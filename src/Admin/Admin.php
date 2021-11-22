@@ -1,0 +1,723 @@
+<?php
+
+namespace ACPT_Lite\Admin;
+
+use ACPT_Lite\Core\Generators\CustomPostTypeGenerator;
+use ACPT_Lite\Core\Generators\MetaBoxGenerator;
+use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Models\MetaBoxModel;
+use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
+use ACPT_Lite\Includes\DB;
+use ACPT_Lite\Includes\Loader;
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * @since      1.0.0
+ * @package    advanced-custom-post-type-lite
+ * @subpackage advanced-custom-post-type/admin
+ * @author     Mauro Cassani <maurocassani1978@gmail.com>
+ */
+class Admin
+{
+    /**
+     * @var Loader
+     */
+    private $loader;
+
+    /**
+     * @var Ajax
+     */
+    private $ajax;
+
+    /**
+     * @var array
+     */
+    private $pages = [];
+
+    /**
+     * @var array
+     */
+    private $ajaxActions = [];
+
+    /**
+     * @var array
+     */
+    private $staticCssAssets = [];
+
+    /**
+     * @var array
+     */
+    private $staticJsAssets = [];
+
+    /**
+     * Admin constructor.
+     *
+     * @param Loader $loader
+     * @param Ajax   $ajax
+     */
+    public function __construct( Loader $loader, Ajax $ajax)
+    {
+        $this->ajax = $ajax;
+        $this->loader = $loader;
+        $this->setStaticCssAssets();
+        $this->setStaticJsAssets();
+        $this->setAjaxActions();
+        $this->setPages();
+    }
+
+    /**
+     * Define static CSS assets
+     */
+    private function setStaticCssAssets()
+    {
+        $this->staticCssAssets = [
+            'admin_select2_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/select2/select2.min.css',
+            'admin_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/admin.css',
+            'block_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/block.min.css',
+        ];
+    }
+
+    /**
+     * Define static JS assets
+     */
+    private function setStaticJsAssets()
+    {
+        $this->staticJsAssets = [
+            'admin_select2_js' => [
+                'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/select2/select2.min.js',
+                'dep'  => ['jquery'],
+            ],
+            'admin_google_maps_js' => [
+                'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/google-maps.js',
+                'dep'  => ['jquery'],
+            ],
+            'admin_js' => [
+                'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/admin.js',
+                'dep'  => ['jquery'],
+            ],
+            'block_js' => [
+                'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/block.min.js',
+                'dep'  => ['wp-blocks', 'wp-element'],
+            ],
+        ];
+    }
+
+    /**
+     * Define ajax actions
+     */
+    private function setAjaxActions()
+    {
+        $this->ajaxActions = [
+            'wp_ajax_assocTaxonomyToPostTypeAction' => 'assocTaxonomyToPostTypeAction',
+            'wp_ajax_deleteCustomPostTypeAction' => 'deleteCustomPostTypeAction',
+            'wp_ajax_deleteCustomPostTypeMetaAction' => 'deleteCustomPostTypeMetaAction',
+            'wp_ajax_deletePostTypeTemplateAction' => 'deletePostTypeTemplateAction',
+            'wp_ajax_deleteTaxonomyAction' => 'deleteTaxonomyAction',
+            'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
+            'wp_ajax_exportFileAction' => 'exportFileAction',
+            'wp_ajax_fetchCustomPostTypeMetaAction' => 'fetchCustomPostTypeMetaAction',
+            'wp_ajax_fetchCustomPostTypeTemplateAction' => 'fetchCustomPostTypeTemplateAction',
+            'wp_ajax_fetchCustomPostTypesAction' => 'fetchCustomPostTypesAction',
+            'wp_ajax_fetchCustomPostTypesCountAction' => 'fetchCustomPostTypesCountAction',
+            'wp_ajax_fetchMetaFieldRelationshipAction' => 'fetchMetaFieldRelationshipAction',
+            'wp_ajax_fetchHeadersAndFootersAction' => 'fetchHeadersAndFootersAction',
+            'wp_ajax_fetchPostDataAction' => 'fetchPostDataAction',
+            'wp_ajax_fetchPostsAction' => 'fetchPostsAction',
+            'wp_ajax_fetchPreviewLinkAction' => 'fetchPreviewLinkAction',
+            'wp_ajax_fetchSettingsAction' => 'fetchSettingsAction',
+            'wp_ajax_fetchSidebarsAction' => 'fetchSidebarsAction',
+            'wp_ajax_fetchTaxonomiesAction' => 'fetchTaxonomiesAction',
+            'wp_ajax_fetchTaxonomiesCountAction' => 'fetchTaxonomiesCountAction',
+            'wp_ajax_importFileAction' => 'importFileAction',
+            'wp_ajax_resetCustomPostTypesAction' => 'resetCustomPostTypesAction',
+            'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',
+            'wp_ajax_saveCustomPostTypeAction' => 'saveCustomPostTypeAction',
+            'wp_ajax_saveCustomPostTypeTemplateAction' => 'saveCustomPostTypeTemplateAction',
+            'wp_ajax_saveCustomPostTypeMetaAction' => 'saveCustomPostTypeMetaAction',
+            'wp_ajax_saveSettingsAction' => 'saveSettingsAction',
+            'wp_ajax_saveTaxonomyAction' => 'saveTaxonomyAction',
+        ];
+    }
+
+    /**
+     * Define admin pages
+     */
+    private function setPages()
+    {
+        $this->pages = [
+            [
+                'pageTitle' => 'Advanced Custom Post Types',
+                'menuTitle' => 'ACPT Lite',
+                'capability' => 'manage_options',
+                'menuSlug' => PLUGIN_NAME,
+                'template' => 'app',
+                'iconUrl' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/img/advanced-custom-post-type-icon.svg',
+                'position' => 50,
+                'assets' => [
+                    'css' => [
+                            plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.css'
+                    ],
+                    'react' => [
+                            plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.js'
+                    ],
+                ],
+            ],
+            [
+                    'parentSlug' => PLUGIN_NAME,
+                    'pageTitle' => translate('Register post type', PLUGIN_NAME),
+                    'menuTitle' => translate('Register post type', PLUGIN_NAME),
+                    'capability' => 'manage_options',
+                    'menuSlug' => PLUGIN_NAME . '#/register',
+                    'template' => 'app',
+                    'position' => 51,
+                    'assets' => [
+                            'css' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.css'
+                            ],
+                            'react' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.js'
+                            ],
+                    ],
+            ],
+            [
+                    'parentSlug' => PLUGIN_NAME,
+                    'pageTitle' => translate('Registered taxonomies', PLUGIN_NAME),
+                    'menuTitle' => translate('Registered taxonomies', PLUGIN_NAME),
+                    'capability' => 'manage_options',
+                    'menuSlug' => PLUGIN_NAME . '#/taxonomies',
+                    'template' => 'app',
+                    'position' => 52,
+                    'assets' => [
+                            'css' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.css'
+                            ],
+                            'react' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.js'
+                            ],
+                    ],
+            ],
+            [
+                    'parentSlug' => PLUGIN_NAME,
+                    'pageTitle' => translate('Documentation', PLUGIN_NAME),
+                    'menuTitle' => translate('Documentation', PLUGIN_NAME),
+                    'capability' => 'manage_options',
+                    'menuSlug' => PLUGIN_NAME . '#/documentation',
+                    'template' => 'app',
+                    'position' => 55,
+                    'assets' => [
+                            'css' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.css'
+                            ],
+                            'react' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.js'
+                            ],
+                    ],
+            ],
+        ];
+    }
+
+    /**
+     * Add pages to to admin panel
+     */
+    public function addPages()
+    {
+        foreach ($this->pages as $page){
+            $this->addPage(
+                $page['pageTitle'],
+                $page['menuTitle'],
+                $page['capability'],
+                $page['menuSlug'],
+                $page['template'],
+                (isset($page['iconUrl'])) ? $page['iconUrl'] : null,
+                (isset($page['position'])) ? $page['position'] : null,
+                (isset($page['parentSlug'])) ? $page['parentSlug'] : null,
+            );
+        }
+    }
+
+    /**
+     * Add a single page to admin panel
+     *
+     * @param string $pageTitle
+     * @param string $menuTitle
+     * @param string $capability
+     * @param string $menuSlug
+     * @param string $template
+     * @param string $iconUrl
+     * @param null   $position
+     * @param null   $parentSlug
+     */
+    private function addPage($pageTitle, $menuTitle, $capability, $menuSlug, $template, $iconUrl = '', $position = null, $parentSlug = null)
+    {
+        if(isset($parentSlug)){
+            add_submenu_page(
+                $parentSlug,
+                $pageTitle,
+                $menuTitle,
+                $capability,
+                $menuSlug,
+                function () use($template) {
+                    require_once plugin_dir_path( dirname( __FILE__ ) ) . '../admin/templates/'.$template.'.php';
+                },
+                $position
+            );
+        } else {
+            add_menu_page(
+                $pageTitle,
+                $menuTitle,
+                $capability,
+                $menuSlug,
+                function () use($template) {
+                    require_once plugin_dir_path( dirname( __FILE__ ) ) . '../admin/templates/'.$template.'.php';
+                },
+                $iconUrl,
+                $position
+            );
+        }
+    }
+
+    /**
+     * Enqueue admin assets
+     */
+    public function enqueueAssets()
+    {
+        global $pagenow;
+
+        // Global assets
+        foreach ($this->pages as $page){
+            if(isset($_GET['page']) and $page['menuSlug'] === $_GET['page'] and isset($page['assets'])){
+                $pageAssets = $page['assets'];
+                foreach ($pageAssets as $key => $assets){
+                    // css
+                    if($key === 'css'){
+                        foreach ($assets as $asset){
+                            wp_enqueue_style( dirname( __FILE__ ).'__'.$key, $asset, [], PLUGIN_VERSION, 'all');
+                        }
+                        // js
+                    } elseif($key === 'js'){
+                        foreach ($assets as $asset){
+                            wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset, ['jquery'], PLUGIN_VERSION, true);
+                        }
+                        // react
+                    } elseif($key === 'react'){
+                        foreach ($assets as $asset){
+                            wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset, ['wp-element'], PLUGIN_VERSION, true);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Assets for create/edit post
+        if($pagenow === 'post-new.php' or $pagenow === 'post.php') {
+
+            // other static assets here
+            foreach ($this->staticCssAssets as $key => $asset){
+                wp_enqueue_style( dirname( __FILE__ ).'__'.$key, $asset, [], PLUGIN_VERSION, 'all');
+            }
+
+            foreach ($this->staticJsAssets as $key => $asset){
+                wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], PLUGIN_VERSION, true);
+            }
+
+            //
+            // =================================
+            // WP DEFAULT UTILITIES
+            // =================================
+            //
+
+            // color picker
+            wp_enqueue_style( 'wp-color-picker' );
+            wp_enqueue_script( 'my-script-handle', plugins_url('my-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+
+            // codemirror
+            $cm_settings['codeEditor'] = wp_enqueue_code_editor(array('type' => 'text/html'));
+            wp_localize_script('jquery', 'cm_settings', $cm_settings);
+            wp_enqueue_script('wp-theme-plugin-editor');
+            wp_enqueue_style('wp-codemirror');
+
+            //
+            // =================================
+            // ICONIFY
+            // =================================
+            //
+            wp_register_script('iconify', 'https://code.iconify.design/2/2.0.3/iconify.min.js');
+            wp_enqueue_script('iconify');
+
+            //
+            // =================================
+            // GOOGLE MAPS
+            // =================================
+            //
+
+            $googleMapKey = DB::getSettings('google_maps_api_key');
+            $apiKey = (!empty($googleMapKey)) ? $googleMapKey[0]->getValue() : null;
+            //$apiKey = 'AIzaSyDcYaQicl2zqOHnaNqvrs_GPKCfzS11lz0';
+
+            wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key='.$apiKey.'&libraries=places&callback=initAutocomplete', false, '3', true);
+            wp_enqueue_script('google-maps');
+        }
+    }
+
+    /**
+     * Add filters here
+     */
+    public function addFilters()
+    {
+        add_filter('script_loader_tag', [$this, 'addAsyncDeferAttribute'], 10, 2);
+        add_filter('block_categories', [$this, 'addGutembergBlocks'], 10, 2 );
+    }
+
+    /**
+     * Register custom Gutember
+     *
+     * @param $block_categories
+     * @param $block_editor_context
+     *
+     * @return array
+     */
+    public function addGutembergBlocks($block_categories, $block_editor_context)
+    {
+        $category_slugs = wp_list_pluck( $block_categories, 'slug' );
+
+        return in_array( 'advanced-custom-post-type-blocks', $category_slugs, true ) ? $block_categories : array_merge(
+                $block_categories,
+                [
+                    [
+                        'slug'  => 'advanced-custom-post-type-blocks',
+                        'title' => __( 'ACPT Blocks', 'advanced-custom-post-type-blocks' ),
+                        'icon'  => null,
+                    ]
+                ]
+        );
+    }
+
+    /**
+     * Async script load
+     *
+     * @param $tag
+     * @param $handle
+     *
+     * @return string|string[]
+     */
+    public function addAsyncDeferAttribute($tag, $handle)
+    {
+        if ( 'google-maps' !== $handle ){
+            return $tag;
+        }
+
+        return str_replace( ' src', ' async defer src', $tag );
+    }
+
+    /**
+     * Add shortcodes
+     */
+    private function addShortcodes()
+    {
+        add_shortcode('acpt', [new PostMetaShortcode(), 'render']);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function registerCustomPostTypesAndTaxonomies()
+    {
+        $metaBoxGenerator = new MetaBoxGenerator();
+
+        // add meta box/taxonomies for CPT
+        foreach (DB::get() as $postTypeModel){
+
+            $customPostType = new CustomPostTypeGenerator(
+                $postTypeModel->getName(),
+                $postTypeModel->isNative(),
+                array_merge(
+                    [
+                        'supports' => $postTypeModel->getSupports(),
+                        'label' => $postTypeModel->getPlural(),
+                        'labels' => $postTypeModel->getLabels(),
+                        "menu_icon" => 'dashicons-'.$postTypeModel->getIcon()
+                    ],
+                    $postTypeModel->getSettings()
+                )
+            );
+
+            // add meta boxes
+            foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
+                $this->generateMetaBoxes($postTypeModel->getName(), $metaBoxModel, $metaBoxGenerator);
+            }
+
+            // add Taxonomies
+            foreach ($postTypeModel->getTaxonomies() as $taxonomyModel){
+                $customPostType->addTaxonomy(
+                    $taxonomyModel->getSlug(),
+                    $taxonomyModel->getPlural(),
+                    array_merge(
+                        [
+                            'singular_label' => $taxonomyModel->getSingular(),
+                            'label' => $taxonomyModel->getPlural(),
+                            'labels' => $taxonomyModel->getLabels(),
+                        ],
+                        $taxonomyModel->getSettings()
+                    )
+                );
+            }
+        }
+    }
+
+    /**
+     * @param                  $postTypeName
+     * @param MetaBoxModel     $metaBoxModel
+     * @param MetaBoxGenerator $metaBoxGenerator
+     */
+    private function generateMetaBoxes( $postTypeName, MetaBoxModel $metaBoxModel, MetaBoxGenerator $metaBoxGenerator)
+    {
+        $metaFields = [];
+
+        foreach ($metaBoxModel->getFields() as $fieldModel){
+
+            $options = [];
+
+            foreach ($fieldModel->getOptions() as $optionModel){
+                $options[] = [
+                    'label' => $optionModel->getLabel(),
+                    'value' => $optionModel->getValue(),
+                ];
+            }
+
+            $relations = [];
+
+            foreach ($fieldModel->getRelations() as $relationshipModel){
+
+                $inversedBy = null;
+
+                if($relationshipModel->isBidirectional() and $relationshipModel->getInversedBy() !== null){
+                    $inversedBy = [
+                            'id' => $relationshipModel->getInversedBy()->getId(),
+                            'box' => $relationshipModel->getInversedBy()->getMetaBox()->getName(),
+                            'field' => $relationshipModel->getInversedBy()->getName(),
+                    ];
+                }
+
+                $relations[] = [
+                        'relationship' => $relationshipModel->getRelationship(),
+                        'related_custom_post_type_id' => $relationshipModel->getRelatedCustomPostType()->getId(),
+                        'related_custom_post_type_name' => $relationshipModel->getRelatedCustomPostType()->getName(),
+                        'inversedBy' => $inversedBy
+                ];
+            }
+
+            $metaFields[] = [
+                    'type' => $fieldModel->getType(),
+                    'name' => $fieldModel->getName(),
+                    'defaultValue' => $fieldModel->getDefaultValue(),
+                    'description' => $fieldModel->getDescription(),
+                    'isRequired' => $fieldModel->isRequired(),
+                    'isShowInArchive' => $fieldModel->isShowInArchive(),
+                    'sort' => $fieldModel->getSort(),
+                    'options' => $options,
+                    'relations' => $relations,
+            ];
+        }
+
+        $metaBoxGenerator->addMetaBox($metaBoxModel->getId(), $metaBoxModel->getName(), $postTypeName, $metaFields);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function addColumnsToShow()
+    {
+        foreach (DB::get() as $postTypeModel){
+
+            $action = 'manage_edit-'.$postTypeModel->getName().'_columns';
+
+            add_filter($action, function($columns) use ($postTypeModel) {
+                foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
+                    foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
+                        if ($metaBoxFieldModel->isShowInArchive()){
+                            $key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
+                            $value = Strings::toHumanReadableFormat($metaBoxFieldModel->getName());
+
+                            $columns[$key] = $value;
+                        }
+                    }
+                }
+
+                return $columns;
+            });
+
+            add_action('manage_posts_custom_column', function($name) use ($postTypeModel) {
+                global $post;
+
+                foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
+                    foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
+                        if ($metaBoxFieldModel->isShowInArchive()){
+                            $key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
+
+                            if($key === $name){
+                                echo do_shortcode( '[acpt preview="true" box="'.$metaBoxModel->getName().'" field="'.$metaBoxFieldModel->getName().'"]');
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * Dynamically add template (single and archive)
+     * for registered custom post types
+     *
+     * @throws \Exception
+     */
+    private function addTemplatesForRegisterCustomPostTypes()
+    {
+        foreach (DB::get() as $postTypeModel){
+            $postName = $postTypeModel->getName();
+
+            add_filter('template_include', function($template) use ($postTypeModel, $postName) {
+
+                if ( is_post_type_archive($postName) or ( is_single() and is_singular($postName) ) ) {
+                    wp_enqueue_style( dirname( __FILE__ ).'__'.$postName, plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/theme.min.css', [], PLUGIN_VERSION, 'all');
+                    wp_register_script('iconify', 'https://code.iconify.design/2/2.0.3/iconify.min.js');
+                    wp_enqueue_script('iconify');
+                }
+
+                // post category
+                if( is_category() ){
+                    $themeFiles = ['acpt/category.php', 'category.php',];
+                    $existsInTheme = locate_template($themeFiles, false);
+                    if ( $existsInTheme != '' ) {
+                        return $existsInTheme;
+                    }
+
+                    $existsTemplate = DB::existsTemplate('post', 'archive');
+                    if(!$existsTemplate){
+                        return locate_template(['category.php', 'index.php'], false);
+                    }
+
+                    return plugin_dir_path(__FILE__) . '../../templates/archive-template.php';
+                }
+
+                // other cpt archive
+                if ( is_post_type_archive($postName) ) {
+                    $themeFiles = ['acpt/archive-'.$postName.'.php', 'archive-'.$postName.'.php', ];
+                    $existsInTheme = locate_template($themeFiles, false);
+                    if ( $existsInTheme != '' ) {
+                        return $existsInTheme;
+                    }
+
+                    $existsTemplate = DB::existsTemplate($postName, 'archive');
+                    if(!$existsTemplate){
+                        return locate_template(['archive-'.$postName.'.php', 'archive.php', 'index.php'], false);
+                    }
+
+                    return plugin_dir_path(__FILE__) . '../../templates/archive-template.php';
+                }
+
+                // page
+                if(is_page() and !is_page_template()){
+
+                    $themeFiles = ['acpt/page.php', 'page.php', ];
+                    $existsInTheme = locate_template($themeFiles, false);
+                    if ( $existsInTheme != '' ) {
+                        return $existsInTheme;
+                    }
+
+                    $existsTemplate = DB::existsTemplate("page", 'single');
+                    if(!$existsTemplate){
+                        return locate_template(['page.php', 'index.php'], false);
+                    }
+
+                    return plugin_dir_path(__FILE__) . '../../templates/single-template.php';
+                }
+
+                // single post
+                if ( is_single() and is_singular($postName) and $postName === 'post' ) {
+                    $themeFiles = ['acpt/single.php', 'single.php', ];
+                    $existsInTheme = locate_template($themeFiles, false);
+                    if ( $existsInTheme != '' ) {
+                        return $existsInTheme;
+                    }
+
+                    $existsTemplate = DB::existsTemplate($postName, 'single');
+                    if(!$existsTemplate){
+                        return locate_template(['single-'.$postName.'.php', 'single.php', 'index.php'], false);
+                    }
+
+                    return plugin_dir_path(__FILE__) . '../../templates/single-template.php';
+                }
+
+                // other cpt
+                if ( is_single() and is_singular($postName) and $postName !== 'post' ) {
+                    $themeFiles = [ 'acpt/single-'.$postName.'.php', 'single-'.$postName.'.php', 'acpt/single-'.$postName.'.php', ];
+                    $existsInTheme = locate_template($themeFiles, false);
+                    if ( $existsInTheme != '' ) {
+                        return $existsInTheme;
+                    }
+
+                    $existsTemplate = DB::existsTemplate($postName, 'single');
+                    if(!$existsTemplate){
+                        return locate_template(['acpt/single-'.$postName.'.php', 'single-'.$postName.'.php', 'single.php', 'index.php'], false);
+                    }
+
+                    return plugin_dir_path(__FILE__) . '../../templates/single-template.php';
+                }
+
+                return $template;
+            });
+        }
+    }
+
+    /**
+     * Register hooks for the theme UI
+     */
+    private function registerHooks()
+    {
+        $this->loader->addAction( 'acpt_after_main_content', new Hooks(), 'afterMainContent' );
+        $this->loader->addAction( 'acpt_before_main_content', new Hooks(), 'beforeMainContent' );
+        $this->loader->addAction( 'acpt_breadcrumb', new Hooks(), 'breadcrumb' );
+        $this->loader->addAction( 'acpt_thumbnail', new Hooks(), 'thumbnail' );
+        $this->loader->addAction( 'acpt_single_content', new Hooks(), 'singleContent' );
+        $this->loader->addAction( 'acpt_archive_title', new Hooks(), 'archiveTitle' );
+        $this->loader->addAction( 'acpt_archive_loop', new Hooks(), 'archiveLoop' );
+        $this->loader->addAction( 'acpt_loop', new Hooks(), 'loop' );
+        $this->loader->addAction( 'acpt_archive_pagination', new Hooks(), 'pagination' );
+        $this->loader->addAction( 'acpt_prev_next_links', new Hooks(), 'prevNextLinks' );
+        $this->loader->addAction( 'acpt_taxonomy_links', new Hooks(), 'taxonomyLinks' );
+    }
+
+    /**
+     * Run admin scripts
+     */
+    public function run()
+    {
+        // filters
+        $this->addFilters();
+
+        // pages and assets
+        $this->loader->addAction( 'admin_menu', $this, 'addPages' );
+        $this->loader->addAction( 'admin_enqueue_scripts', $this, 'enqueueAssets' );
+
+        // ajax calls
+        foreach ($this->ajaxActions as $action => $callback){
+            $this->loader->addAction($action, $this->ajax, $callback);
+        }
+
+        // shortcodes
+        $this->addShortcodes();
+
+        // register custom post types and taxonomies
+        $this->registerCustomPostTypesAndTaxonomies();
+
+        // add columns to show in the list panel
+        $this->addColumnsToShow();
+
+        // add templates  show in the list panel
+        $this->addTemplatesForRegisterCustomPostTypes();
+
+        // register hooks
+        $this->registerHooks();
+    }
+}

@@ -1,0 +1,5 @@
+.idea
+stats.json
+/vendor/
+node_modules/
+/bundle

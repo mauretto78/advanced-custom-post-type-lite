@@ -1,0 +1,84 @@
+/*========== Colors ==========*/
+$primary-color: #003367; //000080
+$primary-color-alt: #02c39a; //6411ad
+$primary-color-light:#82e2cd;
+$success-color: #02c39a;
+$warning-color: #ffbe0b;
+$danger-color: #f94144;
+$info-color: #5390d9;
+$title-color: #000;
+$wp-title-color: #23282d;
+$text-color: #444;
+$text-color-light: #aaa;
+$text-color-lightest: #ddd;
+$btn-color: #fff;
+$card-bg-color: #fff;
+$card-border-color: #f1f1f1;
+$white-color: #fff;
+
+.is-typing,
+.is-selected {
+    .acpt-block {
+        padding: 10px;
+
+        .controls {
+            width: 100%;
+            display: block;
+        }
+    }
+}
+
+.acpt-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    margin-bottom: 28px;
+    width: 100%;
+    text-align: left;
+
+    label {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+
+    .shortcode {
+        border: 1px solid $primary-color-alt;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        margin: 10px 0 0 0;
+        color: $primary-color-alt;
+        border-radius: 3px;
+
+        .icon {
+            position: relative;
+            top: 4px;
+            margin-right: 4px;
+        }
+    }
+
+    .controls {
+        display: none;
+        border: 1px solid #b3bcc0;
+        padding: 14px;
+        width: 100%;
+        border-radius: 3px;
+
+        .components-base-control +.components-base-control {
+            margin-bottom: 0;
+        }
+
+        select,
+        input {
+            max-width: 100%;
+        }
+    }
+}
+

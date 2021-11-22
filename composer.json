@@ -1,0 +1,32 @@
+{
+  "name": "mauretto78/advanced-custom-post-type-lite",
+  "type": "plugin",
+  "description": "A Wordpress plugin for advanced handling of custom post types",
+  "keywords": ["custom post type", "wordpress", "php"],
+  "homepage": "https://github.com/mauretto78/advanced-custom-post-type-lite",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/mauretto78/advanced-custom-post-type-lite/issues"
+  },
+  "authors": [
+    {
+      "name": "Mauro Cassani",
+      "email": "maurocassani1978@gmail.com",
+      "homepage": "https://github.com/mauretto78"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ACPT_Lite\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": { "ACPT_Lite\\Tests\\": "tests/" }
+  },
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.2"
+  }
+}

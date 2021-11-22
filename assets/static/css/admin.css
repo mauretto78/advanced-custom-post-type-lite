@@ -1,0 +1,415 @@
+/*========== META FIELDS ==========*/
+
+.acpt-admin-meta {
+    border: 1px solid #ccd0d4;
+    margin-bottom: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: space-between;
+    border-radius: 3px;
+}
+
+.acpt-admin-meta.sort-1 {
+    margin-top: 14px;
+}
+
+.acpt-admin-meta:last-child {
+    margin-bottom: 0;
+}
+
+.acpt-admin-meta-icon {
+    width: 64px;
+}
+
+.acpt-admin-meta-icon .icon {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    background: #02c39a;
+    border-radius: 50%;
+    line-height: 54px;
+    display: inline-block;
+}
+
+.acpt-admin-meta-icon .icon svg {
+    fill: #fff;
+}
+
+.acpt-admin-meta-label {
+    width: 220px;
+}
+
+.acpt-admin-meta-label label {
+    font-size: 15px;
+    color: #191e23;
+    font-weight: bold;
+    display: block;
+}
+
+.acpt-admin-meta-label small {
+    font-style: italic;
+}
+
+.acpt-admin-meta-label .relation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 4px;
+}
+
+.acpt-admin-meta-label .relation .relation-label {
+    border: 2px solid #aaaaaa;
+    color: #aaa;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.acpt-admin-meta-label .relation .relation-sign {
+    font-weight: bold;
+    color: #007cba;
+}
+
+.acpt-admin-meta-field {}
+
+.acpt-admin-meta-field {
+    width: 700px;
+}
+
+.acpt-admin-meta-field .acpt-admin-meta-field-input {
+    width: 100%;
+}
+
+.acpt-admin-meta-field .acpt-admin-meta-field-input-50 {
+    width: 49.7%;
+}
+
+.acpt-admin-meta-field .btn-wrapper {
+    display: flex;
+}
+
+.acpt-admin-meta-field .btn-wrapper .button,
+.acpt-admin-meta-field .btn-wrapper .acpt-admin-meta-field-input {
+    margin-right: 4px;
+}
+
+.acpt-admin-meta-field .image-preview {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.acpt-admin-meta-field .image-preview .image {
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.acpt-admin-meta-field .image-preview .image video,
+.acpt-admin-meta-field .image-preview .image img {
+    width: 180px;
+    height: 135px;
+    object-fit: cover;
+    padding: 4px;
+    border: 1px solid #7e8993;
+    border-radius: 4px;
+}
+
+.acpt-admin-meta-field .image-preview .image video {
+    width: 267px;
+    height: 200px;
+}
+
+.acpt-admin-meta-field .file-preview {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.acpt-admin-meta-field .file-preview .file {
+    margin-top: 10px;
+}
+
+.acpt-admin-meta-field .embed-preview {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.acpt-admin-meta-field .embed-preview .embed {
+    display: flex;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 180px;
+    height: 135px;
+    object-fit: cover;
+    padding: 4px;
+    border: 1px solid #7e8993;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.acpt-badge  {
+    background: #007cba;
+    color: #fff;
+    display: inline;
+    margin-right: 4px;
+    padding: 3px 6px;
+    font-size: 11px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/*========== CODEMIRROR ==========*/
+
+.acpt-admin-meta-field .CodeMirror-wrap {
+    border: 1px solid #e5e5e5;
+}
+
+/*========== CHECKBOX TOGGLE UI ==========*/
+
+input[type="checkbox"].wppd-ui-toggle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    position: relative;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    margin: 0 4px;
+    background: none;
+    box-shadow: none;
+}
+input[type="checkbox"].wppd-ui-toggle:focus {
+    box-shadow: none;
+}
+input[type="checkbox"].wppd-ui-toggle:after {
+    content: '';
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 18px;
+    text-indent: -14px;
+    color: #ffffff;
+    width: 36px;
+    height: 18px;
+    display: inline-block;
+    background-color: #a7aaad;
+    border-radius: 72px;
+    box-shadow: 0 0 12px rgb(0 0 0 / 15%) inset;
+}
+input[type="checkbox"].wppd-ui-toggle:before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    margin: 0;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+input[type="checkbox"].wppd-ui-toggle:checked:before {
+    left: 20px;
+    margin: 0;
+    background-color: #ffffff;
+}
+input[type="checkbox"].wppd-ui-toggle,
+input[type="checkbox"].wppd-ui-toggle:before,
+input[type="checkbox"].wppd-ui-toggle:after,
+input[type="checkbox"].wppd-ui-toggle:checked:before,
+input[type="checkbox"].wppd-ui-toggle:checked:after {
+    transition: ease .15s;
+}
+input[type="checkbox"].wppd-ui-toggle:checked:after {
+    content: 'ON';
+    background-color: #2271b1;
+}
+
+/*========== LIST ELEMENTS ==========*/
+
+.list-wrapper {
+
+}
+
+.list-wrapper .list-element {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.list-wrapper .list-element input {
+    margin: 0;
+}
+
+.list-wrapper .list-element a {
+    margin-left: 4px;
+    width: 130px;
+    text-decoration: none;
+    vertical-align: top;
+    border: 1px solid #b02828;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 3px;
+    display: inline-block;
+    color: #b02828;
+    margin-bottom: -1px;
+}
+
+.list-wrapper .list-element a:hover
+.list-wrapper .list-element a:focus {
+    color: #c62d2d;
+    border: 1px solid #c62d2d;
+}
+
+.list-wrapper #list-add-element {
+    margin-top: 10px;
+}
+
+/*========== SELECT2 FIX ==========*/
+
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-search-choice-close {
+    top: 7px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+    line-height: 20px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+    border: 2px solid #aaa;
+    background-color: #f1f1f1;
+    background-image: none;
+}
+
+/*========== CURRENCY SELECTOR ==========*/
+
+.currency-group {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+}
+
+.currency-symbol {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.currency-selector {
+
+}
+
+.currency-amount {
+    text-align: right;
+}
+
+.currency-addon {
+    width: 6em;
+    text-align: left;
+    position: relative;
+}
+
+/*========== GOOGLE MAPS ==========*/
+
+.map_preview {
+    width: 100%;
+    height: 400px;
+}
+
+.input-map {
+    right: 20px !important;
+    left: 10px !important;
+    top: 60px !important;
+    width: 70% !important;
+}
+
+/*========== HELPERS ==========*/
+
+.mb-4 {
+    margin-bottom: 4px;
+}
+
+.button-danger {
+    border: 1px solid #b02828 !important;
+    color: #b02828 !important;
+}
+
+.button-danger:hover,
+.button-danger:focus {
+    color: #c62d2d !important;
+    border: 1px solid #c62d2d !important;
+}
+
+/*========== MEDIA QUERIES ==========*/
+
+@media (max-width: 959px){
+    .acpt-admin-meta-icon {
+        display: none;
+    }
+
+    .acpt-admin-meta-field .acpt-admin-meta-field-input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 782px){
+    .acpt-admin-meta  {
+        display: block;
+    }
+
+    .acpt-admin-meta-field .acpt-admin-meta-field-input-50,
+    .acpt-admin-meta-label,
+    .acpt-admin-meta-field {
+        display: block;
+        width: 100%;
+    }
+
+    .acpt-admin-meta-label {
+        margin-bottom: 10px;
+    }
+}
+
+.CodeMirror-code {
+    padding-left: 18px;
+}
+
+.CodeMirror-linenumber {
+    left: -31px !important;
+}
