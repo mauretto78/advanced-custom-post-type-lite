@@ -56,7 +56,7 @@ class PostMetaShortcode
      */
     private function getCustomPostTypeField($type, $pid, $box, $field, $width, $height, $target, $dateFormat, $elements)
     {
-        $className = 'ACPT\\Core\\Shortcodes\\Fields\\'.$type.'Field';
+        $className = 'ACPT_Lite\\Core\\Shortcodes\\Fields\\'.$type.'Field';
 
         return new $className($pid, $box, $field, $width, $height, $target, $dateFormat, $elements);
     }

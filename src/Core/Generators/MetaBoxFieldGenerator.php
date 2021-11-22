@@ -35,7 +35,7 @@ class MetaBoxFieldGenerator
      */
     private static function getCustomPostTypeField( $postId, $metaboxId, array $input)
     {
-        $className = 'ACPT\\Core\\Generators\\Fields\\'.$input['type'].'Field';
+        $className = 'ACPT_Lite\\Core\\Generators\\Fields\\'.$input['type'].'Field';
 
         return new $className($postId, $metaboxId, $input['name'], $input['sort'], $input['isRequired'], $input['defaultValue'], $input['description'], $input['options'], $input['relations']);
     }
