@@ -1,4 +1,4 @@
-=== Advanced Custom Post Type ===
+=== Advanced Custom Post Type Lite ===
 Contributors: mauretto78
 Donate link: https://acpt.io
 Tags: custom post types

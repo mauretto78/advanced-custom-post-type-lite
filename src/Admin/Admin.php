@@ -537,111 +537,6 @@ class Admin
     }
 
     /**
-     * Dynamically add template (single and archive)
-     * for registered custom post types
-     *
-     * @throws \Exception
-     */
-    private function addTemplatesForRegisterCustomPostTypes()
-    {
-        foreach (DB::get() as $postTypeModel){
-            $postName = $postTypeModel->getName();
-
-            add_filter('template_include', function($template) use ($postTypeModel, $postName) {
-
-                if ( is_post_type_archive($postName) or ( is_single() and is_singular($postName) ) ) {
-                    wp_enqueue_style( dirname( __FILE__ ).'__'.$postName, plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/theme.min.css', [], PLUGIN_VERSION, 'all');
-                    wp_register_script('iconify', 'https://code.iconify.design/2/2.0.3/iconify.min.js');
-                    wp_enqueue_script('iconify');
-                }
-
-                // post category
-                if( is_category() ){
-                    $themeFiles = ['acpt/category.php', 'category.php',];
-                    $existsInTheme = locate_template($themeFiles, false);
-                    if ( $existsInTheme != '' ) {
-                        return $existsInTheme;
-                    }
-
-                    $existsTemplate = DB::existsTemplate('post', 'archive');
-                    if(!$existsTemplate){
-                        return locate_template(['category.php', 'index.php'], false);
-                    }
-
-                    return plugin_dir_path(__FILE__) . '../../templates/archive-template.php';
-                }
-
-                // other cpt archive
-                if ( is_post_type_archive($postName) ) {
-                    $themeFiles = ['acpt/archive-'.$postName.'.php', 'archive-'.$postName.'.php', ];
-                    $existsInTheme = locate_template($themeFiles, false);
-                    if ( $existsInTheme != '' ) {
-                        return $existsInTheme;
-                    }
-
-                    $existsTemplate = DB::existsTemplate($postName, 'archive');
-                    if(!$existsTemplate){
-                        return locate_template(['archive-'.$postName.'.php', 'archive.php', 'index.php'], false);
-                    }
-
-                    return plugin_dir_path(__FILE__) . '../../templates/archive-template.php';
-                }
-
-                // page
-                if(is_page() and !is_page_template()){
-
-                    $themeFiles = ['acpt/page.php', 'page.php', ];
-                    $existsInTheme = locate_template($themeFiles, false);
-                    if ( $existsInTheme != '' ) {
-                        return $existsInTheme;
-                    }
-
-                    $existsTemplate = DB::existsTemplate("page", 'single');
-                    if(!$existsTemplate){
-                        return locate_template(['page.php', 'index.php'], false);
-                    }
-
-                    return plugin_dir_path(__FILE__) . '../../templates/single-template.php';
-                }
-
-                // single post
-                if ( is_single() and is_singular($postName) and $postName === 'post' ) {
-                    $themeFiles = ['acpt/single.php', 'single.php', ];
-                    $existsInTheme = locate_template($themeFiles, false);
-                    if ( $existsInTheme != '' ) {
-                        return $existsInTheme;
-                    }
-
-                    $existsTemplate = DB::existsTemplate($postName, 'single');
-                    if(!$existsTemplate){
-                        return locate_template(['single-'.$postName.'.php', 'single.php', 'index.php'], false);
-                    }
-
-                    return plugin_dir_path(__FILE__) . '../../templates/single-template.php';
-                }
-
-                // other cpt
-                if ( is_single() and is_singular($postName) and $postName !== 'post' ) {
-                    $themeFiles = [ 'acpt/single-'.$postName.'.php', 'single-'.$postName.'.php', 'acpt/single-'.$postName.'.php', ];
-                    $existsInTheme = locate_template($themeFiles, false);
-                    if ( $existsInTheme != '' ) {
-                        return $existsInTheme;
-                    }
-
-                    $existsTemplate = DB::existsTemplate($postName, 'single');
-                    if(!$existsTemplate){
-                        return locate_template(['acpt/single-'.$postName.'.php', 'single-'.$postName.'.php', 'single.php', 'index.php'], false);
-                    }
-
-                    return plugin_dir_path(__FILE__) . '../../templates/single-template.php';
-                }
-
-                return $template;
-            });
-        }
-    }
-
-    /**
      * Register hooks for the theme UI
      */
     private function registerHooks()
@@ -684,9 +579,6 @@ class Admin
 
         // add columns to show in the list panel
         $this->addColumnsToShow();
-
-        // add templates  show in the list panel
-        $this->addTemplatesForRegisterCustomPostTypes();
 
         // register hooks
         $this->registerHooks();

@@ -165,8 +165,8 @@ class Hooks
      */
     public function thumbnail($dimensions = [])
     {
-        $width = isset($dimensions['w']) ? ( Strings::contains('%', $dimensions['w']) ? $dimensions['w']  : $dimensions['w'] .'px'  ) : null;
-        $height = isset($dimensions['h']) ? ( Strings::contains('%', $dimensions['h']) ? $dimensions['h']  : $dimensions['h'] .'px'  ) : null;
+        $width = isset($dimensions['w']) ? ( Strings::contains('%', $dimensions['w']) ? $dimensions['w']  : $dimensions['w']  ) : null;
+        $height = isset($dimensions['h']) ? ( Strings::contains('%', $dimensions['h']) ? $dimensions['h']  : $dimensions['h'] ) : null;
 
         global $post;
 
@@ -175,9 +175,9 @@ class Hooks
             $thumbnail_url = wp_get_attachment_url($post_thumbnail_id, 'full');
 
             if($width and $height){
-                echo '<img style="object-fit: cover;" src="'.aq_resize($thumbnail_url, $width, $height, true).'" alt="'.get_the_title().'" />';
+                echo '<img style="object-fit: cover; width: '.$width.'; height: '.$height.';" src="'.$thumbnail_url.'" alt="'.get_the_title().'" />';
             } else {
-                echo '<img style="object-fit: cover;" src="'.$thumbnail_url.'" alt="'.get_the_title().'" />';
+                echo '<img style="object-fit: cover; " src="'.$thumbnail_url.'" alt="'.get_the_title().'" />';
             }
         } else {
 
