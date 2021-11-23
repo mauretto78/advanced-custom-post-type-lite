@@ -199,12 +199,12 @@ class Admin
             ],
             [
                     'parentSlug' => PLUGIN_NAME,
-                    'pageTitle' => translate('Documentation', PLUGIN_NAME),
-                    'menuTitle' => translate('Documentation', PLUGIN_NAME),
+                    'pageTitle' => translate('Settings', PLUGIN_NAME),
+                    'menuTitle' => translate('Settings', PLUGIN_NAME),
                     'capability' => 'manage_options',
-                    'menuSlug' => PLUGIN_NAME . '#/documentation',
+                    'menuSlug' => PLUGIN_NAME . '#/settings',
                     'template' => 'app',
-                    'position' => 55,
+                    'position' => 56,
                     'assets' => [
                             'css' => [
                                     plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.css'
@@ -323,40 +323,11 @@ class Admin
 
             //
             // =================================
-            // WP DEFAULT UTILITIES
-            // =================================
-            //
-
-            // color picker
-            wp_enqueue_style( 'wp-color-picker' );
-            wp_enqueue_script( 'my-script-handle', plugins_url('my-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
-
-            // codemirror
-            $cm_settings['codeEditor'] = wp_enqueue_code_editor(array('type' => 'text/html'));
-            wp_localize_script('jquery', 'cm_settings', $cm_settings);
-            wp_enqueue_script('wp-theme-plugin-editor');
-            wp_enqueue_style('wp-codemirror');
-
-            //
-            // =================================
             // ICONIFY
             // =================================
             //
             wp_register_script('iconify', 'https://code.iconify.design/2/2.0.3/iconify.min.js');
             wp_enqueue_script('iconify');
-
-            //
-            // =================================
-            // GOOGLE MAPS
-            // =================================
-            //
-
-            $googleMapKey = DB::getSettings('google_maps_api_key');
-            $apiKey = (!empty($googleMapKey)) ? $googleMapKey[0]->getValue() : null;
-            //$apiKey = 'AIzaSyDcYaQicl2zqOHnaNqvrs_GPKCfzS11lz0';
-
-            wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key='.$apiKey.'&libraries=places&callback=initAutocomplete', false, '3', true);
-            wp_enqueue_script('google-maps');
         }
     }
 

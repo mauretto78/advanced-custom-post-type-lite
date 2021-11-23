@@ -49,24 +49,27 @@ define( 'PLUGIN_VERSION', '1.0.0' );
  */
 require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
 
-/**
- * The code that runs during plugin activation.
- */
-function activate()
+class ACPT_Lite
 {
-    Activator::activate();
+    /**
+     * The code that runs during plugin activation.
+     */
+    function activate()
+    {
+        Activator::activate();
+    }
+
+    /**
+     * The code that runs during plugin deactivation.
+     */
+    function deactivate()
+    {
+        Deactivator::deactivate();
+    }
 }
 
-/**
- * The code that runs during plugin deactivation.
- */
-function deactivate()
-{
-    Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate' );
-register_deactivation_hook( __FILE__, 'deactivate' );
+register_activation_hook( __FILE__, [ACPT_Lite::class, 'activate'] );
+register_deactivation_hook( __FILE__, [ACPT_Lite::class, 'deactivate'] );
 
 /**
  * Begins execution of the plugin.

@@ -15,9 +15,7 @@ namespace ACPT_Lite\Includes;
 class Activator
 {
     /**
-     * Short Description.
-     *
-     * Long Description.
+     * Activate plugin
      *
      * @since    1.0.0
      */
@@ -28,7 +26,14 @@ class Activator
             wp_die( __( 'This plugin requires PHP Version 5.6 or greater.  Sorry about that.', 'acpt' ) );
         }
 
-        DB::createSchema();
-        DB::sync();
+        $pluginPremium = 'advanced-custom-post-type/advanced-custom-post-type.php';
+
+        if (is_plugin_active($pluginPremium) ) {
+            deactivate_plugins( __FILE__ );
+            die( __( 'ACPT Lite cannot be activated because ACPT Premium version it\'s already active.', 'acpt' ) );
+        } else {
+            DB::createSchema();
+            DB::sync();
+        }
     }
 }

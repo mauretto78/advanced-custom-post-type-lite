@@ -15,14 +15,14 @@ namespace ACPT_Lite\Includes;
 class Deactivator
 {
     /**
-     * Short Description.
-     *
-     * Long Description.
+     * Deactivate
      *
      * @since    1.0.0
      */
     public static function deactivate()
     {
-        DB::destroySchema();
+        if(!class_exists(\ACPT::class)){
+            DB::destroySchema();
+        }
     }
 }
