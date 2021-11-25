@@ -26,14 +26,14 @@ namespace ACPT_Lite\Includes;
  * @subpackage advanced-custom-post-type/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class Internalization
+class ACPT_Lite_Internalization
 {
     /**
-     * @var Loader
+     * @var ACPT_Lite_Loader
      */
     private $loader;
 
-    public function __construct( Loader $loader)
+    public function __construct( ACPT_Lite_Loader $loader)
     {
         $this->loader = $loader;
     }

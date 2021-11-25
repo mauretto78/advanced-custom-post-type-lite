@@ -2,8 +2,8 @@
 
 namespace ACPT_Lite\Includes;
 
-use ACPT_Lite\Admin\Admin;
-use ACPT_Lite\Admin\Ajax;
+use ACPT_Lite\Admin\ACPT_Lite_Admin;
+use ACPT_Lite\Admin\ACPT_Lite_Ajax;
 
 /**
  * The core plugin class.
@@ -19,7 +19,7 @@ use ACPT_Lite\Admin\Ajax;
  * @subpackage advanced-custom-post-type/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class Plugin
+class ACPT_Lite_Plugin
 {
     /**
      * The loader that's responsible for maintaining and registering all hooks that power
@@ -27,7 +27,7 @@ class Plugin
      *
      * @since    1.0.0
      * @access   protected
-     * @var      Loader $loader Maintains and registers all hooks for the plugin.
+     * @var      ACPT_Lite_Loader $loader Maintains and registers all hooks for the plugin.
      */
     private $loader;
 
@@ -56,11 +56,11 @@ class Plugin
      * Load the dependencies, define the locale, and set the hooks for the admin area and
      * the public-facing side of the site.
      *
-     * @param Loader $loader
+     * @param ACPT_Lite_Loader $loader
      *
      * @since    1.0.0
      */
-    public function __construct(Loader $loader)
+    public function __construct( ACPT_Lite_Loader $loader)
     {
         $this->loader = $loader;
         $this->setName();
@@ -74,8 +74,8 @@ class Plugin
      */
     private function setName()
     {
-        if ( defined( 'PLUGIN_NAME' ) ) {
-            $this->name = PLUGIN_NAME;
+        if ( defined( 'ACPT_LITE_PLUGIN_NAME' ) ) {
+            $this->name = ACPT_LITE_PLUGIN_NAME;
         } else {
             $this->name = plugin_dir_path( __FILE__ );
         }
@@ -94,8 +94,8 @@ class Plugin
      */
     private function setVersion()
     {
-        if ( defined( 'PLUGIN_VERSION' ) ) {
-            $this->version = PLUGIN_VERSION;
+        if ( defined( 'ACPT_LITE_PLUGIN_VERSION' ) ) {
+            $this->version = ACPT_LITE_PLUGIN_VERSION;
         } else {
             $this->version = '1.0.0';
         }
@@ -120,7 +120,7 @@ class Plugin
      */
     private function runInternalization()
     {
-        $i18n = new Internalization($this->loader);
+        $i18n = new ACPT_Lite_Internalization($this->loader);
         $i18n->run();
     }
 
@@ -133,7 +133,7 @@ class Plugin
      */
     private function runAdmin()
     {
-        $admin = new Admin($this->loader, new Ajax());
+        $admin = new ACPT_Lite_Admin($this->loader, new ACPT_Lite_Ajax());
         $admin->run();
     }
 

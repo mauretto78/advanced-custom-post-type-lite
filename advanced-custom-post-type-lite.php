@@ -25,10 +25,10 @@
  * Domain Path:       /advanced-custom-post-type
  */
 
-use ACPT_Lite\Includes\Activator;
-use ACPT_Lite\Includes\Deactivator;
-use ACPT_Lite\Includes\Plugin;
-use ACPT_Lite\Includes\Loader;
+use ACPT_Lite\Includes\ACPT_Lite_Activator;
+use ACPT_Lite\Includes\ACPT_Lite_Deactivator;
+use ACPT_Lite\Includes\ACPT_Lite_Plugin;
+use ACPT_Lite\Includes\ACPT_Lite_Loader;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -41,8 +41,8 @@ ob_start();
 /**
  * plugin settings
  */
-define( 'PLUGIN_NAME', 'advanced-custom-post-type-lite' );
-define( 'PLUGIN_VERSION', '1.0.0' );
+define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
+define( 'ACPT_LITE_PLUGIN_VERSION', '1.0.0' );
 
 /**
  * Composer init
@@ -56,7 +56,7 @@ class ACPT_Lite
      */
     function activate()
     {
-        Activator::activate();
+        ACPT_Lite_Activator::activate();
     }
 
     /**
@@ -64,7 +64,7 @@ class ACPT_Lite
      */
     function deactivate()
     {
-        Deactivator::deactivate();
+        ACPT_Lite_Deactivator::deactivate();
     }
 }
 
@@ -80,5 +80,5 @@ register_deactivation_hook( __FILE__, [ACPT_Lite::class, 'deactivate'] );
  *
  * @since    1.0.0
  */
-$plugin = new Plugin(new Loader());
+$plugin = new ACPT_Lite_Plugin(new ACPT_Lite_Loader());
 $plugin->run();

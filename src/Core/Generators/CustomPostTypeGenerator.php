@@ -4,7 +4,7 @@ namespace ACPT_Lite\Core\Generators;
 
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxFieldModel;
-use ACPT_Lite\Includes\DB;
+use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 /**
  * *************************************************
@@ -223,7 +223,7 @@ class CustomPostTypeGenerator extends AbstractGenerator
 
         $sql = "DELETE FROM `{$wpdb->prefix}postmeta` WHERE meta_key=%s and meta_value = %s";
 
-        DB::executeQueryOrThrowException($sql, [
+        ACPT_Lite_DB::executeQueryOrThrowException($sql, [
             $key,
             $postId
         ]);

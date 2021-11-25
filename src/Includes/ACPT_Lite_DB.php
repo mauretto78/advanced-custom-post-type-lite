@@ -21,7 +21,7 @@ use ACPT_Lite\Core\Models\TaxonomyModel;
  * @subpackage advanced-custom-post-type/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class DB
+class ACPT_Lite_DB
 {
     /**
      * Table names
@@ -249,8 +249,8 @@ class DB
                 'settings' => [],
         ]);
 
-        DB::save($postModel);
-        DB::save($pageModel);
+        ACPT_Lite_DB::save($postModel);
+        ACPT_Lite_DB::save($pageModel);
     }
 
     /**
@@ -295,7 +295,7 @@ class DB
                         ],
                 ]);
 
-                DB::save($postModel);
+                ACPT_Lite_DB::save($postModel);
             }
         }
     }
@@ -1125,7 +1125,7 @@ class DB
                             ]);
 
                             if(isset($relation->inversedFieldId) and null !== $relation->inversedFieldId){
-                                $inversedBy = DB::getMetaField($relation->inversedFieldId);
+                                $inversedBy = ACPT_Lite_DB::getMetaField($relation->inversedFieldId);
                                 if(null !== $inversedBy){
                                     $relationModel->setInversedBy($inversedBy);
                                 }

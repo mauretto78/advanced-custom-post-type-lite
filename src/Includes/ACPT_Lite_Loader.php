@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Includes;
 
-class Loader
+class ACPT_Lite_Loader
 {
     /**
      * The array of actions registered with WordPress.

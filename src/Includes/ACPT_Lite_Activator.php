@@ -12,7 +12,7 @@ namespace ACPT_Lite\Includes;
  * @subpackage advanced-custom-post-type/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class Activator
+class ACPT_Lite_Activator
 {
     /**
      * Activate plugin
@@ -32,8 +32,8 @@ class Activator
             deactivate_plugins( __FILE__ );
             die( __( 'ACPT Lite cannot be activated because ACPT Premium version it\'s already active.', 'acpt' ) );
         } else {
-            DB::createSchema();
-            DB::sync();
+            ACPT_Lite_DB::createSchema();
+            ACPT_Lite_DB::sync();
         }
     }
 }

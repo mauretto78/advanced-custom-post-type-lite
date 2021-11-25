@@ -13,7 +13,7 @@ use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
 use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Models\SettingsModel;
 use ACPT_Lite\Core\Models\TaxonomyModel;
-use ACPT_Lite\Includes\DB;
+use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\WPLinks;
 
 /**
@@ -24,7 +24,7 @@ use ACPT_Lite\Utils\WPLinks;
  * @subpackage advanced-custom-post-type/admin
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class Ajax
+class ACPT_Lite_Ajax
 {
     public function assocTaxonomyToPostTypeAction()
     {
@@ -32,13 +32,13 @@ class Ajax
             $data = json_decode( stripslashes( $_POST[ 'data' ] ), true );
 
             try {
-                $postId = DB::getId($data['postType']);
+                $postId = ACPT_Lite_DB::getId($data['postType']);
 
                 foreach ($data['taxonomies'] as $taxonomy){
                     if($taxonomy['checked']){
-                        DB::assocPostToTaxonomy($postId, $taxonomy['id']);
+                        ACPT_Lite_DB::assocPostToTaxonomy($postId, $taxonomy['id']);
                     } else {
-                        DB::removeAssocPostToTaxonomy($postId, $taxonomy['id']);
+                        ACPT_Lite_DB::removeAssocPostToTaxonomy($postId, $taxonomy['id']);
                     }
                 }
 
@@ -76,7 +76,7 @@ class Ajax
             $postType = $data['postType'];
 
             try {
-                DB::delete($postType);
+                ACPT_Lite_DB::delete($postType);
 
                 $return = [
                     'success' => true,
@@ -117,8 +117,8 @@ class Ajax
             $postType = $data['postType'];
 
             try {
-                DB::deleteMeta($postType);
-                DB::removeOrphanRelationships();
+                ACPT_Lite_DB::deleteMeta($postType);
+                ACPT_Lite_DB::removeOrphanRelationships();
 
                 $return = [
                         'success' => true,
@@ -159,7 +159,7 @@ class Ajax
         $templateType = $data['templateType'];
 
         try {
-            DB::deleteTemplate($postType, $templateType);
+            ACPT_Lite_DB::deleteTemplate($postType, $templateType);
 
             $return = [
                     'success' => true,
@@ -194,7 +194,7 @@ class Ajax
             $taxonomy = $data['taxonomy'];
 
             try {
-                DB::deleteTaxonomy($taxonomy);
+                ACPT_Lite_DB::deleteTaxonomy($taxonomy);
 
                 $return = [
                         'success' => true,
@@ -249,7 +249,7 @@ class Ajax
             if($datum['structure']){
 
                 /** @var CustomPostTypeModel $customPostTypeModel */
-                $customPostTypeModel = DB::get([
+                $customPostTypeModel = ACPT_Lite_DB::get([
                     'postType' => $datum['id']
                 ])[0];
 
@@ -323,7 +323,7 @@ class Ajax
             $options['excludeFields'][] = $data['excludeField'];
         }
 
-        return wp_send_json(DB::getMeta($postType, $options));
+        return wp_send_json(ACPT_Lite_DB::getMeta($postType, $options));
     }
 
     /**
@@ -342,7 +342,7 @@ class Ajax
             ]);
         }
 
-        return wp_send_json(DB::getTemplate($data['postType'], $data['templateType']));
+        return wp_send_json(ACPT_Lite_DB::getTemplate($data['postType'], $data['templateType']));
     }
 
     /**
@@ -362,12 +362,12 @@ class Ajax
         }
 
         if($postType){
-            return wp_send_json(DB::get([
+            return wp_send_json(ACPT_Lite_DB::get([
                 'postType' => $postType
             ]));
         }
 
-        return wp_send_json(DB::get([
+        return wp_send_json(ACPT_Lite_DB::get([
             'page' => isset($page) ? $page : 1,
             'perPage' => isset($perPage) ? $perPage : 20,
         ]));
@@ -380,7 +380,7 @@ class Ajax
      */
     public function fetchCustomPostTypesCountAction()
     {
-        return wp_send_json(DB::count());
+        return wp_send_json(ACPT_Lite_DB::count());
     }
 
     public function fetchHeadersAndFootersAction()
@@ -422,7 +422,7 @@ class Ajax
      */
     public function fetchSettingsAction()
     {
-        return wp_send_json(DB::getSettings());
+        return wp_send_json(ACPT_Lite_DB::getSettings());
     }
 
     /**
@@ -460,12 +460,12 @@ class Ajax
         }
 
         if($taxonomy){
-            return wp_send_json(DB::getTaxonomies([
+            return wp_send_json(ACPT_Lite_DB::getTaxonomies([
                     'taxonomy' => $taxonomy
             ]));
         }
 
-        return wp_send_json(DB::getTaxonomies([
+        return wp_send_json(ACPT_Lite_DB::getTaxonomies([
                 'page' => isset($page) ? $page : 1,
                 'perPage' => isset($perPage) ? $perPage : 20,
         ]));
@@ -532,7 +532,7 @@ class Ajax
                 ]);
             }
 
-            $loop = (new Hooks())->loop([
+            $loop = (new ACPT_Lite_Hooks())->loop([
                 'postType' => $data['postType'],
                 'perPage' => isset($data['perPage']) ? $data['perPage'] : -1,
                 'sortOrder' => (isset($data['sortOrder'])) ? $data['sortOrder']: 'ASC',
@@ -562,7 +562,7 @@ class Ajax
      */
     public function fetchTaxonomiesCountAction()
     {
-        return wp_send_json(DB::taxonomyCount());
+        return wp_send_json(ACPT_Lite_DB::taxonomyCount());
     }
 
     /**
@@ -604,7 +604,7 @@ class Ajax
             // import content
             foreach ($content as $item){
                 if(isset($item['structure'])){
-                    DB::import($item['structure']);
+                    ACPT_Lite_DB::import($item['structure']);
                 }
             }
 
@@ -711,7 +711,7 @@ class Ajax
 
         // persist $model on DB
         try {
-            $id = (DB::exists($data[1]["post_name"])) ? DB::getId($data[1]["post_name"]) : Uuid::v4();
+            $id = (ACPT_Lite_DB::exists($data[1]["post_name"])) ? ACPT_Lite_DB::getId($data[1]["post_name"]) : Uuid::v4();
             $model = CustomPostTypeModel::hydrateFromArray([
                     'id' => $id,
                     'name' => $data[1]["post_name"],
@@ -724,7 +724,7 @@ class Ajax
                     'settings' => $data[3]
             ]);
 
-            DB::save($model);
+            ACPT_Lite_DB::save($model);
             $return = [
                     'success' => true
             ];
@@ -757,7 +757,7 @@ class Ajax
 
         // persist $model on DB
         try {
-            $template = DB::getTemplate($data['postType'], $data['templateType']);
+            $template = ACPT_Lite_DB::getTemplate($data['postType'], $data['templateType']);
 
             $newTemplate = CustomPostTypeTemplateModel::hydrateFromArray([
                 'id' => $template ? $template->getId() : Uuid::v4(),
@@ -768,7 +768,7 @@ class Ajax
                 'meta' =>  isset($data['meta']) ? $data['meta'] : [],
             ]);
 
-            DB::saveTemplate($newTemplate);
+            ACPT_Lite_DB::saveTemplate($newTemplate);
 
             $return = [
                 'success' => true
@@ -846,7 +846,7 @@ class Ajax
                         if(isset($field['relations'])){
                             foreach ($field['relations'] as $relationIndex => $relation) {
 
-                                $relatedCustomPostType = DB::get([
+                                $relatedCustomPostType = ACPT_Lite_DB::get([
                                         'postType' => $relation['relatedPostType']
                                 ], true)[0];
 
@@ -858,7 +858,7 @@ class Ajax
                                 ]);
 
                                 if(isset($relation['inversedFieldId'])){
-                                    $inversedBy = DB::getMetaField($relation['inversedFieldId']);
+                                    $inversedBy = ACPT_Lite_DB::getMetaField($relation['inversedFieldId']);
                                     $relationModel->setInversedBy($inversedBy);
                                 }
 
@@ -876,16 +876,16 @@ class Ajax
                 $boxModel->changeName($this->getTheFirstAvailableName($boxModel->getName(), $arrayOfBoxNames));
                 $arrayOfBoxNames[] = $boxModel->getName();
                 
-                DB::saveMetaBox($boxModel, $ids);
+                ACPT_Lite_DB::saveMetaBox($boxModel, $ids);
             }
 
             // remove orphans
             foreach ($ids as $postType => $childrenIds){
-               DB::removeMetaOrphans($postType, $childrenIds);
+               ACPT_Lite_DB::removeMetaOrphans($postType, $childrenIds);
             }
 
             // remove orphan relationships
-            DB::removeOrphanRelationships();
+            ACPT_Lite_DB::removeOrphanRelationships();
 
             $return = [
                     'ids' => $ids,
@@ -925,13 +925,13 @@ class Ajax
         // persist $model on DB
         try {
             foreach ($data as $key => $value){
-                $id = (!empty(DB::getSettings($key))) ? DB::getSettings($key)[0]->getId() : Uuid::v4();
+                $id = (!empty(ACPT_Lite_DB::getSettings($key))) ? ACPT_Lite_DB::getSettings($key)[0]->getId() : Uuid::v4();
                 $model = SettingsModel::hydrateFromArray([
                     'id' => $id,
                     'key' => $key,
                     'value' => $value
                 ]);
-                DB::saveSettings($model);
+                ACPT_Lite_DB::saveSettings($model);
             }
 
             $return = [
@@ -971,7 +971,7 @@ class Ajax
             unset($settings['capabilities_2']);
             unset($settings['capabilities_3']);
 
-            $id = (DB::exists($data[1]["slug"])) ? DB::getId($data[1]["slug"]) : Uuid::v4();
+            $id = (ACPT_Lite_DB::exists($data[1]["slug"])) ? ACPT_Lite_DB::getId($data[1]["slug"]) : Uuid::v4();
             $model = TaxonomyModel::hydrateFromArray([
                 'id' => $id,
                 'slug' => $data[1]["slug"],
@@ -981,7 +981,7 @@ class Ajax
                 'settings' => $settings
             ]);
 
-            DB::saveTaxonomy($model);
+            ACPT_Lite_DB::saveTaxonomy($model);
             $return = [
                     'success' => true
             ];

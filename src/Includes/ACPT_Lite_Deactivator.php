@@ -12,7 +12,7 @@ namespace ACPT_Lite\Includes;
  * @subpackage advanced-custom-post-type/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class Deactivator
+class ACPT_Lite_Deactivator
 {
     /**
      * Deactivate
@@ -22,7 +22,7 @@ class Deactivator
     public static function deactivate()
     {
         if(!class_exists(\ACPT::class)){
-            DB::destroySchema();
+            ACPT_Lite_DB::destroySchema();
         }
     }
 }

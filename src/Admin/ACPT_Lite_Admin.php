@@ -7,8 +7,8 @@ use ACPT_Lite\Core\Generators\MetaBoxGenerator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
-use ACPT_Lite\Includes\DB;
-use ACPT_Lite\Includes\Loader;
+use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Includes\ACPT_Lite_Loader;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -18,15 +18,15 @@ use ACPT_Lite\Includes\Loader;
  * @subpackage advanced-custom-post-type/admin
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class Admin
+class ACPT_Lite_Admin
 {
     /**
-     * @var Loader
+     * @var ACPT_Lite_Loader
      */
     private $loader;
 
     /**
-     * @var Ajax
+     * @var ACPT_Lite_Ajax
      */
     private $ajax;
 
@@ -53,10 +53,10 @@ class Admin
     /**
      * Admin constructor.
      *
-     * @param Loader $loader
-     * @param Ajax   $ajax
+     * @param ACPT_Lite_Loader $loader
+     * @param ACPT_Lite_Ajax   $ajax
      */
-    public function __construct( Loader $loader, Ajax $ajax)
+    public function __construct( ACPT_Lite_Loader $loader, ACPT_Lite_Ajax $ajax)
     {
         $this->ajax = $ajax;
         $this->loader = $loader;
@@ -150,7 +150,7 @@ class Admin
                 'pageTitle' => 'Advanced Custom Post Types',
                 'menuTitle' => 'ACPT Lite',
                 'capability' => 'manage_options',
-                'menuSlug' => PLUGIN_NAME,
+                'menuSlug' => ACPT_LITE_PLUGIN_NAME,
                 'template' => 'app',
                 'iconUrl' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/img/advanced-custom-post-type-icon.svg',
                 'position' => 50,
@@ -164,11 +164,11 @@ class Admin
                 ],
             ],
             [
-                    'parentSlug' => PLUGIN_NAME,
-                    'pageTitle' => translate('Register post type', PLUGIN_NAME),
-                    'menuTitle' => translate('Register post type', PLUGIN_NAME),
+                    'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                    'pageTitle' => translate('Register post type', ACPT_LITE_PLUGIN_NAME),
+                    'menuTitle' => translate('Register post type', ACPT_LITE_PLUGIN_NAME),
                     'capability' => 'manage_options',
-                    'menuSlug' => PLUGIN_NAME . '#/register',
+                    'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/register',
                     'template' => 'app',
                     'position' => 51,
                     'assets' => [
@@ -181,11 +181,11 @@ class Admin
                     ],
             ],
             [
-                    'parentSlug' => PLUGIN_NAME,
-                    'pageTitle' => translate('Registered taxonomies', PLUGIN_NAME),
-                    'menuTitle' => translate('Registered taxonomies', PLUGIN_NAME),
+                    'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                    'pageTitle' => translate('Registered taxonomies', ACPT_LITE_PLUGIN_NAME),
+                    'menuTitle' => translate('Registered taxonomies', ACPT_LITE_PLUGIN_NAME),
                     'capability' => 'manage_options',
-                    'menuSlug' => PLUGIN_NAME . '#/taxonomies',
+                    'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/taxonomies',
                     'template' => 'app',
                     'position' => 52,
                     'assets' => [
@@ -198,11 +198,11 @@ class Admin
                     ],
             ],
             [
-                    'parentSlug' => PLUGIN_NAME,
-                    'pageTitle' => translate('Settings', PLUGIN_NAME),
-                    'menuTitle' => translate('Settings', PLUGIN_NAME),
+                    'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                    'pageTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
+                    'menuTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
                     'capability' => 'manage_options',
-                    'menuSlug' => PLUGIN_NAME . '#/settings',
+                    'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/settings',
                     'template' => 'app',
                     'position' => 56,
                     'assets' => [
@@ -292,17 +292,17 @@ class Admin
                     // css
                     if($key === 'css'){
                         foreach ($assets as $asset){
-                            wp_enqueue_style( dirname( __FILE__ ).'__'.$key, $asset, [], PLUGIN_VERSION, 'all');
+                            wp_enqueue_style( dirname( __FILE__ ).'__'.$key, $asset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
                         }
                         // js
                     } elseif($key === 'js'){
                         foreach ($assets as $asset){
-                            wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset, ['jquery'], PLUGIN_VERSION, true);
+                            wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset, ['jquery'], ACPT_LITE_PLUGIN_VERSION, true);
                         }
                         // react
                     } elseif($key === 'react'){
                         foreach ($assets as $asset){
-                            wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset, ['wp-element'], PLUGIN_VERSION, true);
+                            wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset, ['wp-element'], ACPT_LITE_PLUGIN_VERSION, true);
                         }
                     }
                 }
@@ -314,11 +314,11 @@ class Admin
 
             // other static assets here
             foreach ($this->staticCssAssets as $key => $asset){
-                wp_enqueue_style( dirname( __FILE__ ).'__'.$key, $asset, [], PLUGIN_VERSION, 'all');
+                wp_enqueue_style( dirname( __FILE__ ).'__'.$key, $asset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
             }
 
             foreach ($this->staticJsAssets as $key => $asset){
-                wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], PLUGIN_VERSION, true);
+                wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_LITE_PLUGIN_VERSION, true);
             }
 
             //
@@ -337,18 +337,18 @@ class Admin
     public function addFilters()
     {
         add_filter('script_loader_tag', [$this, 'addAsyncDeferAttribute'], 10, 2);
-        add_filter('block_categories', [$this, 'addGutembergBlocks'], 10, 2 );
+        add_filter('block_categories', [$this, 'addGutenbergBlocks'], 10, 2 );
     }
 
     /**
-     * Register custom Gutember
+     * Register custom Gutenberg
      *
      * @param $block_categories
      * @param $block_editor_context
      *
      * @return array
      */
-    public function addGutembergBlocks($block_categories, $block_editor_context)
+    public function addGutenbergBlocks($block_categories, $block_editor_context)
     {
         $category_slugs = wp_list_pluck( $block_categories, 'slug' );
 
@@ -397,7 +397,7 @@ class Admin
         $metaBoxGenerator = new MetaBoxGenerator();
 
         // add meta box/taxonomies for CPT
-        foreach (DB::get() as $postTypeModel){
+        foreach ( ACPT_Lite_DB::get() as $postTypeModel){
 
             $customPostType = new CustomPostTypeGenerator(
                 $postTypeModel->getName(),
@@ -499,7 +499,7 @@ class Admin
      */
     private function addColumnsToShow()
     {
-        foreach (DB::get() as $postTypeModel){
+        foreach ( ACPT_Lite_DB::get() as $postTypeModel){
 
             $action = 'manage_edit-'.$postTypeModel->getName().'_columns';
 
@@ -541,17 +541,17 @@ class Admin
      */
     private function registerHooks()
     {
-        $this->loader->addAction( 'acpt_after_main_content', new Hooks(), 'afterMainContent' );
-        $this->loader->addAction( 'acpt_before_main_content', new Hooks(), 'beforeMainContent' );
-        $this->loader->addAction( 'acpt_breadcrumb', new Hooks(), 'breadcrumb' );
-        $this->loader->addAction( 'acpt_thumbnail', new Hooks(), 'thumbnail' );
-        $this->loader->addAction( 'acpt_single_content', new Hooks(), 'singleContent' );
-        $this->loader->addAction( 'acpt_archive_title', new Hooks(), 'archiveTitle' );
-        $this->loader->addAction( 'acpt_archive_loop', new Hooks(), 'archiveLoop' );
-        $this->loader->addAction( 'acpt_loop', new Hooks(), 'loop' );
-        $this->loader->addAction( 'acpt_archive_pagination', new Hooks(), 'pagination' );
-        $this->loader->addAction( 'acpt_prev_next_links', new Hooks(), 'prevNextLinks' );
-        $this->loader->addAction( 'acpt_taxonomy_links', new Hooks(), 'taxonomyLinks' );
+        $this->loader->addAction( 'acpt_after_main_content', new ACPT_Lite_Hooks(), 'afterMainContent' );
+        $this->loader->addAction( 'acpt_before_main_content', new ACPT_Lite_Hooks(), 'beforeMainContent' );
+        $this->loader->addAction( 'acpt_breadcrumb', new ACPT_Lite_Hooks(), 'breadcrumb' );
+        $this->loader->addAction( 'acpt_thumbnail', new ACPT_Lite_Hooks(), 'thumbnail' );
+        $this->loader->addAction( 'acpt_single_content', new ACPT_Lite_Hooks(), 'singleContent' );
+        $this->loader->addAction( 'acpt_archive_title', new ACPT_Lite_Hooks(), 'archiveTitle' );
+        $this->loader->addAction( 'acpt_archive_loop', new ACPT_Lite_Hooks(), 'archiveLoop' );
+        $this->loader->addAction( 'acpt_loop', new ACPT_Lite_Hooks(), 'loop' );
+        $this->loader->addAction( 'acpt_archive_pagination', new ACPT_Lite_Hooks(), 'pagination' );
+        $this->loader->addAction( 'acpt_prev_next_links', new ACPT_Lite_Hooks(), 'prevNextLinks' );
+        $this->loader->addAction( 'acpt_taxonomy_links', new ACPT_Lite_Hooks(), 'taxonomyLinks' );
     }
 
     /**

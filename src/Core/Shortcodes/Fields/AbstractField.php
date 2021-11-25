@@ -3,7 +3,7 @@
 namespace ACPT_Lite\Core\Shortcodes\Fields;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Includes\Loader;
+use ACPT_Lite\Includes\ACPT_Lite_Loader;
 
 abstract class AbstractField
 {
