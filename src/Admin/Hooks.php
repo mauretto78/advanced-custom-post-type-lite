@@ -5,6 +5,7 @@ namespace ACPT_Lite\Admin;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxFieldModel;
 use ACPT_Lite\Includes\DB;
+use ACPT_Lite\Utils\PhpEval;
 use ACPT_Lite\Utils\WPLinks;
 
 /**
@@ -201,7 +202,7 @@ class Hooks
         $template = DB::getTemplate($post->post_type, 'single');
 
         $content = $template->getHtml();
-        echo eval("?> $content <?php ");
+        echo PhpEval::evaluate($content);
     }
 
     /**
@@ -216,7 +217,7 @@ class Hooks
         $template = DB::getTemplate($post->post_type, 'archive');
 
         $content = $template->getHtml();
-        echo eval("?> $content <?php ");
+        echo PhpEval::evaluate($content);
     }
 
     /**
