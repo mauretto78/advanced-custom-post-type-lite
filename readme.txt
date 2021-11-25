@@ -3,9 +3,9 @@ Contributors: mauretto78
 Donate link: https://acpt.io
 Tags: cms, cpt, custom post types, post, types, taxonomy, taxonomies
 Requires at least: 5.1
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 3.0
+Stable tag: 1.0.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,7 +24,7 @@ Main features:
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 
-If you need more power, consider to upgrate to [ACPT](https://acpt.io) :)!
+If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!
 
 = Credits =
 
@@ -46,7 +46,7 @@ Please refer to main [ACPT](https://acpt.io) website.
 2. CPT List
 3. Register new CTP
 4. Register new Taxonomy
-5. Manage meta boxes to CPTs
+5. Manage CPT meta boxes
 6. Meta boxes in action in the post editor
 
 == Changelog ==
