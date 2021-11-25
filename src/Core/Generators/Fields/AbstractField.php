@@ -110,70 +110,35 @@ abstract class AbstractField
      * @param $icon
      * @param $field
      */
-    protected function renderField($icon, $field, $relation = null)
+    protected function renderField( $icon, $field )
     {
         ?>
-        <div class="acpt-admin-meta sort-<?php echo $this->sort; ?>">
+        <div class="acpt-admin-meta sort-<?php echo esc_html($this->sort); ?>">
             <div class="acpt-admin-meta-icon">
                 <span class="icon">
-                    <span class="iconify" style="color: white;" data-width="24" data-height="24" data-icon="<?php echo $icon; ?>"></span>
+                    <span class="iconify" style="color: white;" data-width="24" data-height="24" data-icon="<?php echo esc_html($icon); ?>"></span>
                 </span>
             </div>
             <div class="acpt-admin-meta-label">
-                <label for="<?php echo $this->getIdName(); ?>">
+                <label for="<?php echo esc_html($this->getIdName()); ?>">
                     <?php
-                    echo $this->name;
+                    echo esc_html($this->name);
                     echo ($this->isRequired) ? '<span class="required">*</span>': '';
                     ?>
                 </label>
                 <?php if($this->description):_?>
-                    <span class="description"><?php echo $this->description; ?></span>
-                <?php endif; ?>
-                <?php if($relation): ?>
-                    <div class="relation">
-                        <?php echo $this->displayRelation($relation); ?>
-                    </div>
+                    <span class="description">
+                        <?php echo esc_html($this->description); ?>
+                    </span>
                 <?php endif; ?>
             </div>
             <div class="acpt-admin-meta-field">
-                <input type="hidden" name="meta_fields[]" value="<?php echo $this->getIdName(); ?>">
-                <input type="hidden" name="meta_fields[]" value="<?php echo $this->getIdName(); ?>_type">
-                <input type="hidden" name="<?php echo $this->getIdName(); ?>_required" value="<?php echo $this->isRequired; ?>">
-                <?php echo $field; ?>
+                <input type="hidden" name="meta_fields[]" value="<?php echo esc_html($this->getIdName()); ?>">
+                <input type="hidden" name="meta_fields[]" value="<?php echo esc_html($this->getIdName()); ?>_type">
+                <input type="hidden" name="<?php echo esc_html($this->getIdName()); ?>_required" value="<?php echo esc_html($this->isRequired); ?>">
+                <?php echo esc_html($field); ?>
             </div>
         </div>
         <?php
-    }
-
-    private function displayRelation($relation)
-    {
-        switch ($relation){
-            case MetaBoxFieldRelationshipModel::ONE_TO_ONE_UNI:
-                return '<span class="relation-label">1</span><span class="relation-sign">⟶</span><span class="relation-label">1</span></span>';
-
-            case MetaBoxFieldRelationshipModel::ONE_TO_ONE_BI:
-                return '<span class="relation-label">1</span><span class="relation-sign">⟷</span><span class="relation-label">1</span></span>';
-
-            case MetaBoxFieldRelationshipModel::ONE_TO_MANY_UNI:
-                return '<span class="relation-label">1</span><span class="relation-sign">⟶</span><span class="relation-label">M</span></span>';
-
-            case MetaBoxFieldRelationshipModel::ONE_TO_MANY_BI:
-                return '<span class="relation-label">1</span><span class="relation-sign">⟷</span><span class="relation-label">M</span></span>';
-
-            case MetaBoxFieldRelationshipModel::MANY_TO_ONE_UNI:
-                return '<span class="relation-label">M</span><span class="relation-sign">⟶</span><span class="relation-label">1</span></span>';
-
-            case MetaBoxFieldRelationshipModel::MANY_TO_ONE_BI:
-                return '<span class="relation-label">M</span><span class="relation-sign">⟷</span><span class="relation-label">1</span></span>';
-
-            case MetaBoxFieldRelationshipModel::MANY_TO_MANY_UNI:
-                return '<span class="relation-label">M</span><span class="relation-sign">⟶</span><span class="relation-label">M</span></span>';
-
-            case MetaBoxFieldRelationshipModel::MANY_TO_MANY_BI:
-                return '<span class="relation-label">M</span><span class="relation-sign">⟷</span><span class="relation-label">M</span></span>';
-        }
-
-
-        return $relation;
     }
 }

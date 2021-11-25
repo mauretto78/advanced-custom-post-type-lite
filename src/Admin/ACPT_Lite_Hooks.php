@@ -117,17 +117,17 @@ class ACPT_Lite_Hooks
             echo '">';
             echo 'Home';
             echo "</a></li>";
-            echo "<li class='delimiter'>".$delimiter."</li>";
+            echo "<li class='delimiter'>".esc_html($delimiter)."</li>";
 
             if (is_single()) {
 
                 foreach ( ACPT_Lite_DB::get([ 'postType' => $post->post_type]) as $postTypeModel) {
                     echo "<li>";
                     echo "<a href='".get_post_type_archive_link($postTypeModel->getName())."'>";
-                    echo $postTypeModel->getPlural();
+                    echo esc_html($postTypeModel->getPlural());
                     echo '</a>';
                     echo "</li>";
-                    echo "<li class='delimiter'>".$delimiter."</li>";
+                    echo "<li class='delimiter'>".esc_html($delimiter)."</li>";
                     echo "<li>";
                     the_title();
                     echo '</li>';
@@ -136,7 +136,7 @@ class ACPT_Lite_Hooks
                 foreach ( ACPT_Lite_DB::get([ 'postType' => $post->post_type]) as $postTypeModel) {
                     if (is_post_type_archive($postTypeModel->getName())){
                         echo "<li>";
-                        echo $postTypeModel->getPlural();
+                        echo esc_html($postTypeModel->getPlural());
                         echo "</li><li>";
                     }
                 }
@@ -305,7 +305,7 @@ class ACPT_Lite_Hooks
             echo '
                 <div>
                     <a class="'.$cssClasses.'" style="'.$styles.'" href="'.$prev['link'].'">
-                        < '.$prev['title'].'
+                        < '.esc_html($prev['title']).'
                     </a>
                 </div>';
         }
@@ -314,7 +314,7 @@ class ACPT_Lite_Hooks
             echo '
                 <div>
                     <a class="'.$cssClasses.'" style="'.$styles.'" href="'.$next['link'].'">
-                        '.$next['title'].' >
+                        '.esc_html($next['title']).' >
                     </a>
                 </div>';
         }
@@ -345,7 +345,7 @@ class ACPT_Lite_Hooks
             echo '<span class="'.$cssClasses.'" style="'.$styles.'">';
 
             foreach ($links as $link){
-                echo '<a href="'.$link['link'].'">'.$link['name'].'</a>';
+                echo '<a href="'.esc_html($link['link']).'">'.esc_html($link['name']).'</a>';
 
                 if($link !== end($links)){
                    echo $delimiter;
@@ -387,7 +387,7 @@ class ACPT_Lite_Hooks
 
             echo '<ul>';
             foreach ($pagination as $item){
-                echo '<li>'.$item.'</li>';
+                echo '<li>'.esc_html($item).'</li>';
             }
             echo '</ul>';
             echo '</div>';
