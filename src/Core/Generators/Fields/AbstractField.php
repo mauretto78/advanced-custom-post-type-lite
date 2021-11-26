@@ -136,7 +136,7 @@ abstract class AbstractField
                 <input type="hidden" name="meta_fields[]" value="<?php echo esc_html($this->getIdName()); ?>">
                 <input type="hidden" name="meta_fields[]" value="<?php echo esc_html($this->getIdName()); ?>_type">
                 <input type="hidden" name="<?php echo esc_html($this->getIdName()); ?>_required" value="<?php echo esc_html($this->isRequired); ?>">
-                <?php echo esc_html($field); ?>
+                <?php echo $field; ?>
             </div>
         </div>
         <?php
