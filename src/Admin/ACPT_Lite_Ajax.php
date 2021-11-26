@@ -14,6 +14,7 @@ use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Models\SettingsModel;
 use ACPT_Lite\Core\Models\TaxonomyModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\Sanitizer;
 use ACPT_Lite\Utils\WPLinks;
 
 /**
@@ -1004,23 +1005,6 @@ class ACPT_Lite_Ajax
     {
         $jsonDecoded = json_decode(wp_unslash($data), true);
 
-        return $this->recursiveSanitizeTextField($jsonDecoded);
-    }
-
-    /**
-     * @param $array
-     *
-     * @return mixed
-     */
-    function recursiveSanitizeTextField( $array) {
-        foreach ( $array as $key => &$value ) {
-            if ( is_array( $value ) ) {
-                $value = $this->recursiveSanitizeTextField($value);
-            } else {
-                $value = sanitize_text_field( $value );
-            }
-        }
-
-        return $array;
+        return Sanitizer::recursiveSanitizeTextField($jsonDecoded);
     }
 }
