@@ -177,32 +177,8 @@ class CustomPostTypeGenerator extends AbstractGenerator
                     }
                 } else {
                     if(isset($_POST[$key])){
+                        update_post_meta($post->ID, $key, sanitize_text_field($_POST[$key]));
 
-                        if (is_array($_POST[$key])) {
-                            $_POST[$key] = Strings::serialize($_POST[$key]);
-                        }
-
-                        if(Strings::contains('_######RELATION######', $key)){
-
-                            $inversedIds = explode(",", $_POST[$key]);
-
-                            if('' !== $_POST[$key]){
-                                $key = str_replace('_######RELATION######', '', $key);
-                                $this->deleteAllInversedKeys($key, $post->ID);
-
-                                foreach ($inversedIds as $inversedId){
-                                    $previousValues = (get_post_meta($inversedId, $key, true) !== '') ? Strings::unserialize(get_post_meta($inversedId, $key, true)) : [];
-                                    if(!in_array($post->ID, $previousValues)){
-                                        $previousValues[] = $post->ID;
-                                    }
-
-                                    update_post_meta($inversedId, $key.'_type', MetaBoxFieldModel::POST_TYPE);
-                                    update_post_meta($inversedId, $key, Strings::serialize($previousValues));
-                                }
-                            }
-                        } else {
-                            update_post_meta($post->ID, $key, $_POST[$key]);
-                        }
                     } else {
                         update_post_meta($post->ID, $key, '');
                     }

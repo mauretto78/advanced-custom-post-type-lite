@@ -68,30 +68,5 @@ class Strings
     {
         return strpos($haystack, $needle) !== false;
     }
-
-    /**
-     * @param $string
-     *
-     * @return string
-     */
-    public static function serialize($string)
-    {
-        return serialize($string);
-    }
-
-    /**
-     * @param $string
-     *
-     * @return mixed
-     */
-    public static function unserialize($string)
-    {
-        $data = @unserialize($string);
-        if ($data !== false) {
-            return unserialize($string);
-        }
-
-        return $string;
-    }
 }
 

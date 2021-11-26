@@ -93,7 +93,7 @@ abstract class AbstractField
     {
         $value = get_post_meta($this->postId, $this->getIdName(), true);
 
-        return ($value !== null and $value !== '' ) ? Strings::unserialize($value) : $this->defaultValue;
+        return ($value !== null and $value !== '' ) ? $value : $this->defaultValue;
     }
 
     /**
