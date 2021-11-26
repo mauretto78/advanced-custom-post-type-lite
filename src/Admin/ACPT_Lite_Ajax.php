@@ -29,7 +29,7 @@ class ACPT_Lite_Ajax
     public function assocTaxonomyToPostTypeAction()
     {
         if(isset($_POST['data'])) {
-            $data = json_decode( wp_unslash( $_POST[ 'data' ] ), true );
+            $data = $this->sanitizeJsonData($_POST['data']);
 
             try {
                 $postId = ACPT_Lite_DB::getId($data['postType']);
@@ -993,5 +993,27 @@ class ACPT_Lite_Ajax
         }
 
         return wp_send_json($return);
+    }
+
+    /**
+     * @param $data
+     *
+     * @return mixed
+     */
+    private function sanitizeJsonData($data)
+    {
+        $jsonDecoded = json_decode(wp_unslash($data), true);
+
+        if(empty($jsonDecoded)){
+            return null;
+        }
+
+        $sanitized = [];
+
+        foreach ($jsonDecoded as $key => $value){
+            $sanitized[sanitize_text_field($key)] = sanitize_text_field($value);
+        }
+
+        return $sanitized;
     }
 }
