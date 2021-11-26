@@ -64,7 +64,7 @@ class ACPT_Lite_Ajax
     public function deleteCustomPostTypeAction()
     {
         if(isset($_POST['data'])){
-            $data = json_decode(wp_unslash($_POST['data']), true);
+            $data = $this->sanitizeJsonData($_POST['data']);
 
             if(!isset($data['postType'])){
                 return wp_send_json([
@@ -105,7 +105,7 @@ class ACPT_Lite_Ajax
     public function deleteCustomPostTypeMetaAction()
     {
         if(isset($_POST['data'])){
-            $data = json_decode(wp_unslash($_POST['data']), true);
+            $data = $this->sanitizeJsonData($_POST['data']);
 
             if(!isset($data['postType'])){
                 return wp_send_json([
@@ -146,7 +146,7 @@ class ACPT_Lite_Ajax
      */
     public function deletePostTypeTemplateAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
         if(!isset($data['postType']) and !isset($data['templateType'])){
             return wp_send_json([
@@ -182,7 +182,7 @@ class ACPT_Lite_Ajax
     public function deleteTaxonomyAction()
     {
         if(isset($_POST['data'])){
-            $data = json_decode(wp_unslash($_POST['data']), true);
+            $data = $this->sanitizeJsonData($_POST['data']);
 
             if(!isset($data['taxonomy'])){
                 return wp_send_json([
@@ -217,7 +217,7 @@ class ACPT_Lite_Ajax
 
     public function doShortcodeAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
         if(!isset($data['shortcode'])){
             return wp_send_json([
@@ -240,7 +240,7 @@ class ACPT_Lite_Ajax
      */
     public function exportFileAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
         $customPostTypes = [];
 
         foreach ($data as $datum){
@@ -273,7 +273,7 @@ class ACPT_Lite_Ajax
 
     public function fetchPreviewLinkAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
         if(!isset($data['id']) and !isset($data['type']) ){
             return wp_send_json([
                     'success' => false,
@@ -308,7 +308,7 @@ class ACPT_Lite_Ajax
      */
     public function fetchCustomPostTypeMetaAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
         if(!isset($data['postType'])){
             return wp_send_json([
                     'success' => false,
@@ -332,7 +332,7 @@ class ACPT_Lite_Ajax
      */
     public function fetchCustomPostTypeTemplateAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
         // json, postType, templateType
         if(!isset($data['postType']) and !isset($data['templateType'])){
@@ -355,7 +355,7 @@ class ACPT_Lite_Ajax
     {
         $postType = null;
         if(isset($_POST['data'])){
-            $data = json_decode(wp_unslash($_POST['data']), true);
+            $data = $this->sanitizeJsonData($_POST['data']);
             $postType = isset($data['postType']) ? $data['postType'] : null;
             $page = isset($data['page']) ? $data['page'] : null;
             $perPage = isset($data['perPage']) ? $data['perPage'] : null;
@@ -453,7 +453,7 @@ class ACPT_Lite_Ajax
     {
         $taxonomy = null;
         if(isset($_POST['data'])){
-            $data = json_decode(wp_unslash($_POST['data']), true);
+            $data = $this->sanitizeJsonData($_POST['data']);
             $taxonomy = isset($data['taxonomy']) ? $data['taxonomy'] : null;
             $page = isset($data['page']) ? $data['page'] : null;
             $perPage = isset($data['perPage']) ? $data['perPage'] : null;
@@ -479,7 +479,7 @@ class ACPT_Lite_Ajax
     public function fetchPostDataAction()
     {
         if(isset($_POST['data'])){
-            $data = json_decode(wp_unslash($_POST['data']), true);
+            $data = $this->sanitizeJsonData($_POST['data']);
 
             if(!isset($data['id'])){
                 return wp_send_json([
@@ -523,7 +523,7 @@ class ACPT_Lite_Ajax
     public function fetchPostsAction()
     {
         if(isset($_POST['data'])){
-            $data = json_decode(wp_unslash($_POST['data']), true);
+            $data = $this->sanitizeJsonData($_POST['data']);
 
             if(!isset($data['postType'])){
                 return wp_send_json([
@@ -693,7 +693,7 @@ class ACPT_Lite_Ajax
      */
     public function saveCustomPostTypeAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
         $supports = [];
 
@@ -745,7 +745,7 @@ class ACPT_Lite_Ajax
      */
     public function saveCustomPostTypeTemplateAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
         // json, postType, templateType
         if(!isset($data['html']) and !isset($data['json']) and  !isset($data['postType']) and !isset($data['templateType'])){
@@ -789,7 +789,7 @@ class ACPT_Lite_Ajax
      */
     public function saveCustomPostTypeMetaAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
         $ids = [];
         $arrayOfBoxNames = [];
 
@@ -920,7 +920,7 @@ class ACPT_Lite_Ajax
 
     public function saveSettingsAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
         // persist $model on DB
         try {
@@ -952,7 +952,7 @@ class ACPT_Lite_Ajax
      */
     public function saveTaxonomyAction()
     {
-        $data = json_decode(wp_unslash($_POST['data']), true);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
         // persist $model on DB
         try {
@@ -1004,16 +1004,23 @@ class ACPT_Lite_Ajax
     {
         $jsonDecoded = json_decode(wp_unslash($data), true);
 
-        if(empty($jsonDecoded)){
-            return null;
+        return $this->recursiveSanitizeTextField($jsonDecoded);
+    }
+
+    /**
+     * @param $array
+     *
+     * @return mixed
+     */
+    function recursiveSanitizeTextField( $array) {
+        foreach ( $array as $key => &$value ) {
+            if ( is_array( $value ) ) {
+                $value = $this->recursiveSanitizeTextField($value);
+            } else {
+                $value = sanitize_text_field( $value );
+            }
         }
 
-        $sanitized = [];
-
-        foreach ($jsonDecoded as $key => $value){
-            $sanitized[sanitize_text_field($key)] = sanitize_text_field($value);
-        }
-
-        return $sanitized;
+        return $array;
     }
 }
