@@ -45,7 +45,7 @@ class ACPT_Lite_Internalization
      */
     public function loadPluginTextDomain()
     {
-        load_plugin_textdomain( PLUGIN_NAME, false, dirname( plugin_basename( __FILE__ ) ) . "/i18n/languages" );
+        load_plugin_textdomain( ACPT_LITE_PLUGIN_NAME, false, dirname( plugin_basename( __FILE__ ) ) . "/i18n/languages" );
     }
 
     public function run()

@@ -43,9 +43,11 @@ const BasicElement = () => {
                     <th style={{width: '180px'}}>Supports</th>
                     <td>
                         {data.supports && data.supports.map((s)=>
-                            <div className="acpt-badge mr-1">
-                                <span className="label">{s}</span>
-                            </div>
+                            (s !== '') && (
+                                <div className="acpt-badge mr-1">
+                                    <span className="label">{s}</span>
+                                </div>
+                            )
                         )}
                     </td>
                 </tr>

@@ -5,6 +5,7 @@ namespace ACPT_Lite\Core\Generators;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxFieldModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\Assert;
 
 /**
  * *************************************************
@@ -46,7 +47,7 @@ class CustomPostTypeGenerator extends AbstractGenerator
             $this->init([&$this, "registerPostType"]);
         }
 
-        add_action( 'admin_notices', [$this, 'legacy_admin_notices' ]);
+        add_action( 'admin_notices', [$this, 'legacyAdminNotices' ]);
 
         $this->savePost();
     }
@@ -148,22 +149,14 @@ class CustomPostTypeGenerator extends AbstractGenerator
     {
         global $post;
 
+        $errors = [];
+
         if ($_POST && !wp_verify_nonce($_POST[self::NONCE_FIELD_NAME], $this->generateNonce())) {
             return;
         }
 
         if($post and isset($_POST['meta_fields'])){
             foreach ($_POST['meta_fields'] as $key) {
-
-                // validation
-                $isRequired = ($_POST[$key.'_required'] == 1) ? true : false;
-                if($isRequired and empty($_POST[$key])){
-
-                    // legacy admin notices
-                    add_filter( 'redirect_post_location', [$this, 'add_notice_query_var'], 99 );
-
-                    return;
-                }
 
                 if (!empty($_FILES[$key])) {
                     if (!empty($_FILES[$key]['tmp_name'])) {
@@ -177,6 +170,19 @@ class CustomPostTypeGenerator extends AbstractGenerator
                     }
                 } else {
                     if(isset($_POST[$key])){
+
+                        $type = sanitize_text_field($_POST[$key.'_type']);
+                        $isRequired = ($_POST[$key.'_required'] == 1) ? true : false;
+
+                        // validation
+                        try {
+                            $this->validateDataBeforeSaving($type, $isRequired, $_POST[$key]);
+                        } catch (\Exception $exception){
+                            $errors[] = $exception->getMessage();
+
+                            return;
+                        }
+
                         update_post_meta($post->ID, $key, sanitize_text_field($_POST[$key]));
 
                     } else {
@@ -184,6 +190,29 @@ class CustomPostTypeGenerator extends AbstractGenerator
                     }
                 }
             }
+
+            if(!empty($errors)){
+                set_transient( "acpt_plugin_error_msg_".$post->ID, $errors, 60 );
+                add_filter( 'redirect_post_location', [$this, 'addNoticeQueryVar'], 99 );
+            }
+        }
+    }
+
+    /**
+     * @param $type
+     * @param $isRequired
+     * @param $rawData
+     */
+    private function validateDataBeforeSaving($type, $isRequired, $rawData)
+    {
+        if($isRequired){
+            Assert::notEmpty($rawData);
+        }
+
+        switch ($type){
+            case MetaBoxFieldModel::EMAIL_TYPE:
+                Assert::email($rawData);
+                break;
         }
     }
 
@@ -209,30 +238,35 @@ class CustomPostTypeGenerator extends AbstractGenerator
      * @param $location
      * @return mixed
      */
-    public function add_notice_query_var( $location )
+    public function addNoticeQueryVar( $location )
     {
-        remove_filter( 'redirect_post_location', array( $this, 'add_notice_query_var' ), 99 );
+        remove_filter( 'redirect_post_location', array( $this, 'addNoticeQueryVar' ), 99 );
 
-        return add_query_arg( ['missing_fields' => true], $location );
+        return add_query_arg( ['errors' => true], $location );
     }
 
     /**
      * Display legacy notices
      */
-    public function legacy_admin_notices()
+    public function legacyAdminNotices()
     {
-        if ( ! isset( $_GET['missing_fields'] ) ) {
+        if ( ! isset( $_GET['errors'] ) ) {
             return;
         }
 
         global $post;
 
         if($post->post_type === $this->postTypeName){
-            ?>
-            <div class="notice notice-error is-dismissible">
-                <p><?php esc_html_e( 'ERROR: Missing required fields!', 'ACPT' ); ?></p>
-            </div>
-            <?php
+            if ( false !== ( $errors = get_transient( "acpt_plugin_error_msg_{$post->ID}" ) ) && $errors) {
+                delete_transient( "acpt_plugin_error_msg_{$post->ID}" );
+                foreach ($errors as $error){
+                    ?>
+                    <div class="notice notice-error is-dismissible">
+                        <p><?php esc_html( $error ); ?></p>
+                    </div>
+                    <?php
+                }
+            }
         }
     }
 }

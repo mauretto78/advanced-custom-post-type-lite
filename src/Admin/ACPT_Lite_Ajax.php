@@ -710,6 +710,9 @@ class ACPT_Lite_Ajax
         if($data[1]["support_9"] !== false){ $supports[] = $data[1]["support_9"]; }
         if($data[1]["support_10"] !== false){ $supports[] = $data[1]["support_10"]; }
 
+        // converts "1" to true / "0" to false
+        $settings = $this->convertSettingsForDB($data[3]);
+
         // persist $model on DB
         try {
             $id = (ACPT_Lite_DB::exists($data[1]["post_name"])) ? ACPT_Lite_DB::getId($data[1]["post_name"]) : Uuid::v4();
@@ -722,7 +725,7 @@ class ACPT_Lite_Ajax
                     'native' => false,
                     'supports' => $supports,
                     'labels' => $data[2],
-                    'settings' => $data[3]
+                    'settings' => $settings
             ]);
 
             ACPT_Lite_DB::save($model);
@@ -737,6 +740,30 @@ class ACPT_Lite_Ajax
         }
 
         return wp_send_json($return);
+    }
+
+    /**
+     * @param $rawSettings
+     *
+     * @return array
+     */
+    private function convertSettingsForDB($rawSettings)
+    {
+        // converts "1" to true / "0" to false
+        $settings = [];
+        foreach ($rawSettings as $key => $value){
+            if($value === ''){
+                $settings[$key] = null;
+            } elseif($value === "1"){
+                $settings[$key] = true;
+            } elseif($value === "0"){
+                $settings[$key] = false;
+            } else {
+                $settings[$key] = $value;
+            }
+        }
+
+        return $settings;
     }
 
     /**
@@ -971,6 +998,8 @@ class ACPT_Lite_Ajax
             unset($settings['capabilities_1']);
             unset($settings['capabilities_2']);
             unset($settings['capabilities_3']);
+
+            $settings = $this->convertSettingsForDB($settings);
 
             $id = (ACPT_Lite_DB::exists($data[1]["slug"])) ? ACPT_Lite_DB::getId($data[1]["slug"]) : Uuid::v4();
             $model = TaxonomyModel::hydrateFromArray([
