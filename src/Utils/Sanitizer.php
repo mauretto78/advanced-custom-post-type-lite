@@ -9,12 +9,16 @@ class Sanitizer
      *
      * @return mixed
      */
-    public static function recursiveSanitizeTextField($array) {
+    public static function recursiveSanitizeRawData( $array) {
         foreach ( $array as $key => &$value ) {
             if ( is_array( $value ) ) {
-                $value = self::recursiveSanitizeTextField($value);
-            } else {
+                $value = self::recursiveSanitizeRawData($value);
+            } elseif(\is_string($value)){
                 $value = sanitize_text_field( $value );
+            } elseif(\is_bool($value)) {
+                $value = (bool)( $value );
+            } elseif (\is_null($value)){
+                $value = null;
             }
         }
 
