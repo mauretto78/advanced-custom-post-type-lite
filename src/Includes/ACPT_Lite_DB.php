@@ -174,7 +174,7 @@ class ACPT_Lite_DB
         $success = empty($wpdb->last_error);
 
         if(!$success){
-            echo $success;
+            echo esc_html($success);
             die();
         }
     }
@@ -202,7 +202,7 @@ class ACPT_Lite_DB
         $success = empty($wpdb->last_error);
 
         if(!$success){
-            echo $success;
+            echo esc_html($success);
             die();
         }
     }

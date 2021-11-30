@@ -24,4 +24,76 @@ class Sanitizer
 
         return $array;
     }
+
+    /**
+     * @param $field
+     *
+     * @return mixed
+     */
+    public static function escapeField($field)
+    {
+        $allowedTags = [
+                'a' => [
+                        'href' => [],
+                        'title' => []
+                ],
+                'br' => [],
+                'img' => [
+                        'src' => [],
+                        'alt' => [],
+                        'title' => [],
+                ],
+                'strong' => [],
+                'div' => [
+                        'data-target' => [],
+                        'style' => [],
+                        'class' => [],
+                        'id' => []
+                ],
+                'label' => [
+                        'for' => [],
+                        'style' => [],
+                        'type' => [],
+                        'name' => [],
+                        'class' => [],
+                        'id' => []
+                ],
+                'input' => [
+                        'value' => [],
+                        'readonly' => [],
+                        'style' => [],
+                        'type' => [],
+                        'name' => [],
+                        'class' => [],
+                        'id' => []
+                ],
+                'select' => [
+                        'readonly' => [],
+                        'style' => [],
+                        'multiple' => [],
+                        'type' => [],
+                        'name' => [],
+                        'class' => [],
+                        'id' => []
+                ],
+                'option' => [
+                        'value' => [],
+                        'data-symbol' => [],
+                        'data-placeholder' => [],
+                ],
+                'button' => [
+                        'value' => [],
+                        'data-target-id' => [],
+                        'readonly' => [],
+                        'style' => [],
+                        'multiple' => [],
+                        'type' => [],
+                        'name' => [],
+                        'class' => [],
+                        'id' => []
+                ],
+        ];
+
+        return wp_kses($field, $allowedTags);
+    }
 }

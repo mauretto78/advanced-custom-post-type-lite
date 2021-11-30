@@ -527,7 +527,7 @@ class ACPT_Lite_Admin
                             $key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
 
                             if($key === $name){
-                                echo do_shortcode( '[acpt preview="true" box="'.$metaBoxModel->getName().'" field="'.$metaBoxFieldModel->getName().'"]');
+                                echo do_shortcode( '[acpt preview="true" box="'.esc_attr($metaBoxModel->getName()).'" field="'.esc_attr($metaBoxFieldModel->getName()).'"]');
                             }
                         }
                     }

@@ -4,6 +4,7 @@ namespace ACPT_Lite\Core\Generators\Fields;
 
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
+use ACPT_Lite\Utils\Sanitizer;
 
 abstract class AbstractField
 {
@@ -113,14 +114,14 @@ abstract class AbstractField
     protected function renderField( $icon, $field )
     {
         ?>
-        <div class="acpt-admin-meta sort-<?php echo esc_html($this->sort); ?>">
+        <div class="acpt-admin-meta sort-<?php echo esc_attr($this->sort); ?>">
             <div class="acpt-admin-meta-icon">
                 <span class="icon">
-                    <span class="iconify" style="color: white;" data-width="24" data-height="24" data-icon="<?php echo esc_html($icon); ?>"></span>
+                    <span class="iconify" style="color: white;" data-width="24" data-height="24" data-icon="<?php echo esc_attr($icon); ?>"></span>
                 </span>
             </div>
             <div class="acpt-admin-meta-label">
-                <label for="<?php echo esc_html($this->getIdName()); ?>">
+                <label for="<?php echo esc_attr($this->getIdName()); ?>">
                     <?php
                     echo esc_html($this->name);
                     echo ($this->isRequired) ? '<span class="required">*</span>': '';
@@ -135,8 +136,8 @@ abstract class AbstractField
             <div class="acpt-admin-meta-field">
                 <input type="hidden" name="meta_fields[]" value="<?php echo esc_html($this->getIdName()); ?>">
                 <input type="hidden" name="meta_fields[]" value="<?php echo esc_html($this->getIdName()); ?>_type">
-                <input type="hidden" name="<?php echo esc_html($this->getIdName()); ?>_required" value="<?php echo esc_html($this->isRequired); ?>">
-                <?php echo $field; ?>
+                <input type="hidden" name="<?php echo esc_attr($this->getIdName()); ?>_required" value="<?php echo esc_attr($this->isRequired); ?>">
+                <?php echo Sanitizer::escapeField($field); ?>
             </div>
         </div>
         <?php

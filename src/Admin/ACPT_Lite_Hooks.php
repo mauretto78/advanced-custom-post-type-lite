@@ -109,7 +109,7 @@ class ACPT_Lite_Hooks
         $styles .= (isset($options['margin'])) ? 'margin: '. $this->convertToPixelString($options['margin']).';' : '';
         $styles .= (isset($options['padding'])) ? 'padding: '. $this->convertToPixelString($options['padding']).';' : '';
 
-        echo '<div class="acpt-breadcrumb '.$cssClasses.'" style="'.$styles.'">';
+        echo '<div class="acpt-breadcrumb '.esc_attr($cssClasses).'" style="'.esc_attr($styles).'">';
         echo '<ul class="acpt-breadcrumb-list">';
         if (!is_home()) {
             echo '<li><a href="';
@@ -123,7 +123,7 @@ class ACPT_Lite_Hooks
 
                 foreach ( ACPT_Lite_DB::get([ 'postType' => $post->post_type]) as $postTypeModel) {
                     echo "<li>";
-                    echo "<a href='".get_post_type_archive_link($postTypeModel->getName())."'>";
+                    echo "<a href='".get_post_type_archive_link(esc_attr($postTypeModel->getName()))."'>";
                     echo esc_html($postTypeModel->getPlural());
                     echo '</a>';
                     echo "</li>";
@@ -134,7 +134,7 @@ class ACPT_Lite_Hooks
                 }
             } elseif (is_archive()){
                 foreach ( ACPT_Lite_DB::get([ 'postType' => $post->post_type]) as $postTypeModel) {
-                    if (is_post_type_archive($postTypeModel->getName())){
+                    if (is_post_type_archive(esc_attr($postTypeModel->getName()))){
                         echo "<li>";
                         echo esc_html($postTypeModel->getPlural());
                         echo "</li><li>";
@@ -176,9 +176,9 @@ class ACPT_Lite_Hooks
             $thumbnail_url = wp_get_attachment_url($post_thumbnail_id, 'full');
 
             if($width and $height){
-                echo '<img style="object-fit: cover; width: '.$width.'; height: '.$height.';" src="'.$thumbnail_url.'" alt="'.get_the_title().'" />';
+                echo '<img style="object-fit: cover; width: '.esc_attr($width).'; height: '.esc_attr($height).';" src="'.esc_url($thumbnail_url).'" alt="'.get_the_title().'" />';
             } else {
-                echo '<img style="object-fit: cover; " src="'.$thumbnail_url.'" alt="'.get_the_title().'" />';
+                echo '<img style="object-fit: cover; " src="'.esc_url($thumbnail_url).'" alt="'.get_the_title().'" />';
             }
         } else {
 
@@ -186,7 +186,7 @@ class ACPT_Lite_Hooks
             $style .= $width ? 'width: '.$width.';' : '';
             $style .= $height ? 'height: '.$height.';' : '';
 
-            echo '<div class="img-placeholder" style="'.$style.'"><span class="icon iconify" data-icon="bx:bx-image-alt" data-width="48" data-height="48"></span></div>';
+            echo '<div class="img-placeholder" style="'.esc_attr($style).'"><span class="icon iconify" data-icon="bx:bx-image-alt" data-width="48" data-height="48"></span></div>';
         }
     }
 
@@ -304,7 +304,7 @@ class ACPT_Lite_Hooks
         if($prev){
             echo '
                 <div>
-                    <a class="'.$cssClasses.'" style="'.$styles.'" href="'.$prev['link'].'">
+                    <a class="'.esc_attr($cssClasses).'" style="'.esc_attr($styles).'" href="'.esc_url($prev['link']).'">
                         < '.esc_html($prev['title']).'
                     </a>
                 </div>';
@@ -313,7 +313,7 @@ class ACPT_Lite_Hooks
         if($next){
             echo '
                 <div>
-                    <a class="'.$cssClasses.'" style="'.$styles.'" href="'.$next['link'].'">
+                    <a class="'.esc_attr($cssClasses).'" style="'.esc_attr($styles).'" href="'.esc_url($next['link']).'">
                         '.esc_html($next['title']).' >
                     </a>
                 </div>';
@@ -342,10 +342,10 @@ class ACPT_Lite_Hooks
             $styles .= (isset($options['margin'])) ? 'margin: '. $this->convertToPixelString($options['margin']).';' : '';
             $styles .= (isset($options['padding'])) ? 'padding: '. $this->convertToPixelString($options['padding']).';' : '';
 
-            echo '<span class="'.$cssClasses.'" style="'.$styles.'">';
+            echo '<span class="'.esc_attr($cssClasses).'" style="'.esc_attr($styles).'">';
 
             foreach ($links as $link){
-                echo '<a href="'.esc_html($link['link']).'">'.esc_html($link['name']).'</a>';
+                echo '<a href="'.esc_url($link['link']).'">'.esc_html($link['name']).'</a>';
 
                 if($link !== end($links)){
                    echo $delimiter;
