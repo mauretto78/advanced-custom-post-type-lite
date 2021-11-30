@@ -77,6 +77,7 @@ class Sanitizer
                         'id' => []
                 ],
                 'option' => [
+                        'selected' => [],
                         'value' => [],
                         'data-symbol' => [],
                         'data-placeholder' => [],

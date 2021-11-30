@@ -611,16 +611,6 @@ class ACPT_Lite_Ajax
 
             // save import
             $contentFileInfo['content'] = $content;
-            $fileImportModel = new FileImportModel(
-                    Uuid::v4(),
-                    get_current_user_id(),
-                    $contentFileInfo['file'],
-                    $contentFileInfo['url'],
-                    $contentFileInfo['type'],
-                    $contentFileInfo['content']
-            );
-
-//            DB::saveImport($fileImportModel);
 
             return wp_send_json([
                     'success' => true,
@@ -629,7 +619,7 @@ class ACPT_Lite_Ajax
 
         } catch (\Exception $exception){
             return wp_send_json([
-                    'error' => $exception->getMessage()
+                    'error' => (!empty($exception->getMessage())) ? $exception->getMessage() : 'Error during import occurred'
             ]);
         }
     }
