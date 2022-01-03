@@ -24,6 +24,7 @@ import {deletePostTypeTemplateReducer} from "./reducers/deletePostTypeTemplateRe
 import {fetchSidebarsReducer} from "./reducers/fetchSidebarsReducer";
 import {fetchPreviewLinkReducer} from "./reducers/fetchPreviewLinkReducer";
 import {fetchHeadersAndFootersReducer} from "./reducers/fetchHeadersAndFootersReducer";
+import {syncPostsReducer} from "./reducers/syncPostsReducer";
 
 const reducers = {
     assocTaxonomyToPostReducer,
@@ -48,7 +49,8 @@ const reducers = {
     metaStateReducer,
     saveSettingsReducer,
     saveCustomPostTemplateReducer,
-    stepsReducer
+    stepsReducer,
+    syncPostsReducer
 };
 
 export const configureStore = createStore(

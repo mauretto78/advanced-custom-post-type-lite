@@ -13,6 +13,7 @@ import {Icon} from '@iconify/react';
 import {deletePostTypeTemplate} from "../../../redux/thunks/deletePostTypeTemplate";
 import {toast} from "react-toastify";
 import Copyright from "../../reusable/Copyright";
+import {syncPosts} from "../../../redux/thunks/syncPosts";
 
 
 const CustomPostTypeList = () => {
@@ -22,6 +23,7 @@ const CustomPostTypeList = () => {
     const {fetched, loading} = useSelector(state => state.fetchPostTypesReducer);
     const {fetched: fetchedCount, loading:loadingCount} = useSelector(state => state.fetchPostTypesCountReducer);
     const {errors: deleteTemplateErrors, success: deleteTemplateSuccess, loading: deleteTemplateLoading} = useSelector(state => state.deletePostTypeTemplateReducer);
+    const {errors: syncPostsErrors, success: syncPostsSuccess, loading: syncPostsLoading} = useSelector(state => state.syncPostsReducer);
 
     // manage local state
     const {page} = useParams();
@@ -72,9 +74,33 @@ const CustomPostTypeList = () => {
         }
     }, [deleteTemplateLoading]);
 
+    // handle sync posts
+    useEffect(() => {
+        if (didMountRef.current){
+            if(!syncPostsLoading){
+                if(syncPostsSuccess){
+                    history.push('/');
+                    toast.success("Successfully post sync. The browser will refresh after 5 seconds...");
+                    refreshPage(5000);
+                }
 
-    const handeDeleteTemplate = (name, type) => {
+                if(syncPostsErrors.length > 0){
+                    syncPostsErrors.map((error) => {
+                        toast.error(error);
+                    });
+                }
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [syncPostsLoading]);
+
+    const handleDeleteTemplate = (name, type) => {
         dispatch(deletePostTypeTemplate(name, type));
+    };
+
+    const handleSyncPosts = () => {
+        dispatch(syncPosts());
     };
 
     if(!fetchedSuccess){
@@ -95,12 +121,24 @@ const CustomPostTypeList = () => {
             </h1>
             <div className="acpt-buttons">
                 <Link
-                    className="acpt-btn acpt-btn-primary-o"
+                    className="acpt-btn acpt-btn-primary-o mr-1"
                     to="/register">
                         <Icon icon="bx:bx-list-plus" width="24px"/>
                         &nbsp;
                         Register new Post Type
                 </Link>
+                <a
+                    onClick={e => {
+                        e.preventDefault();
+                        handleSyncPosts();
+                    }}
+                    className="acpt-btn acpt-btn-secondary-o"
+                    href="#"
+                >
+                    <Icon icon="bx:bx-refresh" width="24px"/>
+                    &nbsp;
+                    Sync with post types
+                </a>
             </div>
             {fetched.length > 0 ?
                 <div className="acpt-card">
@@ -179,7 +217,7 @@ const CustomPostTypeList = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {fetched.map((element) => <CustomPostTypeListElement id={element.id} key={element.id} element={element} handeDeleteTemplate={handeDeleteTemplate} />)}
+                                    {fetched.map((element) => <CustomPostTypeListElement id={element.id} key={element.id} element={element} handeDeleteTemplate={handleDeleteTemplate} />)}
                                 </tbody>
                             </table>
                         </div>

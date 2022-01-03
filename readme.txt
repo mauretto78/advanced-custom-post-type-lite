@@ -55,3 +55,8 @@ Please refer to main [ACPT](https://acpt.io) website.
 
 * First release
 
+= 1.0.1 (2022-01-03) =
+
+* Sync post types action
+* WooCommerce basic integration
+

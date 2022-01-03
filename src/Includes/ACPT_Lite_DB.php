@@ -321,12 +321,16 @@ class ACPT_Lite_DB
             "wp_template",
         ];
 
-        if(in_array($postType, $notAllowed)){
-            return false;
+        // exclude WooCommerce CPT
+        if ( class_exists( 'woocommerce' ) ) {
+            $notAllowed[] = 'shop_order';
+            $notAllowed[] = 'scheduled-action';
+            $notAllowed[] = 'shop_coupon';
+            $notAllowed[] = 'product_variation';
+            $notAllowed[] = 'shop_order_refund';
         }
 
-        // exclude WooCommerce for now
-        if($postType === 'product' and function_exists( 'is_woocommerce_activated' )){
+        if(in_array($postType, $notAllowed)){
             return false;
         }
 

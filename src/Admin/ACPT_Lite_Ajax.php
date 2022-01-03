@@ -986,6 +986,23 @@ class ACPT_Lite_Ajax
         return wp_send_json($return);
     }
 
+    public function syncPostsAction()
+    {
+        try {
+            ACPT_Lite_DB::sync();
+            $return = [
+                    'success' => true
+            ];
+        } catch (\Exception $exception){
+            $return = [
+                    'success' => false,
+                    'error' => $exception->getMessage()
+            ];
+        }
+
+        return wp_send_json($return);
+    }
+
     /**
      * @param $data
      *

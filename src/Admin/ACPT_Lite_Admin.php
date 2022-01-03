@@ -137,6 +137,7 @@ class ACPT_Lite_Admin
             'wp_ajax_saveCustomPostTypeMetaAction' => 'saveCustomPostTypeMetaAction',
             'wp_ajax_saveSettingsAction' => 'saveSettingsAction',
             'wp_ajax_saveTaxonomyAction' => 'saveTaxonomyAction',
+            'wp_ajax_syncPostsAction' => 'syncPostsAction',
         ];
     }
 

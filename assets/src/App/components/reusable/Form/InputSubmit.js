@@ -2,8 +2,6 @@ import React from 'react';
 
 const InputSubmit = ({id, label, loading}) => {
 
-    // @TODO spinner??
-
     return (
         <div className="form-group">
             <input

@@ -24,5 +24,7 @@ class ACPT_Lite_Deactivator
         if(!class_exists(\ACPT::class)){
             ACPT_Lite_DB::destroySchema();
         }
+
+        delete_option('acpt_lite_version');
     }
 }

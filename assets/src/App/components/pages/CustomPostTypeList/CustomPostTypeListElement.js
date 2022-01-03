@@ -78,13 +78,17 @@ const CustomPostTypeListElement = ({id, element, handeDeleteTemplate}) => {
                 <td>
                     {element.isNative
                         ?
-                        <span className="acpt-badge acpt-badge-native ml-1">
-                            <span className="label">Native</span>
+                        <span className={`acpt-badge acpt-badge-native ml-1`}>
+                            <span className="label">
+                                Native
+                            </span>
                         </span>
                         :
-                        <span className="acpt-badge acpt-badge-custom ml-1">
-                        <span className="label">Custom</span>
-                    </span>
+                        <span className={`acpt-badge acpt-badge-${element.isWooCommerce === true ? 'woocommerce' : 'custom' } ml-1`}>
+                            <span className="label">
+                                {element.isWooCommerce === true ? 'WooCommerce' : 'Custom' }
+                            </span>
+                        </span>
                     }
                 </td>
             <td className="backend">

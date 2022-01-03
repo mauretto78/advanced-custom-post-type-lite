@@ -10,6 +10,7 @@ $warning-color: #ffbe0b;
 $danger-color: #f94144;
 $info-color: #5390d9;
 $native-color: #ae53d9;
+$woocommerce-color: #674399;
 $custom-color: #d9c353;
 $badge-color: #7e9ebd;
 $title-color: #000;
@@ -261,6 +262,7 @@ a {
 .acpt-badge-warning { border-color: $warning-color; color: $warning-color;}
 .acpt-badge-info { border-color: $info-color; color: $info-color;}
 .acpt-badge-native { border-color: $native-color; color: $native-color;}
+.acpt-badge-woocommerce { border-color: $woocommerce-color; color: $woocommerce-color;}
 .acpt-badge-custom { border-color: $custom-color; color:  $custom-color;}
 
 .acpt-badge-success .value {background: $success-color;color: $success-color;}
@@ -268,6 +270,7 @@ a {
 .acpt-badge-warning .value {background: $warning-color;color: $btn-color;}
 .acpt-badge-info .value {background: $info-color;color: $btn-color;}
 .acpt-badge-native .value {background: $native-color;color: $btn-color;}
+.acpt-badge-woocommerce .value {background: $woocommerce-color;color: $btn-color;}
 .acpt-badge-custom .value {background: $custom-color;color: $btn-color;}
 
 /*========== BUTTONS ==========*/

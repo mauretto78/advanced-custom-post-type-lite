@@ -16,7 +16,7 @@
  * Plugin Name:       ACPT Lite
  * Plugin URI:        https://acpt.io
  * Description:       Create and manage custom post types, with advanced custom fields and taxonomies management
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Mauro Cassani
  * Author URI:        https://github.com/mauretto78
  * License:           GPL-2.0+
@@ -26,6 +26,7 @@
  */
 
 use ACPT_Lite\Includes\ACPT_Lite_Activator;
+use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Deactivator;
 use ACPT_Lite\Includes\ACPT_Lite_Plugin;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
@@ -42,7 +43,7 @@ ob_start();
  * plugin settings
  */
 define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
-define( 'ACPT_LITE_PLUGIN_VERSION', '1.0.0' );
+define( 'ACPT_LITE_PLUGIN_VERSION', '1.0.1' );
 
 /**
  * Composer init
@@ -54,7 +55,7 @@ class ACPT_Lite
     /**
      * The code that runs during plugin activation.
      */
-    function activate()
+    public function activate()
     {
         ACPT_Lite_Activator::activate();
     }
@@ -62,14 +63,30 @@ class ACPT_Lite
     /**
      * The code that runs during plugin deactivation.
      */
-    function deactivate()
+    public function deactivate()
     {
         ACPT_Lite_Deactivator::deactivate();
+    }
+
+    /**
+     * Check for plugin upgrades
+     */
+    public static function checkForPluginUpgrades()
+    {
+        $old_version = get_option('acpt_lite_version', 0);
+        $current_version = filemtime(__FILE__);
+
+        if ($old_version != $current_version) {
+            ACPT_Lite_DB::sync();
+            update_option('acpt_lite_version', $current_version, false);
+        }
     }
 }
 
 register_activation_hook( __FILE__, [ACPT_Lite::class, 'activate'] );
 register_deactivation_hook( __FILE__, [ACPT_Lite::class, 'deactivate'] );
+
+ACPT_Lite::checkForPluginUpgrades();
 
 /**
  * Begins execution of the plugin.

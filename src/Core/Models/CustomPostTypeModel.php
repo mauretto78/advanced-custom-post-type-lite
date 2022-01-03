@@ -323,6 +323,16 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
+     * Checks if 'product' if from WooCommerce
+     *
+     * @return bool
+     */
+    public function isWooCommerce()
+    {
+        return $this->name === 'product' and class_exists( 'woocommerce' );
+    }
+
+    /**
      * @return array
      */
     public function arrayRepresentation()
@@ -456,6 +466,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'templates' => $this->templates,
             'existsArchivePageInTheme' => $this->existsArchivePageInTheme,
             'existsSinglePageInTheme' => $this->existsSinglePageInTheme,
+            'isWooCommerce' => $this->isWooCommerce(),
         ];
     }
 }
