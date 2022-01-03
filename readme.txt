@@ -5,7 +5,7 @@ Tags: cms, cpt, custom post types, post, types, taxonomy, taxonomies
 Requires at least: 5.1
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

@@ -77,7 +77,11 @@ class ACPT_Lite
         $current_version = filemtime(__FILE__);
 
         if ($old_version != $current_version) {
-            ACPT_Lite_DB::sync();
+
+            if(ACPT_Lite_DB::checkIfSchemaExists()){
+                ACPT_Lite_DB::sync();
+            }
+
             update_option('acpt_lite_version', $current_version, false);
         }
     }

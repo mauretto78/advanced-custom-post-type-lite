@@ -15,7 +15,6 @@ import {toast} from "react-toastify";
 import Copyright from "../../reusable/Copyright";
 import {syncPosts} from "../../../redux/thunks/syncPosts";
 
-
 const CustomPostTypeList = () => {
 
     // manage global state

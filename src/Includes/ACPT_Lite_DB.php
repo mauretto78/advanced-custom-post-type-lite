@@ -38,6 +38,26 @@ class ACPT_Lite_DB
     const TABLE_SETTINGS = 'acpt_settings';
 
     /**
+     * check if schema exists
+     *
+     * @since    1.0.1
+     * @return bool
+     */
+    public static function checkIfSchemaExists()
+    {
+        try {
+            $sql = "SELECT id FROM `".self::TABLE_CUSTOM_POST_TYPE."` LIMIT 1;";
+            self::executeQueryOrThrowException($sql);
+
+            return true;
+        } catch (\Exception $exception){
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
      * create schema
      *
      * @since    1.0.0
