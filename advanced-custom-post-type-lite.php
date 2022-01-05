@@ -93,6 +93,27 @@ register_deactivation_hook( __FILE__, [ACPT_Lite::class, 'deactivate'] );
 ACPT_Lite::checkForPluginUpgrades();
 
 /**
+ * APPSERO
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function appsero_init_tracker_acpt_lite() {
+
+    if ( ! class_exists( 'Appsero\Client' ) ) {
+        require_once __DIR__ . '/vendor/appsero/client/src/Client.php';
+    }
+
+    $client = new Appsero\Client( '858a08d4-bccd-4710-a3bc-e768cfe80675', 'Advanced Custom Post Type Lite', __FILE__ );
+
+    // Active insights
+    $client->insights()->init();
+
+}
+
+appsero_init_tracker_acpt_lite();
+
+/**
  * Begins execution of the plugin.
  *
  * Since everything within the plugin is registered via hooks,
