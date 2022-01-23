@@ -23,6 +23,7 @@ Main features:
 * Register, manage and associate custom new taxonimies in just 3 clicks.
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
+* WooCommerce custom integration: generate and manage product data in few clicks
 
 If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!
 
