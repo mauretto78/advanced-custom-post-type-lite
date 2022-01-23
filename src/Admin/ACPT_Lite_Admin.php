@@ -4,6 +4,7 @@ namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Generators\CustomPostTypeGenerator;
 use ACPT_Lite\Core\Generators\MetaBoxGenerator;
+use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
@@ -114,6 +115,8 @@ class ACPT_Lite_Admin
             'wp_ajax_deleteCustomPostTypeMetaAction' => 'deleteCustomPostTypeMetaAction',
             'wp_ajax_deletePostTypeTemplateAction' => 'deletePostTypeTemplateAction',
             'wp_ajax_deleteTaxonomyAction' => 'deleteTaxonomyAction',
+            'wp_ajax_deleteWooCommerceProductDataAction' => 'deleteWooCommerceProductDataAction',
+            'wp_ajax_deleteWooCommerceProductDataFieldsAction' => 'deleteWooCommerceProductDataFieldsAction',
             'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
             'wp_ajax_exportFileAction' => 'exportFileAction',
             'wp_ajax_fetchCustomPostTypeMetaAction' => 'fetchCustomPostTypeMetaAction',
@@ -129,14 +132,19 @@ class ACPT_Lite_Admin
             'wp_ajax_fetchSidebarsAction' => 'fetchSidebarsAction',
             'wp_ajax_fetchTaxonomiesAction' => 'fetchTaxonomiesAction',
             'wp_ajax_fetchTaxonomiesCountAction' => 'fetchTaxonomiesCountAction',
+            'wp_ajax_fetchWooCommerceProductDataAction' => 'fetchWooCommerceProductDataAction',
+            'wp_ajax_fetchWooCommerceProductDataFieldsAction' => 'fetchWooCommerceProductDataFieldsAction',
             'wp_ajax_importFileAction' => 'importFileAction',
             'wp_ajax_resetCustomPostTypesAction' => 'resetCustomPostTypesAction',
             'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',
+            'wp_ajax_resetWooCommerceProductDataAction' => 'resetWooCommerceProductDataAction',
             'wp_ajax_saveCustomPostTypeAction' => 'saveCustomPostTypeAction',
             'wp_ajax_saveCustomPostTypeTemplateAction' => 'saveCustomPostTypeTemplateAction',
             'wp_ajax_saveCustomPostTypeMetaAction' => 'saveCustomPostTypeMetaAction',
             'wp_ajax_saveSettingsAction' => 'saveSettingsAction',
             'wp_ajax_saveTaxonomyAction' => 'saveTaxonomyAction',
+            'wp_ajax_saveWooCommerceProductDataAction' => 'saveWooCommerceProductDataAction',
+            'wp_ajax_saveWooCommerceProductDataFieldsAction' => 'saveWooCommerceProductDataFieldsAction',
             'wp_ajax_syncPostsAction' => 'syncPostsAction',
         ];
     }
@@ -438,6 +446,19 @@ class ACPT_Lite_Admin
     }
 
     /**
+     * @throws \Exception
+     */
+    public function addWooCommerceProductData()
+    {
+        $WooCommerceProductData = ACPT_Lite_DB::getWooCommerceProductData([]);
+
+        if(!empty($WooCommerceProductData)){
+            $wooCommerceProductDataGenerator = new WooCommerceProductDataGenerator($WooCommerceProductData);
+            $wooCommerceProductDataGenerator->generate();
+        }
+    }
+
+    /**
      * @param                  $postTypeName
      * @param MetaBoxModel     $metaBoxModel
      * @param MetaBoxGenerator $metaBoxGenerator
@@ -577,6 +598,9 @@ class ACPT_Lite_Admin
 
         // register custom post types and taxonomies
         $this->registerCustomPostTypesAndTaxonomies();
+
+        // WooCommerce product data
+        $this->addWooCommerceProductData();
 
         // add columns to show in the list panel
         $this->addColumnsToShow();

@@ -13,6 +13,9 @@ use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
 use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Models\SettingsModel;
 use ACPT_Lite\Core\Models\TaxonomyModel;
+use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
+use ACPT_Lite\Core\Models\WooCommerceProductDataFieldOptionModel;
+use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Sanitizer;
 use ACPT_Lite\Utils\WPLinks;
@@ -213,6 +216,77 @@ class ACPT_Lite_Ajax
         return wp_send_json([
                 'success' => false,
                 'error' => 'no taxonomy was sent'
+        ]);
+    }
+
+    public function deleteWooCommerceProductDataAction()
+    {
+        if(isset($_POST['data'])){
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if(!isset($data['id'])){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing id'
+                ]);
+            }
+
+            $id = $data['id'];
+
+            try {
+                ACPT_Lite_DB::deleteWooCommerceProductData($id);
+
+                $return = [
+                    'success' => true,
+                ];
+            } catch (\Exception $exception){
+                $return = [
+                    'success' => false,
+                    'error' => $exception->getMessage()
+                ];
+            }
+
+            return wp_send_json($return);
+        }
+
+        return wp_send_json([
+            'success' => false,
+            'error' => 'no WooCommerce product data was sent'
+        ]);
+    }
+
+    public function deleteWooCommerceProductDataFieldsAction()
+    {
+        if(isset($_POST['data'])){
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if(!isset($data['id'])){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing id'
+                ]);
+            }
+            $id = $data['id'];
+
+            try {
+                ACPT_Lite_DB::deleteWooCommerceProductDataFields($id);
+
+                $return = [
+                    'success' => true,
+                ];
+            } catch (\Exception $exception){
+                $return = [
+                    'success' => false,
+                    'error' => $exception->getMessage()
+                ];
+            }
+
+            return wp_send_json($return);
+        }
+
+        return wp_send_json([
+            'success' => false,
+            'error' => 'no WooCommerce product data was sent'
         ]);
     }
 
@@ -424,6 +498,53 @@ class ACPT_Lite_Ajax
     public function fetchSettingsAction()
     {
         return wp_send_json(ACPT_Lite_DB::getSettings());
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function fetchWooCommerceProductDataAction()
+    {
+        if(isset($_POST['data'])){
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            return wp_send_json(ACPT_Lite_DB::getWooCommerceProductData($data));
+        }
+
+        return wp_send_json([]);
+    }
+
+    public function fetchWooCommerceProductDataFieldsAction()
+    {
+        if(isset($_POST['data'])){
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if(!isset($data['id'])){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing post id'
+                ]);
+            }
+
+            $id = $data['id'];
+
+            try {
+                $return = ACPT_Lite_DB::getWooCommerceProductDataFields($id);
+            } catch (\Exception $exception){
+                $return = [
+                    'success' => false,
+                    'error' => $exception->getMessage()
+                ];
+            }
+
+            return wp_send_json($return);
+        }
+
+        return wp_send_json([
+            'success' => false,
+            'error' => 'no id was sent'
+        ]);
     }
 
     /**
@@ -675,6 +796,16 @@ class ACPT_Lite_Ajax
      * @return mixed
      */
     public function resetTaxonomiesAction()
+    {
+        return wp_send_json([]);
+    }
+
+    /**
+     * Reset all taxonomies
+     *
+     * @return mixed
+     */
+    public function resetWooCommerceProductDataAction()
     {
         return wp_send_json([]);
     }
@@ -980,6 +1111,110 @@ class ACPT_Lite_Ajax
             $return = [
                     'success' => false,
                     'error' => $exception->getMessage()
+            ];
+        }
+
+        return wp_send_json($return);
+    }
+
+    /**
+     * Creates a product data
+     */
+    public function saveWooCommerceProductDataAction()
+    {
+        $data = $this->sanitizeJsonData($_POST['data']);
+        $id = (isset($data['id']) and ACPT_Lite_DB::existsWooCommerceProductData($data['id'])) ? $data['id'] : Uuid::v4();
+
+        $model = new WooCommerceProductDataModel(
+            $id,
+            $data['product_data_name'],
+            $data['icon'],
+            $data['visibility'],
+            $data['show_ui']
+        );
+
+        try {
+            ACPT_Lite_DB::saveWooCommerceProductData($model);
+
+            $return = [
+                'success' => true
+            ];
+        } catch (\Exception $exception){
+            $return = [
+                'success' => false,
+                'error' => $exception->getMessage()
+            ];
+        }
+
+        return wp_send_json($return);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function saveWooCommerceProductDataFieldsAction()
+    {
+        $data = $this->sanitizeJsonData($_POST['data']);
+        $fields = [];
+        $ids = [];
+
+        // persist $model on DB
+        try {
+            foreach ($data as $fieldIndex => $field ) {
+
+                $productData = ACPT_Lite_DB::getWooCommerceProductData([
+                    'id' => $field['postDataId']
+                ])[0];
+
+                $fieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
+                    'id' => $field['id'],
+                    'productDataModel' => $productData,
+                    'name' => $field['name'],
+                    'type' => $field['type'],
+                    'defaultValue' => $field['defaultValue'],
+                    'description' => $field['description'],
+                    'required' => $field['isRequired'],
+                    'sort' => ($fieldIndex+1),
+                ]);
+
+                $optionsIds = [];
+
+                if(isset($field['options'])){
+                    foreach ($field['options'] as $optionIndex => $option){
+                        $optionModel = WooCommerceProductDataFieldOptionModel::hydrateFromArray([
+                            'id' => $option['id'],
+                            'productDataField' => $fieldModel,
+                            'label' => $option['label'],
+                            'value' => $option['value'],
+                            'sort' => ($optionIndex+1),
+                        ]);
+
+                        $fieldModel->addOption($optionModel);
+                        $optionsIds[] = $optionModel->getId();
+                    }
+                }
+
+                $fields[] = $fieldModel;
+                $ids[] = [
+                    'product_data_id' => $fieldModel->getProductData()->getId(),
+                    'field' => $fieldModel->getId(),
+                    'options' => $optionsIds
+                ];
+            }
+
+            ACPT_Lite_DB::saveWooCommerceProductDataFields($fields);
+
+            // remove orphans
+            ACPT_Lite_DB::removeWooCommerceProductDataFieldsOrphans($ids);
+
+            $return = [
+                'ids' => $ids,
+                'success' => true
+            ];
+        } catch (\Exception $exception) {
+            $return = [
+                'success' => false,
+                'error' => $exception->getMessage()
             ];
         }
 

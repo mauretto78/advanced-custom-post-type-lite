@@ -32,6 +32,31 @@ abstract class AbstractGenerator
         add_action("admin_init", $cb);
     }
 
+    protected function woocommerceProductDataTabs($cb)
+    {
+        add_filter( 'woocommerce_product_data_tabs', $cb );
+    }
+
+    protected function woocommerceProductDataPanels($cb)
+    {
+        add_filter( 'woocommerce_product_data_panels', $cb );
+    }
+
+    protected function woocommerceProcessProductMeta($cb)
+    {
+        add_filter('woocommerce_process_product_meta', $cb);
+    }
+
+    protected function woocommerceProductTabs($cb)
+    {
+        add_filter('woocommerce_product_tabs', $cb);
+    }
+
+    protected function adminHead($cb)
+    {
+        add_action( 'admin_head', $cb );
+    }
+
     /**
      * @return string
      */

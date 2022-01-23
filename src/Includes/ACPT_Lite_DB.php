@@ -12,6 +12,10 @@ use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
 use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Models\SettingsModel;
 use ACPT_Lite\Core\Models\TaxonomyModel;
+use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
+use ACPT_Lite\Core\Models\WooCommerceProductDataFieldOptionModel;
+use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
+use ACPT_Lite\Utils\WPUtils;
 
 /**
  * This class handles DB interactions.
@@ -36,6 +40,9 @@ class ACPT_Lite_DB
     const TABLE_TAXONOMY = 'acpt_taxonomy';
     const TABLE_TAXONOMY_PIVOT = 'acpt_taxonomy_pivot';
     const TABLE_SETTINGS = 'acpt_settings';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA = 'acpt_woocommerce_product_data';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD = 'acpt_woocommerce_product_data_field';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION = 'acpt_woocommerce_product_data_option';
 
     /**
      * check if schema exists
@@ -180,6 +187,41 @@ class ACPT_Lite_DB
             PRIMARY KEY(id)
         ) $charset_collate;";
 
+        // woocommerce productdata
+        $sql11 = "CREATE TABLE IF NOT EXISTS  `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA."` (
+            id VARCHAR(36) UNIQUE NOT NULL,
+            product_data_name VARCHAR(32) NOT NULL,
+            icon VARCHAR(255) NOT NULL,
+            visibility TEXT NOT NULL,
+            show_in_ui TINYINT(1) NOT NULL,
+            content TEXT DEFAULT NULL,
+            PRIMARY KEY(id)
+        ) $charset_collate;";
+
+        // woocommerce productdata field
+        $sql12 = "CREATE TABLE IF NOT EXISTS  `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` (
+            id VARCHAR(36) UNIQUE NOT NULL,
+            product_data_id VARCHAR(36) NOT NULL,
+            field_name VARCHAR(50) NOT NULL,
+            field_type VARCHAR(50) NOT NULL,
+            field_default_value VARCHAR(50) DEFAULT NULL,
+            field_description TEXT DEFAULT NULL,
+            required TINYINT(1) NOT NULL,
+            sort INT(11),
+            PRIMARY KEY(id)
+        ) $charset_collate;";
+
+        // woocommerce productdata field option
+        $sql13 = "CREATE TABLE IF NOT EXISTS  `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` (
+            id VARCHAR(36) UNIQUE NOT NULL,
+            product_data_id VARCHAR(36) NOT NULL,
+            product_data_field_id VARCHAR(36) NOT NULL,
+            option_label VARCHAR(50) NOT NULL,
+            option_value VARCHAR(50) NOT NULL,
+            sort INT(11),
+            PRIMARY KEY(id)
+        ) $charset_collate;";
+
         dbDelta($sql1);
         dbDelta($sql2);
         dbDelta($sql3);
@@ -190,6 +232,9 @@ class ACPT_Lite_DB
         dbDelta($sql8);
         dbDelta($sql9);
         dbDelta($sql10);
+        dbDelta($sql11);
+        dbDelta($sql12);
+        dbDelta($sql13);
 
         $success = empty($wpdb->last_error);
 
@@ -435,6 +480,11 @@ class ACPT_Lite_DB
                 self::deleteMeta($postType);
                 self::deleteTemplates($postType);
                 self::deleteTaxonomyAssociations($postModel->getId());
+
+                if($postModel->isWooCommerce()){
+                    self::clearWooCommerceProductData();
+                }
+
                 self::removeOrphanRelationships();
                 self::executeQueryOrThrowException($sql, [$postModel->getId()]);
                 self::commitTransaction();
@@ -526,6 +576,80 @@ class ACPT_Lite_DB
             }
 
             self::commitTransaction();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public static function clearWooCommerceProductData()
+    {
+        self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA."`");
+        self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`");
+        self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."`");
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public static function deleteWooCommerceProductData($id)
+    {
+        if(self::existsWooCommerceProductData($id)){
+
+            $productDataModel = self::getWooCommerceProductData([
+                'id' => $id
+            ]);
+
+            /** @var WooCommerceProductDataFieldModel $field */
+            foreach ($productDataModel[0]->getFields() as $field){
+
+                /** @var WooCommerceProductDataFieldOptionModel $option */
+                foreach ($field->getOptions() as $option){
+                    self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` WHERE id = %s;", [$option->getId()]);
+                }
+
+                self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` WHERE id = %s;", [$field->getId()]);
+            }
+
+            self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA."` WHERE id = %s;", [$id]);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public static function deleteWooCommerceProductDataFields($id)
+    {
+        if(self::existsWooCommerceProductData($id)){
+
+            $productDataModel = self::getWooCommerceProductData([
+                'id' => $id
+            ]);
+
+            /** @var WooCommerceProductDataFieldModel $field */
+            foreach ($productDataModel[0]->getFields() as $field){
+
+                /** @var WooCommerceProductDataFieldOptionModel $option */
+                foreach ($field->getOptions() as $option){
+                    self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` WHERE id = %s;", [$option->getId()]);
+                }
+
+                self::executeQueryOrThrowException("DELETE FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` WHERE id = %s;", [$field->getId()]);
+            }
 
             return true;
         }
@@ -635,6 +759,28 @@ class ACPT_Lite_DB
         $results = self::getResults($baseQuery, [$postType, $templateType]);
 
         return count($results) === 1;
+    }
+
+    /**
+     * Check if a WC product data exists
+     *
+     * @since    1.0.1
+     * @param $id
+     *
+     * @return bool
+     */
+    public static function existsWooCommerceProductData($id)
+    {
+        $baseQuery = "
+            SELECT 
+                id
+            FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA."`
+            WHERE id = %s
+            ";
+
+        $posts = self::getResults($baseQuery, [$id]);
+
+        return count($posts) === 1;
     }
 
     /**
@@ -1216,26 +1362,27 @@ class ACPT_Lite_DB
                 }
             }
 
+
             if($postModel->getName() === 'post'){
                 $themeFiles = ['single.php', 'acpt/single.php'];
-                $existsInTheme = locate_template($themeFiles, false);
+                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
                 $postModel->setExistsSinglePageInTheme($existsInTheme != '');
 
                 $themeFiles = ['category.php', 'acpt/category.php'];
-                $existsInTheme = locate_template($themeFiles, false);
+                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
                 $postModel->setExistsArchivePageInTheme($existsInTheme != '');
 
             } elseif ($postModel->getName() === 'page') {
                 $themeFiles = ['page.php', 'acpt/page.php'];
-                $existsInTheme = locate_template($themeFiles, false);
+                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
                 $postModel->setExistsSinglePageInTheme($existsInTheme != '');
             } else {
                 $themeFiles = ['single-'.$postModel->getName().'.php', 'acpt/single-'.$postModel->getName().'.php'];
-                $existsInTheme = locate_template($themeFiles, false);
+                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
                 $postModel->setExistsSinglePageInTheme($existsInTheme != '');
 
                 $themeFiles = ['archive-'.$postModel->getName().'.php', 'acpt/archive-'.$postModel->getName().'.php'];
-                $existsInTheme = locate_template($themeFiles, false);
+                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
                 $postModel->setExistsArchivePageInTheme($existsInTheme != '');
             }
 
@@ -1601,7 +1748,133 @@ class ACPT_Lite_DB
         return $templates;
     }
 
+    /**
+     * @param array $meta
+     *
+     * @return WooCommerceProductDataModel[]
+     * @throws \Exception
+     */
+    public static function getWooCommerceProductData(array $meta = [])
+    {
+        $results = [];
+        $args = [];
 
+        $baseQuery = "
+            SELECT 
+                pd.id, 
+                pd.product_data_name as name,
+                pd.icon,
+                pd.visibility,
+                pd.show_in_ui,
+                pd.content
+            FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA."` pd
+            WHERE 1=1
+            ";
+
+        if(isset($meta['id'])){
+            $baseQuery .= " AND pd.id = %s";
+            $args[] = $meta['id'];
+        }
+
+        $baseQuery .= " GROUP BY pd.id";
+
+        if(isset($meta['page']) and isset($meta['perPage'])){
+            $baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
+        }
+
+        $baseQuery .= ';';
+        $productData = self::getResults($baseQuery, $args);
+
+        foreach ($productData as $productDatum){
+
+            $productDataModel = WooCommerceProductDataModel::hydrateFromArray([
+                'id' => $productDatum->id,
+                'name' => $productDatum->name,
+                'icon' => json_decode($productDatum->icon),
+                'showInUI' => $productDatum->show_in_ui == '0' ? false : true,
+                'visibility' => json_decode($productDatum->visibility),
+            ]);
+
+            $fields = self::getResults("
+                SELECT 
+                    id, 
+                    product_data_id, 
+                    field_name as name, 
+                    field_type as type, 
+                    field_default_value as defaultValue, 
+                    field_description as description,
+                    required, 
+                    sort
+                FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`
+                WHERE product_data_id = %s
+                ORDER BY sort
+            ;", [$productDatum->id]);
+
+            foreach ($fields as $fieldIndex => $field){
+
+                $productDataFieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
+                    'id' => $field->id,
+                    'productDataModel' => $productDataModel,
+                    'name' => $field->name,
+                    'type' => $field->type,
+                    'defaultValue' => $field->defaultValue,
+                    'required' => $field->required == "1",
+                    'description' => $field->description,
+                    'sort' => (int)$field->sort,
+                ]);
+
+                $options = self::getResults("
+                    SELECT
+                        id,
+                        product_data_id as productDataId,
+                        product_data_field_id as fieldId,
+                        option_label as label,
+                        option_value as value,
+                        sort
+                    FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."`
+                    WHERE product_data_field_id = %s
+                    ORDER BY sort
+                ;", [$field->id]);
+
+                foreach ($options as $option){
+                    $optionModel = WooCommerceProductDataFieldOptionModel::hydrateFromArray([
+                        'id' => $option->id,
+                        'productDataField' => $productDataFieldModel,
+                        'label' => $option->label,
+                        'value' => $option->value,
+                        'sort' => $option->sort,
+                    ]);
+
+                    $productDataFieldModel->addOption($optionModel);
+                }
+
+                $productDataModel->addField($productDataFieldModel);
+            }
+
+            $results[] = $productDataModel;
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return WooCommerceProductDataFieldModel[]
+     * @throws \Exception
+     */
+    public static function getWooCommerceProductDataFields($id)
+    {
+        $productData = self::getWooCommerceProductData([
+            'id' => $id
+        ]);
+
+        if(!isset($productData[0])){
+            return [];
+        }
+
+        return $productData[0]->getFields();
+    }
 
     /**
      * @param $postType
@@ -1681,6 +1954,31 @@ class ACPT_Lite_DB
                 ] );
             }
         }
+    }
+
+    /**
+     * @param $ids
+     * @throws \Exception
+     */
+    public static function removeWooCommerceProductDataFieldsOrphans($ids)
+    {
+        $optionsIds = [];
+        $fieldIds = [];
+        $productDataIds = [];
+
+        foreach ($ids as $id){
+            $fieldIds[] = $id['field'];
+            $productDataIds[] = $id['product_data_id'];
+
+            foreach ($id['options'] as $optionId){
+                $optionsIds[] = $optionId;
+            }
+        }
+
+        self::executeQueryOrThrowException("DELETE f FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` f WHERE f.product_data_id IN ('".implode("','",$productDataIds)."') AND f.id NOT IN ('"
+            .implode("','",$fieldIds)."');");
+        self::executeQueryOrThrowException("DELETE o FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` o WHERE o.product_data_id IN ('".implode("','",$productDataIds)."') AND o.id NOT IN ('"
+            .implode("','",$optionsIds)."');");
     }
 
     /**
@@ -2242,6 +2540,155 @@ class ACPT_Lite_DB
             json_encode($taxonomyModel->getLabels()),
             json_encode($taxonomyModel->getSettings())
         ]);
+    }
+
+    /**
+     * @param WooCommerceProductDataModel $productDataModel
+     *
+     * @throws \Exception
+     */
+    public static function saveWooCommerceProductData(WooCommerceProductDataModel $productDataModel)
+    {
+        $sql = "
+            INSERT INTO `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA."` 
+            (`id`,
+            `product_data_name` ,
+            `icon` ,
+            `visibility`,
+            `show_in_ui`,
+            `content`
+            ) VALUES (
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s
+            ) ON DUPLICATE KEY UPDATE 
+                `product_data_name` = %s,
+                `icon` = %s,
+                `visibility` = %s,
+                `show_in_ui` = %s,
+                `content` = %s
+        ;";
+
+        self::executeQueryOrThrowException($sql, [
+            $productDataModel->getId(),
+            $productDataModel->getName(),
+            json_encode($productDataModel->getIcon()),
+            json_encode($productDataModel->getVisibility()),
+            $productDataModel->isShowInUI(),
+            $productDataModel->getContent(),
+            $productDataModel->getName(),
+            json_encode($productDataModel->getIcon()),
+            json_encode($productDataModel->getVisibility()),
+            $productDataModel->isShowInUI(),
+            $productDataModel->getContent(),
+        ]);
+
+        if( !empty($productDataModel->getFields()) ){
+            self::saveWooCommerceProductDataFields($productDataModel->getFields());
+        }
+    }
+
+    /**
+     * @param WooCommerceProductDataFieldModel[] $fields
+     *
+     * @throws \Exception
+     */
+    public static function saveWooCommerceProductDataFields(array $fields)
+    {
+        foreach ($fields as $fieldModel){
+
+            $isRequired = $fieldModel->isRequired() ? '1' : '0';
+
+            $sql = "
+                INSERT INTO `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` 
+                (
+                    `id`,
+                    `product_data_id`,
+                    `field_name`,
+                    `field_type`,
+                    `field_default_value`,
+                    `field_description`,
+                    `required`,
+                    `sort`
+                ) VALUES (
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %d
+                ) ON DUPLICATE KEY UPDATE 
+                    `product_data_id` = %s,
+                    `field_name` = %s,
+                    `field_type` = %s,
+                    `field_default_value` = %s,
+                    `field_description` = %s,
+                    `required` = %s,
+                    `sort` = %d
+            ;";
+
+            self::executeQueryOrThrowException($sql, [
+                $fieldModel->getId(),
+                $fieldModel->getProductData()->getId(),
+                $fieldModel->getName(),
+                $fieldModel->getType(),
+                $fieldModel->getDefaultValue(),
+                $fieldModel->getDescription(),
+                $isRequired,
+                $fieldModel->getSort(),
+                $fieldModel->getProductData()->getId(),
+                $fieldModel->getName(),
+                $fieldModel->getType(),
+                $fieldModel->getDefaultValue(),
+                $fieldModel->getDescription(),
+                $isRequired,
+                $fieldModel->getSort(),
+            ]);
+
+            foreach ($fieldModel->getOptions() as $optionModel){
+                $sql = "
+                    INSERT INTO `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` 
+                    (`id`,
+                    `product_data_id` ,
+                    `product_data_field_id` ,
+                    `option_label` ,
+                    `option_value` ,
+                    `sort`
+                    ) VALUES (
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %d
+                    ) ON DUPLICATE KEY UPDATE 
+                        `product_data_id` = %s,
+                        `product_data_field_id` = %s,
+                        `option_label` = %s,
+                        `option_value` = %s,
+                        `sort` = %d
+                ;";
+
+                self::executeQueryOrThrowException($sql, [
+                    $optionModel->getId(),
+                    $fieldModel->getProductData()->getId(),
+                    $fieldModel->getId(),
+                    $optionModel->getLabel(),
+                    $optionModel->getValue(),
+                    $optionModel->getSort(),
+                    $fieldModel->getProductData()->getId(),
+                    $fieldModel->getId(),
+                    $optionModel->getLabel(),
+                    $optionModel->getValue(),
+                    $optionModel->getSort()
+                ]);
+            }
+        }
     }
 
     /**
