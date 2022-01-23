@@ -25,12 +25,18 @@ import {fetchSidebarsReducer} from "./reducers/fetchSidebarsReducer";
 import {fetchPreviewLinkReducer} from "./reducers/fetchPreviewLinkReducer";
 import {fetchHeadersAndFootersReducer} from "./reducers/fetchHeadersAndFootersReducer";
 import {syncPostsReducer} from "./reducers/syncPostsReducer";
+import {saveWooCommerceProductDataReducer} from "./reducers/saveWooCommerceProductDataReducer";
+import {fetchWooCommerceProductDataReducer} from "./reducers/fetchWooCommerceProductDataReducer";
+import {deleteWooCommerceProductDataReducer} from "./reducers/deleteWooCommerceProductDataReducer";
+import {fetchWooCommerceProductDataFieldsReducer} from "./reducers/fetchWooCommerceProductDataFieldsReducer";
+import {WooCommerceFieldsStateReducer} from "./reducers/WooCommerceFieldsStateReducer";
 
 const reducers = {
     assocTaxonomyToPostReducer,
     deleteCustomPostTypeReducer,
     deletePostTypeTemplateReducer,
     deleteTaxonomyReducer,
+    deleteWooCommerceProductDataReducer,
     exportFileReducer,
     fetchHeadersAndFootersReducer,
     fetchPostDataReducer,
@@ -45,12 +51,16 @@ const reducers = {
     fetchMetaReducer,
     fetchTaxonomiesReducer,
     fetchTaxonomiesCountReducer,
+    fetchWooCommerceProductDataReducer,
+    fetchWooCommerceProductDataFieldsReducer,
     importFileReducer,
     metaStateReducer,
     saveSettingsReducer,
     saveCustomPostTemplateReducer,
+    saveWooCommerceProductDataReducer,
     stepsReducer,
-    syncPostsReducer
+    syncPostsReducer,
+    WooCommerceFieldsStateReducer
 };
 
 export const configureStore = createStore(

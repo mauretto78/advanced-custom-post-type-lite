@@ -413,3 +413,10 @@ input[type="checkbox"].wppd-ui-toggle:checked:after {
 .CodeMirror-linenumber {
     left: -31px !important;
 }
+
+/*========== WOOCOMMERCE ==========*/
+
+.wc-radios label {
+    float: none !important;
+    margin-left: 0px !important;
+}

@@ -512,7 +512,7 @@ a:hover svg {
 .acpt-box-card {
   background: lighten($primary-color, 77%);
   border-radius: $border-radius;
-  border: 10px solid $white-color;
+  border: calc(#{$gutter}/2) solid $white-color;
   margin-bottom: $gutter;
 
   .acpt-card__header {
@@ -544,6 +544,10 @@ a:hover svg {
   border-radius: $border-radius;
   padding: 15px;
   margin-bottom: calc(#{$gutter}/2);
+
+  &.with-border {
+    border: calc(#{$gutter}/2) solid $white-color;
+  }
 
   h3 {
     margin: 0;

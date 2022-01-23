@@ -78,9 +78,8 @@ class ACPT_Lite
 
         if ($old_version != $current_version) {
 
-            if(ACPT_Lite_DB::checkIfSchemaExists()){
-                ACPT_Lite_DB::sync();
-            }
+            ACPT_Lite_DB::createSchema();
+            ACPT_Lite_DB::sync();
 
             update_option('acpt_lite_version', $current_version, false);
         }

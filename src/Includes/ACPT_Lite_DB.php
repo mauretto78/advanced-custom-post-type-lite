@@ -146,7 +146,7 @@ class ACPT_Lite_DB
             file_type VARCHAR(36) DEFAULT NULL,
             user_id INT(11),
             content TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY(id)
         ) $charset_collate;";
 
@@ -2778,7 +2778,7 @@ class ACPT_Lite_DB
     {
         global $wpdb;
 
-        $preparedQuery = $wpdb->prepare( $query, $args );
+        $preparedQuery = (!empty($args)) ? $wpdb->prepare( $query, $args ) : $query;
 
         return str_ireplace( "'NULL'", "NULL", $preparedQuery );
     }

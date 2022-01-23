@@ -17,6 +17,11 @@ import AssocTaxonomyToCustomPostType from "./components/pages/AssocTaxonomyToCus
 import DeleteTaxonomy from "./components/pages/DeleteTaxonomy";
 import ViewTaxonomy from "./components/pages/ViewTaxonomy";
 import Settings from "./components/pages/Settings";
+import WooCommerceProductDataList from "./components/pages/WooCommerceProductData";
+import SaveWooCommerceProductData from "./components/pages/SaveWooCommerceProductData";
+import DeleteWooCommerceProductData from "./components/pages/DeleteWooCommerceProductData";
+import ViewWooCommerceProductData from "./components/pages/ViewWooCommerceProductData";
+import WooCommerceProductDataFields from "./components/pages/WooCommerceProductDataFields";
 // STYLES
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -76,6 +81,12 @@ const App = () => {
                         <Route exact path='/edit_taxonomy/:taxonomy' name="edit_taxonomy" component={SaveTaxonomy} />
                         <Route exact path='/view_taxonomy/:taxonomy' name="view_taxonomy" component={ViewTaxonomy} />
                         <Route exact path='/:page?' name="list" component={CustomPostTypeList} />
+                        <Route exact path='/product-data/product' name="woocommerce_product_data" component={WooCommerceProductDataList} />
+                        <Route exact path='/product-data/product/add' name="woocommerce_product_data_add" component={SaveWooCommerceProductData} />
+                        <Route exact path='/product-data/product/delete/:id' name="woocommerce_product_data_delete" component={DeleteWooCommerceProductData} />
+                        <Route exact path='/product-data/product/edit/:id' name="woocommerce_product_data_edit" component={SaveWooCommerceProductData} />
+                        <Route exact path='/product-data/product/view/:id' name="woocommerce_product_data_view" component={ViewWooCommerceProductData} />
+                        <Route exact path='/product-data/product/fields/:id' name="woocommerce_product_data_fields" component={WooCommerceProductDataFields} />
                         <Route path='/404' name="404" component={NotFound404} />
                     </Switch>
                 </Suspense>

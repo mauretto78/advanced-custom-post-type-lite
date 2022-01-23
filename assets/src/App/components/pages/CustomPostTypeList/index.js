@@ -28,6 +28,7 @@ const CustomPostTypeList = () => {
     const {page} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
+    const [thereIsWooCommerce, setThereIsWooCommerce] = useState(false);
     const perPage = 20;
     const history = useHistory();
 
@@ -46,6 +47,16 @@ const CustomPostTypeList = () => {
         if (didMountRef.current){
             if(!loading){
                 setFetchedSuccess(true);
+
+                let isWooCommerce = 0;
+
+                fetched.map((post)=>{
+                    if(post.isWooCommerce){
+                        isWooCommerce++;
+                    }
+                });
+
+                (isWooCommerce > 0) && setThereIsWooCommerce(true);
             }
         } else {
             didMountRef.current = true;
@@ -151,7 +162,7 @@ const CustomPostTypeList = () => {
                             <table className="acpt-table">
                                 <thead>
                                     <tr>
-                                        <th className="grey backend with-border" colSpan={6}>Backend UI</th>
+                                        <th className="grey backend with-border" colSpan={thereIsWooCommerce ? 7 : 6 }>Backend UI</th>
                                         <th className="grey frontend" colSpan={2}>Frontend UI</th>
                                     </tr>
                                     <tr>
@@ -177,6 +188,17 @@ const CustomPostTypeList = () => {
                                                 </span>
                                             </Tippy>
                                         </th>
+                                        {thereIsWooCommerce === true && (
+                                            <th>
+                                                Product data
+                                                &nbsp;
+                                                <Tippy title="WooCommerce product data">
+                                                    <span className="helper">
+                                                        <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    </span>
+                                                </Tippy>
+                                            </th>
+                                        )}
                                         <th>
                                             Associated taxonomies
                                             &nbsp;
@@ -216,7 +238,7 @@ const CustomPostTypeList = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {fetched.map((element) => <CustomPostTypeListElement id={element.id} key={element.id} element={element} handeDeleteTemplate={handleDeleteTemplate} />)}
+                                    {fetched.map((element) => <CustomPostTypeListElement id={element.id} thereIsWooCommerce={thereIsWooCommerce} key={element.id} element={element} handeDeleteTemplate={handleDeleteTemplate} />)}
                                 </tbody>
                             </table>
                         </div>

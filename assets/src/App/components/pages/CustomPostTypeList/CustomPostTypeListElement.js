@@ -5,7 +5,7 @@ import Tippy from "../../reusable/Tippy";
 import {Icon} from "@iconify/react";
 import Modal from "../../reusable/Modal";
 
-const CustomPostTypeListElement = ({id, element, handeDeleteTemplate}) => {
+const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDeleteTemplate}) => {
 
     // manage local state
     const [modalVisible, setModalVisible] = useState(false);
@@ -109,6 +109,20 @@ const CustomPostTypeListElement = ({id, element, handeDeleteTemplate}) => {
                     Manage
                 </Link>
             </td>
+            {thereIsWooCommerce === true && (
+                <td className="backend">
+                    {element.isWooCommerce === true && (
+                        <Link
+                            to={`/product-data/${element.name}`}
+                            className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                        >
+                            <Icon icon="icon-park-outline:ad-product" width="24px"/>
+                            &nbsp;
+                            Manage
+                        </Link>
+                    ) }
+                </td>
+            )}
             <td>
                 {isset(element, "taxonomies") &&  element.taxonomies.length > 0 && element.taxonomies.map((taxonomy) =>
                     <span className="acpt-badge mr-1">
