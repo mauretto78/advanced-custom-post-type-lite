@@ -1,4 +1,4 @@
-=== Advanced Custom Post Type Lite ===
+=== ACPT Lite - Custom post type UI manager for WordPress ===
 Contributors: mauretto78
 Donate link: https://acpt.io
 Tags: cms, cpt, custom post types, post, types, taxonomy, taxonomies
@@ -9,7 +9,7 @@ Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Easy management of custom post types
+Create and manage custom post types in seconds with. Drag & Drop meta box builder that helps you create complex forms with just a few clicks.
 
 == Description ==
 
