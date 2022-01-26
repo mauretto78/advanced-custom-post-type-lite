@@ -9,7 +9,7 @@ Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create and manage custom post types in seconds. Drag & Drop meta box builder that helps you create complex forms with just a few clicks.
+Create and manage custom post types in seconds. Drag & Drop meta box builder that helps you create complex websites with just a few clicks.
 
 == Description ==
 
@@ -79,3 +79,4 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * WooCommerce product data integration
 * UI improvements
 
+https://plugins.svn.wordpress.org/acpt-lite/
