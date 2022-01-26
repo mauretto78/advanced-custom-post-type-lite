@@ -9,7 +9,7 @@ Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create and manage custom post types in seconds with. Drag & Drop meta box builder that helps you create complex forms with just a few clicks.
+Create and manage custom post types in seconds. Drag & Drop meta box builder that helps you create complex forms with just a few clicks.
 
 == Description ==
 
