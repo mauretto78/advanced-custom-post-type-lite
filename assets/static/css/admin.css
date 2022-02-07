@@ -28,11 +28,12 @@
 .acpt-admin-meta-icon .icon {
     height: 40px;
     width: 40px;
+    display: flex;
     text-align: center;
     background: #02c39a;
     border-radius: 50%;
-    line-height: 54px;
-    display: inline-block;
+    align-items: center;
+    justify-content: center;
 }
 
 .acpt-admin-meta-icon .icon svg {

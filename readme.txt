@@ -1,15 +1,15 @@
-=== ACPT Lite - Custom post type UI manager for WordPress ===
+=== Custom post types for Wordpress – ACPT Lite ===
 Contributors: mauretto78
 Donate link: https://acpt.io
-Tags: cms, cpt, custom post types, post, types, taxonomy, taxonomies
+Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create and manage custom post types in seconds. Drag & Drop meta box builder that helps you create complex websites with just a few clicks.
+Create and manage custom post types in seconds. Create and associate taxonomies. Drag & Drop meta box builder that helps you create complex websites with just a few clicks.
 
 == Description ==
 
@@ -23,6 +23,7 @@ Main features:
 * Register, manage and associate custom new taxonimies in just 3 clicks.
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
+* Elementor integration: manage ACPT meta fields in the Elementor editor
 * WooCommerce custom integration: generate and manage product data in few clicks
 
 If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!

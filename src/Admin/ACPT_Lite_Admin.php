@@ -9,6 +9,7 @@ use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Includes\ACPT_Lite_Elementor_Initiator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 
 /**
@@ -592,6 +593,10 @@ class ACPT_Lite_Admin
         foreach ($this->ajaxActions as $action => $callback){
             $this->loader->addAction($action, $this->ajax, $callback);
         }
+
+        // Elementor
+        $elementorInit = new ACPT_Lite_Elementor_Initiator();
+        $elementorInit->run();
 
         // shortcodes
         $this->addShortcodes();
