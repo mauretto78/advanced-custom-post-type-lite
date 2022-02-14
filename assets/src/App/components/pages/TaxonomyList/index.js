@@ -12,6 +12,7 @@ import {Icon} from "@iconify/react";
 import Tippy from "../../reusable/Tippy";
 import {translate} from "../../../localization";
 import Copyright from "../../reusable/Copyright";
+import {filterByLabel} from "../../../utils/objects";
 
 const TaxonomyList = () => {
 
@@ -19,12 +20,13 @@ const TaxonomyList = () => {
     const dispatch = useDispatch();
     const {fetched, loading} = useSelector(state => state.fetchTaxonomiesReducer);
     const {fetched: fetchedCount, loading:loadingCount} = useSelector(state => state.fetchTaxonomiesCountReducer);
+    const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);
 
     // manage local state
     const {page} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
-    const perPage = 20;
+    const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
 
     useEffect(() => {
         metaTitle(translate("taxonomy_list.title"));
@@ -39,7 +41,7 @@ const TaxonomyList = () => {
     // handle fetch outcome
     useEffect(() => {
         if (didMountRef.current){
-            if(!loading){
+            if(!loading && !settingsLoading){
                 setFetchedSuccess(true);
             }
         } else {

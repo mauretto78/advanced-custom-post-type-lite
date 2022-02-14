@@ -14,6 +14,7 @@ import {deletePostTypeTemplate} from "../../../redux/thunks/deletePostTypeTempla
 import {toast} from "react-toastify";
 import Copyright from "../../reusable/Copyright";
 import {syncPosts} from "../../../redux/thunks/syncPosts";
+import {filterByLabel} from "../../../utils/objects";
 
 const CustomPostTypeList = () => {
 
@@ -23,13 +24,14 @@ const CustomPostTypeList = () => {
     const {fetched: fetchedCount, loading:loadingCount} = useSelector(state => state.fetchPostTypesCountReducer);
     const {errors: deleteTemplateErrors, success: deleteTemplateSuccess, loading: deleteTemplateLoading} = useSelector(state => state.deletePostTypeTemplateReducer);
     const {errors: syncPostsErrors, success: syncPostsSuccess, loading: syncPostsLoading} = useSelector(state => state.syncPostsReducer);
+    const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);
 
     // manage local state
     const {page} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
     const [thereIsWooCommerce, setThereIsWooCommerce] = useState(false);
-    const perPage = 20;
+    const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
     const history = useHistory();
 
     useEffect(() => {
@@ -45,7 +47,7 @@ const CustomPostTypeList = () => {
     // handle fetch outcome
     useEffect(() => {
         if (didMountRef.current){
-            if(!loading){
+            if(!loading && !settingsLoading){
                 setFetchedSuccess(true);
 
                 let isWooCommerce = 0;
