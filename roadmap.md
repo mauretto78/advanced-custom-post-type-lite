@@ -1,0 +1,52 @@
+===================================
+ROADMAP
+===================================
+
+Lite v 1.0.5
+PRO v 1.0.3
+
+fix loading center (???)
+------- sync only with CPT that are ui visible (Show in UI)
+edit/delete/view label visibile
+------- rate it dismissable message
+auto-slug live on create CPT
+auto-slug live on create Taxonomy
+text labels on (?)
+AJAX on associate Taxonomy (remove assoc button)
+------- label "<-- double click to edit" on meta fields
+sync with already registering taxonomies (distinguish between NATIVE and CUSTOM)
+------- click and clear on new meta box fields name
+------- click and clear on new meta box fields options
+------- migrations php
+records per page in settings page
+associate already registered taxonomies when registering a CPT 
+labels in step 2 when registering a CPT
+fix meta boxes UI in the dashboard (show in a popup?)
+
+for Lite: change Wordpress directory header
+
+Lite v 1.0.6
+PRO v 1.0.4
+
+has-archive not boolean but with text (migration needed)
+edit the selected step from the view
+associate an already register taxonomy at the end of step 3
+
+Lite v 1.0.7
+PRO v 1.0.5
+
+Create a Beaver Module
+
+PRO v 1.0.6
+
+Improve CPT relations UI
+
+------------------------------------------------------
+Lite v 1.1.0
+PRO v 1.1.0
+
+Form builder
+- for Lite: only contact forms
+- for PRO: contact form|register form|search form
+
+

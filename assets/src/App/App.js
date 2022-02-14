@@ -29,6 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchSettings} from "./redux/thunks/fetchSettings";
 import {filterByLabel} from "./utils/objects";
+import RateAlert from "./components/reusable/RateAlert";
 
 const App = () => {
 
@@ -67,6 +68,7 @@ const App = () => {
             <HashRouter>
                 <ScrollToTop />
                 <Suspense fallback={Spinner()}>
+                    <RateAlert/>
                     <Switch>
                         <Route exact path='/assoc-taxonomy-post/:postType' name="assoc_taxonomy_post" component={AssocTaxonomyToCustomPostType} />
                         <Route exact path='/meta/:postType' name="meta" component={CustomPostTypeMeta} />

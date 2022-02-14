@@ -8,6 +8,7 @@ import {useForm} from "react-hook-form";
 import {saveSettings} from "../../../redux/thunks/saveSettings";
 import ReactSelect from "../../reusable/Form/ReactSelect";
 import {lanuagesList} from "../../../constants/languages";
+import InputNumber from "../../reusable/Form/InputNumber";
 
 const SettingsForm = () => {
 
@@ -34,13 +35,15 @@ const SettingsForm = () => {
     const { control, register, handleSubmit, formState: {errors, isValid} } = useForm({
         mode: 'all',
         defaultValues: {
+            records_per_page: (fetched.length > 0 && filterByLabel(fetched, 'key', 'records_per_page') !== '') ? filterByLabel(fetched, 'key', 'records_per_page').value : 20,
             language: (fetched.length > 0 && filterByLabel(fetched, 'key', 'language').value !== '') ? filterByValue(lanuagesList, filterByLabel(fetched, 'key', 'language').value) : { value: 'en', label: "English" },
         }
     });
 
     const onSubmit = (data) => {
         dispatch(saveSettings({
-            language: data.language.value
+            language: data.language.value,
+            records_per_page: data.records_per_page
         }));
     };
 
@@ -59,6 +62,18 @@ const SettingsForm = () => {
                     validate={{
                         required: "This field is mandatory"
                     }}
+                />
+                <InputNumber
+                    id="records_per_page"
+                    label="Records per page"
+                    placeholder="Records per page in ACPT dashboards"
+                    defaultValue={(fetched.length > 0 && filterByLabel(fetched, 'key', 'records_per_page').value !== '') ? filterByLabel(fetched, 'key', 'records_per_page').value : 20 }
+                    description="Set the number of records per page in your ACPT dashboards."
+                    register={register}
+                    errors={errors}
+                    isRequired={true}
+                    min={1}
+                    max={200}
                 />
                 <button
                     className="acpt-btn acpt-btn-primary submit"

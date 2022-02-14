@@ -211,6 +211,24 @@ a {
   align-items: center;
 }
 
+/*========== RATE IT ==========*/
+
+.acpt-rate-it {
+  margin-top:  calc(#{$gutter} * 2);
+  border-radius: $border-radius;
+  background:  $white-color;
+  padding: $gutter;
+  display: flex;
+  align-content: center;
+  align-items: center;
+
+  .acpt-rate,
+  .acpt-rate-title {
+    padding: 0;
+    margin: 0 0 calc(#{$gutter} / 2);
+  }
+}
+
 /*========== ALERTS ==========*/
 
 .acpt-alert {
@@ -500,6 +518,19 @@ a:hover svg {
     border-radius: $border-radius;
     font-size: 12px;
     padding: 5px 10px;
+  }
+
+  .double-click-tip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: $badge-color;
+    margin-left: 8px;
+
+    @media screen and (max-width: 767px){
+      display: none;
+    }
   }
 }
 
