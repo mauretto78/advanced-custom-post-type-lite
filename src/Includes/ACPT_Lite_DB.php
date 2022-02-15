@@ -1185,6 +1185,57 @@ class ACPT_Lite_DB
 
                     $postModel->addTemplate($taxonomyModel);
                 }
+
+                if($postModel->isWooCommerce()){
+                    $productData = self::getResults("
+                        SELECT 
+                            id,
+                            product_data_name,
+                            icon,
+                            visibility,
+                            show_in_ui
+                        FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA."`
+                    ;", []);
+
+                    foreach ($productData as $productDatum){
+                        $wooCommerceProductDataModel = WooCommerceProductDataModel::hydrateFromArray([
+                            'id' => $productDatum->id,
+                            'name' => $productDatum->product_data_name,
+                            'icon' => json_decode($productDatum->icon, true),
+                            'visibility' => $productDatum->visibility,
+                            'showInUI' => $productDatum->show_in_ui == '0' ? false : true,
+                        ]);
+
+                        $productDataFields = self::getResults("
+                            SELECT 
+                                id,
+                                product_data_id,
+                                field_name,
+                                field_type,
+                                required,
+                                sort
+                            FROM `".self::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`
+                            WHERE product_data_id = %s ORDER BY sort DESC
+                        ;", [$productDatum->id]);
+
+                        foreach ($productDataFields as $productDataField){
+                            $wooCommerceProductDataFieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
+                                'id' => $productDataField->id,
+                                'productDataModel' => $wooCommerceProductDataModel,
+                                'name' => $productDataField->field_name,
+                                'type' => $productDataField->field_type,
+                                'required' => $productDataField->required == '1',
+                                'sort' => $productDataField->sort,
+                                'defaultValue' => null,
+                                'description' => null,
+                            ]);
+
+                            $wooCommerceProductDataModel->addField($wooCommerceProductDataFieldModel);
+                        }
+
+                        $postModel->addWoocommerceProductData($wooCommerceProductDataModel);
+                    }
+                }
             }
 
 

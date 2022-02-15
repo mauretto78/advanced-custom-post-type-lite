@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import Tippy from "../../reusable/Tippy";
 import {Icon} from "@iconify/react";
 import '../../../scss/woocommerce.scss';
 import Boolean from "../../reusable/Boolean";
@@ -11,25 +10,20 @@ const WooCommerceProductDataListElement = ({id, element}) => {
         <React.Fragment>
             <tr>
                 <td className="backend">
-                    <Tippy
-                        html={(
-                            <div style={{
-                                padding: "5px"
-                            }}>
-                                <a href={`#/product-data/product/view/${id}`}>
-                                    <Icon icon="bx:bx-search-alt" width="24px"/>
-                                </a>
-                                <a href={`#/product-data/product/edit/${id}`}>
-                                    <Icon icon="bx:bx-edit" width="24px"/>
-                                </a>
-                                <a href={`#/product-data/product/delete/${id}`}>
-                                    <Icon icon="bx:bx-trash" width="24px"/>
-                                </a>
-                            </div>
-                        )}
-                    >
-                        <strong>{element.name}</strong>
-                    </Tippy>
+                    <strong>{element.name}</strong>
+                    <div>
+                        <a href={`#/product-data/product/view/${id}`}>
+                            View
+                        </a>
+                        &nbsp;
+                        <a href={`#/product-data/product/edit/${id}`}>
+                            Edit
+                        </a>
+                        &nbsp;
+                        <a href={`#/product-data/product/delete/${id}`}>
+                            Delete
+                        </a>
+                    </div>
                 </td>
                 <td className="backend">
                     <span className={`wcicon-${element.icon.icon}`} />

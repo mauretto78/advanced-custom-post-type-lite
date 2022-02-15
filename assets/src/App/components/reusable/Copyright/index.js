@@ -5,7 +5,7 @@ const Copyright = () => {
     return (
         <div className="acpt-copyright">
             <span style={{display:"inline-block", marginRight: "7px"}}>
-                Copyright &copy; 2021 &nbsp;
+                Copyright &copy; 2021 - {new Date().getFullYear()} &nbsp;
                 <a href="https://acpt.io" target="_blank">ACPT</a>
             </span>
             <a href="https://acpt.io/documentation" target="_blank" className="acpt-btn acpt-btn-sm acpt-btn-primary-o">

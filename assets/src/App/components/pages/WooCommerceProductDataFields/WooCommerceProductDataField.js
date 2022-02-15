@@ -38,6 +38,12 @@ const WooCommerceProductDataField = ({id, postDataId, position, dragHandle}) => 
         return (option.props.fieldId === id);
     });
 
+    const blackName = () => {
+        if (isset(fieldValues, "name")) {
+            nameRef.current.value = '';
+        }
+    };
+
     const handleChangeFieldName = (n) => {
         dispatch(updateWooCommerceProductDataFieldName(id, postDataId, n));
     };
@@ -176,6 +182,7 @@ const WooCommerceProductDataField = ({id, postDataId, position, dragHandle}) => 
                             <input
                                 ref={nameRef}
                                 defaultValue={name}
+                                onClick={e => blackName()}
                                 onChange={e => handleChangeFieldName(e.target.value)}
                                 className={`acpt-form-control ${name === '' ? ' has-errors' : ''}`}
                                 type="text"

@@ -1,5 +1,5 @@
 // GOOGLE FONTS
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 /*========== Colors ==========*/
 $primary-color: #003367; //000080
@@ -37,9 +37,9 @@ $small-font-size: .813rem;
 $smaller-font-size: .75rem;
 
 /*========== Font weight ==========*/
-$font-medium: 500;
+$font-medium: 400;
 $font-semi-bold: 600;
-$font-bold: 800;
+$font-bold: 700;
 
 /*========== Gutter ==========*/
 $gutter: 20px;
@@ -57,7 +57,7 @@ $mb-6: 3rem;
 /*===== GENERAL =====*/
 
 .acpt-container {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
 }
 
@@ -372,6 +372,19 @@ a {
 .acpt-btn-primary-o:focus {
   color: $primary-color !important;;
   border: $border-thickness  solid $primary-color;
+  background: transparent;
+}
+
+.acpt-btn-info-o {
+  color: $info-color !important;
+  border: $border-thickness  solid $info-color;
+  background: transparent;
+}
+
+.acpt-btn-info-o:hover,
+.acpt-btn-info-o:focus {
+  color: lighten($info-color, 5%) !important;;
+  border: $border-thickness  solid lighten($info-color, 5%);
   background: transparent;
 }
 
@@ -1295,6 +1308,27 @@ input.acpt-form-control.has-errors {
   overflow-x: auto;
 }
 
+.acpt-minitable {
+  border-spacing: 0;
+  border-collapse: separate;
+  width: 100%;
+  font-size: 14px;
+  text-align: left;
+  min-width: 300px;
+
+  td,
+  th {
+    text-align: left;
+    padding: calc(#{$gutter} / 1.3) $gutter;
+    border-bottom: $border-thickness solid $card-border-color;
+  }
+}
+
+.minitable-buttons {
+  text-align: left !important;
+  padding: calc(#{$gutter} / 1.3) $gutter;
+}
+
 .acpt-table {
   border-spacing: 0;
   border-collapse: separate;
@@ -2138,4 +2172,10 @@ input.acpt-form-control.has-errors {
     font-weight: bold;
     font-size: 15px;
   }
+}
+
+/*========== TIPPY ==========*/
+
+.tippy-popper .tippy-tooltip.light-theme[data-animatefill] {
+  background-color: $white-color;
 }

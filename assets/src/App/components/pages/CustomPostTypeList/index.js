@@ -168,19 +168,11 @@ const CustomPostTypeList = () => {
                                         <th className="grey frontend" colSpan={2}>Frontend UI</th>
                                     </tr>
                                     <tr>
+                                        <th/>
                                         <th>
                                             Name
                                         </th>
                                         <th/>
-                                        <th>
-                                            Icon
-                                            &nbsp;
-                                            <Tippy title="Associated icon">
-                                                <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
-                                                </span>
-                                            </Tippy>
-                                        </th>
                                         <th>
                                             Meta boxes
                                             &nbsp;
