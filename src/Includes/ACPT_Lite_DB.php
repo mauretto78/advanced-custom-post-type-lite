@@ -2670,4 +2670,26 @@ class ACPT_Lite_DB
 
         return $wpdb->prefix;
     }
+
+    /**
+     * @param $table
+     * @param $column
+     *
+     * @return bool
+     */
+    public static function checkIfColumnExistsInTable($table, $column)
+    {
+        global $wpdb;
+
+        $exists = false;
+        $rows = $wpdb->get_results(  "SHOW COLUMNS FROM `".$table."`  "  );
+
+        foreach ($rows as $row){
+            if($column === $row->Field){
+                return true;
+            }
+        }
+
+        return $exists;
+    }
 }

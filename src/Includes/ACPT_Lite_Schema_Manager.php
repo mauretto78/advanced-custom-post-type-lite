@@ -176,6 +176,11 @@ class ACPT_Lite_Schema_Manager
         dbDelta($sql12);
         dbDelta($sql13);
 
+        // alter tables
+        if(!ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::TABLE_TAXONOMY, 'native')){
+            $wpdb->query("ALTER TABLE `".ACPT_Lite_DB::TABLE_TAXONOMY."` ADD  `native` TINYINT(1) NULL DEFAULT NULL ");
+        }
+
         return empty($wpdb->last_error);
     }
 
@@ -198,6 +203,9 @@ class ACPT_Lite_Schema_Manager
         $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_TAXONOMY."`;");
         $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."`;");
         $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_SETTINGS."`;");
+        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."`;");
+        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`;");
+        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."`;");
 
         return empty($wpdb->last_error);
     }
