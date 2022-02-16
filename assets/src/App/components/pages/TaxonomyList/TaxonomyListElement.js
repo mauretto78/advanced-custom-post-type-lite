@@ -1,5 +1,4 @@
 import React from 'react';
-import Tippy from "../../reusable/Tippy";
 import {Link} from "react-router-dom";
 import {Icon} from "@iconify/react";
 import {isset} from "../../../utils/objects";
@@ -10,40 +9,27 @@ const TaxonomyListElement = ({id, element}) => {
         <tr>
             <td className="backend">
                 <div className="m-0 mb-1">
-                    <Tippy
-                        html={(
-                            <div style={{
-                                padding: "5px"
-                            }}>
-                                <a href={`#/view_taxonomy/${element.slug}`}>
-                                    <Icon icon="bx:bx-search-alt" width="24px"/>
-                                </a>
-                                <a href={`#/edit_taxonomy/${element.slug}`}>
-                                    <Icon icon="bx:bx-edit" width="24px"/>
-                                </a>
-                                <a href={`#/delete_taxonomy/${element.slug}`}>
-                                    <Icon icon="bx:bx-trash" width="24px"/>
-                                </a>
-                            </div>
-                        )}
-                    >
-                        <strong>{element.slug}</strong>
-                    </Tippy>
+                    <strong>{element.slug}</strong>
+                    <div>
+                        <a href={`#/view_taxonomy/${element.slug}`}>
+                            View
+                        </a>
+                        &nbsp;
+                        <a href={`#/edit_taxonomy/${element.slug}`}>
+                            Edit
+                        </a>
+                        &nbsp;
+                        <a href={`#/delete_taxonomy/${element.slug}`}>
+                            Delete
+                        </a>
+                    </div>
                 </div>
             </td>
             <td>
-                <span className="acpt-badge">
-                    <span className="label">
-                        {element.singular}
-                    </span>
-                </span>
+                {element.singular}
             </td>
             <td>
-                <span className="acpt-badge">
-                    <span className="label">
-                        {element.plural}
-                    </span>
-                </span>
+                {element.plural}
             </td>
             <td className="with-border">
                 <span className="acpt-badge">
@@ -56,7 +42,7 @@ const TaxonomyListElement = ({id, element}) => {
                 {isset(element, "customPostTypes") &&  element.customPostTypes.length > 0 && element.customPostTypes.map((customPostType) =>
                     <Link
                         to={`/assoc-taxonomy-post/${customPostType.name}`}
-                        className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                        className="acpt-btn acpt-btn-sm acpt-btn-info-o"
                     >
                         <Icon icon="bx:bx-purchase-tag" width="24px"/>
                         {customPostType.name}

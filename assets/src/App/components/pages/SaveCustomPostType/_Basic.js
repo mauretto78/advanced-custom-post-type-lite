@@ -8,6 +8,8 @@ import Checkboxes from "../../reusable/Form/Checkboxes";
 import ReactSelect from "../../reusable/Form/ReactSelect";
 import {dashiconList} from "../../../constants/dashicons";
 import {filterByValue} from "../../../utils/objects";
+import {sluggify} from "../../../redux/thunks/sluggify";
+import {sluggifyString} from "../../../utils/strings";
 
 const BasicStep = () => {
 
@@ -21,7 +23,7 @@ const BasicStep = () => {
         supports = fetched[0].supports;
     }
 
-    const { control, register, handleSubmit, formState: {errors, isValid} } = useForm({
+    const { control, register, handleSubmit, setValue, formState: {errors, isValid} } = useForm({
         mode: 'all',
         defaultValues: {
             post_name: fetched.length > 0 ? fetched[0].name : null,
@@ -30,6 +32,10 @@ const BasicStep = () => {
             icon: fetched.length > 0 ? fetched[0].icon : null,
         }
     });
+
+    const handlePostNameChange = (post_name) => {
+        setValue('post_name', sluggifyString(post_name, 20));
+    };
 
     /**
      * Keys are used as internal identifiers. Lowercase alphanumeric characters, dashes, and underscores are allowed.
@@ -72,6 +78,7 @@ const BasicStep = () => {
                     register={register}
                     errors={errors}
                     isRequired={true}
+                    onChangeCapture={ e => handlePostNameChange(e.currentTarget.value) }
                     validate={{
                         validate: isPostTypeNameValid,
                         required: "This field is mandatory"

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputText = ({id, label, placeholder, disabled, readOnly, validate, register, errors, isRequired, defaultValue, description, wizard}) => {
+const InputText = ({id, label, placeholder, disabled, readOnly, validate, register, errors, isRequired, defaultValue, description, wizard, onChangeCapture}) => {
 
     const error = errors[id];
 
@@ -25,6 +25,7 @@ const InputText = ({id, label, placeholder, disabled, readOnly, validate, regist
                     disabled={disabled}
                     placeholder={placeholder}
                     required={isRequired}
+                    onChangeCapture={onChangeCapture}
                     readOnly={readOnly && 'readonly'}
                     defaultValue={defaultValue}
                     aria-invalid={error ? "true" : "false"}

@@ -15,6 +15,7 @@ import OtherSettingsStep from "./_Settings";
 import {Icon} from "@iconify/react";
 import {translate} from "../../../localization";
 import Copyright from "../../reusable/Copyright";
+import {stepReset} from "../../../redux/actions/stepsActions";
 
 const SaveTaxonomy = () => {
 
@@ -32,10 +33,12 @@ const SaveTaxonomy = () => {
             dispatch(fetchTaxonomies({
                 taxonomy:taxonomy
             }));
+            dispatch(stepReset()); //@TODO dynamic step
         } else {
             metaTitle(translate("taxonomy_create.title"));
             changeCurrentAdminMenuLink('#/register_taxonomy');
             dispatch(resetTaxonomies());
+            dispatch(stepReset());
         }
         setDirty();
     }, []);

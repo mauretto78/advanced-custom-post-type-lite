@@ -147,6 +147,7 @@ class ACPT_Lite_Admin
             'wp_ajax_saveWooCommerceProductDataAction' => 'saveWooCommerceProductDataAction',
             'wp_ajax_saveWooCommerceProductDataFieldsAction' => 'saveWooCommerceProductDataFieldsAction',
             'wp_ajax_syncPostsAction' => 'syncPostsAction',
+            'wp_ajax_sluggifyAction' => 'sluggifyAction',
         ];
     }
 

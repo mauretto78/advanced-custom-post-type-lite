@@ -186,7 +186,7 @@ const CustomPostTypeList = () => {
                                             <th>
                                                 Product data
                                                 &nbsp;
-                                                <Tippy title="WooCommerce product data">
+                                                <Tippy title="Associated WooCommerce product data">
                                                     <span className="helper">
                                                         <Icon icon="bx:bx-help-circle" width="24px"/>
                                                     </span>
@@ -196,7 +196,7 @@ const CustomPostTypeList = () => {
                                         <th>
                                             Associated taxonomies
                                             &nbsp;
-                                            <Tippy title="Associated taxonomies">
+                                            <Tippy title="Associated taxonomies with the post">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -214,7 +214,7 @@ const CustomPostTypeList = () => {
                                         <th className="text-center">
                                             Archive template
                                             &nbsp;
-                                            <Tippy title="The archive template">
+                                            <Tippy title="The archive template for this custom post type">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -223,7 +223,7 @@ const CustomPostTypeList = () => {
                                         <th className="text-center">
                                             Single template
                                             &nbsp;
-                                            <Tippy title="The single template">
+                                            <Tippy title="The single template for this custom post type">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>

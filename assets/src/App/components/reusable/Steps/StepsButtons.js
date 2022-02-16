@@ -18,21 +18,21 @@ export default function StepsButtons( {isValid, next, prev}) {
             }
 
             {next &&
-            <button
-                className="acpt-btn acpt-btn-primary next" disabled={(isValid) ? '' : 'disabled'}>
-                Next Step
-                <Icon icon="bx:bx-chevron-right" width="24px" />
-            </button>
+                <button
+                    className="acpt-btn acpt-btn-primary next" disabled={(isValid) ? '' : 'disabled'}>
+                    Next Step
+                    <Icon icon="bx:bx-chevron-right" width="24px" />
+                </button>
             }
 
             {!next &&
-            <button
-                className="acpt-btn acpt-btn-primary submit"
-                disabled={(!isValid || loading) ? 'disabled' : ''}
-            >
-                {loading ? 'Loading...' : 'Save'}
-                <Icon icon="bx:bx-save" width="24px" />
-            </button>
+                <button
+                    className="acpt-btn acpt-btn-primary submit"
+                    disabled={(!isValid || loading) ? 'disabled' : ''}
+                >
+                    {loading ? 'Loading...' : 'Save'}
+                    <Icon icon="bx:bx-save" width="24px" />
+                </button>
             }
         </div>
     )

@@ -1,4 +1,4 @@
-import {STEP_BACK, STEP_FORWARD, STEPS_SUBMIT_FAILURE, STEPS_SUBMIT_IN_PROGRESS, STEPS_SUBMIT_SUCCESS} from "../actions/stepsActions";
+import {STEP_BACK, STEP_FORWARD, STEP_RESET, STEPS_SUBMIT_FAILURE, STEPS_SUBMIT_IN_PROGRESS, STEPS_SUBMIT_SUCCESS} from "../actions/stepsActions";
 
 const initialState = {
     activeStep: 1,
@@ -12,6 +12,9 @@ export const stepsReducer = ( state = initialState, action) => {
     const {type, payload} = action;
 
     switch (type) {
+
+        case STEP_RESET:
+            return initialState;
 
         case STEP_FORWARD:
 

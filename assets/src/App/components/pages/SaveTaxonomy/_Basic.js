@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import {stepForward} from "../../../redux/actions/stepsActions";
 import InputText from "../../reusable/Form/InputText";
 import StepsButtons from "../../reusable/Steps/StepsButtons";
+import {sluggifyString} from "../../../utils/strings";
 
 const BasicStep = () => {
 
@@ -12,7 +13,7 @@ const BasicStep = () => {
     const dispatch = useDispatch();
 
     // handle form
-    const { control, register, handleSubmit, formState: {errors, isValid} } = useForm({
+    const { control, register, handleSubmit, setValue, formState: {errors, isValid} } = useForm({
         mode: 'all',
         defaultValues: {
             slug: fetched.length > 0 ? fetched[0].slug : null,
@@ -20,6 +21,10 @@ const BasicStep = () => {
             plural_label: fetched.length > 0 ? fetched[0].plural : null,
         }
     });
+
+    const handleSlugChange = (slug) => {
+        setValue('slug', sluggifyString(slug, 32));
+    };
 
     const isSlugValid = (slug) => {
 
@@ -48,13 +53,14 @@ const BasicStep = () => {
                 <InputText
                     id="slug"
                     label="Slug"
-                    placeholder="Slug"
+                    placeholder="slug"
                     readOnly={fetched.length > 0}
                     defaultValue={fetched.length > 0 ? fetched[0].slug : null }
                     description="The post name/slug. Used for various queries for taxonomy content."
                     register={register}
                     errors={errors}
                     isRequired={true}
+                    onChangeCapture={ e => handleSlugChange(e.currentTarget.value) }
                     validate={{
                         validate: isSlugValid,
                         required: "This field is mandatory"

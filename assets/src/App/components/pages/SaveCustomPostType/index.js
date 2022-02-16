@@ -14,6 +14,7 @@ import {resetPostTypes} from "../../../redux/thunks/resetPostTypes";
 import useUnsavedChangesWarning from "../../../hooks/useUnsavedChangesWarning";
 import {Icon} from "@iconify/react";
 import Copyright from "../../reusable/Copyright";
+import {stepReset} from "../../../redux/actions/stepsActions";
 
 const SaveCustomPostType = () => {
 
@@ -38,10 +39,12 @@ const SaveCustomPostType = () => {
             dispatch(fetchPostTypes({
                 postType:postType
             }));
+            dispatch(stepReset()); //@TODO dynamic step
         } else {
             metaTitle("Register new Custom Post Type");
             changeCurrentAdminMenuLink('#/register');
             dispatch(resetPostTypes());
+            dispatch(stepReset());
         }
         setDirty();
     }, []);

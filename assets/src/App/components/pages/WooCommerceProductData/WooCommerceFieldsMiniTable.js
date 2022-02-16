@@ -1,30 +1,25 @@
 import React from 'react';
 import {Icon} from "@iconify/react";
 
-const MetaBoxMiniTable = ({postType, elements}) => {
+const WooCommerceFieldsMiniTable = ({id, elements}) => {
 
     return (
         <div className="acpt-table-responsive">
             <table className="acpt-minitable">
                 <tr>
-                    <th>Meta box</th>
-                    <th>Fields count</th>
+                    <th>Name</th>
+                    <th>Type</th>
                 </tr>
                 {elements.map((element)=>(
                     <tr>
                         <td>{element.name}</td>
-                        <td>
-                            <span className="acpt-badge">
-                                <span className="label">
-                                    {element.count}
-                                </span>
-                            </span>
-                        </td>
+                        <td>{element.type}</td>
+
                     </tr>
                 ))}
             </table>
             <div className="minitable-buttons">
-                <a href={`#/meta/${postType}`} >
+                <a href={`#/product-data/product/fields/${id}`} >
                     Manage
                 </a>
             </div>
@@ -32,4 +27,4 @@ const MetaBoxMiniTable = ({postType, elements}) => {
     );
 };
 
-export default MetaBoxMiniTable;
+export default WooCommerceFieldsMiniTable;

@@ -18,6 +18,7 @@ use ACPT_Lite\Core\Models\WooCommerceProductDataFieldOptionModel;
 use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Sanitizer;
+use ACPT_Lite\Utils\Sluggify;
 use ACPT_Lite\Utils\WPLinks;
 
 /**
@@ -1236,6 +1237,34 @@ class ACPT_Lite_Ajax
         }
 
         return wp_send_json($return);
+    }
+
+    /**
+     * Sluggify a string
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function sluggifyAction()
+    {
+        $string = null;
+        $maxLength = 20;
+        if(isset($_POST['data'])){
+            $data = $this->sanitizeJsonData($_POST['data']);
+            $string = isset($data['string']) ? $data['string'] : null;
+            $maxLength = isset($data['maxLength']) ? $data['maxLength'] : 20;
+        }
+
+        if($string){
+            return wp_send_json([
+                'string' => Sluggify::slug($string, $maxLength)
+            ]);
+        }
+
+        return wp_send_json([
+                'success' => false,
+                'error' => 'no string was sent'
+        ]);
     }
 
     /**

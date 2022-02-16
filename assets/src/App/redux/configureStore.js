@@ -30,6 +30,7 @@ import {fetchWooCommerceProductDataReducer} from "./reducers/fetchWooCommercePro
 import {deleteWooCommerceProductDataReducer} from "./reducers/deleteWooCommerceProductDataReducer";
 import {fetchWooCommerceProductDataFieldsReducer} from "./reducers/fetchWooCommerceProductDataFieldsReducer";
 import {WooCommerceFieldsStateReducer} from "./reducers/WooCommerceFieldsStateReducer";
+import {sluggifyReducer} from "./reducers/sluggifyReducer";
 
 const reducers = {
     assocTaxonomyToPostReducer,
@@ -58,6 +59,7 @@ const reducers = {
     saveSettingsReducer,
     saveCustomPostTemplateReducer,
     saveWooCommerceProductDataReducer,
+    sluggifyReducer,
     stepsReducer,
     syncPostsReducer,
     WooCommerceFieldsStateReducer

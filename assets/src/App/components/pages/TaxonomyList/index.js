@@ -94,11 +94,19 @@ const TaxonomyList = () => {
                                         <th className="grey frontend" colSpan={1}>Associated</th>
                                     </tr>
                                     <tr>
-                                        <th>Slug</th>
+                                        <th>
+                                            Slug
+                                            &nbsp;
+                                            <Tippy title="Taxonomy slug. The post name/slug. Used for various queries for taxonomy content.">
+                                                <span className="helper">
+                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                </span>
+                                            </Tippy>
+                                        </th>
                                         <th>
                                             Singular
                                             &nbsp;
-                                            <Tippy title="Singular label">
+                                            <Tippy title="Singular label. Used when a singular label is needed">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -107,7 +115,7 @@ const TaxonomyList = () => {
                                         <th>
                                             Plural
                                             &nbsp;
-                                            <Tippy title="Plural label">
+                                            <Tippy title="Plural label. Used for the taxonomy admin menu item">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -116,13 +124,21 @@ const TaxonomyList = () => {
                                         <th className="with-border">
                                             Post count
                                             &nbsp;
-                                            <Tippy title="Published posts count">
+                                            <Tippy title="Published posts count associated with the taxonomy">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
-                                        <th>Custom post types</th>
+                                        <th>
+                                            Custom post types
+                                            &nbsp;
+                                            <Tippy title="Associate custom post types here">
+                                                <span className="helper">
+                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                </span>
+                                            </Tippy>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

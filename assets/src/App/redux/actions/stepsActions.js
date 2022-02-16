@@ -1,8 +1,16 @@
+export const STEP_RESET = 'STEP_RESET';
 export const STEP_FORWARD = 'STEP_FORWARD';
 export const STEP_BACK = 'STEP_BACK';
 export const STEPS_SUBMIT_IN_PROGRESS = 'STEPS_SUBMIT_IN_PROGRESS';
 export const STEPS_SUBMIT_SUCCESS = 'STEPS_SUBMIT_SUCCESS';
 export const STEPS_SUBMIT_FAILURE = 'STEPS_SUBMIT_FAILURE';
+
+export const stepReset = () => {
+    return {
+        type: STEP_RESET,
+        payload: {},
+    };
+};
 
 export const stepBack = () => {
     return {

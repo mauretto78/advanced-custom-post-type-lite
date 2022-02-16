@@ -4,6 +4,9 @@ import {Icon} from "@iconify/react";
 import '../../../scss/woocommerce.scss';
 import Boolean from "../../reusable/Boolean";
 import WooCommerceProductDataVisibility from "../../reusable/WooCommerceProductDataVisibility";
+import MetaBoxMiniTable from "../CustomPostTypeList/MetaBoxMiniTable";
+import Tippy from "../../reusable/Tippy";
+import WooCommerceFieldsMiniTable from "./WooCommerceFieldsMiniTable";
 
 const WooCommerceProductDataListElement = ({id, element}) => {
     return (
@@ -26,7 +29,7 @@ const WooCommerceProductDataListElement = ({id, element}) => {
                     </div>
                 </td>
                 <td className="backend">
-                    <span className={`wcicon-${element.icon.icon}`} />
+                    <span className={`wcicon-lg wcicon-${element.icon.icon}`} />
                 </td>
                 <td className="backend">
                     <Boolean status={element.showInUI}/>
@@ -35,19 +38,33 @@ const WooCommerceProductDataListElement = ({id, element}) => {
                     <WooCommerceProductDataVisibility visibility={element.visibility} />
                 </td>
                 <td className="backend">
-                    <span className="acpt-badge mr-1">
-                        <span className="label">
-                            {element.fields.length}
-                        </span>
-                    </span>
-                    <Link
-                        to={`/product-data/product/fields/${element.id}`}
-                        className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
-                    >
-                        <Icon icon="bx:bxs-inbox" width="24px"/>
-                        &nbsp;
-                        Manage
-                    </Link>
+                    {element.fields.length > 0
+                        ?
+                        <Tippy
+                            placement='top'
+                            html={(
+                                <WooCommerceFieldsMiniTable id={element.id} elements={element.fields}/>
+                            )}
+                        >
+                            <Link
+                                to={`/product-data/product/fields/${element.id}`}
+                                className="acpt-btn acpt-btn-sm acpt-btn-info-o"
+                            >
+                                <Icon icon="bx:bxs-inbox" width="24px"/>
+                                &nbsp;
+                                Manage
+                            </Link>
+                        </Tippy>
+                        :
+                        <Link
+                            to={`/product-data/product/fields/${element.id}`}
+                            className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                        >
+                            <Icon icon="bx:bxs-inbox" width="24px"/>
+                            &nbsp;
+                            Create
+                        </Link>
+                    }
                 </td>
             </tr>
         </React.Fragment>
