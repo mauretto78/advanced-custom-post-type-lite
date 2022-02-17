@@ -3,3 +3,4 @@ stats.json
 /vendor/
 node_modules/
 /bundle
+.phpunit.result.cache

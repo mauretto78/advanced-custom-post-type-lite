@@ -1,5 +1,5 @@
 // GOOGLE FONTS
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 /*========== Colors ==========*/
 $primary-color: #003367; //000080
@@ -37,9 +37,9 @@ $small-font-size: .813rem;
 $smaller-font-size: .75rem;
 
 /*========== Font weight ==========*/
-$font-medium: 500;
+$font-medium: 400;
 $font-semi-bold: 600;
-$font-bold: 800;
+$font-bold: 700;
 
 /*========== Gutter ==========*/
 $gutter: 20px;
@@ -57,7 +57,7 @@ $mb-6: 3rem;
 /*===== GENERAL =====*/
 
 .acpt-container {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
 }
 
@@ -211,6 +211,24 @@ a {
   align-items: center;
 }
 
+/*========== RATE IT ==========*/
+
+.acpt-rate-it {
+  margin-top:  calc(#{$gutter} * 2);
+  border-radius: $border-radius;
+  background:  $white-color;
+  padding: $gutter;
+  display: flex;
+  align-content: center;
+  align-items: center;
+
+  .acpt-rate,
+  .acpt-rate-title {
+    padding: 0;
+    margin: 0 0 calc(#{$gutter} / 2);
+  }
+}
+
 /*========== ALERTS ==========*/
 
 .acpt-alert {
@@ -357,6 +375,19 @@ a {
   background: transparent;
 }
 
+.acpt-btn-info-o {
+  color: $info-color !important;
+  border: $border-thickness  solid $info-color;
+  background: transparent;
+}
+
+.acpt-btn-info-o:hover,
+.acpt-btn-info-o:focus {
+  color: lighten($info-color, 5%) !important;;
+  border: $border-thickness  solid lighten($info-color, 5%);
+  background: transparent;
+}
+
 .acpt-btn-secondary {
   color: $btn-color !important;
   background: $text-color-light;
@@ -500,6 +531,19 @@ a:hover svg {
     border-radius: $border-radius;
     font-size: 12px;
     padding: 5px 10px;
+  }
+
+  .double-click-tip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: $badge-color;
+    margin-left: 8px;
+
+    @media screen and (max-width: 767px){
+      display: none;
+    }
   }
 }
 
@@ -970,7 +1014,7 @@ a:hover svg {
 .acpt-form-group .acpt-form-control-wrapper .description {
   display: block;
   margin-top: 5px;
-  color: $text-color;
+  color: $text-color-light;
   font-style: normal;
 }
 
@@ -1262,6 +1306,32 @@ input.acpt-form-control.has-errors {
 
 .acpt-table-responsive {
   overflow-x: auto;
+}
+
+.element-buttons {
+  margin-top: 5px;
+  font-size: .75rem;
+}
+
+.acpt-minitable {
+  border-spacing: 0;
+  border-collapse: separate;
+  width: 100%;
+  font-size: 14px;
+  text-align: left;
+  min-width: 300px;
+
+  td,
+  th {
+    text-align: left;
+    padding: calc(#{$gutter} / 1.3) $gutter;
+    border-bottom: $border-thickness solid $card-border-color;
+  }
+}
+
+.minitable-buttons {
+  text-align: left !important;
+  padding: calc(#{$gutter} / 1.3) $gutter;
 }
 
 .acpt-table {
@@ -2107,4 +2177,10 @@ input.acpt-form-control.has-errors {
     font-weight: bold;
     font-size: 15px;
   }
+}
+
+/*========== TIPPY ==========*/
+
+.tippy-popper .tippy-tooltip.light-theme[data-animatefill] {
+  background-color: $white-color;
 }

@@ -71,7 +71,7 @@ const DeleteTaxonomy = () => {
                 Delete {taxonomy}
             </h1>
             <p>You are going to delete <strong>{taxonomy} </strong> taxonomy. Are you sure?</p>
-            <div>
+            <div className="mb-3">
                 <a className="acpt-btn acpt-btn-danger" onClick={ e => handleDeleteTaxonomy(taxonomy) }>
                     <Icon icon="bx:bx-trash" width="24px" />
                     Yes, Delete it
@@ -80,7 +80,7 @@ const DeleteTaxonomy = () => {
                 <Link
                     to="/taxonomies"
                     className="acpt-btn acpt-btn-primary-o prev">
-                    <Icon icon="bx:bx-category-alt" width="24px" />
+                    <Icon icon="bx:bx-purchase-tag" width="24px" />
                     Return back to list
                 </Link>
             </div>

@@ -73,6 +73,11 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     private $templates = [];
 
     /**
+     * @var WooCommerceProductDataModel
+     */
+    private $woocommerceProductData = [];
+
+    /**
      * @var bool
      */
     private $existsArchivePageInTheme = false;
@@ -333,6 +338,23 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
+     * @return WooCommerceProductDataModel
+     */
+    public function getWoocommerceProductData() {
+        return $this->woocommerceProductData;
+    }
+
+    /**
+     * @param WooCommerceProductDataModel $woocommerceProductDataModel
+     */
+    public function addWoocommerceProductData( WooCommerceProductDataModel $woocommerceProductDataModel )
+    {
+        if(!$this->existsInCollection($woocommerceProductDataModel->getId(), $this->woocommerceProductData)){
+            $this->woocommerceProductData[] = $woocommerceProductDataModel;
+        }
+    }
+
+    /**
      * @return array
      */
     public function arrayRepresentation()
@@ -447,6 +469,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                 'labels' => $taxonomy->getLabels(),
                 'settings' => $taxonomy->getSettings(),
                 'postCount' => $taxonomy->getPostCount(),
+                'isNative' => $taxonomy->isNative(),
             ];
         }
 
@@ -467,6 +490,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'existsArchivePageInTheme' => $this->existsArchivePageInTheme,
             'existsSinglePageInTheme' => $this->existsSinglePageInTheme,
             'isWooCommerce' => $this->isWooCommerce(),
+            'woocommerceProductData' => $this->woocommerceProductData,
         ];
     }
 }

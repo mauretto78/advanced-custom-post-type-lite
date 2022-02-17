@@ -14,6 +14,7 @@ import {deletePostTypeTemplate} from "../../../redux/thunks/deletePostTypeTempla
 import {toast} from "react-toastify";
 import Copyright from "../../reusable/Copyright";
 import {syncPosts} from "../../../redux/thunks/syncPosts";
+import {filterByLabel} from "../../../utils/objects";
 
 const CustomPostTypeList = () => {
 
@@ -23,13 +24,14 @@ const CustomPostTypeList = () => {
     const {fetched: fetchedCount, loading:loadingCount} = useSelector(state => state.fetchPostTypesCountReducer);
     const {errors: deleteTemplateErrors, success: deleteTemplateSuccess, loading: deleteTemplateLoading} = useSelector(state => state.deletePostTypeTemplateReducer);
     const {errors: syncPostsErrors, success: syncPostsSuccess, loading: syncPostsLoading} = useSelector(state => state.syncPostsReducer);
+    const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);
 
     // manage local state
     const {page} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
     const [thereIsWooCommerce, setThereIsWooCommerce] = useState(false);
-    const perPage = 20;
+    const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
     const history = useHistory();
 
     useEffect(() => {
@@ -45,7 +47,7 @@ const CustomPostTypeList = () => {
     // handle fetch outcome
     useEffect(() => {
         if (didMountRef.current){
-            if(!loading){
+            if(!loading && !settingsLoading){
                 setFetchedSuccess(true);
 
                 let isWooCommerce = 0;
@@ -166,19 +168,11 @@ const CustomPostTypeList = () => {
                                         <th className="grey frontend" colSpan={2}>Frontend UI</th>
                                     </tr>
                                     <tr>
+                                        <th/>
                                         <th>
                                             Name
                                         </th>
                                         <th/>
-                                        <th>
-                                            Icon
-                                            &nbsp;
-                                            <Tippy title="Associated icon">
-                                                <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
-                                                </span>
-                                            </Tippy>
-                                        </th>
                                         <th>
                                             Meta boxes
                                             &nbsp;
@@ -192,7 +186,7 @@ const CustomPostTypeList = () => {
                                             <th>
                                                 Product data
                                                 &nbsp;
-                                                <Tippy title="WooCommerce product data">
+                                                <Tippy title="Associated WooCommerce product data">
                                                     <span className="helper">
                                                         <Icon icon="bx:bx-help-circle" width="24px"/>
                                                     </span>
@@ -202,7 +196,7 @@ const CustomPostTypeList = () => {
                                         <th>
                                             Associated taxonomies
                                             &nbsp;
-                                            <Tippy title="Associated taxonomies">
+                                            <Tippy title="Associated taxonomies with the post">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -220,7 +214,7 @@ const CustomPostTypeList = () => {
                                         <th className="text-center">
                                             Archive template
                                             &nbsp;
-                                            <Tippy title="The archive template">
+                                            <Tippy title="The archive template for this custom post type">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -229,7 +223,7 @@ const CustomPostTypeList = () => {
                                         <th className="text-center">
                                             Single template
                                             &nbsp;
-                                            <Tippy title="The single template">
+                                            <Tippy title="The single template for this custom post type">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>

@@ -9,18 +9,20 @@ import Copyright from "../../reusable/Copyright";
 import Spinner from "../../reusable/Loader/Spinner";
 import Pagination from "../../reusable/Pagination";
 import WooCommerceProductDataListElement from "./WooCommerceProductDataListElement";
+import {filterByLabel} from "../../../utils/objects";
 
 const WooCommerceProductDataList = () => {
 
     // manage global state
     const dispatch = useDispatch();
     const {fetched, loading} = useSelector(state => state.fetchWooCommerceProductDataReducer);
+    const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);
 
     // manage local state
     const {page} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
-    const perPage = 20;
+    const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
     const history = useHistory();
 
     useEffect(() => {

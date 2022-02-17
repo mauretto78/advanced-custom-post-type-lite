@@ -1,6 +1,15 @@
 import React from 'react';
+import {assocTaxonomyToPostType} from "../../../redux/thunks/assocTaxonomyToPostType";
+import {useDispatch} from "react-redux";
 
-const AssocTaxonomyElement = ({id, element, onChange, defaultChecked}) => {
+const AssocTaxonomyElement = ({id, element, postType, defaultChecked}) => {
+
+    // manage global state
+    const dispatch = useDispatch();
+
+    const handleOnChange = (element) => {
+        dispatch(assocTaxonomyToPostType(postType, [element]));
+    };
 
     return(
         <tr>
@@ -8,18 +17,26 @@ const AssocTaxonomyElement = ({id, element, onChange, defaultChecked}) => {
                 <strong>{element.slug}</strong>
             </td>
             <td>
-                <span className="acpt-badge">
-                    <span className="label">
-                        {element.singular}
+                {element.isNative
+                    ?
+                    <span className={`acpt-badge acpt-badge-native ml-1`}>
+                            <span className="label">
+                                Native
+                            </span>
+                        </span>
+                    :
+                    <span className={`acpt-badge acpt-badge-${element.isWooCommerce === true ? 'woocommerce' : 'custom' } ml-1`}>
+                        <span className="label">
+                            {element.isWooCommerce === true ? 'WooCommerce' : 'Custom' }
+                        </span>
                     </span>
-                </span>
+                }
             </td>
             <td>
-                <span className="acpt-badge">
-                    <span className="label">
-                        {element.plural}
-                    </span>
-                </span>
+                {element.singular}
+            </td>
+            <td>
+                {element.plural}
             </td>
             <td className="with-border">
                 <span className="acpt-badge">
@@ -33,7 +50,8 @@ const AssocTaxonomyElement = ({id, element, onChange, defaultChecked}) => {
                     <input
                         id={element.id}
                         type="checkbox"
-                        defaultChecked={defaultChecked} onChange={e => onChange({
+                        defaultChecked={defaultChecked}
+                        onChange={e => handleOnChange({
                             id: element.id,
                             checked: e.target.checked
                         })}

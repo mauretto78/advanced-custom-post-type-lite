@@ -28,6 +28,11 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     private $plural;
 
     /**
+     * @var bool
+     */
+    private $native;
+
+    /**
      * @var int
      */
     private $postCount;
@@ -50,25 +55,28 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     /**
      * TaxonomyModel constructor.
      *
-     * @param string $id
-     * @param string $slug
-     * @param string $singular
-     * @param string $plural
-     * @param array  $labels
-     * @param array  $settings
+     * @param       $id
+     * @param       $slug
+     * @param       $singular
+     * @param       $plural
+     * @param       $native
+     * @param array $labels
+     * @param array $settings
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(
         $id,
         $slug,
         $singular,
         $plural,
+        $native,
         array $labels,
         array $settings
     ) {
         parent::__construct($id);
         $this->setSlug($slug);
+        $this->native   = $native;
         $this->singular = $singular;
         $this->plural   = $plural;
         $this->labels   = $labels;
@@ -78,7 +86,7 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     /**
      * @param $slug
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function setSlug($slug)
     {
@@ -146,6 +154,14 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
+     * @return bool
+     */
+    public function isNative()
+    {
+        return $this->native;
+    }
+
+    /**
      * @param CustomPostTypeModel $customPostTypeModel
      */
     public function addCustomPostType(CustomPostTypeModel $customPostTypeModel)
@@ -190,6 +206,7 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
             'singular' => $this->singular,
             'plural' => $this->plural,
             'postCount' => (isset($this->postCount) and null !== $this->postCount) ? $this->postCount : 0,
+            'isNative' => $this->isNative(),
             'labels' => $this->labels,
             'settings' => $this->settings,
             'customPostTypes' => $customPostTypesArray

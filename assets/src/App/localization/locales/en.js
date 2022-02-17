@@ -25,8 +25,10 @@ export const translations = {
     },
     "general": {
         "labels": {
-            "all_items": "All elements {{r}}",
+            "all_items": "All {{r}}",
             "add": "Add",
+            "add_new_item": "Add new {{r}}",
+            "back_to_items": "Back to {{r}}",
             "edit": "Edit",
             "new": "New",
             "not_found": "No {{r}} found",
@@ -37,10 +39,11 @@ export const translations = {
             "set_featured_image":"Set featured image",
             "remove_featured_image":"Remove featured image",
             "use_featured_image":"Use featured image",
+            "most_used": "Most used {{r}}",
             "archives":"Archives",
             "insert_into_item":"Insert",
             "uploaded_to_this_item":"Upload",
-            "filter_items_list":"Filter_items_list",
+            "filter_items_list":"Filter {{r}} list",
             "items_list_navigation":"Navigation list {{r}}",
             "items_list":"List {{r}}",
             "filter_by_date":"Filter by date",
@@ -49,6 +52,16 @@ export const translations = {
             "item_reverted_to_draft":"{{r}} reverted to draft",
             "item_scheduled":"{{r}} scheduled",
             "item_updated":"{{r}} updated",
+            "popular_items": "Popular {{r}}",
+            "update_item": "Update {{r}}",
+            "no_terms": "No {{r}}",
+            "parent_item": "Parent {{r}}",
+            "new_item_name": "New {{r}}",
+            "filter_by_item": "Filter by {{r}}",
+            "separate_items_with_commas": "Separate {{r}} with commas",
+            "add_or_remove_items": "Add or remove {{r}}",
+            "choose_from_most_used": "Choose from most used {{r}}",
+            "search_items": "Search {{r}}",
         }
     }
-}
+};

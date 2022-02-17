@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -85,3 +85,10 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 * Elementor widget integration
 * UI improvements
+
+= 1.0.5 (2022-02-19) =
+
+* Fixed bug PHP for <7.2 compatibily
+* Taxonomies synchronization
+* Improved CPT synchronization
+* UI/UX fixes and improvements

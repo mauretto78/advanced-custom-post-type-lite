@@ -70,4 +70,23 @@ export const addSlashes = (string) => {
     replace(/\r/g, '\\r').
     replace(/'/g, '\\\'').
     replace(/"/g, '\\"');
-}
+};
+
+/**
+ *
+ * @param string
+ * @param maxLength
+ * @return {string}
+ */
+export const sluggifyString = (string, maxLength) => {
+
+    let sanitized = '';
+
+    if(typeof string === 'string'){
+        sanitized = string.toLowerCase();
+        sanitized = sanitized.replace(" ", "-");
+        sanitized = sanitized.replace(/[^a-z0-9_\-]/g, '-');
+    }
+
+    return sanitized.substr(0, maxLength ? maxLength : 20);
+};

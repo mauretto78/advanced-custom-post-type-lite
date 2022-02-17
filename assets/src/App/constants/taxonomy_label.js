@@ -15,7 +15,7 @@ export const taxonomyLabelsList = [
         {
             id: "search_items",
             label: "Search items",
-            description: "Search Tags'/'Search Categories",
+            description: "Search Tags/Search Categories",
         },
         {
             id: "popular_items",

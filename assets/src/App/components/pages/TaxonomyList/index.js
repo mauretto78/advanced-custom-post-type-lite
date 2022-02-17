@@ -12,6 +12,7 @@ import {Icon} from "@iconify/react";
 import Tippy from "../../reusable/Tippy";
 import {translate} from "../../../localization";
 import Copyright from "../../reusable/Copyright";
+import {filterByLabel} from "../../../utils/objects";
 
 const TaxonomyList = () => {
 
@@ -19,12 +20,13 @@ const TaxonomyList = () => {
     const dispatch = useDispatch();
     const {fetched, loading} = useSelector(state => state.fetchTaxonomiesReducer);
     const {fetched: fetchedCount, loading:loadingCount} = useSelector(state => state.fetchTaxonomiesCountReducer);
+    const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);
 
     // manage local state
     const {page} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
-    const perPage = 20;
+    const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
 
     useEffect(() => {
         metaTitle(translate("taxonomy_list.title"));
@@ -39,7 +41,7 @@ const TaxonomyList = () => {
     // handle fetch outcome
     useEffect(() => {
         if (didMountRef.current){
-            if(!loading){
+            if(!loading && !settingsLoading){
                 setFetchedSuccess(true);
             }
         } else {
@@ -88,15 +90,24 @@ const TaxonomyList = () => {
                             <table className="acpt-table">
                                 <thead>
                                     <tr>
-                                        <th className="grey backend with-border" colSpan={4}>Registered taxonomies</th>
+                                        <th className="grey backend with-border" colSpan={5}>Registered taxonomies</th>
                                         <th className="grey frontend" colSpan={1}>Associated</th>
                                     </tr>
                                     <tr>
-                                        <th>Slug</th>
+                                        <th>
+                                            Slug
+                                            &nbsp;
+                                            <Tippy title="Taxonomy slug. The post name/slug. Used for various queries for taxonomy content.">
+                                                <span className="helper">
+                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                </span>
+                                            </Tippy>
+                                        </th>
+                                        <th/>
                                         <th>
                                             Singular
                                             &nbsp;
-                                            <Tippy title="Singular label">
+                                            <Tippy title="Singular label. Used when a singular label is needed">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -105,7 +116,7 @@ const TaxonomyList = () => {
                                         <th>
                                             Plural
                                             &nbsp;
-                                            <Tippy title="Plural label">
+                                            <Tippy title="Plural label. Used for the taxonomy admin menu item">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -114,13 +125,21 @@ const TaxonomyList = () => {
                                         <th className="with-border">
                                             Post count
                                             &nbsp;
-                                            <Tippy title="Published posts count">
+                                            <Tippy title="Published posts count associated with the taxonomy">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
-                                        <th>Custom post types</th>
+                                        <th>
+                                            Custom post types
+                                            &nbsp;
+                                            <Tippy title="Associate custom post types here">
+                                                <span className="helper">
+                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                </span>
+                                            </Tippy>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -86,8 +86,12 @@ const CustomPostTypeMetaBoxHeader = ({id, position, dragHandle, toggleClose}) =>
                                         setTitleIsVisible(false)
                                     }}
                                 >
-                                {value ? value : <span className="error-message">You must specify a title</span> }
-                                {box.fields && <span className="ml-1 acpt-badge"><span className="label">{box.fields.length}</span></span>}
+                                    {value ? value : <span className="error-message">You must specify a title</span> }
+                                    {box.fields && <span className="ml-1 acpt-badge"><span className="label">{box.fields.length}</span></span>}
+                                    <span className="double-click-tip">
+                                        <Icon icon="akar-icons:arrow-left" width="12px" />
+                                        double click on title to edit
+                                    </span>
                             </span>
                             ) : (
                                 <input

@@ -44,6 +44,12 @@ const CustomPostTypeMetaField = ({id, boxId, position, dragHandle}) => {
         return (relation.props.boxId === boxId && relation.props.fieldId === id);
     });
 
+    const blackName = () => {
+        if (isset(fieldValues, "name")) {
+            nameRef.current.value = '';
+        }
+    };
+
     const handleChangeFieldName = (n) => {
         dispatch(updateFieldName(id, boxId, n));
     };
@@ -206,6 +212,7 @@ const CustomPostTypeMetaField = ({id, boxId, position, dragHandle}) => {
                             <input
                                 ref={nameRef}
                                 defaultValue={name}
+                                onClick={e => blackName()}
                                 onChange={e => handleChangeFieldName(e.target.value)}
                                 className={`acpt-form-control ${name === '' ? ' has-errors' : ''}`}
                                 type="text"

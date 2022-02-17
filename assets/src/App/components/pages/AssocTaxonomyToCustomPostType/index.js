@@ -26,7 +26,6 @@ const AssocTaxonomyToCustomPostType = () => {
     const {postType} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
-    const [checked, setChecked] = useState([]);
 
     useEffect(() => {
         metaTitle("Registered Taxonomies");
@@ -49,8 +48,6 @@ const AssocTaxonomyToCustomPostType = () => {
                         checked: !isEmpty(filterById(fetchedPosts[0].taxonomies, item.id)),
                     });
                 });
-
-                setChecked(f);
             }
         } else {
             didMountRef.current = true;
@@ -75,26 +72,6 @@ const AssocTaxonomyToCustomPostType = () => {
             didMountRef.current = true;
         }
     }, [loadingAssocTaxonomyToPost]);
-
-    // handle data change and form submit
-    const handleChange = (data) => {
-        const newState = checked.map((state) => {
-            if(state.id === data.id){
-                return {
-                    id: data.id,
-                    checked: (data.checked) ? data.checked : state.data,
-                };
-            } else {
-                return state;
-            }
-        });
-
-        setChecked(newState);
-    };
-
-    const handleSubmit = () => {
-        dispatch(assocTaxonomyToPostType(postType, checked));
-    };
 
     if(!fetchedSuccess){
         return <Spinner/>;
@@ -136,15 +113,24 @@ const AssocTaxonomyToCustomPostType = () => {
                             <table className="acpt-table">
                                 <thead>
                                     <tr>
-                                        <th className="grey backend with-border" colSpan={4}>Taxonomy data</th>
+                                        <th className="grey backend with-border" colSpan={5}>Taxonomy data</th>
                                         <th className="grey frontend" colSpan={1}>Actions</th>
                                     </tr>
                                     <tr>
-                                        <th>Slug</th>
+                                        <th>
+                                            Slug
+                                            &nbsp;
+                                            <Tippy title="Taxonomy slug. The post name/slug. Used for various queries for taxonomy content.">
+                                                <span className="helper">
+                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                </span>
+                                            </Tippy>
+                                        </th>
+                                        <th/>
                                         <th>
                                             Singular
                                             &nbsp;
-                                            <Tippy title="Singular label">
+                                            <Tippy title="Singular label. Used when a singular label is needed">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -153,7 +139,7 @@ const AssocTaxonomyToCustomPostType = () => {
                                         <th>
                                             Plural
                                             &nbsp;
-                                            <Tippy title="Plural label">
+                                            <Tippy title="Plural label. Used for the taxonomy admin menu item">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
@@ -162,19 +148,28 @@ const AssocTaxonomyToCustomPostType = () => {
                                         <th className="with-border">
                                             Post count
                                             &nbsp;
-                                            <Tippy title="Published posts count">
+                                            <Tippy title="Published posts count associated with the taxonomy">
                                                 <span className="helper">
                                                     <Icon icon="bx:bx-help-circle" width="24px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
-                                        <th>Associate</th>
+                                        <th>
+                                            Associate
+                                            &nbsp;
+                                            <Tippy title="Associate custom post types here">
+                                                <span className="helper">
+                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                </span>
+                                            </Tippy>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {fetchedTaxonomies.map((element) =>
                                         <AssocTaxonomyElement
-                                            onChange={handleChange}
+                                            //onChange={handleChange}
+                                            postType={postType}
                                             id={element.id}
                                             key={element.id}
                                             element={element}
@@ -182,18 +177,6 @@ const AssocTaxonomyToCustomPostType = () => {
                                         />)}
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <div className="acpt-card__footer" style={{border: "none"}}>
-                        <div className="acpt-card__inner">
-                            <button
-                                onClick={e => handleSubmit()}
-                                className="acpt-btn acpt-btn-primary"
-                            >
-                                <Icon icon="bx:bx-repost" width="24px"/>
-                                &nbsp;
-                                Associate
-                            </button>
                         </div>
                     </div>
                 </div>

@@ -29,7 +29,7 @@ const AdditionalLabelsStep = () => {
     useEffect(() => {
         if (stepsData[1]) {
             setValue('menu_name', fetched.length > 0 ? labels.menu_name : stepsData[1].singular_label);
-            setValue('all_items', fetched.length > 0 ? labels.all_items : `${translate("general.labels.all_items", {r: stepsData[1].singular_label})}`);
+            setValue('all_items', fetched.length > 0 ? labels.all_items : `${translate("general.labels.all_items", {r: stepsData[1].plural_label})}`);
             setValue('add_new', fetched.length > 0 ? labels.add_new : `${translate("general.labels.add")} ${stepsData[1].singular_label}`);
             setValue('add_new_item', fetched.length > 0 ? labels.add_new_item : `${translate("general.labels.add")} ${stepsData[1].singular_label}`);
             setValue('edit_item', fetched.length > 0 ? labels.edit_item : `${translate("general.labels.edit")} ${stepsData[1].singular_label}`);
@@ -47,7 +47,7 @@ const AdditionalLabelsStep = () => {
             setValue('archives', fetched.length > 0 ? labels.archives : translate("general.labels.archives"));
             setValue('insert_into_item', fetched.length > 0 ? labels.insert_into_item : translate("general.labels.insert_into_item"));
             setValue('uploaded_to_this_item', fetched.length > 0 ? labels.uploaded_to_this_item : translate("general.labels.uploaded_to_this_item"));
-            setValue('filter_items_list', fetched.length > 0 ? labels.filter_items_list : translate("general.labels.filter_items_list"));
+            setValue('filter_items_list', fetched.length > 0 ? labels.filter_items_list : translate("general.labels.filter_items_list", {r: stepsData[1].plural_label}));
             setValue('items_list_navigation', fetched.length > 0 ? labels.items_list_navigation : translate("general.labels.items_list_navigation", {r: stepsData[1].plural_label}));
             setValue('items_list', fetched.length > 0 ? labels.items_list : translate("general.labels.items_list", {r: stepsData[1].plural_label}));
             setValue('filter_by_date', fetched.length > 0 ? labels.filter_by_date : translate("general.labels.filter_by_date"));

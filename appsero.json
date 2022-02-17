@@ -1,5 +1,7 @@
 {
   "exclude": [
+    ".phpunit.result.cache",
+    "roadmap.md",
     "README.md",
     "appsero.json",
     "composer.json",
