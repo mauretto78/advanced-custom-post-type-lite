@@ -88,6 +88,7 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 = 1.0.5 (2022-02-19) =
 
+* Fixed bug PHP for <7.2 compatibily
 * Taxonomies synchronization
 * Improved CPT synchronization
 * UI/UX fixes and improvements
