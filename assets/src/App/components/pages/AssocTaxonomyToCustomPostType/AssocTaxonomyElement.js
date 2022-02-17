@@ -17,6 +17,22 @@ const AssocTaxonomyElement = ({id, element, postType, defaultChecked}) => {
                 <strong>{element.slug}</strong>
             </td>
             <td>
+                {element.isNative
+                    ?
+                    <span className={`acpt-badge acpt-badge-native ml-1`}>
+                            <span className="label">
+                                Native
+                            </span>
+                        </span>
+                    :
+                    <span className={`acpt-badge acpt-badge-${element.isWooCommerce === true ? 'woocommerce' : 'custom' } ml-1`}>
+                        <span className="label">
+                            {element.isWooCommerce === true ? 'WooCommerce' : 'Custom' }
+                        </span>
+                    </span>
+                }
+            </td>
+            <td>
                 {element.singular}
             </td>
             <td>

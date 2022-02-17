@@ -60,7 +60,7 @@ const TaxonomyListElement = ({id, element}) => {
                 {isset(element, "customPostTypes") &&  element.customPostTypes.length > 0 && element.customPostTypes.map((customPostType) =>
                     <Link
                         to={`/assoc-taxonomy-post/${customPostType.name}`}
-                        className="acpt-btn acpt-btn-sm acpt-btn-info-o"
+                        className="acpt-btn acpt-btn-sm acpt-btn-info-o mr-1"
                     >
                         <Icon icon="bx:bx-purchase-tag" width="24px"/>
                         {customPostType.name}

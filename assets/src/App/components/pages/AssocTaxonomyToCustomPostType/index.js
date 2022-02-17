@@ -113,7 +113,7 @@ const AssocTaxonomyToCustomPostType = () => {
                             <table className="acpt-table">
                                 <thead>
                                     <tr>
-                                        <th className="grey backend with-border" colSpan={4}>Taxonomy data</th>
+                                        <th className="grey backend with-border" colSpan={5}>Taxonomy data</th>
                                         <th className="grey frontend" colSpan={1}>Actions</th>
                                     </tr>
                                     <tr>
@@ -126,6 +126,7 @@ const AssocTaxonomyToCustomPostType = () => {
                                                 </span>
                                             </Tippy>
                                         </th>
+                                        <th/>
                                         <th>
                                             Singular
                                             &nbsp;
