@@ -90,7 +90,7 @@ const TaxonomyList = () => {
                             <table className="acpt-table">
                                 <thead>
                                     <tr>
-                                        <th className="grey backend with-border" colSpan={4}>Registered taxonomies</th>
+                                        <th className="grey backend with-border" colSpan={5}>Registered taxonomies</th>
                                         <th className="grey frontend" colSpan={1}>Associated</th>
                                     </tr>
                                     <tr>
@@ -103,6 +103,7 @@ const TaxonomyList = () => {
                                                 </span>
                                             </Tippy>
                                         </th>
+                                        <th/>
                                         <th>
                                             Singular
                                             &nbsp;

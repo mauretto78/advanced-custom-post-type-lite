@@ -1,5 +1,6 @@
 {
   "exclude": [
+    "roadmap.md",
     "README.md",
     "appsero.json",
     "composer.json",

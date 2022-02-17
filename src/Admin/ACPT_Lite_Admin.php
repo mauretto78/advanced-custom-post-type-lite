@@ -242,7 +242,7 @@ class ACPT_Lite_Admin
                 $page['template'],
                 (isset($page['iconUrl'])) ? $page['iconUrl'] : null,
                 (isset($page['position'])) ? $page['position'] : null,
-                (isset($page['parentSlug'])) ? $page['parentSlug'] : null,
+                (isset($page['parentSlug'])) ? $page['parentSlug'] : null
             );
         }
     }

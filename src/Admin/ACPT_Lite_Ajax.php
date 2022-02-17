@@ -1101,6 +1101,7 @@ class ACPT_Lite_Ajax
                 'singular' => $data[1]["singular_label"],
                 'plural' => $data[1]["plural_label"],
                 'labels' => $data[2],
+                'native' => false,
                 'settings' => $settings
             ]);
 

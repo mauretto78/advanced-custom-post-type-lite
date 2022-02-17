@@ -103,7 +103,7 @@ class ACPT_Lite_DB
     {
         self::createCustomPostTypes();
         self::createNativePostTypes();
-        // sync taxonomies
+        self::createNativeTaxonomies();
     }
 
     /**
@@ -188,6 +188,46 @@ class ACPT_Lite_DB
                 }
             }
         }
+    }
+
+    /**
+     * Save native taxonomies
+     *
+     * @throws \Exception
+     */
+    private static function createNativeTaxonomies()
+    {
+        $idCat = Uuid::v4();
+        $categoryModel =  TaxonomyModel::hydrateFromArray([
+                'id' => $idCat,
+                'slug' => 'category',
+                'singular' => 'Category',
+                'plural' => 'Categories',
+                'native' => true,
+                'labels' => [],
+                'settings' => [],
+        ]);
+
+        $idTag = Uuid::v4();
+        $tagModel =  TaxonomyModel::hydrateFromArray([
+                'id' => $idTag,
+                'slug' => 'post_tag',
+                'singular' => 'Tag',
+                'plural' => 'Tags',
+                'native' => true,
+                'labels' => [],
+                'settings' => [],
+        ]);
+
+        ACPT_Lite_DB::saveTaxonomy($categoryModel);
+        ACPT_Lite_DB::saveTaxonomy($tagModel);
+
+        $post = ACPT_Lite_DB::get([
+            'postType' => 'post'
+        ], true)[0];
+
+        ACPT_Lite_DB::assocPostToTaxonomy($post->getId(), $idCat);
+        ACPT_Lite_DB::assocPostToTaxonomy($post->getId(), $idTag);
     }
 
     /**
@@ -1142,6 +1182,7 @@ class ACPT_Lite_DB
                         t.singular,
                         t.plural,
                         t.labels,
+                        t.native,
                         t.settings
                     FROM `".self::TABLE_TAXONOMY."` t
                     JOIN `".self::TABLE_TAXONOMY_PIVOT."` p ON p.taxonomy_id = t.id
@@ -1154,6 +1195,7 @@ class ACPT_Lite_DB
                         'slug' => $taxonomy->slug,
                         'singular' => $taxonomy->singular,
                         'plural' => $taxonomy->plural,
+                        'native' => $taxonomy->native == '1' ? true : false,
                         'labels' => json_decode($taxonomy->labels, true),
                         'settings' => json_decode($taxonomy->settings, true),
                     ]);
@@ -1444,6 +1486,7 @@ class ACPT_Lite_DB
                 t.singular,
                 t.plural,
                 t.labels,
+                t.native,
                 t.settings
             FROM `".self::TABLE_TAXONOMY."` t
             WHERE 1=1
@@ -1468,13 +1511,13 @@ class ACPT_Lite_DB
         $baseQuery .= ';';
         $taxonomies = self::getResults($baseQuery, $args);
 
-
         foreach ($taxonomies as $taxonomy){
             $taxonomyModel = TaxonomyModel::hydrateFromArray([
                 'id' => $taxonomy->id,
                 'slug' => $taxonomy->slug,
                 'singular' => $taxonomy->singular,
                 'plural' => $taxonomy->plural,
+                'native' => $taxonomy->native == '1' ? true : false,
                 'labels' => json_decode($taxonomy->labels, true),
                 'settings' => json_decode($taxonomy->settings, true),
             ]);
@@ -2386,9 +2429,11 @@ class ACPT_Lite_DB
             `slug`,
             `singular`,
             `plural`,
+            `native`,
             `labels`,
             `settings`
             ) VALUES (
+                %s,
                 %s,
                 %s,
                 %s,
@@ -2399,6 +2444,7 @@ class ACPT_Lite_DB
                 `slug` = %s,
                 `singular` = %s,
                 `plural` = %s,
+                `native` = %s,
                 `labels` = %s,
                 `settings` = %s
         ;";
@@ -2408,11 +2454,13 @@ class ACPT_Lite_DB
             $taxonomyModel->getSlug(),
             $taxonomyModel->getSingular(),
             $taxonomyModel->getPlural(),
+            $taxonomyModel->isNative(),
             json_encode($taxonomyModel->getLabels()),
             json_encode($taxonomyModel->getSettings()),
             $taxonomyModel->getSlug(),
             $taxonomyModel->getSingular(),
             $taxonomyModel->getPlural(),
+            $taxonomyModel->isNative(),
             json_encode($taxonomyModel->getLabels()),
             json_encode($taxonomyModel->getSettings())
         ]);

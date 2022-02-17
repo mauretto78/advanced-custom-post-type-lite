@@ -469,6 +469,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                 'labels' => $taxonomy->getLabels(),
                 'settings' => $taxonomy->getSettings(),
                 'postCount' => $taxonomy->getPostCount(),
+                'isNative' => $taxonomy->isNative(),
             ];
         }
 

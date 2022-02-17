@@ -10,20 +10,38 @@ const TaxonomyListElement = ({id, element}) => {
             <td className="backend">
                 <div className="m-0 mb-1">
                     <strong>{element.slug}</strong>
-                    <div>
-                        <a href={`#/view_taxonomy/${element.slug}`}>
-                            View
-                        </a>
-                        &nbsp;
-                        <a href={`#/edit_taxonomy/${element.slug}`}>
-                            Edit
-                        </a>
-                        &nbsp;
-                        <a href={`#/delete_taxonomy/${element.slug}`}>
-                            Delete
-                        </a>
-                    </div>
+                    {!element.isNative && (
+                        <div>
+                            <a href={`#/view_taxonomy/${element.slug}`}>
+                                View
+                            </a>
+                            &nbsp;
+                            <a href={`#/edit_taxonomy/${element.slug}`}>
+                                Edit
+                            </a>
+                            &nbsp;
+                            <a href={`#/delete_taxonomy/${element.slug}`}>
+                                Delete
+                            </a>
+                        </div>
+                    )}
                 </div>
+            </td>
+            <td>
+                {element.isNative
+                    ?
+                    <span className={`acpt-badge acpt-badge-native ml-1`}>
+                            <span className="label">
+                                Native
+                            </span>
+                        </span>
+                    :
+                    <span className={`acpt-badge acpt-badge-${element.isWooCommerce === true ? 'woocommerce' : 'custom' } ml-1`}>
+                            <span className="label">
+                                {element.isWooCommerce === true ? 'WooCommerce' : 'Custom' }
+                            </span>
+                        </span>
+                }
             </td>
             <td>
                 {element.singular}
