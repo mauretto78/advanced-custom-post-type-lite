@@ -11,7 +11,7 @@ const TaxonomyListElement = ({id, element}) => {
                 <div className="m-0 mb-1">
                     <strong>{element.slug}</strong>
                     {!element.isNative && (
-                        <div>
+                        <div className="element-buttons">
                             <a href={`#/view_taxonomy/${element.slug}`}>
                                 View
                             </a>

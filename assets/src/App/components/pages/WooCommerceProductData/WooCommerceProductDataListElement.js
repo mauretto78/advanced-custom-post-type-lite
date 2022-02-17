@@ -14,7 +14,7 @@ const WooCommerceProductDataListElement = ({id, element}) => {
             <tr>
                 <td className="backend">
                     <strong>{element.name}</strong>
-                    <div>
+                    <div className="element-buttons">
                         <a href={`#/product-data/product/view/${id}`}>
                             View
                         </a>

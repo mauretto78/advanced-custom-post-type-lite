@@ -51,7 +51,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                     <div className="m-0 mb-1">
                         <strong>{element.name}</strong>
                         {!element.isNative &&
-                            <div>
+                            <div className="element-buttons">
                                 <a href={`#/view/${element.name}`}>
                                     View
                                 </a>
