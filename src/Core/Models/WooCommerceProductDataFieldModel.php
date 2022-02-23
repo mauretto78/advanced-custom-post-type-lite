@@ -2,6 +2,8 @@
 
 namespace ACPT_Lite\Core\Models;
 
+use ACPT_Lite\Core\Helper\Strings;
+
 /**
  * WooCommerceProductDataFieldModel
  *
@@ -176,6 +178,22 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
     }
 
     /**
+     * @return string
+     */
+    public function getDBName()
+    {
+        return '_' . Strings::toDBFormat($this->getProductData()->getName()) . '_' . Strings::toDBFormat($this->name);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUiName()
+    {
+        return Strings::toHumanReadableFormat($this->getProductData()->getName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
+    }
+
+    /**
      * @inheritDoc
      */
     public function jsonSerialize()
@@ -183,6 +201,8 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
         return [
             'id' => $this->id,
             'productData' => $this->getProductData()->getId(),
+            'db_name' => $this->getDBName(),
+            'ui_name' => $this->getUiName(),
             'name' => $this->name,
             'type' => $this->type,
             'defaultValue' => $this->defaultValue,

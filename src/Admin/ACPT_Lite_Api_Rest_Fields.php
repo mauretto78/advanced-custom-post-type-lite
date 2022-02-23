@@ -2,9 +2,6 @@
 
 namespace ACPT_Lite\Admin;
 
-use ACPT_Lite\Core\API\V1\Controllers\CustomPostTypeController;
-use ACPT_Lite\Core\API\V1\Controllers\MetaBoxController;
-use ACPT_Lite\Core\API\V1\Controllers\TaxonomyController;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class ACPT_Lite_Api_Rest_Fields
@@ -55,9 +52,14 @@ class ACPT_Lite_Api_Rest_Fields
      */
     public function getCallback($object)
     {
-        $boxes = [];
+        $pid = $object['id'];
+        $postType = $object['type'];
 
-        $metaBoxes = ACPT_Lite_DB::getMeta($object['type']);
+        $meta = [
+            'meta_boxes' => [],
+        ];
+
+        $metaBoxes = ACPT_Lite_DB::getMeta($postType);
 
         foreach ($metaBoxes as $metaBox){
 
@@ -78,20 +80,58 @@ class ACPT_Lite_Api_Rest_Fields
                     "name" => $field->getName(),
                     "type" => $field->getType(),
                     "options" => $options,
-                    "value" => get_post_meta($object['id'], $field->getDbName(), true),
+                    "value" => get_post_meta($pid, $field->getDbName(), true),
                     "default" => $field->getDefaultValue(),
                     "required" => $field->isRequired() === '1',
                     "showInAdmin" => $field->isShowInArchive() === '1',
                 ];
             }
 
-            $boxes[] = [
+            $meta['meta_boxes'][] = [
                 "meta_box" => $metaBox->getName(),
                 "meta_fields" => $metaFields,
             ];
         }
 
-        return $boxes;
+        if( $postType === 'product' and class_exists( 'woocommerce' )  ){
+            $meta['wc_product_data'] = [];
+            $productData = ACPT_Lite_DB::getWooCommerceProductData();
+
+            foreach ($productData as $productDatum) {
+
+                $productDataFields = [];
+
+                foreach ($productDatum->getFields() as $field){
+
+                    $options = [];
+
+                    foreach ($field->getOptions() as $option){
+                        $options[] = [
+                                'label' => $option->getLabel(),
+                                'value' => $option->getValue(),
+                        ];
+                    }
+
+                    $productDataFields[] = [
+                        'name' => $field->getName(),
+                        'type' => $field->getType(),
+                        "options" => $options,
+                        'value' => get_post_meta($pid, $field->getDbName(), true),
+                        'default' => $field->getDefaultValue(),
+                        'required' => $field->isRequired() === '1',
+                    ];
+                }
+
+                $meta['wc_product_data'][] = [
+                    'name' => $productDatum->getName(),
+                    'icon' => $productDatum->getIcon(),
+                    'visibility' => $productDatum->getVisibility(),
+                    'fields' => $productDataFields,
+                ];
+            }
+        }
+
+        return $meta;
     }
 
     /**
