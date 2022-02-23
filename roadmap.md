@@ -1,15 +1,12 @@
 **ROADMAP**
 
-***Lite v 1.0.5***
-* change Wordpress directory header
-
 ***PRO v 1.0.3***
 
-* add time custom field
+* <del>add time custom field</del>
 
 ***Lite v 1.0.5 and PRO v 1.0.3***
 
-* CHECK BUG PHP < 7.3
+* <del>CHECK BUG PHP < 7.3</del>
 * <del>BUG When I am on STEP 3 (CPT) and quit, then register new Taxomony I am in step 3</del>
 * <del>CTP dashboard UI</del> 
 * <del>Taxonomies dashboard UI</del>
@@ -31,26 +28,30 @@
 * <del>records per page in settings page</del>
 * <del>sync with already registering taxonomies (distinguish between NATIVE and CUSTOM)</del>
 
+***PRO v 1.0.4***
+
+* WPGraphQL integration https://www.wpgraphql.com/  https://www.youtube.com/watch?v=uFwqLBYkGE4&ab_channel=codeaxen
+
 ***Lite v 1.0.6***
 ***PRO v 1.0.4***
 
-* associate already registered taxonomies when registering a CPT 
-* API support (Rest API integration + WPGraphQL integration) see WPGraphQL plugin integration
-* `has-archive` not boolean but with text (migration needed)
-* edit the selected step from the view
-* associate an already register taxonomy at the end of step 3
+* Rest API integration https://www.youtube.com/watch?v=uFwqLBYkGE4&ab_channel=codeaxen
+* `has-archive` in CPT settings not boolean but with text (migration needed?)
+* edit the selected CTP step from the view
+* edit the selected Taxonomy step from the view
 
 ***Lite v 1.0.7***
 ***PRO v 1.0.5***
 
-* Create a Beaver Module
+* Create a Beaver Module (https://docs.wpbeaverbuilder.com/beaver-builder/developer/custom-modules/)
+* Create a Visual Composer element https://codexcoach.com/how-to-create-custom-elements-using-visual-composer-api/
 
 ***PRO v 1.0.6***
 
 * Improve CPT relations UI
 
-***Lite v 1.1.0
-PRO v 1.1.0***
+***Lite v 1.1.0***
+***PRO v 1.1.0***
 
 * Form builder
     - for Lite: only contact forms
