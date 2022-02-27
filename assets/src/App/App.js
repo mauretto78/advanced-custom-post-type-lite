@@ -74,13 +74,13 @@ const App = () => {
                         <Route exact path='/meta/:postType' name="meta" component={CustomPostTypeMeta} />
                         <Route exact path='/register' name="register" component={SaveCustomPostType} />
                         <Route exact path='/delete/:postType' name="delete" component={DeleteCustomPostType} />
-                        <Route exact path='/edit/:postType' name="edit" component={SaveCustomPostType} />
+                        <Route exact path='/edit/:postType/:step?' name="edit" component={SaveCustomPostType} />
                         <Route exact path='/view/:postType' name="view" component={ViewCustomPostType} />
                         <Route exact path='/settings' name="settings" component={Settings} />
                         <Route exact path='/taxonomies/:page?' name="taxonomies" component={TaxonomyList} />
                         <Route exact path='/register_taxonomy' name="register_taxonomy" component={SaveTaxonomy} />
                         <Route exact path='/delete_taxonomy/:taxonomy' name="delete_taxonomy" component={DeleteTaxonomy} />
-                        <Route exact path='/edit_taxonomy/:taxonomy' name="edit_taxonomy" component={SaveTaxonomy} />
+                        <Route exact path='/edit_taxonomy/:taxonomy/:step?' name="edit_taxonomy" component={SaveTaxonomy} />
                         <Route exact path='/view_taxonomy/:taxonomy' name="view_taxonomy" component={ViewTaxonomy} />
                         <Route exact path='/:page?' name="list" component={CustomPostTypeList} />
                         <Route exact path='/product-data/product' name="woocommerce_product_data" component={WooCommerceProductDataList} />

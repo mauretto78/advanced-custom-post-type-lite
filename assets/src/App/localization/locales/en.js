@@ -23,6 +23,9 @@ export const translations = {
     "taxonomy_edit": {
         "title": "Edit a Taxonomy",
     },
+    "taxonomy_view": {
+        "title": "Taxonomy settings",
+    },
     "general": {
         "labels": {
             "all_items": "All {{r}}",

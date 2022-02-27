@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Modal from "../../reusable/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {filterById, isset} from "../../../utils/objects";
@@ -14,6 +14,21 @@ const WooCommerceProductDataOption  = ({id, position, fieldId, dragHandle}) => {
     const optionValues = (isset(field, "options")) ? filterById(field.options, id): [];
     const fetchedLabel = (isset(optionValues, "label")) ? optionValues.label : 'label';
     const fetchedValue = (isset(optionValues, "value")) ? optionValues.value : 'value';
+
+    const labelRef = useRef();
+    const valueRef = useRef();
+
+    const blackLabel = () => {
+        if (isset(optionValues, "label")) {
+            labelRef.current.value = '';
+        }
+    };
+
+    const blackValue = () => {
+        if (isset(optionValues, "value")) {
+            valueRef.current.value = '';
+        }
+    };
 
     const handleChangeOptionLabel = (l) => {
         dispatch(updateWooCommerceProductDataOptionLabel(id, field.productData, fieldId, l));
@@ -59,6 +74,8 @@ const WooCommerceProductDataOption  = ({id, position, fieldId, dragHandle}) => {
                     {dragHandle}
                     <div className="acpt-col acpt-col-sm">
                         <input
+                            ref={labelRef}
+                            onClick={e => blackLabel()}
                             onChange={e => handleChangeOptionLabel(e.target.value)}
                             defaultValue={fetchedLabel}
                             className={`acpt-form-control ${(fetchedLabel === '' || fetchedLabel && fetchedLabel.length > 255) ? ' has-errors' : ''}`}
@@ -69,6 +86,8 @@ const WooCommerceProductDataOption  = ({id, position, fieldId, dragHandle}) => {
                     </div>
                     <div className="acpt-col acpt-col-sm">
                         <input
+                            ref={valueRef}
+                            onClick={e => blackValue()}
                             onChange={e => handleChangeOptionValue(e.target.value)}
                             defaultValue={fetchedValue}
                             className={`acpt-form-control ${(fetchedValue === '' || fetchedValue && fetchedValue.length > 255) ? ' has-errors' : ''}`}

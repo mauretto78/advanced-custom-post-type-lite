@@ -605,6 +605,28 @@ class ACPT_Lite_DB
     }
 
     /**
+     * Check if a taxonomy exists
+     *
+     * @since    1.0.6
+     * @param $slug
+     *
+     * @return bool
+     */
+    public static function existsTaxonomy($slug)
+    {
+        $baseQuery = "
+            SELECT 
+                id
+            FROM `".self::TABLE_TAXONOMY."`
+            WHERE slug = %s
+            ";
+
+        $posts = self::getResults($baseQuery, [$slug]);
+
+        return count($posts) === 1;
+    }
+
+    /**
      * @param $postType
      * @param $templateType
      *

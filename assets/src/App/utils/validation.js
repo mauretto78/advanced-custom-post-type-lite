@@ -6,6 +6,96 @@
  * @return {boolean}
  */
 import {COLOR, CURRENCY, DATE, EMAIL, LENGTH, NUMBER, PHONE, POST, SELECT, SELECT_MULTI, TOGGLE, WEIGHT} from "../constants/fields";
+import {wpAjaxRequest} from "./ajax";
+
+/**
+ * Keys are used as internal identifiers. Lowercase alphanumeric characters, dashes, and underscores are allowed.
+ * https://developer.wordpress.org/reference/functions/sanitize_key/
+ *
+ * @param post_name
+ * @returns {boolean}
+ */
+export const isPostTypeNameValid = (post_name) => {
+
+    const size = post_name.length;
+
+    if (size > 20) {
+        return 'Max post type name lenght is 20';
+    }
+
+    const matches = post_name.match(/[a-z0-9_-]/g);
+
+    if (matches === null || size !== matches.length) {
+        return 'Allowed characters: [Lowercase alphanumeric characters, dashes, and underscores]';
+    }
+
+    return true;
+};
+
+export const asyncIsPostTypeNameValid = async (post_name) => {
+
+    const size = post_name.length;
+
+    if (size > 20) {
+        return 'Max post type name lenght is 20';
+    }
+
+    const matches = post_name.match(/[a-z0-9_-]/g);
+
+    if (matches === null || size !== matches.length) {
+        return 'Allowed characters: [Lowercase alphanumeric characters, dashes, and underscores]';
+    }
+
+    // check if already exists
+    const res = await wpAjaxRequest("checkPostTypeNameAction", {postType: post_name});
+
+    if(res.exists === true){
+        return post_name + ' post type already exists.';
+    }
+
+    return true;
+};
+
+export const isTaxonomySlugValid = async (slug) => {
+
+    const size = slug.length;
+
+    if (size > 32) {
+        return 'Max post type name lenght is 32';
+    }
+
+    const matches = slug.match(/[a-z0-9_-]/g);
+
+    if (matches === null || size !== matches.length) {
+        return 'Allowed characters: [Lowercase alphanumeric characters, dashes, and underscores]';
+    }
+
+    return true;
+};
+
+export const asyncIsTaxonomySlugValid = async (slug) => {
+
+    const size = slug.length;
+
+    if (size > 32) {
+        return 'Max post type name lenght is 32';
+    }
+
+    const matches = slug.match(/[a-z0-9_-]/g);
+
+    if (matches === null || size !== matches.length) {
+        return 'Allowed characters: [Lowercase alphanumeric characters, dashes, and underscores]';
+    }
+
+    // check if already exists
+    const res = await wpAjaxRequest("checkTaxonomySlugAction", {slug: slug});
+
+    if (res.exists === true) {
+        return slug + ' taxonomy already exists.';
+    }
+
+    return true;
+};
 
 export const isAValidValueForThisType = (type, value, options) => {
 

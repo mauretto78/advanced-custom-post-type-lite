@@ -5,8 +5,9 @@ import {stepForward} from "../../../redux/actions/stepsActions";
 import InputText from "../../reusable/Form/InputText";
 import StepsButtons from "../../reusable/Steps/StepsButtons";
 import {sluggifyString} from "../../../utils/strings";
+import {asyncIsTaxonomySlugValid, isTaxonomySlugValid} from "../../../utils/validation";
 
-const BasicStep = () => {
+const BasicStep = ({edit}) => {
 
     // manage global state
     const {fetched} = useSelector(state => state.fetchTaxonomiesReducer);
@@ -24,23 +25,6 @@ const BasicStep = () => {
 
     const handleSlugChange = (slug) => {
         setValue('slug', sluggifyString(slug, 32));
-    };
-
-    const isSlugValid = (slug) => {
-
-        const size = slug.length;
-
-        if(size > 32){
-            return 'Max post type name lenght is 32';
-        }
-
-        const matches = slug.match(/[a-z0-9_-]/g);
-
-        if(matches === null || size !== matches.length){
-            return 'Allowed characters: [Lowercase alphanumeric characters, dashes, and underscores]';
-        }
-
-        return true;
     };
 
     const onSubmit = (data) => {
@@ -62,7 +46,7 @@ const BasicStep = () => {
                     isRequired={true}
                     onChangeCapture={ e => handleSlugChange(e.currentTarget.value) }
                     validate={{
-                        validate: isSlugValid,
+                        validate: edit ? isTaxonomySlugValid : asyncIsTaxonomySlugValid,
                         required: "This field is mandatory"
                     }} />
                 <InputText

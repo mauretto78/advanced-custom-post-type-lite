@@ -79,7 +79,7 @@ const SettingsElement = () => {
             </table>
             <Link
                 className="acpt-btn acpt-btn-primary"
-                to={`/edit/${postType}`}>
+                to={`/edit/${postType}/3`}>
                 <Icon icon="bx:bx-edit" width="24px" />
                 Edit
             </Link>

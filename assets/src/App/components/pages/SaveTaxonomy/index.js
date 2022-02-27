@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {changeCurrentAdminMenuLink, metaTitle} from "../../../utils/misc";
 import Breadcrumbs from "../../reusable/Breadcrumbs";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,17 +15,33 @@ import OtherSettingsStep from "./_Settings";
 import {Icon} from "@iconify/react";
 import {translate} from "../../../localization";
 import Copyright from "../../reusable/Copyright";
-import {stepReset} from "../../../redux/actions/stepsActions";
+import {startFromStep, stepReset} from "../../../redux/actions/stepsActions";
+import {hydratePostTypeFormFromStep, hydrateTaxonomyFormFromStep} from "../../../utils/forms";
 
 const SaveTaxonomy = () => {
 
     // manage global state
-    const {loading} = useSelector(state => state.fetchTaxonomiesReducer);
+    const {fetched, loading} = useSelector(state => state.fetchTaxonomiesReducer);
     const dispatch = useDispatch();
 
     // manage local state
     const {taxonomy} = useParams();
+    const {step} = useParams();
     const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();
+    const [edit, isEdit] = useState(false);
+    const didMountRef = useRef(false);
+    const [fetchedSuccess, setFetchedSuccess] = useState(null);
+
+    // handle fetch outcome
+    useEffect(() => {
+        if (didMountRef.current){
+            if(!loading){
+                setFetchedSuccess(true);
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [loading]);
 
     useEffect(() => {
         if(taxonomy){
@@ -33,7 +49,18 @@ const SaveTaxonomy = () => {
             dispatch(fetchTaxonomies({
                 taxonomy:taxonomy
             }));
-            dispatch(stepReset()); //@TODO dynamic step
+
+            isEdit(true);
+
+            if(step){
+                if(fetchedSuccess){
+                    const stepInt = parseInt(step);
+                    dispatch(startFromStep(stepInt, hydrateTaxonomyFormFromStep(stepInt,fetched[0])));
+                }
+            } else {
+                dispatch(stepReset());
+            }
+
         } else {
             metaTitle(translate("taxonomy_create.title"));
             changeCurrentAdminMenuLink('#/register_taxonomy');
@@ -41,19 +68,19 @@ const SaveTaxonomy = () => {
             dispatch(stepReset());
         }
         setDirty();
-    }, []);
+    }, [fetchedSuccess]);
 
     const setPristineHandler = () => {
         setPristine();
     };
 
     const steps = [
-        <BasicStep/>,
+        <BasicStep edit={edit} />,
         <AdditionalLabelsStep/>,
         <OtherSettingsStep setPristineHandler={setPristineHandler}/>,
     ];
 
-    if(loading){
+    if(!fetchedSuccess){
         return <Spinner/>;
     }
 

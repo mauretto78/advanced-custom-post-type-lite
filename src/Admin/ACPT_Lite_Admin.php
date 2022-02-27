@@ -112,6 +112,8 @@ class ACPT_Lite_Admin
     {
         $this->ajaxActions = [
             'wp_ajax_assocTaxonomyToPostTypeAction' => 'assocTaxonomyToPostTypeAction',
+            'wp_ajax_checkPostTypeNameAction' => 'checkPostTypeNameAction',
+            'wp_ajax_checkTaxonomySlugAction' => 'checkTaxonomySlugAction',
             'wp_ajax_deleteCustomPostTypeAction' => 'deleteCustomPostTypeAction',
             'wp_ajax_deleteCustomPostTypeMetaAction' => 'deleteCustomPostTypeMetaAction',
             'wp_ajax_deletePostTypeTemplateAction' => 'deletePostTypeTemplateAction',
@@ -631,7 +633,7 @@ class ACPT_Lite_Admin
         $this->registerHooks();
 
         // API REST
-        $this->registerRestRoutes();
+       // $this->registerRestRoutes(); FOR PRO v.1.0.4
         $this->registerRestFields();
     }
 }
