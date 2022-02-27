@@ -2,7 +2,9 @@
 
 namespace ACPT_Lite\Admin;
 
+use ACPT_Lite\Core\Models\MetaBoxFieldModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\Assert;
 
 class ACPT_Lite_Api_Rest_Fields
 {
@@ -140,6 +142,7 @@ class ACPT_Lite_Api_Rest_Fields
      */
     public function updateCallback($value, $object)
     {
+        var_dump("updateCallback");
         var_dump($value);
         die();
     }
@@ -151,16 +154,163 @@ class ACPT_Lite_Api_Rest_Fields
      */
     public function sanitizeCallback($value)
     {
-        return $value;
+        var_dump("sanitizeCallback");
+        var_dump($value);
+        die();
     }
 
     /**
-     * @param $value
+     * @param $meta
      *
      * @return bool
      */
-    public function validateCallback($value)
+    public function validateCallback($meta)
     {
+        if(!is_array($meta)){
+            return false;
+        }
+
+        if(empty($meta)){
+            return false;
+        }
+
+        // meta_boxes
+        if(!isset($meta['meta_boxes'])){
+            return false;
+        }
+
+        try {
+            Assert::isArray($meta['meta_boxes']);
+        } catch (\Exception $exception){
+            return false;
+        }
+
+        foreach ($meta['meta_boxes'] as $box){
+            if(!$this->validateMetaBox($box)){
+                return false;
+            }
+        }
+
+        // wc_product_data
+        $requestUri = explode("/", $_SERVER['REQUEST_URI']);
+
+        if( $requestUri[4] === 'product' and class_exists( 'woocommerce' )  ){
+            if(!isset($meta['wc_product_data'])){
+                return false;
+            }
+
+            try {
+                Assert::isArray($meta['wc_product_data']);
+            } catch (\Exception $exception){
+                return false;
+            }
+
+            foreach ($meta['wc_product_data'] as $data){
+                if(!$this->validateWcProductData($data)){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $box
+     * @return bool
+     */
+    private function validateMetaBox($box)
+    {
+        if(!isset($box['meta_box']) and !isset($box['meta_fields'])){
+            return false;
+        }
+
+        try {
+            Assert::string($box['meta_box']);
+            Assert::isArray($box['meta_fields']);
+        } catch (\Exception $exception){
+            return false;
+        }
+
+        foreach ($box['meta_fields'] as $field){
+            if(
+                !isset($field['name']) and
+                !isset($field['type']) and
+                !isset($field['options']) and
+                !isset($field['value']) and
+                !isset($field['default']) and
+                !isset($field['required'])
+            ){
+                return false;
+            }
+
+            try {
+                Assert::string($field['name']);
+                Assert::inArray($field['type'], [
+                    MetaBoxFieldModel::DATE_TYPE,
+                    MetaBoxFieldModel::EMAIL_TYPE,
+                    MetaBoxFieldModel::NUMBER_TYPE,
+                    MetaBoxFieldModel::POST_TYPE,
+                    MetaBoxFieldModel::SELECT_TYPE,
+                    MetaBoxFieldModel::TEXT_TYPE
+                ]);
+                Assert::isArray($field['options']);
+                Assert::boolean($field['required']);
+
+                if(!empty($field['value'])){
+                    Assert::string($field['value']);
+                }
+
+                if(!empty($field['default'])){
+                    Assert::string($field['default']);
+                }
+
+            } catch (\Exception $exception){
+                return false;
+            }
+
+            foreach ($box['options'] as $option){
+                if(
+                    !isset($option['label']) and
+                    !isset($option['value'])
+                ){
+                    return false;
+                }
+
+                try {
+                    Assert::string($option['label']);
+                    Assert::string($option['value']);
+                } catch (\Exception $exception){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private function validateWcProductData($data)
+    {
+        if(
+            !isset($data['name']) and
+            !isset($data['icon']) and
+            !isset($data['visibility']) and
+            !isset($data['fields'])
+        ){
+            return false;
+        }
+
+        try {
+            Assert::string($data['name']);
+            Assert::isArray($data['icon']);
+            Assert::isArray($data['visibility']);
+            Assert::isArray($data['fields']);
+        } catch (\Exception $exception){
+            return false;
+        }
+
+
+
         return true;
     }
 }
