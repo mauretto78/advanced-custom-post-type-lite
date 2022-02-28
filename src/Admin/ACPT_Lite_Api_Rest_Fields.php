@@ -2,11 +2,13 @@
 
 namespace ACPT_Lite\Admin;
 
+use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxFieldModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Assert;
+use ACPT_Lite\Utils\Sanitizer;
 
-class ACPT_Lite_Api_Rest_Fields
+class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
 {
     /**
      * Register `acpt` field for every registered Custom Post Type API Rest resource
@@ -137,77 +139,110 @@ class ACPT_Lite_Api_Rest_Fields
     }
 
     /**
-     * @param $value
+     * @param $meta
      * @param $object
-     */
-    public function updateCallback($value, $object)
-    {
-        var_dump("updateCallback");
-        var_dump($value);
-        die();
-    }
-
-    /**
-     * @param $value
      *
-     * @return mixed
+     * @return \WP_Error
+     * @throws \Exception
      */
-    public function sanitizeCallback($value)
+    public function updateCallback($meta, $object)
     {
-        var_dump("sanitizeCallback");
-        var_dump($value);
-        die();
+        $postType = $object->post_type;
+
+        // meta
+        foreach ($meta['meta'] as $item){
+
+            // data
+            $box = $item['box'];
+            $field = $item['field'];
+            $value = $item['value'];
+
+            // check
+            if(null === $singleMeta = ACPT_Lite_DB::getSingleMeta($postType, $box, $field)){
+                return $this->restError("Meta field does not exists");
+            }
+
+            $key = Strings::toDBFormat($box) . '_' . Strings::toDBFormat($field);
+
+            update_post_meta($object->ID, $key.'_type' , $singleMeta->getType() );
+            update_post_meta($object->ID, $key , $value );
+        }
+
+        // wc_product_data
+        if( $postType === 'product' and class_exists( 'woocommerce' )  ){
+
+            $product = wc_get_product( $object->ID );
+
+            foreach ($meta['wc_product_data'] as $item){
+
+                // data
+                $productData = $item['product_data'];
+                $field = $item['field'];
+                $value = $item['value'];
+
+                // check if exists
+                if(ACPT_Lite_DB::getSingleWoocommerceField($productData, $field)){
+                    return $this->restError("Product data does not exists");
+                }
+
+                $sluggedName = strtolower(str_replace(" ", "_", $productData));
+                $fieldSluggedName = $sluggedName . '_' . strtolower(str_replace(" ", "_", $field));
+
+                $product->update_meta_data('_'.$fieldSluggedName, $value );
+            }
+        }
     }
 
     /**
      * @param $meta
      *
-     * @return bool
+     * @return mixed
+     */
+    public function sanitizeCallback($meta)
+    {
+        return Sanitizer::recursiveSanitizeRawData($meta);
+    }
+
+    /**
+     * @param $meta
+     *
+     * @return bool|\WP_Error
      */
     public function validateCallback($meta)
     {
         if(!is_array($meta)){
-            return false;
+            return $this->restError('`meta` key is not an array');
         }
 
-        if(empty($meta)){
-            return false;
+        // meta
+        if(!isset($meta['meta'])){
+            return $this->restError('Missing `meta` key');
         }
 
-        // meta_boxes
-        if(!isset($meta['meta_boxes'])){
-            return false;
-        }
-
-        try {
-            Assert::isArray($meta['meta_boxes']);
-        } catch (\Exception $exception){
-            return false;
-        }
-
-        foreach ($meta['meta_boxes'] as $box){
-            if(!$this->validateMetaBox($box)){
-                return false;
+        foreach ($meta['meta'] as $item){
+            if(null !== $error = $this->validateMetaItem($item)){
+                return $this->restError($error);
             }
         }
 
         // wc_product_data
         $requestUri = explode("/", $_SERVER['REQUEST_URI']);
+        $identifier = $requestUri[4];
 
-        if( $requestUri[4] === 'product' and class_exists( 'woocommerce' )  ){
+        if( $identifier === 'product' and class_exists( 'woocommerce' )  ){
             if(!isset($meta['wc_product_data'])){
-                return false;
+                return $this->restError('Missing `wc_product_data` key');
             }
 
             try {
                 Assert::isArray($meta['wc_product_data']);
             } catch (\Exception $exception){
-                return false;
+                return $this->restError('`wc_product_data` key is not an array');
             }
 
             foreach ($meta['wc_product_data'] as $data){
-                if(!$this->validateWcProductData($data)){
-                    return false;
+                if(null !== $error = $this->validateWcProductData($data)){
+                    return $this->restError($error);
                 }
             }
         }
@@ -216,101 +251,128 @@ class ACPT_Lite_Api_Rest_Fields
     }
 
     /**
-     * @param $box
-     * @return bool
+     * @param $item
+     *
+     * @return string|null
      */
-    private function validateMetaBox($box)
-    {
-        if(!isset($box['meta_box']) and !isset($box['meta_fields'])){
-            return false;
-        }
-
-        try {
-            Assert::string($box['meta_box']);
-            Assert::isArray($box['meta_fields']);
-        } catch (\Exception $exception){
-            return false;
-        }
-
-        foreach ($box['meta_fields'] as $field){
-            if(
-                !isset($field['name']) and
-                !isset($field['type']) and
-                !isset($field['options']) and
-                !isset($field['value']) and
-                !isset($field['default']) and
-                !isset($field['required'])
-            ){
-                return false;
-            }
-
-            try {
-                Assert::string($field['name']);
-                Assert::inArray($field['type'], [
-                    MetaBoxFieldModel::DATE_TYPE,
-                    MetaBoxFieldModel::EMAIL_TYPE,
-                    MetaBoxFieldModel::NUMBER_TYPE,
-                    MetaBoxFieldModel::POST_TYPE,
-                    MetaBoxFieldModel::SELECT_TYPE,
-                    MetaBoxFieldModel::TEXT_TYPE
-                ]);
-                Assert::isArray($field['options']);
-                Assert::boolean($field['required']);
-
-                if(!empty($field['value'])){
-                    Assert::string($field['value']);
-                }
-
-                if(!empty($field['default'])){
-                    Assert::string($field['default']);
-                }
-
-            } catch (\Exception $exception){
-                return false;
-            }
-
-            foreach ($box['options'] as $option){
-                if(
-                    !isset($option['label']) and
-                    !isset($option['value'])
-                ){
-                    return false;
-                }
-
-                try {
-                    Assert::string($option['label']);
-                    Assert::string($option['value']);
-                } catch (\Exception $exception){
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    private function validateWcProductData($data)
+    private function validateMetaItem($item)
     {
         if(
-            !isset($data['name']) and
-            !isset($data['icon']) and
-            !isset($data['visibility']) and
-            !isset($data['fields'])
+            !isset($item['box']) and
+            !isset($item['field']) and
+            !isset($item['value'])
         ){
-            return false;
+            return 'Missing key(s): [`box`,`field`,`value`]';
         }
 
         try {
-            Assert::string($data['name']);
-            Assert::isArray($data['icon']);
-            Assert::isArray($data['visibility']);
-            Assert::isArray($data['fields']);
+            Assert::string($item['box']);
+            Assert::string($item['field']);
+            Assert::string($item['value']);
         } catch (\Exception $exception){
-            return false;
+            return 'Invalid data: [`box`|STRING,`field`|STRING,`value`|STRING]';
         }
 
-
-
-        return true;
+        return null;
     }
+
+    /**
+     * @param $item
+     *
+     * @return bool
+     */
+    private function validateWcProductData($item)
+    {
+        if(
+                !isset($item['product_data']) and
+                !isset($item['field']) and
+                !isset($item['value'])
+        ){
+            return 'Missing key(s): [`product_data`,`field`,`value`]';
+        }
+
+        try {
+            Assert::string($item['product_data']);
+            Assert::string($item['field']);
+            Assert::string($item['value']);
+        } catch (\Exception $exception){
+            return 'Invalid data: [`product_data`|STRING,`field`|STRING,`value`|STRING]';
+        }
+
+        return null;
+    }
+
+//    /**
+//     * @param $box
+//     * @return bool
+//     */
+//    private function validateMetaBox($box)
+//    {
+//        if(!isset($box['meta_box']) and !isset($box['meta_fields'])){
+//            return false;
+//        }
+//
+//        try {
+//            Assert::string($box['meta_box']);
+//            Assert::isArray($box['meta_fields']);
+//        } catch (\Exception $exception){
+//            return false;
+//        }
+//
+//        foreach ($box['meta_fields'] as $field){
+//            if(
+//                    !isset($field['name']) and
+//                    !isset($field['type']) and
+//                    !isset($field['options']) and
+//                    !isset($field['value']) and
+//                    !isset($field['default']) and
+//                    !isset($field['required'])
+//            ){
+//                return false;
+//            }
+//
+//            try {
+//                Assert::string($field['name']);
+//                Assert::inArray($field['type'], [
+//                        MetaBoxFieldModel::DATE_TYPE,
+//                        MetaBoxFieldModel::EMAIL_TYPE,
+//                        MetaBoxFieldModel::NUMBER_TYPE,
+//                        MetaBoxFieldModel::POST_TYPE,
+//                        MetaBoxFieldModel::SELECT_TYPE,
+//                        MetaBoxFieldModel::TEXT_TYPE
+//                ]);
+//                Assert::isArray($field['options']);
+//                Assert::boolean($field['required']);
+//
+//                if(!empty($field['value'])){
+//                    Assert::string($field['value']);
+//                }
+//
+//                if(!empty($field['default'])){
+//                    Assert::string($field['default']);
+//                }
+//
+//            } catch (\Exception $exception){
+//                return false;
+//            }
+//
+//            foreach ($box['options'] as $option){
+//                if(
+//                        !isset($option['label']) and
+//                        !isset($option['value'])
+//                ){
+//                    return false;
+//                }
+//
+//                try {
+//                    Assert::string($option['label']);
+//                    Assert::string($option['value']);
+//                } catch (\Exception $exception){
+//                    return false;
+//                }
+//            }
+//        }
+//
+//        return true;
+//    }
 }

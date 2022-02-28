@@ -232,6 +232,55 @@ class ACPT_Lite_DB
 
     /**
      * @param $postType
+     * @param $box
+     * @param $field
+     *
+     * @return MetaBoxFieldModel|null
+     * @throws \Exception
+     */
+    public static function getSingleMeta($postType, $box, $field)
+    {
+        $metaBoxes = self::getMeta($postType);
+
+        foreach ($metaBoxes as $boxModel){
+            if($boxModel->getName() === $box){
+                foreach ($boxModel->getFields() as $fieldModel){
+                    if($fieldModel->getName() === $field){
+                        return $fieldModel;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $productDataName
+     * @param $field
+     *
+     * @return WooCommerceProductDataFieldModel|mixed|null
+     * @throws \Exception
+     */
+    public static function getSingleWoocommerceField($productDataName, $field)
+    {
+        $productData = self::getWooCommerceProductData();
+
+        foreach ($productData as $item){
+            if($item->getName() === $productDataName){
+                foreach ($item->getFields() as $fieldModel){
+                    if($fieldModel->getName() === $field){
+                        return $fieldModel;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $postType
      *
      * @return bool
      */
