@@ -28,25 +28,25 @@
 * <del>records per page in settings page</del>
 * <del>sync with already registering taxonomies (distinguish between NATIVE and CUSTOM)</del>
 
-***PRO v 1.0.4***
-
-* WPGraphQL integration https://www.wpgraphql.com/  https://www.youtube.com/watch?v=uFwqLBYkGE4&ab_channel=codeaxen
-
 ***Lite v 1.0.6***
 ***PRO v 1.0.4***
 
-* Rest API integration https://www.youtube.com/watch?v=uFwqLBYkGE4&ab_channel=codeaxen
-* `has-archive` in CPT settings not boolean but with text (migration needed?)
-* edit the selected CTP step from the view
-* edit the selected Taxonomy step from the view
+* <del>Rest API integration (Basic)</del>
+* <del>edit the selected CTP step from the view</del>
+* <del>edit the selected Taxonomy step from the view</del>
+
+***PRO v 1.0.5***
+* Custom API
+* WPGraphQL integration https://www.wpgraphql.com/  https://www.youtube.com/watch?v=uFwqLBYkGE4&ab_channel=codeaxen
 
 ***Lite v 1.0.7***
-***PRO v 1.0.5***
+***PRO v 1.0.6***
 
+* `has-archive` in CPT settings not boolean but with text (migration needed?)
 * Create a Beaver Module (https://docs.wpbeaverbuilder.com/beaver-builder/developer/custom-modules/)
 * Create a Visual Composer element https://codexcoach.com/how-to-create-custom-elements-using-visual-composer-api/
 
-***PRO v 1.0.6***
+***PRO v 1.0.7***
 
 * Improve CPT relations UI
 
