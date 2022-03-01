@@ -62,6 +62,51 @@ class ACPT_Lite_Ajax
     }
 
     /**
+     * Check if a Custom post type exists
+     *
+     * @return mixed
+     */
+    public function checkPostTypeNameAction()
+    {
+        if(isset($_POST['data'])) {
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if (!isset($data['postType'])) {
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing postType'
+                ]);
+            }
+
+            $postType = $data['postType'];
+
+            return wp_send_json([
+                'exists' => ACPT_Lite_DB::exists($postType)
+            ]);
+        }
+    }
+
+    public function checkTaxonomySlugAction()
+    {
+        if(isset($_POST['data'])) {
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if (!isset($data['slug'])) {
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing slug'
+                ]);
+            }
+
+            $slug = $data['slug'];
+
+            return wp_send_json([
+                'exists' => ACPT_Lite_DB::existsTaxonomy($slug)
+            ]);
+        }
+    }
+
+    /**
      * Delete custom post type
      *
      * @return mixed

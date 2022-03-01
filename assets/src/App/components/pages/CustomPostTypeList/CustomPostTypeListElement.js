@@ -45,7 +45,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
             </Modal>
             <tr>
                 <td className="backend">
-                    <Icon icon={`dashicons:${element.icon}`} color="#0e3367" width="24px" />
+                    <Icon icon={`dashicons:${element.icon}`} color="#7e9ebd" width="18px" />
                 </td>
                 <td className="backend">
                     <div className="m-0 mb-1">

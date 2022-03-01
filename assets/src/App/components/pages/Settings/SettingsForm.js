@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import InputText from "../../reusable/Form/InputText";
 import {Icon} from "@iconify/react";
 import {filterByLabel, filterByValue} from "../../../utils/objects";
 import {toast} from "react-toastify";

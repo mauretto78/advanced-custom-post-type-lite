@@ -232,6 +232,55 @@ class ACPT_Lite_DB
 
     /**
      * @param $postType
+     * @param $box
+     * @param $field
+     *
+     * @return MetaBoxFieldModel|null
+     * @throws \Exception
+     */
+    public static function getSingleMeta($postType, $box, $field)
+    {
+        $metaBoxes = self::getMeta($postType);
+
+        foreach ($metaBoxes as $boxModel){
+            if($boxModel->getName() === $box){
+                foreach ($boxModel->getFields() as $fieldModel){
+                    if($fieldModel->getName() === $field){
+                        return $fieldModel;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $productDataName
+     * @param $field
+     *
+     * @return WooCommerceProductDataFieldModel|mixed|null
+     * @throws \Exception
+     */
+    public static function getSingleWoocommerceField($productDataName, $field)
+    {
+        $productData = self::getWooCommerceProductData();
+
+        foreach ($productData as $item){
+            if($item->getName() === $productDataName){
+                foreach ($item->getFields() as $fieldModel){
+                    if($fieldModel->getName() === $field){
+                        return $fieldModel;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $postType
      *
      * @return bool
      */
@@ -600,6 +649,28 @@ class ACPT_Lite_DB
             ";
 
         $posts = self::getResults($baseQuery, [$postType]);
+
+        return count($posts) === 1;
+    }
+
+    /**
+     * Check if a taxonomy exists
+     *
+     * @since    1.0.6
+     * @param $slug
+     *
+     * @return bool
+     */
+    public static function existsTaxonomy($slug)
+    {
+        $baseQuery = "
+            SELECT 
+                id
+            FROM `".self::TABLE_TAXONOMY."`
+            WHERE slug = %s
+            ";
+
+        $posts = self::getResults($baseQuery, [$slug]);
 
         return count($posts) === 1;
     }

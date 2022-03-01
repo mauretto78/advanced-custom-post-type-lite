@@ -25,7 +25,7 @@ const LabelsElement = () => {
             </table>
             <Link
                 className="acpt-btn acpt-btn-primary"
-                to={`/edit/${postType}`}>
+                to={`/edit/${postType}/2`}>
                 <Icon icon="bx:bx-edit" width="24px" />
                 Edit
             </Link>

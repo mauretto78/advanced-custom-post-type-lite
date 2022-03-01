@@ -112,6 +112,8 @@ class ACPT_Lite_Admin
     {
         $this->ajaxActions = [
             'wp_ajax_assocTaxonomyToPostTypeAction' => 'assocTaxonomyToPostTypeAction',
+            'wp_ajax_checkPostTypeNameAction' => 'checkPostTypeNameAction',
+            'wp_ajax_checkTaxonomySlugAction' => 'checkTaxonomySlugAction',
             'wp_ajax_deleteCustomPostTypeAction' => 'deleteCustomPostTypeAction',
             'wp_ajax_deleteCustomPostTypeMetaAction' => 'deleteCustomPostTypeMetaAction',
             'wp_ajax_deletePostTypeTemplateAction' => 'deletePostTypeTemplateAction',
@@ -579,6 +581,14 @@ class ACPT_Lite_Admin
     }
 
     /**
+     * Register API endpoints
+     */
+    private function registerRestFields()
+    {
+        $this->loader->addAction( 'rest_api_init', new ACPT_Lite_Api_Rest_Fields(), 'registerRestFields' );
+    }
+
+    /**
      * Run admin scripts
      */
     public function run()
@@ -595,7 +605,7 @@ class ACPT_Lite_Admin
             $this->loader->addAction($action, $this->ajax, $callback);
         }
 
-        // Elementor
+        // Elementor widgets
         $elementorInit = new ACPT_Lite_Elementor_Initiator();
         $elementorInit->run();
 
@@ -613,5 +623,8 @@ class ACPT_Lite_Admin
 
         // register hooks
         $this->registerHooks();
+
+        // API REST
+        $this->registerRestFields();
     }
 }

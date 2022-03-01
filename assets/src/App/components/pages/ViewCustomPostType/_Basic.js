@@ -54,7 +54,7 @@ const BasicElement = () => {
             </table>
             <Link
                 className="acpt-btn acpt-btn-primary"
-                to={`/edit/${postType}`}>
+                to={`/edit/${postType}/1`}>
                 <Icon icon="bx:bx-edit" width="24px" />
                 Edit
             </Link>

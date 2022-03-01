@@ -8,10 +8,10 @@ import Checkboxes from "../../reusable/Form/Checkboxes";
 import ReactSelect from "../../reusable/Form/ReactSelect";
 import {dashiconList} from "../../../constants/dashicons";
 import {filterByValue} from "../../../utils/objects";
-import {sluggify} from "../../../redux/thunks/sluggify";
 import {sluggifyString} from "../../../utils/strings";
+import {asyncIsPostTypeNameValid, isPostTypeNameValid} from "../../../utils/validation";
 
-const BasicStep = () => {
+const BasicStep = ({edit}) => {
 
     // manage global state
     const {fetched} = useSelector(state => state.fetchPostTypesReducer);
@@ -37,30 +37,6 @@ const BasicStep = () => {
         setValue('post_name', sluggifyString(post_name, 20));
     };
 
-    /**
-     * Keys are used as internal identifiers. Lowercase alphanumeric characters, dashes, and underscores are allowed.
-     * https://developer.wordpress.org/reference/functions/sanitize_key/
-     *
-     * @param post_name
-     * @returns {boolean}
-     */
-    const isPostTypeNameValid = (post_name) => {
-
-        const size = post_name.length;
-
-        if(size > 20){
-            return 'Max post type name lenght is 20';
-        }
-
-        const matches = post_name.match(/[a-z0-9_-]/g);
-
-        if(matches === null || size !== matches.length){
-            return 'Allowed characters: [Lowercase alphanumeric characters, dashes, and underscores]';
-        }
-
-        return true;
-    };
-
     const onSubmit = (data) => {
         dispatch(stepForward(data));
     };
@@ -80,7 +56,7 @@ const BasicStep = () => {
                     isRequired={true}
                     onChangeCapture={ e => handlePostNameChange(e.currentTarget.value) }
                     validate={{
-                        validate: isPostTypeNameValid,
+                        validate: edit ? isPostTypeNameValid : asyncIsPostTypeNameValid,
                         required: "This field is mandatory"
                     }} />
                 <InputText

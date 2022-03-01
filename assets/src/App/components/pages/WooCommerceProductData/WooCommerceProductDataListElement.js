@@ -4,7 +4,6 @@ import {Icon} from "@iconify/react";
 import '../../../scss/woocommerce.scss';
 import Boolean from "../../reusable/Boolean";
 import WooCommerceProductDataVisibility from "../../reusable/WooCommerceProductDataVisibility";
-import MetaBoxMiniTable from "../CustomPostTypeList/MetaBoxMiniTable";
 import Tippy from "../../reusable/Tippy";
 import WooCommerceFieldsMiniTable from "./WooCommerceFieldsMiniTable";
 
