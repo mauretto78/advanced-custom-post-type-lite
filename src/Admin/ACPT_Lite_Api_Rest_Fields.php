@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Assert;
 use ACPT_Lite\Utils\Sanitizer;
@@ -301,78 +300,4 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
 
         return null;
     }
-
-//    /**
-//     * @param $box
-//     * @return bool
-//     */
-//    private function validateMetaBox($box)
-//    {
-//        if(!isset($box['meta_box']) and !isset($box['meta_fields'])){
-//            return false;
-//        }
-//
-//        try {
-//            Assert::string($box['meta_box']);
-//            Assert::isArray($box['meta_fields']);
-//        } catch (\Exception $exception){
-//            return false;
-//        }
-//
-//        foreach ($box['meta_fields'] as $field){
-//            if(
-//                    !isset($field['name']) and
-//                    !isset($field['type']) and
-//                    !isset($field['options']) and
-//                    !isset($field['value']) and
-//                    !isset($field['default']) and
-//                    !isset($field['required'])
-//            ){
-//                return false;
-//            }
-//
-//            try {
-//                Assert::string($field['name']);
-//                Assert::inArray($field['type'], [
-//                        MetaBoxFieldModel::DATE_TYPE,
-//                        MetaBoxFieldModel::EMAIL_TYPE,
-//                        MetaBoxFieldModel::NUMBER_TYPE,
-//                        MetaBoxFieldModel::POST_TYPE,
-//                        MetaBoxFieldModel::SELECT_TYPE,
-//                        MetaBoxFieldModel::TEXT_TYPE
-//                ]);
-//                Assert::isArray($field['options']);
-//                Assert::boolean($field['required']);
-//
-//                if(!empty($field['value'])){
-//                    Assert::string($field['value']);
-//                }
-//
-//                if(!empty($field['default'])){
-//                    Assert::string($field['default']);
-//                }
-//
-//            } catch (\Exception $exception){
-//                return false;
-//            }
-//
-//            foreach ($box['options'] as $option){
-//                if(
-//                        !isset($option['label']) and
-//                        !isset($option['value'])
-//                ){
-//                    return false;
-//                }
-//
-//                try {
-//                    Assert::string($option['label']);
-//                    Assert::string($option['value']);
-//                } catch (\Exception $exception){
-//                    return false;
-//                }
-//            }
-//        }
-//
-//        return true;
-//    }
 }

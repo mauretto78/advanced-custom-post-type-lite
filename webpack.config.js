@@ -12,7 +12,7 @@ module.exports = {
         "block.min":"./assets/src/Gutemberg/index.js",
         "theme.min":"./assets/src/theme/index.js",
     },
-    devtool: "eval", //source-map for prod build files ---  //eval for dev
+    devtool: "source-map", //source-map for prod build files ---  //eval for dev
     output: {
         path: path.join(__dirname, './assets/build'),
         filename: '[name].js'

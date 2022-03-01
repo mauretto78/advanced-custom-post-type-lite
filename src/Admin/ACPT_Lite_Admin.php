@@ -583,14 +583,6 @@ class ACPT_Lite_Admin
     /**
      * Register API endpoints
      */
-    private function registerRestRoutes()
-    {
-        $this->loader->addAction( 'rest_api_init', new ACPT_Lite_Api_V1(), 'registerRestRoutes' );
-    }
-
-    /**
-     * Register API endpoints
-     */
     private function registerRestFields()
     {
         $this->loader->addAction( 'rest_api_init', new ACPT_Lite_Api_Rest_Fields(), 'registerRestFields' );
@@ -633,7 +625,6 @@ class ACPT_Lite_Admin
         $this->registerHooks();
 
         // API REST
-       // $this->registerRestRoutes(); FOR PRO v.1.0.4
         $this->registerRestFields();
     }
 }
