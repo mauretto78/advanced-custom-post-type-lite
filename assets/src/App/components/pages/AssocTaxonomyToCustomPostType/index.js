@@ -8,7 +8,6 @@ import Breadcrumbs from "../../reusable/Breadcrumbs";
 import AssocTaxonomyElement from "./AssocTaxonomyElement";
 import {fetchPostTypes} from "../../../redux/thunks/fetchPostTypes";
 import {filterById, isEmpty} from "../../../utils/objects";
-import {assocTaxonomyToPostType} from "../../../redux/thunks/assocTaxonomyToPostType";
 import {toast} from "react-toastify";
 import {Icon} from "@iconify/react";
 import Tippy from "../../reusable/Tippy";

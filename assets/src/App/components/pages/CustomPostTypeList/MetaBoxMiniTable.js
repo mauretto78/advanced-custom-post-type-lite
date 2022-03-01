@@ -1,5 +1,4 @@
 import React from 'react';
-import {Icon} from "@iconify/react";
 
 const MetaBoxMiniTable = ({postType, elements}) => {
 

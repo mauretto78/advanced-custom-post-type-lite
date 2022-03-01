@@ -8,7 +8,6 @@ import Checkboxes from "../../reusable/Form/Checkboxes";
 import ReactSelect from "../../reusable/Form/ReactSelect";
 import {dashiconList} from "../../../constants/dashicons";
 import {filterByValue} from "../../../utils/objects";
-import {sluggify} from "../../../redux/thunks/sluggify";
 import {sluggifyString} from "../../../utils/strings";
 import {asyncIsPostTypeNameValid, isPostTypeNameValid} from "../../../utils/validation";
 

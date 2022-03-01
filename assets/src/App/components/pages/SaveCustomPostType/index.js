@@ -16,7 +16,6 @@ import {Icon} from "@iconify/react";
 import Copyright from "../../reusable/Copyright";
 import {startFromStep, stepReset} from "../../../redux/actions/stepsActions";
 import {hydratePostTypeFormFromStep} from "../../../utils/forms";
-import {filterById, isEmpty} from "../../../utils/objects";
 
 const SaveCustomPostType = () => {
 

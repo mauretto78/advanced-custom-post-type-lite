@@ -24,7 +24,6 @@ import ViewWooCommerceProductData from "./components/pages/ViewWooCommerceProduc
 import WooCommerceProductDataFields from "./components/pages/WooCommerceProductDataFields";
 // STYLES
 import 'react-toastify/dist/ReactToastify.css';
-
 // GLOBAL STATE
 import {useDispatch, useSelector} from "react-redux";
 import {fetchSettings} from "./redux/thunks/fetchSettings";

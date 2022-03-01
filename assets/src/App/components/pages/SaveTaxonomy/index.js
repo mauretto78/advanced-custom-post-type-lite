@@ -16,7 +16,7 @@ import {Icon} from "@iconify/react";
 import {translate} from "../../../localization";
 import Copyright from "../../reusable/Copyright";
 import {startFromStep, stepReset} from "../../../redux/actions/stepsActions";
-import {hydratePostTypeFormFromStep, hydrateTaxonomyFormFromStep} from "../../../utils/forms";
+import {hydrateTaxonomyFormFromStep} from "../../../utils/forms";
 
 const SaveTaxonomy = () => {
 

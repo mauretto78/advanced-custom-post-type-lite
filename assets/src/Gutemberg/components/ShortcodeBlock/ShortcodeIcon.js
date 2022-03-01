@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    EMAIL,
-    SELECT,
-    TEXT,
-} from "../../../App/constants/fields";
+import {EMAIL, SELECT, TEXT,} from "../../../App/constants/fields";
 import {Icon} from "@iconify/react";
 
 const ShortcodeIcon = ({type}) => {
