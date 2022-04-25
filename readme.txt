@@ -22,10 +22,10 @@ Main features:
 * Register and manage new custom post types in seconds. Take the total control and become a Master of your CPTs.
 * Register, manage and associate custom new taxonimies in just 3 clicks.
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
+* User meta fields manager (choose between 3 field types)
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 * Elementor custom widget: manage ACPT meta fields in the Elementor editor
 * WooCommerce custom integration: generate and manage product data in few clicks
-* User meta fields manager
 * REST API basic integration
 
 If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!
@@ -46,13 +46,12 @@ Please refer to main [ACPT](https://acpt.io) website.
 
 == Screenshots ==
 
-1. Settings panel
-2. CPT List
-3. Register new CTP
-4. Register new Taxonomy
-5. Manage CPT meta boxes
-6. Meta boxes in action in the post editor
-7. Elementor integration
+1. Custom post types list
+2. Register new Custom post type
+3. Register new Taxonomy
+4. Manage CPT meta boxes
+5. Meta boxes in action in the post editor
+6. Settings panel
 
 == Privacy Policy ==
 Advanced Custom Post Type Lite uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
