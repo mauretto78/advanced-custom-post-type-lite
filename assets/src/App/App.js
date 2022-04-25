@@ -69,6 +69,7 @@ const App = () => {
                 <Suspense fallback={Spinner()}>
                     <RateAlert/>
                     <Switch>
+                        <Route exact path='/user-meta' name="user-meta" component={ lazy(() => import('./components/pages/UserMeta')) } />
                         <Route exact path='/assoc-taxonomy-post/:postType' name="assoc_taxonomy_post" component={AssocTaxonomyToCustomPostType} />
                         <Route exact path='/meta/:postType' name="meta" component={CustomPostTypeMeta} />
                         <Route exact path='/register' name="register" component={SaveCustomPostType} />

@@ -2,8 +2,48 @@
 
 namespace ACPT_Lite\Utils;
 
+use ACPT_Lite\Core\Models\UserMetaFieldModel;
+
 class Sanitizer
 {
+    /**
+     * Sanitize post type data before saving
+     *
+     * @param $type
+     * @param $rawData
+     *
+     * @return mixed
+     */
+    public static function sanitizePostTypeRawData($type, $rawData)
+    {
+        switch ($type){
+            case UserMetaFieldModel::EMAIL_TYPE:
+                return sanitize_email($rawData);
+
+            default:
+                return sanitize_text_field($rawData);
+        }
+    }
+
+    /**
+     * Sanitize user meta data before saving
+     *
+     * @param $type
+     * @param $rawData
+     *
+     * @return mixed
+     */
+    public static function sanitizeUserMetaFieldRawData($type, $rawData)
+    {
+        switch ($type){
+            case UserMetaFieldModel::EMAIL_TYPE:
+                return sanitize_email($rawData);
+
+            default:
+                return sanitize_text_field($rawData);
+        }
+    }
+
     /**
      * @param $array
      *
@@ -34,8 +74,11 @@ class Sanitizer
     {
         $allowedTags = [
                 'a' => [
-                        'href' => [],
-                        'title' => []
+                    'id' => [],
+                    'href' => [],
+                    'title' => [],
+                    'style' => [],
+                    'data-target-id' => []
                 ],
                 'br' => [],
                 'img' => [
@@ -59,6 +102,7 @@ class Sanitizer
                         'id' => []
                 ],
                 'input' => [
+                        'required' => [],
                         'value' => [],
                         'readonly' => [],
                         'style' => [],
@@ -68,6 +112,7 @@ class Sanitizer
                         'id' => []
                 ],
                 'select' => [
+                        'required' => [],
                         'readonly' => [],
                         'style' => [],
                         'multiple' => [],

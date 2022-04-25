@@ -5,17 +5,23 @@ namespace ACPT_Lite\Admin;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\CustomPostTypeTemplateModel;
-use ACPT_Lite\Core\Models\FileImportModel;
 use ACPT_Lite\Core\Models\MetaBoxFieldModel;
 use ACPT_Lite\Core\Models\MetaBoxFieldOptionModel;
 use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
 use ACPT_Lite\Core\Models\MetaBoxModel;
 use ACPT_Lite\Core\Models\SettingsModel;
 use ACPT_Lite\Core\Models\TaxonomyModel;
+use ACPT_Lite\Core\Models\UserMetaBoxModel;
+use ACPT_Lite\Core\Models\UserMetaFieldModel;
+use ACPT_Lite\Core\Models\UserMetaFieldOptionModel;
 use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerceProductDataFieldOptionModel;
 use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Repository\SettingsRepository;
+use ACPT_Lite\Core\Repository\TaxonomyRepository;
+use ACPT_Lite\Core\Repository\UserMetaRepository;
+use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Sanitizer;
 use ACPT_Lite\Utils\Sluggify;
@@ -37,13 +43,13 @@ class ACPT_Lite_Ajax
             $data = $this->sanitizeJsonData($_POST['data']);
 
             try {
-                $postId = ACPT_Lite_DB::getId($data['postType']);
+                $postId = CustomPostTypeRepository::getId($data['postType']);
 
                 foreach ($data['taxonomies'] as $taxonomy){
                     if($taxonomy['checked']){
-                        ACPT_Lite_DB::assocPostToTaxonomy($postId, $taxonomy['id']);
+                        TaxonomyRepository::assocToPostType($postId, $taxonomy['id']);
                     } else {
-                        ACPT_Lite_DB::removeAssocPostToTaxonomy($postId, $taxonomy['id']);
+                        TaxonomyRepository::removeAssocPost($postId, $taxonomy['id']);
                     }
                 }
 
@@ -81,7 +87,7 @@ class ACPT_Lite_Ajax
             $postType = $data['postType'];
 
             return wp_send_json([
-                'exists' => ACPT_Lite_DB::exists($postType)
+                'exists' => CustomPostTypeRepository::exists($postType)
             ]);
         }
     }
@@ -101,7 +107,7 @@ class ACPT_Lite_Ajax
             $slug = $data['slug'];
 
             return wp_send_json([
-                'exists' => ACPT_Lite_DB::existsTaxonomy($slug)
+                'exists' => TaxonomyRepository::existsTaxonomy($slug)
             ]);
         }
     }
@@ -126,7 +132,7 @@ class ACPT_Lite_Ajax
             $postType = $data['postType'];
 
             try {
-                ACPT_Lite_DB::delete($postType);
+                CustomPostTypeRepository::delete($postType);
 
                 $return = [
                     'success' => true,
@@ -167,8 +173,8 @@ class ACPT_Lite_Ajax
             $postType = $data['postType'];
 
             try {
-                ACPT_Lite_DB::deleteMeta($postType);
-                ACPT_Lite_DB::removeOrphanRelationships();
+                CustomPostTypeRepository::deleteMeta($postType);
+                CustomPostTypeRepository::removeOrphanRelationships();
 
                 $return = [
                         'success' => true,
@@ -187,41 +193,6 @@ class ACPT_Lite_Ajax
                 'success' => false,
                 'error' => 'no postType was sent'
         ]);
-    }
-
-    /**
-     * Delete post type template
-     *
-     * @return mixed
-     */
-    public function deletePostTypeTemplateAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-
-        if(!isset($data['postType']) and !isset($data['templateType'])){
-            return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing postType and/or templateType'
-            ]);
-        }
-
-        $postType = $data['postType'];
-        $templateType = $data['templateType'];
-
-        try {
-            ACPT_Lite_DB::deleteTemplate($postType, $templateType);
-
-            $return = [
-                    'success' => true,
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
     }
 
     /**
@@ -244,7 +215,7 @@ class ACPT_Lite_Ajax
             $taxonomy = $data['taxonomy'];
 
             try {
-                ACPT_Lite_DB::deleteTaxonomy($taxonomy);
+                TaxonomyRepository::delete($taxonomy);
 
                 $return = [
                         'success' => true,
@@ -280,7 +251,7 @@ class ACPT_Lite_Ajax
             $id = $data['id'];
 
             try {
-                ACPT_Lite_DB::deleteWooCommerceProductData($id);
+                WooCommerceProductDataRepository::delete($id);
 
                 $return = [
                     'success' => true,
@@ -315,7 +286,7 @@ class ACPT_Lite_Ajax
             $id = $data['id'];
 
             try {
-                ACPT_Lite_DB::deleteWooCommerceProductDataFields($id);
+                WooCommerceProductDataRepository::deleteFields($id);
 
                 $return = [
                     'success' => true,
@@ -336,6 +307,30 @@ class ACPT_Lite_Ajax
         ]);
     }
 
+    /**
+     * @return mixed
+     */
+    public function deleteUserMetaAction()
+    {
+        try {
+            UserMetaRepository::deleteAll();
+
+            $return = [
+                    'success' => true,
+            ];
+        } catch (\Exception $exception){
+            $return = [
+                    'success' => false,
+                    'error' => $exception->getMessage()
+            ];
+        }
+
+        return wp_send_json($return);
+    }
+
+    /**
+     * @return mixed
+     */
     public function doShortcodeAction()
     {
         $data = $this->sanitizeJsonData($_POST['data']);
@@ -352,43 +347,6 @@ class ACPT_Lite_Ajax
         return wp_send_json([
             'success' => true,
             'data' => do_shortcode($shortcode)
-        ]);
-    }
-
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function exportFileAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        $customPostTypes = [];
-
-        foreach ($data as $datum){
-            $item = [];
-
-            if($datum['structure']){
-
-                /** @var CustomPostTypeModel $customPostTypeModel */
-                $customPostTypeModel = ACPT_Lite_DB::get([
-                    'postType' => $datum['id']
-                ])[0];
-
-                $item['structure'] = $customPostTypeModel->arrayRepresentation();
-
-                if($datum['data']){
-                    $item['data'] = [];
-                }
-            }
-
-            if(!empty($item)){
-                $customPostTypes[] = $item;
-            }
-        }
-
-        return wp_send_json([
-            'success' => true,
-            'data' => $customPostTypes
         ]);
     }
 
@@ -444,26 +402,7 @@ class ACPT_Lite_Ajax
             $options['excludeFields'][] = $data['excludeField'];
         }
 
-        return wp_send_json(ACPT_Lite_DB::getMeta($postType, $options));
-    }
-
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function fetchCustomPostTypeTemplateAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-
-        // json, postType, templateType
-        if(!isset($data['postType']) and !isset($data['templateType'])){
-            return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing required arguments: [postType, templateType]'
-            ]);
-        }
-
-        return wp_send_json(ACPT_Lite_DB::getTemplate($data['postType'], $data['templateType']));
+        return wp_send_json(CustomPostTypeRepository::getMeta($postType, $options));
     }
 
     /**
@@ -483,12 +422,12 @@ class ACPT_Lite_Ajax
         }
 
         if($postType){
-            return wp_send_json(ACPT_Lite_DB::get([
+            return wp_send_json(CustomPostTypeRepository::get([
                 'postType' => $postType
             ]));
         }
 
-        return wp_send_json(ACPT_Lite_DB::get([
+        return wp_send_json(CustomPostTypeRepository::get([
             'page' => isset($page) ? $page : 1,
             'perPage' => isset($perPage) ? $perPage : 20,
         ]));
@@ -501,40 +440,7 @@ class ACPT_Lite_Ajax
      */
     public function fetchCustomPostTypesCountAction()
     {
-        return wp_send_json(ACPT_Lite_DB::count());
-    }
-
-    public function fetchHeadersAndFootersAction()
-    {
-        $directory = get_template_directory();
-
-        $headers = array_merge(glob($directory."/header.php"), glob($directory."/header-*.php"));
-        $footers = array_merge(glob($directory."/footer.php"), glob($directory."/footer-*.php"));
-
-        foreach ($headers as $index => $header){
-            $headers[$index] = $this->cleanHeadersAndFootersName($header);
-        }
-
-        foreach ($footers as $index => $footer){
-            $footers[$index] = $this->cleanHeadersAndFootersName($footer);
-        }
-
-        return wp_send_json([
-                'headers' => $headers,
-                'footers' => $footers,
-        ]);
-    }
-
-    /**
-     * @param $string
-     *
-     * @return string|string[]
-     */
-    private function cleanHeadersAndFootersName( $string)
-    {
-        $directory = get_template_directory();
-
-        return str_replace([$directory, '/', '.php'],'', $string);
+        return wp_send_json(CustomPostTypeRepository::count());
     }
 
     /**
@@ -543,7 +449,7 @@ class ACPT_Lite_Ajax
      */
     public function fetchSettingsAction()
     {
-        return wp_send_json(ACPT_Lite_DB::getSettings());
+        return wp_send_json(SettingsRepository::get());
     }
 
     /**
@@ -555,7 +461,7 @@ class ACPT_Lite_Ajax
         if(isset($_POST['data'])){
             $data = $this->sanitizeJsonData($_POST['data']);
 
-            return wp_send_json(ACPT_Lite_DB::getWooCommerceProductData($data));
+            return wp_send_json(WooCommerceProductDataRepository::get($data));
         }
 
         return wp_send_json([]);
@@ -576,7 +482,7 @@ class ACPT_Lite_Ajax
             $id = $data['id'];
 
             try {
-                $return = ACPT_Lite_DB::getWooCommerceProductDataFields($id);
+                $return = WooCommerceProductDataRepository::getFields($id);
             } catch (\Exception $exception){
                 $return = [
                     'success' => false,
@@ -628,12 +534,12 @@ class ACPT_Lite_Ajax
         }
 
         if($taxonomy){
-            return wp_send_json(ACPT_Lite_DB::getTaxonomies([
+            return wp_send_json(TaxonomyRepository::getTaxonomies([
                     'taxonomy' => $taxonomy
             ]));
         }
 
-        return wp_send_json(ACPT_Lite_DB::getTaxonomies([
+        return wp_send_json(TaxonomyRepository::getTaxonomies([
                 'page' => isset($page) ? $page : 1,
                 'perPage' => isset($perPage) ? $perPage : 20,
         ]));
@@ -730,100 +636,23 @@ class ACPT_Lite_Ajax
      */
     public function fetchTaxonomiesCountAction()
     {
-        return wp_send_json(ACPT_Lite_DB::taxonomyCount());
+        return wp_send_json(TaxonomyRepository::count());
     }
 
     /**
      * @return mixed
+     * @throws \Exception
      */
-    public function importFileAction()
+    public function fetchUserMetaAction()
     {
-        if(empty($_FILES)){
-            return wp_send_json([
-                'error' => 'No files uploaded'
-            ]);
+        $data = $this->sanitizeJsonData($_POST['data']);
+        $options = [];
+
+        if(isset($data['excludeField'])){
+            $options['excludeFields'][] = $data['excludeField'];
         }
 
-        $file = $_FILES['file'];
-
-        // validate size
-        if($file['size'] > 2097152){
-            return wp_send_json([
-                'error' => 'File too large. Max size: 2Mb'
-            ]);
-        }
-
-        // upload file
-        $contentFileInfo = wp_handle_upload( $file, [
-            'test_form' => false,
-            'test_type' => false,
-        ] );
-
-        $content = json_decode(file_get_contents($contentFileInfo['file']), true);
-
-        // validate content
-        if(!self::validateImportContent($content)){
-            return wp_send_json([
-                    'error' => 'Wrong data, not suitable for import'
-            ]);
-        }
-
-        try {
-            // import content
-            foreach ($content as $item){
-                if(isset($item['structure'])){
-                    ACPT_Lite_DB::import($item['structure']);
-                }
-            }
-
-            // save import
-            $contentFileInfo['content'] = $content;
-
-            return wp_send_json([
-                    'success' => true,
-                    'data' => $contentFileInfo
-            ]);
-
-        } catch (\Exception $exception){
-            return wp_send_json([
-                    'error' => (!empty($exception->getMessage())) ? $exception->getMessage() : 'Error during import occurred'
-            ]);
-        }
-    }
-
-    /**
-     * @param array $content
-     *
-     * @return bool
-     */
-    private static function validateImportContent( array $content )
-    {
-        if(empty($content)){
-            return false;
-        }
-
-        foreach ($content as $item){
-            if(!isset($item['structure']) or !isset($item['data']) ){
-                return false;
-            }
-
-            if(isset($item['structure'])){
-                return (
-                    isset($item['structure']['id']) and
-                    isset($item['structure']['name']) and
-                    isset($item['structure']['singular']) and
-                    isset($item['structure']['plural']) and
-                    isset($item['structure']['icon']) and
-                    isset($item['structure']['postCount']) and
-                    isset($item['structure']['supports']) and
-                    isset($item['structure']['labels']) and
-                    isset($item['structure']['settings']) and
-                    isset($item['structure']['meta'])
-                );
-            }
-        }
-
-        return true;
+        return wp_send_json(UserMetaRepository::get($options));
     }
 
     /**
@@ -879,7 +708,7 @@ class ACPT_Lite_Ajax
 
         // persist $model on DB
         try {
-            $id = (ACPT_Lite_DB::exists($data[1]["post_name"])) ? ACPT_Lite_DB::getId($data[1]["post_name"]) : Uuid::v4();
+            $id = (CustomPostTypeRepository::exists($data[1]["post_name"])) ? CustomPostTypeRepository::getId($data[1]["post_name"]) : Uuid::v4();
             $model = CustomPostTypeModel::hydrateFromArray([
                     'id' => $id,
                     'name' => $data[1]["post_name"],
@@ -892,56 +721,10 @@ class ACPT_Lite_Ajax
                     'settings' => $data[3]
             ]);
 
-            ACPT_Lite_DB::save($model);
+            CustomPostTypeRepository::save($model);
             $return = [
                     'success' => true
             ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
-    }
-
-    /**
-     * Save custom post type template
-     *
-     * @return mixed
-     */
-    public function saveCustomPostTypeTemplateAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-
-        // json, postType, templateType
-        if(!isset($data['html']) and !isset($data['json']) and  !isset($data['postType']) and !isset($data['templateType'])){
-            return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing required arguments: [html, json, postType, templateType]'
-            ]);
-        }
-
-        // persist $model on DB
-        try {
-            $template = ACPT_Lite_DB::getTemplate($data['postType'], $data['templateType']);
-
-            $newTemplate = CustomPostTypeTemplateModel::hydrateFromArray([
-                'id' => $template ? $template->getId() : Uuid::v4(),
-                'postType' => $data['postType'],
-                'templateType' =>  $data['templateType'],
-                'json' =>  $data['json'],
-                'html' =>  $data['html'],
-                'meta' =>  isset($data['meta']) ? $data['meta'] : [],
-            ]);
-
-            ACPT_Lite_DB::saveTemplate($newTemplate);
-
-            $return = [
-                'success' => true
-            ];
-
         } catch (\Exception $exception){
             $return = [
                     'success' => false,
@@ -1014,7 +797,7 @@ class ACPT_Lite_Ajax
                         if(isset($field['relations'])){
                             foreach ($field['relations'] as $relationIndex => $relation) {
 
-                                $relatedCustomPostType = ACPT_Lite_DB::get([
+                                $relatedCustomPostType = CustomPostTypeRepository::get([
                                         'postType' => $relation['relatedPostType']
                                 ], true)[0];
 
@@ -1026,7 +809,7 @@ class ACPT_Lite_Ajax
                                 ]);
 
                                 if(isset($relation['inversedFieldId'])){
-                                    $inversedBy = ACPT_Lite_DB::getMetaField($relation['inversedFieldId']);
+                                    $inversedBy = CustomPostTypeRepository::getMetaField($relation['inversedFieldId']);
                                     $relationModel->setInversedBy($inversedBy);
                                 }
 
@@ -1043,17 +826,17 @@ class ACPT_Lite_Ajax
 
                 $boxModel->changeName($this->getTheFirstAvailableName($boxModel->getName(), $arrayOfBoxNames));
                 $arrayOfBoxNames[] = $boxModel->getName();
-                
-                ACPT_Lite_DB::saveMetaBox($boxModel, $ids);
+
+                CustomPostTypeRepository::saveMetaBox($boxModel, $ids);
             }
 
             // remove orphans
             foreach ($ids as $postType => $childrenIds){
-               ACPT_Lite_DB::removeMetaOrphans($postType, $childrenIds);
+                CustomPostTypeRepository::removeMetaOrphans($postType, $childrenIds);
             }
 
             // remove orphan relationships
-            ACPT_Lite_DB::removeOrphanRelationships();
+            CustomPostTypeRepository::removeOrphanRelationships();
 
             $return = [
                     'ids' => $ids,
@@ -1093,13 +876,13 @@ class ACPT_Lite_Ajax
         // persist $model on DB
         try {
             foreach ($data as $key => $value){
-                $id = (!empty(ACPT_Lite_DB::getSettings($key))) ? ACPT_Lite_DB::getSettings($key)[0]->getId() : Uuid::v4();
+                $id = (!empty(SettingsRepository::get($key))) ? SettingsRepository::get($key)[0]->getId() : Uuid::v4();
                 $model = SettingsModel::hydrateFromArray([
                     'id' => $id,
                     'key' => $key,
                     'value' => $value
                 ]);
-                ACPT_Lite_DB::saveSettings($model);
+                SettingsRepository::save($model);
             }
 
             $return = [
@@ -1139,7 +922,7 @@ class ACPT_Lite_Ajax
             unset($settings['capabilities_2']);
             unset($settings['capabilities_3']);
 
-            $id = (ACPT_Lite_DB::exists($data[1]["slug"])) ? ACPT_Lite_DB::getId($data[1]["slug"]) : Uuid::v4();
+            $id = (TaxonomyRepository::exists($data[1]["slug"])) ? TaxonomyRepository::getId($data[1]["slug"]) : Uuid::v4();
             $model = TaxonomyModel::hydrateFromArray([
                 'id' => $id,
                 'slug' => $data[1]["slug"],
@@ -1150,7 +933,7 @@ class ACPT_Lite_Ajax
                 'settings' => $settings
             ]);
 
-            ACPT_Lite_DB::saveTaxonomy($model);
+            TaxonomyRepository::save($model);
             $return = [
                     'success' => true
             ];
@@ -1170,7 +953,7 @@ class ACPT_Lite_Ajax
     public function saveWooCommerceProductDataAction()
     {
         $data = $this->sanitizeJsonData($_POST['data']);
-        $id = (isset($data['id']) and ACPT_Lite_DB::existsWooCommerceProductData($data['id'])) ? $data['id'] : Uuid::v4();
+        $id = (isset($data['id']) and WooCommerceProductDataRepository::exists($data['id'])) ? $data['id'] : Uuid::v4();
 
         $model = new WooCommerceProductDataModel(
             $id,
@@ -1181,7 +964,7 @@ class ACPT_Lite_Ajax
         );
 
         try {
-            ACPT_Lite_DB::saveWooCommerceProductData($model);
+            WooCommerceProductDataRepository::save($model);
 
             $return = [
                 'success' => true
@@ -1209,7 +992,7 @@ class ACPT_Lite_Ajax
         try {
             foreach ($data as $fieldIndex => $field ) {
 
-                $productData = ACPT_Lite_DB::getWooCommerceProductData([
+                $productData = WooCommerceProductDataRepository::get([
                     'id' => $field['postDataId']
                 ])[0];
 
@@ -1249,10 +1032,10 @@ class ACPT_Lite_Ajax
                 ];
             }
 
-            ACPT_Lite_DB::saveWooCommerceProductDataFields($fields);
+            WooCommerceProductDataRepository::saveFields($fields);
 
             // remove orphans
-            ACPT_Lite_DB::removeWooCommerceProductDataFieldsOrphans($ids);
+            WooCommerceProductDataRepository::removeFieldsOrphans($ids);
 
             $return = [
                 'ids' => $ids,
@@ -1268,6 +1051,95 @@ class ACPT_Lite_Ajax
         return wp_send_json($return);
     }
 
+    /**
+     * @return mixed
+     */
+    public function saveUserMetaAction()
+    {
+        $data = $this->sanitizeJsonData($_POST['data']);
+        $ids = [];
+        $arrayOfBoxNames = [];
+
+        // persist $model on DB
+        try {
+            foreach ($data as $boxIndex => $box ) {
+
+                $boxModel = UserMetaBoxModel::hydrateFromArray([
+                        'id' => $box['id'],
+                        'name' =>  $box['name'],
+                        'sort' =>  ($boxIndex+1)
+                ]);
+
+                $ids['boxes'][] = $box['id'];
+
+                if(isset($box['fields'])){
+                    $arrayOfFieldNames = [];
+
+                    foreach ($box['fields'] as $fieldIndex => $field) {
+                        $fieldModel = UserMetaFieldModel::hydrateFromArray([
+                                'id' => $field['id'],
+                                'name' => $field['name'],
+                                'type' => $field['type'],
+                                'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
+                                'description' => isset($field['description']) ? $field['description'] : null,
+                                'showInArchive' => isset($field['showInArchive']) ? $field['showInArchive'] : false,
+                                'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
+                                'metaBox' => $boxModel,
+                                'sort' =>  ($fieldIndex+1)
+                        ]);
+
+                        $ids['fields'][] = $field['id'];
+
+                        $fieldModel->changeName($this->getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
+                        $arrayOfFieldNames[] = $fieldModel->getName();
+
+                        if(isset($field['options'])){
+                            foreach ($field['options'] as $optionIndex => $option) {
+                                $optionModel = UserMetaFieldOptionModel::hydrateFromArray([
+                                        'id' => $option['id'],
+                                        'label' => $option['label'],
+                                        'value' => $option['value'],
+                                        'userMetaBox' => $boxModel,
+                                        'userField' => $fieldModel,
+                                        'sort' =>  ($optionIndex+1)
+                                ]);
+
+                                $ids['options'][] = $option['id'];
+
+                                $fieldModel->addOption($optionModel);
+                            }
+                        }
+
+                        $boxModel->addField($fieldModel);
+                    }
+                }
+
+                $boxModel->changeName($this->getTheFirstAvailableName($boxModel->getName(), $arrayOfBoxNames));
+                $arrayOfBoxNames[] = $boxModel->getName();
+
+                UserMetaRepository::save($boxModel);
+            }
+
+            // remove orphans
+            UserMetaRepository::removeOrphans($ids);
+
+            $return = [
+                    'ids' => $ids,
+                    'success' => true
+            ];
+        } catch (\Exception $exception){
+            $return = [
+                    'success' => false,
+                    'error' => $exception->getMessage()
+            ];
+        }
+
+        return wp_send_json($return);
+    }
+
+    /**
+     * @return mixed
+     */
     public function syncPostsAction()
     {
         try {

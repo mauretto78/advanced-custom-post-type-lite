@@ -4,7 +4,8 @@ namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxFieldModel;
-use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Repository\TemplateRepository;
 use ACPT_Lite\Utils\PhpEval;
 use ACPT_Lite\Utils\WPLinks;
 
@@ -121,7 +122,7 @@ class ACPT_Lite_Hooks
 
             if (is_single()) {
 
-                foreach ( ACPT_Lite_DB::get([ 'postType' => $post->post_type]) as $postTypeModel) {
+                foreach ( CustomPostTypeRepository::get([ 'postType' => $post->post_type]) as $postTypeModel) {
                     echo "<li>";
                     echo "<a href='".get_post_type_archive_link(esc_attr($postTypeModel->getName()))."'>";
                     echo esc_html($postTypeModel->getPlural());
@@ -133,7 +134,7 @@ class ACPT_Lite_Hooks
                     echo '</li>';
                 }
             } elseif (is_archive()){
-                foreach ( ACPT_Lite_DB::get([ 'postType' => $post->post_type]) as $postTypeModel) {
+                foreach ( CustomPostTypeRepository::get([ 'postType' => $post->post_type]) as $postTypeModel) {
                     if (is_post_type_archive(esc_attr($postTypeModel->getName()))){
                         echo "<li>";
                         echo esc_html($postTypeModel->getPlural());
@@ -199,7 +200,7 @@ class ACPT_Lite_Hooks
     {
         global $post;
 
-        $template = ACPT_Lite_DB::getTemplate($post->post_type, 'single');
+        $template = TemplateRepository::get($post->post_type, 'single');
 
         $content = $template->getHtml();
         echo PhpEval::evaluate($content);
@@ -214,7 +215,7 @@ class ACPT_Lite_Hooks
     {
         global $post;
 
-        $template = ACPT_Lite_DB::getTemplate($post->post_type, 'archive');
+        $template = TemplateRepository::get($post->post_type, 'archive');
 
         $content = $template->getHtml();
         echo PhpEval::evaluate($content);
@@ -239,7 +240,7 @@ class ACPT_Lite_Hooks
             } elseif($sortBy === 'date'){
                 $orderBy = 'publish_date';
             } else {
-                $field = ACPT_Lite_DB::getMetaField($args['sortBy']);
+                $field = CustomPostTypeRepository::getMetaField($args['sortBy']);
                 $orderBy = (MetaBoxFieldModel::NUMBER_TYPE === $field->getType()) ? 'meta_value_num': 'meta_value';
             }
         } else {
