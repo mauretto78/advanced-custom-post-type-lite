@@ -107,7 +107,7 @@ class ACPT_Lite_Ajax
             $slug = $data['slug'];
 
             return wp_send_json([
-                'exists' => TaxonomyRepository::existsTaxonomy($slug)
+                'exists' => TaxonomyRepository::exists($slug)
             ]);
         }
     }
@@ -534,12 +534,12 @@ class ACPT_Lite_Ajax
         }
 
         if($taxonomy){
-            return wp_send_json(TaxonomyRepository::getTaxonomies([
+            return wp_send_json(TaxonomyRepository::get([
                     'taxonomy' => $taxonomy
             ]));
         }
 
-        return wp_send_json(TaxonomyRepository::getTaxonomies([
+        return wp_send_json(TaxonomyRepository::get([
                 'page' => isset($page) ? $page : 1,
                 'perPage' => isset($perPage) ? $perPage : 20,
         ]));

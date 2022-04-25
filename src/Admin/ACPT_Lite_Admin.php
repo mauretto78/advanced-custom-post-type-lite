@@ -4,6 +4,7 @@ namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Generators\CustomPostTypeGenerator;
 use ACPT_Lite\Core\Generators\MetaBoxGenerator;
+use ACPT_Lite\Core\Generators\UserMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxModel;

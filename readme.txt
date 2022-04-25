@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,7 @@ Main features:
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 * Elementor custom widget: manage ACPT meta fields in the Elementor editor
 * WooCommerce custom integration: generate and manage product data in few clicks
+* User meta fields manager
 * REST API basic integration
 
 If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!
@@ -100,3 +101,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Basic integration with Wordpress Rest API
 * Edit the selected CTP step from the view
 * Edit the selected Taxonomy step from the view
+
+= 1.0.7 (2022-04-26) =
+
+* UI/UX fixes and improvements
+* Backend fix on syncronization
+* User meta fields

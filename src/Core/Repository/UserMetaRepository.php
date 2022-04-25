@@ -14,7 +14,7 @@ class UserMetaRepository
      *
      * @return string|null
      * @throws \Exception
-     * @since    1.0.60
+     * @since    1.0.7
      */
     public static function deleteAll()
     {

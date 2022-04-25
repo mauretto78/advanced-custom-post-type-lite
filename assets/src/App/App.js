@@ -22,6 +22,7 @@ import SaveWooCommerceProductData from "./components/pages/SaveWooCommerceProduc
 import DeleteWooCommerceProductData from "./components/pages/DeleteWooCommerceProductData";
 import ViewWooCommerceProductData from "./components/pages/ViewWooCommerceProductData";
 import WooCommerceProductDataFields from "./components/pages/WooCommerceProductDataFields";
+import UserMeta from "./components/pages/UserMeta";
 // STYLES
 import 'react-toastify/dist/ReactToastify.css';
 // GLOBAL STATE
@@ -69,7 +70,7 @@ const App = () => {
                 <Suspense fallback={Spinner()}>
                     <RateAlert/>
                     <Switch>
-                        <Route exact path='/user-meta' name="user-meta" component={ lazy(() => import('./components/pages/UserMeta')) } />
+                        <Route exact path='/user-meta' name="user-meta" component={UserMeta} />
                         <Route exact path='/assoc-taxonomy-post/:postType' name="assoc_taxonomy_post" component={AssocTaxonomyToCustomPostType} />
                         <Route exact path='/meta/:postType' name="meta" component={CustomPostTypeMeta} />
                         <Route exact path='/register' name="register" component={SaveCustomPostType} />

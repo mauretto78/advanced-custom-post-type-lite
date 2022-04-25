@@ -54,7 +54,7 @@ class UserMetaBoxGenerator extends AbstractGenerator
             ?>
             <div class="acpt-user-meta-box">
                 <h3><?php echo $boxModel->getName(); ?></h3>
-                <table class="form-table" id="fieldset-billing">
+                <table class="form-table" id="user-meta-box-<?php echo $boxModel->getId(); ?>">
                     <?php
                     foreach ($boxModel->getFields() as $fieldModel) {
                         $userFieldGenerator = new UserMetaFieldGenerator($fieldModel, $user);
