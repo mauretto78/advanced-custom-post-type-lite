@@ -2,6 +2,5 @@
 stats.json
 /vendor/
 node_modules/
-assets/build
 /bundle
 .phpunit.result.cache
