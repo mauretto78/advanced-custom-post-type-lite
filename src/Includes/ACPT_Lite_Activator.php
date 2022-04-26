@@ -2,8 +2,6 @@
 
 namespace ACPT_Lite\Includes;
 
-use ACPT_Lite;
-
 /**
  * Fired during plugin activation.
  *

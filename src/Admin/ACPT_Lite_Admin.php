@@ -132,7 +132,6 @@ class ACPT_Lite_Admin
             'wp_ajax_fetchMetaFieldRelationshipAction' => 'fetchMetaFieldRelationshipAction',
             'wp_ajax_fetchHeadersAndFootersAction' => 'fetchHeadersAndFootersAction',
             'wp_ajax_fetchPostDataAction' => 'fetchPostDataAction',
-            'wp_ajax_fetchPostsAction' => 'fetchPostsAction',
             'wp_ajax_fetchPreviewLinkAction' => 'fetchPreviewLinkAction',
             'wp_ajax_fetchSettingsAction' => 'fetchSettingsAction',
             'wp_ajax_fetchSidebarsAction' => 'fetchSidebarsAction',
@@ -640,24 +639,6 @@ class ACPT_Lite_Admin
     }
 
     /**
-     * Register hooks for the theme UI
-     */
-    private function registerHooks()
-    {
-        $this->loader->addAction( 'acpt_after_main_content', new ACPT_Lite_Hooks(), 'afterMainContent' );
-        $this->loader->addAction( 'acpt_before_main_content', new ACPT_Lite_Hooks(), 'beforeMainContent' );
-        $this->loader->addAction( 'acpt_breadcrumb', new ACPT_Lite_Hooks(), 'breadcrumb' );
-        $this->loader->addAction( 'acpt_thumbnail', new ACPT_Lite_Hooks(), 'thumbnail' );
-        $this->loader->addAction( 'acpt_single_content', new ACPT_Lite_Hooks(), 'singleContent' );
-        $this->loader->addAction( 'acpt_archive_title', new ACPT_Lite_Hooks(), 'archiveTitle' );
-        $this->loader->addAction( 'acpt_archive_loop', new ACPT_Lite_Hooks(), 'archiveLoop' );
-        $this->loader->addAction( 'acpt_loop', new ACPT_Lite_Hooks(), 'loop' );
-        $this->loader->addAction( 'acpt_archive_pagination', new ACPT_Lite_Hooks(), 'pagination' );
-        $this->loader->addAction( 'acpt_prev_next_links', new ACPT_Lite_Hooks(), 'prevNextLinks' );
-        $this->loader->addAction( 'acpt_taxonomy_links', new ACPT_Lite_Hooks(), 'taxonomyLinks' );
-    }
-
-    /**
      * Register API endpoints
      */
     private function registerRestFields()
@@ -703,9 +684,6 @@ class ACPT_Lite_Admin
 
         // add user meta columns to show in the admin panel
         $this->addUserMetaColumnsToShow();
-
-        // register hooks
-        $this->registerHooks();
 
         // API REST
         $this->registerRestFields();

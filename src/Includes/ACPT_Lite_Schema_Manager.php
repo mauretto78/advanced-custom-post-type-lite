@@ -127,7 +127,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // woocommerce product data
+        // WooCommerce product data
         $sql11 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             product_data_name VARCHAR(32) NOT NULL,
@@ -138,7 +138,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // woocommerce product data field
+        // WooCommerce product data field
         $sql12 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             product_data_id VARCHAR(36) NOT NULL,
@@ -151,7 +151,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // woocommerce product data field option
+        // WooCommerce product data field option
         $sql13 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             product_data_id VARCHAR(36) NOT NULL,

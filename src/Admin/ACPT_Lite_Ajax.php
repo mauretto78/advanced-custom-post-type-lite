@@ -589,49 +589,6 @@ class ACPT_Lite_Ajax
     }
 
     /**
-     * Fetch posts
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    public function fetchPostsAction()
-    {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-
-            if(!isset($data['postType'])){
-                return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing postType'
-                ]);
-            }
-
-            $loop = (new ACPT_Lite_Hooks())->loop([
-                'postType' => $data['postType'],
-                'perPage' => isset($data['perPage']) ? $data['perPage'] : -1,
-                'sortOrder' => (isset($data['sortOrder'])) ? $data['sortOrder']: 'ASC',
-                'sortBy' => (isset($data['sortBy'])) ? $data['sortBy']: null,
-            ]);
-
-            while ( $loop->have_posts() ) : $loop->the_post();
-                $return[] = [
-                    'id' => get_the_ID(),
-                    'title' => get_the_title(),
-                ];
-            endwhile;
-
-            wp_reset_postdata();
-
-            return wp_send_json($return);
-        }
-
-        return wp_send_json([
-                'success' => false,
-                'error' => 'no postType was sent'
-        ]);
-    }
-
-    /**
      * @return mixed
      */
     public function fetchTaxonomiesCountAction()

@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Core\Generators;
 
 use ACPT_Lite\Core\Generators\Fields\CustomPostTypeFieldInterface;
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
 
 class MetaBoxFieldGenerator
 {

@@ -65,7 +65,6 @@ class CustomPostTypeRepository
                     ";
 
                 self::deleteMeta($postType);
-                TemplateRepository::deleteByType($postType);
                 TaxonomyRepository::deleteAssociations($postModel->getId());
 
                 if($postModel->isWooCommerce()){
