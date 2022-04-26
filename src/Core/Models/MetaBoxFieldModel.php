@@ -98,7 +98,7 @@ class MetaBoxFieldModel extends AbstractModel implements \JsonSerializable
         parent::__construct($id);
         $this->metaBox = $metaBox;
         $this->name    = $title;
-        $this->type    = $type;
+        $this->setType($type);
         $this->showInArchive = $showInArchive;
         $this->required = $required;
         $this->sort  = $sort;
@@ -130,6 +130,24 @@ class MetaBoxFieldModel extends AbstractModel implements \JsonSerializable
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param $type
+     */
+    private function setType($type)
+    {
+        $allowedTypes = [
+            self::EMAIL_TYPE,
+            self::SELECT_TYPE,
+            self::TEXT_TYPE,
+        ];
+
+        if(!in_array($type, $allowedTypes)){
+            throw new \DomainException($type . ' is not a valid meta box field type');
+        }
+
+        $this->type = $type;
     }
 
     /**

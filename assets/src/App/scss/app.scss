@@ -580,6 +580,51 @@ a:hover svg {
   }
 }
 
+/*========== USER META FIELDS ==========*/
+
+.acpt-user-meta-box {
+  background: #fff;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.acpt-user-meta-box h3 {
+  margin: 0;
+  padding: 20px;
+  border-bottom: 1px solid #ccd0d4;
+}
+
+.acpt-user-meta-box table {
+  margin: 0;
+}
+
+.acpt-user-meta-box table tr {
+  border-bottom: 1px solid #ccd0d4;
+}
+
+.acpt-user-meta-box table tr th {
+  padding-left: 20px;
+}
+
+.acpt-user-meta-box table tr td {
+  padding-right: 20px;
+}
+
+.acpt-user-meta-box table tr:last-child {
+  border: none;
+}
+
+.acpt-user-meta-box table  .acpt-admin-meta-label-wrapper {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.acpt-user-meta-box table  .acpt-admin-meta-label-wrapper .acpt-admin-meta-icon {
+  width: auto;
+  margin-right: 10px;
+}
+
 /*========== META FIELDS ==========*/
 
 .acpt-meta-field {

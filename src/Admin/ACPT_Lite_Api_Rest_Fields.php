@@ -15,7 +15,7 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
     public function registerRestFields()
     {
         // loop acpt cpt and register only cpt with rest api enabled
-        $posts = ACPT_Lite_DB::get([], true);
+        $posts = CustomPostTypeRepository::get([], true);
 
         foreach ($posts as $post){
             if($post->isNative() or ( $post->getSettings()['show_in_rest'] === true  )  ){
@@ -157,7 +157,7 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
             $value = $item['value'];
 
             // check
-            if(null === $singleMeta = ACPT_Lite_DB::getSingleMeta($postType, $box, $field)){
+            if(null === $singleMeta = CustomPostTypeRepository::getSingleMeta($postType, $box, $field)){
                 return $this->restError("Meta field does not exists");
             }
 
@@ -180,7 +180,7 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
                 $value = $item['value'];
 
                 // check if exists
-                if(ACPT_Lite_DB::getSingleWoocommerceField($productData, $field)){
+                if(WooCommerceProductDataRepository::getSingleField($productData, $field)){
                     return $this->restError("Product data does not exists");
                 }
 

@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,6 +22,7 @@ Main features:
 * Register and manage new custom post types in seconds. Take the total control and become a Master of your CPTs.
 * Register, manage and associate custom new taxonimies in just 3 clicks.
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
+* User meta fields manager (choose between 3 field types)
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 * Elementor custom widget: manage ACPT meta fields in the Elementor editor
 * WooCommerce custom integration: generate and manage product data in few clicks
@@ -45,13 +46,12 @@ Please refer to main [ACPT](https://acpt.io) website.
 
 == Screenshots ==
 
-1. Settings panel
-2. CPT List
-3. Register new CTP
-4. Register new Taxonomy
-5. Manage CPT meta boxes
-6. Meta boxes in action in the post editor
-7. Elementor integration
+1. Custom post types list
+2. Register new Custom post type
+3. Register new Taxonomy
+4. Manage CPT meta boxes
+5. Meta boxes in action in the post editor
+6. Settings panel
 
 == Privacy Policy ==
 Advanced Custom Post Type Lite uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
@@ -100,3 +100,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Basic integration with Wordpress Rest API
 * Edit the selected CTP step from the view
 * Edit the selected Taxonomy step from the view
+
+= 1.0.7 (2022-04-26) =
+
+* UI/UX fixes and improvements
+* Backend fix on syncronization
+* User meta fields

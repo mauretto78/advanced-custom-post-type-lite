@@ -3,8 +3,10 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {stepsReducer} from "./reducers/stepsReducer";
 import {metaStateReducer} from "./reducers/metaStateReducer";
+import {userMetaStateReducer} from "./reducers/userMetaStateReducer";
 import {fetchMetaReducer} from "./reducers/fetchMetaReducer";
 import {fetchPostTypesReducer} from "./reducers/fetchCustomPostTypesReducer";
+import {fetchUserMetaReducer} from "./reducers/fetchUserMetaReducer";
 import {deleteCustomPostTypeReducer} from "./reducers/deleteCustomPostTypeReducer";
 import {fetchPostTypesCountReducer} from "./reducers/fetchCustomPostTypesCountReducer";
 import {fetchSettingsReducer} from "./reducers/fetchSettingsReducer";
@@ -40,28 +42,30 @@ const reducers = {
     deleteWooCommerceProductDataReducer,
     exportFileReducer,
     fetchHeadersAndFootersReducer,
+    fetchInversedMetaReducer,
+    fetchMetaReducer,
     fetchPostDataReducer,
-    fetchPostsReducer,
-    fetchPostTypesReducer,
-    fetchPostTypesCountReducer,
     fetchPostTypeTemplateReducer,
+    fetchPostTypesCountReducer,
+    fetchPostTypesReducer,
+    fetchPostsReducer,
     fetchPreviewLinkReducer,
     fetchSettingsReducer,
     fetchSidebarsReducer,
-    fetchInversedMetaReducer,
-    fetchMetaReducer,
-    fetchTaxonomiesReducer,
     fetchTaxonomiesCountReducer,
-    fetchWooCommerceProductDataReducer,
+    fetchTaxonomiesReducer,
+    fetchUserMetaReducer,
     fetchWooCommerceProductDataFieldsReducer,
+    fetchWooCommerceProductDataReducer,
     importFileReducer,
     metaStateReducer,
-    saveSettingsReducer,
     saveCustomPostTemplateReducer,
+    saveSettingsReducer,
     saveWooCommerceProductDataReducer,
     sluggifyReducer,
     stepsReducer,
     syncPostsReducer,
+    userMetaStateReducer,
     WooCommerceFieldsStateReducer
 };
 

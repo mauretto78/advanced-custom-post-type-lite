@@ -2,8 +2,6 @@
 
 namespace ACPT_Lite\Core\Models;
 
-use ACPT_Lite\Core\Helper\Strings;
-
 /**
  * WooCommerceProductDataModel
  *

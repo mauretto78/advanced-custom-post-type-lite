@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Core\Generators\Fields;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
 use ACPT_Lite\Utils\Sanitizer;
 
 abstract class AbstractField

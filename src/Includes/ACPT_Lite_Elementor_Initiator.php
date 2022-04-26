@@ -4,6 +4,7 @@ namespace ACPT_Lite\Includes;
 
 use ACPT_Lite\Core\Generators\Elementor\Controls\ShortcodeControl;
 use ACPT_Lite\Core\Generators\Elementor\Widgets\WidgetGenerator;
+use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 
 class ACPT_Lite_Elementor_Initiator
 {
@@ -57,12 +58,12 @@ class ACPT_Lite_Elementor_Initiator
     public function registerElementorWidgets($widgets_manager)
     {
         $postType = (isset($_GET['post'])) ? get_post_type($_GET['post']) : null;
-        $customPostTypeModels = ACPT_Lite_DB::get([
+        $customPostTypeModels = CustomPostTypeRepository::get([
                 'postType' => $postType
         ]);
 
         foreach ($customPostTypeModels as $customPostTypeModel){
-            $metaBoxes = ACPT_Lite_DB::getMeta($customPostTypeModel->getName());
+            $metaBoxes = CustomPostTypeRepository::getMeta($customPostTypeModel->getName());
 
             foreach ($metaBoxes as $metaBox){
                 foreach ($metaBox->getFields() as $boxFieldModel){

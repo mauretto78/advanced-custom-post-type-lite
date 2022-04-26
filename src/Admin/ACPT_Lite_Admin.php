@@ -4,11 +4,15 @@ namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Generators\CustomPostTypeGenerator;
 use ACPT_Lite\Core\Generators\MetaBoxGenerator;
+use ACPT_Lite\Core\Generators\UserMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\MetaBoxModel;
+use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Repository\UserMetaRepository;
+use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
-use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Core\Shortcodes\UserMetaShortcode;
 use ACPT_Lite\Includes\ACPT_Lite_Elementor_Initiator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 
@@ -116,20 +120,18 @@ class ACPT_Lite_Admin
             'wp_ajax_checkTaxonomySlugAction' => 'checkTaxonomySlugAction',
             'wp_ajax_deleteCustomPostTypeAction' => 'deleteCustomPostTypeAction',
             'wp_ajax_deleteCustomPostTypeMetaAction' => 'deleteCustomPostTypeMetaAction',
-            'wp_ajax_deletePostTypeTemplateAction' => 'deletePostTypeTemplateAction',
             'wp_ajax_deleteTaxonomyAction' => 'deleteTaxonomyAction',
             'wp_ajax_deleteWooCommerceProductDataAction' => 'deleteWooCommerceProductDataAction',
             'wp_ajax_deleteWooCommerceProductDataFieldsAction' => 'deleteWooCommerceProductDataFieldsAction',
+            'wp_ajax_deleteUserMetaAction' => 'deleteUserMetaAction',
             'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
             'wp_ajax_exportFileAction' => 'exportFileAction',
             'wp_ajax_fetchCustomPostTypeMetaAction' => 'fetchCustomPostTypeMetaAction',
-            'wp_ajax_fetchCustomPostTypeTemplateAction' => 'fetchCustomPostTypeTemplateAction',
             'wp_ajax_fetchCustomPostTypesAction' => 'fetchCustomPostTypesAction',
             'wp_ajax_fetchCustomPostTypesCountAction' => 'fetchCustomPostTypesCountAction',
             'wp_ajax_fetchMetaFieldRelationshipAction' => 'fetchMetaFieldRelationshipAction',
             'wp_ajax_fetchHeadersAndFootersAction' => 'fetchHeadersAndFootersAction',
             'wp_ajax_fetchPostDataAction' => 'fetchPostDataAction',
-            'wp_ajax_fetchPostsAction' => 'fetchPostsAction',
             'wp_ajax_fetchPreviewLinkAction' => 'fetchPreviewLinkAction',
             'wp_ajax_fetchSettingsAction' => 'fetchSettingsAction',
             'wp_ajax_fetchSidebarsAction' => 'fetchSidebarsAction',
@@ -137,17 +139,18 @@ class ACPT_Lite_Admin
             'wp_ajax_fetchTaxonomiesCountAction' => 'fetchTaxonomiesCountAction',
             'wp_ajax_fetchWooCommerceProductDataAction' => 'fetchWooCommerceProductDataAction',
             'wp_ajax_fetchWooCommerceProductDataFieldsAction' => 'fetchWooCommerceProductDataFieldsAction',
+            'wp_ajax_fetchUserMetaAction' => 'fetchUserMetaAction',
             'wp_ajax_importFileAction' => 'importFileAction',
             'wp_ajax_resetCustomPostTypesAction' => 'resetCustomPostTypesAction',
             'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',
             'wp_ajax_resetWooCommerceProductDataAction' => 'resetWooCommerceProductDataAction',
             'wp_ajax_saveCustomPostTypeAction' => 'saveCustomPostTypeAction',
-            'wp_ajax_saveCustomPostTypeTemplateAction' => 'saveCustomPostTypeTemplateAction',
             'wp_ajax_saveCustomPostTypeMetaAction' => 'saveCustomPostTypeMetaAction',
             'wp_ajax_saveSettingsAction' => 'saveSettingsAction',
             'wp_ajax_saveTaxonomyAction' => 'saveTaxonomyAction',
             'wp_ajax_saveWooCommerceProductDataAction' => 'saveWooCommerceProductDataAction',
             'wp_ajax_saveWooCommerceProductDataFieldsAction' => 'saveWooCommerceProductDataFieldsAction',
+            'wp_ajax_saveUserMetaAction' => 'saveUserMetaAction',
             'wp_ajax_syncPostsAction' => 'syncPostsAction',
             'wp_ajax_sluggifyAction' => 'sluggifyAction',
         ];
@@ -207,6 +210,23 @@ class ACPT_Lite_Admin
                             ],
                             'react' => [
                                     plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.js'
+                            ],
+                    ],
+            ],
+            [
+                    'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                    'pageTitle' => translate('User meta', ACPT_LITE_PLUGIN_NAME),
+                    'menuTitle' => translate('User meta', ACPT_LITE_PLUGIN_NAME),
+                    'capability' => 'manage_options',
+                    'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/user-meta',
+                    'template' => 'app',
+                    'position' => 53,
+                    'assets' => [
+                            'css' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.css'
+                            ],
+                            'react' => [
+                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.js'
                             ],
                     ],
             ],
@@ -323,7 +343,7 @@ class ACPT_Lite_Admin
         }
 
         // Assets for create/edit post
-        if($pagenow === 'post-new.php' or $pagenow === 'post.php') {
+        if($pagenow === 'post-new.php' or $pagenow === 'post.php' or $pagenow === 'profile.php' or $pagenow === 'user-edit.php') {
 
             // other static assets here
             foreach ($this->staticCssAssets as $key => $asset){
@@ -400,6 +420,7 @@ class ACPT_Lite_Admin
     private function addShortcodes()
     {
         add_shortcode('acpt', [new PostMetaShortcode(), 'render']);
+        add_shortcode('acpt_user', [new UserMetaShortcode(), 'render']);
     }
 
     /**
@@ -410,7 +431,7 @@ class ACPT_Lite_Admin
         $metaBoxGenerator = new MetaBoxGenerator();
 
         // add meta box/taxonomies for CPT
-        foreach ( ACPT_Lite_DB::get() as $postTypeModel){
+        foreach ( CustomPostTypeRepository::get() as $postTypeModel){
 
             $customPostType = new CustomPostTypeGenerator(
                 $postTypeModel->getName(),
@@ -454,7 +475,7 @@ class ACPT_Lite_Admin
      */
     public function addWooCommerceProductData()
     {
-        $WooCommerceProductData = ACPT_Lite_DB::getWooCommerceProductData([]);
+        $WooCommerceProductData = WooCommerceProductDataRepository::get([]);
 
         if(!empty($WooCommerceProductData)){
             $wooCommerceProductDataGenerator = new WooCommerceProductDataGenerator($WooCommerceProductData);
@@ -521,11 +542,13 @@ class ACPT_Lite_Admin
     }
 
     /**
+     * Add CPT columns to show in the admin panel
+     *
      * @throws \Exception
      */
     private function addColumnsToShow()
     {
-        foreach ( ACPT_Lite_DB::get() as $postTypeModel){
+        foreach ( CustomPostTypeRepository::get() as $postTypeModel){
 
             $action = 'manage_edit-'.$postTypeModel->getName().'_columns';
 
@@ -563,21 +586,56 @@ class ACPT_Lite_Admin
     }
 
     /**
-     * Register hooks for the theme UI
+     * @throws \Exception
      */
-    private function registerHooks()
+    private function registerUserMeta()
     {
-        $this->loader->addAction( 'acpt_after_main_content', new ACPT_Lite_Hooks(), 'afterMainContent' );
-        $this->loader->addAction( 'acpt_before_main_content', new ACPT_Lite_Hooks(), 'beforeMainContent' );
-        $this->loader->addAction( 'acpt_breadcrumb', new ACPT_Lite_Hooks(), 'breadcrumb' );
-        $this->loader->addAction( 'acpt_thumbnail', new ACPT_Lite_Hooks(), 'thumbnail' );
-        $this->loader->addAction( 'acpt_single_content', new ACPT_Lite_Hooks(), 'singleContent' );
-        $this->loader->addAction( 'acpt_archive_title', new ACPT_Lite_Hooks(), 'archiveTitle' );
-        $this->loader->addAction( 'acpt_archive_loop', new ACPT_Lite_Hooks(), 'archiveLoop' );
-        $this->loader->addAction( 'acpt_loop', new ACPT_Lite_Hooks(), 'loop' );
-        $this->loader->addAction( 'acpt_archive_pagination', new ACPT_Lite_Hooks(), 'pagination' );
-        $this->loader->addAction( 'acpt_prev_next_links', new ACPT_Lite_Hooks(), 'prevNextLinks' );
-        $this->loader->addAction( 'acpt_taxonomy_links', new ACPT_Lite_Hooks(), 'taxonomyLinks' );
+        $boxes = UserMetaRepository::get([]);
+
+        if(!empty($boxes)){
+            $generator = new UserMetaBoxGenerator($boxes);
+            $generator->generate();
+        }
+    }
+
+    /**
+     * Add User meta columns to show in the admin panel
+     */
+    private function addUserMetaColumnsToShow()
+    {
+        add_filter( 'manage_users_columns', function ($column) {
+
+            $boxes = UserMetaRepository::get([]);
+
+            foreach ($boxes as $boxModel){
+                foreach ($boxModel->getFields() as $fieldModel){
+                    if($fieldModel->isShowInArchive()){
+                        $key = Strings::toDBFormat($boxModel->getName()).'_'.Strings::toDBFormat($fieldModel->getName());
+                        $value = Strings::toHumanReadableFormat($fieldModel->getName());
+                        $column[$key] = $value;
+                    }
+                }
+            }
+
+            return $column;
+        } );
+
+        add_filter( 'manage_users_custom_column', function ( $val, $columnName, $userId ) {
+
+            $boxes = UserMetaRepository::get([]);
+
+            foreach ($boxes as $boxModel){
+                foreach ($boxModel->getFields() as $fieldModel){
+                    if($fieldModel->isShowInArchive()){
+                        $key = Strings::toDBFormat($boxModel->getName()).'_'.Strings::toDBFormat($fieldModel->getName());
+
+                        if($key === $columnName){
+                            return do_shortcode( '[acpt_user uid="'.$userId.'" box="'.esc_attr($boxModel->getName()).'" field="'.esc_attr($fieldModel->getName()).'"]');
+                        }
+                    }
+                }
+            }
+        }, 10, 3 );
     }
 
     /**
@@ -621,8 +679,11 @@ class ACPT_Lite_Admin
         // add columns to show in the list panel
         $this->addColumnsToShow();
 
-        // register hooks
-        $this->registerHooks();
+        // register user meta
+        $this->registerUserMeta();
+
+        // add user meta columns to show in the admin panel
+        $this->addUserMetaColumnsToShow();
 
         // API REST
         $this->registerRestFields();

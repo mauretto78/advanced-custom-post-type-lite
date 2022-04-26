@@ -5,7 +5,7 @@
  * @param value
  * @return {boolean}
  */
-import {COLOR, CURRENCY, DATE, EMAIL, LENGTH, NUMBER, PHONE, POST, SELECT, SELECT_MULTI, TOGGLE, WEIGHT} from "../constants/fields";
+import {EMAIL, SELECT} from "../constants/fields";
 import {wpAjaxRequest} from "./ajax";
 
 /**
@@ -108,36 +108,11 @@ export const isAValidValueForThisType = (type, value, options) => {
     }
 
     switch (type ) {
-        case COLOR:
-            return validColor(value);
-
-        case CURRENCY:
-            return validCurrency(value);
-
-        case DATE:
-            return validDate(value);
-
         case EMAIL:
             return validEmail(value);
 
-        case WEIGHT:
-        case LENGTH:
-        case POST:
-        case NUMBER:
-            return validNumber(value);
-
-        case PHONE:
-            return validPhone(value);
-
         case SELECT:
-        case SELECT_MULTI:
             return validSelect(value, options);
-
-        case TOGGLE:
-            return validToggle(value);
-
-        case URL:
-            return validURL(value);
 
         default:
             return true;

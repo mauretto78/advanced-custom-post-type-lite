@@ -127,7 +127,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // woocommerce productdata
+        // WooCommerce product data
         $sql11 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             product_data_name VARCHAR(32) NOT NULL,
@@ -138,7 +138,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // woocommerce productdata field
+        // WooCommerce product data field
         $sql12 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             product_data_id VARCHAR(36) NOT NULL,
@@ -151,11 +151,44 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // woocommerce productdata field option
+        // WooCommerce product data field option
         $sql13 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             product_data_id VARCHAR(36) NOT NULL,
             product_data_field_id VARCHAR(36) NOT NULL,
+            option_label VARCHAR(50) NOT NULL,
+            option_value VARCHAR(50) NOT NULL,
+            sort INT(11),
+            PRIMARY KEY(id)
+        ) $charset_collate;";
+
+        // user meta box
+        $sql14 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_USER_META_BOX."` (
+            id VARCHAR(36) UNIQUE NOT NULL,
+            meta_box_name VARCHAR(50) NOT NULL,
+            sort INT(11),
+            PRIMARY KEY(id)
+        ) $charset_collate;";
+
+        // user meta field
+        $sql15 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_USER_META_FIELD."` (
+            id VARCHAR(36) UNIQUE NOT NULL,
+            user_meta_box_id VARCHAR(36) NOT NULL,
+            field_name VARCHAR(50) NOT NULL,
+            field_type VARCHAR(50) NOT NULL,
+            field_default_value VARCHAR(50) DEFAULT NULL,
+            field_description TEXT DEFAULT NULL,
+            showInArchive TINYINT(1) NOT NULL,
+            required TINYINT(1) NOT NULL,
+            sort INT(11),
+            PRIMARY KEY(id)
+        ) $charset_collate;";
+
+        // user meta field option
+        $sql16 = "CREATE TABLE IF NOT EXISTS  `".ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION."` (
+            id VARCHAR(36) UNIQUE NOT NULL,
+            user_meta_box_id VARCHAR(36) NOT NULL,
+            user_meta_field_id VARCHAR(36) NOT NULL,
             option_label VARCHAR(50) NOT NULL,
             option_value VARCHAR(50) NOT NULL,
             sort INT(11),
@@ -175,6 +208,9 @@ class ACPT_Lite_Schema_Manager
         dbDelta($sql11);
         dbDelta($sql12);
         dbDelta($sql13);
+        dbDelta($sql14);
+        dbDelta($sql15);
+        dbDelta($sql16);
 
         // alter tables
         if(!ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::TABLE_TAXONOMY, 'native')){
@@ -193,19 +229,28 @@ class ACPT_Lite_Schema_Manager
     {
         global $wpdb;
 
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_TAXONOMY."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_SETTINGS."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`;");
-        $wpdb->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."`;");
+        $tables = [
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
+            ACPT_Lite_DB::TABLE_TAXONOMY,
+            ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
+            ACPT_Lite_DB::TABLE_SETTINGS,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
+            ACPT_Lite_DB::TABLE_USER_META_BOX,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION,
+        ];
+
+        foreach ($tables as $table){
+            $wpdb->query("DROP TABLE IF EXISTS `".$table."`;");
+        }
 
         return empty($wpdb->last_error);
     }
