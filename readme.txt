@@ -106,3 +106,7 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * UI/UX fixes and improvements
 * Backend fix on syncronization
 * User meta fields
+
+= 1.0.9 (2022-04-26) =
+
+* PHP8 support
