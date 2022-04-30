@@ -216,18 +216,36 @@ class ACPT_Lite_Schema_Manager
         $conn->query($sql15);
         $conn->query($sql16);
 
-        // alter tables
+        ///////////////////////////////////////////////////
+        /// 2. ALTER TABLES
+        ///////////////////////////////////////////////////
+
         if(!ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::TABLE_TAXONOMY, 'native')){
             $conn->query("ALTER TABLE `".ACPT_Lite_DB::TABLE_TAXONOMY."` ADD  `native` TINYINT(1) NULL DEFAULT NULL ");
         }
 
-        // add prefix
+        ///////////////////////////////////////////////////
+        /// 3. ADD PREFIX TO TABLES
+        ///////////////////////////////////////////////////
+
+        foreach (self::getAllUnprefixedTables() as $table){
+            $conn->query("ALTER TABLE `".$table."` RENAME TO `".ACPT_Lite_DB::prefixedTableName($table)."`;");
+        }
+
+        ///////////////////////////////////////////////////
+        /// 4. REMOVE LEGACY TABLES
+        ///////////////////////////////////////////////////
+
+        foreach (self::getAllUnprefixedTables() as $table){
+            $conn->query("DROP TABLE IF EXISTS `".$table."`;");
+        }
 
         return empty($conn->last_error);
     }
 
     /**
      * Destroy the schema
+     * (both legacy and prefixed tables)
      *
      * @return bool
      */
@@ -235,10 +253,36 @@ class ACPT_Lite_Schema_Manager
     {
         $conn = ACPT_Lite_DB::getDbConn();
 
-        foreach (ACPT_Lite_DB::getAllTables() as $table){
+        foreach (self::getAllUnprefixedTables() as $table){
             $conn->query("DROP TABLE IF EXISTS `".$table."`;");
+            $conn->query("DROP TABLE IF EXISTS `".ACPT_Lite_DB::prefixedTableName($table)."`;");
         }
 
         return empty($conn->last_error);
+    }
+
+    /**
+     * @return array
+     */
+    private static function getAllUnprefixedTables()
+    {
+        return [
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
+            ACPT_Lite_DB::TABLE_TAXONOMY,
+            ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
+            ACPT_Lite_DB::TABLE_SETTINGS,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
+            ACPT_Lite_DB::TABLE_USER_META_BOX,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION,
+        ];
     }
 }

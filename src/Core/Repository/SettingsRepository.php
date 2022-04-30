@@ -23,7 +23,7 @@ class SettingsRepository
                 id, 
                 meta_key,
                 meta_value
-            FROM `".ACPT_Lite_DB::TABLE_SETTINGS."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS)."`
             ";
 
         if($key){
@@ -52,7 +52,7 @@ class SettingsRepository
     public static function save(SettingsModel $settingsModel)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::TABLE_SETTINGS."` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS)."` 
             (`id`,
             `meta_key`,
             `meta_value`

@@ -14,9 +14,9 @@ class WooCommerceProductDataRepository
      */
     public static function clear()
     {
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."`");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."`");
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`");
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."`");
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."`");
     }
 
     /**
@@ -38,13 +38,13 @@ class WooCommerceProductDataRepository
 
                 /** @var WooCommerceProductDataFieldOptionModel $option */
                 foreach ($field->getOptions() as $option){
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` WHERE id = %s;", [$option->getId()]);
+                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` WHERE id = %s;", [$option->getId()]);
                 }
 
-                ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` WHERE id = %s;", [$field->getId()]);
+                ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` WHERE id = %s;", [$field->getId()]);
             }
 
-            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."` WHERE id = %s;", [$id]);
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."` WHERE id = %s;", [$id]);
 
             return true;
         }
@@ -62,7 +62,7 @@ class WooCommerceProductDataRepository
     public static function deleteField($id, $fieldId)
     {
         /** @var WooCommerceProductDataFieldModel $productDataFieldModel */
-        $productDataFieldModel = ACPT_Lite_DB::getField($id, $fieldId);
+        $productDataFieldModel = self::getField($id, $fieldId);
 
         if(null === $productDataFieldModel){
             return false;
@@ -70,10 +70,10 @@ class WooCommerceProductDataRepository
 
         /** @var WooCommerceProductDataFieldOptionModel $option */
         foreach ($productDataFieldModel->getOptions() as $option){
-            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` WHERE id = %s;", [$option->getId()]);
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` WHERE id = %s;", [$option->getId()]);
         }
 
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` WHERE id = %s;", [$productDataFieldModel->getId()]);
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` WHERE id = %s;", [$productDataFieldModel->getId()]);
 
         return true;
     }
@@ -97,10 +97,10 @@ class WooCommerceProductDataRepository
 
                 /** @var WooCommerceProductDataFieldOptionModel $option */
                 foreach ($field->getOptions() as $option){
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` WHERE id = %s;", [$option->getId()]);
+                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` WHERE id = %s;", [$option->getId()]);
                 }
 
-                ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` WHERE id = %s;", [$field->getId()]);
+                ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` WHERE id = %s;", [$field->getId()]);
             }
 
             return true;
@@ -122,7 +122,7 @@ class WooCommerceProductDataRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
             WHERE id = %s
             ";
 
@@ -150,7 +150,7 @@ class WooCommerceProductDataRepository
                 pd.visibility,
                 pd.show_in_ui,
                 pd.content
-            FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."` pd
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."` pd
             WHERE 1=1
             ";
 
@@ -193,7 +193,7 @@ class WooCommerceProductDataRepository
                     field_description as description,
                     required, 
                     sort
-                FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."`
                 WHERE product_data_id = %s
                 ORDER BY sort
             ;", [$productDatum->id]);
@@ -219,7 +219,7 @@ class WooCommerceProductDataRepository
                         option_label as label,
                         option_value as value,
                         sort
-                    FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."`
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."`
                     WHERE product_data_field_id = %s
                     ORDER BY sort
                 ;", [$field->id]);
@@ -254,7 +254,7 @@ class WooCommerceProductDataRepository
      */
     public static function getField($id, $fieldId)
     {
-        $fields = ACPT_Lite_DB::CommerceProductDataFields($id);
+        $fields = self::getFields($id);
 
         if(empty($fields)){
             return [];
@@ -322,7 +322,7 @@ class WooCommerceProductDataRepository
     public static function save(WooCommerceProductDataModel $productDataModel)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."` 
             (`id`,
             `product_data_name` ,
             `icon` ,
@@ -375,7 +375,7 @@ class WooCommerceProductDataRepository
             $isRequired = $fieldModel->isRequired() ? '1' : '0';
 
             $sql = "
-                INSERT INTO `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` 
+                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` 
                 (
                     `id`,
                     `product_data_id`,
@@ -424,7 +424,7 @@ class WooCommerceProductDataRepository
 
             foreach ($fieldModel->getOptions() as $optionModel){
                 $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` 
+                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` 
                     (`id`,
                     `product_data_id` ,
                     `product_data_field_id` ,
@@ -482,9 +482,9 @@ class WooCommerceProductDataRepository
             }
         }
 
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."` f WHERE f.product_data_id IN ('".implode("','",$productDataIds)."') AND f.id NOT IN ('"
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f WHERE f.product_data_id IN ('".implode("','",$productDataIds)."') AND f.id NOT IN ('"
                 .implode("','",$fieldIds)."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION."` o WHERE o.product_data_id IN ('".implode("','",$productDataIds)."') AND o.id NOT IN ('"
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o WHERE o.product_data_id IN ('".implode("','",$productDataIds)."') AND o.id NOT IN ('"
                 .implode("','",$optionsIds)."');");
     }
 }

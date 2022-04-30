@@ -435,26 +435,4 @@ class ACPT_Lite_DB
 
         return $exists;
     }
-
-    public static function getAllTables()
-    {
-        return [
-                ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
-                ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX,
-                ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD,
-                ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION,
-                ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION,
-                ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE,
-                ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
-                ACPT_Lite_DB::TABLE_TAXONOMY,
-                ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
-                ACPT_Lite_DB::TABLE_SETTINGS,
-                ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
-                ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
-                ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
-                ACPT_Lite_DB::TABLE_USER_META_BOX,
-                ACPT_Lite_DB::TABLE_USER_META_FIELD,
-                ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION,
-        ];
-    }
 }

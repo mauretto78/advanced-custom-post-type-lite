@@ -20,7 +20,7 @@ class TaxonomyRepository
     {
         $sql = "
             INSERT INTO
-                `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."`
+                `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."`
                 (
                     `custom_post_type_id`, 
                     `taxonomy_id` 
@@ -48,7 +48,7 @@ class TaxonomyRepository
         $baseQuery = "
             SELECT 
                 count(id) as count
-            FROM `".ACPT_Lite_DB::TABLE_TAXONOMY."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."`
             ";
 
         $results = ACPT_Lite_DB::getResults($baseQuery);
@@ -68,8 +68,8 @@ class TaxonomyRepository
         $taxonomyId = self::getId($taxonomy);
 
         if($taxonomyId){
-            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_TAXONOMY."` WHERE id = %s;", [$taxonomyId]);
-            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."` WHERE taxonomy_id = %s;", [$taxonomyId]);
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` WHERE id = %s;", [$taxonomyId]);
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` WHERE taxonomy_id = %s;", [$taxonomyId]);
         }
     }
 
@@ -84,7 +84,7 @@ class TaxonomyRepository
     {
         $sql = "
             DELETE
-                FROM `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."`
                 WHERE custom_post_type_id = %s
             ";
 
@@ -104,7 +104,7 @@ class TaxonomyRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `".ACPT_Lite_DB::TABLE_TAXONOMY."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."`
             WHERE slug = %s
             ";
 
@@ -136,7 +136,7 @@ class TaxonomyRepository
                 t.labels,
                 t.native,
                 t.settings
-            FROM `".ACPT_Lite_DB::TABLE_TAXONOMY."` t
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` t
             WHERE 1=1
             ";
 
@@ -195,8 +195,8 @@ class TaxonomyRepository
                     c.supports,
                     c.labels,
                     c.settings
-                FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."` c
-                JOIN `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."` p ON p.custom_post_type_id = c.id
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` c
+                JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` p ON p.custom_post_type_id = c.id
                 WHERE p.taxonomy_id = %s
             ;", [$taxonomyModel->getId()]);
 
@@ -235,7 +235,7 @@ class TaxonomyRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `".ACPT_Lite_DB::TABLE_TAXONOMY."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."`
             WHERE slug = %s
             ";
 
@@ -256,7 +256,7 @@ class TaxonomyRepository
     public static function save(TaxonomyModel $taxonomyModel)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::TABLE_TAXONOMY."` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` 
             (`id`,
             `slug`,
             `singular`,
@@ -310,7 +310,7 @@ class TaxonomyRepository
     {
         $sql = "
             DELETE FROM
-                `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."`
+                `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."`
                 WHERE
                    `custom_post_type_id` = %s AND `taxonomy_id` = %s
             ";

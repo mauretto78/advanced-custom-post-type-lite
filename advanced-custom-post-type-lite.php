@@ -22,7 +22,7 @@
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       custom-post-type
- * Domain Path:       /advanced-custom-post-type
+ * Domain Path:       /advanced-custom-post-type-lite
  */
 
 use ACPT_Lite\Includes\ACPT_Lite_Activator;
@@ -43,7 +43,7 @@ ob_start();
  * plugin settings
  */
 define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
-define( 'ACPT_LITE_PLUGIN_VERSION', '1.0.8' );
+define( 'ACPT_LITE_PLUGIN_VERSION', '1.0.9' );
 
 /**
  * Composer init
