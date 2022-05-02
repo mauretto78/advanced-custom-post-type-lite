@@ -98,7 +98,7 @@ class ACPT_Lite_DB
     public static function checkIfSchemaExists()
     {
         try {
-            $sql = "SELECT id FROM `".self::TABLE_CUSTOM_POST_TYPE."` LIMIT 1;";
+            $sql = "SELECT id FROM `".self::prefixedTableName(self::TABLE_CUSTOM_POST_TYPE)."` LIMIT 1;";
             self::executeQueryOrThrowException($sql);
 
             return true;

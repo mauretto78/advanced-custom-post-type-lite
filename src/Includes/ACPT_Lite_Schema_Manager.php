@@ -229,7 +229,11 @@ class ACPT_Lite_Schema_Manager
         ///////////////////////////////////////////////////
 
         foreach (self::getAllUnprefixedTables() as $table){
-            $conn->query("ALTER TABLE `".$table."` RENAME TO `".ACPT_Lite_DB::prefixedTableName($table)."`;");
+            if ($result = $conn->query("SHOW TABLES LIKE '".ACPT_Lite_DB::prefixedTableName($table)."'")) {
+                if($result->num_rows !== 1) {
+                    $conn->query("RENAME TABLE `".$table."` TO `".ACPT_Lite_DB::prefixedTableName($table)."`;");
+                }
+            }
         }
 
         ///////////////////////////////////////////////////
