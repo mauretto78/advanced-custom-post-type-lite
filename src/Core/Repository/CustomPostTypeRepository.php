@@ -1077,7 +1077,7 @@ class CustomPostTypeRepository
         $query = "
             SELECT f.`id`, r.`inversed_meta_field_id`, r.`relationship`
             FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-            JOIN `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION . "` r ON r.meta_field_id = f.id
+            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION) . "` r ON r.meta_field_id = f.id
             WHERE f.`field_type` = %s
             AND r.`relationship` LIKE '%Bi'
         ";
@@ -1092,7 +1092,7 @@ class CustomPostTypeRepository
 
                 $subquery = "
                     SELECT f.id
-                    FROM `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD . "` f
+                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` f
                     WHERE f.`id` = %s
                 ";
 
@@ -1143,9 +1143,20 @@ class CustomPostTypeRepository
      */
     public static function removeMetaOrphans($postType, $ids)
     {
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=f.meta_box_id WHERE b.post_type = '".$postType."' AND f.id NOT IN ('".implode("','",$ids['fields'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=o.meta_box_id WHERE b.post_type = '".$postType."' AND o.id NOT IN ('".implode("','",$ids['options'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE r FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=r.meta_box_id WHERE b.post_type = '".$postType."' AND r.id NOT IN ('".implode("','",$ids['relations'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` WHERE post_type = '".$postType."' AND id NOT IN ('".implode("','",$ids['boxes'])."');");
+        if(isset($ids['fields'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=f.meta_box_id WHERE b.post_type = '".$postType."' AND f.id NOT IN ('".implode("','",$ids['fields'])."');");
+        }
+
+        if(isset($ids['options'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=o.meta_box_id WHERE b.post_type = '".$postType."' AND o.id NOT IN ('".implode("','",$ids['options'])."');");
+        }
+
+        if(isset($ids['relations'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE r FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=r.meta_box_id WHERE b.post_type = '".$postType."' AND r.id NOT IN ('".implode("','",$ids['relations'])."');");
+        }
+
+        if(isset($ids['boxes'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` WHERE post_type = '".$postType."' AND id NOT IN ('".implode("','",$ids['boxes'])."');");
+        }
     }
 }

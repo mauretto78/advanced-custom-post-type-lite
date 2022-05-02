@@ -284,7 +284,7 @@ class UserMetaRepository
     public static function save(UserMetaBoxModel $metaBoxModel)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::prefixedTableNam(ACPT_Lite_DB::TABLE_USER_META_BOX)."` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` 
             (
                 `id`,
                 `meta_box_name`,
@@ -412,8 +412,16 @@ class UserMetaRepository
      */
     public static function removeOrphans($ids)
     {
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=f.user_meta_box_id WHERE f.id NOT IN ('".implode("','",$ids['fields'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=o.user_meta_box_id WHERE o.id NOT IN ('".implode("','",$ids['options'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` WHERE id NOT IN ('".implode("','",$ids['boxes'])."');");
+        if(isset($ids['fields'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=f.user_meta_box_id WHERE f.id NOT IN ('".implode("','",$ids['fields'])."');");
+        }
+
+        if(isset($ids['options'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=o.user_meta_box_id WHERE o.id NOT IN ('".implode("','",$ids['options'])."');");
+        }
+
+        if(isset($ids['boxes'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` WHERE id NOT IN ('".implode("','",$ids['boxes'])."');");
+        }
     }
 }
