@@ -62,6 +62,11 @@ class ACPT_Lite_Plugin
      */
     public function __construct( ACPT_Lite_Loader $loader)
     {
+        if(false === ACPT_Lite_DB::checkIfSchemaExists()){
+            ACPT_Lite_DB::createSchema();
+            ACPT_Lite_DB::sync();
+        }
+
         $this->loader = $loader;
         $this->setName();
         $this->setVersion();

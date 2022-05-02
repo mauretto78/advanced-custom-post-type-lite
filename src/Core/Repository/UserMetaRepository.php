@@ -57,7 +57,7 @@ class UserMetaRepository
 
         $sql = "
                     DELETE
-                        FROM `".ACPT_Lite_DB::TABLE_USER_META_BOX."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."`
                         WHERE id = %s
                     ";
 
@@ -71,7 +71,7 @@ class UserMetaRepository
         foreach ($metaBoxModel->getFields() as $fieldModel){
             $sql = "
                     DELETE
-                        FROM `".ACPT_Lite_DB::TABLE_USER_META_FIELD."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD)."`
                         WHERE id = %s
                     ";
 
@@ -85,7 +85,7 @@ class UserMetaRepository
             foreach ($fieldModel->getOptions() as $optionModel){
                 $sql = "
                         DELETE
-                            FROM `".ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION."`
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION)."`
                             WHERE id = %s
                         ";
 
@@ -117,7 +117,7 @@ class UserMetaRepository
                 uf.id, 
                 uf.meta_box_name as name,
                 uf.sort
-            FROM `".ACPT_Lite_DB::TABLE_USER_META_BOX."` uf
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` uf
             WHERE 1=1
             ";
 
@@ -150,7 +150,7 @@ class UserMetaRepository
                             required,
                             showInArchive,
                             sort
-                        FROM `".ACPT_Lite_DB::TABLE_USER_META_FIELD."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD)."`
                         WHERE user_meta_box_id = %s
                         ORDER BY sort;
                     ";
@@ -178,7 +178,7 @@ class UserMetaRepository
                         option_label as label,
                         option_value as value,
                         sort
-                    FROM `".ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION."`
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION)."`
                     WHERE user_meta_field_id = %s
                     ORDER BY sort
                 ;", [$field->id]);
@@ -219,7 +219,7 @@ class UserMetaRepository
                 post_type,
                 meta_box_name as name,
                 sort
-            FROM `".ACPT_Lite_DB::TABLE_USER_META_BOX."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."`
             WHERE id = %s
         ;", [$id]);
 
@@ -251,7 +251,7 @@ class UserMetaRepository
                 required,
                 showInArchive,
                 sort
-            FROM `".ACPT_Lite_DB::TABLE_USER_META_FIELD."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD)."`
             WHERE id = %s
         ;";
 
@@ -284,7 +284,7 @@ class UserMetaRepository
     public static function save(UserMetaBoxModel $metaBoxModel)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::TABLE_USER_META_BOX."` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` 
             (
                 `id`,
                 `meta_box_name`,
@@ -312,7 +312,7 @@ class UserMetaRepository
             $isRequired = $fieldModel->isRequired() ? '1' : '0';
 
             $sql = "
-                INSERT INTO `".ACPT_Lite_DB::TABLE_USER_META_FIELD."` 
+                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD)."` 
                 (
                     `id`,
                     `user_meta_box_id`,
@@ -366,7 +366,7 @@ class UserMetaRepository
 
             foreach ($fieldModel->getOptions() as $optionModel){
                 $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION."` 
+                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION)."` 
                     (`id`,
                     `user_meta_box_id` ,
                     `user_meta_field_id` ,
@@ -412,8 +412,16 @@ class UserMetaRepository
      */
     public static function removeOrphans($ids)
     {
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::TABLE_USER_META_FIELD."` f LEFT JOIN `".ACPT_Lite_DB::TABLE_USER_META_BOX."` b on b.id=f.user_meta_box_id WHERE f.id NOT IN ('".implode("','",$ids['fields'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION."` o LEFT JOIN `".ACPT_Lite_DB::TABLE_USER_META_BOX."` b on b.id=o.user_meta_box_id WHERE o.id NOT IN ('".implode("','",$ids['options'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_USER_META_BOX."` WHERE id NOT IN ('".implode("','",$ids['boxes'])."');");
+        if(isset($ids['fields'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=f.user_meta_box_id WHERE f.id NOT IN ('".implode("','",$ids['fields'])."');");
+        }
+
+        if(isset($ids['options'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=o.user_meta_box_id WHERE o.id NOT IN ('".implode("','",$ids['options'])."');");
+        }
+
+        if(isset($ids['boxes'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` WHERE id NOT IN ('".implode("','",$ids['boxes'])."');");
+        }
     }
 }

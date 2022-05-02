@@ -39,6 +39,57 @@ class ACPT_Lite_DB
     const TABLE_USER_META_FIELD_OPTION = 'acpt_user_field_option';
 
     /**
+     * @var self
+     */
+    private static $instance;
+
+    /**
+     * @var \mysqli
+     */
+    private $dbConn;
+
+    /**
+     *
+     * @return ACPT_Lite_DB
+     */
+    private static function getInstance()
+    {
+        if (self::$instance == null){
+            $className = __CLASS__;
+            self::$instance = new $className;
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     *
+     * @return ACPT_Lite_DB
+     */
+    private static function initConnection()
+    {
+        $db = self::getInstance();
+        $db->dbConn = new \mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $db->dbConn->set_charset(DB_CHARSET);
+
+        return $db;
+    }
+
+    /**
+     * @return \mysqli|null
+     */
+    public static function getDbConn() {
+        try {
+            $db = self::initConnection();
+
+            return $db->dbConn;
+        } catch (\Exception $ex) {
+            echo "I was unable to open a connection to the database. " . $ex->getMessage();
+            return null;
+        }
+    }
+
+    /**
      * check if schema exists
      *
      * @since    1.0.1
@@ -47,7 +98,7 @@ class ACPT_Lite_DB
     public static function checkIfSchemaExists()
     {
         try {
-            $sql = "SELECT id FROM `".self::TABLE_CUSTOM_POST_TYPE."` LIMIT 1;";
+            $sql = "SELECT id FROM `".self::prefixedTableName(self::TABLE_CUSTOM_POST_TYPE)."` LIMIT 1;";
             self::executeQueryOrThrowException($sql);
 
             return true;
@@ -351,6 +402,16 @@ class ACPT_Lite_DB
         global $wpdb;
 
         return $wpdb->prefix;
+    }
+
+    /**
+     * @param $table
+     *
+     * @return string
+     */
+    public static function prefixedTableName($table)
+    {
+        return self::prefix().$table;
     }
 
     /**

@@ -25,7 +25,7 @@ class CustomPostTypeRepository
         $baseQuery = "
             SELECT 
                 count(id) as count
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
             ";
 
         $results = ACPT_Lite_DB::getResults($baseQuery);
@@ -60,7 +60,7 @@ class CustomPostTypeRepository
             try {
                 $sql = "
                     DELETE
-                        FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
                         WHERE id = %s
                     ";
 
@@ -141,7 +141,7 @@ class CustomPostTypeRepository
 
         $sql = "
                     DELETE
-                        FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
                         WHERE id = %s
                     ";
 
@@ -155,7 +155,7 @@ class CustomPostTypeRepository
         foreach ($metaBoxModel->getFields() as $fieldModel){
             $sql = "
                     DELETE
-                        FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
                         WHERE id = %s
                     ";
 
@@ -169,7 +169,7 @@ class CustomPostTypeRepository
             foreach ($fieldModel->getOptions() as $optionModel){
                 $sql = "
                         DELETE
-                            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION."`
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
                             WHERE id = %s
                         ";
 
@@ -184,7 +184,7 @@ class CustomPostTypeRepository
             foreach ($fieldModel->getRelations() as $relationModel){
                 $sql = "
                         DELETE
-                            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."`
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
                             WHERE id = %s
                         ";
 
@@ -213,7 +213,7 @@ class CustomPostTypeRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
             WHERE post_name = %s
             ";
 
@@ -249,7 +249,7 @@ class CustomPostTypeRepository
                 cp.labels,
                 cp.settings,
                 COUNT(p.id) as post_count
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."` cp
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` cp
             LEFT JOIN `".ACPT_Lite_DB::prefix()."posts` p ON p.post_type = cp.post_name AND p.`post_status` = %s
             WHERE 1=1
             ";
@@ -296,7 +296,7 @@ class CustomPostTypeRepository
                     id, 
                     meta_box_name as name,
                     sort
-                FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
                 WHERE post_type = %s
                 ORDER BY sort
             ;", [$post->name]);
@@ -319,7 +319,7 @@ class CustomPostTypeRepository
                             required,
                             showInArchive,
                             sort
-                        FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
                         WHERE meta_box_id = %s
                     ";
 
@@ -353,7 +353,7 @@ class CustomPostTypeRepository
                                 option_label as label,
                                 option_value as value,
                                 sort
-                            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION."`
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
                             WHERE meta_field_id = %s
                             ORDER BY sort
                         ;", [$field->id]);
@@ -381,7 +381,7 @@ class CustomPostTypeRepository
                                 inversed_meta_box_name as inversedBoxName,
                                 inversed_meta_field_id as inversedFieldId,
                                 inversed_meta_field_name as inversedFieldName
-                            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."`
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
                             WHERE meta_field_id = %s
                         ;", [$field->id]);
 
@@ -421,8 +421,8 @@ class CustomPostTypeRepository
                         t.plural,
                         t.labels,
                         t.settings
-                    FROM `".ACPT_Lite_DB::TABLE_TAXONOMY."` t
-                    JOIN `".ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT."` p ON p.taxonomy_id = t.id
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` t
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` p ON p.taxonomy_id = t.id
                     WHERE p.custom_post_type_id = %s
                 ;", [$postModel->getId()]);
 
@@ -448,7 +448,7 @@ class CustomPostTypeRepository
                             json,
                             html,
                             meta
-                        FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE)."`
                         WHERE post_type = %s
                 ;", [$post->name]);
 
@@ -473,7 +473,7 @@ class CustomPostTypeRepository
                             icon,
                             visibility,
                             show_in_ui
-                        FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA."`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
                     ;", []);
 
                     foreach ($productData as $productDatum){
@@ -493,7 +493,7 @@ class CustomPostTypeRepository
                                 field_type,
                                 required,
                                 sort
-                            FROM `".ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD."`
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."`
                             WHERE product_data_id = %s ORDER BY sort DESC
                         ;", [$productDatum->id]);
 
@@ -559,7 +559,7 @@ class CustomPostTypeRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
             WHERE post_name = %s
             ";
 
@@ -633,7 +633,7 @@ class CustomPostTypeRepository
                 post_type,
                 meta_box_name as name,
                 sort
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
             WHERE id = %s
         ;", [$id]);
 
@@ -666,7 +666,7 @@ class CustomPostTypeRepository
                 required,
                 showInArchive,
                 sort
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
             WHERE id = %s
         ;";
 
@@ -699,7 +699,7 @@ class CustomPostTypeRepository
     public static function save(CustomPostTypeModel $model)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` 
             (`id`,
             `post_name` ,
             `singular` ,
@@ -762,7 +762,7 @@ class CustomPostTypeRepository
     public static function saveMetaBox(MetaBoxModel $metaBoxModel, &$ids)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` 
             (
                 `id`,
                 `post_type`,
@@ -795,7 +795,7 @@ class CustomPostTypeRepository
             $isRequired = $fieldModel->isRequired() ? '1' : '0';
 
             $sql = "
-                INSERT INTO `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."` 
+                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` 
                 (
                     `id`,
                     `meta_box_id`,
@@ -849,7 +849,7 @@ class CustomPostTypeRepository
 
             foreach ($fieldModel->getOptions() as $optionModel){
                 $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION."` 
+                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` 
                     (`id`,
                     `meta_box_id` ,
                     `meta_field_id` ,
@@ -894,7 +894,7 @@ class CustomPostTypeRepository
                 $d = ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getName() : 'NULL';
 
                 $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."`
+                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
                     (
                         `id`,
                         `meta_box_id`,
@@ -949,7 +949,7 @@ class CustomPostTypeRepository
                 if($relationModel->getInversedBy() !== null){
 
                     // check if there are already persisted inversed by
-                    $sql = 'SELECT id FROM `'.ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION.'` WHERE 
+                    $sql = 'SELECT id FROM `'.ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION).'` WHERE 
                         `meta_box_id` = %s AND
                         `meta_field_id` = %s AND
                         `related_post_type` = %s
@@ -968,7 +968,7 @@ class CustomPostTypeRepository
                     }
 
                     $sql = "
-                        INSERT INTO `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."`
+                        INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
                             (`id`,
                             `meta_box_id` ,
                             `meta_field_id` ,
@@ -1021,7 +1021,7 @@ class CustomPostTypeRepository
                             $fieldModel->getName()
                     ]);
 
-                    $sql = "UPDATE `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."`
+                    $sql = "UPDATE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
                         SET `field_type` = %s
                         WHERE id = %s
                     ;";
@@ -1037,8 +1037,8 @@ class CustomPostTypeRepository
             if($fieldModel->getType() !== MetaBoxFieldModel::POST_TYPE or !$fieldModel->getRelations()[0]->isBidirectional()){
                 $query = "
                     SELECT *
-                    FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."` f
-                    JOIN `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."` r ON r.meta_field_id = f.id
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r ON r.meta_field_id = f.id
                     WHERE f.`field_type` = %s
                     AND f.id != %s
                     AND r.inversed_meta_field_id = %s
@@ -1052,7 +1052,7 @@ class CustomPostTypeRepository
                 ]);
 
                 foreach ($results as $result){
-                    $sql = "UPDATE `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."`
+                    $sql = "UPDATE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
                         SET
                             `relationship` = '".str_replace("Bi", "Uni", $result->relationship)."',
                             `inversed_meta_box_id` = NULL,
@@ -1076,8 +1076,8 @@ class CustomPostTypeRepository
     {
         $query = "
             SELECT f.`id`, r.`inversed_meta_field_id`, r.`relationship`
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."` f
-            JOIN `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION . "` r ON r.meta_field_id = f.id
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
+            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION) . "` r ON r.meta_field_id = f.id
             WHERE f.`field_type` = %s
             AND r.`relationship` LIKE '%Bi'
         ";
@@ -1092,19 +1092,19 @@ class CustomPostTypeRepository
 
                 $subquery = "
                     SELECT f.id
-                    FROM `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD . "` f
+                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` f
                     WHERE f.`id` = %s
                 ";
 
                 $subResults = ACPT_Lite_DB::getResults( $subquery, [$result->inversed_meta_field_id] );
 
                 if ( count( $subResults ) === 0 ) {
-                    $sql = "DELETE FROM `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION . "` WHERE meta_field_id = %s;";
+                    $sql = "DELETE FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION) . "` WHERE meta_field_id = %s;";
                     self::executeQueryOrThrowException( $sql, [
                             $result->id
                     ] );
 
-                    $sql = "UPDATE `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD . "` SET `field_type` = %s WHERE id = %s;";
+                    $sql = "UPDATE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` SET `field_type` = %s WHERE id = %s;";
                     self::executeQueryOrThrowException( $sql, [
                             MetaBoxFieldModel::TEXT_TYPE,
                             $result->id
@@ -1116,8 +1116,8 @@ class CustomPostTypeRepository
         // check if there are persisted relationship on a NON POST type field
         $query = "
             SELECT r.id
-            FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."` r
-            JOIN `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD . "` f ON f.id = r.meta_field_id 
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r
+            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` f ON f.id = r.meta_field_id 
             WHERE f.`field_type` != %s
         ";
 
@@ -1127,7 +1127,7 @@ class CustomPostTypeRepository
 
         if(count($results) > 0) {
             foreach ( $results as $result ) {
-                $sql = "DELETE FROM `" . ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION . "` WHERE id = %s;";
+                $sql = "DELETE FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION) . "` WHERE id = %s;";
                 self::executeQueryOrThrowException( $sql, [
                         $result->id
                 ] );
@@ -1143,9 +1143,20 @@ class CustomPostTypeRepository
      */
     public static function removeMetaOrphans($postType, $ids)
     {
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."` f LEFT JOIN `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."` b on b.id=f.meta_box_id WHERE b.post_type = '".$postType."' AND f.id NOT IN ('".implode("','",$ids['fields'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION."` o LEFT JOIN `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."` b on b.id=o.meta_box_id WHERE b.post_type = '".$postType."' AND o.id NOT IN ('".implode("','",$ids['options'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE r FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION."` r LEFT JOIN `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."` b on b.id=r.meta_box_id WHERE b.post_type = '".$postType."' AND r.id NOT IN ('".implode("','",$ids['relations'])."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."` WHERE post_type = '".$postType."' AND id NOT IN ('".implode("','",$ids['boxes'])."');");
+        if(isset($ids['fields'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=f.meta_box_id WHERE b.post_type = '".$postType."' AND f.id NOT IN ('".implode("','",$ids['fields'])."');");
+        }
+
+        if(isset($ids['options'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=o.meta_box_id WHERE b.post_type = '".$postType."' AND o.id NOT IN ('".implode("','",$ids['options'])."');");
+        }
+
+        if(isset($ids['relations'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE r FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=r.meta_box_id WHERE b.post_type = '".$postType."' AND r.id NOT IN ('".implode("','",$ids['relations'])."');");
+        }
+
+        if(isset($ids['boxes'])){
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` WHERE post_type = '".$postType."' AND id NOT IN ('".implode("','",$ids['boxes'])."');");
+        }
     }
 }
