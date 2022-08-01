@@ -13,7 +13,9 @@ export const wpAjaxRequest = async (action, data) => {
     formData.append('action', action);
     formData.append('data', JSON.stringify(data));
 
-    let response = await fetch('/wp-admin/admin-ajax.php', {
+    const baseAjaxUrl = (typeof ajaxurl === 'string') ? ajaxurl : '/wp-admin/admin-ajax.php';
+
+    let response = await fetch(baseAjaxUrl, {
         method: 'POST',
         body: formData
     });

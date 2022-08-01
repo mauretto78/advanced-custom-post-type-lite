@@ -13,6 +13,7 @@ import {metaSubmit} from "../../../redux/thunks/metaSubmit";
 import {toast} from "react-toastify";
 import {deleteAllMeta} from "../../../redux/thunks/deleteAllMeta";
 import {Icon} from "@iconify/react";
+import {scrollToBottom} from "../../../utils/scroll";
 
 const CustomPostTypeList = () => {
 
@@ -106,6 +107,7 @@ const CustomPostTypeList = () => {
                     onClick={ (e) => {
                         e.preventDefault();
                         dispatch(createBox(postType));
+                        scrollToBottom();
                     } }
                     className="acpt-btn acpt-btn-primary-o"
                 >
@@ -132,6 +134,7 @@ const CustomPostTypeList = () => {
                                 onClick={ (e) => {
                                     e.preventDefault();
                                     dispatch(createBox(postType));
+                                    scrollToBottom();
                                 } }
                                 className="acpt-btn acpt-btn-primary-o"
                             >

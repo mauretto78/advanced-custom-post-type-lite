@@ -177,9 +177,7 @@ class CustomPostTypeGenerator extends AbstractGenerator
                         try {
                             $this->validateDataBeforeSaving($type, $isRequired, $_POST[$key]);
                         } catch (\Exception $exception){
-                            $errors[] = $exception->getMessage();
-
-                            return;
+                            wp_die('There was an error during saving data. The error is: ' . $exception->getMessage());
                         }
 
                         update_post_meta($post->ID, $key, sanitize_text_field($_POST[$key]));
