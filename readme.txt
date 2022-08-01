@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -111,3 +111,10 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 * PHP8 support
 * Added MySQL tables prefix
+
+= 1.0.10 (2022-08-01) =
+
+* Taxonomy edit fix
+* Broken classname
+* Ajax url fix (subfolder installation fix)
+* UI/UX fixes and improvements

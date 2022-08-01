@@ -44,7 +44,7 @@ const OtherSettingsStep = ({setPristineHandler}) => {
             capability_type: fetched.length > 0 ? settings.capability_type : 'post',
             has_archive: fetched.length > 0 ? settings.has_archive : null,
             rewrite: fetched.length > 0 ? settings.rewrite : null,
-            custom_rewrite: fetched.length > 0 ? settings.custom_rewrite : null,
+            custom_rewrite: fetched.length > 0 && settings.rewrite ? settings.rewrite.slug : null,
             query_var: fetched.length > 0 ? settings.query_var : null,
             custom_query_var: fetched.length > 0 ? settings.custom_query_var : null,
         }
@@ -157,7 +157,7 @@ const OtherSettingsStep = ({setPristineHandler}) => {
                     min="5"
                     max="100"
                     label="Menu position"
-                    placeholder="REST API base slug"
+                    placeholder="Menu position"
                     register={register}
                     errors={errors}
                     description="The position in the menu order the post type should appear. To work, $show_in_menu must be true. Default null (at the bottom)."

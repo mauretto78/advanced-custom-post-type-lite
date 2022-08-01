@@ -4,6 +4,7 @@ namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Assert;
 use ACPT_Lite\Utils\Sanitizer;
@@ -63,7 +64,7 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
             'meta_boxes' => [],
         ];
 
-        $metaBoxes = ACPT_Lite_DB::getMeta($postType);
+        $metaBoxes = CustomPostTypeRepository::getMeta($postType);
 
         foreach ($metaBoxes as $metaBox){
 
@@ -99,7 +100,7 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
 
         if( $postType === 'product' and class_exists( 'woocommerce' )  ){
             $meta['wc_product_data'] = [];
-            $productData = ACPT_Lite_DB::getWooCommerceProductData();
+            $productData = WooCommerceProductDataRepository::get();
 
             foreach ($productData as $productDatum) {
 
