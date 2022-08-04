@@ -12,9 +12,7 @@ class ACPT_Lite_Schema_Manager
     public static function up()
     {
         $conn = ACPT_Lite_DB::getDbConn();
-
-        global $wpdb;
-        $charset_collate = $wpdb->get_charset_collate();
+        $charset_collate = self::getCharsetCollation();
 
         ///////////////////////////////////////////////////
         /// 1. CREATE TABLES
@@ -245,6 +243,32 @@ class ACPT_Lite_Schema_Manager
         }
 
         return empty($conn->last_error);
+    }
+
+    /**
+     * Return the correct charset collation
+     *
+     * @return string
+     */
+    private static function getCharsetCollation()
+    {
+        global $wpdb;
+
+        $charset_collate = "";
+        $collation = $wpdb->get_row("SHOW FULL COLUMNS FROM {$wpdb->posts} WHERE field = 'post_content'");
+
+        if(isset($collation->Collation)) {
+            $charset = explode('_', $collation->Collation);
+
+            if(is_array($charset) && count($charset) > 1) {
+                $charset = $charset[0];
+                $charset_collate = "DEFAULT CHARACTER SET {$charset} COLLATE {$collation->Collation}";
+            }
+        }
+
+        if(empty($charset_collate)) { $charset_collate = $wpdb->get_charset_collate(); }
+
+        return $charset_collate;
     }
 
     /**
