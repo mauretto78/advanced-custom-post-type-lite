@@ -162,7 +162,7 @@ const SaveWooCommerceProductDataForm = ({id, setPristineHandler}) => {
                     disabled={(!isValid) ? 'disabled' : ''}
                 >
                     Save
-                    <Icon icon="bx:bx-save" width="24px" />
+                    <Icon icon="bx:bx-save" width="18px" />
                 </button>
             </div>
         </form>

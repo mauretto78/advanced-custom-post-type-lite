@@ -71,7 +71,7 @@ const ViewTaxonomy = () => {
                 }
             ]} />
             <h1 className="acpt-title">
-                <Icon icon="bx:bx-search-alt" color="#02c39a" width="24px" />
+                <Icon icon="bx:bx-search-alt" color="#02c39a" width="18px" />
                 &nbsp;
                 {taxonomy} global settings
             </h1>

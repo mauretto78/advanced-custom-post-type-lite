@@ -12,7 +12,7 @@ export default function StepsButtons( {isValid, next, prev}) {
         <div className="acpt-step-buttons">
             {prev &&
             <a className="acpt-btn acpt-btn-primary prev" onClick={ e => dispatch(stepBack()) }>
-                <Icon icon="bx:bx-chevron-left" width="24px" />
+                <Icon icon="bx:bx-chevron-left" width="18px" />
                 Previous Step
             </a>
             }
@@ -21,7 +21,7 @@ export default function StepsButtons( {isValid, next, prev}) {
                 <button
                     className="acpt-btn acpt-btn-primary next" disabled={(isValid) ? '' : 'disabled'}>
                     Next Step
-                    <Icon icon="bx:bx-chevron-right" width="24px" />
+                    <Icon icon="bx:bx-chevron-right" width="18px" />
                 </button>
             }
 
@@ -31,7 +31,7 @@ export default function StepsButtons( {isValid, next, prev}) {
                     disabled={(!isValid || loading) ? 'disabled' : ''}
                 >
                     {loading ? 'Loading...' : 'Save'}
-                    <Icon icon="bx:bx-save" width="24px" />
+                    <Icon icon="bx:bx-save" width="18px" />
                 </button>
             }
         </div>

@@ -62,7 +62,7 @@ const WooCommerceProductDataList = () => {
             ]} />
 
             <h1 className="acpt-title vertical-center">
-                <Icon icon="icon-park-outline:ad-product" color="#02c39a" width="24px"/>
+                <Icon icon="icon-park-outline:ad-product" color="#02c39a" width="18px"/>
                 &nbsp;
                 WooCommerce product data
             </h1>
@@ -71,7 +71,7 @@ const WooCommerceProductDataList = () => {
                     to='/product-data/product/add'
                     className="acpt-btn acpt-btn-primary-o"
                 >
-                    <Icon icon="bx:bx-list-plus" width="24px"/>
+                    <Icon icon="bx:bx-list-plus" width="18px"/>
                     &nbsp;
                     Add product data
                 </Link>

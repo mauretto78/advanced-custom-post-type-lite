@@ -101,7 +101,7 @@ const SaveTaxonomy = () => {
             ]} />
             {Prompt}
             <h1 className="acpt-title">
-                <Icon icon={taxonomy ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="24px" />
+                <Icon icon={taxonomy ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="18px" />
                 &nbsp;
                 {taxonomy ? "Edit Taxonomy" : "Create new Taxonomy" }
             </h1>

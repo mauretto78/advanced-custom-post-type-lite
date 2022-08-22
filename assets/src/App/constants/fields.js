@@ -6,9 +6,9 @@ export const SELECT = 'Select';
 export const TEXT = 'Text';
 
 export const fieldsList = [
-    { value: EMAIL, label: <div className="vertical-center"><Icon icon="bx:bx-envelope" width="24px" /> &nbsp; Email address</div> },
-    { value: TEXT, label: <div className="vertical-center"><Icon icon="bx:bx-text" width="24px" /> &nbsp; Text</div> },
-    { value: SELECT, label: <div className="vertical-center"><Icon icon="bx:bx-select-multiple" width="24px" /> &nbsp; Select</div> },
+    { value: EMAIL, label: <div className="vertical-center"><Icon icon="bx:bx-envelope" width="18px" /> &nbsp; Email address</div> },
+    { value: TEXT, label: <div className="vertical-center"><Icon icon="bx:bx-text" width="18px" /> &nbsp; Text</div> },
+    { value: SELECT, label: <div className="vertical-center"><Icon icon="bx:bx-select-multiple" width="18px" /> &nbsp; Select</div> },
 ];
 
 export const fieldsListGroupedOptions = [

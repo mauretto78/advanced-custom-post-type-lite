@@ -26,7 +26,7 @@ const LabelsElement = () => {
             <Link
                 className="acpt-btn acpt-btn-primary"
                 to={`/edit_taxonomy/${taxonomy}/2`}>
-                <Icon icon="bx:bx-edit" width="24px" />
+                <Icon icon="bx:bx-edit" width="18px" />
                 Edit
             </Link>
         </div>

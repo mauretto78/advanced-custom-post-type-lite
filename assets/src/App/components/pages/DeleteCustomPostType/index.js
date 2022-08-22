@@ -67,21 +67,21 @@ const DeleteCustomPostType = () => {
                 }
             ]} />
             <h1 className="acpt-title">
-                <Icon icon="bx:bx-trash" color="#02c39a" width="24px"/>
+                <Icon icon="bx:bx-trash" color="#02c39a" width="18px"/>
                 &nbsp;
                 Delete {postType}
             </h1>
             <p>You are going to delete <strong>{postType} </strong> custom post type. Are you sure?</p>
             <div className="mb-3">
                 <a className="acpt-btn acpt-btn-danger" onClick={ e => handleDeleteCustomPostType(postType, 'all') }>
-                    <Icon icon="bx:bx-trash" width="24px"/>
+                    <Icon icon="bx:bx-trash" width="18px"/>
                     Yes, Delete it
                 </a>
                 &nbsp;
                 <Link
                     to="/"
                     className="acpt-btn acpt-btn-primary-o prev">
-                    <Icon icon="bx:bx-category-alt" width="24px" />
+                    <Icon icon="bx:bx-category-alt" width="18px" />
                         Return back to list
                 </Link>
             </div>

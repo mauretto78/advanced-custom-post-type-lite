@@ -103,7 +103,7 @@ const SaveCustomPostType = () => {
             ]} />
             {Prompt}
             <h1 className="acpt-title">
-                <Icon icon={postType ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="24px" />
+                <Icon icon={postType ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="18px" />
                 &nbsp;
                 {postType ? "Edit Custom Post Type" : "Create new Custom Post Type" }
             </h1>

@@ -9,7 +9,7 @@ const Copyright = () => {
                 <a href="https://acpt.io" target="_blank">ACPT</a>
             </span>
             <a href="https://acpt.io/documentation" target="_blank" className="acpt-btn acpt-btn-sm acpt-btn-primary-o">
-                <Icon icon="fa-regular:life-ring" width="24px" />
+                <Icon icon="fa-regular:life-ring" width="18px" />
                 &nbsp;
                 Documentation
             </a>

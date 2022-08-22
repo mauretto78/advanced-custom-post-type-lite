@@ -110,7 +110,7 @@ const WooCommerceProductDataFields = () => {
             ]} />
             {Prompt}
             <h1 className="acpt-title vertical-center">
-                <Icon icon="bx:bx-inbox" color="#02c39a" width="24px"/>
+                <Icon icon="bx:bx-inbox" color="#02c39a" width="18px"/>
                 &nbsp;
                 {productData[0].name} product data fields
             </h1>
@@ -123,7 +123,7 @@ const WooCommerceProductDataFields = () => {
                     } }
                     className="acpt-btn acpt-btn-primary-o"
                 >
-                    <Icon icon="bx:bx-plus-circle" width="24px"/>
+                    <Icon icon="bx:bx-plus-circle" width="18px"/>
                     &nbsp;
                     Add field box
                 </a>
@@ -148,7 +148,7 @@ const WooCommerceProductDataFields = () => {
                             } }
                             className="acpt-btn acpt-btn-primary-o"
                         >
-                            <Icon icon="bx:bx-plus-circle" width="24px"/>
+                            <Icon icon="bx:bx-plus-circle" width="18px"/>
                             &nbsp;
                             Add field box
                         </a>
@@ -164,7 +164,7 @@ const WooCommerceProductDataFields = () => {
                                 type="submit"
                                 className="acpt-btn acpt-btn-primary submit"
                             >
-                                <Icon icon="bx:bx-save" width="24px"/>
+                                <Icon icon="bx:bx-save" width="18px"/>
                                 &nbsp;
                                 Save
                             </button>
@@ -177,7 +177,7 @@ const WooCommerceProductDataFields = () => {
                                 type="submit"
                                 className="acpt-btn acpt-btn-danger submit"
                             >
-                                <Icon icon="bx:bx-trash" width="24px"/>
+                                <Icon icon="bx:bx-trash" width="18px"/>
                                 &nbsp;
                                 Delete all
                             </button>
@@ -198,7 +198,7 @@ const WooCommerceProductDataFields = () => {
                             type="submit"
                             className="acpt-btn acpt-btn-danger submit"
                         >
-                            <Icon icon="bx:bx-trash" width="24px"/>
+                            <Icon icon="bx:bx-trash" width="18px"/>
                             &nbsp;
                             Delete all
                         </button>

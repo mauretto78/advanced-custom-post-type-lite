@@ -4,7 +4,7 @@ import {Icon} from "@iconify/react";
 
 const DragHandle = SortableHandle(() => (
     <span className="acpt-sortable-hand">
-        <Icon icon="bx:bx-dots-vertical-rounded" color="#7e9ebd" width="20px" />
+        <Icon icon="bx:bx-dots-vertical-rounded" color="#7e9ebd" width="18px" />
     </span>
 ));
 

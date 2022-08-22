@@ -68,7 +68,7 @@ const ViewWooCommerceProductData = () => {
                 }
             ]} />
             <h1 className="acpt-title">
-                <Icon icon="bx:bx-search-alt" color="#02c39a" width="24px" />
+                <Icon icon="bx:bx-search-alt" color="#02c39a" width="18px" />
                 &nbsp;
                 View {fetched[0].name} details
             </h1>
@@ -113,19 +113,19 @@ const ViewWooCommerceProductData = () => {
                     <Link
                         className="acpt-btn acpt-btn-primary mr-1"
                         to={`/product-data/product/edit/${id}`}>
-                        <Icon icon="bx:bx-edit" width="24px" />
+                        <Icon icon="bx:bx-edit" width="18px" />
                         Edit
                     </Link>
                     <Link
                         className="acpt-btn acpt-btn-primary-o mr-1"
                         to={`/product-data/product/fields/${id}`}>
-                        <Icon icon="bx:bxs-inbox" width="24px" />
+                        <Icon icon="bx:bxs-inbox" width="18px" />
                         Manage fields
                     </Link>
                     <Link
                         className="acpt-btn acpt-btn-primary-o"
                         to={`/product-data/product/content/${id}`}>
-                        <Icon icon="bx:bx-message-square-detail" width="24px" />
+                        <Icon icon="bx:bx-message-square-detail" width="18px" />
                         Manage content
                     </Link>
                 </div>

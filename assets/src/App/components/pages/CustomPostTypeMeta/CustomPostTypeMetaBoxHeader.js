@@ -113,7 +113,7 @@ const CustomPostTypeMetaBoxHeader = ({id, position, dragHandle, toggleClose}) =>
                                     setModalVisible(!modalVisible);
                                 }}
                             >
-                                <Icon icon="bx:bx-trash" width="20px"/>
+                                <Icon icon="bx:bx-trash" width="18px"/>
                             </a>
                             &nbsp;
                             <a
@@ -124,7 +124,7 @@ const CustomPostTypeMetaBoxHeader = ({id, position, dragHandle, toggleClose}) =>
                                     toggleClose();
                                 } }
                             >
-                                <Icon icon="bx:bx-expand-alt" width="20px"/>
+                                <Icon icon="bx:bx-expand-alt" width="18px"/>
                             </a>
                         </div>
                     </div>
