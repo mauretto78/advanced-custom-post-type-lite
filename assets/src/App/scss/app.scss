@@ -24,7 +24,7 @@ $card-border-color: #f1f1f1;
 $white-color: #fff;
 
 /*========== Borders ==========*/
-$border-radius: 20px;
+$border-radius: 10px;
 $border-thickness: 2px;
 
 /*========== Font and typography ==========*/
@@ -52,7 +52,9 @@ $mb-4: 2rem;
 $mb-5: 2.5rem;
 $mb-6: 3rem;
 
+/*========== Cards ==========*/
 
+$card-max-width: 1600px;
 
 /*===== GENERAL =====*/
 
@@ -558,6 +560,7 @@ a:hover svg {
   border-radius: $border-radius;
   border: calc(#{$gutter}/2) solid $white-color;
   margin-bottom: $gutter;
+  max-width: $card-max-width;
 
   .acpt-card__header {
     padding: 0 15px;
@@ -629,7 +632,7 @@ a:hover svg {
 
 .acpt-meta-field {
   font-family: 'Quicksand', sans-serif;
-  background: lighten($primary-color, 77%);
+  background: lighten($warning-color, 43%);
   border-radius: $border-radius;
   padding: 15px;
   margin-bottom: calc(#{$gutter}/2);
@@ -685,7 +688,7 @@ a:hover svg {
 /*========== META OPTIONS ==========*/
 
 .acpt-meta-options {
-  background: lighten($primary-color, 77%);
+  background: lighten($woocommerce-color, 55%);
   padding: $gutter;
   margin-top: $gutter;
   border-radius: $border-radius;

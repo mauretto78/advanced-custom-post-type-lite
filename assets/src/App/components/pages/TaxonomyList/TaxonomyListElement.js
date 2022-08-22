@@ -62,7 +62,7 @@ const TaxonomyListElement = ({id, element}) => {
                         to={`/assoc-taxonomy-post/${customPostType.name}`}
                         className="acpt-btn acpt-btn-sm acpt-btn-info-o mr-1"
                     >
-                        <Icon icon="bx:bx-purchase-tag" width="24px"/>
+                        <Icon icon="bx:bx-purchase-tag" width="18px"/>
                         {customPostType.name}
                     </Link>
                 )}

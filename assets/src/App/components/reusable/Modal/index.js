@@ -36,7 +36,7 @@ const Modal = ( {title, children, visible}) => {
                                             setClosed(!closed);
                                         }}
                                     >
-                                        <Icon icon="bx:bx-x" width="24px" />
+                                        <Icon icon="bx:bx-x" width="18px" />
                                     </a>
                                 </div>
                             </div>

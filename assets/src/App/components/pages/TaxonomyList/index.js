@@ -65,7 +65,7 @@ const TaxonomyList = () => {
                 }
             ]} />
             <h1 className="acpt-title">
-                <Icon icon="bx:bx-purchase-tag" color="#02c39a" width="20px" />
+                <Icon icon="bx:bx-purchase-tag" color="#02c39a" width="18px" />
                 &nbsp;
                 Registered Taxonomies
             </h1>
@@ -73,7 +73,7 @@ const TaxonomyList = () => {
                 <Link
                     className="acpt-btn acpt-btn-primary-o"
                     to="/register_taxonomy">
-                    <Icon icon="bx:bx-list-plus" width="24px" />
+                    <Icon icon="bx:bx-list-plus" width="18px" />
                     &nbsp;
                     Register new Taxonomy
                 </Link>
@@ -99,7 +99,7 @@ const TaxonomyList = () => {
                                             &nbsp;
                                             <Tippy title="Taxonomy slug. The post name/slug. Used for various queries for taxonomy content.">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -109,7 +109,7 @@ const TaxonomyList = () => {
                                             &nbsp;
                                             <Tippy title="Singular label. Used when a singular label is needed">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -118,7 +118,7 @@ const TaxonomyList = () => {
                                             &nbsp;
                                             <Tippy title="Plural label. Used for the taxonomy admin menu item">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -127,7 +127,7 @@ const TaxonomyList = () => {
                                             &nbsp;
                                             <Tippy title="Published posts count associated with the taxonomy">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -136,7 +136,7 @@ const TaxonomyList = () => {
                                             &nbsp;
                                             <Tippy title="Associate custom post types here">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>

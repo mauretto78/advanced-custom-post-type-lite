@@ -104,7 +104,7 @@ const WooCommerceProductDataOption  = ({id, position, fieldId, dragHandle}) => {
                             setModalVisible(!modalVisible);
                         }}
                     >
-                        <Icon icon="bx:bx-trash" width="20px"/>
+                        <Icon icon="bx:bx-trash" width="18px"/>
                     </a>
                 </div>
             </div>

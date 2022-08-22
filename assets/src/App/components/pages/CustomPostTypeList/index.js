@@ -127,7 +127,7 @@ const CustomPostTypeList = () => {
                 }
             ]} />
             <h1 className="acpt-title">
-                <Icon icon="bx:bx-category-alt" color="#02c39a" width="20px" />
+                <Icon icon="bx:bx-category-alt" color="#02c39a" width="18px" />
                 &nbsp;
                 Registered Custom Post Types
             </h1>
@@ -135,7 +135,7 @@ const CustomPostTypeList = () => {
                 <Link
                     className="acpt-btn acpt-btn-primary-o mr-1"
                     to="/register">
-                        <Icon icon="bx:bx-list-plus" width="24px"/>
+                        <Icon icon="bx:bx-list-plus" width="18px"/>
                         &nbsp;
                         Register new Post Type
                 </Link>
@@ -147,7 +147,7 @@ const CustomPostTypeList = () => {
                     className="acpt-btn acpt-btn-secondary-o"
                     href="#"
                 >
-                    <Icon icon="bx:bx-refresh" width="24px"/>
+                    <Icon icon="bx:bx-refresh" width="18px"/>
                     &nbsp;
                     Sync with post types
                 </a>
@@ -178,7 +178,7 @@ const CustomPostTypeList = () => {
                                             &nbsp;
                                             <Tippy title="Associated meta boxes">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -188,7 +188,7 @@ const CustomPostTypeList = () => {
                                                 &nbsp;
                                                 <Tippy title="Associated WooCommerce product data">
                                                     <span className="helper">
-                                                        <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                        <Icon icon="bx:bx-help-circle" width="18px"/>
                                                     </span>
                                                 </Tippy>
                                             </th>
@@ -198,7 +198,7 @@ const CustomPostTypeList = () => {
                                             &nbsp;
                                             <Tippy title="Associated taxonomies with the post">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -207,7 +207,7 @@ const CustomPostTypeList = () => {
                                             &nbsp;
                                             <Tippy title="Published posts count">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -216,7 +216,7 @@ const CustomPostTypeList = () => {
                                             &nbsp;
                                             <Tippy title="The archive template for this custom post type">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>
@@ -225,7 +225,7 @@ const CustomPostTypeList = () => {
                                             &nbsp;
                                             <Tippy title="The single template for this custom post type">
                                                 <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="24px"/>
+                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
                                                 </span>
                                             </Tippy>
                                         </th>

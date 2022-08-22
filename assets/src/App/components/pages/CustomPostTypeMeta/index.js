@@ -13,7 +13,7 @@ import {metaSubmit} from "../../../redux/thunks/metaSubmit";
 import {toast} from "react-toastify";
 import {deleteAllMeta} from "../../../redux/thunks/deleteAllMeta";
 import {Icon} from "@iconify/react";
-import {scrollToBottom} from "../../../utils/scroll";
+import {scrollToTargetId} from "../../../utils/scroll";
 
 const CustomPostTypeList = () => {
 
@@ -97,7 +97,7 @@ const CustomPostTypeList = () => {
             ]} />
             {Prompt}
             <h1 className="acpt-title vertical-center">
-                <Icon icon="bx:bx-inbox" color="#02c39a" width="24px"/>
+                <Icon icon="bx:bx-inbox" color="#02c39a" width="18px"/>
                 &nbsp;
                 {postType} meta boxes
             </h1>
@@ -107,11 +107,11 @@ const CustomPostTypeList = () => {
                     onClick={ (e) => {
                         e.preventDefault();
                         dispatch(createBox(postType));
-                        scrollToBottom();
+                        scrollToTargetId("buttons");
                     } }
                     className="acpt-btn acpt-btn-primary-o"
                 >
-                    <Icon icon="bx:bx-plus-circle" width="24px"/>
+                    <Icon icon="bx:bx-plus-circle" width="18px"/>
                     &nbsp;
                     Add meta box
                 </a>
@@ -134,11 +134,11 @@ const CustomPostTypeList = () => {
                                 onClick={ (e) => {
                                     e.preventDefault();
                                     dispatch(createBox(postType));
-                                    scrollToBottom();
+                                    scrollToTargetId("buttons");
                                 } }
                                 className="acpt-btn acpt-btn-primary-o"
                             >
-                                <Icon icon="bx:bx-plus-circle" width="24px"/>
+                                <Icon icon="bx:bx-plus-circle" width="18px"/>
                                 &nbsp;
                                 Add meta box
                             </a>
@@ -154,7 +154,7 @@ const CustomPostTypeList = () => {
                                     type="submit"
                                     className="acpt-btn acpt-btn-primary submit"
                                 >
-                                    <Icon icon="bx:bx-save" width="24px"/>
+                                    <Icon icon="bx:bx-save" width="18px"/>
                                     &nbsp;
                                     Save
                                 </button>
@@ -167,7 +167,7 @@ const CustomPostTypeList = () => {
                                     type="submit"
                                     className="acpt-btn acpt-btn-danger submit"
                                 >
-                                    <Icon icon="bx:bx-trash" width="24px"/>
+                                    <Icon icon="bx:bx-trash" width="18px"/>
                                     &nbsp;
                                     Delete all
                                 </button>
@@ -189,7 +189,7 @@ const CustomPostTypeList = () => {
                                 type="submit"
                                 className="acpt-btn acpt-btn-danger submit"
                             >
-                                <Icon icon="bx:bx-trash" width="24px"/>
+                                <Icon icon="bx:bx-trash" width="18px"/>
                                 &nbsp;
                                 Delete all
                             </button>

@@ -2,7 +2,7 @@ export const reactSelectStyles = {
     control: (base, state) => ({
         ...base,
         background: "#fff",
-        borderRadius: "20px",
+        borderRadius: "10px",
         borderWidth: "2px",
         borderColor: state.isFocused ? "#012169" : "#ddd",
         boxShadow: null,

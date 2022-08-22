@@ -49,7 +49,7 @@ const WooCommerceProductDataListElement = ({id, element}) => {
                                 to={`/product-data/product/fields/${element.id}`}
                                 className="acpt-btn acpt-btn-sm acpt-btn-info-o"
                             >
-                                <Icon icon="bx:bxs-inbox" width="24px"/>
+                                <Icon icon="bx:bxs-inbox" width="18px"/>
                                 &nbsp;
                                 Manage
                             </Link>
@@ -59,7 +59,7 @@ const WooCommerceProductDataListElement = ({id, element}) => {
                             to={`/product-data/product/fields/${element.id}`}
                             className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
                         >
-                            <Icon icon="bx:bxs-inbox" width="24px"/>
+                            <Icon icon="bx:bxs-inbox" width="18px"/>
                             &nbsp;
                             Create
                         </Link>

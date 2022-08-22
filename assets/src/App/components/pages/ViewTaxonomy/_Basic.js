@@ -35,7 +35,7 @@ const BasicElement = () => {
             <Link
                 className="acpt-btn acpt-btn-primary"
                 to={`/edit_taxonomy/${taxonomy}/1`}>
-                <Icon icon="bx:bx-edit" width="24px" />
+                <Icon icon="bx:bx-edit" width="18px" />
                 Edit
             </Link>
         </div>

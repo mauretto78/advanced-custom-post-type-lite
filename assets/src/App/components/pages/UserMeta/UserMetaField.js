@@ -153,7 +153,7 @@ const UserMetaField = ( {id, boxId, position, dragHandle}) => {
                                 setModalVisible(!modalVisible);
                             }}
                         >
-                            <Icon icon="bx:bx-trash" width="20px"/>
+                            <Icon icon="bx:bx-trash" width="18px"/>
                         </a>
                         &nbsp;
                         <a
@@ -165,7 +165,7 @@ const UserMetaField = ( {id, boxId, position, dragHandle}) => {
                                 setClosed(!closed);
                             } }
                         >
-                            <Icon icon="bx:bx-expand-alt" width="20px"/>
+                            <Icon icon="bx:bx-expand-alt" width="18px"/>
                         </a>
                     </div>
                 </div>

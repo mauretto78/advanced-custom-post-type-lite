@@ -95,7 +95,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                                 to={`meta/${element.name}`}
                                 className="acpt-btn acpt-btn-sm acpt-btn-info-o"
                             >
-                                <Icon icon="bx:bxs-inbox" width="24px"/>
+                                <Icon icon="bx:bxs-inbox" width="18px"/>
                                 &nbsp;
                                 Manage
                             </Link>
@@ -105,7 +105,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                             to={`meta/${element.name}`}
                             className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
                         >
-                            <Icon icon="bx:bxs-inbox" width="24px"/>
+                            <Icon icon="bx:bxs-inbox" width="18px"/>
                             &nbsp;
                             Create
                         </Link>
@@ -126,7 +126,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                                             to={`/product-data/${element.name}`}
                                             className="acpt-btn acpt-btn-sm acpt-btn-info-o"
                                         >
-                                            <Icon icon="icon-park-outline:ad-product" width="24px"/>
+                                            <Icon icon="icon-park-outline:ad-product" width="18px"/>
                                             &nbsp;
                                             Manage
                                         </Link>
@@ -136,7 +136,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                                         to={`/product-data/${element.name}`}
                                         className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
                                     >
-                                        <Icon icon="icon-park-outline:ad-product" width="24px"/>
+                                        <Icon icon="icon-park-outline:ad-product" width="18px"/>
                                         &nbsp;
                                         Create
                                     </Link>
@@ -157,7 +157,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                                 to={`/assoc-taxonomy-post/${element.name}`}
                                 className="acpt-btn acpt-btn-sm acpt-btn-info-o"
                             >
-                                <Icon icon="bx:bxs-inbox" width="24px"/>
+                                <Icon icon="bx:bxs-inbox" width="18px"/>
                                 &nbsp;
                                 Manage
                             </Link>
@@ -167,7 +167,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                             to={`/assoc-taxonomy-post/${element.name}`}
                             className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
                         >
-                            <Icon icon="bx:bxs-inbox" width="24px"/>
+                            <Icon icon="bx:bxs-inbox" width="18px"/>
                             &nbsp;
                             Associate
                         </Link>
@@ -186,7 +186,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                         href="https://acpt.io/"
                         target="_blank"
                     >
-                        <Icon icon="fluent:premium-16-filled" width="24px" />
+                        <Icon icon="fluent:premium-16-filled" width="18px" />
                         Buy a Premium Plan
                     </a>
                 </td>
@@ -196,7 +196,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                         href="https://acpt.io/"
                         target="_blank"
                     >
-                        <Icon icon="fluent:premium-16-filled" width="24px" />
+                        <Icon icon="fluent:premium-16-filled" width="18px" />
                         Buy a Premium Plan
                     </a>
                 </td>

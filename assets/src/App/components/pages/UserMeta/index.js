@@ -97,7 +97,7 @@ const UserMeta = () => {
             ]} />
             {Prompt}
             <h1 className="acpt-title vertical-center">
-                <Icon icon="bx:bx-user" color="#02c39a" width="24px"/>
+                <Icon icon="bx:bx-user" color="#02c39a" width="18px"/>
                 &nbsp;
                 User meta boxes
             </h1>
@@ -110,7 +110,7 @@ const UserMeta = () => {
                     } }
                     className="acpt-btn acpt-btn-primary-o"
                 >
-                    <Icon icon="bx:bx-plus-circle" width="24px"/>
+                    <Icon icon="bx:bx-plus-circle" width="18px"/>
                     &nbsp;
                     Add meta box
                 </a>
@@ -136,7 +136,7 @@ const UserMeta = () => {
                                 } }
                                 className="acpt-btn acpt-btn-primary-o"
                             >
-                                <Icon icon="bx:bx-plus-circle" width="24px"/>
+                                <Icon icon="bx:bx-plus-circle" width="18px"/>
                                 &nbsp;
                                 Add meta box
                             </a>
@@ -152,7 +152,7 @@ const UserMeta = () => {
                                     type="submit"
                                     className="acpt-btn acpt-btn-primary submit"
                                 >
-                                    <Icon icon="bx:bx-save" width="24px"/>
+                                    <Icon icon="bx:bx-save" width="18px"/>
                                     &nbsp;
                                     Save
                                 </button>
@@ -165,7 +165,7 @@ const UserMeta = () => {
                                     type="submit"
                                     className="acpt-btn acpt-btn-danger submit"
                                 >
-                                    <Icon icon="bx:bx-trash" width="24px"/>
+                                    <Icon icon="bx:bx-trash" width="18px"/>
                                     &nbsp;
                                     Delete all
                                 </button>
@@ -187,7 +187,7 @@ const UserMeta = () => {
                                 type="submit"
                                 className="acpt-btn acpt-btn-danger submit"
                             >
-                                <Icon icon="bx:bx-trash" width="24px"/>
+                                <Icon icon="bx:bx-trash" width="18px"/>
                                 &nbsp;
                                 Delete all
                             </button>

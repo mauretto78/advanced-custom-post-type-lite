@@ -17,7 +17,7 @@ const Breadcrumb = ({label, link, isLast}) => {
             </li>
             {!isLast && (
                 <span className="separator">
-                    <Icon icon="bx:bx-chevron-right" color="#aaa" width="20px" />
+                    <Icon icon="bx:bx-chevron-right" color="#aaa" width="18px" />
                 </span>
             )}
         </React.Fragment>

@@ -72,7 +72,7 @@ const SaveWooCommerceProductData = () => {
             />
             {Prompt}
             <h1 className="acpt-title">
-                <Icon icon={id ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="24px" />
+                <Icon icon={id ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="18px" />
                 &nbsp;
                 {id ? "Edit WooCommerce product data" : "Create new WooCommerce product data" }
             </h1>
