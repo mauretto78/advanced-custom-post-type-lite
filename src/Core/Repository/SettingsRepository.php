@@ -8,6 +8,22 @@ use ACPT_Lite\Includes\ACPT_Lite_DB;
 class SettingsRepository
 {
     /**
+     * @param $key
+     * @return SettingsModel|null
+     * @throws \Exception
+     */
+    public static function getSingle($key)
+    {
+        $data = self::get($key);
+
+        if(!empty($data) ){
+            return $data[0];
+        }
+
+        return null;
+    }
+
+    /**
      * @param null $key
      *
      * @return SettingsModel[]

@@ -4,6 +4,7 @@ import UserMetaBoxBody from "./UserMetaBoxBody";
 import {Icon} from "@iconify/react";
 import {useDispatch} from "react-redux";
 import {createUserMetaField} from "../../../redux/actions/userMetaStateActions";
+import {isMetaClosed, saveMetaIsClosed} from "../../../utils/localStorage";
 
 const UserMetaBox = ({id, position, dragHandle, register}) => {
 
@@ -11,9 +12,10 @@ const UserMetaBox = ({id, position, dragHandle, register}) => {
     const dispatch = useDispatch();
 
     // manage local state
-    const [closed, setClosed] = useState(false);
+    const [closed, setClosed] = useState(isMetaClosed(id));
     const toggleClose = () => {
         setClosed(!closed);
+        saveMetaIsClosed(id, closed);
     };
 
     return(
@@ -28,16 +30,18 @@ const UserMetaBox = ({id, position, dragHandle, register}) => {
             <div className={`elements-wrapper ${closed ? 'hidden' : 'visible' }`}>
                 <UserMetaBoxBody id={id} />
             </div>
-            <a
-                className="add-field-link"
-                href="#"
-                onClick={e => {
-                    e.preventDefault();
-                    dispatch(createUserMetaField(id));
-                }}
-            >
-                <Icon icon="bx:bx-plus-circle" /> Add field
-            </a>
+            {!closed && (
+                <a
+                    className="add-field-link"
+                    href="#"
+                    onClick={e => {
+                        e.preventDefault();
+                        dispatch(createUserMetaField(id));
+                    }}
+                >
+                    <Icon icon="bx:bx-plus-circle" /> Add field
+                </a>
+            )}
         </div>
     )
 };

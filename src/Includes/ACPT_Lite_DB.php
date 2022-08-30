@@ -142,12 +142,14 @@ class ACPT_Lite_DB
     /**
      * Sync data with already registered custom post types
      *
+     * @throws \Exception
      * @since    1.0.0
      */
     public static function sync()
     {
         self::createCustomPostTypes();
         self::createNativePostTypes();
+        self::createCustomTaxonomies();
         self::createNativeTaxonomies();
     }
 
@@ -244,24 +246,28 @@ class ACPT_Lite_DB
     {
         $idCat = Uuid::v4();
         $categoryModel =  TaxonomyModel::hydrateFromArray([
-                'id' => $idCat,
-                'slug' => 'category',
-                'singular' => 'Category',
-                'plural' => 'Categories',
-                'native' => true,
-                'labels' => [],
-                'settings' => [],
+            'id' => $idCat,
+            'slug' => 'category',
+            'singular' => 'Category',
+            'plural' => 'Categories',
+            'native' => true,
+            'labels' => [],
+            'settings' => [
+                'hierarchical' => true
+            ],
         ]);
 
         $idTag = Uuid::v4();
         $tagModel =  TaxonomyModel::hydrateFromArray([
-                'id' => $idTag,
-                'slug' => 'post_tag',
-                'singular' => 'Tag',
-                'plural' => 'Tags',
-                'native' => true,
-                'labels' => [],
-                'settings' => [],
+            'id' => $idTag,
+            'slug' => 'post_tag',
+            'singular' => 'Tag',
+            'plural' => 'Tags',
+            'native' => true,
+            'labels' => [],
+            'settings' => [
+                'hierarchical' => true
+            ],
         ]);
 
         TaxonomyRepository::save($categoryModel);
@@ -277,6 +283,71 @@ class ACPT_Lite_DB
         }
 
         return null;
+    }
+
+    /**
+     * Save custom taxonomies
+     *
+     * @throws \Exception
+     */
+    private static function createCustomTaxonomies()
+    {
+        $args = [
+                'public' => true,
+                '_builtin' => false,
+        ];
+        $output = 'objects';
+        $operator = 'and';
+        $taxonomies = get_taxonomies($args, $output, $operator);
+
+        foreach ($taxonomies as $taxonomy){
+
+            $idTax = Uuid::v4();
+            $taxModel =  TaxonomyModel::hydrateFromArray([
+                    'id' => $idTax,
+                    'slug' => $taxonomy->name,
+                    'singular' => $taxonomy->labels->singular_name,
+                    'plural' => $taxonomy->label,
+                    'native' => false,
+                    'labels' => (array)$taxonomy->labels,
+                    'settings' => [
+                            'description' => $taxonomy->description,
+                            'public' => $taxonomy->public,
+                            'publicly_queryable' => $taxonomy->publicly_queryable,
+                            'hierarchical' => $taxonomy->hierarchical,
+                            'show_ui' => $taxonomy->show_ui,
+                            'show_in_menu' => $taxonomy->show_in_menu,
+                            'show_in_nav_menus' => $taxonomy->show_in_nav_menus,
+                            'show_tagcloud' => $taxonomy->show_tagcloud,
+                            'show_in_quick_edit' => $taxonomy->show_in_quick_edit,
+                            'show_admin_column' => $taxonomy->show_admin_column,
+                            'meta_box_cb' => $taxonomy->meta_box_cb,
+                            'cap' => (array)$taxonomy->cap,
+                            'rewrite' => $taxonomy->rewrite,
+                            'query_var' => $taxonomy->query_var,
+                            'update_count_callback' => $taxonomy->update_count_callback,
+                            'show_in_rest' => $taxonomy->show_in_rest,
+                            'rest_base' => $taxonomy->rest_base,
+                            'rest_namespace' => $taxonomy->rest_namespace,
+                            'rest_controller_class' => $taxonomy->rest_controller_class,
+                            'rest_controller' => $taxonomy->rest_controller,
+                            'default_term' => $taxonomy->default_term,
+                            'sort' => $taxonomy->sort,
+                    ],
+            ]);
+
+            TaxonomyRepository::save($taxModel);
+
+            foreach ($taxonomy->object_type as $postType){
+                $postTypeModel = CustomPostTypeRepository::get([
+                        'postType' => $postType
+                ], true)[0];
+
+                if($postTypeModel !== null){
+                    TaxonomyRepository::assocToPostType($postTypeModel->getId(), $idTax);
+                }
+            }
+        }
     }
 
     /**

@@ -20,6 +20,8 @@ import {
 import {filterById, filterByValue, isset} from "../../../utils/objects";
 import {isAValidValueForThisType} from "../../../utils/validation";
 import {Icon} from "@iconify/react";
+import {isMetaClosed, saveMetaIsClosed} from "../../../utils/localStorage";
+import Tippy from "../../reusable/Tippy";
 
 const UserMetaField = ( {id, boxId, position, dragHandle}) => {
 
@@ -80,7 +82,7 @@ const UserMetaField = ( {id, boxId, position, dragHandle}) => {
     };
 
     // manage local state
-    const [closed, setClosed] = useState(false);
+    const [closed, setClosed] = useState(isMetaClosed(id));
     const [modalVisible, setModalVisible] = useState(false);
     const [defaultValueError, setDefaultValueError] = useState(null);
 
@@ -142,6 +144,38 @@ const UserMetaField = ( {id, boxId, position, dragHandle}) => {
                         {(name !== '') ? name : <span className="error-message">Field name cannot be blank&nbsp;</span>}
                         {name && name.length > 255 && <span className="error-message">Field name max length is 255 characters</span>}
                         {type && <span className="ml-1 acpt-badge"><span className="label">{filterByValue(fieldsList, type).label}</span></span>}
+                        &nbsp;
+                        <Tippy title="Show in the Wordpress admin user page">
+                            <span className="switch-button">
+                                <input type="checkbox"
+                                       ref={showInArchiveRef}
+                                       id={`showInArchive${id}`}
+                                       defaultChecked={showInArchive}
+                                       onClick={(e) => {
+                                           handleToggleShowInArchive(e.target.checked);
+                                       }}
+                                />
+                                <label htmlFor={`showInArchive${id}`}>
+                                    <Icon icon="bxl:wordpress" width="14px" />
+                                </label>
+                            </span>
+                        </Tippy>
+                        &nbsp;
+                        <Tippy title="Field required">
+                            <span className="switch-button">
+                                <input type="checkbox"
+                                       ref={isRequiredRef}
+                                       id={`isRequired${id}`}
+                                       defaultChecked={isRequired}
+                                       onClick={(e) => {
+                                           handleToggleIsRequired(e.target.checked);
+                                       }}
+                                />
+                                <label htmlFor={`isRequired${id}`}>
+                                    <Icon icon="foundation:asterisk" width="14px" />
+                                </label>
+                            </span>
+                        </Tippy>
                     </h3>
                     <div className="icons">
                         <a
@@ -163,40 +197,12 @@ const UserMetaField = ( {id, boxId, position, dragHandle}) => {
                                 e.preventDefault();
                                 e.stopPropagation();
                                 setClosed(!closed);
+                                saveMetaIsClosed(id, closed);
                             } }
                         >
                             <Icon icon="bx:bx-expand-alt" width="18px"/>
                         </a>
                     </div>
-                </div>
-                <div className="mt-2">
-                    <span className="switch-button">
-                        <input type="checkbox"
-                               ref={showInArchiveRef}
-                               id={`showInArchive${id}`}
-                               defaultChecked={showInArchive}
-                               onClick={(e) => {
-                                   handleToggleShowInArchive(e.target.checked);
-                               }}
-                        />
-                        <label htmlFor={`showInArchive${id}`}>
-                            Show in admin archive
-                        </label>
-                    </span>
-                    &nbsp;
-                    <span className="switch-button">
-                        <input type="checkbox"
-                               ref={isRequiredRef}
-                               id={`isRequired${id}`}
-                               defaultChecked={isRequired}
-                               onClick={(e) => {
-                                   handleToggleIsRequired(e.target.checked);
-                               }}
-                        />
-                        <label htmlFor={`isRequired${id}`}>
-                            Field required
-                        </label>
-                    </span>
                 </div>
                 <div className={`acpt-meta-field__inner mt-3 ${closed ? 'hidden' : 'visible' }`}>
                     <div className="acpt-row">

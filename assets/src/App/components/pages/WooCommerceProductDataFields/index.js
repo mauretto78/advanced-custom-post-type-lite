@@ -130,15 +130,19 @@ const WooCommerceProductDataFields = () => {
             </div>
             {fields.length > 0 ? (
                 <React.Fragment>
-                    <SortableList
-                        items={fields}
-                        onSortEnd={onSortEnd}
-                        useDragHandle
-                        lockAxis="y"
-                        helperClass="dragging-helper-class"
-                        disableAutoscroll={false}
-                        useWindowAsScrollContainer={true}
-                    />
+                    <div className="acpt-box-card" style={{
+                        background: "#fff"
+                    }}>
+                        <SortableList
+                            items={fields}
+                            onSortEnd={onSortEnd}
+                            useDragHandle
+                            lockAxis="y"
+                            helperClass="dragging-helper-class"
+                            disableAutoscroll={false}
+                            useWindowAsScrollContainer={true}
+                        />
+                    </div>
                     <div className="acpt-buttons">
                         <a
                             href="#"

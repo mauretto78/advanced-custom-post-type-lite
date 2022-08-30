@@ -19,6 +19,8 @@ import {
     updateWooCommerceProductDataFieldName,
     updateWooCommerceProductDataFieldType
 } from "../../../redux/actions/WooCommerceFieldsStateAction";
+import {isMetaClosed, saveMetaIsClosed} from "../../../utils/localStorage";
+import Tippy from "../../reusable/Tippy";
 
 const WooCommerceProductDataField = ({id, postDataId, position, dragHandle}) => {
 
@@ -74,7 +76,7 @@ const WooCommerceProductDataField = ({id, postDataId, position, dragHandle}) => 
     };
 
     // manage local state
-    const [closed, setClosed] = useState(false);
+    const [closed, setClosed] = useState(isMetaClosed(id));
     const [modalVisible, setModalVisible] = useState(false);
     const [defaultValueError, setDefaultValueError] = useState(null);
 
@@ -134,6 +136,22 @@ const WooCommerceProductDataField = ({id, postDataId, position, dragHandle}) => 
                         {(name !== '') ? name : <span className="error-message">Field name cannot be blank&nbsp;</span>}
                         {name && name.length > 255 && <span className="error-message">Field name max length is 255 characters</span>}
                         {type && <span className="ml-1 acpt-badge"><span className="label">{filterByValue(WooCommerceFieldsList, type).label}</span></span>}
+                        &nbsp;
+                        <Tippy title="Field required">
+                            <span className="switch-button">
+                                <input type="checkbox"
+                                       ref={isRequiredRef}
+                                       id={`isRequired${id}`}
+                                       defaultChecked={isRequired}
+                                       onClick={(e) => {
+                                           handleToggleIsRequired(e.target.checked);
+                                       }}
+                                />
+                                <label htmlFor={`isRequired${id}`}>
+                                    <Icon icon="foundation:asterisk" width="14px" />
+                                </label>
+                            </span>
+                        </Tippy>
                     </h3>
                     <div className="icons">
                         <a
@@ -155,26 +173,12 @@ const WooCommerceProductDataField = ({id, postDataId, position, dragHandle}) => 
                                 e.preventDefault();
                                 e.stopPropagation();
                                 setClosed(!closed);
+                                saveMetaIsClosed(id, closed);
                             } }
                         >
                             <Icon icon="bx:bx-expand-alt" width="18px"/>
                         </a>
                     </div>
-                </div>
-                <div className="mt-2">
-                    <span className="switch-button">
-                        <input type="checkbox"
-                               ref={isRequiredRef}
-                               id={`isRequired${id}`}
-                               defaultChecked={isRequired}
-                               onClick={(e) => {
-                                   handleToggleIsRequired(e.target.checked);
-                               }}
-                        />
-                        <label htmlFor={`isRequired${id}`}>
-                            Field required
-                        </label>
-                    </span>
                 </div>
                 <div className={`acpt-meta-field__inner mt-3 ${closed ? 'hidden' : 'visible' }`}>
                     <div className="acpt-row">
