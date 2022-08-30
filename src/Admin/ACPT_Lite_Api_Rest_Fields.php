@@ -5,7 +5,6 @@ namespace ACPT_Lite\Admin;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
-use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Assert;
 use ACPT_Lite\Utils\Sanitizer;
 

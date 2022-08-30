@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Includes;
 
-use ACPT\Core\Repository\SettingsRepository;
+use ACPT_Lite\Core\Repository\SettingsRepository;
 
 /**
  * Fired during plugin deactivation.

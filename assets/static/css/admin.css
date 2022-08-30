@@ -1,3 +1,18 @@
+.edit-post-meta-boxes-area .postbox-header {
+    border-bottom: 1px solid #ddd;
+    background: #f0f0f1;
+}
+
+.edit-post-meta-boxes-area .postbox>.inside {
+    background: #f6f7f7;
+    margin: 0 !important;
+    padding: 24px;
+}
+
+.edit-post-meta-boxes-area .postbox>.inside table tr:nth-child(odd) {
+    background: #fff;
+}
+
 /*========== USER META FIELDS ==========*/
 
 .acpt-user-meta-box {

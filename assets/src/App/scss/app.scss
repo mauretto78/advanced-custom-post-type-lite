@@ -317,114 +317,124 @@ a {
   font-weight: $font-bold;
   color: $title-color;
   background: $text-color-light;
+
+  &.no-border {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  &.acpt-btn-sm {
+    font-size: .85rem;
+    font-weight: normal;
+    padding: calc(#{$gutter} / 4) calc(#{$gutter} / 2.6);
+  }
+
+  &.acpt-btn-primary {
+    color: $btn-color !important;
+    background: $success-color;
+  }
+
+  &.acpt-btn-primary:hover,
+  &.acpt-btn-primary:focus {
+    background: $primary-color;
+  }
+
+  &.acpt-btn-info {
+    color: $btn-color !important;
+    background: $info-color;
+  }
+
+  &.acpt-btn-info:hover,
+  &.acpt-btn-info:focus {
+    background: lighten($info-color, 5%);
+  }
+
+  &.acpt-btn-warning {
+    color: $btn-color !important;
+    background: $warning-color;
+  }
+
+  &.acpt-btn-warning:hover,
+  &.acpt-btn-warning:focus {
+    background: lighten($warning-color, 5%);
+  }
+
+  &.acpt-btn-danger {
+    color: $btn-color !important;
+    background: $danger-color;
+  }
+
+  &.acpt-btn-danger:hover,
+  &.acpt-btn-danger:focus {
+    background: lighten($danger-color, 5%);
+  }
+
+  &.acpt-btn-primary-o {
+    color: $success-color !important;
+    border: $border-thickness  solid $success-color;
+    background: transparent;
+  }
+
+  &.acpt-btn-primary-o:hover,
+  &.acpt-btn-primary-o:focus {
+    color: $primary-color !important;;
+    border: $border-thickness  solid $primary-color;
+    background: transparent;
+  }
+
+  &.acpt-btn-info-o {
+    color: $info-color !important;
+    border: $border-thickness  solid $info-color;
+    background: transparent;
+  }
+
+  &.acpt-btn-info-o:hover,
+  &.acpt-btn-info-o:focus {
+    color: lighten($info-color, 5%) !important;;
+    border: $border-thickness  solid lighten($info-color, 5%);
+    background: transparent;
+  }
+
+  &.acpt-btn-secondary {
+    color: $btn-color !important;
+    background: $text-color-light;
+  }
+
+  &.acpt-btn-secondary:hover,
+  &.acpt-btn-secondary:focus {
+    background: lighten($text-color-light, 5%);
+  }
+
+  &.acpt-btn-secondary-o {
+    color: $text-color-light !important;
+    border: $border-thickness  solid $text-color-light;
+    background: transparent;
+  }
+
+  &.acpt-btn-secondary-o:hover,
+  &.acpt-btn-secondary-o:focus {
+    color: lighten($text-color-light, 5%) !important;;
+    border: $border-thickness  solid lighten($text-color-light, 5%);
+    background: transparent;
+  }
+
+  &.acpt-btn-danger-o {
+    color: $danger-color !important;
+    border: $border-thickness  solid $danger-color;
+    background: transparent;
+  }
+
+  &.acpt-btn-danger-o:hover,
+  &.acpt-btn-danger-o:focus {
+    color: $primary-color !important;
+    border: $border-thickness  solid $primary-color;
+    background: transparent;
+  }
 }
 
-.acpt-btn-sm {
-  font-size: 12px;
-  padding: calc(#{$gutter} / 4) calc(#{$gutter} / 2.6);
-}
 
-.acpt-btn-primary {
-  color: $btn-color !important;
-  background: $success-color;
-}
 
-.acpt-btn-primary:hover,
-.acpt-btn-primary:focus {
-  background: $primary-color;
-}
 
-.acpt-btn-info {
-  color: $btn-color !important;
-  background: $info-color;
-}
-
-.acpt-btn-info:hover,
-.acpt-btn-info:focus {
-  background: lighten($info-color, 5%);
-}
-
-.acpt-btn-warning {
-  color: $btn-color !important;
-  background: $warning-color;
-}
-
-.acpt-btn-warning:hover,
-.acpt-btn-warning:focus {
-  background: lighten($warning-color, 5%);
-}
-
-.acpt-btn-danger {
-  color: $btn-color !important;
-  background: $danger-color;
-}
-
-.acpt-btn-danger:hover,
-.acpt-btn-danger:focus {
-  background: lighten($danger-color, 5%);
-}
-
-.acpt-btn-primary-o {
-  color: $success-color !important;
-  border: $border-thickness  solid $success-color;
-  background: transparent;
-}
-
-.acpt-btn-primary-o:hover,
-.acpt-btn-primary-o:focus {
-  color: $primary-color !important;;
-  border: $border-thickness  solid $primary-color;
-  background: transparent;
-}
-
-.acpt-btn-info-o {
-  color: $info-color !important;
-  border: $border-thickness  solid $info-color;
-  background: transparent;
-}
-
-.acpt-btn-info-o:hover,
-.acpt-btn-info-o:focus {
-  color: lighten($info-color, 5%) !important;;
-  border: $border-thickness  solid lighten($info-color, 5%);
-  background: transparent;
-}
-
-.acpt-btn-secondary {
-  color: $btn-color !important;
-  background: $text-color-light;
-}
-
-.acpt-btn-secondary:hover,
-.acpt-btn-secondary:focus {
-  background: lighten($text-color-light, 5%);
-}
-
-.acpt-btn-secondary-o {
-  color: $text-color-light !important;
-  border: $border-thickness  solid $text-color-light;
-  background: transparent;
-}
-
-.acpt-btn-secondary-o:hover,
-.acpt-btn-secondary-o:focus {
-  color: lighten($text-color-light, 5%) !important;;
-  border: $border-thickness  solid lighten($text-color-light, 5%);
-  background: transparent;
-}
-
-.acpt-btn-danger-o {
-  color: $danger-color !important;
-  border: $border-thickness  solid $danger-color;
-  background: transparent;
-}
-
-.acpt-btn-danger-o:hover,
-.acpt-btn-danger-o:focus {
-  color: $primary-color !important;
-  border: $border-thickness  solid $primary-color;
-  background: transparent;
-}
 
 /*========== IMAGES & SVG ICONS ==========*/
 
@@ -935,6 +945,28 @@ a:hover svg {
 
 /*========== FORMS ==========*/
 
+form {
+
+  fieldset {
+    //border: $border-thickness solid $text-color-lightest;
+    border: $border-thickness solid $card-border-color;
+    border-radius: $border-radius;
+    padding: $gutter;
+    margin-bottom: $gutter;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    legend {
+      color: $text-color-lightest;
+      padding: 0 5px;
+      background: transparent;
+      font-weight: bold;
+    }
+  }
+}
+
 .acpt-radio-buttons-wrapper {
   clear: both;
   display: inline-block;
@@ -1312,8 +1344,8 @@ input.acpt-form-control.has-errors {
 
 .switch-button label {
   color: $primary-color;
-  display: inline-block;
-  padding: 5px 10px;
+  display: inline-flex;
+  padding: 7px;
   border: $border-thickness solid $primary-color;
   border-radius: $border-radius;
 }

@@ -93,20 +93,16 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                         >
                             <Link
                                 to={`meta/${element.name}`}
-                                className="acpt-btn acpt-btn-sm acpt-btn-info-o"
+                                className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                             >
-                                <Icon icon="bx:bxs-inbox" width="18px"/>
-                                &nbsp;
                                 Manage
                             </Link>
                         </Tippy>
                         :
                         <Link
                             to={`meta/${element.name}`}
-                            className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                            className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
                         >
-                            <Icon icon="bx:bxs-inbox" width="18px"/>
-                            &nbsp;
                             Create
                         </Link>
                     }
@@ -124,20 +120,16 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                                     >
                                         <Link
                                             to={`/product-data/${element.name}`}
-                                            className="acpt-btn acpt-btn-sm acpt-btn-info-o"
+                                            className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                                         >
-                                            <Icon icon="icon-park-outline:ad-product" width="18px"/>
-                                            &nbsp;
                                             Manage
                                         </Link>
                                     </Tippy>
                                     :
                                     <Link
                                         to={`/product-data/${element.name}`}
-                                        className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
                                     >
-                                        <Icon icon="icon-park-outline:ad-product" width="18px"/>
-                                        &nbsp;
                                         Create
                                     </Link>
                                 }
@@ -155,20 +147,16 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                         >
                             <Link
                                 to={`/assoc-taxonomy-post/${element.name}`}
-                                className="acpt-btn acpt-btn-sm acpt-btn-info-o"
+                                className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                             >
-                                <Icon icon="bx:bxs-inbox" width="18px"/>
-                                &nbsp;
                                 Manage
                             </Link>
                         </Tippy>
                         :
                         <Link
                             to={`/assoc-taxonomy-post/${element.name}`}
-                            className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                            className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
                         >
-                            <Icon icon="bx:bxs-inbox" width="18px"/>
-                            &nbsp;
                             Associate
                         </Link>
                     }
@@ -182,21 +170,19 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                 </td>
                 <td className="frontend">
                     <a
-                        className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
                         href="https://acpt.io/"
                         target="_blank"
                     >
-                        <Icon icon="fluent:premium-16-filled" width="18px" />
                         Buy a Premium Plan
                     </a>
                 </td>
                 <td className="frontend">
                     <a
-                        className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
                         href="https://acpt.io/"
                         target="_blank"
                     >
-                        <Icon icon="fluent:premium-16-filled" width="18px" />
                         Buy a Premium Plan
                     </a>
                 </td>

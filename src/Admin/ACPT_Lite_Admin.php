@@ -359,7 +359,7 @@ class ACPT_Lite_Admin
             // ICONIFY
             // =================================
             //
-            wp_register_script('iconify', 'https://code.iconify.design/2/2.0.3/iconify.min.js');
+            wp_register_script('iconify',  plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/iconify/iconify.min.js' );
             wp_enqueue_script('iconify');
         }
     }
