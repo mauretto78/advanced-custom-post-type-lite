@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.13
+Stable tag: 1.0.14
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -136,3 +136,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Import custom taxonomies
 * UI/UX improvements
 * removed external reference to iconify
+
+= 1.0.14 (2022-08-30) =
+
+* completely new UI
+* backend fixes
+* Meta manager redesigned

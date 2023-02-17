@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useRef, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useRef, useState} from 'react';
 import {HashRouter, Route, Switch} from "react-router-dom";
 import {toast, ToastContainer} from "react-toastify";
 // REUSABLE
@@ -29,7 +29,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchSettings} from "./redux/thunks/fetchSettings";
 import {filterByLabel} from "./utils/objects";
-import RateAlert from "./components/reusable/RateAlert";
 
 const App = () => {
 
@@ -68,28 +67,27 @@ const App = () => {
             <HashRouter>
                 <ScrollToTop />
                 <Suspense fallback={Spinner()}>
-                    <RateAlert/>
                     <Switch>
-                        <Route exact path='/user-meta' name="user-meta" component={UserMeta} />
-                        <Route exact path='/assoc-taxonomy-post/:postType' name="assoc_taxonomy_post" component={AssocTaxonomyToCustomPostType} />
-                        <Route exact path='/meta/:postType' name="meta" component={CustomPostTypeMeta} />
-                        <Route exact path='/register' name="register" component={SaveCustomPostType} />
-                        <Route exact path='/delete/:postType' name="delete" component={DeleteCustomPostType} />
-                        <Route exact path='/edit/:postType/:step?' name="edit" component={SaveCustomPostType} />
-                        <Route exact path='/view/:postType' name="view" component={ViewCustomPostType} />
-                        <Route exact path='/settings' name="settings" component={Settings} />
-                        <Route exact path='/taxonomies/:page?' name="taxonomies" component={TaxonomyList} />
-                        <Route exact path='/register_taxonomy' name="register_taxonomy" component={SaveTaxonomy} />
-                        <Route exact path='/delete_taxonomy/:taxonomy' name="delete_taxonomy" component={DeleteTaxonomy} />
-                        <Route exact path='/edit_taxonomy/:taxonomy/:step?' name="edit_taxonomy" component={SaveTaxonomy} />
-                        <Route exact path='/view_taxonomy/:taxonomy' name="view_taxonomy" component={ViewTaxonomy} />
-                        <Route exact path='/:page?' name="list" component={CustomPostTypeList} />
-                        <Route exact path='/product-data/product' name="woocommerce_product_data" component={WooCommerceProductDataList} />
-                        <Route exact path='/product-data/product/add' name="woocommerce_product_data_add" component={SaveWooCommerceProductData} />
-                        <Route exact path='/product-data/product/delete/:id' name="woocommerce_product_data_delete" component={DeleteWooCommerceProductData} />
-                        <Route exact path='/product-data/product/edit/:id' name="woocommerce_product_data_edit" component={SaveWooCommerceProductData} />
-                        <Route exact path='/product-data/product/view/:id' name="woocommerce_product_data_view" component={ViewWooCommerceProductData} />
-                        <Route exact path='/product-data/product/fields/:id' name="woocommerce_product_data_fields" component={WooCommerceProductDataFields} />
+                        <Route exact path='/user-meta' name="user-meta" component={ lazy(() => import('./components/pages/UserMeta')) } />
+                        <Route exact path='/assoc-taxonomy-post/:postType' name="assoc_taxonomy_post" component={ lazy(() => import('./components/pages/AssocTaxonomyToCustomPostType')) } />
+                        <Route exact path='/meta/:postType' name="meta" component={ lazy(() => import('./components/pages/CustomPostTypeMeta')) } />
+                        <Route exact path='/register' name="register" component={ lazy(() => import('./components/pages/SaveCustomPostType')) } />
+                        <Route exact path='/delete/:postType' name="delete" component={ lazy(() => import('./components/pages/DeleteCustomPostType')) } />
+                        <Route exact path='/edit/:postType/:step?' name="edit" component={ lazy(() => import('./components/pages/SaveCustomPostType')) } />
+                        <Route exact path='/view/:postType' name="view" component={ lazy(() => import('./components/pages/ViewCustomPostType')) } />
+                        <Route exact path='/settings' name="settings" component={ lazy(() => import('./components/pages/Settings')) } />
+                        <Route exact path='/taxonomies/:page?' name="taxonomies" component={ lazy(() => import('./components/pages/TaxonomyList')) } />
+                        <Route exact path='/register_taxonomy' name="register_taxonomy" component={ lazy(() => import('./components/pages/SaveTaxonomy')) } />
+                        <Route exact path='/delete_taxonomy/:taxonomy' name="delete_taxonomy" component={ lazy(() => import('./components/pages/DeleteTaxonomy')) } />
+                        <Route exact path='/edit_taxonomy/:taxonomy/:step?' name="edit_taxonomy" component={ lazy(() => import('./components/pages/SaveTaxonomy')) } />
+                        <Route exact path='/view_taxonomy/:taxonomy' name="view_taxonomy" component={ lazy(() => import('./components/pages/ViewTaxonomy')) } />
+                        <Route exact path='/:page?' name="list" component={ lazy(() => import('./components/pages/CustomPostTypeList'))} />
+                        <Route exact path='/product-data/product' name="woocommerce_product_data" component={ lazy(() => import('./components/pages/WooCommerceProductData'))} />
+                        <Route exact path='/product-data/product/add' name="woocommerce_product_data_add" component={ lazy(() => import('./components/pages/SaveWooCommerceProductData'))} />
+                        <Route exact path='/product-data/product/delete/:id' name="woocommerce_product_data_delete" component={ lazy(() => import('./components/pages/DeleteWooCommerceProductData'))} />
+                        <Route exact path='/product-data/product/edit/:id' name="woocommerce_product_data_edit" component={ lazy(() => import('./components/pages/SaveWooCommerceProductData'))} />
+                        <Route exact path='/product-data/product/view/:id' name="woocommerce_product_data_view" component={ lazy(() => import('./components/pages/ViewWooCommerceProductData'))} />
+                        <Route exact path='/product-data/product/fields/:id' name="woocommerce_product_data_fields" component={ lazy(() => import('./components/pages/WooCommerceProductDataFields'))} />
                         <Route path='/404' name="404" component={NotFound404} />
                     </Switch>
                 </Suspense>
