@@ -2,19 +2,15 @@
 
 namespace ACPT_Lite\Core\Repository;
 
+use ACPT\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
-use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldAdvancedOptionModel;
 use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldOptionModel;
-use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldRelationshipModel;
-use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldVisibilityModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
-use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\User\UserMetaBoxModel;
 use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
 use ACPT_Lite\Costants\MetaTypes;
@@ -101,31 +97,11 @@ class MetaRepository
                         WHERE meta_box_id = %s
                     ";
 
-        $sql4 = "
-                    DELETE
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."`
-                        WHERE meta_box_id = %s
-                    ";
-
-        $sql5 = "
-                    DELETE
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                        WHERE meta_box_id = %s
-                    ";
-
-        $sql6 = "
-                    DELETE
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_ADVANCED_OPTION)."`
-                        WHERE meta_box_id = %s
-                    ";
 
         try {
             ACPT_Lite_DB::executeQueryOrThrowException($sql, [$metaBoxModel->getId()]);
             ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$metaBoxModel->getId()]);
             ACPT_Lite_DB::executeQueryOrThrowException($sql3, [$metaBoxModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql4, [$metaBoxModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql5, [$metaBoxModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql6, [$metaBoxModel->getId()]);
         } catch (\Exception $exception){
             ACPT_Lite_DB::rollbackTransaction();
             throw new \Exception($exception->getMessage());
@@ -216,48 +192,12 @@ class MetaRepository
                 WHERE meta_field_id = %s
             ";
 
-        $sql3 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."`
-                WHERE meta_field_id = %s
-            ";
-
-        $sql4 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                WHERE meta_field_id = %s
-            ";
-
-        $sql5 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_ADVANCED_OPTION)."`
-                WHERE meta_field_id = %s
-            ";
-
         try {
             ACPT_Lite_DB::executeQueryOrThrowException($sql, [$fieldModel->getId()]);
             ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$fieldModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql3, [$fieldModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql4, [$fieldModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql5, [$fieldModel->getId()]);
         } catch (\Exception $exception){
             ACPT_Lite_DB::rollbackTransaction();
             throw new \Exception($exception->getMessage());
-        }
-
-        foreach ($fieldModel->getAdvancedOptions() as $advancedOptionModel){
-            $sql = "
-                DELETE
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_ADVANCED_OPTION)."`
-                    WHERE id = %s
-                ";
-
-            try {
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [$advancedOptionModel->getId()]);
-            } catch (\Exception $exception){
-                ACPT_Lite_DB::rollbackTransaction();
-                throw new \Exception($exception->getMessage());
-            }
         }
 
         foreach ($fieldModel->getOptions() as $optionModel){
@@ -269,36 +209,6 @@ class MetaRepository
 
             try {
                 ACPT_Lite_DB::executeQueryOrThrowException($sql, [$optionModel->getId()]);
-            } catch (\Exception $exception){
-                ACPT_Lite_DB::rollbackTransaction();
-                throw new \Exception($exception->getMessage());
-            }
-        }
-
-        foreach ($fieldModel->getVisibilityConditions() as $visibilityCondition){
-            $sql = "
-                DELETE
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."`
-                    WHERE id = %s
-                ";
-
-            try {
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [$visibilityCondition->getId()]);
-            } catch (\Exception $exception){
-                ACPT_Lite_DB::rollbackTransaction();
-                throw new \Exception($exception->getMessage());
-            }
-        }
-
-        foreach ($fieldModel->getRelations() as $relationModel){
-            $sql = "
-                DELETE
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                    WHERE id = %s
-                ";
-
-            try {
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [$relationModel->getId()]);
             } catch (\Exception $exception){
                 ACPT_Lite_DB::rollbackTransaction();
                 throw new \Exception($exception->getMessage());
@@ -710,59 +620,6 @@ class MetaRepository
             return null;
         }
 
-        if($boxModel->metaType() === MetaTypes::CUSTOM_POST_TYPE and $boxModel->getPostType()){
-            $template = TemplateRepository::get(MetaTypes::CUSTOM_POST_TYPE, 'metaField', $boxModel->getPostType(), $field->id);
-
-            if($template !== null){
-                $fieldModel->setHasTemplate(true);
-            }
-        }
-
-        // Children
-        $children = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                field_name as name,
-                field_type,
-                field_default_value,
-                field_description,
-                required,
-                showInArchive,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-            WHERE parent_id = %s 
-            ORDER BY sort
-        ;", [$field->id]);
-
-        foreach ($children as $child){
-            $childFieldModel = self::hydrateMetaBoxFieldModel($child, $boxModel);
-            $childFieldModel->setParentId($field->id);
-            $fieldModel->addChild($childFieldModel);
-        }
-
-        // Advanced options
-        $advancedOptions = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                meta_box_id as boxId,
-                meta_field_id as fieldId,
-                option_key as okey,
-                option_value as value
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_ADVANCED_OPTION)."`
-            WHERE meta_field_id = %s
-        ;", [$field->id]);
-
-        foreach ($advancedOptions as $advancedOption){
-            $optionModel = MetaBoxFieldAdvancedOptionModel::hydrateFromArray([
-                'id' => $advancedOption->id,
-                'metaBoxField' => $fieldModel,
-                'key' => $advancedOption->okey,
-                'value' => $advancedOption->value,
-            ]);
-
-            $fieldModel->addAdvancedOption($optionModel);
-        }
-
         // Options
         $options = ACPT_Lite_DB::getResults("
             SELECT
@@ -787,95 +644,6 @@ class MetaRepository
             ]);
 
             $fieldModel->addOption($optionModel);
-        }
-
-        // Visibility conditions
-        $visibilityConditions = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                meta_box_id as boxId,
-                meta_field_id as fieldId,
-                visibility_type as type,
-                operator,
-                visibility_value as value,
-                logic,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."`
-            WHERE meta_field_id = %s
-            ORDER BY sort
-        ;", [$field->id]);
-
-        foreach ($visibilityConditions as $visibilityCondition){
-
-            $type = json_decode($visibilityCondition->type, true);
-
-            if($type['type'] === 'OTHER_FIELDS' and Uuid::isValid($type['value'])){
-                $type['value'] = self::getMetaField([
-                    'belongsTo' => $boxModel->metaType(),
-                    'id' => $type['value'],
-                    'lazy' => true,
-                ]);
-            }
-
-            if($type === null or empty($type)){
-                throw new \Exception('Type is not valid: is not allowed as string, neither is not a valid MetaBoxFieldModel instance');
-            }
-
-            $visibilityConditionModel = MetaBoxFieldVisibilityModel::hydrateFromArray([
-                'id' => $visibilityCondition->id,
-                'metaBoxField' => $fieldModel,
-                'type' => $type,
-                'value' => $visibilityCondition->value,
-                'operator' => $visibilityCondition->operator,
-                'logic' => $visibilityCondition->logic,
-                'sort' => $visibilityCondition->sort,
-            ]);
-
-            $fieldModel->addVisibilityCondition($visibilityConditionModel);
-        }
-
-        // Relations
-        $relations = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                meta_box_id as boxId,
-                meta_field_id as fieldId,
-                relationship as type,
-                related_post_type,
-                inversed_meta_box_id as inversedBoxId,
-                inversed_meta_box_name as inversedBoxName,
-                inversed_meta_field_id as inversedFieldId,
-                inversed_meta_field_name as inversedFieldName
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-            WHERE meta_field_id = %s
-        ;", [$field->id]);
-
-        foreach ($relations as $relation){
-            $relatedCustomPostType = CustomPostTypeRepository::get([
-                'postType' => $relation->related_post_type
-            ], true)[0];
-
-            $relationModel = MetaBoxFieldRelationshipModel::hydrateFromArray([
-                'id' => $relation->id,
-                'relationship' => $relation->type,
-                'relatedCustomPostType' => $relatedCustomPostType,
-                'metaBoxField' => $fieldModel,
-            ]);
-
-            if(isset($relation->inversedFieldId) and null !== $relation->inversedFieldId){
-
-                $inversedBy = self::getMetaField([
-                    'belongsTo' => $boxModel->metaType(),
-                    'id' => $relation->inversedFieldId,
-                    'lazy' => true,
-                ]);
-
-                if(null !== $inversedBy){
-                    $relationModel->setInversedBy($inversedBy);
-                }
-            }
-
-            $fieldModel->addRelation($relationModel);
         }
 
         return $fieldModel;
@@ -1429,164 +1197,66 @@ class MetaRepository
         $isRequired = $fieldModel->isRequired() ? '1' : '0';
         $metaBoxModel = $fieldModel->getMetaBox();
 
-        if($fieldModel->getParentId() !== null){
 
-            if($fieldModel->getMetaBox()->metaType() === MetaTypes::CUSTOM_POST_TYPE){
-                PostMetaSync::updateNestedPostMetaWhenFieldNameChanges($fieldModel);
-            }
-
-            $sql = "
-                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` 
-                (
-                    `id`,
-                    `meta_box_id`,
-                    `field_name`,
-                    `field_type`,
-                    `field_default_value`,
-                    `field_description`,
-                    `showInArchive`,
-                    `required`,
-                    `sort`,
-                    `parent_id`
-                ) VALUES (
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %d,
-                    %s
-                ) ON DUPLICATE KEY UPDATE 
-                    `meta_box_id` = %s,
-                    `field_name` = %s,
-                    `field_type` = %s,
-                    `field_default_value` = %s,
-                    `field_description` = %s,
-                    `showInArchive` = %s,
-                    `required` = %s,
-                    `sort` = %d,
-                    `parent_id` = %s
-            ;";
-
-            $params = [
-                $fieldModel->getId(),
-                $metaBoxModel->getId(),
-                $fieldModel->getName(),
-                $fieldModel->getType(),
-                $fieldModel->getDefaultValue(),
-                $fieldModel->getDescription(),
-                $showInArchive,
-                $isRequired,
-                $fieldModel->getSort(),
-                $fieldModel->getParentId(),
-                $metaBoxModel->getId(),
-                $fieldModel->getName(),
-                $fieldModel->getType(),
-                $fieldModel->getDefaultValue(),
-                $fieldModel->getDescription(),
-                $showInArchive,
-                $isRequired,
-                $fieldModel->getSort(),
-                $fieldModel->getParentId(),
-            ];
-        } else {
-
-            if($fieldModel->getMetaBox()->metaType() === MetaTypes::CUSTOM_POST_TYPE){
-                PostMetaSync::updatePostMetaWhenFieldNameChanges($fieldModel);
-            }
-
-            $sql = "
-                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` 
-                (
-                    `id`,
-                    `meta_box_id`,
-                    `field_name`,
-                    `field_type`,
-                    `field_default_value`,
-                    `field_description`,
-                    `showInArchive`,
-                    `required`,
-                    `sort`
-                ) VALUES (
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %d
-                ) ON DUPLICATE KEY UPDATE 
-                    `meta_box_id` = %s,
-                    `field_name` = %s,
-                    `field_type` = %s,
-                    `field_default_value` = %s,
-                    `field_description` = %s,
-                    `showInArchive` = %s,
-                    `required` = %s,
-                    `sort` = %d
-            ;";
-
-            $params = [
-                $fieldModel->getId(),
-                $metaBoxModel->getId(),
-                $fieldModel->getName(),
-                $fieldModel->getType(),
-                $fieldModel->getDefaultValue(),
-                $fieldModel->getDescription(),
-                $showInArchive,
-                $isRequired,
-                $fieldModel->getSort(),
-                $metaBoxModel->getId(),
-                $fieldModel->getName(),
-                $fieldModel->getType(),
-                $fieldModel->getDefaultValue(),
-                $fieldModel->getDescription(),
-                $showInArchive,
-                $isRequired,
-                $fieldModel->getSort(),
-            ];
+        if($fieldModel->getMetaBox()->metaType() === MetaTypes::CUSTOM_POST_TYPE){
+            PostMetaSync::updatePostMetaWhenFieldNameChanges($fieldModel);
         }
+
+        $sql = "
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` 
+            (
+                `id`,
+                `meta_box_id`,
+                `field_name`,
+                `field_type`,
+                `field_default_value`,
+                `field_description`,
+                `showInArchive`,
+                `required`,
+                `sort`
+            ) VALUES (
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %d
+            ) ON DUPLICATE KEY UPDATE 
+                `meta_box_id` = %s,
+                `field_name` = %s,
+                `field_type` = %s,
+                `field_default_value` = %s,
+                `field_description` = %s,
+                `showInArchive` = %s,
+                `required` = %s,
+                `sort` = %d
+        ;";
+
+        $params = [
+            $fieldModel->getId(),
+            $metaBoxModel->getId(),
+            $fieldModel->getName(),
+            $fieldModel->getType(),
+            $fieldModel->getDefaultValue(),
+            $fieldModel->getDescription(),
+            $showInArchive,
+            $isRequired,
+            $fieldModel->getSort(),
+            $metaBoxModel->getId(),
+            $fieldModel->getName(),
+            $fieldModel->getType(),
+            $fieldModel->getDefaultValue(),
+            $fieldModel->getDescription(),
+            $showInArchive,
+            $isRequired,
+            $fieldModel->getSort(),
+        ];
+
 
         ACPT_Lite_DB::executeQueryOrThrowException($sql, $params);
-
-        foreach ($fieldModel->getAdvancedOptions() as $advancedOptionModel){
-            $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_ADVANCED_OPTION)."` 
-                    (`id`,
-                    `meta_box_id` ,
-                    `meta_field_id` ,
-                    `option_key` ,
-                    `option_value` 
-                    ) VALUES (
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s
-                    ) ON DUPLICATE KEY UPDATE 
-                        `meta_box_id` = %s,
-                        `meta_field_id` = %s,
-                        `option_key` = %s,
-                        `option_value` = %s
-                ;";
-
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                $advancedOptionModel->getId(),
-                $metaBoxModel->getId(),
-                $fieldModel->getId(),
-                $advancedOptionModel->getKey(),
-                $advancedOptionModel->getValue(),
-                $metaBoxModel->getId(),
-                $fieldModel->getId(),
-                $advancedOptionModel->getKey(),
-                $advancedOptionModel->getValue(),
-            ]);
-        }
 
         foreach ($fieldModel->getOptions() as $optionModel){
             $sql = "
@@ -1625,242 +1295,6 @@ class MetaRepository
                 $optionModel->getValue(),
                 $optionModel->getSort()
             ]);
-        }
-
-        foreach ($fieldModel->getChildren() as $childModel){
-            self::saveMetaBoxField($childModel);
-        }
-
-        foreach ($fieldModel->getVisibilityConditions() as $visibilityCondition){
-            $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."` 
-                    (`id`,
-                    `meta_box_id` ,
-                    `meta_field_id` ,
-                    `visibility_type` ,
-                    `operator` ,
-                    `visibility_value`,
-                    `logic`,
-                    `sort`
-                    ) VALUES (
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %d
-                    ) ON DUPLICATE KEY UPDATE 
-                        `meta_box_id` = %s,
-                        `meta_field_id` = %s,
-                        `visibility_type` = %s,
-                        `operator` = %s,
-                        `visibility_value` = %s,
-                        `logic` = %s,
-                        `sort` = %d
-                ;";
-
-            $params = [
-	            $visibilityCondition->getId(),
-	            $metaBoxModel->getId(),
-	            $fieldModel->getId(),
-	            json_encode($visibilityCondition->getType()),
-	            $visibilityCondition->getOperator(),
-	            (string)$visibilityCondition->getValue(),
-	            $visibilityCondition->getLogic(),
-	            $visibilityCondition->getSort(),
-	            $metaBoxModel->getId(),
-	            $fieldModel->getId(),
-	            json_encode($visibilityCondition->getType()),
-	            $visibilityCondition->getOperator(),
-	            (string)$visibilityCondition->getValue(),
-	            $visibilityCondition->getLogic(),
-	            $visibilityCondition->getSort(),
-            ];
-
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, $params);
-        }
-
-        foreach ($fieldModel->getRelations() as $relationModel){
-
-            $a = ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getMetaBox()->getId()  : 'NULL';
-            $b = ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getMetaBox()->getName()  : 'NULL';
-            $c = ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getId() : 'NULL';
-            $d = ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getName() : 'NULL';
-
-            $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                    (
-                        `id`,
-                        `meta_box_id`,
-                        `meta_field_id`,
-                        `relationship`,
-                        `related_post_type`,
-                        `inversed_meta_box_id`,
-                        `inversed_meta_box_name`,
-                        `inversed_meta_field_id`,
-                        `inversed_meta_field_name`
-                    ) VALUES (
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s
-                    ) ON DUPLICATE KEY UPDATE
-                        `meta_box_id` = %s,
-                        `meta_field_id` = %s,
-                        `relationship` = %s,
-                        `related_post_type` = %s,
-                        `inversed_meta_box_id` = %s,
-                        `inversed_meta_box_name` = %s,
-                        `inversed_meta_field_id` = %s,
-                        `inversed_meta_field_name` = %s
-                ;";
-
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                $relationModel->getId(),
-                $metaBoxModel->getId(),
-                $fieldModel->getId(),
-                $relationModel->getRelationship(),
-                $relationModel->getRelatedCustomPostType()->getName(),
-                $a,
-                $b,
-                $c,
-                $d,
-                $metaBoxModel->getId(),
-                $fieldModel->getId(),
-                $relationModel->getRelationship(),
-                $relationModel->getRelatedCustomPostType()->getName(),
-                $a,
-                $b,
-                $c,
-                $d,
-            ]);
-
-            if($relationModel->getInversedBy() !== null){
-
-                // check if there are already persisted inversed by
-                $sql = 'SELECT id FROM `'.ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION).'` WHERE 
-                        `meta_box_id` = %s AND
-                        `meta_field_id` = %s AND
-                        `related_post_type` = %s
-                    ';
-
-                $check = ACPT_Lite_DB::getResults($sql, [
-                    $relationModel->getInversedBy()->getMetaBox()->getId(),
-                    $relationModel->getInversedBy()->getId(),
-                    $metaBoxModel->getPostType(),
-                ]);
-
-                if(count($check) === 0){
-                    $id = Uuid::v4();
-                } else {
-                    $id = $check[0]->id;
-                }
-
-                $sql = "
-                        INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                            (`id`,
-                            `meta_box_id` ,
-                            `meta_field_id` ,
-                            `relationship` ,
-                            `related_post_type` ,
-                            `inversed_meta_box_id` ,
-                            `inversed_meta_box_name`,
-                            `inversed_meta_field_id` ,
-                            `inversed_meta_field_name`
-                            ) VALUES (
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s
-                            ) ON DUPLICATE KEY UPDATE
-                                `meta_box_id` = %s,
-                                `meta_field_id` = %s,
-                                `relationship` = %s,
-                                `related_post_type` = %s,
-                                `inversed_meta_box_id` = %s,
-                                `inversed_meta_box_name` = %s,
-                                `inversed_meta_field_id` = %s,
-                                `inversed_meta_field_name` = %s
-                        ;";
-
-                $ids[$metaBoxModel->getPostType()]['relations'][] = $id;
-
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $id,
-                    $relationModel->getInversedBy()->getMetaBox()->getId(),
-                    $relationModel->getInversedBy()->getId(),
-                    $relationModel->getOppositeRelationship(),
-                    $metaBoxModel->getPostType(),
-                    $metaBoxModel->getId(),
-                    $metaBoxModel->getName(),
-                    $fieldModel->getId(),
-                    $fieldModel->getName(),
-                    $relationModel->getInversedBy()->getMetaBox()->getId(),
-                    $relationModel->getInversedBy()->getId(),
-                    $relationModel->getOppositeRelationship(),
-                    $metaBoxModel->getPostType(),
-                    $metaBoxModel->getId(),
-                    $metaBoxModel->getName(),
-                    $fieldModel->getId(),
-                    $fieldModel->getName()
-                ]);
-
-                $sql = "UPDATE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-                        SET `field_type` = %s
-                        WHERE id = %s
-                    ;";
-
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    CustomPostTypeMetaBoxFieldModel::POST_TYPE,
-                    $relationModel->getInversedBy()->getId()
-                ]);
-            }
-        }
-
-        // loop all fields that have relations and have set this field as inversed field
-        if($fieldModel->getType() !== CustomPostTypeMetaBoxFieldModel::POST_TYPE or !$fieldModel->getRelations()[0]->isBidirectional()){
-            $query = "
-                    SELECT *
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r ON r.meta_field_id = f.id
-                    WHERE f.`field_type` = %s
-                    AND f.id != %s
-                    AND r.inversed_meta_field_id = %s
-                    GROUP BY f.id
-                ";
-
-            $results = ACPT_Lite_DB::getResults($query, [
-                CustomPostTypeMetaBoxFieldModel::POST_TYPE,
-                $fieldModel->getId(),
-                $fieldModel->getId()
-            ]);
-
-            foreach ($results as $result){
-                $sql = "UPDATE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                        SET
-                            `relationship` = '".str_replace("Bi", "Uni", $result->relationship)."',
-                            `inversed_meta_box_id` = NULL,
-                            `inversed_meta_box_name` = NULL,
-                            `inversed_meta_field_id` = NULL,
-                            `inversed_meta_field_name` = NULL
-                        WHERE inversed_meta_field_id = %s
-                    ;";
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $result->inversed_meta_field_id
-                ]);
-            }
         }
     }
 
@@ -2023,160 +1457,6 @@ class MetaRepository
                 ACPT_Lite_DB::executeQueryOrThrowException($sql, [
                     $metaFieldName.'_type'
                 ]);
-            }
-        }
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public static function removeOrphanVisibilityConditions()
-    {
-        $query = "
-            SELECT  id, 
-                meta_box_id, 
-                meta_field_id, 
-                visibility_type
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."`
-        ";
-
-        $deleteQuery = "
-            DELETE 
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."` 
-            WHERE id = %s;
-        ";
-
-        $checkCustomPostTypeBoxQuery = "
-            SELECT id
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
-            WHERE id = %s;
-        ";
-
-	    $checkTaxonomyBoxQuery = "
-            SELECT id
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."`
-            WHERE id = %s;
-        ";
-
-	    $checkUserBoxQuery = "
-            SELECT id
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."`
-            WHERE id = %s;
-        ";
-
-        $checkCustomPostTypeFieldQuery = "
-            SELECT id
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-            WHERE id = %s;
-        ";
-
-	    $checkTaxonomyFieldQuery = "
-            SELECT id
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."`
-            WHERE id = %s;
-        ";
-
-        $results = ACPT_Lite_DB::getResults($query);
-
-        foreach ($results as $result){
-
-            $checkCustomPostTypeBox = ACPT_Lite_DB::getResults($checkCustomPostTypeBoxQuery, [$result->meta_box_id]);
-	        $checkTaxonomyBox = ACPT_Lite_DB::getResults($checkTaxonomyBoxQuery, [$result->meta_box_id]);
-	        $checkUserBox = ACPT_Lite_DB::getResults($checkUserBoxQuery, [$result->meta_box_id]);
-
-            if(count($checkCustomPostTypeBox) === 0 and count($checkTaxonomyBox) === 0 and count($checkUserBox) === 0){
-                ACPT_Lite_DB::executeQueryOrThrowException($deleteQuery, [$result->id]);
-            }
-
-	        $checkCustomPostTypeField = ACPT_Lite_DB::getResults($checkCustomPostTypeFieldQuery, [$result->meta_field_id]);
-	        $checkTaxonomyField = ACPT_Lite_DB::getResults($checkTaxonomyFieldQuery, [$result->meta_field_id]);
-            if(count($checkCustomPostTypeField) === 0 and count($checkTaxonomyField) === 0){
-                ACPT_Lite_DB::executeQueryOrThrowException($deleteQuery, [$result->id]);
-            }
-
-            $visibilityType = json_decode($result->visibility_type, true);
-            $visibilityTypeEnum = $visibilityType['type'];
-            $visibilityTypeValue = $visibilityType['value'];
-
-            if($visibilityTypeEnum === 'OTHER_FIELDS'){
-
-                if(isset($visibilityTypeValue['id'])){
-                    $idToDelete = $visibilityTypeValue['id'];
-                } else {
-                    $idToDelete = $visibilityTypeValue;
-                }
-
-	            $checkCustomPostTypeField = ACPT_Lite_DB::getResults($checkCustomPostTypeFieldQuery, [$idToDelete]);
-	            $checkTaxonomyField = ACPT_Lite_DB::getResults($checkTaxonomyFieldQuery, [$idToDelete]);
-	            if(count($checkCustomPostTypeField) === 0 and count($checkTaxonomyField) === 0){
-                    ACPT_Lite_DB::executeQueryOrThrowException($deleteQuery, [$result->id]);
-                }
-            }
-        }
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public static function removeOrphanRelationships()
-    {
-        $query = "
-            SELECT f.`id`, r.`inversed_meta_field_id`, r.`relationship`
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r ON r.meta_field_id = f.id
-            WHERE f.`field_type` = %s
-            AND r.`relationship` LIKE '%Bi'
-        ";
-
-        // set all orphan fields with a orphan relationship to TEXT
-        $results = ACPT_Lite_DB::getResults($query, [
-            CustomPostTypeMetaBoxFieldModel::POST_TYPE
-        ]);
-
-        if(count($results) > 0) {
-            foreach ( $results as $result ) {
-
-                $subquery = "
-                    SELECT f.id
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-                    WHERE f.`id` = %s
-                ";
-
-                $subResults = ACPT_Lite_DB::getResults( $subquery, [$result->inversed_meta_field_id] );
-
-                if ( count( $subResults ) === 0 ) {
-                    $sql = "DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` WHERE meta_field_id = %s;";
-                    ACPT_Lite_DB::executeQueryOrThrowException( $sql, [
-                        $result->id
-                    ] );
-
-                    $sql = "UPDATE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` SET `field_type` = %s WHERE id = %s;";
-                    ACPT_Lite_DB::executeQueryOrThrowException( $sql, [
-                        CustomPostTypeMetaBoxFieldModel::TEXT_TYPE,
-                        $result->id
-                    ] );
-                }
-            }
-        }
-
-        // check if there are persisted relationship on a NON POST type field
-        $query = "
-            SELECT r.id
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r
-            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f ON f.id = r.meta_field_id 
-            WHERE f.`field_type` != %s
-        ";
-
-        $results = ACPT_Lite_DB::getResults($query, [
-            CustomPostTypeMetaBoxFieldModel::POST_TYPE
-        ]);
-
-        if(count($results) > 0) {
-            foreach ( $results as $result ) {
-                $sql = "DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` WHERE id = %s;";
-                ACPT_Lite_DB::executeQueryOrThrowException( $sql, [
-                    $result->id
-                ] );
             }
         }
     }

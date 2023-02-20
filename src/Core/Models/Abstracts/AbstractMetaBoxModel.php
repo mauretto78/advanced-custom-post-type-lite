@@ -116,22 +116,4 @@ abstract class AbstractMetaBoxModel extends AbstractModel
     {
         return $this->fields;
     }
-
-	/**
-	 * @return AbstractMetaBoxModel
-	 */
-	public function duplicate()
-	{
-		$duplicate = clone $this;
-		$duplicate->id = Uuid::v4();
-		$duplicatedFields = $duplicate->getFields();
-		$duplicate->fields = [];
-
-		foreach ($duplicatedFields as $field){
-			$duplicatedFieldModel = $field->duplicateFrom($duplicate);
-			$duplicate->addField($duplicatedFieldModel);
-		}
-
-		return $duplicate;
-	}
 }

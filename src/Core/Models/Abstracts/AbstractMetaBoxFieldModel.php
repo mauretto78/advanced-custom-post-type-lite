@@ -22,7 +22,7 @@ abstract class AbstractMetaBoxFieldModel extends AbstractModel
     const TEXT_TYPE = 'Text';
 
     /**
-     * @var CustomPostTypeMetaBoxModel
+     * @var AbstractMetaBoxModel
      */
     protected $metaBox;
 
@@ -231,35 +231,4 @@ abstract class AbstractMetaBoxFieldModel extends AbstractModel
      * @return string
      */
     abstract public function getUiName();
-
-	/**
-	 * @return AbstractMetaBoxFieldModel
-	 */
-	public function duplicate()
-	{
-		return $this->duplicateFrom($this->getMetaBox());
-	}
-
-	/**
-	 * @param AbstractMetaBoxModel $duplicateFrom
-	 *
-	 * @return AbstractMetaBoxFieldModel
-	 */
-	public function duplicateFrom(AbstractMetaBoxModel $duplicateFrom)
-	{
-		$duplicate = clone $this;
-		$duplicate->id = Uuid::v4();
-		$duplicate->metaBox = $duplicateFrom;
-
-		$duplicatedOptions = $duplicate->getOptions();
-
-		$duplicate->options = [];
-
-		foreach ($duplicatedOptions as $option){
-			$optionFieldModel = $option->duplicateFrom($duplicate);
-			$duplicate->addOption($optionFieldModel);
-		}
-
-		return $duplicate;
-	}
 }
