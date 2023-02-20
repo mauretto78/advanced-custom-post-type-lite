@@ -2,7 +2,10 @@
 
 namespace ACPT_Lite\Core\Models\CustomPostType;
 
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 
 /**
  * CustomPostTypeModel
@@ -60,7 +63,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     private $settings = [];
 
     /**
-     * @var MetaBoxModel[]
+     * @var AbstractMetaBoxFieldModel[]
      */
     private $metaBoxes = [];
 
@@ -70,24 +73,9 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     private $taxonomies = [];
 
     /**
-     * @var CustomPostTypeTemplateModel[]
-     */
-    private $templates = [];
-
-    /**
-     * @var WooCommerceProductDataModel
+     * @var WooCommerceProductDataModel[]
      */
     private $woocommerceProductData = [];
-
-    /**
-     * @var bool
-     */
-    private $existsArchivePageInTheme = false;
-
-    /**
-     * @var bool
-     */
-    private $existsSinglePageInTheme = false;
 
     /**
      * CustomPostTypeModel constructor.

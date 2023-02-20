@@ -3,8 +3,8 @@
 namespace ACPT_Lite\Includes;
 
 use ACPT_Lite\Core\Helper\Uuid;
-use ACPT_Lite\Core\Models\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\TaxonomyModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 
@@ -21,22 +21,23 @@ class ACPT_Lite_DB
     /**
      * Table names
      */
-    const TABLE_CUSTOM_POST_TYPE = 'acpt_custom_post_type';
-    const TABLE_CUSTOM_POST_TYPE_META_BOX = 'acpt_custom_post_type_meta_box';
-    const TABLE_CUSTOM_POST_TYPE_FIELD = 'acpt_custom_post_type_field';
-    const TABLE_CUSTOM_POST_TYPE_OPTION = 'acpt_custom_post_type_option';
-    const TABLE_CUSTOM_POST_TYPE_RELATION = 'acpt_custom_post_type_relation';
-    const TABLE_CUSTOM_POST_TYPE_IMPORT = 'acpt_custom_post_type_import';
-    const TABLE_CUSTOM_POST_TEMPLATE = 'acpt_custom_post_template';
-    const TABLE_TAXONOMY = 'acpt_taxonomy';
-    const TABLE_TAXONOMY_PIVOT = 'acpt_taxonomy_pivot';
-    const TABLE_SETTINGS = 'acpt_settings';
-    const TABLE_WOOCOMMERCE_PRODUCT_DATA = 'acpt_woocommerce_product_data';
-    const TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD = 'acpt_woocommerce_product_data_field';
-    const TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION = 'acpt_woocommerce_product_data_option';
-    const TABLE_USER_META_BOX     = 'acpt_user_meta_box';
-    const TABLE_USER_META_FIELD        = 'acpt_user_field';
-    const TABLE_USER_META_FIELD_OPTION = 'acpt_user_field_option';
+    const TABLE_CUSTOM_POST_TYPE = 'acpt_lite_custom_post_type';
+    const TABLE_CUSTOM_POST_TYPE_META_BOX = 'acpt_lite_custom_post_type_meta_box';
+    const TABLE_CUSTOM_POST_TYPE_FIELD = 'acpt_lite_custom_post_type_field';
+    const TABLE_CUSTOM_POST_TYPE_OPTION = 'acpt_lite_custom_post_type_option';
+    const TABLE_CUSTOM_POST_TYPE_RELATION = 'acpt_lite_custom_post_type_relation';
+    const TABLE_CUSTOM_POST_TYPE_IMPORT = 'acpt_lite_custom_post_type_import';
+    const TABLE_CUSTOM_POST_TEMPLATE = 'acpt_lite_custom_post_template';
+    const TABLE_TAXONOMY = 'acpt_lite_taxonomy';
+	const TABLE_TAXONOMY_META_BOX = 'acpt_lite_taxonomy_meta_box';
+    const TABLE_TAXONOMY_PIVOT = 'acpt_lite_taxonomy_pivot';
+    const TABLE_SETTINGS = 'acpt_lite_settings';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA = 'acpt_lite_woocommerce_product_data';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD = 'acpt_lite_woocommerce_product_data_field';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION = 'acpt_lite_woocommerce_product_data_option';
+    const TABLE_USER_META_BOX     = 'acpt_lite_user_meta_box';
+    const TABLE_USER_META_FIELD        = 'acpt_lite_user_field';
+    const TABLE_USER_META_FIELD_OPTION = 'acpt_lite_user_field_option';
 
     /**
      * @var self
@@ -50,7 +51,7 @@ class ACPT_Lite_DB
 
     /**
      *
-     * @return ACPT_Lite_DB
+     * @return acpt_lite_Lite_DB
      */
     private static function getInstance()
     {
@@ -64,7 +65,7 @@ class ACPT_Lite_DB
 
     /**
      *
-     * @return ACPT_Lite_DB
+     * @return acpt_lite_Lite_DB
      */
     private static function initConnection()
     {

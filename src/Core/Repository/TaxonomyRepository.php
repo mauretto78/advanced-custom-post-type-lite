@@ -2,8 +2,8 @@
 
 namespace ACPT_Lite\Core\Repository;
 
-use ACPT_Lite\Core\Models\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\TaxonomyModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class TaxonomyRepository

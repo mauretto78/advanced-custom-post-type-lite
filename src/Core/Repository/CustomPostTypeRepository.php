@@ -3,15 +3,13 @@
 namespace ACPT_Lite\Core\Repository;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\CustomPostTypeTemplateModel;
-use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldOptionModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
-use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxModel;
-use ACPT_Lite\Core\Models\TaxonomyModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldOptionModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\PostMetaSync;
 use ACPT_Lite\Utils\WPUtils;
