@@ -1,15 +1,15 @@
 import React, {useRef, useState} from 'react';
-import Modal from "../../reusable/Modal";
+import Modal from "../../../../reusable/Modal";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteOption, updateOptionLabel, updateOptionValue} from "../../../redux/actions/metaStateActions";
-import {filterById, isset} from "../../../utils/objects";
+import {deleteOption, updateOptionLabel, updateOptionValue} from "../../../../../redux/actions/metaStateActions";
+import {filterById, isset} from "../../../../../utils/objects";
 import {Icon} from "@iconify/react";
 
-const CustomPostTypeMetaOption  = ({id, position, boxId, fieldId, dragHandle}) => {
+const MetaOption  = ({id, position, boxId, fieldId, dragHandle}) => {
 
     // manage global state
     const dispatch = useDispatch();
-    const {values} = useSelector(state => state.metaStateReducer);
+    const {validationErrors, values, selectedElement} = useSelector(state => state.metaStateReducer);
     const box = filterById(values, boxId);
     const fieldValues = (isset(box, "fields")) ? filterById(box.fields, fieldId): {};
     const optionValues = (isset(fieldValues, "options")) ? filterById(fieldValues.options, id): {};
@@ -19,14 +19,14 @@ const CustomPostTypeMetaOption  = ({id, position, boxId, fieldId, dragHandle}) =
     const labelRef = useRef();
     const valueRef = useRef();
 
-    const blackLabel = () => {
-        if (isset(optionValues, "label")) {
+    const blankLabel = () => {
+        if (isset(optionValues, "label") && labelRef.current.value === 'label') {
             labelRef.current.value = '';
         }
     };
 
-    const blackValue = () => {
-        if (isset(optionValues, "value")) {
+    const blankValue = () => {
+        if (isset(optionValues, "value") && valueRef.current.value === 'value') {
             valueRef.current.value = '';
         }
     };
@@ -41,12 +41,24 @@ const CustomPostTypeMetaOption  = ({id, position, boxId, fieldId, dragHandle}) =
 
     // manage local state
     const [modalVisible, setModalVisible] = useState(false);
+    const hasErrors = typeof validationErrors[id] !== 'undefined';
+
+    const hasErrorType = (type) => {
+
+        if(!hasErrors){
+            return false;
+        }
+
+        return validationErrors[id].filter((validationError)=>{
+            return validationError.type === type
+        }).length > 0;
+    };
 
     return(
         <React.Fragment>
             <Modal title={`Confirm deleting field "${fetchedLabel}"`} visible={modalVisible}>
                 <p>Are you sure?</p>
-                <p>
+                <p className="acpt-buttons">
                     <a
                         href="#"
                         className="acpt-btn acpt-btn-primary"
@@ -57,7 +69,6 @@ const CustomPostTypeMetaOption  = ({id, position, boxId, fieldId, dragHandle}) =
                     >
                         Yes
                     </a>
-                    &nbsp;
                     <a
                         href="#"
                         className="acpt-btn acpt-btn-primary-o"
@@ -70,32 +81,63 @@ const CustomPostTypeMetaOption  = ({id, position, boxId, fieldId, dragHandle}) =
                     </a>
                 </p>
             </Modal>
-            <div className="acpt-meta-option">
+            <div
+                className={`acpt-meta-option ${id === selectedElement ? 'selected' : ''}`}
+                id={id}
+            >
                 <div className="acpt-row flex-center">
                     {dragHandle}
                     <div className="acpt-col acpt-col-sm">
                         <input
+                            id={`option_label_${id}`}
                             ref={labelRef}
-                            onClick={e => blackLabel()}
+                            onClick={e => blankLabel()}
                             onChange={e => handleChangeOptionLabel(e.target.value)}
                             defaultValue={fetchedLabel}
-                            className={`acpt-form-control ${(fetchedLabel === '' || fetchedLabel && fetchedLabel.length > 255) ? ' has-errors' : ''}`}
+                            className={`acpt-form-control ${hasErrorType('label') ? ' has-errors' : ''}`}
                             type="text"
                         />
-                        {fetchedLabel === '' && <span className="error-message">Option label cannot be blank</span>}
-                        {fetchedLabel && fetchedLabel.length > 255 && <span className="error-message">Option label max length is 255 characters</span>}
+                        {hasErrorType('label') && (
+                            <div className="invalid-feedback">
+                                <ul>
+                                    {validationErrors[id]
+                                        .filter((validationError) => {
+                                            return validationError.type === 'label'
+                                        }).
+                                        map((validationError, index)=>(
+                                            <li key={index}>
+                                                {validationError.message}
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                     <div className="acpt-col acpt-col-sm">
                         <input
+                            id={`option_value_${id}`}
                             ref={valueRef}
-                            onClick={e => blackValue()}
+                            onClick={e => blankValue()}
                             onChange={e => handleChangeOptionValue(e.target.value)}
                             defaultValue={fetchedValue}
-                            className={`acpt-form-control ${(fetchedValue === '' || fetchedValue && fetchedValue.length > 255) ? ' has-errors' : ''}`}
+                            className={`acpt-form-control ${hasErrorType('value') ? ' has-errors' : ''}`}
                             type="text"
                         />
-                        {fetchedValue === '' && <span className="error-message">Option value cannot be blank</span>}
-                        {fetchedValue && fetchedValue.length > 255 && <span className="error-message">Option value max length is 255 characters</span>}
+                        {hasErrorType('value') && (
+                            <div className="invalid-feedback">
+                                <ul>
+                                    {validationErrors[id]
+                                        .filter((validationError) => {
+                                            return validationError.type === 'value'
+                                        }).
+                                        map((validationError, index)=>(
+                                            <li key={index}>
+                                                {validationError.message}
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                     <a
                         className=""
@@ -113,4 +155,4 @@ const CustomPostTypeMetaOption  = ({id, position, boxId, fieldId, dragHandle}) =
     )
 };
 
-export default CustomPostTypeMetaOption;
+export default MetaOption;

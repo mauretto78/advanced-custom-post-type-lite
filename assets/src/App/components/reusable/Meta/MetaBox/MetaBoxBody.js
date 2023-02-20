@@ -1,21 +1,26 @@
 import React from 'react';
 import arrayMove from "array-move";
-import {SortableList} from "../../reusable/Sortable";
+import {SortableList} from "../../../reusable/Sortable";
 import {useDispatch, useSelector} from "react-redux";
-import {setFields} from "../../../redux/actions/metaStateActions";
+import {setFields} from "../../../../redux/actions/metaStateActions";
 
-const CustomPostTypeMetaBoxBody = ({id}) => {
+const MetaBoxBody = ({id}) => {
 
     // manage global state
     const dispatch = useDispatch();
     const {fields} = useSelector(state => state.metaStateReducer);
+
     const fieldsBlocks = fields.filter((field) => {
+        return (field.props.boxId === id && (typeof field.props.parentId === 'undefined' || !field.props.parentId));
+    });
+
+    const allFieldsBlocks = fields.filter((field) => {
         return (field.props.boxId === id);
     });
 
     // sortable
     const onSortEnd = ({oldIndex, newIndex}) => {
-        dispatch(setFields(id, arrayMove(fieldsBlocks, oldIndex, newIndex)));
+        dispatch(setFields(id, arrayMove(allFieldsBlocks, oldIndex, newIndex)));
     };
 
     return (
@@ -44,4 +49,4 @@ const CustomPostTypeMetaBoxBody = ({id}) => {
     )
 };
 
-export default CustomPostTypeMetaBoxBody;
+export default MetaBoxBody;

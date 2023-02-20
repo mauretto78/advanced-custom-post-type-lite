@@ -97,6 +97,17 @@ export const asyncIsTaxonomySlugValid = async (slug) => {
     return true;
 };
 
+export const alphanumericallyValid = (string) => {
+
+    const matches = string.match(/^[0-9a-zA-Z_-]+$/g);
+
+    if (matches === null) {
+        return 'Only alphanumeric characters allowed';
+    }
+
+    return true;
+};
+
 export const isAValidValueForThisType = (type, value, options) => {
 
     if(typeof value === 'undefined' || value === null || value === ''){

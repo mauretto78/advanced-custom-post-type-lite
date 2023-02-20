@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Icon} from "@iconify/react";
-import {scrollToElement, scrollToId} from "../../../utils/scroll";
+import {scrollToId} from "../../../utils/scroll";
 
 const MiniNavMapElement = ( {value, isActiveId, setActiveId}) => {
 

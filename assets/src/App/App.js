@@ -61,6 +61,7 @@ const App = () => {
                         <Route exact path='/view/:postType' name="view" component={ lazy(() => import('./components/pages/ViewCustomPostType')) } />
                         <Route exact path='/settings' name="settings" component={ lazy(() => import('./components/pages/Settings')) } />
                         <Route exact path='/taxonomies/:page?' name="taxonomies" component={ lazy(() => import('./components/pages/TaxonomyList')) } />
+                        <Route exact path='/meta-taxonomy/:taxonomy' name="meta-taxonomy" component={ lazy(() => import('./components/pages/TaxonomyMeta')) } />
                         <Route exact path='/register_taxonomy' name="register_taxonomy" component={ lazy(() => import('./components/pages/SaveTaxonomy')) } />
                         <Route exact path='/delete_taxonomy/:taxonomy' name="delete_taxonomy" component={ lazy(() => import('./components/pages/DeleteTaxonomy')) } />
                         <Route exact path='/edit_taxonomy/:taxonomy/:step?' name="edit_taxonomy" component={ lazy(() => import('./components/pages/SaveTaxonomy')) } />
