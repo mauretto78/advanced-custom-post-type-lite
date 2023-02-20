@@ -5,17 +5,15 @@ import AdditionalLabelsStep from "./_Labels";
 import Steps from "../../reusable/Steps";
 import {saveCustomPostTypeHeadings} from "../../../constants/steps";
 import {changeCurrentAdminMenuLink, metaTitle} from "../../../utils/misc";
-import Breadcrumbs from "../../reusable/Breadcrumbs";
 import {useHistory, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchPostTypes} from "../../../redux/thunks/fetchPostTypes";
 import Spinner from "../../reusable/Loader/Spinner";
 import {resetPostTypes} from "../../../redux/thunks/resetPostTypes";
 import useUnsavedChangesWarning from "../../../hooks/useUnsavedChangesWarning";
-import {Icon} from "@iconify/react";
-import Copyright from "../../reusable/Copyright";
 import {startFromStep, stepReset} from "../../../redux/actions/stepsActions";
 import {hydratePostTypeFormFromStep} from "../../../utils/forms";
+import {wpAjaxRequest} from "../../../utils/ajax";
 
 const SaveCustomPostType = () => {
 
@@ -30,6 +28,7 @@ const SaveCustomPostType = () => {
     const [edit, isEdit] = useState(false);
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
+    const [isWPGraphQLActive, setIsWPGraphQLActive] = useState(false);
 
     // manage redirect
     const history = useHistory();
@@ -81,9 +80,9 @@ const SaveCustomPostType = () => {
     };
 
     const steps = [
-        <BasicStep edit={edit} />,
-        <AdditionalLabelsStep/>,
-        <OtherSettingsStep setPristineHandler={setPristineHandler}/>,
+        <BasicStep postType={postType} edit={edit} headings={saveCustomPostTypeHeadings}/>,
+        <AdditionalLabelsStep postType={postType} headings={saveCustomPostTypeHeadings} />,
+        <OtherSettingsStep postType={postType} isWPGraphQLActive={false} headings={saveCustomPostTypeHeadings} setPristineHandler={setPristineHandler}/>,
     ];
 
     if(!fetchedSuccess){
@@ -91,27 +90,12 @@ const SaveCustomPostType = () => {
     }
 
     return(
-        <div>
-            <Breadcrumbs crumbs={[
-                {
-                    label: "Registered Custom Post Types",
-                    link: "/"
-                },
-                {
-                    label: postType ? "Edit Custom Post Type" : "Create new Custom Post Type"
-                }
-            ]} />
+        <React.Fragment>
             {Prompt}
-            <h1 className="acpt-title">
-                <Icon icon={postType ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="18px" />
-                &nbsp;
-                {postType ? "Edit Custom Post Type" : "Create new Custom Post Type" }
-            </h1>
-            <div className="acpt-card">
-                <Steps headings={saveCustomPostTypeHeadings} steps={steps}/>
-            </div>
-            <Copyright/>
-        </div>
+            <Steps
+                steps={steps}
+            />
+        </React.Fragment>
     )
 };
 

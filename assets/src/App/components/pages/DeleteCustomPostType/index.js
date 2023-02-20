@@ -1,18 +1,21 @@
 import React, {useEffect, useRef} from 'react';
-import Breadcrumbs from "../../reusable/Breadcrumbs";
+import Breadcrumbs from "../../reusable/Layout/Breadcrumbs";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {deletePostType} from "../../../redux/thunks/deletePostType";
 import {toast} from "react-toastify";
 import {metaTitle, refreshPage} from "../../../utils/misc";
-import {Icon} from "@iconify/react";
-import Copyright from "../../reusable/Copyright";
+import {filterByLabel} from "../../../utils/objects";
+import Layout from "../../reusable/Layout";
+import ActionsBar from "../../reusable/Layout/ActionsBar";
 
 const DeleteCustomPostType = () => {
 
     // manage global state
     const dispatch = useDispatch();
     const {errors, success, loading} = useSelector(state => state.deleteCustomPostTypeReducer);
+    const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);
+    const deletePostsOption = filterByLabel(settings, 'key', 'delete_posts').value;
 
     // manage local state
     const {postType} = useParams();
@@ -40,7 +43,7 @@ const DeleteCustomPostType = () => {
             if(!loading){
                 if(success){
                     history.push('/');
-                    toast.success("Custom post type successfully deleted. The browser will refresh after 5 seconds...");
+                    toast.success("Custom post type successfully deleted. The browser will refresh after 5 seconds.");
                     refreshPage(5000);
                 }
 
@@ -55,38 +58,46 @@ const DeleteCustomPostType = () => {
         }
     }, [loading]);
 
+    const buttons = (
+        <React.Fragment>
+            <a className="acpt-btn acpt-btn-danger" onClick={ e => handleDeleteCustomPostType(postType, 'all') }>
+                Yes, Delete it
+            </a>
+            <Link
+                to="/"
+                className="acpt-btn acpt-btn-primary-o"
+            >
+                Return back to list
+            </Link>
+        </React.Fragment>
+    );
+
     return (
-        <div>
-            <Breadcrumbs crumbs={[
-                {
-                    label: "Advanced custom post types",
-                    link: "/"
-                },
-                {
-                    label: 'Delete custom post type'
-                }
-            ]} />
-            <h1 className="acpt-title">
-                <Icon icon="bx:bx-trash" color="#02c39a" width="18px"/>
-                &nbsp;
-                Delete {postType}
-            </h1>
-            <p>You are going to delete <strong>{postType} </strong> custom post type. Are you sure?</p>
-            <div className="mb-3">
-                <a className="acpt-btn acpt-btn-danger" onClick={ e => handleDeleteCustomPostType(postType, 'all') }>
-                    <Icon icon="bx:bx-trash" width="18px"/>
-                    Yes, Delete it
-                </a>
-                &nbsp;
-                <Link
-                    to="/"
-                    className="acpt-btn acpt-btn-primary-o prev">
-                    <Icon icon="bx:bx-category-alt" width="18px" />
-                        Return back to list
-                </Link>
-            </div>
-            <Copyright/>
-        </div>
+        <Layout>
+            <ActionsBar
+                title={`Delete ${postType}`}
+                actions={buttons}
+            />
+            <main>
+                <Breadcrumbs crumbs={[
+                    {
+                        label: "Advanced custom post types",
+                        link: "/"
+                    },
+                    {
+                        label: 'Delete custom post type'
+                    }
+                ]} />
+                <h3 className="no-space acpt-alert acpt-alert-warning">
+                    You are going to delete <strong>{postType} </strong> custom post type. Are you sure?
+                </h3>
+                {deletePostsOption === "1" && (
+                    <strong className="">
+                        WARNING: This action will delete all {postType} posts and metadata. The action is irreversible.
+                    </strong>
+                )}
+            </main>
+        </Layout>
     );
 };
 

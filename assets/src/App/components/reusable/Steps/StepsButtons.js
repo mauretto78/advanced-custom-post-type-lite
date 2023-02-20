@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {stepBack} from "../../../redux/actions/stepsActions";
-import {Icon} from "@iconify/react";
+import {scrollToTop} from "../../../utils/scroll";
 
 export default function StepsButtons( {isValid, next, prev}) {
 
@@ -11,28 +11,34 @@ export default function StepsButtons( {isValid, next, prev}) {
     return(
         <div className="acpt-step-buttons">
             {prev &&
-            <a className="acpt-btn acpt-btn-primary prev" onClick={ e => dispatch(stepBack()) }>
-                <Icon icon="bx:bx-chevron-left" width="18px" />
+            <a className="acpt-btn acpt-btn-primary-o"
+               onClick={ e => {
+                   dispatch(stepBack());
+                   scrollToTop();
+               }}
+            >
                 Previous Step
             </a>
             }
-
             {next &&
-                <button
-                    className="acpt-btn acpt-btn-primary next" disabled={(isValid) ? '' : 'disabled'}>
-                    Next Step
-                    <Icon icon="bx:bx-chevron-right" width="18px" />
-                </button>
+            <button
+                className="acpt-btn acpt-btn-primary-o"
+                disabled={(isValid) ? '' : 'disabled'}
+                onClick={() =>{
+                    scrollToTop();
+                }}
+            >
+                Next Step
+            </button>
             }
 
             {!next &&
-                <button
-                    className="acpt-btn acpt-btn-primary submit"
-                    disabled={(!isValid || loading) ? 'disabled' : ''}
-                >
-                    {loading ? 'Loading...' : 'Save'}
-                    <Icon icon="bx:bx-save" width="18px" />
-                </button>
+            <button
+                className="acpt-btn acpt-btn-primary"
+                disabled={(!isValid || loading) ? 'disabled' : ''}
+            >
+                {loading ? 'Loading...' : 'Save'}
+            </button>
             }
         </div>
     )
