@@ -2,20 +2,21 @@ import React from 'react';
 import {assocTaxonomyToPostType} from "../../../redux/thunks/assocTaxonomyToPostType";
 import {useDispatch} from "react-redux";
 import CustomPostTypeLabel from "../../reusable/CustomPostType/CustomPostTypeLabel";
+import {assocPostTypeToTaxonomy} from "../../../redux/thunks/assocPostTypeToTaxonomy";
 
-const AssocTaxonomyElement = ({id, element, postType, defaultChecked}) => {
+const AssocCustomPostTypeElement = ({id, element, taxonomy, defaultChecked}) => {
 
     // manage global state
     const dispatch = useDispatch();
 
     const handleOnChange = (element) => {
-        dispatch(assocTaxonomyToPostType(postType, [element]));
+        dispatch(assocPostTypeToTaxonomy(taxonomy, [element]));
     };
 
     return(
         <tr>
             <td>
-                <strong>{element.slug}</strong>
+                <strong>{element.name}</strong>
             </td>
             <td>
                 <CustomPostTypeLabel element={element} />
@@ -51,4 +52,4 @@ const AssocTaxonomyElement = ({id, element, postType, defaultChecked}) => {
     )
 };
 
-export default AssocTaxonomyElement;
+export default AssocCustomPostTypeElement;

@@ -52,6 +52,7 @@ const App = () => {
                 <Suspense fallback={Spinner()}>
                     <Switch>
                         <Route exact path='/user-meta' name="user-meta" component={ lazy(() => import('./components/pages/UserMeta')) } />
+                        <Route exact path='/assoc-post-taxonomy/:taxonomy' name="assoc_post_taxonomy" component={ lazy(() => import('./components/pages/AssocCustomPostTypeToTaxonomy')) } />
                         <Route exact path='/assoc-taxonomy-post/:postType' name="assoc_taxonomy_post" component={ lazy(() => import('./components/pages/AssocTaxonomyToCustomPostType')) } />
                         <Route exact path='/meta/:postType' name="meta" component={ lazy(() => import('./components/pages/CustomPostTypeMeta')) } />
                         <Route exact path='/register' name="register" component={ lazy(() => import('./components/pages/SaveCustomPostType')) } />

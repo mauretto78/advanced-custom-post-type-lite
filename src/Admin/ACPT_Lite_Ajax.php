@@ -37,6 +37,36 @@ use ACPT_Lite\Utils\WPLinks;
  */
 class ACPT_Lite_Ajax
 {
+	public function assocPostTypeToTaxonomyAction()
+	{
+		if(isset($_POST['data'])) {
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			try {
+				$taxonomyId = TaxonomyRepository::getId($data['taxonomy']);
+
+				foreach ($data['postTypes'] as $customPostType){
+					if($customPostType['checked']){
+						TaxonomyRepository::assocToPostType($customPostType['id'], $taxonomyId);
+					} else {
+						TaxonomyRepository::removeAssocPost($customPostType['id'], $taxonomyId);
+					}
+				}
+
+				$return = [
+					'success' => true,
+				];
+			} catch (\Exception $exception){
+				$return = [
+					'success' => false,
+					'error' => $exception->getMessage()
+				];
+			}
+
+			return wp_send_json($return);
+		}
+	}
+
     public function assocTaxonomyToPostTypeAction()
     {
         if(isset($_POST['data'])) {

@@ -115,6 +115,7 @@ class ACPT_Lite_Admin
     private function setAjaxActions()
     {
         $this->ajaxActions = [
+            'wp_ajax_assocPostTypeToTaxonomyAction' => 'assocPostTypeToTaxonomyAction',
             'wp_ajax_assocTaxonomyToPostTypeAction' => 'assocTaxonomyToPostTypeAction',
             'wp_ajax_checkPostTypeNameAction' => 'checkPostTypeNameAction',
             'wp_ajax_checkTaxonomySlugAction' => 'checkTaxonomySlugAction',
