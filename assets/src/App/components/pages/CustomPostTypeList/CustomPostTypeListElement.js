@@ -170,20 +170,20 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                 </td>
                 <td className="frontend">
                     <a
-                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
-                        href="https://acpt.io/"
+                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger"
+                        href="https://acpt.io/checkout"
                         target="_blank"
                     >
-                        Buy a Premium Plan
+                        Buy a PRO license
                     </a>
                 </td>
                 <td className="frontend">
                     <a
-                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
-                        href="https://acpt.io/"
+                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger"
+                        href="https://acpt.io/checkout"
                         target="_blank"
                     >
-                        Buy a Premium Plan
+                        Buy a PRO license
                     </a>
                 </td>
             </tr>

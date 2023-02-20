@@ -26,8 +26,8 @@ const Header = () => {
                 </span>
             </div>
             <div className="menu">
-                <a href="https://acpt.io/checkout/" target="_blank" className="acpt-btn acpt-btn-danger">
-                    Go PRO
+                <a href="https://acpt.io/checkout/" target="_blank" className="acpt-btn acpt-btn-danger buy-pro">
+                    Buy a PRO License
                 </a>
                 <a
                     href="#"

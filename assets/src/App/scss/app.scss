@@ -472,8 +472,6 @@ a {
   }
 }
 
-
-
 /*========== Images/SVG ==========*/
 
 a,
@@ -578,6 +576,12 @@ header {
 
       &:hover {
         opacity: .5;
+      }
+    }
+
+    .buy-pro {
+      @media screen and (max-width: 767px){
+        display: none;
       }
     }
 
