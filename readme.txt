@@ -129,16 +129,17 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 = 1.0.13 (2022-08-30) =
 
-* fix deactivation bug (class not found)
-* save element is closed or not in LC
-* sync metadata on change ACPT definitions
+* Fix deactivation bug (class not found)
+* Save element is closed or not in LC
+* Sync metadata on change ACPT definitions
 * Fixed category import
 * Import custom taxonomies
 * UI/UX improvements
-* removed external reference to iconify
+* Removed external reference to iconify library
 
-= 1.0.14 (2022-08-30) =
+= 1.0.14 (2023-02-24) =
 
-* completely new UI
-* backend fixes
-* Meta manager redesigned
+* Completely new UI
+* Taxonomy meta
+* Backend fixes
+* Meta manager completely redesigned
