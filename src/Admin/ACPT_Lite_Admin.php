@@ -7,12 +7,12 @@ use ACPT_Lite\Core\Generators\MetaBoxGenerator;
 use ACPT_Lite\Core\Generators\UserMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
-use ACPT_Lite\Core\Repository\UserMetaRepository;
+use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\UserMetaShortcode;
+use ACPT_Lite\Costants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_Elementor_Initiator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 
@@ -591,7 +591,9 @@ class ACPT_Lite_Admin
      */
     private function registerUserMeta()
     {
-        $boxes = UserMetaRepository::get([]);
+        $boxes = MetaRepository::get([
+        	'belongsTo' => MetaTypes::USER
+        ]);
 
         if(!empty($boxes)){
             $generator = new UserMetaBoxGenerator($boxes);
@@ -606,7 +608,9 @@ class ACPT_Lite_Admin
     {
         add_filter( 'manage_users_columns', function ($column) {
 
-            $boxes = UserMetaRepository::get([]);
+            $boxes = MetaRepository::get([
+	            'belongsTo' => MetaTypes::USER
+            ]);
 
             foreach ($boxes as $boxModel){
                 foreach ($boxModel->getFields() as $fieldModel){
@@ -623,7 +627,9 @@ class ACPT_Lite_Admin
 
         add_filter( 'manage_users_custom_column', function ( $val, $columnName, $userId ) {
 
-            $boxes = UserMetaRepository::get([]);
+            $boxes = MetaRepository::get([
+	            'belongsTo' => MetaTypes::USER
+            ]);
 
             foreach ($boxes as $boxModel){
                 foreach ($boxModel->getFields() as $fieldModel){

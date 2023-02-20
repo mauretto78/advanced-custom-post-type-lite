@@ -216,9 +216,9 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param MetaBoxModel $metaBox
+     * @param AbstractMetaBoxFieldModel $metaBox
      */
-    public function addMetaBox(MetaBoxModel $metaBox)
+    public function addMetaBox(AbstractMetaBoxFieldModel $metaBox)
     {
         if(!$this->existsInCollection($metaBox->getId(), $this->metaBoxes)){
             $this->metaBoxes[] = $metaBox;
@@ -226,9 +226,9 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param MetaBoxFieldModel $metaBox
+     * @param AbstractMetaBoxFieldModel $metaBox
      */
-    public function removeMetaBox(MetaBoxFieldModel $metaBox)
+    public function removeMetaBox(AbstractMetaBoxFieldModel $metaBox)
     {
         $this->removeFromCollection($metaBox->getId(), $this->metaBoxes);
     }
@@ -252,7 +252,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @return MetaBoxModel[]
+     * @return AbstractMetaBoxFieldModel[]
      */
     public function getMetaBoxes()
     {

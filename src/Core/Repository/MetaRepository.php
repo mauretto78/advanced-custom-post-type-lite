@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Core\Repository;
 
-use ACPT\Core\Models\User\UserMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
@@ -12,7 +12,7 @@ use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldOptionModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
 use ACPT_Lite\Core\Models\User\UserMetaBoxModel;
-use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
+use ACPT_Lite\Validators\ArgumentsArrayValidator;
 use ACPT_Lite\Costants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\PostMetaSync;

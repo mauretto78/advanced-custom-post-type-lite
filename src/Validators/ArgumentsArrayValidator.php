@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT_Lite\Core\Validators;
+namespace ACPT_Lite\Validators;
 
 class ArgumentsArrayValidator
 {

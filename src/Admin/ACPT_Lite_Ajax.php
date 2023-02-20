@@ -2,26 +2,27 @@
 
 namespace ACPT_Lite\Admin;
 
+use ACPT\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
-use ACPT_Lite\Core\Models\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldOptionModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
-use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxModel;
-use ACPT_Lite\Core\Models\SettingsModel;
-use ACPT_Lite\Core\Models\TaxonomyModel;
-use ACPT_Lite\Core\Models\UserMetaBoxModel;
-use ACPT_Lite\Core\Models\UserMetaFieldModel;
-use ACPT_Lite\Core\Models\UserMetaFieldOptionModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataFieldOptionModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
+use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldOptionModel;
+use ACPT_Lite\Core\Models\Settings\SettingsModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
+use ACPT_Lite\Core\Models\User\UserMetaBoxModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
-use ACPT_Lite\Core\Repository\UserMetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
+use ACPT_Lite\Costants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Sanitizer;
 use ACPT_Lite\Utils\Sluggify;
@@ -162,7 +163,16 @@ class ACPT_Lite_Ajax
             $postType = $data['postType'];
 
             try {
-                CustomPostTypeRepository::delete($postType);
+	            // Delete posts option
+	            $deletePosts = false;
+	            $deletePostsOption = SettingsRepository::getSingle('delete_posts');
+
+	            if($deletePostsOption !== null and $deletePostsOption->getValue() == 1){
+		            $deletePosts = true;
+	            }
+
+                CustomPostTypeRepository::delete($postType, $deletePosts);
+	            unregister_post_type($postType);
 
                 $return = [
                     'success' => true,
@@ -184,45 +194,41 @@ class ACPT_Lite_Ajax
     }
 
     /**
-     * Delete all meta for a custom post type
+     * Delete all meta
      *
      * @return mixed
      */
-    public function deleteCustomPostTypeMetaAction()
+    public function deleteMetaAction()
     {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
 
-            if(!isset($data['postType'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing postType'
-                ]);
-            }
+		    $find = isset($data['find']) ? $data['find'] : $data['postType'];
+		    $belongsTo = isset($data['belongsTo']) ? $data['belongsTo'] : MetaTypes::CUSTOM_POST_TYPE;
 
-            $postType = $data['postType'];
+		    try {
+			    MetaRepository::deleteAll([
+				    'belongsTo' => $belongsTo,
+				    'find' => $find,
+			    ]);
 
-            try {
-                CustomPostTypeRepository::deleteMeta($postType);
-                CustomPostTypeRepository::removeOrphanRelationships();
+			    $return = [
+				    'success' => true,
+			    ];
+		    } catch (\Exception $exception){
+			    $return = [
+				    'success' => false,
+				    'error' => $exception->getMessage()
+			    ];
+		    }
 
-                $return = [
-                        'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                        'success' => false,
-                        'error' => $exception->getMessage()
-                ];
-            }
+		    return wp_send_json($return);
+	    }
 
-            return wp_send_json($return);
-        }
-
-        return wp_send_json([
-                'success' => false,
-                'error' => 'no postType was sent'
-        ]);
+	    return wp_send_json([
+		    'success' => false,
+		    'error' => 'no postType was sent'
+	    ]);
     }
 
     /**
@@ -232,38 +238,39 @@ class ACPT_Lite_Ajax
      */
     public function deleteTaxonomyAction()
     {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
 
-            if(!isset($data['taxonomy'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing taxonomy'
-                ]);
-            }
+		    if(!isset($data['taxonomy'])){
+			    return wp_send_json([
+				    'success' => false,
+				    'error' => 'Missing taxonomy'
+			    ]);
+		    }
 
-            $taxonomy = $data['taxonomy'];
+		    $taxonomy = $data['taxonomy'];
 
-            try {
-                TaxonomyRepository::delete($taxonomy);
+		    try {
+			    TaxonomyRepository::delete($taxonomy);
+			    unregister_taxonomy($taxonomy);
 
-                $return = [
-                        'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                        'success' => false,
-                        'error' => $exception->getMessage()
-                ];
-            }
+			    $return = [
+				    'success' => true,
+			    ];
+		    } catch (\Exception $exception){
+			    $return = [
+				    'success' => false,
+				    'error' => $exception->getMessage()
+			    ];
+		    }
 
-            return wp_send_json($return);
-        }
+		    return wp_send_json($return);
+	    }
 
-        return wp_send_json([
-                'success' => false,
-                'error' => 'no taxonomy was sent'
-        ]);
+	    return wp_send_json([
+		    'success' => false,
+		    'error' => 'no taxonomy was sent'
+	    ]);
     }
 
     public function deleteWooCommerceProductDataAction()
@@ -340,27 +347,6 @@ class ACPT_Lite_Ajax
     /**
      * @return mixed
      */
-    public function deleteUserMetaAction()
-    {
-        try {
-            UserMetaRepository::deleteAll();
-
-            $return = [
-                    'success' => true,
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
-    }
-
-    /**
-     * @return mixed
-     */
     public function doShortcodeAction()
     {
         $data = $this->sanitizeJsonData($_POST['data']);
@@ -382,58 +368,86 @@ class ACPT_Lite_Ajax
 
     public function fetchPreviewLinkAction()
     {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        if(!isset($data['id']) and !isset($data['type']) ){
-            return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing id and/or post type'
-            ]);
-        }
+	    $data = $this->sanitizeJsonData($_POST['data']);
 
-        $postId = $data['id'];
-        $type = $data['type'];
+	    if(!isset($data['id']) and !isset($data['belongsTo']) and !isset($data['find']) and !isset($data['template']) ){
+		    return wp_send_json([
+			    'success' => false,
+			    'error' => 'Missing params (`id`, `belongsTo`, `find`, `template`)'
+		    ]);
+	    }
 
-        if($type === 'post'){
-            $category = get_the_category($postId);
-            $archiveLink = get_category_link($category);
-        } else {
-            $archiveLink = get_post_type_archive_link($type);
-        }
+	    $id = $data['id'];
+	    $find = $data['find'];
+	    $belongsTo = $data['belongsTo'];
 
-        return wp_send_json([
-            'success' => true,
-            'data' => [
-                'single_link' => get_the_permalink($postId),
-                'archive_link' => $archiveLink
-            ]
-        ]);
+	    if($belongsTo === MetaTypes::CUSTOM_POST_TYPE){
+		    if($find === 'post'){
+			    $category = get_the_category($id);
+			    $archiveLink = get_category_link($category);
+		    } else {
+			    $archiveLink = get_post_type_archive_link($find);
+		    }
+
+		    return wp_send_json([
+			    'success' => true,
+			    'data' => [
+				    'single_link' => get_the_permalink($id),
+				    'archive_link' => $archiveLink
+			    ]
+		    ]);
+	    }
+
+	    if($belongsTo === MetaTypes::TAXONOMY){
+		    return wp_send_json([
+			    'success' => true,
+			    'data' => [
+				    'single_link' => get_term_link($id),
+			    ]
+		    ]);
+	    }
+
+	    return wp_send_json([
+		    'success' => false,
+	    ]);
     }
 
-    /**
-     * Fetch custom post type meta
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    public function fetchCustomPostTypeMetaAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        if(!isset($data['postType'])){
-            return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing postType'
-            ]);
-        }
+	/**
+	 * Fetch custom post type meta
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function fetchMetaAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
 
-        $postType = $data['postType'];
-        $options = [];
+		$belongsTo = isset($data['belongsTo']) ? $data['belongsTo'] : MetaTypes::CUSTOM_POST_TYPE;
+		$find = isset($data['find']) ? $data['find'] : null;
 
-        if(isset($data['excludeField'])){
-            $options['excludeFields'][] = $data['excludeField'];
-        }
+		// OLD format, keep compatibility
+		if($find === null){
+			$find = $data['postType'];
+		}
 
-        return wp_send_json(CustomPostTypeRepository::getMeta($postType, $options));
-    }
+		if($belongsTo !== MetaTypes::USER and $find === null){
+			return wp_send_json([
+				'success' => false,
+				'error' => 'No data sent'
+			]);
+		}
+
+		$options = [];
+
+		if(isset($data['excludeField'])){
+			$options['excludeFields'][] = $data['excludeField'];
+		}
+
+		return wp_send_json(MetaRepository::get(array_merge([
+			'belongsTo' => $belongsTo,
+			'find' => $find,
+		], $options)));
+	}
 
     /**
      * Fetch custom post types
@@ -627,22 +641,6 @@ class ACPT_Lite_Ajax
     }
 
     /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function fetchUserMetaAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        $options = [];
-
-        if(isset($data['excludeField'])){
-            $options['excludeFields'][] = $data['excludeField'];
-        }
-
-        return wp_send_json(UserMetaRepository::get($options));
-    }
-
-    /**
      * Reset all custom post type meta
      *
      * @return mixed
@@ -722,122 +720,198 @@ class ACPT_Lite_Ajax
         return wp_send_json($return);
     }
 
-    /**
-     * Creates a custom post type
-     */
-    public function saveCustomPostTypeMetaAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        $ids = [];
-        $arrayOfBoxNames = [];
+	/**
+	 * Saves meta
+	 */
+	public function saveMetaAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
+		$ids = [];
+		$arrayOfBoxNames = [];
 
-        // persist $model on DB
-        try {
-            foreach ($data as $boxIndex => $box ) {
+		$belongsTo  = isset($data[0]) ? $data[0]['belongsTo'] : null;
+		$find  = isset($data[0]) ? $data[0]['find'] : null;
 
-                $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray([
-                        'id' => $box['id'],
-                        'postType' => $box['postType'],
-                        'name' =>  $box['title'],
-                        'sort' =>  ($boxIndex+1)
-                ]);
+		// OLD format, keep compatibility
+		if($find === null){
+			$find  = isset($data[0]) ? $data[0]['postType'] : null;
+		}
 
-                $ids[$box['postType']]['boxes'][] = $box['id'];
+		if($belongsTo !== MetaTypes::USER and $find === null){
+			return wp_send_json([
+				'success' => false,
+				'error' => 'No data sent'
+			]);
+		}
 
-                if(isset($box['fields'])){
-                    $arrayOfFieldNames = [];
+		$ids[$find] = [
+			'boxes' => [],
+			'fields' => [],
+			'options' => [],
+			'visibilityConditions' => [],
+			'relations' => [],
+		];
 
-                    foreach ($box['fields'] as $fieldIndex => $field) {
-                        $fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
-                                'id' => $field['id'],
-                                'title' => $field['name'],
-                                'type' => $field['type'],
-                                'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
-                                'description' => isset($field['description']) ? $field['description'] : null,
-                                'showInArchive' => isset($field['showInArchive']) ? $field['showInArchive'] : false,
-                                'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
-                                'metaBox' => $boxModel,
-                                'sort' =>  ($fieldIndex+1)
-                        ]);
+		// persist $model on DB
+		try {
+			foreach ($data as $boxIndex => $box ) {
 
-                        $ids[$box['postType']]['fields'][] = $field['id'];
+				$boxModel = null;
 
-                        $fieldModel->changeName($this->getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
-                        $arrayOfFieldNames[] = $fieldModel->getName();
+				switch ($belongsTo){
+					case null:
+					case MetaTypes::CUSTOM_POST_TYPE:
+						$boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray([
+							'id' => $box['id'],
+							'postType' => $find,
+							'name' =>  $box['title'],
+							'sort' =>  ($boxIndex+1)
+						]);
+						break;
 
-                        if(isset($field['options'])){
-                            foreach ($field['options'] as $optionIndex => $option) {
-                                $optionModel = MetaBoxFieldOptionModel::hydrateFromArray([
-                                        'id' => $option['id'],
-                                        'label' => $option['label'],
-                                        'value' => $option['value'],
-                                        'metaBoxField' => $fieldModel,
-                                        'sort' =>  ($optionIndex+1)
-                                ]);
+					case MetaTypes::TAXONOMY:
+						$boxModel = TaxonomyMetaBoxModel::hydrateFromArray([
+							'id' => $box['id'],
+							'taxonomy' => $find,
+							'name' =>  $box['title'],
+							'sort' =>  ($boxIndex+1)
+						]);
+						break;
 
-                                $ids[$box['postType']]['options'][] = $option['id'];
+					case MetaTypes::USER:
+						$boxModel = UserMetaBoxModel::hydrateFromArray([
+							'id' => $box['id'],
+							'name' =>  $box['title'],
+							'sort' =>  ($boxIndex+1)
+						]);
+						break;
+				}
 
-                                $fieldModel->addOption($optionModel);
-                            }
-                        }
+				if($boxModel === null){
+					return wp_send_json([
+						'success' => false,
+						'error' => 'Cannot create $boxModel object'
+					]);
+				}
 
-                        if(isset($field['relations'])){
-                            foreach ($field['relations'] as $relationIndex => $relation) {
+				$ids[$find]['boxes'][] = $box['id'];
 
-                                $relatedCustomPostType = CustomPostTypeRepository::get([
-                                        'postType' => $relation['relatedPostType']
-                                ], true)[0];
+				if(isset($box['fields'])){
+					$arrayOfFieldNames = [];
 
-                                $relationModel = MetaBoxFieldRelationshipModel::hydrateFromArray([
-                                        'id' => $relation['id'],
-                                        'relationship' => $relation['type'],
-                                        'relatedCustomPostType' => $relatedCustomPostType,
-                                        'metaBoxField' => $fieldModel,
-                                ]);
+					foreach ($box['fields'] as $fieldIndex => $field) {
 
-                                if(isset($relation['inversedFieldId'])){
-                                    $inversedBy = CustomPostTypeRepository::getMetaField($relation['inversedFieldId']);
-                                    $relationModel->setInversedBy($inversedBy);
-                                }
+						$fieldModel = null;
 
-                                $ids[$box['postType']]['relations'][] = $relation['id'];
+						switch ($belongsTo) {
+							case null:
+							case MetaTypes::CUSTOM_POST_TYPE:
+								$fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
+									'id' => $field['id'],
+									'title' => $field['name'],
+									'type' => $field['type'],
+									'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
+									'description' => isset($field['description']) ? $field['description'] : null,
+									'showInArchive' => isset($field['showInArchive']) ? $field['showInArchive'] : false,
+									'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
+									'metaBox' => $boxModel,
+									'sort' =>  ($fieldIndex+1)
+								]);
+								break;
 
-                                $fieldModel->removeRelation($relationModel);
-                                $fieldModel->addRelation($relationModel);
-                            }
-                        }
+							case MetaTypes::TAXONOMY:
+								$fieldModel = TaxonomyMetaBoxFieldModel::hydrateFromArray([
+									'id' => $field['id'],
+									'name' => $field['name'],
+									'type' => $field['type'],
+									'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
+									'description' => isset($field['description']) ? $field['description'] : null,
+									'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
+									'metaBox' => $boxModel,
+									'sort' =>  ($fieldIndex+1)
+								]);
+								break;
 
-                        $boxModel->addField($fieldModel);
-                    }
-                }
+							case MetaTypes::USER:
+								$fieldModel = UserMetaBoxFieldModel::hydrateFromArray([
+									'id' => $field['id'],
+									'name' => $field['name'],
+									'type' => $field['type'],
+									'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
+									'description' => isset($field['description']) ? $field['description'] : null,
+									'showInArchive' => isset($field['showInArchive']) ? $field['showInArchive'] : false,
+									'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
+									'metaBox' => $boxModel,
+									'sort' =>  ($fieldIndex+1)
+								]);
+								break;
+						}
 
-                $boxModel->changeName($this->getTheFirstAvailableName($boxModel->getName(), $arrayOfBoxNames));
-                $arrayOfBoxNames[] = $boxModel->getName();
+						if($fieldModel === null){
+							return wp_send_json([
+								'success' => false,
+								'error' => 'Cannot create $fieldModel object'
+							]);
+						}
 
-                CustomPostTypeRepository::saveMetaBox($boxModel, $ids);
-            }
+						$ids[$find]['fields'][] = $field['id'];
 
-            // remove orphans
-            foreach ($ids as $postType => $childrenIds){
-                CustomPostTypeRepository::removeMetaOrphans($postType, $childrenIds);
-            }
+						$fieldModel->changeName($this->getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
 
-            // remove orphan relationships
-            CustomPostTypeRepository::removeOrphanRelationships();
+						if(isset($field['parentId']) and null !== $field['parentId']){
+							$fieldModel->setParentId($field['parentId']);
+						}
 
-            $return = [
-                    'ids' => $ids,
-                    'success' => true
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
+						$arrayOfFieldNames[] = $fieldModel->getName();
 
-        return wp_send_json($return);
-    }
+						if(isset($field['options'])){
+							foreach ($field['options'] as $optionIndex => $option) {
+								$optionModel = MetaBoxFieldOptionModel::hydrateFromArray([
+									'id' => $option['id'],
+									'label' => $option['label'],
+									'value' => $option['value'],
+									'metaBoxField' => $fieldModel,
+									'sort' =>  ($optionIndex+1)
+								]);
+
+								$ids[$find]['options'][] = $option['id'];
+
+								$fieldModel->addOption($optionModel);
+							}
+						}
+
+						$boxModel->addField($fieldModel);
+					}
+				}
+
+				$boxModel->changeName($this->getTheFirstAvailableName($boxModel->getName(), $arrayOfBoxNames));
+				$arrayOfBoxNames[] = $boxModel->getName();
+
+				MetaRepository::saveMetaBox($boxModel);
+			}
+
+			// remove orphans
+			foreach ($ids as $find => $childrenIds){
+				MetaRepository::removeMetaOrphans([
+					'belongsTo' => $belongsTo,
+					'find' => $find,
+					'ids' => $childrenIds,
+				]);
+			}
+
+			$return = [
+				'ids' => $ids,
+				'success' => true
+			];
+		} catch (\Exception $exception){
+			$return = [
+				'success' => false,
+				'error' => $exception->getMessage()
+			];
+		}
+
+		return wp_send_json($return);
+	}
 
     /**
      * @param string $name
@@ -890,52 +964,52 @@ class ACPT_Lite_Ajax
      */
     public function saveTaxonomyAction()
     {
-        $data = $this->sanitizeJsonData($_POST['data']);
+	    $data = $this->sanitizeJsonData($_POST['data']);
 
-        // persist $model on DB
-        try {
-            $settings = $data[3];
+	    // persist $model on DB
+	    try {
+		    $settings = $data[3];
 
-            if($settings["rewrite"] === true){
-                $settings["rewrite"] = [];
-                $settings["rewrite"]["slug"] = (isset($settings["custom_rewrite"]) and null !== $settings["custom_rewrite"]) ? strtolower($settings["custom_rewrite"]) : strtolower($data[1]["slug"]) ;
-            }
+		    if($settings["rewrite"] === true){
+			    $settings["rewrite"] = [];
+			    $settings["rewrite"]["slug"] = (isset($settings["custom_rewrite"]) and null !== $settings["custom_rewrite"]) ? strtolower($settings["custom_rewrite"]) : strtolower($data[1]["slug"]) ;
+		    }
 
-            $settings['capabilities'] = [];
+		    $settings['capabilities'] = [];
 
-            if($settings['capabilities_0'] === 'manage_terms') { $settings['capabilities'][] = 'manage_terms'; }
-            if($settings['capabilities_1'] === 'edit_terms') { $settings['capabilities'][] = 'edit_terms'; }
-            if($settings['capabilities_2'] === 'delete_terms') { $settings['capabilities'][] = 'delete_terms'; }
-            if($settings['capabilities_3'] === 'assign_terms') { $settings['capabilities'][] = 'assign_terms'; }
+		    if($settings['capabilities_0'] === 'manage_terms') { $settings['capabilities'][] = 'manage_terms'; }
+		    if($settings['capabilities_1'] === 'edit_terms') { $settings['capabilities'][] = 'edit_terms'; }
+		    if($settings['capabilities_2'] === 'delete_terms') { $settings['capabilities'][] = 'delete_terms'; }
+		    if($settings['capabilities_3'] === 'assign_terms') { $settings['capabilities'][] = 'assign_terms'; }
 
-            unset($settings['capabilities_0']);
-            unset($settings['capabilities_1']);
-            unset($settings['capabilities_2']);
-            unset($settings['capabilities_3']);
+		    unset($settings['capabilities_0']);
+		    unset($settings['capabilities_1']);
+		    unset($settings['capabilities_2']);
+		    unset($settings['capabilities_3']);
 
-            $id = (TaxonomyRepository::exists($data[1]["slug"])) ? TaxonomyRepository::getId($data[1]["slug"]) : Uuid::v4();
-            $model = TaxonomyModel::hydrateFromArray([
-                'id' => $id,
-                'slug' => $data[1]["slug"],
-                'singular' => $data[1]["singular_label"],
-                'plural' => $data[1]["plural_label"],
-                'labels' => $data[2],
-                'native' => false,
-                'settings' => $settings
-            ]);
+		    $id = (TaxonomyRepository::exists($data[1]["slug"])) ? TaxonomyRepository::getId($data[1]["slug"]) : Uuid::v4();
+		    $model = TaxonomyModel::hydrateFromArray([
+			    'id' => $id,
+			    'slug' => $data[1]["slug"],
+			    'singular' => $data[1]["singular_label"],
+			    'plural' => $data[1]["plural_label"],
+			    'labels' => $data[2],
+			    'native' => false,
+			    'settings' => $settings
+		    ]);
 
-            TaxonomyRepository::save($model);
-            $return = [
-                    'success' => true
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
+		    TaxonomyRepository::save($model);
+		    $return = [
+			    'success' => true
+		    ];
+	    } catch (\Exception $exception){
+		    $return = [
+			    'success' => false,
+			    'error' => $exception->getMessage()
+		    ];
+	    }
 
-        return wp_send_json($return);
+	    return wp_send_json($return);
     }
 
     /**
@@ -1036,92 +1110,6 @@ class ACPT_Lite_Ajax
             $return = [
                 'success' => false,
                 'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function saveUserMetaAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        $ids = [];
-        $arrayOfBoxNames = [];
-
-        // persist $model on DB
-        try {
-            foreach ($data as $boxIndex => $box ) {
-
-                $boxModel = UserMetaBoxModel::hydrateFromArray([
-                        'id' => $box['id'],
-                        'name' =>  $box['name'],
-                        'sort' =>  ($boxIndex+1)
-                ]);
-
-                $ids['boxes'][] = $box['id'];
-
-                if(isset($box['fields'])){
-                    $arrayOfFieldNames = [];
-
-                    foreach ($box['fields'] as $fieldIndex => $field) {
-                        $fieldModel = UserMetaFieldModel::hydrateFromArray([
-                                'id' => $field['id'],
-                                'name' => $field['name'],
-                                'type' => $field['type'],
-                                'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
-                                'description' => isset($field['description']) ? $field['description'] : null,
-                                'showInArchive' => isset($field['showInArchive']) ? $field['showInArchive'] : false,
-                                'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
-                                'metaBox' => $boxModel,
-                                'sort' =>  ($fieldIndex+1)
-                        ]);
-
-                        $ids['fields'][] = $field['id'];
-
-                        $fieldModel->changeName($this->getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
-                        $arrayOfFieldNames[] = $fieldModel->getName();
-
-                        if(isset($field['options'])){
-                            foreach ($field['options'] as $optionIndex => $option) {
-                                $optionModel = UserMetaFieldOptionModel::hydrateFromArray([
-                                        'id' => $option['id'],
-                                        'label' => $option['label'],
-                                        'value' => $option['value'],
-                                        'userMetaBox' => $boxModel,
-                                        'userField' => $fieldModel,
-                                        'sort' =>  ($optionIndex+1)
-                                ]);
-
-                                $ids['options'][] = $option['id'];
-
-                                $fieldModel->addOption($optionModel);
-                            }
-                        }
-
-                        $boxModel->addField($fieldModel);
-                    }
-                }
-
-                $boxModel->changeName($this->getTheFirstAvailableName($boxModel->getName(), $arrayOfBoxNames));
-                $arrayOfBoxNames[] = $boxModel->getName();
-
-                UserMetaRepository::save($boxModel);
-            }
-
-            // remove orphans
-            UserMetaRepository::removeOrphans($ids);
-
-            $return = [
-                    'ids' => $ids,
-                    'success' => true
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
             ];
         }
 

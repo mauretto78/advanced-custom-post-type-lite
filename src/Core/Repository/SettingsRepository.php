@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Core\Repository;
 
-use ACPT_Lite\Core\Models\SettingsModel;
+use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class SettingsRepository

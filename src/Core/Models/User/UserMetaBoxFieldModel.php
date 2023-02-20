@@ -13,7 +13,7 @@ use ACPT_Lite\Core\Helper\Strings;
  * @subpackage advanced-custom-post-type/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class UserMetaFieldModel extends AbstractMetaBoxFieldModel implements \JsonSerializable
+class UserMetaBoxFieldModel extends AbstractMetaBoxFieldModel implements \JsonSerializable
 {
     const EMAIL_TYPE = 'Email';
     const SELECT_TYPE = 'Select';
