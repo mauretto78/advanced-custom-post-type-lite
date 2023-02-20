@@ -5,24 +5,7 @@ import {toast, ToastContainer} from "react-toastify";
 import ScrollToTop from "./components/reusable/ScrollToTop";
 import Spinner from "./components/reusable/Loader/Spinner";
 // PAGES
-import ViewCustomPostType from "./components/pages/ViewCustomPostType";
-import SaveCustomPostType from "./components/pages/SaveCustomPostType";
-import CustomPostTypeList from "./components/pages/CustomPostTypeList";
-import CustomPostTypeMeta from "./components/pages/CustomPostTypeMeta";
-import DeleteCustomPostType from "./components/pages/DeleteCustomPostType";
 import NotFound404 from "./components/pages/404";
-import TaxonomyList from "./components/pages/TaxonomyList";
-import SaveTaxonomy from "./components/pages/SaveTaxonomy";
-import AssocTaxonomyToCustomPostType from "./components/pages/AssocTaxonomyToCustomPostType";
-import DeleteTaxonomy from "./components/pages/DeleteTaxonomy";
-import ViewTaxonomy from "./components/pages/ViewTaxonomy";
-import Settings from "./components/pages/Settings";
-import WooCommerceProductDataList from "./components/pages/WooCommerceProductData";
-import SaveWooCommerceProductData from "./components/pages/SaveWooCommerceProductData";
-import DeleteWooCommerceProductData from "./components/pages/DeleteWooCommerceProductData";
-import ViewWooCommerceProductData from "./components/pages/ViewWooCommerceProductData";
-import WooCommerceProductDataFields from "./components/pages/WooCommerceProductDataFields";
-import UserMeta from "./components/pages/UserMeta";
 // STYLES
 import 'react-toastify/dist/ReactToastify.css';
 // GLOBAL STATE
@@ -93,7 +76,7 @@ const App = () => {
                 </Suspense>
             </HashRouter>
             <ToastContainer
-                position={toast.POSITION.TOP_CENTER}
+                position={toast.POSITION.BOTTOM_RIGHT}
                 className="acpt-toastify"
                 autoClose={5000}
                 hideProgressBar={false}
