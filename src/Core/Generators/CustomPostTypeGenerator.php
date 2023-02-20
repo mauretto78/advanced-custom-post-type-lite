@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Core\Generators;
 
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Assert;
 
@@ -207,7 +207,7 @@ class CustomPostTypeGenerator extends AbstractGenerator
         }
 
         switch ($type){
-            case MetaBoxFieldModel::EMAIL_TYPE:
+            case CustomPostTypeMetaBoxFieldModel::EMAIL_TYPE:
                 Assert::email($rawData);
                 break;
         }

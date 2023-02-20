@@ -1,17 +1,24 @@
 <?php
 
-namespace ACPT_Lite\Core\Models;
+namespace ACPT_Lite\Core\Models\CustomPostType;
+
+use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 
 /**
  * MetaBoxModel
  *
- * @since      1.0.7
- * @package    advanced-custom-post-type
+ * @since      1.0.0
+ * @package    advanced-custom-post-type-lite
  * @subpackage advanced-custom-post-type/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class UserMetaBoxModel extends AbstractModel implements \JsonSerializable
+class CustomPostTypeMetaBoxModel extends AbstractModel implements \JsonSerializable
 {
+    /**
+     * @var string
+     */
+    private $postType;
+
     /**
      * @var string
      */
@@ -23,41 +30,55 @@ class UserMetaBoxModel extends AbstractModel implements \JsonSerializable
     private $sort;
 
     /**
-     * @var UserMetaFieldModel[]
+     * @var CustomPostTypeMetaBoxFieldModel[]
      */
     private $fields = [];
 
     /**
-     * UserMetaBoxModel constructor.
+     * MetaBoxModel constructor.
      *
-     * @param $id
-     * @param $name
-     * @param $sort
+     * @param        $id
+     * @param int    $postType
+     * @param string $name
+     * @param int    $sort
      */
     public function __construct(
-            $id,
-            $name,
-            $sort
+        $id,
+        $postType,
+        $name,
+        $sort
     )
     {
         parent::__construct($id);
+        $this->postType = $postType;
         $this->name     = $name;
         $this->sort     = $sort;
         $this->fields   = [];
     }
 
     /**
+     * @param $postType
      * @param $name
      * @param $sort
      */
     public function edit(
-            $name,
-            $sort
+        $postType,
+        $name,
+        $sort
     )
     {
+        $this->postType = $postType;
         $this->name     = $name;
         $this->sort     = $sort;
         $this->fields   = [];
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostType()
+    {
+        return $this->postType;
     }
 
     /**
@@ -93,9 +114,9 @@ class UserMetaBoxModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param UserMetaFieldModel $field
+     * @param CustomPostTypeMetaBoxFieldModel $field
      */
-    public function addField(UserMetaFieldModel $field)
+    public function addField(CustomPostTypeMetaBoxFieldModel $field)
     {
         if(!$this->existsInCollection($field->getId(), $this->fields)){
             $this->fields[] = $field;
@@ -103,15 +124,15 @@ class UserMetaBoxModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param UserMetaFieldModel $field
+     * @param CustomPostTypeMetaBoxFieldModel $field
      */
-    public function removeField(UserMetaFieldModel $field)
+    public function removeField(CustomPostTypeMetaBoxFieldModel $field)
     {
         $this->removeFromCollection($field->getId(), $this->fields);
     }
 
     /**
-     * @return array|UserMetaFieldModel[]
+     * @return array|CustomPostTypeMetaBoxFieldModel[]
      */
     public function getFields()
     {
@@ -124,10 +145,11 @@ class UserMetaBoxModel extends AbstractModel implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-                'id' => $this->id,
-                'name' => $this->name,
-                'sort' => $this->sort,
-                'fields' => $this->fields
+            'id' => $this->id,
+            'title' => $this->name,
+            'postType' => $this->postType,
+            'sort' => $this->sort,
+            'fields' => $this->fields
         ];
     }
 }

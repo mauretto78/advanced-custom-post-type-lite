@@ -7,7 +7,7 @@ use ACPT_Lite\Core\Generators\MetaBoxGenerator;
 use ACPT_Lite\Core\Generators\UserMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\MetaBoxModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\UserMetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
@@ -486,10 +486,10 @@ class ACPT_Lite_Admin
 
     /**
      * @param                  $postTypeName
-     * @param MetaBoxModel     $metaBoxModel
+     * @param CustomPostTypeMetaBoxModel     $metaBoxModel
      * @param MetaBoxGenerator $metaBoxGenerator
      */
-    private function generateMetaBoxes( $postTypeName, MetaBoxModel $metaBoxModel, MetaBoxGenerator $metaBoxGenerator)
+    private function generateMetaBoxes( $postTypeName, CustomPostTypeMetaBoxModel $metaBoxModel, MetaBoxGenerator $metaBoxGenerator)
     {
         $metaFields = [];
 

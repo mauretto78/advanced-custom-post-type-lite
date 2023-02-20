@@ -5,10 +5,10 @@ namespace ACPT_Lite\Admin;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\MetaBoxFieldOptionModel;
 use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
-use ACPT_Lite\Core\Models\MetaBoxModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Core\Models\SettingsModel;
 use ACPT_Lite\Core\Models\TaxonomyModel;
 use ACPT_Lite\Core\Models\UserMetaBoxModel;
@@ -735,7 +735,7 @@ class ACPT_Lite_Ajax
         try {
             foreach ($data as $boxIndex => $box ) {
 
-                $boxModel = MetaBoxModel::hydrateFromArray([
+                $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray([
                         'id' => $box['id'],
                         'postType' => $box['postType'],
                         'name' =>  $box['title'],
@@ -748,7 +748,7 @@ class ACPT_Lite_Ajax
                     $arrayOfFieldNames = [];
 
                     foreach ($box['fields'] as $fieldIndex => $field) {
-                        $fieldModel = MetaBoxFieldModel::hydrateFromArray([
+                        $fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
                                 'id' => $field['id'],
                                 'title' => $field['name'],
                                 'type' => $field['type'],

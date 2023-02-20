@@ -1,6 +1,9 @@
 <?php
 
-namespace ACPT_Lite\Core\Models;
+namespace ACPT_Lite\Core\Models\MetaField;
+
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 
 /**
  * MetaBoxFieldOptionModel
@@ -13,7 +16,7 @@ namespace ACPT_Lite\Core\Models;
 class MetaBoxFieldOptionModel extends AbstractModel implements \JsonSerializable
 {
     /**
-     * @var MetaBoxFieldModel
+     * @var AbstractMetaBoxFieldModel
      */
     private $metaBoxField;
 

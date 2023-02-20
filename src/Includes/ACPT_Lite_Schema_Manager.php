@@ -41,7 +41,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // field
+	    // meta field (FROM v.1.0.14 THIS TABLE IS THE ONLY ONE META FIELD TABLE IN USE)
         $sql3 = "CREATE TABLE IF NOT EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             meta_box_id VARCHAR(36) NOT NULL,
@@ -55,7 +55,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // options
+        // meta options (FROM v.1.0.14 THIS TABLE IS THE ONLY ONE META FIELD OPTIONS TABLE IN USE)
         $sql4 = "CREATE TABLE IF NOT EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             meta_box_id VARCHAR(36) NOT NULL,

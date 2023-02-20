@@ -1,6 +1,8 @@
 <?php
 
-namespace ACPT_Lite\Core\Models;
+namespace ACPT_Lite\Core\Models\Settings;
+
+use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 
 /**
  * SettingsModel

@@ -5,10 +5,10 @@ namespace ACPT_Lite\Core\Repository;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\CustomPostTypeModel;
 use ACPT_Lite\Core\Models\CustomPostTypeTemplateModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\MetaBoxFieldOptionModel;
 use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
-use ACPT_Lite\Core\Models\MetaBoxModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Core\Models\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
@@ -140,10 +140,11 @@ class CustomPostTypeRepository
     /**
      * Delete a meta box
      *
-     * @param MetaBoxModel $metaBoxModel
+     * @param CustomPostTypeMetaBoxModel $metaBoxModel
+     *
      * @throws \Exception
      */
-    private static function deleteMetaBox(MetaBoxModel $metaBoxModel)
+    private static function deleteMetaBox( CustomPostTypeMetaBoxModel $metaBoxModel)
     {
         ACPT_Lite_DB::startTransaction();
 
@@ -310,7 +311,7 @@ class CustomPostTypeRepository
             ;", [$post->name]);
 
                 foreach ($boxes as $boxIndex => $box){
-                    $boxModel = MetaBoxModel::hydrateFromArray([
+                    $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray([
                             'id' => $box->id,
                             'postType' => $postModel->getName(),
                             'name' => $box->name,
@@ -341,7 +342,7 @@ class CustomPostTypeRepository
                     $fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
 
                     foreach ($fields as $fieldIndex => $field){
-                        $fieldModel = MetaBoxFieldModel::hydrateFromArray([
+                        $fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
                                 'id' => $field->id,
                                 'metaBox' => $boxModel,
                                 'title' => $field->name,
@@ -586,7 +587,7 @@ class CustomPostTypeRepository
      * @param $postType
      * @param array $options
      *
-     * @return MetaBoxModel[]
+     * @return CustomPostTypeMetaBoxModel[]
      * @throws \Exception
      */
     public static function getMeta($postType, array $options = [])
@@ -607,7 +608,7 @@ class CustomPostTypeRepository
      * @param $box
      * @param $field
      *
-     * @return MetaBoxFieldModel|null
+     * @return CustomPostTypeMetaBoxFieldModel|null
      * @throws \Exception
      */
     public static function getSingleMeta($postType, $box, $field)
@@ -630,7 +631,7 @@ class CustomPostTypeRepository
     /**
      * @param $id
      *
-     * @return MetaBoxModel
+     * @return CustomPostTypeMetaBoxModel
      * @throws \Exception
      */
     public static function getMetaBox($id)
@@ -646,7 +647,7 @@ class CustomPostTypeRepository
         ;", [$id]);
 
         foreach ($boxes as $boxIndex => $box) {
-            return MetaBoxModel::hydrateFromArray( [
+            return CustomPostTypeMetaBoxModel::hydrateFromArray( [
                     'id'       => $box->id,
                     'postType' => $box->post_type,
                     'name'     => $box->name,
@@ -658,7 +659,7 @@ class CustomPostTypeRepository
     /**
      * @param $id
      *
-     * @return MetaBoxFieldModel
+     * @return CustomPostTypeMetaBoxFieldModel
      * @throws \Exception
      */
     public static function getMetaField($id)
@@ -681,7 +682,7 @@ class CustomPostTypeRepository
         $fields = ACPT_Lite_DB::getResults($sql, [$id]);
 
         foreach ($fields as $fieldIndex => $field) {
-            return MetaBoxFieldModel::hydrateFromArray( [
+            return CustomPostTypeMetaBoxFieldModel::hydrateFromArray( [
                     'id'            => $field->id,
                     'metaBox'       => CustomPostTypeRepository::getMetaBox($field->meta_box_id),
                     'title'         => $field->name,
@@ -762,12 +763,12 @@ class CustomPostTypeRepository
     /**
      * Save meta box
      *
-     * @param MetaBoxModel $metaBoxModel
+     * @param CustomPostTypeMetaBoxModel $metaBoxModel
      * @param              $ids
      *
      * @throws \Exception
      */
-    public static function saveMetaBox(MetaBoxModel $metaBoxModel, &$ids)
+    public static function saveMetaBox( CustomPostTypeMetaBoxModel $metaBoxModel, &$ids)
     {
         ACPT_Lite_DB::startTransaction();
 
@@ -815,11 +816,11 @@ class CustomPostTypeRepository
     }
 
     /**
-     * @param MetaBoxFieldModel $fieldModel
+     * @param CustomPostTypeMetaBoxFieldModel $fieldModel
      *
      * @throws \Exception
      */
-    public static function saveMetaField(MetaBoxFieldModel $fieldModel)
+    public static function saveMetaField(CustomPostTypeMetaBoxFieldModel $fieldModel)
     {
         $showInArchive = $fieldModel->isShowInArchive() ? '1' : '0';
         $isRequired = $fieldModel->isRequired() ? '1' : '0';
@@ -937,7 +938,7 @@ class CustomPostTypeRepository
 
         // set all orphan fields with a orphan relationship to TEXT
         $results = ACPT_Lite_DB::getResults($query, [
-                MetaBoxFieldModel::POST_TYPE
+                CustomPostTypeMetaBoxFieldModel::POST_TYPE
         ]);
 
         if(count($results) > 0) {
@@ -959,7 +960,7 @@ class CustomPostTypeRepository
 
                     $sql = "UPDATE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` SET `field_type` = %s WHERE id = %s;";
                     self::executeQueryOrThrowException( $sql, [
-                            MetaBoxFieldModel::TEXT_TYPE,
+                            CustomPostTypeMetaBoxFieldModel::TEXT_TYPE,
                             $result->id
                     ] );
                 }
@@ -975,7 +976,7 @@ class CustomPostTypeRepository
         ";
 
         $results = ACPT_Lite_DB::getResults($query, [
-                MetaBoxFieldModel::POST_TYPE
+                CustomPostTypeMetaBoxFieldModel::POST_TYPE
         ]);
 
         if(count($results) > 0) {
