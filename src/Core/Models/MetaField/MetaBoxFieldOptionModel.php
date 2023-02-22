@@ -39,14 +39,14 @@ class MetaBoxFieldOptionModel extends AbstractModel implements \JsonSerializable
      * MetaBoxFieldModel constructor.
      *
      * @param                   $id
-     * @param MetaBoxFieldModel $metaBoxField
+     * @param AbstractMetaBoxFieldModel $metaBoxField
      * @param string            $label
      * @param string            $value
      * @param int               $sort
      */
     public function __construct(
         $id,
-        MetaBoxFieldModel $metaBoxField,
+	    AbstractMetaBoxFieldModel $metaBoxField,
         $label,
         $value,
         $sort
@@ -59,7 +59,7 @@ class MetaBoxFieldOptionModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @return MetaBoxFieldModel
+     * @return AbstractMetaBoxFieldModel
      */
     public function getMetaBoxField()
     {

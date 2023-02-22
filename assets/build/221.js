@@ -190,6 +190,7 @@ var TaxonomyMeta = function TaxonomyMeta() {
                         className: "acpt-btn acpt-btn-primary",
                         onClick: function onClick(e) {
                             e.preventDefault();
+                            setModalVisible(!modalVisible);
                             handleDeleteAll();
                         }
                     },

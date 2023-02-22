@@ -48,11 +48,6 @@ abstract class AbstractField
     protected $options;
 
     /**
-     * @var array
-     */
-    protected $relations;
-
-    /**
      * AbstractField constructor.
      *
      * @param int    $postId
@@ -65,7 +60,7 @@ abstract class AbstractField
      * @param array  $options
      * @param array  $relations
      */
-    public function __construct($postId, $metaboxId, $name, $sort, $isRequired = false, $defaultValue = null, $description = null, $options = [], $relations = [] )
+    public function __construct($postId, $metaboxId, $name, $sort, $isRequired = false, $defaultValue = null, $description = null, $options = [] )
     {
         $this->postId = $postId;
         $this->metaboxId = $metaboxId;
@@ -75,7 +70,6 @@ abstract class AbstractField
         $this->defaultValue = $defaultValue;
         $this->description = $description;
         $this->options = $options;
-        $this->relations = $relations;
     }
 
     /**

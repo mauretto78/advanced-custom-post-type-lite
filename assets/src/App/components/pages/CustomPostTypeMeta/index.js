@@ -94,6 +94,7 @@ const CustomPostTypeMeta = () => {
                         className="acpt-btn acpt-btn-primary"
                         onClick={(e) => {
                             e.preventDefault();
+                            setModalVisible(!modalVisible);
                             handleDeleteAll();
                         }}
                     >
@@ -115,7 +116,7 @@ const CustomPostTypeMeta = () => {
             <button
                 onClick={(e) => {
                     e.preventDefault();
-                    setModalVisible(true);
+                    setModalVisible(!modalVisible);
                 }}
                 type="submit"
                 className="acpt-btn acpt-btn-danger"

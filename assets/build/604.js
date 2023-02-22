@@ -190,6 +190,7 @@ var CustomPostTypeMeta = function CustomPostTypeMeta() {
                         className: 'acpt-btn acpt-btn-primary',
                         onClick: function onClick(e) {
                             e.preventDefault();
+                            setModalVisible(!modalVisible);
                             handleDeleteAll();
                         }
                     },
@@ -215,7 +216,7 @@ var CustomPostTypeMeta = function CustomPostTypeMeta() {
             {
                 onClick: function onClick(e) {
                     e.preventDefault();
-                    setModalVisible(true);
+                    setModalVisible(!modalVisible);
                 },
                 type: 'submit',
                 className: 'acpt-btn acpt-btn-danger'

@@ -44,7 +44,6 @@ class CustomPostTypeMetaBoxFieldGenerator
 			return new $className(
 				$postId,
 				$metaboxId,
-				$input['id'],
 				$input['name'],
 				$input['sort'],
 				$input['isRequired'],

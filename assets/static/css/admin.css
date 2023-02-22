@@ -71,6 +71,7 @@
     flex-direction: row;
     align-content: space-between;
     border-radius: 3px;
+    background: #fff;
 }
 
 .acpt-admin-meta.sort-1 {

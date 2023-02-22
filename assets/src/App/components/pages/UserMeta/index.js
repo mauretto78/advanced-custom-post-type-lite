@@ -94,6 +94,7 @@ const UserMeta = () => {
                         className="acpt-btn acpt-btn-primary"
                         onClick={(e) => {
                             e.preventDefault();
+                            setModalVisible(!modalVisible);
                             handleDeleteAll();
                         }}
                     >
