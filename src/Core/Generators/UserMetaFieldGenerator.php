@@ -3,12 +3,12 @@
 namespace ACPT_Lite\Core\Generators;
 
 use ACPT_Lite\Core\Generators\UserFields\UserMetaFieldInterface;
-use ACPT_Lite\Core\Models\UserMetaFieldModel;
+use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
 
 class UserMetaFieldGenerator
 {
     /**
-     * @var UserMetaFieldModel
+     * @var UserMetaBoxFieldModel
      */
     private $userField;
 
@@ -20,10 +20,10 @@ class UserMetaFieldGenerator
     /**
      * UserMetaFieldGenerator constructor.
      *
-     * @param UserMetaFieldModel $userField
+     * @param UserMetaBoxFieldModel $userField
      * @param \WP_User           $user
      */
-    public function __construct(UserMetaFieldModel $userField, \WP_User $user)
+    public function __construct(UserMetaBoxFieldModel $userField, \WP_User $user)
     {
         $this->userField = $userField;
         $this->user = $user;
