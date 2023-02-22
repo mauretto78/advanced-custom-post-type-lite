@@ -1,18 +1,297 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[12],{
 
 /***/ 6595:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _objects = __webpack_require__(4040);\n\nvar _Tippy = __webpack_require__(5825);\n\nvar _Tippy2 = _interopRequireDefault(_Tippy);\n\nvar _react3 = __webpack_require__(6229);\n\nvar _Modal = __webpack_require__(2651);\n\nvar _Modal2 = _interopRequireDefault(_Modal);\n\nvar _MetaBoxMiniTable = __webpack_require__(5410);\n\nvar _MetaBoxMiniTable2 = _interopRequireDefault(_MetaBoxMiniTable);\n\nvar _TaxonomiesMiniTable = __webpack_require__(9738);\n\nvar _TaxonomiesMiniTable2 = _interopRequireDefault(_TaxonomiesMiniTable);\n\nvar _WoocommerceMiniTable = __webpack_require__(5200);\n\nvar _WoocommerceMiniTable2 = _interopRequireDefault(_WoocommerceMiniTable);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {\n    var id = _ref.id,\n        thereIsWooCommerce = _ref.thereIsWooCommerce,\n        element = _ref.element,\n        handeDeleteTemplate = _ref.handeDeleteTemplate;\n\n    // manage local state\n    var _useState = (0, _react.useState)(false),\n        _useState2 = _slicedToArray(_useState, 2),\n        modalVisible = _useState2[0],\n        setModalVisible = _useState2[1];\n\n    var _useState3 = (0, _react.useState)(false),\n        _useState4 = _slicedToArray(_useState3, 2),\n        modalTemplateType = _useState4[0],\n        setModalTemplateType = _useState4[1];\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            _Modal2.default,\n            { title: 'Confirm deleting this template?', visible: modalVisible },\n            wp.element.createElement(\n                'p',\n                null,\n                'Are you sure?'\n            ),\n            wp.element.createElement(\n                'p',\n                null,\n                wp.element.createElement(\n                    'a',\n                    {\n                        href: '#',\n                        className: 'acpt-btn acpt-btn-primary',\n                        onClick: function onClick(e) {\n                            e.preventDefault();\n                            setModalVisible(!modalVisible);\n                            handeDeleteTemplate(element.name, modalTemplateType);\n                        }\n                    },\n                    'Yes'\n                ),\n                '\\xA0',\n                wp.element.createElement(\n                    'a',\n                    {\n                        href: '#',\n                        className: 'acpt-btn acpt-btn-primary-o',\n                        onClick: function onClick(e) {\n                            e.preventDefault();\n                            setModalVisible(!modalVisible);\n                        }\n                    },\n                    'No'\n                )\n            )\n        ),\n        wp.element.createElement(\n            'tr',\n            null,\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                wp.element.createElement(_react3.Icon, { icon: 'dashicons:' + element.icon, color: '#7e9ebd', width: '18px' })\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                wp.element.createElement(\n                    'div',\n                    { className: 'm-0 mb-1' },\n                    wp.element.createElement(\n                        'strong',\n                        null,\n                        element.name\n                    ),\n                    !element.isNative && wp.element.createElement(\n                        'div',\n                        { className: 'element-buttons' },\n                        wp.element.createElement(\n                            'a',\n                            { href: '#/view/' + element.name },\n                            'View'\n                        ),\n                        '\\xA0',\n                        wp.element.createElement(\n                            'a',\n                            { href: '#/edit/' + element.name },\n                            'Edit'\n                        ),\n                        '\\xA0',\n                        wp.element.createElement(\n                            'a',\n                            { href: '#/delete/' + element.name },\n                            'Delete'\n                        )\n                    )\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                element.isNative ? wp.element.createElement(\n                    'span',\n                    { className: 'acpt-badge acpt-badge-native ml-1' },\n                    wp.element.createElement(\n                        'span',\n                        { className: 'label' },\n                        'Native'\n                    )\n                ) : wp.element.createElement(\n                    'span',\n                    { className: 'acpt-badge acpt-badge-' + (element.isWooCommerce === true ? 'woocommerce' : 'custom') + ' ml-1' },\n                    wp.element.createElement(\n                        'span',\n                        { className: 'label' },\n                        element.isWooCommerce === true ? 'WooCommerce' : 'Custom'\n                    )\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                (0, _objects.isset)(element, \"meta\") && element.meta.length > 0 ? wp.element.createElement(\n                    _Tippy2.default,\n                    {\n                        placement: 'end',\n                        html: wp.element.createElement(_MetaBoxMiniTable2.default, { postType: element.name, elements: element.meta })\n                    },\n                    wp.element.createElement(\n                        _reactRouterDom.Link,\n                        {\n                            to: 'meta/' + element.name,\n                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'\n                        },\n                        'Manage'\n                    )\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    {\n                        to: 'meta/' + element.name,\n                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o'\n                    },\n                    'Create'\n                )\n            ),\n            thereIsWooCommerce === true && wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                element.isWooCommerce === true && wp.element.createElement(\n                    _react2.default.Fragment,\n                    null,\n                    (0, _objects.isset)(element, \"woocommerceProductData\") && element.woocommerceProductData.length > 0 ? wp.element.createElement(\n                        _Tippy2.default,\n                        {\n                            placement: 'top',\n                            html: wp.element.createElement(_WoocommerceMiniTable2.default, { postType: element.name, elements: element.woocommerceProductData })\n                        },\n                        wp.element.createElement(\n                            _reactRouterDom.Link,\n                            {\n                                to: '/product-data/' + element.name,\n                                className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'\n                            },\n                            'Manage'\n                        )\n                    ) : wp.element.createElement(\n                        _reactRouterDom.Link,\n                        {\n                            to: '/product-data/' + element.name,\n                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o'\n                        },\n                        'Create'\n                    )\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                (0, _objects.isset)(element, \"taxonomies\") && element.taxonomies.length > 0 ? wp.element.createElement(\n                    _Tippy2.default,\n                    {\n                        placement: 'top',\n                        html: wp.element.createElement(_TaxonomiesMiniTable2.default, { postType: element.name, elements: element.taxonomies })\n                    },\n                    wp.element.createElement(\n                        _reactRouterDom.Link,\n                        {\n                            to: '/assoc-taxonomy-post/' + element.name,\n                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'\n                        },\n                        'Manage'\n                    )\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    {\n                        to: '/assoc-taxonomy-post/' + element.name,\n                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o'\n                    },\n                    'Associate'\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'backend with-border' },\n                wp.element.createElement(\n                    'span',\n                    { className: 'acpt-badge' },\n                    wp.element.createElement(\n                        'span',\n                        { className: 'label' },\n                        element.postCount\n                    )\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'frontend' },\n                wp.element.createElement(\n                    'a',\n                    {\n                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger',\n                        href: 'https://acpt.io/checkout',\n                        target: '_blank'\n                    },\n                    'Buy a PRO license'\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'frontend' },\n                wp.element.createElement(\n                    'a',\n                    {\n                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger',\n                        href: 'https://acpt.io/checkout',\n                        target: '_blank'\n                    },\n                    'Buy a PRO license'\n                )\n            )\n        )\n    );\n};\n\nexports.default = CustomPostTypeListElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/CustomPostTypeList/CustomPostTypeListElement.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _objects = __webpack_require__(4040);
+
+var _Tippy = __webpack_require__(5825);
+
+var _Tippy2 = _interopRequireDefault(_Tippy);
+
+var _react3 = __webpack_require__(6229);
+
+var _Modal = __webpack_require__(2651);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+var _MetaBoxMiniTable = __webpack_require__(5410);
+
+var _MetaBoxMiniTable2 = _interopRequireDefault(_MetaBoxMiniTable);
+
+var _TaxonomiesMiniTable = __webpack_require__(9738);
+
+var _TaxonomiesMiniTable2 = _interopRequireDefault(_TaxonomiesMiniTable);
+
+var _WoocommerceMiniTable = __webpack_require__(5200);
+
+var _WoocommerceMiniTable2 = _interopRequireDefault(_WoocommerceMiniTable);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {
+    var id = _ref.id,
+        thereIsWooCommerce = _ref.thereIsWooCommerce,
+        element = _ref.element,
+        handeDeleteTemplate = _ref.handeDeleteTemplate;
+
+    // manage local state
+    var _useState = (0, _react.useState)(false),
+        _useState2 = _slicedToArray(_useState, 2),
+        modalVisible = _useState2[0],
+        setModalVisible = _useState2[1];
+
+    var _useState3 = (0, _react.useState)(false),
+        _useState4 = _slicedToArray(_useState3, 2),
+        modalTemplateType = _useState4[0],
+        setModalTemplateType = _useState4[1];
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            _Modal2.default,
+            { title: 'Confirm deleting this template?', visible: modalVisible },
+            wp.element.createElement(
+                'p',
+                null,
+                'Are you sure?'
+            ),
+            wp.element.createElement(
+                'p',
+                null,
+                wp.element.createElement(
+                    'a',
+                    {
+                        href: '#',
+                        className: 'acpt-btn acpt-btn-primary',
+                        onClick: function onClick(e) {
+                            e.preventDefault();
+                            setModalVisible(!modalVisible);
+                            handeDeleteTemplate(element.name, modalTemplateType);
+                        }
+                    },
+                    'Yes'
+                ),
+                '\xA0',
+                wp.element.createElement(
+                    'a',
+                    {
+                        href: '#',
+                        className: 'acpt-btn acpt-btn-primary-o',
+                        onClick: function onClick(e) {
+                            e.preventDefault();
+                            setModalVisible(!modalVisible);
+                        }
+                    },
+                    'No'
+                )
+            )
+        ),
+        wp.element.createElement(
+            'tr',
+            null,
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                wp.element.createElement(_react3.Icon, { icon: 'dashicons:' + element.icon, color: '#7e9ebd', width: '18px' })
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                wp.element.createElement(
+                    'div',
+                    { className: 'm-0 mb-1' },
+                    wp.element.createElement(
+                        'strong',
+                        null,
+                        element.name
+                    ),
+                    !element.isNative && wp.element.createElement(
+                        'div',
+                        { className: 'element-buttons' },
+                        wp.element.createElement(
+                            'a',
+                            { href: '#/view/' + element.name },
+                            'View'
+                        ),
+                        '\xA0',
+                        wp.element.createElement(
+                            'a',
+                            { href: '#/edit/' + element.name },
+                            'Edit'
+                        ),
+                        '\xA0',
+                        wp.element.createElement(
+                            'a',
+                            { href: '#/delete/' + element.name },
+                            'Delete'
+                        )
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                element.isNative ? wp.element.createElement(
+                    'span',
+                    { className: 'acpt-badge acpt-badge-native ml-1' },
+                    wp.element.createElement(
+                        'span',
+                        { className: 'label' },
+                        'Native'
+                    )
+                ) : wp.element.createElement(
+                    'span',
+                    { className: 'acpt-badge acpt-badge-' + (element.isWooCommerce === true ? 'woocommerce' : 'custom') + ' ml-1' },
+                    wp.element.createElement(
+                        'span',
+                        { className: 'label' },
+                        element.isWooCommerce === true ? 'WooCommerce' : 'Custom'
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                (0, _objects.isset)(element, "meta") && element.meta.length > 0 ? wp.element.createElement(
+                    _Tippy2.default,
+                    {
+                        placement: 'end',
+                        html: wp.element.createElement(_MetaBoxMiniTable2.default, { postType: element.name, elements: element.meta })
+                    },
+                    wp.element.createElement(
+                        _reactRouterDom.Link,
+                        {
+                            to: 'meta/' + element.name,
+                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'
+                        },
+                        'Manage'
+                    )
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    {
+                        to: 'meta/' + element.name,
+                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o'
+                    },
+                    'Create'
+                )
+            ),
+            thereIsWooCommerce === true && wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                element.isWooCommerce === true && wp.element.createElement(
+                    _react2.default.Fragment,
+                    null,
+                    (0, _objects.isset)(element, "woocommerceProductData") && element.woocommerceProductData.length > 0 ? wp.element.createElement(
+                        _Tippy2.default,
+                        {
+                            placement: 'top',
+                            html: wp.element.createElement(_WoocommerceMiniTable2.default, { postType: element.name, elements: element.woocommerceProductData })
+                        },
+                        wp.element.createElement(
+                            _reactRouterDom.Link,
+                            {
+                                to: '/product-data/' + element.name,
+                                className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'
+                            },
+                            'Manage'
+                        )
+                    ) : wp.element.createElement(
+                        _reactRouterDom.Link,
+                        {
+                            to: '/product-data/' + element.name,
+                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o'
+                        },
+                        'Create'
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                (0, _objects.isset)(element, "taxonomies") && element.taxonomies.length > 0 ? wp.element.createElement(
+                    _Tippy2.default,
+                    {
+                        placement: 'top',
+                        html: wp.element.createElement(_TaxonomiesMiniTable2.default, { postType: element.name, elements: element.taxonomies })
+                    },
+                    wp.element.createElement(
+                        _reactRouterDom.Link,
+                        {
+                            to: '/assoc-taxonomy-post/' + element.name,
+                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'
+                        },
+                        'Manage'
+                    )
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    {
+                        to: '/assoc-taxonomy-post/' + element.name,
+                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o'
+                    },
+                    'Associate'
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'backend with-border' },
+                wp.element.createElement(
+                    'span',
+                    { className: 'acpt-badge' },
+                    wp.element.createElement(
+                        'span',
+                        { className: 'label' },
+                        element.postCount
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'frontend' },
+                wp.element.createElement(
+                    'a',
+                    {
+                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger',
+                        href: 'https://acpt.io/checkout',
+                        target: '_blank'
+                    },
+                    'Buy a PRO license'
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'frontend' },
+                wp.element.createElement(
+                    'a',
+                    {
+                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger',
+                        href: 'https://acpt.io/checkout',
+                        target: '_blank'
+                    },
+                    'Buy a PRO license'
+                )
+            )
+        )
+    );
+};
+
+exports.default = CustomPostTypeListElement;
 
 /***/ }),
 
@@ -20,7 +299,81 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar MetaBoxMiniTable = function MetaBoxMiniTable(_ref) {\n    var postType = _ref.postType,\n        elements = _ref.elements;\n\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-table-responsive\" },\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-minitable\" },\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Meta box\"\n                ),\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Fields count\"\n                )\n            ),\n            elements.map(function (element) {\n                return wp.element.createElement(\n                    \"tr\",\n                    null,\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        element.name\n                    ),\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        wp.element.createElement(\n                            \"span\",\n                            { className: \"acpt-badge\" },\n                            wp.element.createElement(\n                                \"span\",\n                                { className: \"label\" },\n                                element.count\n                            )\n                        )\n                    )\n                );\n            })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"minitable-buttons\" },\n            wp.element.createElement(\n                \"a\",\n                { href: \"#/meta/\" + postType },\n                \"Manage\"\n            )\n        )\n    );\n};\n\nexports.default = MetaBoxMiniTable;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/CustomPostTypeList/MetaBoxMiniTable.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MetaBoxMiniTable = function MetaBoxMiniTable(_ref) {
+    var postType = _ref.postType,
+        elements = _ref.elements;
+
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-table-responsive" },
+        wp.element.createElement(
+            "table",
+            { className: "acpt-minitable" },
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Meta box"
+                ),
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Fields count"
+                )
+            ),
+            elements.map(function (element) {
+                return wp.element.createElement(
+                    "tr",
+                    null,
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        element.name
+                    ),
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        wp.element.createElement(
+                            "span",
+                            { className: "acpt-badge" },
+                            wp.element.createElement(
+                                "span",
+                                { className: "label" },
+                                element.count
+                            )
+                        )
+                    )
+                );
+            })
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "minitable-buttons" },
+            wp.element.createElement(
+                "a",
+                { href: "#/meta/" + postType },
+                "Manage"
+            )
+        )
+    );
+};
+
+exports.default = MetaBoxMiniTable;
 
 /***/ }),
 
@@ -28,7 +381,101 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar TaxonomiesMiniTable = function TaxonomiesMiniTable(_ref) {\n    var postType = _ref.postType,\n        elements = _ref.elements;\n\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-table-responsive\" },\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-minitable\" },\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Taxonomy\"\n                ),\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Sing. label\"\n                ),\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Plural label\"\n                ),\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Post count\"\n                )\n            ),\n            elements.map(function (element) {\n                return wp.element.createElement(\n                    \"tr\",\n                    null,\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        element.slug\n                    ),\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        element.singular\n                    ),\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        element.plural\n                    ),\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        wp.element.createElement(\n                            \"span\",\n                            { className: \"acpt-badge\" },\n                            wp.element.createElement(\n                                \"span\",\n                                { className: \"label\" },\n                                element.postCount ? element.postCount : 0\n                            )\n                        )\n                    )\n                );\n            })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"minitable-buttons\" },\n            wp.element.createElement(\n                \"a\",\n                { href: \"#/assoc-taxonomy-post/\" + postType },\n                \"Manage\"\n            )\n        )\n    );\n};\n\nexports.default = TaxonomiesMiniTable;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/CustomPostTypeList/TaxonomiesMiniTable.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TaxonomiesMiniTable = function TaxonomiesMiniTable(_ref) {
+    var postType = _ref.postType,
+        elements = _ref.elements;
+
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-table-responsive" },
+        wp.element.createElement(
+            "table",
+            { className: "acpt-minitable" },
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Taxonomy"
+                ),
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Sing. label"
+                ),
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Plural label"
+                ),
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Post count"
+                )
+            ),
+            elements.map(function (element) {
+                return wp.element.createElement(
+                    "tr",
+                    null,
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        element.slug
+                    ),
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        element.singular
+                    ),
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        element.plural
+                    ),
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        wp.element.createElement(
+                            "span",
+                            { className: "acpt-badge" },
+                            wp.element.createElement(
+                                "span",
+                                { className: "label" },
+                                element.postCount ? element.postCount : 0
+                            )
+                        )
+                    )
+                );
+            })
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "minitable-buttons" },
+            wp.element.createElement(
+                "a",
+                { href: "#/assoc-taxonomy-post/" + postType },
+                "Manage"
+            )
+        )
+    );
+};
+
+exports.default = TaxonomiesMiniTable;
 
 /***/ }),
 
@@ -36,7 +483,107 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\n__webpack_require__(2107);\n\nvar _Boolean = __webpack_require__(9904);\n\nvar _Boolean2 = _interopRequireDefault(_Boolean);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar WoocommerceMiniTable = function WoocommerceMiniTable(_ref) {\n    var postType = _ref.postType,\n        elements = _ref.elements;\n\n\n    return wp.element.createElement(\n        'div',\n        { className: 'acpt-table-responsive' },\n        wp.element.createElement(\n            'table',\n            { className: 'acpt-minitable' },\n            wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                    'th',\n                    null,\n                    'Name'\n                ),\n                wp.element.createElement(\n                    'th',\n                    null,\n                    'Icon'\n                ),\n                wp.element.createElement(\n                    'th',\n                    null,\n                    'Show on UI'\n                ),\n                wp.element.createElement(\n                    'th',\n                    null,\n                    'Fields'\n                )\n            ),\n            elements.map(function (element) {\n                return wp.element.createElement(\n                    'tr',\n                    null,\n                    wp.element.createElement(\n                        'td',\n                        null,\n                        element.name\n                    ),\n                    wp.element.createElement(\n                        'td',\n                        null,\n                        wp.element.createElement('span', { className: 'wcicon-' + element.icon.icon })\n                    ),\n                    wp.element.createElement(\n                        'td',\n                        null,\n                        wp.element.createElement(_Boolean2.default, { status: element.showInUI })\n                    ),\n                    wp.element.createElement(\n                        'td',\n                        null,\n                        wp.element.createElement(\n                            'span',\n                            { className: 'acpt-badge' },\n                            wp.element.createElement(\n                                'span',\n                                { className: 'label' },\n                                element.fields.length\n                            )\n                        )\n                    )\n                );\n            })\n        ),\n        wp.element.createElement(\n            'div',\n            { className: 'minitable-buttons' },\n            wp.element.createElement(\n                'a',\n                { href: '#/product-data/' + postType },\n                'Manage'\n            )\n        )\n    );\n};\n\nexports.default = WoocommerceMiniTable;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/CustomPostTypeList/WoocommerceMiniTable.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(2107);
+
+var _Boolean = __webpack_require__(9904);
+
+var _Boolean2 = _interopRequireDefault(_Boolean);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WoocommerceMiniTable = function WoocommerceMiniTable(_ref) {
+    var postType = _ref.postType,
+        elements = _ref.elements;
+
+
+    return wp.element.createElement(
+        'div',
+        { className: 'acpt-table-responsive' },
+        wp.element.createElement(
+            'table',
+            { className: 'acpt-minitable' },
+            wp.element.createElement(
+                'tr',
+                null,
+                wp.element.createElement(
+                    'th',
+                    null,
+                    'Name'
+                ),
+                wp.element.createElement(
+                    'th',
+                    null,
+                    'Icon'
+                ),
+                wp.element.createElement(
+                    'th',
+                    null,
+                    'Show on UI'
+                ),
+                wp.element.createElement(
+                    'th',
+                    null,
+                    'Fields'
+                )
+            ),
+            elements.map(function (element) {
+                return wp.element.createElement(
+                    'tr',
+                    null,
+                    wp.element.createElement(
+                        'td',
+                        null,
+                        element.name
+                    ),
+                    wp.element.createElement(
+                        'td',
+                        null,
+                        wp.element.createElement('span', { className: 'wcicon-' + element.icon.icon })
+                    ),
+                    wp.element.createElement(
+                        'td',
+                        null,
+                        wp.element.createElement(_Boolean2.default, { status: element.showInUI })
+                    ),
+                    wp.element.createElement(
+                        'td',
+                        null,
+                        wp.element.createElement(
+                            'span',
+                            { className: 'acpt-badge' },
+                            wp.element.createElement(
+                                'span',
+                                { className: 'label' },
+                                element.fields.length
+                            )
+                        )
+                    )
+                );
+            })
+        ),
+        wp.element.createElement(
+            'div',
+            { className: 'minitable-buttons' },
+            wp.element.createElement(
+                'a',
+                { href: '#/product-data/' + postType },
+                'Manage'
+            )
+        )
+    );
+};
+
+exports.default = WoocommerceMiniTable;
 
 /***/ }),
 
@@ -44,7 +591,418 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _CustomPostTypeListElement = __webpack_require__(6595);\n\nvar _CustomPostTypeListElement2 = _interopRequireDefault(_CustomPostTypeListElement);\n\nvar _Spinner = __webpack_require__(7410);\n\nvar _Spinner2 = _interopRequireDefault(_Spinner);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _fetchPostTypes = __webpack_require__(4825);\n\nvar _fetchPostTypesCount = __webpack_require__(4953);\n\nvar _misc = __webpack_require__(3154);\n\nvar _deletePostTypeTemplate = __webpack_require__(8031);\n\nvar _reactToastify = __webpack_require__(9249);\n\nvar _syncPosts = __webpack_require__(682);\n\nvar _objects = __webpack_require__(4040);\n\nvar _Layout = __webpack_require__(3067);\n\nvar _Layout2 = _interopRequireDefault(_Layout);\n\nvar _ActionsBar = __webpack_require__(3700);\n\nvar _ActionsBar2 = _interopRequireDefault(_ActionsBar);\n\nvar _Breadcrumbs = __webpack_require__(5827);\n\nvar _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);\n\nvar _Tippy = __webpack_require__(5825);\n\nvar _Tippy2 = _interopRequireDefault(_Tippy);\n\nvar _react3 = __webpack_require__(6229);\n\nvar _Pagination = __webpack_require__(1222);\n\nvar _Pagination2 = _interopRequireDefault(_Pagination);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar CustomPostTypeList = function CustomPostTypeList() {\n\n    // manage global state\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchPostTypesReducer;\n    }),\n        fetched = _useSelector.fetched,\n        loading = _useSelector.loading;\n\n    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchPostTypesCountReducer;\n    }),\n        fetchedCount = _useSelector2.fetched,\n        loadingCount = _useSelector2.loading;\n\n    var _useSelector3 = (0, _reactRedux.useSelector)(function (state) {\n        return state.deletePostTypeTemplateReducer;\n    }),\n        deleteTemplateErrors = _useSelector3.errors,\n        deleteTemplateSuccess = _useSelector3.success,\n        deleteTemplateLoading = _useSelector3.loading;\n\n    var _useSelector4 = (0, _reactRedux.useSelector)(function (state) {\n        return state.syncPostsReducer;\n    }),\n        syncPostsErrors = _useSelector4.errors,\n        syncPostsSuccess = _useSelector4.success,\n        syncPostsLoading = _useSelector4.loading;\n\n    var _useSelector5 = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchSettingsReducer;\n    }),\n        settingsLoading = _useSelector5.loading,\n        settings = _useSelector5.fetched;\n\n    // manage local state\n\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        page = _useParams.page;\n\n    var didMountRef = (0, _react.useRef)(false);\n\n    var _useState = (0, _react.useState)(null),\n        _useState2 = _slicedToArray(_useState, 2),\n        fetchedSuccess = _useState2[0],\n        setFetchedSuccess = _useState2[1];\n\n    var _useState3 = (0, _react.useState)(false),\n        _useState4 = _slicedToArray(_useState3, 2),\n        thereIsWooCommerce = _useState4[0],\n        setThereIsWooCommerce = _useState4[1];\n\n    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;\n    var history = (0, _reactRouterDom.useHistory)();\n\n    (0, _react.useEffect)(function () {\n        (0, _misc.metaTitle)(\"Registered Custom Post Types\");\n        (0, _misc.changeCurrentAdminMenuLink)('');\n        dispatch((0, _fetchPostTypesCount.fetchPostTypesCount)());\n        dispatch((0, _fetchPostTypes.fetchPostTypes)({\n            page: page ? page : 1,\n            perPage: perPage\n        }));\n    }, [page]);\n\n    // handle fetch outcome\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!loading && !settingsLoading) {\n                setFetchedSuccess(true);\n\n                var isWooCommerce = 0;\n\n                fetched.map(function (post) {\n                    if (post.isWooCommerce) {\n                        isWooCommerce++;\n                    }\n                });\n\n                isWooCommerce > 0 && setThereIsWooCommerce(true);\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [loading]);\n\n    // handle delete template outcome\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!deleteTemplateLoading) {\n                if (deleteTemplateSuccess) {\n                    history.push('/');\n                    _reactToastify.toast.success(\"Template was successfully deleted. The browser will refresh after 5 seconds...\");\n                    (0, _misc.refreshPage)(5000);\n                }\n\n                if (deleteTemplateErrors.length > 0) {\n                    deleteTemplateErrors.map(function (error) {\n                        _reactToastify.toast.error(error);\n                    });\n                }\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [deleteTemplateLoading]);\n\n    // handle sync posts\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!syncPostsLoading) {\n                if (syncPostsSuccess) {\n                    history.push('/');\n                    _reactToastify.toast.success(\"Successfully post sync. The browser will refresh after 5 seconds...\");\n                    (0, _misc.refreshPage)(5000);\n                }\n\n                if (syncPostsErrors.length > 0) {\n                    syncPostsErrors.map(function (error) {\n                        _reactToastify.toast.error(error);\n                    });\n                }\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [syncPostsLoading]);\n\n    var handleDeleteTemplate = function handleDeleteTemplate(name, type) {\n        dispatch((0, _deletePostTypeTemplate.deletePostTypeTemplate)(name, type));\n    };\n\n    var handleSyncPosts = function handleSyncPosts() {\n        dispatch((0, _syncPosts.syncPosts)());\n    };\n\n    if (!fetchedSuccess) {\n        return wp.element.createElement(_Spinner2.default, null);\n    }\n\n    var actions = wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            _reactRouterDom.Link,\n            {\n                className: 'acpt-btn acpt-btn-primary',\n                to: '/register' },\n            'Register new Post Type'\n        ),\n        wp.element.createElement(\n            'a',\n            {\n                onClick: function onClick(e) {\n                    e.preventDefault();\n                    handleSyncPosts();\n                },\n                className: 'acpt-btn acpt-btn-primary-o',\n                href: '#'\n            },\n            'Sync with post types'\n        )\n    );\n\n    return wp.element.createElement(\n        _Layout2.default,\n        null,\n        wp.element.createElement(_ActionsBar2.default, {\n            title: 'Registered Custom Post Types',\n            actions: actions\n        }),\n        wp.element.createElement(\n            'main',\n            null,\n            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{\n                    label: \"Registered Custom Post Types\"\n                }] }),\n            fetched.length > 0 ? wp.element.createElement(\n                'div',\n                { className: 'acpt-card' },\n                wp.element.createElement(\n                    'div',\n                    { className: 'acpt-card__header borderless' },\n                    wp.element.createElement(\n                        'div',\n                        { className: 'acpt-card__inner' },\n                        fetchedCount,\n                        ' record(s) found'\n                    )\n                ),\n                wp.element.createElement(\n                    'div',\n                    { className: 'acpt-card__body' },\n                    wp.element.createElement(\n                        'div',\n                        { className: 'acpt-table-responsive' },\n                        wp.element.createElement(\n                            'table',\n                            { className: 'acpt-table' },\n                            wp.element.createElement(\n                                'thead',\n                                null,\n                                wp.element.createElement(\n                                    'tr',\n                                    null,\n                                    wp.element.createElement(\n                                        'th',\n                                        { className: 'grey backend with-border', colSpan: thereIsWooCommerce ? 7 : 6 },\n                                        'Backend UI'\n                                    ),\n                                    wp.element.createElement(\n                                        'th',\n                                        { className: 'grey frontend', colSpan: 2 },\n                                        'Frontend UI'\n                                    )\n                                ),\n                                wp.element.createElement(\n                                    'tr',\n                                    null,\n                                    wp.element.createElement('th', null),\n                                    wp.element.createElement(\n                                        'th',\n                                        null,\n                                        'Name'\n                                    ),\n                                    wp.element.createElement('th', null),\n                                    wp.element.createElement(\n                                        'th',\n                                        null,\n                                        'Meta boxes \\xA0',\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: 'Associated meta boxes' },\n                                            wp.element.createElement(\n                                                'span',\n                                                { className: 'helper' },\n                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })\n                                            )\n                                        )\n                                    ),\n                                    thereIsWooCommerce === true && wp.element.createElement(\n                                        'th',\n                                        null,\n                                        'Product data \\xA0',\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: 'Associated WooCommerce product data' },\n                                            wp.element.createElement(\n                                                'span',\n                                                { className: 'helper' },\n                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        'th',\n                                        null,\n                                        'Associated taxonomies \\xA0',\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: 'Associated taxonomies with the post' },\n                                            wp.element.createElement(\n                                                'span',\n                                                { className: 'helper' },\n                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        'th',\n                                        { className: 'with-border' },\n                                        'Post count \\xA0',\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: 'Published posts count' },\n                                            wp.element.createElement(\n                                                'span',\n                                                { className: 'helper' },\n                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        'th',\n                                        { className: 'text-center' },\n                                        'Archive template \\xA0',\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: 'The archive template for this custom post type' },\n                                            wp.element.createElement(\n                                                'span',\n                                                { className: 'helper' },\n                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        'th',\n                                        { className: 'text-center' },\n                                        'Single template \\xA0',\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: 'The single template for this custom post type' },\n                                            wp.element.createElement(\n                                                'span',\n                                                { className: 'helper' },\n                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })\n                                            )\n                                        )\n                                    )\n                                )\n                            ),\n                            wp.element.createElement(\n                                'tbody',\n                                null,\n                                fetched.map(function (element) {\n                                    return wp.element.createElement(_CustomPostTypeListElement2.default, { id: element.id, thereIsWooCommerce: thereIsWooCommerce, key: element.id, element: element, handeDeleteTemplate: handleDeleteTemplate });\n                                })\n                            )\n                        )\n                    )\n                ),\n                wp.element.createElement(\n                    'div',\n                    { className: 'acpt-card__footer', style: { border: \"none\" } },\n                    wp.element.createElement(\n                        'div',\n                        { className: 'acpt-card__inner' },\n                        wp.element.createElement(_Pagination2.default, { currentPage: page ? page : 1, perPage: perPage, records: fetchedCount })\n                    )\n                )\n            ) : wp.element.createElement(\n                'div',\n                { className: 'acpt-alert acpt-alert-secondary' },\n                'No custom post types found. ',\n                wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: '/register' },\n                    'Register the first one'\n                ),\n                '!'\n            )\n        )\n    );\n};\n\nexports.default = CustomPostTypeList;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/CustomPostTypeList/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _CustomPostTypeListElement = __webpack_require__(6595);
+
+var _CustomPostTypeListElement2 = _interopRequireDefault(_CustomPostTypeListElement);
+
+var _Spinner = __webpack_require__(7410);
+
+var _Spinner2 = _interopRequireDefault(_Spinner);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _fetchPostTypes = __webpack_require__(4825);
+
+var _fetchPostTypesCount = __webpack_require__(4953);
+
+var _misc = __webpack_require__(3154);
+
+var _deletePostTypeTemplate = __webpack_require__(8031);
+
+var _reactToastify = __webpack_require__(9249);
+
+var _syncPosts = __webpack_require__(682);
+
+var _objects = __webpack_require__(4040);
+
+var _Layout = __webpack_require__(3067);
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _ActionsBar = __webpack_require__(3700);
+
+var _ActionsBar2 = _interopRequireDefault(_ActionsBar);
+
+var _Breadcrumbs = __webpack_require__(5827);
+
+var _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);
+
+var _Tippy = __webpack_require__(5825);
+
+var _Tippy2 = _interopRequireDefault(_Tippy);
+
+var _react3 = __webpack_require__(6229);
+
+var _Pagination = __webpack_require__(1222);
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CustomPostTypeList = function CustomPostTypeList() {
+
+    // manage global state
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchPostTypesReducer;
+    }),
+        fetched = _useSelector.fetched,
+        loading = _useSelector.loading;
+
+    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchPostTypesCountReducer;
+    }),
+        fetchedCount = _useSelector2.fetched,
+        loadingCount = _useSelector2.loading;
+
+    var _useSelector3 = (0, _reactRedux.useSelector)(function (state) {
+        return state.deletePostTypeTemplateReducer;
+    }),
+        deleteTemplateErrors = _useSelector3.errors,
+        deleteTemplateSuccess = _useSelector3.success,
+        deleteTemplateLoading = _useSelector3.loading;
+
+    var _useSelector4 = (0, _reactRedux.useSelector)(function (state) {
+        return state.syncPostsReducer;
+    }),
+        syncPostsErrors = _useSelector4.errors,
+        syncPostsSuccess = _useSelector4.success,
+        syncPostsLoading = _useSelector4.loading;
+
+    var _useSelector5 = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchSettingsReducer;
+    }),
+        settingsLoading = _useSelector5.loading,
+        settings = _useSelector5.fetched;
+
+    // manage local state
+
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        page = _useParams.page;
+
+    var didMountRef = (0, _react.useRef)(false);
+
+    var _useState = (0, _react.useState)(null),
+        _useState2 = _slicedToArray(_useState, 2),
+        fetchedSuccess = _useState2[0],
+        setFetchedSuccess = _useState2[1];
+
+    var _useState3 = (0, _react.useState)(false),
+        _useState4 = _slicedToArray(_useState3, 2),
+        thereIsWooCommerce = _useState4[0],
+        setThereIsWooCommerce = _useState4[1];
+
+    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;
+    var history = (0, _reactRouterDom.useHistory)();
+
+    (0, _react.useEffect)(function () {
+        (0, _misc.metaTitle)("Registered Custom Post Types");
+        (0, _misc.changeCurrentAdminMenuLink)('');
+        dispatch((0, _fetchPostTypesCount.fetchPostTypesCount)());
+        dispatch((0, _fetchPostTypes.fetchPostTypes)({
+            page: page ? page : 1,
+            perPage: perPage
+        }));
+    }, [page]);
+
+    // handle fetch outcome
+    (0, _react.useEffect)(function () {
+        if (didMountRef.current) {
+            if (!loading && !settingsLoading) {
+                setFetchedSuccess(true);
+
+                var isWooCommerce = 0;
+
+                fetched.map(function (post) {
+                    if (post.isWooCommerce) {
+                        isWooCommerce++;
+                    }
+                });
+
+                isWooCommerce > 0 && setThereIsWooCommerce(true);
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [loading]);
+
+    // handle delete template outcome
+    (0, _react.useEffect)(function () {
+        if (didMountRef.current) {
+            if (!deleteTemplateLoading) {
+                if (deleteTemplateSuccess) {
+                    history.push('/');
+                    _reactToastify.toast.success("Template was successfully deleted. The browser will refresh after 5 seconds...");
+                    (0, _misc.refreshPage)(5000);
+                }
+
+                if (deleteTemplateErrors.length > 0) {
+                    deleteTemplateErrors.map(function (error) {
+                        _reactToastify.toast.error(error);
+                    });
+                }
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [deleteTemplateLoading]);
+
+    // handle sync posts
+    (0, _react.useEffect)(function () {
+        if (didMountRef.current) {
+            if (!syncPostsLoading) {
+                if (syncPostsSuccess) {
+                    history.push('/');
+                    _reactToastify.toast.success("Successfully post sync. The browser will refresh after 5 seconds...");
+                    (0, _misc.refreshPage)(5000);
+                }
+
+                if (syncPostsErrors.length > 0) {
+                    syncPostsErrors.map(function (error) {
+                        _reactToastify.toast.error(error);
+                    });
+                }
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [syncPostsLoading]);
+
+    var handleDeleteTemplate = function handleDeleteTemplate(name, type) {
+        dispatch((0, _deletePostTypeTemplate.deletePostTypeTemplate)(name, type));
+    };
+
+    var handleSyncPosts = function handleSyncPosts() {
+        dispatch((0, _syncPosts.syncPosts)());
+    };
+
+    if (!fetchedSuccess) {
+        return wp.element.createElement(_Spinner2.default, null);
+    }
+
+    var actions = wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            _reactRouterDom.Link,
+            {
+                className: 'acpt-btn acpt-btn-primary',
+                to: '/register' },
+            'Register new Post Type'
+        ),
+        wp.element.createElement(
+            'a',
+            {
+                onClick: function onClick(e) {
+                    e.preventDefault();
+                    handleSyncPosts();
+                },
+                className: 'acpt-btn acpt-btn-primary-o',
+                href: '#'
+            },
+            'Sync with post types'
+        )
+    );
+
+    return wp.element.createElement(
+        _Layout2.default,
+        null,
+        wp.element.createElement(_ActionsBar2.default, {
+            title: 'Registered Custom Post Types',
+            actions: actions
+        }),
+        wp.element.createElement(
+            'main',
+            null,
+            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
+                    label: "Registered Custom Post Types"
+                }] }),
+            fetched.length > 0 ? wp.element.createElement(
+                'div',
+                { className: 'acpt-card' },
+                wp.element.createElement(
+                    'div',
+                    { className: 'acpt-card__header borderless' },
+                    wp.element.createElement(
+                        'div',
+                        { className: 'acpt-card__inner' },
+                        fetchedCount,
+                        ' record(s) found'
+                    )
+                ),
+                wp.element.createElement(
+                    'div',
+                    { className: 'acpt-card__body' },
+                    wp.element.createElement(
+                        'div',
+                        { className: 'acpt-table-responsive' },
+                        wp.element.createElement(
+                            'table',
+                            { className: 'acpt-table' },
+                            wp.element.createElement(
+                                'thead',
+                                null,
+                                wp.element.createElement(
+                                    'tr',
+                                    null,
+                                    wp.element.createElement(
+                                        'th',
+                                        { className: 'grey backend with-border', colSpan: thereIsWooCommerce ? 7 : 6 },
+                                        'Backend UI'
+                                    ),
+                                    wp.element.createElement(
+                                        'th',
+                                        { className: 'grey frontend', colSpan: 2 },
+                                        'Frontend UI'
+                                    )
+                                ),
+                                wp.element.createElement(
+                                    'tr',
+                                    null,
+                                    wp.element.createElement('th', null),
+                                    wp.element.createElement(
+                                        'th',
+                                        null,
+                                        'Name'
+                                    ),
+                                    wp.element.createElement('th', null),
+                                    wp.element.createElement(
+                                        'th',
+                                        null,
+                                        'Meta boxes \xA0',
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: 'Associated meta boxes' },
+                                            wp.element.createElement(
+                                                'span',
+                                                { className: 'helper' },
+                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })
+                                            )
+                                        )
+                                    ),
+                                    thereIsWooCommerce === true && wp.element.createElement(
+                                        'th',
+                                        null,
+                                        'Product data \xA0',
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: 'Associated WooCommerce product data' },
+                                            wp.element.createElement(
+                                                'span',
+                                                { className: 'helper' },
+                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        'th',
+                                        null,
+                                        'Associated taxonomies \xA0',
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: 'Associated taxonomies with the post' },
+                                            wp.element.createElement(
+                                                'span',
+                                                { className: 'helper' },
+                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        'th',
+                                        { className: 'with-border' },
+                                        'Post count \xA0',
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: 'Published posts count' },
+                                            wp.element.createElement(
+                                                'span',
+                                                { className: 'helper' },
+                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        'th',
+                                        { className: 'text-center' },
+                                        'Archive template \xA0',
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: 'The archive template for this custom post type' },
+                                            wp.element.createElement(
+                                                'span',
+                                                { className: 'helper' },
+                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        'th',
+                                        { className: 'text-center' },
+                                        'Single template \xA0',
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: 'The single template for this custom post type' },
+                                            wp.element.createElement(
+                                                'span',
+                                                { className: 'helper' },
+                                                wp.element.createElement(_react3.Icon, { icon: 'bx:bx-help-circle', width: '18px' })
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            wp.element.createElement(
+                                'tbody',
+                                null,
+                                fetched.map(function (element) {
+                                    return wp.element.createElement(_CustomPostTypeListElement2.default, { id: element.id, thereIsWooCommerce: thereIsWooCommerce, key: element.id, element: element, handeDeleteTemplate: handleDeleteTemplate });
+                                })
+                            )
+                        )
+                    )
+                ),
+                wp.element.createElement(
+                    'div',
+                    { className: 'acpt-card__footer', style: { border: "none" } },
+                    wp.element.createElement(
+                        'div',
+                        { className: 'acpt-card__inner' },
+                        wp.element.createElement(_Pagination2.default, { currentPage: page ? page : 1, perPage: perPage, records: fetchedCount })
+                    )
+                )
+            ) : wp.element.createElement(
+                'div',
+                { className: 'acpt-alert acpt-alert-secondary' },
+                'No custom post types found. ',
+                wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/register' },
+                    'Register the first one'
+                ),
+                '!'
+            )
+        )
+    );
+};
+
+exports.default = CustomPostTypeList;
 
 /***/ }),
 
@@ -52,7 +1010,31 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Boolean = function Boolean(_ref) {\n    var status = _ref.status;\n\n\n    var icon = status ? 'bx:bx-check' : 'bx:bx-x';\n    var color = status ? '#02c39a' : '#f94144';\n\n    return wp.element.createElement(_react3.Icon, { icon: icon, color: color, width: '18px' });\n};\n\nexports.default = Boolean;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Boolean/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Boolean = function Boolean(_ref) {
+    var status = _ref.status;
+
+
+    var icon = status ? 'bx:bx-check' : 'bx:bx-x';
+    var color = status ? '#02c39a' : '#f94144';
+
+    return wp.element.createElement(_react3.Icon, { icon: icon, color: color, width: '18px' });
+};
+
+exports.default = Boolean;
 
 /***/ }),
 
@@ -60,7 +1042,49 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumb = function Breadcrumb(_ref) {\n    var label = _ref.label,\n        link = _ref.link,\n        isLast = _ref.isLast;\n\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"li\",\n            { className: isLast ? 'current' : '' },\n            link ? wp.element.createElement(\n                _reactRouterDom.Link,\n                { to: link },\n                label\n            ) : label\n        ),\n        !isLast && wp.element.createElement(\n            \"span\",\n            { className: \"separator\" },\n            wp.element.createElement(_react3.Icon, { icon: \"bx:bx-chevron-right\", color: \"#aaa\", width: \"18px\" })\n        )\n    );\n};\n\nexports.default = Breadcrumb;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/Breadcrumb.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumb = function Breadcrumb(_ref) {
+    var label = _ref.label,
+        link = _ref.link,
+        isLast = _ref.isLast;
+
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "li",
+            { className: isLast ? 'current' : '' },
+            link ? wp.element.createElement(
+                _reactRouterDom.Link,
+                { to: link },
+                label
+            ) : label
+        ),
+        !isLast && wp.element.createElement(
+            "span",
+            { className: "separator" },
+            wp.element.createElement(_react3.Icon, { icon: "bx:bx-chevron-right", color: "#aaa", width: "18px" })
+        )
+    );
+};
+
+exports.default = Breadcrumb;
 
 /***/ }),
 
@@ -68,7 +1092,44 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumb = __webpack_require__(6512);\n\nvar _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumbs = function Breadcrumbs(_ref) {\n    var crumbs = _ref.crumbs;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-breadcrumbs\" },\n        crumbs.length > 0 && wp.element.createElement(\n            \"ul\",\n            null,\n            crumbs.map(function (crumb, index) {\n                return wp.element.createElement(_Breadcrumb2.default, {\n                    label: crumb.label,\n                    link: crumb.link,\n                    isLast: index + 1 === crumbs.length,\n                    key: index\n                });\n            })\n        )\n    );\n};\n\nexports.default = Breadcrumbs;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumb = __webpack_require__(6512);
+
+var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumbs = function Breadcrumbs(_ref) {
+    var crumbs = _ref.crumbs;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-breadcrumbs" },
+        crumbs.length > 0 && wp.element.createElement(
+            "ul",
+            null,
+            crumbs.map(function (crumb, index) {
+                return wp.element.createElement(_Breadcrumb2.default, {
+                    label: crumb.label,
+                    link: crumb.link,
+                    isLast: index + 1 === crumbs.length,
+                    key: index
+                });
+            })
+        )
+    );
+};
+
+exports.default = Breadcrumbs;
 
 /***/ }),
 
@@ -76,7 +1137,58 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Pagination = function Pagination(_ref) {\n    var currentPage = _ref.currentPage,\n        perPage = _ref.perPage,\n        records = _ref.records;\n\n\n    var totalPages = Math.ceil(records / perPage);\n    var rows = [];\n    for (var i = 1; i <= totalPages; i++) {\n        rows.push(i);\n    }\n\n    if (rows.length < 2) {\n        return wp.element.createElement(_react2.default.Fragment, null);\n    }\n\n    return wp.element.createElement(\n        \"ul\",\n        { className: \"acpt-pagination\" },\n        rows.map(function (row) {\n            return wp.element.createElement(\n                \"li\",\n                null,\n                row == currentPage ? wp.element.createElement(\n                    \"span\",\n                    null,\n                    row\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: \"/\" + row },\n                    row\n                )\n            );\n        })\n    );\n};\n\nexports.default = Pagination;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Pagination/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Pagination = function Pagination(_ref) {
+    var currentPage = _ref.currentPage,
+        perPage = _ref.perPage,
+        records = _ref.records;
+
+
+    var totalPages = Math.ceil(records / perPage);
+    var rows = [];
+    for (var i = 1; i <= totalPages; i++) {
+        rows.push(i);
+    }
+
+    if (rows.length < 2) {
+        return wp.element.createElement(_react2.default.Fragment, null);
+    }
+
+    return wp.element.createElement(
+        "ul",
+        { className: "acpt-pagination" },
+        rows.map(function (row) {
+            return wp.element.createElement(
+                "li",
+                null,
+                row == currentPage ? wp.element.createElement(
+                    "span",
+                    null,
+                    row
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: "/" + row },
+                    row
+                )
+            );
+        })
+    );
+};
+
+exports.default = Pagination;
 
 /***/ }),
 
@@ -84,7 +1196,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.deletePostTypeTemplate = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _deletePostTypeTemplateActions = __webpack_require__(8839);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar deletePostTypeTemplate = exports.deletePostTypeTemplate = function deletePostTypeTemplate(postType, templateType) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateInProgress)(postType, templateType));\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('deletePostTypeTemplateAction', postType ? { postType: postType, templateType: templateType } : {});\n\n                        case 4:\n                            res = _context.sent;\n\n                            res.success === true ? dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateSuccess)()) : dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateFailure)(res.error));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/deletePostTypeTemplate.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.deletePostTypeTemplate = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _deletePostTypeTemplateActions = __webpack_require__(8839);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var deletePostTypeTemplate = exports.deletePostTypeTemplate = function deletePostTypeTemplate(postType, templateType) {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var res;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateInProgress)(postType, templateType));
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('deletePostTypeTemplateAction', postType ? { postType: postType, templateType: templateType } : {});
+
+                        case 4:
+                            res = _context.sent;
+
+                            res.success === true ? dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateSuccess)()) : dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateFailure)(res.error));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _deletePostTypeTemplateActions.deletePostTypeTemplateFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -92,7 +1256,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.fetchPostTypes = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchCustomPostTypesActions = __webpack_require__(8912);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchPostTypes = exports.fetchPostTypes = function fetchPostTypes(meta) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesInProgress)(meta));\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('fetchCustomPostTypesAction', meta ? meta : {});\n\n                        case 4:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesSuccess)(fetched));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/fetchPostTypes.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fetchPostTypes = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _fetchCustomPostTypesActions = __webpack_require__(8912);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchPostTypes = exports.fetchPostTypes = function fetchPostTypes(meta) {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var fetched;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesInProgress)(meta));
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('fetchCustomPostTypesAction', meta ? meta : {});
+
+                        case 4:
+                            fetched = _context.sent;
+
+                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesSuccess)(fetched));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -100,7 +1316,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.fetchPostTypesCount = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchCustomPostTypesCountActions = __webpack_require__(8137);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchPostTypesCount = exports.fetchPostTypesCount = function fetchPostTypesCount() {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _fetchCustomPostTypesCountActions.fetchPostTypesCountInProgress)());\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('fetchCustomPostTypesCountAction');\n\n                        case 4:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchCustomPostTypesCountActions.fetchPostTypesCountSuccess)(fetched));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _fetchCustomPostTypesCountActions.fetchPostTypesCountFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/fetchPostTypesCount.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fetchPostTypesCount = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _fetchCustomPostTypesCountActions = __webpack_require__(8137);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchPostTypesCount = exports.fetchPostTypesCount = function fetchPostTypesCount() {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var fetched;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _fetchCustomPostTypesCountActions.fetchPostTypesCountInProgress)());
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('fetchCustomPostTypesCountAction');
+
+                        case 4:
+                            fetched = _context.sent;
+
+                            dispatch((0, _fetchCustomPostTypesCountActions.fetchPostTypesCountSuccess)(fetched));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _fetchCustomPostTypesCountActions.fetchPostTypesCountFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -108,7 +1376,60 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.syncPosts = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _syncPostsAction = __webpack_require__(1575);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar syncPosts = exports.syncPosts = function syncPosts() {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _syncPostsAction.syncPostsInProgress)());\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)(\"syncPostsAction\");\n\n                        case 4:\n                            res = _context.sent;\n\n                            res.success === true ? dispatch((0, _syncPostsAction.syncPostsSuccess)(res.data)) : dispatch((0, _syncPostsAction.syncPostsFailure)(res.error));\n                            _context.next = 12;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            console.log(_context.t0);\n                            dispatch((0, _syncPostsAction.syncPostsFailure)(_context.t0));\n\n                        case 12:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/syncPosts.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.syncPosts = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _syncPostsAction = __webpack_require__(1575);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var syncPosts = exports.syncPosts = function syncPosts() {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var res;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _syncPostsAction.syncPostsInProgress)());
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)("syncPostsAction");
+
+                        case 4:
+                            res = _context.sent;
+
+                            res.success === true ? dispatch((0, _syncPostsAction.syncPostsSuccess)(res.data)) : dispatch((0, _syncPostsAction.syncPostsFailure)(res.error));
+                            _context.next = 12;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            console.log(_context.t0);
+                            dispatch((0, _syncPostsAction.syncPostsFailure)(_context.t0));
+
+                        case 12:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -116,7 +1437,52 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n/**\n * Change document's <title>\n * @param title\n */\nvar metaTitle = exports.metaTitle = function metaTitle(title) {\n    var originalDocumentTitle = document.title.split(\"‹\");\n    document.title = title + ' \\u2039 ' + originalDocumentTitle[1];\n};\n\n/**\n * Add current class to admin menu link\n * @param link\n */\nvar changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {\n\n    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');\n\n    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {\n        var links = currentValue.getElementsByTagName('a');\n\n        for (var i = 0; i < links.length; i++) {\n            var elem = links[i];\n            var href = elem.getAttribute(\"href\");\n            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;\n\n            if (toCompare === href) {\n                currentValue.classList.add(\"current\");\n            } else {\n                currentValue.classList.remove(\"current\");\n            }\n        }\n    });\n};\n\nvar refreshPage = exports.refreshPage = function refreshPage() {\n    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n\n    setTimeout(function () {\n        window.location.reload();\n    }, timeout);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/misc.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+/**
+ * Change document's <title>
+ * @param title
+ */
+var metaTitle = exports.metaTitle = function metaTitle(title) {
+    var originalDocumentTitle = document.title.split("‹");
+    document.title = title + ' \u2039 ' + originalDocumentTitle[1];
+};
+
+/**
+ * Add current class to admin menu link
+ * @param link
+ */
+var changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {
+
+    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
+
+    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {
+        var links = currentValue.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            var elem = links[i];
+            var href = elem.getAttribute("href");
+            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;
+
+            if (toCompare === href) {
+                currentValue.classList.add("current");
+            } else {
+                currentValue.classList.remove("current");
+            }
+        }
+    });
+};
+
+var refreshPage = exports.refreshPage = function refreshPage() {
+    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    setTimeout(function () {
+        window.location.reload();
+    }, timeout);
+};
 
 /***/ }),
 
@@ -124,8 +1490,11 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/scss/woocommerce.scss?");
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ })
 
 }]);
+//# sourceMappingURL=12.js.map

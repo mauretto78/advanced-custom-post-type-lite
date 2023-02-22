@@ -1,7 +1,9 @@
+import {metaTypes} from "../../App/constants/metaTypes";
+
 const fetchMeta = async () => {
     let formData = new FormData();
-    formData.append('action', 'fetchCustomPostTypeMetaAction');
-    formData.append('data', JSON.stringify({postType: typenow}));
+    formData.append('action', 'fetchMetaAction');
+    formData.append('data', JSON.stringify({belongsTo: metaTypes.CUSTOM_POST_TYPE, find: typenow}));
 
     let response = await fetch(ajaxurl, {
         method: 'POST',

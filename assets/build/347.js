@@ -1,18 +1,139 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[347],{
 
 /***/ 3375:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar BasicElement = function BasicElement() {\n\n    // manage global state\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchPostTypesReducer;\n    }),\n        fetched = _useSelector.fetched;\n\n    var data = {\n        name: fetched[0].name,\n        singular: fetched[0].singular,\n        plural: fetched[0].plural,\n        icon: fetched[0].icon,\n        supports: fetched[0].supports\n    };\n\n    // manage local state\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        postType = _useParams.postType;\n\n    return wp.element.createElement(\n        \"div\",\n        null,\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-table acpt-table-secondary mb-3\" },\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Name\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.name\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Singular\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.singular\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Plural\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.plural\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Icon\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_react3.Icon, { icon: \"dashicons:\" + data.icon, color: \"#2271b1\", width: \"18px\" })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Supports\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.supports && data.supports.map(function (s) {\n                        return s !== '' && wp.element.createElement(\n                            \"div\",\n                            { className: \"acpt-badge mr-1\" },\n                            wp.element.createElement(\n                                \"span\",\n                                { className: \"label\" },\n                                s\n                            )\n                        );\n                    })\n                )\n            )\n        )\n    );\n};\n\nexports.default = BasicElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/ViewCustomPostType/_Basic.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BasicElement = function BasicElement() {
+
+    // manage global state
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchPostTypesReducer;
+    }),
+        fetched = _useSelector.fetched;
+
+    var data = {
+        name: fetched[0].name,
+        singular: fetched[0].singular,
+        plural: fetched[0].plural,
+        icon: fetched[0].icon,
+        supports: fetched[0].supports
+    };
+
+    // manage local state
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        postType = _useParams.postType;
+
+    return wp.element.createElement(
+        "div",
+        null,
+        wp.element.createElement(
+            "table",
+            { className: "acpt-table acpt-table-secondary mb-3" },
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Name"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.name
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Singular"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.singular
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Plural"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.plural
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Icon"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_react3.Icon, { icon: "dashicons:" + data.icon, color: "#2271b1", width: "18px" })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Supports"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.supports && data.supports.map(function (s) {
+                        return s !== '' && wp.element.createElement(
+                            "div",
+                            { className: "acpt-badge mr-1" },
+                            wp.element.createElement(
+                                "span",
+                                { className: "label" },
+                                s
+                            )
+                        );
+                    })
+                )
+            )
+        )
+    );
+};
+
+exports.default = BasicElement;
 
 /***/ }),
 
@@ -20,7 +141,68 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _label = __webpack_require__(4384);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar LabelsElement = function LabelsElement() {\n\n    // manage global state\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchPostTypesReducer;\n    }),\n        fetched = _useSelector.fetched;\n\n    var data = fetched[0].labels;\n\n    // manage local state\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        postType = _useParams.postType;\n\n    return wp.element.createElement(\n        \"div\",\n        null,\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-table acpt-table-secondary mb-3\" },\n            _label.postLabelsList.map(function (item) {\n                return wp.element.createElement(\n                    \"tr\",\n                    null,\n                    wp.element.createElement(\n                        \"th\",\n                        { style: { width: '180px' } },\n                        item.label\n                    ),\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        data[item.id]\n                    )\n                );\n            })\n        )\n    );\n};\n\nexports.default = LabelsElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/ViewCustomPostType/_Labels.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _label = __webpack_require__(4384);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var LabelsElement = function LabelsElement() {
+
+    // manage global state
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchPostTypesReducer;
+    }),
+        fetched = _useSelector.fetched;
+
+    var data = fetched[0].labels;
+
+    // manage local state
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        postType = _useParams.postType;
+
+    return wp.element.createElement(
+        "div",
+        null,
+        wp.element.createElement(
+            "table",
+            { className: "acpt-table acpt-table-secondary mb-3" },
+            _label.postLabelsList.map(function (item) {
+                return wp.element.createElement(
+                    "tr",
+                    null,
+                    wp.element.createElement(
+                        "th",
+                        { style: { width: '180px' } },
+                        item.label
+                    ),
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        data[item.id]
+                    )
+                );
+            })
+        )
+    );
+};
+
+exports.default = LabelsElement;
 
 /***/ }),
 
@@ -28,7 +210,264 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _Boolean = __webpack_require__(9904);\n\nvar _Boolean2 = _interopRequireDefault(_Boolean);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar SettingsElement = function SettingsElement() {\n\n    // manage global state\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchPostTypesReducer;\n    }),\n        fetched = _useSelector.fetched;\n\n    var data = fetched[0].settings;\n\n    // manage local state\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        postType = _useParams.postType;\n\n    return wp.element.createElement(\n        \"div\",\n        null,\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-table acpt-table-secondary mb-3\" },\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Is Public\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.public })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Publicly queryable\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.publicly_queryable })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Show in UI\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.show_ui })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Show in menu\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.show_in_menu })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Show in nav menus\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.show_in_nav_menus })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Show in admin bar\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.show_in_admin_bar })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Show in REST API\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.show_in_rest })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"REST API base slug\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.rest_base\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Menu position\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.menu_position\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Capability Type\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.capability_type\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Has archive\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.has_archive })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Rewrite\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.rewrite })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Custom rewrite rules\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.custom_rewrite\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Query var\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    wp.element.createElement(_Boolean2.default, { status: data.query_var })\n                )\n            ),\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    { style: { width: '180px' } },\n                    \"Custom query var\"\n                ),\n                wp.element.createElement(\n                    \"td\",\n                    null,\n                    data.custom_query_var\n                )\n            )\n        )\n    );\n};\n\nexports.default = SettingsElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/ViewCustomPostType/_Settings.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _Boolean = __webpack_require__(9904);
+
+var _Boolean2 = _interopRequireDefault(_Boolean);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SettingsElement = function SettingsElement() {
+
+    // manage global state
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchPostTypesReducer;
+    }),
+        fetched = _useSelector.fetched;
+
+    var data = fetched[0].settings;
+
+    // manage local state
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        postType = _useParams.postType;
+
+    return wp.element.createElement(
+        "div",
+        null,
+        wp.element.createElement(
+            "table",
+            { className: "acpt-table acpt-table-secondary mb-3" },
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Is Public"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.public })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Publicly queryable"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.publicly_queryable })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Show in UI"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.show_ui })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Show in menu"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.show_in_menu })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Show in nav menus"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.show_in_nav_menus })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Show in admin bar"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.show_in_admin_bar })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Show in REST API"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.show_in_rest })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "REST API base slug"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.rest_base
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Menu position"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.menu_position
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Capability Type"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.capability_type
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Has archive"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.has_archive })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Rewrite"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.rewrite })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Custom rewrite rules"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.custom_rewrite
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Query var"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    wp.element.createElement(_Boolean2.default, { status: data.query_var })
+                )
+            ),
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    { style: { width: '180px' } },
+                    "Custom query var"
+                ),
+                wp.element.createElement(
+                    "td",
+                    null,
+                    data.custom_query_var
+                )
+            )
+        )
+    );
+};
+
+exports.default = SettingsElement;
 
 /***/ }),
 
@@ -36,7 +475,182 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumbs = __webpack_require__(7993);\n\nvar _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _fetchPostTypes = __webpack_require__(4825);\n\nvar _Spinner = __webpack_require__(7410);\n\nvar _Spinner2 = _interopRequireDefault(_Spinner);\n\nvar _misc = __webpack_require__(3154);\n\nvar _Accordion = __webpack_require__(1989);\n\nvar _Accordion2 = _interopRequireDefault(_Accordion);\n\nvar _Labels = __webpack_require__(500);\n\nvar _Labels2 = _interopRequireDefault(_Labels);\n\nvar _Basic = __webpack_require__(3375);\n\nvar _Basic2 = _interopRequireDefault(_Basic);\n\nvar _Settings = __webpack_require__(1268);\n\nvar _Settings2 = _interopRequireDefault(_Settings);\n\nvar _ = __webpack_require__(4929);\n\nvar _2 = _interopRequireDefault(_);\n\nvar _Layout = __webpack_require__(3067);\n\nvar _Layout2 = _interopRequireDefault(_Layout);\n\nvar _ActionsBar = __webpack_require__(3700);\n\nvar _ActionsBar2 = _interopRequireDefault(_ActionsBar);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar ViewCustomPostType = function ViewCustomPostType() {\n\n    // manage global state\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchPostTypesReducer;\n    }),\n        fetched = _useSelector.fetched,\n        loading = _useSelector.loading;\n\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    // manage local state\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        postType = _useParams.postType;\n\n    var didMountRef = (0, _react.useRef)(false);\n\n    var _useState = (0, _react.useState)(null),\n        _useState2 = _slicedToArray(_useState, 2),\n        fetchedSuccess = _useState2[0],\n        setFetchedSuccess = _useState2[1];\n\n    var _useState3 = (0, _react.useState)(1),\n        _useState4 = _slicedToArray(_useState3, 2),\n        activeTab = _useState4[0],\n        setActiveTab = _useState4[1];\n\n    var handleAccordionClick = function handleAccordionClick(index) {\n        setActiveTab(index + 1);\n    };\n\n    // manage redirect\n    var history = (0, _reactRouterDom.useHistory)();\n\n    if (postType === 'page' || postType === 'post') {\n        history.push('/');\n    }\n\n    (0, _react.useEffect)(function () {\n        dispatch((0, _fetchPostTypes.fetchPostTypes)({\n            postType: postType\n        }));\n        (0, _misc.metaTitle)(\"Custom Post Type global settings\");\n    }, [postType]);\n\n    // handle fetch outcome\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!loading) {\n                if (fetched.length !== 0) {\n                    setFetchedSuccess(true);\n                } else {\n                    setFetchedSuccess(false);\n                }\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [loading]);\n\n    if (fetchedSuccess === null) {\n        return wp.element.createElement(_Spinner2.default, null);\n    }\n\n    if (!fetchedSuccess) {\n        return wp.element.createElement(_2.default, null);\n    }\n\n    var buttons = wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            _reactRouterDom.Link,\n            {\n                className: \"acpt-btn acpt-btn-primary\",\n                to: \"/edit/\" + postType + \"/\" + activeTab\n            },\n            \"Edit\"\n        ),\n        wp.element.createElement(\n            _reactRouterDom.Link,\n            {\n                className: \"acpt-btn acpt-btn-primary-o\",\n                to: \"/assoc-taxonomy-post/\" + postType\n            },\n            \"Taxonomies association\"\n        )\n    );\n\n    return wp.element.createElement(\n        _Layout2.default,\n        null,\n        wp.element.createElement(_ActionsBar2.default, {\n            title: postType + \" global settings\",\n            actions: buttons\n        }),\n        wp.element.createElement(\n            \"main\",\n            null,\n            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{\n                    label: \"Registered Custom Post Types\",\n                    link: \"/\"\n                }, {\n                    label: \"Custom Post Type global settings\"\n                }] }),\n            wp.element.createElement(\n                _Accordion2.default,\n                { handleClick: handleAccordionClick },\n                wp.element.createElement(_Basic2.default, { title: \"Basic\" }),\n                wp.element.createElement(_Labels2.default, { title: \"Labels\" }),\n                wp.element.createElement(_Settings2.default, { title: \"Settings\" })\n            )\n        )\n    );\n};\n\nexports.default = ViewCustomPostType;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/ViewCustomPostType/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumbs = __webpack_require__(7993);
+
+var _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _fetchPostTypes = __webpack_require__(4825);
+
+var _Spinner = __webpack_require__(7410);
+
+var _Spinner2 = _interopRequireDefault(_Spinner);
+
+var _misc = __webpack_require__(3154);
+
+var _Accordion = __webpack_require__(1989);
+
+var _Accordion2 = _interopRequireDefault(_Accordion);
+
+var _Labels = __webpack_require__(500);
+
+var _Labels2 = _interopRequireDefault(_Labels);
+
+var _Basic = __webpack_require__(3375);
+
+var _Basic2 = _interopRequireDefault(_Basic);
+
+var _Settings = __webpack_require__(1268);
+
+var _Settings2 = _interopRequireDefault(_Settings);
+
+var _ = __webpack_require__(4929);
+
+var _2 = _interopRequireDefault(_);
+
+var _Layout = __webpack_require__(3067);
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _ActionsBar = __webpack_require__(3700);
+
+var _ActionsBar2 = _interopRequireDefault(_ActionsBar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ViewCustomPostType = function ViewCustomPostType() {
+
+    // manage global state
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchPostTypesReducer;
+    }),
+        fetched = _useSelector.fetched,
+        loading = _useSelector.loading;
+
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    // manage local state
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        postType = _useParams.postType;
+
+    var didMountRef = (0, _react.useRef)(false);
+
+    var _useState = (0, _react.useState)(null),
+        _useState2 = _slicedToArray(_useState, 2),
+        fetchedSuccess = _useState2[0],
+        setFetchedSuccess = _useState2[1];
+
+    var _useState3 = (0, _react.useState)(1),
+        _useState4 = _slicedToArray(_useState3, 2),
+        activeTab = _useState4[0],
+        setActiveTab = _useState4[1];
+
+    var handleAccordionClick = function handleAccordionClick(index) {
+        setActiveTab(index + 1);
+    };
+
+    // manage redirect
+    var history = (0, _reactRouterDom.useHistory)();
+
+    if (postType === 'page' || postType === 'post') {
+        history.push('/');
+    }
+
+    (0, _react.useEffect)(function () {
+        dispatch((0, _fetchPostTypes.fetchPostTypes)({
+            postType: postType
+        }));
+        (0, _misc.metaTitle)("Custom Post Type global settings");
+    }, [postType]);
+
+    // handle fetch outcome
+    (0, _react.useEffect)(function () {
+        if (didMountRef.current) {
+            if (!loading) {
+                if (fetched.length !== 0) {
+                    setFetchedSuccess(true);
+                } else {
+                    setFetchedSuccess(false);
+                }
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [loading]);
+
+    if (fetchedSuccess === null) {
+        return wp.element.createElement(_Spinner2.default, null);
+    }
+
+    if (!fetchedSuccess) {
+        return wp.element.createElement(_2.default, null);
+    }
+
+    var buttons = wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            _reactRouterDom.Link,
+            {
+                className: "acpt-btn acpt-btn-primary",
+                to: "/edit/" + postType + "/" + activeTab
+            },
+            "Edit"
+        ),
+        wp.element.createElement(
+            _reactRouterDom.Link,
+            {
+                className: "acpt-btn acpt-btn-primary-o",
+                to: "/assoc-taxonomy-post/" + postType
+            },
+            "Taxonomies association"
+        )
+    );
+
+    return wp.element.createElement(
+        _Layout2.default,
+        null,
+        wp.element.createElement(_ActionsBar2.default, {
+            title: postType + " global settings",
+            actions: buttons
+        }),
+        wp.element.createElement(
+            "main",
+            null,
+            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
+                    label: "Registered Custom Post Types",
+                    link: "/"
+                }, {
+                    label: "Custom Post Type global settings"
+                }] }),
+            wp.element.createElement(
+                _Accordion2.default,
+                { handleClick: handleAccordionClick },
+                wp.element.createElement(_Basic2.default, { title: "Basic" }),
+                wp.element.createElement(_Labels2.default, { title: "Labels" }),
+                wp.element.createElement(_Settings2.default, { title: "Settings" })
+            )
+        )
+    );
+};
+
+exports.default = ViewCustomPostType;
 
 /***/ }),
 
@@ -44,7 +658,31 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Boolean = function Boolean(_ref) {\n    var status = _ref.status;\n\n\n    var icon = status ? 'bx:bx-check' : 'bx:bx-x';\n    var color = status ? '#02c39a' : '#f94144';\n\n    return wp.element.createElement(_react3.Icon, { icon: icon, color: color, width: '18px' });\n};\n\nexports.default = Boolean;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Boolean/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Boolean = function Boolean(_ref) {
+    var status = _ref.status;
+
+
+    var icon = status ? 'bx:bx-check' : 'bx:bx-x';
+    var color = status ? '#02c39a' : '#f94144';
+
+    return wp.element.createElement(_react3.Icon, { icon: icon, color: color, width: '18px' });
+};
+
+exports.default = Boolean;
 
 /***/ }),
 
@@ -52,7 +690,127 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\n// please refer to\n// https://developer.wordpress.org/reference/functions/get_post_type_labels/\nvar postLabelsList = exports.postLabelsList = [{\n    id: \"menu_name\",\n    label: \"Menu Name\",\n    description: \"Label for the menu name. Default is the same as name.\"\n}, {\n    id: \"all_items\",\n    label: \"All items\",\n    description: \"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All Pages’.\"\n}, {\n    id: \"add_new\",\n    label: \"Add New\",\n    description: \"Default is ‘Add New’ for both hierarchical and non-hierarchical types.\"\n}, {\n    id: \"add_new_item\",\n    label: \"Add New Item\",\n    description: \"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New Page’.\"\n}, {\n    id: \"edit_item\",\n    label: \"Edit Item\",\n    description: \"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’.\"\n}, {\n    id: \"new_item\",\n    label: \"New Item\",\n    description: \"Label for the new item page title. Default is ‘New Post’ / ‘New Page’.\"\n}, {\n    id: \"view_item\",\n    label: \"View Item\",\n    description: \"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’.\"\n}, {\n    id: \"view_items\",\n    label: \"View Items\",\n    description: \"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’.\"\n}, {\n    id: \"search_item\",\n    label: \"Search Item\",\n    description: \"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’.\"\n}, {\n    id: \"not_found\",\n    label: \"Not Found\",\n    description: \"Label used when no items are found. Default is ‘No posts found’ / ‘No pages found’.\"\n}, {\n    id: \"not_found_in_trash\",\n    label: \"Not Found in Trash\",\n    description: \"Label used when no items are in the Trash. Default is ‘No posts found in Trash’ / ‘No pages found in Trash’.\"\n}, {\n    id: \"parent_item_colon\",\n    label: \"Parent\",\n    description: \"Label used to prefix parents of hierarchical items. Not used on non-hierarchical post types. Default is ‘Parent Page:’.\"\n}, {\n    id: \"featured_image\",\n    label: \"Featured Image\",\n    description: \"Label for the featured image meta box title. Default is ‘Featured image’.\"\n}, {\n    id: \"set_featured_image\",\n    label: \"Set Featured Image\",\n    description: \"Label for setting the featured image. Default is ‘Set featured image’.\"\n}, {\n    id: \"remove_featured_image\",\n    label: \"Remove Featured Image\",\n    description: \"Label for removing the featured image. Default is ‘Remove featured image’.\"\n}, {\n    id: \"use_featured_image\",\n    label: \"Use Featured Image\",\n    description: \"Label in the media frame for using a featured image. Default is ‘Use as featured image’.\"\n}, {\n    id: \"archives\",\n    label: \"Archives\",\n    description: \"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page Archives’.\"\n}, {\n    id: \"insert_into_item\",\n    label: \"Insert into item\",\n    description: \"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert into page’.\"\n}, {\n    id: \"uploaded_to_this_item\",\n    label: \"Uploaded to this Item\",\n    description: \"Label for the media frame filter. Default is ‘Uploaded to this post’ / ‘Uploaded to this page’.\"\n}, {\n    id: \"filter_items_list\",\n    label: \"Filter Items List\",\n    description: \"Label for the table views hidden heading. Default is ‘Filter posts list’ / ‘Filter pages list’.\"\n}, {\n    id: \"items_list_navigation\",\n    label: \"Items List Navigation\",\n    description: \"Label for the table pagination hidden heading. Default is ‘Posts list navigation’ / ‘Pages list navigation’.\"\n}, {\n    id: \"items_list\",\n    label: \"Items List\",\n    description: \"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’.\"\n}, {\n    id: \"filter_by_date\",\n    label: \"Filter by date\",\n    description: \"Label for the date filter in list tables. Default is ‘Filter by date’.\"\n}, {\n    id: \"item_published\",\n    label: \"Item published\",\n    description: \"Label used when an item is published. Default is ‘Post published.’ / ‘Page published.’\"\n}, {\n    id: \"item_published_privately\",\n    label: \"Item published privately\",\n    description: \"Label used when an item is published with private visibility. Default is ‘Post published privately.’ / ‘Page published privately.’\"\n}, {\n    id: \"item_reverted_to_draft\",\n    label: \"Item reverted to draft\",\n    description: \"Label used when an item is switched to a draft. Default is ‘Post reverted to draft.’ / ‘Page reverted to draft.’\"\n}, {\n    id: \"item_scheduled\",\n    label: \"Item scheduled\",\n    description: \"Label used when an item is scheduled for publishing. Default is ‘Post scheduled.’ / ‘Page scheduled.’\"\n}, {\n    id: \"item_updated\",\n    label: \"Item updated\",\n    description: \"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page updated.’\"\n}];\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/constants/label.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+// please refer to
+// https://developer.wordpress.org/reference/functions/get_post_type_labels/
+var postLabelsList = exports.postLabelsList = [{
+    id: "menu_name",
+    label: "Menu Name",
+    description: "Label for the menu name. Default is the same as name."
+}, {
+    id: "all_items",
+    label: "All items",
+    description: "Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All Pages’."
+}, {
+    id: "add_new",
+    label: "Add New",
+    description: "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+}, {
+    id: "add_new_item",
+    label: "Add New Item",
+    description: "Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New Page’."
+}, {
+    id: "edit_item",
+    label: "Edit Item",
+    description: "Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+}, {
+    id: "new_item",
+    label: "New Item",
+    description: "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+}, {
+    id: "view_item",
+    label: "View Item",
+    description: "Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+}, {
+    id: "view_items",
+    label: "View Items",
+    description: "Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+}, {
+    id: "search_item",
+    label: "Search Item",
+    description: "Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+}, {
+    id: "not_found",
+    label: "Not Found",
+    description: "Label used when no items are found. Default is ‘No posts found’ / ‘No pages found’."
+}, {
+    id: "not_found_in_trash",
+    label: "Not Found in Trash",
+    description: "Label used when no items are in the Trash. Default is ‘No posts found in Trash’ / ‘No pages found in Trash’."
+}, {
+    id: "parent_item_colon",
+    label: "Parent",
+    description: "Label used to prefix parents of hierarchical items. Not used on non-hierarchical post types. Default is ‘Parent Page:’."
+}, {
+    id: "featured_image",
+    label: "Featured Image",
+    description: "Label for the featured image meta box title. Default is ‘Featured image’."
+}, {
+    id: "set_featured_image",
+    label: "Set Featured Image",
+    description: "Label for setting the featured image. Default is ‘Set featured image’."
+}, {
+    id: "remove_featured_image",
+    label: "Remove Featured Image",
+    description: "Label for removing the featured image. Default is ‘Remove featured image’."
+}, {
+    id: "use_featured_image",
+    label: "Use Featured Image",
+    description: "Label in the media frame for using a featured image. Default is ‘Use as featured image’."
+}, {
+    id: "archives",
+    label: "Archives",
+    description: "Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page Archives’."
+}, {
+    id: "insert_into_item",
+    label: "Insert into item",
+    description: "Label for the media frame button. Default is ‘Insert into post’ / ‘Insert into page’."
+}, {
+    id: "uploaded_to_this_item",
+    label: "Uploaded to this Item",
+    description: "Label for the media frame filter. Default is ‘Uploaded to this post’ / ‘Uploaded to this page’."
+}, {
+    id: "filter_items_list",
+    label: "Filter Items List",
+    description: "Label for the table views hidden heading. Default is ‘Filter posts list’ / ‘Filter pages list’."
+}, {
+    id: "items_list_navigation",
+    label: "Items List Navigation",
+    description: "Label for the table pagination hidden heading. Default is ‘Posts list navigation’ / ‘Pages list navigation’."
+}, {
+    id: "items_list",
+    label: "Items List",
+    description: "Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+}, {
+    id: "filter_by_date",
+    label: "Filter by date",
+    description: "Label for the date filter in list tables. Default is ‘Filter by date’."
+}, {
+    id: "item_published",
+    label: "Item published",
+    description: "Label used when an item is published. Default is ‘Post published.’ / ‘Page published.’"
+}, {
+    id: "item_published_privately",
+    label: "Item published privately",
+    description: "Label used when an item is published with private visibility. Default is ‘Post published privately.’ / ‘Page published privately.’"
+}, {
+    id: "item_reverted_to_draft",
+    label: "Item reverted to draft",
+    description: "Label used when an item is switched to a draft. Default is ‘Post reverted to draft.’ / ‘Page reverted to draft.’"
+}, {
+    id: "item_scheduled",
+    label: "Item scheduled",
+    description: "Label used when an item is scheduled for publishing. Default is ‘Post scheduled.’ / ‘Page scheduled.’"
+}, {
+    id: "item_updated",
+    label: "Item updated",
+    description: "Label used when an item is updated. Default is ‘Post updated.’ / ‘Page updated.’"
+}];
 
 /***/ }),
 
@@ -60,7 +818,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.fetchPostTypes = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchCustomPostTypesActions = __webpack_require__(8912);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchPostTypes = exports.fetchPostTypes = function fetchPostTypes(meta) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesInProgress)(meta));\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('fetchCustomPostTypesAction', meta ? meta : {});\n\n                        case 4:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesSuccess)(fetched));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/fetchPostTypes.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fetchPostTypes = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _fetchCustomPostTypesActions = __webpack_require__(8912);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchPostTypes = exports.fetchPostTypes = function fetchPostTypes(meta) {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var fetched;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesInProgress)(meta));
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('fetchCustomPostTypesAction', meta ? meta : {});
+
+                        case 4:
+                            fetched = _context.sent;
+
+                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesSuccess)(fetched));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _fetchCustomPostTypesActions.fetchPostTypesFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -68,8 +878,54 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n/**\n * Change document's <title>\n * @param title\n */\nvar metaTitle = exports.metaTitle = function metaTitle(title) {\n    var originalDocumentTitle = document.title.split(\"‹\");\n    document.title = title + ' \\u2039 ' + originalDocumentTitle[1];\n};\n\n/**\n * Add current class to admin menu link\n * @param link\n */\nvar changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {\n\n    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');\n\n    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {\n        var links = currentValue.getElementsByTagName('a');\n\n        for (var i = 0; i < links.length; i++) {\n            var elem = links[i];\n            var href = elem.getAttribute(\"href\");\n            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;\n\n            if (toCompare === href) {\n                currentValue.classList.add(\"current\");\n            } else {\n                currentValue.classList.remove(\"current\");\n            }\n        }\n    });\n};\n\nvar refreshPage = exports.refreshPage = function refreshPage() {\n    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n\n    setTimeout(function () {\n        window.location.reload();\n    }, timeout);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/misc.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+/**
+ * Change document's <title>
+ * @param title
+ */
+var metaTitle = exports.metaTitle = function metaTitle(title) {
+    var originalDocumentTitle = document.title.split("‹");
+    document.title = title + ' \u2039 ' + originalDocumentTitle[1];
+};
+
+/**
+ * Add current class to admin menu link
+ * @param link
+ */
+var changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {
+
+    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
+
+    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {
+        var links = currentValue.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            var elem = links[i];
+            var href = elem.getAttribute("href");
+            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;
+
+            if (toCompare === href) {
+                currentValue.classList.add("current");
+            } else {
+                currentValue.classList.remove("current");
+            }
+        }
+    });
+};
+
+var refreshPage = exports.refreshPage = function refreshPage() {
+    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    setTimeout(function () {
+        window.location.reload();
+    }, timeout);
+};
 
 /***/ })
 
 }]);
+//# sourceMappingURL=347.js.map

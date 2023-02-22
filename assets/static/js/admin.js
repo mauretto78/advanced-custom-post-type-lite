@@ -204,24 +204,36 @@ $(function(){
         amount.prop("placeholder", selected.data("placeholder"));
     });
 
-    // select2
-    function format(state) {
+    /**
+     * selectize
+     * @see https://selectize.dev/docs/api
+     *
+     * @param item
+     * @param escape
+     * @returns {string}
+     */
+    const formatSelectizeItem = (item, escape) => {
 
-        if(!state.id || !state.text.includes("<-------->")){
-            return state.text;
+        if(!item.text.includes("<-------->")){
+            return `<div>${item.text}</div>`;
         }
 
-        let explode = state.text.split("<-------->");
+        let explode = item.text.split("<-------->");
 
-        return "<span class='acpt-badge'>"+explode[0]+"</span>" + explode[1];
-    }
+        return `<div class="selectize-item"><span class='acpt-badge'>${explode[0]}</span> ${explode[1]}</div>`;
+    };
 
-    $('.select2').select2({
+    $('.select2').selectize({
+        plugins: ["restore_on_backspace", "clear_button"],
         placeholder: "--Select--",
-        allowClear: true,
-        formatResult: format,
-        formatSelection: format,
-        escapeMarkup: function(m) { return m; }
+        render: {
+            option: function(option, escape) {
+                return formatSelectizeItem(option, escape);
+            },
+            item: function(item, escape) {
+                return formatSelectizeItem(item, escape);
+            }
+        },
     });
 
     // color picker

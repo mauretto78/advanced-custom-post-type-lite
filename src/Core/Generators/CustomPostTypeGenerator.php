@@ -78,6 +78,8 @@ class CustomPostTypeGenerator extends AbstractGenerator
 		foreach ($taxonomies as $taxonomyModel){
 			if(!$taxonomyModel->isNative()){
 				$this->registerTaxonomy($taxonomyModel);
+			} else {
+				register_taxonomy_for_object_type($taxonomyModel->getSlug(), $this->postTypeName);
 			}
 
 			$taxonomyNames[] = $taxonomyModel->getSlug();

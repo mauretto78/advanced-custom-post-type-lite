@@ -81,7 +81,7 @@ class ACPT_Lite_Admin
     private function setStaticCssAssets()
     {
         $this->staticCssAssets = [
-            'admin_select2_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/select2/select2.min.css',
+	        'admin_selectize_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/selectize/selectize.default.min.css',
             'admin_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/admin.css',
             'block_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/block.min.css',
         ];
@@ -93,10 +93,10 @@ class ACPT_Lite_Admin
     private function setStaticJsAssets()
     {
         $this->staticJsAssets = [
-            'admin_select2_js' => [
-                'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/select2/select2.min.js',
-                'dep'  => ['jquery'],
-            ],
+	        'admin_selectize_js' => [
+		        'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/selectize/selectize.min.js',
+		        'dep'  => ['jquery'],
+	        ],
             'admin_google_maps_js' => [
                 'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/google-maps.js',
                 'dep'  => ['jquery'],
@@ -345,7 +345,13 @@ class ACPT_Lite_Admin
         }
 
         // Assets for create/edit post
-        if($pagenow === 'post-new.php' or $pagenow === 'post.php' or $pagenow === 'profile.php' or $pagenow === 'user-edit.php') {
+        if($pagenow === 'post-new.php' or
+           $pagenow === 'post.php' or
+           $pagenow === 'profile.php' or
+           $pagenow === 'user-edit.php' or
+           $pagenow === 'edit-tags.php' or
+           $pagenow === 'term.php'
+        ) {
 
             // other static assets here
             foreach ($this->staticCssAssets as $key => $asset){
@@ -355,6 +361,19 @@ class ACPT_Lite_Admin
             foreach ($this->staticJsAssets as $key => $asset){
                 wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_LITE_PLUGIN_VERSION, true);
             }
+
+	        //
+	        // =================================
+	        // WP DEFAULT UTILITIES
+	        // =================================
+	        //
+
+	        // color picker
+	        wp_enqueue_style( 'wp-color-picker' );
+	        wp_enqueue_script( 'my-script-handle', plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/wp-color-picker.js', ['wp-color-picker'], false, true );
+
+	        // media
+	        wp_enqueue_media();
 
             //
             // =================================

@@ -1,17 +1,31 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[112],{
 
 /***/ 8053:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("var map = {\n\t\"./en.js\": 3167\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = 8053;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/localization/locales/_sync_^\\.\\/.*\\.js$?");
+var map = {
+	"./en.js": 3167
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 8053;
 
 /***/ }),
 
@@ -19,7 +33,98 @@ eval("var map = {\n\t\"./en.js\": 3167\n};\n\n\nfunction webpackContext(req) {\n
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Checkboxes = function Checkboxes(_ref) {\n    var id = _ref.id,\n        label = _ref.label,\n        validate = _ref.validate,\n        register = _ref.register,\n        errors = _ref.errors,\n        values = _ref.values,\n        isRequired = _ref.isRequired,\n        description = _ref.description,\n        wizard = _ref.wizard;\n\n\n    var error = errors[id];\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-form-group\" },\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-label-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { htmlFor: id },\n                label,\n                isRequired && wp.element.createElement(\n                    \"span\",\n                    { className: \"required\" },\n                    \"*\"\n                )\n            ),\n            wizard && wp.element.createElement(\"span\", { className: \"wizard\", dangerouslySetInnerHTML: { __html: wizard } })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-control-wrapper\" },\n            wp.element.createElement(\n                \"div\",\n                { className: \"acpt-checkboxes-wrapper\" },\n                Object.keys(values).map(function (keyName, index) {\n                    return wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-checkbox\", key: keyName },\n                        wp.element.createElement(\"input\", _extends({\n                            id: id + \"_\" + index,\n                            value: values[keyName]['value'],\n                            defaultChecked: values[keyName]['checked'],\n                            type: \"checkbox\",\n                            \"aria-invalid\": error ? \"true\" : \"false\",\n                            className: \"form-control \" + (error ? 'has-errors' : '')\n                        }, register(id + \"_\" + index, _extends({}, validate)))),\n                        wp.element.createElement(\n                            \"label\",\n                            { htmlFor: id + \"_\" + index },\n                            keyName\n                        )\n                    );\n                }),\n                error && wp.element.createElement(\n                    \"div\",\n                    { className: \"invalid-feedback\" },\n                    error.message\n                )\n            ),\n            description && wp.element.createElement(\n                \"span\",\n                { className: \"description\" },\n                description\n            ),\n            error && wp.element.createElement(\n                \"div\",\n                { className: \"invalid-feedback\" },\n                error.message\n            )\n        )\n    );\n};\n\nexports.default = Checkboxes;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Form/Checkboxes.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Checkboxes = function Checkboxes(_ref) {
+    var id = _ref.id,
+        label = _ref.label,
+        validate = _ref.validate,
+        register = _ref.register,
+        errors = _ref.errors,
+        values = _ref.values,
+        isRequired = _ref.isRequired,
+        description = _ref.description,
+        wizard = _ref.wizard;
+
+
+    var error = errors[id];
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-form-group" },
+        wp.element.createElement(
+            "div",
+            { className: "acpt-form-label-wrapper" },
+            wp.element.createElement(
+                "label",
+                { htmlFor: id },
+                label,
+                isRequired && wp.element.createElement(
+                    "span",
+                    { className: "required" },
+                    "*"
+                )
+            ),
+            wizard && wp.element.createElement("span", { className: "wizard", dangerouslySetInnerHTML: { __html: wizard } })
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "acpt-form-control-wrapper" },
+            wp.element.createElement(
+                "div",
+                { className: "acpt-checkboxes-wrapper" },
+                Object.keys(values).map(function (keyName, index) {
+                    return wp.element.createElement(
+                        "div",
+                        { className: "acpt-checkbox", key: keyName },
+                        wp.element.createElement("input", _extends({
+                            id: id + "_" + index,
+                            value: values[keyName]['value'],
+                            defaultChecked: values[keyName]['checked'],
+                            type: "checkbox",
+                            "aria-invalid": error ? "true" : "false",
+                            className: "form-control " + (error ? 'has-errors' : '')
+                        }, register(id + "_" + index, _extends({}, validate)))),
+                        wp.element.createElement(
+                            "label",
+                            { htmlFor: id + "_" + index },
+                            keyName
+                        )
+                    );
+                }),
+                error && wp.element.createElement(
+                    "div",
+                    { className: "invalid-feedback" },
+                    error.message
+                )
+            ),
+            description && wp.element.createElement(
+                "span",
+                { className: "description" },
+                description
+            ),
+            error && wp.element.createElement(
+                "div",
+                { className: "invalid-feedback" },
+                error.message
+            )
+        )
+    );
+};
+
+exports.default = Checkboxes;
 
 /***/ }),
 
@@ -27,7 +132,82 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar InputSwitch = function InputSwitch(_ref) {\n    var id = _ref.id,\n        label = _ref.label,\n        validate = _ref.validate,\n        register = _ref.register,\n        errors = _ref.errors,\n        defaultValue = _ref.defaultValue,\n        isRequired = _ref.isRequired,\n        description = _ref.description,\n        wizard = _ref.wizard;\n\n\n    var error = errors[id];\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-form-group\" },\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-label-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { htmlFor: id },\n                label,\n                isRequired && wp.element.createElement(\n                    \"span\",\n                    { className: \"required\" },\n                    \"*\"\n                )\n            ),\n            wizard && wp.element.createElement(\"span\", { className: \"wizard\", dangerouslySetInnerHTML: { __html: wizard } })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-control-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { className: \"switch\" },\n                wp.element.createElement(\"input\", _extends({\n                    id: id,\n                    name: id,\n                    required: isRequired,\n                    type: \"checkbox\",\n                    defaultChecked: defaultValue\n                }, register(id, validate))),\n                wp.element.createElement(\"span\", { className: \"slider round\" })\n            ),\n            description && wp.element.createElement(\n                \"span\",\n                { className: \"description\" },\n                description\n            ),\n            error && wp.element.createElement(\n                \"div\",\n                { className: \"invalid-feedback\" },\n                error.message\n            )\n        )\n    );\n};\n\nexports.default = InputSwitch;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Form/InputSwitch.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var InputSwitch = function InputSwitch(_ref) {
+    var id = _ref.id,
+        label = _ref.label,
+        validate = _ref.validate,
+        register = _ref.register,
+        errors = _ref.errors,
+        defaultValue = _ref.defaultValue,
+        isRequired = _ref.isRequired,
+        description = _ref.description,
+        wizard = _ref.wizard;
+
+
+    var error = errors[id];
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-form-group" },
+        wp.element.createElement(
+            "div",
+            { className: "acpt-form-label-wrapper" },
+            wp.element.createElement(
+                "label",
+                { htmlFor: id },
+                label,
+                isRequired && wp.element.createElement(
+                    "span",
+                    { className: "required" },
+                    "*"
+                )
+            ),
+            wizard && wp.element.createElement("span", { className: "wizard", dangerouslySetInnerHTML: { __html: wizard } })
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "acpt-form-control-wrapper" },
+            wp.element.createElement(
+                "label",
+                { className: "switch" },
+                wp.element.createElement("input", _extends({
+                    id: id,
+                    name: id,
+                    required: isRequired,
+                    type: "checkbox",
+                    defaultChecked: defaultValue
+                }, register(id, validate))),
+                wp.element.createElement("span", { className: "slider round" })
+            ),
+            description && wp.element.createElement(
+                "span",
+                { className: "description" },
+                description
+            ),
+            error && wp.element.createElement(
+                "div",
+                { className: "invalid-feedback" },
+                error.message
+            )
+        )
+    );
+};
+
+exports.default = InputSwitch;
 
 /***/ }),
 
@@ -35,7 +215,87 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar InputText = function InputText(_ref) {\n    var id = _ref.id,\n        label = _ref.label,\n        placeholder = _ref.placeholder,\n        disabled = _ref.disabled,\n        readOnly = _ref.readOnly,\n        validate = _ref.validate,\n        register = _ref.register,\n        errors = _ref.errors,\n        isRequired = _ref.isRequired,\n        defaultValue = _ref.defaultValue,\n        description = _ref.description,\n        wizard = _ref.wizard,\n        onChangeCapture = _ref.onChangeCapture;\n\n\n    var error = errors[id];\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-form-group\" },\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-label-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { htmlFor: id },\n                label,\n                isRequired && wp.element.createElement(\n                    \"span\",\n                    { className: \"required\" },\n                    \"*\"\n                )\n            ),\n            wizard && wp.element.createElement(\"span\", { className: \"wizard\", dangerouslySetInnerHTML: { __html: wizard } })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-control-wrapper\" },\n            wp.element.createElement(\"input\", _extends({\n                id: id,\n                name: id,\n                type: \"text\",\n                disabled: disabled,\n                placeholder: placeholder,\n                required: isRequired,\n                onChangeCapture: onChangeCapture,\n                readOnly: readOnly && 'readonly',\n                defaultValue: defaultValue,\n                \"aria-invalid\": error ? \"true\" : \"false\",\n                className: \"acpt-form-control \" + (error ? 'has-errors' : '')\n            }, register(id, validate))),\n            description && wp.element.createElement(\n                \"span\",\n                { className: \"description\" },\n                description\n            ),\n            error && wp.element.createElement(\n                \"div\",\n                { className: \"invalid-feedback\" },\n                error.message\n            )\n        )\n    );\n};\n\nexports.default = InputText;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Form/InputText.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var InputText = function InputText(_ref) {
+    var id = _ref.id,
+        label = _ref.label,
+        placeholder = _ref.placeholder,
+        disabled = _ref.disabled,
+        readOnly = _ref.readOnly,
+        validate = _ref.validate,
+        register = _ref.register,
+        errors = _ref.errors,
+        isRequired = _ref.isRequired,
+        defaultValue = _ref.defaultValue,
+        description = _ref.description,
+        wizard = _ref.wizard,
+        onChangeCapture = _ref.onChangeCapture;
+
+
+    var error = errors[id];
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-form-group" },
+        wp.element.createElement(
+            "div",
+            { className: "acpt-form-label-wrapper" },
+            wp.element.createElement(
+                "label",
+                { htmlFor: id },
+                label,
+                isRequired && wp.element.createElement(
+                    "span",
+                    { className: "required" },
+                    "*"
+                )
+            ),
+            wizard && wp.element.createElement("span", { className: "wizard", dangerouslySetInnerHTML: { __html: wizard } })
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "acpt-form-control-wrapper" },
+            wp.element.createElement("input", _extends({
+                id: id,
+                name: id,
+                type: "text",
+                disabled: disabled,
+                placeholder: placeholder,
+                required: isRequired,
+                onChangeCapture: onChangeCapture,
+                readOnly: readOnly && 'readonly',
+                defaultValue: defaultValue,
+                "aria-invalid": error ? "true" : "false",
+                className: "acpt-form-control " + (error ? 'has-errors' : '')
+            }, register(id, validate))),
+            description && wp.element.createElement(
+                "span",
+                { className: "description" },
+                description
+            ),
+            error && wp.element.createElement(
+                "div",
+                { className: "invalid-feedback" },
+                error.message
+            )
+        )
+    );
+};
+
+exports.default = InputText;
 
 /***/ }),
 
@@ -43,7 +303,49 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumb = function Breadcrumb(_ref) {\n    var label = _ref.label,\n        link = _ref.link,\n        isLast = _ref.isLast;\n\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"li\",\n            { className: isLast ? 'current' : '' },\n            link ? wp.element.createElement(\n                _reactRouterDom.Link,\n                { to: link },\n                label\n            ) : label\n        ),\n        !isLast && wp.element.createElement(\n            \"span\",\n            { className: \"separator\" },\n            wp.element.createElement(_react3.Icon, { icon: \"bx:bx-chevron-right\", color: \"#aaa\", width: \"18px\" })\n        )\n    );\n};\n\nexports.default = Breadcrumb;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/Breadcrumb.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumb = function Breadcrumb(_ref) {
+    var label = _ref.label,
+        link = _ref.link,
+        isLast = _ref.isLast;
+
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "li",
+            { className: isLast ? 'current' : '' },
+            link ? wp.element.createElement(
+                _reactRouterDom.Link,
+                { to: link },
+                label
+            ) : label
+        ),
+        !isLast && wp.element.createElement(
+            "span",
+            { className: "separator" },
+            wp.element.createElement(_react3.Icon, { icon: "bx:bx-chevron-right", color: "#aaa", width: "18px" })
+        )
+    );
+};
+
+exports.default = Breadcrumb;
 
 /***/ }),
 
@@ -51,7 +353,44 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumb = __webpack_require__(6512);\n\nvar _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumbs = function Breadcrumbs(_ref) {\n    var crumbs = _ref.crumbs;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-breadcrumbs\" },\n        crumbs.length > 0 && wp.element.createElement(\n            \"ul\",\n            null,\n            crumbs.map(function (crumb, index) {\n                return wp.element.createElement(_Breadcrumb2.default, {\n                    label: crumb.label,\n                    link: crumb.link,\n                    isLast: index + 1 === crumbs.length,\n                    key: index\n                });\n            })\n        )\n    );\n};\n\nexports.default = Breadcrumbs;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumb = __webpack_require__(6512);
+
+var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumbs = function Breadcrumbs(_ref) {
+    var crumbs = _ref.crumbs;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-breadcrumbs" },
+        crumbs.length > 0 && wp.element.createElement(
+            "ul",
+            null,
+            crumbs.map(function (crumb, index) {
+                return wp.element.createElement(_Breadcrumb2.default, {
+                    label: crumb.label,
+                    link: crumb.link,
+                    isLast: index + 1 === crumbs.length,
+                    key: index
+                });
+            })
+        )
+    );
+};
+
+exports.default = Breadcrumbs;
 
 /***/ }),
 
@@ -59,7 +398,29 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.default = Step;\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction Step(_ref) {\n    var isActive = _ref.isActive,\n        component = _ref.component;\n\n    return wp.element.createElement(\n        'div',\n        { className: 'acpt-step ' + (isActive ? 'active' : 'hidden') },\n        component\n    );\n}\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Steps/Step.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.default = Step;
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Step(_ref) {
+    var isActive = _ref.isActive,
+        component = _ref.component;
+
+    return wp.element.createElement(
+        'div',
+        { className: 'acpt-step ' + (isActive ? 'active' : 'hidden') },
+        component
+    );
+}
 
 /***/ }),
 
@@ -67,7 +428,72 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.default = StepsButtons;\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _stepsActions = __webpack_require__(4576);\n\nvar _scroll = __webpack_require__(2727);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction StepsButtons(_ref) {\n    var isValid = _ref.isValid,\n        next = _ref.next,\n        prev = _ref.prev;\n\n\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.stepsReducer;\n    }),\n        loading = _useSelector.loading;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-step-buttons\" },\n        prev && wp.element.createElement(\n            \"a\",\n            { className: \"acpt-btn acpt-btn-primary-o\",\n                onClick: function onClick(e) {\n                    dispatch((0, _stepsActions.stepBack)());\n                    (0, _scroll.scrollToTop)();\n                }\n            },\n            \"Previous Step\"\n        ),\n        next && wp.element.createElement(\n            \"button\",\n            {\n                className: \"acpt-btn acpt-btn-primary-o\",\n                disabled: isValid ? '' : 'disabled',\n                onClick: function onClick() {\n                    (0, _scroll.scrollToTop)();\n                }\n            },\n            \"Next Step\"\n        ),\n        !next && wp.element.createElement(\n            \"button\",\n            {\n                className: \"acpt-btn acpt-btn-primary\",\n                disabled: !isValid || loading ? 'disabled' : ''\n            },\n            loading ? 'Loading...' : 'Save'\n        )\n    );\n}\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Steps/StepsButtons.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.default = StepsButtons;
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _stepsActions = __webpack_require__(4576);
+
+var _scroll = __webpack_require__(2727);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function StepsButtons(_ref) {
+    var isValid = _ref.isValid,
+        next = _ref.next,
+        prev = _ref.prev;
+
+
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.stepsReducer;
+    }),
+        loading = _useSelector.loading;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-step-buttons" },
+        prev && wp.element.createElement(
+            "a",
+            { className: "acpt-btn acpt-btn-primary-o",
+                onClick: function onClick(e) {
+                    dispatch((0, _stepsActions.stepBack)());
+                    (0, _scroll.scrollToTop)();
+                }
+            },
+            "Previous Step"
+        ),
+        next && wp.element.createElement(
+            "button",
+            {
+                className: "acpt-btn acpt-btn-primary-o",
+                disabled: isValid ? '' : 'disabled',
+                onClick: function onClick() {
+                    (0, _scroll.scrollToTop)();
+                }
+            },
+            "Next Step"
+        ),
+        !next && wp.element.createElement(
+            "button",
+            {
+                className: "acpt-btn acpt-btn-primary",
+                disabled: !isValid || loading ? 'disabled' : ''
+            },
+            loading ? 'Loading...' : 'Save'
+        )
+    );
+}
 
 /***/ }),
 
@@ -75,7 +501,41 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.default = StepsContainer;\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _Step = __webpack_require__(9633);\n\nvar _Step2 = _interopRequireDefault(_Step);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction StepsContainer(_ref) {\n    var steps = _ref.steps;\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.stepsReducer;\n    }),\n        activeStep = _useSelector.activeStep;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-steps-wrapper\" },\n        steps.map(function (step, index) {\n            return wp.element.createElement(_Step2.default, { component: step, isActive: activeStep === index + 1 });\n        })\n    );\n}\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Steps/StepsContainer.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.default = StepsContainer;
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _Step = __webpack_require__(9633);
+
+var _Step2 = _interopRequireDefault(_Step);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function StepsContainer(_ref) {
+    var steps = _ref.steps;
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.stepsReducer;
+    }),
+        activeStep = _useSelector.activeStep;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-steps-wrapper" },
+        steps.map(function (step, index) {
+            return wp.element.createElement(_Step2.default, { component: step, isActive: activeStep === index + 1 });
+        })
+    );
+}
 
 /***/ }),
 
@@ -83,7 +543,39 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.default = StepsHeader;\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _StepsHeaderElement = __webpack_require__(3319);\n\nvar _StepsHeaderElement2 = _interopRequireDefault(_StepsHeaderElement);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction StepsHeader(_ref) {\n    var headings = _ref.headings;\n\n\n    if (typeof headings === 'undefined') {\n        return null;\n    }\n\n    return wp.element.createElement(\n        'div',\n        { className: 'acpt-steps__headings' },\n        headings.map(function (heading) {\n            return wp.element.createElement(_StepsHeaderElement2.default, { heading: heading });\n        })\n    );\n}\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Steps/StepsHeader.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.default = StepsHeader;
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _StepsHeaderElement = __webpack_require__(3319);
+
+var _StepsHeaderElement2 = _interopRequireDefault(_StepsHeaderElement);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function StepsHeader(_ref) {
+    var headings = _ref.headings;
+
+
+    if (typeof headings === 'undefined') {
+        return null;
+    }
+
+    return wp.element.createElement(
+        'div',
+        { className: 'acpt-steps__headings' },
+        headings.map(function (heading) {
+            return wp.element.createElement(_StepsHeaderElement2.default, { heading: heading });
+        })
+    );
+}
 
 /***/ }),
 
@@ -91,7 +583,63 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.default = StepsHeaderElement;\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(4494);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction StepsHeaderElement(_ref) {\n    var heading = _ref.heading;\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.stepsReducer;\n    }),\n        activeStep = _useSelector.activeStep;\n\n    var getClassName = function getClassName() {\n        var className = 'acpt-steps__heading';\n\n        if (activeStep == heading.number) {\n            className += ' active';\n        } else if (activeStep > heading.number) {\n            className += ' done';\n        } else {\n            className += ' undone';\n        }\n\n        return className;\n    };\n\n    return wp.element.createElement(\n        'div',\n        { className: getClassName() },\n        wp.element.createElement(\n            'div',\n            { className: 'number' },\n            heading.number\n        ),\n        wp.element.createElement(\n            'h3',\n            { className: 'title' },\n            heading.title\n        ),\n        heading.description && wp.element.createElement(\n            'div',\n            { className: 'description' },\n            heading.description\n        )\n    );\n}\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Steps/StepsHeaderElement.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.default = StepsHeaderElement;
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(4494);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function StepsHeaderElement(_ref) {
+    var heading = _ref.heading;
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.stepsReducer;
+    }),
+        activeStep = _useSelector.activeStep;
+
+    var getClassName = function getClassName() {
+        var className = 'acpt-steps__heading';
+
+        if (activeStep == heading.number) {
+            className += ' active';
+        } else if (activeStep > heading.number) {
+            className += ' done';
+        } else {
+            className += ' undone';
+        }
+
+        return className;
+    };
+
+    return wp.element.createElement(
+        'div',
+        { className: getClassName() },
+        wp.element.createElement(
+            'div',
+            { className: 'number' },
+            heading.number
+        ),
+        wp.element.createElement(
+            'h3',
+            { className: 'title' },
+            heading.title
+        ),
+        heading.description && wp.element.createElement(
+            'div',
+            { className: 'description' },
+            heading.description
+        )
+    );
+}
 
 /***/ }),
 
@@ -99,7 +647,38 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.default = Steps;\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _StepsHeader = __webpack_require__(3119);\n\nvar _StepsHeader2 = _interopRequireDefault(_StepsHeader);\n\nvar _StepsContainer = __webpack_require__(69);\n\nvar _StepsContainer2 = _interopRequireDefault(_StepsContainer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction Steps(_ref) {\n    var headings = _ref.headings,\n        steps = _ref.steps;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-steps\" },\n        wp.element.createElement(_StepsHeader2.default, { headings: headings }),\n        wp.element.createElement(_StepsContainer2.default, { steps: steps })\n    );\n}\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Steps/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.default = Steps;
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _StepsHeader = __webpack_require__(3119);
+
+var _StepsHeader2 = _interopRequireDefault(_StepsHeader);
+
+var _StepsContainer = __webpack_require__(69);
+
+var _StepsContainer2 = _interopRequireDefault(_StepsContainer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Steps(_ref) {
+    var headings = _ref.headings,
+        steps = _ref.steps;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-steps" },
+        wp.element.createElement(_StepsHeader2.default, { headings: headings }),
+        wp.element.createElement(_StepsContainer2.default, { steps: steps })
+    );
+}
 
 /***/ }),
 
@@ -107,7 +686,27 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nvar saveCustomPostTypeHeadings = exports.saveCustomPostTypeHeadings = [{\n    \"id\": 1,\n    \"number\": 1,\n    \"title\": \"Basic\",\n    \"description\": \"Minimum configuration\"\n}, {\n    \"id\": 2,\n    \"number\": 2,\n    \"title\": \"Labels\",\n    \"description\": \"Additional labels\"\n}, {\n    \"id\": 3,\n    \"number\": 3,\n    \"title\": \"Settings\",\n    \"description\": \"Other settings\"\n}];\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/constants/steps.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+var saveCustomPostTypeHeadings = exports.saveCustomPostTypeHeadings = [{
+    "id": 1,
+    "number": 1,
+    "title": "Basic",
+    "description": "Minimum configuration"
+}, {
+    "id": 2,
+    "number": 2,
+    "title": "Labels",
+    "description": "Additional labels"
+}, {
+    "id": 3,
+    "number": 3,
+    "title": "Settings",
+    "description": "Other settings"
+}];
 
 /***/ }),
 
@@ -115,7 +714,51 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar useUnsavedChangesWarning = function useUnsavedChangesWarning() {\n    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : \"Are you sure want to discard changes?\";\n\n    var _useState = (0, _react.useState)(false),\n        _useState2 = _slicedToArray(_useState, 2),\n        isDirty = _useState2[0],\n        setDirty = _useState2[1];\n\n    (0, _react.useEffect)(function () {\n        //Detecting browser closing\n        window.onbeforeunload = isDirty && function () {\n            return message;\n        };\n\n        return function () {\n            window.onbeforeunload = null;\n        };\n    }, [isDirty]);\n\n    var routerPrompt = wp.element.createElement(_reactRouterDom.Prompt, { when: isDirty, message: message });\n\n    return [routerPrompt, function () {\n        return setDirty(true);\n    }, function () {\n        return setDirty(false);\n    }, isDirty];\n};\n\nexports.default = useUnsavedChangesWarning;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/hooks/useUnsavedChangesWarning.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var useUnsavedChangesWarning = function useUnsavedChangesWarning() {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Are you sure want to discard changes?";
+
+    var _useState = (0, _react.useState)(false),
+        _useState2 = _slicedToArray(_useState, 2),
+        isDirty = _useState2[0],
+        setDirty = _useState2[1];
+
+    (0, _react.useEffect)(function () {
+        //Detecting browser closing
+        window.onbeforeunload = isDirty && function () {
+            return message;
+        };
+
+        return function () {
+            window.onbeforeunload = null;
+        };
+    }, [isDirty]);
+
+    var routerPrompt = wp.element.createElement(_reactRouterDom.Prompt, { when: isDirty, message: message });
+
+    return [routerPrompt, function () {
+        return setDirty(true);
+    }, function () {
+        return setDirty(false);
+    }, isDirty];
+};
+
+exports.default = useUnsavedChangesWarning;
 
 /***/ }),
 
@@ -123,7 +766,43 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\n/**\n * Translate a string from locale files\n *\n * @param string\n * @return {*}\n */\nvar translate = exports.translate = function translate(string, args) {\n    var lang = __webpack_require__.g.settings && __webpack_require__.g.settings.language ? __webpack_require__.g.settings.language : 'en';\n    var json = __webpack_require__(8053)(\"./\" + lang + \".js\").translations;\n    var strings = string.split(\".\");\n    var translation = getTranslatedString(json, strings);\n\n    if (args !== null && typeof args !== 'undefined') {\n        for (var key in args) {\n            translation = translation.replace(\"{{\" + key + \"}}\", args[key]);\n        }\n    }\n\n    return typeof translation !== 'undefined' ? translation : string;\n};\n\nvar getTranslatedString = function getTranslatedString(json, strings) {\n\n    var object = json;\n\n    strings.map(function (s) {\n        object = object[s];\n    });\n\n    return object;\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/localization/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+/**
+ * Translate a string from locale files
+ *
+ * @param string
+ * @return {*}
+ */
+var translate = exports.translate = function translate(string, args) {
+    var lang = __webpack_require__.g.settings && __webpack_require__.g.settings.language ? __webpack_require__.g.settings.language : 'en';
+    var json = __webpack_require__(8053)("./" + lang + ".js").translations;
+    var strings = string.split(".");
+    var translation = getTranslatedString(json, strings);
+
+    if (args !== null && typeof args !== 'undefined') {
+        for (var key in args) {
+            translation = translation.replace("{{" + key + "}}", args[key]);
+        }
+    }
+
+    return typeof translation !== 'undefined' ? translation : string;
+};
+
+var getTranslatedString = function getTranslatedString(json, strings) {
+
+    var object = json;
+
+    strings.map(function (s) {
+        object = object[s];
+    });
+
+    return object;
+};
 
 /***/ }),
 
@@ -131,7 +810,81 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nvar translations = exports.translations = {\n    \"404\": {\n        \"title\": \"Page not found\"\n    },\n    \"create\": {\n        \"title\": \"Register a new Custom Post Type\"\n    },\n    \"edit\": {\n        \"title\": \"Edit a new Custom Post Type\"\n    },\n    \"list\": {\n        \"title\": \"Registered Custom Post Types\"\n    },\n    \"view\": {\n        \"title\": \"Custom Post Type global settings\"\n    },\n    \"taxonomy_list\": {\n        \"title\": \"Registered Taxonomies\"\n    },\n    \"taxonomy_create\": {\n        \"title\": \"Register a new Taxonomy\"\n    },\n    \"taxonomy_edit\": {\n        \"title\": \"Edit a Taxonomy\"\n    },\n    \"taxonomy_view\": {\n        \"title\": \"Taxonomy settings\"\n    },\n    \"general\": {\n        \"labels\": {\n            \"all_items\": \"All {{r}}\",\n            \"add\": \"Add\",\n            \"add_new_item\": \"Add new {{r}}\",\n            \"back_to_items\": \"Back to {{r}}\",\n            \"edit\": \"Edit\",\n            \"new\": \"New\",\n            \"not_found\": \"No {{r}} found\",\n            \"search\": \"Search\",\n            \"view\": \"View\",\n            \"parent_item_colon\": \"Parent item\",\n            \"featured_image\": \"Featured image\",\n            \"set_featured_image\": \"Set featured image\",\n            \"remove_featured_image\": \"Remove featured image\",\n            \"use_featured_image\": \"Use featured image\",\n            \"most_used\": \"Most used {{r}}\",\n            \"archives\": \"Archives\",\n            \"insert_into_item\": \"Insert\",\n            \"uploaded_to_this_item\": \"Upload\",\n            \"filter_items_list\": \"Filter {{r}} list\",\n            \"items_list_navigation\": \"Navigation list {{r}}\",\n            \"items_list\": \"List {{r}}\",\n            \"filter_by_date\": \"Filter by date\",\n            \"item_published\": \"{{r}} published\",\n            \"item_published_privately\": \"{{r}} published privately\",\n            \"item_reverted_to_draft\": \"{{r}} reverted to draft\",\n            \"item_scheduled\": \"{{r}} scheduled\",\n            \"item_updated\": \"{{r}} updated\",\n            \"popular_items\": \"Popular {{r}}\",\n            \"update_item\": \"Update {{r}}\",\n            \"no_terms\": \"No {{r}}\",\n            \"parent_item\": \"Parent {{r}}\",\n            \"new_item_name\": \"New {{r}}\",\n            \"filter_by_item\": \"Filter by {{r}}\",\n            \"separate_items_with_commas\": \"Separate {{r}} with commas\",\n            \"add_or_remove_items\": \"Add or remove {{r}}\",\n            \"choose_from_most_used\": \"Choose from most used {{r}}\",\n            \"search_items\": \"Search {{r}}\"\n        }\n    }\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/localization/locales/en.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+var translations = exports.translations = {
+    "404": {
+        "title": "Page not found"
+    },
+    "create": {
+        "title": "Register a new Custom Post Type"
+    },
+    "edit": {
+        "title": "Edit a new Custom Post Type"
+    },
+    "list": {
+        "title": "Registered Custom Post Types"
+    },
+    "view": {
+        "title": "Custom Post Type global settings"
+    },
+    "taxonomy_list": {
+        "title": "Registered Taxonomies"
+    },
+    "taxonomy_create": {
+        "title": "Register a new Taxonomy"
+    },
+    "taxonomy_edit": {
+        "title": "Edit a Taxonomy"
+    },
+    "taxonomy_view": {
+        "title": "Taxonomy settings"
+    },
+    "general": {
+        "labels": {
+            "all_items": "All {{r}}",
+            "add": "Add",
+            "add_new_item": "Add new {{r}}",
+            "back_to_items": "Back to {{r}}",
+            "edit": "Edit",
+            "new": "New",
+            "not_found": "No {{r}} found",
+            "search": "Search",
+            "view": "View",
+            "parent_item_colon": "Parent item",
+            "featured_image": "Featured image",
+            "set_featured_image": "Set featured image",
+            "remove_featured_image": "Remove featured image",
+            "use_featured_image": "Use featured image",
+            "most_used": "Most used {{r}}",
+            "archives": "Archives",
+            "insert_into_item": "Insert",
+            "uploaded_to_this_item": "Upload",
+            "filter_items_list": "Filter {{r}} list",
+            "items_list_navigation": "Navigation list {{r}}",
+            "items_list": "List {{r}}",
+            "filter_by_date": "Filter by date",
+            "item_published": "{{r}} published",
+            "item_published_privately": "{{r}} published privately",
+            "item_reverted_to_draft": "{{r}} reverted to draft",
+            "item_scheduled": "{{r}} scheduled",
+            "item_updated": "{{r}} updated",
+            "popular_items": "Popular {{r}}",
+            "update_item": "Update {{r}}",
+            "no_terms": "No {{r}}",
+            "parent_item": "Parent {{r}}",
+            "new_item_name": "New {{r}}",
+            "filter_by_item": "Filter by {{r}}",
+            "separate_items_with_commas": "Separate {{r}} with commas",
+            "add_or_remove_items": "Add or remove {{r}}",
+            "choose_from_most_used": "Choose from most used {{r}}",
+            "search_items": "Search {{r}}"
+        }
+    }
+};
 
 /***/ }),
 
@@ -139,7 +892,60 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.stepsSubmit = undefined;\n\nvar _stepsActions = __webpack_require__(4576);\n\nvar _ajax = __webpack_require__(7569);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar stepsSubmit = exports.stepsSubmit = function stepsSubmit(action, data) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _stepsActions.stepsSubmitInProgress)(data));\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)(action, getState().stepsReducer.data);\n\n                        case 4:\n                            res = _context.sent;\n\n                            res.success === true ? dispatch((0, _stepsActions.stepsSubmitSuccess)()) : dispatch((0, _stepsActions.stepsSubmitFailure)(res.error));\n                            _context.next = 12;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            console.log(_context.t0);\n                            dispatch((0, _stepsActions.stepsSubmitFailure)(_context.t0));\n\n                        case 12:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/stepsSubmit.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.stepsSubmit = undefined;
+
+var _stepsActions = __webpack_require__(4576);
+
+var _ajax = __webpack_require__(7569);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var stepsSubmit = exports.stepsSubmit = function stepsSubmit(action, data) {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var res;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _stepsActions.stepsSubmitInProgress)(data));
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)(action, getState().stepsReducer.data);
+
+                        case 4:
+                            res = _context.sent;
+
+                            res.success === true ? dispatch((0, _stepsActions.stepsSubmitSuccess)()) : dispatch((0, _stepsActions.stepsSubmitFailure)(res.error));
+                            _context.next = 12;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            console.log(_context.t0);
+                            dispatch((0, _stepsActions.stepsSubmitFailure)(_context.t0));
+
+                        case 12:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -147,7 +953,140 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nvar hydratePostTypeFormFromStep = exports.hydratePostTypeFormFromStep = function hydratePostTypeFormFromStep(step, data) {\n\n    if (step === 2) {\n        return {\n            1: {\n                post_name: data.name,\n                singular_label: data.singular,\n                plural_label: data.plural,\n                icon: data.icon,\n                support_0: data.supports[0] ? data.supports[0] : false,\n                support_1: data.supports[1] ? data.supports[1] : false,\n                support_2: data.supports[2] ? data.supports[2] : false,\n                support_3: data.supports[3] ? data.supports[3] : false,\n                support_4: data.supports[4] ? data.supports[4] : false,\n                support_5: data.supports[5] ? data.supports[5] : false,\n                support_6: data.supports[6] ? data.supports[6] : false,\n                support_7: data.supports[7] ? data.supports[7] : false,\n                support_8: data.supports[8] ? data.supports[8] : false,\n                support_9: data.supports[9] ? data.supports[9] : false,\n                support_10: data.supports[10] ? data.supports[10] : false\n            }\n        };\n    }\n\n    if (step === 3) {\n        return {\n            1: {\n                post_name: data.name,\n                singular_label: data.singular,\n                plural_label: data.plural,\n                icon: data.icon,\n                support_0: data.supports[0] ? data.supports[0] : false,\n                support_1: data.supports[1] ? data.supports[1] : false,\n                support_2: data.supports[2] ? data.supports[2] : false,\n                support_3: data.supports[3] ? data.supports[3] : false,\n                support_4: data.supports[4] ? data.supports[4] : false,\n                support_5: data.supports[5] ? data.supports[5] : false,\n                support_6: data.supports[6] ? data.supports[6] : false,\n                support_7: data.supports[7] ? data.supports[7] : false,\n                support_8: data.supports[8] ? data.supports[8] : false,\n                support_9: data.supports[9] ? data.supports[9] : false,\n                support_10: data.supports[10] ? data.supports[10] : false\n            },\n            2: {\n                menu_name: data.labels.menu_name,\n                all_items: data.labels.all_items,\n                add_new: data.labels.add_new,\n                add_new_item: data.labels.add_new_item,\n                edit_item: data.labels.edit_item,\n                new_item: data.labels.new_item,\n                view_item: data.labels.view_item,\n                view_items: data.labels.view_items,\n                search_item: data.labels.search_item,\n                not_found: data.labels.not_found,\n                not_found_in_trash: data.labels.not_found_in_trash,\n                parent_item_colon: data.labels.parent_item_colon,\n                featured_image: data.labels.featured_image,\n                set_featured_image: data.labels.set_featured_image,\n                remove_featured_image: data.labels.remove_featured_image,\n                use_featured_image: data.labels.use_featured_image,\n                archives: data.labels.archives,\n                insert_into_item: data.labels.insert_into_item,\n                uploaded_to_this_item: data.labels.uploaded_to_this_item,\n                filter_items_list: data.labels.filter_items_list,\n                items_list_navigation: data.labels.items_list_navigation,\n                items_list: data.labels.items_list,\n                filter_by_date: data.labels.filter_by_date,\n                item_published: data.labels.item_published,\n                item_published_privately: data.labels.item_published_privately,\n                item_reverted_to_draft: data.labels.item_reverted_to_draft,\n                item_scheduled: data.labels.item_scheduled,\n                item_updated: data.labels.item_updated\n            }\n        };\n    }\n\n    return {};\n};\n\nvar hydrateTaxonomyFormFromStep = exports.hydrateTaxonomyFormFromStep = function hydrateTaxonomyFormFromStep(step, data) {\n\n    console.log(data);\n\n    if (step === 2) {\n        return {\n            1: {\n                slug: data.slug,\n                singular_label: data.singular,\n                plural_label: data.plural\n            }\n        };\n    }\n\n    if (step === 3) {\n        return {\n            1: {\n                slug: data.slug,\n                singular_label: data.singular,\n                plural_label: data.plural\n            },\n            2: {\n                name: data.labels.name,\n                singular_name: data.labels.singular_name,\n                search_items: data.labels.search_items,\n                popular_items: data.labels.popular_items,\n                all_items: data.labels.all_items,\n                parent_item: data.labels.parent_item,\n                parent_item_colon: data.labels.parent_item_colon,\n                edit_item: data.labels.edit_item,\n                view_item: data.labels.view_item,\n                update_item: data.labels.update_item,\n                add_new_item: data.labels.add_new_item,\n                new_item_name: data.labels.new_item_name,\n                separate_items_with_commas: data.labels.separate_items_with_commas,\n                add_or_remove_items: data.labels.add_or_remove_items,\n                choose_from_most_used: data.labels.choose_from_most_used,\n                not_found: data.labels.not_found,\n                no_terms: data.labels.no_terms,\n                filter_by_item: data.labels.filter_by_item,\n                items_list_navigation: data.labels.items_list_navigation,\n                items_list: data.labels.items_list,\n                most_used: data.labels.most_used,\n                back_to_items: data.labels.back_to_items\n            }\n        };\n    }\n\n    return {};\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/forms.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+var hydratePostTypeFormFromStep = exports.hydratePostTypeFormFromStep = function hydratePostTypeFormFromStep(step, data) {
+
+    if (step === 2) {
+        return {
+            1: {
+                post_name: data.name,
+                singular_label: data.singular,
+                plural_label: data.plural,
+                icon: data.icon,
+                support_0: data.supports[0] ? data.supports[0] : false,
+                support_1: data.supports[1] ? data.supports[1] : false,
+                support_2: data.supports[2] ? data.supports[2] : false,
+                support_3: data.supports[3] ? data.supports[3] : false,
+                support_4: data.supports[4] ? data.supports[4] : false,
+                support_5: data.supports[5] ? data.supports[5] : false,
+                support_6: data.supports[6] ? data.supports[6] : false,
+                support_7: data.supports[7] ? data.supports[7] : false,
+                support_8: data.supports[8] ? data.supports[8] : false,
+                support_9: data.supports[9] ? data.supports[9] : false,
+                support_10: data.supports[10] ? data.supports[10] : false
+            }
+        };
+    }
+
+    if (step === 3) {
+        return {
+            1: {
+                post_name: data.name,
+                singular_label: data.singular,
+                plural_label: data.plural,
+                icon: data.icon,
+                support_0: data.supports[0] ? data.supports[0] : false,
+                support_1: data.supports[1] ? data.supports[1] : false,
+                support_2: data.supports[2] ? data.supports[2] : false,
+                support_3: data.supports[3] ? data.supports[3] : false,
+                support_4: data.supports[4] ? data.supports[4] : false,
+                support_5: data.supports[5] ? data.supports[5] : false,
+                support_6: data.supports[6] ? data.supports[6] : false,
+                support_7: data.supports[7] ? data.supports[7] : false,
+                support_8: data.supports[8] ? data.supports[8] : false,
+                support_9: data.supports[9] ? data.supports[9] : false,
+                support_10: data.supports[10] ? data.supports[10] : false
+            },
+            2: {
+                menu_name: data.labels.menu_name,
+                all_items: data.labels.all_items,
+                add_new: data.labels.add_new,
+                add_new_item: data.labels.add_new_item,
+                edit_item: data.labels.edit_item,
+                new_item: data.labels.new_item,
+                view_item: data.labels.view_item,
+                view_items: data.labels.view_items,
+                search_item: data.labels.search_item,
+                not_found: data.labels.not_found,
+                not_found_in_trash: data.labels.not_found_in_trash,
+                parent_item_colon: data.labels.parent_item_colon,
+                featured_image: data.labels.featured_image,
+                set_featured_image: data.labels.set_featured_image,
+                remove_featured_image: data.labels.remove_featured_image,
+                use_featured_image: data.labels.use_featured_image,
+                archives: data.labels.archives,
+                insert_into_item: data.labels.insert_into_item,
+                uploaded_to_this_item: data.labels.uploaded_to_this_item,
+                filter_items_list: data.labels.filter_items_list,
+                items_list_navigation: data.labels.items_list_navigation,
+                items_list: data.labels.items_list,
+                filter_by_date: data.labels.filter_by_date,
+                item_published: data.labels.item_published,
+                item_published_privately: data.labels.item_published_privately,
+                item_reverted_to_draft: data.labels.item_reverted_to_draft,
+                item_scheduled: data.labels.item_scheduled,
+                item_updated: data.labels.item_updated
+            }
+        };
+    }
+
+    return {};
+};
+
+var hydrateTaxonomyFormFromStep = exports.hydrateTaxonomyFormFromStep = function hydrateTaxonomyFormFromStep(step, data) {
+
+    console.log(data);
+
+    if (step === 2) {
+        return {
+            1: {
+                slug: data.slug,
+                singular_label: data.singular,
+                plural_label: data.plural
+            }
+        };
+    }
+
+    if (step === 3) {
+        return {
+            1: {
+                slug: data.slug,
+                singular_label: data.singular,
+                plural_label: data.plural
+            },
+            2: {
+                name: data.labels.name,
+                singular_name: data.labels.singular_name,
+                search_items: data.labels.search_items,
+                popular_items: data.labels.popular_items,
+                all_items: data.labels.all_items,
+                parent_item: data.labels.parent_item,
+                parent_item_colon: data.labels.parent_item_colon,
+                edit_item: data.labels.edit_item,
+                view_item: data.labels.view_item,
+                update_item: data.labels.update_item,
+                add_new_item: data.labels.add_new_item,
+                new_item_name: data.labels.new_item_name,
+                separate_items_with_commas: data.labels.separate_items_with_commas,
+                add_or_remove_items: data.labels.add_or_remove_items,
+                choose_from_most_used: data.labels.choose_from_most_used,
+                not_found: data.labels.not_found,
+                no_terms: data.labels.no_terms,
+                filter_by_item: data.labels.filter_by_item,
+                items_list_navigation: data.labels.items_list_navigation,
+                items_list: data.labels.items_list,
+                most_used: data.labels.most_used,
+                back_to_items: data.labels.back_to_items
+            }
+        };
+    }
+
+    return {};
+};
 
 /***/ }),
 
@@ -155,7 +1094,52 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n/**\n * Change document's <title>\n * @param title\n */\nvar metaTitle = exports.metaTitle = function metaTitle(title) {\n    var originalDocumentTitle = document.title.split(\"‹\");\n    document.title = title + ' \\u2039 ' + originalDocumentTitle[1];\n};\n\n/**\n * Add current class to admin menu link\n * @param link\n */\nvar changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {\n\n    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');\n\n    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {\n        var links = currentValue.getElementsByTagName('a');\n\n        for (var i = 0; i < links.length; i++) {\n            var elem = links[i];\n            var href = elem.getAttribute(\"href\");\n            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;\n\n            if (toCompare === href) {\n                currentValue.classList.add(\"current\");\n            } else {\n                currentValue.classList.remove(\"current\");\n            }\n        }\n    });\n};\n\nvar refreshPage = exports.refreshPage = function refreshPage() {\n    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n\n    setTimeout(function () {\n        window.location.reload();\n    }, timeout);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/misc.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+/**
+ * Change document's <title>
+ * @param title
+ */
+var metaTitle = exports.metaTitle = function metaTitle(title) {
+    var originalDocumentTitle = document.title.split("‹");
+    document.title = title + ' \u2039 ' + originalDocumentTitle[1];
+};
+
+/**
+ * Add current class to admin menu link
+ * @param link
+ */
+var changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {
+
+    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
+
+    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {
+        var links = currentValue.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            var elem = links[i];
+            var href = elem.getAttribute("href");
+            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;
+
+            if (toCompare === href) {
+                currentValue.classList.add("current");
+            } else {
+                currentValue.classList.remove("current");
+            }
+        }
+    });
+};
+
+var refreshPage = exports.refreshPage = function refreshPage() {
+    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    setTimeout(function () {
+        window.location.reload();
+    }, timeout);
+};
 
 /***/ }),
 
@@ -163,7 +1147,33 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nvar scrollToTop = exports.scrollToTop = function scrollToTop() {\n    window.scrollTo({ top: 0, behavior: 'smooth' });\n};\n\nvar scrollToBottom = exports.scrollToBottom = function scrollToBottom() {\n    window.scrollTo({ top: document.body.scrollHeight + 120, behavior: 'smooth' });\n};\n\nvar scrollToTargetId = exports.scrollToTargetId = function scrollToTargetId(id) {\n    var element = document.getElementById(id);\n    element.scrollIntoView({ behavior: 'smooth' }, true);\n};\n\nvar scrollToId = exports.scrollToId = function scrollToId(id) {\n    var yOffset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -130;\n\n\n    var element = document.getElementById(id);\n    var y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;\n\n    window.scrollTo({ top: y, behavior: 'smooth' });\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/scroll.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+var scrollToTop = exports.scrollToTop = function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+var scrollToBottom = exports.scrollToBottom = function scrollToBottom() {
+    window.scrollTo({ top: document.body.scrollHeight + 120, behavior: 'smooth' });
+};
+
+var scrollToTargetId = exports.scrollToTargetId = function scrollToTargetId(id) {
+    var element = document.getElementById(id);
+    element.scrollIntoView({ behavior: 'smooth' }, true);
+};
+
+var scrollToId = exports.scrollToId = function scrollToId(id) {
+    var yOffset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -130;
+
+
+    var element = document.getElementById(id);
+    var y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: 'smooth' });
+};
 
 /***/ }),
 
@@ -171,8 +1181,118 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\n/**\n * Capitalize text\n *\n * @param txt\n * @return {string}\n */\nvar capitalizeTxt = exports.capitalizeTxt = function capitalizeTxt(txt) {\n    return txt.charAt(0).toUpperCase() + txt.slice(1); //or if you want lowercase the rest txt.slice(1).toLowerCase();\n};\n\n/**\n * Converts [0,0,20,0,'px'] into 0px 0px 20px 0px\n * @param values\n * @return {string|null}\n */\nvar squaresToString = exports.squaresToString = function squaresToString(values) {\n\n    if (values && typeof values !== 'undefined') {\n        return values[0] + values[4] + \" \" + values[1] + values[4] + \" \" + values[2] + values[4] + \" \" + values[3] + values[4];\n    }\n\n    return null;\n};\n\n/**\n * For the UI the padding cannot be 0\n * (example: overlapping nested divs)\n */\nvar generatePadding = exports.generatePadding = function generatePadding(padding) {\n\n    var minPadding = 10;\n\n    if (padding !== null && typeof padding !== 'undefined') {\n        var paddings = [];\n\n        if (padding[0] < minPadding) {\n            paddings.push(minPadding);\n        } else {\n            paddings.push(padding[0]);\n        }\n        if (padding[0] < minPadding) {\n            paddings.push(minPadding);\n        } else {\n            paddings.push(padding[1]);\n        }\n        if (padding[0] < minPadding) {\n            paddings.push(minPadding);\n        } else {\n            paddings.push(padding[2]);\n        }\n        if (padding[0] < minPadding) {\n            paddings.push(minPadding);\n        } else {\n            paddings.push(padding[3]);\n        }\n        if (padding[4] !== null) {\n            paddings.push(padding[4]);\n        } else {\n            paddings.push(\"px\");\n        }\n\n        return squaresToString(paddings);\n    }\n\n    return minPadding + 'px';\n};\n\n/**\n *\n * @param item\n * @param searchTerm\n * @return {boolean}\n */\nvar likeThat = exports.likeThat = function likeThat(item, searchTerm) {\n    return item.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;\n};\n\n/**\n *\n * @param string\n * @return {*}\n */\nvar addSlashes = exports.addSlashes = function addSlashes(string) {\n    return string.replace(/\\\\/g, '\\\\\\\\').replace(/\\u0008/g, '\\\\b').replace(/\\t/g, '\\\\t').replace(/\\n/g, '\\\\n').replace(/\\f/g, '\\\\f').replace(/\\r/g, '\\\\r').replace(/'/g, '\\\\\\'').replace(/\"/g, '\\\\\"');\n};\n\n/**\n *\n * @param string\n * @param maxLength\n * @return {string}\n */\nvar sluggifyString = exports.sluggifyString = function sluggifyString(string, maxLength) {\n\n    var sanitized = '';\n\n    if (typeof string === 'string') {\n        sanitized = string.toLowerCase();\n        sanitized = sanitized.replace(\" \", \"-\");\n        sanitized = sanitized.replace(/[^a-z0-9_\\-]/g, '-');\n    }\n\n    return sanitized.substr(0, maxLength ? maxLength : 20);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/strings.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+/**
+ * Capitalize text
+ *
+ * @param txt
+ * @return {string}
+ */
+var capitalizeTxt = exports.capitalizeTxt = function capitalizeTxt(txt) {
+    return txt.charAt(0).toUpperCase() + txt.slice(1); //or if you want lowercase the rest txt.slice(1).toLowerCase();
+};
+
+/**
+ * Converts [0,0,20,0,'px'] into 0px 0px 20px 0px
+ * @param values
+ * @return {string|null}
+ */
+var squaresToString = exports.squaresToString = function squaresToString(values) {
+
+    if (values && typeof values !== 'undefined') {
+        return values[0] + values[4] + " " + values[1] + values[4] + " " + values[2] + values[4] + " " + values[3] + values[4];
+    }
+
+    return null;
+};
+
+/**
+ * For the UI the padding cannot be 0
+ * (example: overlapping nested divs)
+ */
+var generatePadding = exports.generatePadding = function generatePadding(padding) {
+
+    var minPadding = 10;
+
+    if (padding !== null && typeof padding !== 'undefined') {
+        var paddings = [];
+
+        if (padding[0] < minPadding) {
+            paddings.push(minPadding);
+        } else {
+            paddings.push(padding[0]);
+        }
+        if (padding[0] < minPadding) {
+            paddings.push(minPadding);
+        } else {
+            paddings.push(padding[1]);
+        }
+        if (padding[0] < minPadding) {
+            paddings.push(minPadding);
+        } else {
+            paddings.push(padding[2]);
+        }
+        if (padding[0] < minPadding) {
+            paddings.push(minPadding);
+        } else {
+            paddings.push(padding[3]);
+        }
+        if (padding[4] !== null) {
+            paddings.push(padding[4]);
+        } else {
+            paddings.push("px");
+        }
+
+        return squaresToString(paddings);
+    }
+
+    return minPadding + 'px';
+};
+
+/**
+ *
+ * @param item
+ * @param searchTerm
+ * @return {boolean}
+ */
+var likeThat = exports.likeThat = function likeThat(item, searchTerm) {
+    return item.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+};
+
+/**
+ *
+ * @param string
+ * @return {*}
+ */
+var addSlashes = exports.addSlashes = function addSlashes(string) {
+    return string.replace(/\\/g, '\\\\').replace(/\u0008/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/'/g, '\\\'').replace(/"/g, '\\"');
+};
+
+/**
+ *
+ * @param string
+ * @param maxLength
+ * @return {string}
+ */
+var sluggifyString = exports.sluggifyString = function sluggifyString(string, maxLength) {
+
+    var sanitized = '';
+
+    if (typeof string === 'string') {
+        sanitized = string.toLowerCase();
+        sanitized = sanitized.replace(" ", "-");
+        sanitized = sanitized.replace(/[^a-z0-9_\-]/g, '-');
+    }
+
+    return sanitized.substr(0, maxLength ? maxLength : 20);
+};
 
 /***/ })
 
 }]);
+//# sourceMappingURL=112.js.map
