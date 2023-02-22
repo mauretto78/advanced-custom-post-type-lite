@@ -200,8 +200,8 @@ class ACPT_Lite_Admin
             ],
             [
                     'parentSlug' => ACPT_LITE_PLUGIN_NAME,
-                    'pageTitle' => translate('Registered taxonomies', ACPT_LITE_PLUGIN_NAME),
-                    'menuTitle' => translate('Registered taxonomies', ACPT_LITE_PLUGIN_NAME),
+                    'pageTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
+                    'menuTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
                     'capability' => 'manage_options',
                     'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/taxonomies',
                     'template' => 'app',

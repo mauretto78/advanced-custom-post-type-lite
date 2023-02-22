@@ -5,6 +5,7 @@ namespace ACPT_Lite\Core\Repository;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
+use ACPT_Lite\Costants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class TaxonomyRepository
@@ -114,21 +115,28 @@ class TaxonomyRepository
         return count($posts) === 1;
     }
 
-    /**
-     * Get the registered taxonomies
-     *
-     * @param array $meta
-     *
-     * @return TaxonomyModel[]
-     * @throws \Exception
-     * @since    1.0.0
-     */
-    public static function get(array $meta = [], $lazy = false)
-    {
-        $results = [];
-        $args = [];
+	/**
+	 * Get the registered taxonomies
+	 *
+	 * @param array $meta
+	 *
+	 * @param bool $lazy
+	 * @return TaxonomyModel[]
+	 * @throws \Exception
+	 * @since    1.0.0
+	 */
+	public static function get(array $meta = [], $lazy = false)
+	{
+		$results = [];
+		$join = '';
+		$args = [];
 
-        $baseQuery = "
+		if(isset($meta['customPostType'])){
+			$join .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` tp ON tp.taxonomy_id = t.id";
+			$join .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` cp ON cp.id = tp.custom_post_type_id ";
+		}
+
+		$baseQuery = "
             SELECT 
                 t.id, 
                 t.slug,
@@ -138,57 +146,69 @@ class TaxonomyRepository
                 t.native,
                 t.settings
             FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` t
+            ".$join."
             WHERE 1=1
             ";
 
-        if(isset($meta['id'])){
-            $baseQuery .= " AND t.id = %s";
-            $args[] = $meta['id'];
-        }
+		if(isset($meta['id'])){
+			$baseQuery .= " AND t.id = %s";
+			$args[] = $meta['id'];
+		}
 
-        if(isset($meta['taxonomy'])){
-            $baseQuery .= " AND t.slug = %s";
-            $args[] = $meta['taxonomy'];
-        }
+		if(isset($meta['customPostType'])){
+			$baseQuery .= " AND cp.post_name = %s";
+			$args[] = $meta['customPostType'];
+		}
 
-        $baseQuery .= " GROUP BY t.id";
+		if(isset($meta['taxonomy'])){
+			$baseQuery .= " AND t.slug = %s";
+			$args[] = $meta['taxonomy'];
+		}
 
-        if(isset($meta['page']) and isset($meta['perPage'])){
-            $baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
-        }
+		if(isset($meta['exclude'])){
+			$baseQuery .= " AND t.slug != %s";
+			$args[] = $meta['exclude'];
+		}
 
-        $baseQuery .= ';';
-        $taxonomies = ACPT_Lite_DB::getResults($baseQuery, $args);
+		$baseQuery .= " GROUP BY t.id";
+		$baseQuery .= " ORDER BY t.slug ASC";
 
-        foreach ($taxonomies as $taxonomy){
-            $taxonomyModel = TaxonomyModel::hydrateFromArray([
-                    'id' => $taxonomy->id,
-                    'slug' => $taxonomy->slug,
-                    'singular' => $taxonomy->singular,
-                    'plural' => $taxonomy->plural,
-                    'native' => $taxonomy->native == '1' ? true : false,
-                    'labels' => json_decode($taxonomy->labels, true),
-                    'settings' => json_decode($taxonomy->settings, true),
-            ]);
+		if(isset($meta['page']) and isset($meta['perPage'])){
+			$baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
+		}
 
-            $sql = "
+		$baseQuery .= '';
+		$taxonomies = ACPT_Lite_DB::getResults($baseQuery, $args);
+
+		foreach ($taxonomies as $taxonomy){
+			$taxonomyModel = TaxonomyModel::hydrateFromArray([
+				'id' => $taxonomy->id,
+				'slug' => $taxonomy->slug,
+				'singular' => $taxonomy->singular,
+				'plural' => $taxonomy->plural,
+				'native' => $taxonomy->native == '1' ? true : false,
+				'labels' => json_decode($taxonomy->labels, true),
+				'settings' => json_decode($taxonomy->settings, true),
+			]);
+
+			$sql = "
                 SELECT 
                     SUM(count) as count
                 FROM `".ACPT_Lite_DB::prefix()."term_taxonomy` 
                 WHERE `taxonomy` = %s 
             ";
 
-            $res = ACPT_Lite_DB::getResults($sql, [
-                    $taxonomy->slug
-            ]);
+			$res = ACPT_Lite_DB::getResults($sql, [
+				$taxonomy->slug
+			]);
 
-            $count = (count($res) > 0 and isset($res[0]->count) ) ? $res[0]->count : 0;
-            $taxonomyModel->setPostCount($count);
+			$count = (count($res) > 0 and isset($res[0]->count) ) ? $res[0]->count : 0;
+			$taxonomyModel->setPostCount($count);
 
-	        if(!$lazy){
+			if(!$lazy){
 
-		        // Meta boxes
-		        $metaBoxQuery = "
+				// Meta boxes
+				$metaBoxQuery = "
                     SELECT 
                         id, 
                         meta_box_name as name,
@@ -196,26 +216,26 @@ class TaxonomyRepository
                     FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."`
                     WHERE taxonomy = %s
                 ";
-		        $metaBoxArgs = [$taxonomy->slug];
+				$metaBoxArgs = [$taxonomy->slug];
 
-		        if(isset($meta['boxName'])){
-			        $metaBoxQuery .= " AND meta_box_name = %s";
-			        $metaBoxArgs[] = $meta['boxName'];
-		        }
+				if(isset($meta['boxName'])){
+					$metaBoxQuery .= " AND meta_box_name = %s";
+					$metaBoxArgs[] = $meta['boxName'];
+				}
 
-		        $metaBoxQuery .= " ORDER BY sort;";
+				$metaBoxQuery .= " ORDER BY sort;";
 
-		        $boxes = ACPT_Lite_DB::getResults($metaBoxQuery, $metaBoxArgs);
+				$boxes = ACPT_Lite_DB::getResults($metaBoxQuery, $metaBoxArgs);
 
-		        foreach ($boxes as $boxIndex => $box){
-			        $boxModel = TaxonomyMetaBoxModel::hydrateFromArray([
-				        'id' => $box->id,
-				        'taxonomy' => $taxonomy->slug,
-				        'name' => $box->name,
-				        'sort' => $box->sort
-			        ]);
+				foreach ($boxes as $boxIndex => $box){
+					$boxModel = TaxonomyMetaBoxModel::hydrateFromArray([
+						'id' => $box->id,
+						'taxonomy' => $taxonomy->slug,
+						'name' => $box->name,
+						'sort' => $box->sort
+					]);
 
-			        $sql = "
+					$sql = "
                         SELECT
                             id,
                             field_name as name,
@@ -229,25 +249,25 @@ class TaxonomyRepository
                         WHERE meta_box_id = %s
                     ";
 
-			        if(isset($meta['excludeFields'])){
-				        $sql .= " AND id NOT IN ('".implode("','", $meta['excludeFields'])."')";
-			        }
+					if(isset($meta['excludeFields'])){
+						$sql .= " AND id NOT IN ('".implode("','", $meta['excludeFields'])."')";
+					}
 
-			        $sql .= " ORDER BY sort;";
+					$sql .= " ORDER BY sort;";
 
-			        $fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
+					$fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
 
-			        // Meta box fields
-			        foreach ($fields as $fieldIndex => $field){
-				        $fieldModel = MetaRepository::hydrateMetaBoxFieldModel($field, $boxModel);
-				        $boxModel->addField($fieldModel);
-			        }
+					// Meta box fields
+					foreach ($fields as $fieldIndex => $field){
+						$fieldModel = MetaRepository::hydrateMetaBoxFieldModel($field, $boxModel);
+						$boxModel->addField($fieldModel);
+					}
 
-			        $taxonomyModel->addMetaBox($boxModel);
-		        }
-	        }
+					$taxonomyModel->addMetaBox($boxModel);
+				}
+			}
 
-            $customPostTypes = ACPT_Lite_DB::getResults("
+			$customPostTypes = ACPT_Lite_DB::getResults("
                 SELECT
                     c.id,
                     c.post_name,
@@ -263,27 +283,27 @@ class TaxonomyRepository
                 WHERE p.taxonomy_id = %s
             ;", [$taxonomyModel->getId()]);
 
-            foreach ($customPostTypes as $post){
-                $postModel = CustomPostTypeModel::hydrateFromArray([
-                        'id' => $post->id,
-                        'name' => $post->post_name,
-                        'singular' => $post->singular,
-                        'plural' => $post->plural,
-                        'icon' => $post->icon,
-                        'native' => $post->native == '0' ? false : true,
-                        'supports' => json_decode($post->supports),
-                        'labels' => json_decode($post->labels, true),
-                        'settings' => json_decode($post->settings, true),
-                ]);
+			foreach ($customPostTypes as $post){
+				$postModel = CustomPostTypeModel::hydrateFromArray([
+					'id' => $post->id,
+					'name' => $post->post_name,
+					'singular' => $post->singular,
+					'plural' => $post->plural,
+					'icon' => $post->icon,
+					'native' => $post->native == '0' ? false : true,
+					'supports' => json_decode($post->supports),
+					'labels' => json_decode($post->labels, true),
+					'settings' => json_decode($post->settings, true),
+				]);
 
-                $taxonomyModel->addCustomPostType($postModel);
-            }
+				$taxonomyModel->addCustomPostType($postModel);
+			}
 
-            $results[] = $taxonomyModel;
-        }
+			$results[] = $taxonomyModel;
+		}
 
-        return $results;
-    }
+		return $results;
+	}
 
     /**
      * Get the id of a post type by registed name
