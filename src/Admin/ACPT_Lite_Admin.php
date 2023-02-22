@@ -635,9 +635,10 @@ class ACPT_Lite_Admin
         $this->loader->addAction( 'rest_api_init', new ACPT_Lite_Api_Rest_Fields(), 'registerRestFields' );
     }
 
-    /**
-     * Run admin scripts
-     */
+	/**
+	 * Run admin scripts
+	 * @throws \Exception
+	 */
     public function run()
     {
         // filters
