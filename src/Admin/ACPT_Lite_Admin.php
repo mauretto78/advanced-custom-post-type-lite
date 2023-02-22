@@ -3,11 +3,13 @@
 namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Generators\CustomPostTypeGenerator;
-use ACPT_Lite\Core\Generators\MetaBoxGenerator;
+use ACPT_Lite\Core\Generators\CustomPostTypeMetaBoxGenerator;
+use ACPT_Lite\Core\Generators\TaxonomyMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\UserMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
@@ -428,47 +430,41 @@ class ACPT_Lite_Admin
      */
     private function registerCustomPostTypesAndTaxonomies()
     {
-        $metaBoxGenerator = new MetaBoxGenerator();
+	    $customPostTypeMetaBoxGenerator = new CustomPostTypeMetaBoxGenerator();
 
-        // add meta box/taxonomies for CPT
-        foreach ( CustomPostTypeRepository::get() as $postTypeModel){
+	    // add meta box/taxonomies for CPT
+	    foreach (CustomPostTypeRepository::get() as $postTypeModel){
 
-            $customPostType = new CustomPostTypeGenerator(
-                $postTypeModel->getName(),
-                $postTypeModel->isNative(),
-                array_merge(
-                    [
-                        'supports' => $postTypeModel->getSupports(),
-                        'label' => $postTypeModel->getPlural(),
-                        'labels' => $postTypeModel->getLabels(),
-                        "menu_icon" => 'dashicons-'.$postTypeModel->getIcon()
-                    ],
-                    $postTypeModel->getSettings()
-                )
-            );
+		    // register CPTs and Taxonomy here
+		    $customPostType = new CustomPostTypeGenerator(
+			    $postTypeModel->getName(),
+			    $postTypeModel->isNative(),
+			    array_merge(
+				    [
+					    'supports' => $postTypeModel->getSupports(),
+					    'label' => $postTypeModel->getPlural(),
+					    'labels' => $postTypeModel->getLabels(),
+					    "menu_icon" => 'dashicons-'.$postTypeModel->getIcon()
+				    ],
+				    $postTypeModel->getSettings()
+			    )
+		    );
 
-            // add meta boxes
-            foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
-                $this->generateMetaBoxes($postTypeModel->getName(), $metaBoxModel, $metaBoxGenerator);
-            }
-
-            // add Taxonomies
-            foreach ($postTypeModel->getTaxonomies() as $taxonomyModel){
-                $customPostType->addTaxonomy(
-                    $taxonomyModel->getSlug(),
-                    $taxonomyModel->getPlural(),
-                    array_merge(
-                        [
-                            'singular_label' => $taxonomyModel->getSingular(),
-                            'label' => $taxonomyModel->getPlural(),
-                            'labels' => $taxonomyModel->getLabels(),
-                        ],
-                        $taxonomyModel->getSettings()
-                    )
-                );
-            }
-        }
+		    // add meta boxes
+		    foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
+			    $this->generateMetaBoxes($postTypeModel->getName(), $metaBoxModel, $customPostTypeMetaBoxGenerator);
+		    }
+	    }
     }
+
+	/**
+	 * @throws \Exception
+	 */
+	private function registerTaxonomyMeta()
+	{
+		$taxonomyMetaBoxGenerator = new TaxonomyMetaBoxGenerator();
+		$taxonomyMetaBoxGenerator->generate();
+	}
 
     /**
      * @throws \Exception
@@ -483,40 +479,50 @@ class ACPT_Lite_Admin
         }
     }
 
-    /**
-     * @param                  $postTypeName
-     * @param CustomPostTypeMetaBoxModel     $metaBoxModel
-     * @param MetaBoxGenerator $metaBoxGenerator
-     */
-    private function generateMetaBoxes( $postTypeName, CustomPostTypeMetaBoxModel $metaBoxModel, MetaBoxGenerator $metaBoxGenerator)
-    {
-        $metaFields = [];
+	/**
+	 * @param string               $postTypeName
+	 * @param AbstractMetaBoxModel $metaBoxModel
+	 * @param CustomPostTypeMetaBoxGenerator     $metaBoxGenerator
+	 */
+	private function generateMetaBoxes($postTypeName, AbstractMetaBoxModel $metaBoxModel, CustomPostTypeMetaBoxGenerator $metaBoxGenerator)
+	{
+		$metaFields = [];
 
-        foreach ($metaBoxModel->getFields() as $fieldModel){
+		foreach ($metaBoxModel->getFields() as $fieldModel){
+			$metaFields[] = $this->generateMetaBoxFieldArray($fieldModel);
+		}
 
-            $options = [];
+		$metaBoxGenerator->addMetaBox($metaBoxModel->getId(), $metaBoxModel->getName(), $postTypeName, $metaFields);
+	}
 
-            foreach ($fieldModel->getOptions() as $optionModel){
-                $options[] = [
-                    'label' => $optionModel->getLabel(),
-                    'value' => $optionModel->getValue(),
-                ];
-            }
+	/**
+	 * @param CustomPostTypeMetaBoxFieldModel $fieldModel
+	 *
+	 * @return array
+	 */
+	protected function generateMetaBoxFieldArray(CustomPostTypeMetaBoxFieldModel $fieldModel)
+	{
+		$options = [];
 
-            $metaFields[] = [
-                    'type' => $fieldModel->getType(),
-                    'name' => $fieldModel->getName(),
-                    'defaultValue' => $fieldModel->getDefaultValue(),
-                    'description' => $fieldModel->getDescription(),
-                    'isRequired' => $fieldModel->isRequired(),
-                    'isShowInArchive' => $fieldModel->isShowInArchive(),
-                    'sort' => $fieldModel->getSort(),
-                    'options' => $options,
-            ];
-        }
+		foreach ($fieldModel->getOptions() as $optionModel){
+			$options[] = [
+				'label' => $optionModel->getLabel(),
+				'value' => $optionModel->getValue(),
+			];
+		}
 
-        $metaBoxGenerator->addMetaBox($metaBoxModel->getId(), $metaBoxModel->getName(), $postTypeName, $metaFields);
-    }
+		return [
+			'id' => $fieldModel->getId(),
+			'type' => $fieldModel->getType(),
+			'name' => $fieldModel->getName(),
+			'defaultValue' => $fieldModel->getDefaultValue(),
+			'description' => $fieldModel->getDescription(),
+			'isRequired' => $fieldModel->isRequired(),
+			'isShowInArchive' => $fieldModel->isShowInArchive(),
+			'sort' => $fieldModel->getSort(),
+			'options' => $options,
+		];
+	}
 
     /**
      * Add CPT columns to show in the admin panel
@@ -655,6 +661,9 @@ class ACPT_Lite_Admin
 
         // register custom post types and taxonomies
         $this->registerCustomPostTypesAndTaxonomies();
+
+	    // register taxonomy meta
+	    $this->registerTaxonomyMeta();
 
         // WooCommerce product data
         $this->addWooCommerceProductData();

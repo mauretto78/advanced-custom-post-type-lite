@@ -1,8 +1,8 @@
 <?php
 
-namespace ACPT_Lite\Core\Generators\Fields;
+namespace ACPT_Lite\Core\Generators\CustomPostTypeFields;
 
-use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
 
 class TextField extends AbstractField implements CustomPostTypeFieldInterface
 {

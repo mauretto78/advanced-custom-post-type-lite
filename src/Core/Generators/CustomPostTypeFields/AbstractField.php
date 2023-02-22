@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT_Lite\Core\Generators\Fields;
+namespace ACPT_Lite\Core\Generators\CustomPostTypeFields;
 
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Utils\Sanitizer;

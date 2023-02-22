@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT_Lite\Core\Generators\Fields;
+namespace ACPT_Lite\Core\Generators\CustomPostTypeFields;
 
 interface CustomPostTypeFieldInterface
 {

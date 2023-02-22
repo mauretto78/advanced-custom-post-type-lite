@@ -189,6 +189,14 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     }
 
 	/**
+	 * @return CustomPostTypeModel[]
+	 */
+	public function getCustomPostTypes()
+	{
+		return $this->customPostTypes;
+	}
+
+	/**
 	 * @return AbstractMetaBoxModel[]
 	 */
 	public function getMetaBoxes()
