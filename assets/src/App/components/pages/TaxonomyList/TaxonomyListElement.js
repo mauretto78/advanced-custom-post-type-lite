@@ -4,6 +4,7 @@ import {isset} from "../../../utils/objects";
 import Tippy from "../../reusable/Tippy";
 import CustomPostTypeLabel from "../../reusable/CustomPostType/CustomPostTypeLabel";
 import CustomPostTypesMiniTable from "./CustomPostTypesMiniTable";
+import MetaBoxMiniTable from "../../reusable/Meta/MetaBoxMiniTable";
 
 const TaxonomyListElement = ({id, element, handleDeleteTemplate}) => {
 
@@ -34,28 +35,28 @@ const TaxonomyListElement = ({id, element, handleDeleteTemplate}) => {
                     <CustomPostTypeLabel element={element} />
                 </td>
                 <td>
-                    {/*{isset(element, "meta") &&  element.meta.length > 0 ?*/}
-                    {/*    <Tippy*/}
-                    {/*        placement='end'*/}
-                    {/*        html={(*/}
-                    {/*            <Index taxonomy={element.slug} elements={element.meta}/>*/}
-                    {/*        )}*/}
-                    {/*    >*/}
-                    {/*        <Link*/}
-                    {/*            to={`meta-taxonomy/${element.slug}`}*/}
-                    {/*            className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"*/}
-                    {/*        >*/}
-                    {/*            Manage*/}
-                    {/*        </Link>*/}
-                    {/*    </Tippy>*/}
-                    {/*    :*/}
-                    {/*    <Link*/}
-                    {/*        to={`/meta-taxonomy/${element.slug}`}*/}
-                    {/*        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"*/}
-                    {/*    >*/}
-                    {/*        Create*/}
-                    {/*    </Link>*/}
-                    {/*}*/}
+                    {isset(element, "meta") &&  element.meta.length > 0 ?
+                        <Tippy
+                            placement='end'
+                            html={(
+                                <MetaBoxMiniTable taxonomy={element.slug} elements={element.meta}/>
+                            )}
+                        >
+                            <Link
+                                to={`meta-taxonomy/${element.slug}`}
+                                className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
+                            >
+                                Manage
+                            </Link>
+                        </Tippy>
+                        :
+                        <Link
+                            to={`/meta-taxonomy/${element.slug}`}
+                            className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
+                        >
+                            Create
+                        </Link>
+                    }
                 </td>
                 <td>
                     {isset(element, "customPostTypes") &&  element.customPostTypes.length > 0 ?

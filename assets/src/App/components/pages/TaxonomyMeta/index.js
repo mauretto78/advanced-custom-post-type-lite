@@ -115,7 +115,7 @@ const TaxonomyMeta = () => {
             <button
                 onClick={(e) => {
                     e.preventDefault();
-                    setModalVisible(true);
+                    setModalVisible(!modalVisible);
                 }}
                 type="submit"
                 className="acpt-btn acpt-btn-danger"

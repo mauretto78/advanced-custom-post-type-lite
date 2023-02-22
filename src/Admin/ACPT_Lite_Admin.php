@@ -7,6 +7,7 @@ use ACPT_Lite\Core\Generators\MetaBoxGenerator;
 use ACPT_Lite\Core\Generators\UserMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
@@ -120,11 +121,10 @@ class ACPT_Lite_Admin
             'wp_ajax_checkPostTypeNameAction' => 'checkPostTypeNameAction',
             'wp_ajax_checkTaxonomySlugAction' => 'checkTaxonomySlugAction',
             'wp_ajax_deleteCustomPostTypeAction' => 'deleteCustomPostTypeAction',
-            'wp_ajax_deleteCustomPostTypeMetaAction' => 'deleteCustomPostTypeMetaAction',
+            'wp_ajax_deleteMetaAction' => 'deleteMetaAction',
             'wp_ajax_deleteTaxonomyAction' => 'deleteTaxonomyAction',
             'wp_ajax_deleteWooCommerceProductDataAction' => 'deleteWooCommerceProductDataAction',
             'wp_ajax_deleteWooCommerceProductDataFieldsAction' => 'deleteWooCommerceProductDataFieldsAction',
-            'wp_ajax_deleteUserMetaAction' => 'deleteUserMetaAction',
             'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
             'wp_ajax_exportFileAction' => 'exportFileAction',
             'wp_ajax_fetchMetaAction' => 'fetchMetaAction',
@@ -145,7 +145,7 @@ class ACPT_Lite_Admin
             'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',
             'wp_ajax_resetWooCommerceProductDataAction' => 'resetWooCommerceProductDataAction',
             'wp_ajax_saveCustomPostTypeAction' => 'saveCustomPostTypeAction',
-            'wp_ajax_saveCustomPostTypeMetaAction' => 'saveCustomPostTypeMetaAction',
+            'wp_ajax_saveMetaAction' => 'saveMetaAction',
             'wp_ajax_saveSettingsAction' => 'saveSettingsAction',
             'wp_ajax_saveTaxonomyAction' => 'saveTaxonomyAction',
             'wp_ajax_saveWooCommerceProductDataAction' => 'saveWooCommerceProductDataAction',
@@ -503,28 +503,6 @@ class ACPT_Lite_Admin
                 ];
             }
 
-            $relations = [];
-
-            foreach ($fieldModel->getRelations() as $relationshipModel){
-
-                $inversedBy = null;
-
-                if($relationshipModel->isBidirectional() and $relationshipModel->getInversedBy() !== null){
-                    $inversedBy = [
-                            'id' => $relationshipModel->getInversedBy()->getId(),
-                            'box' => $relationshipModel->getInversedBy()->getMetaBox()->getName(),
-                            'field' => $relationshipModel->getInversedBy()->getName(),
-                    ];
-                }
-
-                $relations[] = [
-                        'relationship' => $relationshipModel->getRelationship(),
-                        'related_custom_post_type_id' => $relationshipModel->getRelatedCustomPostType()->getId(),
-                        'related_custom_post_type_name' => $relationshipModel->getRelatedCustomPostType()->getName(),
-                        'inversedBy' => $inversedBy
-                ];
-            }
-
             $metaFields[] = [
                     'type' => $fieldModel->getType(),
                     'name' => $fieldModel->getName(),
@@ -534,7 +512,6 @@ class ACPT_Lite_Admin
                     'isShowInArchive' => $fieldModel->isShowInArchive(),
                     'sort' => $fieldModel->getSort(),
                     'options' => $options,
-                    'relations' => $relations,
             ];
         }
 

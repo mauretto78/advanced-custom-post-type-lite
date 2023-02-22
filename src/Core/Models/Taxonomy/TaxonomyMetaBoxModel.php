@@ -2,8 +2,8 @@
 
 namespace ACPT_Lite\Core\Models\Taxonomy;
 
-use ACPT\Core\Models\Abstracts\AbstractMetaBoxModel;
-use ACPT\Costants\MetaTypes;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
+use ACPT_Lite\Costants\MetaTypes;
 
 /**
  * TaxonomyMetaBoxModel

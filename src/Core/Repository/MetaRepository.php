@@ -536,7 +536,6 @@ class MetaRepository
 	                        sort
 	                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
 	                    WHERE meta_box_id = %s
-	                    AND parent_id IS NULL
 	                ";
 
 	                if(isset($args['excludeFields'])){
@@ -1373,31 +1372,6 @@ class MetaRepository
                     break;
                 case MetaTypes::USER:
                     ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=o.meta_box_id WHERE o.id NOT IN ('".implode("','",$ids['options'])."');");
-                    break;
-            }
-
-        }
-
-        if(isset($ids['relations'])){
-            switch ($belongsTo) {
-                case MetaTypes::CUSTOM_POST_TYPE:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE r FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=r.meta_box_id WHERE b.post_type = '".$find."' AND r.id NOT IN ('".implode("','",$ids['relations'])."');");
-                    break;
-            }
-        }
-
-        if(isset($ids['visibilityConditions'])){
-            switch ($belongsTo) {
-                case MetaTypes::CUSTOM_POST_TYPE:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE v FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."` v LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=v.meta_box_id WHERE b.post_type = '".$find."' AND v.id NOT IN ('".implode("','",$ids['visibilityConditions'])."');");
-                    break;
-
-                case MetaTypes::TAXONOMY:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE v FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."` v LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."` b on b.id=v.meta_box_id WHERE b.taxonomy = '".$find."' AND v.id NOT IN ('".implode("','",$ids['visibilityConditions'])."');");
-                    break;
-
-                case MetaTypes::USER:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE v FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY)."` v LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=v.meta_box_id WHERE v.id NOT IN ('".implode("','",$ids['visibilityConditions'])."');");
                     break;
             }
 

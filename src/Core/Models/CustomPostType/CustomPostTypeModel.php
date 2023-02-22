@@ -3,6 +3,7 @@
 namespace ACPT_Lite\Core\Models\CustomPostType;
 
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
@@ -63,7 +64,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     private $settings = [];
 
     /**
-     * @var AbstractMetaBoxFieldModel[]
+     * @var AbstractMetaBoxModel[]
      */
     private $metaBoxes = [];
 
@@ -216,9 +217,9 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param AbstractMetaBoxFieldModel $metaBox
+     * @param AbstractMetaBoxModel $metaBox
      */
-    public function addMetaBox(AbstractMetaBoxFieldModel $metaBox)
+    public function addMetaBox(AbstractMetaBoxModel $metaBox)
     {
         if(!$this->existsInCollection($metaBox->getId(), $this->metaBoxes)){
             $this->metaBoxes[] = $metaBox;
@@ -226,9 +227,9 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param AbstractMetaBoxFieldModel $metaBox
+     * @param AbstractMetaBoxModel $metaBox
      */
-    public function removeMetaBox(AbstractMetaBoxFieldModel $metaBox)
+    public function removeMetaBox(AbstractMetaBoxModel $metaBox)
     {
         $this->removeFromCollection($metaBox->getId(), $this->metaBoxes);
     }
@@ -252,7 +253,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @return AbstractMetaBoxFieldModel[]
+     * @return AbstractMetaBoxModel[]
      */
     public function getMetaBoxes()
     {
@@ -268,56 +269,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param CustomPostTypeTemplateModel $template
-     */
-    public function addTemplate(CustomPostTypeTemplateModel $template)
-    {
-        if(!$this->existsInCollection($template->getId(), $this->templates)){
-            $this->templates[] = $template;
-        }
-    }
-
-    /**
-     * @param CustomPostTypeTemplateModel $template
-     */
-    public function removeTemplate(CustomPostTypeTemplateModel $template)
-    {
-        $this->removeFromCollection($template->getId(), $this->templates);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isExistsArchivePageInTheme()
-    {
-        return $this->existsArchivePageInTheme;
-    }
-
-    /**
-     * @param bool $existsArchivePageInTheme
-     */
-    public function setExistsArchivePageInTheme($existsArchivePageInTheme)
-    {
-        $this->existsArchivePageInTheme = $existsArchivePageInTheme;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isExistsSinglePageInTheme()
-    {
-        return $this->existsSinglePageInTheme;
-    }
-
-    /**
-     * @param bool $existsSinglePageInTheme
-     */
-    public function setExistsSinglePageInTheme($existsSinglePageInTheme)
-    {
-        $this->existsSinglePageInTheme = $existsSinglePageInTheme;
-    }
-
-    /**
      * Checks if 'product' if from WooCommerce
      *
      * @return bool
@@ -328,7 +279,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @return WooCommerceProductDataModel
+     * @return WooCommerceProductDataModel[]
      */
     public function getWoocommerceProductData() {
         return $this->woocommerceProductData;
@@ -357,7 +308,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             foreach ($metaBoxModel->getFields() as $fieldModel){
 
                 $optionsArray = [];
-                $relationsArray = [];
 
                 foreach ($fieldModel->getOptions() as $optionModel){
                     $optionsArray[] = [
@@ -365,20 +315,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                         'label' => $optionModel->getLabel(),
                         'value' => $optionModel->getValue(),
                         'sort' => $optionModel->getSort(),
-                    ];
-                }
-
-                foreach ($fieldModel->getRelations() as $relationModel){
-                    $relationsArray[] = [
-                            'id' => $relationModel->id,
-                            'boxId' => $relationModel->getMetaBoxField()->getMetaBox()->getId(),
-                            'fieldId' => $relationModel->getMetaBoxField()->getId(),
-                            'type' => $relationModel->getRelationship(),
-                            'relatedPostType' => ($relationModel->getRelatedCustomPostType() !== null) ? $relationModel->getRelatedCustomPostType()->getName() : null,
-                            'inversedBoxId' => ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getMetaBox()->getId() : null,
-                            'inversedBoxName' => ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getMetaBox()->getName() : null,
-                            'inversedFieldName' => ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getName() : null,
-                            'inversedFieldId' => ($relationModel->getInversedBy() !== null) ? $relationModel->getInversedBy()->getId() : null,
                     ];
                 }
 
@@ -392,7 +328,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                     'required' => (bool)$fieldModel->isRequired(),
                     'sort' => $fieldModel->getSort(),
                     'options' => $optionsArray,
-                    'relations' => $relationsArray,
                 ];
             }
 
@@ -430,9 +365,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'settings' => $this->settings,
             'meta' => $metaArray,
             'taxonomies' => $taxonomyArray,
-            'templates' => $this->templates,
-            'existsArchivePageInTheme' => $this->existsArchivePageInTheme,
-            'existsSinglePageInTheme' => $this->existsSinglePageInTheme,
         ];
     }
 
@@ -476,9 +408,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'settings' => $this->settings,
             'meta' => $metaArray,
             'taxonomies' => $taxonomyArray,
-            'templates' => $this->templates,
-            'existsArchivePageInTheme' => $this->existsArchivePageInTheme,
-            'existsSinglePageInTheme' => $this->existsSinglePageInTheme,
             'isWooCommerce' => $this->isWooCommerce(),
             'woocommerceProductData' => $this->woocommerceProductData,
         ];

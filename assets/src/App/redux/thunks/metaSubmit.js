@@ -4,7 +4,7 @@ import {submitFailure, submitInProgress, submitSuccess} from "../actions/metaSta
 export const metaSubmit = (data) => async (dispatch, getState) => {
     try {
         dispatch(submitInProgress());
-        const res = await wpAjaxRequest("saveCustomPostTypeMetaAction", data);
+        const res = await wpAjaxRequest("saveMetaAction", data);
         (res.success === true) ? dispatch(submitSuccess()) : dispatch(submitFailure(res.error)) ;
     } catch (e) {
         console.log(e);

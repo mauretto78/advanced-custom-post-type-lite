@@ -142,4 +142,3 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Completely new UI
 * Taxonomy meta
 * Backend fixes
-* Meta manager completely redesigned

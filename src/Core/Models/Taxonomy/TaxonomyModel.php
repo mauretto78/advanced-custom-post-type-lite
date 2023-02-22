@@ -2,7 +2,9 @@
 
 namespace ACPT_Lite\Core\Models\Taxonomy;
 
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 
 /**
  * TaxonomyModel
@@ -53,6 +55,11 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
      * @var CustomPostTypeModel[]
      */
     private $customPostTypes = [];
+
+	/**
+	 * @var AbstractMetaBoxModel[]
+	 */
+	private $metaBoxes = [];
 
     /**
      * TaxonomyModel constructor.
@@ -181,11 +188,45 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
         $this->removeFromCollection($customPostTypeModel->getId(), $this->customPostTypes);
     }
 
+	/**
+	 * @return AbstractMetaBoxModel[]
+	 */
+	public function getMetaBoxes()
+	{
+		return $this->metaBoxes;
+	}
+
+	/**
+	 * @param AbstractMetaBoxModel $metaBox
+	 */
+	public function addMetaBox(AbstractMetaBoxModel $metaBox)
+	{
+		if(!$this->existsInCollection($metaBox->getId(), $this->metaBoxes)){
+			$this->metaBoxes[] = $metaBox;
+		}
+	}
+
+	/**
+	 * @param AbstractMetaBoxModel $metaBox
+	 */
+	public function removeMetaBox(AbstractMetaBoxModel $metaBox)
+	{
+		$this->removeFromCollection($metaBox->getId(), $this->metaBoxes);
+	}
+
     /**
      * @return array|mixed
      */
     public function jsonSerialize()
     {
+	    $metaArray = [];
+	    foreach ($this->getMetaBoxes() as $metaBoxModel){
+		    $metaArray[] = [
+			    "name" => $metaBoxModel->getName(),
+			    "count" => count($metaBoxModel->getFields()),
+		    ];
+	    }
+
         $customPostTypesArray = [];
 
         /** @var CustomPostTypeModel $postTypeModel */
@@ -211,6 +252,7 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
             'isNative' => $this->isNative(),
             'labels' => $this->labels,
             'settings' => $this->settings,
+            'meta' => $metaArray,
             'customPostTypes' => $customPostTypesArray
         ];
     }

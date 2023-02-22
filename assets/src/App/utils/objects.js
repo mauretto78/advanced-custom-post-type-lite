@@ -103,3 +103,23 @@ export const filterByValue = (jsonObject, value) => {
 
     return jsonObject.filter((jsonObject) => {return (jsonObject['value'] === value);})[0];
 };
+
+/**
+ *
+ * @param array
+ * @param element
+ * @param key
+ * @return {*}
+ */
+export const upsert = (array, element, key) => {
+
+    const i = array.findIndex(_element => _element[key] === element[key]);
+
+    if (i > -1) {
+        array[i] = element;
+    } else {
+        array.push(element);
+    }
+
+    return array;
+};

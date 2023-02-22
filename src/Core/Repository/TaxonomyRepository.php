@@ -3,6 +3,7 @@
 namespace ACPT_Lite\Core\Repository;
 
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
@@ -122,7 +123,7 @@ class TaxonomyRepository
      * @throws \Exception
      * @since    1.0.0
      */
-    public static function get(array $meta = [])
+    public static function get(array $meta = [], $lazy = false)
     {
         $results = [];
         $args = [];
@@ -183,6 +184,68 @@ class TaxonomyRepository
 
             $count = (count($res) > 0 and isset($res[0]->count) ) ? $res[0]->count : 0;
             $taxonomyModel->setPostCount($count);
+
+	        if(!$lazy){
+
+		        // Meta boxes
+		        $metaBoxQuery = "
+                    SELECT 
+                        id, 
+                        meta_box_name as name,
+                        sort
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."`
+                    WHERE taxonomy = %s
+                ";
+		        $metaBoxArgs = [$taxonomy->slug];
+
+		        if(isset($meta['boxName'])){
+			        $metaBoxQuery .= " AND meta_box_name = %s";
+			        $metaBoxArgs[] = $meta['boxName'];
+		        }
+
+		        $metaBoxQuery .= " ORDER BY sort;";
+
+		        $boxes = ACPT_Lite_DB::getResults($metaBoxQuery, $metaBoxArgs);
+
+		        foreach ($boxes as $boxIndex => $box){
+			        $boxModel = TaxonomyMetaBoxModel::hydrateFromArray([
+				        'id' => $box->id,
+				        'taxonomy' => $taxonomy->slug,
+				        'name' => $box->name,
+				        'sort' => $box->sort
+			        ]);
+
+			        $sql = "
+                        SELECT
+                            id,
+                            field_name as name,
+                            field_type,
+                            field_default_value,
+                            field_description,
+                            required,
+                            showInArchive,
+                            sort
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
+                        WHERE meta_box_id = %s
+                    ";
+
+			        if(isset($meta['excludeFields'])){
+				        $sql .= " AND id NOT IN ('".implode("','", $meta['excludeFields'])."')";
+			        }
+
+			        $sql .= " ORDER BY sort;";
+
+			        $fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
+
+			        // Meta box fields
+			        foreach ($fields as $fieldIndex => $field){
+				        $fieldModel = MetaRepository::hydrateMetaBoxFieldModel($field, $boxModel);
+				        $boxModel->addField($fieldModel);
+			        }
+
+			        $taxonomyModel->addMetaBox($boxModel);
+		        }
+	        }
 
             $customPostTypes = ACPT_Lite_DB::getResults("
                 SELECT

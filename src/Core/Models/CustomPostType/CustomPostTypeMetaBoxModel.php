@@ -2,7 +2,8 @@
 
 namespace ACPT_Lite\Core\Models\CustomPostType;
 
-use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
+use ACPT_Lite\Costants\MetaTypes;
 
 /**
  * MetaBoxModel
@@ -12,27 +13,12 @@ use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
  * @subpackage advanced-custom-post-type/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
-class CustomPostTypeMetaBoxModel extends AbstractModel implements \JsonSerializable
+class CustomPostTypeMetaBoxModel extends AbstractMetaBoxModel implements \JsonSerializable
 {
     /**
      * @var string
      */
     private $postType;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var int
-     */
-    private $sort;
-
-    /**
-     * @var CustomPostTypeMetaBoxFieldModel[]
-     */
-    private $fields = [];
 
     /**
      * MetaBoxModel constructor.
@@ -73,71 +59,29 @@ class CustomPostTypeMetaBoxModel extends AbstractModel implements \JsonSerializa
         $this->fields   = [];
     }
 
-    /**
-     * @return string
-     */
-    public function getPostType()
-    {
-        return $this->postType;
-    }
+	/**
+	 * @param $postType
+	 */
+	public function changePostType($postType)
+	{
+		$this->postType = $postType;
+	}
 
-    /**
-     * @param $name
-     */
-    public function changeName($name)
-    {
-        $this->name = $name;
-    }
+	/**
+	 * @return string
+	 */
+	public function getPostType()
+	{
+		return $this->postType;
+	}
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $sort
-     */
-    public function changeSort($sort)
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @param CustomPostTypeMetaBoxFieldModel $field
-     */
-    public function addField(CustomPostTypeMetaBoxFieldModel $field)
-    {
-        if(!$this->existsInCollection($field->getId(), $this->fields)){
-            $this->fields[] = $field;
-        }
-    }
-
-    /**
-     * @param CustomPostTypeMetaBoxFieldModel $field
-     */
-    public function removeField(CustomPostTypeMetaBoxFieldModel $field)
-    {
-        $this->removeFromCollection($field->getId(), $this->fields);
-    }
-
-    /**
-     * @return array|CustomPostTypeMetaBoxFieldModel[]
-     */
-    public function getFields()
-    {
-        return $this->fields;
-    }
+	/**
+	 * @inheritDoc
+	 */
+	public function metaType()
+	{
+		return MetaTypes::CUSTOM_POST_TYPE;
+	}
 
     /**
      * @inheritDoc

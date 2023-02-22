@@ -2,7 +2,6 @@
 
 namespace ACPT_Lite\Core\Models\Abstracts;
 
-use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Costants\MetaTypes;
 
 /**

@@ -2,7 +2,6 @@
 
 namespace ACPT_Lite\Admin;
 
-use ACPT\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
@@ -13,6 +12,7 @@ use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
+use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\User\UserMetaBoxModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
@@ -748,8 +748,6 @@ class ACPT_Lite_Ajax
 			'boxes' => [],
 			'fields' => [],
 			'options' => [],
-			'visibilityConditions' => [],
-			'relations' => [],
 		];
 
 		// persist $model on DB
@@ -857,10 +855,6 @@ class ACPT_Lite_Ajax
 						$ids[$find]['fields'][] = $field['id'];
 
 						$fieldModel->changeName($this->getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
-
-						if(isset($field['parentId']) and null !== $field['parentId']){
-							$fieldModel->setParentId($field['parentId']);
-						}
 
 						$arrayOfFieldNames[] = $fieldModel->getName();
 

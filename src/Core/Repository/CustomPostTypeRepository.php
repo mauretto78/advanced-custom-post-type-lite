@@ -371,29 +371,6 @@ class CustomPostTypeRepository
                 }
             }
 
-            if($postModel->getName() === 'post'){
-                $themeFiles = ['single.php', 'acpt/single.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsSinglePageInTheme($existsInTheme != '');
-
-                $themeFiles = ['category.php', 'acpt/category.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsArchivePageInTheme($existsInTheme != '');
-
-            } elseif ($postModel->getName() === 'page') {
-                $themeFiles = ['page.php', 'acpt/page.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsSinglePageInTheme($existsInTheme != '');
-            } else {
-                $themeFiles = ['single-'.$postModel->getName().'.php', 'acpt/single-'.$postModel->getName().'.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsSinglePageInTheme($existsInTheme != '');
-
-                $themeFiles = ['archive-'.$postModel->getName().'.php', 'acpt/archive-'.$postModel->getName().'.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsArchivePageInTheme($existsInTheme != '');
-            }
-
             $results[] = $postModel;
         }
 
