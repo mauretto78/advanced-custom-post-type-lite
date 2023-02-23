@@ -707,7 +707,6 @@ export const metaStateReducer = ( state = initialState, action) => {
                                     defaultValue: (isset(field, "defaultValue")) ? field.defaultValue : null,
                                     showInArchive: (isset(field, "showInArchive")) ? field.showInArchive : false,
                                     isRequired: (isset(field, "isRequired")) ? field.isRequired : false,
-                                    advancedOptions: (isset(field, "advancedOptions")) ? field.advancedOptions : [],
                                     type: (isset(field, "type")) ? field.type : null,
                                 };
                             } else {
@@ -742,7 +741,6 @@ export const metaStateReducer = ( state = initialState, action) => {
                                     defaultValue: payload.value,
                                     showInArchive: (isset(field, "showInArchive")) ? field.showInArchive : false,
                                     isRequired: (isset(field, "isRequired")) ? field.isRequired : false,
-                                    advancedOptions: (isset(field, "advancedOptions")) ? field.advancedOptions : [],
                                     type: (isset(field, "type")) ? field.type : null,
                                 };
                             } else {
@@ -777,7 +775,6 @@ export const metaStateReducer = ( state = initialState, action) => {
                                     defaultValue: (isset(field, "defaultValue")) ? field.defaultValue : null,
                                     showInArchive: (isset(field, "showInArchive")) ? field.showInArchive : false,
                                     isRequired: (isset(field, "isRequired")) ? field.isRequired : false,
-                                    advancedOptions: (isset(field, "advancedOptions")) ? field.advancedOptions : [],
                                     type: (isset(field, "type")) ? field.type : null,
                                 };
                             } else {
@@ -812,7 +809,6 @@ export const metaStateReducer = ( state = initialState, action) => {
                                     defaultValue: (isset(field, "defaultValue")) ? field.defaultValue : null,
                                     showInArchive: (isset(field, "showInArchive")) ? field.showInArchive : false,
                                     isRequired: (isset(field, "isRequired")) ? field.isRequired : false,
-                                    advancedOptions: (isset(field, "advancedOptions")) ? field.advancedOptions : [],
                                     type: payload.type,
                                 };
                             } else {
