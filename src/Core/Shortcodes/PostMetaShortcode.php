@@ -3,9 +3,11 @@
 namespace ACPT_Lite\Core\Shortcodes;
 
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Shortcodes\DTO\ShortcodePayload;
 use ACPT_Lite\Core\Shortcodes\Fields\AbstractField;
+use ACPT_Lite\Costants\MetaTypes;
 
-class PostMetaShortcode
+class PostMetaShortcode extends AbstractACPTShortcode
 {
     /**
      * @param array $atts
@@ -24,11 +26,7 @@ class PostMetaShortcode
         $pid = isset($atts['pid']) ? $atts['pid'] : $post->ID;
         $box = $atts['box'];
         $field = $atts['field'];
-        $width = isset ($atts['width'] ) ? $atts['width'] : null;
-        $height = isset ($atts['height'] ) ? $atts['height'] : null;
-        $target = isset ($atts['target'] ) ? $atts['target'] : null;
-        $dateFormat = isset ($atts['date-format'] ) ? $atts['date-format'] : null;
-        $elements = isset ($atts['elements'] ) ? $atts['elements'] : null;
+	    $preview = (isset($atts['preview']) and $atts['preview'] === 'true') ? true : false;
 
         $key = Strings::toDBFormat($box).'_'.Strings::toDBFormat($field);
         $type = get_post_meta($pid, $key.'_type', true);
@@ -37,27 +35,16 @@ class PostMetaShortcode
             return '';
         }
 
-        $field = self::getCustomPostTypeField($type, $pid, $box, $field, $width, $height, $target, $dateFormat, $elements);
+	    $payload = new ShortcodePayload();
+	    $payload->id = $pid;
+	    $payload->box = $box;
+	    $payload->field = $field;
+	    $payload->belongsTo = MetaTypes::CUSTOM_POST_TYPE;
+	    $payload->find = get_post_type($pid);
+	    $payload->preview = $preview;
 
-        return  $field->render();
-    }
+	    $field = self::getField($type, $payload);
 
-    /**
-     * @param string $type
-     * @param int    $pid
-     * @param string $box
-     * @param string $field
-     * @param string $width
-     * @param string $height
-     * @param string $target
-     * @param string $dateFormat
-     *
-     * @return AbstractField
-     */
-    private function getCustomPostTypeField($type, $pid, $box, $field, $width, $height, $target, $dateFormat, $elements)
-    {
-        $className = 'ACPT_Lite\\Core\\Shortcodes\\Fields\\'.$type.'Field';
-
-        return new $className($pid, $box, $field, $width, $height, $target, $dateFormat, $elements);
+	    return $field->render();
     }
 }

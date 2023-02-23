@@ -22,6 +22,7 @@ Main features:
 * Register and manage new custom post types in seconds. Take the total control and become a Master of your CPTs.
 * Register, manage and associate custom new taxonimies in just 3 clicks.
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
+* Taxonomy meta fields manager (choose between 3 field types)
 * User meta fields manager (choose between 3 field types)
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 * Elementor custom widget: manage ACPT meta fields in the Elementor editor
@@ -49,7 +50,7 @@ Please refer to main [ACPT](https://acpt.io) website.
 1. Custom post types list
 2. Register new Custom post type
 3. Register new Taxonomy
-4. Manage CPT meta boxes
+4. Manage meta boxes
 5. Meta boxes in action in the post editor
 6. Settings panel
 
@@ -139,6 +140,7 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 = 1.0.14 (2023-02-24) =
 
-* Completely new UI
+* Renaming DB tables
+* Completely new UI (from PRO version)
 * Taxonomy meta
-* Backend fixes
+* Backend fixes and improvements (from PRO version)

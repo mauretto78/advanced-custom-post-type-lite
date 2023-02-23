@@ -14,6 +14,7 @@ use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\TaxonomyMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\UserMetaShortcode;
 use ACPT_Lite\Costants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_Elementor_Initiator;
@@ -441,6 +442,7 @@ class ACPT_Lite_Admin
     private function addShortcodes()
     {
         add_shortcode('acpt', [new PostMetaShortcode(), 'render']);
+        add_shortcode('acpt_tax', [new TaxonomyMetaShortcode(), 'render']);
         add_shortcode('acpt_user', [new UserMetaShortcode(), 'render']);
     }
 
