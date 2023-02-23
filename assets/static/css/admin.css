@@ -572,3 +572,14 @@ input[type="checkbox"].wppd-ui-toggle:checked:after {
     float: none !important;
     margin-left: 0px !important;
 }
+
+/*========== SELECTIZE ==========*/
+
+.selectize-dropdown .selected {
+    background-color: #007cba;
+}
+
+.selectize-item,
+.selectize-dropdown  {
+    padding: 5px;
+}
