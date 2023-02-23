@@ -6,8 +6,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {stepForward} from "../../../redux/actions/stepsActions";
 import {postLabelsList} from "../../../constants/label";
 import {translate} from "../../../localization";
+import Layout from "../../reusable/Layout";
+import ActionsBar from "../../reusable/Layout/ActionsBar";
+import Breadcrumbs from "../../reusable/Layout/Breadcrumbs";
+import StepsHeader from "../../reusable/Steps/StepsHeader";
 
-const AdditionalLabelsStep = () => {
+const AdditionalLabelsStep = ({postType, headings}) => {
 
     // manage global state
     const {data:stepsData, activeStep} = useSelector(state => state.stepsReducer);
@@ -28,7 +32,7 @@ const AdditionalLabelsStep = () => {
     // form default values
     useEffect(() => {
         if (stepsData[1]) {
-            setValue('menu_name', fetched.length > 0 ? labels.menu_name : stepsData[1].singular_label);
+            setValue ('menu_name', fetched.length > 0 ? labels.menu_name : stepsData[1].singular_label);
             setValue('all_items', fetched.length > 0 ? labels.all_items : `${translate("general.labels.all_items", {r: stepsData[1].plural_label})}`);
             setValue('add_new', fetched.length > 0 ? labels.add_new : `${translate("general.labels.add")} ${stepsData[1].singular_label}`);
             setValue('add_new_item', fetched.length > 0 ? labels.add_new_item : `${translate("general.labels.add")} ${stepsData[1].singular_label}`);
@@ -64,27 +68,46 @@ const AdditionalLabelsStep = () => {
     };
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="acpt-card__inner">
-                {postLabelsList.map((item)=> (
-                    <InputText
-                        id={item.id}
-                        label={item.label}
-                        placeholder={item.label}
-                        register={register}
-                        errors={errors}
-                        description={item.description}
-                        validate={{
-                            maxLength: {
-                                value: 255,
-                                message: "min length is 255"
-                            }
-                        }}
-                    />
-                ))}
-            </div>
-            <StepsButtons isValid={isValid} next={3} prev={1} />
-        </form>
+        <Layout>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <ActionsBar
+                    title={postType ? "Edit Custom Post Type" : "Create new Custom Post Type"}
+                    actions={<StepsButtons isValid={isValid} next={3} prev={1} />}
+                />
+                <main>
+                    <Breadcrumbs crumbs={[
+                        {
+                            label: "Registered Custom Post Types",
+                            link: "/"
+                        },
+                        {
+                            label: postType ? "Edit Custom Post Type" : "Create new Custom Post Type"
+                        }
+                    ]} />
+                    <div className="acpt-card">
+                        <StepsHeader headings={headings}/>
+                        <div className="acpt-card__inner">
+                            {postLabelsList.map((item)=> (
+                                <InputText
+                                    id={item.id}
+                                    label={item.label}
+                                    placeholder={item.label}
+                                    register={register}
+                                    errors={errors}
+                                    description={item.description}
+                                    validate={{
+                                        maxLength: {
+                                            value: 255,
+                                            message: "min length is 255"
+                                        }
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </main>
+            </form>
+        </Layout>
     )
 };
 

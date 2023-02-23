@@ -3,15 +3,14 @@
 namespace ACPT_Lite\Core\Repository;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\CustomPostTypeTemplateModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldOptionModel;
-use ACPT_Lite\Core\Models\MetaBoxFieldRelationshipModel;
-use ACPT_Lite\Core\Models\MetaBoxModel;
-use ACPT_Lite\Core\Models\TaxonomyModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldOptionModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
+use ACPT_Lite\Costants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\PostMetaSync;
 use ACPT_Lite\Utils\WPUtils;
@@ -34,17 +33,17 @@ class CustomPostTypeRepository
         return (int)$results[0]->count;
     }
 
-    /**
-     * Delete a custom post type
-     *
-     * @param $postType
-     * @param $mode
-     *
-     * @return string|null
-     * @throws \Exception
-     * @since    1.0.0
-     */
-    public static function delete($postType)
+	/**
+	 * Delete a custom post type
+	 *
+	 * @param $postType
+	 * @param bool $deletePosts
+	 *
+	 * @return string|null
+	 * @throws \Exception
+	 * @since    1.0.0
+	 */
+    public static function delete($postType, $deletePosts = false)
     {
         if($postType === 'post' or $postType === 'page'){
             throw new \Exception('You cannot delete page or post CPT.');
@@ -65,14 +64,16 @@ class CustomPostTypeRepository
                         WHERE id = %s
                     ";
 
-                self::deleteMeta($postType);
+	            MetaRepository::deleteAll([
+		            'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
+		            'find' => $postType,
+	            ]);
                 TaxonomyRepository::deleteAssociations($postModel->getId());
 
                 if($postModel->isWooCommerce()){
                     WooCommerceProductDataRepository::clear();
                 }
 
-                self::removeOrphanRelationships();
                 ACPT_Lite_DB::executeQueryOrThrowException($sql, [$postModel->getId()]);
                 ACPT_Lite_DB::commitTransaction();
             } catch (\Exception $exception){
@@ -80,132 +81,14 @@ class CustomPostTypeRepository
                 throw new \Exception($exception->getMessage());
             }
 
-            // Delete post type data
-            $deletePostType = SettingsRepository::getSingle('delete_posts');
-
-            if($deletePostType !== null and $deletePostType->getValue() == 1){
-                self::deletePostType($postType);
-            }
+	        if($deletePosts){
+		        self::deletePostType($postType);
+	        }
 
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Delete all meta for a custom post type
-     *
-     * @param $postType
-     *
-     * @return string|null
-     * @throws \Exception
-     * @since    1.0.0
-     */
-    public static function deleteMeta($postType)
-    {
-        if(self::exists($postType)) {
-
-            $meta = CustomPostTypeRepository::getMeta($postType);
-
-            ACPT_Lite_DB::startTransaction();
-
-            foreach ($meta as $metaBoxModel){
-                self::deleteMetaBox($metaBoxModel);
-            }
-
-            ACPT_Lite_DB::commitTransaction();
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $postType
-     * @param $id
-     * @return bool
-     * @throws \Exception
-     */
-    public static function deleteMetaById($postType, $id)
-    {
-        if(self::exists($postType) and null !== $metaBoxModel = self::getMetaBox($id)) {
-            self::deleteMetaBox($metaBoxModel);
-        }
-
-        return false;
-    }
-
-    /**
-     * Delete a meta box
-     *
-     * @param MetaBoxModel $metaBoxModel
-     * @throws \Exception
-     */
-    private static function deleteMetaBox(MetaBoxModel $metaBoxModel)
-    {
-        ACPT_Lite_DB::startTransaction();
-
-        $sql = "
-                    DELETE
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
-                        WHERE id = %s
-                    ";
-
-        try {
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$metaBoxModel->getId()]);
-        } catch (\Exception $exception){
-            ACPT_Lite_DB::rollbackTransaction();
-            throw new \Exception($exception->getMessage());
-        }
-
-        foreach ($metaBoxModel->getFields() as $fieldModel){
-            $sql = "
-                    DELETE
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-                        WHERE id = %s
-                    ";
-
-            try {
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [$fieldModel->getId()]);
-            } catch (\Exception $exception){
-                ACPT_Lite_DB::rollbackTransaction();
-                throw new \Exception($exception->getMessage());
-            }
-
-            foreach ($fieldModel->getOptions() as $optionModel){
-                $sql = "
-                        DELETE
-                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
-                            WHERE id = %s
-                        ";
-
-                try {
-                    ACPT_Lite_DB::executeQueryOrThrowException($sql, [$optionModel->getId()]);
-                } catch (\Exception $exception){
-                    ACPT_Lite_DB::rollbackTransaction();
-                    throw new \Exception($exception->getMessage());
-                }
-            }
-
-            foreach ($fieldModel->getRelations() as $relationModel){
-                $sql = "
-                        DELETE
-                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                            WHERE id = %s
-                        ";
-
-                try {
-                    ACPT_Lite_DB::executeQueryOrThrowException($sql, [$relationModel->getId()]);
-                } catch (\Exception $exception){
-                    ACPT_Lite_DB::rollbackTransaction();
-                    throw new \Exception($exception->getMessage());
-                }
-            }
-        }
-
-        ACPT_Lite_DB::commitTransaction();
     }
 
     /**
@@ -310,7 +193,7 @@ class CustomPostTypeRepository
             ;", [$post->name]);
 
                 foreach ($boxes as $boxIndex => $box){
-                    $boxModel = MetaBoxModel::hydrateFromArray([
+                    $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray([
                             'id' => $box->id,
                             'postType' => $postModel->getName(),
                             'name' => $box->name,
@@ -341,7 +224,7 @@ class CustomPostTypeRepository
                     $fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
 
                     foreach ($fields as $fieldIndex => $field){
-                        $fieldModel = MetaBoxFieldModel::hydrateFromArray([
+                        $fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
                                 'id' => $field->id,
                                 'metaBox' => $boxModel,
                                 'title' => $field->name,
@@ -376,43 +259,6 @@ class CustomPostTypeRepository
                             ]);
 
                             $fieldModel->addOption($optionModel);
-                        }
-
-                        $relations = ACPT_Lite_DB::getResults("
-                            SELECT
-                                id,
-                                meta_box_id as boxId,
-                                meta_field_id as fieldId,
-                                relationship as type,
-                                related_post_type,
-                                inversed_meta_box_id as inversedBoxId,
-                                inversed_meta_box_name as inversedBoxName,
-                                inversed_meta_field_id as inversedFieldId,
-                                inversed_meta_field_name as inversedFieldName
-                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."`
-                            WHERE meta_field_id = %s
-                        ;", [$field->id]);
-
-                        foreach ($relations as $relation){
-                            $relatedCustomPostType = self::get([
-                                    'postType' => $relation->related_post_type
-                            ], true)[0];
-
-                            $relationModel = MetaBoxFieldRelationshipModel::hydrateFromArray([
-                                    'id' => $relation->id,
-                                    'relationship' => $relation->type,
-                                    'relatedCustomPostType' => $relatedCustomPostType,
-                                    'metaBoxField' => $fieldModel,
-                            ]);
-
-                            if(isset($relation->inversedFieldId) and null !== $relation->inversedFieldId){
-                                $inversedBy = self::getMetaField($relation->inversedFieldId);
-                                if(null !== $inversedBy){
-                                    $relationModel->setInversedBy($inversedBy);
-                                }
-                            }
-
-                            $fieldModel->addRelation($relationModel);
                         }
 
                         $boxModel->addField($fieldModel);
@@ -525,29 +371,6 @@ class CustomPostTypeRepository
                 }
             }
 
-            if($postModel->getName() === 'post'){
-                $themeFiles = ['single.php', 'acpt/single.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsSinglePageInTheme($existsInTheme != '');
-
-                $themeFiles = ['category.php', 'acpt/category.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsArchivePageInTheme($existsInTheme != '');
-
-            } elseif ($postModel->getName() === 'page') {
-                $themeFiles = ['page.php', 'acpt/page.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsSinglePageInTheme($existsInTheme != '');
-            } else {
-                $themeFiles = ['single-'.$postModel->getName().'.php', 'acpt/single-'.$postModel->getName().'.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsSinglePageInTheme($existsInTheme != '');
-
-                $themeFiles = ['archive-'.$postModel->getName().'.php', 'acpt/archive-'.$postModel->getName().'.php'];
-                $existsInTheme = WPUtils::locateTemplate($themeFiles, false);
-                $postModel->setExistsArchivePageInTheme($existsInTheme != '');
-            }
-
             $results[] = $postModel;
         }
 
@@ -586,7 +409,7 @@ class CustomPostTypeRepository
      * @param $postType
      * @param array $options
      *
-     * @return MetaBoxModel[]
+     * @return CustomPostTypeMetaBoxModel[]
      * @throws \Exception
      */
     public static function getMeta($postType, array $options = [])
@@ -607,7 +430,7 @@ class CustomPostTypeRepository
      * @param $box
      * @param $field
      *
-     * @return MetaBoxFieldModel|null
+     * @return CustomPostTypeMetaBoxFieldModel|null
      * @throws \Exception
      */
     public static function getSingleMeta($postType, $box, $field)
@@ -630,7 +453,7 @@ class CustomPostTypeRepository
     /**
      * @param $id
      *
-     * @return MetaBoxModel
+     * @return CustomPostTypeMetaBoxModel
      * @throws \Exception
      */
     public static function getMetaBox($id)
@@ -646,7 +469,7 @@ class CustomPostTypeRepository
         ;", [$id]);
 
         foreach ($boxes as $boxIndex => $box) {
-            return MetaBoxModel::hydrateFromArray( [
+            return CustomPostTypeMetaBoxModel::hydrateFromArray( [
                     'id'       => $box->id,
                     'postType' => $box->post_type,
                     'name'     => $box->name,
@@ -658,7 +481,7 @@ class CustomPostTypeRepository
     /**
      * @param $id
      *
-     * @return MetaBoxFieldModel
+     * @return CustomPostTypeMetaBoxFieldModel
      * @throws \Exception
      */
     public static function getMetaField($id)
@@ -681,7 +504,7 @@ class CustomPostTypeRepository
         $fields = ACPT_Lite_DB::getResults($sql, [$id]);
 
         foreach ($fields as $fieldIndex => $field) {
-            return MetaBoxFieldModel::hydrateFromArray( [
+            return CustomPostTypeMetaBoxFieldModel::hydrateFromArray( [
                     'id'            => $field->id,
                     'metaBox'       => CustomPostTypeRepository::getMetaBox($field->meta_box_id),
                     'title'         => $field->name,
@@ -762,12 +585,12 @@ class CustomPostTypeRepository
     /**
      * Save meta box
      *
-     * @param MetaBoxModel $metaBoxModel
+     * @param CustomPostTypeMetaBoxModel $metaBoxModel
      * @param              $ids
      *
      * @throws \Exception
      */
-    public static function saveMetaBox(MetaBoxModel $metaBoxModel, &$ids)
+    public static function saveMetaBox( CustomPostTypeMetaBoxModel $metaBoxModel, &$ids)
     {
         ACPT_Lite_DB::startTransaction();
 
@@ -815,11 +638,11 @@ class CustomPostTypeRepository
     }
 
     /**
-     * @param MetaBoxFieldModel $fieldModel
+     * @param CustomPostTypeMetaBoxFieldModel $fieldModel
      *
      * @throws \Exception
      */
-    public static function saveMetaField(MetaBoxFieldModel $fieldModel)
+    public static function saveMetaField(CustomPostTypeMetaBoxFieldModel $fieldModel)
     {
         $showInArchive = $fieldModel->isShowInArchive() ? '1' : '0';
         $isRequired = $fieldModel->isRequired() ? '1' : '0';
@@ -919,72 +742,6 @@ class CustomPostTypeRepository
                     $optionModel->getValue(),
                     $optionModel->getSort()
             ]);
-        }
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public static function removeOrphanRelationships()
-    {
-        $query = "
-            SELECT f.`id`, r.`inversed_meta_field_id`, r.`relationship`
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION) . "` r ON r.meta_field_id = f.id
-            WHERE f.`field_type` = %s
-            AND r.`relationship` LIKE '%Bi'
-        ";
-
-        // set all orphan fields with a orphan relationship to TEXT
-        $results = ACPT_Lite_DB::getResults($query, [
-                MetaBoxFieldModel::POST_TYPE
-        ]);
-
-        if(count($results) > 0) {
-            foreach ( $results as $result ) {
-
-                $subquery = "
-                    SELECT f.id
-                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` f
-                    WHERE f.`id` = %s
-                ";
-
-                $subResults = ACPT_Lite_DB::getResults( $subquery, [$result->inversed_meta_field_id] );
-
-                if ( count( $subResults ) === 0 ) {
-                    $sql = "DELETE FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION) . "` WHERE meta_field_id = %s;";
-                    self::executeQueryOrThrowException( $sql, [
-                            $result->id
-                    ] );
-
-                    $sql = "UPDATE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` SET `field_type` = %s WHERE id = %s;";
-                    self::executeQueryOrThrowException( $sql, [
-                            MetaBoxFieldModel::TEXT_TYPE,
-                            $result->id
-                    ] );
-                }
-            }
-        }
-
-        // check if there are persisted relationship on a NON POST type field
-        $query = "
-            SELECT r.id
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION)."` r
-            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD) . "` f ON f.id = r.meta_field_id 
-            WHERE f.`field_type` != %s
-        ";
-
-        $results = ACPT_Lite_DB::getResults($query, [
-                MetaBoxFieldModel::POST_TYPE
-        ]);
-
-        if(count($results) > 0) {
-            foreach ( $results as $result ) {
-                $sql = "DELETE FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION) . "` WHERE id = %s;";
-                self::executeQueryOrThrowException( $sql, [
-                        $result->id
-                ] );
-            }
         }
     }
 

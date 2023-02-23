@@ -2,13 +2,13 @@
 
 namespace ACPT_Lite\Core\Generators\Elementor\Widgets;
 
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
 
 class WidgetGenerator extends \Elementor\Widget_Base
 {
     /**
-     * @var MetaBoxFieldModel
+     * @var CustomPostTypeMetaBoxFieldModel
      */
     private $boxFieldModel;
 
@@ -57,14 +57,14 @@ class WidgetGenerator extends \Elementor\Widget_Base
 
         switch ($this->boxFieldModel->getType()){
 
-            case MetaBoxFieldModel::EMAIL_TYPE:
+            case CustomPostTypeMetaBoxFieldModel::EMAIL_TYPE:
                 return 'eicon-mail';
 
-            case MetaBoxFieldModel::SELECT_TYPE:
+            case CustomPostTypeMetaBoxFieldModel::SELECT_TYPE:
                 return 'eicon-select';
 
             default:
-            case MetaBoxFieldModel::TEXT_TYPE:
+            case CustomPostTypeMetaBoxFieldModel::TEXT_TYPE:
                 return 'eicon-t-letter';
         }
     }

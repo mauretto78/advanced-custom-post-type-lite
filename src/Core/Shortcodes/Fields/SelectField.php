@@ -6,6 +6,6 @@ class SelectField extends AbstractField
 {
     public function render()
     {
-        return get_post_meta($this->pid, $this->key, true);
+	    return $this->fetchMeta($this->getKey());
     }
 }

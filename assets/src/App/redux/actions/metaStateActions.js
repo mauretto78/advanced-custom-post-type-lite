@@ -1,14 +1,12 @@
 export const CREATE_BOX = 'CREATE_BOX';
 export const CREATE_FIELD = 'CREATE_FIELD';
 export const CREATE_OPTION = 'CREATE_OPTION';
-export const CREATE_RELATION = 'CREATE_RELATION';
 export const DELETE_ALL_FAILURE = 'DELETE_ALL_FAILURE';
 export const DELETE_ALL_IN_PROGRESS = 'DELETE_ALL_IN_PROGRESS';
 export const DELETE_ALL_SUCCESS = 'DELETE_ALL_SUCCESS';
 export const DELETE_BOX = 'DELETE_BOX';
 export const DELETE_FIELD = 'DELETE_FIELD';
 export const DELETE_OPTION = 'DELETE_OPTION';
-export const DELETE_RELATION = 'DELETE_RELATION';
 export const HYDRATE_VALUES = 'HYDRATE_VALUES';
 export const SET_BOXES = 'SET_BOXES';
 export const SET_FIELDS = 'SET_FIELDS';
@@ -28,24 +26,23 @@ export const UPDATE_FIELD_DESCRIPTION = 'UPDATE_FIELD_DESCRIPTION';
 export const UPDATE_FIELD_TYPE = 'UPDATE_FIELD_TYPE';
 export const UPDATE_OPTION_LABEL = 'UPDATE_OPTION_LABEL';
 export const UPDATE_OPTION_VALUE = 'UPDATE_OPTION_VALUE';
-export const UPDATE_RELATION_POST = 'UPDATE_RELATION_POST';
-export const UPDATE_RELATION_TYPE = 'UPDATE_RELATION_TYPE';
-export const UPDATE_RELATION_INVERSED_FIELD = 'UPDATE_RELATION_INVERSED_FIELD';
 
-export const createBox = (postType) => {
+export const createBox = (belongsTo, find) => {
     return {
         type: CREATE_BOX,
         payload: {
-            postType: postType
+            belongsTo: belongsTo,
+            find: find,
         },
     };
 };
 
-export const createField = (boxId) => {
+export const createField = (boxId, parentId) => {
     return {
         type: CREATE_FIELD,
         payload: {
-            boxId: boxId
+            boxId: boxId,
+            parentId: parentId
         },
     };
 };
@@ -53,16 +50,6 @@ export const createField = (boxId) => {
 export const createOption = (boxId, fieldId) => {
     return {
         type: CREATE_OPTION,
-        payload: {
-            boxId: boxId,
-            fieldId: fieldId
-        },
-    };
-};
-
-export const createRelation = (boxId, fieldId) => {
-    return {
-        type: CREATE_RELATION,
         payload: {
             boxId: boxId,
             fieldId: fieldId
@@ -113,17 +100,6 @@ export const deleteField = (boxId, fieldId) => {
 export const deleteOption = (boxId, fieldId, id) => {
     return {
         type: DELETE_OPTION,
-        payload: {
-            id: id,
-            boxId: boxId,
-            fieldId: fieldId,
-        },
-    };
-};
-
-export const deleteRelation = (boxId, fieldId, id) => {
-    return {
-        type: DELETE_RELATION,
         payload: {
             id: id,
             boxId: boxId,
@@ -306,45 +282,6 @@ export const updateOptionValue = (id, boxId, fieldId, value) => {
             boxId: boxId,
             fieldId: fieldId,
             value: value,
-        },
-    };
-};
-
-export const updateRelationPost = (id, boxId, fieldId, relatedPostType) => {
-    return {
-        type: UPDATE_RELATION_POST,
-        payload: {
-            id: id,
-            boxId: boxId,
-            fieldId: fieldId,
-            relatedPostType: relatedPostType,
-        },
-    };
-};
-
-export const updateRelationType = (id, boxId, fieldId, type) => {
-    return {
-        type: UPDATE_RELATION_TYPE,
-        payload: {
-            id: id,
-            boxId: boxId,
-            fieldId: fieldId,
-            type: type,
-        },
-    };
-};
-
-export const updateRelationInversedField = (id, boxId, fieldId, inversedBoxId, inversedBoxName, inversedFieldName, inversedFieldId) => {
-    return {
-        type: UPDATE_RELATION_INVERSED_FIELD,
-        payload: {
-            id: id,
-            boxId: boxId,
-            fieldId: fieldId,
-            inversedBoxId: inversedBoxId,
-            inversedBoxName: inversedBoxName,
-            inversedFieldName: inversedFieldName,
-            inversedFieldId: inversedFieldId,
         },
     };
 };

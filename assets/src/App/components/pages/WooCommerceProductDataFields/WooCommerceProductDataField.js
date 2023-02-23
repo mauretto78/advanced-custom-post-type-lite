@@ -231,7 +231,7 @@ const WooCommerceProductDataField = ({id, postDataId, position, dragHandle}) => 
                     </React.Fragment>
                     }
                     {(type === SELECT || type === CHECKBOX || type === RADIO ) && (
-                        <div className="acpt-meta-options">
+                        <div className="acpt-meta-options mt-3">
                             {optionBlocks && optionBlocks.length > 0
                                 ? (
                                     <React.Fragment>

@@ -3,9 +3,9 @@ import metaFields from "../../data/metaFields";
 import ShortcodeIcon from "./ShortcodeIcon";
 import {isEmpty} from "../../../App/utils/objects";
 
-const { SelectControl } = wp.components;
-
 const ShortcodeBlock = ({props, updateType}) => {
+
+    const { SelectControl } = wp.components;
 
     return (
         <div className="acpt-block">

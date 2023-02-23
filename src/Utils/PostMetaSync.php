@@ -3,17 +3,20 @@
 namespace ACPT_Lite\Utils;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\MetaBoxFieldModel;
-use ACPT_Lite\Core\Models\MetaBoxModel;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class PostMetaSync
 {
     /**
-     * @param MetaBoxModel $metaBoxModel
+     * @param AbstractMetaBoxModel $metaBoxModel
+     *
      * @throws \Exception
      */
-    public static function updatePostMetaWhenBoxNameChanges(MetaBoxModel $metaBoxModel)
+    public static function updatePostMetaWhenBoxNameChanges( AbstractMetaBoxModel $metaBoxModel)
     {
         // check if box already exists
         $query = "SELECT * FROM 
@@ -47,10 +50,11 @@ class PostMetaSync
     }
 
     /**
-     * @param MetaBoxFieldModel $fieldModel
+     * @param AbstractMetaBoxFieldModel $fieldModel
+     *
      * @throws \Exception
      */
-    public static function updatePostMetaWhenFieldNameChanges(MetaBoxFieldModel $fieldModel)
+    public static function updatePostMetaWhenFieldNameChanges( AbstractMetaBoxFieldModel $fieldModel)
     {
         // check if field already exists
         $query = "SELECT * FROM 

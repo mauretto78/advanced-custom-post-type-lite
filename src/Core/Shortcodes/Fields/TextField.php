@@ -6,6 +6,6 @@ class TextField extends AbstractField
 {
     public function render()
     {
-        return get_post_meta($this->pid, $this->key, true);
+	    return do_shortcode($this->fetchMeta($this->getKey()));
     }
 }

@@ -5,6 +5,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
     mode: 'production', //development production
     entry: {
@@ -12,7 +14,7 @@ module.exports = {
         "block.min":"./assets/src/Gutemberg/index.js",
         "theme.min":"./assets/src/theme/index.js",
     },
-    devtool: "source-map", //source-map for prod build files ---  //eval for dev
+    devtool: isProduction ? 'source-map' : 'eval',
     output: {
         path: path.join(__dirname, './assets/build'),
         filename: '[name].js'

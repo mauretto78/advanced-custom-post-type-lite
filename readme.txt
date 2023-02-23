@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.13
+Stable tag: 1.0.14
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,6 +22,7 @@ Main features:
 * Register and manage new custom post types in seconds. Take the total control and become a Master of your CPTs.
 * Register, manage and associate custom new taxonimies in just 3 clicks.
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
+* Taxonomy meta fields manager (choose between 3 field types)
 * User meta fields manager (choose between 3 field types)
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 * Elementor custom widget: manage ACPT meta fields in the Elementor editor
@@ -49,7 +50,7 @@ Please refer to main [ACPT](https://acpt.io) website.
 1. Custom post types list
 2. Register new Custom post type
 3. Register new Taxonomy
-4. Manage CPT meta boxes
+4. Manage meta boxes
 5. Meta boxes in action in the post editor
 6. Settings panel
 
@@ -129,10 +130,17 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 = 1.0.13 (2022-08-30) =
 
-* fix deactivation bug (class not found)
-* save element is closed or not in LC
-* sync metadata on change ACPT definitions
+* Fix deactivation bug (class not found)
+* Save element is closed or not in LC
+* Sync metadata on change ACPT definitions
 * Fixed category import
 * Import custom taxonomies
 * UI/UX improvements
-* removed external reference to iconify
+* Removed external reference to iconify library
+
+= 1.0.14 (2023-02-24) =
+
+* Renaming DB tables
+* Completely new UI (from PRO version)
+* Taxonomy meta
+* Backend fixes and improvements (from PRO version)

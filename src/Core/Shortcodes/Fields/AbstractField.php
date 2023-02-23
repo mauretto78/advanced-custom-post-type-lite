@@ -3,78 +3,79 @@
 namespace ACPT_Lite\Core\Shortcodes\Fields;
 
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
+use ACPT_Lite\Core\Repository\MetaRepository;
+use ACPT_Lite\Core\Shortcodes\DTO\ShortcodePayload;
+use ACPT_Lite\Costants\MetaTypes;
 
 abstract class AbstractField
 {
-    /**
-     * @var int
-     */
-    protected $pid;
+	/**
+	 * @var ShortcodePayload
+	 */
+	protected $payload;
 
-    /**
-     * @var string
-     */
-    protected $box;
+	/**
+	 * @var AbstractMetaBoxFieldModel|null
+	 */
+	private $metaBoxFieldModel;
 
-    /**
-     * @var string
-     */
-    protected $field;
+	/**
+	 * AbstractField constructor.
+	 * @param ShortcodePayload $payload
+	 * @throws \Exception
+	 */
+	public function __construct(ShortcodePayload $payload)
+	{
+		$this->payload = $payload;
 
-    /**
-     * @var ?string
-     */
-    protected $width;
+		$this->metaBoxFieldModel = MetaRepository::getMetaFieldByName([
+			'belongsTo' => $payload->belongsTo,
+			'find' => ($payload->find !== null) ? $payload->find : null,
+			'boxName' => $this->payload->box,
+			'fieldName' => $this->payload->field,
+		]);
+	}
 
-    /**
-     * @var ?string
-     */
-    protected $height;
+	/**
+	 * @return string
+	 */
+	protected function getKey()
+	{
+		return Strings::toDBFormat($this->payload->box).'_'.Strings::toDBFormat($this->payload->field);
+	}
 
-    /**
-     * @var ?string
-     */
-    protected $target;
+	/**
+	 * @param $key
+	 * @param bool $single
+	 *
+	 * @return array|string|null
+	 */
+	protected function fetchMeta($key, $single = true)
+	{
+		$fetched = null;
 
-    /**
-     * @var ?string
-     */
-    protected $dateFormat;
+		switch ($this->payload->belongsTo){
+			case MetaTypes::CUSTOM_POST_TYPE:
+				$fetched = get_post_meta($this->payload->id, $key, $single);
+				break;
 
-    /**
-     * @var ?int
-     */
-    protected $elements;
+			case MetaTypes::TAXONOMY:
+				$fetched = get_term_meta($this->payload->id, $key, $single);
+				break;
 
-    /**
-     * @var string
-     */
-    protected $key;
+			case MetaTypes::USER:
+				$fetched = get_user_meta($this->payload->id, $key, $single);
+				break;
+		}
 
-    /**
-     * AbstractField constructor.
-     *
-     * @param        $pid
-     * @param        $box
-     * @param        $field
-     * @param null   $width
-     * @param null   $height
-     * @param null   $target
-     * @param null   $dateFormat
-     * @param null   $elements
-     */
-    public function __construct($pid, $box, $field, $width = null, $height = null, $target = null, $dateFormat = null, $elements = null)
-    {
-        $this->pid = $pid;
-        $this->box = $box;
-        $this->field = $field;
-        $this->width = $width;
-        $this->height = $height;
-        $this->target = $target;
-        $this->dateFormat = $dateFormat;
-        $this->elements = $elements;
-        $this->key = Strings::toDBFormat($box).'_'.Strings::toDBFormat($field);
-    }
+		return $fetched;
+	}
 
-    abstract public function render();
+	/**
+	 * Method for rendering the shortcode
+	 *
+	 * @return mixed
+	 */
+	abstract public function render();
 }

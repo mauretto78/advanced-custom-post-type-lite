@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from 'react';
-import Breadcrumbs from "../../reusable/Breadcrumbs";
+import Breadcrumbs from "../../reusable/Layout/Breadcrumbs";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 import {metaTitle} from "../../../utils/misc";
 import {deleteTaxonomy} from "../../../redux/thunks/deleteTaxonomy";
-import {Icon} from "@iconify/react";
-import Copyright from "../../reusable/Copyright";
+import Layout from "../../reusable/Layout";
+import ActionsBar from "../../reusable/Layout/ActionsBar";
 
 const DeleteTaxonomy = () => {
 
@@ -50,42 +50,42 @@ const DeleteTaxonomy = () => {
         }
     }, [loading]);
 
+    const buttons = (
+        <React.Fragment>
+            <a className="acpt-btn acpt-btn-danger" onClick={ e => handleDeleteTaxonomy(taxonomy) }>
+                Yes, Delete it
+            </a>
+            <Link
+                to="/taxonomies"
+                className="acpt-btn acpt-btn-primary-o">
+                Return back to list
+            </Link>
+        </React.Fragment>
+    );
+
     return (
-        <div>
-            <Breadcrumbs crumbs={[
-                {
-                    label: "Registered Custom Post Types",
-                    link: "/"
-                },
-                {
-                    label: "Registered Taxonomies",
-                    link: "/taxonomies"
-                },
-                {
-                    label: 'Delete Taxonomy'
-                }
-            ]} />
-            <h1 className="acpt-title">
-                <Icon icon="bx:bx-trash" color="#02c39a" width="18px" />
-                &nbsp;
-                Delete {taxonomy}
-            </h1>
-            <p>You are going to delete <strong>{taxonomy} </strong> taxonomy. Are you sure?</p>
-            <div className="mb-3">
-                <a className="acpt-btn acpt-btn-danger" onClick={ e => handleDeleteTaxonomy(taxonomy) }>
-                    <Icon icon="bx:bx-trash" width="18px" />
-                    Yes, Delete it
-                </a>
-                &nbsp;
-                <Link
-                    to="/taxonomies"
-                    className="acpt-btn acpt-btn-primary-o prev">
-                    <Icon icon="bx:bx-purchase-tag" width="18px" />
-                    Return back to list
-                </Link>
-            </div>
-            <Copyright/>
-        </div>
+        <Layout>
+            <ActionsBar
+                title={`Delete ${taxonomy}`}
+                actions={buttons}
+            />
+            <main>
+                <Breadcrumbs crumbs={[
+                    {
+                        label: "Registered Custom Post Types",
+                        link: "/"
+                    },
+                    {
+                        label: "Registered Taxonomies",
+                        link: "/taxonomies"
+                    },
+                    {
+                        label: 'Delete Taxonomy'
+                    }
+                ]} />
+                <h3 className="acpt-alert acpt-alert-warning">You are going to delete <strong>{taxonomy} </strong> taxonomy. Are you sure?</h3>
+            </main>
+        </Layout>
     );
 };
 

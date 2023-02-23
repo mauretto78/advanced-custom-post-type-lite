@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {changeCurrentAdminMenuLink, metaTitle} from "../../../utils/misc";
-import Breadcrumbs from "../../reusable/Breadcrumbs";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import useUnsavedChangesWarning from "../../../hooks/useUnsavedChangesWarning";
@@ -12,9 +11,7 @@ import {resetTaxonomies} from "../../../redux/thunks/resetTaxonomies";
 import BasicStep from "./_Basic";
 import AdditionalLabelsStep from "./_Labels";
 import OtherSettingsStep from "./_Settings";
-import {Icon} from "@iconify/react";
 import {translate} from "../../../localization";
-import Copyright from "../../reusable/Copyright";
 import {startFromStep, stepReset} from "../../../redux/actions/stepsActions";
 import {hydrateTaxonomyFormFromStep} from "../../../utils/forms";
 
@@ -75,9 +72,9 @@ const SaveTaxonomy = () => {
     };
 
     const steps = [
-        <BasicStep edit={edit} />,
-        <AdditionalLabelsStep/>,
-        <OtherSettingsStep setPristineHandler={setPristineHandler}/>,
+        <BasicStep taxonomy={taxonomy} edit={edit} headings={saveCustomPostTypeHeadings} />,
+        <AdditionalLabelsStep taxonomy={taxonomy} headings={saveCustomPostTypeHeadings}/>,
+        <OtherSettingsStep taxonomy={taxonomy} setPristineHandler={setPristineHandler} headings={saveCustomPostTypeHeadings}/>,
     ];
 
     if(!fetchedSuccess){
@@ -85,31 +82,12 @@ const SaveTaxonomy = () => {
     }
 
     return (
-        <div>
-            <Breadcrumbs crumbs={[
-                {
-                    label: "Registered Custom Post Types",
-                    link: "/"
-                },
-                {
-                    label: "Registered Taxonomies",
-                    link: "/taxonomies"
-                },
-                {
-                    label: taxonomy ? "Edit Taxonomy" : "Create new Taxonomy"
-                }
-            ]} />
+        <React.Fragment>
             {Prompt}
-            <h1 className="acpt-title">
-                <Icon icon={taxonomy ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="18px" />
-                &nbsp;
-                {taxonomy ? "Edit Taxonomy" : "Create new Taxonomy" }
-            </h1>
-            <div className="acpt-card">
-                <Steps headings={saveCustomPostTypeHeadings} steps={steps}/>
-            </div>
-            <Copyright/>
-        </div>
+            <Steps
+                steps={steps}
+            />
+        </React.Fragment>
     );
 };
 

@@ -6,8 +6,12 @@ import InputText from "../../reusable/Form/InputText";
 import StepsButtons from "../../reusable/Steps/StepsButtons";
 import {taxonomyLabelsList} from "../../../constants/taxonomy_label";
 import {translate} from "../../../localization";
+import Layout from "../../reusable/Layout";
+import ActionsBar from "../../reusable/Layout/ActionsBar";
+import Breadcrumbs from "../../reusable/Layout/Breadcrumbs";
+import StepsHeader from "../../reusable/Steps/StepsHeader";
 
-const AdditionalLabelsStep = () => {
+const AdditionalLabelsStep = ({headings, taxonomy}) => {
 
     // manage global state
     const {data:stepsData, activeStep} = useSelector(state => state.stepsReducer);
@@ -57,27 +61,50 @@ const AdditionalLabelsStep = () => {
     };
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="acpt-card__inner">
-                {taxonomyLabelsList.map((item)=> (
-                    <InputText
-                        id={item.id}
-                        label={item.label}
-                        placeholder={item.label}
-                        register={register}
-                        errors={errors}
-                        description={item.description}
-                        validate={{
-                            maxLength: {
-                                value: 255,
-                                message: "min length is 255"
-                            }
-                        }}
-                    />
-                ))}
-            </div>
-            <StepsButtons isValid={isValid} next={3} prev={1} />
-        </form>
+        <Layout>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <ActionsBar
+                    title={taxonomy ? "Edit Taxonomy" : "Create new Taxonomy"}
+                    actions={<StepsButtons isValid={isValid} next={3} prev={1} />}
+                />
+                <main>
+                    <Breadcrumbs crumbs={[
+                        {
+                            label: "Registered Custom Post Types",
+                            link: "/"
+                        },
+                        {
+                            label: "Registered Taxonomies",
+                            link: "/taxonomies"
+                        },
+                        {
+                            label: taxonomy ? "Edit Taxonomy" : "Create new Taxonomy"
+                        }
+                    ]} />
+                </main>
+                <div className="acpt-card">
+                    <StepsHeader headings={headings}/>
+                    <div className="acpt-card__inner">
+                        {taxonomyLabelsList.map((item)=> (
+                            <InputText
+                                id={item.id}
+                                label={item.label}
+                                placeholder={item.label}
+                                register={register}
+                                errors={errors}
+                                description={item.description}
+                                validate={{
+                                    maxLength: {
+                                        value: 255,
+                                        message: "min length is 255"
+                                    }
+                                }}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </form>
+        </Layout>
     )
 };
 

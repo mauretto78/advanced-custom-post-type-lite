@@ -3,8 +3,8 @@
 namespace ACPT_Lite\Core\Generators;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\UserMetaBoxModel;
-use ACPT_Lite\Core\Models\UserMetaFieldModel;
+use ACPT_Lite\Core\Models\User\UserMetaBoxModel;
+use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Utils\Sanitizer;
 
 /**
@@ -87,7 +87,7 @@ class UserMetaBoxGenerator extends AbstractGenerator
 
                 foreach ($extras as $extra){
                     if(isset($_POST[$idName.'_'.$extra])){
-                        update_user_meta( $user_id, $idName.'_'.$extra, Sanitizer::sanitizeUserMetaFieldRawData(UserMetaFieldModel::TEXT_TYPE, $_POST[$idName.'_'.$extra] ) );
+                        update_user_meta( $user_id, $idName.'_'.$extra, Sanitizer::sanitizeUserMetaFieldRawData(UserMetaBoxFieldModel::TEXT_TYPE, $_POST[$idName.'_'.$extra] ) );
                     }
                 }
             }

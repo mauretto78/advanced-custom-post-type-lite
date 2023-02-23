@@ -1,9 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-const Accordion = ({children}) => {
+const Accordion = ({children, handleClick, defaultActiveTab = 0}) => {
 
     // manage local state
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState(defaultActiveTab);
+
+    const handleSetActiveTable = (index) => {
+        setActiveTab(index);
+
+        if(handleClick){
+            handleClick(index);
+        }
+    };
+
+    useEffect(()=>{
+        setActiveTab(defaultActiveTab);
+    },[defaultActiveTab]);
 
     return (
         <div className="acpt-accordion-wrapper">
@@ -14,7 +26,7 @@ const Accordion = ({children}) => {
                             <li
                                 className={`acpt-accordion-tab ${activeTab === index ? 'active' : ''}`}
                                 key={index}
-                                onClick={e => setActiveTab(index)}
+                                onClick={e => handleSetActiveTable(index)}
                             >
                                 {child.props.title ? child.props.title : `Tab ${index+1}`}
                             </li>

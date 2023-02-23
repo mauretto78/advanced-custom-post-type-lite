@@ -71,6 +71,7 @@
     flex-direction: row;
     align-content: space-between;
     border-radius: 3px;
+    background: #fff;
 }
 
 .acpt-admin-meta.sort-1 {
@@ -237,6 +238,96 @@
     font-size: 11px;
     border-radius: 4px;
     font-weight: bold;
+}
+
+/*========== TAXONOMY META BOXES ==========*/
+
+.taxonomy-meta-box-group {
+    background: #fff;
+    border-radius: 4px;
+}
+
+.taxonomy-meta-box-group img {
+    max-width: 100%;
+}
+
+.taxonomy-meta-box-group .image-preview {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px
+}
+
+.taxonomy-meta-box-group .image-preview .image img {
+    width: 200px;
+    height: 135px;
+    object-fit: cover;
+}
+
+.taxonomy-meta-box-group .btn-wrapper input {
+    margin-bottom: 10px;
+}
+
+.taxonomy-meta-box-group h3 {
+    padding: 10px;
+    border-bottom: 1px solid #c3c4c7;
+    margin: 0;
+}
+
+.taxonomy-meta-box-group .upload-gallery-btn,
+.taxonomy-meta-box-group .upload-image-btn {
+    margin-right: 5px;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields {
+    padding: 15px 15px 5px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px !important;
+    margin-bottom: 10px !important;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .taxonomy-meta-field-icon{
+    height: 30px;
+    width: 30px;
+    display: flex;
+    text-align: center;
+    background: #02c39a;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .taxonomy-meta-field-icon svg {
+    fill: #fff;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .form-field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .form-field label {
+    font-weight: bold;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .form-field.top {
+    flex-direction: column;
+}
+
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .form-field.top label,
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .form-field.top input,
+.taxonomy-meta-box-group .taxonomy-meta-fields .taxonomy-meta-field .form-field.top select {
+    width: 100%;
 }
 
 /*========== CODEMIRROR ==========*/
@@ -480,4 +571,15 @@ input[type="checkbox"].wppd-ui-toggle:checked:after {
 .wc-radios label {
     float: none !important;
     margin-left: 0px !important;
+}
+
+/*========== SELECTIZE ==========*/
+
+.selectize-dropdown .selected {
+    background-color: #007cba;
+}
+
+.selectize-item,
+.selectize-dropdown  {
+    padding: 5px;
 }

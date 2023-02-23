@@ -3,10 +3,8 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {stepsReducer} from "./reducers/stepsReducer";
 import {metaStateReducer} from "./reducers/metaStateReducer";
-import {userMetaStateReducer} from "./reducers/userMetaStateReducer";
 import {fetchMetaReducer} from "./reducers/fetchMetaReducer";
 import {fetchPostTypesReducer} from "./reducers/fetchCustomPostTypesReducer";
-import {fetchUserMetaReducer} from "./reducers/fetchUserMetaReducer";
 import {deleteCustomPostTypeReducer} from "./reducers/deleteCustomPostTypeReducer";
 import {fetchPostTypesCountReducer} from "./reducers/fetchCustomPostTypesCountReducer";
 import {fetchSettingsReducer} from "./reducers/fetchSettingsReducer";
@@ -15,6 +13,7 @@ import {importFileReducer} from "./reducers/importFileReducer";
 import {exportFileReducer} from "./reducers/exportFileReducer";
 import {fetchTaxonomiesReducer} from "./reducers/fetchTaxonomiesReducer";
 import {fetchTaxonomiesCountReducer} from "./reducers/fetchTaxonomiesCountReducer";
+import {assocPostToTaxonomyReducer} from "./reducers/assocPostToTaxonomyReducer";
 import {assocTaxonomyToPostReducer} from "./reducers/assocTaxonomyToPostReducer";
 import {deleteTaxonomyReducer} from "./reducers/deleteTaxonomyReducer";
 import {fetchPostsReducer} from "./reducers/fetchPostsReducer";
@@ -35,6 +34,7 @@ import {WooCommerceFieldsStateReducer} from "./reducers/WooCommerceFieldsStateRe
 import {sluggifyReducer} from "./reducers/sluggifyReducer";
 
 const reducers = {
+    assocPostToTaxonomyReducer,
     assocTaxonomyToPostReducer,
     deleteCustomPostTypeReducer,
     deletePostTypeTemplateReducer,
@@ -54,7 +54,6 @@ const reducers = {
     fetchSidebarsReducer,
     fetchTaxonomiesCountReducer,
     fetchTaxonomiesReducer,
-    fetchUserMetaReducer,
     fetchWooCommerceProductDataFieldsReducer,
     fetchWooCommerceProductDataReducer,
     importFileReducer,
@@ -65,7 +64,6 @@ const reducers = {
     sluggifyReducer,
     stepsReducer,
     syncPostsReducer,
-    userMetaStateReducer,
     WooCommerceFieldsStateReducer
 };
 

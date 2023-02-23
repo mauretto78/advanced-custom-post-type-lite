@@ -3,16 +3,20 @@
 namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Generators\CustomPostTypeGenerator;
-use ACPT_Lite\Core\Generators\MetaBoxGenerator;
+use ACPT_Lite\Core\Generators\CustomPostTypeMetaBoxGenerator;
+use ACPT_Lite\Core\Generators\TaxonomyMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\UserMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\MetaBoxModel;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
+use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
-use ACPT_Lite\Core\Repository\UserMetaRepository;
+use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\TaxonomyMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\UserMetaShortcode;
+use ACPT_Lite\Costants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_Elementor_Initiator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 
@@ -78,7 +82,7 @@ class ACPT_Lite_Admin
     private function setStaticCssAssets()
     {
         $this->staticCssAssets = [
-            'admin_select2_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/select2/select2.min.css',
+	        'admin_selectize_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/selectize/selectize.default.min.css',
             'admin_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/css/admin.css',
             'block_css' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/block.min.css',
         ];
@@ -90,10 +94,10 @@ class ACPT_Lite_Admin
     private function setStaticJsAssets()
     {
         $this->staticJsAssets = [
-            'admin_select2_js' => [
-                'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/select2/select2.min.js',
-                'dep'  => ['jquery'],
-            ],
+	        'admin_selectize_js' => [
+		        'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/selectize/selectize.min.js',
+		        'dep'  => ['jquery'],
+	        ],
             'admin_google_maps_js' => [
                 'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/google-maps.js',
                 'dep'  => ['jquery'],
@@ -115,18 +119,18 @@ class ACPT_Lite_Admin
     private function setAjaxActions()
     {
         $this->ajaxActions = [
+            'wp_ajax_assocPostTypeToTaxonomyAction' => 'assocPostTypeToTaxonomyAction',
             'wp_ajax_assocTaxonomyToPostTypeAction' => 'assocTaxonomyToPostTypeAction',
             'wp_ajax_checkPostTypeNameAction' => 'checkPostTypeNameAction',
             'wp_ajax_checkTaxonomySlugAction' => 'checkTaxonomySlugAction',
             'wp_ajax_deleteCustomPostTypeAction' => 'deleteCustomPostTypeAction',
-            'wp_ajax_deleteCustomPostTypeMetaAction' => 'deleteCustomPostTypeMetaAction',
+            'wp_ajax_deleteMetaAction' => 'deleteMetaAction',
             'wp_ajax_deleteTaxonomyAction' => 'deleteTaxonomyAction',
             'wp_ajax_deleteWooCommerceProductDataAction' => 'deleteWooCommerceProductDataAction',
             'wp_ajax_deleteWooCommerceProductDataFieldsAction' => 'deleteWooCommerceProductDataFieldsAction',
-            'wp_ajax_deleteUserMetaAction' => 'deleteUserMetaAction',
             'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
             'wp_ajax_exportFileAction' => 'exportFileAction',
-            'wp_ajax_fetchCustomPostTypeMetaAction' => 'fetchCustomPostTypeMetaAction',
+            'wp_ajax_fetchMetaAction' => 'fetchMetaAction',
             'wp_ajax_fetchCustomPostTypesAction' => 'fetchCustomPostTypesAction',
             'wp_ajax_fetchCustomPostTypesCountAction' => 'fetchCustomPostTypesCountAction',
             'wp_ajax_fetchMetaFieldRelationshipAction' => 'fetchMetaFieldRelationshipAction',
@@ -139,13 +143,12 @@ class ACPT_Lite_Admin
             'wp_ajax_fetchTaxonomiesCountAction' => 'fetchTaxonomiesCountAction',
             'wp_ajax_fetchWooCommerceProductDataAction' => 'fetchWooCommerceProductDataAction',
             'wp_ajax_fetchWooCommerceProductDataFieldsAction' => 'fetchWooCommerceProductDataFieldsAction',
-            'wp_ajax_fetchUserMetaAction' => 'fetchUserMetaAction',
             'wp_ajax_importFileAction' => 'importFileAction',
             'wp_ajax_resetCustomPostTypesAction' => 'resetCustomPostTypesAction',
             'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',
             'wp_ajax_resetWooCommerceProductDataAction' => 'resetWooCommerceProductDataAction',
             'wp_ajax_saveCustomPostTypeAction' => 'saveCustomPostTypeAction',
-            'wp_ajax_saveCustomPostTypeMetaAction' => 'saveCustomPostTypeMetaAction',
+            'wp_ajax_saveMetaAction' => 'saveMetaAction',
             'wp_ajax_saveSettingsAction' => 'saveSettingsAction',
             'wp_ajax_saveTaxonomyAction' => 'saveTaxonomyAction',
             'wp_ajax_saveWooCommerceProductDataAction' => 'saveWooCommerceProductDataAction',
@@ -198,8 +201,8 @@ class ACPT_Lite_Admin
             ],
             [
                     'parentSlug' => ACPT_LITE_PLUGIN_NAME,
-                    'pageTitle' => translate('Registered taxonomies', ACPT_LITE_PLUGIN_NAME),
-                    'menuTitle' => translate('Registered taxonomies', ACPT_LITE_PLUGIN_NAME),
+                    'pageTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
+                    'menuTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
                     'capability' => 'manage_options',
                     'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/taxonomies',
                     'template' => 'app',
@@ -343,7 +346,13 @@ class ACPT_Lite_Admin
         }
 
         // Assets for create/edit post
-        if($pagenow === 'post-new.php' or $pagenow === 'post.php' or $pagenow === 'profile.php' or $pagenow === 'user-edit.php') {
+        if($pagenow === 'post-new.php' or
+           $pagenow === 'post.php' or
+           $pagenow === 'profile.php' or
+           $pagenow === 'user-edit.php' or
+           $pagenow === 'edit-tags.php' or
+           $pagenow === 'term.php'
+        ) {
 
             // other static assets here
             foreach ($this->staticCssAssets as $key => $asset){
@@ -353,6 +362,19 @@ class ACPT_Lite_Admin
             foreach ($this->staticJsAssets as $key => $asset){
                 wp_enqueue_script( dirname( __FILE__ ).'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_LITE_PLUGIN_VERSION, true);
             }
+
+	        //
+	        // =================================
+	        // WP DEFAULT UTILITIES
+	        // =================================
+	        //
+
+	        // color picker
+	        wp_enqueue_style( 'wp-color-picker' );
+	        wp_enqueue_script( 'my-script-handle', plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/wp-color-picker.js', ['wp-color-picker'], false, true );
+
+	        // media
+	        wp_enqueue_media();
 
             //
             // =================================
@@ -420,6 +442,7 @@ class ACPT_Lite_Admin
     private function addShortcodes()
     {
         add_shortcode('acpt', [new PostMetaShortcode(), 'render']);
+        add_shortcode('acpt_tax', [new TaxonomyMetaShortcode(), 'render']);
         add_shortcode('acpt_user', [new UserMetaShortcode(), 'render']);
     }
 
@@ -428,47 +451,41 @@ class ACPT_Lite_Admin
      */
     private function registerCustomPostTypesAndTaxonomies()
     {
-        $metaBoxGenerator = new MetaBoxGenerator();
+	    $customPostTypeMetaBoxGenerator = new CustomPostTypeMetaBoxGenerator();
 
-        // add meta box/taxonomies for CPT
-        foreach ( CustomPostTypeRepository::get() as $postTypeModel){
+	    // add meta box/taxonomies for CPT
+	    foreach (CustomPostTypeRepository::get() as $postTypeModel){
 
-            $customPostType = new CustomPostTypeGenerator(
-                $postTypeModel->getName(),
-                $postTypeModel->isNative(),
-                array_merge(
-                    [
-                        'supports' => $postTypeModel->getSupports(),
-                        'label' => $postTypeModel->getPlural(),
-                        'labels' => $postTypeModel->getLabels(),
-                        "menu_icon" => 'dashicons-'.$postTypeModel->getIcon()
-                    ],
-                    $postTypeModel->getSettings()
-                )
-            );
+		    // register CPTs and Taxonomy here
+		    $customPostType = new CustomPostTypeGenerator(
+			    $postTypeModel->getName(),
+			    $postTypeModel->isNative(),
+			    array_merge(
+				    [
+					    'supports' => $postTypeModel->getSupports(),
+					    'label' => $postTypeModel->getPlural(),
+					    'labels' => $postTypeModel->getLabels(),
+					    "menu_icon" => 'dashicons-'.$postTypeModel->getIcon()
+				    ],
+				    $postTypeModel->getSettings()
+			    )
+		    );
 
-            // add meta boxes
-            foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
-                $this->generateMetaBoxes($postTypeModel->getName(), $metaBoxModel, $metaBoxGenerator);
-            }
-
-            // add Taxonomies
-            foreach ($postTypeModel->getTaxonomies() as $taxonomyModel){
-                $customPostType->addTaxonomy(
-                    $taxonomyModel->getSlug(),
-                    $taxonomyModel->getPlural(),
-                    array_merge(
-                        [
-                            'singular_label' => $taxonomyModel->getSingular(),
-                            'label' => $taxonomyModel->getPlural(),
-                            'labels' => $taxonomyModel->getLabels(),
-                        ],
-                        $taxonomyModel->getSettings()
-                    )
-                );
-            }
-        }
+		    // add meta boxes
+		    foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
+			    $this->generateMetaBoxes($postTypeModel->getName(), $metaBoxModel, $customPostTypeMetaBoxGenerator);
+		    }
+	    }
     }
+
+	/**
+	 * @throws \Exception
+	 */
+	private function registerTaxonomyMeta()
+	{
+		$taxonomyMetaBoxGenerator = new TaxonomyMetaBoxGenerator();
+		$taxonomyMetaBoxGenerator->generate();
+	}
 
     /**
      * @throws \Exception
@@ -483,63 +500,50 @@ class ACPT_Lite_Admin
         }
     }
 
-    /**
-     * @param                  $postTypeName
-     * @param MetaBoxModel     $metaBoxModel
-     * @param MetaBoxGenerator $metaBoxGenerator
-     */
-    private function generateMetaBoxes( $postTypeName, MetaBoxModel $metaBoxModel, MetaBoxGenerator $metaBoxGenerator)
-    {
-        $metaFields = [];
+	/**
+	 * @param string               $postTypeName
+	 * @param AbstractMetaBoxModel $metaBoxModel
+	 * @param CustomPostTypeMetaBoxGenerator     $metaBoxGenerator
+	 */
+	private function generateMetaBoxes($postTypeName, AbstractMetaBoxModel $metaBoxModel, CustomPostTypeMetaBoxGenerator $metaBoxGenerator)
+	{
+		$metaFields = [];
 
-        foreach ($metaBoxModel->getFields() as $fieldModel){
+		foreach ($metaBoxModel->getFields() as $fieldModel){
+			$metaFields[] = $this->generateMetaBoxFieldArray($fieldModel);
+		}
 
-            $options = [];
+		$metaBoxGenerator->addMetaBox($metaBoxModel->getId(), $metaBoxModel->getName(), $postTypeName, $metaFields);
+	}
 
-            foreach ($fieldModel->getOptions() as $optionModel){
-                $options[] = [
-                    'label' => $optionModel->getLabel(),
-                    'value' => $optionModel->getValue(),
-                ];
-            }
+	/**
+	 * @param CustomPostTypeMetaBoxFieldModel $fieldModel
+	 *
+	 * @return array
+	 */
+	protected function generateMetaBoxFieldArray(CustomPostTypeMetaBoxFieldModel $fieldModel)
+	{
+		$options = [];
 
-            $relations = [];
+		foreach ($fieldModel->getOptions() as $optionModel){
+			$options[] = [
+				'label' => $optionModel->getLabel(),
+				'value' => $optionModel->getValue(),
+			];
+		}
 
-            foreach ($fieldModel->getRelations() as $relationshipModel){
-
-                $inversedBy = null;
-
-                if($relationshipModel->isBidirectional() and $relationshipModel->getInversedBy() !== null){
-                    $inversedBy = [
-                            'id' => $relationshipModel->getInversedBy()->getId(),
-                            'box' => $relationshipModel->getInversedBy()->getMetaBox()->getName(),
-                            'field' => $relationshipModel->getInversedBy()->getName(),
-                    ];
-                }
-
-                $relations[] = [
-                        'relationship' => $relationshipModel->getRelationship(),
-                        'related_custom_post_type_id' => $relationshipModel->getRelatedCustomPostType()->getId(),
-                        'related_custom_post_type_name' => $relationshipModel->getRelatedCustomPostType()->getName(),
-                        'inversedBy' => $inversedBy
-                ];
-            }
-
-            $metaFields[] = [
-                    'type' => $fieldModel->getType(),
-                    'name' => $fieldModel->getName(),
-                    'defaultValue' => $fieldModel->getDefaultValue(),
-                    'description' => $fieldModel->getDescription(),
-                    'isRequired' => $fieldModel->isRequired(),
-                    'isShowInArchive' => $fieldModel->isShowInArchive(),
-                    'sort' => $fieldModel->getSort(),
-                    'options' => $options,
-                    'relations' => $relations,
-            ];
-        }
-
-        $metaBoxGenerator->addMetaBox($metaBoxModel->getId(), $metaBoxModel->getName(), $postTypeName, $metaFields);
-    }
+		return [
+			'id' => $fieldModel->getId(),
+			'type' => $fieldModel->getType(),
+			'name' => $fieldModel->getName(),
+			'defaultValue' => $fieldModel->getDefaultValue(),
+			'description' => $fieldModel->getDescription(),
+			'isRequired' => $fieldModel->isRequired(),
+			'isShowInArchive' => $fieldModel->isShowInArchive(),
+			'sort' => $fieldModel->getSort(),
+			'options' => $options,
+		];
+	}
 
     /**
      * Add CPT columns to show in the admin panel
@@ -590,7 +594,9 @@ class ACPT_Lite_Admin
      */
     private function registerUserMeta()
     {
-        $boxes = UserMetaRepository::get([]);
+        $boxes = MetaRepository::get([
+        	'belongsTo' => MetaTypes::USER
+        ]);
 
         if(!empty($boxes)){
             $generator = new UserMetaBoxGenerator($boxes);
@@ -605,7 +611,9 @@ class ACPT_Lite_Admin
     {
         add_filter( 'manage_users_columns', function ($column) {
 
-            $boxes = UserMetaRepository::get([]);
+            $boxes = MetaRepository::get([
+	            'belongsTo' => MetaTypes::USER
+            ]);
 
             foreach ($boxes as $boxModel){
                 foreach ($boxModel->getFields() as $fieldModel){
@@ -622,7 +630,9 @@ class ACPT_Lite_Admin
 
         add_filter( 'manage_users_custom_column', function ( $val, $columnName, $userId ) {
 
-            $boxes = UserMetaRepository::get([]);
+            $boxes = MetaRepository::get([
+	            'belongsTo' => MetaTypes::USER
+            ]);
 
             foreach ($boxes as $boxModel){
                 foreach ($boxModel->getFields() as $fieldModel){
@@ -646,9 +656,10 @@ class ACPT_Lite_Admin
         $this->loader->addAction( 'rest_api_init', new ACPT_Lite_Api_Rest_Fields(), 'registerRestFields' );
     }
 
-    /**
-     * Run admin scripts
-     */
+	/**
+	 * Run admin scripts
+	 * @throws \Exception
+	 */
     public function run()
     {
         // filters
@@ -672,6 +683,9 @@ class ACPT_Lite_Admin
 
         // register custom post types and taxonomies
         $this->registerCustomPostTypesAndTaxonomies();
+
+	    // register taxonomy meta
+	    $this->registerTaxonomyMeta();
 
         // WooCommerce product data
         $this->addWooCommerceProductData();

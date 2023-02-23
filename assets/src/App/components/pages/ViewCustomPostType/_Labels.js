@@ -23,23 +23,6 @@ const LabelsElement = () => {
                     </tr>
                 ))}
             </table>
-            <div>
-                <Link
-                    className="acpt-btn acpt-btn-primary"
-                    to={`/edit/${postType}/2`}
-                >
-                    <Icon icon="bx:bx-edit" width="18px" />
-                    Edit
-                </Link>
-                &nbsp;
-                <Link
-                    className="acpt-btn acpt-btn-primary-o"
-                    to={`/assoc-taxonomy-post/${postType}`}
-                >
-                    <Icon icon="bx:bx-purchase-tag" width="18px" />
-                    Taxonomies association
-                </Link>
-            </div>
         </div>
     );
 };

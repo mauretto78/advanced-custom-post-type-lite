@@ -2,6 +2,8 @@
 
 namespace ACPT_Lite\Includes;
 
+use ACPT_Lite\Includes\ACPT_Lite_DB;
+
 class ACPT_Lite_Schema_Manager
 {
     /**
@@ -41,7 +43,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // field
+	    // meta field (FROM v.1.0.14 THIS TABLE IS THE ONLY ONE META FIELD TABLE IN USE)
         $sql3 = "CREATE TABLE IF NOT EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             meta_box_id VARCHAR(36) NOT NULL,
@@ -55,7 +57,7 @@ class ACPT_Lite_Schema_Manager
             PRIMARY KEY(id)
         ) $charset_collate;";
 
-        // options
+        // meta options (FROM v.1.0.14 THIS TABLE IS THE ONLY ONE META FIELD OPTIONS TABLE IN USE)
         $sql4 = "CREATE TABLE IF NOT EXISTS `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION."` (
             id VARCHAR(36) UNIQUE NOT NULL,
             meta_box_id VARCHAR(36) NOT NULL,
@@ -196,6 +198,15 @@ class ACPT_Lite_Schema_Manager
             sort INT(11),
             PRIMARY KEY(id)
         ) $charset_collate;";
+
+	    // taxonomy meta box
+	    $sql17 = "CREATE TABLE IF NOT EXISTS `".ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX."` (
+            id VARCHAR(36) UNIQUE NOT NULL,
+            taxonomy VARCHAR(20) NOT NULL,
+            meta_box_name VARCHAR(50) NOT NULL,
+            sort INT(11),
+            PRIMARY KEY(id)
+        ) $charset_collate;";
         
         $conn->query($sql1);
         $conn->query($sql2);
@@ -213,6 +224,7 @@ class ACPT_Lite_Schema_Manager
         $conn->query($sql14);
         $conn->query($sql15);
         $conn->query($sql16);
+        $conn->query($sql17);
 
         ///////////////////////////////////////////////////
         /// 2. ALTER TABLES
@@ -303,6 +315,7 @@ class ACPT_Lite_Schema_Manager
             ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE,
             ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
             ACPT_Lite_DB::TABLE_TAXONOMY,
+            ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX,
             ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
             ACPT_Lite_DB::TABLE_SETTINGS,
             ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,

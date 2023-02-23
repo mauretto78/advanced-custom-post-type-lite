@@ -16,11 +16,9 @@ var _react = __webpack_require__(7294);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Breadcrumbs = __webpack_require__(7993);
+var _Breadcrumbs = __webpack_require__(5827);
 
 var _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);
-
-var _reactRouterDom = __webpack_require__(3727);
 
 var _reactRedux = __webpack_require__(4494);
 
@@ -38,32 +36,46 @@ var _Spinner = __webpack_require__(7410);
 
 var _Spinner2 = _interopRequireDefault(_Spinner);
 
-var _fetchUserMeta = __webpack_require__(1307);
-
-var _userMetaStateActions = __webpack_require__(8616);
-
-var _deleteAllUserMeta = __webpack_require__(3022);
-
 var _react3 = __webpack_require__(6229);
 
-var _Sortable = __webpack_require__(91);
+var _Layout = __webpack_require__(3067);
 
-var _userMetaSubmit = __webpack_require__(4033);
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _ActionsBar = __webpack_require__(3700);
+
+var _ActionsBar2 = _interopRequireDefault(_ActionsBar);
+
+var _fetchMeta = __webpack_require__(4553);
+
+var _metaTypes = __webpack_require__(1895);
+
+var _metaSubmit = __webpack_require__(4717);
+
+var _deleteAllMeta = __webpack_require__(7209);
+
+var _metaStateActions = __webpack_require__(8527);
+
+var _Meta = __webpack_require__(7975);
+
+var _Meta2 = _interopRequireDefault(_Meta);
+
+var _Modal = __webpack_require__(2651);
+
+var _Modal2 = _interopRequireDefault(_Modal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var UserMeta = function UserMeta() {
 
     // manage global state
-    var _useParams = (0, _reactRouterDom.useParams)(),
-        postType = _useParams.postType;
-
     var dispatch = (0, _reactRedux.useDispatch)();
 
     var _useSelector = (0, _reactRedux.useSelector)(function (state) {
-        return state.userMetaStateReducer;
+        return state.metaStateReducer;
     }),
         boxes = _useSelector.boxes,
+        fields = _useSelector.fields,
         values = _useSelector.values,
         isSaved = _useSelector.isSaved,
         isValid = _useSelector.isValid,
@@ -72,7 +84,7 @@ var UserMeta = function UserMeta() {
         success = _useSelector.success;
 
     var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {
-        return state.fetchUserMetaReducer;
+        return state.fetchMetaReducer;
     }),
         loading = _useSelector2.loading,
         fetched = _useSelector2.fetched;
@@ -88,12 +100,14 @@ var UserMeta = function UserMeta() {
         setDirty = _useUnsavedChangesWar2[1],
         setPristine = _useUnsavedChangesWar2[2];
 
-    // manage redirect
-
-
-    var history = (0, _reactRouterDom.useHistory)();
+    var _useState = (0, _react.useState)(false),
+        _useState2 = _slicedToArray(_useState, 2),
+        modalVisible = _useState2[0],
+        setModalVisible = _useState2[1];
 
     // set page meta title
+
+
     (0, _react.useEffect)(function () {
         (0, _misc.metaTitle)("ACPT - User meta" + (isSaved ? '' : '*'));
         (0, _misc.changeCurrentAdminMenuLink)('#/user-meta');
@@ -105,7 +119,7 @@ var UserMeta = function UserMeta() {
     // fetching data and
     // populate the UI
     (0, _react.useEffect)(function () {
-        dispatch((0, _fetchUserMeta.fetchUserMeta)());
+        dispatch((0, _fetchMeta.fetchMeta)(_metaTypes.metaTypes.USER));
     }, [saveLoading]);
 
     // sortable
@@ -113,19 +127,19 @@ var UserMeta = function UserMeta() {
         var oldIndex = _ref.oldIndex,
             newIndex = _ref.newIndex;
 
-        dispatch((0, _userMetaStateActions.setUserMetaBoxes)((0, _reactSortableHoc.arrayMove)(boxes, oldIndex, newIndex)));
+        dispatch((0, _metaStateActions.setBoxes)((0, _reactSortableHoc.arrayMove)(boxes, oldIndex, newIndex)));
     };
 
     // handle data submit
     var handleSubmit = function handleSubmit() {
-        dispatch((0, _userMetaSubmit.userMetaSubmit)(values));
-        dispatch((0, _userMetaStateActions.setUserMetaStatusSaved)());
+        dispatch((0, _metaSubmit.metaSubmit)(values));
+        dispatch((0, _metaStateActions.setStatusSaved)());
         setPristine();
     };
 
     var handleDeleteAll = function handleDeleteAll() {
-        dispatch((0, _deleteAllUserMeta.deleteAllUserMeta)());
-        dispatch((0, _userMetaStateActions.setUserMetaStatusSaved)());
+        dispatch((0, _deleteAllMeta.deleteAllMeta)(_metaTypes.metaTypes.USER));
+        dispatch(setUserMetaStatusSaved());
         setPristine();
     };
 
@@ -153,315 +167,332 @@ var UserMeta = function UserMeta() {
         return wp.element.createElement(_Spinner2.default, null);
     }
 
-    return wp.element.createElement(
-        "div",
+    var renderDeleteButton = wp.element.createElement(
+        _react2.default.Fragment,
         null,
-        wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
-                label: "Registered Custom Post Types",
-                link: "/"
-            }, {
-                label: "Manage User Meta"
-            }] }),
-        Prompt,
         wp.element.createElement(
-            "h1",
-            { className: "acpt-title vertical-center" },
-            wp.element.createElement(_react3.Icon, { icon: "bx:bx-user", color: "#02c39a", width: "24px" }),
-            "\xA0 User meta boxes"
-        ),
-        wp.element.createElement(
-            "div",
-            { className: "acpt-buttons" },
+            _Modal2.default,
+            { title: "Confirm deleting all", visible: modalVisible },
             wp.element.createElement(
-                "a",
-                {
-                    href: "#",
-                    onClick: function onClick(e) {
-                        e.preventDefault();
-                        dispatch((0, _userMetaStateActions.createUserMetaBox)());
-                    },
-                    className: "acpt-btn acpt-btn-primary-o"
-                },
-                wp.element.createElement(_react3.Icon, { icon: "bx:bx-plus-circle", width: "24px" }),
-                "\xA0 Add meta box"
-            )
-        ),
-        boxes.length > 0 ? wp.element.createElement(
-            _react2.default.Fragment,
-            null,
-            wp.element.createElement(_Sortable.SortableList, {
-                items: boxes,
-                onSortEnd: onSortEnd,
-                useDragHandle: true,
-                lockAxis: "y",
-                helperClass: "dragging-helper-class",
-                disableAutoscroll: false,
-                useWindowAsScrollContainer: true
-            }),
+                "p",
+                null,
+                "Are you sure?"
+            ),
             wp.element.createElement(
-                "div",
-                { className: "acpt-buttons" },
+                "p",
+                null,
                 wp.element.createElement(
                     "a",
                     {
                         href: "#",
+                        className: "acpt-btn acpt-btn-primary",
                         onClick: function onClick(e) {
                             e.preventDefault();
-                            dispatch((0, _userMetaStateActions.createUserMetaBox)());
-                        },
-                        className: "acpt-btn acpt-btn-primary-o"
+                            setModalVisible(!modalVisible);
+                            handleDeleteAll();
+                        }
                     },
-                    wp.element.createElement(_react3.Icon, { icon: "bx:bx-plus-circle", width: "24px" }),
-                    "\xA0 Add meta box"
-                )
-            ),
-            wp.element.createElement(
-                "div",
-                { className: "acpt-card__footer" },
+                    "Yes"
+                ),
+                "\xA0",
                 wp.element.createElement(
-                    "div",
-                    { className: "acpt-card__inner" },
-                    wp.element.createElement(
-                        "button",
-                        {
-                            disabled: !isValid,
-                            onClick: function onClick(e) {
-                                e.preventDefault();
-                                handleSubmit();
-                            },
-                            type: "submit",
-                            className: "acpt-btn acpt-btn-primary submit"
-                        },
-                        wp.element.createElement(_react3.Icon, { icon: "bx:bx-save", width: "24px" }),
-                        "\xA0 Save"
-                    ),
-                    "\xA0",
-                    wp.element.createElement(
-                        "button",
-                        {
-                            onClick: function onClick(e) {
-                                e.preventDefault();
-                                handleDeleteAll();
-                            },
-                            type: "submit",
-                            className: "acpt-btn acpt-btn-danger submit"
-                        },
-                        wp.element.createElement(_react3.Icon, { icon: "bx:bx-trash", width: "24px" }),
-                        "\xA0 Delete all"
-                    )
+                    "a",
+                    {
+                        href: "#",
+                        className: "acpt-btn acpt-btn-primary-o",
+                        onClick: function onClick(e) {
+                            e.preventDefault();
+                            setModalVisible(!modalVisible);
+                        }
+                    },
+                    "No"
                 )
             )
-        ) : wp.element.createElement(
+        ),
+        wp.element.createElement(
+            "button",
+            {
+                onClick: function onClick(e) {
+                    e.preventDefault();
+                    setModalVisible(true);
+                },
+                type: "submit",
+                className: "acpt-btn acpt-btn-danger"
+            },
+            "Delete all"
+        )
+    );
+
+    var buttons = wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "button",
+            {
+                onClick: function onClick(e) {
+                    e.preventDefault();
+                    dispatch((0, _metaStateActions.createBox)(_metaTypes.metaTypes.USER));
+                },
+                className: "acpt-btn acpt-btn-primary-o"
+            },
+            "Add meta box"
+        ),
+        boxes.length > 0 ? wp.element.createElement(
             _react2.default.Fragment,
             null,
             wp.element.createElement(
-                "div",
-                { className: "" },
-                "No meta box already created. Create the first one now by clicking the button \"Add meta box\"!"
-            ),
-            fetched.length > 0 && wp.element.createElement(
                 "button",
                 {
+                    disabled: !isValid,
                     onClick: function onClick(e) {
                         e.preventDefault();
-                        handleDeleteAll();
+                        handleSubmit();
                     },
                     type: "submit",
-                    className: "acpt-btn acpt-btn-danger submit"
+                    className: "acpt-btn acpt-btn-primary"
                 },
-                wp.element.createElement(_react3.Icon, { icon: "bx:bx-trash", width: "24px" }),
-                "\xA0 Delete all"
-            )
+                "Save"
+            ),
+            renderDeleteButton
+        ) : wp.element.createElement(
+            _react2.default.Fragment,
+            null,
+            fetched.length > 0 && renderDeleteButton
+        )
+    );
+
+    return wp.element.createElement(
+        _Layout2.default,
+        null,
+        wp.element.createElement(_ActionsBar2.default, {
+            title: "User meta boxes",
+            actions: buttons
+        }),
+        wp.element.createElement(
+            "main",
+            null,
+            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
+                    label: "Registered Custom Post Types",
+                    link: "/"
+                }, {
+                    label: "Manage User Meta"
+                }] }),
+            Prompt,
+            wp.element.createElement(_Meta2.default, {
+                belongsTo: _metaTypes.metaTypes.USER,
+                boxes: boxes,
+                fields: fields,
+                onSortEnd: onSortEnd,
+                values: values
+            })
         )
     );
 };
 
 exports.default = UserMeta;
 
-/***/ }),
-
-/***/ 3022:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.deleteAllUserMeta = undefined;
-
-var _ajax = __webpack_require__(7569);
-
-var _userMetaStateActions = __webpack_require__(8616);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var deleteAllUserMeta = exports.deleteAllUserMeta = function deleteAllUserMeta() {
-    return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
-            var res;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            _context.prev = 0;
-
-                            dispatch((0, _userMetaStateActions.deleteAllUserMetaInProgress)());
-                            _context.next = 4;
-                            return (0, _ajax.wpAjaxRequest)("deleteUserMetaAction", {});
-
-                        case 4:
-                            res = _context.sent;
-
-                            res.success === true ? dispatch((0, _userMetaStateActions.deleteAllUserMetaSuccess)()) : dispatch((0, _userMetaStateActions.deleteAllUserMetaFailure)(res.error));
-                            _context.next = 12;
-                            break;
-
-                        case 8:
-                            _context.prev = 8;
-                            _context.t0 = _context["catch"](0);
-
-                            console.log(_context.t0);
-                            dispatch((0, _userMetaStateActions.deleteAllUserMetaFailure)(_context.t0));
-
-                        case 12:
-                        case "end":
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined, [[0, 8]]);
-        }));
-
-        return function (_x, _x2) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-};
-
-/***/ }),
-
-/***/ 1307:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.fetchUserMeta = undefined;
-
-var _ajax = __webpack_require__(7569);
-
-var _fetchUserMetaActions = __webpack_require__(8799);
-
-var _userMetaStateActions = __webpack_require__(8616);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var fetchUserMeta = exports.fetchUserMeta = function fetchUserMeta() {
-    return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
-            var fetched;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            _context.prev = 0;
-
-                            dispatch((0, _fetchUserMetaActions.fetchUserMetaInProgress)());
-                            _context.next = 4;
-                            return (0, _ajax.wpAjaxRequest)('fetchUserMetaAction', {});
-
-                        case 4:
-                            fetched = _context.sent;
-
-                            dispatch((0, _fetchUserMetaActions.fetchUserMetaSuccess)(fetched));
-                            dispatch((0, _userMetaStateActions.hydrateUserMetaValues)(fetched));
-                            _context.next = 12;
-                            break;
-
-                        case 9:
-                            _context.prev = 9;
-                            _context.t0 = _context["catch"](0);
-
-                            dispatch((0, _fetchUserMetaActions.fetchUserMetaFailure)(_context.t0));
-
-                        case 12:
-                        case "end":
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined, [[0, 9]]);
-        }));
-
-        return function (_x, _x2) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-};
-
-/***/ }),
-
-/***/ 4033:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.userMetaSubmit = undefined;
-
-var _ajax = __webpack_require__(7569);
-
-var _userMetaStateActions = __webpack_require__(8616);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var userMetaSubmit = exports.userMetaSubmit = function userMetaSubmit(data) {
-    return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
-            var res;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            _context.prev = 0;
-
-                            dispatch((0, _userMetaStateActions.submitUserMetaInProgress)());
-                            _context.next = 4;
-                            return (0, _ajax.wpAjaxRequest)("saveUserMetaAction", data);
-
-                        case 4:
-                            res = _context.sent;
-
-                            res.success === true ? dispatch((0, _userMetaStateActions.submitUserMetaSuccess)()) : dispatch((0, _userMetaStateActions.submitUserMetaFailure)(res.error));
-                            _context.next = 12;
-                            break;
-
-                        case 8:
-                            _context.prev = 8;
-                            _context.t0 = _context["catch"](0);
-
-                            console.log(_context.t0);
-                            dispatch((0, _userMetaStateActions.submitUserMetaFailure)(_context.t0));
-
-                        case 12:
-                        case "end":
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined, [[0, 8]]);
-        }));
-
-        return function (_x, _x2) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-};
+// import React, {useEffect, useRef} from 'react';
+// import Breadcrumbs from "../../reusable/Breadcrumbs";
+// import {useHistory, useParams} from "react-router-dom";
+// import {useDispatch, useSelector} from "react-redux";
+// import useUnsavedChangesWarning from "../../../hooks/useUnsavedChangesWarning";
+// import {changeCurrentAdminMenuLink, metaTitle} from "../../../utils/misc";
+// import {arrayMove} from "react-sortable-hoc";
+// import {toast} from "react-toastify";
+// import Spinner from "../../reusable/Loader/Spinner";
+// import {fetchUserMeta} from "../../../redux/thunks/fetchUserMeta";
+// import {createUserMetaBox, setUserMetaBoxes, setUserMetaStatusSaved} from "../../../redux/actions/userMetaStateActions";
+// import {deleteAllUserMeta} from "../../../redux/thunks/deleteAllUserMeta";
+// import {Icon} from "@iconify/react";
+// import {SortableList} from "../../reusable/Sortable";
+// import {userMetaSubmit} from "../../../redux/thunks/userMetaSubmit";
+//
+// const UserMeta = () => {
+//
+//     // manage global state
+//     const { postType } = useParams();
+//     const dispatch = useDispatch();
+//     const {boxes, values, isSaved, isValid, loading: saveLoading, errors: saveErrors, success} = useSelector(state => state.userMetaStateReducer);
+//     const {loading, fetched} = useSelector(state => state.fetchUserMetaReducer);
+//
+//     // manage local state
+//     const didMountRef = useRef(false);
+//     const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();
+//
+//     // manage redirect
+//     const history = useHistory();
+//
+//     // set page meta title
+//     useEffect(() => {
+//         metaTitle(`ACPT - User meta${isSaved ? '' : '*'}`);
+//         changeCurrentAdminMenuLink('#/user-meta');
+//         if(!isSaved){ setDirty(); }
+//     }, [isSaved]);
+//
+//     // fetching data and
+//     // populate the UI
+//     useEffect(() => {
+//         dispatch(fetchUserMeta());
+//     }, [saveLoading]);
+//
+//     // sortable
+//     const onSortEnd = ({oldIndex, newIndex}) => {
+//         dispatch(setUserMetaBoxes(arrayMove(boxes, oldIndex, newIndex)));
+//     };
+//
+//     // handle data submit
+//     const handleSubmit = () => {
+//         dispatch(userMetaSubmit(values));
+//         dispatch(setUserMetaStatusSaved());
+//         setPristine();
+//     };
+//
+//     const handleDeleteAll = () => {
+//         dispatch(deleteAllUserMeta());
+//         dispatch(setUserMetaStatusSaved());
+//         setPristine();
+//     };
+//
+//     // handle form submission outcome
+//     useEffect(() => {
+//         if (didMountRef.current){
+//             if(!saveLoading){
+//                 if(success){
+//                     setPristine();
+//                     toast.success("User meta successfully saved");
+//                 }
+//
+//                 if(saveErrors.length > 0){
+//                     saveErrors.map((error) => {
+//                         toast.error(error);
+//                     });
+//                 }
+//             }
+//         } else {
+//             didMountRef.current = true;
+//         }
+//     }, [saveLoading]);
+//
+//     if(loading){
+//         return <Spinner />;
+//     }
+//
+//     return (
+//         <div>
+//             <Breadcrumbs crumbs={[
+//                 {
+//                     label: "Registered Custom Post Types",
+//                     link: "/"
+//                 },
+//                 {
+//                     label: "Manage User Meta"
+//                 }
+//             ]} />
+//             {Prompt}
+//             <h1 className="acpt-title vertical-center">
+//                 <Icon icon="bx:bx-user" color="#02c39a" width="18px"/>
+//                 &nbsp;
+//                 User meta boxes
+//             </h1>
+//             <div className="acpt-buttons">
+//                 <a
+//                     href="#"
+//                     onClick={ (e) => {
+//                         e.preventDefault();
+//                         dispatch(createUserMetaBox());
+//                     } }
+//                     className="acpt-btn acpt-btn-primary-o"
+//                 >
+//                     <Icon icon="bx:bx-plus-circle" width="18px"/>
+//                     &nbsp;
+//                     Add meta box
+//                 </a>
+//             </div>
+//             {boxes.length > 0
+//                 ? (
+//                     <React.Fragment>
+//                         <SortableList
+//                             items={boxes}
+//                             onSortEnd={onSortEnd}
+//                             useDragHandle
+//                             lockAxis="y"
+//                             helperClass="dragging-helper-class"
+//                             disableAutoscroll={false}
+//                             useWindowAsScrollContainer={true}
+//                         />
+//                         <div className="acpt-buttons">
+//                             <a
+//                                 href="#"
+//                                 onClick={ (e) => {
+//                                     e.preventDefault();
+//                                     dispatch(createUserMetaBox());
+//                                 } }
+//                                 className="acpt-btn acpt-btn-primary-o"
+//                             >
+//                                 <Icon icon="bx:bx-plus-circle" width="18px"/>
+//                                 &nbsp;
+//                                 Add meta box
+//                             </a>
+//                         </div>
+//                         <div className="acpt-card__footer">
+//                             <div className="acpt-card__inner">
+//                                 <button
+//                                     disabled={!isValid}
+//                                     onClick={(e) => {
+//                                         e.preventDefault();
+//                                         handleSubmit();
+//                                     }}
+//                                     type="submit"
+//                                     className="acpt-btn acpt-btn-primary submit"
+//                                 >
+//                                     <Icon icon="bx:bx-save" width="18px"/>
+//                                     &nbsp;
+//                                     Save
+//                                 </button>
+//                                 &nbsp;
+//                                 <button
+//                                     onClick={(e) => {
+//                                         e.preventDefault();
+//                                         handleDeleteAll();
+//                                     }}
+//                                     type="submit"
+//                                     className="acpt-btn acpt-btn-danger submit"
+//                                 >
+//                                     <Icon icon="bx:bx-trash" width="18px"/>
+//                                     &nbsp;
+//                                     Delete all
+//                                 </button>
+//                             </div>
+//                         </div>
+//                     </React.Fragment>
+//                 )
+//                 : (
+//                     <React.Fragment>
+//                         <div className="">
+//                             No meta box already created. Create the first one now by clicking the button "Add meta box"!
+//                         </div>
+//                         {fetched.length > 0 && (
+//                             <button
+//                                 onClick={(e) => {
+//                                     e.preventDefault();
+//                                     handleDeleteAll();
+//                                 }}
+//                                 type="submit"
+//                                 className="acpt-btn acpt-btn-danger submit"
+//                             >
+//                                 <Icon icon="bx:bx-trash" width="18px"/>
+//                                 &nbsp;
+//                                 Delete all
+//                             </button>
+//                         )}
+//                     </React.Fragment>
+//                 )
+//             }
+//         </div>
+//     );
+// };
+//
+// export default UserMeta;
 
 /***/ })
 

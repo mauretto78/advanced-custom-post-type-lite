@@ -2,9 +2,9 @@
 
 namespace ACPT_Lite\Core\Generators;
 
-use ACPT_Lite\Core\Models\WooCommerceProductDataFieldModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataFieldOptionModel;
-use ACPT_Lite\Core\Models\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
 
 class WooCommerceProductDataGenerator extends AbstractGenerator
 {

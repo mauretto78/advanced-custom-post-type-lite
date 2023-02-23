@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Breadcrumbs from "../../reusable/Breadcrumbs";
 import {useDispatch, useSelector} from "react-redux";
-import {useHistory, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import {fetchPostTypes} from "../../../redux/thunks/fetchPostTypes";
 import Spinner from "../../reusable/Loader/Spinner";
 import {metaTitle} from "../../../utils/misc";
@@ -10,8 +10,8 @@ import LabelsElement from "./_Labels";
 import BasicElement from "./_Basic";
 import SettingsElement from "./_Settings";
 import NotFound404 from "../404";
-import {Icon} from "@iconify/react";
-import Copyright from "../../reusable/Copyright";
+import Layout from "../../../components/reusable/Layout";
+import ActionsBar from "../../../components/reusable/Layout/ActionsBar";
 
 const ViewCustomPostType = () => {
 
@@ -23,6 +23,11 @@ const ViewCustomPostType = () => {
     const {postType} = useParams();
     const didMountRef = useRef(false);
     const [fetchedSuccess, setFetchedSuccess] = useState(null);
+    const [activeTab, setActiveTab] = useState(1);
+
+    const handleAccordionClick = (index) => {
+        setActiveTab(index+1);
+    };
 
     // manage redirect
     const history = useHistory();
@@ -61,29 +66,45 @@ const ViewCustomPostType = () => {
         return <NotFound404/>;
     }
 
+    const buttons =
+        <React.Fragment>
+            <Link
+                className="acpt-btn acpt-btn-primary"
+                to={`/edit/${postType}/${activeTab}`}
+            >
+                Edit
+            </Link>
+            <Link
+                className="acpt-btn acpt-btn-primary-o"
+                to={`/assoc-taxonomy-post/${postType}`}
+            >
+                Taxonomies association
+            </Link>
+        </React.Fragment>;
+
     return (
-        <div>
-            <Breadcrumbs crumbs={[
-                {
-                    label: "Registered Custom Post Types",
-                    link: "/"
-                },
-                {
-                    label: "Custom Post Type global settings"
-                }
-            ]} />
-            <h1 className="acpt-title">
-                <Icon icon="bx:bx-search-alt" color="#02c39a" width="18px" />
-                &nbsp;
-                {postType} global settings
-            </h1>
-            <Accordion>
-                <BasicElement title="Basic" />
-                <LabelsElement title="Labels" />
-                <SettingsElement title="Settings"/>
-            </Accordion>
-            <Copyright/>
-        </div>
+        <Layout>
+            <ActionsBar
+                title={`${postType} global settings`}
+                actions={buttons}
+            />
+            <main>
+                <Breadcrumbs crumbs={[
+                    {
+                        label: "Registered Custom Post Types",
+                        link: "/"
+                    },
+                    {
+                        label: "Custom Post Type global settings"
+                    }
+                ]} />
+                <Accordion handleClick={handleAccordionClick}>
+                    <BasicElement title="Basic" />
+                    <LabelsElement title="Labels" />
+                    <SettingsElement title="Settings"/>
+                </Accordion>
+            </main>
+        </Layout>
     );
 };
 

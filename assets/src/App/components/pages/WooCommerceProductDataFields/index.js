@@ -6,15 +6,21 @@ import {metaTitle} from "../../../utils/misc";
 import {fetchWooCommerceProductDataFields} from "../../../redux/thunks/fetchWooCommerceProductDataFields";
 import Spinner from "../../reusable/Loader/Spinner";
 import {toast} from "react-toastify";
-import Breadcrumbs from "../../reusable/Breadcrumbs";
-import {Icon} from "@iconify/react";
+import Breadcrumbs from "../../reusable/Layout/Breadcrumbs";
 import {arrayMove} from "react-sortable-hoc";
-import {createWooCommerceProductDataField, setWooCommerceProductDataFields, setWooCommerceProductDataStatusSaved} from "../../../redux/actions/WooCommerceFieldsStateAction";
+import {
+    createWooCommerceProductDataField,
+    setWooCommerceProductDataFields,
+    setWooCommerceProductDataStatusSaved
+} from "../../../redux/actions/WooCommerceFieldsStateAction";
 import {WooCommerceProductDataFieldsSubmit} from "../../../redux/thunks/WooCommerceProductDataFieldsSubmit";
 import {deleteAllWooCommerceProductDataFields} from "../../../redux/thunks/deleteAllWooCommerceProductDataFields";
 import {SortableList} from "../../reusable/Sortable";
 import {fetchWooCommerceProductData} from "../../../redux/thunks/fetchWooCommerceProductData";
 import NotFound404 from "../404";
+import Layout from "../../reusable/Layout";
+import ActionsBar from "../../reusable/Layout/ActionsBar";
+import MiniNavMap from "../../reusable/MiniNavMap";
 
 const WooCommerceProductDataFields = () => {
 
@@ -93,123 +99,98 @@ const WooCommerceProductDataFields = () => {
         return <NotFound404/>;
     }
 
-    return (
-        <div>
-            <Breadcrumbs crumbs={[
-                {
-                    label: "Registered Custom Post Types",
-                    link: "/"
-                },
-                {
-                    label: "WooCommerce product data",
-                    link: "/product-data/product"
-                },
-                {
-                    label: `${productData[0].name} product data fields`
-                }
-            ]} />
-            {Prompt}
-            <h1 className="acpt-title vertical-center">
-                <Icon icon="bx:bx-inbox" color="#02c39a" width="18px"/>
-                &nbsp;
-                {productData[0].name} product data fields
-            </h1>
-            <div className="acpt-buttons">
-                <a
-                    href="#"
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        dispatch(createWooCommerceProductDataField(id));
-                    } }
-                    className="acpt-btn acpt-btn-primary-o"
-                >
-                    <Icon icon="bx:bx-plus-circle" width="18px"/>
-                    &nbsp;
-                    Add field box
-                </a>
-            </div>
-            {fields.length > 0 ? (
+    const actions = (
+        <React.Fragment>
+            <a
+                href="#"
+                onClick={ (e) => {
+                    e.preventDefault();
+                    dispatch(createWooCommerceProductDataField(id));
+                } }
+                className="acpt-btn acpt-btn-primary-o"
+            >
+                Add field box
+            </a>
+            {fields.length > 0 && (
                 <React.Fragment>
-                    <div className="acpt-box-card" style={{
-                        background: "#fff"
-                    }}>
-                        <SortableList
-                            items={fields}
-                            onSortEnd={onSortEnd}
-                            useDragHandle
-                            lockAxis="y"
-                            helperClass="dragging-helper-class"
-                            disableAutoscroll={false}
-                            useWindowAsScrollContainer={true}
-                        />
-                    </div>
-                    <div className="acpt-buttons">
-                        <a
-                            href="#"
-                            onClick={ (e) => {
-                                e.preventDefault();
-                                dispatch(createWooCommerceProductDataField(id));
-                            } }
-                            className="acpt-btn acpt-btn-primary-o"
-                        >
-                            <Icon icon="bx:bx-plus-circle" width="18px"/>
-                            &nbsp;
-                            Add field box
-                        </a>
-                    </div>
-                    <div className="acpt-card__footer">
-                        <div className="acpt-card__inner">
-                            <button
-                                disabled={!isValid}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleSubmit();
-                                }}
-                                type="submit"
-                                className="acpt-btn acpt-btn-primary submit"
-                            >
-                                <Icon icon="bx:bx-save" width="18px"/>
-                                &nbsp;
-                                Save
-                            </button>
-                            &nbsp;
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleDeleteAll();
-                                }}
-                                type="submit"
-                                className="acpt-btn acpt-btn-danger submit"
-                            >
-                                <Icon icon="bx:bx-trash" width="18px"/>
-                                &nbsp;
-                                Delete all
-                            </button>
-                        </div>
-                    </div>
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    <div className="">
-                        No field box already created. Create the first one now by clicking the button "Add field box"!
-                    </div>
-                    {fields.length > 0 && (
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleDeleteAll();
-                            }}
-                            type="submit"
-                            className="acpt-btn acpt-btn-danger submit"
-                        >
-                            <Icon icon="bx:bx-trash" width="18px"/>
-                            &nbsp;
-                            Delete all
-                        </button>
-                    )}
+                    <button
+                        disabled={!isValid}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleSubmit();
+                        }}
+                        type="submit"
+                        className="acpt-btn acpt-btn-primary"
+                    >
+                        Save
+                    </button>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleDeleteAll();
+                        }}
+                        type="submit"
+                        className="acpt-btn acpt-btn-danger"
+                    >
+                        Delete all
+                    </button>
                 </React.Fragment>
             )}
-        </div>
+        </React.Fragment>
+    );
+
+    return (
+        <Layout>
+            {Prompt}
+            <ActionsBar
+                title={`${productData[0].name} product data fields`}
+                actions={actions}
+            />
+            <main>
+                <Breadcrumbs crumbs={[
+                    {
+                        label: "Registered Custom Post Types",
+                        link: "/"
+                    },
+                    {
+                        label: "WooCommerce product data",
+                        link: "/product-data/product"
+                    },
+                    {
+                        label: `${productData[0].name} product data fields`
+                    }
+                ]}
+                />
+                {fields.length > 0 ? (
+                    <React.Fragment>
+                        <div className="acpt-meta-wrapper">
+                            <div className="acpt-meta-list-wrapper">
+                                <div className="acpt-card">
+                                    <div className="acpt-card__inner">
+                                        <SortableList
+                                            items={fields}
+                                            onSortEnd={onSortEnd}
+                                            useDragHandle
+                                            lockAxis="y"
+                                            helperClass="dragging-helper-class"
+                                            disableAutoscroll={false}
+                                            useWindowAsScrollContainer={true}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <MiniNavMap values={values} />
+                        </div>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        <div className="acpt-alert acpt-alert-warning">
+                            No field box already created. Create the first one now by clicking the button "Add field box"!
+                        </div>
+                    </React.Fragment>
+                )}
+            </main>
+        </Layout>
     );
 };
 
