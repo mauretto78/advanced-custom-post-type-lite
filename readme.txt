@@ -138,9 +138,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * UI/UX improvements
 * Removed external reference to iconify library
 
-= 1.0.14 (2023-02-24) =
+= 1.0.14 (2023-02-23) =
 
-* Renaming DB tables
 * Completely new UI (from PRO version)
 * Taxonomy meta
 * Backend fixes and improvements (from PRO version)
+* Renaming DB tables to avoid conflicts with ACPT PRO
