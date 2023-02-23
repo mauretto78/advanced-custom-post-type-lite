@@ -20,6 +20,9 @@ class ACPT_Lite_DB
 {
     /**
      * Table names
+     *
+     * @note: Since v.1.0.14 the table basename was changed from `acpt` to `acpt_lite`
+     * to avoid conflict with ACPT pro
      */
     const TABLE_CUSTOM_POST_TYPE = 'acpt_lite_custom_post_type';
     const TABLE_CUSTOM_POST_TYPE_META_BOX = 'acpt_lite_custom_post_type_meta_box';
@@ -49,10 +52,9 @@ class ACPT_Lite_DB
      */
     private $dbConn;
 
-    /**
-     *
-     * @return acpt_lite_Lite_DB
-     */
+	/**
+	 * @return ACPT_Lite_DB
+	 */
     private static function getInstance()
     {
         if (self::$instance == null){
@@ -63,10 +65,9 @@ class ACPT_Lite_DB
         return self::$instance;
     }
 
-    /**
-     *
-     * @return acpt_lite_Lite_DB
-     */
+	/**
+	 * @return ACPT_Lite_DB
+	 */
     private static function initConnection()
     {
         $db = self::getInstance();
