@@ -10,7 +10,7 @@ class SelectField extends AbstractField implements CustomPostTypeFieldInterface
     {
         $icon = 'bx:bx-select-multiple';
         $field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="' . CustomPostTypeMetaBoxFieldModel::SELECT_TYPE . '">';
-        $field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="select2 acpt-admin-meta-field-input">';
+        $field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="acpt-select2 acpt-admin-meta-field-input">';
         $field .= '<option value="">--Select--</option>';
 
         foreach ($this->options as $option){

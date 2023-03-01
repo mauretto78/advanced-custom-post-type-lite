@@ -11,7 +11,7 @@ class SelectField extends AbstractField implements UserMetaFieldInterface
     {
         $icon = 'bx:bx-select-multiple';
         $field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.UserMetaBoxFieldModel::SELECT_TYPE.'">';
-        $field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="select2 regular-text">';
+        $field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="acpt-select2 regular-text">';
         $field .= '<option value="">--Select--</option>';
 
         /** @var MetaBoxFieldOptionModel $option */
