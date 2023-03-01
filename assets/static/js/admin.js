@@ -223,7 +223,7 @@ $(function(){
         return `<div class="selectize-item"><span class='acpt-badge'>${explode[0]}</span> ${explode[1]}</div>`;
     };
 
-    $('.select2').selectize({
+    $('.acpt-select2').selectize({
         plugins: ["restore_on_backspace", "clear_button"],
         placeholder: "--Select--",
         render: {
