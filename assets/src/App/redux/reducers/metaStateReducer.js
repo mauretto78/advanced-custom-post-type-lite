@@ -251,7 +251,7 @@ export const metaStateReducer = ( state = initialState, action) => {
 
             const oid = uuidv4();
             const oposition = state.options.length + 1;
-            state.options.push(<MetaOption id={oid} boxId={payload.boxId} fieldId={payload.fieldId} position={oposition} />);
+            state.options.push(<MetaOption id={oid} boxId={payload.boxId} fieldId={payload.fieldId} position={oposition} isNew={true} />);
 
             return validateState({
                 ...state,
@@ -464,7 +464,7 @@ export const metaStateReducer = ( state = initialState, action) => {
 
                 // options
                 (isset(field, "options")) && field.options.map((option, index) => {
-                    options.push(<MetaOption id={option.id} boxId={field.boxId} fieldId={option.fieldId} position={(index+1)} />);
+                    options.push(<MetaOption id={option.id} boxId={field.boxId} fieldId={option.fieldId} position={(index+1)} isNew={false} />);
                 });
 
                 // children

@@ -156,3 +156,4 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Fix publicly_queryable custom post type param (now is TRUE by default)
 * Fix DB connection (DB port issue)
 * Fix destroy schema on deactivate
+* Meta field manager: added a button to link label and value in the option element (from PRO version)

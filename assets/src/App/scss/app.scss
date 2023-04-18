@@ -1089,6 +1089,21 @@ main {
       border: $border-thickness solid $primary-color;
       padding: $smaller-gutter $mini-gutter;
     }
+
+    .link-option {
+      border-radius: $border-radius;
+      padding: $mini-gutter;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: $border-thickness solid transparent;
+      color: $text-color-light;
+
+      &.is-linked {
+        border:  $border-thickness solid $wordpress-primary-color;
+        color: $wordpress-primary-color;
+      }
+    }
   }
 
   .acpt-sortable-list {
