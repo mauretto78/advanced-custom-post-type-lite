@@ -3,9 +3,9 @@ Contributors: mauretto78
 Donate link: https://acpt.io
 Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
-Tested up to: 5.9
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 1.0.15
+Stable tag: 1.0.16
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -148,3 +148,11 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 = 1.0.15 (2023-03-01) =
 
 * WooCommerce HotFix
+
+= 1.0.16 (2023-04-19) =
+
+* Revised UI (from PRO version)
+* Added meta box label
+* Fix publicly_queryable custom post type param (now is TRUE by default)
+* Fix DB connection (DB port issue)
+* Fixed CSS in option meta fields
