@@ -155,4 +155,4 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Added meta box label
 * Fix publicly_queryable custom post type param (now is TRUE by default)
 * Fix DB connection (DB port issue)
-* Fixed CSS in option meta fields
+* Fix destroy schema on deactivate
