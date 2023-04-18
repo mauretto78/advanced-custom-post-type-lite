@@ -186,6 +186,7 @@ class CustomPostTypeRepository
                 SELECT 
                     id, 
                     meta_box_name as name,
+                    meta_box_label as label,
                     sort
                 FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
                 WHERE post_type = %s
@@ -199,6 +200,10 @@ class CustomPostTypeRepository
                             'name' => $box->name,
                             'sort' => $box->sort
                     ]);
+
+	                if($boxModel !== null and $box->label !== null){
+		                $boxModel->changeLabel($box->label);
+	                }
 
                     $sql = "
                         SELECT

@@ -417,6 +417,7 @@ class MetaRepository
                     SELECT 
                         id, 
                         meta_box_name as name,
+                        meta_box_label as label,
                         post_type,
                         sort
                     FROM `".$metaBoxTableName."`
@@ -443,6 +444,7 @@ class MetaRepository
                     SELECT 
                         id, 
                         meta_box_name as name,
+                        meta_box_label as label,
                         taxonomy,
                         sort
                     FROM `".$metaBoxTableName."`
@@ -468,6 +470,7 @@ class MetaRepository
                     SELECT 
                         uf.id, 
                         uf.meta_box_name as name,
+                        uf.meta_box_label as label,
                         uf.sort
                     FROM `".$metaBoxTableName."` uf
                     WHERE 1=1
@@ -757,6 +760,7 @@ class MetaRepository
                         id, 
                         post_type,
                         meta_box_name as name,
+                        meta_box_label as label,
                         sort
                     FROM `".$metaBoxTableName."`
                     WHERE id = %s
@@ -771,6 +775,7 @@ class MetaRepository
                         id, 
                         taxonomy,
                         meta_box_name as name,
+                        meta_box_label as label,
                         sort
                     FROM `".$metaBoxTableName."`
                     WHERE id = %s
@@ -784,6 +789,7 @@ class MetaRepository
                     SELECT 
                         id, 
                         meta_box_name as name,
+                        meta_box_label as label,
                         sort
                     FROM `".$metaBoxTableName."`
                     WHERE id = %s
@@ -1114,6 +1120,7 @@ class MetaRepository
                             `id`,
                             `post_type`,
                             `meta_box_name`,
+                            `meta_box_label`,
                             `sort`
                         ) VALUES (
                             %s,
@@ -1123,6 +1130,7 @@ class MetaRepository
                         ) ON DUPLICATE KEY UPDATE 
                             `post_type` = %s,
                             `meta_box_name` = %s,
+                            `meta_box_label` = %s,
                             `sort` = %d
                     ;";
 
@@ -1130,9 +1138,11 @@ class MetaRepository
                         $metaBoxModel->getId(),
                         $metaBoxModel->getPostType(),
                         $metaBoxModel->getName(),
+                        $metaBoxModel->getLabel(),
                         $metaBoxModel->getSort(),
                         $metaBoxModel->getPostType(),
                         $metaBoxModel->getName(),
+                        $metaBoxModel->getLabel(),
                         $metaBoxModel->getSort()
                     ]);
                     break;
@@ -1144,6 +1154,7 @@ class MetaRepository
                             `id`,
                             `taxonomy`,
                             `meta_box_name`,
+                            `meta_box_label`,
                             `sort`
                         ) VALUES (
                             %s,
@@ -1153,6 +1164,7 @@ class MetaRepository
                         ) ON DUPLICATE KEY UPDATE 
                             `taxonomy` = %s,
                             `meta_box_name` = %s,
+                            `meta_box_label` = %s,
                             `sort` = %d
                     ;";
 
@@ -1160,9 +1172,11 @@ class MetaRepository
                         $metaBoxModel->getId(),
                         $metaBoxModel->getTaxonomy(),
                         $metaBoxModel->getName(),
+                        $metaBoxModel->getLabel(),
                         $metaBoxModel->getSort(),
                         $metaBoxModel->getTaxonomy(),
                         $metaBoxModel->getName(),
+                        $metaBoxModel->getLabel(),
                         $metaBoxModel->getSort()
                     ]);
                     break;
@@ -1173,6 +1187,7 @@ class MetaRepository
                         (
                             `id`,
                             `meta_box_name`,
+                            `meta_box_label`,
                             `sort`
                         ) VALUES (
                             %s,
@@ -1180,14 +1195,17 @@ class MetaRepository
                             %d
                         ) ON DUPLICATE KEY UPDATE 
                             `meta_box_name` = %s,
+                            `meta_box_label` = %s,
                             `sort` = %d
                     ;";
 
                     ACPT_Lite_DB::executeQueryOrThrowException($sql, [
                         $metaBoxModel->getId(),
                         $metaBoxModel->getName(),
+                        $metaBoxModel->getLabel(),
                         $metaBoxModel->getSort(),
                         $metaBoxModel->getName(),
+                        $metaBoxModel->getLabel(),
                         $metaBoxModel->getSort()
                     ]);
                     break;
