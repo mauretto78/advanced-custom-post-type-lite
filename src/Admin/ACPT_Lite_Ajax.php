@@ -792,6 +792,10 @@ class ACPT_Lite_Ajax
 					]);
 				}
 
+				if(isset($box['label'])){
+					$boxModel->changeLabel($box['label']);
+				}
+
 				$ids[$find]['boxes'][] = $box['id'];
 
 				if(isset($box['fields'])){

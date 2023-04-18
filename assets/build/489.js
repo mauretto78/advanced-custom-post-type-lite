@@ -173,6 +173,10 @@ var _MetaBoxMiniTable = __webpack_require__(400);
 
 var _MetaBoxMiniTable2 = _interopRequireDefault(_MetaBoxMiniTable);
 
+var _ProFeatureAlert = __webpack_require__(3187);
+
+var _ProFeatureAlert2 = _interopRequireDefault(_ProFeatureAlert);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TaxonomyListElement = function TaxonomyListElement(_ref) {
@@ -230,19 +234,12 @@ var TaxonomyListElement = function TaxonomyListElement(_ref) {
                 "td",
                 null,
                 (0, _objects.isset)(element, "meta") && element.meta.length > 0 ? wp.element.createElement(
-                    _Tippy2.default,
+                    _reactRouterDom.Link,
                     {
-                        placement: "end",
-                        html: wp.element.createElement(_MetaBoxMiniTable2.default, { taxonomy: element.slug, elements: element.meta })
+                        to: "meta-taxonomy/" + element.slug,
+                        className: "acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                     },
-                    wp.element.createElement(
-                        _reactRouterDom.Link,
-                        {
-                            to: "meta-taxonomy/" + element.slug,
-                            className: "acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
-                        },
-                        "Manage"
-                    )
+                    "Manage"
                 ) : wp.element.createElement(
                     _reactRouterDom.Link,
                     {
@@ -256,19 +253,12 @@ var TaxonomyListElement = function TaxonomyListElement(_ref) {
                 "td",
                 null,
                 (0, _objects.isset)(element, "customPostTypes") && element.customPostTypes.length > 0 ? wp.element.createElement(
-                    _Tippy2.default,
+                    _reactRouterDom.Link,
                     {
-                        placement: "top",
-                        html: wp.element.createElement(_CustomPostTypesMiniTable2.default, { taxonomy: element.slug, elements: element.customPostTypes })
+                        to: "/assoc-post-taxonomy/" + element.slug,
+                        className: "acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                     },
-                    wp.element.createElement(
-                        _reactRouterDom.Link,
-                        {
-                            to: "/assoc-post-taxonomy/" + element.slug,
-                            className: "acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
-                        },
-                        "Manage"
-                    )
+                    "Manage"
                 ) : wp.element.createElement(
                     _reactRouterDom.Link,
                     {
@@ -283,7 +273,7 @@ var TaxonomyListElement = function TaxonomyListElement(_ref) {
                 { className: "with-border" },
                 wp.element.createElement(
                     "span",
-                    { className: "acpt-badge" },
+                    { className: "acpt-badge acpt-badge-success" },
                     wp.element.createElement(
                         "span",
                         { className: "label" },
@@ -294,15 +284,7 @@ var TaxonomyListElement = function TaxonomyListElement(_ref) {
             wp.element.createElement(
                 "td",
                 { className: "frontend" },
-                wp.element.createElement(
-                    "a",
-                    {
-                        className: "acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger",
-                        href: "https://acpt.io/checkout",
-                        target: "_blank"
-                    },
-                    "Buy a PRO license"
-                )
+                wp.element.createElement(_ProFeatureAlert2.default, null)
             )
         )
     );
@@ -1083,6 +1065,44 @@ var Pagination = function Pagination(_ref) {
 };
 
 exports.default = Pagination;
+
+/***/ }),
+
+/***/ 3187:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ProFeatureAlert = function ProFeatureAlert() {
+
+    return wp.element.createElement(
+        "span",
+        { className: "pro-feature" },
+        wp.element.createElement(
+            "span",
+            { className: "acpt-badge acpt-badge-pro" },
+            "Pro feature"
+        ),
+        wp.element.createElement(
+            "a",
+            { href: "https://acpt.io/checkout/", target: "_blank" },
+            "Upgrade"
+        )
+    );
+};
+
+exports.default = ProFeatureAlert;
 
 /***/ }),
 

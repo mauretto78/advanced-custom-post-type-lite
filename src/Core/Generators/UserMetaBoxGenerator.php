@@ -50,10 +50,11 @@ class UserMetaBoxGenerator extends AbstractGenerator
      */
     public function addMetaBoxes(\WP_User $user)
     {
-        foreach ($this->boxes as $boxModel):
-            ?>
+	    ?><h2>ACPT</h2><?php
+	    foreach ($this->boxes as $boxModel):
+		    ?>
             <div class="acpt-user-meta-box">
-                <h3><?php echo $boxModel->getName(); ?></h3>
+                <h3><?php echo (!empty($boxModel->getLabel())) ? $boxModel->getLabel() : $boxModel->getName(); ?></h3>
                 <table class="form-table" id="user-meta-box-<?php echo $boxModel->getId(); ?>">
                     <?php
                     foreach ($boxModel->getFields() as $fieldModel) {

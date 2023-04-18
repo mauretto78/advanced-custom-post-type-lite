@@ -872,7 +872,7 @@ var OtherSettingsStep = function OtherSettingsStep(_ref) {
                             id: "publicly_queryable",
                             label: "Publicly queryable",
                             description: "Whether queries can be performed on the front end for the post type as part of parse_request().",
-                            defaultValue: fetched.length > 0 ? settings.publicly_queryable : false,
+                            defaultValue: fetched.length > 0 ? settings.publicly_queryable : true,
                             register: register,
                             errors: errors
                         }),

@@ -234,6 +234,40 @@ class ACPT_Lite_Schema_Manager
             $conn->query("ALTER TABLE `".ACPT_Lite_DB::TABLE_TAXONOMY."` ADD  `native` TINYINT(1) NULL DEFAULT NULL ");
         }
 
+	    // add `meta_box_label` to TABLE_CUSTOM_POST_TYPE_META_BOX, TABLE_TAXONOMY_META_BOX and TABLE_USER_META_BOX
+	    $result = $conn->query("SHOW TABLES LIKE '".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."'");
+	    if($result->num_rows == 1){
+		    if(false === ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX), 'meta_box_label')){
+			    $conn->query("ALTER TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` ADD `meta_box_label` VARCHAR(255) DEFAULT NULL ");
+		    }
+	    } else {
+		    if(false === ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX, 'meta_box_label')){
+			    $conn->query("ALTER TABLE `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX."` ADD `meta_box_label` VARCHAR(255) DEFAULT NULL ");
+		    }
+	    }
+
+	    $result = $conn->query("SHOW TABLES LIKE '".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."'");
+	    if($result->num_rows == 1){
+		    if(false === ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX), 'meta_box_label')){
+			    $conn->query("ALTER TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."` ADD `meta_box_label` VARCHAR(255) DEFAULT NULL ");
+		    }
+	    } else {
+		    if(false === ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX, 'meta_box_label')){
+			    $conn->query("ALTER TABLE `".ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX."` ADD `meta_box_label` VARCHAR(255) DEFAULT NULL ");
+		    }
+	    }
+
+	    $result = $conn->query("SHOW TABLES LIKE '".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."'");
+	    if($result->num_rows == 1){
+		    if(false === ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX), 'meta_box_label')){
+			    $conn->query("ALTER TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` ADD `meta_box_label` VARCHAR(255) DEFAULT NULL ");
+		    }
+	    } else {
+		    if(false === ACPT_Lite_DB::checkIfColumnExistsInTable(ACPT_Lite_DB::TABLE_USER_META_BOX, 'meta_box_label')){
+			    $conn->query("ALTER TABLE `".ACPT_Lite_DB::TABLE_USER_META_BOX."` ADD `meta_box_label` VARCHAR(255) DEFAULT NULL ");
+		    }
+	    }
+
         ///////////////////////////////////////////////////
         /// 3. ADD PREFIX TO TABLES
         ///////////////////////////////////////////////////

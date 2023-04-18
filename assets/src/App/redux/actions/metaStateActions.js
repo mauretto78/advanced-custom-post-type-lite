@@ -20,6 +20,7 @@ export const SUBMIT_FAILURE = 'SUBMIT_FAILURE';
 export const TOGGLE_FIELD_SHOW_IN_ARCHIVE = 'TOGGLE_FIELD_SHOW_IN_ARCHIVE';
 export const TOGGLE_FIELD_IS_REQUIRED = 'TOGGLE_FIELD_IS_REQUIRED';
 export const UPDATE_BOX_TITLE = 'UPDATE_BOX_TITLE';
+export const UPDATE_BOX_LABEL = 'UPDATE_BOX_LABEL';
 export const UPDATE_FIELD_NAME = 'UPDATE_FIELD_NAME';
 export const UPDATE_FIELD_DEFAULT_VALUE = 'UPDATE_FIELD_DEFAULT_VALUE';
 export const UPDATE_FIELD_DESCRIPTION = 'UPDATE_FIELD_DESCRIPTION';
@@ -214,6 +215,16 @@ export const updateBoxTitle = (id, title) => {
         payload: {
             id: id,
             title: title
+        },
+    };
+};
+
+export const updateBoxLabel = (id, label) => {
+    return {
+        type: UPDATE_BOX_LABEL,
+        payload: {
+            id: id,
+            label: label
         },
     };
 };

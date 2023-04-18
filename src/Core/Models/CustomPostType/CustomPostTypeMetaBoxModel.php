@@ -91,6 +91,7 @@ class CustomPostTypeMetaBoxModel extends AbstractMetaBoxModel implements \JsonSe
         return [
             'id' => $this->id,
             'title' => $this->name,
+            'label' => $this->label,
             'postType' => $this->postType,
             'sort' => $this->sort,
             'fields' => $this->fields

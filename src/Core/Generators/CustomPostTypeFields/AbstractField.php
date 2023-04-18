@@ -3,6 +3,7 @@
 namespace ACPT_Lite\Core\Generators\CustomPostTypeFields;
 
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 use ACPT_Lite\Utils\Sanitizer;
 
 abstract class AbstractField
@@ -12,10 +13,10 @@ abstract class AbstractField
      */
     protected $postId;
 
-    /**
-     * @var string
-     */
-    protected $metaboxId;
+	/**
+	 * @var AbstractMetaBoxModel
+	 */
+	protected $metaBoxModel;
 
     /**
      * @var string
@@ -51,7 +52,7 @@ abstract class AbstractField
      * AbstractField constructor.
      *
      * @param int    $postId
-     * @param string $metaboxId
+     * @param AbstractMetaBoxModel $metaBoxModel
      * @param string $name
      * @param int    $sort
      * @param bool   $isRequired
@@ -60,10 +61,10 @@ abstract class AbstractField
      * @param array  $options
      * @param array  $relations
      */
-    public function __construct($postId, $metaboxId, $name, $sort, $isRequired = false, $defaultValue = null, $description = null, $options = [] )
+    public function __construct($postId,  $metaBoxModel, $name, $sort, $isRequired = false, $defaultValue = null, $description = null, $options = [] )
     {
         $this->postId = $postId;
-        $this->metaboxId = $metaboxId;
+        $this->metaBoxModel = $metaBoxModel;
         $this->name = $name;
         $this->sort = (int)$sort;
         $this->isRequired = $isRequired;
@@ -72,13 +73,15 @@ abstract class AbstractField
         $this->options = $options;
     }
 
-    /**
-     * @return string
-     */
-    protected function getIdName()
-    {
-        return Strings::toDBFormat($this->metaboxId) . '_' . Strings::toDBFormat($this->name);
-    }
+	/**
+	 * @return string
+	 */
+	protected function getIdName()
+	{
+		$idName = Strings::toDBFormat($this->metaBoxModel->getName()) . '_' . Strings::toDBFormat($this->name);
+
+		return esc_html($idName);
+	}
 
     /**
      * @return mixed|null

@@ -212,6 +212,7 @@ class TaxonomyRepository
                     SELECT 
                         id, 
                         meta_box_name as name,
+                        meta_box_label as label,
                         sort
                     FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."`
                     WHERE taxonomy = %s
@@ -234,6 +235,10 @@ class TaxonomyRepository
 						'name' => $box->name,
 						'sort' => $box->sort
 					]);
+
+					if($boxModel !== null and $box->label !== null){
+						$boxModel->changeLabel($box->label);
+					}
 
 					$sql = "
                         SELECT

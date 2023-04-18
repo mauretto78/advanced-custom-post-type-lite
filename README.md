@@ -6,7 +6,7 @@ Core Developer(s):
 
 * **Mauro Cassani** - [github](https://github.com/mauretto78)
 
-<a href="https://acpt.io/contact/"><img src="https://acpt.io/wp-content/uploads/2022/03/github.png" alt="WebDevStudios. WordPress for big brands."></a>
+<a href="https://acpt.io/contact/"><img src="https://acpt.io/wp-content/uploads/2023/04/fb_banner-1640x922.jpg" alt="ACPT"></a>
 
 ## Description
 

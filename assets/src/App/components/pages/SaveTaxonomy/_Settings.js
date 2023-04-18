@@ -121,7 +121,7 @@ const OtherSettingsStep = ({headings, taxonomy, setPristineHandler}) => {
                                 id="publicly_queryable"
                                 label="Publicly queryable"
                                 description="Whether the taxonomy is publicly queryable. If not set, the default is inherited from $public."
-                                defaultValue={fetched.length > 0 ? settings.publicly_queryable : false}
+                                defaultValue={fetched.length > 0 ? settings.publicly_queryable : true}
                                 register={register}
                                 errors={errors}
                             />

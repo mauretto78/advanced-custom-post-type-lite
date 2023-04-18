@@ -5,6 +5,7 @@ import Tippy from "../../reusable/Tippy";
 import CustomPostTypeLabel from "../../reusable/CustomPostType/CustomPostTypeLabel";
 import CustomPostTypesMiniTable from "./CustomPostTypesMiniTable";
 import MetaBoxMiniTable from "../../reusable/Meta/MetaBoxMiniTable";
+import ProFeatureAlert from "../../reusable/ProFeatureAlert";
 
 const TaxonomyListElement = ({id, element, handleDeleteTemplate}) => {
 
@@ -36,19 +37,12 @@ const TaxonomyListElement = ({id, element, handleDeleteTemplate}) => {
                 </td>
                 <td>
                     {isset(element, "meta") &&  element.meta.length > 0 ?
-                        <Tippy
-                            placement='end'
-                            html={(
-                                <MetaBoxMiniTable taxonomy={element.slug} elements={element.meta}/>
-                            )}
+                        <Link
+                            to={`meta-taxonomy/${element.slug}`}
+                            className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                         >
-                            <Link
-                                to={`meta-taxonomy/${element.slug}`}
-                                className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
-                            >
-                                Manage
-                            </Link>
-                        </Tippy>
+                            Manage
+                        </Link>
                         :
                         <Link
                             to={`/meta-taxonomy/${element.slug}`}
@@ -60,19 +54,12 @@ const TaxonomyListElement = ({id, element, handleDeleteTemplate}) => {
                 </td>
                 <td>
                     {isset(element, "customPostTypes") &&  element.customPostTypes.length > 0 ?
-                        <Tippy
-                            placement='top'
-                            html={(
-                                <CustomPostTypesMiniTable taxonomy={element.slug} elements={element.customPostTypes}/>
-                            )}
+                        <Link
+                            to={`/assoc-post-taxonomy/${element.slug}`}
+                            className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                         >
-                            <Link
-                                to={`/assoc-post-taxonomy/${element.slug}`}
-                                className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
-                            >
-                                Manage
-                            </Link>
-                        </Tippy>
+                            Manage
+                        </Link>
                         :
                         <Link
                             to={`/assoc-post-taxonomy/${element.slug}`}
@@ -83,20 +70,14 @@ const TaxonomyListElement = ({id, element, handleDeleteTemplate}) => {
                     }
                 </td>
                 <td className="with-border">
-                    <span className="acpt-badge">
+                    <span className="acpt-badge acpt-badge-success">
                         <span className="label">
                             {element.postCount}
                         </span>
                     </span>
                 </td>
                 <td className="frontend">
-                    <a
-                        className="acpt-btn no-border acpt-btn-sm acpt-btn-primary-o text-danger"
-                        href="https://acpt.io/checkout"
-                        target="_blank"
-                    >
-                        Buy a PRO license
-                    </a>
+                    <ProFeatureAlert />
                 </td>
             </tr>
         </React.Fragment>

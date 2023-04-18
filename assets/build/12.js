@@ -42,6 +42,10 @@ var _WoocommerceMiniTable = __webpack_require__(5200);
 
 var _WoocommerceMiniTable2 = _interopRequireDefault(_WoocommerceMiniTable);
 
+var _ProFeatureAlert = __webpack_require__(3187);
+
+var _ProFeatureAlert2 = _interopRequireDefault(_ProFeatureAlert);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {
@@ -199,19 +203,12 @@ var CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {
                     _react2.default.Fragment,
                     null,
                     (0, _objects.isset)(element, "woocommerceProductData") && element.woocommerceProductData.length > 0 ? wp.element.createElement(
-                        _Tippy2.default,
+                        _reactRouterDom.Link,
                         {
-                            placement: 'top',
-                            html: wp.element.createElement(_WoocommerceMiniTable2.default, { postType: element.name, elements: element.woocommerceProductData })
+                            to: '/product-data/' + element.name,
+                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'
                         },
-                        wp.element.createElement(
-                            _reactRouterDom.Link,
-                            {
-                                to: '/product-data/' + element.name,
-                                className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'
-                            },
-                            'Manage'
-                        )
+                        'Manage'
                     ) : wp.element.createElement(
                         _reactRouterDom.Link,
                         {
@@ -226,19 +223,12 @@ var CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {
                 'td',
                 null,
                 (0, _objects.isset)(element, "taxonomies") && element.taxonomies.length > 0 ? wp.element.createElement(
-                    _Tippy2.default,
+                    _reactRouterDom.Link,
                     {
-                        placement: 'top',
-                        html: wp.element.createElement(_TaxonomiesMiniTable2.default, { postType: element.name, elements: element.taxonomies })
+                        to: '/assoc-taxonomy-post/' + element.name,
+                        className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'
                     },
-                    wp.element.createElement(
-                        _reactRouterDom.Link,
-                        {
-                            to: '/assoc-taxonomy-post/' + element.name,
-                            className: 'acpt-btn no-border acpt-btn-sm acpt-btn-info-o'
-                        },
-                        'Manage'
-                    )
+                    'Manage'
                 ) : wp.element.createElement(
                     _reactRouterDom.Link,
                     {
@@ -253,7 +243,7 @@ var CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {
                 { className: 'backend with-border' },
                 wp.element.createElement(
                     'span',
-                    { className: 'acpt-badge' },
+                    { className: 'acpt-badge acpt-badge-success' },
                     wp.element.createElement(
                         'span',
                         { className: 'label' },
@@ -271,7 +261,7 @@ var CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {
                         href: 'https://acpt.io/checkout',
                         target: '_blank'
                     },
-                    'Buy a PRO license'
+                    wp.element.createElement(_ProFeatureAlert2.default, null)
                 )
             ),
             wp.element.createElement(
@@ -284,7 +274,7 @@ var CustomPostTypeListElement = function CustomPostTypeListElement(_ref) {
                         href: 'https://acpt.io/checkout',
                         target: '_blank'
                     },
-                    'Buy a PRO license'
+                    wp.element.createElement(_ProFeatureAlert2.default, null)
                 )
             )
         )
@@ -861,20 +851,6 @@ var CustomPostTypeList = function CustomPostTypeList() {
                                 wp.element.createElement(
                                     'tr',
                                     null,
-                                    wp.element.createElement(
-                                        'th',
-                                        { className: 'grey backend with-border', colSpan: thereIsWooCommerce ? 7 : 6 },
-                                        'Backend UI'
-                                    ),
-                                    wp.element.createElement(
-                                        'th',
-                                        { className: 'grey frontend', colSpan: 2 },
-                                        'Frontend UI'
-                                    )
-                                ),
-                                wp.element.createElement(
-                                    'tr',
-                                    null,
                                     wp.element.createElement('th', null),
                                     wp.element.createElement(
                                         'th',
@@ -1189,6 +1165,44 @@ var Pagination = function Pagination(_ref) {
 };
 
 exports.default = Pagination;
+
+/***/ }),
+
+/***/ 3187:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ProFeatureAlert = function ProFeatureAlert() {
+
+    return wp.element.createElement(
+        "span",
+        { className: "pro-feature" },
+        wp.element.createElement(
+            "span",
+            { className: "acpt-badge acpt-badge-pro" },
+            "Pro feature"
+        ),
+        wp.element.createElement(
+            "a",
+            { href: "https://acpt.io/checkout/", target: "_blank" },
+            "Upgrade"
+        )
+    );
+};
+
+exports.default = ProFeatureAlert;
 
 /***/ }),
 

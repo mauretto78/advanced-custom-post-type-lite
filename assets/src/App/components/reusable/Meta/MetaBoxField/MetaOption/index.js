@@ -1,11 +1,12 @@
 import React, {useRef, useState} from 'react';
 import Modal from "../../../../reusable/Modal";
+import Tippy from "../../../../reusable/Tippy";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteOption, updateOptionLabel, updateOptionValue} from "../../../../../redux/actions/metaStateActions";
 import {filterById, isset} from "../../../../../utils/objects";
 import {Icon} from "@iconify/react";
 
-const MetaOption  = ({id, position, boxId, fieldId, dragHandle}) => {
+const MetaOption  = ({id, position, boxId, fieldId, dragHandle, isNew}) => {
 
     // manage global state
     const dispatch = useDispatch();
@@ -18,6 +19,18 @@ const MetaOption  = ({id, position, boxId, fieldId, dragHandle}) => {
 
     const labelRef = useRef();
     const valueRef = useRef();
+
+    const defaultLinkedOptionValue = () => {
+        if(isNew){
+            return true;
+        }
+
+        if(!isset(optionValues, "label") && !isset(optionValues, "value")){
+            return true;
+        }
+
+        return optionValues.label === optionValues.value;
+    };
 
     const blankLabel = () => {
         if (isset(optionValues, "label") && labelRef.current.value === 'label') {
@@ -32,14 +45,25 @@ const MetaOption  = ({id, position, boxId, fieldId, dragHandle}) => {
     };
 
     const handleChangeOptionLabel = (l) => {
+        if(linkedOption){
+            valueRef.current.value = l;
+            dispatch(updateOptionValue(id, boxId, fieldId, l));
+        }
+
         dispatch(updateOptionLabel(id, boxId, fieldId, l));
     };
 
     const handleChangeOptionValue = (v) => {
+        if(linkedOption){
+            labelRef.current.value = v;
+            dispatch(updateOptionLabel(id, boxId, fieldId, v));
+        }
+
         dispatch(updateOptionValue(id, boxId, fieldId, v));
     };
 
     // manage local state
+    const [linkedOption, setLinkedOption] = useState(defaultLinkedOptionValue());
     const [modalVisible, setModalVisible] = useState(false);
     const hasErrors = typeof validationErrors[id] !== 'undefined';
 
@@ -112,6 +136,20 @@ const MetaOption  = ({id, position, boxId, fieldId, dragHandle}) => {
                                 </ul>
                             </div>
                         )}
+                    </div>
+                    <div>
+                        <Tippy title={linkedOption ? 'Label and value are linked' : 'Label and value are unlinked'}>
+                            <a
+                                className={`link-option ${linkedOption ? 'is-linked' : ''}`}
+                                href="#"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    setLinkedOption(!linkedOption);
+                                }}
+                            >
+                                <Icon icon="bx:bx-link" width="18px"/>
+                            </a>
+                        </Tippy>
                     </div>
                     <div className="acpt-col acpt-col-sm">
                         <input

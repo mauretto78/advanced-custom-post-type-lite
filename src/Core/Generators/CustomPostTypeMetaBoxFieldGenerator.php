@@ -3,24 +3,25 @@
 namespace ACPT_Lite\Core\Generators;
 
 use ACPT_Lite\Core\Generators\Contracts\MetaFieldInterface;
+use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 
 class CustomPostTypeMetaBoxFieldGenerator
 {
 	/**
 	 * @param int    $postId
-	 * @param string $metaboxId
+	 * @param AbstractMetaBoxModel $metaBoxModel
 	 * @param array  $input
 	 *
 	 * @return MetaFieldInterface
 	 * @throws \Exception
 	 */
-	public static function generate($postId, $metaboxId, array $input)
+	public static function generate($postId, AbstractMetaBoxModel $metaBoxModel, array $input)
 	{
 		if(!isset($input['type'])){
 			throw new \Exception('Type is not defined');
 		}
 
-		$field = self::getCustomPostTypeField($postId, $metaboxId, $input);
+		$field = self::getCustomPostTypeField($postId, $metaBoxModel, $input);
 
 		if($field){
 			return $field->render();
@@ -31,19 +32,19 @@ class CustomPostTypeMetaBoxFieldGenerator
 
 	/**
 	 * @param int    $postId
-	 * @param string $metaboxId
+	 * @param AbstractMetaBoxModel $metaBoxModel
 	 * @param array  $input
 	 *
 	 * @return MetaFieldInterface
 	 */
-	private static function getCustomPostTypeField( $postId, $metaboxId, array $input)
+	private static function getCustomPostTypeField( $postId, AbstractMetaBoxModel $metaBoxModel, array $input)
 	{
 		$className = 'ACPT_Lite\\Core\\Generators\\CustomPostTypeFields\\'.$input['type'].'Field';
 
 		if(class_exists($className)){
 			return new $className(
 				$postId,
-				$metaboxId,
+				$metaBoxModel,
 				$input['name'],
 				$input['sort'],
 				$input['isRequired'],

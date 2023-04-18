@@ -90,6 +90,7 @@ class TaxonomyMetaBoxModel extends AbstractMetaBoxModel implements \JsonSerializ
         return [
             'id' => $this->id,
             'title' => $this->name,
+            'label' => $this->label,
             'find' => $this->taxonomy,
             'sort' => (int)$this->sort,
             'belongsTo' => $this->metaType(),

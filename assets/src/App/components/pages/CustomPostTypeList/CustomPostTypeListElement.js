@@ -7,6 +7,7 @@ import Modal from "../../reusable/Modal";
 import MetaBoxMiniTable from "./MetaBoxMiniTable";
 import TaxonomiesMiniTable from "./TaxonomiesMiniTable";
 import WoocommerceMiniTable from "./WoocommerceMiniTable";
+import ProFeatureAlert from "../../reusable/ProFeatureAlert";
 
 const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDeleteTemplate}) => {
 
@@ -112,19 +113,12 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                         {element.isWooCommerce === true && (
                             <React.Fragment>
                                 {isset( element, "woocommerceProductData" ) && element.woocommerceProductData.length > 0 ?
-                                    <Tippy
-                                        placement='top'
-                                        html={(
-                                            <WoocommerceMiniTable postType={element.name} elements={element.woocommerceProductData}/>
-                                        )}
+                                    <Link
+                                        to={`/product-data/${element.name}`}
+                                        className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                                     >
-                                        <Link
-                                            to={`/product-data/${element.name}`}
-                                            className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
-                                        >
-                                            Manage
-                                        </Link>
-                                    </Tippy>
+                                        Manage
+                                    </Link>
                                     :
                                     <Link
                                         to={`/product-data/${element.name}`}
@@ -139,19 +133,12 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                 )}
                 <td>
                     {isset(element, "taxonomies") &&  element.taxonomies.length > 0 ?
-                        <Tippy
-                            placement='top'
-                            html={(
-                                <TaxonomiesMiniTable postType={element.name} elements={element.taxonomies}/>
-                            )}
+                        <Link
+                            to={`/assoc-taxonomy-post/${element.name}`}
+                            className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
                         >
-                            <Link
-                                to={`/assoc-taxonomy-post/${element.name}`}
-                                className="acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
-                            >
-                                Manage
-                            </Link>
-                        </Tippy>
+                            Manage
+                        </Link>
                         :
                         <Link
                             to={`/assoc-taxonomy-post/${element.name}`}
@@ -162,7 +149,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                     }
                 </td>
                 <td className="backend with-border">
-                    <span className="acpt-badge">
+                    <span className="acpt-badge acpt-badge-success">
                         <span className="label">
                             {element.postCount}
                         </span>
@@ -174,7 +161,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                         href="https://acpt.io/checkout"
                         target="_blank"
                     >
-                        Buy a PRO license
+                        <ProFeatureAlert />
                     </a>
                 </td>
                 <td className="frontend">
@@ -183,7 +170,7 @@ const CustomPostTypeListElement = ({id, thereIsWooCommerce, element, handeDelete
                         href="https://acpt.io/checkout"
                         target="_blank"
                     >
-                        Buy a PRO license
+                        <ProFeatureAlert />
                     </a>
                 </td>
             </tr>

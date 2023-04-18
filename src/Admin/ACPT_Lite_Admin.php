@@ -184,23 +184,6 @@ class ACPT_Lite_Admin
             ],
             [
                     'parentSlug' => ACPT_LITE_PLUGIN_NAME,
-                    'pageTitle' => translate('Register post type', ACPT_LITE_PLUGIN_NAME),
-                    'menuTitle' => translate('Register post type', ACPT_LITE_PLUGIN_NAME),
-                    'capability' => 'manage_options',
-                    'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/register',
-                    'template' => 'app',
-                    'position' => 51,
-                    'assets' => [
-                            'css' => [
-                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.css'
-                            ],
-                            'react' => [
-                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.js'
-                            ],
-                    ],
-            ],
-            [
-                    'parentSlug' => ACPT_LITE_PLUGIN_NAME,
                     'pageTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
                     'menuTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
                     'capability' => 'manage_options',
@@ -513,7 +496,7 @@ class ACPT_Lite_Admin
 			$metaFields[] = $this->generateMetaBoxFieldArray($fieldModel);
 		}
 
-		$metaBoxGenerator->addMetaBox($metaBoxModel->getId(), $metaBoxModel->getName(), $postTypeName, $metaFields);
+		$metaBoxGenerator->addMetaBox($metaBoxModel, $postTypeName, $metaFields);
 	}
 
 	/**
