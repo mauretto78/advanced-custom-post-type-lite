@@ -1,17 +1,31 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[489],{
 
 /***/ 8053:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("var map = {\n\t\"./en.js\": 3167\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = 8053;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/localization/locales/_sync_^\\.\\/.*\\.js$?");
+var map = {
+	"./en.js": 3167
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 8053;
 
 /***/ }),
 
@@ -19,7 +33,109 @@ eval("var map = {\n\t\"./en.js\": 3167\n};\n\n\nfunction webpackContext(req) {\n
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar CustomPostTypesMiniTable = function CustomPostTypesMiniTable(_ref) {\n    var taxonomy = _ref.taxonomy,\n        elements = _ref.elements;\n\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-table-responsive\" },\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-minitable\" },\n            wp.element.createElement(\n                \"thead\",\n                null,\n                wp.element.createElement(\n                    \"tr\",\n                    null,\n                    wp.element.createElement(\n                        \"th\",\n                        null,\n                        \"CPT\"\n                    ),\n                    wp.element.createElement(\n                        \"th\",\n                        null,\n                        \"Sing. label\"\n                    ),\n                    wp.element.createElement(\n                        \"th\",\n                        null,\n                        \"Plural label\"\n                    ),\n                    wp.element.createElement(\n                        \"th\",\n                        null,\n                        \"Post count\"\n                    )\n                )\n            ),\n            wp.element.createElement(\n                \"tbody\",\n                null,\n                elements.map(function (element) {\n                    return wp.element.createElement(\n                        \"tr\",\n                        null,\n                        wp.element.createElement(\n                            \"td\",\n                            null,\n                            element.name\n                        ),\n                        wp.element.createElement(\n                            \"td\",\n                            null,\n                            element.singular\n                        ),\n                        wp.element.createElement(\n                            \"td\",\n                            null,\n                            element.plural\n                        ),\n                        wp.element.createElement(\n                            \"td\",\n                            null,\n                            wp.element.createElement(\n                                \"span\",\n                                { className: \"acpt-badge\" },\n                                wp.element.createElement(\n                                    \"span\",\n                                    { className: \"label\" },\n                                    element.postCount ? element.postCount : 0\n                                )\n                            )\n                        )\n                    );\n                })\n            )\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"minitable-buttons\" },\n            wp.element.createElement(\n                \"a\",\n                { href: \"#/assoc-post-taxonomy/\" + taxonomy },\n                \"Manage\"\n            )\n        )\n    );\n};\n\nexports.default = CustomPostTypesMiniTable;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/TaxonomyList/CustomPostTypesMiniTable.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CustomPostTypesMiniTable = function CustomPostTypesMiniTable(_ref) {
+    var taxonomy = _ref.taxonomy,
+        elements = _ref.elements;
+
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-table-responsive" },
+        wp.element.createElement(
+            "table",
+            { className: "acpt-minitable" },
+            wp.element.createElement(
+                "thead",
+                null,
+                wp.element.createElement(
+                    "tr",
+                    null,
+                    wp.element.createElement(
+                        "th",
+                        null,
+                        "CPT"
+                    ),
+                    wp.element.createElement(
+                        "th",
+                        null,
+                        "Sing. label"
+                    ),
+                    wp.element.createElement(
+                        "th",
+                        null,
+                        "Plural label"
+                    ),
+                    wp.element.createElement(
+                        "th",
+                        null,
+                        "Post count"
+                    )
+                )
+            ),
+            wp.element.createElement(
+                "tbody",
+                null,
+                elements.map(function (element) {
+                    return wp.element.createElement(
+                        "tr",
+                        null,
+                        wp.element.createElement(
+                            "td",
+                            null,
+                            element.name
+                        ),
+                        wp.element.createElement(
+                            "td",
+                            null,
+                            element.singular
+                        ),
+                        wp.element.createElement(
+                            "td",
+                            null,
+                            element.plural
+                        ),
+                        wp.element.createElement(
+                            "td",
+                            null,
+                            wp.element.createElement(
+                                "span",
+                                { className: "acpt-badge" },
+                                wp.element.createElement(
+                                    "span",
+                                    { className: "label" },
+                                    element.postCount ? element.postCount : 0
+                                )
+                            )
+                        )
+                    );
+                })
+            )
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "minitable-buttons" },
+            wp.element.createElement(
+                "a",
+                { href: "#/assoc-post-taxonomy/" + taxonomy },
+                "Manage"
+            )
+        )
+    );
+};
+
+exports.default = CustomPostTypesMiniTable;
 
 /***/ }),
 
@@ -27,7 +143,154 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _objects = __webpack_require__(4040);\n\nvar _Tippy = __webpack_require__(5825);\n\nvar _Tippy2 = _interopRequireDefault(_Tippy);\n\nvar _CustomPostTypeLabel = __webpack_require__(6054);\n\nvar _CustomPostTypeLabel2 = _interopRequireDefault(_CustomPostTypeLabel);\n\nvar _CustomPostTypesMiniTable = __webpack_require__(6740);\n\nvar _CustomPostTypesMiniTable2 = _interopRequireDefault(_CustomPostTypesMiniTable);\n\nvar _MetaBoxMiniTable = __webpack_require__(400);\n\nvar _MetaBoxMiniTable2 = _interopRequireDefault(_MetaBoxMiniTable);\n\nvar _ProFeatureAlert = __webpack_require__(187);\n\nvar _ProFeatureAlert2 = _interopRequireDefault(_ProFeatureAlert);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar TaxonomyListElement = function TaxonomyListElement(_ref) {\n    var id = _ref.id,\n        element = _ref.element,\n        handleDeleteTemplate = _ref.handleDeleteTemplate;\n\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"tr\",\n            null,\n            wp.element.createElement(\n                \"td\",\n                { className: \"backend\" },\n                wp.element.createElement(\n                    \"div\",\n                    { className: \"m-0 mb-1\" },\n                    wp.element.createElement(\n                        \"strong\",\n                        null,\n                        element.slug\n                    ),\n                    !element.isNative && wp.element.createElement(\n                        \"div\",\n                        { className: \"element-buttons\" },\n                        wp.element.createElement(\n                            \"a\",\n                            { href: \"#/view_taxonomy/\" + element.slug },\n                            \"View\"\n                        ),\n                        \"\\xA0\",\n                        wp.element.createElement(\n                            \"a\",\n                            { href: \"#/edit_taxonomy/\" + element.slug },\n                            \"Edit\"\n                        ),\n                        \"\\xA0\",\n                        wp.element.createElement(\n                            \"a\",\n                            { href: \"#/delete_taxonomy/\" + element.slug },\n                            \"Delete\"\n                        )\n                    )\n                )\n            ),\n            wp.element.createElement(\n                \"td\",\n                null,\n                wp.element.createElement(_CustomPostTypeLabel2.default, { element: element })\n            ),\n            wp.element.createElement(\n                \"td\",\n                null,\n                (0, _objects.isset)(element, \"meta\") && element.meta.length > 0 ? wp.element.createElement(\n                    _reactRouterDom.Link,\n                    {\n                        to: \"meta-taxonomy/\" + element.slug,\n                        className: \"acpt-btn no-border acpt-btn-sm acpt-btn-info-o\"\n                    },\n                    \"Manage\"\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    {\n                        to: \"/meta-taxonomy/\" + element.slug,\n                        className: \"acpt-btn no-border acpt-btn-sm acpt-btn-primary-o\"\n                    },\n                    \"Create\"\n                )\n            ),\n            wp.element.createElement(\n                \"td\",\n                null,\n                (0, _objects.isset)(element, \"customPostTypes\") && element.customPostTypes.length > 0 ? wp.element.createElement(\n                    _reactRouterDom.Link,\n                    {\n                        to: \"/assoc-post-taxonomy/\" + element.slug,\n                        className: \"acpt-btn no-border acpt-btn-sm acpt-btn-info-o\"\n                    },\n                    \"Manage\"\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    {\n                        to: \"/assoc-post-taxonomy/\" + element.slug,\n                        className: \"acpt-btn no-border acpt-btn-sm acpt-btn-primary-o\"\n                    },\n                    \"Associate\"\n                )\n            ),\n            wp.element.createElement(\n                \"td\",\n                { className: \"with-border\" },\n                wp.element.createElement(\n                    \"span\",\n                    { className: \"acpt-badge acpt-badge-success\" },\n                    wp.element.createElement(\n                        \"span\",\n                        { className: \"label\" },\n                        element.postCount\n                    )\n                )\n            ),\n            wp.element.createElement(\n                \"td\",\n                { className: \"frontend\" },\n                wp.element.createElement(_ProFeatureAlert2.default, null)\n            )\n        )\n    );\n};\n\nexports.default = TaxonomyListElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/TaxonomyList/TaxonomyListElement.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _objects = __webpack_require__(4040);
+
+var _Tippy = __webpack_require__(5825);
+
+var _Tippy2 = _interopRequireDefault(_Tippy);
+
+var _CustomPostTypeLabel = __webpack_require__(6054);
+
+var _CustomPostTypeLabel2 = _interopRequireDefault(_CustomPostTypeLabel);
+
+var _CustomPostTypesMiniTable = __webpack_require__(6740);
+
+var _CustomPostTypesMiniTable2 = _interopRequireDefault(_CustomPostTypesMiniTable);
+
+var _MetaBoxMiniTable = __webpack_require__(400);
+
+var _MetaBoxMiniTable2 = _interopRequireDefault(_MetaBoxMiniTable);
+
+var _ProFeatureAlert = __webpack_require__(3187);
+
+var _ProFeatureAlert2 = _interopRequireDefault(_ProFeatureAlert);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TaxonomyListElement = function TaxonomyListElement(_ref) {
+    var id = _ref.id,
+        element = _ref.element,
+        handleDeleteTemplate = _ref.handleDeleteTemplate;
+
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "tr",
+            null,
+            wp.element.createElement(
+                "td",
+                { className: "backend" },
+                wp.element.createElement(
+                    "div",
+                    { className: "m-0 mb-1" },
+                    wp.element.createElement(
+                        "strong",
+                        null,
+                        element.slug
+                    ),
+                    !element.isNative && wp.element.createElement(
+                        "div",
+                        { className: "element-buttons" },
+                        wp.element.createElement(
+                            "a",
+                            { href: "#/view_taxonomy/" + element.slug },
+                            "View"
+                        ),
+                        "\xA0",
+                        wp.element.createElement(
+                            "a",
+                            { href: "#/edit_taxonomy/" + element.slug },
+                            "Edit"
+                        ),
+                        "\xA0",
+                        wp.element.createElement(
+                            "a",
+                            { href: "#/delete_taxonomy/" + element.slug },
+                            "Delete"
+                        )
+                    )
+                )
+            ),
+            wp.element.createElement(
+                "td",
+                null,
+                wp.element.createElement(_CustomPostTypeLabel2.default, { element: element })
+            ),
+            wp.element.createElement(
+                "td",
+                null,
+                (0, _objects.isset)(element, "meta") && element.meta.length > 0 ? wp.element.createElement(
+                    _reactRouterDom.Link,
+                    {
+                        to: "meta-taxonomy/" + element.slug,
+                        className: "acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
+                    },
+                    "Manage"
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    {
+                        to: "/meta-taxonomy/" + element.slug,
+                        className: "acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
+                    },
+                    "Create"
+                )
+            ),
+            wp.element.createElement(
+                "td",
+                null,
+                (0, _objects.isset)(element, "customPostTypes") && element.customPostTypes.length > 0 ? wp.element.createElement(
+                    _reactRouterDom.Link,
+                    {
+                        to: "/assoc-post-taxonomy/" + element.slug,
+                        className: "acpt-btn no-border acpt-btn-sm acpt-btn-info-o"
+                    },
+                    "Manage"
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    {
+                        to: "/assoc-post-taxonomy/" + element.slug,
+                        className: "acpt-btn no-border acpt-btn-sm acpt-btn-primary-o"
+                    },
+                    "Associate"
+                )
+            ),
+            wp.element.createElement(
+                "td",
+                { className: "with-border" },
+                wp.element.createElement(
+                    "span",
+                    { className: "acpt-badge acpt-badge-success" },
+                    wp.element.createElement(
+                        "span",
+                        { className: "label" },
+                        element.postCount
+                    )
+                )
+            ),
+            wp.element.createElement(
+                "td",
+                { className: "frontend" },
+                wp.element.createElement(_ProFeatureAlert2.default, null)
+            )
+        )
+    );
+};
+
+exports.default = TaxonomyListElement;
 
 /***/ }),
 
@@ -35,7 +298,477 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _misc = __webpack_require__(3154);\n\nvar _Breadcrumbs = __webpack_require__(5827);\n\nvar _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _Spinner = __webpack_require__(7410);\n\nvar _Spinner2 = _interopRequireDefault(_Spinner);\n\nvar _fetchTaxonomiesCount = __webpack_require__(2081);\n\nvar _fetchTaxonomies = __webpack_require__(1141);\n\nvar _Pagination = __webpack_require__(1222);\n\nvar _Pagination2 = _interopRequireDefault(_Pagination);\n\nvar _TaxonomyListElement = __webpack_require__(272);\n\nvar _TaxonomyListElement2 = _interopRequireDefault(_TaxonomyListElement);\n\nvar _react3 = __webpack_require__(6229);\n\nvar _Tippy = __webpack_require__(5825);\n\nvar _Tippy2 = _interopRequireDefault(_Tippy);\n\nvar _localization = __webpack_require__(8525);\n\nvar _objects = __webpack_require__(4040);\n\nvar _Layout = __webpack_require__(3067);\n\nvar _Layout2 = _interopRequireDefault(_Layout);\n\nvar _ActionsBar = __webpack_require__(3700);\n\nvar _ActionsBar2 = _interopRequireDefault(_ActionsBar);\n\nvar _metaTypes = __webpack_require__(1895);\n\nvar _reactToastify = __webpack_require__(9249);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar TaxonomyList = function TaxonomyList() {\n\n    // manage global state\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchTaxonomiesReducer;\n    }),\n        fetched = _useSelector.fetched,\n        loading = _useSelector.loading;\n\n    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchTaxonomiesCountReducer;\n    }),\n        fetchedCount = _useSelector2.fetched,\n        loadingCount = _useSelector2.loading;\n\n    var _useSelector3 = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchSettingsReducer;\n    }),\n        settingsLoading = _useSelector3.loading,\n        settings = _useSelector3.fetched;\n\n    // manage local state\n\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        page = _useParams.page;\n\n    var didMountRef = (0, _react.useRef)(false);\n\n    var _useState = (0, _react.useState)(null),\n        _useState2 = _slicedToArray(_useState, 2),\n        fetchedSuccess = _useState2[0],\n        setFetchedSuccess = _useState2[1];\n\n    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;\n    var totalPages = Math.ceil(fetchedCount / perPage);\n    var history = (0, _reactRouterDom.useHistory)();\n\n    (0, _react.useEffect)(function () {\n        (0, _misc.metaTitle)((0, _localization.translate)(\"taxonomy_list.title\"));\n        (0, _misc.changeCurrentAdminMenuLink)('#/taxonomies');\n        dispatch((0, _fetchTaxonomiesCount.fetchTaxonomiesCount)());\n        dispatch((0, _fetchTaxonomies.fetchTaxonomies)({\n            page: page ? page : 1,\n            perPage: perPage\n        }));\n    }, [page]);\n\n    // handle fetch outcome\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!loading && !settingsLoading) {\n                setFetchedSuccess(true);\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [loading]);\n\n    if (!fetchedSuccess) {\n        return wp.element.createElement(_Spinner2.default, null);\n    }\n\n    var button = wp.element.createElement(\n        _reactRouterDom.Link,\n        {\n            className: \"acpt-btn acpt-btn-primary\",\n            to: \"/register_taxonomy\"\n        },\n        \"Register new Taxonomy\"\n    );\n\n    return wp.element.createElement(\n        _Layout2.default,\n        null,\n        wp.element.createElement(_ActionsBar2.default, {\n            title: \"Registered Taxonomies\",\n            actions: button\n        }),\n        wp.element.createElement(\n            \"main\",\n            null,\n            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{\n                    label: \"Registered Taxonomies\"\n                }] }),\n            fetched.length > 0 ? wp.element.createElement(\n                \"div\",\n                { className: \"acpt-card\" },\n                wp.element.createElement(\n                    \"div\",\n                    { className: \"acpt-card__header\" },\n                    wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-card__inner\" },\n                        fetchedCount,\n                        \" record(s) found\"\n                    )\n                ),\n                wp.element.createElement(\n                    \"div\",\n                    { className: \"acpt-card__body\" },\n                    wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-table-responsive\" },\n                        wp.element.createElement(\n                            \"table\",\n                            { className: \"acpt-table\" },\n                            wp.element.createElement(\n                                \"thead\",\n                                null,\n                                wp.element.createElement(\n                                    \"tr\",\n                                    null,\n                                    wp.element.createElement(\n                                        \"th\",\n                                        { className: \"grey backend with-border\", colSpan: 5 },\n                                        \"Backend UI\"\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        { className: \"grey frontend\", colSpan: 1 },\n                                        \"Frontend UI\"\n                                    )\n                                ),\n                                wp.element.createElement(\n                                    \"tr\",\n                                    null,\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Slug \\xA0\",\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: \"Taxonomy slug. The post name/slug. Used for various queries for taxonomy content.\" },\n                                            wp.element.createElement(\n                                                \"span\",\n                                                { className: \"helper\" },\n                                                wp.element.createElement(_react3.Icon, { icon: \"bx:bx-help-circle\", width: \"18px\" })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Type\"\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Meta boxes \\xA0\",\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: \"Associated meta boxes\" },\n                                            wp.element.createElement(\n                                                \"span\",\n                                                { className: \"helper\" },\n                                                wp.element.createElement(_react3.Icon, { icon: \"bx:bx-help-circle\", width: \"18px\" })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Associated post types \\xA0\",\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: \"Associate custom post types here\" },\n                                            wp.element.createElement(\n                                                \"span\",\n                                                { className: \"helper\" },\n                                                wp.element.createElement(_react3.Icon, { icon: \"bx:bx-help-circle\", width: \"18px\" })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        { className: \"with-border\" },\n                                        \"Post count \\xA0\",\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: \"Published posts count associated with the taxonomy\" },\n                                            wp.element.createElement(\n                                                \"span\",\n                                                { className: \"helper\" },\n                                                wp.element.createElement(_react3.Icon, { icon: \"bx:bx-help-circle\", width: \"18px\" })\n                                            )\n                                        )\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        { className: \"text-center\" },\n                                        \"Single template \\xA0\",\n                                        wp.element.createElement(\n                                            _Tippy2.default,\n                                            { title: \"The single template for taxonomy term\" },\n                                            wp.element.createElement(\n                                                \"span\",\n                                                { className: \"helper\" },\n                                                wp.element.createElement(_react3.Icon, { icon: \"bx:bx-help-circle\", width: \"18px\" })\n                                            )\n                                        )\n                                    )\n                                )\n                            ),\n                            wp.element.createElement(\n                                \"tbody\",\n                                null,\n                                fetched.map(function (element) {\n                                    return wp.element.createElement(_TaxonomyListElement2.default, { id: element.id, key: element.id, element: element });\n                                })\n                            )\n                        )\n                    )\n                ),\n                totalPages > 1 && wp.element.createElement(\n                    \"div\",\n                    { className: \"acpt-card__footer\", style: { border: \"none\" } },\n                    wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-card__inner\" },\n                        wp.element.createElement(_Pagination2.default, { currentPage: page ? page : 1, perPage: perPage, records: fetchedCount })\n                    )\n                )\n            ) : wp.element.createElement(\n                \"div\",\n                { className: \"acpt-alert acpt-alert-secondary\" },\n                \"No taxonomies found. \",\n                wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: \"/register_taxonomy\" },\n                    \"Register the first one\"\n                ),\n                \"!\"\n            )\n        )\n    );\n};\n\nexports.default = TaxonomyList;\n\n// import React, {useEffect, useRef, useState} from 'react';\n// import {changeCurrentAdminMenuLink, metaTitle} from \"../../../utils/misc\";\n// import Breadcrumbs from \"../../reusable/Breadcrumbs\";\n// import {useDispatch, useSelector} from \"react-redux\";\n// import {Link, useParams} from \"react-router-dom\";\n// import Spinner from \"../../reusable/Loader/Spinner\";\n// import {fetchTaxonomiesCount} from \"../../../redux/thunks/fetchTaxonomiesCount\";\n// import {fetchTaxonomies} from \"../../../redux/thunks/fetchTaxonomies\";\n// import Pagination from \"../../reusable/Pagination\";\n// import TaxonomyListElement from \"./TaxonomyListElement\";\n// import {Icon} from \"@iconify/react\";\n// import Tippy from \"../../reusable/Tippy\";\n// import {translate} from \"../../../localization\";\n// import Copyright from \"../../reusable/Copyright\";\n// import {filterByLabel} from \"../../../utils/objects\";\n//\n// const TaxonomyList = () => {\n//\n//     // manage global state\n//     const dispatch = useDispatch();\n//     const {fetched, loading} = useSelector(state => state.fetchTaxonomiesReducer);\n//     const {fetched: fetchedCount, loading:loadingCount} = useSelector(state => state.fetchTaxonomiesCountReducer);\n//     const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);\n//\n//     // manage local state\n//     const {page} = useParams();\n//     const didMountRef = useRef(false);\n//     const [fetchedSuccess, setFetchedSuccess] = useState(null);\n//     const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;\n//\n//     useEffect(() => {\n//         metaTitle(translate(\"taxonomy_list.title\"));\n//         changeCurrentAdminMenuLink('#/taxonomies');\n//         dispatch(fetchTaxonomiesCount());\n//         dispatch(fetchTaxonomies({\n//             page: page ? page : 1,\n//             perPage: perPage\n//         }));\n//     }, [page]);\n//\n//     // handle fetch outcome\n//     useEffect(() => {\n//         if (didMountRef.current){\n//             if(!loading && !settingsLoading){\n//                 setFetchedSuccess(true);\n//             }\n//         } else {\n//             didMountRef.current = true;\n//         }\n//     }, [loading]);\n//\n//     if(!fetchedSuccess){\n//         return <Spinner/>;\n//     }\n//\n//     return (\n//         <div>\n//             <Breadcrumbs crumbs={[\n//                 {\n//                     label: \"Registered Custom Post Types\",\n//                     link: \"/\"\n//                 },\n//                 {\n//                     label: \"Registered Taxonomies\"\n//                 }\n//             ]} />\n//             <h1 className=\"acpt-title\">\n//                 <Icon icon=\"bx:bx-purchase-tag\" color=\"#02c39a\" width=\"18px\" />\n//                 &nbsp;\n//                 Registered Taxonomies\n//             </h1>\n//             <div className=\"acpt-buttons\">\n//                 <Link\n//                     className=\"acpt-btn acpt-btn-primary-o\"\n//                     to=\"/register_taxonomy\">\n//                     <Icon icon=\"bx:bx-list-plus\" width=\"18px\" />\n//                     &nbsp;\n//                     Register new Taxonomy\n//                 </Link>\n//             </div>\n//             {fetched.length > 0 ?\n//                 <div className=\"acpt-card\">\n//                     <div className=\"acpt-card__header\">\n//                         <div className=\"acpt-card__inner\">\n//                             {fetchedCount} record(s) found\n//                         </div>\n//                     </div>\n//                     <div className=\"acpt-card__body\">\n//                         <div className=\"acpt-table-responsive\">\n//                             <table className=\"acpt-table\">\n//                                 <thead>\n//                                     <tr>\n//                                         <th className=\"grey backend with-border\" colSpan={5}>Registered taxonomies</th>\n//                                         <th className=\"grey frontend\" colSpan={1}>Associated</th>\n//                                     </tr>\n//                                     <tr>\n//                                         <th>\n//                                             Slug\n//                                             &nbsp;\n//                                             <Tippy title=\"Taxonomy slug. The post name/slug. Used for various queries for taxonomy content.\">\n//                                                 <span className=\"helper\">\n//                                                     <Icon icon=\"bx:bx-help-circle\" width=\"18px\"/>\n//                                                 </span>\n//                                             </Tippy>\n//                                         </th>\n//                                         <th/>\n//                                         <th>\n//                                             Singular\n//                                             &nbsp;\n//                                             <Tippy title=\"Singular label. Used when a singular label is needed\">\n//                                                 <span className=\"helper\">\n//                                                     <Icon icon=\"bx:bx-help-circle\" width=\"18px\"/>\n//                                                 </span>\n//                                             </Tippy>\n//                                         </th>\n//                                         <th>\n//                                             Plural\n//                                             &nbsp;\n//                                             <Tippy title=\"Plural label. Used for the taxonomy admin menu item\">\n//                                                 <span className=\"helper\">\n//                                                     <Icon icon=\"bx:bx-help-circle\" width=\"18px\"/>\n//                                                 </span>\n//                                             </Tippy>\n//                                         </th>\n//                                         <th className=\"with-border\">\n//                                             Post count\n//                                             &nbsp;\n//                                             <Tippy title=\"Published posts count associated with the taxonomy\">\n//                                                 <span className=\"helper\">\n//                                                     <Icon icon=\"bx:bx-help-circle\" width=\"18px\"/>\n//                                                 </span>\n//                                             </Tippy>\n//                                         </th>\n//                                         <th>\n//                                             Custom post types\n//                                             &nbsp;\n//                                             <Tippy title=\"Associate custom post types here\">\n//                                                 <span className=\"helper\">\n//                                                     <Icon icon=\"bx:bx-help-circle\" width=\"18px\"/>\n//                                                 </span>\n//                                             </Tippy>\n//                                         </th>\n//                                     </tr>\n//                                 </thead>\n//                                 <tbody>\n//                                 {fetched.map((element) => <TaxonomyListElement id={element.id} key={element.id} element={element} />)}\n//                                 </tbody>\n//                             </table>\n//                         </div>\n//                     </div>\n//                     <div className=\"acpt-card__footer\" style={{border: \"none\"}}>\n//                         <div className=\"acpt-card__inner\">\n//                             <Pagination currentPage={page ? page : 1} perPage={perPage} records={fetchedCount}/>\n//                         </div>\n//                     </div>\n//                 </div>\n//                 :\n//                 <div className=\"acpt-alert acpt-alert-secondary\">\n//                     No taxonomies found. <Link to=\"/register_taxonomy\">Register the first one</Link>!\n//                 </div>\n//             }\n//             <Copyright/>\n//         </div>\n//     );\n// };\n//\n// export default TaxonomyList;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/TaxonomyList/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _misc = __webpack_require__(3154);
+
+var _Breadcrumbs = __webpack_require__(5827);
+
+var _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _Spinner = __webpack_require__(7410);
+
+var _Spinner2 = _interopRequireDefault(_Spinner);
+
+var _fetchTaxonomiesCount = __webpack_require__(2081);
+
+var _fetchTaxonomies = __webpack_require__(1141);
+
+var _Pagination = __webpack_require__(1222);
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
+var _TaxonomyListElement = __webpack_require__(272);
+
+var _TaxonomyListElement2 = _interopRequireDefault(_TaxonomyListElement);
+
+var _react3 = __webpack_require__(6229);
+
+var _Tippy = __webpack_require__(5825);
+
+var _Tippy2 = _interopRequireDefault(_Tippy);
+
+var _localization = __webpack_require__(8525);
+
+var _objects = __webpack_require__(4040);
+
+var _Layout = __webpack_require__(3067);
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _ActionsBar = __webpack_require__(3700);
+
+var _ActionsBar2 = _interopRequireDefault(_ActionsBar);
+
+var _metaTypes = __webpack_require__(1895);
+
+var _reactToastify = __webpack_require__(9249);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TaxonomyList = function TaxonomyList() {
+
+    // manage global state
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchTaxonomiesReducer;
+    }),
+        fetched = _useSelector.fetched,
+        loading = _useSelector.loading;
+
+    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchTaxonomiesCountReducer;
+    }),
+        fetchedCount = _useSelector2.fetched,
+        loadingCount = _useSelector2.loading;
+
+    var _useSelector3 = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchSettingsReducer;
+    }),
+        settingsLoading = _useSelector3.loading,
+        settings = _useSelector3.fetched;
+
+    // manage local state
+
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        page = _useParams.page;
+
+    var didMountRef = (0, _react.useRef)(false);
+
+    var _useState = (0, _react.useState)(null),
+        _useState2 = _slicedToArray(_useState, 2),
+        fetchedSuccess = _useState2[0],
+        setFetchedSuccess = _useState2[1];
+
+    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;
+    var totalPages = Math.ceil(fetchedCount / perPage);
+    var history = (0, _reactRouterDom.useHistory)();
+
+    (0, _react.useEffect)(function () {
+        (0, _misc.metaTitle)((0, _localization.translate)("taxonomy_list.title"));
+        (0, _misc.changeCurrentAdminMenuLink)('#/taxonomies');
+        dispatch((0, _fetchTaxonomiesCount.fetchTaxonomiesCount)());
+        dispatch((0, _fetchTaxonomies.fetchTaxonomies)({
+            page: page ? page : 1,
+            perPage: perPage
+        }));
+    }, [page]);
+
+    // handle fetch outcome
+    (0, _react.useEffect)(function () {
+        if (didMountRef.current) {
+            if (!loading && !settingsLoading) {
+                setFetchedSuccess(true);
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [loading]);
+
+    if (!fetchedSuccess) {
+        return wp.element.createElement(_Spinner2.default, null);
+    }
+
+    var button = wp.element.createElement(
+        _reactRouterDom.Link,
+        {
+            className: "acpt-btn acpt-btn-primary",
+            to: "/register_taxonomy"
+        },
+        "Register new Taxonomy"
+    );
+
+    return wp.element.createElement(
+        _Layout2.default,
+        null,
+        wp.element.createElement(_ActionsBar2.default, {
+            title: "Registered Taxonomies",
+            actions: button
+        }),
+        wp.element.createElement(
+            "main",
+            null,
+            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
+                    label: "Registered Taxonomies"
+                }] }),
+            fetched.length > 0 ? wp.element.createElement(
+                "div",
+                { className: "acpt-card" },
+                wp.element.createElement(
+                    "div",
+                    { className: "acpt-card__header" },
+                    wp.element.createElement(
+                        "div",
+                        { className: "acpt-card__inner" },
+                        fetchedCount,
+                        " record(s) found"
+                    )
+                ),
+                wp.element.createElement(
+                    "div",
+                    { className: "acpt-card__body" },
+                    wp.element.createElement(
+                        "div",
+                        { className: "acpt-table-responsive" },
+                        wp.element.createElement(
+                            "table",
+                            { className: "acpt-table" },
+                            wp.element.createElement(
+                                "thead",
+                                null,
+                                wp.element.createElement(
+                                    "tr",
+                                    null,
+                                    wp.element.createElement(
+                                        "th",
+                                        { className: "grey backend with-border", colSpan: 5 },
+                                        "Backend UI"
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        { className: "grey frontend", colSpan: 1 },
+                                        "Frontend UI"
+                                    )
+                                ),
+                                wp.element.createElement(
+                                    "tr",
+                                    null,
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Slug \xA0",
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: "Taxonomy slug. The post name/slug. Used for various queries for taxonomy content." },
+                                            wp.element.createElement(
+                                                "span",
+                                                { className: "helper" },
+                                                wp.element.createElement(_react3.Icon, { icon: "bx:bx-help-circle", width: "18px" })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Type"
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Meta boxes \xA0",
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: "Associated meta boxes" },
+                                            wp.element.createElement(
+                                                "span",
+                                                { className: "helper" },
+                                                wp.element.createElement(_react3.Icon, { icon: "bx:bx-help-circle", width: "18px" })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Associated post types \xA0",
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: "Associate custom post types here" },
+                                            wp.element.createElement(
+                                                "span",
+                                                { className: "helper" },
+                                                wp.element.createElement(_react3.Icon, { icon: "bx:bx-help-circle", width: "18px" })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        { className: "with-border" },
+                                        "Post count \xA0",
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: "Published posts count associated with the taxonomy" },
+                                            wp.element.createElement(
+                                                "span",
+                                                { className: "helper" },
+                                                wp.element.createElement(_react3.Icon, { icon: "bx:bx-help-circle", width: "18px" })
+                                            )
+                                        )
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        { className: "text-center" },
+                                        "Single template \xA0",
+                                        wp.element.createElement(
+                                            _Tippy2.default,
+                                            { title: "The single template for taxonomy term" },
+                                            wp.element.createElement(
+                                                "span",
+                                                { className: "helper" },
+                                                wp.element.createElement(_react3.Icon, { icon: "bx:bx-help-circle", width: "18px" })
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            wp.element.createElement(
+                                "tbody",
+                                null,
+                                fetched.map(function (element) {
+                                    return wp.element.createElement(_TaxonomyListElement2.default, { id: element.id, key: element.id, element: element });
+                                })
+                            )
+                        )
+                    )
+                ),
+                totalPages > 1 && wp.element.createElement(
+                    "div",
+                    { className: "acpt-card__footer", style: { border: "none" } },
+                    wp.element.createElement(
+                        "div",
+                        { className: "acpt-card__inner" },
+                        wp.element.createElement(_Pagination2.default, { currentPage: page ? page : 1, perPage: perPage, records: fetchedCount })
+                    )
+                )
+            ) : wp.element.createElement(
+                "div",
+                { className: "acpt-alert acpt-alert-secondary" },
+                "No taxonomies found. ",
+                wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: "/register_taxonomy" },
+                    "Register the first one"
+                ),
+                "!"
+            )
+        )
+    );
+};
+
+exports.default = TaxonomyList;
+
+// import React, {useEffect, useRef, useState} from 'react';
+// import {changeCurrentAdminMenuLink, metaTitle} from "../../../utils/misc";
+// import Breadcrumbs from "../../reusable/Breadcrumbs";
+// import {useDispatch, useSelector} from "react-redux";
+// import {Link, useParams} from "react-router-dom";
+// import Spinner from "../../reusable/Loader/Spinner";
+// import {fetchTaxonomiesCount} from "../../../redux/thunks/fetchTaxonomiesCount";
+// import {fetchTaxonomies} from "../../../redux/thunks/fetchTaxonomies";
+// import Pagination from "../../reusable/Pagination";
+// import TaxonomyListElement from "./TaxonomyListElement";
+// import {Icon} from "@iconify/react";
+// import Tippy from "../../reusable/Tippy";
+// import {translate} from "../../../localization";
+// import Copyright from "../../reusable/Copyright";
+// import {filterByLabel} from "../../../utils/objects";
+//
+// const TaxonomyList = () => {
+//
+//     // manage global state
+//     const dispatch = useDispatch();
+//     const {fetched, loading} = useSelector(state => state.fetchTaxonomiesReducer);
+//     const {fetched: fetchedCount, loading:loadingCount} = useSelector(state => state.fetchTaxonomiesCountReducer);
+//     const {loading: settingsLoading, fetched: settings} = useSelector(state => state.fetchSettingsReducer);
+//
+//     // manage local state
+//     const {page} = useParams();
+//     const didMountRef = useRef(false);
+//     const [fetchedSuccess, setFetchedSuccess] = useState(null);
+//     const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
+//
+//     useEffect(() => {
+//         metaTitle(translate("taxonomy_list.title"));
+//         changeCurrentAdminMenuLink('#/taxonomies');
+//         dispatch(fetchTaxonomiesCount());
+//         dispatch(fetchTaxonomies({
+//             page: page ? page : 1,
+//             perPage: perPage
+//         }));
+//     }, [page]);
+//
+//     // handle fetch outcome
+//     useEffect(() => {
+//         if (didMountRef.current){
+//             if(!loading && !settingsLoading){
+//                 setFetchedSuccess(true);
+//             }
+//         } else {
+//             didMountRef.current = true;
+//         }
+//     }, [loading]);
+//
+//     if(!fetchedSuccess){
+//         return <Spinner/>;
+//     }
+//
+//     return (
+//         <div>
+//             <Breadcrumbs crumbs={[
+//                 {
+//                     label: "Registered Custom Post Types",
+//                     link: "/"
+//                 },
+//                 {
+//                     label: "Registered Taxonomies"
+//                 }
+//             ]} />
+//             <h1 className="acpt-title">
+//                 <Icon icon="bx:bx-purchase-tag" color="#02c39a" width="18px" />
+//                 &nbsp;
+//                 Registered Taxonomies
+//             </h1>
+//             <div className="acpt-buttons">
+//                 <Link
+//                     className="acpt-btn acpt-btn-primary-o"
+//                     to="/register_taxonomy">
+//                     <Icon icon="bx:bx-list-plus" width="18px" />
+//                     &nbsp;
+//                     Register new Taxonomy
+//                 </Link>
+//             </div>
+//             {fetched.length > 0 ?
+//                 <div className="acpt-card">
+//                     <div className="acpt-card__header">
+//                         <div className="acpt-card__inner">
+//                             {fetchedCount} record(s) found
+//                         </div>
+//                     </div>
+//                     <div className="acpt-card__body">
+//                         <div className="acpt-table-responsive">
+//                             <table className="acpt-table">
+//                                 <thead>
+//                                     <tr>
+//                                         <th className="grey backend with-border" colSpan={5}>Registered taxonomies</th>
+//                                         <th className="grey frontend" colSpan={1}>Associated</th>
+//                                     </tr>
+//                                     <tr>
+//                                         <th>
+//                                             Slug
+//                                             &nbsp;
+//                                             <Tippy title="Taxonomy slug. The post name/slug. Used for various queries for taxonomy content.">
+//                                                 <span className="helper">
+//                                                     <Icon icon="bx:bx-help-circle" width="18px"/>
+//                                                 </span>
+//                                             </Tippy>
+//                                         </th>
+//                                         <th/>
+//                                         <th>
+//                                             Singular
+//                                             &nbsp;
+//                                             <Tippy title="Singular label. Used when a singular label is needed">
+//                                                 <span className="helper">
+//                                                     <Icon icon="bx:bx-help-circle" width="18px"/>
+//                                                 </span>
+//                                             </Tippy>
+//                                         </th>
+//                                         <th>
+//                                             Plural
+//                                             &nbsp;
+//                                             <Tippy title="Plural label. Used for the taxonomy admin menu item">
+//                                                 <span className="helper">
+//                                                     <Icon icon="bx:bx-help-circle" width="18px"/>
+//                                                 </span>
+//                                             </Tippy>
+//                                         </th>
+//                                         <th className="with-border">
+//                                             Post count
+//                                             &nbsp;
+//                                             <Tippy title="Published posts count associated with the taxonomy">
+//                                                 <span className="helper">
+//                                                     <Icon icon="bx:bx-help-circle" width="18px"/>
+//                                                 </span>
+//                                             </Tippy>
+//                                         </th>
+//                                         <th>
+//                                             Custom post types
+//                                             &nbsp;
+//                                             <Tippy title="Associate custom post types here">
+//                                                 <span className="helper">
+//                                                     <Icon icon="bx:bx-help-circle" width="18px"/>
+//                                                 </span>
+//                                             </Tippy>
+//                                         </th>
+//                                     </tr>
+//                                 </thead>
+//                                 <tbody>
+//                                 {fetched.map((element) => <TaxonomyListElement id={element.id} key={element.id} element={element} />)}
+//                                 </tbody>
+//                             </table>
+//                         </div>
+//                     </div>
+//                     <div className="acpt-card__footer" style={{border: "none"}}>
+//                         <div className="acpt-card__inner">
+//                             <Pagination currentPage={page ? page : 1} perPage={perPage} records={fetchedCount}/>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 :
+//                 <div className="acpt-alert acpt-alert-secondary">
+//                     No taxonomies found. <Link to="/register_taxonomy">Register the first one</Link>!
+//                 </div>
+//             }
+//             <Copyright/>
+//         </div>
+//     );
+// };
+//
+// export default TaxonomyList;
 
 /***/ }),
 
@@ -43,7 +776,48 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar CustomPostTypeLabel = function CustomPostTypeLabel(_ref) {\n    var element = _ref.element;\n\n\n    // Note: can be used also for Taxonomy\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        element.isNative ? wp.element.createElement(\n            'span',\n            { className: 'acpt-badge acpt-badge-native' },\n            wp.element.createElement(\n                'span',\n                { className: 'label' },\n                'Native'\n            )\n        ) : wp.element.createElement(\n            'span',\n            { className: 'acpt-badge acpt-badge-' + (element.isWooCommerce === true ? 'woocommerce' : 'custom') },\n            wp.element.createElement(\n                'span',\n                { className: 'label' },\n                element.isWooCommerce === true ? 'WooCommerce' : 'Custom'\n            )\n        )\n    );\n};\n\nexports.default = CustomPostTypeLabel;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/CustomPostType/CustomPostTypeLabel.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CustomPostTypeLabel = function CustomPostTypeLabel(_ref) {
+    var element = _ref.element;
+
+
+    // Note: can be used also for Taxonomy
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        element.isNative ? wp.element.createElement(
+            'span',
+            { className: 'acpt-badge acpt-badge-native' },
+            wp.element.createElement(
+                'span',
+                { className: 'label' },
+                'Native'
+            )
+        ) : wp.element.createElement(
+            'span',
+            { className: 'acpt-badge acpt-badge-' + (element.isWooCommerce === true ? 'woocommerce' : 'custom') },
+            wp.element.createElement(
+                'span',
+                { className: 'label' },
+                element.isWooCommerce === true ? 'WooCommerce' : 'Custom'
+            )
+        )
+    );
+};
+
+exports.default = CustomPostTypeLabel;
 
 /***/ }),
 
@@ -51,7 +825,49 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumb = function Breadcrumb(_ref) {\n    var label = _ref.label,\n        link = _ref.link,\n        isLast = _ref.isLast;\n\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"li\",\n            { className: isLast ? 'current' : '' },\n            link ? wp.element.createElement(\n                _reactRouterDom.Link,\n                { to: link },\n                label\n            ) : label\n        ),\n        !isLast && wp.element.createElement(\n            \"span\",\n            { className: \"separator\" },\n            wp.element.createElement(_react3.Icon, { icon: \"bx:bx-chevron-right\", color: \"#aaa\", width: \"18px\" })\n        )\n    );\n};\n\nexports.default = Breadcrumb;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/Breadcrumb.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumb = function Breadcrumb(_ref) {
+    var label = _ref.label,
+        link = _ref.link,
+        isLast = _ref.isLast;
+
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "li",
+            { className: isLast ? 'current' : '' },
+            link ? wp.element.createElement(
+                _reactRouterDom.Link,
+                { to: link },
+                label
+            ) : label
+        ),
+        !isLast && wp.element.createElement(
+            "span",
+            { className: "separator" },
+            wp.element.createElement(_react3.Icon, { icon: "bx:bx-chevron-right", color: "#aaa", width: "18px" })
+        )
+    );
+};
+
+exports.default = Breadcrumb;
 
 /***/ }),
 
@@ -59,7 +875,44 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumb = __webpack_require__(6512);\n\nvar _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumbs = function Breadcrumbs(_ref) {\n    var crumbs = _ref.crumbs;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-breadcrumbs\" },\n        crumbs.length > 0 && wp.element.createElement(\n            \"ul\",\n            null,\n            crumbs.map(function (crumb, index) {\n                return wp.element.createElement(_Breadcrumb2.default, {\n                    label: crumb.label,\n                    link: crumb.link,\n                    isLast: index + 1 === crumbs.length,\n                    key: index\n                });\n            })\n        )\n    );\n};\n\nexports.default = Breadcrumbs;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumb = __webpack_require__(6512);
+
+var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumbs = function Breadcrumbs(_ref) {
+    var crumbs = _ref.crumbs;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-breadcrumbs" },
+        crumbs.length > 0 && wp.element.createElement(
+            "ul",
+            null,
+            crumbs.map(function (crumb, index) {
+                return wp.element.createElement(_Breadcrumb2.default, {
+                    label: crumb.label,
+                    link: crumb.link,
+                    isLast: index + 1 === crumbs.length,
+                    key: index
+                });
+            })
+        )
+    );
+};
+
+exports.default = Breadcrumbs;
 
 /***/ }),
 
@@ -67,7 +920,92 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar MetaBoxMiniTable = function MetaBoxMiniTable(_ref) {\n    var postType = _ref.postType,\n        taxonomy = _ref.taxonomy,\n        elements = _ref.elements;\n\n\n    var manageLink = postType ? \"#/meta/\" + postType : \"#/meta-taxonomy/\" + taxonomy;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-table-responsive\" },\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-minitable\" },\n            wp.element.createElement(\n                \"thead\",\n                null,\n                wp.element.createElement(\n                    \"tr\",\n                    null,\n                    wp.element.createElement(\n                        \"th\",\n                        null,\n                        \"Meta box\"\n                    ),\n                    wp.element.createElement(\n                        \"th\",\n                        null,\n                        \"Fields count\"\n                    )\n                )\n            ),\n            wp.element.createElement(\n                \"tbody\",\n                null,\n                elements.map(function (element) {\n                    return wp.element.createElement(\n                        \"tr\",\n                        null,\n                        wp.element.createElement(\n                            \"td\",\n                            null,\n                            element.name\n                        ),\n                        wp.element.createElement(\n                            \"td\",\n                            null,\n                            wp.element.createElement(\n                                \"span\",\n                                { className: \"acpt-badge\" },\n                                wp.element.createElement(\n                                    \"span\",\n                                    { className: \"label\" },\n                                    element.count\n                                )\n                            )\n                        )\n                    );\n                })\n            )\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"minitable-buttons\" },\n            wp.element.createElement(\n                \"a\",\n                { href: manageLink },\n                \"Manage\"\n            )\n        )\n    );\n};\n\nexports.default = MetaBoxMiniTable;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Meta/MetaBoxMiniTable/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MetaBoxMiniTable = function MetaBoxMiniTable(_ref) {
+    var postType = _ref.postType,
+        taxonomy = _ref.taxonomy,
+        elements = _ref.elements;
+
+
+    var manageLink = postType ? "#/meta/" + postType : "#/meta-taxonomy/" + taxonomy;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-table-responsive" },
+        wp.element.createElement(
+            "table",
+            { className: "acpt-minitable" },
+            wp.element.createElement(
+                "thead",
+                null,
+                wp.element.createElement(
+                    "tr",
+                    null,
+                    wp.element.createElement(
+                        "th",
+                        null,
+                        "Meta box"
+                    ),
+                    wp.element.createElement(
+                        "th",
+                        null,
+                        "Fields count"
+                    )
+                )
+            ),
+            wp.element.createElement(
+                "tbody",
+                null,
+                elements.map(function (element) {
+                    return wp.element.createElement(
+                        "tr",
+                        null,
+                        wp.element.createElement(
+                            "td",
+                            null,
+                            element.name
+                        ),
+                        wp.element.createElement(
+                            "td",
+                            null,
+                            wp.element.createElement(
+                                "span",
+                                { className: "acpt-badge" },
+                                wp.element.createElement(
+                                    "span",
+                                    { className: "label" },
+                                    element.count
+                                )
+                            )
+                        )
+                    );
+                })
+            )
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "minitable-buttons" },
+            wp.element.createElement(
+                "a",
+                { href: manageLink },
+                "Manage"
+            )
+        )
+    );
+};
+
+exports.default = MetaBoxMiniTable;
 
 /***/ }),
 
@@ -75,15 +1013,96 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Pagination = function Pagination(_ref) {\n    var currentPage = _ref.currentPage,\n        perPage = _ref.perPage,\n        records = _ref.records;\n\n\n    var totalPages = Math.ceil(records / perPage);\n    var rows = [];\n    for (var i = 1; i <= totalPages; i++) {\n        rows.push(i);\n    }\n\n    if (rows.length < 2) {\n        return wp.element.createElement(_react2.default.Fragment, null);\n    }\n\n    return wp.element.createElement(\n        \"ul\",\n        { className: \"acpt-pagination\" },\n        rows.map(function (row) {\n            return wp.element.createElement(\n                \"li\",\n                null,\n                row == currentPage ? wp.element.createElement(\n                    \"span\",\n                    null,\n                    row\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: \"/\" + row },\n                    row\n                )\n            );\n        })\n    );\n};\n\nexports.default = Pagination;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Pagination/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Pagination = function Pagination(_ref) {
+    var currentPage = _ref.currentPage,
+        perPage = _ref.perPage,
+        records = _ref.records;
+
+
+    var totalPages = Math.ceil(records / perPage);
+    var rows = [];
+    for (var i = 1; i <= totalPages; i++) {
+        rows.push(i);
+    }
+
+    if (rows.length < 2) {
+        return wp.element.createElement(_react2.default.Fragment, null);
+    }
+
+    return wp.element.createElement(
+        "ul",
+        { className: "acpt-pagination" },
+        rows.map(function (row) {
+            return wp.element.createElement(
+                "li",
+                null,
+                row == currentPage ? wp.element.createElement(
+                    "span",
+                    null,
+                    row
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: "/" + row },
+                    row
+                )
+            );
+        })
+    );
+};
+
+exports.default = Pagination;
 
 /***/ }),
 
-/***/ 187:
+/***/ 3187:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar ProFeatureAlert = function ProFeatureAlert() {\n\n    return wp.element.createElement(\n        \"span\",\n        { className: \"pro-feature\" },\n        wp.element.createElement(\n            \"span\",\n            { className: \"acpt-badge acpt-badge-pro\" },\n            \"Pro feature\"\n        ),\n        wp.element.createElement(\n            \"a\",\n            { href: \"https://acpt.io/checkout/\", target: \"_blank\" },\n            \"Upgrade\"\n        )\n    );\n};\n\nexports.default = ProFeatureAlert;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/ProFeatureAlert/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ProFeatureAlert = function ProFeatureAlert() {
+
+    return wp.element.createElement(
+        "span",
+        { className: "pro-feature" },
+        wp.element.createElement(
+            "span",
+            { className: "acpt-badge acpt-badge-pro" },
+            "Pro feature"
+        ),
+        wp.element.createElement(
+            "a",
+            { href: "https://acpt.io/checkout/", target: "_blank" },
+            "Upgrade"
+        )
+    );
+};
+
+exports.default = ProFeatureAlert;
 
 /***/ }),
 
@@ -91,7 +1110,43 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\n/**\n * Translate a string from locale files\n *\n * @param string\n * @return {*}\n */\nvar translate = exports.translate = function translate(string, args) {\n    var lang = __webpack_require__.g.settings && __webpack_require__.g.settings.language ? __webpack_require__.g.settings.language : 'en';\n    var json = __webpack_require__(8053)(\"./\" + lang + \".js\").translations;\n    var strings = string.split(\".\");\n    var translation = getTranslatedString(json, strings);\n\n    if (args !== null && typeof args !== 'undefined') {\n        for (var key in args) {\n            translation = translation.replace(\"{{\" + key + \"}}\", args[key]);\n        }\n    }\n\n    return typeof translation !== 'undefined' ? translation : string;\n};\n\nvar getTranslatedString = function getTranslatedString(json, strings) {\n\n    var object = json;\n\n    strings.map(function (s) {\n        object = object[s];\n    });\n\n    return object;\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/localization/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+/**
+ * Translate a string from locale files
+ *
+ * @param string
+ * @return {*}
+ */
+var translate = exports.translate = function translate(string, args) {
+    var lang = __webpack_require__.g.settings && __webpack_require__.g.settings.language ? __webpack_require__.g.settings.language : 'en';
+    var json = __webpack_require__(8053)("./" + lang + ".js").translations;
+    var strings = string.split(".");
+    var translation = getTranslatedString(json, strings);
+
+    if (args !== null && typeof args !== 'undefined') {
+        for (var key in args) {
+            translation = translation.replace("{{" + key + "}}", args[key]);
+        }
+    }
+
+    return typeof translation !== 'undefined' ? translation : string;
+};
+
+var getTranslatedString = function getTranslatedString(json, strings) {
+
+    var object = json;
+
+    strings.map(function (s) {
+        object = object[s];
+    });
+
+    return object;
+};
 
 /***/ }),
 
@@ -99,7 +1154,81 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nvar translations = exports.translations = {\n    \"404\": {\n        \"title\": \"Page not found\"\n    },\n    \"create\": {\n        \"title\": \"Register a new Custom Post Type\"\n    },\n    \"edit\": {\n        \"title\": \"Edit a new Custom Post Type\"\n    },\n    \"list\": {\n        \"title\": \"Registered Custom Post Types\"\n    },\n    \"view\": {\n        \"title\": \"Custom Post Type global settings\"\n    },\n    \"taxonomy_list\": {\n        \"title\": \"Registered Taxonomies\"\n    },\n    \"taxonomy_create\": {\n        \"title\": \"Register a new Taxonomy\"\n    },\n    \"taxonomy_edit\": {\n        \"title\": \"Edit a Taxonomy\"\n    },\n    \"taxonomy_view\": {\n        \"title\": \"Taxonomy settings\"\n    },\n    \"general\": {\n        \"labels\": {\n            \"all_items\": \"All {{r}}\",\n            \"add\": \"Add\",\n            \"add_new_item\": \"Add new {{r}}\",\n            \"back_to_items\": \"Back to {{r}}\",\n            \"edit\": \"Edit\",\n            \"new\": \"New\",\n            \"not_found\": \"No {{r}} found\",\n            \"search\": \"Search\",\n            \"view\": \"View\",\n            \"parent_item_colon\": \"Parent item\",\n            \"featured_image\": \"Featured image\",\n            \"set_featured_image\": \"Set featured image\",\n            \"remove_featured_image\": \"Remove featured image\",\n            \"use_featured_image\": \"Use featured image\",\n            \"most_used\": \"Most used {{r}}\",\n            \"archives\": \"Archives\",\n            \"insert_into_item\": \"Insert\",\n            \"uploaded_to_this_item\": \"Upload\",\n            \"filter_items_list\": \"Filter {{r}} list\",\n            \"items_list_navigation\": \"Navigation list {{r}}\",\n            \"items_list\": \"List {{r}}\",\n            \"filter_by_date\": \"Filter by date\",\n            \"item_published\": \"{{r}} published\",\n            \"item_published_privately\": \"{{r}} published privately\",\n            \"item_reverted_to_draft\": \"{{r}} reverted to draft\",\n            \"item_scheduled\": \"{{r}} scheduled\",\n            \"item_updated\": \"{{r}} updated\",\n            \"popular_items\": \"Popular {{r}}\",\n            \"update_item\": \"Update {{r}}\",\n            \"no_terms\": \"No {{r}}\",\n            \"parent_item\": \"Parent {{r}}\",\n            \"new_item_name\": \"New {{r}}\",\n            \"filter_by_item\": \"Filter by {{r}}\",\n            \"separate_items_with_commas\": \"Separate {{r}} with commas\",\n            \"add_or_remove_items\": \"Add or remove {{r}}\",\n            \"choose_from_most_used\": \"Choose from most used {{r}}\",\n            \"search_items\": \"Search {{r}}\"\n        }\n    }\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/localization/locales/en.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+var translations = exports.translations = {
+    "404": {
+        "title": "Page not found"
+    },
+    "create": {
+        "title": "Register a new Custom Post Type"
+    },
+    "edit": {
+        "title": "Edit a new Custom Post Type"
+    },
+    "list": {
+        "title": "Registered Custom Post Types"
+    },
+    "view": {
+        "title": "Custom Post Type global settings"
+    },
+    "taxonomy_list": {
+        "title": "Registered Taxonomies"
+    },
+    "taxonomy_create": {
+        "title": "Register a new Taxonomy"
+    },
+    "taxonomy_edit": {
+        "title": "Edit a Taxonomy"
+    },
+    "taxonomy_view": {
+        "title": "Taxonomy settings"
+    },
+    "general": {
+        "labels": {
+            "all_items": "All {{r}}",
+            "add": "Add",
+            "add_new_item": "Add new {{r}}",
+            "back_to_items": "Back to {{r}}",
+            "edit": "Edit",
+            "new": "New",
+            "not_found": "No {{r}} found",
+            "search": "Search",
+            "view": "View",
+            "parent_item_colon": "Parent item",
+            "featured_image": "Featured image",
+            "set_featured_image": "Set featured image",
+            "remove_featured_image": "Remove featured image",
+            "use_featured_image": "Use featured image",
+            "most_used": "Most used {{r}}",
+            "archives": "Archives",
+            "insert_into_item": "Insert",
+            "uploaded_to_this_item": "Upload",
+            "filter_items_list": "Filter {{r}} list",
+            "items_list_navigation": "Navigation list {{r}}",
+            "items_list": "List {{r}}",
+            "filter_by_date": "Filter by date",
+            "item_published": "{{r}} published",
+            "item_published_privately": "{{r}} published privately",
+            "item_reverted_to_draft": "{{r}} reverted to draft",
+            "item_scheduled": "{{r}} scheduled",
+            "item_updated": "{{r}} updated",
+            "popular_items": "Popular {{r}}",
+            "update_item": "Update {{r}}",
+            "no_terms": "No {{r}}",
+            "parent_item": "Parent {{r}}",
+            "new_item_name": "New {{r}}",
+            "filter_by_item": "Filter by {{r}}",
+            "separate_items_with_commas": "Separate {{r}} with commas",
+            "add_or_remove_items": "Add or remove {{r}}",
+            "choose_from_most_used": "Choose from most used {{r}}",
+            "search_items": "Search {{r}}"
+        }
+    }
+};
 
 /***/ }),
 
@@ -107,7 +1236,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.fetchTaxonomies = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchTaxonomiesActions = __webpack_require__(7783);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchTaxonomies = exports.fetchTaxonomies = function fetchTaxonomies(meta) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _fetchTaxonomiesActions.fetchTaxonomiesInProgress)(meta));\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('fetchTaxonomiesAction', meta ? meta : {});\n\n                        case 4:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchTaxonomiesActions.fetchTaxonomiesSuccess)(fetched));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _fetchTaxonomiesActions.fetchTaxonomiesFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/fetchTaxonomies.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fetchTaxonomies = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _fetchTaxonomiesActions = __webpack_require__(7783);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchTaxonomies = exports.fetchTaxonomies = function fetchTaxonomies(meta) {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var fetched;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _fetchTaxonomiesActions.fetchTaxonomiesInProgress)(meta));
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('fetchTaxonomiesAction', meta ? meta : {});
+
+                        case 4:
+                            fetched = _context.sent;
+
+                            dispatch((0, _fetchTaxonomiesActions.fetchTaxonomiesSuccess)(fetched));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _fetchTaxonomiesActions.fetchTaxonomiesFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -115,7 +1296,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.fetchTaxonomiesCount = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchTaxonomiesCountActions = __webpack_require__(5034);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchTaxonomiesCount = exports.fetchTaxonomiesCount = function fetchTaxonomiesCount() {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _fetchTaxonomiesCountActions.fetchTaxonomiesCountInProgress)());\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('fetchTaxonomiesCountAction');\n\n                        case 4:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchTaxonomiesCountActions.fetchTaxonomiesCountSuccess)(fetched));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _fetchTaxonomiesCountActions.fetchTaxonomiesCountFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/fetchTaxonomiesCount.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fetchTaxonomiesCount = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _fetchTaxonomiesCountActions = __webpack_require__(5034);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchTaxonomiesCount = exports.fetchTaxonomiesCount = function fetchTaxonomiesCount() {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var fetched;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _fetchTaxonomiesCountActions.fetchTaxonomiesCountInProgress)());
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('fetchTaxonomiesCountAction');
+
+                        case 4:
+                            fetched = _context.sent;
+
+                            dispatch((0, _fetchTaxonomiesCountActions.fetchTaxonomiesCountSuccess)(fetched));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _fetchTaxonomiesCountActions.fetchTaxonomiesCountFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -123,8 +1356,54 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n/**\n * Change document's <title>\n * @param title\n */\nvar metaTitle = exports.metaTitle = function metaTitle(title) {\n    var originalDocumentTitle = document.title.split(\"‹\");\n    document.title = title + ' \\u2039 ' + originalDocumentTitle[1];\n};\n\n/**\n * Add current class to admin menu link\n * @param link\n */\nvar changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {\n\n    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');\n\n    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {\n        var links = currentValue.getElementsByTagName('a');\n\n        for (var i = 0; i < links.length; i++) {\n            var elem = links[i];\n            var href = elem.getAttribute(\"href\");\n            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;\n\n            if (toCompare === href) {\n                currentValue.classList.add(\"current\");\n            } else {\n                currentValue.classList.remove(\"current\");\n            }\n        }\n    });\n};\n\nvar refreshPage = exports.refreshPage = function refreshPage() {\n    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n\n    setTimeout(function () {\n        window.location.reload();\n    }, timeout);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/misc.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+/**
+ * Change document's <title>
+ * @param title
+ */
+var metaTitle = exports.metaTitle = function metaTitle(title) {
+    var originalDocumentTitle = document.title.split("‹");
+    document.title = title + ' \u2039 ' + originalDocumentTitle[1];
+};
+
+/**
+ * Add current class to admin menu link
+ * @param link
+ */
+var changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {
+
+    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
+
+    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {
+        var links = currentValue.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            var elem = links[i];
+            var href = elem.getAttribute("href");
+            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;
+
+            if (toCompare === href) {
+                currentValue.classList.add("current");
+            } else {
+                currentValue.classList.remove("current");
+            }
+        }
+    });
+};
+
+var refreshPage = exports.refreshPage = function refreshPage() {
+    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    setTimeout(function () {
+        window.location.reload();
+    }, timeout);
+};
 
 /***/ })
 
 }]);
+//# sourceMappingURL=489.js.map

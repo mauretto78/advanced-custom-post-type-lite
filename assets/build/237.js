@@ -1,18 +1,170 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[237],{
 
 /***/ 1237:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumbs = __webpack_require__(5827);\n\nvar _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _reactToastify = __webpack_require__(9249);\n\nvar _misc = __webpack_require__(3154);\n\nvar _deleteTaxonomy = __webpack_require__(5613);\n\nvar _Layout = __webpack_require__(3067);\n\nvar _Layout2 = _interopRequireDefault(_Layout);\n\nvar _ActionsBar = __webpack_require__(3700);\n\nvar _ActionsBar2 = _interopRequireDefault(_ActionsBar);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar DeleteTaxonomy = function DeleteTaxonomy() {\n\n    // manage global state\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.deleteTaxonomyReducer;\n    }),\n        errors = _useSelector.errors,\n        success = _useSelector.success,\n        loading = _useSelector.loading;\n\n    // manage local state\n\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        taxonomy = _useParams.taxonomy;\n\n    var didMountRef = (0, _react.useRef)(false);\n\n    (0, _react.useEffect)(function () {\n        (0, _misc.metaTitle)(\"Delete \" + taxonomy);\n    }, []);\n\n    // manage redirect\n    var history = (0, _reactRouterDom.useHistory)();\n\n    // manage delete\n    var handleDeleteTaxonomy = function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(taxonomy) {\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.next = 2;\n                            return dispatch((0, _deleteTaxonomy.deleteTaxonomy)(taxonomy));\n\n                        case 2:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined);\n        }));\n\n        return function handleDeleteTaxonomy(_x) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n\n    // handle delete outcome\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!loading) {\n                if (success) {\n                    history.push('/taxonomies');\n                    _reactToastify.toast.success(\"Taxonomy successfully deleted\");\n                }\n\n                if (errors.length > 0) {\n                    errors.map(function (error) {\n                        _reactToastify.toast.error(error);\n                    });\n                }\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [loading]);\n\n    var buttons = wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"a\",\n            { className: \"acpt-btn acpt-btn-danger\", onClick: function onClick(e) {\n                    return handleDeleteTaxonomy(taxonomy);\n                } },\n            \"Yes, Delete it\"\n        ),\n        wp.element.createElement(\n            _reactRouterDom.Link,\n            {\n                to: \"/taxonomies\",\n                className: \"acpt-btn acpt-btn-primary-o\" },\n            \"Return back to list\"\n        )\n    );\n\n    return wp.element.createElement(\n        _Layout2.default,\n        null,\n        wp.element.createElement(_ActionsBar2.default, {\n            title: \"Delete \" + taxonomy,\n            actions: buttons\n        }),\n        wp.element.createElement(\n            \"main\",\n            null,\n            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{\n                    label: \"Registered Custom Post Types\",\n                    link: \"/\"\n                }, {\n                    label: \"Registered Taxonomies\",\n                    link: \"/taxonomies\"\n                }, {\n                    label: 'Delete Taxonomy'\n                }] }),\n            wp.element.createElement(\n                \"h3\",\n                { className: \"acpt-alert acpt-alert-warning\" },\n                \"You are going to delete \",\n                wp.element.createElement(\n                    \"strong\",\n                    null,\n                    taxonomy,\n                    \" \"\n                ),\n                \" taxonomy. Are you sure?\"\n            )\n        )\n    );\n};\n\nexports.default = DeleteTaxonomy;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/DeleteTaxonomy/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumbs = __webpack_require__(5827);
+
+var _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _reactToastify = __webpack_require__(9249);
+
+var _misc = __webpack_require__(3154);
+
+var _deleteTaxonomy = __webpack_require__(5613);
+
+var _Layout = __webpack_require__(3067);
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _ActionsBar = __webpack_require__(3700);
+
+var _ActionsBar2 = _interopRequireDefault(_ActionsBar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var DeleteTaxonomy = function DeleteTaxonomy() {
+
+    // manage global state
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.deleteTaxonomyReducer;
+    }),
+        errors = _useSelector.errors,
+        success = _useSelector.success,
+        loading = _useSelector.loading;
+
+    // manage local state
+
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        taxonomy = _useParams.taxonomy;
+
+    var didMountRef = (0, _react.useRef)(false);
+
+    (0, _react.useEffect)(function () {
+        (0, _misc.metaTitle)("Delete " + taxonomy);
+    }, []);
+
+    // manage redirect
+    var history = (0, _reactRouterDom.useHistory)();
+
+    // manage delete
+    var handleDeleteTaxonomy = function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(taxonomy) {
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.next = 2;
+                            return dispatch((0, _deleteTaxonomy.deleteTaxonomy)(taxonomy));
+
+                        case 2:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined);
+        }));
+
+        return function handleDeleteTaxonomy(_x) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+
+    // handle delete outcome
+    (0, _react.useEffect)(function () {
+        if (didMountRef.current) {
+            if (!loading) {
+                if (success) {
+                    history.push('/taxonomies');
+                    _reactToastify.toast.success("Taxonomy successfully deleted");
+                }
+
+                if (errors.length > 0) {
+                    errors.map(function (error) {
+                        _reactToastify.toast.error(error);
+                    });
+                }
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [loading]);
+
+    var buttons = wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "a",
+            { className: "acpt-btn acpt-btn-danger", onClick: function onClick(e) {
+                    return handleDeleteTaxonomy(taxonomy);
+                } },
+            "Yes, Delete it"
+        ),
+        wp.element.createElement(
+            _reactRouterDom.Link,
+            {
+                to: "/taxonomies",
+                className: "acpt-btn acpt-btn-primary-o" },
+            "Return back to list"
+        )
+    );
+
+    return wp.element.createElement(
+        _Layout2.default,
+        null,
+        wp.element.createElement(_ActionsBar2.default, {
+            title: "Delete " + taxonomy,
+            actions: buttons
+        }),
+        wp.element.createElement(
+            "main",
+            null,
+            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
+                    label: "Registered Custom Post Types",
+                    link: "/"
+                }, {
+                    label: "Registered Taxonomies",
+                    link: "/taxonomies"
+                }, {
+                    label: 'Delete Taxonomy'
+                }] }),
+            wp.element.createElement(
+                "h3",
+                { className: "acpt-alert acpt-alert-warning" },
+                "You are going to delete ",
+                wp.element.createElement(
+                    "strong",
+                    null,
+                    taxonomy,
+                    " "
+                ),
+                " taxonomy. Are you sure?"
+            )
+        )
+    );
+};
+
+exports.default = DeleteTaxonomy;
 
 /***/ }),
 
@@ -20,7 +172,49 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumb = function Breadcrumb(_ref) {\n    var label = _ref.label,\n        link = _ref.link,\n        isLast = _ref.isLast;\n\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"li\",\n            { className: isLast ? 'current' : '' },\n            link ? wp.element.createElement(\n                _reactRouterDom.Link,\n                { to: link },\n                label\n            ) : label\n        ),\n        !isLast && wp.element.createElement(\n            \"span\",\n            { className: \"separator\" },\n            wp.element.createElement(_react3.Icon, { icon: \"bx:bx-chevron-right\", color: \"#aaa\", width: \"18px\" })\n        )\n    );\n};\n\nexports.default = Breadcrumb;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/Breadcrumb.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumb = function Breadcrumb(_ref) {
+    var label = _ref.label,
+        link = _ref.link,
+        isLast = _ref.isLast;
+
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "li",
+            { className: isLast ? 'current' : '' },
+            link ? wp.element.createElement(
+                _reactRouterDom.Link,
+                { to: link },
+                label
+            ) : label
+        ),
+        !isLast && wp.element.createElement(
+            "span",
+            { className: "separator" },
+            wp.element.createElement(_react3.Icon, { icon: "bx:bx-chevron-right", color: "#aaa", width: "18px" })
+        )
+    );
+};
+
+exports.default = Breadcrumb;
 
 /***/ }),
 
@@ -28,7 +222,44 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumb = __webpack_require__(6512);\n\nvar _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumbs = function Breadcrumbs(_ref) {\n    var crumbs = _ref.crumbs;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-breadcrumbs\" },\n        crumbs.length > 0 && wp.element.createElement(\n            \"ul\",\n            null,\n            crumbs.map(function (crumb, index) {\n                return wp.element.createElement(_Breadcrumb2.default, {\n                    label: crumb.label,\n                    link: crumb.link,\n                    isLast: index + 1 === crumbs.length,\n                    key: index\n                });\n            })\n        )\n    );\n};\n\nexports.default = Breadcrumbs;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumb = __webpack_require__(6512);
+
+var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumbs = function Breadcrumbs(_ref) {
+    var crumbs = _ref.crumbs;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-breadcrumbs" },
+        crumbs.length > 0 && wp.element.createElement(
+            "ul",
+            null,
+            crumbs.map(function (crumb, index) {
+                return wp.element.createElement(_Breadcrumb2.default, {
+                    label: crumb.label,
+                    link: crumb.link,
+                    isLast: index + 1 === crumbs.length,
+                    key: index
+                });
+            })
+        )
+    );
+};
+
+exports.default = Breadcrumbs;
 
 /***/ }),
 
@@ -36,7 +267,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.deleteTaxonomy = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _deleteTaxonomyActions = __webpack_require__(4279);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar deleteTaxonomy = exports.deleteTaxonomy = function deleteTaxonomy(taxonomy) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _deleteTaxonomyActions.deleteTaxonomyInProgress)(taxonomy));\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('deleteTaxonomyAction', taxonomy ? { taxonomy: taxonomy } : {});\n\n                        case 4:\n                            res = _context.sent;\n\n                            res.success === true ? dispatch((0, _deleteTaxonomyActions.deleteTaxonomySuccess)()) : dispatch((0, _deleteTaxonomyActions.deleteTaxonomyFailure)(res.error));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _deleteTaxonomyActions.deleteTaxonomyFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/deleteTaxonomy.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.deleteTaxonomy = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _deleteTaxonomyActions = __webpack_require__(4279);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var deleteTaxonomy = exports.deleteTaxonomy = function deleteTaxonomy(taxonomy) {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var res;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _deleteTaxonomyActions.deleteTaxonomyInProgress)(taxonomy));
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('deleteTaxonomyAction', taxonomy ? { taxonomy: taxonomy } : {});
+
+                        case 4:
+                            res = _context.sent;
+
+                            res.success === true ? dispatch((0, _deleteTaxonomyActions.deleteTaxonomySuccess)()) : dispatch((0, _deleteTaxonomyActions.deleteTaxonomyFailure)(res.error));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _deleteTaxonomyActions.deleteTaxonomyFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -44,8 +327,54 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n/**\n * Change document's <title>\n * @param title\n */\nvar metaTitle = exports.metaTitle = function metaTitle(title) {\n    var originalDocumentTitle = document.title.split(\"‹\");\n    document.title = title + ' \\u2039 ' + originalDocumentTitle[1];\n};\n\n/**\n * Add current class to admin menu link\n * @param link\n */\nvar changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {\n\n    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');\n\n    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {\n        var links = currentValue.getElementsByTagName('a');\n\n        for (var i = 0; i < links.length; i++) {\n            var elem = links[i];\n            var href = elem.getAttribute(\"href\");\n            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;\n\n            if (toCompare === href) {\n                currentValue.classList.add(\"current\");\n            } else {\n                currentValue.classList.remove(\"current\");\n            }\n        }\n    });\n};\n\nvar refreshPage = exports.refreshPage = function refreshPage() {\n    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n\n    setTimeout(function () {\n        window.location.reload();\n    }, timeout);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/misc.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+/**
+ * Change document's <title>
+ * @param title
+ */
+var metaTitle = exports.metaTitle = function metaTitle(title) {
+    var originalDocumentTitle = document.title.split("‹");
+    document.title = title + ' \u2039 ' + originalDocumentTitle[1];
+};
+
+/**
+ * Add current class to admin menu link
+ * @param link
+ */
+var changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {
+
+    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
+
+    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {
+        var links = currentValue.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            var elem = links[i];
+            var href = elem.getAttribute("href");
+            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;
+
+            if (toCompare === href) {
+                currentValue.classList.add("current");
+            } else {
+                currentValue.classList.remove("current");
+            }
+        }
+    });
+};
+
+var refreshPage = exports.refreshPage = function refreshPage() {
+    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    setTimeout(function () {
+        window.location.reload();
+    }, timeout);
+};
 
 /***/ })
 
 }]);
+//# sourceMappingURL=237.js.map

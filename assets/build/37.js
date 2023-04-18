@@ -1,18 +1,76 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[37],{
 
 /***/ 3979:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar WooCommerceFieldsMiniTable = function WooCommerceFieldsMiniTable(_ref) {\n    var id = _ref.id,\n        elements = _ref.elements;\n\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-table-responsive\" },\n        wp.element.createElement(\n            \"table\",\n            { className: \"acpt-minitable\" },\n            wp.element.createElement(\n                \"tr\",\n                null,\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Name\"\n                ),\n                wp.element.createElement(\n                    \"th\",\n                    null,\n                    \"Type\"\n                )\n            ),\n            elements.map(function (element) {\n                return wp.element.createElement(\n                    \"tr\",\n                    null,\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        element.name\n                    ),\n                    wp.element.createElement(\n                        \"td\",\n                        null,\n                        element.type\n                    )\n                );\n            })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"minitable-buttons\" },\n            wp.element.createElement(\n                \"a\",\n                { href: \"#/product-data/product/fields/\" + id },\n                \"Manage\"\n            )\n        )\n    );\n};\n\nexports.default = WooCommerceFieldsMiniTable;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/WooCommerceProductData/WooCommerceFieldsMiniTable.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WooCommerceFieldsMiniTable = function WooCommerceFieldsMiniTable(_ref) {
+    var id = _ref.id,
+        elements = _ref.elements;
+
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-table-responsive" },
+        wp.element.createElement(
+            "table",
+            { className: "acpt-minitable" },
+            wp.element.createElement(
+                "tr",
+                null,
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Name"
+                ),
+                wp.element.createElement(
+                    "th",
+                    null,
+                    "Type"
+                )
+            ),
+            elements.map(function (element) {
+                return wp.element.createElement(
+                    "tr",
+                    null,
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        element.name
+                    ),
+                    wp.element.createElement(
+                        "td",
+                        null,
+                        element.type
+                    )
+                );
+            })
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "minitable-buttons" },
+            wp.element.createElement(
+                "a",
+                { href: "#/product-data/product/fields/" + id },
+                "Manage"
+            )
+        )
+    );
+};
+
+exports.default = WooCommerceFieldsMiniTable;
 
 /***/ }),
 
@@ -20,7 +78,204 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\n__webpack_require__(2107);\n\nvar _Boolean = __webpack_require__(9904);\n\nvar _Boolean2 = _interopRequireDefault(_Boolean);\n\nvar _WooCommerceProductDataVisibility = __webpack_require__(8670);\n\nvar _WooCommerceProductDataVisibility2 = _interopRequireDefault(_WooCommerceProductDataVisibility);\n\nvar _WooCommerceFieldsMiniTable = __webpack_require__(3979);\n\nvar _WooCommerceFieldsMiniTable2 = _interopRequireDefault(_WooCommerceFieldsMiniTable);\n\nvar _Tippy = __webpack_require__(5825);\n\nvar _Tippy2 = _interopRequireDefault(_Tippy);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar WooCommerceProductDataListElement = function WooCommerceProductDataListElement(_ref) {\n    var id = _ref.id,\n        element = _ref.element;\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            'tr',\n            null,\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                wp.element.createElement(\n                    'strong',\n                    null,\n                    element.name\n                ),\n                wp.element.createElement(\n                    'div',\n                    { className: 'element-buttons' },\n                    wp.element.createElement(\n                        'a',\n                        { href: '#/product-data/product/view/' + id },\n                        'View'\n                    ),\n                    '\\xA0',\n                    wp.element.createElement(\n                        'a',\n                        { href: '#/product-data/product/edit/' + id },\n                        'Edit'\n                    ),\n                    '\\xA0',\n                    wp.element.createElement(\n                        'a',\n                        { href: '#/product-data/product/delete/' + id },\n                        'Delete'\n                    )\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                wp.element.createElement('span', {\n                    className: 'wcicon-lg wcicon-' + element.icon.icon,\n                    style: {\n                        color: \"#7e9ebd\",\n                        fontSize: \"18px\"\n                    }\n                })\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                wp.element.createElement(_Boolean2.default, { status: element.showInUI })\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                wp.element.createElement(_WooCommerceProductDataVisibility2.default, { visibility: element.visibility })\n            ),\n            wp.element.createElement(\n                'td',\n                { className: 'backend' },\n                element.fields.length > 0 ? wp.element.createElement(\n                    _Tippy2.default,\n                    {\n                        placement: 'top',\n                        html: wp.element.createElement(_WooCommerceFieldsMiniTable2.default, { id: element.id, elements: element.fields })\n                    },\n                    wp.element.createElement(\n                        _reactRouterDom.Link,\n                        {\n                            to: '/product-data/product/fields/' + element.id,\n                            className: 'acpt-btn acpt-btn-sm no-border acpt-btn-info-o'\n                        },\n                        'Manage'\n                    )\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    {\n                        to: '/product-data/product/fields/' + element.id,\n                        className: 'acpt-btn acpt-btn-sm no-border acpt-btn-primary-o'\n                    },\n                    'Create'\n                )\n            )\n        )\n    );\n};\n\nexports.default = WooCommerceProductDataListElement;\n\n// import React from 'react';\n// import {Link} from 'react-router-dom'\n// import {Icon} from \"@iconify/react\";\n// import '../../../scss/woocommerce.scss';\n// import Boolean from \"../../reusable/Boolean\";\n// import WooCommerceProductDataVisibility from \"../../reusable/WooCommerceProductDataVisibility\";\n// import Tippy from \"../../reusable/Tippy\";\n// import WooCommerceFieldsMiniTable from \"./WooCommerceFieldsMiniTable\";\n//\n// const WooCommerceProductDataListElement = ({id, element}) => {\n//     return (\n//         <React.Fragment>\n//             <tr>\n//                 <td className=\"backend\">\n//                     <strong>{element.name}</strong>\n//                     <div className=\"element-buttons\">\n//                         <a href={`#/product-data/product/view/${id}`}>\n//                             View\n//                         </a>\n//                         &nbsp;\n//                         <a href={`#/product-data/product/edit/${id}`}>\n//                             Edit\n//                         </a>\n//                         &nbsp;\n//                         <a href={`#/product-data/product/delete/${id}`}>\n//                             Delete\n//                         </a>\n//                     </div>\n//                 </td>\n//                 <td className=\"backend\">\n//                     <span className={`wcicon-lg wcicon-${element.icon.icon}`} />\n//                 </td>\n//                 <td className=\"backend\">\n//                     <Boolean status={element.showInUI}/>\n//                 </td>\n//                 <td className=\"backend\">\n//                     <WooCommerceProductDataVisibility visibility={element.visibility} />\n//                 </td>\n//                 <td className=\"backend\">\n//                     {element.fields.length > 0\n//                         ?\n//                         <Tippy\n//                             placement='top'\n//                             html={(\n//                                 <WooCommerceFieldsMiniTable id={element.id} elements={element.fields}/>\n//                             )}\n//                         >\n//                             <Link\n//                                 to={`/product-data/product/fields/${element.id}`}\n//                                 className=\"acpt-btn acpt-btn-sm acpt-btn-info-o\"\n//                             >\n//                                 <Icon icon=\"bx:bxs-inbox\" width=\"18px\"/>\n//                                 &nbsp;\n//                                 Manage\n//                             </Link>\n//                         </Tippy>\n//                         :\n//                         <Link\n//                             to={`/product-data/product/fields/${element.id}`}\n//                             className=\"acpt-btn acpt-btn-sm acpt-btn-primary-o\"\n//                         >\n//                             <Icon icon=\"bx:bxs-inbox\" width=\"18px\"/>\n//                             &nbsp;\n//                             Create\n//                         </Link>\n//                     }\n//                 </td>\n//             </tr>\n//         </React.Fragment>\n//     );\n// };\n//\n// export default WooCommerceProductDataListElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/WooCommerceProductData/WooCommerceProductDataListElement.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+__webpack_require__(2107);
+
+var _Boolean = __webpack_require__(9904);
+
+var _Boolean2 = _interopRequireDefault(_Boolean);
+
+var _WooCommerceProductDataVisibility = __webpack_require__(8670);
+
+var _WooCommerceProductDataVisibility2 = _interopRequireDefault(_WooCommerceProductDataVisibility);
+
+var _WooCommerceFieldsMiniTable = __webpack_require__(3979);
+
+var _WooCommerceFieldsMiniTable2 = _interopRequireDefault(_WooCommerceFieldsMiniTable);
+
+var _Tippy = __webpack_require__(5825);
+
+var _Tippy2 = _interopRequireDefault(_Tippy);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WooCommerceProductDataListElement = function WooCommerceProductDataListElement(_ref) {
+    var id = _ref.id,
+        element = _ref.element;
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            'tr',
+            null,
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                wp.element.createElement(
+                    'strong',
+                    null,
+                    element.name
+                ),
+                wp.element.createElement(
+                    'div',
+                    { className: 'element-buttons' },
+                    wp.element.createElement(
+                        'a',
+                        { href: '#/product-data/product/view/' + id },
+                        'View'
+                    ),
+                    '\xA0',
+                    wp.element.createElement(
+                        'a',
+                        { href: '#/product-data/product/edit/' + id },
+                        'Edit'
+                    ),
+                    '\xA0',
+                    wp.element.createElement(
+                        'a',
+                        { href: '#/product-data/product/delete/' + id },
+                        'Delete'
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                wp.element.createElement('span', {
+                    className: 'wcicon-lg wcicon-' + element.icon.icon,
+                    style: {
+                        color: "#7e9ebd",
+                        fontSize: "18px"
+                    }
+                })
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                wp.element.createElement(_Boolean2.default, { status: element.showInUI })
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                wp.element.createElement(_WooCommerceProductDataVisibility2.default, { visibility: element.visibility })
+            ),
+            wp.element.createElement(
+                'td',
+                { className: 'backend' },
+                element.fields.length > 0 ? wp.element.createElement(
+                    _Tippy2.default,
+                    {
+                        placement: 'top',
+                        html: wp.element.createElement(_WooCommerceFieldsMiniTable2.default, { id: element.id, elements: element.fields })
+                    },
+                    wp.element.createElement(
+                        _reactRouterDom.Link,
+                        {
+                            to: '/product-data/product/fields/' + element.id,
+                            className: 'acpt-btn acpt-btn-sm no-border acpt-btn-info-o'
+                        },
+                        'Manage'
+                    )
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    {
+                        to: '/product-data/product/fields/' + element.id,
+                        className: 'acpt-btn acpt-btn-sm no-border acpt-btn-primary-o'
+                    },
+                    'Create'
+                )
+            )
+        )
+    );
+};
+
+exports.default = WooCommerceProductDataListElement;
+
+// import React from 'react';
+// import {Link} from 'react-router-dom'
+// import {Icon} from "@iconify/react";
+// import '../../../scss/woocommerce.scss';
+// import Boolean from "../../reusable/Boolean";
+// import WooCommerceProductDataVisibility from "../../reusable/WooCommerceProductDataVisibility";
+// import Tippy from "../../reusable/Tippy";
+// import WooCommerceFieldsMiniTable from "./WooCommerceFieldsMiniTable";
+//
+// const WooCommerceProductDataListElement = ({id, element}) => {
+//     return (
+//         <React.Fragment>
+//             <tr>
+//                 <td className="backend">
+//                     <strong>{element.name}</strong>
+//                     <div className="element-buttons">
+//                         <a href={`#/product-data/product/view/${id}`}>
+//                             View
+//                         </a>
+//                         &nbsp;
+//                         <a href={`#/product-data/product/edit/${id}`}>
+//                             Edit
+//                         </a>
+//                         &nbsp;
+//                         <a href={`#/product-data/product/delete/${id}`}>
+//                             Delete
+//                         </a>
+//                     </div>
+//                 </td>
+//                 <td className="backend">
+//                     <span className={`wcicon-lg wcicon-${element.icon.icon}`} />
+//                 </td>
+//                 <td className="backend">
+//                     <Boolean status={element.showInUI}/>
+//                 </td>
+//                 <td className="backend">
+//                     <WooCommerceProductDataVisibility visibility={element.visibility} />
+//                 </td>
+//                 <td className="backend">
+//                     {element.fields.length > 0
+//                         ?
+//                         <Tippy
+//                             placement='top'
+//                             html={(
+//                                 <WooCommerceFieldsMiniTable id={element.id} elements={element.fields}/>
+//                             )}
+//                         >
+//                             <Link
+//                                 to={`/product-data/product/fields/${element.id}`}
+//                                 className="acpt-btn acpt-btn-sm acpt-btn-info-o"
+//                             >
+//                                 <Icon icon="bx:bxs-inbox" width="18px"/>
+//                                 &nbsp;
+//                                 Manage
+//                             </Link>
+//                         </Tippy>
+//                         :
+//                         <Link
+//                             to={`/product-data/product/fields/${element.id}`}
+//                             className="acpt-btn acpt-btn-sm acpt-btn-primary-o"
+//                         >
+//                             <Icon icon="bx:bxs-inbox" width="18px"/>
+//                             &nbsp;
+//                             Create
+//                         </Link>
+//                     }
+//                 </td>
+//             </tr>
+//         </React.Fragment>
+//     );
+// };
+//
+// export default WooCommerceProductDataListElement;
 
 /***/ }),
 
@@ -28,7 +283,235 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumbs = __webpack_require__(5827);\n\nvar _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _misc = __webpack_require__(3154);\n\nvar _fetchWooCommerceProductData = __webpack_require__(7338);\n\nvar _Spinner = __webpack_require__(7410);\n\nvar _Spinner2 = _interopRequireDefault(_Spinner);\n\nvar _Pagination = __webpack_require__(1222);\n\nvar _Pagination2 = _interopRequireDefault(_Pagination);\n\nvar _WooCommerceProductDataListElement = __webpack_require__(7914);\n\nvar _WooCommerceProductDataListElement2 = _interopRequireDefault(_WooCommerceProductDataListElement);\n\nvar _objects = __webpack_require__(4040);\n\nvar _Layout = __webpack_require__(3067);\n\nvar _Layout2 = _interopRequireDefault(_Layout);\n\nvar _ActionsBar = __webpack_require__(3700);\n\nvar _ActionsBar2 = _interopRequireDefault(_ActionsBar);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar WooCommerceProductDataList = function WooCommerceProductDataList() {\n\n    // manage global state\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchWooCommerceProductDataReducer;\n    }),\n        fetched = _useSelector.fetched,\n        loading = _useSelector.loading;\n\n    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchSettingsReducer;\n    }),\n        settingsLoading = _useSelector2.loading,\n        settings = _useSelector2.fetched;\n\n    // manage local state\n\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        page = _useParams.page;\n\n    var didMountRef = (0, _react.useRef)(false);\n\n    var _useState = (0, _react.useState)(null),\n        _useState2 = _slicedToArray(_useState, 2),\n        fetchedSuccess = _useState2[0],\n        setFetchedSuccess = _useState2[1];\n\n    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;\n    var totalPages = Math.ceil(fetched.length / perPage);\n\n    (0, _react.useEffect)(function () {\n        (0, _misc.metaTitle)(\"WooCommerce product data\");\n        (0, _misc.changeCurrentAdminMenuLink)('');\n        dispatch((0, _fetchWooCommerceProductData.fetchWooCommerceProductData)({\n            page: page ? page : 1,\n            perPage: perPage\n        }));\n    }, [page]);\n\n    // handle fetch outcome\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!loading) {\n                setFetchedSuccess(true);\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [loading]);\n\n    if (!fetchedSuccess) {\n        return wp.element.createElement(_Spinner2.default, null);\n    }\n\n    var actions = wp.element.createElement(\n        _reactRouterDom.Link,\n        {\n            to: \"/product-data/product/add\",\n            className: \"acpt-btn acpt-btn-primary\"\n        },\n        \"Add product data\"\n    );\n\n    return wp.element.createElement(\n        _Layout2.default,\n        null,\n        wp.element.createElement(_ActionsBar2.default, {\n            title: \"WooCommerce product data\",\n            actions: actions\n        }),\n        wp.element.createElement(\n            \"main\",\n            null,\n            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{\n                    label: \"Registered Custom Post Types\",\n                    link: \"/\"\n                }, {\n                    label: \"WooCommerce product data\"\n                }] }),\n            fetched.length > 0 ? wp.element.createElement(\n                \"div\",\n                { className: \"acpt-card\" },\n                wp.element.createElement(\n                    \"div\",\n                    { className: \"acpt-card__header borderless\" },\n                    wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-card__inner\" },\n                        fetched.length,\n                        \" record(s) found\"\n                    )\n                ),\n                wp.element.createElement(\n                    \"div\",\n                    { className: \"acpt-card__body\" },\n                    wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-table-responsive\" },\n                        wp.element.createElement(\n                            \"table\",\n                            { className: \"acpt-table\" },\n                            wp.element.createElement(\n                                \"thead\",\n                                null,\n                                wp.element.createElement(\n                                    \"tr\",\n                                    null,\n                                    wp.element.createElement(\n                                        \"th\",\n                                        { className: \"grey backend\", colSpan: 5 },\n                                        \"Backend UI\"\n                                    )\n                                ),\n                                wp.element.createElement(\n                                    \"tr\",\n                                    null,\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Name\"\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Icon\"\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Show on UI\"\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        null,\n                                        \"Visibility\"\n                                    ),\n                                    wp.element.createElement(\n                                        \"th\",\n                                        { className: \"with-border\" },\n                                        \"Fields\"\n                                    )\n                                )\n                            ),\n                            wp.element.createElement(\n                                \"tbody\",\n                                null,\n                                fetched.map(function (element) {\n                                    return wp.element.createElement(_WooCommerceProductDataListElement2.default, { id: element.id, key: element.id, element: element });\n                                })\n                            )\n                        )\n                    )\n                ),\n                totalPages > 1 && wp.element.createElement(\n                    \"div\",\n                    { className: \"acpt-card__footer\", style: { border: \"none\" } },\n                    wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-card__inner\" },\n                        wp.element.createElement(_Pagination2.default, { currentPage: page ? page : 1, perPage: perPage, records: fetched.length })\n                    )\n                )\n            ) : wp.element.createElement(\n                \"div\",\n                { className: \"acpt-alert acpt-alert-secondary\" },\n                \"No product data found. \",\n                wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: \"/product-data/product/add\" },\n                    \"Register the first one\"\n                ),\n                \"!\"\n            )\n        )\n    );\n};\n\nexports.default = WooCommerceProductDataList;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/WooCommerceProductData/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumbs = __webpack_require__(5827);
+
+var _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);
+
+var _reactRedux = __webpack_require__(4494);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _misc = __webpack_require__(3154);
+
+var _fetchWooCommerceProductData = __webpack_require__(7338);
+
+var _Spinner = __webpack_require__(7410);
+
+var _Spinner2 = _interopRequireDefault(_Spinner);
+
+var _Pagination = __webpack_require__(1222);
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
+var _WooCommerceProductDataListElement = __webpack_require__(7914);
+
+var _WooCommerceProductDataListElement2 = _interopRequireDefault(_WooCommerceProductDataListElement);
+
+var _objects = __webpack_require__(4040);
+
+var _Layout = __webpack_require__(3067);
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _ActionsBar = __webpack_require__(3700);
+
+var _ActionsBar2 = _interopRequireDefault(_ActionsBar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WooCommerceProductDataList = function WooCommerceProductDataList() {
+
+    // manage global state
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchWooCommerceProductDataReducer;
+    }),
+        fetched = _useSelector.fetched,
+        loading = _useSelector.loading;
+
+    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchSettingsReducer;
+    }),
+        settingsLoading = _useSelector2.loading,
+        settings = _useSelector2.fetched;
+
+    // manage local state
+
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        page = _useParams.page;
+
+    var didMountRef = (0, _react.useRef)(false);
+
+    var _useState = (0, _react.useState)(null),
+        _useState2 = _slicedToArray(_useState, 2),
+        fetchedSuccess = _useState2[0],
+        setFetchedSuccess = _useState2[1];
+
+    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;
+    var totalPages = Math.ceil(fetched.length / perPage);
+
+    (0, _react.useEffect)(function () {
+        (0, _misc.metaTitle)("WooCommerce product data");
+        (0, _misc.changeCurrentAdminMenuLink)('');
+        dispatch((0, _fetchWooCommerceProductData.fetchWooCommerceProductData)({
+            page: page ? page : 1,
+            perPage: perPage
+        }));
+    }, [page]);
+
+    // handle fetch outcome
+    (0, _react.useEffect)(function () {
+        if (didMountRef.current) {
+            if (!loading) {
+                setFetchedSuccess(true);
+            }
+        } else {
+            didMountRef.current = true;
+        }
+    }, [loading]);
+
+    if (!fetchedSuccess) {
+        return wp.element.createElement(_Spinner2.default, null);
+    }
+
+    var actions = wp.element.createElement(
+        _reactRouterDom.Link,
+        {
+            to: "/product-data/product/add",
+            className: "acpt-btn acpt-btn-primary"
+        },
+        "Add product data"
+    );
+
+    return wp.element.createElement(
+        _Layout2.default,
+        null,
+        wp.element.createElement(_ActionsBar2.default, {
+            title: "WooCommerce product data",
+            actions: actions
+        }),
+        wp.element.createElement(
+            "main",
+            null,
+            wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
+                    label: "Registered Custom Post Types",
+                    link: "/"
+                }, {
+                    label: "WooCommerce product data"
+                }] }),
+            fetched.length > 0 ? wp.element.createElement(
+                "div",
+                { className: "acpt-card" },
+                wp.element.createElement(
+                    "div",
+                    { className: "acpt-card__header borderless" },
+                    wp.element.createElement(
+                        "div",
+                        { className: "acpt-card__inner" },
+                        fetched.length,
+                        " record(s) found"
+                    )
+                ),
+                wp.element.createElement(
+                    "div",
+                    { className: "acpt-card__body" },
+                    wp.element.createElement(
+                        "div",
+                        { className: "acpt-table-responsive" },
+                        wp.element.createElement(
+                            "table",
+                            { className: "acpt-table" },
+                            wp.element.createElement(
+                                "thead",
+                                null,
+                                wp.element.createElement(
+                                    "tr",
+                                    null,
+                                    wp.element.createElement(
+                                        "th",
+                                        { className: "grey backend", colSpan: 5 },
+                                        "Backend UI"
+                                    )
+                                ),
+                                wp.element.createElement(
+                                    "tr",
+                                    null,
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Name"
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Icon"
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Show on UI"
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        null,
+                                        "Visibility"
+                                    ),
+                                    wp.element.createElement(
+                                        "th",
+                                        { className: "with-border" },
+                                        "Fields"
+                                    )
+                                )
+                            ),
+                            wp.element.createElement(
+                                "tbody",
+                                null,
+                                fetched.map(function (element) {
+                                    return wp.element.createElement(_WooCommerceProductDataListElement2.default, { id: element.id, key: element.id, element: element });
+                                })
+                            )
+                        )
+                    )
+                ),
+                totalPages > 1 && wp.element.createElement(
+                    "div",
+                    { className: "acpt-card__footer", style: { border: "none" } },
+                    wp.element.createElement(
+                        "div",
+                        { className: "acpt-card__inner" },
+                        wp.element.createElement(_Pagination2.default, { currentPage: page ? page : 1, perPage: perPage, records: fetched.length })
+                    )
+                )
+            ) : wp.element.createElement(
+                "div",
+                { className: "acpt-alert acpt-alert-secondary" },
+                "No product data found. ",
+                wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: "/product-data/product/add" },
+                    "Register the first one"
+                ),
+                "!"
+            )
+        )
+    );
+};
+
+exports.default = WooCommerceProductDataList;
 
 /***/ }),
 
@@ -36,7 +519,31 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Boolean = function Boolean(_ref) {\n    var status = _ref.status;\n\n\n    var icon = status ? 'bx:bx-check' : 'bx:bx-x';\n    var color = status ? '#02c39a' : '#f94144';\n\n    return wp.element.createElement(_react3.Icon, { icon: icon, color: color, width: '18px' });\n};\n\nexports.default = Boolean;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Boolean/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Boolean = function Boolean(_ref) {
+    var status = _ref.status;
+
+
+    var icon = status ? 'bx:bx-check' : 'bx:bx-x';
+    var color = status ? '#02c39a' : '#f94144';
+
+    return wp.element.createElement(_react3.Icon, { icon: icon, color: color, width: '18px' });
+};
+
+exports.default = Boolean;
 
 /***/ }),
 
@@ -44,7 +551,49 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumb = function Breadcrumb(_ref) {\n    var label = _ref.label,\n        link = _ref.link,\n        isLast = _ref.isLast;\n\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"li\",\n            { className: isLast ? 'current' : '' },\n            link ? wp.element.createElement(\n                _reactRouterDom.Link,\n                { to: link },\n                label\n            ) : label\n        ),\n        !isLast && wp.element.createElement(\n            \"span\",\n            { className: \"separator\" },\n            wp.element.createElement(_react3.Icon, { icon: \"bx:bx-chevron-right\", color: \"#aaa\", width: \"18px\" })\n        )\n    );\n};\n\nexports.default = Breadcrumb;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/Breadcrumb.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+var _react3 = __webpack_require__(6229);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumb = function Breadcrumb(_ref) {
+    var label = _ref.label,
+        link = _ref.link,
+        isLast = _ref.isLast;
+
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            "li",
+            { className: isLast ? 'current' : '' },
+            link ? wp.element.createElement(
+                _reactRouterDom.Link,
+                { to: link },
+                label
+            ) : label
+        ),
+        !isLast && wp.element.createElement(
+            "span",
+            { className: "separator" },
+            wp.element.createElement(_react3.Icon, { icon: "bx:bx-chevron-right", color: "#aaa", width: "18px" })
+        )
+    );
+};
+
+exports.default = Breadcrumb;
 
 /***/ }),
 
@@ -52,7 +601,44 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumb = __webpack_require__(6512);\n\nvar _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumbs = function Breadcrumbs(_ref) {\n    var crumbs = _ref.crumbs;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-breadcrumbs\" },\n        crumbs.length > 0 && wp.element.createElement(\n            \"ul\",\n            null,\n            crumbs.map(function (crumb, index) {\n                return wp.element.createElement(_Breadcrumb2.default, {\n                    label: crumb.label,\n                    link: crumb.link,\n                    isLast: index + 1 === crumbs.length,\n                    key: index\n                });\n            })\n        )\n    );\n};\n\nexports.default = Breadcrumbs;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Breadcrumb = __webpack_require__(6512);
+
+var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Breadcrumbs = function Breadcrumbs(_ref) {
+    var crumbs = _ref.crumbs;
+
+    return wp.element.createElement(
+        "div",
+        { className: "acpt-breadcrumbs" },
+        crumbs.length > 0 && wp.element.createElement(
+            "ul",
+            null,
+            crumbs.map(function (crumb, index) {
+                return wp.element.createElement(_Breadcrumb2.default, {
+                    label: crumb.label,
+                    link: crumb.link,
+                    isLast: index + 1 === crumbs.length,
+                    key: index
+                });
+            })
+        )
+    );
+};
+
+exports.default = Breadcrumbs;
 
 /***/ }),
 
@@ -60,7 +646,58 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Pagination = function Pagination(_ref) {\n    var currentPage = _ref.currentPage,\n        perPage = _ref.perPage,\n        records = _ref.records;\n\n\n    var totalPages = Math.ceil(records / perPage);\n    var rows = [];\n    for (var i = 1; i <= totalPages; i++) {\n        rows.push(i);\n    }\n\n    if (rows.length < 2) {\n        return wp.element.createElement(_react2.default.Fragment, null);\n    }\n\n    return wp.element.createElement(\n        \"ul\",\n        { className: \"acpt-pagination\" },\n        rows.map(function (row) {\n            return wp.element.createElement(\n                \"li\",\n                null,\n                row == currentPage ? wp.element.createElement(\n                    \"span\",\n                    null,\n                    row\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: \"/\" + row },\n                    row\n                )\n            );\n        })\n    );\n};\n\nexports.default = Pagination;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Pagination/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(886);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Pagination = function Pagination(_ref) {
+    var currentPage = _ref.currentPage,
+        perPage = _ref.perPage,
+        records = _ref.records;
+
+
+    var totalPages = Math.ceil(records / perPage);
+    var rows = [];
+    for (var i = 1; i <= totalPages; i++) {
+        rows.push(i);
+    }
+
+    if (rows.length < 2) {
+        return wp.element.createElement(_react2.default.Fragment, null);
+    }
+
+    return wp.element.createElement(
+        "ul",
+        { className: "acpt-pagination" },
+        rows.map(function (row) {
+            return wp.element.createElement(
+                "li",
+                null,
+                row == currentPage ? wp.element.createElement(
+                    "span",
+                    null,
+                    row
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: "/" + row },
+                    row
+                )
+            );
+        })
+    );
+};
+
+exports.default = Pagination;
 
 /***/ }),
 
@@ -68,7 +705,61 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar WooCommerceProductDataVisibility = function WooCommerceProductDataVisibility(_ref) {\n    var visibility = _ref.visibility;\n\n\n    var vis = [];\n\n    if (visibility.includes('show_if_simple')) {\n        vis.push(\"Show in simple products\");\n    }\n    if (visibility.includes('show_if_variable')) {\n        vis.push(\"Show in variable products\");\n    }\n    if (visibility.includes('show_if_grouped')) {\n        vis.push(\"Show in grouped products\");\n    }\n    if (visibility.includes('show_if_external')) {\n        vis.push(\"Show in external products\");\n    }\n    if (visibility.includes('hide_if_virtual')) {\n        vis.push(\"Hide in virtual products\");\n    }\n    if (visibility.includes('hide_if_external')) {\n        vis.push(\"Hide in external products\");\n    }\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        vis.map(function (vis) {\n            return wp.element.createElement(\n                'span',\n                { className: 'acpt-badge mr-1' },\n                wp.element.createElement(\n                    'span',\n                    { className: 'label' },\n                    vis\n                )\n            );\n        })\n    );\n};\n\nexports.default = WooCommerceProductDataVisibility;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/WooCommerceProductDataVisibility/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WooCommerceProductDataVisibility = function WooCommerceProductDataVisibility(_ref) {
+    var visibility = _ref.visibility;
+
+
+    var vis = [];
+
+    if (visibility.includes('show_if_simple')) {
+        vis.push("Show in simple products");
+    }
+    if (visibility.includes('show_if_variable')) {
+        vis.push("Show in variable products");
+    }
+    if (visibility.includes('show_if_grouped')) {
+        vis.push("Show in grouped products");
+    }
+    if (visibility.includes('show_if_external')) {
+        vis.push("Show in external products");
+    }
+    if (visibility.includes('hide_if_virtual')) {
+        vis.push("Hide in virtual products");
+    }
+    if (visibility.includes('hide_if_external')) {
+        vis.push("Hide in external products");
+    }
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        vis.map(function (vis) {
+            return wp.element.createElement(
+                'span',
+                { className: 'acpt-badge mr-1' },
+                wp.element.createElement(
+                    'span',
+                    { className: 'label' },
+                    vis
+                )
+            );
+        })
+    );
+};
+
+exports.default = WooCommerceProductDataVisibility;
 
 /***/ }),
 
@@ -76,7 +767,59 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.fetchWooCommerceProductData = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchWooCommerceProductDataActions = __webpack_require__(6208);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchWooCommerceProductData = exports.fetchWooCommerceProductData = function fetchWooCommerceProductData(meta) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataInProgress)());\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('fetchWooCommerceProductDataAction', meta);\n\n                        case 4:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataSuccess)(fetched));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/fetchWooCommerceProductData.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.fetchWooCommerceProductData = undefined;
+
+var _ajax = __webpack_require__(7569);
+
+var _fetchWooCommerceProductDataActions = __webpack_require__(6208);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchWooCommerceProductData = exports.fetchWooCommerceProductData = function fetchWooCommerceProductData(meta) {
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
+            var fetched;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.prev = 0;
+
+                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataInProgress)());
+                            _context.next = 4;
+                            return (0, _ajax.wpAjaxRequest)('fetchWooCommerceProductDataAction', meta);
+
+                        case 4:
+                            fetched = _context.sent;
+
+                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataSuccess)(fetched));
+                            _context.next = 11;
+                            break;
+
+                        case 8:
+                            _context.prev = 8;
+                            _context.t0 = _context["catch"](0);
+
+                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataFailure)(_context.t0));
+
+                        case 11:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined, [[0, 8]]);
+        }));
+
+        return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+        };
+    }();
+};
 
 /***/ }),
 
@@ -84,7 +827,52 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n/**\n * Change document's <title>\n * @param title\n */\nvar metaTitle = exports.metaTitle = function metaTitle(title) {\n    var originalDocumentTitle = document.title.split(\"‹\");\n    document.title = title + ' \\u2039 ' + originalDocumentTitle[1];\n};\n\n/**\n * Add current class to admin menu link\n * @param link\n */\nvar changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {\n\n    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');\n\n    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {\n        var links = currentValue.getElementsByTagName('a');\n\n        for (var i = 0; i < links.length; i++) {\n            var elem = links[i];\n            var href = elem.getAttribute(\"href\");\n            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;\n\n            if (toCompare === href) {\n                currentValue.classList.add(\"current\");\n            } else {\n                currentValue.classList.remove(\"current\");\n            }\n        }\n    });\n};\n\nvar refreshPage = exports.refreshPage = function refreshPage() {\n    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n\n    setTimeout(function () {\n        window.location.reload();\n    }, timeout);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/misc.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+/**
+ * Change document's <title>
+ * @param title
+ */
+var metaTitle = exports.metaTitle = function metaTitle(title) {
+    var originalDocumentTitle = document.title.split("‹");
+    document.title = title + ' \u2039 ' + originalDocumentTitle[1];
+};
+
+/**
+ * Add current class to admin menu link
+ * @param link
+ */
+var changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {
+
+    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
+
+    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {
+        var links = currentValue.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            var elem = links[i];
+            var href = elem.getAttribute("href");
+            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;
+
+            if (toCompare === href) {
+                currentValue.classList.add("current");
+            } else {
+                currentValue.classList.remove("current");
+            }
+        }
+    });
+};
+
+var refreshPage = exports.refreshPage = function refreshPage() {
+    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    setTimeout(function () {
+        window.location.reload();
+    }, timeout);
+};
 
 /***/ }),
 
@@ -92,8 +880,11 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/scss/woocommerce.scss?");
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ })
 
 }]);
+//# sourceMappingURL=37.js.map
