@@ -1126,6 +1126,7 @@ class MetaRepository
                             %s,
                             %s,
                             %s,
+                            %s,
                             %d
                         ) ON DUPLICATE KEY UPDATE 
                             `post_type` = %s,
@@ -1160,6 +1161,7 @@ class MetaRepository
                             %s,
                             %s,
                             %s,
+                            %s,
                             %d
                         ) ON DUPLICATE KEY UPDATE 
                             `taxonomy` = %s,
@@ -1190,6 +1192,7 @@ class MetaRepository
                             `meta_box_label`,
                             `sort`
                         ) VALUES (
+                            %s,
                             %s,
                             %s,
                             %d
