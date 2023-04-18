@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {duplicateMetaBox, updateBoxTitle} from "../../../../redux/actions/metaStateActions";
+import {updateBoxTitle, updateBoxLabel} from "../../../../redux/actions/metaStateActions";
 import {filterById, filterByLabel} from "../../../../utils/objects";
 import {Icon} from "@iconify/react";
 import Tippy from "../../../reusable/Tippy";
 import DeleteMetaBoxModal from "./Modal/DeleteMetaBoxModal";
-import {metaTypes} from "../../../../constants/metaTypes";
 
 const MetaBoxHeader = ({id, position, dragHandle, toggleClose, isSaved}) => {
 
@@ -21,36 +20,17 @@ const MetaBoxHeader = ({id, position, dragHandle, toggleClose, isSaved}) => {
         dispatch(updateBoxTitle(id, title));
     };
 
+    const handleLabelChange = (label) => {
+        dispatch(updateBoxLabel(id, label));
+    };
+
     // manage local state
-    const value = (typeof box !== 'undefined') ? box.title : 'Meta box title';
+    const value = (typeof box !== 'undefined') ? box.title : 'meta_box_title';
+    const label = (typeof box !== 'undefined') ? box.label : null;
     const [titleIsVisible, setTitleIsVisible] = useState(true);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-    const hasErrors = typeof validationErrors[id] !== 'undefined';
-
-    // handle double click on title
-    const node = useRef();
-    const handleDoubleClickOnTitle = (event) => {
-        if (event.key === 'Enter' || event.key === 'Escape') {
-            setTitleIsVisible(true);
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    };
-
-    // handle click outside title box
-    const handleOutsideTitleBoxClick = e => {
-        if (node.current !== e.target) {
-            setTitleIsVisible(true);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener("mousedown", handleOutsideTitleBoxClick);
-
-        return () => {
-            document.removeEventListener("mousedown", handleOutsideTitleBoxClick);
-        };
-    }, []);
+    const titleErrors = (typeof validationErrors[id] !== 'undefined') ? validationErrors[id].filter((element) => { return element.type === 'title'; }) : [];
+    const labelErrors = (typeof validationErrors[id] !== 'undefined') ? validationErrors[id].filter((element) => { return element.type === 'label'; }) : [];
 
     // if using keyboard navigation set title visible
     useEffect(() => {
@@ -75,32 +55,46 @@ const MetaBoxHeader = ({id, position, dragHandle, toggleClose, isSaved}) => {
                                 {(titleIsVisible) ? (
                                     <span
                                         className="flex-center"
-                                        onDoubleClick={() => {
-                                            setTitleIsVisible(false)
-                                        }}
                                     >
-                                        {value ? <span>{value}</span> : <span className="error-message">You must specify a title</span> }
-                                        <span className="ml-1 acpt-badge">
-                                            <span className="label">
-                                                {box.fields ? box.fields.length : 0}
-                                            </span>
-                                        </span>
-                                        <span className="double-click-tip">
-                                            <Icon icon="akar-icons:arrow-left" width="12px" />
-                                            double click on title to edit
-                                        </span>
+                                        {value && <span>{value}</span>}
+                                        {label && <span className="label">{label}</span>}
+                                        <a
+                                            href="#"
+                                            className="acpt-btn acpt-btn-xs acpt-btn-primary-o"
+                                            onClick={e => {
+                                                e.preventDefault();
+                                                setTitleIsVisible(false);
+                                            }}
+                                        >
+                                            Edit
+                                        </a>
                                     </span>
                                 ) : (
-                                    <input
-                                        id={`meta_box_title_${box.id}`}
-                                        ref={node}
-                                        type='text'
-                                        className={`acpt-form-control ${hasErrors && 'has-errors'}`}
-                                        defaultValue={value}
-                                        autoFocus={true}
-                                        onChange={(event) => handleTitleChange(event.target.value) }
-                                        onKeyDown={(event) => handleDoubleClickOnTitle(event)}
-                                    />
+                                    <div className="font-normal flex-center">
+                                        <input
+                                            id={`meta_box_title_${box.id}`}
+                                            type='text'
+                                            className={`acpt-form-control acpt-form-control-sm ${titleErrors.length > 0 && 'has-errors'}`}
+                                            placeholder="Box name. Allowed chars: [a-z0-9_-]"
+                                            defaultValue={value}
+                                            autoFocus={true}
+                                            onChange={(event) => handleTitleChange(event.target.value) }
+                                        />
+                                        <input
+                                            id={`meta_box_label_${box.id}`}
+                                            type="text"
+                                            className={`acpt-form-control acpt-form-control-sm ${labelErrors.length > 0 && 'has-errors'}`}
+                                            placeholder="Box label, non latin chars allowed."
+                                            defaultValue={label}
+                                            onChange={(event) => handleLabelChange(event.target.value) }
+                                        />
+                                        <button
+                                            className="acpt-btn acpt-btn-primary-o"
+                                            onClick={() => setTitleIsVisible(true)}
+                                        >
+                                            Save
+                                        </button>
+                                    </div>
                                 )}
                             </h3>
                             <div className="icons">
@@ -130,10 +124,21 @@ const MetaBoxHeader = ({id, position, dragHandle, toggleClose, isSaved}) => {
                                 </Tippy>
                             </div>
                         </div>
-                        {hasErrors && (
+                        {titleErrors.length > 0 && (
                             <div className="errors">
                                 <ul>
-                                    {validationErrors[id].map((validationError, index)=>(
+                                    {titleErrors.map((validationError, index)=>(
+                                        <li key={index}>
+                                            {validationError.message}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        {labelErrors.length > 0 && (
+                            <div className="errors">
+                                <ul>
+                                    {labelErrors.map((validationError, index)=>(
                                         <li key={index}>
                                             {validationError.message}
                                         </li>

@@ -312,6 +312,12 @@ a {
     padding: calc(#{$gutter} / 4) calc(#{$gutter} / 2.6);
   }
 
+  &.acpt-btn-xs {
+    font-size: .80rem;
+    font-weight: normal;
+    padding: calc(#{$gutter} / 5) calc(#{$gutter} / 3);
+  }
+
   &.acpt-btn-primary {
     color: $btn-color !important;
     background: $wordpress-primary-color;
@@ -885,6 +891,18 @@ main {
 /*========== META BOX ==========*/
 
 .acpt-meta-box {
+
+  h3 {
+    .label {
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: $text-color-light;
+
+      @media screen and (max-width: 767px){
+        display: none;
+      }
+    }
+  }
 
   .errors {
     margin: 10px 0 0 17px;
@@ -1751,6 +1769,14 @@ input.acpt-form-control.has-errors {
 .acpt-form-control:disabled {
   opacity: .5;
   cursor: not-allowed;
+}
+
+.acpt-form-control {
+  &.acpt-form-control-sm {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    min-height: 38px;
+  }
 }
 
 div.has-errors > div:first-of-type {

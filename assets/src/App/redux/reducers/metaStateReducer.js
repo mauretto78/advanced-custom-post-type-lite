@@ -26,6 +26,7 @@ import {
     TOGGLE_FIELD_IS_REQUIRED,
     TOGGLE_FIELD_SHOW_IN_ARCHIVE,
     UPDATE_BOX_TITLE,
+    UPDATE_BOX_LABEL,
     UPDATE_FIELD_DEFAULT_VALUE,
     UPDATE_FIELD_DESCRIPTION,
     UPDATE_FIELD_NAME,
@@ -33,9 +34,8 @@ import {
     UPDATE_OPTION_LABEL,
     UPDATE_OPTION_VALUE,
 } from "../actions/metaStateActions";
-import {filterById, isset, upsert} from "../../utils/objects";
+import {filterById, isset} from "../../utils/objects";
 import {TEXT} from "../../constants/fields";
-import {isBidirectional} from "../../utils/relations";
 import {v4 as uuidv4} from 'uuid';
 import {alphanumericallyValid, isAValidValueForThisType} from "../../utils/validation";
 
@@ -86,6 +86,16 @@ const stateIsValid = (state) => {
 
         if(box.title === '' || box.title === null){
             validationErrors.push({id: box.id, type: 'title', message: `Box title cannot be black`});
+            errors++;
+        }
+
+        if(true !== alphanumericallyValid(box.title)){
+            validationErrors.push({id: box.id, type: 'title', message: "Box title is not alphanumerically [0-9a-zA-Z_-]"});
+            errors++;
+        }
+
+        if(box.label && box.label.length > maxLengthSupport){
+            validationErrors.push({id: box.id, type: 'label', message: `Box label too long (max ${maxLengthSupport} characters)`});
             errors++;
         }
 
@@ -180,7 +190,7 @@ export const metaStateReducer = ( state = initialState, action) => {
                     ...state.values,
                     {
                         id: id,
-                        title: 'Meta box title',
+                        title: 'meta_box_title',
                         belongsTo: payload.belongsTo,
                         find: payload.find,
                     }
@@ -684,6 +694,18 @@ export const metaStateReducer = ( state = initialState, action) => {
                 isSaved: false,
                 values: state.values.map(
                     (box) => box.id === payload.id ? {...box, title: payload.title} : box
+                )
+            });
+
+        /**
+         * Update box label
+         */
+        case UPDATE_BOX_LABEL:
+            return validateState({
+                ...state,
+                isSaved: false,
+                values: state.values.map(
+                    (box) => box.id === payload.id ? {...box, label: payload.label} : box
                 )
             });
 
