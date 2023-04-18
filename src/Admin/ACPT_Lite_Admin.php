@@ -496,7 +496,7 @@ class ACPT_Lite_Admin
 			$metaFields[] = $this->generateMetaBoxFieldArray($fieldModel);
 		}
 
-		$metaBoxGenerator->addMetaBox($metaBoxModel->getId(), $metaBoxModel->getName(), $postTypeName, $metaFields);
+		$metaBoxGenerator->addMetaBox($metaBoxModel, $postTypeName, $metaFields);
 	}
 
 	/**
