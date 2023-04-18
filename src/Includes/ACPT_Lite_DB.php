@@ -70,11 +70,18 @@ class ACPT_Lite_DB
 	 */
     private static function initConnection()
     {
-        $db = self::getInstance();
-        $db->dbConn = new \mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-        $db->dbConn->set_charset(DB_CHARSET);
+	    $host = explode(":", DB_HOST);
+	    $dbHost = $host[0];
+	    $dbPort = (isset($host[1])) ? $host[1] : null;
+	    $dbUser = DB_USER;
+	    $dbPassword = DB_PASSWORD;
+	    $dbName = DB_NAME;
 
-        return $db;
+	    $db = self::getInstance();
+	    $db->dbConn = new \mysqli($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
+	    $db->dbConn->set_charset(DB_CHARSET);
+
+	    return $db;
     }
 
     /**

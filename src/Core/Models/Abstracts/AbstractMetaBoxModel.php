@@ -19,6 +19,11 @@ abstract class AbstractMetaBoxModel extends AbstractModel
      */
     protected $name;
 
+	/**
+	 * @var string
+	 */
+	protected $label;
+
     /**
      * @var int
      */
@@ -73,6 +78,22 @@ abstract class AbstractMetaBoxModel extends AbstractModel
     {
         return $this->name;
     }
+
+	/**
+	 * @return string
+	 */
+	public function getLabel()
+	{
+		return $this->label;
+	}
+
+	/**
+	 * @param string $label
+	 */
+	public function changeLabel( $label )
+	{
+		$this->label = $label;
+	}
 
     /**
      * @param $sort

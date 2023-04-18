@@ -163,76 +163,72 @@ const CustomPostTypeList = () => {
                             <div className="acpt-table-responsive">
                                 <table className="acpt-table">
                                     <thead>
-                                    <tr>
-                                        <th className="grey backend with-border" colSpan={thereIsWooCommerce ? 7 : 6 }>Backend UI</th>
-                                        <th className="grey frontend" colSpan={2}>Frontend UI</th>
-                                    </tr>
-                                    <tr>
-                                        <th/>
-                                        <th>
-                                            Name
-                                        </th>
-                                        <th/>
-                                        <th>
-                                            Meta boxes
-                                            &nbsp;
-                                            <Tippy title="Associated meta boxes">
-                                                <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
-                                                </span>
-                                            </Tippy>
-                                        </th>
-                                        {thereIsWooCommerce === true && (
+                                        <tr>
+                                            <th/>
                                             <th>
-                                                Product data
+                                                Name
+                                            </th>
+                                            <th/>
+                                            <th>
+                                                Meta boxes
                                                 &nbsp;
-                                                <Tippy title="Associated WooCommerce product data">
+                                                <Tippy title="Associated meta boxes">
                                                     <span className="helper">
                                                         <Icon icon="bx:bx-help-circle" width="18px"/>
                                                     </span>
                                                 </Tippy>
                                             </th>
-                                        )}
-                                        <th>
-                                            Associated taxonomies
-                                            &nbsp;
-                                            <Tippy title="Associated taxonomies with the post">
-                                                <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
-                                                </span>
-                                            </Tippy>
-                                        </th>
-                                        <th className="with-border">
-                                            Post count
-                                            &nbsp;
-                                            <Tippy title="Published posts count">
-                                                <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
-                                                </span>
-                                            </Tippy>
-                                        </th>
-                                        <th className="text-center">
-                                            Archive template
-                                            &nbsp;
-                                            <Tippy title="The archive template for this custom post type">
-                                                <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
-                                                </span>
-                                            </Tippy>
-                                        </th>
-                                        <th className="text-center">
-                                            Single template
-                                            &nbsp;
-                                            <Tippy title="The single template for this custom post type">
-                                                <span className="helper">
-                                                    <Icon icon="bx:bx-help-circle" width="18px"/>
-                                                </span>
-                                            </Tippy>
-                                        </th>
-                                    </tr>
+                                            {thereIsWooCommerce === true && (
+                                                <th>
+                                                    Product data
+                                                    &nbsp;
+                                                    <Tippy title="Associated WooCommerce product data">
+                                                        <span className="helper">
+                                                            <Icon icon="bx:bx-help-circle" width="18px"/>
+                                                        </span>
+                                                    </Tippy>
+                                                </th>
+                                            )}
+                                            <th>
+                                                Associated taxonomies
+                                                &nbsp;
+                                                <Tippy title="Associated taxonomies with the post">
+                                                    <span className="helper">
+                                                        <Icon icon="bx:bx-help-circle" width="18px"/>
+                                                    </span>
+                                                </Tippy>
+                                            </th>
+                                            <th className="with-border">
+                                                Post count
+                                                &nbsp;
+                                                <Tippy title="Published posts count">
+                                                    <span className="helper">
+                                                        <Icon icon="bx:bx-help-circle" width="18px"/>
+                                                    </span>
+                                                </Tippy>
+                                            </th>
+                                            <th className="text-center">
+                                                Archive template
+                                                &nbsp;
+                                                <Tippy title="The archive template for this custom post type">
+                                                    <span className="helper">
+                                                        <Icon icon="bx:bx-help-circle" width="18px"/>
+                                                    </span>
+                                                </Tippy>
+                                            </th>
+                                            <th className="text-center">
+                                                Single template
+                                                &nbsp;
+                                                <Tippy title="The single template for this custom post type">
+                                                    <span className="helper">
+                                                        <Icon icon="bx:bx-help-circle" width="18px"/>
+                                                    </span>
+                                                </Tippy>
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    {fetched.map((element) => <CustomPostTypeListElement id={element.id} thereIsWooCommerce={thereIsWooCommerce} key={element.id} element={element} handeDeleteTemplate={handleDeleteTemplate} />)}
+                                        {fetched.map((element) => <CustomPostTypeListElement id={element.id} thereIsWooCommerce={thereIsWooCommerce} key={element.id} element={element} handeDeleteTemplate={handleDeleteTemplate} />)}
                                     </tbody>
                                 </table>
                             </div>

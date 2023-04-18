@@ -1,458 +1,18 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[449],{
 
 /***/ 4449:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Breadcrumbs = __webpack_require__(5827);
-
-var _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);
-
-var _reactRedux = __webpack_require__(4494);
-
-var _reactRouterDom = __webpack_require__(886);
-
-var _useUnsavedChangesWarning = __webpack_require__(9755);
-
-var _useUnsavedChangesWarning2 = _interopRequireDefault(_useUnsavedChangesWarning);
-
-var _misc = __webpack_require__(3154);
-
-var _fetchWooCommerceProductData = __webpack_require__(7338);
-
-var _Spinner = __webpack_require__(7410);
-
-var _Spinner2 = _interopRequireDefault(_Spinner);
-
-var _resetWooCommerceProductData = __webpack_require__(2663);
-
-var _Layout = __webpack_require__(3067);
-
-var _Layout2 = _interopRequireDefault(_Layout);
-
-var _ActionsBar = __webpack_require__(3700);
-
-var _ActionsBar2 = _interopRequireDefault(_ActionsBar);
-
-var _reactHookForm = __webpack_require__(930);
-
-var _objects = __webpack_require__(4040);
-
-var _woocommerce_icons = __webpack_require__(9132);
-
-var _reactToastify = __webpack_require__(9249);
-
-var _saveWooCommerceProductData = __webpack_require__(7322);
-
-var _InputText = __webpack_require__(7388);
-
-var _InputText2 = _interopRequireDefault(_InputText);
-
-var _ReactSelect = __webpack_require__(2762);
-
-var _ReactSelect2 = _interopRequireDefault(_ReactSelect);
-
-var _Checkboxes = __webpack_require__(2184);
-
-var _Checkboxes2 = _interopRequireDefault(_Checkboxes);
-
-var _InputSwitch = __webpack_require__(8195);
-
-var _InputSwitch2 = _interopRequireDefault(_InputSwitch);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var SaveWooCommerceProductData = function SaveWooCommerceProductData() {
-
-    // manage global state
-    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
-        return state.fetchWooCommerceProductDataReducer;
-    }),
-        fetched = _useSelector.fetched,
-        fetchingLoading = _useSelector.loading;
-
-    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {
-        return state.saveWooCommerceProductDataReducer;
-    }),
-        saveProductDataErrors = _useSelector2.errors,
-        success = _useSelector2.success,
-        loading = _useSelector2.loading;
-
-    var dispatch = (0, _reactRedux.useDispatch)();
-
-    // manage local state
-
-    var _useParams = (0, _reactRouterDom.useParams)(),
-        id = _useParams.id;
-
-    var _useUnsavedChangesWar = (0, _useUnsavedChangesWarning2.default)(),
-        _useUnsavedChangesWar2 = _slicedToArray(_useUnsavedChangesWar, 3),
-        Prompt = _useUnsavedChangesWar2[0],
-        setDirty = _useUnsavedChangesWar2[1],
-        setPristine = _useUnsavedChangesWar2[2];
-
-    var didMountRef = (0, _react.useRef)(false);
-
-    var _useState = (0, _react.useState)(null),
-        _useState2 = _slicedToArray(_useState, 2),
-        fetchedSuccess = _useState2[0],
-        setFetchedSuccess = _useState2[1];
-
-    (0, _react.useEffect)(function () {
-        if (id) {
-            (0, _misc.metaTitle)("Edit WooCommerce product data");
-            dispatch((0, _fetchWooCommerceProductData.fetchWooCommerceProductData)({
-                id: id
-            }));
-        } else {
-            (0, _misc.metaTitle)("Create new WooCommerce product data");
-            dispatch((0, _resetWooCommerceProductData.resetWooCommerceProductData)());
-        }
-        setDirty();
-    }, []);
-
-    var setPristineHandler = function setPristineHandler() {
-        setPristine();
-    };
-
-    (0, _react.useEffect)(function () {
-        if (didMountRef.current) {
-            if (!fetchingLoading) {
-                setFetchedSuccess(true);
-            }
-        } else {
-            didMountRef.current = true;
-        }
-    }, [fetchingLoading]);
-
-    // manage redirect
-    var history = (0, _reactRouterDom.useHistory)();
-
-    // handle form
-
-    var _useForm = (0, _reactHookForm.useForm)({
-        mode: 'all',
-        defaultValues: {
-            product_data_name: fetched.length > 0 ? fetched[0].name : null,
-            visibility: fetched.length > 0 ? fetched[0].visibility : null,
-            show_ui: fetched.length > 0 ? fetched[0].showInUI : true,
-            icon: fetched.length > 0 ? (0, _objects.filterByValue)(_woocommerce_icons.woocommerceIconsList, fetched[0].icon.value) : null
-        }
-    }),
-        control = _useForm.control,
-        register = _useForm.register,
-        handleSubmit = _useForm.handleSubmit,
-        _useForm$formState = _useForm.formState,
-        errors = _useForm$formState.errors,
-        isValid = _useForm$formState.isValid;
-
-    // handle form submission outcome
-
-
-    (0, _react.useEffect)(function () {
-        if (didMountRef.current) {
-            if (!loading) {
-                if (success) {
-                    history.push('/product-data/product');
-                    _reactToastify.toast.success("Product data successfully saved");
-                }
-
-                if (saveProductDataErrors.length > 0) {
-                    saveProductDataErrors.map(function (error) {
-                        _reactToastify.toast.error(error);
-                    });
-                }
-            }
-        } else {
-            didMountRef.current = true;
-        }
-    }, [loading]);
-
-    var onSubmit = function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
-            var icon, visibility;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            icon = {
-                                icon: data.icon.label.props.icon,
-                                value: data.icon.value
-                            };
-                            visibility = [];
-
-                            if (data.visibility_0) {
-                                visibility.push(data.visibility_0);
-                            }
-                            if (data.visibility_1) {
-                                visibility.push(data.visibility_1);
-                            }
-                            if (data.visibility_2) {
-                                visibility.push(data.visibility_2);
-                            }
-                            if (data.visibility_3) {
-                                visibility.push(data.visibility_3);
-                            }
-                            if (data.visibility_4) {
-                                visibility.push(data.visibility_4);
-                            }
-                            if (data.visibility_5) {
-                                visibility.push(data.visibility_5);
-                            }
-
-                            setPristineHandler();
-                            _context.next = 11;
-                            return dispatch((0, _saveWooCommerceProductData.saveWooCommerceProductData)({
-                                id: id ? id : null,
-                                product_data_name: data.product_data_name,
-                                icon: icon,
-                                visibility: visibility,
-                                show_ui: data.show_ui
-                            }));
-
-                        case 11:
-                        case "end":
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined);
-        }));
-
-        return function onSubmit(_x) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-
-    if (!fetchedSuccess) {
-        return wp.element.createElement(_Spinner2.default, null);
-    }
-
-    var actions = wp.element.createElement(
-        "button",
-        {
-            className: "acpt-btn acpt-btn-primary",
-            disabled: !isValid ? 'disabled' : ''
-        },
-        "Save"
-    );
-
-    return wp.element.createElement(
-        _Layout2.default,
-        null,
-        Prompt,
-        wp.element.createElement(
-            "form",
-            { onSubmit: handleSubmit(onSubmit) },
-            wp.element.createElement(_ActionsBar2.default, {
-                title: id ? "Edit WooCommerce product data" : "Create new WooCommerce product data",
-                actions: actions
-            }),
-            wp.element.createElement(
-                "main",
-                null,
-                wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{
-                        label: "Registered Custom Post Types",
-                        link: "/"
-                    }, {
-                        label: "WooCommerce product data",
-                        link: "/product-data/product"
-                    }, {
-                        label: id ? "Edit WooCommerce product data" : "Create new WooCommerce product data"
-                    }]
-                }),
-                wp.element.createElement(
-                    "div",
-                    { className: "acpt-card" },
-                    wp.element.createElement(
-                        "div",
-                        { className: "acpt-steps-wrapper" },
-                        wp.element.createElement(
-                            "div",
-                            { className: "acpt-card__inner" },
-                            wp.element.createElement(_InputText2.default, {
-                                id: "product_data_name",
-                                label: "Product data name",
-                                placeholder: "Product data name",
-                                defaultValue: null,
-                                description: "The product data name.",
-                                register: register,
-                                errors: errors,
-                                isRequired: true,
-                                validate: {
-                                    maxLength: {
-                                        value: 20,
-                                        message: "max length is 20"
-                                    },
-                                    required: "This field is mandatory"
-                                }
-                            }),
-                            wp.element.createElement(_ReactSelect2.default, {
-                                id: "icon",
-                                label: "Icon",
-                                placeholder: "Associated icon",
-                                description: "Displayed on the admin panel",
-                                control: control,
-                                defaultValue: fetched.length > 0 ? (0, _objects.filterByValue)(_woocommerce_icons.woocommerceIconsList, fetched[0].icon.value) : null,
-                                values: _woocommerce_icons.woocommerceIconsList,
-                                isRequired: true,
-                                validate: {
-                                    required: "This field is mandatory"
-                                }
-                            }),
-                            wp.element.createElement(_Checkboxes2.default, {
-                                id: "visibility",
-                                label: "visibility",
-                                wizard: "Visibility of product data",
-                                values: {
-                                    "Show in simple products": {
-                                        "value": "show_if_simple",
-                                        "checked": fetched.length > 0 ? fetched[0].visibility.includes("show_if_simple") : true
-                                    },
-                                    "Show in variable products": {
-                                        "value": "show_if_variable",
-                                        "checked": fetched.length > 0 ? fetched[0].visibility.includes("show_if_variable") : true
-                                    },
-                                    "Show in grouped products": {
-                                        "value": "show_if_grouped",
-                                        "checked": fetched.length > 0 ? fetched[0].visibility.includes("show_if_grouped") : true
-                                    },
-                                    "Show in external products": {
-                                        "value": "show_if_external",
-                                        "checked": fetched.length > 0 ? fetched[0].visibility.includes("show_if_external") : true
-                                    },
-                                    "Hide in virtual products": {
-                                        "value": "hide_if_virtual",
-                                        "checked": fetched.length > 0 ? fetched[0].visibility.includes("hide_if_virtual") : false
-                                    },
-                                    "Hide in external products": {
-                                        "value": "hide_if_external",
-                                        "checked": fetched.length > 0 ? fetched[0].visibility.includes("hide_if_external") : false
-                                    }
-                                },
-                                register: register,
-                                errors: errors
-                            }),
-                            wp.element.createElement(_InputSwitch2.default, {
-                                id: "show_ui",
-                                label: "Show in UI",
-                                description: "Show the product data on the front store page.",
-                                defaultValue: null,
-                                register: register,
-                                errors: errors
-                            })
-                        )
-                    )
-                )
-            )
-        )
-    );
-};
-
-exports.default = SaveWooCommerceProductData;
-
-// import React, {useEffect, useRef, useState} from 'react';
-// import Breadcrumbs from "../../reusable/Breadcrumbs";
-// import {Icon} from "@iconify/react";
-// import {useDispatch, useSelector} from "react-redux";
-// import Copyright from "../../reusable/Copyright";
-// import {useParams} from "react-router-dom";
-// import useUnsavedChangesWarning from "../../../hooks/useUnsavedChangesWarning";
-// import {metaTitle} from "../../../utils/misc";
-// import {fetchWooCommerceProductData} from "../../../redux/thunks/fetchWooCommerceProductData";
-// import Spinner from "../../reusable/Loader/Spinner";
-// import {resetWooCommerceProductData} from "../../../redux/thunks/resetWooCommerceProductData";
-// import SaveWooCommerceProductDataForm from "./SaveWooCommerceProductDataForm";
-//
-// const SaveWooCommerceProductData = () => {
-//
-//     // manage global state
-//     const {loading: fetchingLoading } = useSelector(state => state.fetchWooCommerceProductDataReducer);
-//     const dispatch = useDispatch();
-//
-//     // manage local state
-//     const {id} = useParams();
-//     const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();
-//     const didMountRef = useRef(false);
-//     const [fetchedSuccess, setFetchedSuccess] = useState(null);
-//
-//     useEffect(() => {
-//         if(id){
-//             metaTitle("Edit WooCommerce product data");
-//             dispatch(fetchWooCommerceProductData({
-//                 id: id
-//             }));
-//         } else {
-//             metaTitle("Create new WooCommerce product data");
-//             dispatch(resetWooCommerceProductData());
-//         }
-//         setDirty();
-//     }, []);
-//
-//     const setPristineHandler = () => {
-//         setPristine();
-//     };
-//
-//     useEffect(() => {
-//         if (didMountRef.current){
-//             if(!fetchingLoading){
-//                 setFetchedSuccess(true);
-//             }
-//         } else {
-//             didMountRef.current = true;
-//         }
-//     }, [fetchingLoading]);
-//
-//     if(!fetchedSuccess){
-//         return <Spinner/>;
-//     }
-//
-//     return (
-//         <div>
-//             <Breadcrumbs crumbs={[
-//                 {
-//                     label: "Registered Custom Post Types",
-//                     link: "/"
-//                 },
-//                 {
-//                     label: "WooCommerce product data",
-//                     link: "/product-data/product"
-//                 },
-//                 {
-//                     label: `Create new WooCommerce product data`
-//                 }
-//             ]}
-//             />
-//             {Prompt}
-//             <h1 className="acpt-title">
-//                 <Icon icon={id ? "bx:bx-edit" : "bx:bx-list-plus"} color="#02c39a" width="18px" />
-//                 &nbsp;
-//                 {id ? "Edit WooCommerce product data" : "Create new WooCommerce product data" }
-//             </h1>
-//             <div className="acpt-card">
-//                 <div className="acpt-steps-wrapper">
-//                     <SaveWooCommerceProductDataForm id={id} setPristineHandler={setPristineHandler}/>
-//                 </div>
-//             </div>
-//             <Copyright/>
-//         </div>
-//     );
-// };
-//
-// export default SaveWooCommerceProductData;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumbs = __webpack_require__(5827);\n\nvar _Breadcrumbs2 = _interopRequireDefault(_Breadcrumbs);\n\nvar _reactRedux = __webpack_require__(4494);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _useUnsavedChangesWarning = __webpack_require__(9755);\n\nvar _useUnsavedChangesWarning2 = _interopRequireDefault(_useUnsavedChangesWarning);\n\nvar _misc = __webpack_require__(3154);\n\nvar _fetchWooCommerceProductData = __webpack_require__(7338);\n\nvar _Spinner = __webpack_require__(7410);\n\nvar _Spinner2 = _interopRequireDefault(_Spinner);\n\nvar _resetWooCommerceProductData = __webpack_require__(2663);\n\nvar _Layout = __webpack_require__(3067);\n\nvar _Layout2 = _interopRequireDefault(_Layout);\n\nvar _ActionsBar = __webpack_require__(3700);\n\nvar _ActionsBar2 = _interopRequireDefault(_ActionsBar);\n\nvar _reactHookForm = __webpack_require__(930);\n\nvar _objects = __webpack_require__(4040);\n\nvar _woocommerce_icons = __webpack_require__(9132);\n\nvar _reactToastify = __webpack_require__(9249);\n\nvar _saveWooCommerceProductData = __webpack_require__(7322);\n\nvar _InputText = __webpack_require__(7388);\n\nvar _InputText2 = _interopRequireDefault(_InputText);\n\nvar _ReactSelect = __webpack_require__(2762);\n\nvar _ReactSelect2 = _interopRequireDefault(_ReactSelect);\n\nvar _Checkboxes = __webpack_require__(2184);\n\nvar _Checkboxes2 = _interopRequireDefault(_Checkboxes);\n\nvar _InputSwitch = __webpack_require__(8195);\n\nvar _InputSwitch2 = _interopRequireDefault(_InputSwitch);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar SaveWooCommerceProductData = function SaveWooCommerceProductData() {\n\n    // manage global state\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchWooCommerceProductDataReducer;\n    }),\n        fetched = _useSelector.fetched,\n        fetchingLoading = _useSelector.loading;\n\n    var _useSelector2 = (0, _reactRedux.useSelector)(function (state) {\n        return state.saveWooCommerceProductDataReducer;\n    }),\n        saveProductDataErrors = _useSelector2.errors,\n        success = _useSelector2.success,\n        loading = _useSelector2.loading;\n\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    // manage local state\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        id = _useParams.id;\n\n    var _useUnsavedChangesWar = (0, _useUnsavedChangesWarning2.default)(),\n        _useUnsavedChangesWar2 = _slicedToArray(_useUnsavedChangesWar, 3),\n        Prompt = _useUnsavedChangesWar2[0],\n        setDirty = _useUnsavedChangesWar2[1],\n        setPristine = _useUnsavedChangesWar2[2];\n\n    var didMountRef = (0, _react.useRef)(false);\n\n    var _useState = (0, _react.useState)(null),\n        _useState2 = _slicedToArray(_useState, 2),\n        fetchedSuccess = _useState2[0],\n        setFetchedSuccess = _useState2[1];\n\n    (0, _react.useEffect)(function () {\n        if (id) {\n            (0, _misc.metaTitle)(\"Edit WooCommerce product data\");\n            dispatch((0, _fetchWooCommerceProductData.fetchWooCommerceProductData)({\n                id: id\n            }));\n        } else {\n            (0, _misc.metaTitle)(\"Create new WooCommerce product data\");\n            dispatch((0, _resetWooCommerceProductData.resetWooCommerceProductData)());\n        }\n        setDirty();\n    }, []);\n\n    var setPristineHandler = function setPristineHandler() {\n        setPristine();\n    };\n\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!fetchingLoading) {\n                setFetchedSuccess(true);\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [fetchingLoading]);\n\n    // manage redirect\n    var history = (0, _reactRouterDom.useHistory)();\n\n    // handle form\n\n    var _useForm = (0, _reactHookForm.useForm)({\n        mode: 'all',\n        defaultValues: {\n            product_data_name: fetched.length > 0 ? fetched[0].name : null,\n            visibility: fetched.length > 0 ? fetched[0].visibility : null,\n            show_ui: fetched.length > 0 ? fetched[0].showInUI : true,\n            icon: fetched.length > 0 ? (0, _objects.filterByValue)(_woocommerce_icons.woocommerceIconsList, fetched[0].icon.value) : null\n        }\n    }),\n        control = _useForm.control,\n        register = _useForm.register,\n        handleSubmit = _useForm.handleSubmit,\n        _useForm$formState = _useForm.formState,\n        errors = _useForm$formState.errors,\n        isValid = _useForm$formState.isValid;\n\n    // handle form submission outcome\n\n\n    (0, _react.useEffect)(function () {\n        if (didMountRef.current) {\n            if (!loading) {\n                if (success) {\n                    history.push('/product-data/product');\n                    _reactToastify.toast.success(\"Product data successfully saved\");\n                }\n\n                if (saveProductDataErrors.length > 0) {\n                    saveProductDataErrors.map(function (error) {\n                        _reactToastify.toast.error(error);\n                    });\n                }\n            }\n        } else {\n            didMountRef.current = true;\n        }\n    }, [loading]);\n\n    var onSubmit = function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {\n            var icon, visibility;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            icon = {\n                                icon: data.icon.label.props.icon,\n                                value: data.icon.value\n                            };\n                            visibility = [];\n\n                            if (data.visibility_0) {\n                                visibility.push(data.visibility_0);\n                            }\n                            if (data.visibility_1) {\n                                visibility.push(data.visibility_1);\n                            }\n                            if (data.visibility_2) {\n                                visibility.push(data.visibility_2);\n                            }\n                            if (data.visibility_3) {\n                                visibility.push(data.visibility_3);\n                            }\n                            if (data.visibility_4) {\n                                visibility.push(data.visibility_4);\n                            }\n                            if (data.visibility_5) {\n                                visibility.push(data.visibility_5);\n                            }\n\n                            setPristineHandler();\n                            _context.next = 11;\n                            return dispatch((0, _saveWooCommerceProductData.saveWooCommerceProductData)({\n                                id: id ? id : null,\n                                product_data_name: data.product_data_name,\n                                icon: icon,\n                                visibility: visibility,\n                                show_ui: data.show_ui\n                            }));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined);\n        }));\n\n        return function onSubmit(_x) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n\n    if (!fetchedSuccess) {\n        return wp.element.createElement(_Spinner2.default, null);\n    }\n\n    var actions = wp.element.createElement(\n        \"button\",\n        {\n            className: \"acpt-btn acpt-btn-primary\",\n            disabled: !isValid ? 'disabled' : ''\n        },\n        \"Save\"\n    );\n\n    return wp.element.createElement(\n        _Layout2.default,\n        null,\n        Prompt,\n        wp.element.createElement(\n            \"form\",\n            { onSubmit: handleSubmit(onSubmit) },\n            wp.element.createElement(_ActionsBar2.default, {\n                title: id ? \"Edit WooCommerce product data\" : \"Create new WooCommerce product data\",\n                actions: actions\n            }),\n            wp.element.createElement(\n                \"main\",\n                null,\n                wp.element.createElement(_Breadcrumbs2.default, { crumbs: [{\n                        label: \"Registered Custom Post Types\",\n                        link: \"/\"\n                    }, {\n                        label: \"WooCommerce product data\",\n                        link: \"/product-data/product\"\n                    }, {\n                        label: id ? \"Edit WooCommerce product data\" : \"Create new WooCommerce product data\"\n                    }]\n                }),\n                wp.element.createElement(\n                    \"div\",\n                    { className: \"acpt-card\" },\n                    wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-steps-wrapper\" },\n                        wp.element.createElement(\n                            \"div\",\n                            { className: \"acpt-card__inner\" },\n                            wp.element.createElement(_InputText2.default, {\n                                id: \"product_data_name\",\n                                label: \"Product data name\",\n                                placeholder: \"Product data name\",\n                                defaultValue: null,\n                                description: \"The product data name.\",\n                                register: register,\n                                errors: errors,\n                                isRequired: true,\n                                validate: {\n                                    maxLength: {\n                                        value: 20,\n                                        message: \"max length is 20\"\n                                    },\n                                    required: \"This field is mandatory\"\n                                }\n                            }),\n                            wp.element.createElement(_ReactSelect2.default, {\n                                id: \"icon\",\n                                label: \"Icon\",\n                                placeholder: \"Associated icon\",\n                                description: \"Displayed on the admin panel\",\n                                control: control,\n                                defaultValue: fetched.length > 0 ? (0, _objects.filterByValue)(_woocommerce_icons.woocommerceIconsList, fetched[0].icon.value) : null,\n                                values: _woocommerce_icons.woocommerceIconsList,\n                                isRequired: true,\n                                validate: {\n                                    required: \"This field is mandatory\"\n                                }\n                            }),\n                            wp.element.createElement(_Checkboxes2.default, {\n                                id: \"visibility\",\n                                label: \"visibility\",\n                                wizard: \"Visibility of product data\",\n                                values: {\n                                    \"Show in simple products\": {\n                                        \"value\": \"show_if_simple\",\n                                        \"checked\": fetched.length > 0 ? fetched[0].visibility.includes(\"show_if_simple\") : true\n                                    },\n                                    \"Show in variable products\": {\n                                        \"value\": \"show_if_variable\",\n                                        \"checked\": fetched.length > 0 ? fetched[0].visibility.includes(\"show_if_variable\") : true\n                                    },\n                                    \"Show in grouped products\": {\n                                        \"value\": \"show_if_grouped\",\n                                        \"checked\": fetched.length > 0 ? fetched[0].visibility.includes(\"show_if_grouped\") : true\n                                    },\n                                    \"Show in external products\": {\n                                        \"value\": \"show_if_external\",\n                                        \"checked\": fetched.length > 0 ? fetched[0].visibility.includes(\"show_if_external\") : true\n                                    },\n                                    \"Hide in virtual products\": {\n                                        \"value\": \"hide_if_virtual\",\n                                        \"checked\": fetched.length > 0 ? fetched[0].visibility.includes(\"hide_if_virtual\") : false\n                                    },\n                                    \"Hide in external products\": {\n                                        \"value\": \"hide_if_external\",\n                                        \"checked\": fetched.length > 0 ? fetched[0].visibility.includes(\"hide_if_external\") : false\n                                    }\n                                },\n                                register: register,\n                                errors: errors\n                            }),\n                            wp.element.createElement(_InputSwitch2.default, {\n                                id: \"show_ui\",\n                                label: \"Show in UI\",\n                                description: \"Show the product data on the front store page.\",\n                                defaultValue: null,\n                                register: register,\n                                errors: errors\n                            })\n                        )\n                    )\n                )\n            )\n        )\n    );\n};\n\nexports.default = SaveWooCommerceProductData;\n\n// import React, {useEffect, useRef, useState} from 'react';\n// import Breadcrumbs from \"../../reusable/Breadcrumbs\";\n// import {Icon} from \"@iconify/react\";\n// import {useDispatch, useSelector} from \"react-redux\";\n// import Copyright from \"../../reusable/Copyright\";\n// import {useParams} from \"react-router-dom\";\n// import useUnsavedChangesWarning from \"../../../hooks/useUnsavedChangesWarning\";\n// import {metaTitle} from \"../../../utils/misc\";\n// import {fetchWooCommerceProductData} from \"../../../redux/thunks/fetchWooCommerceProductData\";\n// import Spinner from \"../../reusable/Loader/Spinner\";\n// import {resetWooCommerceProductData} from \"../../../redux/thunks/resetWooCommerceProductData\";\n// import SaveWooCommerceProductDataForm from \"./SaveWooCommerceProductDataForm\";\n//\n// const SaveWooCommerceProductData = () => {\n//\n//     // manage global state\n//     const {loading: fetchingLoading } = useSelector(state => state.fetchWooCommerceProductDataReducer);\n//     const dispatch = useDispatch();\n//\n//     // manage local state\n//     const {id} = useParams();\n//     const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();\n//     const didMountRef = useRef(false);\n//     const [fetchedSuccess, setFetchedSuccess] = useState(null);\n//\n//     useEffect(() => {\n//         if(id){\n//             metaTitle(\"Edit WooCommerce product data\");\n//             dispatch(fetchWooCommerceProductData({\n//                 id: id\n//             }));\n//         } else {\n//             metaTitle(\"Create new WooCommerce product data\");\n//             dispatch(resetWooCommerceProductData());\n//         }\n//         setDirty();\n//     }, []);\n//\n//     const setPristineHandler = () => {\n//         setPristine();\n//     };\n//\n//     useEffect(() => {\n//         if (didMountRef.current){\n//             if(!fetchingLoading){\n//                 setFetchedSuccess(true);\n//             }\n//         } else {\n//             didMountRef.current = true;\n//         }\n//     }, [fetchingLoading]);\n//\n//     if(!fetchedSuccess){\n//         return <Spinner/>;\n//     }\n//\n//     return (\n//         <div>\n//             <Breadcrumbs crumbs={[\n//                 {\n//                     label: \"Registered Custom Post Types\",\n//                     link: \"/\"\n//                 },\n//                 {\n//                     label: \"WooCommerce product data\",\n//                     link: \"/product-data/product\"\n//                 },\n//                 {\n//                     label: `Create new WooCommerce product data`\n//                 }\n//             ]}\n//             />\n//             {Prompt}\n//             <h1 className=\"acpt-title\">\n//                 <Icon icon={id ? \"bx:bx-edit\" : \"bx:bx-list-plus\"} color=\"#02c39a\" width=\"18px\" />\n//                 &nbsp;\n//                 {id ? \"Edit WooCommerce product data\" : \"Create new WooCommerce product data\" }\n//             </h1>\n//             <div className=\"acpt-card\">\n//                 <div className=\"acpt-steps-wrapper\">\n//                     <SaveWooCommerceProductDataForm id={id} setPristineHandler={setPristineHandler}/>\n//                 </div>\n//             </div>\n//             <Copyright/>\n//         </div>\n//     );\n// };\n//\n// export default SaveWooCommerceProductData;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/pages/SaveWooCommerceProductData/index.js?");
 
 /***/ }),
 
@@ -460,98 +20,7 @@ exports.default = SaveWooCommerceProductData;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Checkboxes = function Checkboxes(_ref) {
-    var id = _ref.id,
-        label = _ref.label,
-        validate = _ref.validate,
-        register = _ref.register,
-        errors = _ref.errors,
-        values = _ref.values,
-        isRequired = _ref.isRequired,
-        description = _ref.description,
-        wizard = _ref.wizard;
-
-
-    var error = errors[id];
-
-    return wp.element.createElement(
-        "div",
-        { className: "acpt-form-group" },
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-label-wrapper" },
-            wp.element.createElement(
-                "label",
-                { htmlFor: id },
-                label,
-                isRequired && wp.element.createElement(
-                    "span",
-                    { className: "required" },
-                    "*"
-                )
-            ),
-            wizard && wp.element.createElement("span", { className: "wizard", dangerouslySetInnerHTML: { __html: wizard } })
-        ),
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-control-wrapper" },
-            wp.element.createElement(
-                "div",
-                { className: "acpt-checkboxes-wrapper" },
-                Object.keys(values).map(function (keyName, index) {
-                    return wp.element.createElement(
-                        "div",
-                        { className: "acpt-checkbox", key: keyName },
-                        wp.element.createElement("input", _extends({
-                            id: id + "_" + index,
-                            value: values[keyName]['value'],
-                            defaultChecked: values[keyName]['checked'],
-                            type: "checkbox",
-                            "aria-invalid": error ? "true" : "false",
-                            className: "form-control " + (error ? 'has-errors' : '')
-                        }, register(id + "_" + index, _extends({}, validate)))),
-                        wp.element.createElement(
-                            "label",
-                            { htmlFor: id + "_" + index },
-                            keyName
-                        )
-                    );
-                }),
-                error && wp.element.createElement(
-                    "div",
-                    { className: "invalid-feedback" },
-                    error.message
-                )
-            ),
-            description && wp.element.createElement(
-                "span",
-                { className: "description" },
-                description
-            ),
-            error && wp.element.createElement(
-                "div",
-                { className: "invalid-feedback" },
-                error.message
-            )
-        )
-    );
-};
-
-exports.default = Checkboxes;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Checkboxes = function Checkboxes(_ref) {\n    var id = _ref.id,\n        label = _ref.label,\n        validate = _ref.validate,\n        register = _ref.register,\n        errors = _ref.errors,\n        values = _ref.values,\n        isRequired = _ref.isRequired,\n        description = _ref.description,\n        wizard = _ref.wizard;\n\n\n    var error = errors[id];\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-form-group\" },\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-label-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { htmlFor: id },\n                label,\n                isRequired && wp.element.createElement(\n                    \"span\",\n                    { className: \"required\" },\n                    \"*\"\n                )\n            ),\n            wizard && wp.element.createElement(\"span\", { className: \"wizard\", dangerouslySetInnerHTML: { __html: wizard } })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-control-wrapper\" },\n            wp.element.createElement(\n                \"div\",\n                { className: \"acpt-checkboxes-wrapper\" },\n                Object.keys(values).map(function (keyName, index) {\n                    return wp.element.createElement(\n                        \"div\",\n                        { className: \"acpt-checkbox\", key: keyName },\n                        wp.element.createElement(\"input\", _extends({\n                            id: id + \"_\" + index,\n                            value: values[keyName]['value'],\n                            defaultChecked: values[keyName]['checked'],\n                            type: \"checkbox\",\n                            \"aria-invalid\": error ? \"true\" : \"false\",\n                            className: \"form-control \" + (error ? 'has-errors' : '')\n                        }, register(id + \"_\" + index, _extends({}, validate)))),\n                        wp.element.createElement(\n                            \"label\",\n                            { htmlFor: id + \"_\" + index },\n                            keyName\n                        )\n                    );\n                }),\n                error && wp.element.createElement(\n                    \"div\",\n                    { className: \"invalid-feedback\" },\n                    error.message\n                )\n            ),\n            description && wp.element.createElement(\n                \"span\",\n                { className: \"description\" },\n                description\n            ),\n            error && wp.element.createElement(\n                \"div\",\n                { className: \"invalid-feedback\" },\n                error.message\n            )\n        )\n    );\n};\n\nexports.default = Checkboxes;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Form/Checkboxes.js?");
 
 /***/ }),
 
@@ -559,82 +28,7 @@ exports.default = Checkboxes;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var InputSwitch = function InputSwitch(_ref) {
-    var id = _ref.id,
-        label = _ref.label,
-        validate = _ref.validate,
-        register = _ref.register,
-        errors = _ref.errors,
-        defaultValue = _ref.defaultValue,
-        isRequired = _ref.isRequired,
-        description = _ref.description,
-        wizard = _ref.wizard;
-
-
-    var error = errors[id];
-
-    return wp.element.createElement(
-        "div",
-        { className: "acpt-form-group" },
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-label-wrapper" },
-            wp.element.createElement(
-                "label",
-                { htmlFor: id },
-                label,
-                isRequired && wp.element.createElement(
-                    "span",
-                    { className: "required" },
-                    "*"
-                )
-            ),
-            wizard && wp.element.createElement("span", { className: "wizard", dangerouslySetInnerHTML: { __html: wizard } })
-        ),
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-control-wrapper" },
-            wp.element.createElement(
-                "label",
-                { className: "switch" },
-                wp.element.createElement("input", _extends({
-                    id: id,
-                    name: id,
-                    required: isRequired,
-                    type: "checkbox",
-                    defaultChecked: defaultValue
-                }, register(id, validate))),
-                wp.element.createElement("span", { className: "slider round" })
-            ),
-            description && wp.element.createElement(
-                "span",
-                { className: "description" },
-                description
-            ),
-            error && wp.element.createElement(
-                "div",
-                { className: "invalid-feedback" },
-                error.message
-            )
-        )
-    );
-};
-
-exports.default = InputSwitch;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar InputSwitch = function InputSwitch(_ref) {\n    var id = _ref.id,\n        label = _ref.label,\n        validate = _ref.validate,\n        register = _ref.register,\n        errors = _ref.errors,\n        defaultValue = _ref.defaultValue,\n        isRequired = _ref.isRequired,\n        description = _ref.description,\n        wizard = _ref.wizard;\n\n\n    var error = errors[id];\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-form-group\" },\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-label-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { htmlFor: id },\n                label,\n                isRequired && wp.element.createElement(\n                    \"span\",\n                    { className: \"required\" },\n                    \"*\"\n                )\n            ),\n            wizard && wp.element.createElement(\"span\", { className: \"wizard\", dangerouslySetInnerHTML: { __html: wizard } })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-control-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { className: \"switch\" },\n                wp.element.createElement(\"input\", _extends({\n                    id: id,\n                    name: id,\n                    required: isRequired,\n                    type: \"checkbox\",\n                    defaultChecked: defaultValue\n                }, register(id, validate))),\n                wp.element.createElement(\"span\", { className: \"slider round\" })\n            ),\n            description && wp.element.createElement(\n                \"span\",\n                { className: \"description\" },\n                description\n            ),\n            error && wp.element.createElement(\n                \"div\",\n                { className: \"invalid-feedback\" },\n                error.message\n            )\n        )\n    );\n};\n\nexports.default = InputSwitch;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Form/InputSwitch.js?");
 
 /***/ }),
 
@@ -642,87 +36,7 @@ exports.default = InputSwitch;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var InputText = function InputText(_ref) {
-    var id = _ref.id,
-        label = _ref.label,
-        placeholder = _ref.placeholder,
-        disabled = _ref.disabled,
-        readOnly = _ref.readOnly,
-        validate = _ref.validate,
-        register = _ref.register,
-        errors = _ref.errors,
-        isRequired = _ref.isRequired,
-        defaultValue = _ref.defaultValue,
-        description = _ref.description,
-        wizard = _ref.wizard,
-        onChangeCapture = _ref.onChangeCapture;
-
-
-    var error = errors[id];
-
-    return wp.element.createElement(
-        "div",
-        { className: "acpt-form-group" },
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-label-wrapper" },
-            wp.element.createElement(
-                "label",
-                { htmlFor: id },
-                label,
-                isRequired && wp.element.createElement(
-                    "span",
-                    { className: "required" },
-                    "*"
-                )
-            ),
-            wizard && wp.element.createElement("span", { className: "wizard", dangerouslySetInnerHTML: { __html: wizard } })
-        ),
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-control-wrapper" },
-            wp.element.createElement("input", _extends({
-                id: id,
-                name: id,
-                type: "text",
-                disabled: disabled,
-                placeholder: placeholder,
-                required: isRequired,
-                onChangeCapture: onChangeCapture,
-                readOnly: readOnly && 'readonly',
-                defaultValue: defaultValue,
-                "aria-invalid": error ? "true" : "false",
-                className: "acpt-form-control " + (error ? 'has-errors' : '')
-            }, register(id, validate))),
-            description && wp.element.createElement(
-                "span",
-                { className: "description" },
-                description
-            ),
-            error && wp.element.createElement(
-                "div",
-                { className: "invalid-feedback" },
-                error.message
-            )
-        )
-    );
-};
-
-exports.default = InputText;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar InputText = function InputText(_ref) {\n    var id = _ref.id,\n        label = _ref.label,\n        placeholder = _ref.placeholder,\n        disabled = _ref.disabled,\n        readOnly = _ref.readOnly,\n        validate = _ref.validate,\n        register = _ref.register,\n        errors = _ref.errors,\n        isRequired = _ref.isRequired,\n        defaultValue = _ref.defaultValue,\n        description = _ref.description,\n        wizard = _ref.wizard,\n        onChangeCapture = _ref.onChangeCapture;\n\n\n    var error = errors[id];\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-form-group\" },\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-label-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { htmlFor: id },\n                label,\n                isRequired && wp.element.createElement(\n                    \"span\",\n                    { className: \"required\" },\n                    \"*\"\n                )\n            ),\n            wizard && wp.element.createElement(\"span\", { className: \"wizard\", dangerouslySetInnerHTML: { __html: wizard } })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-control-wrapper\" },\n            wp.element.createElement(\"input\", _extends({\n                id: id,\n                name: id,\n                type: \"text\",\n                disabled: disabled,\n                placeholder: placeholder,\n                required: isRequired,\n                onChangeCapture: onChangeCapture,\n                readOnly: readOnly && 'readonly',\n                defaultValue: defaultValue,\n                \"aria-invalid\": error ? \"true\" : \"false\",\n                className: \"acpt-form-control \" + (error ? 'has-errors' : '')\n            }, register(id, validate))),\n            description && wp.element.createElement(\n                \"span\",\n                { className: \"description\" },\n                description\n            ),\n            error && wp.element.createElement(\n                \"div\",\n                { className: \"invalid-feedback\" },\n                error.message\n            )\n        )\n    );\n};\n\nexports.default = InputText;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Form/InputText.js?");
 
 /***/ }),
 
@@ -730,108 +44,7 @@ exports.default = InputText;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _reactSelect = __webpack_require__(3442);
-
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactHookForm = __webpack_require__(930);
-
-var _styles = __webpack_require__(624);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ReactSelect = function ReactSelect(_ref) {
-    var id = _ref.id,
-        label = _ref.label,
-        validate = _ref.validate,
-        control = _ref.control,
-        values = _ref.values,
-        defaultValue = _ref.defaultValue,
-        isRequired = _ref.isRequired,
-        description = _ref.description,
-        wizard = _ref.wizard;
-
-
-    return wp.element.createElement(
-        "div",
-        { className: "acpt-form-group" },
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-label-wrapper" },
-            wp.element.createElement(
-                "label",
-                { htmlFor: id },
-                label,
-                isRequired && wp.element.createElement(
-                    "span",
-                    { className: "required" },
-                    "*"
-                )
-            ),
-            wizard && wp.element.createElement("span", { className: "wizard", dangerouslySetInnerHTML: { __html: wizard } })
-        ),
-        wp.element.createElement(
-            "div",
-            { className: "acpt-form-control-wrapper" },
-            wp.element.createElement(_reactHookForm.Controller, {
-                id: id,
-                control: control,
-                name: id,
-                rules: validate,
-                render: function render(_ref2) {
-                    var _ref2$field = _ref2.field,
-                        onChange = _ref2$field.onChange,
-                        onBlur = _ref2$field.onBlur,
-                        value = _ref2$field.value,
-                        name = _ref2$field.name,
-                        ref = _ref2$field.ref,
-                        _ref2$fieldState = _ref2.fieldState,
-                        invalid = _ref2$fieldState.invalid,
-                        isTouched = _ref2$fieldState.isTouched,
-                        isDirty = _ref2$fieldState.isDirty,
-                        error = _ref2$fieldState.error,
-                        formState = _ref2.formState;
-                    return wp.element.createElement(
-                        "div",
-                        null,
-                        wp.element.createElement(_reactSelect2.default, {
-                            defaultValue: defaultValue,
-                            styles: _styles.reactSelectStyles,
-                            classNamePrefix: "addl-class",
-                            onBlur: onBlur,
-                            onChange: onChange,
-                            checked: value,
-                            inputRef: ref,
-                            options: values
-                        }),
-                        error && wp.element.createElement(
-                            "div",
-                            { className: "invalid-feedback" },
-                            error.message
-                        )
-                    );
-                }
-            }),
-            description && wp.element.createElement(
-                "span",
-                { className: "description" },
-                description
-            )
-        )
-    );
-};
-
-exports.default = ReactSelect;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _reactSelect = __webpack_require__(3442);\n\nvar _reactSelect2 = _interopRequireDefault(_reactSelect);\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactHookForm = __webpack_require__(930);\n\nvar _styles = __webpack_require__(624);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar ReactSelect = function ReactSelect(_ref) {\n    var id = _ref.id,\n        label = _ref.label,\n        validate = _ref.validate,\n        control = _ref.control,\n        values = _ref.values,\n        defaultValue = _ref.defaultValue,\n        isRequired = _ref.isRequired,\n        description = _ref.description,\n        wizard = _ref.wizard;\n\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-form-group\" },\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-label-wrapper\" },\n            wp.element.createElement(\n                \"label\",\n                { htmlFor: id },\n                label,\n                isRequired && wp.element.createElement(\n                    \"span\",\n                    { className: \"required\" },\n                    \"*\"\n                )\n            ),\n            wizard && wp.element.createElement(\"span\", { className: \"wizard\", dangerouslySetInnerHTML: { __html: wizard } })\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"acpt-form-control-wrapper\" },\n            wp.element.createElement(_reactHookForm.Controller, {\n                id: id,\n                control: control,\n                name: id,\n                rules: validate,\n                render: function render(_ref2) {\n                    var _ref2$field = _ref2.field,\n                        onChange = _ref2$field.onChange,\n                        onBlur = _ref2$field.onBlur,\n                        value = _ref2$field.value,\n                        name = _ref2$field.name,\n                        ref = _ref2$field.ref,\n                        _ref2$fieldState = _ref2.fieldState,\n                        invalid = _ref2$fieldState.invalid,\n                        isTouched = _ref2$fieldState.isTouched,\n                        isDirty = _ref2$fieldState.isDirty,\n                        error = _ref2$fieldState.error,\n                        formState = _ref2.formState;\n                    return wp.element.createElement(\n                        \"div\",\n                        null,\n                        wp.element.createElement(_reactSelect2.default, {\n                            defaultValue: defaultValue,\n                            styles: _styles.reactSelectStyles,\n                            classNamePrefix: \"addl-class\",\n                            onBlur: onBlur,\n                            onChange: onChange,\n                            checked: value,\n                            inputRef: ref,\n                            options: values\n                        }),\n                        error && wp.element.createElement(\n                            \"div\",\n                            { className: \"invalid-feedback\" },\n                            error.message\n                        )\n                    );\n                }\n            }),\n            description && wp.element.createElement(\n                \"span\",\n                { className: \"description\" },\n                description\n            )\n        )\n    );\n};\n\nexports.default = ReactSelect;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Form/ReactSelect.js?");
 
 /***/ }),
 
@@ -839,49 +52,7 @@ exports.default = ReactSelect;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(886);
-
-var _react3 = __webpack_require__(6229);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Breadcrumb = function Breadcrumb(_ref) {
-    var label = _ref.label,
-        link = _ref.link,
-        isLast = _ref.isLast;
-
-
-    return wp.element.createElement(
-        _react2.default.Fragment,
-        null,
-        wp.element.createElement(
-            "li",
-            { className: isLast ? 'current' : '' },
-            link ? wp.element.createElement(
-                _reactRouterDom.Link,
-                { to: link },
-                label
-            ) : label
-        ),
-        !isLast && wp.element.createElement(
-            "span",
-            { className: "separator" },
-            wp.element.createElement(_react3.Icon, { icon: "bx:bx-chevron-right", color: "#aaa", width: "18px" })
-        )
-    );
-};
-
-exports.default = Breadcrumb;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nvar _react3 = __webpack_require__(6229);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumb = function Breadcrumb(_ref) {\n    var label = _ref.label,\n        link = _ref.link,\n        isLast = _ref.isLast;\n\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            \"li\",\n            { className: isLast ? 'current' : '' },\n            link ? wp.element.createElement(\n                _reactRouterDom.Link,\n                { to: link },\n                label\n            ) : label\n        ),\n        !isLast && wp.element.createElement(\n            \"span\",\n            { className: \"separator\" },\n            wp.element.createElement(_react3.Icon, { icon: \"bx:bx-chevron-right\", color: \"#aaa\", width: \"18px\" })\n        )\n    );\n};\n\nexports.default = Breadcrumb;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/Breadcrumb.js?");
 
 /***/ }),
 
@@ -889,44 +60,7 @@ exports.default = Breadcrumb;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Breadcrumb = __webpack_require__(6512);
-
-var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Breadcrumbs = function Breadcrumbs(_ref) {
-    var crumbs = _ref.crumbs;
-
-    return wp.element.createElement(
-        "div",
-        { className: "acpt-breadcrumbs" },
-        crumbs.length > 0 && wp.element.createElement(
-            "ul",
-            null,
-            crumbs.map(function (crumb, index) {
-                return wp.element.createElement(_Breadcrumb2.default, {
-                    label: crumb.label,
-                    link: crumb.link,
-                    isLast: index + 1 === crumbs.length,
-                    key: index
-                });
-            })
-        )
-    );
-};
-
-exports.default = Breadcrumbs;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Breadcrumb = __webpack_require__(6512);\n\nvar _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Breadcrumbs = function Breadcrumbs(_ref) {\n    var crumbs = _ref.crumbs;\n\n    return wp.element.createElement(\n        \"div\",\n        { className: \"acpt-breadcrumbs\" },\n        crumbs.length > 0 && wp.element.createElement(\n            \"ul\",\n            null,\n            crumbs.map(function (crumb, index) {\n                return wp.element.createElement(_Breadcrumb2.default, {\n                    label: crumb.label,\n                    link: crumb.link,\n                    isLast: index + 1 === crumbs.length,\n                    key: index\n                });\n            })\n        )\n    );\n};\n\nexports.default = Breadcrumbs;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/Layout/Breadcrumbs/index.js?");
 
 /***/ }),
 
@@ -934,33 +68,7 @@ exports.default = Breadcrumbs;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-__webpack_require__(2107);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var WooCommerceListElement = function WooCommerceListElement(_ref) {
-    var icon = _ref.icon,
-        label = _ref.label;
-
-    return wp.element.createElement(
-        'div',
-        null,
-        wp.element.createElement('span', { className: 'mr-1 wcicon-' + icon }),
-        label
-    );
-};
-
-exports.default = WooCommerceListElement;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\n__webpack_require__(2107);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar WooCommerceListElement = function WooCommerceListElement(_ref) {\n    var icon = _ref.icon,\n        label = _ref.label;\n\n    return wp.element.createElement(\n        'div',\n        null,\n        wp.element.createElement('span', { className: 'mr-1 wcicon-' + icon }),\n        label\n    );\n};\n\nexports.default = WooCommerceListElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/reusable/WooCommerceIcon/index.js?");
 
 /***/ }),
 
@@ -968,24 +76,7 @@ exports.default = WooCommerceListElement;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.woocommerceIconsList = undefined;
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _WooCommerceIcon = __webpack_require__(9623);
-
-var _WooCommerceIcon2 = _interopRequireDefault(_WooCommerceIcon);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var woocommerceIconsList = exports.woocommerceIconsList = [{ value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "storefront", label: "Store front" }) }, { value: "\\e604", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "ccv", label: "CCV" }) }, { value: "\\e000", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "virtual", label: "Virtual" }) }, { value: "\\e022", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "down", label: "Down" }) }, { value: "\\e023", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "reports", label: "Reports" }) }, { value: "\\e031", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "refresh", label: "Refersh" }) }, { value: "\\e032", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "navigation", label: "Navigation" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status-fill", label: "Status-fill" }) }, { value: "\\e004", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "contract", label: "Contract" }) }, { value: "\\e001", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "downloadable", label: "Downloadable" }) }, { value: "\\e007", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "plus", label: "Plus" }) }, { value: "\\e006", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "simple", label: "Simple" }) }, { value: "\\e033", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "on-hold", label: "On hold" }) }, { value: "\\e034", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "external", label: "External" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "contract-2", label: "Contract" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "expand-2", label: "Expand" }) }, { value: "\\e037", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "phone", label: "Phone" }) }, { value: "\\e038", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "user", label: "User" }) }, { value: "\\e039", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status", label: "Status" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status-pending", label: "Status pending" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status-cancelled", label: "Status cancelled" }) }, { value: "\\e02f", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "west", label: "West" }) }, { value: "\\e02e", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "south", label: "South" }) }, { value: "\\e02d", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "mail", label: "Mail" }) }, { value: "\\e02c", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "inventory", label: "Inventory" }) }, { value: "\\e02b", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "attributes", label: "Attributes" }) }, { value: "\\e02a", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "north", label: "North" }) }, { value: "\\e029", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "east", label: "East" }) }, { value: "\\e028", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "note", label: "Note" }) }, { value: "\\e027", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "windows", label: "Windows" }) }, { value: "\\e026", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "user2", label: "User 2" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "search-2", label: "Search 2" }) }, { value: "\\e024", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "search", label: "Search" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "star-empty", label: "Star empty" }) }, { value: "\\e030", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "share", label: "Share" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "phone-fill", label: "Store front" }) }, { value: "\\e03d", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "woo", label: "Woo" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "user-fill", label: "User fill" }) }, { value: "\\e002", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "grouped", label: "Grouped" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status-refunded", label: "Status refunded" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status-completed", label: "Status completed" }) }, { value: "\\e003", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "variable", label: "Variable" }) }, { value: "\\e005", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "expand", label: "Expand" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status-failed", label: "Status failed" }) }, { value: "\\e017", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "check", label: "Check" }) }, { value: "\\e008", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "right", label: "Right" }) }, { value: "\\e009", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "up", label: "Up" }) }, { value: "\\e018", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "query", label: "Query" }) }, { value: "\\e00a", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "down", label: "Down" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "truck-1", label: "Truck 1" }) }, { value: "\\e00b", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "left", label: "Left" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "truck-2", label: "Truck 2" }) }, { value: "\\e00c", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "image", label: "Image" }) }, { value: "\\e01b", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "globe", label: "Globe" }) }, { value: "\\e00d", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "link", label: "Link" }) }, { value: "\\e01c", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "gear", label: "Gear" }) }, { value: "\\e00e", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "calendar", label: "Calendar" }) }, { value: "\\e01d", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "cart", label: "Cart" }) }, { value: "\\e00f", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "processing", label: "Processing" }) }, { value: "\\e01e", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "card", label: "Card" }) }, { value: "\\e010", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "view", label: "View" }) }, { value: "\\e01f", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "stats", label: "Stats" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "status-processing", label: "Status processing" }) }, { value: "\\e900", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "star-full", label: "Star full" }) }, { value: "\\e600", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "coupon", label: "Coupon" }) }, { value: "\\e601", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "limit", label: "Limit" }) }, { value: "\\e602", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "restricted", label: "Restricted" }) }, { value: "\\e603", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: "edit", label: "Edit" }) }];
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.woocommerceIconsList = undefined;\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _WooCommerceIcon = __webpack_require__(9623);\n\nvar _WooCommerceIcon2 = _interopRequireDefault(_WooCommerceIcon);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar woocommerceIconsList = exports.woocommerceIconsList = [{ value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"storefront\", label: \"Store front\" }) }, { value: \"\\\\e604\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"ccv\", label: \"CCV\" }) }, { value: \"\\\\e000\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"virtual\", label: \"Virtual\" }) }, { value: \"\\\\e022\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"down\", label: \"Down\" }) }, { value: \"\\\\e023\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"reports\", label: \"Reports\" }) }, { value: \"\\\\e031\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"refresh\", label: \"Refersh\" }) }, { value: \"\\\\e032\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"navigation\", label: \"Navigation\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status-fill\", label: \"Status-fill\" }) }, { value: \"\\\\e004\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"contract\", label: \"Contract\" }) }, { value: \"\\\\e001\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"downloadable\", label: \"Downloadable\" }) }, { value: \"\\\\e007\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"plus\", label: \"Plus\" }) }, { value: \"\\\\e006\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"simple\", label: \"Simple\" }) }, { value: \"\\\\e033\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"on-hold\", label: \"On hold\" }) }, { value: \"\\\\e034\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"external\", label: \"External\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"contract-2\", label: \"Contract\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"expand-2\", label: \"Expand\" }) }, { value: \"\\\\e037\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"phone\", label: \"Phone\" }) }, { value: \"\\\\e038\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"user\", label: \"User\" }) }, { value: \"\\\\e039\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status\", label: \"Status\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status-pending\", label: \"Status pending\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status-cancelled\", label: \"Status cancelled\" }) }, { value: \"\\\\e02f\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"west\", label: \"West\" }) }, { value: \"\\\\e02e\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"south\", label: \"South\" }) }, { value: \"\\\\e02d\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"mail\", label: \"Mail\" }) }, { value: \"\\\\e02c\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"inventory\", label: \"Inventory\" }) }, { value: \"\\\\e02b\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"attributes\", label: \"Attributes\" }) }, { value: \"\\\\e02a\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"north\", label: \"North\" }) }, { value: \"\\\\e029\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"east\", label: \"East\" }) }, { value: \"\\\\e028\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"note\", label: \"Note\" }) }, { value: \"\\\\e027\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"windows\", label: \"Windows\" }) }, { value: \"\\\\e026\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"user2\", label: \"User 2\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"search-2\", label: \"Search 2\" }) }, { value: \"\\\\e024\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"search\", label: \"Search\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"star-empty\", label: \"Star empty\" }) }, { value: \"\\\\e030\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"share\", label: \"Share\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"phone-fill\", label: \"Store front\" }) }, { value: \"\\\\e03d\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"woo\", label: \"Woo\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"user-fill\", label: \"User fill\" }) }, { value: \"\\\\e002\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"grouped\", label: \"Grouped\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status-refunded\", label: \"Status refunded\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status-completed\", label: \"Status completed\" }) }, { value: \"\\\\e003\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"variable\", label: \"Variable\" }) }, { value: \"\\\\e005\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"expand\", label: \"Expand\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status-failed\", label: \"Status failed\" }) }, { value: \"\\\\e017\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"check\", label: \"Check\" }) }, { value: \"\\\\e008\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"right\", label: \"Right\" }) }, { value: \"\\\\e009\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"up\", label: \"Up\" }) }, { value: \"\\\\e018\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"query\", label: \"Query\" }) }, { value: \"\\\\e00a\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"down\", label: \"Down\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"truck-1\", label: \"Truck 1\" }) }, { value: \"\\\\e00b\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"left\", label: \"Left\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"truck-2\", label: \"Truck 2\" }) }, { value: \"\\\\e00c\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"image\", label: \"Image\" }) }, { value: \"\\\\e01b\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"globe\", label: \"Globe\" }) }, { value: \"\\\\e00d\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"link\", label: \"Link\" }) }, { value: \"\\\\e01c\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"gear\", label: \"Gear\" }) }, { value: \"\\\\e00e\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"calendar\", label: \"Calendar\" }) }, { value: \"\\\\e01d\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"cart\", label: \"Cart\" }) }, { value: \"\\\\e00f\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"processing\", label: \"Processing\" }) }, { value: \"\\\\e01e\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"card\", label: \"Card\" }) }, { value: \"\\\\e010\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"view\", label: \"View\" }) }, { value: \"\\\\e01f\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"stats\", label: \"Stats\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"status-processing\", label: \"Status processing\" }) }, { value: \"\\\\e900\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"star-full\", label: \"Star full\" }) }, { value: \"\\\\e600\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"coupon\", label: \"Coupon\" }) }, { value: \"\\\\e601\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"limit\", label: \"Limit\" }) }, { value: \"\\\\e602\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"restricted\", label: \"Restricted\" }) }, { value: \"\\\\e603\", label: wp.element.createElement(_WooCommerceIcon2.default, { icon: \"edit\", label: \"Edit\" }) }];\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/constants/woocommerce_icons.js?");
 
 /***/ }),
 
@@ -993,51 +84,7 @@ var woocommerceIconsList = exports.woocommerceIconsList = [{ value: "\\e900", la
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _react = __webpack_require__(7294);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(886);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var useUnsavedChangesWarning = function useUnsavedChangesWarning() {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Are you sure want to discard changes?";
-
-    var _useState = (0, _react.useState)(false),
-        _useState2 = _slicedToArray(_useState, 2),
-        isDirty = _useState2[0],
-        setDirty = _useState2[1];
-
-    (0, _react.useEffect)(function () {
-        //Detecting browser closing
-        window.onbeforeunload = isDirty && function () {
-            return message;
-        };
-
-        return function () {
-            window.onbeforeunload = null;
-        };
-    }, [isDirty]);
-
-    var routerPrompt = wp.element.createElement(_reactRouterDom.Prompt, { when: isDirty, message: message });
-
-    return [routerPrompt, function () {
-        return setDirty(true);
-    }, function () {
-        return setDirty(false);
-    }, isDirty];
-};
-
-exports.default = useUnsavedChangesWarning;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(886);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar useUnsavedChangesWarning = function useUnsavedChangesWarning() {\n    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : \"Are you sure want to discard changes?\";\n\n    var _useState = (0, _react.useState)(false),\n        _useState2 = _slicedToArray(_useState, 2),\n        isDirty = _useState2[0],\n        setDirty = _useState2[1];\n\n    (0, _react.useEffect)(function () {\n        //Detecting browser closing\n        window.onbeforeunload = isDirty && function () {\n            return message;\n        };\n\n        return function () {\n            window.onbeforeunload = null;\n        };\n    }, [isDirty]);\n\n    var routerPrompt = wp.element.createElement(_reactRouterDom.Prompt, { when: isDirty, message: message });\n\n    return [routerPrompt, function () {\n        return setDirty(true);\n    }, function () {\n        return setDirty(false);\n    }, isDirty];\n};\n\nexports.default = useUnsavedChangesWarning;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/hooks/useUnsavedChangesWarning.js?");
 
 /***/ }),
 
@@ -1045,59 +92,7 @@ exports.default = useUnsavedChangesWarning;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.fetchWooCommerceProductData = undefined;
-
-var _ajax = __webpack_require__(7569);
-
-var _fetchWooCommerceProductDataActions = __webpack_require__(6208);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var fetchWooCommerceProductData = exports.fetchWooCommerceProductData = function fetchWooCommerceProductData(meta) {
-    return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
-            var fetched;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            _context.prev = 0;
-
-                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataInProgress)());
-                            _context.next = 4;
-                            return (0, _ajax.wpAjaxRequest)('fetchWooCommerceProductDataAction', meta);
-
-                        case 4:
-                            fetched = _context.sent;
-
-                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataSuccess)(fetched));
-                            _context.next = 11;
-                            break;
-
-                        case 8:
-                            _context.prev = 8;
-                            _context.t0 = _context["catch"](0);
-
-                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataFailure)(_context.t0));
-
-                        case 11:
-                        case "end":
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined, [[0, 8]]);
-        }));
-
-        return function (_x, _x2) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-};
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.fetchWooCommerceProductData = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchWooCommerceProductDataActions = __webpack_require__(6208);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchWooCommerceProductData = exports.fetchWooCommerceProductData = function fetchWooCommerceProductData(meta) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataInProgress)());\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('fetchWooCommerceProductDataAction', meta);\n\n                        case 4:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataSuccess)(fetched));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _fetchWooCommerceProductDataActions.fetchWooCommerceProductDataFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/fetchWooCommerceProductData.js?");
 
 /***/ }),
 
@@ -1105,49 +100,7 @@ var fetchWooCommerceProductData = exports.fetchWooCommerceProductData = function
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.resetWooCommerceProductData = undefined;
-
-var _ajax = __webpack_require__(7569);
-
-var _fetchWooCommerceProductDataActions = __webpack_require__(6208);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var resetWooCommerceProductData = exports.resetWooCommerceProductData = function resetWooCommerceProductData() {
-    return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
-            var fetched;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            dispatch((0, _fetchWooCommerceProductDataActions.resetWooCommerceProductDataInProgress)());
-                            _context.next = 3;
-                            return (0, _ajax.wpAjaxRequest)('resetWooCommerceProductDataAction');
-
-                        case 3:
-                            fetched = _context.sent;
-
-                            dispatch((0, _fetchWooCommerceProductDataActions.resetWooCommerceProductDataSuccess)());
-
-                        case 5:
-                        case "end":
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined);
-        }));
-
-        return function (_x, _x2) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-};
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.resetWooCommerceProductData = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _fetchWooCommerceProductDataActions = __webpack_require__(6208);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar resetWooCommerceProductData = exports.resetWooCommerceProductData = function resetWooCommerceProductData() {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var fetched;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            dispatch((0, _fetchWooCommerceProductDataActions.resetWooCommerceProductDataInProgress)());\n                            _context.next = 3;\n                            return (0, _ajax.wpAjaxRequest)('resetWooCommerceProductDataAction');\n\n                        case 3:\n                            fetched = _context.sent;\n\n                            dispatch((0, _fetchWooCommerceProductDataActions.resetWooCommerceProductDataSuccess)());\n\n                        case 5:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/resetWooCommerceProductData.js?");
 
 /***/ }),
 
@@ -1155,59 +108,7 @@ var resetWooCommerceProductData = exports.resetWooCommerceProductData = function
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.saveWooCommerceProductData = undefined;
-
-var _ajax = __webpack_require__(7569);
-
-var _saveWooCommerceProductDataActions = __webpack_require__(164);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var saveWooCommerceProductData = exports.saveWooCommerceProductData = function saveWooCommerceProductData(data) {
-    return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {
-            var res;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            _context.prev = 0;
-
-                            dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataInProgress)());
-                            _context.next = 4;
-                            return (0, _ajax.wpAjaxRequest)('saveWooCommerceProductDataAction', data);
-
-                        case 4:
-                            res = _context.sent;
-
-                            res.success === true ? dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataSuccess)(res.data)) : dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataFailure)(res.error));
-                            _context.next = 11;
-                            break;
-
-                        case 8:
-                            _context.prev = 8;
-                            _context.t0 = _context["catch"](0);
-
-                            dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataFailure)(_context.t0));
-
-                        case 11:
-                        case "end":
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined, [[0, 8]]);
-        }));
-
-        return function (_x, _x2) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-};
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.saveWooCommerceProductData = undefined;\n\nvar _ajax = __webpack_require__(7569);\n\nvar _saveWooCommerceProductDataActions = __webpack_require__(164);\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar saveWooCommerceProductData = exports.saveWooCommerceProductData = function saveWooCommerceProductData(data) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.prev = 0;\n\n                            dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataInProgress)());\n                            _context.next = 4;\n                            return (0, _ajax.wpAjaxRequest)('saveWooCommerceProductDataAction', data);\n\n                        case 4:\n                            res = _context.sent;\n\n                            res.success === true ? dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataSuccess)(res.data)) : dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataFailure)(res.error));\n                            _context.next = 11;\n                            break;\n\n                        case 8:\n                            _context.prev = 8;\n                            _context.t0 = _context[\"catch\"](0);\n\n                            dispatch((0, _saveWooCommerceProductDataActions.saveWooCommerceProductDataFailure)(_context.t0));\n\n                        case 11:\n                        case \"end\":\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined, [[0, 8]]);\n        }));\n\n        return function (_x, _x2) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/redux/thunks/saveWooCommerceProductData.js?");
 
 /***/ }),
 
@@ -1215,52 +116,7 @@ var saveWooCommerceProductData = exports.saveWooCommerceProductData = function s
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-/**
- * Change document's <title>
- * @param title
- */
-var metaTitle = exports.metaTitle = function metaTitle(title) {
-    var originalDocumentTitle = document.title.split("‹");
-    document.title = title + ' \u2039 ' + originalDocumentTitle[1];
-};
-
-/**
- * Add current class to admin menu link
- * @param link
- */
-var changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {
-
-    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
-
-    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {
-        var links = currentValue.getElementsByTagName('a');
-
-        for (var i = 0; i < links.length; i++) {
-            var elem = links[i];
-            var href = elem.getAttribute("href");
-            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;
-
-            if (toCompare === href) {
-                currentValue.classList.add("current");
-            } else {
-                currentValue.classList.remove("current");
-            }
-        }
-    });
-};
-
-var refreshPage = exports.refreshPage = function refreshPage() {
-    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-    setTimeout(function () {
-        window.location.reload();
-    }, timeout);
-};
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n/**\n * Change document's <title>\n * @param title\n */\nvar metaTitle = exports.metaTitle = function metaTitle(title) {\n    var originalDocumentTitle = document.title.split(\"‹\");\n    document.title = title + ' \\u2039 ' + originalDocumentTitle[1];\n};\n\n/**\n * Add current class to admin menu link\n * @param link\n */\nvar changeCurrentAdminMenuLink = exports.changeCurrentAdminMenuLink = function changeCurrentAdminMenuLink(link) {\n\n    var menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');\n\n    menuWrapper.childNodes.forEach(function (currentValue, currentIndex, listObj) {\n        var links = currentValue.getElementsByTagName('a');\n\n        for (var i = 0; i < links.length; i++) {\n            var elem = links[i];\n            var href = elem.getAttribute(\"href\");\n            var toCompare = 'admin.php?page=advanced-custom-post-type-lite' + link;\n\n            if (toCompare === href) {\n                currentValue.classList.add(\"current\");\n            } else {\n                currentValue.classList.remove(\"current\");\n            }\n        }\n    });\n};\n\nvar refreshPage = exports.refreshPage = function refreshPage() {\n    var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n\n    setTimeout(function () {\n        window.location.reload();\n    }, timeout);\n};\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/utils/misc.js?");
 
 /***/ }),
 
@@ -1268,11 +124,8 @@ var refreshPage = exports.refreshPage = function refreshPage() {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/scss/woocommerce.scss?");
 
 /***/ })
 
 }]);
-//# sourceMappingURL=449.js.map

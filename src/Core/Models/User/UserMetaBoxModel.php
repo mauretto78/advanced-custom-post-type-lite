@@ -64,6 +64,7 @@ class UserMetaBoxModel extends AbstractMetaBoxModel implements \JsonSerializable
 		return [
 			'id' => $this->id,
 			'title' => $this->name,
+			'label' => $this->label,
 			'sort' => (int)$this->sort,
 			'belongsTo' => $this->metaType(),
 			'fields' => $this->fields

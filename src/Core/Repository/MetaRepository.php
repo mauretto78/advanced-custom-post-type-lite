@@ -523,6 +523,10 @@ class MetaRepository
                         break;
                 }
 
+	            if($boxModel !== null and $box->label){
+		            $boxModel->changeLabel($box->label);
+	            }
+
                 if($lazy === false){
 	                $sql = "
 	                    SELECT
@@ -718,6 +722,8 @@ class MetaRepository
             }
         }
 
+
+
         return null;
     }
 
@@ -791,30 +797,42 @@ class MetaRepository
             $boxes = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
 
             foreach ($boxes as $box){
+
+	            $boxModel = null;
+
                 switch ($belongsTo){
                     case MetaTypes::CUSTOM_POST_TYPE:
-                        return CustomPostTypeMetaBoxModel::hydrateFromArray( [
+                        $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray( [
                             'id'       => $box->id,
                             'postType' => $box->post_type,
                             'name'     => $box->name,
                             'sort'     => $box->sort
                         ] );
+                        break;
 
                     case MetaTypes::TAXONOMY:
-                        return TaxonomyMetaBoxModel::hydrateFromArray( [
+                        $boxModel = TaxonomyMetaBoxModel::hydrateFromArray( [
                             'id'       => $box->id,
                             'taxonomy' => $box->taxonomy,
                             'name'     => $box->name,
                             'sort'     => $box->sort
                         ] );
+                        break;
 
                     case MetaTypes::USER:
-                        return UserMetaBoxModel::hydrateFromArray( [
+                        $boxModel = UserMetaBoxModel::hydrateFromArray( [
                             'id'       => $box->id,
                             'name'     => $box->name,
                             'sort'     => $box->sort
                         ] );
+                        break;
                 }
+
+	            if($boxModel !== null and $box->label !== null){
+		            $boxModel->changeLabel($box->label);
+	            }
+
+	            return $boxModel;
             }
         }
 

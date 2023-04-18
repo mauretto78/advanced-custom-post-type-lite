@@ -35,8 +35,8 @@ const HeaderMenu = ({isVisible, setIsVisible}) => {
             <a className="facebook" href="https://www.facebook.com/groups/880817719861018" target="_blank">
                 Facebook group
             </a>
-            <a className="acpt-text-danger" href="https://acpt.io/checkout/" target="_blank">
-                Buy a PRO license
+            <a className="acpt-text-accent" href="https://acpt.io/checkout/" target="_blank">
+                Upgrade to PRO
             </a>
         </nav>
     );
