@@ -24,7 +24,7 @@ class ACPT_Lite_Deactivator
     public static function deactivate()
     {
         $deleteTablesSettings = SettingsRepository::get('delete_tables_when_deactivate');
-        $destroySchema = (!empty($deleteTablesSettings)) ? $deleteTablesSettings[0]->getValue() : 1;
+        $destroySchema = (!empty($deleteTablesSettings)) ? $deleteTablesSettings[0]->getValue() : 0;
 
         if(!class_exists(\ACPT::class) and $destroySchema == 1){
             ACPT_Lite_DB::destroySchema();
