@@ -47,7 +47,7 @@ class TaxonomyMetaBoxGenerator extends AbstractGenerator
         ])  as $metaBoxModel):
         ?>
         <div class="taxonomy-meta-box-group">
-            <h3><?php echo $metaBoxModel->getName(); ?></h3>
+            <h3><?php echo (!empty($metaBoxModel->getLabel())) ? $metaBoxModel->getLabel() : $metaBoxModel->getName(); ?></h3>
             <div class="taxonomy-meta-fields">
                 <?php
                 foreach ($metaBoxModel->getFields() as $metaBoxFieldModel) {
