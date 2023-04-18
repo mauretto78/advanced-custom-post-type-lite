@@ -149,7 +149,7 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 * WooCommerce HotFix
 
-= 1.0.16 (2023-04-19) =
+= 1.0.16 (2023-04-18) =
 
 * Revised UI (from PRO version)
 * Added meta box label
