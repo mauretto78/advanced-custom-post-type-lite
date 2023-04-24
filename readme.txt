@@ -157,3 +157,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Fix DB connection (DB port issue)
 * Fix destroy schema on deactivate
 * Meta field manager: added a button to link label and value in the option element (from PRO version)
+
+= 1.0.17 (2023-04-24) =
+
+* WordPress admin menu labels
+* Fix AbstractModal::hydrateFromArray() method (to fix PHP 8 deprecations)
+* Fix `menu_position` bug when registering new custom post types

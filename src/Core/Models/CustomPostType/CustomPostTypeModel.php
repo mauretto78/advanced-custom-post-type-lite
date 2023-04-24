@@ -189,8 +189,23 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
      */
     public function getSettings()
     {
-        return $this->settings;
+	    return $this->normalizeSettings($this->settings);
     }
+
+	/**
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	private function normalizeSettings(array $settings)
+	{
+		// menu_position MUST be integer to have effect
+		if(isset($settings['menu_position']) and $settings['menu_position'] !== null){
+			$settings['menu_position'] = (int)$settings['menu_position'];
+		}
+
+		return $settings;
+	}
 
     /**
      * @param int $postCount
