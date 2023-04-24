@@ -33,7 +33,7 @@ class ACPT_Lite_Activator
             die( __( 'ACPT Lite cannot be activated because ACPT Premium version it\'s already active.', 'acpt' ) );
         } else {
             ACPT_Lite_DB::createSchema();
-            ACPT_Lite_DB::sync();
+            ACPT_Lite_DB::sync(); //64869   //87558
         }
     }
 }

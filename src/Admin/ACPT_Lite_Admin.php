@@ -168,7 +168,7 @@ class ACPT_Lite_Admin
             [
                 'pageTitle' => 'Advanced Custom Post Types',
                 'menuTitle' => 'ACPT Lite',
-                'capability' => 'manage_options',
+                'capability' => 'read',
                 'menuSlug' => ACPT_LITE_PLUGIN_NAME,
                 'template' => 'app',
                 'iconUrl' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/img/advanced-custom-post-type-icon.svg',
@@ -182,6 +182,23 @@ class ACPT_Lite_Admin
                     ],
                 ],
             ],
+	        [
+		        'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+		        'pageTitle' => translate('Custom Post Types', ACPT_LITE_PLUGIN_NAME),
+		        'menuTitle' => translate('Custom Post Types', ACPT_LITE_PLUGIN_NAME),
+		        'capability' => 'manage_options',
+		        'menuSlug' => ACPT_LITE_PLUGIN_NAME,
+		        'template' => 'app',
+		        'position' => 52,
+		        'assets' => [
+			        'css' => [
+				        plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.css'
+			        ],
+			        'react' => [
+				        plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.js'
+			        ],
+		        ],
+	        ],
             [
                     'parentSlug' => ACPT_LITE_PLUGIN_NAME,
                     'pageTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
