@@ -3,6 +3,7 @@
 namespace ACPT_Lite\Core\Models\Abstracts;
 
 use ACPT_Lite\Core\Helper\Uuid;
+use ReflectionClass;
 
 /**
  * AbstractModel
@@ -47,61 +48,64 @@ abstract class AbstractModel
         return self::HydrateReflectionClassFromData($reflection, $data);
     }
 
-    /**
-     * @param \ReflectionClass $reflection
-     * @param array            $data
-     *
-     * @return mixed
-     */
-    private static function HydrateReflectionClassFromData( \ReflectionClass $reflection, array $data)
-    {
-        $constructorParams = $reflection->getConstructor()->getParameters();
+	/**
+	 * @param \ReflectionClass $reflection
+	 * @param array $data
+	 *
+	 * @return mixed
+	 * @throws \ReflectionException
+	 */
+	private static function HydrateReflectionClassFromData( \ReflectionClass $reflection, array $data)
+	{
+		$constructorParams = $reflection->getConstructor()->getParameters();
 
-        $id = null;
-        $values = [];
-        $keys = [];
+		$id = null;
+		$values = [];
+		$keys = [];
 
-        foreach ($constructorParams as $constructorParam){
+		foreach ($constructorParams as $constructorParam){
 
-            if($constructorParam->getName() === 'id' and isset($data[$constructorParam->getName()])){
-                $id = $data[$constructorParam->getName()];
-            }
+			if($constructorParam->getName() === 'id' and isset($data[$constructorParam->getName()])){
+				$id = $data[$constructorParam->getName()];
+			}
 
-            if($constructorParam->getName() !== 'id'){
-                $keys[] = $constructorParam->getName();
+			if($constructorParam->getName() !== 'id'){
+				$keys[] = $constructorParam->getName();
 
-                if(isset($data[$constructorParam->getName()])){
-                    $value = $data[$constructorParam->getName()];
-                } elseif ($constructorParam->allowsNull()) {
-                    $value = null;
-                } else {
-                    throw new \DomainException('Wrong or missing parameters');
-                }
+				if(isset($data[$constructorParam->getName()])){
+					$value = $data[$constructorParam->getName()];
+				} elseif ($constructorParam->allowsNull()) {
+					$value = null;
+				} else {
+					throw new \DomainException('Wrong or missing parameters');
+				}
 
-                if ($class = $constructorParam->getClass() and is_array($value)){
-                    $values[] = self::HydrateReflectionClassFromData($class, $value);
-                } else {
-                    $values[] = $value;
-                }
-            }
-        }
+				$class = ($constructorParam->getType() and !$constructorParam->getType()->isBuiltin()) ? new ReflectionClass($constructorParam->getType()->getName()) : null;
 
-        unset($data['id']);
+				if ($class and is_array($value)){
+					$values[] = self::HydrateReflectionClassFromData($class, $value);
+				} else {
+					$values[] = $value;
+				}
+			}
+		}
 
-        $diff = array_diff(array_keys($data), $keys);
-        if(!empty($diff)){
-            //@TODO in prod log the error and return null??
-            throw new \DomainException('Wrong or missing parameters');
-        }
+		unset($data['id']);
 
-        $className = $reflection->getName();
+		$diff = array_diff(array_keys($data), $keys);
+		if(!empty($diff)){
+			//@TODO in prod log the error and return null??
+			throw new \DomainException('Wrong or missing parameters');
+		}
 
-        if(!$id){
-            $id = Uuid::v4();
-        }
+		$className = $reflection->getName();
 
-        return new $className($id, ...$values);
-    }
+		if(!$id){
+			$id = Uuid::v4();
+		}
+
+		return new $className($id, ...$values);
+	}
 
     /**
      * @param $id
