@@ -154,6 +154,7 @@ class ACPT_Lite_Admin
             'wp_ajax_fetchWooCommerceProductDataAction' => 'fetchWooCommerceProductDataAction',
             'wp_ajax_fetchWooCommerceProductDataFieldsAction' => 'fetchWooCommerceProductDataFieldsAction',
             'wp_ajax_fetchElementsAction' => 'fetchElementsAction',
+            'wp_ajax_globalSettingsAction' => 'globalSettingsAction',
             'wp_ajax_importFileAction' => 'importFileAction',
             'wp_ajax_resetCustomPostTypesAction' => 'resetCustomPostTypesAction',
             'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',

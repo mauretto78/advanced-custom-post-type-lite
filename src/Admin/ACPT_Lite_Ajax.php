@@ -2,11 +2,7 @@
 
 namespace ACPT_Lite\Admin;
 
-use ACPT_Lite\Core\CQRS\Query\FetchElementsQuery;
-use ACPT_Lite\Core\CQRS\Query\FetchPreviewLinkQuery;
-use ACPT_Lite\Core\CQRS\Query\FetchAllFindBelongsQuery;
-use ACPT_Lite\Core\CQRS\Query\FetchFindQuery;
-use ACPT_Lite\Core\CQRS\Query\FetchLanguagesQuery;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\CQRS\Command\AssocTaxonomyToCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaBoxCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaFieldCommand;
@@ -14,29 +10,26 @@ use ACPT_Lite\Core\CQRS\Command\DeleteCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteMetaGroupCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteTaxonomyCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteWooCommerceProductDataCommand;
+use ACPT_Lite\Core\CQRS\Command\SaveCustomPostTypeCommand;
+use ACPT_Lite\Core\CQRS\Command\SaveMetaGroupCommand;
+use ACPT_Lite\Core\CQRS\Command\SaveTaxonomyCommand;
+use ACPT_Lite\Core\CQRS\Command\SaveWooCommerceProductDataCommand;
+use ACPT_Lite\Core\CQRS\Command\SaveWooCommerceProductDataFieldsCommand;
 use ACPT_Lite\Core\CQRS\Query\CalculateShortCodeQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchAllFindBelongsQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchElementsQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchFindQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchLanguagesQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchMetaFieldsFromBelongsQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchPreviewLinkQuery;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
-use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
-use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldOptionModel;
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
-use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
-use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
-use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\User\UserMetaBoxModel;
-use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
-use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
-use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
-use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Sanitizer;
 use ACPT_Lite\Utils\Sluggify;
@@ -1032,13 +1025,16 @@ class ACPT_Lite_Ajax
         ]);
     }
 
-    /**
-     * @return mixed
-     */
-    public function fetchTaxonomiesCountAction()
-    {
-        return wp_send_json(TaxonomyRepository::count());
-    }
+	/**
+	 * Return the string translations
+	 * @throws \Exception
+	 */
+	public function languagesAction()
+	{
+		$query = new FetchLanguagesQuery();
+
+		return wp_send_json($query->execute());
+	}
 
     /**
      * Reset all custom post type meta
@@ -1075,49 +1071,51 @@ class ACPT_Lite_Ajax
      */
     public function saveCustomPostTypeAction()
     {
-        $data = $this->sanitizeJsonData($_POST['data']);
+	    $data = $this->sanitizeJsonData($_POST['data']);
 
-        $supports = [];
+	    $supports = [];
 
-        if($data[1]["support_0"] !== false){ $supports[] = $data[1]["support_0"]; }
-        if($data[1]["support_1"] !== false){ $supports[] = $data[1]["support_1"]; }
-        if($data[1]["support_2"] !== false){ $supports[] = $data[1]["support_2"]; }
-        if($data[1]["support_3"] !== false){ $supports[] = $data[1]["support_3"]; }
-        if($data[1]["support_4"] !== false){ $supports[] = $data[1]["support_4"]; }
-        if($data[1]["support_5"] !== false){ $supports[] = $data[1]["support_5"]; }
-        if($data[1]["support_6"] !== false){ $supports[] = $data[1]["support_6"]; }
-        if($data[1]["support_7"] !== false){ $supports[] = $data[1]["support_7"]; }
-        if($data[1]["support_8"] !== false){ $supports[] = $data[1]["support_8"]; }
-        if($data[1]["support_9"] !== false){ $supports[] = $data[1]["support_9"]; }
-        if($data[1]["support_10"] !== false){ $supports[] = $data[1]["support_10"]; }
+	    if($data[1]["support_0"] !== false){ $supports[] = $data[1]["support_0"]; }
+	    if($data[1]["support_1"] !== false){ $supports[] = $data[1]["support_1"]; }
+	    if($data[1]["support_2"] !== false){ $supports[] = $data[1]["support_2"]; }
+	    if($data[1]["support_3"] !== false){ $supports[] = $data[1]["support_3"]; }
+	    if($data[1]["support_4"] !== false){ $supports[] = $data[1]["support_4"]; }
+	    if($data[1]["support_5"] !== false){ $supports[] = $data[1]["support_5"]; }
+	    if($data[1]["support_6"] !== false){ $supports[] = $data[1]["support_6"]; }
+	    if($data[1]["support_7"] !== false){ $supports[] = $data[1]["support_7"]; }
+	    if($data[1]["support_8"] !== false){ $supports[] = $data[1]["support_8"]; }
+	    if($data[1]["support_9"] !== false){ $supports[] = $data[1]["support_9"]; }
+	    if($data[1]["support_10"] !== false){ $supports[] = $data[1]["support_10"]; }
 
-        // persist $model on DB
-        try {
-            $id = (CustomPostTypeRepository::exists($data[1]["post_name"])) ? CustomPostTypeRepository::getId($data[1]["post_name"]) : Uuid::v4();
-            $model = CustomPostTypeModel::hydrateFromArray([
-                    'id' => $id,
-                    'name' => $data[1]["post_name"],
-                    'singular' => $data[1]["singular_label"],
-                    'plural' => $data[1]["plural_label"],
-                    'icon' => (isset($data[1]["icon"]['value'])) ? $data[1]["icon"]['value']: $data[1]["icon"],
-                    'native' => false,
-                    'supports' => $supports,
-                    'labels' => $data[2],
-                    'settings' => $data[3]
-            ]);
+	    // persist $model on DB
+	    try {
+		    $id = (CustomPostTypeRepository::exists($data[1]["post_name"])) ? CustomPostTypeRepository::getId($data[1]["post_name"]) : Uuid::v4();
 
-            CustomPostTypeRepository::save($model);
-            $return = [
-                    'success' => true
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
+		    $data = [
+			    'id' => $id,
+			    'name' => $data[1]["post_name"],
+			    'singular_label' => $data[1]["singular_label"],
+			    'plural_label' => $data[1]["plural_label"],
+			    'icon' => (isset($data[1]["icon"]['value'])) ? $data[1]["icon"]['value']: $data[1]["icon"],
+			    'supports' => $supports,
+			    'labels' => $data[2],
+			    'settings' => $data[3]
+		    ];
 
-        return wp_send_json($return);
+		    $command = new SaveCustomPostTypeCommand($data);
+
+		    $return = [
+			    'id' => $command->execute(),
+			    'success' => true,
+		    ];
+	    } catch (\Exception $exception){
+		    $return = [
+			    'success' => false,
+			    'error' => $exception->getMessage()
+		    ];
+	    }
+
+	    return wp_send_json($return);
     }
 
 	/**
@@ -1126,179 +1124,22 @@ class ACPT_Lite_Ajax
 	public function saveMetaAction()
 	{
 		$data = $this->sanitizeJsonData($_POST['data']);
-		$ids = [];
-		$arrayOfBoxNames = [];
 
-		$belongsTo  = isset($data[0]) ? $data[0]['belongsTo'] : null;
-		$find  = isset($data[0]) ? $data[0]['find'] : null;
-
-		// OLD format, keep compatibility
-		if($find === null){
-			$find  = isset($data[0]) ? $data[0]['postType'] : null;
-		}
-
-		if($belongsTo !== MetaTypes::USER and $find === null){
+		if(
+			!isset($data['id']) or
+			!isset($data['name'])
+		){
 			return wp_send_json([
 				'success' => false,
 				'error' => 'No data sent'
 			]);
 		}
 
-		$ids[$find] = [
-			'boxes' => [],
-			'fields' => [],
-			'options' => [],
-		];
-
-		// persist $model on DB
 		try {
-			foreach ($data as $boxIndex => $box ) {
-
-				$boxModel = null;
-
-				switch ($belongsTo){
-					case null:
-					case MetaTypes::CUSTOM_POST_TYPE:
-						$boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray([
-							'id' => $box['id'],
-							'postType' => $find,
-							'name' =>  $box['title'],
-							'sort' =>  ($boxIndex+1)
-						]);
-						break;
-
-					case MetaTypes::TAXONOMY:
-						$boxModel = TaxonomyMetaBoxModel::hydrateFromArray([
-							'id' => $box['id'],
-							'taxonomy' => $find,
-							'name' =>  $box['title'],
-							'sort' =>  ($boxIndex+1)
-						]);
-						break;
-
-					case MetaTypes::USER:
-						$boxModel = UserMetaBoxModel::hydrateFromArray([
-							'id' => $box['id'],
-							'name' =>  $box['title'],
-							'sort' =>  ($boxIndex+1)
-						]);
-						break;
-				}
-
-				if($boxModel === null){
-					return wp_send_json([
-						'success' => false,
-						'error' => 'Cannot create $boxModel object'
-					]);
-				}
-
-				if(isset($box['label'])){
-					$boxModel->changeLabel($box['label']);
-				}
-
-				$ids[$find]['boxes'][] = $box['id'];
-
-				if(isset($box['fields'])){
-					$arrayOfFieldNames = [];
-
-					foreach ($box['fields'] as $fieldIndex => $field) {
-
-						$fieldModel = null;
-
-						switch ($belongsTo) {
-							case null:
-							case MetaTypes::CUSTOM_POST_TYPE:
-								$fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
-									'id' => $field['id'],
-									'title' => $field['name'],
-									'type' => $field['type'],
-									'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
-									'description' => isset($field['description']) ? $field['description'] : null,
-									'showInArchive' => isset($field['showInArchive']) ? $field['showInArchive'] : false,
-									'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
-									'metaBox' => $boxModel,
-									'sort' =>  ($fieldIndex+1)
-								]);
-								break;
-
-							case MetaTypes::TAXONOMY:
-								$fieldModel = TaxonomyMetaBoxFieldModel::hydrateFromArray([
-									'id' => $field['id'],
-									'name' => $field['name'],
-									'type' => $field['type'],
-									'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
-									'description' => isset($field['description']) ? $field['description'] : null,
-									'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
-									'metaBox' => $boxModel,
-									'sort' =>  ($fieldIndex+1)
-								]);
-								break;
-
-							case MetaTypes::USER:
-								$fieldModel = UserMetaBoxFieldModel::hydrateFromArray([
-									'id' => $field['id'],
-									'name' => $field['name'],
-									'type' => $field['type'],
-									'defaultValue' => isset($field['defaultValue']) ? $field['defaultValue'] : null,
-									'description' => isset($field['description']) ? $field['description'] : null,
-									'showInArchive' => isset($field['showInArchive']) ? $field['showInArchive'] : false,
-									'required' => isset($field['isRequired']) ? $field['isRequired'] : false,
-									'metaBox' => $boxModel,
-									'sort' =>  ($fieldIndex+1)
-								]);
-								break;
-						}
-
-						if($fieldModel === null){
-							return wp_send_json([
-								'success' => false,
-								'error' => 'Cannot create $fieldModel object'
-							]);
-						}
-
-						$ids[$find]['fields'][] = $field['id'];
-
-						$fieldModel->changeName($this->getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
-
-						$arrayOfFieldNames[] = $fieldModel->getName();
-
-						if(isset($field['options'])){
-							foreach ($field['options'] as $optionIndex => $option) {
-								$optionModel = MetaBoxFieldOptionModel::hydrateFromArray([
-									'id' => $option['id'],
-									'label' => $option['label'],
-									'value' => $option['value'],
-									'metaBoxField' => $fieldModel,
-									'sort' =>  ($optionIndex+1)
-								]);
-
-								$ids[$find]['options'][] = $option['id'];
-
-								$fieldModel->addOption($optionModel);
-							}
-						}
-
-						$boxModel->addField($fieldModel);
-					}
-				}
-
-				$boxModel->changeName($this->getTheFirstAvailableName($boxModel->getName(), $arrayOfBoxNames));
-				$arrayOfBoxNames[] = $boxModel->getName();
-
-				MetaRepository::saveMetaBox($boxModel);
-			}
-
-			// remove orphans
-			foreach ($ids as $find => $childrenIds){
-				MetaRepository::removeMetaOrphans([
-					'belongsTo' => $belongsTo,
-					'find' => $find,
-					'ids' => $childrenIds,
-				]);
-			}
+			$command = new SaveMetaGroupCommand($data);
 
 			$return = [
-				'ids' => $ids,
+				'id' => $command->execute(),
 				'success' => true
 			];
 		} catch (\Exception $exception){
@@ -1386,19 +1227,21 @@ class ACPT_Lite_Ajax
 		    unset($settings['capabilities_3']);
 
 		    $id = (TaxonomyRepository::exists($data[1]["slug"])) ? TaxonomyRepository::getId($data[1]["slug"]) : Uuid::v4();
-		    $model = TaxonomyModel::hydrateFromArray([
+		    $data = [
 			    'id' => $id,
 			    'slug' => $data[1]["slug"],
-			    'singular' => $data[1]["singular_label"],
-			    'plural' => $data[1]["plural_label"],
+			    'singular_label' => $data[1]["singular_label"],
+			    'plural_label' => $data[1]["plural_label"],
 			    'labels' => $data[2],
-			    'native' => false,
 			    'settings' => $settings
-		    ]);
+		    ];
 
-		    TaxonomyRepository::save($model);
+		    $command = new SaveTaxonomyCommand($data);
+		    $command->execute();
+
 		    $return = [
-			    'success' => true
+			    'id' => $id,
+			    'success' => true,
 		    ];
 	    } catch (\Exception $exception){
 		    $return = [
@@ -1415,31 +1258,23 @@ class ACPT_Lite_Ajax
      */
     public function saveWooCommerceProductDataAction()
     {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        $id = (isset($data['id']) and WooCommerceProductDataRepository::exists($data['id'])) ? $data['id'] : Uuid::v4();
+	    $data = $this->sanitizeJsonData($_POST['data']);
 
-        $model = new WooCommerceProductDataModel(
-            $id,
-            $data['product_data_name'],
-            $data['icon'],
-            $data['visibility'],
-            $data['show_ui']
-        );
+	    try {
+		    $command = new SaveWooCommerceProductDataCommand($data);
+		    $command->execute();
 
-        try {
-            WooCommerceProductDataRepository::save($model);
+		    $return = [
+			    'success' => true
+		    ];
+	    } catch (\Exception $exception){
+		    $return = [
+			    'success' => false,
+			    'error' => $exception->getMessage()
+		    ];
+	    }
 
-            $return = [
-                'success' => true
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                'success' => false,
-                'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
+	    return wp_send_json($return);
     }
 
     /**
@@ -1447,71 +1282,21 @@ class ACPT_Lite_Ajax
      */
     public function saveWooCommerceProductDataFieldsAction()
     {
-        $data = $this->sanitizeJsonData($_POST['data']);
-        $fields = [];
-        $ids = [];
+	    try {
+		    $data = $this->sanitizeJsonData($_POST['data']);
+		    $command = new SaveWooCommerceProductDataFieldsCommand($data);
+		    $return = [
+			    'ids' => $command->execute(),
+			    'success' => true
+		    ];
+	    } catch (\Exception $exception) {
+		    $return = [
+			    'success' => false,
+			    'error' => $exception->getMessage()
+		    ];
+	    }
 
-        // persist $model on DB
-        try {
-            foreach ($data as $fieldIndex => $field ) {
-
-                $productData = WooCommerceProductDataRepository::get([
-                    'id' => $field['postDataId']
-                ])[0];
-
-                $fieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
-                    'id' => $field['id'],
-                    'productDataModel' => $productData,
-                    'name' => $field['name'],
-                    'type' => $field['type'],
-                    'defaultValue' => $field['defaultValue'],
-                    'description' => $field['description'],
-                    'required' => $field['isRequired'],
-                    'sort' => ($fieldIndex+1),
-                ]);
-
-                $optionsIds = [];
-
-                if(isset($field['options'])){
-                    foreach ($field['options'] as $optionIndex => $option){
-                        $optionModel = WooCommerceProductDataFieldOptionModel::hydrateFromArray([
-                            'id' => $option['id'],
-                            'productDataField' => $fieldModel,
-                            'label' => $option['label'],
-                            'value' => $option['value'],
-                            'sort' => ($optionIndex+1),
-                        ]);
-
-                        $fieldModel->addOption($optionModel);
-                        $optionsIds[] = $optionModel->getId();
-                    }
-                }
-
-                $fields[] = $fieldModel;
-                $ids[] = [
-                    'product_data_id' => $fieldModel->getProductData()->getId(),
-                    'field' => $fieldModel->getId(),
-                    'options' => $optionsIds
-                ];
-            }
-
-            WooCommerceProductDataRepository::saveFields($fields);
-
-            // remove orphans
-            WooCommerceProductDataRepository::removeFieldsOrphans($ids);
-
-            $return = [
-                'ids' => $ids,
-                'success' => true
-            ];
-        } catch (\Exception $exception) {
-            $return = [
-                'success' => false,
-                'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
+	    return wp_send_json($return);
     }
 
     /**
