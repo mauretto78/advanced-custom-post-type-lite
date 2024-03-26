@@ -2,6 +2,14 @@
 
 namespace ACPT_Lite\Admin;
 
+use ACPT\Core\CQRS\Query\FetchAllFindBelongsQuery;
+use ACPT\Core\CQRS\Query\FetchLanguagesQuery;
+use ACPT_Lite\Core\CQRS\Command\AssocTaxonomyToCustomPostTypeCommand;
+use ACPT_Lite\Core\CQRS\Command\DeleteCustomPostTypeCommand;
+use ACPT_Lite\Core\CQRS\Command\DeleteMetaGroupCommand;
+use ACPT_Lite\Core\CQRS\Command\DeleteTaxonomyCommand;
+use ACPT_Lite\Core\CQRS\Command\DeleteWooCommerceProductDataCommand;
+use ACPT_Lite\Core\CQRS\Query\CalculateShortCodeQuery;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
@@ -38,6 +46,46 @@ use ACPT_Lite\Utils\WPLinks;
  */
 class ACPT_Lite_Ajax
 {
+	/**
+	 * @throws \Exception
+	 */
+	public function globalSettingsAction()
+	{
+		try {
+			$language = SettingsRepository::getSingle('language') ? SettingsRepository::getSingle('language')->getValue() : 'en_US';
+		} catch (\Exception $exception){
+			$language = 'en_US';
+		}
+
+		$languageQuery = new FetchLanguagesQuery();
+		$languageEntries = $languageQuery->execute();
+
+		$findQuery = new FetchAllFindBelongsQuery();
+		$findEntries = $findQuery->execute();
+
+		$globals = [
+			"plugin_version" => ACPT_LITE_PLUGIN_VERSION,
+			"site_url" =>  site_url(),
+			"admin_url" => admin_url(),
+			"ajax_url" => admin_url( 'admin-ajax.php' ),
+			"rest_route_url" => "/?rest_route=/acpt/v1",
+			"http_referer" => (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '',
+			"language" => $language,
+			"locale" => get_locale(),
+			"is_rtl" => is_rtl(),
+			'find' => $findEntries,
+			"available_languages" => $languageEntries['languages'],
+			"translations" =>  $languageEntries['translations'],
+		];
+
+		$settings = SettingsRepository::get();
+
+		return wp_send_json([
+			'globals' => $globals,
+			'settings' => $settings,
+		]);
+	}
+
 	public function assocPostTypeToTaxonomyAction()
 	{
 		if(isset($_POST['data'])) {
@@ -47,11 +95,8 @@ class ACPT_Lite_Ajax
 				$taxonomyId = TaxonomyRepository::getId($data['taxonomy']);
 
 				foreach ($data['postTypes'] as $customPostType){
-					if($customPostType['checked']){
-						TaxonomyRepository::assocToPostType($customPostType['id'], $taxonomyId);
-					} else {
-						TaxonomyRepository::removeAssocPost($customPostType['id'], $taxonomyId);
-					}
+					$command = new AssocTaxonomyToCustomPostTypeCommand($customPostType['id'], $taxonomyId, $customPostType['checked']);
+					$command->execute();
 				}
 
 				$return = [
@@ -73,30 +118,135 @@ class ACPT_Lite_Ajax
         if(isset($_POST['data'])) {
             $data = $this->sanitizeJsonData($_POST['data']);
 
-            try {
-                $postId = CustomPostTypeRepository::getId($data['postType']);
+	        try {
+		        $postId = CustomPostTypeRepository::getId($data['postType']);
 
-                foreach ($data['taxonomies'] as $taxonomy){
-                    if($taxonomy['checked']){
-                        TaxonomyRepository::assocToPostType($postId, $taxonomy['id']);
-                    } else {
-                        TaxonomyRepository::removeAssocPost($postId, $taxonomy['id']);
-                    }
-                }
+		        foreach ($data['taxonomies'] as $taxonomy){
+			        $command = new AssocTaxonomyToCustomPostTypeCommand($postId, $taxonomy['id'], $taxonomy['checked']);
+			        $command->execute();
+		        }
 
-                $return = [
-                        'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                        'success' => false,
-                        'error' => $exception->getMessage()
-                ];
-            }
+		        $return = [
+			        'success' => true,
+		        ];
+	        } catch (\Exception $exception){
+		        $return = [
+			        'success' => false,
+			        'error' => $exception->getMessage()
+		        ];
+	        }
 
             return wp_send_json($return);
         }
     }
+
+	/**
+	 * Execute bulk actions
+	 */
+	public function bulkActionsAction()
+	{
+		if(isset($_POST['data'])) {
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			if (!isset($data['action'])) {
+				return wp_send_json([
+					'success' => false,
+					'error' => 'Missing action'
+				]);
+			}
+
+			if (!isset($data['belongsTo'])) {
+				return wp_send_json([
+					'success' => false,
+					'error' => 'Missing belongsTo'
+				]);
+			}
+
+			if (!isset($data['elements'])) {
+				return wp_send_json([
+					'success' => false,
+					'error' => 'Missing elements'
+				]);
+			}
+
+			$action = $data['action'];
+			$elements = $data['elements'];
+			$belongsTo = $data['belongsTo'];
+
+			try {
+				switch ($action){
+					case "delete":
+						foreach ($elements as $element => $toDelete){
+							if($toDelete){
+								switch ($belongsTo){
+									default:
+									case MetaTypes::CUSTOM_POST_TYPE:
+										$command = new DeleteCustomPostTypeCommand($element);
+										break;
+
+									case MetaTypes::TAXONOMY:
+										$command = new DeleteTaxonomyCommand($element);
+										break;
+
+									case MetaTypes::META:
+										$command = new DeleteMetaGroupCommand($element);
+										break;
+
+									case "woo_product_data":
+										$command = new DeleteWooCommerceProductDataCommand($element);
+										break;
+								}
+
+								$command->execute();
+							}
+						}
+				}
+
+				return wp_send_json([
+					'success' => true,
+				]);
+
+			} catch ( \Exception $e ) {
+				return wp_send_json([
+					'success' => false,
+					'error' => $e->getMessage()
+				]);
+			}
+		}
+	}
+
+	/**
+	 * Calculate meta field shortcode
+	 */
+	public function calculateShortCodeAction()
+	{
+		if(isset($_POST['data'])) {
+			$data = $this->sanitizeJsonData($_POST['data']);
+			try {
+				$query = new CalculateShortCodeQuery( $data );
+
+				return wp_send_json($query->execute());
+			} catch ( \Exception $e ) {
+				return wp_send_json([
+					"metaKey" => null,
+					"shortcodes" => []
+				]);
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Check if a Custom post type exists
