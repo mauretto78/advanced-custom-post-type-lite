@@ -5,6 +5,8 @@ namespace ACPT_Lite\Admin;
 use ACPT\Core\CQRS\Query\FetchAllFindBelongsQuery;
 use ACPT\Core\CQRS\Query\FetchLanguagesQuery;
 use ACPT_Lite\Core\CQRS\Command\AssocTaxonomyToCustomPostTypeCommand;
+use ACPT_Lite\Core\CQRS\Command\CopyMetaBoxCommand;
+use ACPT_Lite\Core\CQRS\Command\CopyMetaFieldCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteMetaGroupCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteTaxonomyCommand;
@@ -235,18 +237,60 @@ class ACPT_Lite_Ajax
 		}
 	}
 
+	/**
+	 * @throws \Exception
+	 */
+	public function checkMetaBoxNameAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
 
+		if (!isset($data['boxName'])) {
+			return wp_send_json([
+				'success' => false,
+				'error' => 'Missing boxName'
+			]);
+		}
 
+		$boxName = $data['boxName'];
 
+		return wp_send_json([
+			'exists' => MetaRepository::existsMetaBox([
+				'boxName' => $boxName
+			])
+		]);
+	}
 
+	/**
+	 * @throws \Exception
+	 */
+	public function checkMetaBoxFieldNameAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
 
+		if (!isset($data['boxName'])) {
+			return wp_send_json([
+				'success' => false,
+				'error' => 'Missing boxName'
+			]);
+		}
 
+		if (!isset($data['fieldName'])) {
+			return wp_send_json([
+				'success' => false,
+				'error' => 'Missing fieldName'
+			]);
+		}
 
+		$boxName = $data['boxName'];
+		$fieldName = $data['fieldName'];
 
-
-
-
-
+		return wp_send_json([
+			'exists' => MetaRepository::existsMetaBoxField([
+				'boxName' => $boxName,
+				'fieldName' => $fieldName,
+			])
+		]);
+	}
 
     /**
      * Check if a Custom post type exists
@@ -292,6 +336,126 @@ class ACPT_Lite_Ajax
             ]);
         }
     }
+
+	public function copyMetaBoxAction()
+	{
+		if(isset($_POST['data'])) {
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			try {
+				$command = new CopyMetaBoxCommand($data);
+				$command->execute();
+
+				$return = [
+					'success' => true,
+				];
+			} catch (\Exception $exception){
+				$return = [
+					'success' => false,
+					'error' => $exception->getMessage()
+				];
+			}
+
+			return wp_send_json($return);
+		}
+	}
+
+	public function copyMetaBoxesAction()
+	{
+		if(isset($_POST['data'])) {
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			if(!isset($data['boxIds'])){
+				return wp_send_json([
+					'success' => false,
+					'error' => 'Missing boxIds'
+				]);
+			}
+
+			try {
+				foreach ($data['boxIds'] as $boxId){
+					$command = new CopyMetaBoxCommand([
+						'boxId' => $boxId,
+						'targetGroupId' => $data['targetGroupId'],
+						'delete' => $data['delete'],
+					]);
+					$command->execute();
+				}
+
+
+				$return = [
+					'success' => true,
+				];
+			} catch (\Exception $exception){
+				$return = [
+					'success' => false,
+					'error' => $exception->getMessage()
+				];
+			}
+
+			return wp_send_json($return);
+		}
+	}
+
+	public function copyMetaFieldAction()
+	{
+		if(isset($_POST['data'])) {
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			try {
+				$command = new CopyMetaFieldCommand($data);
+				$command->execute();
+
+				$return = [
+					'success' => true,
+				];
+			} catch (\Exception $exception){
+				$return = [
+					'success' => false,
+					'error' => $exception->getMessage()
+				];
+			}
+
+			return wp_send_json($return);
+		}
+	}
+
+	public function copyMetaFieldsAction()
+	{
+		if(isset($_POST['data'])) {
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			if(!isset($data['fieldIds'])){
+				return wp_send_json([
+					'success' => false,
+					'error' => 'Missing fieldIds'
+				]);
+			}
+
+			try {
+				foreach ($data['fieldIds'] as $fieldId){
+					$command = new CopyMetaFieldCommand([
+						'fieldId' => $fieldId,
+						'targetEntityId' => $data['targetEntityId'],
+						'targetEntityType' => $data['targetEntityType'],
+						'delete' => $data['delete'],
+					]);
+					$command->execute();
+
+					$return = [
+						'success' => true,
+					];
+				}
+			} catch (\Exception $exception){
+				$return = [
+					'success' => false,
+					'error' => $exception->getMessage()
+				];
+			}
+
+			return wp_send_json($return);
+		}
+	}
 
     /**
      * Delete custom post type

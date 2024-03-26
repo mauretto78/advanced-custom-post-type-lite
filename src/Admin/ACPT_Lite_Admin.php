@@ -122,6 +122,10 @@ class ACPT_Lite_Admin
         $this->ajaxActions = [
             'wp_ajax_assocPostTypeToTaxonomyAction' => 'assocPostTypeToTaxonomyAction',
             'wp_ajax_assocTaxonomyToPostTypeAction' => 'assocTaxonomyToPostTypeAction',
+            'wp_ajax_bulkActionsAction' => 'bulkActionsAction',
+            'wp_ajax_calculateShortCodeAction' => 'calculateShortCodeAction',
+            'wp_ajax_checkMetaBoxNameAction' => 'checkMetaBoxNameAction',
+            'wp_ajax_checkMetaBoxFieldNameAction' => 'checkMetaBoxFieldNameAction',
             'wp_ajax_checkPostTypeNameAction' => 'checkPostTypeNameAction',
             'wp_ajax_checkTaxonomySlugAction' => 'checkTaxonomySlugAction',
             'wp_ajax_deleteCustomPostTypeAction' => 'deleteCustomPostTypeAction',
