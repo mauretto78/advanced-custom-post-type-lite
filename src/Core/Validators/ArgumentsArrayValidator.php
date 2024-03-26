@@ -2,6 +2,8 @@
 
 namespace ACPT_Lite\Core\Validators;
 
+use ACPT_Lite\Utils\Translator;
+
 class ArgumentsArrayValidator
 {
 	/**
@@ -71,5 +73,13 @@ class ArgumentsArrayValidator
 		}
 
 		return empty($this->errors);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function errorMessage()
+	{
+		return static::class . ': '.Translator::translate('Invalid data provided').'. Errors: {' . implode(", ", self::getErrors()) . '}';
 	}
 }

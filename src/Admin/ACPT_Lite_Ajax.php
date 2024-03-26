@@ -2,7 +2,10 @@
 
 namespace ACPT_Lite\Admin;
 
+use ACPT_Lite\Core\CQRS\Query\FetchElementsQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchPreviewLinkQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchAllFindBelongsQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchFindQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchLanguagesQuery;
 use ACPT_Lite\Core\CQRS\Command\AssocTaxonomyToCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaBoxCommand;
@@ -678,52 +681,6 @@ class ACPT_Lite_Ajax
         ]);
     }
 
-    public function fetchPreviewLinkAction()
-    {
-	    $data = $this->sanitizeJsonData($_POST['data']);
-
-	    if(!isset($data['id']) and !isset($data['belongsTo']) and !isset($data['find']) and !isset($data['template']) ){
-		    return wp_send_json([
-			    'success' => false,
-			    'error' => 'Missing params (`id`, `belongsTo`, `find`, `template`)'
-		    ]);
-	    }
-
-	    $id = $data['id'];
-	    $find = $data['find'];
-	    $belongsTo = $data['belongsTo'];
-
-	    if($belongsTo === MetaTypes::CUSTOM_POST_TYPE){
-		    if($find === 'post'){
-			    $category = get_the_category($id);
-			    $archiveLink = get_category_link($category);
-		    } else {
-			    $archiveLink = get_post_type_archive_link($find);
-		    }
-
-		    return wp_send_json([
-			    'success' => true,
-			    'data' => [
-				    'single_link' => get_the_permalink($id),
-				    'archive_link' => $archiveLink
-			    ]
-		    ]);
-	    }
-
-	    if($belongsTo === MetaTypes::TAXONOMY){
-		    return wp_send_json([
-			    'success' => true,
-			    'data' => [
-				    'single_link' => get_term_link($id),
-			    ]
-		    ]);
-	    }
-
-	    return wp_send_json([
-		    'success' => false,
-	    ]);
-    }
-
 	/**
 	 * @throws \Exception
 	 */
@@ -756,10 +713,83 @@ class ACPT_Lite_Ajax
 		return wp_send_json($query->execute());
 	}
 
+	/**
+	 * @throws \Exception
+	 */
+	public function fetchFindAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
 
+		if(!isset($data['belongsTo']) and !isset($data['id'])){
+			return wp_send_json([
+				'success' => false,
+				'error' => 'Missing params (`id, belongsTo`)'
+			]);
+		}
 
+		$id = $data['id'];
+		$belongsTo = $data['belongsTo'];
 
+		$command = new FetchFindQuery($id, $belongsTo);
 
+		return wp_send_json($command->execute());
+	}
+
+	/**
+	 * @throws \Exception
+	 */
+	public function fetchFindFromBelongsToAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
+
+		if(!isset($data['belongsTo'])){
+			return wp_send_json([
+				'success' => false,
+				'error' => 'Missing params (`belongsTo`)'
+			]);
+		}
+
+		$belongsTo = $data['belongsTo'];
+		$format = $data['format'] ? $data['format'] : 'default';
+
+		$command = new FetchMetaFieldsFromBelongsQuery($belongsTo, $format);
+
+		return wp_send_json($command->execute());
+	}
+
+	public function fetchPreviewLinkAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
+
+		try {
+			$query = new FetchPreviewLinkQuery($data);
+
+			return wp_send_json([
+				'success' => true,
+				'link' => $query->execute(),
+			]);
+
+		} catch (\Exception $exception){
+			return wp_send_json([
+				'success' => false,
+				'error' => $exception->getMessage(),
+			]);
+		}
+	}
+
+	public function fetchMetaFieldsFlatMapAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
+
+		if(!isset($data['excludeField'])){
+			return wp_send_json([
+				'success' => false,
+				'error' => 'Missing `excludeField`'
+			]);
+		}
+
+		return wp_send_json(MetaRepository::metaFieldsFlatArray($data['excludeField']));
+	}
 
 	/**
 	 * Fetch custom post type meta
@@ -771,31 +801,29 @@ class ACPT_Lite_Ajax
 	{
 		$data = $this->sanitizeJsonData($_POST['data']);
 
-		$belongsTo = isset($data['belongsTo']) ? $data['belongsTo'] : MetaTypes::CUSTOM_POST_TYPE;
-		$find = isset($data['find']) ? $data['find'] : null;
-
-		// OLD format, keep compatibility
-		if($find === null){
-			$find = $data['postType'];
+		if(empty($data)){
+			$data = [];
 		}
 
-		if($belongsTo !== MetaTypes::USER and $find === null){
-			return wp_send_json([
-				'success' => false,
-				'error' => 'No data sent'
+		if(isset($data['id'])){
+
+			$record = MetaRepository::get([
+				'id' => $data['id'],
+				'excludeField' => ((isset($data['excludeField'])) ? $data['excludeField'] : null),
+				'gutenberg' => ((isset($data['gutenberg'])) ? $data['gutenberg'] : false),
 			]);
+
+			if(!empty($record)){
+				return wp_send_json($record[0]);
+			}
+
+			return wp_send_json([]);
 		}
 
-		$options = [];
-
-		if(isset($data['excludeField'])){
-			$options['excludeFields'][] = $data['excludeField'];
-		}
-
-		return wp_send_json(MetaRepository::get(array_merge([
-			'belongsTo' => $belongsTo,
-			'find' => $find,
-		], $options)));
+		return wp_send_json([
+			'count' => MetaRepository::count(),
+			'records' => MetaRepository::get($data),
+		]);
 	}
 
     /**
@@ -824,16 +852,6 @@ class ACPT_Lite_Ajax
             'page' => isset($page) ? $page : 1,
             'perPage' => isset($perPage) ? $perPage : 20,
         ]));
-    }
-
-    /**
-     * Fetch custom post types total count
-     *
-     * @return mixed
-     */
-    public function fetchCustomPostTypesCountAction()
-    {
-        return wp_send_json(CustomPostTypeRepository::count());
     }
 
     /**
@@ -937,6 +955,39 @@ class ACPT_Lite_Ajax
                 'perPage' => isset($perPage) ? $perPage : 20,
         ]));
     }
+
+	/**
+	 * fetch CPTs or Taxonomies
+	 * (used by copy meta box/field UI)
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function fetchElementsAction()
+	{
+		if(isset($_POST['data'])){
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			if(!isset($data['belongsTo'])){
+				return wp_send_json([
+					'success' => false,
+					'error' => 'Missing belongsTo'
+				]);
+			}
+
+			$belongsTo = $data['belongsTo'];
+			$exclude = (isset($data['exclude'])) ? $data['exclude'] : null;
+
+			$query = new FetchElementsQuery($belongsTo, $exclude);
+
+			return wp_send_json($query->execute());
+		}
+
+		return wp_send_json([
+			'success' => false,
+			'error' => 'no params were sent'
+		]);
+	}
 
     /**
      * fetch post data from id
