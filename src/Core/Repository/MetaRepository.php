@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Core\Repository;
 
+use ACPT\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
@@ -375,7 +376,7 @@ class MetaRepository
      * Query for meta box
      *
      * @param array $args
-     * @return AbstractMetaBoxModel[]
+     * @return MetaGroupModel[]
      * @throws \Exception
      */
     public static function get(array $args)

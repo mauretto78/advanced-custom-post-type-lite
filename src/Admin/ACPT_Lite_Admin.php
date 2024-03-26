@@ -146,6 +146,7 @@ class ACPT_Lite_Admin
             'wp_ajax_fetchSidebarsAction' => 'fetchSidebarsAction',
             'wp_ajax_fetchTaxonomiesAction' => 'fetchTaxonomiesAction',
             'wp_ajax_fetchTaxonomiesCountAction' => 'fetchTaxonomiesCountAction',
+            'wp_ajax_fetchMetaFieldsFromBelongsToAction' => 'fetchMetaFieldsFromBelongsToAction',
             'wp_ajax_fetchWooCommerceProductDataAction' => 'fetchWooCommerceProductDataAction',
             'wp_ajax_fetchWooCommerceProductDataFieldsAction' => 'fetchWooCommerceProductDataFieldsAction',
             'wp_ajax_importFileAction' => 'importFileAction',

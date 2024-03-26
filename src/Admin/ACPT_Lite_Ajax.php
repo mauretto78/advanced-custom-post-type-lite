@@ -2,8 +2,8 @@
 
 namespace ACPT_Lite\Admin;
 
-use ACPT\Core\CQRS\Query\FetchAllFindBelongsQuery;
-use ACPT\Core\CQRS\Query\FetchLanguagesQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchAllFindBelongsQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchLanguagesQuery;
 use ACPT_Lite\Core\CQRS\Command\AssocTaxonomyToCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaBoxCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaFieldCommand;
@@ -12,6 +12,7 @@ use ACPT_Lite\Core\CQRS\Command\DeleteMetaGroupCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteTaxonomyCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteWooCommerceProductDataCommand;
 use ACPT_Lite\Core\CQRS\Query\CalculateShortCodeQuery;
+use ACPT_Lite\Core\CQRS\Query\FetchMetaFieldsFromBelongsQuery;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
@@ -464,47 +465,39 @@ class ACPT_Lite_Ajax
      */
     public function deleteCustomPostTypeAction()
     {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
 
-            if(!isset($data['postType'])){
-                return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing postType'
-                ]);
-            }
+		    if(!isset($data['postType'])){
+			    return wp_send_json([
+				    'success' => false,
+				    'error' => 'Missing postType'
+			    ]);
+		    }
 
-            $postType = $data['postType'];
+		    $postType = $data['postType'];
 
-            try {
-	            // Delete posts option
-	            $deletePosts = false;
-	            $deletePostsOption = SettingsRepository::getSingle('delete_posts');
+		    try {
+			    $command = new DeleteCustomPostTypeCommand($postType);
+			    $command->execute();
 
-	            if($deletePostsOption !== null and $deletePostsOption->getValue() == 1){
-		            $deletePosts = true;
-	            }
+			    $return = [
+				    'success' => true,
+			    ];
+		    } catch (\Exception $exception){
+			    $return = [
+				    'success' => false,
+				    'error' => $exception->getMessage()
+			    ];
+		    }
 
-                CustomPostTypeRepository::delete($postType, $deletePosts);
-	            unregister_post_type($postType);
+		    return wp_send_json($return);
+	    }
 
-                $return = [
-                    'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-                ];
-            }
-
-            return wp_send_json($return);
-        }
-
-        return wp_send_json([
-            'success' => false,
-            'error' => 'no postType was sent'
-        ]);
+	    return wp_send_json([
+		    'success' => false,
+		    'error' => 'no postType was sent'
+	    ]);
     }
 
     /**
@@ -517,14 +510,18 @@ class ACPT_Lite_Ajax
 	    if(isset($_POST['data'])){
 		    $data = $this->sanitizeJsonData($_POST['data']);
 
-		    $find = isset($data['find']) ? $data['find'] : $data['postType'];
-		    $belongsTo = isset($data['belongsTo']) ? $data['belongsTo'] : MetaTypes::CUSTOM_POST_TYPE;
+		    if(!isset($data['id'])){
+			    return wp_send_json([
+				    'success' => false,
+				    'error' => 'Missing group `id`'
+			    ]);
+		    }
+
+		    $id = $data['id'];
 
 		    try {
-			    MetaRepository::deleteAll([
-				    'belongsTo' => $belongsTo,
-				    'find' => $find,
-			    ]);
+			    $command = new DeleteMetaGroupCommand($id);
+			    $command->execute();
 
 			    $return = [
 				    'success' => true,
@@ -565,8 +562,8 @@ class ACPT_Lite_Ajax
 		    $taxonomy = $data['taxonomy'];
 
 		    try {
-			    TaxonomyRepository::delete($taxonomy);
-			    unregister_taxonomy($taxonomy);
+			    $command = new DeleteTaxonomyCommand($taxonomy);
+			    $command->execute();
 
 			    $return = [
 				    'success' => true,
@@ -589,73 +586,74 @@ class ACPT_Lite_Ajax
 
     public function deleteWooCommerceProductDataAction()
     {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
 
-            if(!isset($data['id'])){
-                return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing id'
-                ]);
-            }
+		    if(!isset($data['id'])){
+			    return wp_send_json([
+				    'success' => false,
+				    'error' => 'Missing id'
+			    ]);
+		    }
 
-            $id = $data['id'];
+		    $id = $data['id'];
 
-            try {
-                WooCommerceProductDataRepository::delete($id);
+		    try {
+			    $command = new DeleteWooCommerceProductDataCommand($id);
+			    $command->execute();
 
-                $return = [
-                    'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-                ];
-            }
+			    $return = [
+				    'success' => true,
+			    ];
+		    } catch (\Exception $exception){
+			    $return = [
+				    'success' => false,
+				    'error' => $exception->getMessage()
+			    ];
+		    }
 
-            return wp_send_json($return);
-        }
+		    return wp_send_json($return);
+	    }
 
-        return wp_send_json([
-            'success' => false,
-            'error' => 'no WooCommerce product data was sent'
-        ]);
+	    return wp_send_json([
+		    'success' => false,
+		    'error' => 'no WooCommerce product data was sent'
+	    ]);
     }
 
     public function deleteWooCommerceProductDataFieldsAction()
     {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
 
-            if(!isset($data['id'])){
-                return wp_send_json([
-                    'success' => false,
-                    'error' => 'Missing id'
-                ]);
-            }
-            $id = $data['id'];
+		    if(!isset($data['id'])){
+			    return wp_send_json([
+				    'success' => false,
+				    'error' => 'Missing id'
+			    ]);
+		    }
+		    $id = $data['id'];
 
-            try {
-                WooCommerceProductDataRepository::deleteFields($id);
+		    try {
+			    WooCommerceProductDataRepository::deleteFields($id);
 
-                $return = [
-                    'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-                ];
-            }
+			    $return = [
+				    'success' => true,
+			    ];
+		    } catch (\Exception $exception){
+			    $return = [
+				    'success' => false,
+				    'error' => $exception->getMessage()
+			    ];
+		    }
 
-            return wp_send_json($return);
-        }
+		    return wp_send_json($return);
+	    }
 
-        return wp_send_json([
-            'success' => false,
-            'error' => 'no WooCommerce product data was sent'
-        ]);
+	    return wp_send_json([
+		    'success' => false,
+		    'error' => 'no WooCommerce product data was sent'
+	    ]);
     }
 
     /**
@@ -725,6 +723,43 @@ class ACPT_Lite_Ajax
 		    'success' => false,
 	    ]);
     }
+
+	/**
+	 * @throws \Exception
+	 */
+	public function fetchMetaFieldsFromBelongsToAction()
+	{
+		$data = $this->sanitizeJsonData($_POST['data']);
+
+		if(!isset($data['belongsTo']) and !isset($data['find'])){
+			return wp_send_json([
+				'success' => false,
+				'error' => 'Missing params (`belongsTo`)'
+			]);
+		}
+
+		$belongsTo = $data['belongsTo'];
+		$find = $data['find'];
+
+		$query = new FetchMetaFieldsFromBelongsQuery($belongsTo, $find);
+
+		return wp_send_json($query->execute());
+	}
+
+	/**
+	 * @throws \Exception
+	 */
+	public function fetchAllFindBelongsAction()
+	{
+		$query = new FetchAllFindBelongsQuery();
+
+		return wp_send_json($query->execute());
+	}
+
+
+
+
+
 
 	/**
 	 * Fetch custom post type meta
