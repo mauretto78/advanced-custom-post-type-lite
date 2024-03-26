@@ -40,6 +40,11 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
+/**
+ * Composer init
+ */
+require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
+
 // Fix PHP headers
 ob_start();
 Session::start();
@@ -49,11 +54,7 @@ Session::start();
  */
 define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
 define( 'ACPT_LITE_PLUGIN_VERSION', '2.0.0' );
-
-/**
- * Composer init
- */
-require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
+define( 'ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
  * Avoid Call to undefined function is_plugin_active() error
@@ -68,7 +69,7 @@ if( !function_exists('is_plugin_active') ) {
 try {
 	function cacheInstance()
 	{
-		$cacheDir = ACPT_PLUGIN_DIR_PATH . "cache";
+		$cacheDir = ACPT_LITE_PLUGIN_DIR_PATH . "cache";
 
 		if(!is_dir($cacheDir)){
 			mkdir($cacheDir, 0777, true);

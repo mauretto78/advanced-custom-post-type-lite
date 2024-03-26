@@ -123,3 +123,50 @@ export const upsert = (array, element, key) => {
 
     return array;
 };
+
+/**
+ *
+ * @param obj
+ * @return {boolean}
+ */
+export const isIterable = (obj) => {
+    // checks for null and undefined
+    if (obj == null) {
+        return false;
+    }
+
+    return typeof obj[Symbol.iterator] === 'function';
+};
+
+/**
+ * Equivalent of PHP function array_unique
+ *
+ * @param arr
+ * @return {unknown[]}
+ */
+export const arrayUnique = (arr) => {
+    return [...new Set(arr)];
+};
+
+/**
+ *
+ * @param object
+ * @return {string}
+ */
+export const objectToEscapedJson = (object) => {
+    return JSON.stringify(object).replace(/"/g, "&quot;");
+};
+
+/**
+ *
+ * @param json
+ * @return {*}
+ */
+export const escapedJsonToObject = (json) => {
+    return json.replaceAll("&quot;", '"');
+};
+
+
+
+
+

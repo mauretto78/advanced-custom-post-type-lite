@@ -1,0 +1,35 @@
+// @TODO RTL SUPPORT
+
+.tree {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-12;
+
+  &:after {
+    background: $light-gray;
+    bottom: 15px;
+    content: "";
+    left: 8px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .tree-el {
+    position: relative;
+    padding-left: calc(#{$space-36} + (#{$space-12} * var(--level)));
+
+    //$space-36 *
+
+    &:after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      background: $light-gray;
+      width:calc(#{$space-12} + (#{$space-12} * var(--level)));;
+      top: 50%;
+      left: 8px;
+    }
+  }
+}

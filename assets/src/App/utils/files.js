@@ -38,3 +38,12 @@ export const download = (filename, text) => {
 
     document.body.removeChild(element);
 };
+
+/**
+ *
+ * @param filename
+ * @return {*}
+ */
+export const getFileExtension = (filename) => {
+    return filename.split('.').pop();
+};

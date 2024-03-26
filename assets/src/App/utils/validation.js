@@ -5,8 +5,20 @@
  * @param value
  * @return {boolean}
  */
-import {EMAIL, SELECT} from "../constants/fields";
+import {fieldTypes} from "../constants/fields";
 import {wpAjaxRequest} from "./ajax";
+import useTranslation from "../hooks/useTranslation";
+
+export const alphanumericallyValid = (string) => {
+
+    const matches = string.match(/^[0-9a-zA-Z_-]+$/g);
+
+    if (matches === null) {
+        return 'Only alphanumeric characters allowed';
+    }
+
+    return true;
+};
 
 /**
  * Keys are used as internal identifiers. Lowercase alphanumeric characters, dashes, and underscores are allowed.
@@ -97,17 +109,6 @@ export const asyncIsTaxonomySlugValid = async (slug) => {
     return true;
 };
 
-export const alphanumericallyValid = (string) => {
-
-    const matches = string.match(/^[0-9a-zA-Z_-]+$/g);
-
-    if (matches === null) {
-        return 'Only alphanumeric characters allowed';
-    }
-
-    return true;
-};
-
 export const isAValidValueForThisType = (type, value, options) => {
 
     if(typeof value === 'undefined' || value === null || value === ''){
@@ -119,11 +120,37 @@ export const isAValidValueForThisType = (type, value, options) => {
     }
 
     switch (type ) {
-        case EMAIL:
+        case fieldTypes.COLOR:
+            return validColor(value);
+
+        case fieldTypes.CURRENCY:
+            return validCurrency(value);
+
+        case fieldTypes.DATE:
+            return validDate(value);
+
+        case fieldTypes.EMAIL:
             return validEmail(value);
 
-        case SELECT:
+        case fieldTypes.WEIGHT:
+        case fieldTypes.LENGTH:
+        case fieldTypes.NUMBER:
+            return validNumber(value);
+
+        case fieldTypes.PHONE:
+            return validPhone(value);
+
+        case fieldTypes.CHECKBOX:
+        case fieldTypes.RADIO:
+        case fieldTypes.SELECT:
+        case fieldTypes.SELECT_MULTI:
             return validSelect(value, options);
+
+        case fieldTypes.TOGGLE:
+            return validToggle(value);
+
+        case fieldTypes.URL:
+            return validURL(value);
 
         default:
             return true;
@@ -249,4 +276,39 @@ export const validSelect = (value, options) => {
     });
 
     return matches > 0;
+};
+
+export const validWPGraphQLName = (name) => {
+
+    if (null === name.match(/^[a-z]/)) {
+        return "The string needs to start with a letter.";
+    }
+
+    if (null ===  name.match(/^[0-9a-zA-Z]+$/)) {
+        return "The string needs to be alphanumeric (camelcase).";
+    }
+};
+
+/**
+ *
+ * @param key
+ * @return {string|boolean}
+ */
+export const validateGoogleMapsApiKey = (key) => {
+
+    if(typeof key === 'undefined' ||  key === null || key === '' || key.length === 0){
+        return  true;
+    }
+
+    if(key.length !== 39){
+        return useTranslation('Key length must be 39.');
+    }
+
+    const regx = new RegExp( "^[A-Za-z0-9-_]+$" );
+
+    if(!regx.test(key)){
+        return useTranslation('Not valid format.');
+    }
+
+    return true;
 };

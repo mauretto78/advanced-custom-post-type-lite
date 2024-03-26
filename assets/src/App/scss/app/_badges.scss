@@ -1,0 +1,122 @@
+.acpt-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: $border-radius;
+  color: $gray;
+  background: $pale-gray;
+  border: none;
+  outline: none;
+  transition: .3s;
+  font-size: $small-font-size;
+
+  &.disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  &.block {
+    display: block;
+  }
+
+  &.with-border {
+    border: $border-thickness solid $gray;
+  }
+
+  .badge-link {
+    background: $white;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 100%;
+  }
+
+  &.acpt-badge-disabled {
+    color: $gray;
+    background: $light-gray;
+  }
+
+  &.acpt-badge-warning {
+    background: $warning-bg;
+    color: $warning-color;
+
+    .badge-link {
+      color: $warning-color;
+    }
+
+    &.with-border {
+      border: $border-thickness solid $warning-color;
+    }
+  }
+
+  &.acpt-badge-info {
+    background: $info-bg;
+    color: $info-color;
+
+    .badge-link {
+      color: $info-color;
+    }
+
+    &.with-border {
+      border: $border-thickness solid $info-color;
+    }
+  }
+
+  &.acpt-badge-primary {
+    background: $primary-color;
+    color: $white;
+
+    .badge-link {
+      color: $primary-color;
+    }
+
+    &.with-border {
+      border: $border-thickness solid $primary-color;
+    }
+  }
+
+  &.acpt-badge-secondary {
+    background: $secondary-color;
+    color: $primary-color;
+
+    .badge-link {
+      color: $primary-color;
+    }
+
+    &.with-border {
+      border: $border-thickness solid $primary-color;
+    }
+  }
+
+  &.acpt-badge-success {
+    background: $success-bg;
+    color: $success-color;
+
+    .badge-link {
+      color: $success-color;
+    }
+
+    &.with-border {
+      border: $border-thickness solid $success-color;
+    }
+  }
+
+  &.acpt-badge-danger {
+    background: $danger-bg;
+    color: $danger-color;
+
+    .badge-link {
+      color: $danger-color;
+    }
+
+    &.with-border {
+      border: $border-thickness solid $danger-color;
+    }
+  }
+}

@@ -12,10 +12,12 @@ export const scrollToTargetId = (id) => {
     element.scrollIntoView({behavior: 'smooth'}, true);
 };
 
-export const scrollToId = (id, yOffset = -130) => {
+export const scrollToId = (id, yOffset = -230) => {
 
     const element = document.getElementById(id);
-    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-    window.scrollTo({top: y, behavior: 'smooth'});
+    if(element){
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+    }
 };

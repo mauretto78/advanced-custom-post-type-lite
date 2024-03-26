@@ -1,7 +1,6 @@
 export const metaTypes = {
-    META: "meta",
     CUSTOM_POST_TYPE: "customPostType",
-    TAXONOMY: "taxonomy",
     OPTION_PAGE: "optionPage",
+    TAXONOMY: "taxonomy",
     USER: "user"
 };

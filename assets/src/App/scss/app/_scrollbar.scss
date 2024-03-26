@@ -1,0 +1,13 @@
+::-webkit-scrollbar {
+  width: $space-12;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar-track {
+  background: $pale-gray;
+  border-left: $border-thickness solid $light-gray;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $light-gray;
+}

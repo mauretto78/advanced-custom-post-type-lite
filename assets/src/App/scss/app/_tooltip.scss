@@ -1,0 +1,34 @@
+.acpt-tooltip {
+  position: relative;
+  align-items: center;
+  gap: $space-4;
+
+  .acpt-tooltip-help,
+  .acpt-tooltip-label {
+    cursor: help;
+
+    label {
+      margin: 0;
+    }
+  }
+
+  .acpt-tooltip-tip {
+    position: absolute;
+    top: 60px;
+    border-radius: $border-radius;
+    background: $white;
+    box-shadow: $box-shadow;
+    padding: $space-12;
+    width: 240px;
+    z-index: -1;
+    overflow : hidden;
+    white-space: pre-wrap;
+    opacity: 0;
+    transition: all ease .3s;
+
+    &.visible {
+      opacity: 1;
+      z-index: 9999;
+    }
+  }
+}

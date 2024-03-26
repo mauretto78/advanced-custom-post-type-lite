@@ -37,7 +37,7 @@ class FetchLanguagesQuery implements QueryInterface
 		});
 
 		foreach($catalog->getEntries() as $entry){
-			$entries['translations'][$entry->getMsgId()] = esc_html__($entry->getMsgId(), ACPT_PLUGIN_NAME);
+			$entries['translations'][$entry->getMsgId()] = esc_html__($entry->getMsgId(), ACPT_LITE_PLUGIN_NAME);
 		}
 
 		return $entries;
