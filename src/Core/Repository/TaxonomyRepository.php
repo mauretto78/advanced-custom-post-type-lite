@@ -5,7 +5,7 @@ namespace ACPT_Lite\Core\Repository;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class TaxonomyRepository

@@ -10,7 +10,7 @@ use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\PostMetaSync;
 use ACPT_Lite\Utils\WPUtils;

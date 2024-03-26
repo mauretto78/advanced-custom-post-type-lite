@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Core\Models\User;
 
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 
 /**

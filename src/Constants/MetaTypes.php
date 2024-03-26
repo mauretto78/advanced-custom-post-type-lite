@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT_Lite\Costants;
+namespace ACPT_Lite\Constants;
 
 class MetaTypes
 {

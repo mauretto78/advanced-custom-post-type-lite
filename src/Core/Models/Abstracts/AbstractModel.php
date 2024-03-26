@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Core\Models\Abstracts;
 
+use ACPT\Utils\PHP\Objects;
 use ACPT_Lite\Core\Helper\Uuid;
 use ReflectionClass;
 
@@ -138,4 +139,40 @@ abstract class AbstractModel
             }
         }
     }
+
+	/**
+	 * @return array
+	 */
+	protected function getConstants()
+	{
+		try {
+			$oClass = new \ReflectionClass(static::class);
+
+			return $oClass->getConstants();
+		} catch (\Exception $exception){
+			return [];
+		}
+	}
+
+	/**
+	 * @return mixed
+	 * @throws \ReflectionException
+	 */
+	public function toStdObject()
+	{
+		$stdObject = json_decode(json_encode($this));
+
+		return Objects::cast(\stdClass::class, $stdObject);
+	}
+
+	/**
+	 * @return array
+	 * @throws \ReflectionException
+	 */
+	public function toArray()
+	{
+		$stdClass = $this->toStdObject();
+
+		return Objects::stdObjToArray($stdClass);
+	}
 }

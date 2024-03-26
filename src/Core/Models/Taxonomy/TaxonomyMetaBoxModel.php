@@ -3,7 +3,7 @@
 namespace ACPT_Lite\Core\Models\Taxonomy;
 
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 
 /**
  * TaxonomyMetaBoxModel

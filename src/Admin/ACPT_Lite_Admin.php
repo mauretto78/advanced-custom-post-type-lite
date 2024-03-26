@@ -16,9 +16,10 @@ use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\TaxonomyMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\UserMetaShortcode;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_Elementor_Initiator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
+use ACPT_Lite\Utils\Translator;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -391,9 +392,31 @@ class ACPT_Lite_Admin
      */
     public function addFilters()
     {
+	    add_filter( 'plugin_action_links', [ $this, 'addPluginLinks' ], PHP_INT_MAX, 2 );
         add_filter('script_loader_tag', [$this, 'addAsyncDeferAttribute'], 10, 2);
         add_filter('block_categories', [$this, 'addGutenbergBlocks'], 10, 2 );
     }
+
+	/**
+	 * Add plugin links
+	 *
+	 * @param $actions
+	 * @param $plugin_file
+	 *
+	 * @return array
+	 */
+	public function addPluginLinks($actions, $plugin_file)
+	{
+		$actionLinks = [];
+
+		if ( 'advanced-custom-post-type-lite/advanced-custom-post-type-lite.php' === $plugin_file ) {
+			$actionLinks['pro'] = '<a href="https://acpt.io/checkout/?pid=791276">'.Translator::translate('Go PRO').'</a>';
+			$actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page=advanced-custom-post-type#/settings' ).'">'.Translator::translate('Settings').'</a>';
+			$actionLinks['documentation'] = '<a target="_blank" href="https://docs.acpt.io/">'.Translator::translate('Documentation').'</a>';
+		}
+
+		return array_merge($actionLinks, $actions);
+	}
 
     /**
      * Register custom Gutenberg

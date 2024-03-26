@@ -7,7 +7,7 @@ use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Core\Validators\MetaDataValidator;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Utils\Sanitizer;
 
 /**

@@ -7,6 +7,9 @@ use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
+use ACPT_Lite\Utils\CallingClass;
+use Phpfastcache\Core\Pool\ExtendedCacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * This class handles DB interactions.
@@ -42,61 +45,51 @@ class ACPT_Lite_DB
     const TABLE_USER_META_FIELD        = 'acpt_lite_user_field';
     const TABLE_USER_META_FIELD_OPTION = 'acpt_lite_user_field_option';
 
-    /**
-     * @var self
-     */
-    private static $instance;
-
-    /**
-     * @var \mysqli
-     */
-    private $dbConn;
+	const TABLE_BELONG = 'acpt_lite_belong';
+	const TABLE_META_GROUP_BELONG = 'acpt_lite_group_belong';
+	const TABLE_META_GROUP = 'acpt_lite_meta_group';
+	const TABLE_META_BOX = 'acpt_lite_meta_box';
+	const TABLE_META_FIELD = 'acpt_lite_meta_field';
+	const TABLE_META_OPTION = 'acpt_lite_meta_option';
 
 	/**
-	 * @return ACPT_Lite_DB
+	 * @var ExtendedCacheItemPoolInterface
 	 */
-    private static function getInstance()
-    {
-        if (self::$instance == null){
-            $className = __CLASS__;
-            self::$instance = new $className;
-        }
-
-        return self::$instance;
-    }
+	private static ?ExtendedCacheItemPoolInterface $cache = null;
 
 	/**
-	 * @return ACPT_Lite_DB
+	 * @param ExtendedCacheItemPoolInterface $cache
 	 */
-    private static function initConnection()
-    {
-	    $host = explode(":", DB_HOST);
-	    $dbHost = $host[0];
-	    $dbPort = (isset($host[1])) ? $host[1] : null;
-	    $dbUser = DB_USER;
-	    $dbPassword = DB_PASSWORD;
-	    $dbName = DB_NAME;
+	public static function injectCache(ExtendedCacheItemPoolInterface $cache)
+	{
+		self::$cache = $cache;
+	}
 
-	    $db = self::getInstance();
-	    $db->dbConn = new \mysqli($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
-	    $db->dbConn->set_charset(DB_CHARSET);
+	/**
+	 * Return the correct charset collation
+	 *
+	 * @return string
+	 */
+	public static function getCharsetCollation()
+	{
+		global $wpdb;
 
-	    return $db;
-    }
+		$charset_collate = "";
+		$collation = $wpdb->get_row("SHOW FULL COLUMNS FROM {$wpdb->posts} WHERE field = 'post_content'");
 
-    /**
-     * @return \mysqli|null
-     */
-    public static function getDbConn() {
-        try {
-            $db = self::initConnection();
+		if(isset($collation->Collation)) {
+			$charset = explode('_', $collation->Collation);
 
-            return $db->dbConn;
-        } catch (\Exception $ex) {
-            echo "I was unable to open a connection to the database. " . $ex->getMessage();
-            return null;
-        }
-    }
+			if(is_array($charset) && count($charset) > 1) {
+				$charset = $charset[0];
+				$charset_collate = "DEFAULT CHARACTER SET {$charset} COLLATE {$collation->Collation}";
+			}
+		}
+
+		if(empty($charset_collate)) { $charset_collate = $wpdb->get_charset_collate(); }
+
+		return $charset_collate;
+	}
 
     /**
      * check if schema exists
@@ -114,8 +107,6 @@ class ACPT_Lite_DB
         } catch (\Exception $exception){
             return false;
         }
-
-        return false;
     }
 
     /**
@@ -440,17 +431,58 @@ class ACPT_Lite_DB
         }
     }
 
-    /**
-     * @param $sql
-     *
-     * @return mixed
-     */
+	/**
+	 * @param $sql
+	 * @param array $args
+	 *
+	 * @return array|mixed|object|null
+	 */
     public static function getResults($sql, array $args = [])
     {
-        global $wpdb;
+	    global $wpdb;
+	    $preparedQuery = self::prepare($sql, $args);
+
+	    if(self::$cache){
+		    try {
+			    $cacheKey = md5($preparedQuery);
+			    $cachedElement = self::$cache->getItem($cacheKey);
+
+			    if (!$cachedElement->isHit()) {
+				    $tag = md5(CallingClass::get());
+				    $data = $wpdb->get_results($preparedQuery);
+				    $cachedElement->addTag($tag)->set($data)->expiresAfter($cacheTtl);
+				    self::$cache->save($cachedElement);
+			    }
+
+			    return $cachedElement->get();
+
+		    } catch ( InvalidArgumentException $e ) {
+			    return $wpdb->get_results($preparedQuery);
+		    }
+	    }
 
         return $wpdb->get_results(self::prepare($sql, $args));
     }
+
+	/**
+	 * @param $tag
+	 */
+	public static function invalidateCacheTag($tag)
+	{
+		if(self::$cache){
+			self::$cache->deleteItemsByTag(md5($tag));
+		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function flushCache()
+	{
+		if(self::$cache){
+			return self::$cache->clear();
+		}
+	}
 
     /**
      * Get the prepared sql query

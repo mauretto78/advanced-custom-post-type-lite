@@ -22,7 +22,7 @@ use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Sanitizer;
 use ACPT_Lite\Utils\Sluggify;

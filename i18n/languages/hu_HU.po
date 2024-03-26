@@ -1,0 +1,3234 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ACPT\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Radics József Géza - www.slyweb.hu\n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "(default true)"
+msgstr "(alapértelmezett true)"
+
+msgid "(e.g. Movie)"
+msgstr "(pl. Film)"
+
+msgid "(e.g. Movies)"
+msgstr "(pl. Filmek)"
+
+msgid "--Select--"
+msgstr "--választ--"
+
+msgid "A brief description"
+msgstr "Rövid leírás"
+
+msgid "Add page"
+msgstr "Oldal hozzáadása"
+
+msgid "ACPT Tools"
+msgstr "ACPT eszközök"
+
+msgid "ACPT email account"
+msgstr "ACPT e-mail fiók"
+
+msgid "ALERT:"
+msgstr "FIGYELMEZTETÉS:"
+
+msgid "API dashboard"
+msgstr "API műszerfal"
+
+msgid "APIs"
+msgstr "API-k"
+
+msgid "APIs dashboard panel"
+msgstr "API-k műszerfal panel"
+
+msgid "APIs endpoints"
+msgstr "API végpontok"
+
+msgid "API key"
+msgstr "API kulcs"
+
+msgid "Action required"
+msgstr "Szükséges intézkedés"
+
+msgid "Actions"
+msgstr "Műveletek"
+
+msgid ""
+"Activate ACPT by your license key to get professional support and automatic "
+"updates from your WordPress dashboard."
+msgstr ""
+"Aktiválja az ACPT-t a licenckulcsával, hogy professzionális támogatást és "
+"automatikus frissítéseket kapjon a WordPress műszerfaláról."
+
+msgid "Activate your license"
+msgstr "Aktiválja licenszét"
+
+msgid ""
+"Activate your license key here. Please note that you need also your ACPT "
+"user email"
+msgstr ""
+"Aktiválja licenckulcsát itt. Kérjük, vegye figyelembe, hogy szüksége van az "
+"ACPT felhasználói e-mail címére is"
+
+msgid "Activate your license now"
+msgstr "Aktiválja licencét most"
+
+msgid "Add"
+msgstr "Hozzáadás"
+
+msgid "Add block"
+msgstr "Blokk hozzáadása"
+
+msgid "Add child page"
+msgstr "Gyermekoldal hozzáadása"
+
+msgid "Add element"
+msgstr "Elem hozzáadása"
+
+msgid "Add field"
+msgstr "Mező hozzáadása"
+
+msgid "Add meta box"
+msgstr "Meta doboz hozzáadása"
+
+msgid "Add new {{r}}"
+msgstr "Új {{r}}"
+
+msgid "Add option"
+msgstr "Opció hozzáadása"
+
+msgid "Add or remove {{r}}"
+msgstr "Hozzáadás vagy eltávolítás {{r}}"
+
+msgid "Add product data"
+msgstr "Termékadatok hozzáadása"
+
+msgid "Add support for various available post edit features. For more info"
+msgstr ""
+"Támogatás hozzáadása a különböző elérhető posztszerkesztési funkciókhoz. "
+"További információkért"
+
+msgid "after copying"
+msgstr "másolás után"
+
+msgid "All {{r}}"
+msgstr "Minden {{r}}"
+
+msgid ""
+"Allowed keys: 'name', name of default term.|'slug', Slug for default "
+"term.|'description', Description for default term"
+msgstr ""
+"Megengedett kulcsok: 'name', az alapértelmezett kifejezés neve.|'slug', Az "
+"alapértelmezett kifejezés slug-ja.|'description', Az alapértelmezett "
+"kifejezés leírása"
+
+msgid "Archive template"
+msgstr "Archiv sablon"
+
+msgid "Archives"
+msgstr "Archívum"
+
+msgid "Are you sure?"
+msgstr "Biztos benne?"
+
+msgid "Array of capabilities for this taxonomy."
+msgstr "A taxonómia lehetőségeinek tömbje."
+
+msgid "Associate"
+msgstr "Társított"
+
+msgid "Associate custom post types here"
+msgstr "Egyedi bejegyzés típusok társítása"
+
+msgid "Associate custom post types to"
+msgstr "Egyedi bejegyzés típusok társítása"
+
+msgid "Associate taxonomies to"
+msgstr "Taxonómiák társítása"
+
+msgid "Associated icon"
+msgstr "Kapcsolódó ikon"
+
+msgid "Associated meta boxes"
+msgstr "Kapcsolódó meta boxok"
+
+msgid "Associated meta fields"
+msgstr "Kapcsolódó metamezők"
+
+msgid "Associated post types"
+msgstr "Kapcsolódó bejegyzés típusok"
+
+msgid "Associated taxonomies"
+msgstr "Kapcsolódó taxonómiák"
+
+msgid "Back to {{r}}"
+msgstr "Vissza a {{r}}"
+
+msgid "Belongs to"
+msgstr "Tartozik"
+
+msgid "Block list"
+msgstr "Blokklista"
+
+msgid "Block was successfully copied"
+msgstr "A blokkot sikeresen másolva"
+
+msgid "CPT"
+msgstr "CPT"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the plural name."
+msgstr ""
+"Nagybetűs karakterlánc írásjelek és szóközök nélkül. Betűvel kell kezdődnie "
+"(nem számmal). Fontos, hogy különbözzön a többes szám nevétől."
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the single name."
+msgstr ""
+"Nagybetűs karakterlánc írásjelek és szóközök nélkül. Betűvel kell kezdődnie "
+"(nem számmal). Fontos, hogy különbözzön az egyszerű névtől."
+
+msgid "Capabilities"
+msgstr "Jogosultságok"
+
+msgid "Capability"
+msgstr "Képesség"
+
+msgid "Capability Type"
+msgstr "Képesség típus"
+
+msgid "Capability type"
+msgstr "A képesség típus"
+
+msgid "Changelog"
+msgstr "Fejlesztési napló"
+
+msgid "Check `required` in the selected meta field"
+msgstr "Jelölje be a “kötelező jelölőnégyzetet a kiválasztott metamezőben"
+
+msgid "Check `show in archive` in the selected meta field"
+msgstr ""
+"Jelölje be a `megjelenítés az archívumban` opciót a kiválasztott metamezőben"
+
+msgid "Children list"
+msgstr "Gyermekek listája"
+
+msgid "Choose box"
+msgstr "Válassza ki a dobozt"
+
+msgid "Choose element"
+msgstr "Válasszon elemet"
+
+msgid "Choose field"
+msgstr "Válasszon mezőt"
+
+msgid "Choose from most used {{r}}"
+msgstr "Válasszon a leggyakrabban használt {{r}}"
+
+msgid "Choose from the list"
+msgstr "Válasszon a listából"
+
+msgid "Choose how to display the related post(s) selector (default: select)"
+msgstr ""
+"Válassza ki, hogyan jelenjen meg a kapcsolódó bejegyzés(ek) választó "
+"(alapértelmezett: lista)"
+
+msgid "Choose the field type"
+msgstr "Válassza ki a mező típusát"
+
+msgid "Close"
+msgstr "Bezár"
+
+msgid "Condition"
+msgstr "Állapot"
+
+msgid "Condition value"
+msgstr "Feltétel értéke"
+
+msgid "Conditional rendering"
+msgstr "Feltételes renderelés"
+
+msgid "Confirm deleting all"
+msgstr "Az összes törlésének megerősítése"
+
+msgid "Confirm deleting option"
+msgstr "Törlés lehetőségének megerősítése"
+
+msgid ""
+"Copy the conditional logic settings of this meta field to other fields of "
+"this box"
+msgstr ""
+"A metamező feltételes logikai beállításainak másolása a mező más mezőibe"
+
+msgid "Copy the meta block"
+msgstr "Másolja a meta blokkot"
+
+msgid "Copy the meta box"
+msgstr "A meta doboz másolása"
+
+msgid "Copy the meta field"
+msgstr "Másolja a meta mezőt"
+
+msgid "Copy the selected meta box"
+msgstr "A kiválasztott meta doboz másolása"
+
+msgid "Copy the selected meta field"
+msgstr "A kiválasztott metamező másolása"
+
+msgid "Copy this block to another meta field"
+msgstr "Másolja ezt a blokkot egy másik metamezőbe"
+
+msgid "Copy this meta box to another"
+msgstr "Másolja ezt a meta mezőt egy másikba"
+
+msgid "Copy this meta field to another meta box"
+msgstr "Másolja ezt a metamezőt egy másik meta boxba"
+
+msgid "Copyright"
+msgstr "Minden jog fenntartva"
+
+msgid "Create"
+msgstr "Létrehozás"
+
+msgid "Create a meta field in the selected meta box"
+msgstr "Meta mező létrehozása a kiválasztott meta borban"
+
+msgid "Create a meta option (if applicable) in the selected meta field"
+msgstr ""
+"Hozzon létre egy meta opciót (ha alkalmazható) a kiválasztott meta mezőben"
+
+msgid "Create a new block (only for Flexible field)"
+msgstr "Új blokk létrehozása (csak a Rugalmas mezőhöz)"
+
+msgid "Create a new condition in the selected meta field"
+msgstr "Új feltétel létrehozása a kiválasztott metamezőben"
+
+msgid "Create new Taxonomy"
+msgstr "Új taxonómia létrehozása"
+
+msgid "Create new WooCommerce product data"
+msgstr "Új WooCommerce termékadatok létrehozása"
+
+msgid "Create new meta box"
+msgstr "Új meta doboz létrehozása"
+
+msgid "Create new options after the selected meta option"
+msgstr "Új opciók létrehozása a kiválasztott meta opció után"
+
+msgid "Create template"
+msgstr "Sablon létrehozása"
+
+msgid "Custom"
+msgstr "Egyedi"
+
+msgid "Custom Post Type global settings"
+msgstr "Egyéni Bejegyzés típus globális beállítások"
+
+msgid "Custom post type data"
+msgstr "Egyedi bejegyzés típus adatok"
+
+msgid "Custom post type meta successfully saved"
+msgstr "Az egyedi bejegyzés típus meta sikeresen mentve"
+
+msgid "Custom post type slug to use instead of default."
+msgstr "Egyedi bejegyzés típus slug használata az alapértelmezett helyett."
+
+msgid ""
+"Custom post type successfully deleted. The browser will refresh after 5 "
+"seconds."
+msgstr ""
+"Egyedi bejegyzés típus sikeresen törölve. A böngésző 5 másodperc múlva "
+"frissül."
+
+msgid ""
+"Custom post type successfully saved. The browser will refresh after 5 "
+"seconds."
+msgstr ""
+"Az egyedi bejegyzés típus sikeresen mentve. A böngésző 5 másodperc múlva "
+"frissül."
+
+msgid "Custom post type was associated to selected taxonomies"
+msgstr "Egyéni bejegyzés típus társít a kiválasztott taxonómiákhoz"
+
+msgid "Custom post types"
+msgstr "Egyedi bejegyzés típusok"
+
+msgid "Custom query var"
+msgstr "Egyedi lekérdezés változó"
+
+msgid "Custom query var slug to use instead of default."
+msgstr "Egyéni lekérdezés változó slug az alapértelmezett helyett."
+
+msgid "Custom rewrite"
+msgstr "Egyedi átírás"
+
+msgid "Custom rewrite rules"
+msgstr "Egyéni átírási szabályok"
+
+msgid "Date format"
+msgstr "Dátum formátum"
+
+msgid "Default term to be used for the taxonomy."
+msgstr "A taxonómiához használandó alapértelmezett kifejezés."
+
+msgid "Default value"
+msgstr "Alapértelmezett érték"
+
+msgid "Delete"
+msgstr "Törlés"
+
+msgid "Delete ACPT definitions when deactivate the plug-in"
+msgstr "ACPT adatok törlése a bővítmény deaktiválásakor"
+
+msgid "Delete API key"
+msgstr "API-kulcs törlése"
+
+msgid "Delete Taxonomy"
+msgstr "Taxonómia törlése"
+
+msgid "Delete WooCommerce product data"
+msgstr "WooCommerce termékadatok törlése"
+
+msgid "Delete all"
+msgstr "Összes törlése"
+
+msgid "Delete all action"
+msgstr "Minden művelet törlése"
+
+msgid "Delete all images"
+msgstr "Minden kép törlése"
+
+msgid ""
+"Delete all saved ACPT definitions when you deactivate the plug-in. This "
+"means that if you select NO when you deactivate and then reactivate the plug-"
+"in you will find all the previously saved ACPT definitions (meta fields, "
+"options etc.)"
+msgstr ""
+"Törli az összes mentett ACPT-definíciót, amikor a bővítményt kikapcsolja. Ez "
+"azt jelenti, hogy ha deaktiváláskor a NEM lehetőséget választja, majd újra "
+"aktiválja a beépülő modult, akkor a korábban elmentett ACPT definíciók "
+"(metamezők, opciók stb.)"
+
+msgid "Delete metadata when delete an ACPT field"
+msgstr "Metaadatok törlése az ACPT mező törlésekor"
+
+msgid "Delete others pages"
+msgstr "Egyéb oldalak törlése"
+
+msgid "Delete others posts"
+msgstr "Egyéb hozzászólások törlése"
+
+msgid "Delete pages"
+msgstr "Oldalak törlése"
+
+msgid "Delete post metadata when deleting ACPT fields"
+msgstr "Bejegyzés meta adatok törlése ACPT-mezők törlésénél"
+
+msgid ""
+"Delete post metadata when deleting an ACPT field. This means that if you "
+"select YES, when you delete an ACPT meta field all the saved metadata will "
+"be deleted"
+msgstr ""
+"A postai metaadatok törlése ACPT-mező törlésekor. Ez azt jelenti, hogy ha "
+"IGEN-t választ, akkor egy ACPT metamező törlésekor az összes mentett "
+"metaadat törlődik"
+
+msgid "Delete posts when delete an ACPT post definition"
+msgstr "Hozzászólások törlése ACPT hozzászólás-definíció törlésekor"
+
+msgid ""
+"Delete posts when delete an ACPT post type definition. This means that if "
+"you select YES, when you delete an ACPT post type definition all the saved "
+"posts will be deleted"
+msgstr ""
+"Hozzászólások törlése ACPT poszttípus-definíció törlésekor. Ez azt jelenti, "
+"hogy ha az IGEN lehetőséget választja, akkor az ACPT poszttípus definíció "
+"törlésekor az összes mentett poszt törlődik"
+
+msgid "Delete private pages"
+msgstr "Privát oldalak törlése"
+
+msgid "Delete private posts"
+msgstr "Privát hozzászólások törlése"
+
+msgid "Delete published pages"
+msgstr "Publikált oldalak törlése"
+
+msgid "Delete the meta box in this"
+msgstr "Törölje a meta mezőt ebben a"
+
+msgid "Delete the meta field in this block after copying"
+msgstr "Törölje a meta mezőt ebben a blokkban a másolás után"
+
+msgid "Delete the meta field in this field after copying"
+msgstr "A meta mező törlése ebben a mezőben a másolás után"
+
+msgid "Delete the selected condition"
+msgstr "A kiválasztott feltétel törlése"
+
+msgid "Delete the selected meta box"
+msgstr "A kiválasztott meta box törlése"
+
+msgid "Delete the selected meta field"
+msgstr "A kiválasztott meta mező törlése"
+
+msgid "Delete the selected meta option"
+msgstr "A kiválasztott meta beállítás törlése"
+
+msgid "Delete this meta box"
+msgstr "A meta box törlése"
+
+msgid "Delete this meta field"
+msgstr "A meta mező törlése"
+
+#, fuzzy
+msgid "Different name MUST be different from single name"
+msgstr "A különböző névnek meg kell különböztetnie az egynevűtől"
+
+msgid "Disabled"
+msgstr "Kikapcsolva"
+
+msgid "Displayed on the admin panel"
+msgstr "Megjelenik az admin panelen"
+
+msgid "Displayed on the sidebar of the admin panel"
+msgstr "Megjelenik az adminisztrációs panel oldalsávjában"
+
+msgid "Documentation"
+msgstr "Dokumentáció"
+
+msgid "Drag your component(s) here"
+msgstr "Húzza ide a komponens(ek)et"
+
+msgid "Drag your loop component(s) here"
+msgstr "Húzza ide a loop összetevő(ke)t"
+
+msgid "Duplicate the selected meta box"
+msgstr "A kiválasztott meta doboz duplikálása"
+
+msgid "Duplicate the selected meta field"
+msgstr "A kiválasztott meta mező duplikálása"
+
+msgid "Duplicate this block"
+msgstr "Duplikálja ezt a blokkot"
+
+msgid "Duplicate this meta box"
+msgstr "Duplikálja ezt a meta mezőt"
+
+msgid "Duplicate this meta field"
+msgstr "Duplikálja ezt a meta mezőt"
+
+msgid "Edit"
+msgstr "Szerkesztés"
+
+msgid "Edit Custom Post Type"
+msgstr "Egyedi bejegyzés típus szerkesztése"
+
+msgid "Edit Taxonomy"
+msgstr "Taxonómia szerkesztése"
+
+msgid "Edit WooCommerce product data"
+msgstr "WooCommerce termékadatok szerkesztése"
+
+msgid "Edit a Taxonomy"
+msgstr "Taxonómia szerkesztése"
+
+msgid "Edit others pages"
+msgstr "Más oldalak szerkesztése"
+
+msgid "Edit others posts"
+msgstr "Más bejegyzések szerkesztése"
+
+msgid "Edit pages"
+msgstr "Oldalak szerkesztése"
+
+msgid "Edit private pages"
+msgstr "Privát oldalak szerkesztése"
+
+msgid "Edit private posts"
+msgstr "Privát hozzászólások szerkesztése"
+
+msgid "Edit published pages"
+msgstr "Publikált oldalak szerkesztése"
+
+msgid "Element"
+msgstr "Vezérlő"
+
+msgid "Elements per page"
+msgstr "Elemek oldalanként"
+
+msgid "Elements per row"
+msgstr "Elemek soronként"
+
+msgid "Elements to display"
+msgstr "Megjelenítendő elemek"
+
+msgid "Enable ACPT visual builder"
+msgstr "ACPT vizuális szerkesztő engedélyezése"
+
+msgid "Enable the ACPT visual builder to manage your templates."
+msgstr "Engedélyezze az ACPT vizuális építőjét a sablonok kezeléséhez."
+
+msgid ""
+"Enable the ACPT visual builder. This option allows you to use the integrated "
+"visual builder to create and manage templates for single CPTs, archive "
+"pages, taxonomy terms and relations."
+msgstr ""
+"Engedélyezze az ACPT vizuális építőt. Ez a beállítás lehetővé teszi, hogy az "
+"integrált vizuális építő segítségével létrehozza és kezelje az egyes CPT-k, "
+"archívum oldalak, taxonómiai kifejezések és kapcsolatok sablonjait."
+
+msgid "Error during saving the template"
+msgstr "Hiba a sablon mentése közben"
+
+msgid "Error during the activation of the license."
+msgstr "Hiba a licenc aktiválása során."
+
+msgid "Error fetching data"
+msgstr "Hiba az adatok lekérdezésében"
+
+msgid "Ex. movie"
+msgstr "Pl. film"
+
+msgid "Ex. movies"
+msgstr "Pl. filmek"
+
+msgid "Expiration date"
+msgstr "Lejárat dátuma"
+
+msgid "Export HTML/CSS code"
+msgstr "HTML/CSS kód exportálása"
+
+msgid "Export code"
+msgstr "Kód export"
+
+msgid "Export custom post types"
+msgstr "Egyedi bejegyzés típus exportálása"
+
+msgid "Export data"
+msgstr "Adatok exportálása"
+
+msgid "Export selected elements"
+msgstr "Kijelölt elemek exportálása"
+
+msgid "Export settings and meta fields for selected elements:"
+msgstr "A kiválasztott elemek beállításainak és metamezőinek exportálása:"
+
+msgid "Facebook group"
+msgstr "Facebook csoport"
+
+msgid "Featured image"
+msgstr "Kiemelt kép"
+
+msgid "Field columns ([1-6] only for repeater field)"
+msgstr "Mező oszlopok ([1-6] csak az ismétlőmező esetében)"
+
+msgid "Field label"
+msgstr "Mező neve"
+
+msgid "Field name cannot be blank"
+msgstr "A mező neve nem lehet üres"
+
+msgid "Field name max length is 255 characters"
+msgstr "A mezőnév maximális hossza 255 karakter"
+
+msgid "Field required"
+msgstr "Kötelező mező"
+
+msgid "Field slug (Ex. gallery or text_1)"
+msgstr "Mező slug (pl. galéria vagy text_1)"
+
+msgid ""
+"Field slug. Only alphanumeric (latin) characters allowed, without spaces"
+msgstr ""
+"Mező slug. Csak alfanumerikus (latin) karakterek engedélyezettek, szóközök "
+"nélkül"
+
+msgid "Field width in % ([1-100] default value: 100)"
+msgstr "Mező szélesség %-ban ([1-100] alapértelmezett érték: 100)"
+
+msgid "Fields"
+msgstr "Mezők"
+
+msgid "Fields count"
+msgstr "Mezők száma"
+
+msgid "Filter by date"
+msgstr "Dátum szerinti szűrés"
+
+msgid "Filter by {{r}}"
+msgstr "Szűrés {{r}}"
+
+msgid "Filter {{r}} list"
+msgstr "Szűrő {{r}} lista"
+
+msgid "Filter in admin"
+msgstr "Szűrő az adminban"
+
+msgid "First, create a post for this post type"
+msgstr "Először hozzon létre egy bejegyzést ehhez a bejegyzéstípushoz"
+
+msgid "First, you need to add a block in ACPT settings."
+msgstr "Először is hozzá kell adnia egy blokkot az ACPT beállításaiban."
+
+msgid "Format"
+msgstr "Formátum"
+
+msgid ""
+"From this dashboard you can discover and manage every API endpoints exposed "
+"by ACPT. Use the playground to learn how to use every endpoint."
+msgstr ""
+"Ezen a műszerfalon keresztül felfedezhet és kezelhet minden, az ACPT által "
+"közzétett API végpontot. A játszótér segítségével megtanulhatja, hogyan "
+"használhatja az egyes végpontokat."
+
+msgid "Fullscreen mode"
+msgstr "Teljes képernyős mód"
+
+msgid "General"
+msgstr "Általános"
+
+msgid "Generate"
+msgstr "Létrehozás"
+
+msgid "Generated at"
+msgstr "Generálva"
+
+msgid "Generating code..."
+msgstr "Kódgenerálás..."
+
+msgid "Go to"
+msgstr "Ugrás ide"
+
+msgid "Google Maps API key"
+msgstr "Google térkép API kulcs"
+
+msgid "GraphQL plural name"
+msgstr "GraphQL többes szám neve"
+
+msgid "GraphQL single name"
+msgstr "GraphQL név"
+
+msgid "Has archive"
+msgstr "Van archívuma"
+
+msgid "Headline location"
+msgstr "Név elhelyezkedése"
+
+msgid "Height"
+msgstr "Magasság"
+
+#, fuzzy
+msgid "Hide all modals, deselect the current element"
+msgstr "Minden modál elrejtése, az aktuális elem kijelölésének megszüntetése"
+
+msgid "Hide in external products"
+msgstr "Rejtse el Külső termékeknél"
+
+msgid "Hide in virtual products"
+msgstr "Virtuális termékeknél elrejtés"
+
+msgid "Hide/show this meta box"
+msgstr "Elrejtés/megjelenítés ezt a meta mezőt"
+
+msgid "Hide/show this meta field"
+msgstr "Elrejtés/megjelenítés ezt a meta mezőt"
+
+msgid "Hierarchical"
+msgstr "Hierarchikus"
+
+msgid "How to display the related post(s) selector?"
+msgstr "Hogyan jelenítsem meg a kapcsolódó bejegyzés(ek) szelektorát?"
+
+msgid "Icon"
+msgstr "Ikon"
+
+msgid "Import an ACPT backup here."
+msgstr "ACPT biztonsági másolat importálása."
+
+msgid "Import custom post types"
+msgstr "Egyedi bejegyzés típusok importálása"
+
+msgid "Import data"
+msgstr "Adat importálása"
+
+msgid "Insert"
+msgstr "Beszúrás"
+
+msgid "Is Public"
+msgstr "Nyilvános"
+
+msgid "Key"
+msgstr "Kulcs"
+
+msgid "Label and value are linked"
+msgstr "A cím és az érték összekapcsolódik"
+
+msgid "Label and value are unlinked"
+msgstr "A cím és az érték nincs összekapcsolva"
+
+msgid "Language"
+msgstr "Nyelv"
+
+msgid "Leading term:"
+msgstr "Vezető kifejezés:"
+
+msgid "Lifetime"
+msgstr "Korlátlan"
+
+msgid "Link target"
+msgstr "Link cél"
+
+msgid "List {{r}}"
+msgstr "Lista {{r}}"
+
+msgid "Makes this post type available via the admin bar. Default is value of"
+msgstr ""
+"Elérhetővé teszi ezt a bejegyzéstípust az admin sávon keresztül. "
+"Alapértelmezett érték a"
+
+msgid ""
+"Makes this taxonomy available for selection in navigation menus. If not set, "
+"the default is inherited from"
+msgstr ""
+"Ezt a taxonómiát elérhetővé teszi a navigációs menükben történő "
+"kiválasztáshoz. Ha nincs beállítva, akkor az alapértelmezettet a "
+"következőktől örökli"
+
+msgid "Manage"
+msgstr "Szerkesztés"
+
+msgid "Manage User Meta"
+msgstr "Felhasználói meta kezelése"
+
+msgid "Manage categories"
+msgstr "Kategóriák kezelése"
+
+msgid "Manage content"
+msgstr "Tartalom kezelése"
+
+msgid "Manage fields"
+msgstr "Mezők kezelése"
+
+msgid "Manage links"
+msgstr "Linkek kezelése"
+
+msgid "Manage options"
+msgstr "Opciók kezelése"
+
+msgid "Manage pages"
+msgstr "Oldalak kezelése"
+
+msgid "Manage your license"
+msgstr "Licensz kulcs"
+
+msgid "Manage your registered license key"
+msgstr "Regisztrált licenckulcs információ"
+
+msgid "Max value (used only by numeric and textual fields)"
+msgstr "Maximális érték (csak szám és szöveges mezőknél)"
+
+msgid "Maximum blocks allowed"
+msgstr "Maximálisan engedélyezett blokkok"
+
+msgid "Menu icon"
+msgstr "Menü ikon"
+
+msgid "Menu position"
+msgstr "Menü pozíciója"
+
+msgid "Menu slug"
+msgstr "Menü slug"
+
+msgid "Menu title"
+msgstr "Menü címe"
+
+msgid "Meta box"
+msgstr "Meta doboz"
+
+msgid "Meta box was successfully copied"
+msgstr "A meta doboz sikeresen másolva"
+
+msgid "Meta boxes"
+msgstr "Meta dobozok"
+
+msgid "Meta field"
+msgstr "Meta mező"
+
+msgid "Meta field was successfully copied"
+msgstr "A Meta mező sikeresen másolva"
+
+msgid "Meta fields"
+msgstr "Meta mezők"
+
+msgid "Meta option"
+msgstr "Meta beállítás"
+
+msgid "Min value (used only by numeric and textual fields)"
+msgstr "Minimális érték (csak szám és szöveg mezőnél)"
+
+msgid "Minimum blocks allowed"
+msgstr "Megengedett minimális blokkok"
+
+msgid "Moderate comments"
+msgstr "Hozzászólások moderálása"
+
+msgid "Most used {{r}}"
+msgstr "Leggyakrabban használt {{r}}"
+
+msgid "My account"
+msgstr "Fiókom"
+
+msgid "My license"
+msgstr "Licensz kulcsom"
+
+msgid "Name"
+msgstr "Név"
+
+msgid "Native"
+msgstr "Natív"
+
+msgid "Navigate the input fields in the selected meta field"
+msgstr "Navigáljon a kiválasztott metamező beviteli mezőiben"
+
+msgid "Navigate the input fields in the selected meta option"
+msgstr "Navigáljon a kiválasztott meta opció beviteli mezőiben"
+
+msgid "Navigate the tabs of selected field (go to next tab)"
+msgstr "A kiválasztott mező lapjain való navigálás (a következő lapra lépés)"
+
+msgid "Navigate the tabs of selected field (go to previous tab)"
+msgstr "A kiválasztott mező lapjain való navigálás (előző lapra lépés)"
+
+msgid "Navigate to next element (box, field, option or condition)"
+msgstr "Navigálás a következő elemhez (doboz, mező, opció vagy feltétel)"
+
+msgid "Navigate to previous element (box, field, option or condition)"
+msgstr "Navigálás az előző elemhez (doboz, mező, opció vagy feltétel)"
+
+msgid "Navigation"
+msgstr "Navigáció"
+
+msgid "Navigation list {{r}}"
+msgstr "Navigációs lista {{r}}"
+
+msgid "New"
+msgstr "Új"
+
+msgid "New {{r}}"
+msgstr "Új {{r}}"
+
+msgid "Next Step"
+msgstr "Következő lépés"
+
+msgid "No"
+msgstr "Nem"
+
+msgid "No API keys found."
+msgstr "Nem találtunk API-kulcsokat."
+
+msgid ""
+"No blocks already created. Create the first one now by clicking the button "
+"\"Add block\"!"
+msgstr ""
+"Nincsenek már létrehozott blokkok. Hozza létre az elsőt most a \"Blokk "
+"hozzáadása\" gombra kattintva!"
+
+msgid ""
+"No blocks saved, generate the first one clicking on \"Add block\" button"
+msgstr ""
+"Nincs elmentett blokk, generálja az elsőt a \"Blokk hozzáadása\" gombra "
+"kattintva"
+
+msgid ""
+"No children already created. Create the first one now by clicking the button "
+"\"Add child page\"!"
+msgstr ""
+"Még nem hoztunk létre gyermekeket. Hozza létre az elsőt most a "
+"\"Gyermekoldal hozzáadása\" gombra kattintva!"
+
+msgid "No choice"
+msgstr "Nincs kiválasztva"
+
+msgid ""
+"No conditions are present, click on \"Add condition\" button to add the "
+"first one."
+msgstr ""
+"Ha nincs feltétel, kattintson a \"Feltétel hozzáadása\" gombra az első "
+"feltétel hozzáadásához."
+
+msgid ""
+"No content yet. Drag components in this canvas and start building something "
+"awesome!"
+msgstr ""
+"Még nincs tartalom. Húzza a komponenseket erre a vászonra, és kezdjen el "
+"építeni valami fantasztikusat!"
+
+msgid "No custom post type found."
+msgstr "Nem találtunk egyedi bejegyzés típust."
+
+msgid "No display"
+msgstr "Kezdje a megjelenítést"
+
+msgid ""
+"No elements saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"Nincs elmentett elem, generálja le az elsőt az \"Elem hozzáadása\" gombra "
+"kattintva"
+
+msgid ""
+"No field box already created. Create the first one now by clicking the "
+"button \"Add field box\"!"
+msgstr ""
+"Nincs még létrehozott meződoboz. Hozzon létre most egy elsőt a \"Meződoboz "
+"hozzáadása\" gombra kattintva!"
+
+#, fuzzy
+msgid ""
+"No fields saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"Nincs mező elmentve, az elsőt az \"Add element\" gombra kattintva generálja"
+
+msgid ""
+"No fields already created. Create the first one now by clicking the button "
+"\"Add field\"!"
+msgstr ""
+"Nincsenek még létrehozott mezők. Az elsőt most hozza létre a \"Mező "
+"hozzáadása\" gombra kattintva!"
+
+msgid ""
+"No meta box already created. Create the first one now by clicking the button "
+"\"Add meta box\"!"
+msgstr ""
+"Nincs létrehozott meta box. Hozzon létre egyet most a \"Meta box "
+"hozzáadása\" gombra kattintva!"
+
+msgid "No option pages found."
+msgstr "Nem található beállítás oldal."
+
+msgid ""
+"No options already created. Create the first one now by clicking the button "
+"\"Add option\"!"
+msgstr ""
+"Nincsenek még létrehozott opciók. Hozza létre az elsőt most a \"Lehetőség "
+"hozzáadása\" gombra kattintva!"
+
+msgid "No product data found."
+msgstr "Nem találtunk termékadatokat."
+
+msgid "No records message"
+msgstr "Nincs üzenet"
+
+msgid "No taxonomies found."
+msgstr "Nem találhatóak taxonómiák."
+
+msgid "No templates found."
+msgstr "Nem találhatóak sablonok."
+
+msgid "No {{r}}"
+msgstr "Nem {{r}}"
+
+msgid "No {{r}} found"
+msgstr "Nem találtunk {{r}}"
+
+msgid "Not allowed"
+msgstr "Nem engedélyezett"
+
+msgid "On the left"
+msgstr "A bal oldalon"
+
+msgid "On the right"
+msgstr "A jobb oldalon"
+
+msgid "On the top"
+msgstr "A tetején"
+
+msgid "Opens in a new window or tab "
+msgstr "Új ablakban vagy fülön nyílik meg "
+
+msgid "Opens in the full body of the window"
+msgstr "Megnyílik a teljes ablakban"
+
+msgid "Opens in the parent frame"
+msgstr "Megnyílik a szülői keretben"
+
+msgid "Opens in the same frame as it was clicked"
+msgstr "Ugyanabban a keretben nyílik meg, mint ahol rákattintottak"
+
+msgid "Option list"
+msgstr "Beálíltások listája"
+
+msgid "Option page meta successfully saved"
+msgstr "Beállítások oldal meta sikeresen mentve"
+
+msgid "Option pages"
+msgstr "Beállítások oldal"
+
+msgid "Option pages meta"
+msgstr "Oldalak meta beállítása"
+
+msgid "Order by"
+msgstr "Rendezés"
+
+msgid "Page description (will be displayed after the title)"
+msgstr "Oldal leírása (a cím után jelenik meg)"
+
+msgid "Page not found"
+msgstr "Az oldal nem található"
+
+msgid "Page title"
+msgstr "Oldal cím"
+
+msgid "Parent"
+msgstr "Szülő"
+
+msgid "Parent item"
+msgstr "Szülői elem"
+
+msgid "Parent {{r}}"
+msgstr "Szülő {{r}}"
+
+msgid ""
+"Paste here your Google Maps API key. Needed to use the Address meta field."
+msgstr ""
+"Illessze be ide a Google Maps API kulcsát. A Cím metamező használatához "
+"szükséges."
+
+msgid "Pattern value (used only by numeric and textual fields)"
+msgstr "Mintaérték (csak szám és szöveg mezőnél)"
+
+msgid "Pattern value (used only by textual fields)"
+msgstr "Mintaérték (csak szöveges mezők használják)"
+
+msgid "Permalink text"
+msgstr "Permalink szöveg"
+
+msgid "Plugin version"
+msgstr "ACPT verzió"
+
+msgid "Plural"
+msgstr "Többes szám"
+
+msgid "Plural label"
+msgstr "Többes szám címke"
+
+msgid "Popular {{r}}"
+msgstr "Népszerű {{r}}"
+
+msgid "Possible values: customPostType, taxonomy."
+msgstr "Lehetséges értékek: customPostType, taxonomy."
+
+msgid "Post count"
+msgstr "Bejegyzések"
+
+msgid "Post name"
+msgstr "Bejegyzés neve"
+
+msgid "Preview"
+msgstr "Előnézet"
+
+msgid "Previous Step"
+msgstr "Előző lépés"
+
+msgid "Product data"
+msgstr "Termékadatok"
+
+msgid "Product data successfully saved"
+msgstr "Termékadatok sikeresen mentve"
+
+msgid "Publicly queryable"
+msgstr "Nyilvánosan lekérdezhető"
+
+msgid "Publish pages"
+msgstr "Oldalak közzététele"
+
+msgid "Published posts count"
+msgstr "Publikált hozzászólások száma"
+
+msgid "Published posts count associated with the taxonomy"
+msgstr "A taxonómiához kapcsolódó közzétett hozzászólások száma"
+
+msgid "Query var"
+msgstr "Változók lekérdezése"
+
+msgid "Quick edit"
+msgstr "Gyors szerkesztés"
+
+msgid "Quick navigation"
+msgstr "Gyors navigáció"
+
+msgid "REST API Controller class name. Default is 'WP_REST_Terms_Controller'."
+msgstr ""
+"REST API vezérlő osztály neve. Az alapértelmezett a "
+"'WP_REST_Terms_Controller'."
+
+msgid "REST API base slug"
+msgstr "REST API alap slug"
+
+msgid "REST Controller class"
+msgstr "REST Controller osztály"
+
+msgid "Radio/checkbox"
+msgstr "Rádió/jelölőnégyzet"
+
+msgid "Read private pages"
+msgstr "Privát oldalak olvasása"
+
+msgid "Read private posts"
+msgstr "Privát hozzászólások megtekintése"
+
+msgid "Records per page"
+msgstr "Rekord oldalanként"
+
+msgid "Records per page in ACPT dashboards"
+msgstr "Rekord oldalanként az ACPT oldalon"
+
+msgid "Redo"
+msgstr "Újra"
+
+msgid "Regenerate"
+msgstr "Újragenerálás"
+
+msgid "Register new Custom Post Type"
+msgstr "Új egyedi bejegyzés típus regisztrálása"
+
+msgid "Register the first one"
+msgstr "Regisztrálja az elsőt"
+
+msgid "Registered Custom Post Types"
+msgstr "ACPT műszerfal"
+
+msgid "Registered Taxonomies"
+msgstr "Regisztrált taxonómiák"
+
+msgid "Related template"
+msgstr "Kapcsolódó sablon"
+
+msgid "Remove featured image"
+msgstr "Kiemelt kép eltávolítása"
+
+msgid "Return back to list"
+msgstr "Vissza a listához"
+
+msgid "Rewrite"
+msgstr "Újraírás"
+
+msgid "Save"
+msgstr "Mentés"
+
+msgid "Save action"
+msgstr "Művelet mentése"
+
+msgid "Search"
+msgstr "Keresés"
+
+msgid "Search box"
+msgstr "Keresődoboz"
+
+msgid "Search {{r}}"
+msgstr "Keresés {{r}}"
+
+msgid "Secret"
+msgstr "Titkos kulcs"
+
+msgid "Select"
+msgstr "Kiválasztás"
+
+msgid "Select field box from list"
+msgstr "Válassza ki a mezőt a listából"
+
+msgid "Select field from list"
+msgstr "Mező kiválasztása a listából"
+
+msgid "Select field type from list"
+msgstr "Mezőtípus kiválasztása a listából"
+
+msgid "Select relation type from list"
+msgstr "Kapcsolattípus kiválasztása a listából"
+
+msgid "Select the element from the list:"
+msgstr "Válassza ki az elemet a listából:"
+
+msgid "Select the headline location (default: on the left)"
+msgstr "Válassza ki a címsor helyét (alapértelmezett: balra)"
+
+msgid "Select the template type:"
+msgstr "Válassza ki a sablon típusát:"
+
+msgid "Separate {{r}} with commas"
+msgstr "A {{r}}-t vesszővel elválasztva"
+
+msgid "Set featured image"
+msgstr "Kiemelt kép beállítása"
+
+msgid "Set the language of the plug-in"
+msgstr "A bővítmény nyelvének beállítása"
+
+#, fuzzy
+msgid ""
+"Sets the query var key for this taxonomy. Default  key. If false, a taxonomy "
+"cannot be loaded at ?{query_var}={term_slug}. If a string, the query ?"
+"{query_var}={term_slug} will be valid."
+msgstr ""
+"Beállítja a lekérdezés var kulcsát ehhez a taxonómiához. Alapértelmezett "
+"kulcs. Ha false, akkor a taxonómia nem tölthető be a ?{query_var}"
+"={term_slug} értéken. Ha egy karakterlánc, akkor a ?{query_var}={term_slug} "
+"lekérdezés lesz érvényes."
+
+#, fuzzy
+msgid ""
+"Sets the query_var key for this post type. Defaults to  key. If false, a "
+"post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+"string, the query {post_slug} will be valid."
+msgstr ""
+"Beállítja a query_var kulcsot ehhez a poszttípushoz. Alapértelmezett értéke "
+"key. Ha false, akkor a poszttípus nem tölthető be a ?{query_var}={post_slug} "
+"értéken. Ha stringként van megadva, akkor a {post_slug} lekérdezés lesz "
+"érvényes."
+
+msgid "Settings"
+msgstr "Beállítások"
+
+msgid "Settings page"
+msgstr "Beállítások oldal"
+
+msgid "Show Tagcloud"
+msgstr "Címkefelhő megjelenítése"
+
+msgid "Show admin column"
+msgstr "Admin oszlop megjelenítése"
+
+msgid "Show in GraphQL"
+msgstr "Megjelenítés GraphQL-ben"
+
+msgid "Show in REST API"
+msgstr "Megjelenítés a REST API-ban"
+
+msgid "Show in UI"
+msgstr "Megjelenítés a felhasználói felületen"
+
+msgid "Show in Wordpress admin post lists page"
+msgstr "Megjelenítés a Wordpress admin post listák oldalon"
+
+msgid "Show in admin bar"
+msgstr "Megjelenítés az admin sávban"
+
+msgid "Show in external products"
+msgstr "Megjelenítés külső termékeknél"
+
+msgid "Show in grouped products"
+msgstr "Csoportosított termékekben való megjelenítés"
+
+msgid "Show in menu"
+msgstr "Megjelenítés a menüben"
+
+msgid "Show in nav menus"
+msgstr "Megjelenítés a navigációs menüben"
+
+msgid "Show in quick edit"
+msgstr "Gyorsszerkesztésben megjelenítés"
+
+msgid "Show in simple products"
+msgstr "Mutassa egyszerű termékekben"
+
+msgid "Show in variable products"
+msgstr "Megjelenítés variálható termékekben"
+
+msgid "Show on UI"
+msgstr "Megjelenítés a felhasználói felületen"
+
+msgid "Show pagination"
+msgstr "Oldalszámozás megjelenítése"
+
+msgid "Show the custom post type in WPGraphQL"
+msgstr "Az egyedi bejegyzés típus megjelenítése a WPGraphQL-ben"
+
+msgid "Show the custom post type in WPGraphQL."
+msgstr "Az egyedi bejegyzés típus megjelenítése a WPGraphQL-ben."
+
+msgid "Show the product data on the front store page."
+msgstr "A termékadatok megjelenítése az áruház oldalán."
+
+#, fuzzy
+msgid "Show this legend modal"
+msgstr "Megjeleníti ezt a legenda modált"
+
+msgid "Show/hide all fields"
+msgstr "Minden mező megjelenítése/elrejtése"
+
+msgid "Sing. label"
+msgstr "Sing. cím"
+
+msgid "Single name MUST be different from plural name"
+msgstr ""
+"Az egyes névnek meg kell különböztetnie a többes számban szereplő nevet"
+
+msgid "Single template"
+msgstr "Oldal sablon"
+
+msgid "Singular"
+msgstr "Egyedi"
+
+msgid "Singular label"
+msgstr "Egyedi cím"
+
+msgid "Slug"
+msgstr "Keresőbarát cím"
+
+msgid "Sort"
+msgstr "Rendezés"
+
+msgid "Sort by"
+msgstr "Rendezés"
+
+msgid "Step value (used only by numeric fields)"
+msgstr "Lépésérték (csak szám mezőknél)"
+
+msgid "Successfully post sync. The browser will refresh after 5 seconds."
+msgstr ""
+"Sikeres bejegyzés szinkronizálás. A böngésző 5 másodperc múlva frissül."
+
+msgid "Support"
+msgstr "Támogatás"
+
+msgid "Supports"
+msgstr "Támogatások"
+
+msgid "Surrounding tag"
+msgstr "Környező címke"
+
+msgid "Sync with post types"
+msgstr "Szinkronizálás bejegyzés típusokkal"
+
+msgid "Taxonomies"
+msgstr "Taxonómiák"
+
+msgid "Taxonomies association"
+msgstr "Taxonómiák társítása"
+
+msgid "Taxonomy"
+msgstr "Taxonómia"
+
+msgid "Taxonomy data"
+msgstr "Taxonómia adatok"
+
+msgid "Taxonomy meta successfully saved"
+msgstr "Taxonómia meta sikeresen mentve"
+
+msgid "Taxonomy settings"
+msgstr "Taxonómia beállítások"
+
+msgid "Taxonomy slug to use instead of default."
+msgstr "Taxonómia slug, amelyet az alapértelmezett helyett használ."
+
+msgid ""
+"Taxonomy slug. The post name/slug. Used for various queries for taxonomy "
+"content."
+msgstr ""
+"Taxonómiai slug. A bejegyzés neve/slug. A taxonómia tartalmára vonatkozó "
+"különböző lekérdezésekhez használatos."
+
+msgid "Taxonomy successfully deleted"
+msgstr "Taxonómia sikeresen törölve"
+
+msgid "Taxonomy was associated to selected Custom post types"
+msgstr "Taxonómia társult a kiválasztott egyedi bejegyzés típusokhoz"
+
+msgid "Template"
+msgstr "Sablon"
+
+msgid "Template list"
+msgstr "Sablon lista"
+
+msgid "Template saved successfully"
+msgstr "Sablon sikeresen mentve"
+
+msgid "Template was successfully deleted."
+msgstr "A sablon sikeresen törlésre került."
+
+msgid ""
+"Template was successfully deleted. The browser will refresh after 5 seconds."
+msgstr ""
+"A sablon sikeresen törlésre került. A böngésző 5 másodperc múlva frissül."
+
+msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
+msgstr "Szöveg után. A HTML megengedett (pl. &lt;/small&gt;)"
+
+msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Szöveg előtt. HTML megengedett (pl. &lt;small&gt;)"
+
+msgid "The API key was successfully deleted"
+msgstr "Az API-kulcs sikeresen törlésre került"
+
+msgid "The archive template for this custom post type"
+msgstr "Archívum sablon ehhez az egyedi bejegyzés típushoz"
+
+msgid "The browser will refresh after 5 seconds."
+msgstr "A böngésző 5 másodperc múlva frissül."
+
+msgid "The custom post type or taxonomy element."
+msgstr "Az egyedi bejegyzés típus vagy taxonómia elem."
+
+msgid "The default value for this field"
+msgstr "A mező alapértelmezett értéke"
+
+msgid "The description of this field (showed only on admin panel)"
+msgstr "A mező leírása (csak az admin oldalon jelenik meg a mezőnél)"
+
+msgid "The field label, non latin characters are allowed"
+msgstr "A mező címe, nem latin karakterek is megengedettek"
+
+msgid "The icon displayed on menu (only for parent pages)"
+msgstr "A menüben megjelenő ikon (csak a szülői oldalak esetében)"
+
+#, fuzzy
+msgid ""
+"The inversed field is the target post type field which is related with this "
+"one in a bidirectional relation"
+msgstr ""
+"Az inverz mező a célpostatípus mező, amely kétirányú kapcsolatban áll ezzel "
+"a mezővel"
+
+#, fuzzy
+msgid ""
+"The limit on how many blocks are allowed ([1-100] only for flexible field)"
+msgstr ""
+"A megengedett blokkok számának korlátja ([1-100] csak a rugalmas mező "
+"esetében)"
+
+#, fuzzy
+msgid ""
+"The limit on how many blocks are required ([1-100] only for flexible field)"
+msgstr ""
+"A szükséges blokkok számának korlátja ([1-100] csak rugalmas mező esetén)"
+
+msgid "The maximum value (used only by numeric and textual fields)"
+msgstr "A maximális érték (csak szám és szöveg mezőknél)"
+
+msgid "The menu title (displayed only in the admin menu)"
+msgstr "A menü címe (csak az adminisztrációs menüben jelenik meg)"
+
+msgid "The minimum value (used only by numeric and textual fields)"
+msgstr "A minimális érték (csak szám és szöveg mezőknél)"
+
+msgid "The page slug (used to generate the page URL). Must be unique"
+msgstr ""
+"Az oldal slug-ja (az oldal URL-jének létrehozásához). Egyedinek kell lennie"
+
+msgid "The page title"
+msgstr "Az oldal címe"
+
+msgid "The parent element slug"
+msgstr "A szülő elem slug"
+
+#, fuzzy
+msgid ""
+"The position in the menu order the post type should appear. To work,  must "
+"be true. Default null (at the bottom)."
+msgstr ""
+"A pozíció a menüsorrendben, ahol a poszttípusnak meg kell jelennie. Ahhoz, "
+"hogy működjön, igaznak kell lennie. Alapértelmezett null (alul)."
+
+#, fuzzy
+msgid "The post name/slug. Used for various queries for taxonomy content."
+msgstr ""
+"A poszt neve/slug. A taxonómia tartalmára vonatkozó különböző "
+"lekérdezésekhez használatos."
+
+#, fuzzy
+msgid "The post name/slug. Used for various queries."
+msgstr "A poszt neve/slug. Különböző lekérdezésekhez használatos."
+
+msgid "The product data name."
+msgstr "A termék adat neve."
+
+#, fuzzy
+msgid "The requested page was not found, was deleted or was moved!"
+msgstr "A kért oldal nem található, törölték vagy áthelyezték!"
+
+msgid "The single template for taxonomy term"
+msgstr "A taxonómiai kifejezés egyetlen sablonja"
+
+msgid "The single template for this custom post type"
+msgstr "Az egyetlen sablon ehhez az egyedi bejegyzés típushoz"
+
+#, fuzzy
+msgid ""
+"The string to use to build the read, edit, and delete capabilities. May be "
+"passed as an array to allow for alternative plurals when using this argument "
+"as a base to construct the capabilities, e.g. array('story', 'stories'). "
+"Default 'post'."
+msgstr ""
+"Az olvasási, szerkesztési és törlési képességek létrehozásához használandó "
+"karakterlánc. Átadható tömbként, hogy lehetővé tegye az alternatív többes "
+"számok használatát, amikor ezt az argumentumot alapként használjuk a "
+"képességek felépítéséhez, pl. array('story', 'stories'). Alapértelmezett "
+"'post'."
+
+msgid ""
+"The template type. Possible values: archive, single, related, metaField."
+msgstr ""
+"A sablon típusa. Lehetséges értékek: archive, single, related, metaField."
+
+msgid ""
+"The template used to display this custom post type when it is releated to "
+"another one. If no template is set, it will be displayed just the title of "
+"the post."
+msgstr ""
+"A sablon, amelyet ennek az egyéni poszttípusnak a megjelenítésére "
+"használnak, amikor egy másikhoz kapcsolódik. Ha nincs sablon beállítva, "
+"akkor csak a bejegyzés címe jelenik meg."
+
+msgid "The visual builder can be used with a minimum resolution of 960 px wide"
+msgstr "A vizuális építő legalább 960 px széles felbontással használható"
+
+msgid "The visual builder is disabled. Go to Settings page and enable it."
+msgstr ""
+"A vizuális építő le van tiltva. Menjen a Beállítások oldalra, és "
+"engedélyezze."
+
+msgid "This field is mandatory"
+msgstr "Ez a mező kötelező"
+
+msgid ""
+"This is the only time that the secret access key can be viewed or copied. "
+"You cannot recover it later. However, you can delete and create or "
+"regenerate new API key at any time."
+msgstr ""
+"Ez az egyetlen alkalom, amikor a titkos hozzáférési kulcs megtekinthető vagy "
+"lemásolható. Később nem lehet visszaállítani. Azonban bármikor törölheti, és "
+"új API-kulcsot hozhat létre vagy regenerálhat."
+
+msgid "This number controls the position of this page in the admin menu"
+msgstr "Ez a szám szabályozza az oldal sorrendjét az admin menüben"
+
+msgid "This text will appear after input"
+msgstr "Ez a szöveg a mező után jelenik meg"
+
+msgid "This text will appear before input"
+msgstr "Ez a szöveg a mező előtt jelenik meg"
+
+msgid ""
+"This tool allows you to import settings and meta fields from previously "
+"exported .acpt files (max size allowed is 2Mb)."
+msgstr ""
+"Ez az eszköz lehetővé teszi a beállítások és meta mezők importálását a "
+"korábban exportált .acpt fájlokból (a megengedett maximális méret 2 Mb)."
+
+msgid "To change the base url of REST API route. Default is"
+msgstr "A REST API útvonal alap url-jének módosítása. Az alapértelmezett"
+
+msgid "Toggle guides"
+msgstr "Toggle útmutatók"
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using  as "
+"slug. To prevent rewrite, set to false. To specify rewrite rules, an array "
+"can be passed with any of these keys:"
+msgstr ""
+"Az adott taxonómia újraírásának kezelését indítja el. Alapértelmezett true, "
+"slugként használja. Az átírás megakadályozásához állítsa false-ra. Az "
+"újraírási szabályok megadásához egy tömb adható át a következő kulcsok "
+"bármelyikével:"
+
+msgid "Type"
+msgstr "Típus"
+
+msgid "Type here your ACPT email account. Ex: mauro@acpt.io"
+msgstr "Írja be ide az ACPT e-mail címét. Például: mauro@acpt.io"
+
+msgid "Type here your license. Ex: 123e4567-e89b-12d3-a456-426614174000"
+msgstr "Add meg a licensz kulcsot. Pl.: 123e4567-e89b-12d3-a456-426614174000"
+
+msgid "Uncheck `required` in the selected meta field"
+msgstr "Törölje a “kötelező” jelölést a kiválasztott meta mezőben"
+
+msgid "Uncheck `show in archive` in the selected meta field"
+msgstr ""
+"Törölje a \"megjelenítés az archívumban\" jelölést a kiválasztott meta "
+"mezőben"
+
+msgid "Undo"
+msgstr "Visszavonás"
+
+msgid "Unfiltered html"
+msgstr "Szűretlen html"
+
+msgid "Update {{r}}"
+msgstr "Frissítés {{r}}"
+
+msgid "Upgrade"
+msgstr "Frissítés"
+
+msgid "Upload"
+msgstr "Feltöltés"
+
+msgid "Upload file"
+msgstr "Fájl feltöltése"
+
+msgid "Upload your file"
+msgstr "Fájl feltöltése"
+
+msgid "Use featured image"
+msgstr "Kiemelt kép használata"
+
+msgid ""
+"Use this tool to quick export the general settings and meta fields for every "
+"element in a compressed JSON format called .acpt."
+msgstr ""
+"Ezzel az eszközzel gyorsan exportálhatja az általános beállításokat és a "
+"meta mezőket minden elemhez egy .acpt nevű tömörített JSON formátumban."
+
+msgid "Used for the post type admin menu item"
+msgstr "A bejegyzés típus adminisztrációs menüponthoz használatos"
+
+msgid "Used for the taxonomy admin menu item"
+msgstr "A taxonómia adminisztrációs menüponthoz használatos"
+
+msgid "Used when a singular label is needed"
+msgstr "Akkor használatos, ha egyedi címkére van szükség"
+
+msgid "User"
+msgstr "Felhasználó"
+
+msgid "User meta"
+msgstr "Felhasználó meta"
+
+msgid "User meta successfully saved"
+msgstr "Felhasználói meta sikeresen mentve"
+
+msgid "View"
+msgstr "Megtekintés"
+
+msgid "View WooCommerce product data"
+msgstr "WooCommerce termékadatok megtekintése"
+
+msgid "Visibility of product data"
+msgstr "A termékadatok láthatósága"
+
+msgid ""
+"WARNING: This action will delete all posts and metadata for this post type. "
+"The action is irreversible."
+msgstr ""
+"FIGYELMEZTETÉS: Ez a művelet törli az összes bejegyzést és meta adatot ehhez "
+"a bejegyzés típushoz. A művelet nem lehet visszafordítani."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"block. The action is irreversible."
+msgstr ""
+"FIGYELMEZTETÉS: Ez a művelet törli a blokkhoz kapcsolódó összes poszt meta "
+"adatot. A műveletet nem lehet visszafordítani."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"box. The action is irreversible."
+msgstr ""
+"FIGYELMEZTETÉS: Ez a művelet törli a mezőhöz kapcsolódó összes poszt meta "
+"adatot. A műveletet nem lehet visszafordítani."
+
+msgid "When BB Theme builder is active, the visual builder is disabled."
+msgstr "Amikor a BB Theme builder aktív, a vizuális építő le van tiltva."
+
+msgid "When Oxygen Builder is active, the visual builder is disabled."
+msgstr "Amikor az Oxygen Builder aktív, a vizuális építő le van tiltva."
+
+msgid "Where do you want to copy this meta box?"
+msgstr "Hová szeretné másolni ezt a meta-dobozt?"
+
+msgid "Where do you want to copy this meta field?"
+msgstr "Hová szeretné másolni ezt a metamezőt?"
+
+#, fuzzy
+msgid ""
+"Where to show the post type in the admin menu. To work,  must be true. If "
+"true, the post type is shown in its own top level menu. If false, no menu is "
+"shown."
+msgstr ""
+"Hol jelenjen meg a poszttípus az admin menüben. Ahhoz, hogy működjön, "
+"igaznak kell lennie. Ha true, akkor a poszttípus a saját felső szintű "
+"menüjében jelenik meg. Ha false, akkor nem jelenik meg semmilyen menü."
+
+#, fuzzy
+msgid ""
+"Whether a post type is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"Az, hogy egy bejegyzéstípus nyilvánosan használható-e az admin felületen "
+"keresztül vagy a front-end felhasználók által."
+
+#, fuzzy
+msgid ""
+"Whether a taxonomy is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"A taxonómiát nyilvánosan, az adminisztrátori felületen keresztül vagy a "
+"front-end felhasználók által történő használatra szánják-e."
+
+#, fuzzy
+msgid ""
+"Whether queries can be performed on the front end for the post type as part "
+"of parse_request()."
+msgstr ""
+"A lekérdezések elvégezhetők-e a frontendben a post típusra vonatkozóan a "
+"parse_request() részeként."
+
+#, fuzzy
+msgid ""
+"Whether terms in this taxonomy should be sorted in the order they are "
+"provided to wp_set_object_terms(). Default null which equates to false."
+msgstr ""
+"A taxonómia kifejezéseit a wp_set_object_terms() függvényben megadott "
+"sorrendben kell-e rendezni. Alapértelmezett null, ami false-nak felel meg."
+
+msgid "Whether the taxonomy is hierarchical. Default false."
+msgstr "Hierarchikus-e a taxonómia. Alapértelmezett false."
+
+#, fuzzy
+msgid ""
+"Whether the taxonomy is publicly queryable. If not set, the default is "
+"inherited from"
+msgstr ""
+"A taxonómia nyilvánosan lekérdezhető-e. Ha nincs beállítva, akkor az "
+"alapértelmezett értéket a"
+
+#, fuzzy
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if"
+msgstr ""
+"Legyenek-e poszttípusú archívumok, vagy ha egy karakterlánc, akkor az "
+"archívum slugját kell használni. A megfelelő átírási szabályokat generálja, "
+"ha"
+
+#, fuzzy
+msgid ""
+"Whether to display a column for the taxonomy on its post type listing "
+"screens. Default false."
+msgstr ""
+"A taxonómia oszlopának megjelenítése a poszttípusok listázási képernyőin. "
+"Alapértelmezett false."
+
+#, fuzzy
+msgid ""
+"Whether to generate and allow a UI for managing terms in this taxonomy in "
+"the admin. If not set, the default is inherited from"
+msgstr ""
+"Létrehozza-e és engedélyezi-e a kezelőfelületet az adminisztrátorban az "
+"adott taxonómia kifejezései kezeléséhez. Ha nincs beállítva, akkor az "
+"alapértelmezettet a következőből örököljük"
+
+#, fuzzy
+msgid ""
+"Whether to generate and allow a UI for managing this post type in the admin. "
+"Default is value of"
+msgstr ""
+"Létrehozza-e és engedélyezi-e a felhasználói felületet a poszttípus "
+"kezeléséhez az adminisztrátorban. Az alapértelmezett érték"
+
+#, fuzzy
+msgid ""
+"Whether to include the post type in the REST API. Set this to true for the "
+"post type to be available in the block editor. SET TRUE TO ENABLE GUTEMBERG "
+"EDITOR."
+msgstr ""
+"A poszttípus szerepeltetése a REST API-ban. Állítsa ezt true-ra, hogy a "
+"poszttípus elérhető legyen a blokkszerkesztőben. ÁLLÍTSA BE A TRUE ÉRTÉKET A "
+"GUTEMBERG SZERKESZTŐ ENGEDÉLYEZÉSÉHEZ."
+
+#, fuzzy
+msgid ""
+"Whether to include the taxonomy in the REST API. Set this to true for the "
+"taxonomy to be available in the block editor. SET TRUE TO ENABLE "
+"VISUALIZATION ON GUTEMBERG EDITOR."
+msgstr ""
+"A taxonómia beépítése a REST API-ba. Állítsa ezt true-ra, hogy a taxonómia "
+"elérhető legyen a blokkszerkesztőben. ÁLLÍTSA BE A TRUE ÉRTÉKET, HOGY "
+"ENGEDÉLYEZZE A VIZUALIZÁCIÓT A GUTEMBERG SZERKESZTŐBEN."
+
+#, fuzzy
+msgid ""
+"Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
+"the default is inherited from"
+msgstr ""
+"A taxonómia felsorolása a Tag Cloud Widget vezérlőelemekben. Ha nincs "
+"beállítva, akkor az alapértelmezettet a"
+
+#, fuzzy
+msgid ""
+"Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+"shown as a submenu of the object type menu. If false, no menu is shown.  "
+"must be true. If not set, default is inherited from  (default true)."
+msgstr ""
+"Megjelenítse-e a taxonómiát az admin menüben. Ha igaz, a taxonómia az "
+"objektumtípus menü almenüjeként jelenik meg. Ha false, akkor nem jelenik meg "
+"menü. must be true. Ha nincs beállítva, az alapértelmezett érték a "
+"(alapértelmezett true) értékből öröklődik."
+
+msgid ""
+"Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
+"default is inherited from"
+msgstr ""
+"A taxonómia megjelenítése a gyors/tömeges szerkesztési panelen. Ha nincs "
+"beállítva, akkor az alapértelmezettet a következőktől örökli"
+
+msgid "Which does this template belong to?"
+msgstr "Mihez tartozzon ez a sablon?"
+
+msgid "Width"
+msgstr "Szélesség"
+
+msgid "WooCommerce product data"
+msgstr "WooCommerce termékadatok"
+
+msgid "WooCommerce product data fields successfully saved"
+msgstr "WooCommerce termékadat mezők sikeresen mentve"
+
+msgid "WooCommerce product data successfully deleted"
+msgstr "A WooCommerce termékadatok sikeresen törlődtek"
+
+msgid "Yes"
+msgstr "Igen"
+
+msgid "Yes, delete it"
+msgstr "Igen, törölje"
+
+msgid "You are going to delete WooCommerce this product data. Are you sure?"
+msgstr "Törölni fogja a WooCommerce ezt a termékadatot. Biztos vagy benne?"
+
+msgid "You are going to delete this API key. Are you sure?"
+msgstr "Ezt az API-kulcsot törölni fogja. Biztos benne?"
+
+msgid "You are going to delete this custom post type. Are you sure?"
+msgstr "Az egyedi bejegyzés típust törölni fogja. Biztos benne?"
+
+#, fuzzy
+msgid ""
+"You are going to delete this meta block definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Ezt a meta blokkdefiníciót törölni fogja. Minden benne lévő meződefiníció "
+"törlésre kerül. Biztos vagy benne?"
+
+#, fuzzy
+msgid ""
+"You are going to delete this meta box definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Ezt a meta-dobozdefiníciót törölni fogja. Minden benne lévő meződefiníció "
+"törlésre kerül. Biztos vagy benne?"
+
+#, fuzzy
+msgid ""
+"You are going to delete this option page definition. Every associated meta "
+"fields and child page will be deleted. Are you sure?"
+msgstr ""
+"Ezt az opciós oldal definícióját törölni fogja. Minden kapcsolódó metamező "
+"és gyermekoldal törlésre kerül. Biztos vagy benne?"
+
+msgid "You are going to delete this taxonomy. Are you sure?"
+msgstr "Ezt a taxonómiát törölni fogja. Biztos benne?"
+
+msgid "Your API keys"
+msgstr "Az Ön API kulcsai"
+
+msgid "Your favourite ACPT settings"
+msgstr "Az Ön ACPT beállításai"
+
+msgid "Your new generated API key"
+msgstr "Az Ön új generált API-kulcsa"
+
+msgid "Your theme already has a single template for"
+msgstr "A téma már rendelkezik egy sablonnal a"
+
+msgid "Your theme already has an archive template for"
+msgstr "A téma már rendelkezik egy archiv sablonnal a"
+
+msgid "`has_archive` set to false"
+msgstr "`has_archive` hamisra van állítva"
+
+msgid "child element"
+msgstr "gyermek elem"
+
+msgid "current"
+msgstr "jelenlegi"
+
+msgid "custom post type"
+msgstr "egyedi bejegyzés típus"
+
+msgid "custom post types registered"
+msgstr "regisztrált egyedi bejegyzés típus"
+
+msgid "details"
+msgstr "részletek"
+
+msgid "format"
+msgstr "formátum"
+
+msgid "global settings"
+msgstr "globális beállítások"
+
+msgid "id"
+msgstr "id"
+
+msgid "is checked"
+msgstr "bejelölt"
+
+msgid "is empty"
+msgstr "üres"
+
+msgid "is equal to"
+msgstr "egyenlő"
+
+msgid "is greater or equals than"
+msgstr "nagyobb vagy egyenlő, mint"
+
+msgid "is greater than"
+msgstr "nagyobb, mint"
+
+msgid "is greater than or equal to"
+msgstr "nagyobb vagy egyenlő, mint"
+
+msgid "is included in"
+msgstr "tartalmazza"
+
+msgid "is less or equals than"
+msgstr "kisebb vagy egyenlő, mint"
+
+msgid "is less than"
+msgstr "kisebb, mint"
+
+msgid "is less than or equal to"
+msgstr "kisebb vagy egyenlő, mint"
+
+msgid "is like to"
+msgstr "olyan, mint a"
+
+msgid "is not checked"
+msgstr "nem bejelölt"
+
+msgid "is not empty"
+msgstr "nem üres"
+
+msgid "is not equal to"
+msgstr "nem egyenlő"
+
+msgid "is not included in"
+msgstr "nem szerepel a"
+
+msgid "is not like"
+msgstr "nem olyan, mint"
+
+msgid "meta boxes"
+msgstr "meta botok"
+
+msgid "Meta boxes total count"
+msgstr "Meta dobozok összes száma"
+
+msgid "meta fields"
+msgstr "meta mezők"
+
+msgid "Meta fields total count"
+msgstr "Meta mezők teljes száma"
+
+msgid "min length is"
+msgstr "min. hossza"
+
+msgid "old"
+msgstr "régi"
+
+msgid "product data fields"
+msgstr "termék adat mezők"
+
+msgid "record(s) found"
+msgstr "rekord"
+
+msgid "see here"
+msgstr "lásd itt"
+
+msgid "slug"
+msgstr "slug"
+
+msgid "taxonomies registered"
+msgstr "regisztrált taxonómiák"
+
+msgid "template"
+msgstr "sablon"
+
+msgid "title"
+msgstr "cím"
+
+msgid "visibility"
+msgstr "láthatóság"
+
+msgid "{{r}} published"
+msgstr "{{r}} közzétett"
+
+msgid "{{r}} published privately"
+msgstr "{{r}} privátként megjelenítve"
+
+msgid "{{r}} reverted to draft"
+msgstr "{{r}} visszavonva piszkozatnak"
+
+msgid "{{r}} scheduled"
+msgstr "{{r}} ütemezett"
+
+msgid "{{r}} updated"
+msgstr "{{r}} frissítve"
+
+msgid "Address map"
+msgstr "Térkép"
+
+msgid "Color"
+msgstr "Szín"
+
+msgid "Currency"
+msgstr "Pénznem"
+
+msgid "Weight"
+msgstr "Súly"
+
+msgid "Length"
+msgstr "Hossz"
+
+msgid "Date"
+msgstr "Dátum"
+
+msgid "Email address"
+msgstr "E-mail cím"
+
+msgid "Number"
+msgstr "Szám"
+
+msgid "Phone Number"
+msgstr "Telefonszám"
+
+msgid "Text"
+msgstr "Szöveg"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "Select Multiple"
+msgstr "Többszörös kiválasztás"
+
+msgid "Toggle"
+msgstr "Lenyitható Doboz"
+
+msgid "Embed content"
+msgstr "Beágyazott tartalom"
+
+msgid "Gallery"
+msgstr "Galéria"
+
+msgid "Image"
+msgstr "Kép"
+
+msgid "Post relationship"
+msgstr "Bejegyzés kapcsolat"
+
+msgid "Time"
+msgstr "Idő"
+
+msgid "Grouped field (Repeater)"
+msgstr "Csoportosított mező (Ismétlő)"
+
+msgid "User (select multiple)"
+msgstr "Felhasználó (válasszon ki többet)"
+
+msgid "Checkbox"
+msgstr "Jelölődoboz"
+
+msgid "Radio button"
+msgstr "Rádiógomb"
+
+msgid "Date Range"
+msgstr "Dátumtartomány"
+
+msgid "Flexible content"
+msgstr "Rugalmas tartalom"
+
+msgid "is enabled"
+msgstr "engedélyezve van"
+
+msgid "found"
+msgstr "talált"
+
+msgid "record(s)"
+msgstr "rekord(ok)"
+
+msgid "Copied"
+msgstr "Másolva"
+
+msgid "Confirm deleting this template?"
+msgstr "Megerősíti a sablon törlését?"
+
+msgid "meta"
+msgstr "meta"
+
+msgid "Delete custom post type"
+msgstr "Egyedi bejegyzés típus törlése"
+
+msgid "Delete taxonomy"
+msgstr "Taxonómia törlése"
+
+msgid "License"
+msgstr "Licensz"
+
+msgid "Tools"
+msgstr "Eszközök"
+
+msgid "Templates"
+msgstr "Sablonok"
+
+msgid "Custom Post Types"
+msgstr "Egyedi bejegyzés típusok"
+
+msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
+msgstr "[Engedélyezett kiterjesztés: *.acpt, maximális méret: 2 Mb]"
+
+msgid "Associated taxonomies with the post"
+msgstr "A bejegyzéshez kapcsolódó taxonómiák"
+
+msgid "Register new Post Type"
+msgstr "Új Bejegyzés típus regisztrálása"
+
+msgid "Manage meta fields"
+msgstr "Meta mezők kezelése"
+
+msgid "Create new Custom Post Type"
+msgstr "Új egyedi bejegyzés típus"
+
+msgid "Basic"
+msgstr "Alap"
+
+msgid "Labels"
+msgstr "Címek"
+
+msgid "Minimum configuration"
+msgstr "Minimális beállítások"
+
+msgid "Additional labels"
+msgstr "További címek"
+
+msgid "Other settings"
+msgstr "Egyéb beállítások"
+
+msgid "Menu Name"
+msgstr "Menünév"
+
+msgid "Label for the menu name. Default is the same as name."
+msgstr "A menü nevének címe. Az alapértelmezett érték megegyezik a névvel."
+
+msgid "All items"
+msgstr "Összes elem"
+
+msgid ""
+"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All "
+"Pages’."
+msgstr ""
+"Címke az almenü összes elemének jelölésére. Az alapértelmezett érték 'Minden "
+"hozzászólás' / 'Minden oldal'."
+
+msgid "Add New"
+msgstr "Új hozzáadása"
+
+msgid "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+msgstr ""
+"Az alapértelmezett beállítás a 'Új hozzáadása' hierarchikus és nem "
+"hierarchikus típusok esetében egyaránt."
+
+msgid "Add New Item"
+msgstr "Új tétel hozzáadás"
+
+#, fuzzy
+msgid ""
+"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New "
+"Page’."
+msgstr ""
+"Címke egy új egyedi elem hozzáadásához. Alapértelmezett: 'Új bejegyzés "
+"hozzáadása' / 'Új oldal hozzáadása'."
+
+msgid "Edit Item"
+msgstr "Elem szerkesztése"
+
+#, fuzzy
+msgid ""
+"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+msgstr ""
+"Címke egy egyedi elem szerkesztéséhez. Alapértelmezett a 'Hozzászólás "
+"szerkesztése' / 'Oldal szerkesztése'."
+
+msgid "New Item"
+msgstr "Új elem"
+
+#, fuzzy
+msgid "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+msgstr ""
+"Az új elemoldal címkéje. Az alapértelmezett címke 'Új bejegyzés' / 'Új "
+"oldal'."
+
+msgid "View Item"
+msgstr "Elem megtekintés"
+
+#, fuzzy
+msgid ""
+"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+msgstr ""
+"Címke egy egyedi elem megtekintéséhez. Alapértelmezett a 'View Post' / 'View "
+"Page'."
+
+msgid "View Items"
+msgstr "Elemek"
+
+#, fuzzy
+msgid ""
+"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+msgstr ""
+"Címke a poszttípus archívumának megtekintéséhez. Az alapértelmezett a "
+"'Bejegyzések megtekintése' / 'Oldalak megtekintése'."
+
+msgid "Search Item"
+msgstr "Elem keresés"
+
+#, fuzzy
+msgid ""
+"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+msgstr ""
+"Címke többes számban lévő elemek kereséséhez. Az alapértelmezett beállítás a "
+"'Search Posts' / 'Search Pages'."
+
+msgid "Not Found"
+msgstr "Nincs találat"
+
+#, fuzzy
+msgid ""
+"Label used when no items are found. Default is ‘No posts found’ / ‘No pages "
+"found’."
+msgstr ""
+"Címke, amelyet akkor használnak, ha nem találnak elemeket. Alapértelmezett: "
+"'No posts found' / 'No pages found'."
+
+msgid "Not Found in Trash"
+msgstr "Nem található a törölt elemek között"
+
+#, fuzzy
+msgid ""
+"Label used when no items are in the Trash. Default is ‘No posts found in "
+"Trash’ / ‘No pages found in Trash’."
+msgstr ""
+"Címke, amelyet akkor használnak, ha nincs elem a szemetesben. "
+"Alapértelmezett: 'No posts found in Trash' / 'No pages found in Trash'."
+
+#, fuzzy
+msgid ""
+"Label used to prefix parents of hierarchical items. Not used on non-"
+"hierarchical post types. Default is ‘Parent Page:’."
+msgstr ""
+"A hierarchikus elemek szüleinek előtagozására használt címke. Nem "
+"hierarchikus poszttípusoknál nem használatos. Alapértelmezett a 'Parent "
+"Page:'."
+
+msgid "Featured Image"
+msgstr "Kiemelt kép"
+
+msgid ""
+"Label for the featured image meta box title. Default is ‘Featured image’."
+msgstr ""
+"A kiemelt kép meta doboz címének címkéje. Alapértelmezett: 'Kiemelt kép'."
+
+msgid "Set Featured Image"
+msgstr "Állítson be kiemelt képet"
+
+msgid "Label for setting the featured image. Default is ‘Set featured image’."
+msgstr ""
+"Címke a kiemelt kép beállításához. Az alapértelmezett beállítás a 'Kiemelt "
+"kép beállítása'."
+
+msgid "Remove Featured Image"
+msgstr "Kiemelt kép eltávolítása"
+
+msgid ""
+"Label for removing the featured image. Default is ‘Remove featured image’."
+msgstr ""
+"Címke a kiemelt kép eltávolításához. Az alapértelmezett érték a 'Kiemelt kép "
+"eltávolítása'."
+
+msgid "Use Featured Image"
+msgstr "Kiemelt kép használata"
+
+#, fuzzy
+msgid ""
+"Label in the media frame for using a featured image. Default is ‘Use as "
+"featured image’."
+msgstr ""
+"Címke a médiakeretben a kiemelt kép használatához. Az alapértelmezett "
+"beállítás a 'Kiemelt képként használni'."
+
+#, fuzzy
+msgid ""
+"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page "
+"Archives’."
+msgstr ""
+"Címke az archívumokhoz a navigációs menükben. Alapértelmezett a 'Post "
+"Archives' / 'Page Archives'."
+
+msgid "Insert into item"
+msgstr "Behelyezés az elembe"
+
+#, fuzzy
+msgid ""
+"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert "
+"into page’."
+msgstr ""
+"A médiakeret gomb címkéje. Az alapértelmezett érték 'Beillesztés a "
+"posztba' / 'Beillesztés az oldalba'."
+
+msgid "Uploaded to this Item"
+msgstr "Feltöltve ehhez az elemhez"
+
+#, fuzzy
+msgid ""
+"Label for the media frame filter. Default is ‘Uploaded to this post’ / "
+"‘Uploaded to this page’."
+msgstr ""
+"A médiakeretes szűrő címkéje. Az alapértelmezett érték 'Feltöltve ebbe a "
+"bejegyzésbe' / 'Feltöltve erre az oldalra'."
+
+msgid "Filter Items List"
+msgstr "Szűrő elemek lista"
+
+msgid ""
+"Label for the table views hidden heading. Default is ‘Filter posts list’ / "
+"‘Filter pages list’."
+msgstr ""
+"A táblázat nézeteinek rejtett címe. Alapértelmezett a 'Filter posts list' / "
+"'Filter pages list'."
+
+msgid "Items List Navigation"
+msgstr "Elemek lista navigáció"
+
+msgid ""
+"Label for the table pagination hidden heading. Default is ‘Posts list "
+"navigation’ / ‘Pages list navigation’."
+msgstr ""
+"A táblázat oldalszámozásának rejtett címe. Alapértelmezett a 'Posts list "
+"navigation' / 'Pages list navigation'."
+
+msgid "Items List"
+msgstr "Elemek listája"
+
+#, fuzzy
+msgid ""
+"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+msgstr ""
+"A táblázat rejtett fejlécének címkéje. Alapértelmezett a 'Posts list' / "
+"'Pages list'."
+
+#, fuzzy
+msgid "Label for the date filter in list tables. Default is ‘Filter by date’."
+msgstr ""
+"A dátumszűrő címkéje a lista táblázatokban. Az alapértelmezett érték 'Szűrés "
+"dátum szerint'."
+
+msgid "Item published"
+msgstr "Publikált elem"
+
+#, fuzzy
+msgid ""
+"Label used when an item is published. Default is ‘Post published.’ / ‘Page "
+"published.’"
+msgstr ""
+"Egy elem közzétételekor használt címke. Az alapértelmezett érték 'Post "
+"published.' / 'Page published.'"
+
+#, fuzzy
+msgid "Item published privately"
+msgstr "Magánkiadásban megjelent tétel"
+
+#, fuzzy
+msgid ""
+"Label used when an item is published with private visibility. Default is "
+"‘Post published privately.’ / ‘Page published privately.’"
+msgstr ""
+"Címke, amelyet akkor használnak, ha egy elemet privát láthatósággal tesznek "
+"közzé. Alapértelmezett: 'Post published privately.' / 'Magánjelleggel "
+"közzétett oldal.'"
+
+#, fuzzy
+msgid "Item reverted to draft"
+msgstr "A tételt visszavezették tervezetbe"
+
+#, fuzzy
+msgid ""
+"Label used when an item is switched to a draft. Default is ‘Post reverted to "
+"draft.’ / ‘Page reverted to draft.’"
+msgstr ""
+"Címke, amelyet akkor használnak, amikor egy elemet vázlatra váltanak. "
+"Alapértelmezett: 'Post visszaállítva vázlatra.' / 'Oldal visszaváltozott "
+"vázlatba.'"
+
+msgid "Item scheduled"
+msgstr "Tervezett elem"
+
+#, fuzzy
+msgid ""
+"Label used when an item is scheduled for publishing. Default is ‘Post "
+"scheduled.’ / ‘Page scheduled.’"
+msgstr ""
+"Címke, amelyet akkor használnak, ha egy elemet közzétételre terveznek. Az "
+"alapértelmezett érték 'Post scheduled' / 'Page scheduled.'"
+
+msgid "Item updated"
+msgstr "Termék frissítve"
+
+#, fuzzy
+msgid ""
+"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page "
+"updated.’"
+msgstr ""
+"Egy elem frissítésekor használt címke. Alapértelmezett: 'Post updated.' / "
+"'Oldal frissítve.'"
+
+#, fuzzy
+msgid ""
+"General name for the taxonomy, usually plural. The same as and overridden by "
+"$tax->label. Default 'Tags/Categories'."
+msgstr ""
+"A taxonómia általános neve, általában többes számban. Ugyanaz, mint a $tax-"
+">label és felülírja. Alapértelmezett 'Címkék/Kategóriák'."
+
+msgid "Singular name"
+msgstr "Név egyes számban"
+
+msgid "Name for one object of this taxonomy. Default 'Tag/Category'"
+msgstr "A taxonómia egy objektumának neve. Alapértelmezett ‘Címke/K’ategória"
+
+msgid "Search items"
+msgstr "Elemek keresése"
+
+msgid "Search Tags/Search Categories"
+msgstr "Címkék keresése/kategóriák keresése"
+
+msgid "Popular items"
+msgstr "Népszerű csomagok"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Popular "
+"Tags'."
+msgstr ""
+"Ez a címke csak a nem hierarchikus taxonómiák esetében használható. "
+"Alapértelmezett 'Népszerű címkék'."
+
+msgid "All Tags/All Categories"
+msgstr "Összes címke/Összes kategória"
+
+#, fuzzy
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Parent "
+"Category'."
+msgstr ""
+"Ez a címke csak hierarchikus taxonómiák esetében használatos. "
+"Alapértelmezett 'Szülő kategória'."
+
+#, fuzzy
+msgid "Parent item colon"
+msgstr "Szülő elem kettőspont"
+
+#, fuzzy
+msgid "The same as parent_item, but with colon : in the end."
+msgstr "Ugyanaz, mint a parent_item, de a végén kettőspont : van."
+
+msgid "Edit Tag/Edit Category."
+msgstr "Címke szerkesztése/Kategória szerkesztése."
+
+msgid "View Tag/View Category."
+msgstr "Címke megtekintése/Kategória megtekintése."
+
+msgid "Update item"
+msgstr "Elem frissítése"
+
+msgid "Update Tag/Update Category."
+msgstr "Címke frissítése / kategória frissítése."
+
+msgid "Add New Tag/Add New Category."
+msgstr "Új címke hozzáadása/Új kategória hozzáadása."
+
+msgid "New item name"
+msgstr "Új elem neve"
+
+msgid "New Tag Name/New Category Name."
+msgstr "Új címke neve/új kategória neve."
+
+msgid "Separate items with commas"
+msgstr "Megrendelt tételek"
+
+#, fuzzy
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Separate "
+"tags with commas', used in the meta box."
+msgstr ""
+"Ez a címke csak a nem hierarchikus taxonómiák esetében használatos. "
+"Alapértelmezett 'A címkék vesszővel való elválasztása', a meta dobozban "
+"használatos."
+
+msgid "Add or remove items"
+msgstr "Eltávolítás"
+
+#, fuzzy
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Add or "
+"remove tags', used in the meta box when JavaScript is disabled."
+msgstr ""
+"Ez a címke csak a nem hierarchikus taxonómiák esetében használatos. "
+"Alapértelmezett 'Címkék hozzáadása vagy eltávolítása', a meta dobozban "
+"használatos, ha a JavaScript le van tiltva."
+
+msgid "Choose from most used"
+msgstr "Válassz a leggyakrabban használtak közül"
+
+#, fuzzy
+msgid ""
+"This label is only used on non-hierarchical taxonomies. Default 'Choose from "
+"the most used tags', used in the meta box."
+msgstr ""
+"Ez a címke csak a nem hierarchikus taxonómiák esetében használatos. "
+"Alapértelmezett 'Válasszon a leggyakrabban használt címkék közül', a meta "
+"dobozban használatos."
+
+#, fuzzy
+msgid ""
+"No tags found/No categories found', used in the meta box and taxonomy list "
+"table."
+msgstr ""
+"No tags found/No categories found\", amelyet a meta dobozban és a taxonómia "
+"lista táblázatban használnak."
+
+msgid "No terms"
+msgstr "Nincsenek feltételek"
+
+#, fuzzy
+msgid "No tags/No categories', used in the posts and media list tables."
+msgstr ""
+"Nincsenek címkék/Nincsenek kategóriák\", amelyet a bejegyzések és a "
+"médialisták táblázataiban használnak."
+
+msgid "Filter by item"
+msgstr "Szűrés elemenként"
+
+#, fuzzy
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Filter by "
+"category', used in the posts list table."
+msgstr ""
+"Ez a címke csak hierarchikus taxonómiák esetében használatos. "
+"Alapértelmezett 'Filter by category', a hozzászólások listája táblázatban "
+"használatos."
+
+msgid "Items list navigation"
+msgstr "Elemek listája navigáció"
+
+msgid "Label for the table pagination hidden heading."
+msgstr "A táblázat oldalszámozásának rejtett címe."
+
+msgid "Label for the table hidden heading."
+msgstr "A táblázat rejtett fejlécének címe."
+
+msgid "Most used"
+msgstr "Leggyakrabban használt"
+
+msgid "Title for the Most Used tab. Default 'Most Used'."
+msgstr ""
+"A Leggyakrabban használt lap címe. Alapértelmezett 'Leggyakrabban használt'."
+
+msgid "Back to items"
+msgstr "Vissza az elemekhez"
+
+msgid "Key length must be 39."
+msgstr "A kulcs hosszának 39-nek kell lennie."
+
+msgid "Not valid format."
+msgstr "Nem érvényes formátum."
+
+msgid "General settings"
+msgstr "Általános beállítások"
+
+msgid "Content settings"
+msgstr "Tartalom beállítások"
+
+msgid "Danger zone"
+msgstr "Veszélyes zóna"
+
+msgid "manage template"
+msgstr "sablon kezelése"
+
+msgid "Taxonomy global settings"
+msgstr "Taxonómia globális beállítások"
+
+msgid "eg. Text here"
+msgstr "pl. Szöveg itt"
+
+msgid "Thumbnail"
+msgstr "Bélyegkép"
+
+msgid "Medium"
+msgstr "Közepes"
+
+msgid "Large"
+msgstr "Nagy"
+
+msgid "Full size"
+msgstr "Teljes méret"
+
+msgid "ASC"
+msgstr "Növekvő"
+
+msgid "DESC"
+msgstr "Csökkenő"
+
+msgid "eg. 100%"
+msgstr "pl. 100%"
+
+msgid "Desktop"
+msgstr "Asztali"
+
+msgid "Tablet"
+msgstr "Táblagép"
+
+msgid "Mobile"
+msgstr "Mobil"
+
+msgid "Keyboard interaction legend"
+msgstr "Billentyűzet interakció"
+
+msgid "Keyboard legend"
+msgstr "Billentyűzet parancsok"
+
+msgid "BASIC"
+msgstr "ALAP"
+
+msgid "SPECIALIZED FIELDS"
+msgstr "SPECIÁLIS TERÜLETEK"
+
+msgid "UNIT OF MEASURE"
+msgstr "MÉRTÉKEGYSÉG"
+
+msgid "MEDIA"
+msgstr "MÉDIA"
+
+msgid "RELATIONS"
+msgstr "KAPCSOLATOK"
+
+msgid "GROUPED"
+msgstr "CSOPORTOSÍTOTT"
+
+msgid "USER RELATIONS"
+msgstr "FELHASZNÁLÓI KAPCSOLATOK"
+
+#, fuzzy
+msgid "One to One - Unidirectional"
+msgstr "Egy az egyhez - Egyirányú"
+
+#, fuzzy
+msgid "One to One - Bidirectional"
+msgstr "Egy az egyhez - kétirányú"
+
+#, fuzzy
+msgid "One to Many - Unidirectional"
+msgstr "Egytől sokig - Egyirányú"
+
+#, fuzzy
+msgid "One to Many - Bidirectional"
+msgstr "Egytől sokáig - Kétirányú"
+
+#, fuzzy
+msgid "Many to One - Unidirectional"
+msgstr "Sok az egyhez - Egyirányú"
+
+#, fuzzy
+msgid "Many to One - Bidirectional"
+msgstr "Sok az egyhez - Kétirányú"
+
+#, fuzzy
+msgid "Many to Many - Unidirectional"
+msgstr "Sokan sokfelé - Egyirányú"
+
+#, fuzzy
+msgid "Many to Many - Bidirectional"
+msgstr "Sokan sokfelé - Kétirányú"
+
+msgid "Show this field if:"
+msgstr "Ezt a mezőt akkor jelenítse meg, ha:"
+
+msgid "Copy settings"
+msgstr "Beállítások másolása"
+
+msgid "Add condition"
+msgstr "Feltétel hozzáadása"
+
+msgid "ADVANCED OPTIONS"
+msgstr "SPECIÁLIS BEÁLLÍTÁSOK"
+
+msgid "BASIC OPTIONS"
+msgstr "ALAP BEÁLLÍTÁSOK"
+
+msgid "CONDITIONAL LOGIC"
+msgstr "FELTÉTELES LOGIKA"
+
+msgid "Select option"
+msgstr "Válasszon egy opciót"
+
+msgid "operator"
+msgstr "operátor"
+
+msgid "This field"
+msgstr "Ez a mező"
+
+msgid "Value"
+msgstr "Érték"
+
+msgid "Label"
+msgstr "Címke"
+
+msgid "Post"
+msgstr "Bejegyzés"
+
+msgid "Term"
+msgstr "Futamidő"
+
+msgid "Related taxonomies"
+msgstr "Kapcsolódó taxonómiák"
+
+msgid "Other fields"
+msgstr "Egyéb mezők"
+
+msgid "Invalid visibility condition type"
+msgstr "Érvénytelen láthatósági feltétel"
+
+msgid "Invalid visibility condition operator"
+msgstr "Érvénytelen láthatósági feltétel operátor"
+
+msgid "Invalid visibility condition value"
+msgstr "Érvénytelen láthatósági feltétel értéke"
+
+msgid "Invalid visibility condition logic"
+msgstr "Érvénytelen láthatósági feltétel logika"
+
+msgid "Box label, non latin chars allowed."
+msgstr "Doboz címe, nem latin karakterek megengedettek."
+
+msgid "Logic"
+msgstr "Logika"
+
+msgid "AND"
+msgstr "ÉS"
+
+msgid "OR"
+msgstr "VAGY"
+
+msgid "Enter download text link"
+msgstr "Adja meg a letöltés szöveges linket"
+
+msgid "Select images"
+msgstr "Képek kiválasztása"
+
+msgid "Remove element"
+msgstr "Elem eltávolítása"
+
+msgid "Min blocks required"
+msgstr "Min. kötelező blokkok"
+
+msgid "Max blocks allowed"
+msgstr "Max. megengedett blokkok"
+
+msgid "Browser icons"
+msgstr "Böngésző ikonok"
+
+msgid "Search an icon"
+msgstr "Ikon keresése"
+
+msgid "Type at least 3 characters to start searching."
+msgstr "A keresés megkezdéséhez írjon be legalább 3 karaktert."
+
+msgid "Example: heart"
+msgstr "Példa: szív"
+
+msgid "There was an error during saving data. The error is:"
+msgstr "Hiba történt az adatok mentése során. A hiba a következő:"
+
+msgid "There was an error during saving data. Minimum number of blocks is:"
+msgstr "Hiba történt az adatok mentése során. A blokkok minimális száma:"
+
+msgid "There was an error during saving data. Maximum number of blocks is:"
+msgstr "Hiba történt az adatok mentése során. A blokkok maximális száma:"
+
+msgid "Data saved correctly"
+msgstr "Az adatok helyesen mentve"
+
+msgid "No meta boxes aldready created."
+msgstr "Még nincsenek meta dobozok létrehozva."
+
+msgid "Create the first one"
+msgstr "Hozza létre az elsőt"
+
+msgid "There was an error fetching icons, retry later."
+msgstr "Hiba történt az ikonok lekérdezésében, próbálja meg később újra."
+
+msgid "Sorry, no result match."
+msgstr "Sajnálom, nincs találat."
+
+msgid ""
+"The media gallery is not available. You must admin_enqueue this function: "
+"wp_enqueue_media()"
+msgstr ""
+"A médiagaléria nem elérhető. Ezt a funkciót kell "
+"admin_enqueue_enqueue_media()"
+
+msgid "Download"
+msgstr "Letöltés"
+
+msgid "Upload an Image"
+msgstr "Kép feltöltése"
+
+msgid "Upload a Video"
+msgstr "Videó feltöltése"
+
+msgid "Upload a File"
+msgstr "Tölts fel egy fájlt"
+
+msgid "Remove this block"
+msgstr "Távolítsa el ezt a blokkot"
+
+msgid "Show/hide elements in this block"
+msgstr "Elemek megjelenítése/elrejtése ebben a blokkban"
+
+msgid "Filterable in Wordpress admin post lists page"
+msgstr "Szűrhető a bejegyzések lista oldalon"
+
+msgid "Quick edit in Wordpress admin post lists page"
+msgstr "Gyors szerkesztés a Wordpress admin bejegyzések lista oldalon"
+
+msgid "Hide the blank value"
+msgstr "Elrejtés, ha üres"
+
+msgid "Hide the label"
+msgstr "A cím elrejtése"
+
+msgid "Enter the URL"
+msgstr "Adja meg az URL-t"
+
+msgid "Enter text link"
+msgstr "Szöveges link megadása"
+
+msgid "Settings saved. The browser will refresh after 5 seconds."
+msgstr ""
+"A beállítások mentve. A böngésző 5 másodperc múlva újra tölti az oldalt."
+
+msgid "Exit"
+msgstr "Kilépés"
+
+msgid "Option pages successfully saved"
+msgstr "Beállítások sikeresen mentve"
+
+msgid "Children page list"
+msgstr "Gyermekek oldal lista"
+
+msgid "Register new Taxonomy"
+msgstr "Új taxonómia regisztrálása"
+
+msgid "Deactivate"
+msgstr "Kikapcsolás"
+
+msgid "Choose icon"
+msgstr "Ikon kiválasztása"
+
+msgid "Select icon type from the list"
+msgstr "Válassza ki az ikon típusát a listából"
+
+msgid "Select a Dashicon"
+msgstr "Dashicon kiválasztása"
+
+msgid "Select an icon from another set"
+msgstr "Válasszon ki egy ikont egy másik készletből"
+
+msgid "Upload an icon image"
+msgstr "Ikon feltöltése"
+
+msgid "ACPT meta import start"
+msgstr "ACPT meta import indítása"
+
+msgid "ACPT meta import end"
+msgstr "ACPT meta import vége"
+
+msgid "Option page total count"
+msgstr "Beállítások oldal összes szám"
+
+msgid "Show/hide all pages"
+msgstr "Minden oldal megjelenítése/elrejtése"
+
+msgid "List view"
+msgstr "Lista nézet"
+
+msgid "Tabular view"
+msgstr "Box nézet"
+
+msgid "Switch view"
+msgstr "Nézet váltása"
+
+msgid "ACPT Date field"
+msgstr "ACPT Dátum mező"
+
+msgid "ACPT Textual field"
+msgstr "ACPT Szöveges mező"
+
+msgid "ACPT Link field"
+msgstr "ACPT Link mező"
+
+msgid "ACPT Image field"
+msgstr "ACPT képmező"
+
+msgid "ACPT UOM field"
+msgstr "ACPT UOM mező"
+
+msgid "Select the date format"
+msgstr "Válassza ki a dátumformátumot"
+
+msgid "Date range separator"
+msgstr "Dátumtartomány választó"
+
+msgid "Select the date range separator"
+msgstr "Válassza ki a dátumtartomány elválasztó jelét"
+
+msgid "Value format (Decimal points)"
+msgstr "Értékformátum (tizedesjegyek)"
+
+msgid "Value format (Decimal separator)"
+msgstr "Értékformátum (tizedesvessző)"
+
+msgid "Value format (Thousands separator)"
+msgstr "Értékformátum (ezres elválasztójel)"
+
+msgid "Currency format"
+msgstr "Pénznem formátum"
+
+msgid "Currency position"
+msgstr "Pénznem pozíció"
+
+msgid "Custom Format"
+msgstr "Egyedi Formátum"
+
+msgid "Render as"
+msgstr "Renderelés mint"
+
+msgid "Date separator"
+msgstr "Dátum elválasztó"
+
+msgid "Classes (separated by space)"
+msgstr "Class-ok (szóközzel elválasztva)"
+
+msgid "Target link"
+msgstr "Cél link"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Plain text"
+msgstr "Egyszerű szöveg"
+
+msgid "Size (px)"
+msgstr "Méret (px)"
+
+msgid "Set the icon size."
+msgstr "Az ikon méretének beállítása."
+
+msgid "Select the icon color."
+msgstr "Válassza ki az ikon színét."
+
+msgid "Spacing (px)"
+msgstr "Távolság (px)"
+
+msgid "Select the icon spacing."
+msgstr "Válassza ki az ikonok távolságát."
+
+msgid "Is clickable?"
+msgstr "Kattintható?"
+
+msgid "Value and UOM"
+msgstr "Érték és UOM"
+
+msgid "Only value"
+msgstr "Csak érték"
+
+msgid "Only UOM"
+msgstr "Csak UOM"
+
+msgid "UOM format"
+msgstr "UOM formátum"
+
+msgid "Select the UOM format."
+msgstr "Válassza ki az UOM formátumot."
+
+msgid "Full UOM name"
+msgstr "Teljes UOM név"
+
+msgid "Abbreviation"
+msgstr "Rövidítés"
+
+msgid "UOM position"
+msgstr "UOM pozíció"
+
+msgid "Select the UOM position"
+msgstr "Válassza ki az UOM pozíciót"
+
+msgid "After value"
+msgstr "Érték után"
+
+msgid "Before value"
+msgstr "Az érték előtt"
+
+msgid "Decimal points"
+msgstr "Tizedesjegyek"
+
+msgid "Set the decimal points."
+msgstr "Állítsa be a tizedespontokat."
+
+msgid "Decimal separator"
+msgstr "Tizedes elválasztó"
+
+msgid "Set the decimal separator."
+msgstr "Állítsa be a tizedesvesszőt."
+
+msgid "Thousands separator"
+msgstr "Ezres elválasztó"
+
+msgid "Set the thousands separator."
+msgstr "Állítsa be az ezres elválasztójelet."
+
+msgid "ACPT Field"
+msgstr "ACPT mező"
+
+msgid "ACPT Icon field"
+msgstr "ACPT ikon mező"
+
+msgid "List format"
+msgstr "Lista formátum"
+
+msgid "Select the list format"
+msgstr "Válassza ki a lista formátumot"
+
+msgid "String separator"
+msgstr "String elválasztó"
+
+msgid "Select the string separator"
+msgstr "Válassza ki a karakterlánc elválasztót"
+
+msgid "ACPT Time field"
+msgstr "ACPT Időmező"
+
+msgid "Time format"
+msgstr "Időformátum"
+
+msgid "Select the time format"
+msgstr "Válassza ki az időformátumot"
+
+msgid "Controls"
+msgstr "Vezérlő"
+
+msgid "Allow video controls."
+msgstr "Videóvezérlés engedélyezése."
+
+msgid "Autoplay"
+msgstr "Automatikus lejátszás"
+
+msgid "Autoplay player."
+msgstr "Automatikus lejátszás."
+
+msgid "Video width"
+msgstr "Video szélessége"
+
+msgid "Video width (% is allowed)."
+msgstr "Videó szélessége (% is megengedett)."
+
+msgid "Video height"
+msgstr "Videó magasság"
+
+msgid "Video height (% is allowed)."
+msgstr "Videó magassága (% is megengedett)."
+
+msgid "You are going to delete this meta field definition. Are you sure?"
+msgstr "Ezt a metamező-definíciót törölni fogja. Biztos vagy benne?"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related to this "
+"field. The action is irreversible."
+msgstr ""
+"FIGYELMEZTETÉS: Ez a művelet törli a mezőhöz kapcsolódó összes bejegyzés "
+"metaadatot. A művelet nem lehet visszafordítani."
+
+msgid "Show the shortcode"
+msgstr "A shorcode megjelenítése"
+
+msgid "Use this shortcode to display the meta field on your frontend."
+msgstr ""
+"Használja ezt a shortcode-ot a meta mező megjelenítéséhez a weboldalon."
+
+msgid ""
+"Please note that \"N\" stands for a positive integer value, representing the "
+"nested field index (count starts from 0)."
+msgstr ""
+"Kérjük, vegye figyelembe, hogy az \"N\" egy pozitív egész értéket jelent, "
+"amely a beágyazott mező indexét jelöli (a számolás 0-tól kezdődik)."
+
+msgid "What you want to display?"
+msgstr "Mit szeretne megjeleníteni?"
+
+msgid "Rating"
+msgstr "Értékelés"
+
+msgid "ACPT Rating field"
+msgstr "ACPT értékelés mező"
+
+msgid "Performances"
+msgstr "Teljesítmények"
+
+msgid "Flush the ACPT cache"
+msgstr "Az ACPT gyorsítótár ürítése"
+
+msgid "Flush cache"
+msgstr "Cache ürítése"
+
+msgid "Cache was successfully flushed"
+msgstr "A gyorsítótár sikeresen kiürítve"
+
+msgid "Enable ACPT cache"
+msgstr "ACPT gyorsítótár engedélyezése"
+
+msgid "Enable the ACPT cache to optimize the plugin performances."
+msgstr ""
+"Az ACPT gyorsítótár engedélyezése a bővítmény teljesítményének "
+"optimalizálása érdekében."
+
+msgid ""
+"Enable the ACPT cache. The cache stores the MySQL results in simple textual "
+"files to avoid useless DB calls."
+msgstr ""
+"Az ACPT gyorsítótár engedélyezése. A gyorsítótár egyszerű szöveges fájlokban "
+"tárolja a MySQL eredményeket, hogy elkerülje a felesleges DB-hívásokat."
+
+msgid "select all"
+msgstr "összes kijelölése"
+
+msgid "deselect all"
+msgstr "összes törlése"
+
+msgid "UOM default value"
+msgstr "UOM alapértelmezett érték"

@@ -1,0 +1,2968 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+msgid "(default true)"
+msgstr "（默认值 true）"
+
+msgid "(e.g. Movie)"
+msgstr "（例如：电影）"
+
+msgid "(e.g. Movies)"
+msgstr "（例如：电影）"
+
+msgid "--Select--"
+msgstr "--选择--"
+
+msgid "A brief description"
+msgstr "简要说明"
+
+msgid "Add page"
+msgstr "添加 页面"
+
+msgid "ACPT Tools"
+msgstr "ACPT 工具"
+
+msgid "ACPT email account"
+msgstr "ACPT 电子邮件帐户"
+
+msgid "ALERT:"
+msgstr "警报："
+
+msgid "API dashboard"
+msgstr "API仪表盘"
+
+msgid "APIs"
+msgstr "API 密钥"
+
+msgid "APIs dashboard panel"
+msgstr "API 仪表板面板"
+
+msgid "APIs endpoints"
+msgstr "API 端点"
+
+msgid "API key"
+msgstr "API密钥"
+
+msgid "Action required"
+msgstr "需要采取措施"
+
+msgid "Actions"
+msgstr "操作"
+
+msgid ""
+"Activate ACPT by your license key to get professional support and automatic "
+"updates from your WordPress dashboard."
+msgstr ""
+"通过您的许可证密钥激活 ACPT，以从您的 WordPress 仪表板获得专业支持和自动更"
+"新。"
+
+msgid "Activate your license"
+msgstr "激活您的许可证"
+
+msgid ""
+"Activate your license key here. Please note that you need also your ACPT "
+"user email"
+msgstr "在此处激活您的许可证密钥。请注意，您还需要您的 ACPT 用户电子邮件"
+
+msgid "Activate your license now"
+msgstr "立即激活您的许可证"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Add block"
+msgstr "添加块"
+
+msgid "Add child page"
+msgstr "添加子页面"
+
+msgid "Add element"
+msgstr "添加元素"
+
+msgid "Add field"
+msgstr "添加字段"
+
+msgid "Add meta box"
+msgstr "添加元框"
+
+msgid "Add new {{r}}"
+msgstr "添加新{{r}}"
+
+msgid "Add option"
+msgstr "添加选项"
+
+msgid "Add or remove {{r}}"
+msgstr "添加或删除{{r}}"
+
+msgid "Add product data"
+msgstr "添加产品数据"
+
+msgid "Add support for various available post edit features. For more info"
+msgstr "添加对各种可用后期编辑功能的支持。更多信息"
+
+msgid "after copying"
+msgstr "复制后"
+
+msgid "All {{r}}"
+msgstr "所有{{r}}"
+
+msgid ""
+"Allowed keys: 'name', name of default term.|'slug', Slug for default "
+"term.|'description', Description for default term"
+msgstr ""
+"允许的键：'name'，默认术语的名称。slug'，Slug 表示默认术语。|'description'， "
+"默认术语的说明"
+
+msgid "Archive template"
+msgstr "归档模板"
+
+msgid "Archives"
+msgstr "归档"
+
+msgid "Are you sure?"
+msgstr "你确定？"
+
+msgid "Array of capabilities for this taxonomy."
+msgstr "此分类的一系列功能。"
+
+msgid "Associate"
+msgstr "关联"
+
+msgid "Associate custom post types here"
+msgstr "在此处关联自定义帖子类型"
+
+msgid "Associate custom post types to"
+msgstr "将自定义帖子类型关联到"
+
+msgid "Associate taxonomies to"
+msgstr "将分类法关联到"
+
+msgid "Associated icon"
+msgstr "关联的图标"
+
+msgid "Associated meta boxes"
+msgstr "关联的元框"
+
+msgid "Associated meta fields"
+msgstr "关联的元字段"
+
+msgid "Associated post types"
+msgstr "相关帖子类型"
+
+msgid "Associated taxonomies"
+msgstr "相关分类法"
+
+msgid "Back to {{r}}"
+msgstr "返回{{r}}"
+
+msgid "Belongs to"
+msgstr "属于"
+
+msgid "Block list"
+msgstr "区块列表"
+
+msgid "Block was successfully copied"
+msgstr "块已成功复制"
+
+msgid "CPT"
+msgstr "CPT"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the plural name."
+msgstr ""
+"没有标点符号或空格的驼峰大小写字符串。需要以字母（而不是数字）开头。重要的是"
+"与复数名称不同。"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the single name."
+msgstr ""
+"没有标点符号或空格的驼峰大小写字符串。需要以字母（而不是数字）开头。重要的是"
+"与单个名称不同。"
+
+msgid "Capabilities"
+msgstr "权限"
+
+msgid "Capability"
+msgstr "权限"
+
+msgid "Capability Type"
+msgstr "权限类型"
+
+msgid "Capability type"
+msgstr "功能类型"
+
+msgid "Changelog"
+msgstr "更新日志"
+
+msgid "Check `required` in the selected meta field"
+msgstr "选中所选元字段中的“必填”"
+
+msgid "Check `show in archive` in the selected meta field"
+msgstr "选中所选元字段中的“在存档中显示”"
+
+msgid "Children list"
+msgstr "儿童名单"
+
+msgid "Choose box"
+msgstr "选择框"
+
+msgid "Choose element"
+msgstr "选择Element类型"
+
+msgid "Choose field"
+msgstr "选择字段"
+
+msgid "Choose from most used {{r}}"
+msgstr "从最常用的{{r}}中选择"
+
+msgid "Choose from the list"
+msgstr "从列表中选择"
+
+msgid "Choose how to display the related post(s) selector (default: select)"
+msgstr "选择相关文章选择器的显示方式（默认：select）"
+
+msgid "Choose the field type"
+msgstr "选择字段类型"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Condition"
+msgstr "条件"
+
+msgid "Condition value"
+msgstr "条件值"
+
+msgid "Conditional rendering"
+msgstr "条件渲染"
+
+msgid "Confirm deleting all"
+msgstr "确认全部删除"
+
+msgid "Confirm deleting option"
+msgstr "确认删除选项"
+
+msgid ""
+"Copy the conditional logic settings of this meta field to other fields of "
+"this box"
+msgstr "将此元字段的条件逻辑设置复制到此框的其他字段"
+
+msgid "Copy the meta block"
+msgstr "复制元块"
+
+msgid "Copy the meta box"
+msgstr "复制元框"
+
+msgid "Copy the meta field"
+msgstr "复制元字段"
+
+msgid "Copy the selected meta box"
+msgstr "复制选定的元框"
+
+msgid "Copy the selected meta field"
+msgstr "复制选定的元字段"
+
+msgid "Copy this block to another meta field"
+msgstr "将此块复制到另一个元字段"
+
+msgid "Copy this meta box to another"
+msgstr "将此元框复制到另一个元框"
+
+msgid "Copy this meta field to another meta box"
+msgstr "将此元字段复制到另一个元框"
+
+msgid "Copyright"
+msgstr "版权"
+
+msgid "Create"
+msgstr "创建"
+
+msgid "Create a meta field in the selected meta box"
+msgstr "在选定的元框中创建元字段"
+
+msgid "Create a meta option (if applicable) in the selected meta field"
+msgstr "在选定的元字段中创建一个元选项（如果适用）"
+
+msgid "Create a new block (only for Flexible field)"
+msgstr "创建新块（仅适用于灵活字段）"
+
+msgid "Create a new condition in the selected meta field"
+msgstr "在所选元字段中创建新条件"
+
+msgid "Create new Taxonomy"
+msgstr "创建新分类"
+
+msgid "Create new WooCommerce product data"
+msgstr "创建新的 WooCommerce 产品数据"
+
+msgid "Create new meta box"
+msgstr "创建新的元框"
+
+msgid "Create new options after the selected meta option"
+msgstr "在选定的元选项后创建新选项"
+
+msgid "Create template"
+msgstr "创建模板"
+
+msgid "Custom"
+msgstr "自定义"
+
+msgid "Custom Post Type global settings"
+msgstr "自定义帖子类型全局设置"
+
+msgid "Custom post type data"
+msgstr "自定义帖子类型数据"
+
+msgid "Custom post type meta successfully saved"
+msgstr "自定义帖子类型元已成功保存"
+
+msgid "Custom post type slug to use instead of default."
+msgstr "要使用的自定义帖子类型 slug 代替默认值。"
+
+msgid ""
+"Custom post type successfully deleted. The browser will refresh after 5 "
+"seconds."
+msgstr "自定义帖子类型已成功删除。浏览器将在 5 秒后刷新。"
+
+msgid ""
+"Custom post type successfully saved. The browser will refresh after 5 "
+"seconds."
+msgstr "自定义帖子类型已成功保存。浏览器将在 5 秒后刷新。"
+
+msgid "Custom post type was associated to selected taxonomies"
+msgstr "自定义帖子类型与选定的分类相关联"
+
+msgid "Custom post types"
+msgstr "自定义帖子类型"
+
+msgid "Custom query var"
+msgstr "自定义查询变量"
+
+msgid "Custom query var slug to use instead of default."
+msgstr "要使用的自定义查询 var slug 而不是 default。"
+
+msgid "Custom rewrite"
+msgstr "自定义重写"
+
+msgid "Custom rewrite rules"
+msgstr "自定义重写规则"
+
+msgid "Date format"
+msgstr "日期格式"
+
+msgid "Default term to be used for the taxonomy."
+msgstr "用于分类的默认术语。"
+
+msgid "Default value"
+msgstr "默认值"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Delete ACPT definitions when deactivate the plug-in"
+msgstr "停用插件时删除 ACPT 定义"
+
+msgid "Delete API key"
+msgstr "删除 API 密钥"
+
+msgid "Delete Taxonomy"
+msgstr "删除分类"
+
+msgid "Delete WooCommerce product data"
+msgstr "删除 WooCommerce 产品数据"
+
+msgid "Delete all"
+msgstr "全部删除"
+
+msgid "Delete all action"
+msgstr "删除所有操作"
+
+msgid "Delete all images"
+msgstr "删除所有图像"
+
+msgid ""
+"Delete all saved ACPT definitions when you deactivate the plug-in. This "
+"means that if you select NO when you deactivate and then reactivate the plug-"
+"in you will find all the previously saved ACPT definitions (meta fields, "
+"options etc.)"
+msgstr ""
+"停用插件时删除所有已保存的 ACPT 定义。这意味着，如果在停用然后重新激活插件时"
+"选择“否”，您将找到所有以前保存的 ACPT 定义（元字段、选项等）。"
+
+msgid "Delete metadata when delete an ACPT field"
+msgstr "删除 ACPT 字段时删除元数据"
+
+msgid "Delete others pages"
+msgstr "删除其他页面"
+
+msgid "Delete others posts"
+msgstr "删除其他帖子"
+
+msgid "Delete pages"
+msgstr "删除页面"
+
+msgid "Delete post metadata when deleting ACPT fields"
+msgstr "删除 ACPT 字段时删除帖子元数据"
+
+msgid ""
+"Delete post metadata when deleting an ACPT field. This means that if you "
+"select YES, when you delete an ACPT meta field all the saved metadata will "
+"be deleted"
+msgstr ""
+"删除 ACPT 字段时删除帖子元数据。这意味着，如果选择“是”，则在删除 ACPT 元字段"
+"时，将删除所有保存的元数据"
+
+msgid "Delete posts when delete an ACPT post definition"
+msgstr "删除 ACPT 帖子定义时删除帖子"
+
+msgid ""
+"Delete posts when delete an ACPT post type definition. This means that if "
+"you select YES, when you delete an ACPT post type definition all the saved "
+"posts will be deleted"
+msgstr ""
+"删除 ACPT 帖子类型定义时删除帖子。这意味着，如果选择“是”，则在删除 ACPT 帖子"
+"类型定义时，将删除所有已保存的帖子"
+
+msgid "Delete private pages"
+msgstr "删除私人页面"
+
+msgid "Delete private posts"
+msgstr "删除私人帖子"
+
+msgid "Delete published pages"
+msgstr "删除已发布的页面"
+
+msgid "Delete the meta box in this"
+msgstr "删除其中的元框"
+
+msgid "Delete the meta field in this block after copying"
+msgstr "复制后删除此块中的元字段"
+
+msgid "Delete the meta field in this field after copying"
+msgstr "复制后删除此字段中的元字段"
+
+msgid "Delete the selected condition"
+msgstr "删除所选条件"
+
+msgid "Delete the selected meta box"
+msgstr "删除选定的元框"
+
+msgid "Delete the selected meta field"
+msgstr "删除选定的元字段"
+
+msgid "Delete the selected meta option"
+msgstr "删除选定的元选项"
+
+msgid "Delete this meta box"
+msgstr "删除此元框"
+
+msgid "Delete this meta field"
+msgstr "删除此元字段"
+
+msgid "Different name MUST be different from single name"
+msgstr "其他名称必须与单个名称不同"
+
+msgid "Disabled"
+msgstr "禁用"
+
+msgid "Displayed on the admin panel"
+msgstr "显示在管理面板上"
+
+msgid "Displayed on the sidebar of the admin panel"
+msgstr "显示在管理面板的侧边栏上"
+
+msgid "Documentation"
+msgstr "文档"
+
+msgid "Drag your component(s) here"
+msgstr "将您的组件拖到此处"
+
+msgid "Drag your loop component(s) here"
+msgstr "将循环组件拖到此处"
+
+msgid "Duplicate the selected meta box"
+msgstr "复制选定的元框"
+
+msgid "Duplicate the selected meta field"
+msgstr "复制选定的元字段"
+
+msgid "Duplicate this block"
+msgstr "复制此块"
+
+msgid "Duplicate this meta box"
+msgstr "复制此元框"
+
+msgid "Duplicate this meta field"
+msgstr "复制此元字段"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Edit Custom Post Type"
+msgstr "编辑自定义文章类型"
+
+msgid "Edit Taxonomy"
+msgstr "编辑分类方法"
+
+msgid "Edit WooCommerce product data"
+msgstr "编辑 WooCommerce 产品数据"
+
+msgid "Edit a Taxonomy"
+msgstr "编辑分类"
+
+msgid "Edit others pages"
+msgstr "编辑其他页面"
+
+msgid "Edit others posts"
+msgstr "编辑他人的文章"
+
+msgid "Edit pages"
+msgstr "编辑页面"
+
+msgid "Edit private pages"
+msgstr "编辑私人页面"
+
+msgid "Edit private posts"
+msgstr "编辑私密文章"
+
+msgid "Edit published pages"
+msgstr "编辑已发布的页面"
+
+msgid "Element"
+msgstr "元素"
+
+msgid "Elements per page"
+msgstr "每页元素数"
+
+msgid "Elements per row"
+msgstr "每行元素"
+
+msgid "Elements to display"
+msgstr "要显示的元素"
+
+msgid "Enable ACPT visual builder"
+msgstr "启用 ACPT 可视化构建器"
+
+msgid "Enable the ACPT visual builder to manage your templates."
+msgstr "启用 ACPT 可视化构建器以管理模板。"
+
+msgid ""
+"Enable the ACPT visual builder. This option allows you to use the integrated "
+"visual builder to create and manage templates for single CPTs, archive "
+"pages, taxonomy terms and relations."
+msgstr ""
+"启用 ACPT 可视化构建器。此选项允许您使用集成的可视化构建器来创建和管理单个 "
+"CPT、存档页面、分类术语和关系的模板。"
+
+msgid "Error during saving the template"
+msgstr "保存模板时出错"
+
+msgid "Error during the activation of the license."
+msgstr "激活许可证期间出错。"
+
+msgid "Error fetching data"
+msgstr "提取数据时出错"
+
+msgid "Ex. movie"
+msgstr "例如电影"
+
+msgid "Ex. movies"
+msgstr "例如电影"
+
+msgid "Expiration date"
+msgstr "到期日期"
+
+msgid "Export HTML/CSS code"
+msgstr "导出 HTML/CSS 代码"
+
+msgid "Export code"
+msgstr "导出代码"
+
+msgid "Export custom post types"
+msgstr "导出自定义帖子类型"
+
+msgid "Export data"
+msgstr "导出数据"
+
+msgid "Export selected elements"
+msgstr "导出所选元素"
+
+msgid "Export settings and meta fields for selected elements:"
+msgstr "导出所选元素的设置和元字段："
+
+msgid "Facebook group"
+msgstr "Facebook群组"
+
+msgid "Featured image"
+msgstr "特色图片"
+
+msgid "Field columns ([1-6] only for repeater field)"
+msgstr "字段列（[1-6] 仅适用于中继器字段）"
+
+msgid "Field label"
+msgstr "字段标签"
+
+msgid "Field name cannot be blank"
+msgstr "字段名称不能为空"
+
+msgid "Field name max length is 255 characters"
+msgstr "字段名称最大长度为 255 个字符"
+
+msgid "Field required"
+msgstr "必填字段"
+
+msgid "Field slug (Ex. gallery or text_1)"
+msgstr "字段段塞（例如画廊或text_1）"
+
+msgid ""
+"Field slug. Only alphanumeric (latin) characters allowed, without spaces"
+msgstr "田间蛞蝓。只允许使用字母数字（拉丁）字符，不带空格"
+
+msgid "Field width in % ([1-100] default value: 100)"
+msgstr "字段宽度（以 % 为单位）（[1-100] 默认值：100）"
+
+msgid "Fields"
+msgstr "字段"
+
+msgid "Fields count"
+msgstr "字段计数"
+
+msgid "Filter by date"
+msgstr "按日期过滤"
+
+msgid "Filter by {{r}}"
+msgstr "按{{r}}筛选"
+
+msgid "Filter {{r}} list"
+msgstr "筛选{{r}}列表"
+
+msgid "Filter in admin"
+msgstr "在后台筛选"
+
+msgid "First, create a post for this post type"
+msgstr "首先，为此帖子类型创建一个帖子"
+
+msgid "First, you need to add a block in ACPT settings."
+msgstr "首先，您需要在 ACPT 设置中添加一个块。"
+
+msgid "Format"
+msgstr "格式"
+
+msgid ""
+"From this dashboard you can discover and manage every API endpoints exposed "
+"by ACPT. Use the playground to learn how to use every endpoint."
+msgstr ""
+"在此仪表板中，您可以发现和管理 APPT 公开的每个 API 端点。 使用 Playground 了"
+"解如何使用每个端点。"
+
+msgid "Fullscreen mode"
+msgstr "全屏模式"
+
+msgid "General"
+msgstr "常规"
+
+msgid "Generate"
+msgstr "生成"
+
+msgid "Generated at"
+msgstr "生成于"
+
+msgid "Generating code..."
+msgstr "正在生成代码..."
+
+msgid "Go to"
+msgstr "转到"
+
+msgid "Google Maps API key"
+msgstr "Google 地图 API 密钥"
+
+msgid "GraphQL plural name"
+msgstr "GraphQL 复数名称"
+
+msgid "GraphQL single name"
+msgstr "GraphQL 单名"
+
+msgid "Has archive"
+msgstr "有存档"
+
+msgid "Headline location"
+msgstr "标题位置"
+
+msgid "Height"
+msgstr "高度"
+
+msgid "Hide all modals, deselect the current element"
+msgstr "隐藏所有模态，取消选择当前元素"
+
+msgid "Hide in external products"
+msgstr "隐藏在外部产品中"
+
+msgid "Hide in virtual products"
+msgstr "隐藏在虚拟产品中"
+
+msgid "Hide/show this meta box"
+msgstr "隐藏/显示此元框"
+
+msgid "Hide/show this meta field"
+msgstr "隐藏/显示此元字段"
+
+msgid "Hierarchical"
+msgstr "分层"
+
+msgid "How to display the related post(s) selector?"
+msgstr "如何显示相关帖子选择器？"
+
+msgid "Icon"
+msgstr "图标"
+
+msgid "Import an ACPT backup here."
+msgstr "在此处导入 ACPT 备份。"
+
+msgid "Import custom post types"
+msgstr "导入自定义帖子类型"
+
+msgid "Import data"
+msgstr "导入数据"
+
+msgid "Insert"
+msgstr "插入"
+
+msgid "Is Public"
+msgstr "是公共"
+
+msgid "Key"
+msgstr "键"
+
+msgid "Label and value are linked"
+msgstr "标签和值已链接"
+
+msgid "Label and value are unlinked"
+msgstr "标签和值未关联"
+
+msgid "Language"
+msgstr "语言"
+
+msgid "Leading term:"
+msgstr "主导术语："
+
+msgid "Lifetime"
+msgstr "终身"
+
+msgid "Link target"
+msgstr "链接目标"
+
+msgid "List {{r}}"
+msgstr "列表{{r}}"
+
+msgid "Makes this post type available via the admin bar. Default is value of"
+msgstr "通过管理栏提供此帖子类型。默认值为"
+
+msgid ""
+"Makes this taxonomy available for selection in navigation menus. If not set, "
+"the default is inherited from"
+msgstr "使此分类可在导航菜单中进行选择。如果未设置，则默认值继承自"
+
+msgid "Manage"
+msgstr "管理"
+
+msgid "Manage User Meta"
+msgstr "管理用户元"
+
+msgid "Manage categories"
+msgstr "管理类别"
+
+msgid "Manage content"
+msgstr "管理内容"
+
+msgid "Manage fields"
+msgstr "管理字段"
+
+msgid "Manage links"
+msgstr "管理链接"
+
+msgid "Manage options"
+msgstr "管理选项"
+
+msgid "Manage pages"
+msgstr "管理页面"
+
+msgid "Manage your license"
+msgstr "管理您的许可证"
+
+msgid "Manage your registered license key"
+msgstr "管理已注册的许可证密钥"
+
+msgid "Max value (used only by numeric and textual fields)"
+msgstr "最大值（仅供数值和文本字段使用）"
+
+msgid "Maximum blocks allowed"
+msgstr "允许的最大块数"
+
+msgid "Menu icon"
+msgstr "菜单图标"
+
+msgid "Menu position"
+msgstr "菜单位置"
+
+msgid "Menu slug"
+msgstr "菜单slug"
+
+msgid "Menu title"
+msgstr "菜单标题"
+
+msgid "Meta box"
+msgstr "元框"
+
+msgid "Meta box was successfully copied"
+msgstr "Meta box 已成功复制"
+
+msgid "Meta boxes"
+msgstr "元Metabox"
+
+msgid "Meta field"
+msgstr "Meta field"
+
+msgid "Meta field was successfully copied"
+msgstr "元字段已成功复制"
+
+msgid "Meta fields"
+msgstr "字段"
+
+msgid "Meta option"
+msgstr "Meta 选项"
+
+msgid "Min value (used only by numeric and textual fields)"
+msgstr "最小值（仅供数值和文本字段使用）"
+
+msgid "Minimum blocks allowed"
+msgstr "允许的最小块数"
+
+msgid "Moderate comments"
+msgstr "适度评论"
+
+msgid "Most used {{r}}"
+msgstr "最常用的{{r}}"
+
+msgid "My account"
+msgstr "我的账户"
+
+msgid "My license"
+msgstr "我的执照"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Native"
+msgstr "原生"
+
+msgid "Navigate the input fields in the selected meta field"
+msgstr "在所选元字段中导航输入字段"
+
+msgid "Navigate the input fields in the selected meta option"
+msgstr "在所选元选项中导航输入字段"
+
+msgid "Navigate the tabs of selected field (go to next tab)"
+msgstr "导航所选字段的选项卡（转到下一个选项卡）"
+
+msgid "Navigate the tabs of selected field (go to previous tab)"
+msgstr "导航所选字段的选项卡（转到上一个选项卡）"
+
+msgid "Navigate to next element (box, field, option or condition)"
+msgstr "导航到下一个元素（框、字段、选项或条件）"
+
+msgid "Navigate to previous element (box, field, option or condition)"
+msgstr "导航到上一个元素（框、字段、选项或条件）"
+
+msgid "Navigation"
+msgstr "导航"
+
+msgid "Navigation list {{r}}"
+msgstr "导航列表{{r}}"
+
+msgid "New"
+msgstr "新"
+
+msgid "New {{r}}"
+msgstr "新{{r}}"
+
+msgid "Next Step"
+msgstr "下一步"
+
+msgid "No"
+msgstr "不"
+
+msgid "No API keys found."
+msgstr "未找到 API 密钥。"
+
+msgid ""
+"No blocks already created. Create the first one now by clicking the button "
+"\"Add block\"!"
+msgstr "尚未创建任何块。现在通过单击“添加块”按钮创建第一个！"
+
+msgid ""
+"No blocks saved, generate the first one clicking on \"Add block\" button"
+msgstr "没有保存块，生成第一个点击“添加块”按钮"
+
+msgid ""
+"No children already created. Create the first one now by clicking the button "
+"\"Add child page\"!"
+msgstr "尚未创建任何子项。现在通过单击“添加子页面”按钮创建第一个！"
+
+msgid "No choice"
+msgstr "选项"
+
+msgid ""
+"No conditions are present, click on \"Add condition\" button to add the "
+"first one."
+msgstr "不存在任何条件，单击“添加条件”按钮添加第一个条件。"
+
+msgid ""
+"No content yet. Drag components in this canvas and start building something "
+"awesome!"
+msgstr "暂无内容。在此画布中拖动组件，然后开始构建一些很棒的东西！"
+
+msgid "No custom post type found."
+msgstr "未找到自定义帖子类型。"
+
+msgid "No display"
+msgstr "没有显示"
+
+msgid ""
+"No elements saved, generate the first one clicking on \"Add element\" button"
+msgstr "没有保存元素，生成第一个点击“添加元素”按钮"
+
+msgid ""
+"No field box already created. Create the first one now by clicking the "
+"button \"Add field box\"!"
+msgstr "尚未创建任何字段框。现在通过单击“添加字段框”按钮创建第一个！"
+
+msgid ""
+"No fields saved, generate the first one clicking on \"Add element\" button"
+msgstr "未保存字段，生成第一个字段，单击“添加元素”按钮"
+
+msgid ""
+"No fields already created. Create the first one now by clicking the button "
+"\"Add field\"!"
+msgstr "尚未创建任何字段。现在通过单击“添加字段”按钮创建第一个！"
+
+msgid ""
+"No meta box already created. Create the first one now by clicking the button "
+"\"Add meta box\"!"
+msgstr "尚未创建元框。现在通过单击“添加元框”按钮创建第一个！"
+
+msgid "No option pages found."
+msgstr "未找到选项页面。"
+
+msgid ""
+"No options already created. Create the first one now by clicking the button "
+"\"Add option\"!"
+msgstr "尚未创建任何选项。现在通过单击“添加选项”按钮创建第一个！"
+
+msgid "No product data found."
+msgstr "未找到产品数据。"
+
+msgid "No records message"
+msgstr "无记录消息"
+
+msgid "No taxonomies found."
+msgstr "没有找到分类法。"
+
+msgid "No templates found."
+msgstr "未找到模板。"
+
+msgid "No {{r}}"
+msgstr "没有{{r}}"
+
+msgid "No {{r}} found"
+msgstr "未找到{{r}}"
+
+msgid "Not allowed"
+msgstr "不允许"
+
+msgid "On the left"
+msgstr "在左边"
+
+msgid "On the right"
+msgstr "在右边"
+
+msgid "On the top"
+msgstr "在顶部"
+
+msgid "Opens in a new window or tab "
+msgstr "在新窗口或标签页中打开"
+
+msgid "Opens in the full body of the window"
+msgstr "在窗口的整个正文中打开"
+
+msgid "Opens in the parent frame"
+msgstr "在父框架中打开"
+
+msgid "Opens in the same frame as it was clicked"
+msgstr "在单击的同一帧中打开"
+
+msgid "Option list"
+msgstr "选项列表"
+
+msgid "Option page meta successfully saved"
+msgstr "选项页面元已成功保存"
+
+msgid "Option pages"
+msgstr "选项页"
+
+msgid "Option pages meta"
+msgstr "选项页面元"
+
+msgid "Order by"
+msgstr "排序"
+
+msgid "Page description (will be displayed after the title)"
+msgstr "页面描述（将显示在标题之后）"
+
+msgid "Page not found"
+msgstr "找不到网页"
+
+msgid "Page title"
+msgstr "页面标题"
+
+msgid "Parent"
+msgstr "父级"
+
+msgid "Parent item"
+msgstr "父项目"
+
+msgid "Parent {{r}}"
+msgstr "父{{r}}"
+
+msgid ""
+"Paste here your Google Maps API key. Needed to use the Address meta field."
+msgstr "将您的 Google Maps API 密钥粘贴到此处。需要使用“地址”元字段。"
+
+msgid "Pattern value (used only by numeric and textual fields)"
+msgstr "模式值（仅供数值和文本字段使用）"
+
+msgid "Pattern value (used only by textual fields)"
+msgstr "模式值（仅供文本字段使用）"
+
+msgid "Permalink text"
+msgstr "固定链接文本"
+
+msgid "Plugin version"
+msgstr "插件版本"
+
+msgid "Plural"
+msgstr "复数"
+
+msgid "Plural label"
+msgstr "复数标签"
+
+msgid "Popular {{r}}"
+msgstr "热门{{r}}"
+
+msgid "Possible values: customPostType, taxonomy."
+msgstr "可能的值：customPostType、taxonomy。"
+
+msgid "Post count"
+msgstr "文章数"
+
+msgid "Post name"
+msgstr "文章名称"
+
+msgid "Preview"
+msgstr "预览"
+
+msgid "Previous Step"
+msgstr "上一步"
+
+msgid "Product data"
+msgstr "产品数据"
+
+msgid "Product data successfully saved"
+msgstr "产品数据已成功保存"
+
+msgid "Publicly queryable"
+msgstr "可公开查询"
+
+msgid "Publish pages"
+msgstr "发布页面"
+
+msgid "Published posts count"
+msgstr "按文章数发布"
+
+msgid "Published posts count associated with the taxonomy"
+msgstr "与分类相关的已发布帖子计数"
+
+msgid "Query var"
+msgstr "查询变量"
+
+msgid "Quick edit"
+msgstr "快速编辑"
+
+msgid "Quick navigation"
+msgstr "快速导航"
+
+msgid "REST API Controller class name. Default is 'WP_REST_Terms_Controller'."
+msgstr "REST API 控制器类名。默认值为“WP_REST_Terms_Controller”。"
+
+msgid "REST API base slug"
+msgstr "REST 接口基本别名"
+
+msgid "REST Controller class"
+msgstr "REST 控制器类"
+
+msgid "Radio/checkbox"
+msgstr "单选/复选框"
+
+msgid "Read private pages"
+msgstr "阅读加密页面"
+
+msgid "Read private posts"
+msgstr "阅读私人帖子"
+
+msgid "Records per page"
+msgstr "每页的记录数量"
+
+msgid "Records per page in ACPT dashboards"
+msgstr "ACPT 仪表板中每页的记录数"
+
+msgid "Redo"
+msgstr "重做"
+
+msgid "Regenerate"
+msgstr "重新生成"
+
+msgid "Register new Custom Post Type"
+msgstr "注册新的自定义帖子类型"
+
+msgid "Register the first one"
+msgstr "注册第一个"
+
+msgid "Registered Custom Post Types"
+msgstr "已注册的自定义帖子类型"
+
+msgid "Registered Taxonomies"
+msgstr "注册分类法"
+
+msgid "Related template"
+msgstr "相关模板"
+
+msgid "Remove featured image"
+msgstr "移除特色图片"
+
+msgid "Return back to list"
+msgstr "返回列表"
+
+msgid "Rewrite"
+msgstr "重写"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save action"
+msgstr "保存操作"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search box"
+msgstr "搜索框"
+
+msgid "Search {{r}}"
+msgstr "搜索{{r}}"
+
+msgid "Secret"
+msgstr "密钥"
+
+msgid "Select"
+msgstr "选择 "
+
+msgid "Select field box from list"
+msgstr "从列表中选择字段框"
+
+msgid "Select field from list"
+msgstr "从列表中选择字段"
+
+msgid "Select field type from list"
+msgstr "从列表中选择字段类型"
+
+msgid "Select relation type from list"
+msgstr "从列表中选择关系类型"
+
+msgid "Select the element from the list:"
+msgstr "从列表中选择元素："
+
+msgid "Select the headline location (default: on the left)"
+msgstr "选择标题位置（默认：在左侧）"
+
+msgid "Select the template type:"
+msgstr "选择模板类型："
+
+msgid "Separate {{r}} with commas"
+msgstr "用逗号分隔{{r}}"
+
+msgid "Set featured image"
+msgstr "设置特色图片"
+
+msgid "Set the language of the plug-in"
+msgstr "设置插件的语言"
+
+msgid ""
+"Sets the query var key for this taxonomy. Default  key. If false, a taxonomy "
+"cannot be loaded at ?{query_var}={term_slug}. If a string, the query ?"
+"{query_var}={term_slug} will be valid."
+msgstr ""
+"设置此分类的查询 var 键。默认键。如果为 false，则无法在 ？{query_var}"
+"={term_slug}。如果是字符串，则查询 ？{query_var}={term_slug} 将有效。"
+
+msgid ""
+"Sets the query_var key for this post type. Defaults to  key. If false, a "
+"post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+"string, the query {post_slug} will be valid."
+msgstr ""
+"设置此帖子类型的query_var键。默认为 key。如果为 false，则无法在 ？{query_var}"
+"={post_slug}。如果指定为字符串，则查询{post_slug}将有效。"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Settings page"
+msgstr "设置页面"
+
+msgid "Show Tagcloud"
+msgstr "显示标签云"
+
+msgid "Show admin column"
+msgstr "显示管理列"
+
+msgid "Show in GraphQL"
+msgstr "显示在图形QL中"
+
+msgid "Show in REST API"
+msgstr "显示在 REST 接口"
+
+msgid "Show in UI"
+msgstr "在 UI 中显示"
+
+msgid "Show in Wordpress admin post lists page"
+msgstr "显示在 Wordpress 管理帖子列表页面中"
+
+msgid "Show in admin bar"
+msgstr "在顶部管理条中显示"
+
+msgid "Show in external products"
+msgstr "在外部产品中展示"
+
+msgid "Show in grouped products"
+msgstr "在分组产品中显示"
+
+msgid "Show in menu"
+msgstr "显示在菜单"
+
+msgid "Show in nav menus"
+msgstr "在移动设备上显示滚动箭头"
+
+msgid "Show in quick edit"
+msgstr "在快速编辑中显示"
+
+msgid "Show in simple products"
+msgstr "以简单的产品展示"
+
+msgid "Show in variable products"
+msgstr "在可变产品中显示"
+
+msgid "Show on UI"
+msgstr "在 UI 上显示"
+
+msgid "Show pagination"
+msgstr "显示分页"
+
+msgid "Show the custom post type in WPGraphQL"
+msgstr "在WPGraphQL中显示自定义帖子类型"
+
+msgid "Show the custom post type in WPGraphQL."
+msgstr "在WPGraphQL中显示自定义帖子类型。"
+
+msgid "Show the product data on the front store page."
+msgstr "在商店正面页面上显示产品数据。"
+
+msgid "Show this legend modal"
+msgstr "显示此图例模式"
+
+msgid "Show/hide all fields"
+msgstr "显示/隐藏所有字段"
+
+msgid "Sing. label"
+msgstr "唱歌-标签"
+
+msgid "Single name MUST be different from plural name"
+msgstr "单个名称必须与复数名称不同"
+
+msgid "Single template"
+msgstr "单个模板"
+
+msgid "Singular"
+msgstr "单数"
+
+msgid "Singular label"
+msgstr "单数标签"
+
+msgid "Slug"
+msgstr "别名"
+
+msgid "Sort"
+msgstr "排序"
+
+msgid "Sort by"
+msgstr "排序方式"
+
+msgid "Step value (used only by numeric fields)"
+msgstr "步进值（仅用于数字字段）"
+
+msgid "Successfully post sync. The browser will refresh after 5 seconds."
+msgstr "成功发布同步。浏览器将在 5 秒后刷新。"
+
+msgid "Support"
+msgstr "支持"
+
+msgid "Supports"
+msgstr "支持"
+
+msgid "Surrounding tag"
+msgstr "周围标签"
+
+msgid "Sync with post types"
+msgstr "与帖子类型同步"
+
+msgid "Taxonomies"
+msgstr "分类法"
+
+msgid "Taxonomies association"
+msgstr "分类法协会"
+
+msgid "Taxonomy"
+msgstr "分类法"
+
+msgid "Taxonomy data"
+msgstr "分类数据"
+
+msgid "Taxonomy meta successfully saved"
+msgstr "分类元已成功保存"
+
+msgid "Taxonomy settings"
+msgstr "分类设置"
+
+msgid "Taxonomy slug to use instead of default."
+msgstr "要使用的分类 slug 而不是默认值。"
+
+msgid ""
+"Taxonomy slug. The post name/slug. Used for various queries for taxonomy "
+"content."
+msgstr "分类别名。帖子名称/slug。用于对分类内容进行各种查询。"
+
+msgid "Taxonomy successfully deleted"
+msgstr "分类已成功删除"
+
+msgid "Taxonomy was associated to selected Custom post types"
+msgstr "分类与选定的自定义帖子类型相关联"
+
+msgid "Template"
+msgstr "模板"
+
+msgid "Template list"
+msgstr "模板列表"
+
+msgid "Template saved successfully"
+msgstr "模板已成功保存"
+
+msgid "Template was successfully deleted."
+msgstr "模板已成功删除。"
+
+msgid ""
+"Template was successfully deleted. The browser will refresh after 5 seconds."
+msgstr "模板已成功删除。浏览器将在 5 秒后刷新。"
+
+msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
+msgstr "之后的文字。允许 HTML（例如 &lt;/small&gt;）"
+
+msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "前面的文字。允许使用 HTML（例如&lt;小&gt;）"
+
+msgid "The API key was successfully deleted"
+msgstr "API 密钥已成功删除"
+
+msgid "The archive template for this custom post type"
+msgstr "此自定义帖子类型的存档模板"
+
+msgid "The browser will refresh after 5 seconds."
+msgstr "浏览器将在 5 秒后刷新。"
+
+msgid "The custom post type or taxonomy element."
+msgstr "自定义帖子类型或分类元素。"
+
+msgid "The default value for this field"
+msgstr "此字段的默认值"
+
+msgid "The description of this field (showed only on admin panel)"
+msgstr "此字段的描述（仅在管理面板上显示）"
+
+msgid "The field label, non latin characters are allowed"
+msgstr "字段标签，允许使用非拉丁字符"
+
+msgid "The icon displayed on menu (only for parent pages)"
+msgstr "菜单上显示的图标（仅适用于父页面）"
+
+msgid ""
+"The inversed field is the target post type field which is related with this "
+"one in a bidirectional relation"
+msgstr "反转字段是与此字段呈双向关系的目标柱类型字段"
+
+msgid ""
+"The limit on how many blocks are allowed ([1-100] only for flexible field)"
+msgstr "允许的块数限制（[1-100] 仅适用于柔性字段）"
+
+msgid ""
+"The limit on how many blocks are required ([1-100] only for flexible field)"
+msgstr "所需块数限制（[1-100] 仅适用于柔性字段）"
+
+msgid "The maximum value (used only by numeric and textual fields)"
+msgstr "最大值（仅供数值和文本字段使用）"
+
+msgid "The menu title (displayed only in the admin menu)"
+msgstr "菜单标题（仅在管理菜单中显示）"
+
+msgid "The minimum value (used only by numeric and textual fields)"
+msgstr "最小值（仅由数值和文本字段使用）"
+
+msgid "The page slug (used to generate the page URL). Must be unique"
+msgstr "页面 slug（用于生成页面 URL）。必须是唯一的"
+
+msgid "The page title"
+msgstr "页面标题"
+
+msgid "The parent element slug"
+msgstr "父元素 slug"
+
+msgid ""
+"The position in the menu order the post type should appear. To work,  must "
+"be true. Default null (at the bottom)."
+msgstr ""
+"应显示帖子类型应显示的菜单顺序中的位置。要工作，必须是真的。默认值为 null（在"
+"底部）。"
+
+msgid "The post name/slug. Used for various queries for taxonomy content."
+msgstr "帖子名称/slug。用于对分类内容的各种查询。"
+
+msgid "The post name/slug. Used for various queries."
+msgstr "帖子名称/slug。用于各种查询。"
+
+msgid "The product data name."
+msgstr "产品数据名称。"
+
+msgid "The requested page was not found, was deleted or was moved!"
+msgstr "请求的页面未找到、被删除或被移动！"
+
+msgid "The single template for taxonomy term"
+msgstr "分类术语的单一模板"
+
+msgid "The single template for this custom post type"
+msgstr "此自定义帖子类型的单个模板"
+
+msgid ""
+"The string to use to build the read, edit, and delete capabilities. May be "
+"passed as an array to allow for alternative plurals when using this argument "
+"as a base to construct the capabilities, e.g. array('story', 'stories'). "
+"Default 'post'."
+msgstr ""
+"用于生成读取、编辑和删除功能的字符串。当使用此参数作为构造功能的基础时，可以"
+"作为数组传递以允许替代复数形式，例如 array（'story'， 'stories'）。默认"
+"为“post”。"
+
+msgid ""
+"The template type. Possible values: archive, single, related, metaField."
+msgstr "模板类型。可能的值：archive、single、related、metaField。"
+
+msgid ""
+"The template used to display this custom post type when it is releated to "
+"another one. If no template is set, it will be displayed just the title of "
+"the post."
+msgstr ""
+"用于在关联到另一个自定义帖子类型时显示该自定义帖子类型的模板。如果未设置模"
+"板，则仅显示帖子的标题。"
+
+msgid "The visual builder can be used with a minimum resolution of 960 px wide"
+msgstr "可视化构建器的最小分辨率为 960 px 宽"
+
+msgid "The visual builder is disabled. Go to Settings page and enable it."
+msgstr "可视化构建器已禁用。转到“设置”页面并启用它。"
+
+msgid "This field is mandatory"
+msgstr "此字段为必填"
+
+msgid ""
+"This is the only time that the secret access key can be viewed or copied. "
+"You cannot recover it later. However, you can delete and create or "
+"regenerate new API key at any time."
+msgstr ""
+"这是唯一可以查看或复制秘密访问密钥的时间。您以后无法恢复它。但是，您可以随时"
+"删除并创建或重新生成新的 API 密钥。"
+
+msgid "This number controls the position of this page in the admin menu"
+msgstr "此数字控制此页面在管理菜单中的位置"
+
+msgid "This text will appear after input"
+msgstr "此文本将在输入后显示"
+
+msgid "This text will appear before input"
+msgstr "此文本将出现在输入之前"
+
+msgid ""
+"This tool allows you to import settings and meta fields from previously "
+"exported .acpt files (max size allowed is 2Mb)."
+msgstr ""
+"此工具允许您从以前导出的 .acpt 文件导入设置和元字段（允许的最大大小为 2Mb）。"
+
+msgid "To change the base url of REST API route. Default is"
+msgstr "更改 REST API 路由的基 URL。默认值为"
+
+msgid "Toggle guides"
+msgstr "切换参考线"
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using  as "
+"slug. To prevent rewrite, set to false. To specify rewrite rules, an array "
+"can be passed with any of these keys:"
+msgstr ""
+"触发对此分类的重写处理。默认值为 true，用作 slug。若要防止重写，请设置为 "
+"false。若要指定重写规则，可以使用以下任一键传递数组："
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Type here your ACPT email account. Ex: mauro@acpt.io"
+msgstr "在此处输入您的 ACPT 电子邮件帐户。例如：mauro@acpt.io"
+
+msgid "Type here your license. Ex: 123e4567-e89b-12d3-a456-426614174000"
+msgstr "在此处输入您的许可证。例如：123e4567-e89b-12d3-a456-426614174000"
+
+msgid "Uncheck `required` in the selected meta field"
+msgstr "取消选中所选元字段中的“必填”"
+
+msgid "Uncheck `show in archive` in the selected meta field"
+msgstr "取消选中所选元字段中的“在存档中显示”"
+
+msgid "Undo"
+msgstr "撤销"
+
+msgid "Unfiltered html"
+msgstr "不过滤html"
+
+msgid "Update {{r}}"
+msgstr "更新{{r}}"
+
+msgid "Upgrade"
+msgstr "升级"
+
+msgid "Upload"
+msgstr "上传"
+
+msgid "Upload file"
+msgstr "上传文件"
+
+msgid "Upload your file"
+msgstr "上传文件"
+
+msgid "Use featured image"
+msgstr "使用特色图片"
+
+msgid ""
+"Use this tool to quick export the general settings and meta fields for every "
+"element in a compressed JSON format called .acpt."
+msgstr ""
+"使用此工具以名为 .acpt 的压缩 JSON 格式快速导出每个元素的常规设置和元字段。"
+
+msgid "Used for the post type admin menu item"
+msgstr "用于帖子类型管理菜单项"
+
+msgid "Used for the taxonomy admin menu item"
+msgstr "用于分类管理菜单项"
+
+msgid "Used when a singular label is needed"
+msgstr "当需要单个标签时使用"
+
+msgid "User"
+msgstr "用户"
+
+msgid "User meta"
+msgstr "用户meta"
+
+msgid "User meta successfully saved"
+msgstr "用户元已成功保存"
+
+msgid "View"
+msgstr "查看"
+
+msgid "View WooCommerce product data"
+msgstr "查看 WooCommerce 产品数据"
+
+msgid "Visibility of product data"
+msgstr "商品数据的可见性"
+
+msgid ""
+"WARNING: This action will delete all posts and metadata for this post type. "
+"The action is irreversible."
+msgstr "警告：此操作将删除此帖子类型的所有帖子和元数据。该操作是不可逆的。"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"block. The action is irreversible."
+msgstr "警告：此操作将删除与此块相关的所有帖子元数据。该操作是不可逆的。"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"box. The action is irreversible."
+msgstr "警告：此操作将删除与此框相关的所有帖子元数据。该操作是不可逆的。"
+
+msgid "When BB Theme builder is active, the visual builder is disabled."
+msgstr "当 BB 主题生成器处于活动状态时，可视化生成器将被禁用。"
+
+msgid "When Oxygen Builder is active, the visual builder is disabled."
+msgstr "当 Oxygen Builder 处于活动状态时，可视化构建器将被禁用。"
+
+msgid "Where do you want to copy this meta box?"
+msgstr "你想在哪里复制这个元框？"
+
+msgid "Where do you want to copy this meta field?"
+msgstr "您想在哪里复制此元字段？"
+
+msgid ""
+"Where to show the post type in the admin menu. To work,  must be true. If "
+"true, the post type is shown in its own top level menu. If false, no menu is "
+"shown."
+msgstr ""
+"在管理菜单中显示帖子类型的位置。要工作，必须是真的。如果为 true，则帖子类型将"
+"显示在其自己的顶级菜单中。如果为 false，则不显示任何菜单。"
+
+msgid ""
+"Whether a post type is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr "帖子类型是否旨在通过管理界面或前端用户公开使用。"
+
+msgid ""
+"Whether a taxonomy is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr "分类是打算通过管理界面还是由前端用户公开使用。"
+
+msgid ""
+"Whether queries can be performed on the front end for the post type as part "
+"of parse_request()."
+msgstr "是否可以在前端对帖子类型执行查询作为 parse_request（） 的一部分。"
+
+msgid ""
+"Whether terms in this taxonomy should be sorted in the order they are "
+"provided to wp_set_object_terms(). Default null which equates to false."
+msgstr ""
+"此分类中的术语是否应按提供给 wp_set_object_terms（） 的顺序排序。默认值为 "
+"null，等同于 false。"
+
+msgid "Whether the taxonomy is hierarchical. Default false."
+msgstr "分类是否为分层分类。默认值为 false。"
+
+msgid ""
+"Whether the taxonomy is publicly queryable. If not set, the default is "
+"inherited from"
+msgstr "分类是否可公开查询。如果未设置，则默认值继承自"
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if"
+msgstr ""
+"是否应该有帖子类型的存档，或者如果是字符串，则使用存档 slug。如果出现以下情"
+"况，将生成正确的重写规则"
+
+msgid ""
+"Whether to display a column for the taxonomy on its post type listing "
+"screens. Default false."
+msgstr "是否在其帖子类型列表屏幕上显示分类的列。默认值为 false。"
+
+msgid ""
+"Whether to generate and allow a UI for managing terms in this taxonomy in "
+"the admin. If not set, the default is inherited from"
+msgstr ""
+"是否在后台中生成并允许用于管理此分类中的术语的 UI。如果未设置，则默认值继承自"
+
+msgid ""
+"Whether to generate and allow a UI for managing this post type in the admin. "
+"Default is value of"
+msgstr "是否生成并允许在后台中管理此帖子类型的 UI。默认值为"
+
+msgid ""
+"Whether to include the post type in the REST API. Set this to true for the "
+"post type to be available in the block editor. SET TRUE TO ENABLE GUTEMBERG "
+"EDITOR."
+msgstr ""
+"是否在 REST API 中包含帖子类型。将此值设置为 true，以使帖子类型在块编辑器中可"
+"用。设置为 TRUE 以启用 GUTENBERG 编辑器。"
+
+msgid ""
+"Whether to include the taxonomy in the REST API. Set this to true for the "
+"taxonomy to be available in the block editor. SET TRUE TO ENABLE "
+"VISUALIZATION ON GUTEMBERG EDITOR."
+msgstr ""
+"是否在 REST API 中包含分类。将此项设置为 true，以使分类在块编辑器中可用。设置"
+"为 TRUE 可在 GUTENBERG 编辑器上启用可视化。"
+
+msgid ""
+"Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
+"the default is inherited from"
+msgstr "是否在“标记云”小组件控件中列出分类。如果未设置，则默认值继承自"
+
+msgid ""
+"Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+"shown as a submenu of the object type menu. If false, no menu is shown.  "
+"must be true. If not set, default is inherited from  (default true)."
+msgstr ""
+"是否在管理菜单中显示分类。如果为 true，则分类将显示为对象类型菜单的子菜单。如"
+"果为 false，则不显示任何菜单。 必须为 true。如果未设置，则继承自 （default "
+"true）。"
+
+msgid ""
+"Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
+"default is inherited from"
+msgstr "是否在快速/批量编辑面板中显示分类。它未设置，默认值继承自"
+
+msgid "Which does this template belong to?"
+msgstr "这个模板属于哪个？"
+
+msgid "Width"
+msgstr "宽度"
+
+msgid "WooCommerce product data"
+msgstr "WooCommerce 产品数据"
+
+msgid "WooCommerce product data fields successfully saved"
+msgstr "WooCommerce 产品数据字段已成功保存"
+
+msgid "WooCommerce product data successfully deleted"
+msgstr "WooCommerce 产品数据已成功删除"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "Yes, delete it"
+msgstr "是，删除它"
+
+msgid "You are going to delete WooCommerce this product data. Are you sure?"
+msgstr "您将删除 WooCommerce 此产品数据。是否确定？"
+
+msgid "You are going to delete this API key. Are you sure?"
+msgstr "您将删除此 API 密钥。是否确定？"
+
+msgid "You are going to delete this custom post type. Are you sure?"
+msgstr "您将删除此自定义帖子类型。是否确定？"
+
+msgid ""
+"You are going to delete this meta block definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr "您将删除此元块定义。其中的每个字段定义都将被删除。是否确定？"
+
+msgid ""
+"You are going to delete this meta box definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr "您将删除此元框定义。其中的每个字段定义都将被删除。是否确定？"
+
+msgid ""
+"You are going to delete this option page definition. Every associated meta "
+"fields and child page will be deleted. Are you sure?"
+msgstr "您将删除此选项页面定义。每个关联的元字段和子页面都将被删除。是否确定？"
+
+msgid "You are going to delete this taxonomy. Are you sure?"
+msgstr "您将删除此分类。是否确定？"
+
+msgid "Your API keys"
+msgstr "您的 API 密钥"
+
+msgid "Your favourite ACPT settings"
+msgstr "您喜欢的 ACPT 设置"
+
+msgid "Your new generated API key"
+msgstr "新生成的 API 密钥"
+
+msgid "Your theme already has a single template for"
+msgstr "您的主题已经有一个模板"
+
+msgid "Your theme already has an archive template for"
+msgstr "您的主题已经有一个存档模板，用于"
+
+msgid "`has_archive` set to false"
+msgstr "“has_archive”设置为 false"
+
+msgid "child element"
+msgstr "子元素"
+
+msgid "current"
+msgstr "当前"
+
+msgid "custom post type"
+msgstr "自定义帖子类型"
+
+msgid "custom post types registered"
+msgstr "已注册的自定义帖子类型"
+
+msgid "details"
+msgstr "详情"
+
+msgid "format"
+msgstr "格式"
+
+msgid "global settings"
+msgstr "全局设置"
+
+msgid "id"
+msgstr "id"
+
+msgid "is checked"
+msgstr "已选取"
+
+msgid "is empty"
+msgstr "是空的"
+
+msgid "is equal to"
+msgstr "等于"
+
+msgid "is greater or equals than"
+msgstr "大于或等于"
+
+msgid "is greater than"
+msgstr "大于"
+
+msgid "is greater than or equal to"
+msgstr "大于或等于"
+
+msgid "is included in"
+msgstr "包含在内"
+
+msgid "is less or equals than"
+msgstr "小于或等于"
+
+msgid "is less than"
+msgstr "小于"
+
+msgid "is less than or equal to"
+msgstr "小于或等于"
+
+msgid "is like to"
+msgstr "就像"
+
+msgid "is not checked"
+msgstr "未选中"
+
+msgid "is not empty"
+msgstr "不是空的"
+
+msgid "is not equal to"
+msgstr "不等于"
+
+msgid "is not included in"
+msgstr "不包括在"
+
+msgid "is not like"
+msgstr "你可能也喜欢"
+
+msgid "meta boxes"
+msgstr "元框"
+
+msgid "Meta boxes total count"
+msgstr "元框总数"
+
+msgid "meta fields"
+msgstr "元字段"
+
+msgid "Meta fields total count"
+msgstr "元字段总数"
+
+msgid "min length is"
+msgstr "最小长度为"
+
+msgid "old"
+msgstr "老"
+
+msgid "product data fields"
+msgstr "产品数据字段"
+
+msgid "record(s) found"
+msgstr "找到的记录"
+
+msgid "see here"
+msgstr ""
+"如果要排除任何类别，请在此处填写类别标签。查看此处了解什么是类别段塞。示例："
+"旅行"
+
+msgid "slug"
+msgstr "别名"
+
+msgid "taxonomies registered"
+msgstr "已注册的分类法"
+
+msgid "template"
+msgstr "模板"
+
+msgid "title"
+msgstr "标题"
+
+msgid "visibility"
+msgstr "能见度"
+
+msgid "{{r}} published"
+msgstr "{{r}}已出版"
+
+msgid "{{r}} published privately"
+msgstr "{{r}}私下出版"
+
+msgid "{{r}} reverted to draft"
+msgstr "{{r}}恢复为草稿"
+
+msgid "{{r}} scheduled"
+msgstr "{{r}}计划"
+
+msgid "{{r}} updated"
+msgstr "{{r}}已更新"
+
+msgid "Address map"
+msgstr "地址映射"
+
+msgid "Color"
+msgstr "颜色"
+
+msgid "Currency"
+msgstr "货币"
+
+msgid "Weight"
+msgstr "宽度"
+
+msgid "Length"
+msgstr "长度"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Email address"
+msgstr "邮箱地址"
+
+msgid "Number"
+msgstr "数量"
+
+msgid "Phone Number"
+msgstr "电话号码"
+
+msgid "Text"
+msgstr "文本"
+
+msgid "List"
+msgstr "列表"
+
+msgid "Select Multiple"
+msgstr "多选"
+
+msgid "Toggle"
+msgstr "切换"
+
+msgid "Embed content"
+msgstr "发布视频"
+
+msgid "Gallery"
+msgstr "画廊"
+
+msgid "Image"
+msgstr "图像"
+
+msgid "Post relationship"
+msgstr "文章关系"
+
+msgid "Time"
+msgstr "时间"
+
+msgid "Grouped field (Repeater)"
+msgstr "分组字段（中继器）"
+
+msgid "User (select multiple)"
+msgstr "用户（选择多个）"
+
+msgid "Checkbox"
+msgstr "复选框"
+
+msgid "Radio button"
+msgstr "单选按钮"
+
+msgid "Date Range"
+msgstr "日期范围"
+
+msgid "Flexible content"
+msgstr "灵活的内容"
+
+msgid "is enabled"
+msgstr "已启用"
+
+msgid "found"
+msgstr "找到"
+
+msgid "record(s)"
+msgstr "记录"
+
+msgid "Copied"
+msgstr "复制"
+
+msgid "Confirm deleting this template?"
+msgstr "确认删除此模板？"
+
+msgid "meta"
+msgstr "元数据"
+
+msgid "Delete custom post type"
+msgstr "删除自定义帖子类型"
+
+msgid "Delete taxonomy"
+msgstr "删除分类"
+
+msgid "License"
+msgstr "许可证"
+
+msgid "Tools"
+msgstr "工具"
+
+msgid "Templates"
+msgstr "模板"
+
+msgid "Custom Post Types"
+msgstr "自定义文章类型"
+
+msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
+msgstr "[允许的扩展名：*.acpt、*.json、*.yaml、*.xml最大大小：2Mb]"
+
+msgid "Associated taxonomies with the post"
+msgstr "与帖子相关的分类法"
+
+msgid "Register new Post Type"
+msgstr "注册新帖子类型"
+
+msgid "Manage meta fields"
+msgstr "管理元字段"
+
+msgid "Create new Custom Post Type"
+msgstr "创建新的自定义帖子类型"
+
+msgid "Basic"
+msgstr "基本"
+
+msgid "Labels"
+msgstr "标签"
+
+msgid "Minimum configuration"
+msgstr "最低配置"
+
+msgid "Additional labels"
+msgstr "推荐选项"
+
+msgid "Other settings"
+msgstr "其他设置"
+
+msgid "Menu Name"
+msgstr "菜单名称"
+
+msgid "Label for the menu name. Default is the same as name."
+msgstr "菜单名称的标签。默认值与名称相同。"
+
+msgid "All items"
+msgstr "所有项目"
+
+msgid ""
+"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All "
+"Pages’."
+msgstr "用于表示子菜单链接中所有项目的标签。默认值为“所有帖子”/“所有页面”。"
+
+msgid "Add New"
+msgstr "新增"
+
+msgid "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+msgstr "对于分层类型和非分层类型，默认值为“新增”。"
+
+msgid "Add New Item"
+msgstr "添加新项目"
+
+msgid ""
+"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New "
+"Page’."
+msgstr "用于添加新单数项的标签。默认值为“添加新帖子”/“添加新页面”。"
+
+msgid "Edit Item"
+msgstr "编辑项目"
+
+msgid ""
+"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+msgstr "用于编辑单个项目的标签。默认值为“编辑帖子”/“编辑页面”。"
+
+msgid "New Item"
+msgstr "新项目"
+
+msgid "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+msgstr "新项目页面标题的标签。默认值为“新帖子”/“新页面”。"
+
+msgid "View Item"
+msgstr "查看项目"
+
+msgid ""
+"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+msgstr "用于查看单个项目的标签。默认值为“查看帖子”/“查看页面”。"
+
+msgid "View Items"
+msgstr "查看项目"
+
+msgid ""
+"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+msgstr "用于查看帖子类型存档的标签。默认值为“查看帖子”/“查看页面”。"
+
+msgid "Search Item"
+msgstr "搜索项目"
+
+msgid ""
+"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+msgstr "用于搜索复数项目的标签。默认值为“搜索帖子”/“搜索页面”。"
+
+msgid "Not Found"
+msgstr "未找到"
+
+msgid ""
+"Label used when no items are found. Default is ‘No posts found’ / ‘No pages "
+"found’."
+msgstr "未找到项目时使用的标签。默认值为“未找到帖子”/“未找到页面”。"
+
+msgid "Not Found in Trash"
+msgstr "在回收站中找不到文件"
+
+msgid ""
+"Label used when no items are in the Trash. Default is ‘No posts found in "
+"Trash’ / ‘No pages found in Trash’."
+msgstr ""
+"废纸篓中没有项目时使用的标签。默认值为“在废纸篓中找不到帖子”/“在废纸篓中找不"
+"到网页”。"
+
+msgid ""
+"Label used to prefix parents of hierarchical items. Not used on non-"
+"hierarchical post types. Default is ‘Parent Page:’."
+msgstr ""
+"用于为分层项的父项添加前缀的标签。不用于非分层帖子类型。默认值为“父页面：”。"
+
+msgid "Featured Image"
+msgstr "特色图片"
+
+msgid ""
+"Label for the featured image meta box title. Default is ‘Featured image’."
+msgstr "特色图片元框标题的标签。默认值为“特色图片”。"
+
+msgid "Set Featured Image"
+msgstr "设置特色图像"
+
+msgid "Label for setting the featured image. Default is ‘Set featured image’."
+msgstr "用于设置特色图片的标签。默认值为“设置特色图片”。"
+
+msgid "Remove Featured Image"
+msgstr "移除特色图片"
+
+msgid ""
+"Label for removing the featured image. Default is ‘Remove featured image’."
+msgstr "用于删除特色图片的标签。默认值为“移除特色图片”。"
+
+msgid "Use Featured Image"
+msgstr "使用特色图像"
+
+msgid ""
+"Label in the media frame for using a featured image. Default is ‘Use as "
+"featured image’."
+msgstr "媒体框架中用于使用特色图片的标签。默认值为“用作特色图片”。"
+
+msgid ""
+"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page "
+"Archives’."
+msgstr "导航菜单中存档的标签。默认值为“Post Archives”/“Page Archives”。"
+
+msgid "Insert into item"
+msgstr "插入项目"
+
+msgid ""
+"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert "
+"into page’."
+msgstr "媒体框架按钮的标签。默认值为“插入到帖子”/“插入到页面”。"
+
+msgid "Uploaded to this Item"
+msgstr "已上传到这个项"
+
+msgid ""
+"Label for the media frame filter. Default is ‘Uploaded to this post’ / "
+"‘Uploaded to this page’."
+msgstr "介质框架过滤器的标签。默认值为“上传到此帖子”/“上传到此页面”。"
+
+msgid "Filter Items List"
+msgstr "过滤项目列表"
+
+msgid ""
+"Label for the table views hidden heading. Default is ‘Filter posts list’ / "
+"‘Filter pages list’."
+msgstr "表格视图隐藏标题的标签。默认值为“过滤帖子列表”/“过滤页面列表”。"
+
+msgid "Items List Navigation"
+msgstr "项目导航"
+
+msgid ""
+"Label for the table pagination hidden heading. Default is ‘Posts list "
+"navigation’ / ‘Pages list navigation’."
+msgstr "表格分页隐藏标题的标签。默认值为“帖子列表导航”/“页面列表导航”。"
+
+msgid "Items List"
+msgstr "项列表"
+
+msgid ""
+"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+msgstr "表格隐藏标题的标签。默认值为“帖子列表”/“页面列表”。"
+
+msgid "Label for the date filter in list tables. Default is ‘Filter by date’."
+msgstr "列表表中日期筛选器的标签。默认值为“按日期筛选”。"
+
+msgid "Item published"
+msgstr "项目已发布"
+
+msgid ""
+"Label used when an item is published. Default is ‘Post published.’ / ‘Page "
+"published.’"
+msgstr "发布项目时使用的标签。默认值为“发布”/“页面发布”。"
+
+msgid "Item published privately"
+msgstr "私下发布的项目"
+
+msgid ""
+"Label used when an item is published with private visibility. Default is "
+"‘Post published privately.’ / ‘Page published privately.’"
+msgstr ""
+"发布具有私有可见性的项目时使用的标签。默认值为“私下发布的帖子”/“私下发布的页"
+"面”。"
+
+msgid "Item reverted to draft"
+msgstr "项目已恢复为草稿"
+
+msgid ""
+"Label used when an item is switched to a draft. Default is ‘Post reverted to "
+"draft.’ / ‘Page reverted to draft.’"
+msgstr ""
+"将项目切换为草稿时使用的标签。默认值为“帖子已恢复为草稿”/“页面已恢复为草稿”。"
+
+msgid "Item scheduled"
+msgstr "项目计划"
+
+msgid ""
+"Label used when an item is scheduled for publishing. Default is ‘Post "
+"scheduled.’ / ‘Page scheduled.’"
+msgstr "计划发布项目时使用的标签。默认值为“已排期发布”/“已排期网页”。"
+
+msgid "Item updated"
+msgstr "更新项目"
+
+msgid ""
+"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page "
+"updated.’"
+msgstr "更新项目时使用的标签。默认值为“发布已更新”/“页面已更新”。"
+
+msgid ""
+"General name for the taxonomy, usually plural. The same as and overridden by "
+"$tax->label. Default 'Tags/Categories'."
+msgstr ""
+"分类法的通用名称，通常为复数形式。与 $tax->label 相同并被 -label 覆盖。默认"
+"的“标签/类别”。"
+
+msgid "Singular name"
+msgstr "单数名称"
+
+msgid "Name for one object of this taxonomy. Default 'Tag/Category'"
+msgstr "此分类的一个对象的名称。默认“标签/类别”"
+
+msgid "Search items"
+msgstr "搜索项目"
+
+msgid "Search Tags/Search Categories"
+msgstr "搜索标签/搜索类别"
+
+msgid "Popular items"
+msgstr "受欢迎的项目"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Popular "
+"Tags'."
+msgstr "此标签仅用于非分层分类。默认“热门标签”。"
+
+msgid "All Tags/All Categories"
+msgstr "所有标签/所有类别"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Parent "
+"Category'."
+msgstr "此标签仅用于分层分类。默认“父类别”。"
+
+msgid "Parent item colon"
+msgstr "父项冒号"
+
+msgid "The same as parent_item, but with colon : in the end."
+msgstr "与parent_item相同，但最后带有冒号。"
+
+msgid "Edit Tag/Edit Category."
+msgstr "编辑标签/编辑类别。"
+
+msgid "View Tag/View Category."
+msgstr "查看标签/查看类别。"
+
+msgid "Update item"
+msgstr "更新项目"
+
+msgid "Update Tag/Update Category."
+msgstr "更新标签/更新类别。"
+
+msgid "Add New Tag/Add New Category."
+msgstr "添加新标签/添加新类别。"
+
+msgid "New item name"
+msgstr "新项目名称"
+
+msgid "New Tag Name/New Category Name."
+msgstr "新标签名称/新类别名称。"
+
+msgid "Separate items with commas"
+msgstr "用逗号分隔项目"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Separate "
+"tags with commas', used in the meta box."
+msgstr "此标签仅用于非分层分类。默认的“用逗号分隔标签”，在元框中使用。"
+
+msgid "Add or remove items"
+msgstr "添加或删除项目"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Add or "
+"remove tags', used in the meta box when JavaScript is disabled."
+msgstr ""
+"此标签仅用于非分层分类。默认的“添加或删除标签”，在禁用 JavaScript 时在元框中"
+"使用。"
+
+msgid "Choose from most used"
+msgstr "从最多使用里选择"
+
+msgid ""
+"This label is only used on non-hierarchical taxonomies. Default 'Choose from "
+"the most used tags', used in the meta box."
+msgstr "此标签仅用于非分层分类。默认的“从最常用的标签中选择”，在元框中使用。"
+
+msgid ""
+"No tags found/No categories found', used in the meta box and taxonomy list "
+"table."
+msgstr "未找到标签/未找到类别“，用于元框和分类列表表。"
+
+msgid "No terms"
+msgstr "没有项目"
+
+msgid "No tags/No categories', used in the posts and media list tables."
+msgstr "无标签/无类别“，用于帖子和媒体列表表。"
+
+msgid "Filter by item"
+msgstr "按项目筛选"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Filter by "
+"category', used in the posts list table."
+msgstr "此标签仅用于分层分类。默认的“按类别过滤”，用于帖子列表表。"
+
+msgid "Items list navigation"
+msgstr "项目列表导航"
+
+msgid "Label for the table pagination hidden heading."
+msgstr "表分页隐藏标题的标签。"
+
+msgid "Label for the table hidden heading."
+msgstr "表隐藏标题的标签。"
+
+msgid "Most used"
+msgstr "最常用"
+
+msgid "Title for the Most Used tab. Default 'Most Used'."
+msgstr "“最常用”选项卡的标题。默认为“最常用”。"
+
+msgid "Back to items"
+msgstr "返回项目"
+
+msgid "Key length must be 39."
+msgstr "密钥长度必须为 39。"
+
+msgid "Not valid format."
+msgstr "格式无效。"
+
+msgid "General settings"
+msgstr "常规设置"
+
+msgid "Content settings"
+msgstr "内容设置"
+
+msgid "Danger zone"
+msgstr "危险区域"
+
+msgid "manage template"
+msgstr "管理模板"
+
+msgid "Taxonomy global settings"
+msgstr "分类全局设置"
+
+msgid "eg. Text here"
+msgstr "例如。正文在这里"
+
+msgid "Thumbnail"
+msgstr "缩略图"
+
+msgid "Medium"
+msgstr "中"
+
+msgid "Large"
+msgstr "大"
+
+msgid "Full size"
+msgstr "全尺寸"
+
+msgid "ASC"
+msgstr "升序"
+
+msgid "DESC"
+msgstr "降序"
+
+msgid "eg. 100%"
+msgstr "例如: 100%"
+
+msgid "Desktop"
+msgstr "台式电脑"
+
+msgid "Tablet"
+msgstr "平板"
+
+msgid "Mobile"
+msgstr "手机"
+
+msgid "Keyboard interaction legend"
+msgstr "键盘交互图例"
+
+msgid "Keyboard legend"
+msgstr "键盘图例"
+
+msgid "BASIC"
+msgstr "基础"
+
+msgid "SPECIALIZED FIELDS"
+msgstr "专业领域"
+
+msgid "UNIT OF MEASURE"
+msgstr "计量单位"
+
+msgid "MEDIA"
+msgstr "媒体"
+
+msgid "RELATIONS"
+msgstr "关系"
+
+msgid "GROUPED"
+msgstr "分组"
+
+msgid "USER RELATIONS"
+msgstr "用户关系"
+
+msgid "One to One - Unidirectional"
+msgstr "一对一 - 单向"
+
+msgid "One to One - Bidirectional"
+msgstr "一对一 - 双向"
+
+msgid "One to Many - Unidirectional"
+msgstr "一对多 - 单向"
+
+msgid "One to Many - Bidirectional"
+msgstr "一对多 - 双向"
+
+msgid "Many to One - Unidirectional"
+msgstr "多对一 - 单向"
+
+msgid "Many to One - Bidirectional"
+msgstr "多对一 - 双向"
+
+msgid "Many to Many - Unidirectional"
+msgstr "多对多 - 单向"
+
+msgid "Many to Many - Bidirectional"
+msgstr "多对多 - 双向"
+
+msgid "Show this field if:"
+msgstr "如果出现以下情况，请显示此字段："
+
+msgid "Copy settings"
+msgstr "复制设置"
+
+msgid "Add condition"
+msgstr "添加条件"
+
+msgid "ADVANCED OPTIONS"
+msgstr "高级选项"
+
+msgid "BASIC OPTIONS"
+msgstr "基本选项"
+
+msgid "CONDITIONAL LOGIC"
+msgstr "条件逻辑"
+
+msgid "Select option"
+msgstr "选择选项"
+
+msgid "operator"
+msgstr "操作员"
+
+msgid "This field"
+msgstr "这个字段"
+
+msgid "Value"
+msgstr "值"
+
+msgid "Label"
+msgstr "标签"
+
+msgid "Post"
+msgstr "文章"
+
+msgid "Term"
+msgstr "术语"
+
+msgid "Related taxonomies"
+msgstr "相关分类法"
+
+msgid "Other fields"
+msgstr "其他字段"
+
+msgid "Invalid visibility condition type"
+msgstr "可见性条件类型无效"
+
+msgid "Invalid visibility condition operator"
+msgstr "无效的可见性条件运算符"
+
+msgid "Invalid visibility condition value"
+msgstr "可见性条件值无效"
+
+msgid "Invalid visibility condition logic"
+msgstr "无效的可见性条件逻辑"
+
+msgid "Box label, non latin chars allowed."
+msgstr "盒子标签，允许使用非拉丁字符。"
+
+msgid "Logic"
+msgstr "逻辑"
+
+msgid "AND"
+msgstr "和"
+
+msgid "OR"
+msgstr "或"
+
+msgid "Enter download text link"
+msgstr "输入下载文本链接"
+
+msgid "Select images"
+msgstr "选择图片"
+
+msgid "Remove element"
+msgstr "元素"
+
+msgid "Min blocks required"
+msgstr "所需的最小块数"
+
+msgid "Max blocks allowed"
+msgstr "允许的最大块数"
+
+msgid "Browser icons"
+msgstr "浏览器图标"
+
+msgid "Search an icon"
+msgstr "搜索图标"
+
+msgid "Type at least 3 characters to start searching."
+msgstr "键入至少 3 个字符以开始搜索。"
+
+msgid "Example: heart"
+msgstr "示例：heart"
+
+msgid "There was an error during saving data. The error is:"
+msgstr "保存数据时出错。错误是："
+
+msgid "There was an error during saving data. Minimum number of blocks is:"
+msgstr "保存数据时出错。最小块数为："
+
+msgid "There was an error during saving data. Maximum number of blocks is:"
+msgstr "保存数据时出错。最大块数为："
+
+msgid "Data saved correctly"
+msgstr "数据保存正确"
+
+msgid "No meta boxes aldready created."
+msgstr "没有创建元框 aldready。"
+
+msgid "Create the first one"
+msgstr "创建第一个"
+
+msgid "There was an error fetching icons, retry later."
+msgstr "获取图标时出错，请稍后重试。"
+
+msgid "Sorry, no result match."
+msgstr "对不起，结果不匹配。"
+
+msgid ""
+"The media gallery is not available. You must admin_enqueue this function: "
+"wp_enqueue_media()"
+msgstr "媒体库不可用。您必须admin_enqueue以下函数：wp_enqueue_media（）"
+
+msgid "Download"
+msgstr "下载"
+
+msgid "Upload an Image"
+msgstr "上传图片"
+
+msgid "Upload a Video"
+msgstr "上传一个视频"
+
+msgid "Upload a File"
+msgstr "上传文件"
+
+msgid "Remove this block"
+msgstr "删除此块"
+
+msgid "Show/hide elements in this block"
+msgstr "显示/隐藏此块中的元素"
+
+msgid "Filterable in Wordpress admin post lists page"
+msgstr "可在 Wordpress 管理帖子列表页面中过滤"
+
+msgid "Quick edit in Wordpress admin post lists page"
+msgstr "在 Wordpress 管理帖子列表页面中快速编辑"
+
+msgid "Hide the blank value"
+msgstr "隐藏空白值"
+
+msgid "Hide the label"
+msgstr "隐藏标签"
+
+msgid "Enter the URL"
+msgstr "输入网址"
+
+msgid "Enter text link"
+msgstr "输入文本链接"
+
+msgid "Settings saved. The browser will refresh after 5 seconds."
+msgstr "设置已保存。浏览器将在 5 秒后刷新。"
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "Option pages successfully saved"
+msgstr "选项页面已成功保存"
+
+msgid "Children page list"
+msgstr "儿童页面列表"
+
+msgid "Register new Taxonomy"
+msgstr "注册新的分类法"
+
+msgid "Deactivate"
+msgstr "停用"
+
+msgid "Choose icon"
+msgstr "选择图标"
+
+msgid "Select icon type from the list"
+msgstr "从列表中选择图标类型"
+
+msgid "Select a Dashicon"
+msgstr "选择系统图标"
+
+msgid "Select an icon from another set"
+msgstr "从其他集合中选择一个图标"
+
+msgid "Upload an icon image"
+msgstr "上传图标图片"
+
+msgid "ACPT meta import start"
+msgstr "ACPT 元导入开始"
+
+msgid "ACPT meta import end"
+msgstr "ACPT 元导入结束"
+
+msgid "Option page total count"
+msgstr "选项页总数"
+
+msgid "Show/hide all pages"
+msgstr "显示/隐藏所有页面"
+
+msgid "List view"
+msgstr "列表视图"
+
+msgid "Tabular view"
+msgstr "表格视图"
+
+msgid "Switch view"
+msgstr "切换视图"
+
+msgid "ACPT Date field"
+msgstr "ACPT 日期字段"
+
+msgid "ACPT Textual field"
+msgstr "ACPT 文本字段"
+
+msgid "ACPT Link field"
+msgstr "ACPT Link 字段"
+
+msgid "ACPT Image field"
+msgstr "ACPT 图像字段"
+
+msgid "ACPT UOM field"
+msgstr "ACPT UOM字段"
+
+msgid "Select the date format"
+msgstr "选择日期格式"
+
+msgid "Date range separator"
+msgstr "日期范围分隔符"
+
+msgid "Select the date range separator"
+msgstr "选择日期范围分隔符"
+
+msgid "Value format (Decimal points)"
+msgstr "值格式（小数点）"
+
+msgid "Value format (Decimal separator)"
+msgstr "值格式（小数分隔符）"
+
+msgid "Value format (Thousands separator)"
+msgstr "值格式（千位分隔符）"
+
+msgid "Currency format"
+msgstr "货币格式"
+
+msgid "Currency position"
+msgstr "货币位置"
+
+msgid "Custom Format"
+msgstr "自定义格式"
+
+msgid "Render as"
+msgstr "渲染为"
+
+msgid "Date separator"
+msgstr "日期分隔符"
+
+msgid "Classes (separated by space)"
+msgstr "类（以空格分隔）"
+
+msgid "Target link"
+msgstr "目标链接"
+
+msgid "Link"
+msgstr "链接"
+
+msgid "Plain text"
+msgstr "纯文本"
+
+msgid "Size (px)"
+msgstr "尺寸 (px)"
+
+msgid "Set the icon size."
+msgstr "设置图标大小。"
+
+msgid "Select the icon color."
+msgstr "选择图标颜色。"
+
+msgid "Spacing (px)"
+msgstr "间距(像素)"
+
+msgid "Select the icon spacing."
+msgstr "选择图标间距。"
+
+msgid "Is clickable?"
+msgstr "可点击吗？"
+
+msgid "Value and UOM"
+msgstr "价值和计量单位"
+
+msgid "Only value"
+msgstr "只有值"
+
+msgid "Only UOM"
+msgstr "仅计量单位"
+
+msgid "UOM format"
+msgstr "UOM 格式"
+
+msgid "Select the UOM format."
+msgstr "选择 UOM 格式。"
+
+msgid "Full UOM name"
+msgstr "全 UOM 名称"
+
+msgid "Abbreviation"
+msgstr "缩写"
+
+msgid "UOM position"
+msgstr "计量单位位置"
+
+msgid "Select the UOM position"
+msgstr "选择计量单位位置"
+
+msgid "After value"
+msgstr "值后"
+
+msgid "Before value"
+msgstr "值之前"
+
+msgid "Decimal points"
+msgstr "小数点"
+
+msgid "Set the decimal points."
+msgstr "设置小数点。"
+
+msgid "Decimal separator"
+msgstr "小数分隔符"
+
+msgid "Set the decimal separator."
+msgstr "设置小数分隔符。"
+
+msgid "Thousands separator"
+msgstr "千位分隔符"
+
+msgid "Set the thousands separator."
+msgstr "设置千位分隔符。"
+
+msgid "ACPT Field"
+msgstr "ACPT字段"
+
+msgid "ACPT Icon field"
+msgstr "ACPT 图标字段"
+
+msgid "List format"
+msgstr "列表格式"
+
+msgid "Select the list format"
+msgstr "选择列表格式"
+
+msgid "String separator"
+msgstr "字符串分隔符"
+
+msgid "Select the string separator"
+msgstr "选择字符串分隔符"
+
+msgid "ACPT Time field"
+msgstr "ACPT 时间字段"
+
+msgid "Time format"
+msgstr "时间格式"
+
+msgid "Select the time format"
+msgstr "选择时间格式"
+
+msgid "Controls"
+msgstr "控制"
+
+msgid "Allow video controls."
+msgstr "允许视频控件。"
+
+msgid "Autoplay"
+msgstr "自动播放"
+
+msgid "Autoplay player."
+msgstr "自动播放播放器。"
+
+msgid "Video width"
+msgstr "视频宽度"
+
+msgid "Video width (% is allowed)."
+msgstr "视频宽度（允许 % i 秒）。"
+
+msgid "Video height"
+msgstr "视频高度"
+
+msgid "Video height (% is allowed)."
+msgstr "视频高度（允许 % i 秒）。"
+
+msgid "You are going to delete this meta field definition. Are you sure?"
+msgstr "您将删除此元字段定义。是否确定？"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related to this "
+"field. The action is irreversible."
+msgstr "警告：此操作将删除与此字段相关的所有帖子元数据。该操作是不可逆的。"
+
+msgid "Show the shortcode"
+msgstr "显示简码"
+
+msgid "Use this shortcode to display the meta field on your frontend."
+msgstr "使用此简码在前端显示元字段。"
+
+msgid ""
+"Please note that \"N\" stands for a positive integer value, representing the "
+"nested field index (count starts from 0)."
+msgstr "请注意，“N”代表一个正整数值，代表嵌套字段索引（计数从 0 开始）。"
+
+msgid "What you want to display?"
+msgstr "要显示什么？"
+
+msgid "Rating"
+msgstr "评分"
+
+msgid "ACPT Rating field"
+msgstr "ACPT 评级字段"
+
+msgid "Performances"
+msgstr "性能"
+
+msgid "Flush the ACPT cache"
+msgstr "刷新 ACPT 缓存"
+
+msgid "Flush cache"
+msgstr "刷新缓存"
+
+msgid "Cache was successfully flushed"
+msgstr "缓存已成功刷新"
+
+msgid "Enable ACPT cache"
+msgstr "启用 ACPT 缓存"
+
+msgid "Enable the ACPT cache to optimize the plugin performances."
+msgstr "启用 ACPT 缓存以优化插件性能。"
+
+msgid ""
+"Enable the ACPT cache. The cache stores the MySQL results in simple textual "
+"files to avoid useless DB calls."
+msgstr ""
+"启用 ACPT 缓存。缓存将MySQL结果存储在简单的文本文件中，以避免无用的数据库调"
+"用。"
+
+msgid "select all"
+msgstr "选择所有"
+
+msgid "deselect all"
+msgstr "取消选定"
+
+msgid "UOM default value"
+msgstr "UOM 默认值"

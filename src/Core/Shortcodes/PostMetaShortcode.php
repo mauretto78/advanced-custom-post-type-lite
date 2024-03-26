@@ -5,7 +5,7 @@ namespace ACPT_Lite\Core\Shortcodes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Shortcodes\DTO\ShortcodePayload;
 use ACPT_Lite\Core\Shortcodes\Fields\AbstractField;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 
 class PostMetaShortcode extends AbstractACPTShortcode
 {

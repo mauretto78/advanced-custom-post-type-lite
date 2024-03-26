@@ -3,7 +3,7 @@
 namespace ACPT_Lite\Core\Models\CustomPostType;
 
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 
 /**
  * MetaBoxModel
