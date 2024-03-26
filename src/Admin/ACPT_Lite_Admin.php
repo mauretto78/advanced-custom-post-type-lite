@@ -168,6 +168,7 @@ class ACPT_Lite_Admin
             'wp_ajax_saveUserMetaAction' => 'saveUserMetaAction',
             'wp_ajax_syncPostsAction' => 'syncPostsAction',
             'wp_ajax_sluggifyAction' => 'sluggifyAction',
+            'wp_ajax_isWPGraphQLActiveAction' => 'isWPGraphQLActiveAction',
         ];
     }
 
@@ -228,23 +229,23 @@ class ACPT_Lite_Admin
                             ],
                     ],
             ],
-            [
-                    'parentSlug' => ACPT_LITE_PLUGIN_NAME,
-                    'pageTitle' => translate('User meta', ACPT_LITE_PLUGIN_NAME),
-                    'menuTitle' => translate('User meta', ACPT_LITE_PLUGIN_NAME),
-                    'capability' => 'manage_options',
-                    'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/user-meta',
-                    'template' => 'app',
-                    'position' => 53,
-                    'assets' => [
-                            'css' => [
-                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.css'
-                            ],
-                            'react' => [
-                                    plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.js'
-                            ],
-                    ],
-            ],
+	        [
+		        'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+		        'pageTitle' => translate('Field groups', ACPT_LITE_PLUGIN_NAME),
+		        'menuTitle' => translate('Field groups', ACPT_LITE_PLUGIN_NAME),
+		        'capability' => 'manage_options',
+		        'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/meta',
+		        'template' => 'app',
+		        'position' => 54,
+		        'assets' => [
+			        'css' => [
+				        plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.css'
+			        ],
+			        'react' => [
+				        plugin_dir_url( dirname( __FILE__ ) ) . '../assets/build/app.min.js'
+			        ],
+		        ],
+	        ],
             [
                     'parentSlug' => ACPT_LITE_PLUGIN_NAME,
                     'pageTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),

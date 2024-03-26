@@ -1026,6 +1026,16 @@ class ACPT_Lite_Ajax
     }
 
 	/**
+	 * @return mixed
+	 */
+	public function isWPGraphQLActiveAction()
+	{
+		return wp_send_json([
+			'status' => is_plugin_active( 'wp-graphql/wp-graphql.php' ),
+		]);
+	}
+
+	/**
 	 * Return the string translations
 	 * @throws \Exception
 	 */
