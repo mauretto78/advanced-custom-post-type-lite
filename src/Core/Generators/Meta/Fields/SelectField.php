@@ -10,7 +10,7 @@ class SelectField extends AbstractField
 	public function render()
 	{
 		$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::SELECT_TYPE.'">';
-		$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="acpt-select2 acpt-form-control" '.$this->appendDataValidateAndLogicAttributes() . '>';
+		$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="acpt-select2 acpt-form-control">';
 		$selectedOptions = $this->selectedOptions($this->metaField->getOptions());
 		$field .= '<option value="">'.Translator::translate("--Select--").'</option>';
 

@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Core\Validators;
 
-use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Utils\Assert;
 
 class MetaDataValidator
@@ -20,7 +20,11 @@ class MetaDataValidator
 
 		switch ($type){
 
-			case CustomPostTypeMetaBoxFieldModel::EMAIL_TYPE:
+			case MetaFieldModel::DATE_TYPE:
+				Assert::date($rawData);
+				break;
+
+			case MetaFieldModel::EMAIL_TYPE:
 				Assert::email($rawData);
 				break;
 

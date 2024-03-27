@@ -794,6 +794,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 				'enum' => [
 					MetaFieldModel::DATE_TYPE,
 					MetaFieldModel::EMAIL_TYPE,
+					MetaFieldModel::SELECT_TYPE,
 					MetaFieldModel::TEXT_TYPE,
 					MetaFieldModel::TEXTAREA_TYPE,
 				],
