@@ -19,6 +19,9 @@ use ACPT_Lite\Core\Shortcodes\UserMetaShortcode;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_Elementor_Initiator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
+use ACPT_Lite\Integrations\AbstractIntegration;
+use ACPT_Lite\Integrations\Elementor\ACPT_Lite_Elementor;
+use ACPT_Lite\Integrations\Gutenberg\ACPT_Lite_Gutenberg;
 use ACPT_Lite\Utils\Translator;
 
 /**
@@ -694,6 +697,23 @@ class ACPT_Lite_Admin
     }
 
 	/**
+	 * Run integrations
+	 */
+	private function runIntegrations()
+	{
+		$integrations = [
+			ACPT_Lite_Gutenberg::class,
+			ACPT_Lite_Elementor::class,
+		];
+
+		foreach ($integrations as $integration){
+			/** @var AbstractIntegration $instance */
+			$instance = new $integration;
+			$instance->run();
+		}
+	}
+
+	/**
 	 * Run admin scripts
 	 * @throws \Exception
 	 */
@@ -710,10 +730,6 @@ class ACPT_Lite_Admin
         foreach ($this->ajaxActions as $action => $callback){
             $this->loader->addAction($action, $this->ajax, $callback);
         }
-
-        // Elementor widgets
-        $elementorInit = new ACPT_Lite_Elementor_Initiator();
-        $elementorInit->run();
 
         // shortcodes
         $this->addShortcodes();
@@ -738,5 +754,8 @@ class ACPT_Lite_Admin
 
         // API REST
         $this->registerRestFields();
+
+	    // run integrations
+	    $this->runIntegrations();
     }
 }
