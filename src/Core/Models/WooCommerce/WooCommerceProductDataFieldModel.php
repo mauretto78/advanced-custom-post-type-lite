@@ -194,9 +194,7 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
         return Strings::toHumanReadableFormat($this->getProductData()->getName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
     }
 
-    /**
-     * @inheritDoc
-     */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

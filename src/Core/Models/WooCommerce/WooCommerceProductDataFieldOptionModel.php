@@ -89,9 +89,7 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
         return $this->sort;
     }
 
-    /**
-     * @inheritDoc
-     */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

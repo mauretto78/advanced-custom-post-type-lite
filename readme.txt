@@ -165,7 +165,7 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 = 2.0.0 (2024-03-28) =
 
-* Completely new UI/UX
+* Brand-new new UI/UX (from ACPT v2.0.1)
 * Introduction of meta field groups
-* Font manager
-* Fixes and improvements from ACPT v2.0.1
+* Localization in 9 languages
+* Back-end fixes and improvements (from ACPT v2.0.1)

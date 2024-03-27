@@ -69,9 +69,7 @@ class SettingsModel extends AbstractModel implements \JsonSerializable
         return $this->value;
     }
 
-    /**
-     * @return array|mixed
-     */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

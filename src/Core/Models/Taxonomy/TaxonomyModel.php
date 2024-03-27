@@ -190,9 +190,7 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
 		return $this->customPostTypes;
 	}
 
-    /**
-     * @return array|mixed
-     */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $customPostTypesArray = [];

@@ -311,9 +311,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $taxonomyArray = [];
