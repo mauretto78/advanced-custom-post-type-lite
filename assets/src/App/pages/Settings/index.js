@@ -16,6 +16,8 @@ import {toast} from "react-hot-toast";
 import Toggle from "../../components/Forms/Toggle";
 import {validateGoogleMapsApiKey} from "../../utils/validation";
 import {wpAjaxRequest} from "../../utils/ajax";
+import Select from "../../components/Forms/Select";
+import {fontList} from "../../constants/fonts";
 
 const Settings = () => {
 
@@ -35,8 +37,6 @@ const Settings = () => {
     const fetched = settings.settings;
 
     const enableCacheDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'enable_cache') !== 'undefined') ? parseInt(filterByLabel(fetched, 'key', 'enable_cache').value) : 1;
-    const enableVisualEditorDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'enable_visual_editor') !== 'undefined') ? parseInt(filterByLabel(fetched, 'key', 'enable_visual_editor').value) : 0;
-    const enableForms = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'enable_forms') !== 'undefined') ? parseInt(filterByLabel(fetched, 'key', 'enable_forms').value) : 0;
     const deletePostsDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'delete_posts') !== 'undefined') ? parseInt(filterByLabel(fetched, 'key', 'delete_posts').value) : 0;
     const deleteMetadataDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'delete_metadata') !== 'undefined') ? parseInt(filterByLabel(fetched, 'key', 'delete_metadata').value) : 0;
     const deleteDefinitionsDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'delete_tables_when_deactivate') !== 'undefined') ? parseInt(filterByLabel(fetched, 'key', 'delete_tables_when_deactivate').value) : 0;
@@ -44,14 +44,13 @@ const Settings = () => {
     const googleMapsApiKeyDefaultValue = (fetched.length > 0 && filterByLabel(fetched, 'key', 'google_maps_api_key').value !== '') ? filterByLabel(fetched, 'key', 'google_maps_api_key').value : null;
     const googleReCaptchaSiteKeyDefaultValue = (fetched.length > 0 && filterByLabel(fetched, 'key', 'google_recaptcha_site_key').value !== '') ? filterByLabel(fetched, 'key', 'google_recaptcha_site_key').value : null;
     const googleReCaptchaSecretKeyDefaultValue = (fetched.length > 0 && filterByLabel(fetched, 'key', 'google_recaptcha_secret_key').value !== '') ? filterByLabel(fetched, 'key', 'google_recaptcha_secret_key').value : null;
-    const languageDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'language').value !== 'undefined') ? filterByValue(settings.globals.available_languages, filterByLabel(fetched, 'key', 'language').value) : { value: 'en_US', label: "English US" };
+    const languageDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'language').value !== 'undefined') ? filterByValue(settings.globals.available_languages, filterByLabel(fetched, 'key', 'language').value).value : 'en_US';
+    const fontDefaultValue = (fetched.length > 0 && typeof filterByLabel(fetched, 'key', 'font').value !== 'undefined') ? filterByValue(fontList, filterByLabel(fetched, 'key', 'font').value).value : 'Inter';
 
-    const { control, register, handleSubmit, formState: {errors, isValid}, setValue } = useForm({
+    const { register, handleSubmit, formState: {errors, isValid} } = useForm({
         mode: 'all',
         defaultValues: {
             enable_cache: enableCacheDefaultValue,
-            enable_visual_editor: enableVisualEditorDefaultValue,
-            enable_forms: enableForms,
             delete_metadata: deleteMetadataDefaultValue,
             delete_posts: deletePostsDefaultValue,
             delete_tables_when_deactivate: deleteDefinitionsDefaultValue,
@@ -60,6 +59,7 @@ const Settings = () => {
             google_recaptcha_site_key: googleReCaptchaSiteKeyDefaultValue,
             google_recaptcha_secret_key: googleReCaptchaSecretKeyDefaultValue,
             language: languageDefaultValue,
+            font: fontDefaultValue,
         }
     });
 
@@ -67,15 +67,14 @@ const Settings = () => {
         dispatch(saveSettings({
             records_per_page: data.records_per_page,
             enable_cache: data.enable_cache ? 1 : 0,
-            enable_visual_editor: data.enable_visual_editor ? 1 : 0,
-            enable_forms: data.enable_forms ? 1 : 0,
             delete_tables_when_deactivate: data.delete_tables_when_deactivate ? 1 : 0,
             delete_posts: data.delete_posts ? 1 : 0,
             delete_metadata: data.delete_metadata ? 1 : 0,
             google_maps_api_key: data.google_maps_api_key,
             google_recaptcha_site_key: data.google_recaptcha_site_key,
             google_recaptcha_secret_key: data.google_recaptcha_secret_key,
-            language: data.language ? data.language.value : null
+            language: data.language ? data.language : null,
+            font: data.font ? data.font : null
         }));
         setFormSubmitted(true);
     };
@@ -134,15 +133,35 @@ const Settings = () => {
                         <CardRow
                             label={useTranslation("Language")}
                             value={
-                                <ReactSelect
+                                <Select
                                     id="language"
                                     label={useTranslation("Language")}
                                     placeholder={useTranslation("Set the language of the plug-in")}
                                     description={useTranslation("Set the language of the plug-in")}
-                                    control={control}
+                                    register={register}
                                     defaultValue={languageDefaultValue}
                                     values={settings.globals.available_languages}
                                     isRequired={true}
+                                    errors={errors}
+                                    validate={{
+                                        required: "This field is mandatory"
+                                    }}
+                                />
+                            }
+                        />
+                        <CardRow
+                            label={useTranslation("Font")}
+                            value={
+                                <Select
+                                    id="font"
+                                    label={useTranslation("Font")}
+                                    placeholder={useTranslation("Set the font of the plug-in")}
+                                    description={useTranslation("Set the font of the plug-in")}
+                                    register={register}
+                                    defaultValue={languageDefaultValue}
+                                    values={fontList}
+                                    isRequired={true}
+                                    errors={errors}
                                     validate={{
                                         required: "This field is mandatory"
                                     }}
@@ -203,32 +222,6 @@ const Settings = () => {
                                     register={register}
                                     errors={errors}
                                     isRequired={false}
-                                />
-                            }
-                        />
-                    </Card>
-                    <Card title={useTranslation("Content settings")}>
-                        <CardRow
-                            label={useTranslation("Enable ACPT visual builder")}
-                            value={
-                                <Toggle
-                                    id="enable_visual_editor"
-                                    description={useTranslation("Enable the ACPT visual builder. This option allows you to use the integrated visual builder to create and manage templates for single CPTs, archive pages, taxonomy terms and relations.")}
-                                    register={register}
-                                    errors={errors}
-                                    defaultValue={enableVisualEditorDefaultValue}
-                                />
-                            }
-                        />
-                        <CardRow
-                            label={useTranslation("Enable forms")}
-                            value={
-                                <Toggle
-                                    id="enable_forms"
-                                    description={useTranslation("Enable the form builder.")}
-                                    register={register}
-                                    errors={errors}
-                                    defaultValue={enableVisualEditorDefaultValue}
                                 />
                             }
                         />

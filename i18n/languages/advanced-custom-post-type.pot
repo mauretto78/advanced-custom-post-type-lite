@@ -3334,3 +3334,9 @@ msgstr ""
 
 msgid "Upgrade to PRO"
 msgstr ""
+
+msgid "Font"
+msgstr ""
+
+msgid "Set the font of the plug-in"
+msgstr ""

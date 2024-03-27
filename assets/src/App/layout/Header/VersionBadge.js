@@ -6,7 +6,7 @@ const VersionBadge = () => {
     const settings = document.globals;
 
     return (
-        <div className="hidden-xs">
+        <div className="hidden-xs top-2">
             <Badge style="success">
                 {settings.globals.plugin_version}
             </Badge>

@@ -1,6 +1,7 @@
 .svn
 .idea
 stats.json
+/cache/
 /vendor/
 node_modules/
 /bundle

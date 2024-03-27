@@ -3858,3 +3858,12 @@ msgstr "Lista non ordinata"
 
 msgid "Ordered list"
 msgstr "Lista ordinata"
+
+msgid "Upgrade to PRO"
+msgstr "Fai l'upgrade a PRO"
+
+msgid "Font"
+msgstr "Font"
+
+msgid "Set the font of the plug-in"
+msgstr "Imposta il font del plugin"

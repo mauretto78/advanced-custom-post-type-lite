@@ -13,7 +13,7 @@ import Alert from "../../components/Alert";
 import MetaListElement from "./MetaListElement";
 import Pagination from "../../components/Pagination";
 import {FormProvider, useForm, useWatch} from "react-hook-form";
-import {metaTypes} from "../../../../../../advanced-custom-post-type-lite/assets/src/App/constants/metaTypes";
+import {metaTypes} from "../../constants/metaTypes";
 import {wpAjaxRequest} from "../../utils/ajax";
 import {toast} from "react-hot-toast";
 import BulkActions from "./BulkActions";

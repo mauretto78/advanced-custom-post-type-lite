@@ -19,7 +19,7 @@ import {toast} from "react-hot-toast";
 import {FormProvider, useForm, useWatch} from "react-hook-form";
 import BulkActions from "./BulkActions";
 import {wpAjaxRequest} from "../../utils/ajax";
-import {metaTypes} from "../../../../../../advanced-custom-post-type-lite/assets/src/App/constants/metaTypes";
+import {metaTypes} from "../../constants/metaTypes";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {scrollToTop} from "../../utils/scroll";
 

@@ -3953,3 +3953,12 @@ msgstr "Lista desordenada"
 
 msgid "Ordered list"
 msgstr "Lista ordenada"
+
+msgid "Upgrade to PRO"
+msgstr "Actualízate a PRO"
+
+msgid "Font"
+msgstr "Fuente"
+
+msgid "Set the font of the plug-in"
+msgstr "Establecer el fuente del plug-in"
