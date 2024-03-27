@@ -5,7 +5,7 @@ import useTranslation from "../../hooks/useTranslation";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCustomPostTypes} from "../../redux/reducers/fetchCustomPostTypesSlice";
 import {syncCustomPostTypes} from "../../redux/reducers/syncCustomPostTypesSlice";
-import {delay, metaTitle, refreshPage} from "../../utils/misc";
+import {metaTitle, refreshPage} from "../../utils/misc";
 import Loader from "../../components/Loader";
 import {Link, useParams} from "react-router-dom";
 import Alert from "../../components/Alert";

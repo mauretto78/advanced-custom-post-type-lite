@@ -5,7 +5,7 @@ namespace ACPT_Lite\Utils\MetaSync;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Includes\ACPT_DB;
+use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 abstract class AbstractMetaSync
 {
@@ -34,10 +34,10 @@ abstract class AbstractMetaSync
 	{
 		// check if box already exists
 		$query = "SELECT * FROM 
-            `".ACPT_DB::prefixedTableName(ACPT_DB::TABLE_META_BOX)."` 
+            `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` 
             WHERE id = %s 
         ";
-		$results = ACPT_DB::getResults($query, [$metaBoxModel->getId()]);
+		$results = ACPT_Lite_DB::getResults($query, [$metaBoxModel->getId()]);
 
 		if(isset($results[0]) and count($results) === 1){
 			return $results[0];
@@ -54,12 +54,12 @@ abstract class AbstractMetaSync
 	protected static function getMetaFieldData(MetaFieldModel $fieldModel)
 	{
 		$query = "SELECT * FROM 
-            `".ACPT_DB::prefixedTableName(ACPT_DB::TABLE_META_FIELD)."` f
-            JOIN `".ACPT_DB::prefixedTableName(ACPT_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
             WHERE f.id = %s 
             GROUP BY f.id
         ";
-		$results = ACPT_DB::getResults($query, [$fieldModel->getId()]);
+		$results = ACPT_Lite_DB::getResults($query, [$fieldModel->getId()]);
 
 		if(isset($results[0]) and count($results) === 1){
 			return $results[0];
@@ -76,12 +76,12 @@ abstract class AbstractMetaSync
 	protected static function getParentMetaFieldData(MetaFieldModel $fieldModel)
 	{
 		$query = "SELECT * FROM 
-            `".ACPT_DB::prefixedTableName(ACPT_DB::TABLE_META_FIELD)."` f
-            JOIN `".ACPT_DB::prefixedTableName(ACPT_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
             WHERE f.id = %s 
             GROUP BY f.id
         ";
-		$results = ACPT_DB::getResults($query, [$fieldModel->getParentId()]);
+		$results = ACPT_Lite_DB::getResults($query, [$fieldModel->getParentId()]);
 
 		if(isset($results[0]) and count($results) === 1){
 			return $results[0];

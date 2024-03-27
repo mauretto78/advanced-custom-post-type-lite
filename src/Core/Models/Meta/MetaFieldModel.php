@@ -12,6 +12,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 {
 	const DATE_TYPE = 'Date';
 	const EMAIL_TYPE = 'Email';
+	const SELECT_TYPE = 'Select';
 	const TEXTAREA_TYPE = 'Textarea';
 	const TEXT_TYPE = 'Text';
 
