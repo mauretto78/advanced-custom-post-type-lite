@@ -52,8 +52,10 @@ class ACPT_Lite_Ajax
 	{
 		try {
 			$language = SettingsRepository::getSingle('language') ? SettingsRepository::getSingle('language')->getValue() : 'en_US';
+			$font = SettingsRepository::getSingle('font') ? SettingsRepository::getSingle('font')->getValue() : 'Inter';
 		} catch (\Exception $exception){
 			$language = 'en_US';
+			$font = 'Inter';
 		}
 
 		$languageQuery = new FetchLanguagesQuery();
@@ -71,6 +73,7 @@ class ACPT_Lite_Ajax
 			"http_referer" => (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '',
 			"language" => $language,
 			"locale" => get_locale(),
+			"font" => $font,
 			"is_rtl" => is_rtl(),
 			'find' => $findEntries,
 			"available_languages" => $languageEntries['languages'],
@@ -827,24 +830,28 @@ class ACPT_Lite_Ajax
      */
     public function fetchCustomPostTypesAction()
     {
-        $postType = null;
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-            $postType = isset($data['postType']) ? $data['postType'] : null;
-            $page = isset($data['page']) ? $data['page'] : null;
-            $perPage = isset($data['perPage']) ? $data['perPage'] : null;
-        }
+	    $postType = null;
 
-        if($postType){
-            return wp_send_json(CustomPostTypeRepository::get([
-                'postType' => $postType
-            ]));
-        }
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
+		    $postType = isset($data['postType']) ? $data['postType'] : null;
+		    $page = isset($data['page']) ? $data['page'] : null;
+		    $perPage = isset($data['perPage']) ? $data['perPage'] : null;
+	    }
 
-        return wp_send_json(CustomPostTypeRepository::get([
-            'page' => isset($page) ? $page : 1,
-            'perPage' => isset($perPage) ? $perPage : 20,
-        ]));
+	    if($postType){
+		    return wp_send_json(CustomPostTypeRepository::get([
+			    'postType' => $postType
+		    ]));
+	    }
+
+	    return wp_send_json([
+		    'count' => CustomPostTypeRepository::count(),
+		    'records' => CustomPostTypeRepository::get([
+			    'page' => isset($page) ? $page : 1,
+			    'perPage' => isset($perPage) ? $perPage : 20,
+		    ]),
+	    ]);
     }
 
     /**
@@ -929,24 +936,27 @@ class ACPT_Lite_Ajax
      */
     public function fetchTaxonomiesAction()
     {
-        $taxonomy = null;
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-            $taxonomy = isset($data['taxonomy']) ? $data['taxonomy'] : null;
-            $page = isset($data['page']) ? $data['page'] : null;
-            $perPage = isset($data['perPage']) ? $data['perPage'] : null;
-        }
+	    $taxonomy = null;
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
+		    $taxonomy = isset($data['taxonomy']) ? $data['taxonomy'] : null;
+		    $page = isset($data['page']) ? $data['page'] : null;
+		    $perPage = isset($data['perPage']) ? $data['perPage'] : null;
+	    }
 
-        if($taxonomy){
-            return wp_send_json(TaxonomyRepository::get([
-                    'taxonomy' => $taxonomy
-            ]));
-        }
+	    if($taxonomy){
+		    return wp_send_json(TaxonomyRepository::get([
+			    'taxonomy' => $taxonomy
+		    ]));
+	    }
 
-        return wp_send_json(TaxonomyRepository::get([
-                'page' => isset($page) ? $page : 1,
-                'perPage' => isset($perPage) ? $perPage : 20,
-        ]));
+	    return wp_send_json([
+		    'count' => TaxonomyRepository::count(),
+		    'records' => TaxonomyRepository::get([
+			    'page' => isset($page) ? $page : 1,
+			    'perPage' => isset($perPage) ? $perPage : 20,
+		    ]),
+	    ]);
     }
 
 	/**

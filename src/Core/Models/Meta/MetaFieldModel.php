@@ -571,7 +571,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 			'name' => $this->name,
 			'label' => $this->label,
 			'type' => $this->type,
-			'group' => $this->getGroup(),
 			'belongsToLabel' => $this->getBelongsToLabel(),
 			'findLabel' => $this->getFindLabel(),
 			'defaultValue' => $this->defaultValue,
