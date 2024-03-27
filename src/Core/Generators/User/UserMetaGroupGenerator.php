@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Core\Generators\User;
 
 use ACPT_Lite\Constants\MetaGroupDisplay;
-use ACPT_Lite\Core\CQRS\Command\SaveUserMetaCommand;
 use ACPT_Lite\Core\Generators\AbstractGenerator;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 

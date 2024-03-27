@@ -57,8 +57,6 @@ class UserMetaBoxGenerator extends AbstractGenerator
      */
     public function addMetaBoxes(\WP_User $user)
     {
-	    $this->enqueueScripts('save-user');
-
         if(
             $this->userId === null or
             (isset($_GET['user_id']) and $_GET['user_id'] == $this->userId)
