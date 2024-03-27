@@ -3,7 +3,9 @@
 namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Models\Query\QueryResultModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Utils\Assert;
 use ACPT_Lite\Utils\Sanitizer;
@@ -18,21 +20,21 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
         // loop acpt cpt and register only cpt with rest api enabled
         $posts = CustomPostTypeRepository::get([], true);
 
-        foreach ($posts as $post){
-            if($post->isNative() or ( $post->getSettings()['show_in_rest'] === true  )  ){
-                $this->registerRestField($post->getName(), 'acpt', [
-                    'get_callback' => [$this, 'getCallback'],
-                    'update_callback' => [$this, 'updateCallback'],
-                    'schema' => [
-                        'type' => 'object',
-                        'arg_options' => [
-                            'sanitize_callback' => [$this, 'sanitizeCallback'],
-                            'validate_callback' => [$this, 'validateCallback'],
-                        ],
-                    ],
-                ]);
-            }
-        }
+	    foreach ($posts as $post){
+		    if($post->isNative() or ( isset($post->getSettings()['show_in_rest']) and $post->getSettings()['show_in_rest'] === true  )  ){
+			    $this->registerRestField($post->getName(), 'acpt', [
+				    'get_callback' => [$this, 'getCallback'],
+				    'update_callback' => [$this, 'updateCallback'],
+				    'schema' => [
+					    'type' => 'object',
+					    'arg_options' => [
+						    'sanitize_callback' => [$this, 'sanitizeCallback'],
+						    'validate_callback' => [$this, 'validateCallback'],
+					    ],
+				    ],
+			    ]);
+		    }
+	    }
     }
 
     /**
@@ -56,86 +58,10 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
      */
     public function getCallback($object)
     {
-        $pid = $object['id'];
-        $postType = $object['type'];
+	    $post = get_post((int)$object['id']);
+	    $queryResultModel = new QueryResultModel($post);
 
-        $meta = [
-            'meta_boxes' => [],
-        ];
-
-        $metaBoxes = CustomPostTypeRepository::getMeta($postType);
-
-        foreach ($metaBoxes as $metaBox){
-
-            $metaFields = [];
-
-            foreach ($metaBox->getFields() as $field){
-
-                $options = [];
-
-                foreach ($field->getOptions() as $option){
-                    $options[] = [
-                        'label' => $option->getLabel(),
-                        'value' => $option->getValue(),
-                    ];
-                }
-
-                $metaFields[] = [
-                    "name" => $field->getName(),
-                    "type" => $field->getType(),
-                    "options" => $options,
-                    "value" => get_post_meta($pid, $field->getDbName(), true),
-                    "default" => $field->getDefaultValue(),
-                    "required" => $field->isRequired() === '1',
-                    "showInAdmin" => $field->isShowInArchive() === '1',
-                ];
-            }
-
-            $meta['meta_boxes'][] = [
-                "meta_box" => $metaBox->getName(),
-                "meta_fields" => $metaFields,
-            ];
-        }
-
-        if( $postType === 'product' and class_exists( 'woocommerce' )  ){
-            $meta['wc_product_data'] = [];
-            $productData = WooCommerceProductDataRepository::get();
-
-            foreach ($productData as $productDatum) {
-
-                $productDataFields = [];
-
-                foreach ($productDatum->getFields() as $field){
-
-                    $options = [];
-
-                    foreach ($field->getOptions() as $option){
-                        $options[] = [
-                                'label' => $option->getLabel(),
-                                'value' => $option->getValue(),
-                        ];
-                    }
-
-                    $productDataFields[] = [
-                        'name' => $field->getName(),
-                        'type' => $field->getType(),
-                        "options" => $options,
-                        'value' => get_post_meta($pid, $field->getDbName(), true),
-                        'default' => $field->getDefaultValue(),
-                        'required' => $field->isRequired() === '1',
-                    ];
-                }
-
-                $meta['wc_product_data'][] = [
-                    'name' => $productDatum->getName(),
-                    'icon' => $productDatum->getIcon(),
-                    'visibility' => $productDatum->getVisibility(),
-                    'fields' => $productDataFields,
-                ];
-            }
-        }
-
-        return $meta;
+	    return $queryResultModel->getMeta();
     }
 
     /**
@@ -147,50 +73,53 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
      */
     public function updateCallback($meta, $object)
     {
-        $postType = $object->post_type;
+	    $postType = $object->post_type;
 
-        // meta
-        foreach ($meta['meta'] as $item){
+	    // meta
+	    foreach ($meta['meta'] as $item){
 
-            // data
-            $box = $item['box'];
-            $field = $item['field'];
-            $value = $item['value'];
+		    // data
+		    $box = $item['box'];
+		    $field = $item['field'];
+		    $value = $item['value'];
 
-            // check
-            if(null === $singleMeta = CustomPostTypeRepository::getSingleMeta($postType, $box, $field)){
-                return $this->restError("Meta field does not exists");
-            }
+		    // check
+		    if(null === $singleMeta = MetaRepository::getMetaFieldByName([
+				    'boxName' => $box,
+				    'fieldName' => $field,
+			    ])){
+			    return $this->restError("Meta field does not exists");
+		    }
 
-            $key = Strings::toDBFormat($box) . '_' . Strings::toDBFormat($field);
+		    $key = Strings::toDBFormat($box) . '_' . Strings::toDBFormat($field);
 
-            update_post_meta($object->ID, $key.'_type' , $singleMeta->getType() );
-            update_post_meta($object->ID, $key , $value );
-        }
+		    update_post_meta($object->ID, $key.'_type' , $singleMeta->getType() );
+		    update_post_meta($object->ID, $key , $value );
+	    }
 
-        // wc_product_data
-        if( $postType === 'product' and class_exists( 'woocommerce' )  ){
+	    // wc_product_data
+	    if( $postType === 'product' and class_exists( 'woocommerce' )  ){
 
-            $product = wc_get_product( $object->ID );
+		    $product = wc_get_product( $object->ID );
 
-            foreach ($meta['wc_product_data'] as $item){
+		    foreach ($meta['wc_product_data'] as $item){
 
-                // data
-                $productData = $item['product_data'];
-                $field = $item['field'];
-                $value = $item['value'];
+			    // data
+			    $productData = $item['product_data'];
+			    $field = $item['field'];
+			    $value = $item['value'];
 
-                // check if exists
-                if(WooCommerceProductDataRepository::getSingleField($productData, $field)){
-                    return $this->restError("Product data does not exists");
-                }
+			    // check if exists
+			    if(WooCommerceProductDataRepository::getSingleField($productData, $field)){
+				    return $this->restError("Product data does not exists");
+			    }
 
-                $sluggedName = strtolower(str_replace(" ", "_", $productData));
-                $fieldSluggedName = $sluggedName . '_' . strtolower(str_replace(" ", "_", $field));
+			    $sluggedName = strtolower(str_replace(" ", "_", $productData));
+			    $fieldSluggedName = $sluggedName . '_' . strtolower(str_replace(" ", "_", $field));
 
-                $product->update_meta_data('_'.$fieldSluggedName, $value );
-            }
-        }
+			    $product->update_meta_data('_'.$fieldSluggedName, $value );
+		    }
+	    }
     }
 
     /**

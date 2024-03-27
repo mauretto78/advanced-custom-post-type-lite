@@ -3,6 +3,7 @@
 namespace ACPT_Lite\Utils;
 
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
 
@@ -16,54 +17,18 @@ class Sanitizer
 	 *
 	 * @return mixed
 	 */
-	public static function sanitizePostTypeRawData($type, $rawData)
+	public static function sanitizeRawData($type, $rawData)
 	{
 		switch ($type){
 
-			case CustomPostTypeMetaBoxFieldModel::EMAIL_TYPE:
+			case MetaFieldModel::EMAIL_TYPE:
 				return sanitize_email($rawData);
 
-			default:
-				return sanitize_text_field($rawData);
-		}
-	}
-
-	/**
-	 * Sanitize post type data before saving
-	 *
-	 * @param $type
-	 * @param $rawData
-	 *
-	 * @return mixed
-	 */
-	public static function sanitizeTaxonomyRawData($type, $rawData)
-	{
-		switch ($type){
-
-			case TaxonomyMetaBoxFieldModel::EMAIL_TYPE:
-				return sanitize_email($rawData);
+			case MetaFieldModel::TEXTAREA_TYPE:
+				return stripslashes_deep(sanitize_textarea_field($rawData));
 
 			default:
-				return sanitize_text_field($rawData);
-		}
-	}
-
-	/**
-	 * Sanitize user meta data before saving
-	 *
-	 * @param $type
-	 * @param $rawData
-	 *
-	 * @return mixed
-	 */
-	public static function sanitizeUserMetaFieldRawData($type, $rawData)
-	{
-		switch ($type){
-			case UserMetaBoxFieldModel::EMAIL_TYPE:
-				return sanitize_email($rawData);
-
-			default:
-				return sanitize_text_field($rawData);
+				return stripslashes_deep(sanitize_text_field($rawData));
 		}
 	}
 

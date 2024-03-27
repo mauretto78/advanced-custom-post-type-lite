@@ -524,7 +524,6 @@ class ACPT_Lite_Admin
 			];
 		}
 
-		$customPostTypeMetaBoxGenerator = new CustomPostTypeMetaBoxGenerator();
 		$metaGroupModels = MetaRepository::get([]);
 
 		// loop all post types

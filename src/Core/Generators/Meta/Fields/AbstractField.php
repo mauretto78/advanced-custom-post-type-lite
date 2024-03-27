@@ -3,16 +3,12 @@
 namespace ACPT_Lite\Core\Generators\Meta\Fields;
 
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Constants\Relationships;
-use ACPT_Lite\Core\Generators\Validation\DataValidateAttributes;
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\Meta\MetaFieldBlockModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldOptionModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Utils\Data\Sanitizer;
-use ACPT_Lite\Utils\PHP\Session;
-use ACPT_Lite\Utils\Wordpress\WPAttachment;
+use ACPT_Lite\Utils\Sanitizer;
+use ACPT_Lite\Utils\Session;
 
 abstract class AbstractField
 {
@@ -27,11 +23,6 @@ abstract class AbstractField
 	 * @var MetaFieldModel
 	 */
 	protected ?MetaFieldModel $parentMetaField = null;
-
-	/**
-	 * @var MetaFieldBlockModel
-	 */
-	protected ?MetaFieldBlockModel $parentBlock = null;
 
 	/**
 	 * @var string
@@ -98,11 +89,6 @@ abstract class AbstractField
 			$parentMetaField = MetaRepository::getMetaFieldById($metaField->getParentId());
 			$this->parentMetaField = $parentMetaField;
 		}
-
-		if($metaField->hasParentBlock()){
-			$parentBlock = MetaRepository::getMetaBlockById($metaField->getBlockId());
-			$this->parentBlock = $parentBlock;
-		}
 	}
 
 	/**
@@ -143,38 +129,6 @@ abstract class AbstractField
 	}
 
 	/**
-	 * @return MetaFieldModel
-	 */
-	public function getParentMetaField(): MetaFieldModel
-	{
-		return $this->parentMetaField;
-	}
-
-	/**
-	 * @return MetaFieldBlockModel
-	 */
-	public function getParentBlock(): MetaFieldBlockModel
-	{
-		return $this->parentBlock;
-	}
-
-	/**
-	 * @return null
-	 */
-	public function getParentName()
-	{
-		return $this->parentName;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getBlockIndex(): int
-	{
-		return $this->blockIndex;
-	}
-
-	/**
 	 * @return mixed
 	 */
 	public function getValue()
@@ -196,22 +150,6 @@ abstract class AbstractField
 	protected function hasChildren()
 	{
 		return $this->metaField->hasChildren();
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function isNestedInABlock()
-	{
-		return $this->metaField->hasParentBlock();
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function hasBlocks()
-	{
-		return $this->metaField->hasBlocks();
 	}
 
 	/**
@@ -264,24 +202,7 @@ abstract class AbstractField
 	 */
 	protected function getIdName()
 	{
-		$idName = '';
-		if($this->belongsTo === MetaTypes::OPTION_PAGE and $this->find !== null){
-			$idName .= Strings::toDBFormat($this->find)."_";
-		}
-
-		if($this->isNestedInABlock()){
-			$idName .= $this->parentName . '[blocks]['.$this->blockIndex.']['.$this->parentBlock->getNormalizedName().']['.$this->metaField->getNormalizedName().']['.$this->index.']';
-
-			return esc_html($idName);
-		}
-
-		if($this->isChild()){
-			$idName .= $this->parentName.'['.$this->metaField->getNormalizedName().']['.$this->index.']';
-
-			return esc_html($idName);
-		}
-
-		$idName .= Strings::toDBFormat($this->metaField->getBox()->getName()) . '_' . Strings::toDBFormat($this->metaField->getName());
+		$idName = Strings::toDBFormat($this->metaField->getBox()->getName()) . '_' . Strings::toDBFormat($this->metaField->getName());
 
 		return esc_html($idName);
 	}
@@ -300,9 +221,6 @@ abstract class AbstractField
 
 			case MetaTypes::TAXONOMY:
 				return get_term_meta($this->find, $key, true);
-
-			case MetaTypes::OPTION_PAGE:
-				return get_option($key);
 
 			case MetaTypes::USER:
 				return get_user_meta($this->find, $key, true);
@@ -336,25 +254,6 @@ abstract class AbstractField
 	 */
 	protected function getDefaultValue()
 	{
-		if($this->isNestedInABlock()){
-
-			if($this->value){
-				return $this->value;
-			}
-
-			if(!isset($this->parentBlock->getFields()[$this->blockIndex])){
-				return null;
-			}
-
-			$nestedField = $this->parentBlock->getFields()[$this->blockIndex];
-
-			return ($nestedField) ? $nestedField->getDefaultValue() : null;
-		}
-
-		if($this->isChild()){
-			return ($this->value) ? $this->value : $this->parentMetaField->getDefaultValue();
-		}
-
 		$value = $this->getData($this->getIdName());
 
 		if($value !== null and $value !== ''){
@@ -366,62 +265,6 @@ abstract class AbstractField
 	}
 
 	/**
-	 * @return WPAttachment[]
-	 */
-	protected function getAttachments()
-	{
-		$attachments = [];
-		$id = $this->getData($this->getIdName().'_id');
-		$url = $this->getData($this->getIdName());
-
-		if($id === null and $url === null){
-			return $attachments;
-		}
-
-		// from id
-		if(!empty($id)){
-			$ids =  explode(',', $id);
-
-			foreach ($ids as $_id){
-				$attachments[] = WPAttachment::fromId($_id);
-			}
-
-			return $attachments;
-		}
-
-		// from url
-		if(!empty($url)){
-			if(is_array($url)){
-				foreach ($url as $_url){
-					$attachments[] = WPAttachment::fromUrl($_url);
-				}
-
-				return $attachments;
-			}
-
-			$attachments[] = WPAttachment::fromUrl($url);
-		}
-
-		return $attachments;
-	}
-
-	/**
-	 * @param $key
-	 *
-	 * @return mixed|null
-	 */
-	protected function getAdvancedOption($key)
-	{
-		foreach ($this->metaField->getAdvancedOptions() as $advancedOption){
-			if ($advancedOption->getKey() === $key and $advancedOption->getValue() !== '') {
-				return $advancedOption->getUnserializedValue();
-			}
-		}
-
-		return null;
-	}
-
-	/**
 	 * @return string
 	 */
 	protected function displayLabel()
@@ -429,14 +272,6 @@ abstract class AbstractField
 		$label = ($this->metaField->getLabel()) ? $this->metaField->getLabel() : $this->metaField->getName();
 		$label = esc_html($label);
 		$label = '<span>'.$this->addAsteriskToLabel($label).'</span>';
-
-		if($this->metaField->getType() === MetaFieldModel::REPEATER_TYPE){
-			$label .= '<span class="acpt-badge">REPEATER</span>';
-		}
-
-		if($this->metaField->getType() === MetaFieldModel::FLEXIBLE_CONTENT_TYPE){
-			$label .= '<span class="acpt-badge acpt-badge-success">FLEXIBLE</span>';
-		}
 
 		return $label;
 	}
@@ -470,43 +305,6 @@ abstract class AbstractField
 	}
 
 	/**
-	 * @param string $relation
-	 *
-	 * @return string
-	 */
-	private function displayRelation($relation)
-	{
-		switch ($relation){
-			case Relationships::ONE_TO_ONE_UNI:
-				return '<span class="relation-label">1</span><span class="relation-sign">⟶</span><span class="relation-label">1</span></span>';
-
-			case Relationships::ONE_TO_ONE_BI:
-				return '<span class="relation-label">1</span><span class="relation-sign">⟷</span><span class="relation-label">1</span></span>';
-
-			case Relationships::ONE_TO_MANY_UNI:
-				return '<span class="relation-label">1</span><span class="relation-sign">⟶</span><span class="relation-label">M</span></span>';
-
-			case Relationships::ONE_TO_MANY_BI:
-				return '<span class="relation-label">1</span><span class="relation-sign">⟷</span><span class="relation-label">M</span></span>';
-
-			case Relationships::MANY_TO_ONE_UNI:
-				return '<span class="relation-label">M</span><span class="relation-sign">⟶</span><span class="relation-label">1</span></span>';
-
-			case Relationships::MANY_TO_ONE_BI:
-				return '<span class="relation-label">M</span><span class="relation-sign">⟷</span><span class="relation-label">1</span></span>';
-
-			case Relationships::MANY_TO_MANY_UNI:
-				return '<span class="relation-label">M</span><span class="relation-sign">⟶</span><span class="relation-label">M</span></span>';
-
-			case Relationships::MANY_TO_MANY_BI:
-				return '<span class="relation-label">M</span><span class="relation-sign">⟷</span><span class="relation-label">M</span></span>';
-		}
-
-
-		return $relation;
-	}
-
-	/**
 	 * @return string
 	 */
 	protected function required()
@@ -532,9 +330,6 @@ abstract class AbstractField
 			case MetaTypes::TAXONOMY:
 				return $this->renderForTaxonomy($field);
 
-			case MetaTypes::OPTION_PAGE:
-				return $this->renderForOptionPage($field);
-
 			case MetaTypes::USER:
 				return $this->renderForUser($field);
 		}
@@ -547,77 +342,11 @@ abstract class AbstractField
 	 *
 	 * @return string
 	 */
-	protected function renderRepeaterField($field)
-	{
-		$headlineAlignment = $this->getAdvancedOption('headline') ? $this->getAdvancedOption('headline') : 'top';
-		$width = $this->getAdvancedOption('width') ? $this->getAdvancedOption('width') : '100';
-
-		$return = '<div class="field '.$headlineAlignment.'" data-index="'.$this->index.'" style="width: '.$width.'%;">';
-		$return .= '<div class="field-inner">';
-
-		if ( $headlineAlignment === 'top' or $headlineAlignment === 'left' ) {
-			$return .= $this->renderRepeaterFieldLabel() . $this->renderRepeaterFieldValue($field);
-		} elseif ( $headlineAlignment === 'right' ) {
-			$return .= $this->renderRepeaterFieldValue( $field ) . $this->renderRepeaterFieldLabel();
-		} elseif ( $headlineAlignment === 'none' ) {
-			$return .= $this->renderRepeaterFieldValue( $field );
-		}
-
-		$return .= '</div>';
-		$return .= '</div>';
-
-		return $return;
-	}
-
-	/**
-	 * @return string
-	 */
-	private function renderRepeaterFieldLabel()
-	{
-		$return = '<div class="acpt-admin-meta-label">';
-		$return .= '<label for="'.$this->getIdName().'">';
-		$return .= $this->displayLabel();
-		$return .= '</label>';
-		$return .= '</div>';
-
-		return $return;
-	}
-
-	/**
-	 * @param $field
-	 *
-	 * @return mixed|string
-	 */
-	private function renderRepeaterFieldValue($field)
-	{
-		$return = ($this->metaField->getType() !== MetaFieldModel::EDITOR_TYPE) ? Sanitizer::escapeField($field) : $field;
-
-		if($this->hasChildren()){
-			$idName = Strings::toDBFormat($this->metaField->getBox()->getName()) . '_' . Strings::toDBFormat($this->metaField->getName());
-			$return .= '<input type="hidden" name="meta_fields[]" value="'. $idName .'">';
-			$return .= '<input type="hidden" name="meta_fields[]" value="'. $idName .'_type">';
-			$return .= '<input type="hidden" name="meta_fields[]" value="'. $idName .'_id">';
-			$return .= '<input type="hidden" name="'.$idName.'_id" value="'. esc_html($this->metaField->getId()) .'">';
-			$return .= '<input type="hidden" name="'.$idName.'_required" value="'.esc_attr($this->metaField->isRequired()) . '">';
-		}
-
-		if($this->metaField->getDescription() !== null and $this->metaField->getDescription() !== ''){
-			$return .= '<span class="description">'.$this->metaField->getDescription().'</span>';
-		}
-
-		return $return;
-	}
-
-	/**
-	 * @param $field
-	 *
-	 * @return string
-	 */
 	private function renderForCustomPostType($field)
 	{
-		$css = $this->getAdvancedOption('css') ? $this->getAdvancedOption('css') : '';
-		$headlineAlignment = $this->getAdvancedOption('headline') ? $this->getAdvancedOption('headline') : 'top';
-		$width = $this->getAdvancedOption('width') ? $this->getAdvancedOption('width') : '100';
+		$css = '';
+		$headlineAlignment = 'top';
+		$width = '100';
 		$widthStyle = $width.'%';
 
 		$return = '<div class="acpt-admin-meta-wrapper '.$css.'" id="'.$this->metaField->getId().'" style="width: '.$widthStyle.';">';
@@ -648,7 +377,6 @@ abstract class AbstractField
 			$return .= $this->renderPostTypeFieldValue($field);
 		}
 
-		$return .= $this->renderErrors();
 		$return .= '</div>';
 
 		return $return;
@@ -668,17 +396,6 @@ abstract class AbstractField
 			$return .= '<span class="description">';
 			$return .= $this->metaField->getDescription();
 			$return .= '</span>';
-		}
-
-		if(!empty($this->metaField->getRelations())){
-			$relationModel = $this->metaField->getRelations()[0];
-			$return .= '<div class="relation">';
-			$return .= $this->displayRelation($relationModel->getRelationship());
-			$return .= '</div>';
-
-			if($relationModel->getInversedBy() !== null){
-				$return .= '<div class="inversed-by">'.$relationModel->getInversedBy()->getUiName().'</div>';
-			}
 		}
 
 		$return .= '</div>';
@@ -712,9 +429,9 @@ abstract class AbstractField
 	 */
 	private function renderForTaxonomy($field)
 	{
-		$css = $this->getAdvancedOption('css') ? $this->getAdvancedOption('css') : '';
-		$headlineAlignment = $this->getAdvancedOption('headline') ? $this->getAdvancedOption('headline') : 'top';
-		$width = $this->getAdvancedOption('width') ? $this->getAdvancedOption('width') : '100';
+		$css = '';
+		$headlineAlignment = 'top';
+		$width = '100';
 		$widthStyle = $width.'%';
 
 		$return = '<div class="taxonomy-meta-field-wrapper '.$css.'" id="'.$this->metaField->getId().'" style="width: '.$widthStyle.'">';
@@ -722,7 +439,6 @@ abstract class AbstractField
 
 		$return .= '<div style="width: 100%">';
 		$return .= $this->renderTaxonomyFieldWrapper($field, $headlineAlignment);
-		$return .= $this->renderErrors();
 		$return .= '</div>';
 
 		$return .= '</div>';
@@ -763,18 +479,6 @@ abstract class AbstractField
 		$return .= '<label for="'.esc_attr($this->getIdName()).'">';
 		$return .= $this->displayLabel();
 		$return .= '</label>';
-
-		if(!empty($this->metaField->getRelations())){
-			$relationModel = $this->metaField->getRelations()[0];
-			$return .= '<div class="relation">';
-			$return .= $this->displayRelation($relationModel->getRelationship());
-			$return .= '</div>';
-
-			if($relationModel->getInversedBy() !== null){
-				$return .= '<div class="inversed-by">'.$relationModel->getInversedBy()->getUiName().'</div>';
-			}
-		}
-
 		$return .= '</div>';
 
 		return $return;
@@ -803,49 +507,10 @@ abstract class AbstractField
 	 *
 	 * @return string
 	 */
-	private function renderForOptionPage($field)
-	{
-		$css = $this->getAdvancedOption('css') ? $this->getAdvancedOption('css') : '';
-		$headlineAlignment = $this->getAdvancedOption('headline') ? $this->getAdvancedOption('headline') : 'top';
-		$width = $this->getAdvancedOption('width') ? $this->getAdvancedOption('width') : '100';
-		$widthStyle = $width.'%';
-
-		$return = '<div class="option-page-meta-field-wrapper '.$css.'" id="'.$this->metaField->getId().'" style="width: '.$widthStyle.'">';
-		$return .= '<div class="option-page-meta">';
-		$return .= '<div class="option-page-meta-field '.$headlineAlignment.'">';
-
-		$return .= '<div>';
-
-		if($headlineAlignment !== 'none'){
-			$return .= '<div class="acpt-admin-meta-label">';
-			$return .= '<label for="'.$this->getIdName().'">'.$this->displayLabel().'</label>';
-			$return .= '</div>';
-		}
-
-		if($this->metaField->getDescription() !== null and $this->metaField->getDescription() !== ''){
-			$return .= '<span class="description">'.$this->metaField->getDescription().'</span>';
-		}
-
-		$return .= '</div>';
-		$return .= $field;
-
-		$return .= $this->renderErrors();
-		$return .= '</div>';
-		$return .= '</div>';
-		$return .= '</div>';
-
-		return $return;
-	}
-
-	/**
-	 * @param $field
-	 *
-	 * @return string
-	 */
 	private function renderForUser($field)
 	{
-		$css = $this->getAdvancedOption('css') ? $this->getAdvancedOption('css') : '';
-		$headlineAlignment = $this->getAdvancedOption('headline') ? $this->getAdvancedOption('headline') : 'top';
+		$css = '';
+		$headlineAlignment = 'top';
 
 		$return = '<tr class="'.$css.'">';
 
@@ -900,18 +565,6 @@ abstract class AbstractField
 		$return .= '<label for="'. $this->getIdName() .'">';
 		$return .= $this->displayLabel();
 		$return .= '</label>';
-
-		if(!empty($this->metaField->getRelations())){
-			$relationModel = $this->metaField->getRelations()[0];
-			$return .= '<div class="relation">';
-			$return .= $this->displayRelation($relationModel->getRelationship());
-			$return .= '</div>';
-
-			if($relationModel->getInversedBy() !== null){
-				$return .= '<div class="inversed-by">'.$relationModel->getInversedBy()->getUiName().'</div>';
-			}
-		}
-
 		$return .= '</div>';
 		$return .= '</div>';
 
@@ -926,7 +579,6 @@ abstract class AbstractField
 	private function renderUserField($field)
 	{
 		$return = Sanitizer::escapeField($field);
-		$return .= $this->renderErrors();
 
 		if($this->metaField->getDescription() !== null and $this->metaField->getDescription() !== ''){
 			$return .= '<span class="description">';
@@ -935,62 +587,5 @@ abstract class AbstractField
 		}
 
 		return $return;
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function hasErrors()
-	{
-		if(Session::has(self::ERRORS_SESSION_KEY)){
-			foreach (Session::get(self::ERRORS_SESSION_KEY) as $id => $errors){
-				if($id === $this->metaField->getId()){
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	private function renderErrors()
-	{
-		if(Session::has(self::ERRORS_SESSION_KEY)){
-			$errorsList = '<ul class="acpt-error-list">';
-
-			foreach (Session::get(self::ERRORS_SESSION_KEY) as $id => $errors){
-				foreach ($errors as $error){
-					if($id === $this->metaField->getId()){
-						$errorsList .= '<li>'.$error.'</li>';
-					}
-				}
-			}
-
-			Session::flush(self::ERRORS_SESSION_KEY);
-			$errorsList .= '</ul>';
-
-			return $errorsList;
-		}
-
-		return null;
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function appendDataValidateAndLogicAttributes()
-	{
-		$attr = '';
-
-		if($this->metaField->canFieldHaveValidationAndLogicRules()){
-			$attr .= ' data-conditional-rules-id="'.$this->metaField->getId().'"';
-			$attr .= DataValidateAttributes::generate($this->metaField->getValidationRules(), $this->metaField->isTextual(), $this->metaField->isRequired());
-
-		}
-
-		return $attr;
 	}
 }
