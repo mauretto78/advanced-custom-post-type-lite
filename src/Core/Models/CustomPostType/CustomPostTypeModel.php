@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Core\Models\CustomPostType;
 
+use ACPT_Lite\Core\Helper\Icon;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
@@ -162,6 +163,14 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     {
         return $this->icon;
     }
+
+	/**
+	 * @return string
+	 */
+	public function renderIcon(): string
+	{
+		return Icon::render($this->icon);
+	}
 
     /**
      * @return array

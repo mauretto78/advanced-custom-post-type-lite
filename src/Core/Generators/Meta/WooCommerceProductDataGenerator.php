@@ -1,10 +1,11 @@
 <?php
 
-namespace ACPT_Lite\Core\Generators;
+namespace ACPT_Lite\Core\Generators\Meta;
 
-use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Generators\AbstractGenerator;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
+use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 
 class WooCommerceProductDataGenerator extends AbstractGenerator
 {
@@ -58,7 +59,7 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
         $style = '';
 
         foreach ($this->productDataModelArray as $productDataModel){
-            $icon = $productDataModel->getIcon()->value;
+            $icon = (isset($productDataModel->getIcon()->value)) ? $productDataModel->getIcon()->value : $productDataModel->getIcon();
             $sluggedName = $productDataModel->getSluggedName();
             $style .= "#woocommerce-product-data ul.wc-tabs li.".$sluggedName."_options a:before { font-family: WooCommerce; content: '". $icon. "'; }";
         }
@@ -95,16 +96,19 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
                         $options[$option->getValue()] = $option->getLabel();
                     }
 
+                    //@TODO add multi select
+                    // https://jeroensormani.com/adding-custom-woocommerce-product-fields/
+
                     switch ($fieldModel->getType()){
                         case WooCommerceProductDataFieldModel::TEXT_TYPE:
-                            woocommerce_wp_text_input( [
-                                    'id' => $fieldSluggedName,
-                                    'name' => $fieldSluggedName,
-                                    'value' => $field_value,
-                                    'label' => __($fieldModel->getName(), 'woocommerce'),
-                                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
-                                    'desc_tip' => true,
-                            ] );
+                                woocommerce_wp_text_input( [
+                                        'id' => $fieldSluggedName,
+                                        'name' => $fieldSluggedName,
+                                        'value' => $field_value,
+                                        'label' => __($fieldModel->getName(), 'woocommerce'),
+                                        'description' => __($fieldModel->getDescription(), 'woocommerce'),
+                                        'desc_tip' => true,
+                                ] );
                             break;
 
                         case WooCommerceProductDataFieldModel::TEXTAREA_TYPE:
