@@ -559,6 +559,14 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		return $duplicate;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getGroup(): ?string
+	{
+		return 'basic';
+	}
+
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize()
 	{
@@ -571,6 +579,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 			'name' => $this->name,
 			'label' => $this->label,
 			'type' => $this->type,
+			'group' => $this->getGroup(),
 			'belongsToLabel' => $this->getBelongsToLabel(),
 			'findLabel' => $this->getFindLabel(),
 			'defaultValue' => $this->defaultValue,

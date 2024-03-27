@@ -2,7 +2,10 @@
 
 namespace ACPT_Lite\Integrations\Gutenberg\Blocks;
 
+use ACPT_Lite\Core\CQRS\Query\FetchMetaFieldValueQuery;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Core\Repository\MetaRepository;
+use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
 
 class ACPTBasicBlock
 {
@@ -52,31 +55,11 @@ class ACPTBasicBlock
 		$find = 'post_id';
 		$findValue = $post->ID;
 
-		if(isset($field['block_name'])){
-			$rawData = get_acpt_block_child_field([
-				$find => $findValue,
-				'box_name' => $field['box'],
-				'field_name' => $field['field'],
-				'parent_field_name' => $field['parent_field'],
-				'index' => $field['index'],
-				'block_name' => $field['block_name'],
-				'block_index' => $field['block_index'],
-			]);
-		} elseif(isset($field['parent_field'])){
-			$rawData = get_acpt_child_field([
-				$find => $findValue,
-				'box_name' => $field['box'],
-				'field_name' => $field['field'],
-				'parent_field_name' => $field['parent_field'],
-				'index' => $field['index'],
-			]);
-		} else {
-			$rawData = get_acpt_field([
-				$find => $findValue,
-				'box_name' => $field['box'],
-				'field_name' => $field['field'],
-			]);
-		}
+		$rawData = $this->getAcptField([
+			$find => $findValue,
+			'box_name' => $field['box'],
+			'field_name' => $field['field'],
+		]);
 
 		if($rawData === null){
 			return null;
@@ -101,6 +84,67 @@ class ACPTBasicBlock
 
 			default:
 				return $rawData;
+		}
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return mixed|null
+	 */
+	private function getAcptField($args = [])
+	{
+		try {
+			// validate array
+			$mandatory_keys = [
+				'post_id' => [
+					'required' => false,
+					'type' => 'integer',
+				],
+				'term_id' => [
+					'required' => false,
+					'type' => 'integer',
+				],
+				'user_id' => [
+					'required' => false,
+					'type' => 'integer',
+				],
+				'option_page' => [
+					'required' => false,
+					'type' => 'string',
+				],
+				'box_name' => [
+					'required' => true,
+					'type' => 'string',
+				],
+				'field_name' => [
+					'required' => true,
+					'type' => 'string',
+				],
+			];
+
+			$validator = new ArgumentsArrayValidator();
+
+			if(!$validator->validate($mandatory_keys, $args)){
+				return null;
+			}
+
+			$field_name = explode(".", $args['field_name']);
+
+			$meta_field_model = MetaRepository::getMetaFieldByName([
+				'boxName' => $args['box_name'] ?? $args['boxName'],
+				'fieldName' => $field_name[0]
+			]);
+
+			if($meta_field_model === null){
+				return null;
+			}
+
+			$query = new FetchMetaFieldValueQuery($meta_field_model, $args);
+
+			return $query->execute();
+		} catch (\Exception $exception){
+			return null;
 		}
 	}
 }
