@@ -434,10 +434,11 @@ class ACPT_Lite_DB
 	/**
 	 * @param $sql
 	 * @param array $args
+	 * @param int $cacheTtl
 	 *
 	 * @return array|mixed|object|null
 	 */
-    public static function getResults($sql, array $args = [])
+    public static function getResults($sql, array $args = [], $cacheTtl = 7200)
     {
 	    global $wpdb;
 	    $preparedQuery = self::prepare($sql, $args);

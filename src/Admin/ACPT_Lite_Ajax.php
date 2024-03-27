@@ -1036,6 +1036,32 @@ class ACPT_Lite_Ajax
     }
 
 	/**
+	 * Flush cache
+	 */
+	public function flushCacheAction()
+	{
+		try {
+			$flushCache = ACPT_Lite_DB::flushCache();
+
+			if($flushCache){
+				return wp_send_json([
+					'success' => true,
+				]);
+			}
+
+			return wp_send_json([
+				'success' => false,
+				'error' => "Unknown error",
+			]);
+		} catch (\Exception $exception){
+			return wp_send_json([
+				'success' => false,
+				'error' => $exception->getMessage(),
+			]);
+		}
+	}
+
+	/**
 	 * @return mixed
 	 */
 	public function isWPGraphQLActiveAction()

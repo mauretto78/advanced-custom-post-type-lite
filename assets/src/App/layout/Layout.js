@@ -1,15 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "./Header";
 import Footer from "./Footer";
 import Breadcrumbs from "./Breadcrumbs";
 import Button from '../components/Button';
 import ScrollToTop from "./Footer/ScrollToTop";
 import PropTypes from 'prop-types';
+import WebFont from 'webfontloader';
 
 const Layout = ({title, actions, crumbs, children}) => {
 
+    const settings = document.globals;
+    const font = settings.globals.font ? settings.globals.font : 'Inter';
+    const fontFamily = font !== "Default" ? font : '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue"';
+
+    useEffect(() => {
+        if(font !== "Default"){
+            WebFont.load({
+                google: {
+                    families: [font]
+                }
+            });
+        }
+    }, []);
+
     return (
-        <React.Fragment>
+        <div style={{
+            fontFamily: `${fontFamily}, sans-serif`
+        }}>
             <Header title={title} actions={actions} />
             <div className="acpt-main">
                 <div className="acpt-main-wrapper">
@@ -19,7 +36,7 @@ const Layout = ({title, actions, crumbs, children}) => {
                 <Footer/>
             </div>
             <ScrollToTop />
-        </React.Fragment>
+        </div>
     );
 };
 

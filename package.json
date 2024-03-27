@@ -30,7 +30,8 @@
     "react-select": "^5.3.0",
     "react-tooltip": "^5.25.1",
     "transliteration": "^2.3.5",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@babel/preset-es2015": "^7.0.0-beta.53",
