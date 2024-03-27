@@ -64,11 +64,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     private $settings = [];
 
     /**
-     * @var AbstractMetaBoxModel[]
-     */
-    private $metaBoxes = [];
-
-    /**
      * @var TaxonomyModel[]
      */
     private $taxonomies = [];
@@ -232,24 +227,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param AbstractMetaBoxModel $metaBox
-     */
-    public function addMetaBox(AbstractMetaBoxModel $metaBox)
-    {
-        if(!$this->existsInCollection($metaBox->getId(), $this->metaBoxes)){
-            $this->metaBoxes[] = $metaBox;
-        }
-    }
-
-    /**
-     * @param AbstractMetaBoxModel $metaBox
-     */
-    public function removeMetaBox(AbstractMetaBoxModel $metaBox)
-    {
-        $this->removeFromCollection($metaBox->getId(), $this->metaBoxes);
-    }
-
-    /**
      * @param TaxonomyModel $taxonomyModel
      */
     public function addTaxonomy(TaxonomyModel $taxonomyModel)
@@ -265,14 +242,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     public function removeTaxonomy(TaxonomyModel $taxonomyModel)
     {
         $this->removeFromCollection($taxonomyModel->getId(), $this->taxonomies);
-    }
-
-    /**
-     * @return AbstractMetaBoxModel[]
-     */
-    public function getMetaBoxes()
-    {
-        return $this->metaBoxes;
     }
 
     /**
@@ -315,46 +284,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
      */
     public function arrayRepresentation()
     {
-        $metaArray = [];
-        foreach ($this->getMetaBoxes() as $metaBoxModel){
-
-            $fieldsArray = [];
-
-            foreach ($metaBoxModel->getFields() as $fieldModel){
-
-                $optionsArray = [];
-
-                foreach ($fieldModel->getOptions() as $optionModel){
-                    $optionsArray[] = [
-                        'id' => $optionModel->getId(),
-                        'label' => $optionModel->getLabel(),
-                        'value' => $optionModel->getValue(),
-                        'sort' => $optionModel->getSort(),
-                    ];
-                }
-
-                $fieldsArray[] = [
-                    'id' => $fieldModel->getId(),
-                    'name' => $fieldModel->getName(),
-                    'type' => $fieldModel->getType(),
-                    'defaultValue' => $fieldModel->getDefaultValue(),
-                    'description' => $fieldModel->getDescription(),
-                    'showInArchive' => (bool)$fieldModel->isShowInArchive(),
-                    'required' => (bool)$fieldModel->isRequired(),
-                    'sort' => $fieldModel->getSort(),
-                    'options' => $optionsArray,
-                ];
-            }
-
-            $metaArray[] = [
-                "id" => $metaBoxModel->getId(),
-                "postType" => $metaBoxModel->getPostType(),
-                "name" => $metaBoxModel->getName(),
-                "sort" => $metaBoxModel->getSort(),
-                "fields" => $fieldsArray
-            ];
-        }
-
         $taxonomyArray = [];
         foreach ($this->taxonomies as $taxonomy){
             $taxonomyArray[] = [
@@ -378,7 +307,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'supports' => $this->supports,
             'labels' => $this->labels,
             'settings' => $this->settings,
-            'meta' => $metaArray,
             'taxonomies' => $taxonomyArray,
         ];
     }
@@ -388,14 +316,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $metaArray = [];
-        foreach ($this->getMetaBoxes() as $metaBoxModel){
-            $metaArray[] = [
-                "name" => $metaBoxModel->getName(),
-                "count" => count($metaBoxModel->getFields()),
-            ];
-        }
-
         $taxonomyArray = [];
         foreach ($this->taxonomies as $taxonomy){
             $taxonomyArray[] = [
@@ -421,7 +341,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'supports' => $this->supports,
             'labels' => $this->labels,
             'settings' => $this->settings,
-            'meta' => $metaArray,
             'taxonomies' => $taxonomyArray,
             'isWooCommerce' => $this->isWooCommerce(),
             'woocommerceProductData' => $this->woocommerceProductData,

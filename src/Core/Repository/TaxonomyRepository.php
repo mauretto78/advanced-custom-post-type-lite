@@ -41,6 +41,7 @@ class TaxonomyRepository
                 $taxonomyId
         ]);
 
+        ACPT_Lite_DB::invalidateCacheTag(CustomPostTypeRepository::class);
         ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
@@ -414,5 +415,8 @@ class TaxonomyRepository
                 $postId,
                 $taxonomyId
         ]);
+
+	    ACPT_Lite_DB::invalidateCacheTag(CustomPostTypeRepository::class);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 }
