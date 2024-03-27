@@ -3,8 +3,8 @@ Contributors: mauretto78
 Donate link: https://acpt.io
 Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
-Tested up to: 6.2
-Requires PHP: 5.6
+Tested up to: 6.5
+Requires PHP: 7.0
 Stable tag: 2.0.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -22,8 +22,7 @@ Main features:
 * Register and manage new custom post types in seconds. Take the total control and become a Master of your CPTs.
 * Register, manage and associate custom new taxonimies in just 3 clicks.
 * Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
-* Taxonomy meta fields manager (choose between 3 field types)
-* User meta fields manager (choose between 3 field types)
+* Meta fields manager (choose between 5 field types)
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 * Elementor custom widget: manage ACPT meta fields in the Elementor editor
 * WooCommerce custom integration: generate and manage product data in few clicks
@@ -37,7 +36,7 @@ If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!
 
 == Installation ==
 
-1. Make sure you are using WordPress 5.1 or later and that your server is running PHP 5.6 or later (same requirement as WordPress itself)
+1. Make sure you are using WordPress 5.1 or later and that your server is running PHP 7.0 or later (same requirement as WordPress itself)
 2. Install and activate the plugin as usual from the 'Plugins' menu in WordPress.
 3. Go to the plugin settings page and set the language.
 
@@ -50,7 +49,7 @@ Please refer to main [ACPT](https://acpt.io) website.
 1. Custom post types list
 2. Register new Custom post type
 3. Register new Taxonomy
-4. Manage meta boxes
+4. Manage meta fields
 5. Meta boxes in action in the post editor
 6. Settings panel
 
@@ -163,3 +162,10 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * WordPress admin menu labels
 * Fix AbstractModal::hydrateFromArray() method (to fix PHP 8 deprecations)
 * Fix `menu_position` bug when registering new custom post types
+
+= 2.0.0 (2024-03-28) =
+
+* Completely new UI/UX
+* Introduction of meta field groups
+* Font manager
+* Fixes and improvements from ACPT v2.0.1

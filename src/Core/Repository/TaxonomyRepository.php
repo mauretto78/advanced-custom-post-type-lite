@@ -40,6 +40,8 @@ class TaxonomyRepository
                 $postId,
                 $taxonomyId
         ]);
+
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -73,6 +75,8 @@ class TaxonomyRepository
             ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` WHERE id = %s;", [$taxonomyId]);
             ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` WHERE taxonomy_id = %s;", [$taxonomyId]);
         }
+
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -91,6 +95,7 @@ class TaxonomyRepository
             ";
 
         ACPT_Lite_DB::executeQueryOrThrowException($sql, [$postId]);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -384,6 +389,8 @@ class TaxonomyRepository
                 json_encode($taxonomyModel->getLabels()),
                 json_encode($taxonomyModel->getSettings())
         ]);
+
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**

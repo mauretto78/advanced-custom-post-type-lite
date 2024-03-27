@@ -13,7 +13,7 @@ class FetchLanguagesQuery implements QueryInterface
 	 */
 	public function execute()
 	{
-		$fileHandler = new FileSystem(__DIR__.'/../../../../i18n/languages/advanced-custom-post-type.pot');
+		$fileHandler = new FileSystem(__DIR__.'/../../../../i18n/languages/advanced-custom-post-type-lite.pot');
 		$poParser = new Parser($fileHandler);
 		$catalog  = $poParser->parse();
 		$entries = [

@@ -3962,3 +3962,6 @@ msgstr "Fuente"
 
 msgid "Set the font of the plug-in"
 msgstr "Establecer el fuente del plug-in"
+
+msgid "Rate this plugin"
+msgstr "Evalúa este plugin"

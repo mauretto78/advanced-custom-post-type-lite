@@ -76,6 +76,7 @@ class CustomPostTypeRepository
 
                 ACPT_Lite_DB::executeQueryOrThrowException($sql, [$postModel->getId()]);
                 ACPT_Lite_DB::commitTransaction();
+	            ACPT_Lite_DB::invalidateCacheTag(self::class);
             } catch (\Exception $exception){
                 ACPT_Lite_DB::rollbackTransaction();
                 throw new \Exception($exception->getMessage());
@@ -585,6 +586,8 @@ class CustomPostTypeRepository
                 json_encode($model->getLabels()),
                 json_encode($model->getSettings())
         ]);
+
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -795,6 +798,7 @@ class CustomPostTypeRepository
             WHERE a.post_type = %s";
 
         ACPT_Lite_DB::executeQueryOrThrowException($query, [$postType]);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**

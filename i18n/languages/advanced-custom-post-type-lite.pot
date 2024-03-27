@@ -3340,3 +3340,6 @@ msgstr ""
 
 msgid "Set the font of the plug-in"
 msgstr ""
+
+msgid "Rate this plugin"
+msgstr ""

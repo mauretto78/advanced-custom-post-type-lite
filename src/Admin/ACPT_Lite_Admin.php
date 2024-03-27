@@ -157,6 +157,7 @@ class ACPT_Lite_Admin
             'wp_ajax_flushCacheAction' => 'flushCacheAction',
             'wp_ajax_globalSettingsAction' => 'globalSettingsAction',
             'wp_ajax_importFileAction' => 'importFileAction',
+            'wp_ajax_languagesAction' => 'languagesAction',
             'wp_ajax_resetCustomPostTypesAction' => 'resetCustomPostTypesAction',
             'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',
             'wp_ajax_resetWooCommerceProductDataAction' => 'resetWooCommerceProductDataAction',

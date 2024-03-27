@@ -4,6 +4,7 @@ import Loader from "./components/Loader";
 import {Toaster} from "react-hot-toast";
 import {useDispatch} from "react-redux";
 import {fetchGlobalSettings} from "./redux/reducers/fetchGlobalSettingsSlice";
+import WebFont from 'webfontloader';
 
 // Pages
 const PageCustomPostTypeListPage = lazy(() => import("./pages/CustomPostTypeList"));
@@ -135,6 +136,17 @@ const App = memo(() => {
         dispatch(fetchGlobalSettings())
             .then(res => {
                 document.globals = res.payload;
+
+                // load Google fonts
+                setFont(res.payload.globals.font);
+                if(res.payload.globals.font !== "Default"){
+                    WebFont.load({
+                        google: {
+                            families: [res.payload.globals.font]
+                        }
+                    });
+                }
+
                 isReady(true);
             })
             .catch(err => console.error(err))
@@ -142,13 +154,17 @@ const App = memo(() => {
     }, []);
 
     const [ready, isReady] = useState(false);
+    const [font, setFont] = useState('Inter');
+    const fontFamily = font !== "Default" ? font : '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue"';
 
     if(!ready){
         return <Loader/>;
     }
 
     return(
-        <React.Fragment>
+        <div style={{
+            fontFamily: `${fontFamily}, sans-serif`
+        }}>
             <RouterProvider router={router} />
             <div data-cy="toaster-wrapper">
                 <Toaster
@@ -156,7 +172,7 @@ const App = memo(() => {
                     reverseOrder={false}
                 />
             </div>
-        </React.Fragment>
+        </div>
     )
 });
 

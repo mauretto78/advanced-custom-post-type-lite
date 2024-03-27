@@ -3867,3 +3867,6 @@ msgstr "Font"
 
 msgid "Set the font of the plug-in"
 msgstr "Imposta il font del plugin"
+
+msgid "Rate this plugin"
+msgstr "Vota questo plugin"

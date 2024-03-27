@@ -17,6 +17,7 @@ class WooCommerceProductDataRepository
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`");
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."`");
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."`");
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -45,6 +46,7 @@ class WooCommerceProductDataRepository
             }
 
             ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."` WHERE id = %s;", [$id]);
+	        ACPT_Lite_DB::invalidateCacheTag(self::class);
 
             return true;
         }
@@ -74,6 +76,7 @@ class WooCommerceProductDataRepository
         }
 
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` WHERE id = %s;", [$productDataFieldModel->getId()]);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
 
         return true;
     }
@@ -102,6 +105,8 @@ class WooCommerceProductDataRepository
 
                 ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` WHERE id = %s;", [$field->getId()]);
             }
+
+	        ACPT_Lite_DB::invalidateCacheTag(self::class);
 
             return true;
         }
@@ -361,6 +366,8 @@ class WooCommerceProductDataRepository
         if( !empty($productDataModel->getFields()) ){
             WooCommerceProductDataRepository::saveFields($productDataModel->getFields());
         }
+
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -469,22 +476,37 @@ class WooCommerceProductDataRepository
      */
     public static function removeFieldsOrphans($ids)
     {
-        $optionsIds = [];
-        $fieldIds = [];
-        $productDataIds = [];
+	    if(empty($ids)){
+		    self::deleteAllFields();
+	    } else {
+		    $optionsIds = [];
+		    $fieldIds = [];
+		    $productDataIds = [];
 
-        foreach ($ids as $id){
-            $fieldIds[] = $id['field'];
-            $productDataIds[] = $id['product_data_id'];
+		    foreach ($ids as $id){
+			    $fieldIds[] = $id['field'];
+			    $productDataIds[] = $id['product_data_id'];
 
-            foreach ($id['options'] as $optionId){
-                $optionsIds[] = $optionId;
-            }
-        }
+			    foreach ($id['options'] as $optionId){
+				    $optionsIds[] = $optionId;
+			    }
+		    }
 
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f WHERE f.product_data_id IN ('".implode("','",$productDataIds)."') AND f.id NOT IN ('"
-                .implode("','",$fieldIds)."');");
-        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o WHERE o.product_data_id IN ('".implode("','",$productDataIds)."') AND o.id NOT IN ('"
-                .implode("','",$optionsIds)."');");
+		    ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f WHERE f.product_data_id IN ('".implode("','",$productDataIds)."') AND f.id NOT IN ('"
+		                                          .implode("','",$fieldIds)."');");
+		    ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o WHERE o.product_data_id IN ('".implode("','",$productDataIds)."') AND o.id NOT IN ('"
+		                                          .implode("','",$optionsIds)."');");
+	    }
+
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
+
+	/**
+	 * @throws \Exception
+	 */
+	public static function deleteAllFields()
+	{
+		ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f;");
+		ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o;");
+	}
 }
