@@ -5,7 +5,6 @@ namespace ACPT_Lite\Utils\MetaSync;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class PostMetaSync extends AbstractMetaSync

@@ -509,9 +509,9 @@ class ACPT_Lite_Admin
 		    );
 
 		    // add meta boxes
-		    foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
-			    $this->generateMetaBoxes($postTypeModel->getName(), $metaBoxModel, $customPostTypeMetaBoxGenerator);
-		    }
+//		    foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
+//			    $this->generateMetaBoxes($postTypeModel->getName(), $metaBoxModel, $customPostTypeMetaBoxGenerator);
+//		    }
 	    }
     }
 
@@ -611,17 +611,17 @@ class ACPT_Lite_Admin
             add_action('manage_posts_custom_column', function($name) use ($postTypeModel) {
                 global $post;
 
-                foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
-                    foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
-                        if ($metaBoxFieldModel->isShowInArchive()){
-                            $key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
-
-                            if($key === $name){
-                                echo do_shortcode( '[acpt preview="true" box="'.esc_attr($metaBoxModel->getName()).'" field="'.esc_attr($metaBoxFieldModel->getName()).'"]');
-                            }
-                        }
-                    }
-                }
+//                foreach ($postTypeModel->getMetaBoxes() as $metaBoxModel){
+//                    foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
+//                        if ($metaBoxFieldModel->isShowInArchive()){
+//                            $key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
+//
+//                            if($key === $name){
+//                                echo do_shortcode( '[acpt preview="true" box="'.esc_attr($metaBoxModel->getName()).'" field="'.esc_attr($metaBoxFieldModel->getName()).'"]');
+//                            }
+//                        }
+//                    }
+//                }
             });
         }
     }
