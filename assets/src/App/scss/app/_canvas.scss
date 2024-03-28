@@ -1,0 +1,139 @@
+.canvas {
+
+  &.canvas-hover {
+    opacity: .5;
+  }
+
+  .drag-placeholder {
+    background: $pale-gray;
+    width: 100%;
+    height: 120px;
+    border-radius: $border-radius;
+  }
+
+  .canvas-container {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 1px;
+
+    @media screen and (max-width: 960px){
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .canvas-element {
+      position: relative;
+      border-radius: $border-radius;
+
+      * {
+        cursor: pointer;
+      }
+
+      .top-half,
+      .bottom-half,
+      .left-half,
+      .right-half {
+        position: absolute;
+        z-index: -1;
+      }
+
+      .left-half {
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 30px;
+        height: 100%;
+      }
+
+      .right-half {
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 30px;
+        height: 100%;
+      }
+
+      .top-half {
+        top: 0;
+        left: 30px;
+        right: 30px;
+        height: 50%;
+      }
+
+      .bottom-half {
+        bottom: 0;
+        left: 30px;
+        right: 30px;
+        height: 50%;
+      }
+
+      .left-half-hover-placeholder,
+      .right-half-hover-placeholder {
+        background: $primary-color;
+        height: 100%;
+        width: 3px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+
+      .top-half-hover-placeholder,
+      .bottom-half-hover-placeholder {
+        background: $primary-color;
+        height: 3px;
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
+
+      .left-half-hover-placeholder {
+        left: 0;
+        border-radius: $border-radius 0 0 $border-radius;
+      }
+
+      .right-half-hover-placeholder {
+        right: 0;
+        border-radius: 0 $border-radius $border-radius 0;
+      }
+
+      .top-half-hover-placeholder {
+        top: 0;
+        border-radius: $border-radius $border-radius 0 0;
+      }
+
+      .bottom-half-hover-placeholder {
+        bottom: 0;
+        border-radius: 0 0 $border-radius $border-radius;
+      }
+
+      .inside {
+        padding: $space-8;
+        border-radius: $border-radius;
+
+        .actions {
+          position: absolute;
+          top: -31px;
+          padding: 6px 10px;
+          left: 12px;
+          border-radius: $border-radius $border-radius 0 0;
+          background: $primary-color;
+          z-index: 100;
+          color: $white;
+
+          a {
+            color: $white;
+
+            &:hover,
+            &:focus {
+              color: rgba($white, .7);
+            }
+          }
+        }
+
+        &.active {
+          outline: $border-thickness solid $primary-color;
+        }
+      }
+    }
+  }
+}

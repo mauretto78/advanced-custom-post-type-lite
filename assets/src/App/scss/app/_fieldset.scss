@@ -1,0 +1,11 @@
+fieldset.acpt-fieldset {
+  border: $border-thickness solid $light-gray;
+  padding: $space-24;
+  border-radius: $border-radius;
+
+  legend {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $gray;
+  }
+}

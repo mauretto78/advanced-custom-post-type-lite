@@ -10,4 +10,6 @@ class ShortcodePayload
     public $belongsTo;
     public $find = null;
     public $preview = false;
+	public $dateFormat = null;
+	public $render = null;
 }

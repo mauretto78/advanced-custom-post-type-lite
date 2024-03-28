@@ -1,4 +1,17 @@
 /**
+ *
+ * @param text
+ */
+export const copyToTheClipboard = (text) => {
+
+    // text.select();
+    // text.setSelectionRange(0, 99999);
+
+    console.log(`'copied ${text} to clipboard'`);
+    navigator.clipboard.writeText(text);
+};
+
+/**
  * Change document's <title>
  * @param title
  */
@@ -36,4 +49,8 @@ export const refreshPage = (timeout = 0) => {
     setTimeout(function () {
         window.location.reload();
     }, timeout);
+};
+
+export const  delay = (time) => {
+    return new Promise(resolve => setTimeout(resolve, time));
 };

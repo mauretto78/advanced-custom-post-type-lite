@@ -1,0 +1,32 @@
+* {
+  font-weight: 400;
+}
+
+h1 { font-size: $h1-font-size;  }
+h2 { font-size: $h2-font-size; }
+h3, h4 { font-size: $h3-font-size; }
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  outline: none;
+  color: $primary-color;
+  box-shadow: none;
+
+  &:focus,
+  &:hover {
+    border: none;
+    outline: none;
+    color: darken($primary-color, 8%);
+    box-shadow: none;
+  }
+}
+
+code {
+ background: transparent !important;
+}

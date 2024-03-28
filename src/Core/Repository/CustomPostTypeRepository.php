@@ -10,7 +10,7 @@ use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\PostMetaSync;
 use ACPT_Lite\Utils\WPUtils;
@@ -76,6 +76,7 @@ class CustomPostTypeRepository
 
                 ACPT_Lite_DB::executeQueryOrThrowException($sql, [$postModel->getId()]);
                 ACPT_Lite_DB::commitTransaction();
+	            ACPT_Lite_DB::invalidateCacheTag(self::class);
             } catch (\Exception $exception){
                 ACPT_Lite_DB::rollbackTransaction();
                 throw new \Exception($exception->getMessage());
@@ -123,12 +124,12 @@ class CustomPostTypeRepository
      * @throws \Exception
      * @since    1.0.0
      */
-    public static function get(array $meta = [], $lazy = false)
-    {
-        $results = [];
-        $args = [];
+	public static function get(array $meta = [])
+	{
+		$results = [];
+		$args = [];
 
-        $baseQuery = "
+		$baseQuery = "
             SELECT 
                 cp.id, 
                 cp.post_name as name,
@@ -145,134 +146,66 @@ class CustomPostTypeRepository
             WHERE 1=1
             ";
 
-        $args[] = 'publish';
+		$args[] = 'publish';
 
-        if(isset($meta['id'])){
-            $baseQuery .= " AND cp.id = %s";
-            $args[] = $meta['id'];
-        }
+		if(isset($meta['id'])){
+			$baseQuery .= " AND cp.id = %s";
+			$args[] = $meta['id'];
+		}
 
-        if(isset($meta['postType'])){
-            $baseQuery .= " AND cp.post_name = %s ";
-            $args[] = $meta['postType'];
-        }
+		if(isset($meta['postType'])){
+			$baseQuery .= " AND cp.post_name = %s ";
+			$args[] = $meta['postType'];
+		}
 
-        $baseQuery .= " GROUP BY cp.id";
-        $baseQuery .= " ORDER BY cp.native DESC";
+		if(isset($meta['exclude'])){
+			$baseQuery .= " AND cp.post_name != %s ";
+			$args[] = $meta['exclude'];
+		}
 
-        if(isset($meta['page']) and isset($meta['perPage'])){
-            $baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
-        }
+		$baseQuery .= " GROUP BY cp.id";
+		$baseQuery .= " ORDER BY cp.native DESC, cp.post_name ASC";
 
-        $baseQuery .= ';';
-        $posts = ACPT_Lite_DB::getResults($baseQuery, $args);
+		if(isset($meta['page']) and isset($meta['perPage'])){
+			$baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
+		}
 
-        foreach ($posts as $post){
-            $postModel = CustomPostTypeModel::hydrateFromArray([
-                    'id' => $post->id,
-                    'name' => $post->name,
-                    'singular' => $post->singular,
-                    'plural' => $post->plural,
-                    'icon' => $post->icon,
-                    'native' => $post->native == '0' ? false : true,
-                    'supports' => json_decode($post->supports),
-                    'labels' => json_decode($post->labels, true),
-                    'settings' => json_decode($post->settings, true),
-            ]);
-            $postModel->setPostCount($post->post_count);
+		$baseQuery .= ';';
+		$posts = ACPT_Lite_DB::getResults($baseQuery, $args);
 
-            if(!$lazy){
-                $boxes = ACPT_Lite_DB::getResults("
-                SELECT 
-                    id, 
-                    meta_box_name as name,
-                    meta_box_label as label,
-                    sort
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
-                WHERE post_type = %s
-                ORDER BY sort
-            ;", [$post->name]);
+		foreach ($posts as $post){
+			$postModel = CustomPostTypeModel::hydrateFromArray([
+				'id' => $post->id,
+				'name' => $post->name,
+				'singular' => $post->singular,
+				'plural' => $post->plural,
+				'icon' => $post->icon,
+				'native' => $post->native == '0' ? false : true,
+				'supports' => json_decode($post->supports),
+				'labels' => json_decode($post->labels, true),
+				'settings' => json_decode($post->settings, true),
+			]);
 
-                foreach ($boxes as $boxIndex => $box){
-                    $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray([
-                            'id' => $box->id,
-                            'postType' => $postModel->getName(),
-                            'name' => $box->name,
-                            'sort' => $box->sort
-                    ]);
+			// Add more data
+			$postModel = self::addTaxonomiesToPostTypeModel($postModel);
+			$postModel = self::addWooCommerceDataToPostTypeModel($postModel);
+			$postModel->setPostCount($post->post_count);
 
-	                if($boxModel !== null and $box->label !== null){
-		                $boxModel->changeLabel($box->label);
-	                }
+			$results[] = $postModel;
+		}
 
-                    $sql = "
-                        SELECT
-                            id,
-                            field_name as name,
-                            field_type,
-                            field_default_value,
-                            field_description,
-                            required,
-                            showInArchive,
-                            sort
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-                        WHERE meta_box_id = %s
-                    ";
+		return $results;
+	}
 
-                    if(isset($meta['excludeFields'])){
-                        $sql .= " AND id NOT IN ('".implode("','", $meta['excludeFields'])."')";
-                    }
-
-                    $sql .= " ORDER BY sort;";
-
-
-                    $fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
-
-                    foreach ($fields as $fieldIndex => $field){
-                        $fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
-                                'id' => $field->id,
-                                'metaBox' => $boxModel,
-                                'title' => $field->name,
-                                'type' => $field->field_type,
-                                'required' => $field->required,
-                                'defaultValue' => $field->field_default_value,
-                                'description' => $field->field_description,
-                                'showInArchive' => $field->showInArchive,
-                                'sort' => $field->sort
-                        ]);
-
-                        $options = ACPT_Lite_DB::getResults("
-                            SELECT
-                                id,
-                                meta_box_id as boxId,
-                                meta_field_id as fieldId,
-                                option_label as label,
-                                option_value as value,
-                                sort
-                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
-                            WHERE meta_field_id = %s
-                            ORDER BY sort
-                        ;", [$field->id]);
-
-                        foreach ($options as $option){
-                            $optionModel = MetaBoxFieldOptionModel::hydrateFromArray([
-                                    'id' => $option->id,
-                                    'metaBoxField' => $fieldModel,
-                                    'label' => $option->label,
-                                    'value' => $option->value,
-                                    'sort' => $option->sort,
-                            ]);
-
-                            $fieldModel->addOption($optionModel);
-                        }
-
-                        $boxModel->addField($fieldModel);
-                    }
-
-                    $postModel->addMetaBox($boxModel);
-                }
-
-                $taxonomies = ACPT_Lite_DB::getResults("
+	/**
+	 * @param CustomPostTypeModel $postModel
+	 *
+	 * @return CustomPostTypeModel
+	 * @throws \Exception
+	 */
+	private static function addTaxonomiesToPostTypeModel(CustomPostTypeModel $postModel)
+	{
+		$taxonomies = ACPT_Lite_DB::getResults("
                     SELECT
                         t.id,
                         t.slug ,
@@ -285,47 +218,33 @@ class CustomPostTypeRepository
                     WHERE p.custom_post_type_id = %s
                 ;", [$postModel->getId()]);
 
-                foreach ($taxonomies as $taxonomy) {
-                    $taxonomyModel = TaxonomyModel::hydrateFromArray([
-                            'id' => $taxonomy->id,
-                            'slug' => $taxonomy->slug,
-                            'singular' => $taxonomy->singular,
-                            'plural' => $taxonomy->plural,
-                            'native' => (isset($taxonomy->native) and $taxonomy->native == '1') ? true : false,
-                            'labels' => json_decode($taxonomy->labels, true),
-                            'settings' => json_decode($taxonomy->settings, true),
-                    ]);
+		foreach ($taxonomies as $taxonomy) {
+			$taxonomyModel = TaxonomyModel::hydrateFromArray([
+				'id' => $taxonomy->id,
+				'slug' => $taxonomy->slug,
+				'singular' => $taxonomy->singular,
+				'plural' => $taxonomy->plural,
+				'native' => (isset($taxonomy->native) and $taxonomy->native == '1') ? true : false,
+				'labels' => json_decode($taxonomy->labels, true),
+				'settings' => json_decode($taxonomy->settings, true),
+			]);
 
-                    $postModel->addTaxonomy($taxonomyModel);
-                }
+			$postModel->addTaxonomy($taxonomyModel);
+		}
 
-                $templates = ACPT_Lite_DB::getResults("
-                        SELECT 
-                            id, 
-                            post_type as postType,
-                            template_type as templateType,
-                            json,
-                            html,
-                            meta
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE)."`
-                        WHERE post_type = %s
-                ;", [$post->name]);
+		return $postModel;
+	}
 
-                foreach ($templates as $template) {
-                    $taxonomyModel = CustomPostTypeTemplateModel::hydrateFromArray([
-                            'id' => $template->id,
-                            'postType' => $template->postType,
-                            'templateType' => $template->templateType,
-                            'json' => $template->json,
-                            'html' => $template->html,
-                            'meta' => json_decode($template->meta, true),
-                    ]);
-
-                    $postModel->addTemplate($taxonomyModel);
-                }
-
-                if($postModel->isWooCommerce()){
-                    $productData = ACPT_Lite_DB::getResults("
+	/**
+	 * @param CustomPostTypeModel $postModel
+	 *
+	 * @return CustomPostTypeModel
+	 * @throws \Exception
+	 */
+	private static function addWooCommerceDataToPostTypeModel( CustomPostTypeModel $postModel)
+	{
+		if($postModel->isWooCommerce()){
+			$productData = ACPT_Lite_DB::getResults("
                         SELECT 
                             id,
                             product_data_name,
@@ -335,16 +254,16 @@ class CustomPostTypeRepository
                         FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
                     ;", []);
 
-                    foreach ($productData as $productDatum){
-                        $wooCommerceProductDataModel = WooCommerceProductDataModel::hydrateFromArray([
-                                'id' => $productDatum->id,
-                                'name' => $productDatum->product_data_name,
-                                'icon' => json_decode($productDatum->icon, true),
-                                'visibility' => $productDatum->visibility,
-                                'showInUI' => $productDatum->show_in_ui == '0' ? false : true,
-                        ]);
+			foreach ($productData as $productDatum){
+				$wooCommerceProductDataModel = WooCommerceProductDataModel::hydrateFromArray([
+					'id' => $productDatum->id,
+					'name' => $productDatum->product_data_name,
+					'icon' => json_decode($productDatum->icon, true),
+					'visibility' => $productDatum->visibility,
+					'showInUI' => $productDatum->show_in_ui == '0' ? false : true,
+				]);
 
-                        $productDataFields = ACPT_Lite_DB::getResults("
+				$productDataFields = ACPT_Lite_DB::getResults("
                             SELECT 
                                 id,
                                 product_data_id,
@@ -356,31 +275,29 @@ class CustomPostTypeRepository
                             WHERE product_data_id = %s ORDER BY sort DESC
                         ;", [$productDatum->id]);
 
-                        foreach ($productDataFields as $productDataField){
-                            $wooCommerceProductDataFieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
-                                    'id' => $productDataField->id,
-                                    'productDataModel' => $wooCommerceProductDataModel,
-                                    'name' => $productDataField->field_name,
-                                    'type' => $productDataField->field_type,
-                                    'required' => $productDataField->required == '1',
-                                    'sort' => $productDataField->sort,
-                                    'defaultValue' => null,
-                                    'description' => null,
-                            ]);
+				foreach ($productDataFields as $productDataField){
+					$wooCommerceProductDataFieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
+						'id' => $productDataField->id,
+						'productDataModel' => $wooCommerceProductDataModel,
+						'name' => $productDataField->field_name,
+						'type' => $productDataField->field_type,
+						'required' => $productDataField->required == '1',
+						'sort' => $productDataField->sort,
+						'defaultValue' => null,
+						'description' => null,
+					]);
 
-                            $wooCommerceProductDataModel->addField($wooCommerceProductDataFieldModel);
-                        }
+					$wooCommerceProductDataModel->addField($wooCommerceProductDataFieldModel);
+				}
 
-                        $postModel->addWoocommerceProductData($wooCommerceProductDataModel);
-                    }
-                }
-            }
+				$postModel->addWoocommerceProductData($wooCommerceProductDataModel);
+			}
 
-            $results[] = $postModel;
-        }
+			return $postModel;
+		}
 
-        return $results;
-    }
+		return $postModel;
+	}
 
     /**
      * Get the id of a post type by registered name
@@ -405,121 +322,6 @@ class CustomPostTypeRepository
 
         if(count($posts) === 1){
             return $posts[0]->id;
-        }
-
-        return null;
-    }
-
-    /**
-     * @param $postType
-     * @param array $options
-     *
-     * @return CustomPostTypeMetaBoxModel[]
-     * @throws \Exception
-     */
-    public static function getMeta($postType, array $options = [])
-    {
-        $postTypeModels = self::get(array_merge([
-                'postType' => $postType
-        ], $options));
-
-        if(!isset($postTypeModels[0])){
-            return [];
-        }
-
-        return $postTypeModels[0]->getMetaBoxes();
-    }
-
-    /**
-     * @param $postType
-     * @param $box
-     * @param $field
-     *
-     * @return CustomPostTypeMetaBoxFieldModel|null
-     * @throws \Exception
-     */
-    public static function getSingleMeta($postType, $box, $field)
-    {
-        $metaBoxes = self::getMeta($postType);
-
-        foreach ($metaBoxes as $boxModel){
-            if($boxModel->getName() === $box){
-                foreach ($boxModel->getFields() as $fieldModel){
-                    if($fieldModel->getName() === $field){
-                        return $fieldModel;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @param $id
-     *
-     * @return CustomPostTypeMetaBoxModel
-     * @throws \Exception
-     */
-    public static function getMetaBox($id)
-    {
-        $boxes = ACPT_Lite_DB::getResults("
-            SELECT 
-                id, 
-                post_type,
-                meta_box_name as name,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."`
-            WHERE id = %s
-        ;", [$id]);
-
-        foreach ($boxes as $boxIndex => $box) {
-            return CustomPostTypeMetaBoxModel::hydrateFromArray( [
-                    'id'       => $box->id,
-                    'postType' => $box->post_type,
-                    'name'     => $box->name,
-                    'sort'     => $box->sort
-            ] );
-        }
-    }
-
-    /**
-     * @param $id
-     *
-     * @return CustomPostTypeMetaBoxFieldModel
-     * @throws \Exception
-     */
-    public static function getMetaField($id)
-    {
-        $sql = "
-            SELECT
-                id,
-                meta_box_id,
-                field_name as name,
-                field_default_value as default_value,
-                field_description as description,
-                field_type,
-                required,
-                showInArchive,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-            WHERE id = %s
-        ;";
-
-        $fields = ACPT_Lite_DB::getResults($sql, [$id]);
-
-        foreach ($fields as $fieldIndex => $field) {
-            return CustomPostTypeMetaBoxFieldModel::hydrateFromArray( [
-                    'id'            => $field->id,
-                    'metaBox'       => CustomPostTypeRepository::getMetaBox($field->meta_box_id),
-                    'title'         => $field->name,
-                    'type'          => $field->field_type,
-                    'required'      => $field->required,
-                    'defaultValue'  => $field->default_value,
-                    'description'   => $field->description,
-                    'showInArchive' => $field->showInArchive,
-                    'sort'          => $field->sort
-            ] );
         }
 
         return null;
@@ -585,194 +387,8 @@ class CustomPostTypeRepository
                 json_encode($model->getLabels()),
                 json_encode($model->getSettings())
         ]);
-    }
 
-    /**
-     * Save meta box
-     *
-     * @param CustomPostTypeMetaBoxModel $metaBoxModel
-     * @param              $ids
-     *
-     * @throws \Exception
-     */
-    public static function saveMetaBox( CustomPostTypeMetaBoxModel $metaBoxModel, &$ids)
-    {
-        ACPT_Lite_DB::startTransaction();
-
-        try {
-
-            PostMetaSync::updatePostMetaWhenBoxNameChanges($metaBoxModel);
-
-            $sql = "
-                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` 
-                (
-                    `id`,
-                    `post_type`,
-                    `meta_box_name`,
-                    `sort`
-                ) VALUES (
-                    %s,
-                    %s,
-                    %s,
-                    %d
-                ) ON DUPLICATE KEY UPDATE 
-                    `post_type` = %s,
-                    `meta_box_name` = %s,
-                    `sort` = %d
-            ;";
-
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaBoxModel->getId(),
-                    $metaBoxModel->getPostType(),
-                    $metaBoxModel->getName(),
-                    $metaBoxModel->getSort(),
-                    $metaBoxModel->getPostType(),
-                    $metaBoxModel->getName(),
-                    $metaBoxModel->getSort()
-            ]);
-
-            foreach ($metaBoxModel->getFields() as $fieldModel){
-                self::saveMetaField($fieldModel);
-            }
-
-        } catch (\Exception $exception){
-            ACPT_Lite_DB::rollbackTransaction();
-        }
-
-        ACPT_Lite_DB::commitTransaction();
-    }
-
-    /**
-     * @param CustomPostTypeMetaBoxFieldModel $fieldModel
-     *
-     * @throws \Exception
-     */
-    public static function saveMetaField(CustomPostTypeMetaBoxFieldModel $fieldModel)
-    {
-        $showInArchive = $fieldModel->isShowInArchive() ? '1' : '0';
-        $isRequired = $fieldModel->isRequired() ? '1' : '0';
-        $metaBoxModel = $fieldModel->getMetaBox();
-
-        PostMetaSync::updatePostMetaWhenFieldNameChanges($fieldModel);
-
-        $sql = "
-            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` 
-            (
-                `id`,
-                `meta_box_id`,
-                `field_name`,
-                `field_type`,
-                `field_default_value`,
-                `field_description`,
-                `showInArchive`,
-                `required`,
-                `sort`
-            ) VALUES (
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %d
-            ) ON DUPLICATE KEY UPDATE 
-                `meta_box_id` = %s,
-                `field_name` = %s,
-                `field_type` = %s,
-                `field_default_value` = %s,
-                `field_description` = %s,
-                `showInArchive` = %s,
-                `required` = %s,
-                `sort` = %d
-        ;";
-
-        $params = [
-                $fieldModel->getId(),
-                $metaBoxModel->getId(),
-                $fieldModel->getName(),
-                $fieldModel->getType(),
-                $fieldModel->getDefaultValue(),
-                $fieldModel->getDescription(),
-                $showInArchive,
-                $isRequired,
-                $fieldModel->getSort(),
-                $metaBoxModel->getId(),
-                $fieldModel->getName(),
-                $fieldModel->getType(),
-                $fieldModel->getDefaultValue(),
-                $fieldModel->getDescription(),
-                $showInArchive,
-                $isRequired,
-                $fieldModel->getSort(),
-        ];
-
-        ACPT_Lite_DB::executeQueryOrThrowException($sql, $params);
-
-        foreach ($fieldModel->getOptions() as $optionModel){
-            $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` 
-                    (`id`,
-                    `meta_box_id` ,
-                    `meta_field_id` ,
-                    `option_label` ,
-                    `option_value` ,
-                    `sort`
-                    ) VALUES (
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %d
-                    ) ON DUPLICATE KEY UPDATE 
-                        `meta_box_id` = %s,
-                        `meta_field_id` = %s,
-                        `option_label` = %s,
-                        `option_value` = %s,
-                        `sort` = %d
-                ;";
-
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $optionModel->getId(),
-                    $metaBoxModel->getId(),
-                    $fieldModel->getId(),
-                    $optionModel->getLabel(),
-                    $optionModel->getValue(),
-                    $optionModel->getSort(),
-                    $metaBoxModel->getId(),
-                    $fieldModel->getId(),
-                    $optionModel->getLabel(),
-                    $optionModel->getValue(),
-                    $optionModel->getSort()
-            ]);
-        }
-    }
-
-    /**
-     * @param $postType
-     * @param $ids
-     *
-     * @throws \Exception
-     */
-    public static function removeMetaOrphans($postType, $ids)
-    {
-        if(isset($ids['fields'])){
-            ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=f.meta_box_id WHERE b.post_type = '".$postType."' AND f.id NOT IN ('".implode("','",$ids['fields'])."');");
-        }
-
-        if(isset($ids['options'])){
-            ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=o.meta_box_id WHERE b.post_type = '".$postType."' AND o.id NOT IN ('".implode("','",$ids['options'])."');");
-        }
-
-        if(isset($ids['boxes'])){
-            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` WHERE post_type = '".$postType."' AND id NOT IN ('".implode("','",$ids['boxes'])."');");
-        }
-
-        if(!empty($fieldIds)){
-            self::deletePostMetaData($fieldIds);
-        }
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -795,6 +411,7 @@ class CustomPostTypeRepository
             WHERE a.post_type = %s";
 
         ACPT_Lite_DB::executeQueryOrThrowException($query, [$postType]);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**

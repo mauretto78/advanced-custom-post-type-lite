@@ -5,7 +5,7 @@ namespace ACPT_Lite\Core\Shortcodes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Shortcodes\DTO\ShortcodePayload;
 use ACPT_Lite\Core\Shortcodes\Fields\AbstractField;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 
 class PostMetaShortcode extends AbstractACPTShortcode
 {
@@ -27,6 +27,8 @@ class PostMetaShortcode extends AbstractACPTShortcode
         $box = $atts['box'];
         $field = $atts['field'];
 	    $preview = (isset($atts['preview']) and $atts['preview'] === 'true') ? true : false;
+	    $render = (isset($atts['render'])) ? $atts['render'] : null;
+	    $dateFormat = isset ($atts['date-format'] ) ? $atts['date-format'] : null;
 
         $key = Strings::toDBFormat($box).'_'.Strings::toDBFormat($field);
         $type = get_post_meta($pid, $key.'_type', true);
@@ -42,6 +44,8 @@ class PostMetaShortcode extends AbstractACPTShortcode
 	    $payload->belongsTo = MetaTypes::CUSTOM_POST_TYPE;
 	    $payload->find = get_post_type($pid);
 	    $payload->preview = $preview;
+	    $payload->render = $render;
+	    $payload->dateFormat = $dateFormat;
 
 	    $field = self::getField($type, $payload);
 

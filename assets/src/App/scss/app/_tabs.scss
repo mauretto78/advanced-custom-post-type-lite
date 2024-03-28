@@ -1,0 +1,67 @@
+.acpt-horizontal-tabs {
+  display: flex;
+
+  > .tablist {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+    margin: 0;
+    padding: 0;
+
+    > .tab {
+      padding: $space-24;
+      background: $pale-gray;
+      border-radius: $border-radius 0 0 $border-radius;
+      color: $gray;
+      cursor: pointer;
+
+      &.active {
+        background: $white;
+        color: $black;
+        border-radius: 0 $border-radius $border-radius $border-radius;
+      }
+    }
+  }
+
+  > .tab-panel {
+    width: 75%;
+    background: $white;
+    border-radius: 0 $border-radius $border-radius $border-radius;
+    box-shadow: 3px 2px 4px rgba(0,0,0,.16);
+    padding: $space-24;
+  }
+}
+
+.acpt-tabs {
+
+  .tablist {
+    display: flex;
+    gap: $space-8;
+    padding: 0;
+    margin: 0;
+
+    li {
+      background: $white;
+      position: relative;
+      bottom: -1px;
+      padding: $space-12;
+      border: $border-thickness solid $light-gray;
+      border-radius: $border-radius $border-radius 0 0;
+      cursor: pointer;
+      margin: 0;
+
+      &.active {
+        color: $black;
+        border-bottom: calc(#{$border-thickness}*2) solid $white;
+      }
+    }
+  }
+
+  .tab-panel {
+    padding: $space-24;
+    border: $border-thickness solid $light-gray;
+    background: $white;
+    border-radius: 0 $border-radius $border-radius $border-radius;
+  }
+}

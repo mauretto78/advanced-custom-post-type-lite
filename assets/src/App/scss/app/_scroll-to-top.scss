@@ -1,0 +1,11 @@
+.scroll-to-top {
+  transition: .3s;
+  cursor: pointer;
+  bottom: -200px;
+  right: 24px;
+  position: fixed;
+
+  &.visible {
+    bottom: 72px;
+  }
+}

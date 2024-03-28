@@ -1,21 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from "react-redux";
+import {createRoot} from 'react-dom/client';
 import * as serviceWorker from './tools/serviceWorker';
-import {configureStore} from "./redux/configureStore";
 import App from "./App";
-// scss
+import {Provider} from "react-redux";
+import store from "./redux/store";
+// styles
 import "./scss/app.scss";
 
 document.addEventListener( 'DOMContentLoaded', function() {
-    const element = document.getElementById( 'acpt-admin-app' );
+    const container = document.getElementById( 'acpt-admin-app' );
+    const root = createRoot(container);
 
-    if( typeof element !== 'undefined' && element !== null ) {
-        ReactDOM.render(
-            <Provider store={configureStore}>
+    if(typeof container !== 'undefined' && container !== null) {
+        root.render(
+            <Provider store={store}>
                 <App />
             </Provider>
-        , element);
+        );
     }
 });
 

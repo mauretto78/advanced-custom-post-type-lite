@@ -1,0 +1,35 @@
+.icon-picker-wrapper {
+  max-height: 350px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+  gap: $space-8;
+  padding: $space-24;
+  border: $border-thickness solid $light-gray;
+  border-radius: $border-radius;
+
+  .icon {
+    width: 100%;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border-radius;
+    border: $border-thickness solid $light-gray;
+    cursor: pointer;
+
+    svg {
+      color: $gray;
+      fill: $gray;
+    }
+
+    &:hover {
+      border: $border-thickness solid $primary-color;
+
+      svg {
+        color: $primary-color;
+        fill: $primary-color;
+      }
+    }
+  }
+}

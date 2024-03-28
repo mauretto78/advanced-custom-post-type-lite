@@ -5,7 +5,7 @@ namespace ACPT_Lite\Core\Repository;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class TaxonomyRepository
@@ -40,6 +40,9 @@ class TaxonomyRepository
                 $postId,
                 $taxonomyId
         ]);
+
+        ACPT_Lite_DB::invalidateCacheTag(CustomPostTypeRepository::class);
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -73,6 +76,8 @@ class TaxonomyRepository
             ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` WHERE id = %s;", [$taxonomyId]);
             ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` WHERE taxonomy_id = %s;", [$taxonomyId]);
         }
+
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -91,6 +96,7 @@ class TaxonomyRepository
             ";
 
         ACPT_Lite_DB::executeQueryOrThrowException($sql, [$postId]);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -205,73 +211,6 @@ class TaxonomyRepository
 			$count = (count($res) > 0 and isset($res[0]->count) ) ? $res[0]->count : 0;
 			$taxonomyModel->setPostCount($count);
 
-			if(!$lazy){
-
-				// Meta boxes
-				$metaBoxQuery = "
-                    SELECT 
-                        id, 
-                        meta_box_name as name,
-                        meta_box_label as label,
-                        sort
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."`
-                    WHERE taxonomy = %s
-                ";
-				$metaBoxArgs = [$taxonomy->slug];
-
-				if(isset($meta['boxName'])){
-					$metaBoxQuery .= " AND meta_box_name = %s";
-					$metaBoxArgs[] = $meta['boxName'];
-				}
-
-				$metaBoxQuery .= " ORDER BY sort;";
-
-				$boxes = ACPT_Lite_DB::getResults($metaBoxQuery, $metaBoxArgs);
-
-				foreach ($boxes as $boxIndex => $box){
-					$boxModel = TaxonomyMetaBoxModel::hydrateFromArray([
-						'id' => $box->id,
-						'taxonomy' => $taxonomy->slug,
-						'name' => $box->name,
-						'sort' => $box->sort
-					]);
-
-					if($boxModel !== null and $box->label !== null){
-						$boxModel->changeLabel($box->label);
-					}
-
-					$sql = "
-                        SELECT
-                            id,
-                            field_name as name,
-                            field_type,
-                            field_default_value,
-                            field_description,
-                            required,
-                            showInArchive,
-                            sort
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-                        WHERE meta_box_id = %s
-                    ";
-
-					if(isset($meta['excludeFields'])){
-						$sql .= " AND id NOT IN ('".implode("','", $meta['excludeFields'])."')";
-					}
-
-					$sql .= " ORDER BY sort;";
-
-					$fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
-
-					// Meta box fields
-					foreach ($fields as $fieldIndex => $field){
-						$fieldModel = MetaRepository::hydrateMetaBoxFieldModel($field, $boxModel);
-						$boxModel->addField($fieldModel);
-					}
-
-					$taxonomyModel->addMetaBox($boxModel);
-				}
-			}
-
 			$customPostTypes = ACPT_Lite_DB::getResults("
                 SELECT
                     c.id,
@@ -384,6 +323,8 @@ class TaxonomyRepository
                 json_encode($taxonomyModel->getLabels()),
                 json_encode($taxonomyModel->getSettings())
         ]);
+
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
@@ -407,5 +348,8 @@ class TaxonomyRepository
                 $postId,
                 $taxonomyId
         ]);
+
+	    ACPT_Lite_DB::invalidateCacheTag(CustomPostTypeRepository::class);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 }

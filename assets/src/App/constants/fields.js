@@ -1,24 +1,65 @@
-import {Icon} from "@iconify/react";
+import useTranslation from "../hooks/useTranslation";
 import React from "react";
+import {resolveField} from "../utils/resolvers";
 
-export const EMAIL = 'Email';
-export const SELECT = 'Select';
-export const TEXT = 'Text';
+export const fieldGroupsDisplay = {
+    STANDARD: "standard",
+    ACCORDION: 'accordion',
+    VERTICAL_TABS: 'verticalTabs',
+    HORIZONTAL_TABS: 'horizontalTabs'
+};
 
-export const fieldsList = [
-    { value: EMAIL, label: <div className="vertical-center"><Icon icon="bx:bx-envelope" width="18px" /> &nbsp; Email address</div> },
-    { value: TEXT, label: <div className="vertical-center"><Icon icon="bx:bx-text" width="18px" /> &nbsp; Text</div> },
-    { value: SELECT, label: <div className="vertical-center"><Icon icon="bx:bx-select-multiple" width="18px" /> &nbsp; Select</div> },
-];
+export const fieldSettings = {
+    MAX_NESTING: 4,
+};
 
-export const fieldsListGroupedOptions = [
-    {
-        label: "BASIC",
-        options: [
-            fieldsList[0],
-            fieldsList[1],
-            fieldsList[2],
-        ]
-    },
-];
+export const fieldTypes = {
+    DATE: 'Date',
+    EMAIL: 'Email',
+    SELECT: 'Select',
+    TEXT: 'Text',
+    TEXTAREA: 'Textarea',
+};
 
+/**
+ *
+ * @return {[{options: [{label, value: string}, {label, value: string}], label: *}, {options: [], label: *}, {options: [], label: *}, {options: [], label: *}, {options: [], label: *}]}
+ */
+export const fieldsList = (nestingLevel) => {
+
+    const fieldListElement = (fieldType) => {
+        const {label} = resolveField(fieldType);
+
+        return {label: useTranslation(label), value: fieldType};
+    };
+
+    return [
+        {
+            label: useTranslation("BASIC"),
+            options: [
+                fieldListElement(fieldTypes.TEXT),
+                fieldListElement(fieldTypes.TEXTAREA),
+                fieldListElement(fieldTypes.SELECT),
+            ]
+        },
+        {
+            label: useTranslation("SPECIALIZED FIELDS"),
+            options: [
+                fieldListElement(fieldTypes.DATE),
+                fieldListElement(fieldTypes.EMAIL),
+            ]
+        },
+    ];
+};
+
+/**
+ *
+ * @param fieldType
+ * @return {boolean}
+ */
+export const fieldHasOptions = (fieldType) => {
+
+    return (
+        fieldType === fieldTypes.SELECT
+    );
+};

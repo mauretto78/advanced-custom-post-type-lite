@@ -1,0 +1,20 @@
+<?php
+
+namespace ACPT_Lite\Utils;
+
+class Translator
+{
+	/**
+	 * @param $name
+	 *
+	 * @return string|void
+	 */
+	public static function translate($name)
+	{
+		if( $name !== __($name, ACPT_LITE_PLUGIN_NAME)){
+			return __($name, ACPT_LITE_PLUGIN_NAME);
+		}
+
+		return __(ucfirst($name), ACPT_LITE_PLUGIN_NAME);
+	}
+}

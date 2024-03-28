@@ -148,9 +148,7 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
         return $this->fields;
     }
 
-    /**
-     * @return array|mixed
-     */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

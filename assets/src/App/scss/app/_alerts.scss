@@ -1,0 +1,47 @@
+.acpt-alert {
+  display: block;
+  padding: 14px 24px;
+  border-radius: $border-radius;
+  color: $gray;
+  background: $pale-gray;
+  border: none;
+  outline: none;
+  transition: .3s;
+  font-size: $font-size;
+  width: -webkit-fill-available;
+
+  &.acpt-alert-disabled {
+    color: $gray;
+    background: $light-gray;
+  }
+
+  &.acpt-alert-warning {
+    background: $warning-bg;
+    color: $warning-color;
+  }
+
+  &.acpt-alert-info {
+    background: $info-bg;
+    color: $info-color;
+  }
+
+  &.acpt-alert-primary {
+    background: $primary-color;
+    color: $white;
+  }
+
+  &.acpt-alert-secondary {
+    background: $secondary-color;
+    color: $primary-color;
+  }
+
+  &.acpt-alert-success {
+    background: $success-bg;
+    color: $success-color;
+  }
+
+  &.acpt-alert-danger {
+    background: $danger-bg;
+    color: $danger-color;
+  }
+}

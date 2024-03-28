@@ -88,5 +88,7 @@ class SettingsRepository
                 $settingsModel->getKey(),
                 $settingsModel->getValue(),
         ]);
+
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 }

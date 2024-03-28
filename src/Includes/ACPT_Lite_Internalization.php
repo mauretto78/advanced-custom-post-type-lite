@@ -2,6 +2,8 @@
 
 namespace ACPT_Lite\Includes;
 
+use ACPT_Lite\Core\Repository\SettingsRepository;
+
 /**
  * Define the internationalization functionality
  *
@@ -38,18 +40,29 @@ class ACPT_Lite_Internalization
         $this->loader = $loader;
     }
 
-    /**
-     * Load the plugin text domain for translation.
-     *
-     * @since    1.0.0
-     */
-    public function loadPluginTextDomain()
-    {
-        load_plugin_textdomain( ACPT_LITE_PLUGIN_NAME, false, dirname( plugin_basename( __FILE__ ) ) . "/i18n/languages" );
-    }
+	/**
+	 * @return string
+	 */
+	private function getLocale()
+	{
+		try {
+			$language = SettingsRepository::getSingle('language');
 
-    public function run()
-    {
-        $this->loader->addAction( 'plugins_loaded', $this, 'loadPluginTextDomain' );
-    }
+			if($language !== null){
+				return $language->getValue();
+			}
+
+			return 'en_US';
+		} catch (\Exception $exception){
+			return 'en_US';
+		}
+	}
+
+	/**
+	 * Run localisation
+	 */
+	public function run()
+	{
+		load_textdomain( ACPT_LITE_PLUGIN_NAME, __DIR__ . '/../../i18n/languages/'.$this->getLocale().'.mo');;
+	}
 }

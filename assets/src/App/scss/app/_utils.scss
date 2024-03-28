@@ -1,0 +1,352 @@
+/**
+ *  BORDER
+ */
+
+.with-border {
+  border: $border-thickness solid $light-gray;
+}
+
+.b-bottom-1 {
+  border-bottom: $border-thickness solid $light-gray;
+}
+
+.b-rounded {
+  border-radius: $border-radius;
+}
+
+.with-shadow {
+  box-shadow: $box-shadow;
+}
+
+/**
+ *  CURSOR
+ */
+
+.cursor-help {
+  cursor: help;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+.cursor-not-allowed {
+  cursor: move;
+}
+
+/**
+ *  BG COLOR
+ */
+
+.bg-white {
+  background: $white;
+}
+
+.bg-pale-gray {
+  background: $pale-gray;
+}
+
+/**
+ *  TEXT COLOR
+ */
+
+.color-white {
+  color: $white;
+}
+
+.color-black {
+  color: $black;
+}
+
+.color-gray {
+  color: $gray;
+}
+
+.color-light-gray {
+  color: $light-gray;
+}
+
+.color-pale-gray {
+  color: $pale-gray;
+}
+
+.color-danger {
+  color: $danger-color;
+}
+
+/**
+ *  TEXT ALIGN
+ */
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/**
+ *  ELLIPSIS
+ */
+
+.text-ellipsis {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+/**
+ *  POSITIONING
+ */
+
+.sticky {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.top-1 {
+  position: relative;
+  top: 1px;
+}
+
+.top-2 {
+  position: relative;
+  top: $space-2;
+}
+
+/**
+ *  FLEX
+ */
+
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-shrink {
+  flex-shrink: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.for-xs {
+    @media screen and (max-width: 960px){
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
+.flex-absolute-center {
+  display: flex;
+  flex-grow: unset;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  gap: 0;
+
+  &.for-xs {
+    @media screen and (max-width: 960px){
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  }
+}
+
+.i-flex-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+
+  &.for-xs {
+    @media screen and (max-width: 960px){
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  }
+}
+
+/**
+ *  WIDTH AND SPACING
+ */
+
+.max-w-400 {
+  max-width: 400px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.s-4 {
+  gap: $space-4;
+}
+
+.s-8 {
+  gap: $space-8;
+}
+
+.s-12 {
+  gap: $space-12;
+}
+
+.s-24 {
+  gap: $space-24;
+}
+
+.mt-4 {
+  margin-top: $space-4;
+}
+
+.mt-8 {
+  margin-top: $space-8;
+}
+
+.mt-12 {
+  margin-top: $space-12;
+}
+
+.mt-24 {
+  margin-top: $space-24;
+}
+
+.mb-4 {
+  margin-bottom: $space-4;
+}
+
+.mb-8 {
+  margin-bottom: $space-8;
+}
+
+.mb-12 {
+  margin-bottom: $space-12;
+}
+
+.mb-24 {
+  margin-bottom: $space-24;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.m-4 {
+  margin: $space-4;
+}
+
+.m-8 {
+  margin: $space-8;
+}
+
+.m-12 {
+  margin: $space-12;
+}
+
+.m-24 {
+  margin: $space-24;
+}
+
+.p-4 {
+  padding: $space-4;
+}
+
+.p-8 {
+  padding: $space-8;
+}
+
+.p-12 {
+  padding: $space-12;
+}
+
+.p-24 {
+  padding: $space-24;
+}
+
+/**
+ *  VISIBILITY
+ */
+
+.hidden {
+  display: none;
+}
+
+.hidden-xs {
+  @media screen and (max-width: 960px){
+    display: none;
+  }
+}
+
+.visible-xs {
+  display: none;
+
+  @media screen and (max-width: 960px){
+    display: block;
+  }
+}
+
+.responsive {
+  @media screen and (max-width: 960px) {
+    overflow-x: auto;
+  }
+}
+
+
+.acpt-code {
+  font-family: Monaco, Courier New, monospace;
+  background: $pale-gray;
+  padding: 2px;
+  border: $border-thickness solid $light-gray;
+  border-radius: $border-radius;
+}
+
+.line {
+  width: $space-24;
+  height: $border-thickness;
+  background-color: $light-gray;
+}

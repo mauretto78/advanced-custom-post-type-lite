@@ -2,1542 +2,1876 @@
 
 namespace ACPT_Lite\Core\Repository;
 
-use ACPT_Lite\Core\Models\User\UserMetaBoxFieldModel;
+use ACPT_Lite\Constants\BelongsTo;
+use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Constants\Operator;
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
-use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeMetaBoxModel;
-use ACPT_Lite\Core\Models\MetaField\MetaBoxFieldOptionModel;
-use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\Taxonomy\TaxonomyMetaBoxModel;
-use ACPT_Lite\Core\Models\User\UserMetaBoxModel;
-use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Core\Models\Belong\BelongModel;
+use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
+use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Core\Models\Meta\MetaFieldOptionModel;
+use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
+use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
-use ACPT_Lite\Utils\PostMetaSync;
+use ACPT_Lite\Utils\MetaSync\MetaSync;
 
-class MetaRepository
+class MetaRepository extends AbstractRepository
 {
-    /**
-     * Delete all meta box
-     *
-     * @param array $args
-     * @return bool
-     * @throws \Exception
-     */
-    public static function deleteAll(array $args)
-    {
-        self::validateArgs([], $args);
+	/**
+	 * @return int
+	 */
+	public static function count()
+	{
+		$baseQuery = "
+            SELECT 
+                count(id) as count
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."`
+            ";
 
-        $meta = self::get($args);
+		$results = ACPT_Lite_DB::getResults($baseQuery);
 
-        if(empty($meta)){
-            return false;
-        }
+		return (int)$results[0]->count;
+	}
 
-        $belongsTo =  $args['belongsTo'];
-        $find = isset($args['find']) ? $args['find'] : null;
+	/**
+	 * Delete all meta groups
+	 *
+	 * @param array $args
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public static function deleteAll(array $args)
+	{
+		self::validateArgs(self::mandatoryKeys([]), $args);
 
-        ACPT_Lite_DB::startTransaction();
+		$groups = self::get($args);
 
-        foreach ($meta as $metaBoxModel){
-            self::deleteMetaBox([
-                'belongsTo' => $belongsTo,
-                'find' => $find,
-                'metaBox' => $metaBoxModel
-            ]);
-        }
+		if(empty($groups)){
+			return false;
+		}
 
-        ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::startTransaction();
 
-        return true;
-    }
+		foreach ($groups as $groupModel){
+			self::deleteMetaGroup($groupModel->getId());
+		}
 
-    /**
-     * Delete a meta box model
-     *
-     * @param array $args
-     * @throws \Exception
-     */
-    public static function deleteMetaBox(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'metaBox' => [
-                'required' => true,
-                'type' => 'object',
-                'instanceOf' => AbstractMetaBoxModel::class,
-            ],
-        ]);
+		ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
 
-        self::validateArgs($mandatoryKeys, $args);
+		return true;
+	}
 
-        ACPT_Lite_DB::startTransaction();
+	/**
+	 * @param $belongsTo
+	 * @param $find
+	 *
+	 * @throws \Exception
+	 */
+	public static function deleteBelongs($belongsTo, $find)
+	{
+		$sql = "
+			SELECT b.id FROM 
+			 `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+			WHERE b.belongs =  %s
+			AND b.find =  %s
+		;";
 
-        /** @var AbstractMetaBoxModel $metaBoxModel */
-        $metaBoxModel = $args['metaBox'];
-        $belongsTo = $args['belongsTo'];
-        $metaBoxTableName = self::metaBoxTableName($belongsTo);
+		$belongs = ACPT_Lite_DB::getResults($sql, [
+			$belongsTo,
+			$find
+		]);
 
-        $sql = "
-                    DELETE
-                        FROM `".$metaBoxTableName."`
-                        WHERE id = %s
-                    ";
-
-        $sql2 = "
-                    DELETE
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-                        WHERE meta_box_id = %s
-                    ";
-
-        $sql3 = "
-                    DELETE
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
-                        WHERE meta_box_id = %s
-                    ";
-
-
-        try {
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$metaBoxModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$metaBoxModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql3, [$metaBoxModel->getId()]);
-        } catch (\Exception $exception){
-            ACPT_Lite_DB::rollbackTransaction();
-            throw new \Exception($exception->getMessage());
-        }
-
-        foreach ($metaBoxModel->getFields() as $fieldModel){
-            self::deleteMetaField([
-                'metaBoxField' => $fieldModel,
-                'belongsTo' => $belongsTo,
-                'find' => $args['find'],
-            ]);
-        }
-
-        ACPT_Lite_DB::commitTransaction();
-    }
-
-    /**
-     * Delete meta box by its id
-     *
-     * @param array $args
-     * @return bool
-     * @throws \Exception
-     */
-    public static function deleteMetaBoxById(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'id' => [
-                'required' => true,
-                'type' => 'integer|string',
-            ],
-        ]);
-
-        self::validateArgs($mandatoryKeys, $args);
-
-        $id = $args['id'];
-        $belongsTo = $args['belongsTo'];
-        $find = isset($args['find']) ? $args['find'] : null;
-
-        $metaBoxModel = self::getMetaBoxById([
-            'id' => $id,
-            'belongsTo' => $belongsTo,
-            'find' => $find,
-        ]);
-
-        if( null !== $metaBoxModel) {
-            self::deleteMetaBox([
-                'belongsTo' => $args['belongsTo'],
-                'find' => $find,
-                'metaBox' => $metaBoxModel,
-            ]);
-        }
-
-        return false;
-    }
-
-    /**
-     * Delete meta field model
-     *
-     * @param array $args
-     * @throws \Exception
-     */
-    public static function deleteMetaField(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'metaBoxField' => [
-                'required' => true,
-                'type' => 'object',
-                'instanceOf' => AbstractMetaBoxFieldModel::class,
-            ],
-        ]);
-
-        self::validateArgs($mandatoryKeys, $args);
-
-        ACPT_Lite_DB::startTransaction();
-
-        /** @var AbstractMetaBoxFieldModel $metaBoxFieldModel */
-        $fieldModel = $args['metaBoxField'];
-
-        $sql = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
+		foreach ($belongs as $belong){
+			$sql = "
+	            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."`
                 WHERE id = %s
             ";
 
-        $sql2 = "
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$belong->id]);
+
+			$sql = "
+	            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."`
+                WHERE belong_id = %s
+            ";
+
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$belong->id]);
+		}
+	}
+
+	/**
+	 * @param string $id
+	 *
+	 * @throws \Exception
+	 */
+	public static function deleteMetaGroup(string $id)
+	{
+		ACPT_Lite_DB::startTransaction();
+
+		try {
+			$sql = "
+	            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."`
+                WHERE id = %s
+            ";
+
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$id]);
+
+			$sql = "
+	            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."`
+                WHERE group_id = %s
+            ";
+
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$id]);
+
+			$sql = "
+				SELECT b.id FROM 
+				 `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
+				where b.group_id =  %s
+			;";
+
+			$boxes = ACPT_Lite_DB::getResults($sql, [
+				$id
+			]);
+
+			if(!empty($boxes)){
+				foreach ($boxes as $box){
+					self::deleteMetaBox($box->id);
+				}
+			}
+
+		} catch (\Exception $exception){
+			ACPT_Lite_DB::rollbackTransaction();
+			throw new \Exception($exception->getMessage());
+		}
+
+		ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
+
+	/**
+	 * Delete a meta box
+	 *
+	 * @param string $boxId
+	 *
+	 * @throws \Exception
+	 */
+	public static function deleteMetaBox(string $boxId)
+	{
+		$sql = "
             DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
+                WHERE id = %s
+            ";
+
+		$sql2 = "
+            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
+                WHERE meta_box_id = %s
+            ";
+
+		$sql3 = "
+            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."`
+                WHERE meta_box_id = %s
+            ";
+
+		try {
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$boxId]);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$boxId]);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql3, [$boxId]);
+		} catch (\Exception $exception){
+			ACPT_Lite_DB::rollbackTransaction();
+			throw new \Exception($exception->getMessage());
+		}
+
+		ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
+
+	/**
+	 * Delete meta box by its id
+	 *
+	 * @param array $args
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public static function deleteMetaBoxById(array $args)
+	{
+		$mandatoryKeys = self::mandatoryKeys([
+			'id' => [
+				'required' => true,
+				'type' => 'integer|string',
+			],
+		]);
+
+		self::validateArgs($mandatoryKeys, $args);
+
+		$id = $args['id'];
+		$metaBoxModel = self::getMetaBoxById($id);
+
+		if( null !== $metaBoxModel) {
+			self::deleteMetaBox($id);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Delete meta field model
+	 *
+	 * @param string $fieldId
+	 * @throws \Exception
+	 */
+	public static function deleteMetaField(string $fieldId)
+	{
+		ACPT_Lite_DB::startTransaction();
+
+		$sql = "
+            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
+                WHERE id = %s
+            ";
+
+		$sql2 = "
+            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."`
                 WHERE meta_field_id = %s
             ";
 
-        try {
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$fieldModel->getId()]);
-            ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$fieldModel->getId()]);
-        } catch (\Exception $exception){
-            ACPT_Lite_DB::rollbackTransaction();
-            throw new \Exception($exception->getMessage());
-        }
-
-        foreach ($fieldModel->getOptions() as $optionModel){
-            $sql = "
-                DELETE
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
-                    WHERE id = %s
-                ";
-
-            try {
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [$optionModel->getId()]);
-            } catch (\Exception $exception){
-                ACPT_Lite_DB::rollbackTransaction();
-                throw new \Exception($exception->getMessage());
-            }
-        }
-
-        ACPT_Lite_DB::commitTransaction();
-    }
-
-    /**
-     * Check if a meta box exists by its name
-     *
-     * @param array $args
-     * @return bool
-     * @throws \Exception
-     */
-    public static function existsMetaBox(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'boxName' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ]);
-
-        self::validateArgs($mandatoryKeys, $args);
-
-        $belongsTo = $args['belongsTo'];
-        $boxName = $args['boxName'];
-        $metaBoxTableName = self::metaBoxTableName($belongsTo);
-
-        $baseQuery = null;
-        $queryArgs = [];
-
-        switch ($belongsTo){
-            case MetaTypes::CUSTOM_POST_TYPE:
-                $baseQuery = "
-                    SELECT
-                        id
-                    FROM `".$metaBoxTableName."`
-                    WHERE post_type = %s
-                    AND meta_box_name = %s
-                ";
-
-                $queryArgs = [$args['find'], $boxName];
-                break;
-
-            case MetaTypes::TAXONOMY:
-                $baseQuery = "
-                    SELECT 
-                        id
-                    FROM `".$metaBoxTableName."`
-                    WHERE taxonomy = %s
-                    AND meta_box_name = %s
-                ";
-
-                $queryArgs = [$args['find'], $boxName];
-                break;
-
-            case MetaTypes::USER:
-                $baseQuery = "
-                    SELECT 
-                        id
-                    FROM `".$metaBoxTableName."`
-                    WHERE meta_box_name = %s
-                ";
-
-                $queryArgs = [$boxName];
-                break;
-        }
-
-        if(!empty($baseQuery)){
-            $records = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
-
-            return count($records) === 1;
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if a  meta field exists by its name
-     *
-     * @param array $args
-     * @return bool
-     * @throws \Exception
-     */
-    public static function existsMetaBoxField(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'boxName' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-            'fieldName' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ]);
-
-        self::validateArgs($mandatoryKeys, $args);
-
-        $belongsTo = $args['belongsTo'];
-        $boxName = $args['boxName'];
-        $fieldName = $args['fieldName'];
-        $metaBoxTableName = self::metaBoxTableName($belongsTo);
-
-        $baseQuery = null;
-        $queryArgs = [];
-
-        switch ($belongsTo){
-            case MetaTypes::CUSTOM_POST_TYPE:
-                $baseQuery = "
-                    SELECT 
-                        f.id
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-                    JOIN `".$metaBoxTableName."` b ON b.id = f.meta_box_id
-                    WHERE b.post_type = %s
-                    AND b.meta_box_name = %s
-                    AND f.field_name = %s
-                ";
-
-                $queryArgs = [$args['find'], $boxName, $fieldName];
-                break;
-
-            case MetaTypes::TAXONOMY:
-                $baseQuery = "
-                    SELECT 
-                        f.id
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-                    JOIN `".$metaBoxTableName."` b ON b.id = f.meta_box_id
-                    WHERE b.taxonomy = %s
-                    AND b.meta_box_name = %s
-                    AND f.field_name = %s
-                ";
-
-                $queryArgs = [$args['find'], $boxName, $fieldName];
-                break;
-
-            case MetaTypes::USER:
-                $baseQuery = "
-                    SELECT 
-                        f.id
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-                    JOIN `".$metaBoxTableName."` b ON b.id = f.meta_box_id
-                    WHERE b.meta_box_name = %s
-                    AND f.field_name = %s
-                ";
-
-                $queryArgs = [$boxName, $fieldName];
-                break;
-        }
-
-        if(!empty($baseQuery)){
-            $records = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
-
-            return count($records) === 1;
-        }
-
-        return false;
-    }
-
-    /**
-     * Query for meta box
-     *
-     * @param array $args
-     * @return AbstractMetaBoxModel[]
-     * @throws \Exception
-     */
-    public static function get(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'id' => [
-                'required' => false,
-                'type' => 'integer|string',
-            ],
-            'boxName' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-            'excludeFields' => [
-                'required' => false,
-                'type' => 'array',
-            ],
-            'lazy' => [
-	            'required' => false,
-	            'type' => 'boolean',
-            ],
-        ]);
-
-        self::validateArgs($mandatoryKeys, $args);
-
-        $belongsTo = $args['belongsTo'];
-        $metaBoxTableName = self::metaBoxTableName($belongsTo);
-	    $lazy = isset($args['lazy']) ? $args['lazy'] : false;
-
-        $metaBoxQuery = null;
-        $metaBoxArgs = [];
-
-        $results = [];
-
-        // query for boxes
-        switch($belongsTo){
-            case MetaTypes::CUSTOM_POST_TYPE:
-                $metaBoxQuery = "
-                    SELECT 
-                        id, 
-                        meta_box_name as name,
-                        meta_box_label as label,
-                        post_type,
-                        sort
-                    FROM `".$metaBoxTableName."`
-                    WHERE post_type = %s
-                ";
-                $metaBoxArgs[] = $args['find'];
-
-                if(isset($args['boxName'])){
-                    $metaBoxQuery .= " AND meta_box_name = %s";
-                    $metaBoxArgs[] = $args['boxName'];
-                }
-
-                if(isset($args['id'])){
-                    $metaBoxQuery .= " AND id = %s";
-                    $metaBoxArgs[] = $args['id'];
-                }
-
-                $metaBoxQuery .= " ORDER BY sort;";
-
-                break;
-
-            case MetaTypes::TAXONOMY:
-                $metaBoxQuery = "
-                    SELECT 
-                        id, 
-                        meta_box_name as name,
-                        meta_box_label as label,
-                        taxonomy,
-                        sort
-                    FROM `".$metaBoxTableName."`
-                    WHERE taxonomy = %s
-                ";
-                $metaBoxArgs[] = $args['find'];
-
-                if(isset($args['boxName'])){
-                    $metaBoxQuery .= " AND meta_box_name = %s";
-                    $metaBoxArgs[] = $args['boxName'];
-                }
-
-                if(isset($args['id'])){
-                    $metaBoxQuery .= " AND id = %s";
-                    $metaBoxArgs[] = $args['id'];
-                }
-
-                $metaBoxQuery .= " ORDER BY sort;";
-                break;
-
-            case MetaTypes::USER:
-                $metaBoxQuery = "
-                    SELECT 
-                        uf.id, 
-                        uf.meta_box_name as name,
-                        uf.meta_box_label as label,
-                        uf.sort
-                    FROM `".$metaBoxTableName."` uf
-                    WHERE 1=1
-                    ";
-
-                if(isset($args['boxName'])){
-                    $metaBoxQuery .= " AND uf.meta_box_name = %s";
-                    $metaBoxArgs[] = $args['boxName'];
-                }
-
-                if(isset($args['id'])){
-                    $metaBoxQuery .= " AND uf.id = %s";
-                    $metaBoxArgs[] = $args['id'];
-                }
-
-                $metaBoxQuery .= " ORDER BY uf.sort;";
-                break;
-        }
-
-        if(!empty($metaBoxQuery)){
-            $boxes = ACPT_Lite_DB::getResults($metaBoxQuery, $metaBoxArgs);
-
-            // then fields
-            foreach ($boxes as $boxIndex => $box){
-
-                $boxModel = null;
-
-                switch ($belongsTo){
-                    case MetaTypes::CUSTOM_POST_TYPE:
-                        $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray( [
-                            'id'       => $box->id,
-                            'postType' => $box->post_type,
-                            'name'     => $box->name,
-                            'sort'     => $box->sort
-                        ] );
-                        break;
-
-                    case MetaTypes::TAXONOMY:
-                        $boxModel = TaxonomyMetaBoxModel::hydrateFromArray( [
-                            'id'       => $box->id,
-                            'taxonomy' => $box->taxonomy,
-                            'name'     => $box->name,
-                            'sort'     => $box->sort
-                        ] );
-                        break;
-
-                    case MetaTypes::USER:
-                        $boxModel = UserMetaBoxModel::hydrateFromArray( [
-                            'id'       => $box->id,
-                            'name'     => $box->name,
-                            'sort'     => $box->sort
-                        ] );
-                        break;
-                }
-
-	            if($boxModel !== null and $box->label){
-		            $boxModel->changeLabel($box->label);
-	            }
-
-                if($lazy === false){
-	                $sql = "
-	                    SELECT
-	                        id,
-	                        field_name as name,
-	                        field_type,
-	                        field_default_value,
-	                        field_description,
-	                        required,
-	                        showInArchive,
-	                        sort
-	                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
-	                    WHERE meta_box_id = %s
-	                ";
-
-	                if(isset($args['excludeFields'])){
-		                $sql .= " AND id NOT IN ('".implode("','", $args['excludeFields'])."')";
-	                }
-
-	                $sql .= " ORDER BY sort;";
-
-	                $fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
-
-	                // Meta box fields
-	                foreach ($fields as $fieldIndex => $field){
-		                $fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel);
-		                $boxModel->addField($fieldModel);
-	                }
-                }
-
-                $results[] = $boxModel;
-            }
-        }
-
-        return $results;
-    }
-
-    /**
-     * Hydrate the meta field object
-     *
-     * @param $field
-     * @param AbstractMetaBoxModel $boxModel
-     * @return CustomPostTypeMetaBoxFieldModel
-     * @throws \Exception
-     */
-    public static function hydrateMetaBoxFieldModel($field, AbstractMetaBoxModel $boxModel)
-    {
-        $fieldModel = null;
-
-        switch ($boxModel->metaType()){
-            case MetaTypes::CUSTOM_POST_TYPE:
-                $fieldModel = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
-                    'id' => $field->id,
-                    'metaBox' => $boxModel,
-                    'title' => $field->name,
-                    'type' => $field->field_type,
-                    'required' => $field->required,
-                    'defaultValue' => isset($field->field_default_value) ? $field->field_default_value : null,
-                    'description' => isset($field->field_description) ? $field->field_description : null,
-                    'showInArchive' => $field->showInArchive,
-                    'sort' => $field->sort
-                ]);
-                break;
-
-            case MetaTypes::TAXONOMY:
-                $fieldModel = TaxonomyMetaBoxFieldModel::hydrateFromArray([
-                    'id' => $field->id,
-                    'metaBox' => $boxModel,
-                    'name' => $field->name,
-                    'type' => $field->field_type,
-                    'required' => $field->required,
-                    'defaultValue' => isset($field->field_default_value) ? $field->field_default_value : null,
-                    'description' => isset($field->field_description) ? $field->field_description : null,
-                    'sort' => $field->sort
-                ]);
-                break;
-
-            case MetaTypes::USER:
-                $fieldModel = UserMetaBoxFieldModel::hydrateFromArray([
-                    'id' => $field->id,
-                    'metaBox' => $boxModel,
-                    'name' => $field->name,
-                    'type' => $field->field_type,
-                    'required' => $field->required,
-                    'defaultValue' => isset($field->field_default_value) ? $field->field_default_value : null,
-                    'description' => isset($field->field_description) ? $field->field_description : null,
-                    'showInArchive' => $field->showInArchive,
-                    'sort' => $field->sort
-                ]);
-                break;
-        }
-
-        if($fieldModel === null){
-            return null;
-        }
-
-        // Options
-        $options = ACPT_Lite_DB::getResults("
+		try {
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$fieldId]);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$fieldId]);
+		} catch (\Exception $exception){
+			ACPT_Lite_DB::rollbackTransaction();
+			throw new \Exception($exception->getMessage());
+		}
+
+		ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
+
+	/**
+	 * Check if a meta box exists by its name
+	 *
+	 * @param array $args
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public static function existsMetaBox(array $args)
+	{
+		$mandatoryKeys = [
+			'boxName' => [
+				'required' => true,
+				'type' => 'string',
+			],
+		];
+
+		self::validateArgs($mandatoryKeys, $args);
+
+		$boxName = $args['boxName'];
+
+		$baseQuery = "
+            SELECT
+                id
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
+            WHERE meta_box_name = %s
+        ";
+
+		$queryArgs = [$boxName];
+		$records = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
+
+		if(empty($records)){
+			return false;
+		}
+
+		return count($records) === 1;
+
+	}
+
+	/**
+	 * Check if a  meta field exists by its name
+	 *
+	 * @param array $args
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public static function existsMetaBoxField(array $args)
+	{
+		$mandatoryKeys = [
+			'boxName' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'fieldName' => [
+				'required' => true,
+				'type' => 'string',
+			],
+		];
+
+		self::validateArgs($mandatoryKeys, $args);
+
+		$boxName = $args['boxName'];
+		$fieldName = $args['fieldName'];
+
+		$baseQuery = "
+            SELECT 
+                f.id
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            WHERE b.meta_box_name = %s
+            AND f.field_name = %s
+        ";
+
+		$queryArgs = [$boxName, $fieldName];
+		$records = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
+
+		if(empty($records)){
+			return false;
+		}
+
+		return count($records) === 1;
+	}
+
+	/**
+	 * @param $excludeId
+	 *
+	 * @return array
+	 */
+	public static function metaFieldsFlatArray($excludeId)
+	{
+		$guery = "
+	        SELECT 
+                f.id, 
+                f.meta_box_id as box_id,
+                f.field_name as name,
+                b.meta_box_name as box_name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            WHERE f.id != %s
+	    ";
+
+		return ACPT_Lite_DB::getResults($guery, [$excludeId]);
+	}
+
+	/**
+	 * Query for meta groups
+	 *
+	 * @param array $args
+	 * @return MetaGroupModel[]
+	 * @throws \Exception
+	 */
+	public static function get(array $args): array
+	{
+		$mandatoryKeys = self::mandatoryKeys([
+			'id' => [
+				'required' => false,
+				'type' => 'integer|string',
+			],
+			'groupName' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'boxId' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'boxName' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'page' => [
+				'required' => false,
+				'type' => 'integer|string',
+			],
+			'perPage' => [
+				'required' => false,
+				'type' => 'integer|string',
+			],
+			'excludeField' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'formBuilder' => [
+				'required' => false,
+				'type' => 'boolean',
+			],
+			'lazy' => [
+				'required' => false,
+				'type' => 'boolean',
+			],
+			'gutenberg' => [
+				'required' => false,
+				'type' => 'boolean',
+			],
+		]);
+
+		self::validateArgs($mandatoryKeys, $args);
+
+		$results = [];
+		$id = isset($args['id']) ? $args['id'] : null;
+		$belongsTo = isset($args['belongsTo']) ? $args['belongsTo'] : null;
+		$groupName = isset($args['groupName']) ? $args['groupName'] : null;
+		$find = isset($args['find']) ? $args['find'] : null;
+		$lazy = isset($args['lazy']) ? $args['lazy'] : false;
+		$boxName = isset($args['boxName']) ? $args['boxName'] : false;
+		$excludeField = isset($args['excludeField']) ? $args['excludeField'] : null;
+		$formBuilder = isset($args['formBuilder']) ? $args['formBuilder'] : false;
+		$gutenberg = isset($args['gutenberg']) ? $args['gutenberg'] : false;
+
+		$groupQueryArgs = [];
+		$groupQuery = "
+	        SELECT 
+                g.id, 
+                g.group_name as name,
+                g.label,
+                g.display
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
+            LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` b ON b.group_id = g.id
+            WHERE 1 = 1
+	    ";
+
+		if($id !== null){
+			$groupQuery .= " AND g.id = %s";
+			$groupQueryArgs[] = $id;
+		}
+
+		if($groupName !== null){
+			$groupQuery .= " AND g.group_name = %s";
+			$groupQueryArgs[] = $groupName;
+		}
+
+		$groupQuery .= ' GROUP BY g.id ORDER BY g.group_name ASC';
+		$groups = ACPT_Lite_DB::getResults($groupQuery, $groupQueryArgs);
+		$groupModels = [];
+
+		foreach ($groups as $group){
+
+			$groupModel = MetaGroupModel::hydrateFromArray([
+				'id'       => $group->id,
+				'name'     => $group->name,
+				'label'    => $group->label,
+				'display'    => $group->display,
+			]);
+
+			$belongQuery = "
+		        SELECT 
+		        	b.id,
+					b.belongs,
+					b.operator,
+					b.find,
+					b.logic,
+					b.sort
+	            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+	            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` bb on bb.belong_id = b.id
+	            WHERE bb.group_id = %s
+	            GROUP BY b.id
+	            ORDER BY b.sort
+		    ";
+
+			$belongQueryArgs = [
+				$group->id
+			];
+
+			$belongs = ACPT_Lite_DB::getResults($belongQuery, $belongQueryArgs);
+
+			foreach ($belongs as $belong){
+				$belongModel = BelongModel::hydrateFromArray([
+					'id' => $belong->id,
+					'belongsTo' => $belong->belongs,
+					'operator' => $belong->operator,
+					'find' => $belong->find,
+					'logic' => $belong->logic,
+					'sort' => $belong->sort,
+				]);
+
+				$groupModel->addBelong($belongModel);
+			}
+
+			$groupModels[] = $groupModel;
+		}
+
+		foreach ($groupModels as $groupModel){
+			$groupIsVisible = true;
+
+			if($belongsTo){
+				if($find){
+					$groupIsVisible = $groupModel->belongsTo($belongsTo, Operator::EQUALS, $find);
+				} else {
+					$groupIsVisible = $groupModel->belongsTo($belongsTo);
+				}
+			}
+
+			if($groupIsVisible === true){
+				if($lazy === false){
+
+					$boxesQueryArgs = [
+						$groupModel->getId()
+					];
+
+					$boxesQuery = "
+						SELECT
+			                id,
+			                group_id,
+			                meta_box_name as name,
+			                meta_box_label as label,
+			                sort
+			            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
+			            WHERE group_id = %s
+					";
+
+					if($boxName){
+						$boxesQuery .= " AND meta_box_name = %s";
+						$boxesQueryArgs[] = $boxName;
+					}
+
+					$boxesQuery .= " ORDER BY sort";
+
+					$boxes = ACPT_Lite_DB::getResults($boxesQuery, $boxesQueryArgs);
+
+					foreach ($boxes as $box){
+
+						$boxModel = MetaBoxModel::hydrateFromArray([
+							'id' => $box->id,
+							'group' => $groupModel,
+							'name' => $box->name,
+							'sort' => $box->sort,
+							'label' => $box->label,
+						]);
+
+						// fields
+						$sql = "
+		                    SELECT
+		                        id,
+		                        field_name as name,
+		                        field_label as label,
+		                        field_type,
+		                        field_default_value,
+		                        field_description,
+		                        required,
+		                        showInArchive,
+		                        block_id,
+		                        filter_in_admin,
+		                        quick_edit,
+		                        sort
+		                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
+		                    WHERE meta_box_id = %s
+		                    AND parent_id IS NULL
+		                    AND block_id IS NULL
+		                ";
+
+						$sqlArgs = [$box->id];
+
+						if($excludeField){
+							$sql .= " AND id != %s";
+							$sqlArgs[] = $excludeField;
+						}
+
+						$sql .= " ORDER BY sort;";
+
+						$fields = ACPT_Lite_DB::getResults($sql, $sqlArgs);
+
+						// Meta box fields
+						foreach ($fields as $fieldIndex => $field){
+							$fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel, $excludeField);
+							$boxModel->addField($fieldModel);
+						}
+
+						$groupModel->addBox($boxModel);
+					}
+				}
+
+				$results[] = $groupModel;
+			}
+		}
+
+		return $results;
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function getNames(): array
+	{
+		$names = [
+			'groups' => [],
+			'boxes' => [],
+			'fields' => [],
+			'blocks' => [],
+		];
+
+		$groupQuery = "
+	        SELECT 
+                g.id, 
+                g.group_name as name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
+	    ";
+
+		$boxQuery = "
+	        SELECT 
+                b.id, 
+                b.meta_box_name as name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
+	    ";
+
+		$fieldQuery = "
+	        SELECT 
+                f.id, 
+                f.field_name as name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+	    ";
+
+		$groups = ACPT_Lite_DB::getResults($groupQuery, []);
+		foreach ($groups as $group){
+			$names['groups'][] = [
+				'id' => $group->id,
+				'name' => $group->name,
+			];
+		}
+
+		$boxes = ACPT_Lite_DB::getResults($boxQuery, []);
+		foreach ($boxes as $box){
+			$names['boxes'][] = [
+				'id' => $box->id,
+				'name' => $box->name,
+			];
+		}
+
+		$fields  = ACPT_Lite_DB::getResults($fieldQuery, []);
+		foreach ($fields as $field){
+			$names['fields'][] = [
+				'id' => $field->id,
+				'name' => $field->name,
+			];
+		}
+
+		return $names;
+	}
+
+	/**
+	 * Hydrate the meta field object
+	 *
+	 * @param $field
+	 * @param MetaBoxModel $boxModel
+	 * @param null $excludeField
+	 *
+	 * @return MetaFieldModel
+	 * @throws \Exception
+	 */
+	public static function hydrateMetaBoxFieldModel($field, MetaBoxModel $boxModel, $excludeField = null): ?MetaFieldModel
+	{
+		$fieldModel = MetaFieldModel::hydrateFromArray([
+			'id' => $field->id,
+			'box' => $boxModel,
+			'name' => $field->name,
+			'label' => $field->label,
+			'type' => $field->field_type,
+			'isRequired' => (bool)$field->required,
+			'defaultValue' => isset($field->field_default_value) ? $field->field_default_value : null,
+			'description' => isset($field->field_description) ? $field->field_description : null,
+			'showInArchive' => (bool)$field->showInArchive,
+			'sort' => (int)$field->sort
+		]);
+
+		if(isset($field->quick_edit) and $field->quick_edit == 1){
+			$fieldModel->setQuickEdit(true);
+		}
+
+		if(isset($field->filter_in_admin) and $field->filter_in_admin == 1){
+			$fieldModel->setFilterableInAdmin(true);
+		}
+
+		if(isset($field->parent_id)){
+			$fieldModel->setParentId($field->parent_id);
+		}
+
+		if($fieldModel === null){
+			return null;
+		}
+
+		if(isset($field->parent_id)){
+			$fieldModel->setParentId($field->parent_id);
+		}
+
+		// Children
+		$excludeQuery = $excludeField ? " AND id != %s" : "";
+		$childrenArgs = [$field->id];
+
+		if($excludeField){
+			$childrenArgs[] = $excludeField;
+		}
+
+		$children = ACPT_Lite_DB::getResults("
+            SELECT
+                id,
+                field_name as name,
+                field_label as label,
+                field_type,
+                field_default_value,
+                field_description,
+                required,
+                showInArchive,
+                sort
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
+            WHERE parent_id = %s 
+            ".$excludeQuery."
+            ORDER BY sort
+        ;", $childrenArgs);
+
+		foreach ($children as $child){
+			$childFieldModel = self::hydrateMetaBoxFieldModel($child, $boxModel);
+			$childFieldModel->setParentId($field->id);
+			$fieldModel->addChild($childFieldModel);
+		}
+
+		// Options
+		$options = ACPT_Lite_DB::getResults("
             SELECT
                 id,
                 meta_box_id as boxId,
                 meta_field_id as fieldId,
                 option_label as label,
                 option_value as value,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`
+                sort,
+                is_default
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."`
             WHERE meta_field_id = %s
             ORDER BY sort
         ;", [$field->id]);
 
-        foreach ($options as $option){
-            $optionModel = MetaBoxFieldOptionModel::hydrateFromArray([
-                'id' => $option->id,
-                'metaBoxField' => $fieldModel,
-                'label' => $option->label,
-                'value' => $option->value,
-                'sort' => $option->sort,
-            ]);
+		foreach ($options as $option){
+			$optionModel = MetaFieldOptionModel::hydrateFromArray([
+				'id' => $option->id,
+				'metaField' => $fieldModel,
+				'label' => $option->label,
+				'value' => $option->value,
+				'sort' => $option->sort,
+				'isDefault' => $option->is_default == '0' ? false : true,
+			]);
 
-            $fieldModel->addOption($optionModel);
-        }
+			$fieldModel->addOption($optionModel);
+		}
 
-        return $fieldModel;
-    }
+		return $fieldModel;
+	}
 
-    /**
-     * @param array $args
-     * @return AbstractMetaBoxModel|null
-     * @throws \Exception
-     */
-    public static function getMetaBoxByName(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'boxName' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ]);
+	/**
+	 * @param string $boxName
+	 *
+	 * @return MetaBoxModel|null
+	 * @throws \Exception
+	 */
+	public static function getMetaBoxByName($boxName)
+	{
+		$boxesQuery = "
+			SELECT
+                id,
+                group_id,
+                meta_box_name as name,
+                meta_box_label as label,
+                sort
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
+            WHERE meta_box_name = %s
+            ORDER BY sort
+		";
 
-        self::validateArgs($mandatoryKeys, $args);
+		$boxes = ACPT_Lite_DB::getResults($boxesQuery, [$boxName]);
 
-        $boxName = $args['boxName'];
+		if(empty($boxes)){
+			return null;
+		}
 
-        $metaBoxes = self::get($args);
+		$box = $boxes[0];
 
-        foreach ($metaBoxes as $boxModel){
-            if($boxModel->getName() === $boxName){
-                return $boxModel;
-            }
-        }
+		$groupModel = self::get([
+			'id' => $box->group_id,
+			'lazy' => true
+		]);
 
-        return null;
-    }
+		$boxModel = MetaBoxModel::hydrateFromArray([
+			'id' => $box->id,
+			'group' => $groupModel[0],
+			'name' => $box->name,
+			'sort' => $box->sort,
+			'label' => $box->label,
+		]);
 
-    /**
-     * @param array $args
-     * @return AbstractMetaBoxFieldModel|null
-     * @throws \Exception
-     */
-    public static function getMetaFieldByName(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'boxName' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-            'fieldName' => [
-                'required' => true,
-                'type' => 'string',
-            ],
-        ]);
+		// fields
+		$sql = "
+	        SELECT
+	            id,
+	            field_name as name,
+	            field_label as label,
+	            field_type,
+	            field_default_value,
+	            field_description,
+	            required,
+	            showInArchive,
+	            block_id,
+	            filter_in_admin,
+	            quick_edit,
+	            sort
+	        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
+	        WHERE meta_box_id = %s
+	        AND parent_id IS NULL
+	        AND block_id IS NULL
+	    ";
 
-        self::validateArgs($mandatoryKeys, $args);
+		$sql .= " ORDER BY sort;";
 
-        $belongsTo = $args['belongsTo'];
-        $find = isset($args['find']) ? $args['find'] : null;
-        $boxName = $args['boxName'];
-        $fieldName = $args['fieldName'];
+		$fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
 
-        $metaBoxes = self::get([
-            'boxName' => $boxName,
-            'belongsTo' => $belongsTo,
-            'find' => $find,
-        ]);
+		// Meta box fields
+		foreach ($fields as $fieldIndex => $field){
+			$fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel);
+			$boxModel->addField($fieldModel);
+		}
 
-        foreach ($metaBoxes as $boxModel){
-            if($boxModel->getName() === $boxName){
-                foreach ($boxModel->getFields() as $fieldModel){
-                    if($fieldModel->getName() === $fieldName){
-                        return $fieldModel;
-                    }
-                }
-            }
-        }
+		return $boxModel;
+	}
 
+	/**
+	 * @param array $args
+	 * @return MetaFieldModel|null
+	 * @throws \Exception
+	 */
+	public static function getMetaFieldByName(array $args): ?MetaFieldModel
+	{
+		$mandatoryKeys = [
+			'boxName' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'fieldName' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'lazy' => [
+				'required' => false,
+				'type' => 'boolean',
+			],
+		];
 
+		self::validateArgs($mandatoryKeys, $args);
 
-        return null;
-    }
+		$boxName = $args['box_name'] ?? $args['boxName'];
+		$fieldName = $args['field_name'] ?? $args['fieldName'];
+		$lazy = $args['lazy'] ?? false;
 
-    /**
-     * @param array $args
-     * @return AbstractMetaBoxModel|null
-     * @throws \Exception
-     */
-    public static function getMetaBoxById(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'id' => [
-                'required' => true,
-                'type' => 'integer|string',
-            ],
-        ]);
+		if($lazy){
+			$sql = "
+	            SELECT
+	                f.id,
+	                f.meta_box_id,
+	                f.field_name as name,
+	                f.field_label as label,
+	                f.field_default_value,
+	                f.field_description as description,
+	                f.field_type,
+	                f.parent_id,
+	                f.block_id,
+	                f.required,
+	                f.showInArchive,
+	                f.filter_in_admin,
+	                f.quick_edit,
+	                f.parent_id,
+					f.block_id,
+	                f.sort
+	            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+	            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
+	            WHERE f.field_name = %s AND b.meta_box_name = %s
+	        ;";
 
-        self::validateArgs($mandatoryKeys, $args);
+			$fields = ACPT_Lite_DB::getResults($sql, [$fieldName, $boxName]);
 
-        $belongsTo = $args['belongsTo'];
-        $metaBoxTableName = self::metaBoxTableName($belongsTo);
-        $id = $args['id'];
+			if(empty($fields)){
+				return null;
+			}
 
-        $baseQuery = null;
-        $queryArgs = [];
+			$field = $fields[0];
+			$boxModel = self::getMetaBoxById($field->meta_box_id, $lazy);
 
-        switch ($belongsTo){
-            case MetaTypes::CUSTOM_POST_TYPE:
-                $baseQuery = "
-                    SELECT 
-                        id, 
-                        post_type,
-                        meta_box_name as name,
-                        meta_box_label as label,
+			return MetaFieldModel::hydrateFromArray([
+				'id'            => $field->id,
+				'box'           => $boxModel,
+				'name'          => $field->name,
+				'label'         => $field->label,
+				'type'          => $field->field_type,
+				'isRequired'    => $field->required == 1,
+				'defaultValue'  => $field->field_default_value,
+				'description'   => $field->description,
+				'showInArchive' => $field->showInArchive == 1,
+				'sort'          => $field->sort
+			]);
+		}
+
+		$boxModel = self::getMetaBoxByName($boxName);
+
+		if($boxModel === null){
+			return null;
+		}
+
+		if($fieldModel = $boxModel->findAFieldByName($fieldName)){
+			return $fieldModel;
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param $id
+	 * @param bool $lazy
+	 *
+	 * @return MetaBoxModel|null
+	 * @throws \Exception
+	 */
+	public static function getMetaBoxById($id, $lazy = false)
+	{
+		$baseQuery = "
+            SELECT 
+                id, 
+                group_id,
+                meta_box_name as name,
+                meta_box_label as label,
+                sort
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
+            WHERE id = %s
+            ";
+
+		$queryArgs = [$id];
+		$boxes = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
+
+		if(!empty($boxes)){
+			foreach ($boxes as $box){
+
+				$sql = "
+            	    SELECT 
+	                    g.id, 
+	                    g.group_name as name,
+	                    g.label
+	                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
+	                WHERE id = %s
+            	";
+				$group = ACPT_Lite_DB::getResults($sql, [
+					$box->group_id
+				]);
+
+				if(empty($group)){
+					return null;
+				}
+
+				$groupModel = MetaGroupModel::hydrateFromArray([
+					'id'    => $group[0]->id,
+					'name'  => $group[0]->name,
+					'label' => $group[0]->label,
+				]);
+
+				// belongs
+				$belongQuery = "
+			        SELECT 
+			            b.id,
+						b.belongs,
+						b.operator,
+						b.find,
+						b.logic,
+						b.sort
+		            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+		            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` bb on bb.belong_id = b.id
+		            WHERE bb.group_id = %s
+		            GROUP BY b.id
+		            ORDER BY b.sort
+			    ";
+
+				$belongs = ACPT_Lite_DB::getResults($belongQuery, [$group[0]->id]);
+
+				foreach ($belongs as $belong){
+					$belongModel = BelongModel::hydrateFromArray([
+						'id' => $belong->id,
+						'belongsTo' => $belong->belongs,
+						'operator' => $belong->operator,
+						'find' => $belong->find,
+						'logic' => $belong->logic,
+						'sort' => $belong->sort,
+					]);
+
+					$groupModel->addBelong($belongModel);
+				}
+
+				$boxModel = MetaBoxModel::hydrateFromArray( [
+					'id'       => $box->id,
+					'group'    => $groupModel,
+					'name'     => $box->name,
+					'label'    => $box->label,
+					'sort'     => $box->sort
+				] );
+
+				// fields
+				if($lazy === false){
+					$sql = "
+                    SELECT
+                        id,
+                        field_name as name,
+                        field_label as label,
+                        field_type,
+                        field_default_value,
+                        field_description,
+                        required,
+                        showInArchive,
+                        block_id,
+                        filter_in_admin,
+                        quick_edit,
                         sort
-                    FROM `".$metaBoxTableName."`
-                    WHERE id = %s
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
+                    WHERE meta_box_id = %s
+                    AND parent_id IS NULL
+                    AND block_id IS NULL ORDER BY sort;
                 ";
 
-                $queryArgs = [$id];
-                break;
+					$fields = ACPT_Lite_DB::getResults($sql, [$box->id]);
 
-            case MetaTypes::TAXONOMY:
-                $baseQuery = "
-                    SELECT 
-                        id, 
-                        taxonomy,
-                        meta_box_name as name,
-                        meta_box_label as label,
-                        sort
-                    FROM `".$metaBoxTableName."`
-                    WHERE id = %s
-                ";
+					// Meta box fields
+					foreach ($fields as $fieldIndex => $field){
+						$fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel);
+						$boxModel->addField($fieldModel);
+					}
 
-                $queryArgs = [$id];
-                break;
+					$groupModel->addBox($boxModel);
+				}
 
-            case MetaTypes::USER:
-                $baseQuery = "
-                    SELECT 
-                        id, 
-                        meta_box_name as name,
-                        meta_box_label as label,
-                        sort
-                    FROM `".$metaBoxTableName."`
-                    WHERE id = %s
-                ";
+				return $boxModel;
+			}
+		}
 
-                $queryArgs = [$id];
-                break;
-        }
+		return null;
+	}
 
-        if(!empty($baseQuery)){
-            $boxes = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
-
-            foreach ($boxes as $box){
-
-	            $boxModel = null;
-
-                switch ($belongsTo){
-                    case MetaTypes::CUSTOM_POST_TYPE:
-                        $boxModel = CustomPostTypeMetaBoxModel::hydrateFromArray( [
-                            'id'       => $box->id,
-                            'postType' => $box->post_type,
-                            'name'     => $box->name,
-                            'sort'     => $box->sort
-                        ] );
-                        break;
-
-                    case MetaTypes::TAXONOMY:
-                        $boxModel = TaxonomyMetaBoxModel::hydrateFromArray( [
-                            'id'       => $box->id,
-                            'taxonomy' => $box->taxonomy,
-                            'name'     => $box->name,
-                            'sort'     => $box->sort
-                        ] );
-                        break;
-
-                    case MetaTypes::USER:
-                        $boxModel = UserMetaBoxModel::hydrateFromArray( [
-                            'id'       => $box->id,
-                            'name'     => $box->name,
-                            'sort'     => $box->sort
-                        ] );
-                        break;
-                }
-
-	            if($boxModel !== null and $box->label !== null){
-		            $boxModel->changeLabel($box->label);
-	            }
-
-	            return $boxModel;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @param array $args
-     * @return AbstractMetaBoxFieldModel|void|null
-     * @throws \Exception
-     */
-    public static function getMetaField(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'id' => [
-                'required' => true,
-                'type' => 'integer|string',
-            ],
-            'lazy' => [
-                'required' => false,
-                'type' => 'boolean',
-            ],
-        ]);
-
-        self::validateArgs($mandatoryKeys, $args);
-
-        $belongsTo = $args['belongsTo'];
-        $find = isset($args['find']) ? $args['find'] : null;
-        $id = $args['id'];
-        $lazy = isset($args['lazy']) ? $args['lazy'] : false;
-
-        $sql = "
+	/**
+	 * @param string $id
+	 * @param bool $lazy
+	 *
+	 * @return MetaFieldModel|null
+	 * @throws \Exception
+	 */
+	public static function getMetaFieldById($id, $lazy = false): ?MetaFieldModel
+	{
+		$sql = "
             SELECT
                 id,
                 meta_box_id,
                 field_name as name,
-                field_default_value as default_value,
+                field_label as label,
+                field_default_value,
                 field_description as description,
                 field_type,
+                parent_id,
+                block_id,
                 required,
                 showInArchive,
+                filter_in_admin,
+                quick_edit,
+                parent_id,
+				block_id,
                 sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
             WHERE id = %s
         ;";
 
-        $fields = ACPT_Lite_DB::getResults($sql, [$id]);
+		$fields = ACPT_Lite_DB::getResults($sql, [$id]);
 
-        foreach ($fields as $fieldIndex => $field) {
+		foreach ($fields as $fieldIndex => $field) {
+			$boxModel = self::getMetaBoxById($field->meta_box_id, $lazy);
 
-            $boxModel = self::getMetaBoxById([
-                'belongsTo' => $belongsTo,
-                'find' => $find,
-                'id' => $field->meta_box_id
-            ]);
+			if($boxModel === null){
+				return null;
+			}
 
-            if($lazy){
-                switch ($belongsTo){
-                    case MetaTypes::CUSTOM_POST_TYPE:
-                        return CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
-                            'id'            => $field->id,
-                            'metaBox'       => $boxModel,
-                            'title'         => $field->name,
-                            'type'          => $field->field_type,
-                            'required'      => $field->required,
-                            'defaultValue'  => $field->default_value,
-                            'description'   => $field->description,
-                            'showInArchive' => $field->showInArchive,
-                            'sort'          => $field->sort
-                        ]);
+			if($lazy){
+				return MetaFieldModel::hydrateFromArray([
+					'id'            => $field->id,
+					'box'           => $boxModel,
+					'name'          => $field->name,
+					'label'         => $field->label,
+					'type'          => $field->field_type,
+					'isRequired'    => $field->required == 1,
+					'defaultValue'  => $field->field_default_value,
+					'description'   => $field->description,
+					'showInArchive' => $field->showInArchive == 1,
+					'sort'          => $field->sort
+				]);
+			}
 
-                    case MetaTypes::TAXONOMY:
-                        return TaxonomyMetaBoxFieldModel::hydrateFromArray([
-                            'id'            => $field->id,
-                            'metaBox'       => $boxModel,
-                            'name'         => $field->name,
-                            'type'          => $field->field_type,
-                            'required'      => $field->required,
-                            'defaultValue'  => $field->default_value,
-                            'description'   => $field->description,
-                            'sort'          => $field->sort
-                        ]);
+			// fields
+			$sql = "
+			        SELECT
+			            id,
+			            field_name as name,
+			            field_label as label,
+			            field_type,
+			            field_default_value,
+			            field_description,
+			            required,
+			            showInArchive,
+			            block_id,
+			            filter_in_admin,
+			            quick_edit,
+			            sort
+			        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
+			        WHERE meta_box_id = %s
+			        AND parent_id IS NULL
+			        AND block_id IS NULL
+			    ";
 
-                    case MetaTypes::USER:
-                        return UserMetaBoxFieldModel::hydrateFromArray([
-                            'id'            => $field->id,
-                            'metaBox'       => $boxModel,
-                            'name'         => $field->name,
-                            'type'          => $field->field_type,
-                            'required'      => $field->required,
-                            'defaultValue'  => $field->default_value,
-                            'description'   => $field->description,
-                            'showInArchive' => $field->showInArchive,
-                            'sort'          => $field->sort
-                        ]);
-                }
+			$sql .= " ORDER BY sort;";
+			$boxFields = ACPT_Lite_DB::getResults($sql, [$boxModel->getId()]);
 
-                return null;
-            }
+			// Meta box fields
+			foreach ($boxFields as $boxField){
+				$boxFieldModel = self::hydrateMetaBoxFieldModel($boxField, $boxModel);
+				$boxModel->addField($boxFieldModel);
+			}
 
-            return self::hydrateMetaBoxFieldModel(
-                $field,
-                self::getMetaBoxById([
-                    'belongsTo' => $belongsTo,
-                    'id' => $field->meta_box_id
-                ]));
-        }
+			return self::hydrateMetaBoxFieldModel($field, $boxModel);
+		}
 
-        return null;
-    }
+		return null;
+	}
 
 	/**
 	 * @param array $args
 	 *
-	 * @return AbstractMetaBoxFieldModel[]|null
+	 * @return MetaFieldModel[]|null
 	 * @throws \Exception
 	 */
-    public static function getMetaFields(array $args)
-    {
-	    $mandatoryKeys = self::mandatoryKeys([
-		    'types' => [
-			    'required' => false,
-			    'type' => 'array',
-		    ],
-		    'lazy' => [
-			    'required' => false,
-			    'type' => 'boolean',
-		    ],
-	    ]);
+	public static function getMetaFields(array $args)
+	{
+		$mandatoryKeys = [
+			'types' => [
+				'required' => false,
+				'type' => 'array',
+			],
+			'blockId' => [
+				'required' => false,
+				'type' => 'integer|string',
+			],
+			'lazy' => [
+				'required' => false,
+				'type' => 'boolean',
+			],
+			'sortBy' => [
+				'required' => false,
+				'type' => 'string',
+			],
+		];
 
-	    self::validateArgs($mandatoryKeys, $args);
+		self::validateArgs($mandatoryKeys, $args);
 
-	    $belongsTo = isset($args['belongsTo']) ? $args['belongsTo'] : null;
-	    $find = isset($args['find']) ? $args['find'] : null;
-	    $lazy = isset($args['lazy']) ? $args['lazy'] : false;
-	    $types = isset($args['types']) ? $args['types'] : null;
+		$sortBy = isset($args['sortBy']) ? $args['sortBy'] : 'field_name';
+		$lazy = isset($args['lazy']) ? $args['lazy'] : false;
+		$types = isset($args['types']) ? $args['types'] : null;
+		$blockId = isset($args['blockId']) ? $args['blockId'] : null;
 
-	    $queryArgs = [];
-	    $sql = "
+		$queryArgs = [];
+		$sql = "
             SELECT
                 f.id,
+                f.block_id,
                 f.meta_box_id,
                 f.field_name as name,
+                f.field_label as label,
                 f.field_default_value as default_value,
                 f.field_description as description,
                 f.field_type,
                 f.required,
                 f.showInArchive,
+                f.filter_in_admin,
+                f.quick_edit,
                 f.sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
         ";
 
-	    if($find){
-		    switch ($belongsTo){
-			    case MetaTypes::CUSTOM_POST_TYPE:
-				    $sql .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b ON b.id = f.meta_box_id";
-				    $queryArgs[] = $find;
-			    	break;
+		$sql .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id";
+		$sql .= " WHERE 1 = 1";
 
-			    case MetaTypes::TAXONOMY:
-				    $sql .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."` b ON b.id = f.meta_box_id";
-				    $queryArgs[] = $find;
-				    break;
+		if($types){
+			$sql .= " AND f.field_type IN ('".implode("','", $types)."')";
+		}
 
-			    case MetaTypes::USER:
-				    $sql .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b ON b.id = f.meta_box_id";
-				    break;
-		    }
-	    }
+		if($blockId){
+			$sql .= " AND f.block_id = %s";
+			$queryArgs[] = $blockId;
+		}
 
-	    $sql .= " WHERE 1 = 1";
+		$sql .= ' GROUP BY f.id ORDER BY f.'.$sortBy.' ASC;';
 
-	    if($types){
-		    $sql .= " AND f.field_type IN ('".implode("','", $types)."')";
-	    }
+		$results = [];
+		$fields = ACPT_Lite_DB::getResults($sql, $queryArgs);
 
-	    if($find){
-		    switch ($belongsTo){
-			    case MetaTypes::CUSTOM_POST_TYPE:
-				    $sql .= " AND b.post_type = %s";
-				    break;
+		foreach ($fields as $fieldIndex => $field) {
 
-			    case MetaTypes::TAXONOMY:
-				    $sql .= " AND b.taxonomy = %s";
-				    break;
-		    }
-	    }
+			$boxModel = self::getMetaBoxById($field->meta_box_id);
 
-	    $sql .= ' GROUP BY f.id ORDER BY f.field_name ASC;';
+			if($boxModel !== null){
+				if($lazy){
+					$results[] = MetaFieldModel::hydrateFromArray([
+						'id'            => $field->id,
+						'metaBox'       => $boxModel,
+						'name'          => $field->name,
+						'label'         => $field->label,
+						'type'          => $field->field_type,
+						'isRequired'    => $field->required,
+						'defaultValue'  => $field->default_value,
+						'description'   => $field->description,
+						'showInArchive' => $field->showInArchive,
+						'sort'          => $field->sort
+					]);
+				} else {
+					$results[] = self::hydrateMetaBoxFieldModel($field, $boxModel);
+				}
+			}
+		}
 
-	    $results = [];
-	    $fields = ACPT_Lite_DB::getResults($sql, $queryArgs);
+		return $results;
+	}
 
-	    foreach ($fields as $fieldIndex => $field) {
+	/**
+	 * @param MetaGroupModel $group
+	 *
+	 * @throws \Exception
+	 */
+	public static function saveMetaGroup(MetaGroupModel $group)
+	{
+		ACPT_Lite_DB::startTransaction();
 
-		    $boxModel = self::getMetaBoxById([
-			    'belongsTo' => $belongsTo,
-			    'find' => $find,
-			    'id' => $field->meta_box_id
-		    ]);
+		$belongsToArray = [];
 
-		    if($boxModel !== null){
-			    if($lazy){
-				    switch ($belongsTo){
-					    case MetaTypes::CUSTOM_POST_TYPE:
-						    $results[] = CustomPostTypeMetaBoxFieldModel::hydrateFromArray([
-							    'id'            => $field->id,
-							    'metaBox'       => $boxModel,
-							    'title'         => $field->name,
-							    'type'          => $field->field_type,
-							    'required'      => $field->required,
-							    'defaultValue'  => $field->default_value,
-							    'description'   => $field->description,
-							    'showInArchive' => $field->showInArchive,
-							    'sort'          => $field->sort
-						    ]);
-						    break;
+		try {
+			$sql = "
+                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` 
+                (
+                    `id`,
+                    `group_name`,
+                    `label`,
+                    `display`
+                ) VALUES (
+                    %s,
+                    %s,
+                    %s,
+                    %s
+                ) ON DUPLICATE KEY UPDATE 
+                    `group_name` = %s,
+                    `label` = %s,
+                    `display` = %s
+            ;";
 
-					    case MetaTypes::TAXONOMY:
-						    $results[] = TaxonomyMetaBoxFieldModel::hydrateFromArray([
-							    'id'            => $field->id,
-							    'metaBox'       => $boxModel,
-							    'name'          => $field->name,
-							    'type'          => $field->field_type,
-							    'required'      => $field->required,
-							    'defaultValue'  => $field->default_value,
-							    'description'   => $field->description,
-							    'sort'          => $field->sort
-						    ]);
-						    break;
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+				$group->getId(),
+				$group->getName(),
+				$group->getLabel(),
+				$group->getDisplay(),
+				$group->getName(),
+				$group->getLabel(),
+				$group->getDisplay(),
+			]);
 
-					    case MetaTypes::USER:
-						    $results[] = UserMetaBoxFieldModel::hydrateFromArray([
-							    'id'            => $field->id,
-							    'metaBox'       => $boxModel,
-							    'name'          => $field->name,
-							    'type'          => $field->field_type,
-							    'required'      => $field->required,
-							    'defaultValue'  => $field->default_value,
-							    'description'   => $field->description,
-							    'showInArchive' => $field->showInArchive,
-							    'sort'          => $field->sort
-						    ]);
-						    break;
-				    }
-			    } else {
-				    $results[] = self::hydrateMetaBoxFieldModel(
-					    $field,
-					    self::getMetaBoxById([
-						    'belongsTo' => $belongsTo,
-						    'id' => $field->meta_box_id
-					    ]));
-			    }
-		    }
-	    }
+			foreach($group->getBelongs() as $belong){
+				$sql = "
+	                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` 
+	                (
+	                    `id`,
+	                    `belongs`,
+	                    `operator`,
+	                    `find`,
+	                    `logic`,
+	                    `sort`
+	                ) VALUES (
+	                    %s,
+	                    %s,
+	                    %s,
+	                    %s,
+	                    %s,
+	                    %d
+	                ) ON DUPLICATE KEY UPDATE 
+	                    `belongs` = %s,
+	                    `operator` = %s,
+	                    `find` = %s,
+	                    `logic` = %s,
+	                    `sort` = %d
+	                ;";
 
-	    return $results;
-    }
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$belong->getId(),
+					$belong->getBelongsTo(),
+					$belong->getOperator(),
+					$belong->getFind(),
+					$belong->getLogic(),
+					$belong->getSort(),
+					$belong->getBelongsTo(),
+					$belong->getOperator(),
+					$belong->getFind(),
+					$belong->getLogic(),
+					$belong->getSort(),
+				]);
 
-    /**
-     * @param AbstractMetaBoxModel $metaBoxModel
-     * @throws \Exception
-     */
-    public static function saveMetaBox(AbstractMetaBoxModel $metaBoxModel)
-    {
-        ACPT_Lite_DB::startTransaction();
+				$sql = "
+	                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."`
+	                (
+	                    `group_id`,
+	                    `belong_id`
+	                ) VALUES (
+	                    %s,
+	                    %s
+	                ) ON DUPLICATE KEY UPDATE
+	                    `group_id` = %s,
+	                    `belong_id` = %s
+	                ;";
 
-        try {
-            $metaType = $metaBoxModel->metaType();
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$group->getId(),
+					$belong->getId(),
+					$group->getId(),
+					$belong->getId(),
+				]);
 
-            switch ($metaType){
-                case MetaTypes::CUSTOM_POST_TYPE:
+				$belongsToArray[] = $belong->getBelongsTo();
+			}
 
-                    PostMetaSync::updatePostMetaWhenBoxNameChanges($metaBoxModel);
+			foreach ($group->getBoxes() as $boxModel){
+				self::saveMetaBox($boxModel);
+			}
 
-                    $sql = "
-                        INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` 
-                        (
-                            `id`,
-                            `post_type`,
-                            `meta_box_name`,
-                            `meta_box_label`,
-                            `sort`
-                        ) VALUES (
-                            %s,
-                            %s,
-                            %s,
-                            %s,
-                            %d
-                        ) ON DUPLICATE KEY UPDATE 
-                            `post_type` = %s,
-                            `meta_box_name` = %s,
-                            `meta_box_label` = %s,
-                            `sort` = %d
-                    ;";
+		} catch (\Exception $exception){
+			ACPT_Lite_DB::rollbackTransaction();
+		}
 
-                    ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                        $metaBoxModel->getId(),
-                        $metaBoxModel->getPostType(),
-                        $metaBoxModel->getName(),
-                        $metaBoxModel->getLabel(),
-                        $metaBoxModel->getSort(),
-                        $metaBoxModel->getPostType(),
-                        $metaBoxModel->getName(),
-                        $metaBoxModel->getLabel(),
-                        $metaBoxModel->getSort()
-                    ]);
-                    break;
+		ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::flushCache();
+	}
 
-                case MetaTypes::TAXONOMY:
-                    $sql = "
-                        INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."` 
-                        (
-                            `id`,
-                            `taxonomy`,
-                            `meta_box_name`,
-                            `meta_box_label`,
-                            `sort`
-                        ) VALUES (
-                            %s,
-                            %s,
-                            %s,
-                            %s,
-                            %d
-                        ) ON DUPLICATE KEY UPDATE 
-                            `taxonomy` = %s,
-                            `meta_box_name` = %s,
-                            `meta_box_label` = %s,
-                            `sort` = %d
-                    ;";
+	/**
+	 * @param MetaBoxModel $metaBoxModel
+	 * @throws \Exception
+	 */
+	public static function saveMetaBox(MetaBoxModel $metaBoxModel)
+	{
+		ACPT_Lite_DB::startTransaction();
 
-                    ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                        $metaBoxModel->getId(),
-                        $metaBoxModel->getTaxonomy(),
-                        $metaBoxModel->getName(),
-                        $metaBoxModel->getLabel(),
-                        $metaBoxModel->getSort(),
-                        $metaBoxModel->getTaxonomy(),
-                        $metaBoxModel->getName(),
-                        $metaBoxModel->getLabel(),
-                        $metaBoxModel->getSort()
-                    ]);
-                    break;
+		try {
+			// Sync metadata BEFORE saving data
+			MetaSync::syncBox($metaBoxModel);
 
-                case MetaTypes::USER:
-                    $sql = "
-                        INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` 
-                        (
-                            `id`,
-                            `meta_box_name`,
-                            `meta_box_label`,
-                            `sort`
-                        ) VALUES (
-                            %s,
-                            %s,
-                            %s,
-                            %d
-                        ) ON DUPLICATE KEY UPDATE 
-                            `meta_box_name` = %s,
-                            `meta_box_label` = %s,
-                            `sort` = %d
-                    ;";
+			$sql = "
+                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` 
+                (
+                    `id`,
+                    `group_id`,
+                    `meta_box_name`,
+                    `meta_box_label`,
+                    `sort`
+                ) VALUES (
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %d
+                ) ON DUPLICATE KEY UPDATE 
+                    `group_id` = %s,
+                    `meta_box_name` = %s,
+                    `meta_box_label` = %s,
+                    `sort` = %d
+            ;";
 
-                    ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                        $metaBoxModel->getId(),
-                        $metaBoxModel->getName(),
-                        $metaBoxModel->getLabel(),
-                        $metaBoxModel->getSort(),
-                        $metaBoxModel->getName(),
-                        $metaBoxModel->getLabel(),
-                        $metaBoxModel->getSort()
-                    ]);
-                    break;
-            }
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+				$metaBoxModel->getId(),
+				$metaBoxModel->getGroup()->getId(),
+				$metaBoxModel->getName(),
+				$metaBoxModel->getLabel(),
+				$metaBoxModel->getSort(),
+				$metaBoxModel->getGroup()->getId(),
+				$metaBoxModel->getName(),
+				$metaBoxModel->getLabel(),
+				$metaBoxModel->getSort()
+			]);
 
-            foreach ($metaBoxModel->getFields() as $fieldModel){
-                self::saveMetaBoxField($fieldModel);
-            }
+			foreach ($metaBoxModel->getFields() as $fieldModel){
+				self::saveMetaBoxField($fieldModel);
+			}
 
-        } catch (\Exception $exception){
-            ACPT_Lite_DB::rollbackTransaction();
-        }
+		} catch (\Exception $exception){
+			ACPT_Lite_DB::rollbackTransaction();
+		}
 
-        ACPT_Lite_DB::commitTransaction();
-    }
+		ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
 
-    /**
-     * @param AbstractMetaBoxFieldModel $fieldModel
-     * @throws \Exception
-     */
-    public static function saveMetaBoxField(AbstractMetaBoxFieldModel $fieldModel)
-    {
-        $showInArchive = $fieldModel->isShowInArchive() ? '1' : '0';
-        $isRequired = $fieldModel->isRequired() ? '1' : '0';
-        $metaBoxModel = $fieldModel->getMetaBox();
+	/**
+	 * @param MetaFieldModel $fieldModel
+	 * @throws \Exception
+	 */
+	public static function saveMetaBoxField(MetaFieldModel $fieldModel)
+	{
+		$metaBoxModel = $fieldModel->getBox();
 
+		ACPT_Lite_DB::startTransaction();
 
-        if($fieldModel->getMetaBox()->metaType() === MetaTypes::CUSTOM_POST_TYPE){
-            PostMetaSync::updatePostMetaWhenFieldNameChanges($fieldModel);
-        }
+		try {
+			// Sync metadata BEFORE saving data
+			MetaSync::syncField($fieldModel);
+			self::saveMetaField($fieldModel);
 
-        $sql = "
-            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` 
-            (
-                `id`,
-                `meta_box_id`,
-                `field_name`,
-                `field_type`,
-                `field_default_value`,
-                `field_description`,
-                `showInArchive`,
-                `required`,
-                `sort`
-            ) VALUES (
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %d
-            ) ON DUPLICATE KEY UPDATE 
-                `meta_box_id` = %s,
-                `field_name` = %s,
-                `field_type` = %s,
-                `field_default_value` = %s,
-                `field_description` = %s,
-                `showInArchive` = %s,
-                `required` = %s,
-                `sort` = %d
-        ;";
-
-        $params = [
-            $fieldModel->getId(),
-            $metaBoxModel->getId(),
-            $fieldModel->getName(),
-            $fieldModel->getType(),
-            $fieldModel->getDefaultValue(),
-            $fieldModel->getDescription(),
-            $showInArchive,
-            $isRequired,
-            $fieldModel->getSort(),
-            $metaBoxModel->getId(),
-            $fieldModel->getName(),
-            $fieldModel->getType(),
-            $fieldModel->getDefaultValue(),
-            $fieldModel->getDescription(),
-            $showInArchive,
-            $isRequired,
-            $fieldModel->getSort(),
-        ];
-
-
-        ACPT_Lite_DB::executeQueryOrThrowException($sql, $params);
-
-        foreach ($fieldModel->getOptions() as $optionModel){
-            $sql = "
-                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` 
+			foreach ($fieldModel->getOptions() as $optionModel){
+				$sql = "
+                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` 
                     (`id`,
                     `meta_box_id` ,
                     `meta_field_id` ,
                     `option_label` ,
                     `option_value` ,
-                    `sort`
+                    `sort`,
+                    `is_default`
                     ) VALUES (
                         %s,
                         %s,
                         %s,
                         %s,
                         %s,
-                        %d
+                        %d,
+                        %s
                     ) ON DUPLICATE KEY UPDATE 
                         `meta_box_id` = %s,
                         `meta_field_id` = %s,
                         `option_label` = %s,
                         `option_value` = %s,
-                        `sort` = %d
+                        `sort` = %d,
+                        `is_default` = %s
                 ;";
 
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                $optionModel->getId(),
-                $metaBoxModel->getId(),
-                $fieldModel->getId(),
-                $optionModel->getLabel(),
-                $optionModel->getValue(),
-                $optionModel->getSort(),
-                $metaBoxModel->getId(),
-                $fieldModel->getId(),
-                $optionModel->getLabel(),
-                $optionModel->getValue(),
-                $optionModel->getSort()
-            ]);
-        }
-    }
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$optionModel->getId(),
+					$metaBoxModel->getId(),
+					$fieldModel->getId(),
+					$optionModel->getLabel(),
+					$optionModel->getValue(),
+					$optionModel->getSort(),
+					$optionModel->isDefault(),
+					$metaBoxModel->getId(),
+					$fieldModel->getId(),
+					$optionModel->getLabel(),
+					$optionModel->getValue(),
+					$optionModel->getSort(),
+					$optionModel->isDefault()
+				]);
+			}
 
-    /**
-     * @param array $args
-     * @throws \Exception
-     */
-    public static function removeMetaOrphans(array $args)
-    {
-        $mandatoryKeys = self::mandatoryKeys([
-            'ids' => [
-                'required' => false,
-                'type' => 'array',
-            ],
-        ]);
+			foreach ($fieldModel->getChildren() as $childModel){
+				self::saveMetaBoxField($childModel);
+			}
 
-        self::validateArgs($mandatoryKeys, $args);
+		} catch (\Exception $exception){
+			ACPT_Lite_DB::rollbackTransaction();
+		}
 
-        $ids = $args['ids'];
-        $belongsTo = $args['belongsTo'];
-        $find = isset($args['find']) ? $args['find'] : null;
+		ACPT_Lite_DB::commitTransaction();
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
 
-        // Delete metadata
-        $deleteMetadata = SettingsRepository::getSingle('delete_metadata');
+	/**
+	 * @param MetaFieldModel $fieldModel
+	 *
+	 * @throws \Exception
+	 */
+	private static function saveMetaField(MetaFieldModel $fieldModel)
+	{
+		$showInArchive = $fieldModel->isShowInArchive() ? '1' : '0';
+		$isRequired = $fieldModel->isRequired() ? '1' : '0';
+		$isFilterableInAdmin = $fieldModel->isFilterableInAdmin() ? '1' : '0';
+		$isForQuickEdit = $fieldModel->isForQuickEdit() ? '1' : '0';
+		$metaBoxModel = $fieldModel->getBox();
 
-        if($deleteMetadata !== null and $deleteMetadata->getValue() == 1){
-            switch ($belongsTo) {
-                case MetaTypes::CUSTOM_POST_TYPE:
-                    $baseQuery = "
-                        SELECT 
-                            f.id
-                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-                        WHERE f.id NOT IN ('".implode("','", $ids['fields'])."') AND f.parent_id IS NULL
-                    ";
+		$data = [
+			'fields' => [
+				'meta_box_id',
+				'field_name',
+				'field_label',
+				'field_type',
+				'field_default_value',
+				'field_description',
+				'showInArchive',
+				'required',
+				'sort',
+			],
+			'types'  => [
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%d',
+			],
+			'values' => [
+				$metaBoxModel->getId(),
+				$fieldModel->getName(),
+				$fieldModel->getLabel(),
+				$fieldModel->getType(),
+				$fieldModel->getDefaultValue(),
+				$fieldModel->getDescription(),
+				$showInArchive,
+				$isRequired,
+				$fieldModel->getSort(),
+			],
+		];
 
-                    $fieldsToBeDeleted = ACPT_Lite_DB::getResults($baseQuery);
+		if($fieldModel->getParentId() !== null){
+			$data['fields'][] = 'parent_id';
+			$data['types'][] = '%s';
+			$data['values'][] = $fieldModel->getParentId();
+		}
 
-                    $fieldIds = [];
-                    foreach ($fieldsToBeDeleted as $fieldToBeDeleted){
-                        $fieldIds[] = $fieldToBeDeleted->id;
-                    }
+		if($fieldModel->isForQuickEdit() !== null){
+			$data['fields'][] = 'quick_edit';
+			$data['types'][] = '%s';
+			$data['values'][] = $isForQuickEdit;
+		}
 
-                    if(!empty($fieldIds)){
-                        self::deletePostMetaData($fieldIds);
-                    }
-                    break;
+		if($fieldModel->isFilterableInAdmin() !== null){
+			$data['fields'][] = 'filter_in_admin';
+			$data['types'][] = '%s';
+			$data['values'][] = $isFilterableInAdmin;
+		}
 
-                // @TODO User and Taxonomy
-            }
-        }
+		$sql = "INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` ( `id`,";
 
-        if(isset($ids['fields'])){
-            switch ($belongsTo) {
-                case MetaTypes::CUSTOM_POST_TYPE:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=f.meta_box_id WHERE b.post_type = '".$find."' AND f.id NOT IN ('".implode("','",$ids['fields'])."');");
-                    break;
+		foreach ($data['fields'] as $index => $field){
+			$sql .= '`'.$field.'`';
 
-                case MetaTypes::TAXONOMY:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."` b on b.id=f.meta_box_id WHERE b.taxonomy = '".$find."' AND f.id NOT IN ('".implode("','",$ids['fields'])."');");
-                    break;
+			if($index < (count($data['fields'])-1)){
+				$sql .= ',';
+			}
+		}
 
-                case MetaTypes::USER:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=f.meta_box_id WHERE f.id NOT IN ('".implode("','",$ids['fields'])."');");
-                    break;
-            }
-        }
+		$sql .= ') VALUES ( %s,';
 
-        if(isset($ids['options'])){
-            switch ($belongsTo) {
-                case MetaTypes::CUSTOM_POST_TYPE:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id=o.meta_box_id WHERE b.post_type = '".$find."' AND o.id NOT IN ('".implode("','",$ids['options'])."');");
-                    break;
+		foreach ($data['types'] as $index => $type){
+			$sql .= $type;
 
-                case MetaTypes::TAXONOMY:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."` b on b.id=o.meta_box_id WHERE b.taxonomy = '".$find."' AND o.id NOT IN ('".implode("','",$ids['options'])."');");
-                    break;
-                case MetaTypes::USER:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."` o LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` b on b.id=o.meta_box_id WHERE o.id NOT IN ('".implode("','",$ids['options'])."');");
-                    break;
-            }
+			if($index < (count($data['fields'])-1)){
+				$sql .= ',';
+			}
+		}
 
-        }
+		$sql .= ') ON DUPLICATE KEY UPDATE ';
 
-        if(isset($ids['boxes'])){
-            switch ($belongsTo) {
-                case MetaTypes::CUSTOM_POST_TYPE:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` WHERE post_type = '".$args['find']."' AND id NOT IN ('".implode("','",$ids['boxes'])."');");
-                    break;
+		foreach ($data['fields'] as $index => $field){
+			$sql .= '`'.$field.'` = ' . $data['types'][$index];
 
-                case MetaTypes::TAXONOMY:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX)."` WHERE taxonomy = '".$args['find']."' AND id NOT IN ('".implode("','",$ids['boxes'])."');");
-                    break;
+			if($index < (count($data['fields'])-1)){
+				$sql .= ',';
+			}
+		}
 
-                case MetaTypes::USER:
-                    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX)."` WHERE id NOT IN ('".implode("','",$ids['boxes'])."');");
-                    break;
-            }
-        }
-    }
+		$sql .= ';';
 
-    /**
-     * Delete all post meta data for a given fieldIds list
-     *
-     * @param $fieldIds
-     *
-     * @throws \Exception
-     */
-    private static function deletePostMetaData($fieldIds)
-    {
-        global $wpdb;
+		$params = [
+			$fieldModel->getId(),
+		];
 
-        foreach ($fieldIds as $fieldId){
+		foreach ($data['values'] as $values){
+			$params[] = $values;
+		}
 
-            $baseQuery = "
+		foreach ($data['values'] as $values){
+			$params[] = $values;
+		}
+
+		ACPT_Lite_DB::executeQueryOrThrowException($sql, $params);
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
+
+	/**
+	 * @param array $args
+	 * @throws \Exception
+	 */
+	public static function removeMetaOrphans(array $args)
+	{
+		$mandatoryKeys = [
+			'groupId'  => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'ids' => [
+				'required' => true,
+				'type' => 'array',
+			],
+		];
+
+		self::validateArgs($mandatoryKeys, $args);
+
+		$ids = $args['ids'];
+		$groupId = $args['groupId'];
+
+		// Delete metadata
+		$deleteMetadata = SettingsRepository::getSingle(SettingsModel::DELETE_POSTMETA_KEY);
+
+		// Delete ACPT definitions
+		$deleteBelongsQuery = "
+	        DELETE b
+	        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` b
+	        WHERE b.group_id = %s
+	    ";
+
+		if(isset($ids['belongs']) and !empty($ids['belongs'])){
+			$deleteBelongsQuery .= " AND b.belong_id NOT IN ('".implode("','",$ids['belongs'])."')";
+		}
+
+		$deleteBelongsQuery .= ";";
+
+		ACPT_Lite_DB::executeQueryOrThrowException($deleteBelongsQuery, [
+			$groupId,
+		]);
+
+		$deleteFieldsQuery = "
+			DELETE f 
+			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f 
+			LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id=f.meta_box_id 
+			WHERE b.group_id = %s
+		";
+
+		if(isset($ids['fields']) and !empty($ids['fields'])){
+			$deleteFieldsQuery .= " AND f.id NOT IN ('".implode("','",$ids['fields'])."')";
+		}
+
+		$deleteFieldsQuery .= ";";
+
+		ACPT_Lite_DB::executeQueryOrThrowException($deleteFieldsQuery, [
+			$groupId,
+		]);
+
+		// Delete options
+		$deleteOptionsQuery = "
+	    	DELETE o
+			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` o
+			LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id=o.meta_box_id
+			WHERE b.group_id = %s
+	    ";
+
+		if(isset($ids['options']) and !empty($ids['options'])){
+			$deleteOptionsQuery .= " AND o.id NOT IN ('".implode("','",$ids['options'])."')";
+		}
+
+		$deleteOptionsQuery .= ";";
+
+		ACPT_Lite_DB::executeQueryOrThrowException($deleteOptionsQuery, [
+			$groupId,
+		]);
+
+		$deleteBoxesQuery = "
+	        DELETE b
+			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
+			WHERE b.group_id = %s
+	    ";
+
+		if(isset($ids['boxes']) and !empty($ids['boxes'])){
+			$deleteBoxesQuery .= " AND id NOT IN ('".implode("','",$ids['boxes'])."')";
+		}
+
+		$deleteBoxesQuery .= ";";
+
+		ACPT_Lite_DB::executeQueryOrThrowException($deleteBoxesQuery, [
+			$groupId,
+		]);
+
+		// Delete metadata
+		if($deleteMetadata !== null and $deleteMetadata->getValue() == 1){
+			$queryForIdsToDelete = "
+		            SELECT f.id
+		             	FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+						LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+						WHERE b.group_id = %s
+						AND f.id NOT IN ('".implode("','", $ids['fields'])."')
+						AND f.parent_id IS NULL
+					;
+		        ";
+
+			$fieldsToBeDeleted = ACPT_Lite_DB::getResults($queryForIdsToDelete, [
+				$groupId,
+			]);
+
+			$fieldIds = [];
+			foreach ($fieldsToBeDeleted as $fieldToBeDeleted){
+				$fieldIds[] = $fieldToBeDeleted->id;
+			}
+
+			if(!empty($fieldIds)){
+				self::deletePostMetaData($fieldIds);
+				self::deleteTaxonomyMetaData($fieldIds);
+			}
+		}
+
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
+
+	/**
+	 * Delete all post meta data for a given fieldIds list
+	 *
+	 * @param $fieldIds
+	 *
+	 * @throws \Exception
+	 */
+	private static function deletePostMetaData($fieldIds)
+	{
+		global $wpdb;
+
+		foreach ($fieldIds as $fieldId){
+
+			$baseQuery = "
                     SELECT 
                         b.meta_box_name,
                         f.field_name,
                         f.field_type
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD)."` f
-                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` b on b.id = f.meta_box_id
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
                     WHERE f.id = %s AND parent_id IS NULL
                 ";
 
-            $field = ACPT_Lite_DB::getResults($baseQuery, [$fieldId])[0];
+			$field = ACPT_Lite_DB::getResults($baseQuery, [$fieldId])[0];
 
-            if($field->meta_box_name !== null and $field->field_name !== null){
-                $metaFieldName = Strings::toDBFormat($field->meta_box_name).'_'.Strings::toDBFormat($field->field_name);
+			if($field->meta_box_name !== null and $field->field_name !== null){
+				$metaFieldName = Strings::toDBFormat($field->meta_box_name).'_'.Strings::toDBFormat($field->field_name);
 
-                $sql = "DELETE FROM `{$wpdb->prefix}postmeta` WHERE meta_key=%s";
+				$sql = "DELETE FROM `{$wpdb->prefix}postmeta` WHERE meta_key=%s";
 
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName
-                ]);
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$metaFieldName
+				]);
 
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName.'_type'
-                ]);
-            }
-        }
-    }
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$metaFieldName.'_type'
+				]);
+			}
+		}
 
-    /**
-     * ***********************************
-     *  GENERAL PURPOSE METHODS
-     * ***********************************
-     */
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
 
-    /**
-     * @param array $keys
-     * @return array
-     */
-    private static function mandatoryKeys(array $keys = [])
-    {
-        $mandatoryKeys = [
-            'belongsTo' => [
-                'required' => true,
-                'type' => 'string',
-                'enum' => [
-                    MetaTypes::CUSTOM_POST_TYPE,
-                    MetaTypes::TAXONOMY,
-                    MetaTypes::USER,
-                ],
-            ],
-            'find' => [
-                'required' => false,
-                'type' => 'string',
-            ],
-        ];
+	/**
+	 * @param $fieldIds
+	 *
+	 * @throws \Exception
+	 */
+	private static function deleteTaxonomyMetaData($fieldIds)
+	{
+		global $wpdb;
 
-        return array_merge($keys, $mandatoryKeys);
-    }
+		foreach ($fieldIds as $fieldId){
 
-    /**
-     * @param array $mandatoryKeys
-     * @param array $args
-     * @throws \Exception
-     */
-    private static function validateArgs(array $mandatoryKeys = [], array $args = [])
-    {
-        $validator = new ArgumentsArrayValidator();
+			$baseQuery = "
+                    SELECT 
+                        b.meta_box_name,
+                        f.field_name,
+                        f.field_type
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
+                    WHERE f.id = %s AND parent_id IS NULL
+                ";
 
-        if(!$validator->validate(self::mandatoryKeys($mandatoryKeys), $args)){
-            throw new \Exception('Invalid parameters');
-        }
-    }
+			$field = ACPT_Lite_DB::getResults($baseQuery, [$fieldId])[0];
 
-    /**
-     * @param $belongsTo
-     * @return string|null
-     */
-    private static function metaBoxTableName($belongsTo)
-    {
-        switch ($belongsTo){
-            case MetaTypes::CUSTOM_POST_TYPE:
-                return ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX);
+			if($field->meta_box_name !== null and $field->field_name !== null){
+				$metaFieldName = Strings::toDBFormat($field->meta_box_name).'_'.Strings::toDBFormat($field->field_name);
 
-            case MetaTypes::TAXONOMY:
-                return ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX);
-                break;
+				$sql = "DELETE FROM `{$wpdb->prefix}termmeta` WHERE meta_key=%s";
 
-            case MetaTypes::USER:
-                return ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_USER_META_BOX);
-                break;
-        }
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$metaFieldName
+				]);
 
-        return null;
-    }
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$metaFieldName.'_type'
+				]);
+			}
+		}
+
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
+
+	/**
+	 * @param $fieldIds
+	 *
+	 * @throws \Exception
+	 */
+	private static function deleteUserMetaData($fieldIds)
+	{
+		global $wpdb;
+
+		foreach ($fieldIds as $fieldId){
+
+			$baseQuery = "
+                    SELECT 
+                        b.meta_box_name,
+                        f.field_name,
+                        f.field_type
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
+                    WHERE f.id = %s AND parent_id IS NULL
+                ";
+
+			$field = ACPT_Lite_DB::getResults($baseQuery, [$fieldId])[0];
+
+			if($field->meta_box_name !== null and $field->field_name !== null){
+				$metaFieldName = Strings::toDBFormat($field->meta_box_name).'_'.Strings::toDBFormat($field->field_name);
+
+				$sql = "DELETE FROM `{$wpdb->prefix}usermeta` WHERE meta_key=%s";
+
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$metaFieldName
+				]);
+
+				ACPT_Lite_DB::executeQueryOrThrowException($sql, [
+					$metaFieldName.'_type'
+				]);
+			}
+		}
+
+		ACPT_Lite_DB::invalidateCacheTag(self::class);
+	}
+
+	/**
+	 * ***********************************
+	 *  GENERAL PURPOSE METHODS
+	 * ***********************************
+	 */
+
+	/**
+	 * @param array $keys
+	 * @return array
+	 */
+	private static function mandatoryKeys(array $keys = [])
+	{
+		$mandatoryKeys = [
+			'belongsTo' => [
+				'required' => false,
+				'type' => 'string',
+				'enum' => [
+					BelongsTo::POST_ID,
+					BelongsTo::USER_ID,
+					BelongsTo::TERM_ID,
+					MetaTypes::CUSTOM_POST_TYPE,
+					MetaTypes::TAXONOMY,
+					MetaTypes::USER,
+				],
+			],
+			'find' => [
+				'required' => false,
+				'type' => 'integer|string',
+			],
+		];
+
+		return array_merge($keys, $mandatoryKeys);
+	}
 }

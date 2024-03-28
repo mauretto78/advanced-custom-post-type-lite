@@ -1,0 +1,23 @@
+.acpt-code {
+  border: $border-thickness solid $light-gray;
+  border-radius: $border-radius;
+  position: relative;
+  overflow: hidden;
+
+  .copy-to-clipboard {
+    position: absolute;
+    top: $space-24;
+    right: $space-24;
+    z-index: 111;
+    cursor: pointer;
+    padding: $space-12 $space-12 8px; // fix to SVG to make the button perfectyl rounded
+    border: none;
+    border-radius: $border-radius;
+    background: $pale-gray;
+
+    &:hover,
+    &:focus {
+      background: darken($pale-gray, 8%);
+    }
+  }
+}

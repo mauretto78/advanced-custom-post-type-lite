@@ -1,0 +1,191 @@
+.acpt-btn-switch {
+  cursor: pointer;
+  padding: $space-8;
+  border: $border-thickness solid $pale-gray;
+  background: $pale-gray;
+  color: $gray;
+  border-radius: $border-radius;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.active {
+    background: $white;
+    border: $border-thickness solid $light-gray;
+    color: $black;
+  }
+
+  &.disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+}
+
+.acpt-btn {
+  display: inline-block;
+  padding: 14px 24px;
+  border-radius: $border-radius;
+  color: $gray;
+  background: $pale-gray;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .3s;
+  font-size: $font-size;
+  max-height: 46px;
+
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  &:hover,
+  &:focus {
+    color: $gray;
+    background: darken($pale-gray, 8%);
+  }
+
+  &.acpt-btn-sm {
+    padding: 12px 20px;
+    font-size: $small-font-size;
+  }
+
+  &.acpt-btn-xs {
+    padding: 10px 16px;
+    font-size: $xs-font-size;
+  }
+
+  &.acpt-btn-disabled {
+    color: $gray;
+    background: $light-gray;
+
+    &:hover,
+    &:focus {
+      background: darken($light-gray, 8%);
+    }
+  }
+
+  &.acpt-btn-white {
+    color: $primary-color;
+    background: $white;
+
+    &:hover,
+    &:focus {
+      background: $pale-gray;
+    }
+  }
+
+  &.acpt-btn-primary {
+    background: $primary-color;
+    color: $white;
+
+    &:hover,
+    &:focus {
+      background: darken($primary-color, 8%);
+    }
+  }
+
+  &.acpt-btn-secondary {
+    background: $secondary-color;
+    color: $primary-color;
+
+    &:hover,
+    &:focus {
+      background: darken($secondary-color, 8%);
+    }
+  }
+
+  &.acpt-btn-success {
+    background: $success-bg;
+    color: $success-color;
+
+    &:hover,
+    &:focus {
+      background: darken($success-bg, 8%);
+    }
+  }
+
+  &.acpt-btn-danger {
+    background: $danger-bg;
+    color: $danger-color;
+
+    &:hover,
+    &:focus {
+      background: darken($danger-bg, 8%);
+    }
+  }
+
+  &.acpt-btn-info {
+    background: $info-bg;
+    color: $info-color;
+
+    &:hover,
+    &:focus {
+      background: darken($info-bg, 8%);
+    }
+  }
+
+  &.acpt-btn-warning {
+    background: $warning-bg;
+    color: $warning-color;
+
+    &:hover,
+    &:focus {
+      background: darken($warning-bg, 8%);
+    }
+  }
+}
+
+.acpt-button-group {
+  position: relative;
+  display: inline-flex;
+  white-space: nowrap;
+  font-size: 0;
+  vertical-align: middle;
+
+  .btn {
+    display: flex;
+
+    svg {
+      color: $gray;
+    }
+
+    &:first-child {
+      button {
+        border-radius: $border-radius 0 0 $border-radius;
+      }
+    }
+
+    &:last-child {
+      button {
+        border-radius: 0 $border-radius $border-radius 0;
+      }
+    }
+
+    button {
+      outline: none;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      border-radius: 0;
+      margin-right: -1px;
+      border: $border-thickness solid $light-gray;
+      padding: 10px 16px;
+      cursor: pointer;
+      color: $gray;
+      background: $white;
+    }
+
+    &.active {
+      button {
+        color: $white;
+        border: $primary-color;
+        background: $primary-color;
+      }
+
+      svg {
+        color: $white;
+      }
+    }
+  }
+}

@@ -1,0 +1,320 @@
+/*========== Google Fonts ==========*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/*========== Variables ==========*/
+@import "app/variables";
+
+/*========== General ==========*/
+
+button {
+  cursor: pointer;
+  font-size: $small-font-size;
+  margin: 0;
+  border: none;
+  border-radius: $border-radius;
+  padding: 4px 10px;
+  transition: all ease .3s;
+
+  &.primary {
+    background: $primary-color;
+    color: $white;
+
+    &:hover {
+      opacity: .85;
+    }
+  }
+
+  &.primary-o {
+    background: transparent;
+    border: 1px solid $white;
+    color: $white;
+
+    &:hover {
+      opacity: .85;
+    }
+  }
+}
+
+/*========== Editor ==========*/
+
+.gjs-editor {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.gjs-wrapper {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 111111;
+
+  .gjs-top {
+    background: $gjs-primary-color;
+    padding: 5px 0;
+    width: 100%;
+    display: flex;
+    position: initial;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+
+    &.hidden {
+      display: none;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: $space-8;
+
+      .label {
+        font-size: $h2-font-size;
+        font-weight: bold;
+        color: $light-gray;
+
+        .a {
+          color: $gray;
+        }
+      }
+    }
+
+    .version {
+      margin-left: $space-8;
+      font-weight: bold;
+      font-size: $small-font-size;
+      border-radius: $border-radius;
+      padding: 3px 6px;
+      background: $gray;
+      color: $header-color;
+    }
+
+    .gjs-pn-panel {
+      position: relative;
+    }
+  }
+
+  .gjs-main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    height: 100vh;
+    background: $white;
+
+    .gjs-meta {
+      padding: $space-24;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+
+      .gjs-meta-element {
+        display: flex;
+        align-items: center;
+        gap: $space-8;
+
+        select,
+        button {
+          height: 100%;
+        }
+      }
+    }
+
+    .editor-canvas {
+      flex-grow: 1;
+    }
+
+    .gjs-editor {
+      .gjs-cv-canvas {
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .gjs-sidebar {
+      flex-basis: 320px;
+      position: relative;
+      overflow-y: auto;
+      background: $gjs-primary-color;
+      padding-bottom: 60px;
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: $space-8;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: $gjs-sec-color;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: $gjs-primary-color;
+        border-radius: 100%;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: $gjs-primary-color;
+      }
+    }
+  }
+}
+
+/*========== Override Gjs default ==========*/
+
+.gjs-sm-property.gjs-sm-gradient.gjs-sm-property__background-image {
+  width: 100% !important;
+}
+
+.gjs-block {
+  background: $gjs-sec-color !important;
+
+  svg {
+    fill: currentColor;
+    width: 36px;
+  }
+
+  .gjs-block-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: .78rem;
+  }
+
+  &:hover {
+    color: $white !important;
+  }
+}
+
+.gjs-rte-actionbar {
+  .gjs-rte-action {
+    min-width: 25px;
+    width: auto !important;
+  }
+}
+
+.gjs-panel-switcher {
+  display: contents;
+  position: relative;
+
+  .gjs-pn-buttons {
+    position: sticky;
+    top: 0;
+    z-index: 1111;
+    background: $gjs-primary-color;
+
+    span {
+      width: 100%;
+    }
+  }
+}
+
+.gjs-filter-block {
+  position: sticky;
+  top: 30px;
+  z-index: 1111;
+  background: $gjs-primary-color;
+  padding: $space-8;
+
+  input {
+    width: 100%;
+    border: none;
+    background: $gjs-sec-color;
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.gjs-pn-buttons {
+  span {
+    margin: 0;
+  }
+}
+
+.wp-core-ui select {
+  background: none;
+}
+
+.gjs-layer-vis {
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.gjs-layer-move {
+  right: 11px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.gjs-pn-btn.gjs-pn-active {
+  background-color: $gjs-sec-color;
+  color: $white;
+
+  svg {
+    color: $white;
+    fill: $white;
+  }
+}
+
+/*========== Override colors ==========*/
+
+.gjs-one-bg {
+  background-color: #2c3338;
+}
+
+.gjs-two-color {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gjs-three-bg {
+  background-color: #2271b1;
+  color: white;
+}
+
+.gjs-four-color {
+  color: #2271b1;
+}
+
+.gjs-four-color-h:hover {
+  color: #2271b1;
+}
+
+/*========== Fix ==========*/
+
+.gjs-title{
+  font-weight: 400 !important;
+}
+
+.gjs-traits-container {
+
+  .gjs-label {
+    font-weight: 400 !important;
+  }
+
+  .gjs-field input,
+  .gjs-field select {
+    color: inherit;
+    font-weight: 400 !important;
+
+    &:hover {
+      color: $white;
+    }
+
+    &:focus {
+        border-color: hsla(0,0%,100%,.7);
+        color: $white;
+        box-shadow: 0 0 0 1px hsla(0,0%,100%,.7);
+    }
+  }
+}
+

@@ -1,0 +1,20 @@
+.acpt-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.acpt-loading .acpt-loader {
+  display: flex;
+  align-items: center;
+  font-size: $h1-font-size;
+}
+
+.spinning-icon {
+  animation: spinner .8s linear infinite;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}

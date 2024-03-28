@@ -16,7 +16,7 @@
  * Plugin Name:       ACPT Lite
  * Plugin URI:        https://wordpress.org/plugins/acpt-lite
  * Description:       Create and manage custom post types, with advanced custom fields and taxonomies management
- * Version:           1.0.17
+ * Version:           2.0.0
  * Author:            Mauro Cassani
  * Author URI:        https://github.com/mauretto78
  * License:           GPL-2.0+
@@ -25,30 +25,72 @@
  * Domain Path:       /advanced-custom-post-type-lite
  */
 
+use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Includes\ACPT_Lite_Activator;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Deactivator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Includes\ACPT_Lite_Plugin;
+use ACPT_Lite\Utils\Session;
+use Phpfastcache\CacheManager;
+use Phpfastcache\Config\ConfigurationOption;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
+/**
+ * Composer init
+ */
+require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
+
 // Fix PHP headers
 ob_start();
+Session::start();
 
 /**
  * plugin settings
  */
 define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
-define( 'ACPT_LITE_PLUGIN_VERSION', '1.0.17' );
+define( 'ACPT_LITE_PLUGIN_VERSION', '2.0.0' );
+define( 'ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
- * Composer init
+ * Avoid Call to undefined function is_plugin_active() error
  */
-require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
+if( !function_exists('is_plugin_active') ) {
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+}
+
+/**
+ * Inject DB Cache
+ */
+try {
+	function cacheInstance()
+	{
+		$cacheDir = ACPT_LITE_PLUGIN_DIR_PATH . "cache";
+
+		if(!is_dir($cacheDir)){
+			mkdir($cacheDir, 0777, true);
+		}
+
+		$config = new ConfigurationOption();
+		$config->setPath($cacheDir);
+
+		CacheManager::setDefaultConfig($config);
+
+		return CacheManager::getInstance('files');
+	}
+
+	$isCacheEnabled = SettingsRepository::getSingle('enable_cache');
+
+	if($isCacheEnabled === null or $isCacheEnabled->getValue() == 1){
+		ACPT_Lite_DB::injectCache(cacheInstance());
+	}
+} catch (\Exception $exception){
+	// do nothing
+}
 
 class ACPT_Lite
 {

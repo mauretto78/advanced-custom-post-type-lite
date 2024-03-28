@@ -3,10 +3,10 @@
 namespace ACPT_Lite\Core\Shortcodes\Fields;
 
 use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
+use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Shortcodes\DTO\ShortcodePayload;
-use ACPT_Lite\Costants\MetaTypes;
+use ACPT_Lite\Constants\MetaTypes;
 
 abstract class AbstractField
 {
@@ -16,7 +16,7 @@ abstract class AbstractField
 	protected $payload;
 
 	/**
-	 * @var AbstractMetaBoxFieldModel|null
+	 * @var MetaFieldModel|null
 	 */
 	private $metaBoxFieldModel;
 
@@ -30,8 +30,6 @@ abstract class AbstractField
 		$this->payload = $payload;
 
 		$this->metaBoxFieldModel = MetaRepository::getMetaFieldByName([
-			'belongsTo' => $payload->belongsTo,
-			'find' => ($payload->find !== null) ? $payload->find : null,
 			'boxName' => $this->payload->box,
 			'fieldName' => $this->payload->field,
 		]);

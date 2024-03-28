@@ -1,31 +1,74 @@
 import {metaTypes} from "../../App/constants/metaTypes";
+import {wpAjaxRequest} from "../utils/ajax";
+
+const { __ } = wp.i18n;
 
 const fetchMeta = async () => {
-    let formData = new FormData();
-    formData.append('action', 'fetchMetaAction');
-    formData.append('data', JSON.stringify({belongsTo: metaTypes.CUSTOM_POST_TYPE, find: typenow}));
 
-    let response = await fetch(ajaxurl, {
-        method: 'POST',
-        body: formData
+    let meta = [];
+
+    // 1. Fetch current CPT meta fields
+    let results = await wpAjaxRequest('fetchMetaAction', {belongsTo: metaTypes.CUSTOM_POST_TYPE, find: typenow});
+
+    meta.push({
+        belongsTo: metaTypes.CUSTOM_POST_TYPE,
+        find: typenow,
+        records: results.records
     });
 
-    return await response.json();
+    return meta;
 };
 
-let metaFields = [{ value: null, label: "--Select---", box: "", field: "", type: "" }];
+let metaFields = [{
+    value: null,
+    label: __("--Select---", 'acpt'),
+    group: 'all'
+}];
 
-fetchMeta().then( boxes => {
-    boxes.map((box) => {
-        if(box.fields){
-            box.fields.map((field) => {
-                metaFields.push({
-                    value: field.db_name,
-                    label: field.ui_name,
-                    box: box.title,
-                    field: field.name,
-                    type: field.type
-                });
+fetchMeta().then(groups => {
+
+    groups.map((group) => {
+
+        const records = group.records;
+        const belongsTo = group.belongsTo;
+        const find = group.find ? group.find : null;
+
+        /**
+         *
+         * @param groupName
+         * @param box
+         * @param field
+         * @return {{field: *, find: null, box: *, label: string, type: *, value: string, belongsTo: *, group: *}}
+         */
+        const formatField = (groupName, box, field) => {
+            return {
+                group: groupName,
+                value: find +'_'+field.db_name,
+                label: '['+find+'] - ' + field.ui_name,
+                box: box.name,
+                field: field.name,
+                type: field.type,
+                belongsTo: belongsTo,
+                find: find
+            };
+        };
+
+        if(records.length > 0){
+            records.map((record) => {
+                if(record.boxes.length > 0){
+                    record.boxes.map((box) => {
+                        if(box.fields){
+                            box.fields
+                                .map((field) => {
+                                    metaFields.push({
+                                        label: '['+find+'] - ' + field.ui_name,
+                                        group: field.group,
+                                        value: JSON.stringify(formatField(record.name, box, field))
+                                    });
+                                });
+                        }
+                    });
+                }
             });
         }
     });

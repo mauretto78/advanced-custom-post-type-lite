@@ -1,84 +1,55 @@
-/*========== Colors ==========*/
-$primary-color: #003367; //000080
-$primary-color-alt: #02c39a; //6411ad
-$primary-color-light:#82e2cd;
-$success-color: #02c39a;
-$warning-color: #ffbe0b;
-$danger-color: #f94144;
-$info-color: #5390d9;
-$title-color: #000;
-$wp-title-color: #23282d;
-$text-color: #444;
-$text-color-light: #aaa;
-$text-color-lightest: #ddd;
-$btn-color: #fff;
-$card-bg-color: #fff;
-$card-border-color: #f1f1f1;
-$white-color: #fff;
+.block-editor-block-inspector {
 
-.is-typing,
-.is-selected {
-    .acpt-block {
-        padding: 10px;
-
-        .controls {
-            width: 100%;
-            display: block;
-        }
+    .components-base-control:last-child {
+        width: 100%;
     }
-}
 
-.acpt-block {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    position: relative;
-    margin-bottom: 28px;
-    width: 100%;
-    text-align: left;
+    input.components-range-control__slider {
+        position: relative !important;
+        width: auto !important;
+    }
 
-    label {
+    .acpt-inline-block {
         display: flex;
+        gap: 6px;
         align-items: center;
-        white-space: nowrap;
-        font-weight: 600;
-        flex-shrink: 0;
     }
 
-    .shortcode {
-        border: 1px solid $primary-color-alt;
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        font-size: 14px;
-        margin: 10px 0 0 0;
-        color: $primary-color-alt;
+    .acpt-badge {
+        color: #fff;
+        padding: 4px 8px;
         border-radius: 3px;
+        background: black;
+        margin: 0;
 
-        .icon {
-            position: relative;
-            top: 4px;
-            margin-right: 4px;
-        }
-    }
-
-    .controls {
-        display: none;
-        border: 1px solid #b3bcc0;
-        padding: 14px;
-        width: 100%;
-        border-radius: 3px;
-
-        .components-base-control +.components-base-control {
-            margin-bottom: 0;
+        &.acpt-badge-primary {
+            background: #007cba;
         }
 
-        select,
-        input {
-            max-width: 100%;
+        &.acpt-badge-success {
+            background: #02c39a;
+        }
+
+        &.acpt-badge-success-outline {
+            background: transparent;
+            border: 1px solid #02c39a;
+            color: #02c39a;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        &.acpt-badge-secondary {
+            background: rgb(50, 50, 50);
+        }
+
+        &.acpt-badge-secondary-outline {
+            background: transparent;
+            border: 1px solid rgb(50, 50, 50);
+            color: rgb(50, 50, 50);
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
         }
     }
 }
-

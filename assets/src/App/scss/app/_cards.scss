@@ -1,0 +1,63 @@
+.acpt-card {
+  border-radius: $border-radius;
+  background: $white;
+
+  .acpt-card-header {
+    border-bottom: $border-thickness solid $light-gray;
+    padding: $space-24;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-12;
+
+    h3 {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: $font-size;
+      color: $gray;
+    }
+
+    @media screen and (max-width: 767px){
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  }
+
+  .acpt-card-body {
+    .acpt-card-row {
+      border-bottom: $border-thickness solid $light-gray;
+      padding: $space-24;
+      display: flex;
+      align-items: center;
+      gap: $space-12;
+
+      @media screen and (max-width: 767px){
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .label {
+        color: $black;
+        width: 300px;
+
+        @media screen and (max-width: 767px){
+          width: 100%;
+        }
+
+        .wizard {
+          margin-top: $space-8;
+          color: $gray;
+          font-size: $small-font-size;
+        }
+      }
+
+      .value {
+        width: 100%;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

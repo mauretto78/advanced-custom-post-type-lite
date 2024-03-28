@@ -1,96 +1,181 @@
-import React, {lazy, Suspense, useEffect, useRef, useState} from 'react';
-import {HashRouter, Route, Switch} from "react-router-dom";
-import {toast, ToastContainer} from "react-toastify";
-// REUSABLE
-import ScrollToTop from "./components/reusable/ScrollToTop";
-import Spinner from "./components/reusable/Loader/Spinner";
-// PAGES
-import NotFound404 from "./components/pages/404";
-// STYLES
-import 'react-toastify/dist/ReactToastify.css';
-// GLOBAL STATE
-import {useDispatch, useSelector} from "react-redux";
-import {fetchSettings} from "./redux/thunks/fetchSettings";
-import {filterByLabel} from "./utils/objects";
+import React, {lazy, memo, Suspense, useEffect, useState} from 'react';
+import {createHashRouter, RouterProvider} from 'react-router-dom';
+import Loader from "./components/Loader";
+import {Toaster} from "react-hot-toast";
+import {useDispatch} from "react-redux";
+import {fetchGlobalSettings} from "./redux/reducers/fetchGlobalSettingsSlice";
+import WebFont from 'webfontloader';
 
-const App = () => {
+// Pages
+const PageCustomPostTypeListPage = lazy(() => import("./pages/CustomPostTypeList"));
+const SettingsPage = lazy(() => import("./pages/Settings"));
+const TaxonomyListPage = lazy(() => import("./pages/TaxonomyList"));
+const MetaListPage = lazy(() => import("./pages/MetaList"));
+const SaveCustomPostTypePage = lazy(() => import("./pages/SaveCustomPostType"));
+const SaveTaxonomyPage = lazy(() => import("./pages/SaveTaxonomy"));
+const ViewCustomPostTypePage = lazy(() => import("./pages/ViewCustomPostType"));
+const ViewTaxonomyPage = lazy(() => import("./pages/ViewTaxonomy"));
+const AssocCustomPostTypeToTaxonomyPage = lazy(() => import("./pages/AssocCustomPostTypeToTaxonomy"));
+const AssocTaxonomyToCustomPostTypePage = lazy(() => import("./pages/AssocTaxonomyToCustomPostType"));
+const MetaPage = lazy(() => import("./pages/Meta"));
+const ViewProductDataPage = lazy(() => import("./pages/WooCommerce/ViewProductData"));
+const SaveProductDataPage = lazy(() => import("./pages/WooCommerce/SaveProductData"));
+const ProductDataListPage = lazy(() => import("./pages/WooCommerce/ProductDataList"));
+const ProductDataFieldsPage = lazy(() => import("./pages/WooCommerce/ProductDataFields"));
 
-    // manage global state
-    const {fetched, loading} = useSelector(state => state.fetchSettingsReducer);
+const router = createHashRouter([
+        {
+            path: "/",
+            children: [
+                {
+                    path:'/:page?',
+                    name: "CPT dashboard Page",
+                    element: <Suspense fallback={<Loader/>}><PageCustomPostTypeListPage /></Suspense>
+                },
+                {
+                    path:'/assoc-post-taxonomy/:taxonomy',
+                    name: "Associate Post to Taxonomy",
+                    element: <Suspense fallback={<Loader/>}><AssocCustomPostTypeToTaxonomyPage /></Suspense>
+                },
+                {
+                    path:'/assoc-taxonomy-post/:postType',
+                    name: "Associate Taxonomy to Post",
+                    element: <Suspense fallback={<Loader/>}><AssocTaxonomyToCustomPostTypePage /></Suspense>
+                },
+                {
+                    path:"/edit/:postType/:step?",
+                    name: "Edit Custom Post Type Page",
+                    element: <Suspense fallback={<Loader/>}><SaveCustomPostTypePage /></Suspense>
+                },
+                {
+                    path:'/edit_meta/:id',
+                    name: "Meta manager",
+                    element: <Suspense fallback={<Loader/>}><MetaPage /></Suspense>
+                },
+                {
+                    path:"/edit_taxonomy/:taxonomy/:step?",
+                    name: "Edit Taxonomy Page",
+                    element: <Suspense fallback={<Loader/>}><SaveTaxonomyPage /></Suspense>
+                },
+                {
+                    path:'/meta/:page?',
+                    name: "Meta fields Page",
+                    element: <Suspense fallback={<Loader/>}><MetaListPage /></Suspense>
+                },
+                {
+                    path:'/product-data/product',
+                    name: "woocommerce_product_data",
+                    element: <Suspense fallback={<Loader/>}><ProductDataListPage /></Suspense>
+                },
+                {
+                    path:'/product-data/product/add',
+                    name: "woocommerce_product_data_add",
+                    element: <Suspense fallback={<Loader/>}><SaveProductDataPage /></Suspense>
+                },
+                {
+                    path:'/product-data/product/edit/:id',
+                    name: "woocommerce_product_data_edit",
+                    element: <Suspense fallback={<Loader/>}><SaveProductDataPage /></Suspense>
+                },
+                {
+                    path:'/product-data/product/fields/:id',
+                    name: "woocommerce_product_data_fields",
+                    element: <Suspense fallback={<Loader/>}><ProductDataFieldsPage /></Suspense>
+                },
+                {
+                    path:'/product-data/product/view/:id',
+                    name: "woocommerce_product_data_view",
+                    element: <Suspense fallback={<Loader/>}><ViewProductDataPage /></Suspense>
+                },
+                {
+                    path:"/register",
+                    name: "Save Custom Post Type Page",
+                    element: <Suspense fallback={<Loader/>}><SaveCustomPostTypePage /></Suspense>
+                },
+                {
+                    path:'/register_meta',
+                    name: "Register new meta",
+                    element: <Suspense fallback={<Loader/>}><MetaPage /></Suspense>
+                },
+                {
+                    path:"/settings",
+                    name: "Settings Page",
+                    element: <Suspense fallback={<Loader/>}><SettingsPage /></Suspense>
+                },
+                {
+                    path:'/taxonomies/:page?',
+                    name: "CPT dashboard Page",
+                    element: <Suspense fallback={<Loader/>}><TaxonomyListPage /></Suspense>
+                },
+                {
+                    path:"/register_taxonomy",
+                    name: "Save Taxonomy Page",
+                    element: <Suspense fallback={<Loader/>}><SaveTaxonomyPage /></Suspense>
+                },
+                {
+                    path:"/view/:postType",
+                    name: "View Custom Post Type Page",
+                    element: <Suspense fallback={<Loader/>}><ViewCustomPostTypePage /></Suspense>
+                },
+                {
+                    path:"/view_taxonomy/:taxonomy",
+                    name: "View Taxonomy Page",
+                    element: <Suspense fallback={<Loader/>}><ViewTaxonomyPage /></Suspense>
+                }
+            ]
+        }
+    ]
+);
+
+const App = memo(() => {
+
+    // redux global state
     const dispatch = useDispatch();
 
-    // manage local state
-    const didMountRef = useRef(false);
-    const [fetchedSuccess, setFetchedSuccess] = useState(null);
+    useEffect(()=>{
+        dispatch(fetchGlobalSettings())
+            .then(res => {
+                document.globals = res.payload;
 
-    useEffect(() => {
-        dispatch(fetchSettings());
+                // load Google fonts
+                setFont(res.payload.globals.font);
+                if(res.payload.globals.font !== "Default"){
+                    WebFont.load({
+                        google: {
+                            families: [res.payload.globals.font]
+                        }
+                    });
+                }
+
+                isReady(true);
+            })
+            .catch(err => console.error(err))
+        ;
     }, []);
 
-    // handle fetch outcome
-    useEffect(() => {
-        if (didMountRef.current){
-            if(!loading){
-                setFetchedSuccess(true);
-                global.settings = {
-                    language: (fetched.length > 0 && filterByLabel(fetched, 'key', 'language').value !== '') ? filterByLabel(fetched, 'key', 'language').value : null,
-                };
-            }
-        } else {
-            didMountRef.current = true;
-        }
-    }, [loading]);
+    const [ready, isReady] = useState(false);
+    const [font, setFont] = useState('Inter');
+    const fontFamily = font !== "Default" ? font : '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue"';
 
-    if(!fetchedSuccess){
-        return <Spinner/>;
+    if(!ready){
+        return <Loader/>;
     }
 
     return(
-        <React.Fragment>
-            <HashRouter>
-                <ScrollToTop />
-                <Suspense fallback={Spinner()}>
-                    <Switch>
-                        <Route exact path='/user-meta' name="user-meta" component={ lazy(() => import('./components/pages/UserMeta')) } />
-                        <Route exact path='/assoc-post-taxonomy/:taxonomy' name="assoc_post_taxonomy" component={ lazy(() => import('./components/pages/AssocCustomPostTypeToTaxonomy')) } />
-                        <Route exact path='/assoc-taxonomy-post/:postType' name="assoc_taxonomy_post" component={ lazy(() => import('./components/pages/AssocTaxonomyToCustomPostType')) } />
-                        <Route exact path='/meta/:postType' name="meta" component={ lazy(() => import('./components/pages/CustomPostTypeMeta')) } />
-                        <Route exact path='/register' name="register" component={ lazy(() => import('./components/pages/SaveCustomPostType')) } />
-                        <Route exact path='/delete/:postType' name="delete" component={ lazy(() => import('./components/pages/DeleteCustomPostType')) } />
-                        <Route exact path='/edit/:postType/:step?' name="edit" component={ lazy(() => import('./components/pages/SaveCustomPostType')) } />
-                        <Route exact path='/view/:postType' name="view" component={ lazy(() => import('./components/pages/ViewCustomPostType')) } />
-                        <Route exact path='/settings' name="settings" component={ lazy(() => import('./components/pages/Settings')) } />
-                        <Route exact path='/taxonomies/:page?' name="taxonomies" component={ lazy(() => import('./components/pages/TaxonomyList')) } />
-                        <Route exact path='/meta-taxonomy/:taxonomy' name="meta-taxonomy" component={ lazy(() => import('./components/pages/TaxonomyMeta')) } />
-                        <Route exact path='/register_taxonomy' name="register_taxonomy" component={ lazy(() => import('./components/pages/SaveTaxonomy')) } />
-                        <Route exact path='/delete_taxonomy/:taxonomy' name="delete_taxonomy" component={ lazy(() => import('./components/pages/DeleteTaxonomy')) } />
-                        <Route exact path='/edit_taxonomy/:taxonomy/:step?' name="edit_taxonomy" component={ lazy(() => import('./components/pages/SaveTaxonomy')) } />
-                        <Route exact path='/view_taxonomy/:taxonomy' name="view_taxonomy" component={ lazy(() => import('./components/pages/ViewTaxonomy')) } />
-                        <Route exact path='/:page?' name="list" component={ lazy(() => import('./components/pages/CustomPostTypeList'))} />
-                        <Route exact path='/product-data/product' name="woocommerce_product_data" component={ lazy(() => import('./components/pages/WooCommerceProductData'))} />
-                        <Route exact path='/product-data/product/add' name="woocommerce_product_data_add" component={ lazy(() => import('./components/pages/SaveWooCommerceProductData'))} />
-                        <Route exact path='/product-data/product/delete/:id' name="woocommerce_product_data_delete" component={ lazy(() => import('./components/pages/DeleteWooCommerceProductData'))} />
-                        <Route exact path='/product-data/product/edit/:id' name="woocommerce_product_data_edit" component={ lazy(() => import('./components/pages/SaveWooCommerceProductData'))} />
-                        <Route exact path='/product-data/product/view/:id' name="woocommerce_product_data_view" component={ lazy(() => import('./components/pages/ViewWooCommerceProductData'))} />
-                        <Route exact path='/product-data/product/fields/:id' name="woocommerce_product_data_fields" component={ lazy(() => import('./components/pages/WooCommerceProductDataFields'))} />
-                        <Route path='/404' name="404" component={NotFound404} />
-                    </Switch>
-                </Suspense>
-            </HashRouter>
-            <ToastContainer
-                position={toast.POSITION.BOTTOM_RIGHT}
-                className="acpt-toastify"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover={false}
-            />
-        </React.Fragment>
+        <div id="acpt-admin-app-wrapper"
+             style={{
+                fontFamily: `${fontFamily}, sans-serif`
+            }}
+        >
+            <RouterProvider router={router} />
+            <div data-cy="toaster-wrapper">
+                <Toaster
+                    position="bottom-right"
+                    reverseOrder={false}
+                />
+            </div>
+        </div>
     )
-};
+});
 
 export default App;

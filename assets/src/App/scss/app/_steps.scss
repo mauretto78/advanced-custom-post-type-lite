@@ -1,0 +1,76 @@
+.acpt-steps {
+  padding: $space-24;
+  border-bottom: $border-thickness solid $light-gray;
+  display: grid;
+  gap: $space-24;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  text-align: center;
+  position: relative;
+
+  .acpt-steps-heading {
+    position: relative;
+
+    &:after {
+      width: 100%;
+      height: 3px;
+      content: '';
+      position: absolute;
+      background-color: $pale-gray;
+      top: 25px;
+      left: -50%;
+      z-index: 1;
+    }
+
+    &.done:after,
+    &.active:after {
+      background-color: $primary-color;
+    }
+
+    &:first-child:after {
+      content: none;
+    }
+
+    .number {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: $h3-font-size;
+      color: $white;
+      background: $primary-color;
+      margin-bottom: 10px;
+    }
+
+    &.undone .number {
+      color: $gray;
+      background: $pale-gray;
+    }
+
+    &.done .number {
+      color: $white;
+      background: $primary-color;
+    }
+
+    .title {
+      color: $black;
+      font-size: $h3-font-size;
+      margin: 0 0 10px;
+    }
+
+    .description {
+      color: $gray;
+      display: inline-block;
+    }
+  }
+
+  &.rtl {
+    .acpt-steps-heading {
+      &:after {
+        right: -50%;
+      }
+    }
+  }
+}

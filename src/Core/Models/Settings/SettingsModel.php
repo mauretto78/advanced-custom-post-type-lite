@@ -14,6 +14,18 @@ use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
  */
 class SettingsModel extends AbstractModel implements \JsonSerializable
 {
+	// option keys
+	const LANGUAGE_KEY = 'language';
+	const RECORDS_PER_PAGE_KEY = 'records_per_page';
+	const GOOGLE_MAPS_API_KEY = 'google_maps_api_key';
+	const GOOGLE_RECAPTCHA_SITE_KEY = 'google_recaptcha_site_key';
+	const GOOGLE_RECAPTCHA_SECRET_KEY = 'google_recaptcha_secret_key';
+	const ENABLE_VISUAL_EDITOR_KEY = 'enable_visual_editor';
+	const ENABLE_FORMS = 'enable_forms';
+	const DELETE_TABLES_WHEN_DEACTIVATE_KEY = 'delete_tables_when_deactivate';
+	const DELETE_POSTS_KEY = 'delete_posts';
+	const DELETE_POSTMETA_KEY = 'delete_metadata';
+
     /**
      * @var string
      */
@@ -57,9 +69,7 @@ class SettingsModel extends AbstractModel implements \JsonSerializable
         return $this->value;
     }
 
-    /**
-     * @return array|mixed
-     */
+	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [
