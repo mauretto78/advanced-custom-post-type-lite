@@ -31,6 +31,7 @@ use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\ExportCode\ExportCodeStrings;
 use ACPT_Lite\Utils\Sanitizer;
 use ACPT_Lite\Utils\Sluggify;
 use ACPT_Lite\Utils\WPLinks;
@@ -676,6 +677,30 @@ class ACPT_Lite_Ajax
             'data' => do_shortcode($shortcode)
         ]);
     }
+
+	/**
+	 * @throws \Exception
+	 */
+	public function exportCodeAction()
+	{
+		if(isset($_POST['data'])){
+			$data = $this->sanitizeJsonData($_POST['data']);
+
+			if(!isset($data['find']) and !isset($data['belongsTo'])){
+				return wp_send_json([
+					'success' => false,
+					'error' => 'Missing params (`find`, `belongsTo`)'
+				]);
+			}
+
+			return wp_send_json(ExportCodeStrings::export($data['belongsTo'], $data['find']));
+		}
+
+		return wp_send_json([
+			'success' => false,
+			'error' => 'no data was sent'
+		]);
+	}
 
 	/**
 	 * @throws \Exception

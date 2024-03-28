@@ -5,7 +5,6 @@ namespace ACPT_Lite\Admin;
 use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\Operator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeGenerator;
-use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeMetaGroupGenerator;
 use ACPT_Lite\Core\Generators\Meta\WooCommerceProductDataGenerator;
 use ACPT_Lite\Core\Generators\Taxonomy\TaxonomyMetaBoxGenerator;
@@ -141,6 +140,7 @@ class ACPT_Lite_Admin
             'wp_ajax_deleteWooCommerceProductDataAction' => 'deleteWooCommerceProductDataAction',
             'wp_ajax_deleteWooCommerceProductDataFieldsAction' => 'deleteWooCommerceProductDataFieldsAction',
             'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
+            'wp_ajax_exportCodeAction' => 'exportCodeAction',
             'wp_ajax_exportFileAction' => 'exportFileAction',
             'wp_ajax_fetchAllFindBelongsAction' => 'fetchAllFindBelongsAction',
             'wp_ajax_fetchFindFromBelongsToAction' => 'fetchFindFromBelongsToAction',

@@ -164,6 +164,57 @@ class Strings
 	}
 
 	/**
+	 * @param array $strings
+	 *
+	 * @return string
+	 */
+	public static function convertKeyValueArrayToString(array $strings)
+	{
+		$return = '';
+
+		foreach ($strings as $key => $value){
+
+			if(is_array($value)){
+				if(is_numeric($key)){
+					$return .= self::convertKeyValueArrayToString($value) . PHP_EOL;
+				} else {
+					$return .= '        \''.$key.'\' => ['. PHP_EOL;
+					$return .= self::convertKeyValueArrayToString($value);
+					$return .= '        ],' . PHP_EOL;
+				}
+			}
+
+			if(is_string($value)){
+				if(is_numeric($key)){
+					$return .= '           \''.addslashes($value).'\',' . PHP_EOL;
+				} else {
+					$return .= '           \''.$key.'\' => \''.addslashes($value).'\',' . PHP_EOL;
+				}
+			}
+
+			if(is_bool($value)){
+				$value = ($value === true) ? 'true' : 'false';
+
+				if(is_numeric($key)){
+					$return .= '           '.$value.',' . PHP_EOL;
+				} else {
+					$return .= '           \''.$key.'\' => '.$value.',' . PHP_EOL;
+				}
+			}
+
+			if($value === null){
+				if(is_numeric($key)){
+					$return .= '           null,' . PHP_EOL;
+				} else {
+					$return .= '           \''.$key.'\' => null,' . PHP_EOL;
+				}
+			}
+		}
+
+		return $return;
+	}
+
+	/**
 	 * @param string $string
 	 *
 	 * @return bool
