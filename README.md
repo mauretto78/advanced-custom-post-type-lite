@@ -6,7 +6,7 @@ Core Developer(s):
 
 * **Mauro Cassani** - [github](https://github.com/mauretto78)
 
-<a href="https://acpt.io/contact/"><img src="https://acpt.io/wp-content/uploads/2023/04/fb_banner-1640x922.jpg" alt="ACPT"></a>
+<a href="https://acpt.io/contact/"><img src="https://github.com/mauretto78/advanced-custom-post-type-lite/blob/master/banner-1544x500.png?raw=true" alt="ACPT"></a>
 
 ## Description
 
@@ -37,7 +37,7 @@ Please refert to [official ACPT FAQ page](https://acpt.io/faq) and feel free to 
 
 ## Documentation
 
-Here you can find the [official ACPT documentation](https://acpt.io/documentation). (still work in progress, sorry!)
+Here you can find the [official ACPT documentation](https://docs.acpt.io/).
 
 ## Support
 
