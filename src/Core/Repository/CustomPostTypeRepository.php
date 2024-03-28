@@ -124,12 +124,12 @@ class CustomPostTypeRepository
      * @throws \Exception
      * @since    1.0.0
      */
-    public static function get(array $meta = [], $lazy = false)
-    {
-        $results = [];
-        $args = [];
+	public static function get(array $meta = [])
+	{
+		$results = [];
+		$args = [];
 
-        $baseQuery = "
+		$baseQuery = "
             SELECT 
                 cp.id, 
                 cp.post_name as name,
@@ -146,47 +146,158 @@ class CustomPostTypeRepository
             WHERE 1=1
             ";
 
-        $args[] = 'publish';
+		$args[] = 'publish';
 
-        if(isset($meta['id'])){
-            $baseQuery .= " AND cp.id = %s";
-            $args[] = $meta['id'];
-        }
+		if(isset($meta['id'])){
+			$baseQuery .= " AND cp.id = %s";
+			$args[] = $meta['id'];
+		}
 
-        if(isset($meta['postType'])){
-            $baseQuery .= " AND cp.post_name = %s ";
-            $args[] = $meta['postType'];
-        }
+		if(isset($meta['postType'])){
+			$baseQuery .= " AND cp.post_name = %s ";
+			$args[] = $meta['postType'];
+		}
 
-        $baseQuery .= " GROUP BY cp.id";
-        $baseQuery .= " ORDER BY cp.native DESC";
+		if(isset($meta['exclude'])){
+			$baseQuery .= " AND cp.post_name != %s ";
+			$args[] = $meta['exclude'];
+		}
 
-        if(isset($meta['page']) and isset($meta['perPage'])){
-            $baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
-        }
+		$baseQuery .= " GROUP BY cp.id";
+		$baseQuery .= " ORDER BY cp.native DESC, cp.post_name ASC";
 
-        $baseQuery .= ';';
-        $posts = ACPT_Lite_DB::getResults($baseQuery, $args);
+		if(isset($meta['page']) and isset($meta['perPage'])){
+			$baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
+		}
 
-        foreach ($posts as $post){
-            $postModel = CustomPostTypeModel::hydrateFromArray([
-                    'id' => $post->id,
-                    'name' => $post->name,
-                    'singular' => $post->singular,
-                    'plural' => $post->plural,
-                    'icon' => $post->icon,
-                    'native' => $post->native == '0' ? false : true,
-                    'supports' => json_decode($post->supports),
-                    'labels' => json_decode($post->labels, true),
-                    'settings' => json_decode($post->settings, true),
-            ]);
-            $postModel->setPostCount($post->post_count);
+		$baseQuery .= ';';
+		$posts = ACPT_Lite_DB::getResults($baseQuery, $args);
 
-            $results[] = $postModel;
-        }
+		foreach ($posts as $post){
+			$postModel = CustomPostTypeModel::hydrateFromArray([
+				'id' => $post->id,
+				'name' => $post->name,
+				'singular' => $post->singular,
+				'plural' => $post->plural,
+				'icon' => $post->icon,
+				'native' => $post->native == '0' ? false : true,
+				'supports' => json_decode($post->supports),
+				'labels' => json_decode($post->labels, true),
+				'settings' => json_decode($post->settings, true),
+			]);
 
-        return $results;
-    }
+			// Add more data
+			$postModel = self::addTaxonomiesToPostTypeModel($postModel);
+			$postModel = self::addWooCommerceDataToPostTypeModel($postModel);
+			$postModel->setPostCount($post->post_count);
+
+			$results[] = $postModel;
+		}
+
+		return $results;
+	}
+
+	/**
+	 * @param CustomPostTypeModel $postModel
+	 *
+	 * @return CustomPostTypeModel
+	 * @throws \Exception
+	 */
+	private static function addTaxonomiesToPostTypeModel(CustomPostTypeModel $postModel)
+	{
+		$taxonomies = ACPT_Lite_DB::getResults("
+                    SELECT
+                        t.id,
+                        t.slug ,
+                        t.singular,
+                        t.plural,
+                        t.labels,
+                        t.settings
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` t
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` p ON p.taxonomy_id = t.id
+                    WHERE p.custom_post_type_id = %s
+                ;", [$postModel->getId()]);
+
+		foreach ($taxonomies as $taxonomy) {
+			$taxonomyModel = TaxonomyModel::hydrateFromArray([
+				'id' => $taxonomy->id,
+				'slug' => $taxonomy->slug,
+				'singular' => $taxonomy->singular,
+				'plural' => $taxonomy->plural,
+				'native' => (isset($taxonomy->native) and $taxonomy->native == '1') ? true : false,
+				'labels' => json_decode($taxonomy->labels, true),
+				'settings' => json_decode($taxonomy->settings, true),
+			]);
+
+			$postModel->addTaxonomy($taxonomyModel);
+		}
+
+		return $postModel;
+	}
+
+	/**
+	 * @param CustomPostTypeModel $postModel
+	 *
+	 * @return CustomPostTypeModel
+	 * @throws \Exception
+	 */
+	private static function addWooCommerceDataToPostTypeModel( CustomPostTypeModel $postModel)
+	{
+		if($postModel->isWooCommerce()){
+			$productData = ACPT_Lite_DB::getResults("
+                        SELECT 
+                            id,
+                            product_data_name,
+                            icon,
+                            visibility,
+                            show_in_ui
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
+                    ;", []);
+
+			foreach ($productData as $productDatum){
+				$wooCommerceProductDataModel = WooCommerceProductDataModel::hydrateFromArray([
+					'id' => $productDatum->id,
+					'name' => $productDatum->product_data_name,
+					'icon' => json_decode($productDatum->icon, true),
+					'visibility' => $productDatum->visibility,
+					'showInUI' => $productDatum->show_in_ui == '0' ? false : true,
+				]);
+
+				$productDataFields = ACPT_Lite_DB::getResults("
+                            SELECT 
+                                id,
+                                product_data_id,
+                                field_name,
+                                field_type,
+                                required,
+                                sort
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."`
+                            WHERE product_data_id = %s ORDER BY sort DESC
+                        ;", [$productDatum->id]);
+
+				foreach ($productDataFields as $productDataField){
+					$wooCommerceProductDataFieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
+						'id' => $productDataField->id,
+						'productDataModel' => $wooCommerceProductDataModel,
+						'name' => $productDataField->field_name,
+						'type' => $productDataField->field_type,
+						'required' => $productDataField->required == '1',
+						'sort' => $productDataField->sort,
+						'defaultValue' => null,
+						'description' => null,
+					]);
+
+					$wooCommerceProductDataModel->addField($wooCommerceProductDataFieldModel);
+				}
+
+				$postModel->addWoocommerceProductData($wooCommerceProductDataModel);
+			}
+
+			return $postModel;
+		}
+
+		return $postModel;
+	}
 
     /**
      * Get the id of a post type by registered name
