@@ -320,7 +320,7 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
                         value={
                             <Toggle
                                 id="rewrite"
-                                description={useTranslation("Whether there should be post type archives, or if a string, the archive slug to use. Will generate the proper rewrite rules if $rewrite is enabled.")}
+                                description={useTranslation("Triggers the handling of rewrites for this post type. To prevent rewrite, set to false. Defaults to true, using $post_type as slug. To specify rewrite rules, an array can be passed with any of these keys:")}
                                 defaultValue={data.length > 0 ? settings.rewrite : true}
                                 register={register}
                                 errors={errors}
