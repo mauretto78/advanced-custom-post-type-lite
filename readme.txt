@@ -21,7 +21,6 @@ Main features:
 
 * Register and manage new custom post types in seconds. Take the total control and become a Master of your CPTs.
 * Register, manage and associate custom new taxonimies in just 3 clicks.
-* Create and manage posts meta box fields with a fresh UI. You can choose between 3 field types.
 * Meta fields manager (choose between 5 field types)
 * Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
 * Elementor custom widget: manage ACPT meta fields in the Elementor editor
