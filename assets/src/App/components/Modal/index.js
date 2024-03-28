@@ -60,7 +60,7 @@ const Modal = ( {title, size = 'medium', visible = false, textAlign = "left", pa
                 )}
             </div>
         </div>,
-        document.getElementById("acpt-admin-app")
+        document.getElementById("acpt-admin-app-wrapper")
     );
 };
 

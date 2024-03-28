@@ -114,6 +114,22 @@ class WooCommerceProductDataRepository
         return false;
     }
 
+	/**
+	 * @return int
+	 */
+	public static function count()
+	{
+		$baseQuery = "
+            SELECT 
+                count(id) as count
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
+            ";
+
+		$results = ACPT_Lite_DB::getResults($baseQuery);
+
+		return (int)$results[0]->count;
+	}
+
     /**
      * Check if a WC product data exists
      *

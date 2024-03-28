@@ -869,13 +869,20 @@ class ACPT_Lite_Ajax
      */
     public function fetchWooCommerceProductDataAction()
     {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
 
-            return wp_send_json(WooCommerceProductDataRepository::get($data));
-        }
+		    if(isset($data['id'])){
+			    return wp_send_json(WooCommerceProductDataRepository::get($data)[0]);
+		    }
 
-        return wp_send_json([]);
+		    return wp_send_json([
+			    'count' => WooCommerceProductDataRepository::count(),
+			    'records' => WooCommerceProductDataRepository::get($data),
+		    ]);
+	    }
+
+	    return wp_send_json([]);
     }
 
     public function fetchWooCommerceProductDataFieldsAction()

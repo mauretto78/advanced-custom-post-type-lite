@@ -50,8 +50,9 @@ Please refer to main [ACPT](https://acpt.io) website.
 2. Register new Custom post type
 3. Register new Taxonomy
 4. Manage meta fields
-5. Meta boxes in action in the post editor
+5. Meta boxes in the post editor
 6. Settings panel
+7. Elementor widget
 
 == Privacy Policy ==
 Advanced Custom Post Type Lite uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
@@ -163,9 +164,11 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Fix AbstractModal::hydrateFromArray() method (to fix PHP 8 deprecations)
 * Fix `menu_position` bug when registering new custom post types
 
-= 2.0.0 (2024-03-28) =
+= 2.0.0 (2024-03-29) =
 
 * Brand-new new UI/UX (from ACPT v2.0.1)
-* Introduction of meta field groups
+* Reusable meta field groups
+* 5 meta fields available
+* New Gutenberg block
 * Localization in 9 languages
 * Back-end fixes and improvements (from ACPT v2.0.1)

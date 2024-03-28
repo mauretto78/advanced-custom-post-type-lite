@@ -41,7 +41,7 @@ const ProductDataFieldHeader = ({field, view, listeners, attributes, index, form
 
     // manage global state
     const dispatch = useDispatch();
-    const {closedElements} = useSelector(state => state.optionPagesState);
+    const {closedElements} = useSelector(state => state.productDataFieldsState);
 
     /**
      *

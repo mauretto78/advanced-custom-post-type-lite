@@ -6,6 +6,20 @@ class EmailField extends AbstractField
 {
     public function render()
     {
-	    return '<a href="mailto:'.$this->fetchMeta($this->getKey()).'">'.$this->fetchMeta($this->getKey()).'</a>';
+	    return $this->renderEmail($this->fetchMeta($this->getKey()));
     }
+
+	/**
+	 * @param $email
+	 *
+	 * @return string
+	 */
+	private function renderEmail($email)
+	{
+		if($this->payload->render === 'text'){
+			return $email;
+		}
+
+		return '<a href="mailto:' . $email . '">' . $email . '</a>';
+	}
 }

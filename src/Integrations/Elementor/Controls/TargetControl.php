@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Integrations\Elementor\Controls;
 
-use ACPT_Lite\Utils\Wordpress\Translator;
+use ACPT_Lite\Utils\Translator;
 
 class TargetControl extends \Elementor\Base_Data_Control
 {

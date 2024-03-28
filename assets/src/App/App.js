@@ -162,9 +162,11 @@ const App = memo(() => {
     }
 
     return(
-        <div style={{
-            fontFamily: `${fontFamily}, sans-serif`
-        }}>
+        <div id="acpt-admin-app-wrapper"
+             style={{
+                fontFamily: `${fontFamily}, sans-serif`
+            }}
+        >
             <RouterProvider router={router} />
             <div data-cy="toaster-wrapper">
                 <Toaster

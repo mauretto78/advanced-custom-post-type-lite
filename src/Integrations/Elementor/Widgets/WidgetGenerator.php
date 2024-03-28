@@ -3,7 +3,7 @@
 namespace ACPT_Lite\Integrations\Elementor\Widgets;
 
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Core\Shortcodes\ACPT_Lite\PostMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\PostMetaShortcode;
 
 class WidgetGenerator extends \Elementor\Widget_Base
 {
@@ -65,79 +65,20 @@ class WidgetGenerator extends \Elementor\Widget_Base
         }
 
         switch ($this->boxFieldModel->getType()){
-            case MetaFieldModel::ADDRESS_TYPE:
-                return ' eicon-map-pin';
-
-            case MetaFieldModel::COLOR_TYPE:
-                return 'eicon-paint-brush';
-
-            case MetaFieldModel::CURRENCY_TYPE:
-                return ' eicon-bag-light';
 
             case MetaFieldModel::DATE_TYPE:
-            case MetaFieldModel::DATE_TIME_TYPE:
-            case MetaFieldModel::DATE_RANGE_TYPE:
                 return 'eicon-date';
-
-            case MetaFieldModel::EDITOR_TYPE:
-                return 'eicon-text-area';
 
             case MetaFieldModel::EMAIL_TYPE:
                 return 'eicon-mail';
 
-            case MetaFieldModel::EMBED_TYPE:
-                return 'eicon-gallery-grid';
-
-            case MetaFieldModel::FILE_TYPE:
-                return 'eicon-save-o';
-
-            case MetaFieldModel::HTML_TYPE:
-                return 'eicon-editor-code';
-
-            case MetaFieldModel::GALLERY_TYPE:
-                return 'eicon-photo-library';
-
-            case MetaFieldModel::IMAGE_TYPE:
-                return 'eicon-image';
-
-            case MetaFieldModel::LENGTH_TYPE:
-                return 'eicon-cursor-move';
-
-            case MetaFieldModel::LIST_TYPE:
-                return 'eicon-bullet-list';
-
-            case MetaFieldModel::NUMBER_TYPE:
-                return 'eicon-number-field';
-
-            case MetaFieldModel::POST_TYPE:
-                return 'eicon-sync';
-
-            case MetaFieldModel::PHONE_TYPE:
-                return 'eicon-tel-field';
-
             case MetaFieldModel::SELECT_TYPE:
-            case MetaFieldModel::SELECT_MULTI_TYPE:
                 return 'eicon-select';
 
             default:
             case MetaFieldModel::TEXTAREA_TYPE:
             case MetaFieldModel::TEXT_TYPE:
                 return 'eicon-t-letter';
-
-            case MetaFieldModel::TIME_TYPE:
-                return 'eicon-clock-o';
-
-            case MetaFieldModel::TOGGLE_TYPE:
-                return 'eicon-toggle';
-
-            case MetaFieldModel::VIDEO_TYPE:
-                return 'eicon-play';
-
-            case MetaFieldModel::WEIGHT_TYPE:
-                return 'eicon-basket-medium';
-
-            case MetaFieldModel::URL_TYPE:
-                return 'eicon-url';
         }
     }
 
@@ -180,49 +121,9 @@ class WidgetGenerator extends \Elementor\Widget_Base
             ]
         );
 
-        $group1 = [MetaFieldModel::ADDRESS_TYPE, MetaFieldModel::IMAGE_TYPE, MetaFieldModel::VIDEO_TYPE, MetaFieldModel::COLOR_TYPE, MetaFieldModel::TOGGLE_TYPE];
-        $group2 = [MetaFieldModel::URL_TYPE];
-        $group3 = [MetaFieldModel::DATE_TYPE, MetaFieldModel::DATE_RANGE_TYPE];
-        $group4 = [MetaFieldModel::GALLERY_TYPE];
-        $group5 = [MetaFieldModel::DATE_TIME_TYPE];
-        $group6 = [MetaFieldModel::TIME_TYPE];
-        $group7 = [MetaFieldModel::EMAIL_TYPE, MetaFieldModel::PHONE_TYPE];
+        $group3 = [MetaFieldModel::DATE_TYPE];
+        $group7 = [MetaFieldModel::EMAIL_TYPE];
 
-        // Group 1
-        if(in_array($this->boxFieldModel->getType(), $group1)){
-            $this->add_control(
-            'acpt_width',
-                [
-                    'type' => 'acpt_width',
-                    'description' => esc_html__( 'Width.', 'elementor' ),
-                    'default' => '100%',
-                    'placeholder' => esc_html__( 'Set the width (in pixels)', 'elementor' ),
-                ]
-            );
-
-            $this->add_control(
-            'acpt_height',
-                [
-                    'type' => 'acpt_height',
-                    'description' => esc_html__( 'Height.', 'elementor' ),
-                    'default' => '300',
-                    'placeholder' => esc_html__( 'Set the height (in pixels)', 'elementor' ),
-                ]
-            );
-        }
-
-        // Group 2
-        if(in_array($this->boxFieldModel->getType(), $group2)){
-            $this->add_control(
-                'acpt_target',
-                [
-                    'type' => 'acpt_target',
-                    'description' => esc_html__( 'Link target.', 'elementor' ),
-                    'default' => '_self',
-                    'placeholder' => esc_html__( 'Select the link target', 'elementor' ),
-                ]
-            );
-        }
 
         // Group 3
         if(in_array($this->boxFieldModel->getType(), $group3)){
@@ -236,75 +137,6 @@ class WidgetGenerator extends \Elementor\Widget_Base
                 ]
             );
         }
-
-        // Group 4
-        if(in_array($this->boxFieldModel->getType(), $group4)){
-            $this->add_control(
-            'acpt_width',
-                [
-                    'type' => 'acpt_width',
-                    'description' => esc_html__( 'Width (px).', 'elementor' ),
-                    'default' => '100%',
-                    'placeholder' => esc_html__( 'Set the width (in pixels)', 'elementor' ),
-                ]
-            );
-
-            $this->add_control(
-            'acpt_height',
-                [
-                    'type' => 'acpt_height',
-                    'description' => esc_html__( 'Height (px).', 'elementor' ),
-                    'default' => '300',
-                    'placeholder' => esc_html__( 'Set the height (in pixels)', 'elementor' ),
-                ]
-            );
-
-            $this->add_control(
-            'acpt_elements',
-                [
-                    'type' => 'acpt_elements',
-                    'description' => esc_html__( 'Number of elements.', 'elementor' ),
-                    'default' => '2',
-                    'placeholder' => esc_html__( 'Select the number of elements', 'elementor' ),
-                ]
-            );
-        }
-
-	    // Group 5
-	    if(in_array($this->boxFieldModel->getType(), $group5)){
-		    $this->add_control(
-			    'acpt_dateformat',
-			    [
-				    'type' => 'acpt_dateformat',
-				    'description' => esc_html__( 'Date format.', 'elementor' ),
-				    'default' => 'd/m/Y',
-				    'placeholder' => esc_html__( 'Select the date format', 'elementor' ),
-			    ]
-		    );
-
-		    $this->add_control(
-			    'acpt_timeformat',
-			    [
-				    'type' => 'acpt_timeformat',
-				    'description' => esc_html__( 'Time format.', 'elementor' ),
-				    'default' => 'H:i:s',
-				    'placeholder' => esc_html__( 'Select the time format', 'elementor' ),
-			    ]
-		    );
-	    }
-
-	    // Group 6
-	    if(in_array($this->boxFieldModel->getType(), $group6)){
-		    $this->add_control(
-			    'acpt_timeformat',
-			    [
-				    'type' => 'acpt_timeformat',
-				    'description' => esc_html__( 'Time format.', 'elementor' ),
-				    'default' => 'H:i:s',
-				    'placeholder' => esc_html__( 'Select the time format', 'elementor' ),
-			    ]
-		    );
-	    }
 
 	    // Group 7
 	    if(in_array($this->boxFieldModel->getType(), $group7)){
