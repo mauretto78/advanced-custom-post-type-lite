@@ -1,18 +1,49 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[347],{
 
 /***/ 3900:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _react3 = __webpack_require__(4226);\n\nvar _propTypes = __webpack_require__(5697);\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar ElementIcon = function ElementIcon(_ref) {\n    var value = _ref.value;\n\n\n    // render image if values starts by http / https\n    if (value && value.includes(\"http://\") || value && value.includes(\"https://\")) {\n        return wp.element.createElement('img', { src: value, width: 18, alt: '' });\n    }\n\n    // add dashicons: for retro-compatibility\n    if (value && !value.includes(\"dashicons\")) {\n        return wp.element.createElement(_react3.Icon, { icon: 'dashicons:' + value, color: '#777', width: '18px' });\n    }\n\n    return wp.element.createElement(_react3.Icon, { icon: value, color: '#777', width: '18px' });\n};\n\nElementIcon.propTypes = {\n    value: _propTypes2.default.string.isRequired\n};\n\nexports.default = ElementIcon;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/components/ElementIcon/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _react3 = __webpack_require__(4226);
+
+var _propTypes = __webpack_require__(5697);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ElementIcon = function ElementIcon(_ref) {
+    var value = _ref.value;
+
+
+    // render image if values starts by http / https
+    if (value && value.includes("http://") || value && value.includes("https://")) {
+        return wp.element.createElement('img', { src: value, width: 18, alt: '' });
+    }
+
+    // add dashicons: for retro-compatibility
+    if (value && !value.includes("dashicons")) {
+        return wp.element.createElement(_react3.Icon, { icon: 'dashicons:' + value, color: '#777', width: '18px' });
+    }
+
+    return wp.element.createElement(_react3.Icon, { icon: value, color: '#777', width: '18px' });
+};
+
+ElementIcon.propTypes = {
+    value: _propTypes2.default.string.isRequired
+};
+
+exports.default = ElementIcon;
 
 /***/ }),
 
@@ -20,7 +51,137 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactHookForm = __webpack_require__(930);\n\nvar _useTranslation = __webpack_require__(1422);\n\nvar _useTranslation2 = _interopRequireDefault(_useTranslation);\n\nvar _Button = __webpack_require__(6337);\n\nvar _Button2 = _interopRequireDefault(_Button);\n\nvar _styles = __webpack_require__(624);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar BulkActions = function BulkActions() {\n\n    // manage form state\n    var _useFormContext = (0, _reactHookForm.useFormContext)(),\n        control = _useFormContext.control,\n        register = _useFormContext.register;\n\n    var watchedElements = (0, _reactHookForm.useWatch)({\n        control: control,\n        name: \"elements\"\n    });\n\n    /**\n     *\n     * @return {number}\n     */\n    var count = function count() {\n\n        var count = 0;\n\n        var _iteratorNormalCompletion = true;\n        var _didIteratorError = false;\n        var _iteratorError = undefined;\n\n        try {\n            for (var _iterator = Object.entries(watchedElements)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {\n                var _ref = _step.value;\n\n                var _ref2 = _slicedToArray(_ref, 2);\n\n                var key = _ref2[0];\n                var value = _ref2[1];\n\n                if (value === true) {\n                    count++;\n                }\n            }\n        } catch (err) {\n            _didIteratorError = true;\n            _iteratorError = err;\n        } finally {\n            try {\n                if (!_iteratorNormalCompletion && _iterator.return) {\n                    _iterator.return();\n                }\n            } finally {\n                if (_didIteratorError) {\n                    throw _iteratorError;\n                }\n            }\n        }\n\n        return count;\n    };\n\n    return wp.element.createElement(\n        \"div\",\n        {\n            className: \"flex-between s-8 mb-24\",\n            \"data-cy\": \"bulk-actions\"\n        },\n        wp.element.createElement(\n            \"span\",\n            null,\n            count(),\n            \" \",\n            (0, _useTranslation2.default)(\"Selected items\")\n        ),\n        wp.element.createElement(\n            \"div\",\n            { className: \"i-flex-center s-8\" },\n            wp.element.createElement(\n                \"select\",\n                _extends({\n                    name: \"action\",\n                    \"data-cy\": \"cpt-bulk-actions\",\n                    className: \"form-control sm\"\n                }, register(\"action\")),\n                wp.element.createElement(\n                    \"option\",\n                    { value: \"\" },\n                    (0, _useTranslation2.default)(\"Select\")\n                ),\n                wp.element.createElement(\n                    \"option\",\n                    { value: \"delete\" },\n                    (0, _useTranslation2.default)(\"Delete\")\n                )\n            ),\n            wp.element.createElement(\n                _Button2.default,\n                {\n                    testId: \"cpt-bulk-actions\",\n                    style: _styles.styleVariants.WHITE,\n                    size: \"sm\"\n                },\n                (0, _useTranslation2.default)(\"Execute\")\n            )\n        )\n    );\n};\n\nexports.default = BulkActions;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/pages/CustomPostTypeList/BulkActions/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHookForm = __webpack_require__(930);
+
+var _useTranslation = __webpack_require__(1422);
+
+var _useTranslation2 = _interopRequireDefault(_useTranslation);
+
+var _Button = __webpack_require__(6337);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _styles = __webpack_require__(624);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BulkActions = function BulkActions() {
+
+    // manage form state
+    var _useFormContext = (0, _reactHookForm.useFormContext)(),
+        control = _useFormContext.control,
+        register = _useFormContext.register;
+
+    var watchedElements = (0, _reactHookForm.useWatch)({
+        control: control,
+        name: "elements"
+    });
+
+    /**
+     *
+     * @return {number}
+     */
+    var count = function count() {
+
+        var count = 0;
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = Object.entries(watchedElements)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var _ref = _step.value;
+
+                var _ref2 = _slicedToArray(_ref, 2);
+
+                var key = _ref2[0];
+                var value = _ref2[1];
+
+                if (value === true) {
+                    count++;
+                }
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        return count;
+    };
+
+    return wp.element.createElement(
+        "div",
+        {
+            className: "flex-between s-8 mb-24",
+            "data-cy": "bulk-actions"
+        },
+        wp.element.createElement(
+            "span",
+            null,
+            count(),
+            " ",
+            (0, _useTranslation2.default)("Selected items")
+        ),
+        wp.element.createElement(
+            "div",
+            { className: "i-flex-center s-8" },
+            wp.element.createElement(
+                "select",
+                _extends({
+                    name: "action",
+                    "data-cy": "cpt-bulk-actions",
+                    className: "form-control sm"
+                }, register("action")),
+                wp.element.createElement(
+                    "option",
+                    { value: "" },
+                    (0, _useTranslation2.default)("Select")
+                ),
+                wp.element.createElement(
+                    "option",
+                    { value: "delete" },
+                    (0, _useTranslation2.default)("Delete")
+                )
+            ),
+            wp.element.createElement(
+                _Button2.default,
+                {
+                    testId: "cpt-bulk-actions",
+                    style: _styles.styleVariants.WHITE,
+                    size: "sm"
+                },
+                (0, _useTranslation2.default)("Execute")
+            )
+        )
+    );
+};
+
+exports.default = BulkActions;
 
 /***/ }),
 
@@ -28,7 +189,185 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _propTypes = __webpack_require__(5697);\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _ElementIcon = __webpack_require__(3900);\n\nvar _ElementIcon2 = _interopRequireDefault(_ElementIcon);\n\nvar _useTranslation = __webpack_require__(1422);\n\nvar _useTranslation2 = _interopRequireDefault(_useTranslation);\n\nvar _reactRouterDom = __webpack_require__(4022);\n\nvar _ElementTypeBadge = __webpack_require__(740);\n\nvar _ElementTypeBadge2 = _interopRequireDefault(_ElementTypeBadge);\n\nvar _ExportCodeModal = __webpack_require__(8930);\n\nvar _ExportCodeModal2 = _interopRequireDefault(_ExportCodeModal);\n\nvar _metaTypes = __webpack_require__(1895);\n\nvar _objects = __webpack_require__(4040);\n\nvar _DeleteCustomPostTypeModal = __webpack_require__(1744);\n\nvar _DeleteCustomPostTypeModal2 = _interopRequireDefault(_DeleteCustomPostTypeModal);\n\nvar _reactHookForm = __webpack_require__(930);\n\nvar _FieldGroupsModal = __webpack_require__(655);\n\nvar _FieldGroupsModal2 = _interopRequireDefault(_FieldGroupsModal);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar CustomPostTypeElement = (0, _react.memo)(function (_ref) {\n    var record = _ref.record,\n        showWooCommerceColumn = _ref.showWooCommerceColumn;\n\n    // manage form state\n    var _useFormContext = (0, _reactHookForm.useFormContext)(),\n        register = _useFormContext.register;\n\n    var formId = 'elements.' + record.name;\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            'tr',\n            null,\n            wp.element.createElement(\n                'td',\n                { style: {\n                        width: \"24px\"\n                    } },\n                !record.isNative && wp.element.createElement(\n                    'label',\n                    {\n                        className: 'checkbox',\n                        htmlFor: formId,\n                        'data-cy': 'select-' + record.name\n                    },\n                    wp.element.createElement('input', _extends({\n                        type: 'checkbox',\n                        id: formId,\n                        name: formId,\n                        defaultChecked: false\n                    }, register(formId))),\n                    wp.element.createElement('span', null)\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                wp.element.createElement(_ElementIcon2.default, { value: record.icon })\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                record.name\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                wp.element.createElement(_ElementTypeBadge2.default, { element: record })\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                (0, _objects.isset)(record, \"taxonomies\") && record.taxonomies.length > 0 ? wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: '/assoc-taxonomy-post/' + record.name },\n                    (0, _useTranslation2.default)(\"Manage\")\n                ) : wp.element.createElement(\n                    _reactRouterDom.Link,\n                    { to: '/assoc-taxonomy-post/' + record.name },\n                    (0, _useTranslation2.default)(\"Associate\")\n                )\n            ),\n            showWooCommerceColumn && wp.element.createElement(\n                'td',\n                null,\n                record.isWooCommerce === true && wp.element.createElement(\n                    _react2.default.Fragment,\n                    null,\n                    (0, _objects.isset)(record, \"woocommerceProductData\") && record.woocommerceProductData.length > 0 ? wp.element.createElement(\n                        _reactRouterDom.Link,\n                        { to: '/product-data/' + record.name },\n                        (0, _useTranslation2.default)(\"Manage\")\n                    ) : wp.element.createElement(\n                        _reactRouterDom.Link,\n                        { to: '/product-data/' + record.name },\n                        (0, _useTranslation2.default)(\"Create\")\n                    )\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                wp.element.createElement(\n                    'div',\n                    { className: 'i-flex-center s-8' },\n                    wp.element.createElement(\n                        _reactRouterDom.Link,\n                        { to: '/register_meta?belongsTo=' + _metaTypes.metaTypes.CUSTOM_POST_TYPE + '&find=' + record.name },\n                        (0, _useTranslation2.default)(\"Create\")\n                    ),\n                    wp.element.createElement(_FieldGroupsModal2.default, {\n                        find: record.name,\n                        belongsTo: _metaTypes.metaTypes.CUSTOM_POST_TYPE\n                    })\n                )\n            ),\n            wp.element.createElement(\n                'td',\n                null,\n                !record.isNative && wp.element.createElement(\n                    'div',\n                    { className: 'i-flex-center s-8' },\n                    wp.element.createElement(\n                        _reactRouterDom.Link,\n                        { to: 'view/' + record.name },\n                        (0, _useTranslation2.default)(\"View\")\n                    ),\n                    wp.element.createElement(\n                        _reactRouterDom.Link,\n                        { to: 'edit/' + record.name },\n                        (0, _useTranslation2.default)(\"Edit\")\n                    ),\n                    wp.element.createElement(_DeleteCustomPostTypeModal2.default, { postType: record.name }),\n                    wp.element.createElement(_ExportCodeModal2.default, { belongsTo: _metaTypes.metaTypes.CUSTOM_POST_TYPE, find: record.name })\n                )\n            )\n        )\n    );\n});\n\nCustomPostTypeElement.propTypes = {\n    record: _propTypes2.default.object.isRequired,\n    showWooCommerceColumn: _propTypes2.default.bool.isRequired\n};\n\nexports.default = CustomPostTypeElement;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/pages/CustomPostTypeList/CustomPostTypeElement.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(5697);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _ElementIcon = __webpack_require__(3900);
+
+var _ElementIcon2 = _interopRequireDefault(_ElementIcon);
+
+var _useTranslation = __webpack_require__(1422);
+
+var _useTranslation2 = _interopRequireDefault(_useTranslation);
+
+var _reactRouterDom = __webpack_require__(4022);
+
+var _ElementTypeBadge = __webpack_require__(740);
+
+var _ElementTypeBadge2 = _interopRequireDefault(_ElementTypeBadge);
+
+var _ExportCodeModal = __webpack_require__(8930);
+
+var _ExportCodeModal2 = _interopRequireDefault(_ExportCodeModal);
+
+var _metaTypes = __webpack_require__(1895);
+
+var _objects = __webpack_require__(4040);
+
+var _DeleteCustomPostTypeModal = __webpack_require__(1744);
+
+var _DeleteCustomPostTypeModal2 = _interopRequireDefault(_DeleteCustomPostTypeModal);
+
+var _reactHookForm = __webpack_require__(930);
+
+var _FieldGroupsModal = __webpack_require__(655);
+
+var _FieldGroupsModal2 = _interopRequireDefault(_FieldGroupsModal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CustomPostTypeElement = (0, _react.memo)(function (_ref) {
+    var record = _ref.record,
+        showWooCommerceColumn = _ref.showWooCommerceColumn;
+
+    // manage form state
+    var _useFormContext = (0, _reactHookForm.useFormContext)(),
+        register = _useFormContext.register;
+
+    var formId = 'elements.' + record.name;
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            'tr',
+            null,
+            wp.element.createElement(
+                'td',
+                { style: {
+                        width: "24px"
+                    } },
+                !record.isNative && wp.element.createElement(
+                    'label',
+                    {
+                        className: 'checkbox',
+                        htmlFor: formId,
+                        'data-cy': 'select-' + record.name
+                    },
+                    wp.element.createElement('input', _extends({
+                        type: 'checkbox',
+                        id: formId,
+                        name: formId,
+                        defaultChecked: false
+                    }, register(formId))),
+                    wp.element.createElement('span', null)
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                wp.element.createElement(_ElementIcon2.default, { value: record.icon })
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                record.name
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                wp.element.createElement(_ElementTypeBadge2.default, { element: record })
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                (0, _objects.isset)(record, "taxonomies") && record.taxonomies.length > 0 ? wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/assoc-taxonomy-post/' + record.name },
+                    (0, _useTranslation2.default)("Manage")
+                ) : wp.element.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/assoc-taxonomy-post/' + record.name },
+                    (0, _useTranslation2.default)("Associate")
+                )
+            ),
+            showWooCommerceColumn && wp.element.createElement(
+                'td',
+                null,
+                record.isWooCommerce === true && wp.element.createElement(
+                    _react2.default.Fragment,
+                    null,
+                    (0, _objects.isset)(record, "woocommerceProductData") && record.woocommerceProductData.length > 0 ? wp.element.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/product-data/' + record.name },
+                        (0, _useTranslation2.default)("Manage")
+                    ) : wp.element.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/product-data/' + record.name },
+                        (0, _useTranslation2.default)("Create")
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                wp.element.createElement(
+                    'div',
+                    { className: 'i-flex-center s-8' },
+                    wp.element.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/register_meta?belongsTo=' + _metaTypes.metaTypes.CUSTOM_POST_TYPE + '&find=' + record.name },
+                        (0, _useTranslation2.default)("Create")
+                    ),
+                    wp.element.createElement(_FieldGroupsModal2.default, {
+                        find: record.name,
+                        belongsTo: _metaTypes.metaTypes.CUSTOM_POST_TYPE
+                    })
+                )
+            ),
+            wp.element.createElement(
+                'td',
+                null,
+                !record.isNative && wp.element.createElement(
+                    'div',
+                    { className: 'i-flex-center s-8' },
+                    wp.element.createElement(
+                        _reactRouterDom.Link,
+                        { to: 'view/' + record.name },
+                        (0, _useTranslation2.default)("View")
+                    ),
+                    wp.element.createElement(
+                        _reactRouterDom.Link,
+                        { to: 'edit/' + record.name },
+                        (0, _useTranslation2.default)("Edit")
+                    ),
+                    wp.element.createElement(_DeleteCustomPostTypeModal2.default, { postType: record.name }),
+                    wp.element.createElement(_ExportCodeModal2.default, { belongsTo: _metaTypes.metaTypes.CUSTOM_POST_TYPE, find: record.name })
+                )
+            )
+        )
+    );
+});
+
+CustomPostTypeElement.propTypes = {
+    record: _propTypes2.default.object.isRequired,
+    showWooCommerceColumn: _propTypes2.default.bool.isRequired
+};
+
+exports.default = CustomPostTypeElement;
 
 /***/ }),
 
@@ -36,7 +375,154 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(4022);\n\nvar _propTypes = __webpack_require__(5697);\n\nvar _propTypes2 = _interopRequireDefault(_propTypes);\n\nvar _Modal = __webpack_require__(6103);\n\nvar _Modal2 = _interopRequireDefault(_Modal);\n\nvar _useTranslation = __webpack_require__(1422);\n\nvar _useTranslation2 = _interopRequireDefault(_useTranslation);\n\nvar _Button = __webpack_require__(6337);\n\nvar _Button2 = _interopRequireDefault(_Button);\n\nvar _styles = __webpack_require__(624);\n\nvar _Alert = __webpack_require__(1316);\n\nvar _Alert2 = _interopRequireDefault(_Alert);\n\nvar _objects = __webpack_require__(4040);\n\nvar _reactRedux = __webpack_require__(6706);\n\nvar _deleteCustomPostTypeSlice = __webpack_require__(5665);\n\nvar _reactHotToast = __webpack_require__(4500);\n\nvar _misc = __webpack_require__(3154);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar DeleteCustomPostTypeModal = function DeleteCustomPostTypeModal(_ref) {\n    var postType = _ref.postType;\n\n\n    var globals = document.globals;\n    var settings = globals.settings;\n    var deletePostsOption = (0, _objects.filterByLabel)(settings, 'key', 'delete_posts').value;\n\n    // manage global state\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    // manage local state\n\n    var _useState = (0, _react.useState)(false),\n        _useState2 = _slicedToArray(_useState, 2),\n        modalOpen = _useState2[0],\n        setModalOpen = _useState2[1];\n\n    // manage redirect\n\n\n    var navigate = (0, _reactRouterDom.useNavigate)();\n\n    var handleDeletePostType = function handleDeletePostType() {\n        dispatch((0, _deleteCustomPostTypeSlice.deleteCustomPostType)(postType, 'all')).then(function (res) {\n            var payload = res.payload;\n\n            if (payload.success) {\n                navigate('/');\n                setModalOpen(!modalOpen);\n                _reactHotToast.toast.success((0, _useTranslation2.default)(\"Custom post type successfully deleted. The browser will refresh after 5 seconds.\"));\n                (0, _misc.refreshPage)(5000);\n            } else {\n                _reactHotToast.toast.error(payload.error);\n            }\n        }).catch(function (err) {\n            _reactHotToast.toast.error(err);\n        });\n    };\n\n    var buttons = [wp.element.createElement(\n        _Button2.default,\n        {\n            style: _styles.styleVariants.DANGER,\n            onClick: function onClick() {\n                handleDeletePostType();\n            }\n        },\n        (0, _useTranslation2.default)(\"Yes, delete it\")\n    ), wp.element.createElement(\n        _Button2.default,\n        {\n            style: _styles.styleVariants.SECONDARY,\n            onClick: function onClick() {\n                setModalOpen(!modalOpen);\n            }\n        },\n        (0, _useTranslation2.default)(\"Return back to list\")\n    )];\n\n    return wp.element.createElement(\n        _react2.default.Fragment,\n        null,\n        wp.element.createElement(\n            _Modal2.default,\n            { title: (0, _useTranslation2.default)('Delete custom post type'), buttons: buttons, visible: modalOpen },\n            wp.element.createElement(\n                \"div\",\n                null,\n                (0, _useTranslation2.default)(\"You are going to delete this custom post type. Are you sure?\")\n            ),\n            deletePostsOption && wp.element.createElement(\n                \"div\",\n                { className: \"mt-24\" },\n                wp.element.createElement(\n                    _Alert2.default,\n                    { style: _styles.styleVariants.WARNING },\n                    (0, _useTranslation2.default)(\"WARNING: This action will delete all posts and metadata for this post type. The action is irreversible.\")\n                )\n            )\n        ),\n        wp.element.createElement(\n            \"a\",\n            {\n                href: \"#\",\n                onClick: function onClick(e) {\n                    e.preventDefault();\n                    setModalOpen(!modalOpen);\n                }\n            },\n            (0, _useTranslation2.default)(\"Delete\")\n        )\n    );\n};\n\nDeleteCustomPostTypeModal.propTypes = {\n    postType: _propTypes2.default.string.isRequired\n};\n\nexports.default = DeleteCustomPostTypeModal;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/pages/CustomPostTypeList/Modal/DeleteCustomPostTypeModal.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(4022);
+
+var _propTypes = __webpack_require__(5697);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _Modal = __webpack_require__(6103);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+var _useTranslation = __webpack_require__(1422);
+
+var _useTranslation2 = _interopRequireDefault(_useTranslation);
+
+var _Button = __webpack_require__(6337);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _styles = __webpack_require__(624);
+
+var _Alert = __webpack_require__(1316);
+
+var _Alert2 = _interopRequireDefault(_Alert);
+
+var _objects = __webpack_require__(4040);
+
+var _reactRedux = __webpack_require__(6706);
+
+var _deleteCustomPostTypeSlice = __webpack_require__(5665);
+
+var _reactHotToast = __webpack_require__(4500);
+
+var _misc = __webpack_require__(3154);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var DeleteCustomPostTypeModal = function DeleteCustomPostTypeModal(_ref) {
+    var postType = _ref.postType;
+
+
+    var globals = document.globals;
+    var settings = globals.settings;
+    var deletePostsOption = (0, _objects.filterByLabel)(settings, 'key', 'delete_posts').value;
+
+    // manage global state
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    // manage local state
+
+    var _useState = (0, _react.useState)(false),
+        _useState2 = _slicedToArray(_useState, 2),
+        modalOpen = _useState2[0],
+        setModalOpen = _useState2[1];
+
+    // manage redirect
+
+
+    var navigate = (0, _reactRouterDom.useNavigate)();
+
+    var handleDeletePostType = function handleDeletePostType() {
+        dispatch((0, _deleteCustomPostTypeSlice.deleteCustomPostType)(postType, 'all')).then(function (res) {
+            var payload = res.payload;
+
+            if (payload.success) {
+                navigate('/');
+                setModalOpen(!modalOpen);
+                _reactHotToast.toast.success((0, _useTranslation2.default)("Custom post type successfully deleted. The browser will refresh after 5 seconds."));
+                (0, _misc.refreshPage)(5000);
+            } else {
+                _reactHotToast.toast.error(payload.error);
+            }
+        }).catch(function (err) {
+            _reactHotToast.toast.error(err);
+        });
+    };
+
+    var buttons = [wp.element.createElement(
+        _Button2.default,
+        {
+            style: _styles.styleVariants.DANGER,
+            onClick: function onClick() {
+                handleDeletePostType();
+            }
+        },
+        (0, _useTranslation2.default)("Yes, delete it")
+    ), wp.element.createElement(
+        _Button2.default,
+        {
+            style: _styles.styleVariants.SECONDARY,
+            onClick: function onClick() {
+                setModalOpen(!modalOpen);
+            }
+        },
+        (0, _useTranslation2.default)("Return back to list")
+    )];
+
+    return wp.element.createElement(
+        _react2.default.Fragment,
+        null,
+        wp.element.createElement(
+            _Modal2.default,
+            { title: (0, _useTranslation2.default)('Delete custom post type'), buttons: buttons, visible: modalOpen },
+            wp.element.createElement(
+                "div",
+                null,
+                (0, _useTranslation2.default)("You are going to delete this custom post type. Are you sure?")
+            ),
+            deletePostsOption && wp.element.createElement(
+                "div",
+                { className: "mt-24" },
+                wp.element.createElement(
+                    _Alert2.default,
+                    { style: _styles.styleVariants.WARNING },
+                    (0, _useTranslation2.default)("WARNING: This action will delete all posts and metadata for this post type. The action is irreversible.")
+                )
+            )
+        ),
+        wp.element.createElement(
+            "a",
+            {
+                href: "#",
+                onClick: function onClick(e) {
+                    e.preventDefault();
+                    setModalOpen(!modalOpen);
+                }
+            },
+            (0, _useTranslation2.default)("Delete")
+        )
+    );
+};
+
+DeleteCustomPostTypeModal.propTypes = {
+    postType: _propTypes2.default.string.isRequired
+};
+
+exports.default = DeleteCustomPostTypeModal;
 
 /***/ }),
 
@@ -44,8 +530,486 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(7294);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Layout = __webpack_require__(145);\n\nvar _Layout2 = _interopRequireDefault(_Layout);\n\nvar _Button = __webpack_require__(6337);\n\nvar _Button2 = _interopRequireDefault(_Button);\n\nvar _useTranslation = __webpack_require__(1422);\n\nvar _useTranslation2 = _interopRequireDefault(_useTranslation);\n\nvar _reactRedux = __webpack_require__(6706);\n\nvar _fetchCustomPostTypesSlice = __webpack_require__(9300);\n\nvar _syncCustomPostTypesSlice = __webpack_require__(5488);\n\nvar _misc = __webpack_require__(3154);\n\nvar _Loader = __webpack_require__(9660);\n\nvar _Loader2 = _interopRequireDefault(_Loader);\n\nvar _reactRouterDom = __webpack_require__(4022);\n\nvar _Alert = __webpack_require__(1316);\n\nvar _Alert2 = _interopRequireDefault(_Alert);\n\nvar _styles = __webpack_require__(624);\n\nvar _Tooltip = __webpack_require__(4877);\n\nvar _Tooltip2 = _interopRequireDefault(_Tooltip);\n\nvar _CustomPostTypeElement = __webpack_require__(9590);\n\nvar _CustomPostTypeElement2 = _interopRequireDefault(_CustomPostTypeElement);\n\nvar _objects = __webpack_require__(4040);\n\nvar _Pagination = __webpack_require__(5253);\n\nvar _Pagination2 = _interopRequireDefault(_Pagination);\n\nvar _ButtonLink = __webpack_require__(4545);\n\nvar _ButtonLink2 = _interopRequireDefault(_ButtonLink);\n\nvar _reactHotToast = __webpack_require__(4500);\n\nvar _reactHookForm = __webpack_require__(930);\n\nvar _BulkActions = __webpack_require__(9664);\n\nvar _BulkActions2 = _interopRequireDefault(_BulkActions);\n\nvar _ajax = __webpack_require__(7569);\n\nvar _metaTypes = __webpack_require__(1895);\n\nvar _react3 = __webpack_require__(8839);\n\nvar _scroll = __webpack_require__(2727);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar CustomPostTypeList = function CustomPostTypeList() {\n\n    var documentGlobals = document.globals;\n    var settings = documentGlobals.settings;\n    var globals = documentGlobals.globals;\n\n    // auto-animate\n\n    var _useAutoAnimate = (0, _react3.useAutoAnimate)(),\n        _useAutoAnimate2 = _slicedToArray(_useAutoAnimate, 1),\n        parent = _useAutoAnimate2[0];\n\n    // ref\n\n\n    var ref = (0, _react.useRef)();\n\n    // form init\n    var methods = (0, _reactHookForm.useForm)({\n        mode: 'all'\n    });\n\n    var watchedElements = (0, _reactHookForm.useWatch)({\n        control: methods.control,\n        name: \"elements\"\n    });\n\n    // manage global state\n    var dispatch = (0, _reactRedux.useDispatch)();\n\n    var _useSelector = (0, _reactRedux.useSelector)(function (state) {\n        return state.fetchCustomPostTypes;\n    }),\n        data = _useSelector.data,\n        loading = _useSelector.loading;\n\n    // manage local state\n\n\n    var _useParams = (0, _reactRouterDom.useParams)(),\n        page = _useParams.page;\n\n    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;\n    var totalPages = Math.ceil(data.count / perPage);\n\n    (0, _react.useEffect)(function () {\n        (0, _misc.metaTitle)((0, _useTranslation2.default)(\"Registered Custom Post Types\"));\n        dispatch((0, _fetchCustomPostTypesSlice.fetchCustomPostTypes)({\n            page: page ? page : 1,\n            perPage: perPage\n        }));\n    }, [page]);\n\n    (0, _react.useEffect)(function () {\n\n        /**\n         *\n         * @return {boolean}\n         */\n        var areAllSelected = function areAllSelected() {\n\n            if (!watchedElements) {\n                return false;\n            }\n\n            var matches = 0;\n            var _iteratorNormalCompletion = true;\n            var _didIteratorError = false;\n            var _iteratorError = undefined;\n\n            try {\n                for (var _iterator = Object.entries(watchedElements)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {\n                    var _ref = _step.value;\n\n                    var _ref2 = _slicedToArray(_ref, 2);\n\n                    var key = _ref2[0];\n                    var value = _ref2[1];\n\n                    if (value === true) {\n                        matches++;\n                    }\n                }\n            } catch (err) {\n                _didIteratorError = true;\n                _iteratorError = err;\n            } finally {\n                try {\n                    if (!_iteratorNormalCompletion && _iterator.return) {\n                        _iterator.return();\n                    }\n                } finally {\n                    if (_didIteratorError) {\n                        throw _iteratorError;\n                    }\n                }\n            }\n\n            return matches === Object.entries(watchedElements).length;\n        };\n\n        if (areAllSelected()) {\n            ref.current.checked = true;\n        } else {\n            if (ref.current) {\n                ref.current.checked = false;\n            }\n        }\n    }, [watchedElements]);\n\n    var handleSyncPosts = function handleSyncPosts() {\n        dispatch((0, _syncCustomPostTypesSlice.syncCustomPostTypes)()).then(function (res) {\n\n            var payload = res.payload;\n\n            if (payload.success) {\n                _reactHotToast.toast.success((0, _useTranslation2.default)(\"Successfully post sync. The browser will refresh after 5 seconds.\"));\n                (0, _misc.refreshPage)(5000);\n            }\n\n            if (payload.error) {\n                _reactHotToast.toast.error(error);\n            }\n        }).catch(function (err) {\n            return console.error(err);\n        });\n    };\n\n    /**\n     *\n     * @return {boolean}\n     */\n    var showBulkActions = function showBulkActions() {\n\n        if (!watchedElements) {\n            return false;\n        }\n\n        var _iteratorNormalCompletion2 = true;\n        var _didIteratorError2 = false;\n        var _iteratorError2 = undefined;\n\n        try {\n            for (var _iterator2 = Object.entries(watchedElements)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {\n                var _ref3 = _step2.value;\n\n                var _ref4 = _slicedToArray(_ref3, 2);\n\n                var key = _ref4[0];\n                var value = _ref4[1];\n\n                if (value === true) {\n                    return true;\n                }\n            }\n        } catch (err) {\n            _didIteratorError2 = true;\n            _iteratorError2 = err;\n        } finally {\n            try {\n                if (!_iteratorNormalCompletion2 && _iterator2.return) {\n                    _iterator2.return();\n                }\n            } finally {\n                if (_didIteratorError2) {\n                    throw _iteratorError2;\n                }\n            }\n        }\n\n        return false;\n    };\n\n    var onSubmit = function onSubmit(data) {\n        methods.reset();\n        data.belongsTo = _metaTypes.metaTypes.CUSTOM_POST_TYPE;\n\n        (0, _ajax.wpAjaxRequest)('bulkActionsAction', data).then(function (res) {\n            if (res.success === true) {\n\n                // flush message\n                switch (data.action) {\n                    case \"delete\":\n                        _reactHotToast.toast.success((0, _useTranslation2.default)(\"Custom post type successfully deleted. The browser will refresh after 5 seconds.\"));\n                        methods.resetField(\"elements\");\n                        (0, _scroll.scrollToTop)();\n\n                        // refresh items\n                        dispatch((0, _fetchCustomPostTypesSlice.fetchCustomPostTypes)({\n                            page: page ? page : 1,\n                            perPage: perPage\n                        }));\n\n                        (0, _misc.refreshPage)(5000);\n                        break;\n                }\n            } else {\n                _reactHotToast.toast.error(res.error);\n            }\n        }).catch(function (err) {\n            console.error(err);\n            _reactHotToast.toast.error((0, _useTranslation2.default)(\"Unknown error, please retry later\"));\n        });\n    };\n\n    /**\n     *\n     * @return {boolean}\n     */\n    var showWooCommerceColumn = function showWooCommerceColumn() {\n\n        if (!data.records) {\n            return false;\n        }\n\n        var match = 0;\n\n        data.records.map(function (r) {\n            if (r.isWooCommerce === true) {\n                match++;\n            }\n        });\n\n        return match > 0;\n    };\n\n    var actions = [wp.element.createElement(\n        _ButtonLink2.default,\n        { style: _styles.styleVariants.PRIMARY, to: \"/register\" },\n        (0, _useTranslation2.default)(\"Register new Post Type\")\n    ), wp.element.createElement(\n        _Button2.default,\n        {\n            type: \"button\",\n            style: _styles.styleVariants.SECONDARY,\n            onClick: function onClick(e) {\n                e.preventDefault();\n                handleSyncPosts();\n            }\n        },\n        (0, _useTranslation2.default)(\"Sync with post types\")\n    )];\n\n    if (loading) {\n        return wp.element.createElement(_Loader2.default, null);\n    }\n\n    return wp.element.createElement(\n        _reactHookForm.FormProvider,\n        methods,\n        wp.element.createElement(\n            \"form\",\n            { onSubmit: methods.handleSubmit(onSubmit) },\n            wp.element.createElement(\n                _Layout2.default,\n                {\n                    title: (0, _useTranslation2.default)(\"Registered Custom Post Types\"),\n                    actions: actions,\n                    crumbs: [{\n                        label: (0, _useTranslation2.default)(\"Registered Custom Post Types\")\n                    }]\n                },\n                wp.element.createElement(\n                    \"div\",\n                    { ref: parent },\n                    showBulkActions() && wp.element.createElement(_BulkActions2.default, null)\n                ),\n                data.records && data.records.length > 0 ? wp.element.createElement(\n                    \"div\",\n                    { className: \"responsive\" },\n                    wp.element.createElement(\n                        \"table\",\n                        {\n                            \"data-cy\": \"cpt-table\",\n                            className: \"acpt-table with-shadow \" + (globals.is_rtl ? 'rtl' : '')\n                        },\n                        wp.element.createElement(\n                            \"thead\",\n                            null,\n                            wp.element.createElement(\n                                \"tr\",\n                                null,\n                                wp.element.createElement(\n                                    \"th\",\n                                    { style: {\n                                            width: \"24px\"\n                                        } },\n                                    wp.element.createElement(\n                                        \"label\",\n                                        {\n                                            \"data-cy\": \"select-all\",\n                                            className: \"checkbox\",\n                                            htmlFor: \"all\"\n                                        },\n                                        wp.element.createElement(\"input\", {\n                                            ref: ref,\n                                            type: \"checkbox\",\n                                            id: \"all\",\n                                            defaultChecked: false,\n                                            onClick: function onClick(e) {\n                                                data.records.filter(function (r) {\n                                                    return r.isNative === false;\n                                                }).map(function (r) {\n                                                    methods.setValue(\"elements.\" + r.name, e.currentTarget.checked);\n                                                });\n                                            }\n                                        }),\n                                        wp.element.createElement(\"span\", null)\n                                    )\n                                ),\n                                wp.element.createElement(\"th\", null),\n                                wp.element.createElement(\n                                    \"th\",\n                                    null,\n                                    (0, _useTranslation2.default)(\"Name\")\n                                ),\n                                wp.element.createElement(\n                                    \"th\",\n                                    null,\n                                    (0, _useTranslation2.default)(\"Type\")\n                                ),\n                                wp.element.createElement(\n                                    \"th\",\n                                    null,\n                                    wp.element.createElement(_Tooltip2.default, {\n                                        tip: (0, _useTranslation2.default)(\"Associated taxonomies with the post\"),\n                                        label: (0, _useTranslation2.default)(\"Associated taxonomies\")\n                                    })\n                                ),\n                                showWooCommerceColumn() && wp.element.createElement(\n                                    \"th\",\n                                    null,\n                                    wp.element.createElement(_Tooltip2.default, {\n                                        tip: (0, _useTranslation2.default)(\"Associated WooCommerce product data\"),\n                                        label: (0, _useTranslation2.default)(\"Product data\")\n                                    })\n                                ),\n                                wp.element.createElement(\n                                    \"th\",\n                                    null,\n                                    (0, _useTranslation2.default)(\"Field groups\")\n                                ),\n                                wp.element.createElement(\n                                    \"th\",\n                                    null,\n                                    (0, _useTranslation2.default)(\"Actions\")\n                                )\n                            )\n                        ),\n                        wp.element.createElement(\n                            \"tbody\",\n                            null,\n                            data.records && data.records.map(function (record) {\n                                return wp.element.createElement(_CustomPostTypeElement2.default, {\n                                    key: record.id,\n                                    record: record,\n                                    showWooCommerceColumn: showWooCommerceColumn()\n                                });\n                            })\n                        ),\n                        totalPages > 1 && wp.element.createElement(\n                            \"tfoot\",\n                            null,\n                            wp.element.createElement(\n                                \"tr\",\n                                null,\n                                wp.element.createElement(\n                                    \"td\",\n                                    { colSpan: 7 },\n                                    wp.element.createElement(_Pagination2.default, {\n                                        currentPage: page ? parseInt(page) : 1,\n                                        totalPages: totalPages,\n                                        baseLink: \"\"\n                                    })\n                                )\n                            )\n                        )\n                    )\n                ) : wp.element.createElement(\n                    _Alert2.default,\n                    { style: _styles.styleVariants.SECONDARY },\n                    (0, _useTranslation2.default)(\"No custom post types found.\"),\n                    \" \",\n                    wp.element.createElement(\n                        _reactRouterDom.Link,\n                        { to: \"/register\" },\n                        (0, _useTranslation2.default)(\"Register the first one\")\n                    ),\n                    \"!\"\n                )\n            )\n        )\n    );\n};\n\nCustomPostTypeList.propTypes = {};\n\nexports.default = CustomPostTypeList;\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./assets/src/App/pages/CustomPostTypeList/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _react = __webpack_require__(7294);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Layout = __webpack_require__(145);
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _Button = __webpack_require__(6337);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _useTranslation = __webpack_require__(1422);
+
+var _useTranslation2 = _interopRequireDefault(_useTranslation);
+
+var _reactRedux = __webpack_require__(6706);
+
+var _fetchCustomPostTypesSlice = __webpack_require__(9300);
+
+var _syncCustomPostTypesSlice = __webpack_require__(5488);
+
+var _misc = __webpack_require__(3154);
+
+var _Loader = __webpack_require__(9660);
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
+var _reactRouterDom = __webpack_require__(4022);
+
+var _Alert = __webpack_require__(1316);
+
+var _Alert2 = _interopRequireDefault(_Alert);
+
+var _styles = __webpack_require__(624);
+
+var _Tooltip = __webpack_require__(4877);
+
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
+
+var _CustomPostTypeElement = __webpack_require__(9590);
+
+var _CustomPostTypeElement2 = _interopRequireDefault(_CustomPostTypeElement);
+
+var _objects = __webpack_require__(4040);
+
+var _Pagination = __webpack_require__(5253);
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
+var _ButtonLink = __webpack_require__(4545);
+
+var _ButtonLink2 = _interopRequireDefault(_ButtonLink);
+
+var _reactHotToast = __webpack_require__(4500);
+
+var _reactHookForm = __webpack_require__(930);
+
+var _BulkActions = __webpack_require__(9664);
+
+var _BulkActions2 = _interopRequireDefault(_BulkActions);
+
+var _ajax = __webpack_require__(7569);
+
+var _metaTypes = __webpack_require__(1895);
+
+var _react3 = __webpack_require__(8839);
+
+var _scroll = __webpack_require__(2727);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CustomPostTypeList = function CustomPostTypeList() {
+
+    var documentGlobals = document.globals;
+    var settings = documentGlobals.settings;
+    var globals = documentGlobals.globals;
+
+    // auto-animate
+
+    var _useAutoAnimate = (0, _react3.useAutoAnimate)(),
+        _useAutoAnimate2 = _slicedToArray(_useAutoAnimate, 1),
+        parent = _useAutoAnimate2[0];
+
+    // ref
+
+
+    var ref = (0, _react.useRef)();
+
+    // form init
+    var methods = (0, _reactHookForm.useForm)({
+        mode: 'all'
+    });
+
+    var watchedElements = (0, _reactHookForm.useWatch)({
+        control: methods.control,
+        name: "elements"
+    });
+
+    // manage global state
+    var dispatch = (0, _reactRedux.useDispatch)();
+
+    var _useSelector = (0, _reactRedux.useSelector)(function (state) {
+        return state.fetchCustomPostTypes;
+    }),
+        data = _useSelector.data,
+        loading = _useSelector.loading;
+
+    // manage local state
+
+
+    var _useParams = (0, _reactRouterDom.useParams)(),
+        page = _useParams.page;
+
+    var perPage = settings.length > 0 && (0, _objects.filterByLabel)(settings, 'key', 'records_per_page') !== '' ? (0, _objects.filterByLabel)(settings, 'key', 'records_per_page').value : 20;
+    var totalPages = Math.ceil(data.count / perPage);
+
+    (0, _react.useEffect)(function () {
+        (0, _misc.metaTitle)((0, _useTranslation2.default)("Registered Custom Post Types"));
+        dispatch((0, _fetchCustomPostTypesSlice.fetchCustomPostTypes)({
+            page: page ? page : 1,
+            perPage: perPage
+        }));
+    }, [page]);
+
+    (0, _react.useEffect)(function () {
+
+        /**
+         *
+         * @return {boolean}
+         */
+        var areAllSelected = function areAllSelected() {
+
+            if (!watchedElements) {
+                return false;
+            }
+
+            var matches = 0;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.entries(watchedElements)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var _ref = _step.value;
+
+                    var _ref2 = _slicedToArray(_ref, 2);
+
+                    var key = _ref2[0];
+                    var value = _ref2[1];
+
+                    if (value === true) {
+                        matches++;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return matches === Object.entries(watchedElements).length;
+        };
+
+        if (areAllSelected()) {
+            ref.current.checked = true;
+        } else {
+            if (ref.current) {
+                ref.current.checked = false;
+            }
+        }
+    }, [watchedElements]);
+
+    var handleSyncPosts = function handleSyncPosts() {
+        dispatch((0, _syncCustomPostTypesSlice.syncCustomPostTypes)()).then(function (res) {
+
+            var payload = res.payload;
+
+            if (payload.success) {
+                _reactHotToast.toast.success((0, _useTranslation2.default)("Successfully post sync. The browser will refresh after 5 seconds."));
+                (0, _misc.refreshPage)(5000);
+            }
+
+            if (payload.error) {
+                _reactHotToast.toast.error(error);
+            }
+        }).catch(function (err) {
+            return console.error(err);
+        });
+    };
+
+    /**
+     *
+     * @return {boolean}
+     */
+    var showBulkActions = function showBulkActions() {
+
+        if (!watchedElements) {
+            return false;
+        }
+
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+            for (var _iterator2 = Object.entries(watchedElements)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var _ref3 = _step2.value;
+
+                var _ref4 = _slicedToArray(_ref3, 2);
+
+                var key = _ref4[0];
+                var value = _ref4[1];
+
+                if (value === true) {
+                    return true;
+                }
+            }
+        } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                    _iterator2.return();
+                }
+            } finally {
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
+                }
+            }
+        }
+
+        return false;
+    };
+
+    var onSubmit = function onSubmit(data) {
+        methods.reset();
+        data.belongsTo = _metaTypes.metaTypes.CUSTOM_POST_TYPE;
+
+        (0, _ajax.wpAjaxRequest)('bulkActionsAction', data).then(function (res) {
+            if (res.success === true) {
+
+                // flush message
+                switch (data.action) {
+                    case "delete":
+                        _reactHotToast.toast.success((0, _useTranslation2.default)("Custom post type successfully deleted. The browser will refresh after 5 seconds."));
+                        methods.resetField("elements");
+                        (0, _scroll.scrollToTop)();
+
+                        // refresh items
+                        dispatch((0, _fetchCustomPostTypesSlice.fetchCustomPostTypes)({
+                            page: page ? page : 1,
+                            perPage: perPage
+                        }));
+
+                        (0, _misc.refreshPage)(5000);
+                        break;
+                }
+            } else {
+                _reactHotToast.toast.error(res.error);
+            }
+        }).catch(function (err) {
+            console.error(err);
+            _reactHotToast.toast.error((0, _useTranslation2.default)("Unknown error, please retry later"));
+        });
+    };
+
+    /**
+     *
+     * @return {boolean}
+     */
+    var showWooCommerceColumn = function showWooCommerceColumn() {
+
+        if (!data.records) {
+            return false;
+        }
+
+        var match = 0;
+
+        data.records.map(function (r) {
+            if (r.isWooCommerce === true) {
+                match++;
+            }
+        });
+
+        return match > 0;
+    };
+
+    var actions = [wp.element.createElement(
+        _ButtonLink2.default,
+        { style: _styles.styleVariants.PRIMARY, to: "/register" },
+        (0, _useTranslation2.default)("Register new Post Type")
+    ), wp.element.createElement(
+        _Button2.default,
+        {
+            type: "button",
+            style: _styles.styleVariants.SECONDARY,
+            onClick: function onClick(e) {
+                e.preventDefault();
+                handleSyncPosts();
+            }
+        },
+        (0, _useTranslation2.default)("Sync with post types")
+    )];
+
+    if (loading) {
+        return wp.element.createElement(_Loader2.default, null);
+    }
+
+    return wp.element.createElement(
+        _reactHookForm.FormProvider,
+        methods,
+        wp.element.createElement(
+            "form",
+            { onSubmit: methods.handleSubmit(onSubmit) },
+            wp.element.createElement(
+                _Layout2.default,
+                {
+                    title: (0, _useTranslation2.default)("Registered Custom Post Types"),
+                    actions: actions,
+                    crumbs: [{
+                        label: (0, _useTranslation2.default)("Registered Custom Post Types")
+                    }]
+                },
+                wp.element.createElement(
+                    "div",
+                    { ref: parent },
+                    showBulkActions() && wp.element.createElement(_BulkActions2.default, null)
+                ),
+                data.records && data.records.length > 0 ? wp.element.createElement(
+                    "div",
+                    { className: "responsive" },
+                    wp.element.createElement(
+                        "table",
+                        {
+                            "data-cy": "cpt-table",
+                            className: "acpt-table with-shadow " + (globals.is_rtl ? 'rtl' : '')
+                        },
+                        wp.element.createElement(
+                            "thead",
+                            null,
+                            wp.element.createElement(
+                                "tr",
+                                null,
+                                wp.element.createElement(
+                                    "th",
+                                    { style: {
+                                            width: "24px"
+                                        } },
+                                    wp.element.createElement(
+                                        "label",
+                                        {
+                                            "data-cy": "select-all",
+                                            className: "checkbox",
+                                            htmlFor: "all"
+                                        },
+                                        wp.element.createElement("input", {
+                                            ref: ref,
+                                            type: "checkbox",
+                                            id: "all",
+                                            defaultChecked: false,
+                                            onClick: function onClick(e) {
+                                                data.records.filter(function (r) {
+                                                    return r.isNative === false;
+                                                }).map(function (r) {
+                                                    methods.setValue("elements." + r.name, e.currentTarget.checked);
+                                                });
+                                            }
+                                        }),
+                                        wp.element.createElement("span", null)
+                                    )
+                                ),
+                                wp.element.createElement("th", null),
+                                wp.element.createElement(
+                                    "th",
+                                    null,
+                                    (0, _useTranslation2.default)("Name")
+                                ),
+                                wp.element.createElement(
+                                    "th",
+                                    null,
+                                    (0, _useTranslation2.default)("Type")
+                                ),
+                                wp.element.createElement(
+                                    "th",
+                                    null,
+                                    wp.element.createElement(_Tooltip2.default, {
+                                        tip: (0, _useTranslation2.default)("Associated taxonomies with the post"),
+                                        label: (0, _useTranslation2.default)("Associated taxonomies")
+                                    })
+                                ),
+                                showWooCommerceColumn() && wp.element.createElement(
+                                    "th",
+                                    null,
+                                    wp.element.createElement(_Tooltip2.default, {
+                                        tip: (0, _useTranslation2.default)("Associated WooCommerce product data"),
+                                        label: (0, _useTranslation2.default)("Product data")
+                                    })
+                                ),
+                                wp.element.createElement(
+                                    "th",
+                                    null,
+                                    (0, _useTranslation2.default)("Field groups")
+                                ),
+                                wp.element.createElement(
+                                    "th",
+                                    null,
+                                    (0, _useTranslation2.default)("Actions")
+                                )
+                            )
+                        ),
+                        wp.element.createElement(
+                            "tbody",
+                            null,
+                            data.records && data.records.map(function (record) {
+                                return wp.element.createElement(_CustomPostTypeElement2.default, {
+                                    key: record.id,
+                                    record: record,
+                                    showWooCommerceColumn: showWooCommerceColumn()
+                                });
+                            })
+                        ),
+                        totalPages > 1 && wp.element.createElement(
+                            "tfoot",
+                            null,
+                            wp.element.createElement(
+                                "tr",
+                                null,
+                                wp.element.createElement(
+                                    "td",
+                                    { colSpan: 7 },
+                                    wp.element.createElement(_Pagination2.default, {
+                                        currentPage: page ? parseInt(page) : 1,
+                                        totalPages: totalPages,
+                                        baseLink: ""
+                                    })
+                                )
+                            )
+                        )
+                    )
+                ) : wp.element.createElement(
+                    _Alert2.default,
+                    { style: _styles.styleVariants.SECONDARY },
+                    (0, _useTranslation2.default)("No custom post types found."),
+                    " ",
+                    wp.element.createElement(
+                        _reactRouterDom.Link,
+                        { to: "/register" },
+                        (0, _useTranslation2.default)("Register the first one")
+                    ),
+                    "!"
+                )
+            )
+        )
+    );
+};
+
+CustomPostTypeList.propTypes = {};
+
+exports.default = CustomPostTypeList;
 
 /***/ })
 
 }]);
+//# sourceMappingURL=347.js.map

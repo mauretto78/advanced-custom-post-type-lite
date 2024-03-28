@@ -212,6 +212,7 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                     register={register}
                     id={formId("operator")}
                     values={operators}
+                    defaultValue="="
                     errors={errors}
                     disabled={isDisabled()}
                     validate={validate()}

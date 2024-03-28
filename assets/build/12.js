@@ -1,18 +1,4006 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkadvanced_custom_post_type_lite"] = self["webpackChunkadvanced_custom_post_type_lite"] || []).push([[12],{
 
 /***/ 9752:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("// ESM COMPAT FLAG\n__webpack_require__.r(__webpack_exports__);\n\n// EXPORTS\n__webpack_require__.d(__webpack_exports__, {\n  \"AutoScrollActivator\": () => (/* binding */ AutoScrollActivator),\n  \"DndContext\": () => (/* binding */ DndContext),\n  \"DragOverlay\": () => (/* binding */ DragOverlay),\n  \"KeyboardCode\": () => (/* binding */ KeyboardCode),\n  \"KeyboardSensor\": () => (/* binding */ KeyboardSensor),\n  \"MeasuringFrequency\": () => (/* binding */ MeasuringFrequency),\n  \"MeasuringStrategy\": () => (/* binding */ MeasuringStrategy),\n  \"MouseSensor\": () => (/* binding */ MouseSensor),\n  \"PointerSensor\": () => (/* binding */ PointerSensor),\n  \"TouchSensor\": () => (/* binding */ TouchSensor),\n  \"TraversalOrder\": () => (/* binding */ TraversalOrder),\n  \"applyModifiers\": () => (/* binding */ applyModifiers),\n  \"closestCenter\": () => (/* binding */ closestCenter),\n  \"closestCorners\": () => (/* binding */ closestCorners),\n  \"defaultAnnouncements\": () => (/* binding */ defaultAnnouncements),\n  \"defaultCoordinates\": () => (/* binding */ defaultCoordinates),\n  \"defaultDropAnimation\": () => (/* binding */ defaultDropAnimationConfiguration),\n  \"defaultDropAnimationSideEffects\": () => (/* binding */ defaultDropAnimationSideEffects),\n  \"defaultScreenReaderInstructions\": () => (/* binding */ defaultScreenReaderInstructions),\n  \"getClientRect\": () => (/* binding */ getClientRect),\n  \"getFirstCollision\": () => (/* binding */ getFirstCollision),\n  \"getScrollableAncestors\": () => (/* binding */ getScrollableAncestors),\n  \"pointerWithin\": () => (/* binding */ pointerWithin),\n  \"rectIntersection\": () => (/* binding */ rectIntersection),\n  \"useDndContext\": () => (/* binding */ useDndContext),\n  \"useDndMonitor\": () => (/* binding */ useDndMonitor),\n  \"useDraggable\": () => (/* binding */ useDraggable),\n  \"useDroppable\": () => (/* binding */ useDroppable),\n  \"useSensor\": () => (/* binding */ useSensor),\n  \"useSensors\": () => (/* binding */ useSensors)\n});\n\n// EXTERNAL MODULE: ./node_modules/react/index.js\nvar react = __webpack_require__(7294);\n// EXTERNAL MODULE: ./node_modules/react-dom/index.js\nvar react_dom = __webpack_require__(3935);\n// EXTERNAL MODULE: ./node_modules/@dnd-kit/utilities/dist/utilities.esm.js\nvar utilities_esm = __webpack_require__(4285);\n;// CONCATENATED MODULE: ./node_modules/@dnd-kit/accessibility/dist/accessibility.esm.js\n\n\nconst hiddenStyles = {\n  display: 'none'\n};\nfunction HiddenText(_ref) {\n  let {\n    id,\n    value\n  } = _ref;\n  return react.createElement(\"div\", {\n    id: id,\n    style: hiddenStyles\n  }, value);\n}\n\nfunction LiveRegion(_ref) {\n  let {\n    id,\n    announcement,\n    ariaLiveType = \"assertive\"\n  } = _ref;\n  // Hide element visually but keep it readable by screen readers\n  const visuallyHidden = {\n    position: 'fixed',\n    width: 1,\n    height: 1,\n    margin: -1,\n    border: 0,\n    padding: 0,\n    overflow: 'hidden',\n    clip: 'rect(0 0 0 0)',\n    clipPath: 'inset(100%)',\n    whiteSpace: 'nowrap'\n  };\n  return react.createElement(\"div\", {\n    id: id,\n    style: visuallyHidden,\n    role: \"status\",\n    \"aria-live\": ariaLiveType,\n    \"aria-atomic\": true\n  }, announcement);\n}\n\nfunction useAnnouncement() {\n  const [announcement, setAnnouncement] = (0,react.useState)('');\n  const announce = (0,react.useCallback)(value => {\n    if (value != null) {\n      setAnnouncement(value);\n    }\n  }, []);\n  return {\n    announce,\n    announcement\n  };\n}\n\n\n//# sourceMappingURL=accessibility.esm.js.map\n\n;// CONCATENATED MODULE: ./node_modules/@dnd-kit/core/dist/core.esm.js\n\n\n\n\n\nconst DndMonitorContext = /*#__PURE__*/(0,react.createContext)(null);\n\nfunction useDndMonitor(listener) {\n  const registerListener = (0,react.useContext)(DndMonitorContext);\n  (0,react.useEffect)(() => {\n    if (!registerListener) {\n      throw new Error('useDndMonitor must be used within a children of <DndContext>');\n    }\n\n    const unsubscribe = registerListener(listener);\n    return unsubscribe;\n  }, [listener, registerListener]);\n}\n\nfunction useDndMonitorProvider() {\n  const [listeners] = (0,react.useState)(() => new Set());\n  const registerListener = (0,react.useCallback)(listener => {\n    listeners.add(listener);\n    return () => listeners.delete(listener);\n  }, [listeners]);\n  const dispatch = (0,react.useCallback)(_ref => {\n    let {\n      type,\n      event\n    } = _ref;\n    listeners.forEach(listener => {\n      var _listener$type;\n\n      return (_listener$type = listener[type]) == null ? void 0 : _listener$type.call(listener, event);\n    });\n  }, [listeners]);\n  return [dispatch, registerListener];\n}\n\nconst defaultScreenReaderInstructions = {\n  draggable: \"\\n    To pick up a draggable item, press the space bar.\\n    While dragging, use the arrow keys to move the item.\\n    Press space again to drop the item in its new position, or press escape to cancel.\\n  \"\n};\nconst defaultAnnouncements = {\n  onDragStart(_ref) {\n    let {\n      active\n    } = _ref;\n    return \"Picked up draggable item \" + active.id + \".\";\n  },\n\n  onDragOver(_ref2) {\n    let {\n      active,\n      over\n    } = _ref2;\n\n    if (over) {\n      return \"Draggable item \" + active.id + \" was moved over droppable area \" + over.id + \".\";\n    }\n\n    return \"Draggable item \" + active.id + \" is no longer over a droppable area.\";\n  },\n\n  onDragEnd(_ref3) {\n    let {\n      active,\n      over\n    } = _ref3;\n\n    if (over) {\n      return \"Draggable item \" + active.id + \" was dropped over droppable area \" + over.id;\n    }\n\n    return \"Draggable item \" + active.id + \" was dropped.\";\n  },\n\n  onDragCancel(_ref4) {\n    let {\n      active\n    } = _ref4;\n    return \"Dragging was cancelled. Draggable item \" + active.id + \" was dropped.\";\n  }\n\n};\n\nfunction Accessibility(_ref) {\n  let {\n    announcements = defaultAnnouncements,\n    container,\n    hiddenTextDescribedById,\n    screenReaderInstructions = defaultScreenReaderInstructions\n  } = _ref;\n  const {\n    announce,\n    announcement\n  } = useAnnouncement();\n  const liveRegionId = (0,utilities_esm.useUniqueId)(\"DndLiveRegion\");\n  const [mounted, setMounted] = (0,react.useState)(false);\n  (0,react.useEffect)(() => {\n    setMounted(true);\n  }, []);\n  useDndMonitor((0,react.useMemo)(() => ({\n    onDragStart(_ref2) {\n      let {\n        active\n      } = _ref2;\n      announce(announcements.onDragStart({\n        active\n      }));\n    },\n\n    onDragMove(_ref3) {\n      let {\n        active,\n        over\n      } = _ref3;\n\n      if (announcements.onDragMove) {\n        announce(announcements.onDragMove({\n          active,\n          over\n        }));\n      }\n    },\n\n    onDragOver(_ref4) {\n      let {\n        active,\n        over\n      } = _ref4;\n      announce(announcements.onDragOver({\n        active,\n        over\n      }));\n    },\n\n    onDragEnd(_ref5) {\n      let {\n        active,\n        over\n      } = _ref5;\n      announce(announcements.onDragEnd({\n        active,\n        over\n      }));\n    },\n\n    onDragCancel(_ref6) {\n      let {\n        active,\n        over\n      } = _ref6;\n      announce(announcements.onDragCancel({\n        active,\n        over\n      }));\n    }\n\n  }), [announce, announcements]));\n\n  if (!mounted) {\n    return null;\n  }\n\n  const markup = react.createElement(react.Fragment, null, react.createElement(HiddenText, {\n    id: hiddenTextDescribedById,\n    value: screenReaderInstructions.draggable\n  }), react.createElement(LiveRegion, {\n    id: liveRegionId,\n    announcement: announcement\n  }));\n  return container ? (0,react_dom.createPortal)(markup, container) : markup;\n}\n\nvar Action;\n\n(function (Action) {\n  Action[\"DragStart\"] = \"dragStart\";\n  Action[\"DragMove\"] = \"dragMove\";\n  Action[\"DragEnd\"] = \"dragEnd\";\n  Action[\"DragCancel\"] = \"dragCancel\";\n  Action[\"DragOver\"] = \"dragOver\";\n  Action[\"RegisterDroppable\"] = \"registerDroppable\";\n  Action[\"SetDroppableDisabled\"] = \"setDroppableDisabled\";\n  Action[\"UnregisterDroppable\"] = \"unregisterDroppable\";\n})(Action || (Action = {}));\n\nfunction noop() {}\n\nfunction useSensor(sensor, options) {\n  return (0,react.useMemo)(() => ({\n    sensor,\n    options: options != null ? options : {}\n  }), // eslint-disable-next-line react-hooks/exhaustive-deps\n  [sensor, options]);\n}\n\nfunction useSensors() {\n  for (var _len = arguments.length, sensors = new Array(_len), _key = 0; _key < _len; _key++) {\n    sensors[_key] = arguments[_key];\n  }\n\n  return (0,react.useMemo)(() => [...sensors].filter(sensor => sensor != null), // eslint-disable-next-line react-hooks/exhaustive-deps\n  [...sensors]);\n}\n\nconst defaultCoordinates = /*#__PURE__*/Object.freeze({\n  x: 0,\n  y: 0\n});\n\n/**\r\n * Returns the distance between two points\r\n */\nfunction distanceBetween(p1, p2) {\n  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));\n}\n\nfunction getRelativeTransformOrigin(event, rect) {\n  const eventCoordinates = (0,utilities_esm.getEventCoordinates)(event);\n\n  if (!eventCoordinates) {\n    return '0 0';\n  }\n\n  const transformOrigin = {\n    x: (eventCoordinates.x - rect.left) / rect.width * 100,\n    y: (eventCoordinates.y - rect.top) / rect.height * 100\n  };\n  return transformOrigin.x + \"% \" + transformOrigin.y + \"%\";\n}\n\n/**\r\n * Sort collisions from smallest to greatest value\r\n */\nfunction sortCollisionsAsc(_ref, _ref2) {\n  let {\n    data: {\n      value: a\n    }\n  } = _ref;\n  let {\n    data: {\n      value: b\n    }\n  } = _ref2;\n  return a - b;\n}\n/**\r\n * Sort collisions from greatest to smallest value\r\n */\n\nfunction sortCollisionsDesc(_ref3, _ref4) {\n  let {\n    data: {\n      value: a\n    }\n  } = _ref3;\n  let {\n    data: {\n      value: b\n    }\n  } = _ref4;\n  return b - a;\n}\n/**\r\n * Returns the coordinates of the corners of a given rectangle:\r\n * [TopLeft {x, y}, TopRight {x, y}, BottomLeft {x, y}, BottomRight {x, y}]\r\n */\n\nfunction cornersOfRectangle(_ref5) {\n  let {\n    left,\n    top,\n    height,\n    width\n  } = _ref5;\n  return [{\n    x: left,\n    y: top\n  }, {\n    x: left + width,\n    y: top\n  }, {\n    x: left,\n    y: top + height\n  }, {\n    x: left + width,\n    y: top + height\n  }];\n}\nfunction getFirstCollision(collisions, property) {\n  if (!collisions || collisions.length === 0) {\n    return null;\n  }\n\n  const [firstCollision] = collisions;\n  return property ? firstCollision[property] : firstCollision;\n}\n\n/**\r\n * Returns the coordinates of the center of a given ClientRect\r\n */\n\nfunction centerOfRectangle(rect, left, top) {\n  if (left === void 0) {\n    left = rect.left;\n  }\n\n  if (top === void 0) {\n    top = rect.top;\n  }\n\n  return {\n    x: left + rect.width * 0.5,\n    y: top + rect.height * 0.5\n  };\n}\n/**\r\n * Returns the closest rectangles from an array of rectangles to the center of a given\r\n * rectangle.\r\n */\n\n\nconst closestCenter = _ref => {\n  let {\n    collisionRect,\n    droppableRects,\n    droppableContainers\n  } = _ref;\n  const centerRect = centerOfRectangle(collisionRect, collisionRect.left, collisionRect.top);\n  const collisions = [];\n\n  for (const droppableContainer of droppableContainers) {\n    const {\n      id\n    } = droppableContainer;\n    const rect = droppableRects.get(id);\n\n    if (rect) {\n      const distBetween = distanceBetween(centerOfRectangle(rect), centerRect);\n      collisions.push({\n        id,\n        data: {\n          droppableContainer,\n          value: distBetween\n        }\n      });\n    }\n  }\n\n  return collisions.sort(sortCollisionsAsc);\n};\n\n/**\r\n * Returns the closest rectangles from an array of rectangles to the corners of\r\n * another rectangle.\r\n */\n\nconst closestCorners = _ref => {\n  let {\n    collisionRect,\n    droppableRects,\n    droppableContainers\n  } = _ref;\n  const corners = cornersOfRectangle(collisionRect);\n  const collisions = [];\n\n  for (const droppableContainer of droppableContainers) {\n    const {\n      id\n    } = droppableContainer;\n    const rect = droppableRects.get(id);\n\n    if (rect) {\n      const rectCorners = cornersOfRectangle(rect);\n      const distances = corners.reduce((accumulator, corner, index) => {\n        return accumulator + distanceBetween(rectCorners[index], corner);\n      }, 0);\n      const effectiveDistance = Number((distances / 4).toFixed(4));\n      collisions.push({\n        id,\n        data: {\n          droppableContainer,\n          value: effectiveDistance\n        }\n      });\n    }\n  }\n\n  return collisions.sort(sortCollisionsAsc);\n};\n\n/**\r\n * Returns the intersecting rectangle area between two rectangles\r\n */\n\nfunction getIntersectionRatio(entry, target) {\n  const top = Math.max(target.top, entry.top);\n  const left = Math.max(target.left, entry.left);\n  const right = Math.min(target.left + target.width, entry.left + entry.width);\n  const bottom = Math.min(target.top + target.height, entry.top + entry.height);\n  const width = right - left;\n  const height = bottom - top;\n\n  if (left < right && top < bottom) {\n    const targetArea = target.width * target.height;\n    const entryArea = entry.width * entry.height;\n    const intersectionArea = width * height;\n    const intersectionRatio = intersectionArea / (targetArea + entryArea - intersectionArea);\n    return Number(intersectionRatio.toFixed(4));\n  } // Rectangles do not overlap, or overlap has an area of zero (edge/corner overlap)\n\n\n  return 0;\n}\n/**\r\n * Returns the rectangles that has the greatest intersection area with a given\r\n * rectangle in an array of rectangles.\r\n */\n\nconst rectIntersection = _ref => {\n  let {\n    collisionRect,\n    droppableRects,\n    droppableContainers\n  } = _ref;\n  const collisions = [];\n\n  for (const droppableContainer of droppableContainers) {\n    const {\n      id\n    } = droppableContainer;\n    const rect = droppableRects.get(id);\n\n    if (rect) {\n      const intersectionRatio = getIntersectionRatio(rect, collisionRect);\n\n      if (intersectionRatio > 0) {\n        collisions.push({\n          id,\n          data: {\n            droppableContainer,\n            value: intersectionRatio\n          }\n        });\n      }\n    }\n  }\n\n  return collisions.sort(sortCollisionsDesc);\n};\n\n/**\r\n * Check if a given point is contained within a bounding rectangle\r\n */\n\nfunction isPointWithinRect(point, rect) {\n  const {\n    top,\n    left,\n    bottom,\n    right\n  } = rect;\n  return top <= point.y && point.y <= bottom && left <= point.x && point.x <= right;\n}\n/**\r\n * Returns the rectangles that the pointer is hovering over\r\n */\n\n\nconst pointerWithin = _ref => {\n  let {\n    droppableContainers,\n    droppableRects,\n    pointerCoordinates\n  } = _ref;\n\n  if (!pointerCoordinates) {\n    return [];\n  }\n\n  const collisions = [];\n\n  for (const droppableContainer of droppableContainers) {\n    const {\n      id\n    } = droppableContainer;\n    const rect = droppableRects.get(id);\n\n    if (rect && isPointWithinRect(pointerCoordinates, rect)) {\n      /* There may be more than a single rectangle intersecting\r\n       * with the pointer coordinates. In order to sort the\r\n       * colliding rectangles, we measure the distance between\r\n       * the pointer and the corners of the intersecting rectangle\r\n       */\n      const corners = cornersOfRectangle(rect);\n      const distances = corners.reduce((accumulator, corner) => {\n        return accumulator + distanceBetween(pointerCoordinates, corner);\n      }, 0);\n      const effectiveDistance = Number((distances / 4).toFixed(4));\n      collisions.push({\n        id,\n        data: {\n          droppableContainer,\n          value: effectiveDistance\n        }\n      });\n    }\n  }\n\n  return collisions.sort(sortCollisionsAsc);\n};\n\nfunction adjustScale(transform, rect1, rect2) {\n  return { ...transform,\n    scaleX: rect1 && rect2 ? rect1.width / rect2.width : 1,\n    scaleY: rect1 && rect2 ? rect1.height / rect2.height : 1\n  };\n}\n\nfunction getRectDelta(rect1, rect2) {\n  return rect1 && rect2 ? {\n    x: rect1.left - rect2.left,\n    y: rect1.top - rect2.top\n  } : defaultCoordinates;\n}\n\nfunction createRectAdjustmentFn(modifier) {\n  return function adjustClientRect(rect) {\n    for (var _len = arguments.length, adjustments = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {\n      adjustments[_key - 1] = arguments[_key];\n    }\n\n    return adjustments.reduce((acc, adjustment) => ({ ...acc,\n      top: acc.top + modifier * adjustment.y,\n      bottom: acc.bottom + modifier * adjustment.y,\n      left: acc.left + modifier * adjustment.x,\n      right: acc.right + modifier * adjustment.x\n    }), { ...rect\n    });\n  };\n}\nconst getAdjustedRect = /*#__PURE__*/createRectAdjustmentFn(1);\n\nfunction parseTransform(transform) {\n  if (transform.startsWith('matrix3d(')) {\n    const transformArray = transform.slice(9, -1).split(/, /);\n    return {\n      x: +transformArray[12],\n      y: +transformArray[13],\n      scaleX: +transformArray[0],\n      scaleY: +transformArray[5]\n    };\n  } else if (transform.startsWith('matrix(')) {\n    const transformArray = transform.slice(7, -1).split(/, /);\n    return {\n      x: +transformArray[4],\n      y: +transformArray[5],\n      scaleX: +transformArray[0],\n      scaleY: +transformArray[3]\n    };\n  }\n\n  return null;\n}\n\nfunction inverseTransform(rect, transform, transformOrigin) {\n  const parsedTransform = parseTransform(transform);\n\n  if (!parsedTransform) {\n    return rect;\n  }\n\n  const {\n    scaleX,\n    scaleY,\n    x: translateX,\n    y: translateY\n  } = parsedTransform;\n  const x = rect.left - translateX - (1 - scaleX) * parseFloat(transformOrigin);\n  const y = rect.top - translateY - (1 - scaleY) * parseFloat(transformOrigin.slice(transformOrigin.indexOf(' ') + 1));\n  const w = scaleX ? rect.width / scaleX : rect.width;\n  const h = scaleY ? rect.height / scaleY : rect.height;\n  return {\n    width: w,\n    height: h,\n    top: y,\n    right: x + w,\n    bottom: y + h,\n    left: x\n  };\n}\n\nconst defaultOptions = {\n  ignoreTransform: false\n};\n/**\r\n * Returns the bounding client rect of an element relative to the viewport.\r\n */\n\nfunction getClientRect(element, options) {\n  if (options === void 0) {\n    options = defaultOptions;\n  }\n\n  let rect = element.getBoundingClientRect();\n\n  if (options.ignoreTransform) {\n    const {\n      transform,\n      transformOrigin\n    } = (0,utilities_esm.getWindow)(element).getComputedStyle(element);\n\n    if (transform) {\n      rect = inverseTransform(rect, transform, transformOrigin);\n    }\n  }\n\n  const {\n    top,\n    left,\n    width,\n    height,\n    bottom,\n    right\n  } = rect;\n  return {\n    top,\n    left,\n    width,\n    height,\n    bottom,\n    right\n  };\n}\n/**\r\n * Returns the bounding client rect of an element relative to the viewport.\r\n *\r\n * @remarks\r\n * The ClientRect returned by this method does not take into account transforms\r\n * applied to the element it measures.\r\n *\r\n */\n\nfunction getTransformAgnosticClientRect(element) {\n  return getClientRect(element, {\n    ignoreTransform: true\n  });\n}\n\nfunction getWindowClientRect(element) {\n  const width = element.innerWidth;\n  const height = element.innerHeight;\n  return {\n    top: 0,\n    left: 0,\n    right: width,\n    bottom: height,\n    width,\n    height\n  };\n}\n\nfunction isFixed(node, computedStyle) {\n  if (computedStyle === void 0) {\n    computedStyle = (0,utilities_esm.getWindow)(node).getComputedStyle(node);\n  }\n\n  return computedStyle.position === 'fixed';\n}\n\nfunction isScrollable(element, computedStyle) {\n  if (computedStyle === void 0) {\n    computedStyle = (0,utilities_esm.getWindow)(element).getComputedStyle(element);\n  }\n\n  const overflowRegex = /(auto|scroll|overlay)/;\n  const properties = ['overflow', 'overflowX', 'overflowY'];\n  return properties.some(property => {\n    const value = computedStyle[property];\n    return typeof value === 'string' ? overflowRegex.test(value) : false;\n  });\n}\n\nfunction getScrollableAncestors(element, limit) {\n  const scrollParents = [];\n\n  function findScrollableAncestors(node) {\n    if (limit != null && scrollParents.length >= limit) {\n      return scrollParents;\n    }\n\n    if (!node) {\n      return scrollParents;\n    }\n\n    if ((0,utilities_esm.isDocument)(node) && node.scrollingElement != null && !scrollParents.includes(node.scrollingElement)) {\n      scrollParents.push(node.scrollingElement);\n      return scrollParents;\n    }\n\n    if (!(0,utilities_esm.isHTMLElement)(node) || (0,utilities_esm.isSVGElement)(node)) {\n      return scrollParents;\n    }\n\n    if (scrollParents.includes(node)) {\n      return scrollParents;\n    }\n\n    const computedStyle = (0,utilities_esm.getWindow)(element).getComputedStyle(node);\n\n    if (node !== element) {\n      if (isScrollable(node, computedStyle)) {\n        scrollParents.push(node);\n      }\n    }\n\n    if (isFixed(node, computedStyle)) {\n      return scrollParents;\n    }\n\n    return findScrollableAncestors(node.parentNode);\n  }\n\n  if (!element) {\n    return scrollParents;\n  }\n\n  return findScrollableAncestors(element);\n}\nfunction getFirstScrollableAncestor(node) {\n  const [firstScrollableAncestor] = getScrollableAncestors(node, 1);\n  return firstScrollableAncestor != null ? firstScrollableAncestor : null;\n}\n\nfunction getScrollableElement(element) {\n  if (!utilities_esm.canUseDOM || !element) {\n    return null;\n  }\n\n  if ((0,utilities_esm.isWindow)(element)) {\n    return element;\n  }\n\n  if (!(0,utilities_esm.isNode)(element)) {\n    return null;\n  }\n\n  if ((0,utilities_esm.isDocument)(element) || element === (0,utilities_esm.getOwnerDocument)(element).scrollingElement) {\n    return window;\n  }\n\n  if ((0,utilities_esm.isHTMLElement)(element)) {\n    return element;\n  }\n\n  return null;\n}\n\nfunction getScrollXCoordinate(element) {\n  if ((0,utilities_esm.isWindow)(element)) {\n    return element.scrollX;\n  }\n\n  return element.scrollLeft;\n}\nfunction getScrollYCoordinate(element) {\n  if ((0,utilities_esm.isWindow)(element)) {\n    return element.scrollY;\n  }\n\n  return element.scrollTop;\n}\nfunction getScrollCoordinates(element) {\n  return {\n    x: getScrollXCoordinate(element),\n    y: getScrollYCoordinate(element)\n  };\n}\n\nvar Direction;\n\n(function (Direction) {\n  Direction[Direction[\"Forward\"] = 1] = \"Forward\";\n  Direction[Direction[\"Backward\"] = -1] = \"Backward\";\n})(Direction || (Direction = {}));\n\nfunction isDocumentScrollingElement(element) {\n  if (!utilities_esm.canUseDOM || !element) {\n    return false;\n  }\n\n  return element === document.scrollingElement;\n}\n\nfunction getScrollPosition(scrollingContainer) {\n  const minScroll = {\n    x: 0,\n    y: 0\n  };\n  const dimensions = isDocumentScrollingElement(scrollingContainer) ? {\n    height: window.innerHeight,\n    width: window.innerWidth\n  } : {\n    height: scrollingContainer.clientHeight,\n    width: scrollingContainer.clientWidth\n  };\n  const maxScroll = {\n    x: scrollingContainer.scrollWidth - dimensions.width,\n    y: scrollingContainer.scrollHeight - dimensions.height\n  };\n  const isTop = scrollingContainer.scrollTop <= minScroll.y;\n  const isLeft = scrollingContainer.scrollLeft <= minScroll.x;\n  const isBottom = scrollingContainer.scrollTop >= maxScroll.y;\n  const isRight = scrollingContainer.scrollLeft >= maxScroll.x;\n  return {\n    isTop,\n    isLeft,\n    isBottom,\n    isRight,\n    maxScroll,\n    minScroll\n  };\n}\n\nconst defaultThreshold = {\n  x: 0.2,\n  y: 0.2\n};\nfunction getScrollDirectionAndSpeed(scrollContainer, scrollContainerRect, _ref, acceleration, thresholdPercentage) {\n  let {\n    top,\n    left,\n    right,\n    bottom\n  } = _ref;\n\n  if (acceleration === void 0) {\n    acceleration = 10;\n  }\n\n  if (thresholdPercentage === void 0) {\n    thresholdPercentage = defaultThreshold;\n  }\n\n  const {\n    isTop,\n    isBottom,\n    isLeft,\n    isRight\n  } = getScrollPosition(scrollContainer);\n  const direction = {\n    x: 0,\n    y: 0\n  };\n  const speed = {\n    x: 0,\n    y: 0\n  };\n  const threshold = {\n    height: scrollContainerRect.height * thresholdPercentage.y,\n    width: scrollContainerRect.width * thresholdPercentage.x\n  };\n\n  if (!isTop && top <= scrollContainerRect.top + threshold.height) {\n    // Scroll Up\n    direction.y = Direction.Backward;\n    speed.y = acceleration * Math.abs((scrollContainerRect.top + threshold.height - top) / threshold.height);\n  } else if (!isBottom && bottom >= scrollContainerRect.bottom - threshold.height) {\n    // Scroll Down\n    direction.y = Direction.Forward;\n    speed.y = acceleration * Math.abs((scrollContainerRect.bottom - threshold.height - bottom) / threshold.height);\n  }\n\n  if (!isRight && right >= scrollContainerRect.right - threshold.width) {\n    // Scroll Right\n    direction.x = Direction.Forward;\n    speed.x = acceleration * Math.abs((scrollContainerRect.right - threshold.width - right) / threshold.width);\n  } else if (!isLeft && left <= scrollContainerRect.left + threshold.width) {\n    // Scroll Left\n    direction.x = Direction.Backward;\n    speed.x = acceleration * Math.abs((scrollContainerRect.left + threshold.width - left) / threshold.width);\n  }\n\n  return {\n    direction,\n    speed\n  };\n}\n\nfunction getScrollElementRect(element) {\n  if (element === document.scrollingElement) {\n    const {\n      innerWidth,\n      innerHeight\n    } = window;\n    return {\n      top: 0,\n      left: 0,\n      right: innerWidth,\n      bottom: innerHeight,\n      width: innerWidth,\n      height: innerHeight\n    };\n  }\n\n  const {\n    top,\n    left,\n    right,\n    bottom\n  } = element.getBoundingClientRect();\n  return {\n    top,\n    left,\n    right,\n    bottom,\n    width: element.clientWidth,\n    height: element.clientHeight\n  };\n}\n\nfunction getScrollOffsets(scrollableAncestors) {\n  return scrollableAncestors.reduce((acc, node) => {\n    return (0,utilities_esm.add)(acc, getScrollCoordinates(node));\n  }, defaultCoordinates);\n}\nfunction getScrollXOffset(scrollableAncestors) {\n  return scrollableAncestors.reduce((acc, node) => {\n    return acc + getScrollXCoordinate(node);\n  }, 0);\n}\nfunction getScrollYOffset(scrollableAncestors) {\n  return scrollableAncestors.reduce((acc, node) => {\n    return acc + getScrollYCoordinate(node);\n  }, 0);\n}\n\nfunction scrollIntoViewIfNeeded(element, measure) {\n  if (measure === void 0) {\n    measure = getClientRect;\n  }\n\n  if (!element) {\n    return;\n  }\n\n  const {\n    top,\n    left,\n    bottom,\n    right\n  } = measure(element);\n  const firstScrollableAncestor = getFirstScrollableAncestor(element);\n\n  if (!firstScrollableAncestor) {\n    return;\n  }\n\n  if (bottom <= 0 || right <= 0 || top >= window.innerHeight || left >= window.innerWidth) {\n    element.scrollIntoView({\n      block: 'center',\n      inline: 'center'\n    });\n  }\n}\n\nconst properties = [['x', ['left', 'right'], getScrollXOffset], ['y', ['top', 'bottom'], getScrollYOffset]];\nclass Rect {\n  constructor(rect, element) {\n    this.rect = void 0;\n    this.width = void 0;\n    this.height = void 0;\n    this.top = void 0;\n    this.bottom = void 0;\n    this.right = void 0;\n    this.left = void 0;\n    const scrollableAncestors = getScrollableAncestors(element);\n    const scrollOffsets = getScrollOffsets(scrollableAncestors);\n    this.rect = { ...rect\n    };\n    this.width = rect.width;\n    this.height = rect.height;\n\n    for (const [axis, keys, getScrollOffset] of properties) {\n      for (const key of keys) {\n        Object.defineProperty(this, key, {\n          get: () => {\n            const currentOffsets = getScrollOffset(scrollableAncestors);\n            const scrollOffsetsDeltla = scrollOffsets[axis] - currentOffsets;\n            return this.rect[key] + scrollOffsetsDeltla;\n          },\n          enumerable: true\n        });\n      }\n    }\n\n    Object.defineProperty(this, 'rect', {\n      enumerable: false\n    });\n  }\n\n}\n\nclass Listeners {\n  constructor(target) {\n    this.target = void 0;\n    this.listeners = [];\n\n    this.removeAll = () => {\n      this.listeners.forEach(listener => {\n        var _this$target;\n\n        return (_this$target = this.target) == null ? void 0 : _this$target.removeEventListener(...listener);\n      });\n    };\n\n    this.target = target;\n  }\n\n  add(eventName, handler, options) {\n    var _this$target2;\n\n    (_this$target2 = this.target) == null ? void 0 : _this$target2.addEventListener(eventName, handler, options);\n    this.listeners.push([eventName, handler, options]);\n  }\n\n}\n\nfunction getEventListenerTarget(target) {\n  // If the `event.target` element is removed from the document events will still be targeted\n  // at it, and hence won't always bubble up to the window or document anymore.\n  // If there is any risk of an element being removed while it is being dragged,\n  // the best practice is to attach the event listeners directly to the target.\n  // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget\n  const {\n    EventTarget\n  } = (0,utilities_esm.getWindow)(target);\n  return target instanceof EventTarget ? target : (0,utilities_esm.getOwnerDocument)(target);\n}\n\nfunction hasExceededDistance(delta, measurement) {\n  const dx = Math.abs(delta.x);\n  const dy = Math.abs(delta.y);\n\n  if (typeof measurement === 'number') {\n    return Math.sqrt(dx ** 2 + dy ** 2) > measurement;\n  }\n\n  if ('x' in measurement && 'y' in measurement) {\n    return dx > measurement.x && dy > measurement.y;\n  }\n\n  if ('x' in measurement) {\n    return dx > measurement.x;\n  }\n\n  if ('y' in measurement) {\n    return dy > measurement.y;\n  }\n\n  return false;\n}\n\nvar EventName;\n\n(function (EventName) {\n  EventName[\"Click\"] = \"click\";\n  EventName[\"DragStart\"] = \"dragstart\";\n  EventName[\"Keydown\"] = \"keydown\";\n  EventName[\"ContextMenu\"] = \"contextmenu\";\n  EventName[\"Resize\"] = \"resize\";\n  EventName[\"SelectionChange\"] = \"selectionchange\";\n  EventName[\"VisibilityChange\"] = \"visibilitychange\";\n})(EventName || (EventName = {}));\n\nfunction preventDefault(event) {\n  event.preventDefault();\n}\nfunction stopPropagation(event) {\n  event.stopPropagation();\n}\n\nvar KeyboardCode;\n\n(function (KeyboardCode) {\n  KeyboardCode[\"Space\"] = \"Space\";\n  KeyboardCode[\"Down\"] = \"ArrowDown\";\n  KeyboardCode[\"Right\"] = \"ArrowRight\";\n  KeyboardCode[\"Left\"] = \"ArrowLeft\";\n  KeyboardCode[\"Up\"] = \"ArrowUp\";\n  KeyboardCode[\"Esc\"] = \"Escape\";\n  KeyboardCode[\"Enter\"] = \"Enter\";\n})(KeyboardCode || (KeyboardCode = {}));\n\nconst defaultKeyboardCodes = {\n  start: [KeyboardCode.Space, KeyboardCode.Enter],\n  cancel: [KeyboardCode.Esc],\n  end: [KeyboardCode.Space, KeyboardCode.Enter]\n};\nconst defaultKeyboardCoordinateGetter = (event, _ref) => {\n  let {\n    currentCoordinates\n  } = _ref;\n\n  switch (event.code) {\n    case KeyboardCode.Right:\n      return { ...currentCoordinates,\n        x: currentCoordinates.x + 25\n      };\n\n    case KeyboardCode.Left:\n      return { ...currentCoordinates,\n        x: currentCoordinates.x - 25\n      };\n\n    case KeyboardCode.Down:\n      return { ...currentCoordinates,\n        y: currentCoordinates.y + 25\n      };\n\n    case KeyboardCode.Up:\n      return { ...currentCoordinates,\n        y: currentCoordinates.y - 25\n      };\n  }\n\n  return undefined;\n};\n\nclass KeyboardSensor {\n  constructor(props) {\n    this.props = void 0;\n    this.autoScrollEnabled = false;\n    this.referenceCoordinates = void 0;\n    this.listeners = void 0;\n    this.windowListeners = void 0;\n    this.props = props;\n    const {\n      event: {\n        target\n      }\n    } = props;\n    this.props = props;\n    this.listeners = new Listeners((0,utilities_esm.getOwnerDocument)(target));\n    this.windowListeners = new Listeners((0,utilities_esm.getWindow)(target));\n    this.handleKeyDown = this.handleKeyDown.bind(this);\n    this.handleCancel = this.handleCancel.bind(this);\n    this.attach();\n  }\n\n  attach() {\n    this.handleStart();\n    this.windowListeners.add(EventName.Resize, this.handleCancel);\n    this.windowListeners.add(EventName.VisibilityChange, this.handleCancel);\n    setTimeout(() => this.listeners.add(EventName.Keydown, this.handleKeyDown));\n  }\n\n  handleStart() {\n    const {\n      activeNode,\n      onStart\n    } = this.props;\n    const node = activeNode.node.current;\n\n    if (node) {\n      scrollIntoViewIfNeeded(node);\n    }\n\n    onStart(defaultCoordinates);\n  }\n\n  handleKeyDown(event) {\n    if ((0,utilities_esm.isKeyboardEvent)(event)) {\n      const {\n        active,\n        context,\n        options\n      } = this.props;\n      const {\n        keyboardCodes = defaultKeyboardCodes,\n        coordinateGetter = defaultKeyboardCoordinateGetter,\n        scrollBehavior = 'smooth'\n      } = options;\n      const {\n        code\n      } = event;\n\n      if (keyboardCodes.end.includes(code)) {\n        this.handleEnd(event);\n        return;\n      }\n\n      if (keyboardCodes.cancel.includes(code)) {\n        this.handleCancel(event);\n        return;\n      }\n\n      const {\n        collisionRect\n      } = context.current;\n      const currentCoordinates = collisionRect ? {\n        x: collisionRect.left,\n        y: collisionRect.top\n      } : defaultCoordinates;\n\n      if (!this.referenceCoordinates) {\n        this.referenceCoordinates = currentCoordinates;\n      }\n\n      const newCoordinates = coordinateGetter(event, {\n        active,\n        context: context.current,\n        currentCoordinates\n      });\n\n      if (newCoordinates) {\n        const coordinatesDelta = (0,utilities_esm.subtract)(newCoordinates, currentCoordinates);\n        const scrollDelta = {\n          x: 0,\n          y: 0\n        };\n        const {\n          scrollableAncestors\n        } = context.current;\n\n        for (const scrollContainer of scrollableAncestors) {\n          const direction = event.code;\n          const {\n            isTop,\n            isRight,\n            isLeft,\n            isBottom,\n            maxScroll,\n            minScroll\n          } = getScrollPosition(scrollContainer);\n          const scrollElementRect = getScrollElementRect(scrollContainer);\n          const clampedCoordinates = {\n            x: Math.min(direction === KeyboardCode.Right ? scrollElementRect.right - scrollElementRect.width / 2 : scrollElementRect.right, Math.max(direction === KeyboardCode.Right ? scrollElementRect.left : scrollElementRect.left + scrollElementRect.width / 2, newCoordinates.x)),\n            y: Math.min(direction === KeyboardCode.Down ? scrollElementRect.bottom - scrollElementRect.height / 2 : scrollElementRect.bottom, Math.max(direction === KeyboardCode.Down ? scrollElementRect.top : scrollElementRect.top + scrollElementRect.height / 2, newCoordinates.y))\n          };\n          const canScrollX = direction === KeyboardCode.Right && !isRight || direction === KeyboardCode.Left && !isLeft;\n          const canScrollY = direction === KeyboardCode.Down && !isBottom || direction === KeyboardCode.Up && !isTop;\n\n          if (canScrollX && clampedCoordinates.x !== newCoordinates.x) {\n            const newScrollCoordinates = scrollContainer.scrollLeft + coordinatesDelta.x;\n            const canScrollToNewCoordinates = direction === KeyboardCode.Right && newScrollCoordinates <= maxScroll.x || direction === KeyboardCode.Left && newScrollCoordinates >= minScroll.x;\n\n            if (canScrollToNewCoordinates && !coordinatesDelta.y) {\n              // We don't need to update coordinates, the scroll adjustment alone will trigger\n              // logic to auto-detect the new container we are over\n              scrollContainer.scrollTo({\n                left: newScrollCoordinates,\n                behavior: scrollBehavior\n              });\n              return;\n            }\n\n            if (canScrollToNewCoordinates) {\n              scrollDelta.x = scrollContainer.scrollLeft - newScrollCoordinates;\n            } else {\n              scrollDelta.x = direction === KeyboardCode.Right ? scrollContainer.scrollLeft - maxScroll.x : scrollContainer.scrollLeft - minScroll.x;\n            }\n\n            if (scrollDelta.x) {\n              scrollContainer.scrollBy({\n                left: -scrollDelta.x,\n                behavior: scrollBehavior\n              });\n            }\n\n            break;\n          } else if (canScrollY && clampedCoordinates.y !== newCoordinates.y) {\n            const newScrollCoordinates = scrollContainer.scrollTop + coordinatesDelta.y;\n            const canScrollToNewCoordinates = direction === KeyboardCode.Down && newScrollCoordinates <= maxScroll.y || direction === KeyboardCode.Up && newScrollCoordinates >= minScroll.y;\n\n            if (canScrollToNewCoordinates && !coordinatesDelta.x) {\n              // We don't need to update coordinates, the scroll adjustment alone will trigger\n              // logic to auto-detect the new container we are over\n              scrollContainer.scrollTo({\n                top: newScrollCoordinates,\n                behavior: scrollBehavior\n              });\n              return;\n            }\n\n            if (canScrollToNewCoordinates) {\n              scrollDelta.y = scrollContainer.scrollTop - newScrollCoordinates;\n            } else {\n              scrollDelta.y = direction === KeyboardCode.Down ? scrollContainer.scrollTop - maxScroll.y : scrollContainer.scrollTop - minScroll.y;\n            }\n\n            if (scrollDelta.y) {\n              scrollContainer.scrollBy({\n                top: -scrollDelta.y,\n                behavior: scrollBehavior\n              });\n            }\n\n            break;\n          }\n        }\n\n        this.handleMove(event, (0,utilities_esm.add)((0,utilities_esm.subtract)(newCoordinates, this.referenceCoordinates), scrollDelta));\n      }\n    }\n  }\n\n  handleMove(event, coordinates) {\n    const {\n      onMove\n    } = this.props;\n    event.preventDefault();\n    onMove(coordinates);\n  }\n\n  handleEnd(event) {\n    const {\n      onEnd\n    } = this.props;\n    event.preventDefault();\n    this.detach();\n    onEnd();\n  }\n\n  handleCancel(event) {\n    const {\n      onCancel\n    } = this.props;\n    event.preventDefault();\n    this.detach();\n    onCancel();\n  }\n\n  detach() {\n    this.listeners.removeAll();\n    this.windowListeners.removeAll();\n  }\n\n}\nKeyboardSensor.activators = [{\n  eventName: 'onKeyDown',\n  handler: (event, _ref, _ref2) => {\n    let {\n      keyboardCodes = defaultKeyboardCodes,\n      onActivation\n    } = _ref;\n    let {\n      active\n    } = _ref2;\n    const {\n      code\n    } = event.nativeEvent;\n\n    if (keyboardCodes.start.includes(code)) {\n      const activator = active.activatorNode.current;\n\n      if (activator && event.target !== activator) {\n        return false;\n      }\n\n      event.preventDefault();\n      onActivation == null ? void 0 : onActivation({\n        event: event.nativeEvent\n      });\n      return true;\n    }\n\n    return false;\n  }\n}];\n\nfunction isDistanceConstraint(constraint) {\n  return Boolean(constraint && 'distance' in constraint);\n}\n\nfunction isDelayConstraint(constraint) {\n  return Boolean(constraint && 'delay' in constraint);\n}\n\nclass AbstractPointerSensor {\n  constructor(props, events, listenerTarget) {\n    var _getEventCoordinates;\n\n    if (listenerTarget === void 0) {\n      listenerTarget = getEventListenerTarget(props.event.target);\n    }\n\n    this.props = void 0;\n    this.events = void 0;\n    this.autoScrollEnabled = true;\n    this.document = void 0;\n    this.activated = false;\n    this.initialCoordinates = void 0;\n    this.timeoutId = null;\n    this.listeners = void 0;\n    this.documentListeners = void 0;\n    this.windowListeners = void 0;\n    this.props = props;\n    this.events = events;\n    const {\n      event\n    } = props;\n    const {\n      target\n    } = event;\n    this.props = props;\n    this.events = events;\n    this.document = (0,utilities_esm.getOwnerDocument)(target);\n    this.documentListeners = new Listeners(this.document);\n    this.listeners = new Listeners(listenerTarget);\n    this.windowListeners = new Listeners((0,utilities_esm.getWindow)(target));\n    this.initialCoordinates = (_getEventCoordinates = (0,utilities_esm.getEventCoordinates)(event)) != null ? _getEventCoordinates : defaultCoordinates;\n    this.handleStart = this.handleStart.bind(this);\n    this.handleMove = this.handleMove.bind(this);\n    this.handleEnd = this.handleEnd.bind(this);\n    this.handleCancel = this.handleCancel.bind(this);\n    this.handleKeydown = this.handleKeydown.bind(this);\n    this.removeTextSelection = this.removeTextSelection.bind(this);\n    this.attach();\n  }\n\n  attach() {\n    const {\n      events,\n      props: {\n        options: {\n          activationConstraint,\n          bypassActivationConstraint\n        }\n      }\n    } = this;\n    this.listeners.add(events.move.name, this.handleMove, {\n      passive: false\n    });\n    this.listeners.add(events.end.name, this.handleEnd);\n    this.windowListeners.add(EventName.Resize, this.handleCancel);\n    this.windowListeners.add(EventName.DragStart, preventDefault);\n    this.windowListeners.add(EventName.VisibilityChange, this.handleCancel);\n    this.windowListeners.add(EventName.ContextMenu, preventDefault);\n    this.documentListeners.add(EventName.Keydown, this.handleKeydown);\n\n    if (activationConstraint) {\n      if (bypassActivationConstraint != null && bypassActivationConstraint({\n        event: this.props.event,\n        activeNode: this.props.activeNode,\n        options: this.props.options\n      })) {\n        return this.handleStart();\n      }\n\n      if (isDelayConstraint(activationConstraint)) {\n        this.timeoutId = setTimeout(this.handleStart, activationConstraint.delay);\n        return;\n      }\n\n      if (isDistanceConstraint(activationConstraint)) {\n        return;\n      }\n    }\n\n    this.handleStart();\n  }\n\n  detach() {\n    this.listeners.removeAll();\n    this.windowListeners.removeAll(); // Wait until the next event loop before removing document listeners\n    // This is necessary because we listen for `click` and `selection` events on the document\n\n    setTimeout(this.documentListeners.removeAll, 50);\n\n    if (this.timeoutId !== null) {\n      clearTimeout(this.timeoutId);\n      this.timeoutId = null;\n    }\n  }\n\n  handleStart() {\n    const {\n      initialCoordinates\n    } = this;\n    const {\n      onStart\n    } = this.props;\n\n    if (initialCoordinates) {\n      this.activated = true; // Stop propagation of click events once activation constraints are met\n\n      this.documentListeners.add(EventName.Click, stopPropagation, {\n        capture: true\n      }); // Remove any text selection from the document\n\n      this.removeTextSelection(); // Prevent further text selection while dragging\n\n      this.documentListeners.add(EventName.SelectionChange, this.removeTextSelection);\n      onStart(initialCoordinates);\n    }\n  }\n\n  handleMove(event) {\n    var _getEventCoordinates2;\n\n    const {\n      activated,\n      initialCoordinates,\n      props\n    } = this;\n    const {\n      onMove,\n      options: {\n        activationConstraint\n      }\n    } = props;\n\n    if (!initialCoordinates) {\n      return;\n    }\n\n    const coordinates = (_getEventCoordinates2 = (0,utilities_esm.getEventCoordinates)(event)) != null ? _getEventCoordinates2 : defaultCoordinates;\n    const delta = (0,utilities_esm.subtract)(initialCoordinates, coordinates); // Constraint validation\n\n    if (!activated && activationConstraint) {\n      if (isDistanceConstraint(activationConstraint)) {\n        if (activationConstraint.tolerance != null && hasExceededDistance(delta, activationConstraint.tolerance)) {\n          return this.handleCancel();\n        }\n\n        if (hasExceededDistance(delta, activationConstraint.distance)) {\n          return this.handleStart();\n        }\n      }\n\n      if (isDelayConstraint(activationConstraint)) {\n        if (hasExceededDistance(delta, activationConstraint.tolerance)) {\n          return this.handleCancel();\n        }\n      }\n\n      return;\n    }\n\n    if (event.cancelable) {\n      event.preventDefault();\n    }\n\n    onMove(coordinates);\n  }\n\n  handleEnd() {\n    const {\n      onEnd\n    } = this.props;\n    this.detach();\n    onEnd();\n  }\n\n  handleCancel() {\n    const {\n      onCancel\n    } = this.props;\n    this.detach();\n    onCancel();\n  }\n\n  handleKeydown(event) {\n    if (event.code === KeyboardCode.Esc) {\n      this.handleCancel();\n    }\n  }\n\n  removeTextSelection() {\n    var _this$document$getSel;\n\n    (_this$document$getSel = this.document.getSelection()) == null ? void 0 : _this$document$getSel.removeAllRanges();\n  }\n\n}\n\nconst events = {\n  move: {\n    name: 'pointermove'\n  },\n  end: {\n    name: 'pointerup'\n  }\n};\nclass PointerSensor extends AbstractPointerSensor {\n  constructor(props) {\n    const {\n      event\n    } = props; // Pointer events stop firing if the target is unmounted while dragging\n    // Therefore we attach listeners to the owner document instead\n\n    const listenerTarget = (0,utilities_esm.getOwnerDocument)(event.target);\n    super(props, events, listenerTarget);\n  }\n\n}\nPointerSensor.activators = [{\n  eventName: 'onPointerDown',\n  handler: (_ref, _ref2) => {\n    let {\n      nativeEvent: event\n    } = _ref;\n    let {\n      onActivation\n    } = _ref2;\n\n    if (!event.isPrimary || event.button !== 0) {\n      return false;\n    }\n\n    onActivation == null ? void 0 : onActivation({\n      event\n    });\n    return true;\n  }\n}];\n\nconst events$1 = {\n  move: {\n    name: 'mousemove'\n  },\n  end: {\n    name: 'mouseup'\n  }\n};\nvar MouseButton;\n\n(function (MouseButton) {\n  MouseButton[MouseButton[\"RightClick\"] = 2] = \"RightClick\";\n})(MouseButton || (MouseButton = {}));\n\nclass MouseSensor extends AbstractPointerSensor {\n  constructor(props) {\n    super(props, events$1, (0,utilities_esm.getOwnerDocument)(props.event.target));\n  }\n\n}\nMouseSensor.activators = [{\n  eventName: 'onMouseDown',\n  handler: (_ref, _ref2) => {\n    let {\n      nativeEvent: event\n    } = _ref;\n    let {\n      onActivation\n    } = _ref2;\n\n    if (event.button === MouseButton.RightClick) {\n      return false;\n    }\n\n    onActivation == null ? void 0 : onActivation({\n      event\n    });\n    return true;\n  }\n}];\n\nconst events$2 = {\n  move: {\n    name: 'touchmove'\n  },\n  end: {\n    name: 'touchend'\n  }\n};\nclass TouchSensor extends AbstractPointerSensor {\n  constructor(props) {\n    super(props, events$2);\n  }\n\n  static setup() {\n    // Adding a non-capture and non-passive `touchmove` listener in order\n    // to force `event.preventDefault()` calls to work in dynamically added\n    // touchmove event handlers. This is required for iOS Safari.\n    window.addEventListener(events$2.move.name, noop, {\n      capture: false,\n      passive: false\n    });\n    return function teardown() {\n      window.removeEventListener(events$2.move.name, noop);\n    }; // We create a new handler because the teardown function of another sensor\n    // could remove our event listener if we use a referentially equal listener.\n\n    function noop() {}\n  }\n\n}\nTouchSensor.activators = [{\n  eventName: 'onTouchStart',\n  handler: (_ref, _ref2) => {\n    let {\n      nativeEvent: event\n    } = _ref;\n    let {\n      onActivation\n    } = _ref2;\n    const {\n      touches\n    } = event;\n\n    if (touches.length > 1) {\n      return false;\n    }\n\n    onActivation == null ? void 0 : onActivation({\n      event\n    });\n    return true;\n  }\n}];\n\nvar AutoScrollActivator;\n\n(function (AutoScrollActivator) {\n  AutoScrollActivator[AutoScrollActivator[\"Pointer\"] = 0] = \"Pointer\";\n  AutoScrollActivator[AutoScrollActivator[\"DraggableRect\"] = 1] = \"DraggableRect\";\n})(AutoScrollActivator || (AutoScrollActivator = {}));\n\nvar TraversalOrder;\n\n(function (TraversalOrder) {\n  TraversalOrder[TraversalOrder[\"TreeOrder\"] = 0] = \"TreeOrder\";\n  TraversalOrder[TraversalOrder[\"ReversedTreeOrder\"] = 1] = \"ReversedTreeOrder\";\n})(TraversalOrder || (TraversalOrder = {}));\n\nfunction useAutoScroller(_ref) {\n  let {\n    acceleration,\n    activator = AutoScrollActivator.Pointer,\n    canScroll,\n    draggingRect,\n    enabled,\n    interval = 5,\n    order = TraversalOrder.TreeOrder,\n    pointerCoordinates,\n    scrollableAncestors,\n    scrollableAncestorRects,\n    delta,\n    threshold\n  } = _ref;\n  const scrollIntent = useScrollIntent({\n    delta,\n    disabled: !enabled\n  });\n  const [setAutoScrollInterval, clearAutoScrollInterval] = (0,utilities_esm.useInterval)();\n  const scrollSpeed = (0,react.useRef)({\n    x: 0,\n    y: 0\n  });\n  const scrollDirection = (0,react.useRef)({\n    x: 0,\n    y: 0\n  });\n  const rect = (0,react.useMemo)(() => {\n    switch (activator) {\n      case AutoScrollActivator.Pointer:\n        return pointerCoordinates ? {\n          top: pointerCoordinates.y,\n          bottom: pointerCoordinates.y,\n          left: pointerCoordinates.x,\n          right: pointerCoordinates.x\n        } : null;\n\n      case AutoScrollActivator.DraggableRect:\n        return draggingRect;\n    }\n  }, [activator, draggingRect, pointerCoordinates]);\n  const scrollContainerRef = (0,react.useRef)(null);\n  const autoScroll = (0,react.useCallback)(() => {\n    const scrollContainer = scrollContainerRef.current;\n\n    if (!scrollContainer) {\n      return;\n    }\n\n    const scrollLeft = scrollSpeed.current.x * scrollDirection.current.x;\n    const scrollTop = scrollSpeed.current.y * scrollDirection.current.y;\n    scrollContainer.scrollBy(scrollLeft, scrollTop);\n  }, []);\n  const sortedScrollableAncestors = (0,react.useMemo)(() => order === TraversalOrder.TreeOrder ? [...scrollableAncestors].reverse() : scrollableAncestors, [order, scrollableAncestors]);\n  (0,react.useEffect)(() => {\n    if (!enabled || !scrollableAncestors.length || !rect) {\n      clearAutoScrollInterval();\n      return;\n    }\n\n    for (const scrollContainer of sortedScrollableAncestors) {\n      if ((canScroll == null ? void 0 : canScroll(scrollContainer)) === false) {\n        continue;\n      }\n\n      const index = scrollableAncestors.indexOf(scrollContainer);\n      const scrollContainerRect = scrollableAncestorRects[index];\n\n      if (!scrollContainerRect) {\n        continue;\n      }\n\n      const {\n        direction,\n        speed\n      } = getScrollDirectionAndSpeed(scrollContainer, scrollContainerRect, rect, acceleration, threshold);\n\n      for (const axis of ['x', 'y']) {\n        if (!scrollIntent[axis][direction[axis]]) {\n          speed[axis] = 0;\n          direction[axis] = 0;\n        }\n      }\n\n      if (speed.x > 0 || speed.y > 0) {\n        clearAutoScrollInterval();\n        scrollContainerRef.current = scrollContainer;\n        setAutoScrollInterval(autoScroll, interval);\n        scrollSpeed.current = speed;\n        scrollDirection.current = direction;\n        return;\n      }\n    }\n\n    scrollSpeed.current = {\n      x: 0,\n      y: 0\n    };\n    scrollDirection.current = {\n      x: 0,\n      y: 0\n    };\n    clearAutoScrollInterval();\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [acceleration, autoScroll, canScroll, clearAutoScrollInterval, enabled, interval, // eslint-disable-next-line react-hooks/exhaustive-deps\n  JSON.stringify(rect), // eslint-disable-next-line react-hooks/exhaustive-deps\n  JSON.stringify(scrollIntent), setAutoScrollInterval, scrollableAncestors, sortedScrollableAncestors, scrollableAncestorRects, // eslint-disable-next-line react-hooks/exhaustive-deps\n  JSON.stringify(threshold)]);\n}\nconst defaultScrollIntent = {\n  x: {\n    [Direction.Backward]: false,\n    [Direction.Forward]: false\n  },\n  y: {\n    [Direction.Backward]: false,\n    [Direction.Forward]: false\n  }\n};\n\nfunction useScrollIntent(_ref2) {\n  let {\n    delta,\n    disabled\n  } = _ref2;\n  const previousDelta = (0,utilities_esm.usePrevious)(delta);\n  return (0,utilities_esm.useLazyMemo)(previousIntent => {\n    if (disabled || !previousDelta || !previousIntent) {\n      // Reset scroll intent tracking when auto-scrolling is disabled\n      return defaultScrollIntent;\n    }\n\n    const direction = {\n      x: Math.sign(delta.x - previousDelta.x),\n      y: Math.sign(delta.y - previousDelta.y)\n    }; // Keep track of the user intent to scroll in each direction for both axis\n\n    return {\n      x: {\n        [Direction.Backward]: previousIntent.x[Direction.Backward] || direction.x === -1,\n        [Direction.Forward]: previousIntent.x[Direction.Forward] || direction.x === 1\n      },\n      y: {\n        [Direction.Backward]: previousIntent.y[Direction.Backward] || direction.y === -1,\n        [Direction.Forward]: previousIntent.y[Direction.Forward] || direction.y === 1\n      }\n    };\n  }, [disabled, delta, previousDelta]);\n}\n\nfunction useCachedNode(draggableNodes, id) {\n  const draggableNode = id !== null ? draggableNodes.get(id) : undefined;\n  const node = draggableNode ? draggableNode.node.current : null;\n  return (0,utilities_esm.useLazyMemo)(cachedNode => {\n    var _ref;\n\n    if (id === null) {\n      return null;\n    } // In some cases, the draggable node can unmount while dragging\n    // This is the case for virtualized lists. In those situations,\n    // we fall back to the last known value for that node.\n\n\n    return (_ref = node != null ? node : cachedNode) != null ? _ref : null;\n  }, [node, id]);\n}\n\nfunction useCombineActivators(sensors, getSyntheticHandler) {\n  return (0,react.useMemo)(() => sensors.reduce((accumulator, sensor) => {\n    const {\n      sensor: Sensor\n    } = sensor;\n    const sensorActivators = Sensor.activators.map(activator => ({\n      eventName: activator.eventName,\n      handler: getSyntheticHandler(activator.handler, sensor)\n    }));\n    return [...accumulator, ...sensorActivators];\n  }, []), [sensors, getSyntheticHandler]);\n}\n\nvar MeasuringStrategy;\n\n(function (MeasuringStrategy) {\n  MeasuringStrategy[MeasuringStrategy[\"Always\"] = 0] = \"Always\";\n  MeasuringStrategy[MeasuringStrategy[\"BeforeDragging\"] = 1] = \"BeforeDragging\";\n  MeasuringStrategy[MeasuringStrategy[\"WhileDragging\"] = 2] = \"WhileDragging\";\n})(MeasuringStrategy || (MeasuringStrategy = {}));\n\nvar MeasuringFrequency;\n\n(function (MeasuringFrequency) {\n  MeasuringFrequency[\"Optimized\"] = \"optimized\";\n})(MeasuringFrequency || (MeasuringFrequency = {}));\n\nconst defaultValue = /*#__PURE__*/new Map();\nfunction useDroppableMeasuring(containers, _ref) {\n  let {\n    dragging,\n    dependencies,\n    config\n  } = _ref;\n  const [queue, setQueue] = (0,react.useState)(null);\n  const {\n    frequency,\n    measure,\n    strategy\n  } = config;\n  const containersRef = (0,react.useRef)(containers);\n  const disabled = isDisabled();\n  const disabledRef = (0,utilities_esm.useLatestValue)(disabled);\n  const measureDroppableContainers = (0,react.useCallback)(function (ids) {\n    if (ids === void 0) {\n      ids = [];\n    }\n\n    if (disabledRef.current) {\n      return;\n    }\n\n    setQueue(value => {\n      if (value === null) {\n        return ids;\n      }\n\n      return value.concat(ids.filter(id => !value.includes(id)));\n    });\n  }, [disabledRef]);\n  const timeoutId = (0,react.useRef)(null);\n  const droppableRects = (0,utilities_esm.useLazyMemo)(previousValue => {\n    if (disabled && !dragging) {\n      return defaultValue;\n    }\n\n    if (!previousValue || previousValue === defaultValue || containersRef.current !== containers || queue != null) {\n      const map = new Map();\n\n      for (let container of containers) {\n        if (!container) {\n          continue;\n        }\n\n        if (queue && queue.length > 0 && !queue.includes(container.id) && container.rect.current) {\n          // This container does not need to be re-measured\n          map.set(container.id, container.rect.current);\n          continue;\n        }\n\n        const node = container.node.current;\n        const rect = node ? new Rect(measure(node), node) : null;\n        container.rect.current = rect;\n\n        if (rect) {\n          map.set(container.id, rect);\n        }\n      }\n\n      return map;\n    }\n\n    return previousValue;\n  }, [containers, queue, dragging, disabled, measure]);\n  (0,react.useEffect)(() => {\n    containersRef.current = containers;\n  }, [containers]);\n  (0,react.useEffect)(() => {\n    if (disabled) {\n      return;\n    }\n\n    measureDroppableContainers();\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [dragging, disabled]);\n  (0,react.useEffect)(() => {\n    if (queue && queue.length > 0) {\n      setQueue(null);\n    }\n  }, //eslint-disable-next-line react-hooks/exhaustive-deps\n  [JSON.stringify(queue)]);\n  (0,react.useEffect)(() => {\n    if (disabled || typeof frequency !== 'number' || timeoutId.current !== null) {\n      return;\n    }\n\n    timeoutId.current = setTimeout(() => {\n      measureDroppableContainers();\n      timeoutId.current = null;\n    }, frequency);\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [frequency, disabled, measureDroppableContainers, ...dependencies]);\n  return {\n    droppableRects,\n    measureDroppableContainers,\n    measuringScheduled: queue != null\n  };\n\n  function isDisabled() {\n    switch (strategy) {\n      case MeasuringStrategy.Always:\n        return false;\n\n      case MeasuringStrategy.BeforeDragging:\n        return dragging;\n\n      default:\n        return !dragging;\n    }\n  }\n}\n\nfunction useInitialValue(value, computeFn) {\n  return (0,utilities_esm.useLazyMemo)(previousValue => {\n    if (!value) {\n      return null;\n    }\n\n    if (previousValue) {\n      return previousValue;\n    }\n\n    return typeof computeFn === 'function' ? computeFn(value) : value;\n  }, [computeFn, value]);\n}\n\nfunction useInitialRect(node, measure) {\n  return useInitialValue(node, measure);\n}\n\n/**\r\n * Returns a new MutationObserver instance.\r\n * If `MutationObserver` is undefined in the execution environment, returns `undefined`.\r\n */\n\nfunction useMutationObserver(_ref) {\n  let {\n    callback,\n    disabled\n  } = _ref;\n  const handleMutations = (0,utilities_esm.useEvent)(callback);\n  const mutationObserver = (0,react.useMemo)(() => {\n    if (disabled || typeof window === 'undefined' || typeof window.MutationObserver === 'undefined') {\n      return undefined;\n    }\n\n    const {\n      MutationObserver\n    } = window;\n    return new MutationObserver(handleMutations);\n  }, [handleMutations, disabled]);\n  (0,react.useEffect)(() => {\n    return () => mutationObserver == null ? void 0 : mutationObserver.disconnect();\n  }, [mutationObserver]);\n  return mutationObserver;\n}\n\n/**\r\n * Returns a new ResizeObserver instance bound to the `onResize` callback.\r\n * If `ResizeObserver` is undefined in the execution environment, returns `undefined`.\r\n */\n\nfunction useResizeObserver(_ref) {\n  let {\n    callback,\n    disabled\n  } = _ref;\n  const handleResize = (0,utilities_esm.useEvent)(callback);\n  const resizeObserver = (0,react.useMemo)(() => {\n    if (disabled || typeof window === 'undefined' || typeof window.ResizeObserver === 'undefined') {\n      return undefined;\n    }\n\n    const {\n      ResizeObserver\n    } = window;\n    return new ResizeObserver(handleResize);\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [disabled]);\n  (0,react.useEffect)(() => {\n    return () => resizeObserver == null ? void 0 : resizeObserver.disconnect();\n  }, [resizeObserver]);\n  return resizeObserver;\n}\n\nfunction defaultMeasure(element) {\n  return new Rect(getClientRect(element), element);\n}\n\nfunction useRect(element, measure, fallbackRect) {\n  if (measure === void 0) {\n    measure = defaultMeasure;\n  }\n\n  const [rect, measureRect] = (0,react.useReducer)(reducer, null);\n  const mutationObserver = useMutationObserver({\n    callback(records) {\n      if (!element) {\n        return;\n      }\n\n      for (const record of records) {\n        const {\n          type,\n          target\n        } = record;\n\n        if (type === 'childList' && target instanceof HTMLElement && target.contains(element)) {\n          measureRect();\n          break;\n        }\n      }\n    }\n\n  });\n  const resizeObserver = useResizeObserver({\n    callback: measureRect\n  });\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    measureRect();\n\n    if (element) {\n      resizeObserver == null ? void 0 : resizeObserver.observe(element);\n      mutationObserver == null ? void 0 : mutationObserver.observe(document.body, {\n        childList: true,\n        subtree: true\n      });\n    } else {\n      resizeObserver == null ? void 0 : resizeObserver.disconnect();\n      mutationObserver == null ? void 0 : mutationObserver.disconnect();\n    }\n  }, [element]);\n  return rect;\n\n  function reducer(currentRect) {\n    if (!element) {\n      return null;\n    }\n\n    if (element.isConnected === false) {\n      var _ref;\n\n      // Fall back to last rect we measured if the element is\n      // no longer connected to the DOM.\n      return (_ref = currentRect != null ? currentRect : fallbackRect) != null ? _ref : null;\n    }\n\n    const newRect = measure(element);\n\n    if (JSON.stringify(currentRect) === JSON.stringify(newRect)) {\n      return currentRect;\n    }\n\n    return newRect;\n  }\n}\n\nfunction useRectDelta(rect) {\n  const initialRect = useInitialValue(rect);\n  return getRectDelta(rect, initialRect);\n}\n\nconst defaultValue$1 = [];\nfunction useScrollableAncestors(node) {\n  const previousNode = (0,react.useRef)(node);\n  const ancestors = (0,utilities_esm.useLazyMemo)(previousValue => {\n    if (!node) {\n      return defaultValue$1;\n    }\n\n    if (previousValue && previousValue !== defaultValue$1 && node && previousNode.current && node.parentNode === previousNode.current.parentNode) {\n      return previousValue;\n    }\n\n    return getScrollableAncestors(node);\n  }, [node]);\n  (0,react.useEffect)(() => {\n    previousNode.current = node;\n  }, [node]);\n  return ancestors;\n}\n\nfunction useScrollOffsets(elements) {\n  const [scrollCoordinates, setScrollCoordinates] = (0,react.useState)(null);\n  const prevElements = (0,react.useRef)(elements); // To-do: Throttle the handleScroll callback\n\n  const handleScroll = (0,react.useCallback)(event => {\n    const scrollingElement = getScrollableElement(event.target);\n\n    if (!scrollingElement) {\n      return;\n    }\n\n    setScrollCoordinates(scrollCoordinates => {\n      if (!scrollCoordinates) {\n        return null;\n      }\n\n      scrollCoordinates.set(scrollingElement, getScrollCoordinates(scrollingElement));\n      return new Map(scrollCoordinates);\n    });\n  }, []);\n  (0,react.useEffect)(() => {\n    const previousElements = prevElements.current;\n\n    if (elements !== previousElements) {\n      cleanup(previousElements);\n      const entries = elements.map(element => {\n        const scrollableElement = getScrollableElement(element);\n\n        if (scrollableElement) {\n          scrollableElement.addEventListener('scroll', handleScroll, {\n            passive: true\n          });\n          return [scrollableElement, getScrollCoordinates(scrollableElement)];\n        }\n\n        return null;\n      }).filter(entry => entry != null);\n      setScrollCoordinates(entries.length ? new Map(entries) : null);\n      prevElements.current = elements;\n    }\n\n    return () => {\n      cleanup(elements);\n      cleanup(previousElements);\n    };\n\n    function cleanup(elements) {\n      elements.forEach(element => {\n        const scrollableElement = getScrollableElement(element);\n        scrollableElement == null ? void 0 : scrollableElement.removeEventListener('scroll', handleScroll);\n      });\n    }\n  }, [handleScroll, elements]);\n  return (0,react.useMemo)(() => {\n    if (elements.length) {\n      return scrollCoordinates ? Array.from(scrollCoordinates.values()).reduce((acc, coordinates) => (0,utilities_esm.add)(acc, coordinates), defaultCoordinates) : getScrollOffsets(elements);\n    }\n\n    return defaultCoordinates;\n  }, [elements, scrollCoordinates]);\n}\n\nfunction useScrollOffsetsDelta(scrollOffsets, dependencies) {\n  if (dependencies === void 0) {\n    dependencies = [];\n  }\n\n  const initialScrollOffsets = (0,react.useRef)(null);\n  (0,react.useEffect)(() => {\n    initialScrollOffsets.current = null;\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  dependencies);\n  (0,react.useEffect)(() => {\n    const hasScrollOffsets = scrollOffsets !== defaultCoordinates;\n\n    if (hasScrollOffsets && !initialScrollOffsets.current) {\n      initialScrollOffsets.current = scrollOffsets;\n    }\n\n    if (!hasScrollOffsets && initialScrollOffsets.current) {\n      initialScrollOffsets.current = null;\n    }\n  }, [scrollOffsets]);\n  return initialScrollOffsets.current ? (0,utilities_esm.subtract)(scrollOffsets, initialScrollOffsets.current) : defaultCoordinates;\n}\n\nfunction useSensorSetup(sensors) {\n  (0,react.useEffect)(() => {\n    if (!utilities_esm.canUseDOM) {\n      return;\n    }\n\n    const teardownFns = sensors.map(_ref => {\n      let {\n        sensor\n      } = _ref;\n      return sensor.setup == null ? void 0 : sensor.setup();\n    });\n    return () => {\n      for (const teardown of teardownFns) {\n        teardown == null ? void 0 : teardown();\n      }\n    };\n  }, // TO-DO: Sensors length could theoretically change which would not be a valid dependency\n  // eslint-disable-next-line react-hooks/exhaustive-deps\n  sensors.map(_ref2 => {\n    let {\n      sensor\n    } = _ref2;\n    return sensor;\n  }));\n}\n\nfunction useSyntheticListeners(listeners, id) {\n  return (0,react.useMemo)(() => {\n    return listeners.reduce((acc, _ref) => {\n      let {\n        eventName,\n        handler\n      } = _ref;\n\n      acc[eventName] = event => {\n        handler(event, id);\n      };\n\n      return acc;\n    }, {});\n  }, [listeners, id]);\n}\n\nfunction useWindowRect(element) {\n  return (0,react.useMemo)(() => element ? getWindowClientRect(element) : null, [element]);\n}\n\nconst defaultValue$2 = [];\nfunction useRects(elements, measure) {\n  if (measure === void 0) {\n    measure = getClientRect;\n  }\n\n  const [firstElement] = elements;\n  const windowRect = useWindowRect(firstElement ? (0,utilities_esm.getWindow)(firstElement) : null);\n  const [rects, measureRects] = (0,react.useReducer)(reducer, defaultValue$2);\n  const resizeObserver = useResizeObserver({\n    callback: measureRects\n  });\n\n  if (elements.length > 0 && rects === defaultValue$2) {\n    measureRects();\n  }\n\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    if (elements.length) {\n      elements.forEach(element => resizeObserver == null ? void 0 : resizeObserver.observe(element));\n    } else {\n      resizeObserver == null ? void 0 : resizeObserver.disconnect();\n      measureRects();\n    }\n  }, [elements]);\n  return rects;\n\n  function reducer() {\n    if (!elements.length) {\n      return defaultValue$2;\n    }\n\n    return elements.map(element => isDocumentScrollingElement(element) ? windowRect : new Rect(measure(element), element));\n  }\n}\n\nfunction getMeasurableNode(node) {\n  if (!node) {\n    return null;\n  }\n\n  if (node.children.length > 1) {\n    return node;\n  }\n\n  const firstChild = node.children[0];\n  return (0,utilities_esm.isHTMLElement)(firstChild) ? firstChild : node;\n}\n\nfunction useDragOverlayMeasuring(_ref) {\n  let {\n    measure\n  } = _ref;\n  const [rect, setRect] = (0,react.useState)(null);\n  const handleResize = (0,react.useCallback)(entries => {\n    for (const {\n      target\n    } of entries) {\n      if ((0,utilities_esm.isHTMLElement)(target)) {\n        setRect(rect => {\n          const newRect = measure(target);\n          return rect ? { ...rect,\n            width: newRect.width,\n            height: newRect.height\n          } : newRect;\n        });\n        break;\n      }\n    }\n  }, [measure]);\n  const resizeObserver = useResizeObserver({\n    callback: handleResize\n  });\n  const handleNodeChange = (0,react.useCallback)(element => {\n    const node = getMeasurableNode(element);\n    resizeObserver == null ? void 0 : resizeObserver.disconnect();\n\n    if (node) {\n      resizeObserver == null ? void 0 : resizeObserver.observe(node);\n    }\n\n    setRect(node ? measure(node) : null);\n  }, [measure, resizeObserver]);\n  const [nodeRef, setRef] = (0,utilities_esm.useNodeRef)(handleNodeChange);\n  return (0,react.useMemo)(() => ({\n    nodeRef,\n    rect,\n    setRef\n  }), [rect, nodeRef, setRef]);\n}\n\nconst defaultSensors = [{\n  sensor: PointerSensor,\n  options: {}\n}, {\n  sensor: KeyboardSensor,\n  options: {}\n}];\nconst defaultData = {\n  current: {}\n};\nconst defaultMeasuringConfiguration = {\n  draggable: {\n    measure: getTransformAgnosticClientRect\n  },\n  droppable: {\n    measure: getTransformAgnosticClientRect,\n    strategy: MeasuringStrategy.WhileDragging,\n    frequency: MeasuringFrequency.Optimized\n  },\n  dragOverlay: {\n    measure: getClientRect\n  }\n};\n\nclass DroppableContainersMap extends Map {\n  get(id) {\n    var _super$get;\n\n    return id != null ? (_super$get = super.get(id)) != null ? _super$get : undefined : undefined;\n  }\n\n  toArray() {\n    return Array.from(this.values());\n  }\n\n  getEnabled() {\n    return this.toArray().filter(_ref => {\n      let {\n        disabled\n      } = _ref;\n      return !disabled;\n    });\n  }\n\n  getNodeFor(id) {\n    var _this$get$node$curren, _this$get;\n\n    return (_this$get$node$curren = (_this$get = this.get(id)) == null ? void 0 : _this$get.node.current) != null ? _this$get$node$curren : undefined;\n  }\n\n}\n\nconst defaultPublicContext = {\n  activatorEvent: null,\n  active: null,\n  activeNode: null,\n  activeNodeRect: null,\n  collisions: null,\n  containerNodeRect: null,\n  draggableNodes: /*#__PURE__*/new Map(),\n  droppableRects: /*#__PURE__*/new Map(),\n  droppableContainers: /*#__PURE__*/new DroppableContainersMap(),\n  over: null,\n  dragOverlay: {\n    nodeRef: {\n      current: null\n    },\n    rect: null,\n    setRef: noop\n  },\n  scrollableAncestors: [],\n  scrollableAncestorRects: [],\n  measuringConfiguration: defaultMeasuringConfiguration,\n  measureDroppableContainers: noop,\n  windowRect: null,\n  measuringScheduled: false\n};\nconst defaultInternalContext = {\n  activatorEvent: null,\n  activators: [],\n  active: null,\n  activeNodeRect: null,\n  ariaDescribedById: {\n    draggable: ''\n  },\n  dispatch: noop,\n  draggableNodes: /*#__PURE__*/new Map(),\n  over: null,\n  measureDroppableContainers: noop\n};\nconst InternalContext = /*#__PURE__*/(0,react.createContext)(defaultInternalContext);\nconst PublicContext = /*#__PURE__*/(0,react.createContext)(defaultPublicContext);\n\nfunction getInitialState() {\n  return {\n    draggable: {\n      active: null,\n      initialCoordinates: {\n        x: 0,\n        y: 0\n      },\n      nodes: new Map(),\n      translate: {\n        x: 0,\n        y: 0\n      }\n    },\n    droppable: {\n      containers: new DroppableContainersMap()\n    }\n  };\n}\nfunction reducer(state, action) {\n  switch (action.type) {\n    case Action.DragStart:\n      return { ...state,\n        draggable: { ...state.draggable,\n          initialCoordinates: action.initialCoordinates,\n          active: action.active\n        }\n      };\n\n    case Action.DragMove:\n      if (!state.draggable.active) {\n        return state;\n      }\n\n      return { ...state,\n        draggable: { ...state.draggable,\n          translate: {\n            x: action.coordinates.x - state.draggable.initialCoordinates.x,\n            y: action.coordinates.y - state.draggable.initialCoordinates.y\n          }\n        }\n      };\n\n    case Action.DragEnd:\n    case Action.DragCancel:\n      return { ...state,\n        draggable: { ...state.draggable,\n          active: null,\n          initialCoordinates: {\n            x: 0,\n            y: 0\n          },\n          translate: {\n            x: 0,\n            y: 0\n          }\n        }\n      };\n\n    case Action.RegisterDroppable:\n      {\n        const {\n          element\n        } = action;\n        const {\n          id\n        } = element;\n        const containers = new DroppableContainersMap(state.droppable.containers);\n        containers.set(id, element);\n        return { ...state,\n          droppable: { ...state.droppable,\n            containers\n          }\n        };\n      }\n\n    case Action.SetDroppableDisabled:\n      {\n        const {\n          id,\n          key,\n          disabled\n        } = action;\n        const element = state.droppable.containers.get(id);\n\n        if (!element || key !== element.key) {\n          return state;\n        }\n\n        const containers = new DroppableContainersMap(state.droppable.containers);\n        containers.set(id, { ...element,\n          disabled\n        });\n        return { ...state,\n          droppable: { ...state.droppable,\n            containers\n          }\n        };\n      }\n\n    case Action.UnregisterDroppable:\n      {\n        const {\n          id,\n          key\n        } = action;\n        const element = state.droppable.containers.get(id);\n\n        if (!element || key !== element.key) {\n          return state;\n        }\n\n        const containers = new DroppableContainersMap(state.droppable.containers);\n        containers.delete(id);\n        return { ...state,\n          droppable: { ...state.droppable,\n            containers\n          }\n        };\n      }\n\n    default:\n      {\n        return state;\n      }\n  }\n}\n\nfunction RestoreFocus(_ref) {\n  let {\n    disabled\n  } = _ref;\n  const {\n    active,\n    activatorEvent,\n    draggableNodes\n  } = (0,react.useContext)(InternalContext);\n  const previousActivatorEvent = (0,utilities_esm.usePrevious)(activatorEvent);\n  const previousActiveId = (0,utilities_esm.usePrevious)(active == null ? void 0 : active.id); // Restore keyboard focus on the activator node\n\n  (0,react.useEffect)(() => {\n    if (disabled) {\n      return;\n    }\n\n    if (!activatorEvent && previousActivatorEvent && previousActiveId != null) {\n      if (!(0,utilities_esm.isKeyboardEvent)(previousActivatorEvent)) {\n        return;\n      }\n\n      if (document.activeElement === previousActivatorEvent.target) {\n        // No need to restore focus\n        return;\n      }\n\n      const draggableNode = draggableNodes.get(previousActiveId);\n\n      if (!draggableNode) {\n        return;\n      }\n\n      const {\n        activatorNode,\n        node\n      } = draggableNode;\n\n      if (!activatorNode.current && !node.current) {\n        return;\n      }\n\n      requestAnimationFrame(() => {\n        for (const element of [activatorNode.current, node.current]) {\n          if (!element) {\n            continue;\n          }\n\n          const focusableNode = (0,utilities_esm.findFirstFocusableNode)(element);\n\n          if (focusableNode) {\n            focusableNode.focus();\n            break;\n          }\n        }\n      });\n    }\n  }, [activatorEvent, disabled, draggableNodes, previousActiveId, previousActivatorEvent]);\n  return null;\n}\n\nfunction applyModifiers(modifiers, _ref) {\n  let {\n    transform,\n    ...args\n  } = _ref;\n  return modifiers != null && modifiers.length ? modifiers.reduce((accumulator, modifier) => {\n    return modifier({\n      transform: accumulator,\n      ...args\n    });\n  }, transform) : transform;\n}\n\nfunction useMeasuringConfiguration(config) {\n  return (0,react.useMemo)(() => ({\n    draggable: { ...defaultMeasuringConfiguration.draggable,\n      ...(config == null ? void 0 : config.draggable)\n    },\n    droppable: { ...defaultMeasuringConfiguration.droppable,\n      ...(config == null ? void 0 : config.droppable)\n    },\n    dragOverlay: { ...defaultMeasuringConfiguration.dragOverlay,\n      ...(config == null ? void 0 : config.dragOverlay)\n    }\n  }), // eslint-disable-next-line react-hooks/exhaustive-deps\n  [config == null ? void 0 : config.draggable, config == null ? void 0 : config.droppable, config == null ? void 0 : config.dragOverlay]);\n}\n\nfunction useLayoutShiftScrollCompensation(_ref) {\n  let {\n    activeNode,\n    measure,\n    initialRect,\n    config = true\n  } = _ref;\n  const initialized = (0,react.useRef)(false);\n  const {\n    x,\n    y\n  } = typeof config === 'boolean' ? {\n    x: config,\n    y: config\n  } : config;\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    const disabled = !x && !y;\n\n    if (disabled || !activeNode) {\n      initialized.current = false;\n      return;\n    }\n\n    if (initialized.current || !initialRect) {\n      // Return early if layout shift scroll compensation was already attempted\n      // or if there is no initialRect to compare to.\n      return;\n    } // Get the most up to date node ref for the active draggable\n\n\n    const node = activeNode == null ? void 0 : activeNode.node.current;\n\n    if (!node || node.isConnected === false) {\n      // Return early if there is no attached node ref or if the node is\n      // disconnected from the document.\n      return;\n    }\n\n    const rect = measure(node);\n    const rectDelta = getRectDelta(rect, initialRect);\n\n    if (!x) {\n      rectDelta.x = 0;\n    }\n\n    if (!y) {\n      rectDelta.y = 0;\n    } // Only perform layout shift scroll compensation once\n\n\n    initialized.current = true;\n\n    if (Math.abs(rectDelta.x) > 0 || Math.abs(rectDelta.y) > 0) {\n      const firstScrollableAncestor = getFirstScrollableAncestor(node);\n\n      if (firstScrollableAncestor) {\n        firstScrollableAncestor.scrollBy({\n          top: rectDelta.y,\n          left: rectDelta.x\n        });\n      }\n    }\n  }, [activeNode, x, y, initialRect, measure]);\n}\n\nconst ActiveDraggableContext = /*#__PURE__*/(0,react.createContext)({ ...defaultCoordinates,\n  scaleX: 1,\n  scaleY: 1\n});\nvar Status;\n\n(function (Status) {\n  Status[Status[\"Uninitialized\"] = 0] = \"Uninitialized\";\n  Status[Status[\"Initializing\"] = 1] = \"Initializing\";\n  Status[Status[\"Initialized\"] = 2] = \"Initialized\";\n})(Status || (Status = {}));\n\nconst DndContext = /*#__PURE__*/(0,react.memo)(function DndContext(_ref) {\n  var _sensorContext$curren, _dragOverlay$nodeRef$, _dragOverlay$rect, _over$rect;\n\n  let {\n    id,\n    accessibility,\n    autoScroll = true,\n    children,\n    sensors = defaultSensors,\n    collisionDetection = rectIntersection,\n    measuring,\n    modifiers,\n    ...props\n  } = _ref;\n  const store = (0,react.useReducer)(reducer, undefined, getInitialState);\n  const [state, dispatch] = store;\n  const [dispatchMonitorEvent, registerMonitorListener] = useDndMonitorProvider();\n  const [status, setStatus] = (0,react.useState)(Status.Uninitialized);\n  const isInitialized = status === Status.Initialized;\n  const {\n    draggable: {\n      active: activeId,\n      nodes: draggableNodes,\n      translate\n    },\n    droppable: {\n      containers: droppableContainers\n    }\n  } = state;\n  const node = activeId ? draggableNodes.get(activeId) : null;\n  const activeRects = (0,react.useRef)({\n    initial: null,\n    translated: null\n  });\n  const active = (0,react.useMemo)(() => {\n    var _node$data;\n\n    return activeId != null ? {\n      id: activeId,\n      // It's possible for the active node to unmount while dragging\n      data: (_node$data = node == null ? void 0 : node.data) != null ? _node$data : defaultData,\n      rect: activeRects\n    } : null;\n  }, [activeId, node]);\n  const activeRef = (0,react.useRef)(null);\n  const [activeSensor, setActiveSensor] = (0,react.useState)(null);\n  const [activatorEvent, setActivatorEvent] = (0,react.useState)(null);\n  const latestProps = (0,utilities_esm.useLatestValue)(props, Object.values(props));\n  const draggableDescribedById = (0,utilities_esm.useUniqueId)(\"DndDescribedBy\", id);\n  const enabledDroppableContainers = (0,react.useMemo)(() => droppableContainers.getEnabled(), [droppableContainers]);\n  const measuringConfiguration = useMeasuringConfiguration(measuring);\n  const {\n    droppableRects,\n    measureDroppableContainers,\n    measuringScheduled\n  } = useDroppableMeasuring(enabledDroppableContainers, {\n    dragging: isInitialized,\n    dependencies: [translate.x, translate.y],\n    config: measuringConfiguration.droppable\n  });\n  const activeNode = useCachedNode(draggableNodes, activeId);\n  const activationCoordinates = (0,react.useMemo)(() => activatorEvent ? (0,utilities_esm.getEventCoordinates)(activatorEvent) : null, [activatorEvent]);\n  const autoScrollOptions = getAutoScrollerOptions();\n  const initialActiveNodeRect = useInitialRect(activeNode, measuringConfiguration.draggable.measure);\n  useLayoutShiftScrollCompensation({\n    activeNode: activeId ? draggableNodes.get(activeId) : null,\n    config: autoScrollOptions.layoutShiftCompensation,\n    initialRect: initialActiveNodeRect,\n    measure: measuringConfiguration.draggable.measure\n  });\n  const activeNodeRect = useRect(activeNode, measuringConfiguration.draggable.measure, initialActiveNodeRect);\n  const containerNodeRect = useRect(activeNode ? activeNode.parentElement : null);\n  const sensorContext = (0,react.useRef)({\n    activatorEvent: null,\n    active: null,\n    activeNode,\n    collisionRect: null,\n    collisions: null,\n    droppableRects,\n    draggableNodes,\n    draggingNode: null,\n    draggingNodeRect: null,\n    droppableContainers,\n    over: null,\n    scrollableAncestors: [],\n    scrollAdjustedTranslate: null\n  });\n  const overNode = droppableContainers.getNodeFor((_sensorContext$curren = sensorContext.current.over) == null ? void 0 : _sensorContext$curren.id);\n  const dragOverlay = useDragOverlayMeasuring({\n    measure: measuringConfiguration.dragOverlay.measure\n  }); // Use the rect of the drag overlay if it is mounted\n\n  const draggingNode = (_dragOverlay$nodeRef$ = dragOverlay.nodeRef.current) != null ? _dragOverlay$nodeRef$ : activeNode;\n  const draggingNodeRect = isInitialized ? (_dragOverlay$rect = dragOverlay.rect) != null ? _dragOverlay$rect : activeNodeRect : null;\n  const usesDragOverlay = Boolean(dragOverlay.nodeRef.current && dragOverlay.rect); // The delta between the previous and new position of the draggable node\n  // is only relevant when there is no drag overlay\n\n  const nodeRectDelta = useRectDelta(usesDragOverlay ? null : activeNodeRect); // Get the window rect of the dragging node\n\n  const windowRect = useWindowRect(draggingNode ? (0,utilities_esm.getWindow)(draggingNode) : null); // Get scrollable ancestors of the dragging node\n\n  const scrollableAncestors = useScrollableAncestors(isInitialized ? overNode != null ? overNode : activeNode : null);\n  const scrollableAncestorRects = useRects(scrollableAncestors); // Apply modifiers\n\n  const modifiedTranslate = applyModifiers(modifiers, {\n    transform: {\n      x: translate.x - nodeRectDelta.x,\n      y: translate.y - nodeRectDelta.y,\n      scaleX: 1,\n      scaleY: 1\n    },\n    activatorEvent,\n    active,\n    activeNodeRect,\n    containerNodeRect,\n    draggingNodeRect,\n    over: sensorContext.current.over,\n    overlayNodeRect: dragOverlay.rect,\n    scrollableAncestors,\n    scrollableAncestorRects,\n    windowRect\n  });\n  const pointerCoordinates = activationCoordinates ? (0,utilities_esm.add)(activationCoordinates, translate) : null;\n  const scrollOffsets = useScrollOffsets(scrollableAncestors); // Represents the scroll delta since dragging was initiated\n\n  const scrollAdjustment = useScrollOffsetsDelta(scrollOffsets); // Represents the scroll delta since the last time the active node rect was measured\n\n  const activeNodeScrollDelta = useScrollOffsetsDelta(scrollOffsets, [activeNodeRect]);\n  const scrollAdjustedTranslate = (0,utilities_esm.add)(modifiedTranslate, scrollAdjustment);\n  const collisionRect = draggingNodeRect ? getAdjustedRect(draggingNodeRect, modifiedTranslate) : null;\n  const collisions = active && collisionRect ? collisionDetection({\n    active,\n    collisionRect,\n    droppableRects,\n    droppableContainers: enabledDroppableContainers,\n    pointerCoordinates\n  }) : null;\n  const overId = getFirstCollision(collisions, 'id');\n  const [over, setOver] = (0,react.useState)(null); // When there is no drag overlay used, we need to account for the\n  // window scroll delta\n\n  const appliedTranslate = usesDragOverlay ? modifiedTranslate : (0,utilities_esm.add)(modifiedTranslate, activeNodeScrollDelta);\n  const transform = adjustScale(appliedTranslate, (_over$rect = over == null ? void 0 : over.rect) != null ? _over$rect : null, activeNodeRect);\n  const instantiateSensor = (0,react.useCallback)((event, _ref2) => {\n    let {\n      sensor: Sensor,\n      options\n    } = _ref2;\n\n    if (activeRef.current == null) {\n      return;\n    }\n\n    const activeNode = draggableNodes.get(activeRef.current);\n\n    if (!activeNode) {\n      return;\n    }\n\n    const activatorEvent = event.nativeEvent;\n    const sensorInstance = new Sensor({\n      active: activeRef.current,\n      activeNode,\n      event: activatorEvent,\n      options,\n      // Sensors need to be instantiated with refs for arguments that change over time\n      // otherwise they are frozen in time with the stale arguments\n      context: sensorContext,\n\n      onStart(initialCoordinates) {\n        const id = activeRef.current;\n\n        if (id == null) {\n          return;\n        }\n\n        const draggableNode = draggableNodes.get(id);\n\n        if (!draggableNode) {\n          return;\n        }\n\n        const {\n          onDragStart\n        } = latestProps.current;\n        const event = {\n          active: {\n            id,\n            data: draggableNode.data,\n            rect: activeRects\n          }\n        };\n        (0,react_dom.unstable_batchedUpdates)(() => {\n          onDragStart == null ? void 0 : onDragStart(event);\n          setStatus(Status.Initializing);\n          dispatch({\n            type: Action.DragStart,\n            initialCoordinates,\n            active: id\n          });\n          dispatchMonitorEvent({\n            type: 'onDragStart',\n            event\n          });\n        });\n      },\n\n      onMove(coordinates) {\n        dispatch({\n          type: Action.DragMove,\n          coordinates\n        });\n      },\n\n      onEnd: createHandler(Action.DragEnd),\n      onCancel: createHandler(Action.DragCancel)\n    });\n    (0,react_dom.unstable_batchedUpdates)(() => {\n      setActiveSensor(sensorInstance);\n      setActivatorEvent(event.nativeEvent);\n    });\n\n    function createHandler(type) {\n      return async function handler() {\n        const {\n          active,\n          collisions,\n          over,\n          scrollAdjustedTranslate\n        } = sensorContext.current;\n        let event = null;\n\n        if (active && scrollAdjustedTranslate) {\n          const {\n            cancelDrop\n          } = latestProps.current;\n          event = {\n            activatorEvent,\n            active: active,\n            collisions,\n            delta: scrollAdjustedTranslate,\n            over\n          };\n\n          if (type === Action.DragEnd && typeof cancelDrop === 'function') {\n            const shouldCancel = await Promise.resolve(cancelDrop(event));\n\n            if (shouldCancel) {\n              type = Action.DragCancel;\n            }\n          }\n        }\n\n        activeRef.current = null;\n        (0,react_dom.unstable_batchedUpdates)(() => {\n          dispatch({\n            type\n          });\n          setStatus(Status.Uninitialized);\n          setOver(null);\n          setActiveSensor(null);\n          setActivatorEvent(null);\n          const eventName = type === Action.DragEnd ? 'onDragEnd' : 'onDragCancel';\n\n          if (event) {\n            const handler = latestProps.current[eventName];\n            handler == null ? void 0 : handler(event);\n            dispatchMonitorEvent({\n              type: eventName,\n              event\n            });\n          }\n        });\n      };\n    }\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [draggableNodes]);\n  const bindActivatorToSensorInstantiator = (0,react.useCallback)((handler, sensor) => {\n    return (event, active) => {\n      const nativeEvent = event.nativeEvent;\n      const activeDraggableNode = draggableNodes.get(active);\n\n      if ( // Another sensor is already instantiating\n      activeRef.current !== null || // No active draggable\n      !activeDraggableNode || // Event has already been captured\n      nativeEvent.dndKit || nativeEvent.defaultPrevented) {\n        return;\n      }\n\n      const activationContext = {\n        active: activeDraggableNode\n      };\n      const shouldActivate = handler(event, sensor.options, activationContext);\n\n      if (shouldActivate === true) {\n        nativeEvent.dndKit = {\n          capturedBy: sensor.sensor\n        };\n        activeRef.current = active;\n        instantiateSensor(event, sensor);\n      }\n    };\n  }, [draggableNodes, instantiateSensor]);\n  const activators = useCombineActivators(sensors, bindActivatorToSensorInstantiator);\n  useSensorSetup(sensors);\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    if (activeNodeRect && status === Status.Initializing) {\n      setStatus(Status.Initialized);\n    }\n  }, [activeNodeRect, status]);\n  (0,react.useEffect)(() => {\n    const {\n      onDragMove\n    } = latestProps.current;\n    const {\n      active,\n      activatorEvent,\n      collisions,\n      over\n    } = sensorContext.current;\n\n    if (!active || !activatorEvent) {\n      return;\n    }\n\n    const event = {\n      active,\n      activatorEvent,\n      collisions,\n      delta: {\n        x: scrollAdjustedTranslate.x,\n        y: scrollAdjustedTranslate.y\n      },\n      over\n    };\n    (0,react_dom.unstable_batchedUpdates)(() => {\n      onDragMove == null ? void 0 : onDragMove(event);\n      dispatchMonitorEvent({\n        type: 'onDragMove',\n        event\n      });\n    });\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [scrollAdjustedTranslate.x, scrollAdjustedTranslate.y]);\n  (0,react.useEffect)(() => {\n    const {\n      active,\n      activatorEvent,\n      collisions,\n      droppableContainers,\n      scrollAdjustedTranslate\n    } = sensorContext.current;\n\n    if (!active || activeRef.current == null || !activatorEvent || !scrollAdjustedTranslate) {\n      return;\n    }\n\n    const {\n      onDragOver\n    } = latestProps.current;\n    const overContainer = droppableContainers.get(overId);\n    const over = overContainer && overContainer.rect.current ? {\n      id: overContainer.id,\n      rect: overContainer.rect.current,\n      data: overContainer.data,\n      disabled: overContainer.disabled\n    } : null;\n    const event = {\n      active,\n      activatorEvent,\n      collisions,\n      delta: {\n        x: scrollAdjustedTranslate.x,\n        y: scrollAdjustedTranslate.y\n      },\n      over\n    };\n    (0,react_dom.unstable_batchedUpdates)(() => {\n      setOver(over);\n      onDragOver == null ? void 0 : onDragOver(event);\n      dispatchMonitorEvent({\n        type: 'onDragOver',\n        event\n      });\n    });\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [overId]);\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    sensorContext.current = {\n      activatorEvent,\n      active,\n      activeNode,\n      collisionRect,\n      collisions,\n      droppableRects,\n      draggableNodes,\n      draggingNode,\n      draggingNodeRect,\n      droppableContainers,\n      over,\n      scrollableAncestors,\n      scrollAdjustedTranslate\n    };\n    activeRects.current = {\n      initial: draggingNodeRect,\n      translated: collisionRect\n    };\n  }, [active, activeNode, collisions, collisionRect, draggableNodes, draggingNode, draggingNodeRect, droppableRects, droppableContainers, over, scrollableAncestors, scrollAdjustedTranslate]);\n  useAutoScroller({ ...autoScrollOptions,\n    delta: translate,\n    draggingRect: collisionRect,\n    pointerCoordinates,\n    scrollableAncestors,\n    scrollableAncestorRects\n  });\n  const publicContext = (0,react.useMemo)(() => {\n    const context = {\n      active,\n      activeNode,\n      activeNodeRect,\n      activatorEvent,\n      collisions,\n      containerNodeRect,\n      dragOverlay,\n      draggableNodes,\n      droppableContainers,\n      droppableRects,\n      over,\n      measureDroppableContainers,\n      scrollableAncestors,\n      scrollableAncestorRects,\n      measuringConfiguration,\n      measuringScheduled,\n      windowRect\n    };\n    return context;\n  }, [active, activeNode, activeNodeRect, activatorEvent, collisions, containerNodeRect, dragOverlay, draggableNodes, droppableContainers, droppableRects, over, measureDroppableContainers, scrollableAncestors, scrollableAncestorRects, measuringConfiguration, measuringScheduled, windowRect]);\n  const internalContext = (0,react.useMemo)(() => {\n    const context = {\n      activatorEvent,\n      activators,\n      active,\n      activeNodeRect,\n      ariaDescribedById: {\n        draggable: draggableDescribedById\n      },\n      dispatch,\n      draggableNodes,\n      over,\n      measureDroppableContainers\n    };\n    return context;\n  }, [activatorEvent, activators, active, activeNodeRect, dispatch, draggableDescribedById, draggableNodes, over, measureDroppableContainers]);\n  return react.createElement(DndMonitorContext.Provider, {\n    value: registerMonitorListener\n  }, react.createElement(InternalContext.Provider, {\n    value: internalContext\n  }, react.createElement(PublicContext.Provider, {\n    value: publicContext\n  }, react.createElement(ActiveDraggableContext.Provider, {\n    value: transform\n  }, children)), react.createElement(RestoreFocus, {\n    disabled: (accessibility == null ? void 0 : accessibility.restoreFocus) === false\n  })), react.createElement(Accessibility, { ...accessibility,\n    hiddenTextDescribedById: draggableDescribedById\n  }));\n\n  function getAutoScrollerOptions() {\n    const activeSensorDisablesAutoscroll = (activeSensor == null ? void 0 : activeSensor.autoScrollEnabled) === false;\n    const autoScrollGloballyDisabled = typeof autoScroll === 'object' ? autoScroll.enabled === false : autoScroll === false;\n    const enabled = isInitialized && !activeSensorDisablesAutoscroll && !autoScrollGloballyDisabled;\n\n    if (typeof autoScroll === 'object') {\n      return { ...autoScroll,\n        enabled\n      };\n    }\n\n    return {\n      enabled\n    };\n  }\n});\n\nconst NullContext = /*#__PURE__*/(0,react.createContext)(null);\nconst defaultRole = 'button';\nconst ID_PREFIX = 'Droppable';\nfunction useDraggable(_ref) {\n  let {\n    id,\n    data,\n    disabled = false,\n    attributes\n  } = _ref;\n  const key = (0,utilities_esm.useUniqueId)(ID_PREFIX);\n  const {\n    activators,\n    activatorEvent,\n    active,\n    activeNodeRect,\n    ariaDescribedById,\n    draggableNodes,\n    over\n  } = (0,react.useContext)(InternalContext);\n  const {\n    role = defaultRole,\n    roleDescription = 'draggable',\n    tabIndex = 0\n  } = attributes != null ? attributes : {};\n  const isDragging = (active == null ? void 0 : active.id) === id;\n  const transform = (0,react.useContext)(isDragging ? ActiveDraggableContext : NullContext);\n  const [node, setNodeRef] = (0,utilities_esm.useNodeRef)();\n  const [activatorNode, setActivatorNodeRef] = (0,utilities_esm.useNodeRef)();\n  const listeners = useSyntheticListeners(activators, id);\n  const dataRef = (0,utilities_esm.useLatestValue)(data);\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    draggableNodes.set(id, {\n      id,\n      key,\n      node,\n      activatorNode,\n      data: dataRef\n    });\n    return () => {\n      const node = draggableNodes.get(id);\n\n      if (node && node.key === key) {\n        draggableNodes.delete(id);\n      }\n    };\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [draggableNodes, id]);\n  const memoizedAttributes = (0,react.useMemo)(() => ({\n    role,\n    tabIndex,\n    'aria-disabled': disabled,\n    'aria-pressed': isDragging && role === defaultRole ? true : undefined,\n    'aria-roledescription': roleDescription,\n    'aria-describedby': ariaDescribedById.draggable\n  }), [disabled, role, tabIndex, isDragging, roleDescription, ariaDescribedById.draggable]);\n  return {\n    active,\n    activatorEvent,\n    activeNodeRect,\n    attributes: memoizedAttributes,\n    isDragging,\n    listeners: disabled ? undefined : listeners,\n    node,\n    over,\n    setNodeRef,\n    setActivatorNodeRef,\n    transform\n  };\n}\n\nfunction useDndContext() {\n  return (0,react.useContext)(PublicContext);\n}\n\nconst ID_PREFIX$1 = 'Droppable';\nconst defaultResizeObserverConfig = {\n  timeout: 25\n};\nfunction useDroppable(_ref) {\n  let {\n    data,\n    disabled = false,\n    id,\n    resizeObserverConfig\n  } = _ref;\n  const key = (0,utilities_esm.useUniqueId)(ID_PREFIX$1);\n  const {\n    active,\n    dispatch,\n    over,\n    measureDroppableContainers\n  } = (0,react.useContext)(InternalContext);\n  const previous = (0,react.useRef)({\n    disabled\n  });\n  const resizeObserverConnected = (0,react.useRef)(false);\n  const rect = (0,react.useRef)(null);\n  const callbackId = (0,react.useRef)(null);\n  const {\n    disabled: resizeObserverDisabled,\n    updateMeasurementsFor,\n    timeout: resizeObserverTimeout\n  } = { ...defaultResizeObserverConfig,\n    ...resizeObserverConfig\n  };\n  const ids = (0,utilities_esm.useLatestValue)(updateMeasurementsFor != null ? updateMeasurementsFor : id);\n  const handleResize = (0,react.useCallback)(() => {\n    if (!resizeObserverConnected.current) {\n      // ResizeObserver invokes the `handleResize` callback as soon as `observe` is called,\n      // assuming the element is rendered and displayed.\n      resizeObserverConnected.current = true;\n      return;\n    }\n\n    if (callbackId.current != null) {\n      clearTimeout(callbackId.current);\n    }\n\n    callbackId.current = setTimeout(() => {\n      measureDroppableContainers(Array.isArray(ids.current) ? ids.current : [ids.current]);\n      callbackId.current = null;\n    }, resizeObserverTimeout);\n  }, //eslint-disable-next-line react-hooks/exhaustive-deps\n  [resizeObserverTimeout]);\n  const resizeObserver = useResizeObserver({\n    callback: handleResize,\n    disabled: resizeObserverDisabled || !active\n  });\n  const handleNodeChange = (0,react.useCallback)((newElement, previousElement) => {\n    if (!resizeObserver) {\n      return;\n    }\n\n    if (previousElement) {\n      resizeObserver.unobserve(previousElement);\n      resizeObserverConnected.current = false;\n    }\n\n    if (newElement) {\n      resizeObserver.observe(newElement);\n    }\n  }, [resizeObserver]);\n  const [nodeRef, setNodeRef] = (0,utilities_esm.useNodeRef)(handleNodeChange);\n  const dataRef = (0,utilities_esm.useLatestValue)(data);\n  (0,react.useEffect)(() => {\n    if (!resizeObserver || !nodeRef.current) {\n      return;\n    }\n\n    resizeObserver.disconnect();\n    resizeObserverConnected.current = false;\n    resizeObserver.observe(nodeRef.current);\n  }, [nodeRef, resizeObserver]);\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    dispatch({\n      type: Action.RegisterDroppable,\n      element: {\n        id,\n        key,\n        disabled,\n        node: nodeRef,\n        rect,\n        data: dataRef\n      }\n    });\n    return () => dispatch({\n      type: Action.UnregisterDroppable,\n      key,\n      id\n    });\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [id]);\n  (0,react.useEffect)(() => {\n    if (disabled !== previous.current.disabled) {\n      dispatch({\n        type: Action.SetDroppableDisabled,\n        id,\n        key,\n        disabled\n      });\n      previous.current.disabled = disabled;\n    }\n  }, [id, key, disabled, dispatch]);\n  return {\n    active,\n    rect,\n    isOver: (over == null ? void 0 : over.id) === id,\n    node: nodeRef,\n    over,\n    setNodeRef\n  };\n}\n\nfunction AnimationManager(_ref) {\n  let {\n    animation,\n    children\n  } = _ref;\n  const [clonedChildren, setClonedChildren] = (0,react.useState)(null);\n  const [element, setElement] = (0,react.useState)(null);\n  const previousChildren = (0,utilities_esm.usePrevious)(children);\n\n  if (!children && !clonedChildren && previousChildren) {\n    setClonedChildren(previousChildren);\n  }\n\n  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {\n    if (!element) {\n      return;\n    }\n\n    const key = clonedChildren == null ? void 0 : clonedChildren.key;\n    const id = clonedChildren == null ? void 0 : clonedChildren.props.id;\n\n    if (key == null || id == null) {\n      setClonedChildren(null);\n      return;\n    }\n\n    Promise.resolve(animation(id, element)).then(() => {\n      setClonedChildren(null);\n    });\n  }, [animation, clonedChildren, element]);\n  return react.createElement(react.Fragment, null, children, clonedChildren ? (0,react.cloneElement)(clonedChildren, {\n    ref: setElement\n  }) : null);\n}\n\nconst defaultTransform = {\n  x: 0,\n  y: 0,\n  scaleX: 1,\n  scaleY: 1\n};\nfunction NullifiedContextProvider(_ref) {\n  let {\n    children\n  } = _ref;\n  return react.createElement(InternalContext.Provider, {\n    value: defaultInternalContext\n  }, react.createElement(ActiveDraggableContext.Provider, {\n    value: defaultTransform\n  }, children));\n}\n\nconst baseStyles = {\n  position: 'fixed',\n  touchAction: 'none'\n};\n\nconst defaultTransition = activatorEvent => {\n  const isKeyboardActivator = (0,utilities_esm.isKeyboardEvent)(activatorEvent);\n  return isKeyboardActivator ? 'transform 250ms ease' : undefined;\n};\n\nconst PositionedOverlay = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {\n  let {\n    as,\n    activatorEvent,\n    adjustScale,\n    children,\n    className,\n    rect,\n    style,\n    transform,\n    transition = defaultTransition\n  } = _ref;\n\n  if (!rect) {\n    return null;\n  }\n\n  const scaleAdjustedTransform = adjustScale ? transform : { ...transform,\n    scaleX: 1,\n    scaleY: 1\n  };\n  const styles = { ...baseStyles,\n    width: rect.width,\n    height: rect.height,\n    top: rect.top,\n    left: rect.left,\n    transform: utilities_esm.CSS.Transform.toString(scaleAdjustedTransform),\n    transformOrigin: adjustScale && activatorEvent ? getRelativeTransformOrigin(activatorEvent, rect) : undefined,\n    transition: typeof transition === 'function' ? transition(activatorEvent) : transition,\n    ...style\n  };\n  return react.createElement(as, {\n    className,\n    style: styles,\n    ref\n  }, children);\n});\n\nconst defaultDropAnimationSideEffects = options => _ref => {\n  let {\n    active,\n    dragOverlay\n  } = _ref;\n  const originalStyles = {};\n  const {\n    styles,\n    className\n  } = options;\n\n  if (styles != null && styles.active) {\n    for (const [key, value] of Object.entries(styles.active)) {\n      if (value === undefined) {\n        continue;\n      }\n\n      originalStyles[key] = active.node.style.getPropertyValue(key);\n      active.node.style.setProperty(key, value);\n    }\n  }\n\n  if (styles != null && styles.dragOverlay) {\n    for (const [key, value] of Object.entries(styles.dragOverlay)) {\n      if (value === undefined) {\n        continue;\n      }\n\n      dragOverlay.node.style.setProperty(key, value);\n    }\n  }\n\n  if (className != null && className.active) {\n    active.node.classList.add(className.active);\n  }\n\n  if (className != null && className.dragOverlay) {\n    dragOverlay.node.classList.add(className.dragOverlay);\n  }\n\n  return function cleanup() {\n    for (const [key, value] of Object.entries(originalStyles)) {\n      active.node.style.setProperty(key, value);\n    }\n\n    if (className != null && className.active) {\n      active.node.classList.remove(className.active);\n    }\n  };\n};\n\nconst defaultKeyframeResolver = _ref2 => {\n  let {\n    transform: {\n      initial,\n      final\n    }\n  } = _ref2;\n  return [{\n    transform: utilities_esm.CSS.Transform.toString(initial)\n  }, {\n    transform: utilities_esm.CSS.Transform.toString(final)\n  }];\n};\n\nconst defaultDropAnimationConfiguration = {\n  duration: 250,\n  easing: 'ease',\n  keyframes: defaultKeyframeResolver,\n  sideEffects: /*#__PURE__*/defaultDropAnimationSideEffects({\n    styles: {\n      active: {\n        opacity: '0'\n      }\n    }\n  })\n};\nfunction useDropAnimation(_ref3) {\n  let {\n    config,\n    draggableNodes,\n    droppableContainers,\n    measuringConfiguration\n  } = _ref3;\n  return (0,utilities_esm.useEvent)((id, node) => {\n    if (config === null) {\n      return;\n    }\n\n    const activeDraggable = draggableNodes.get(id);\n\n    if (!activeDraggable) {\n      return;\n    }\n\n    const activeNode = activeDraggable.node.current;\n\n    if (!activeNode) {\n      return;\n    }\n\n    const measurableNode = getMeasurableNode(node);\n\n    if (!measurableNode) {\n      return;\n    }\n\n    const {\n      transform\n    } = (0,utilities_esm.getWindow)(node).getComputedStyle(node);\n    const parsedTransform = parseTransform(transform);\n\n    if (!parsedTransform) {\n      return;\n    }\n\n    const animation = typeof config === 'function' ? config : createDefaultDropAnimation(config);\n    scrollIntoViewIfNeeded(activeNode, measuringConfiguration.draggable.measure);\n    return animation({\n      active: {\n        id,\n        data: activeDraggable.data,\n        node: activeNode,\n        rect: measuringConfiguration.draggable.measure(activeNode)\n      },\n      draggableNodes,\n      dragOverlay: {\n        node,\n        rect: measuringConfiguration.dragOverlay.measure(measurableNode)\n      },\n      droppableContainers,\n      measuringConfiguration,\n      transform: parsedTransform\n    });\n  });\n}\n\nfunction createDefaultDropAnimation(options) {\n  const {\n    duration,\n    easing,\n    sideEffects,\n    keyframes\n  } = { ...defaultDropAnimationConfiguration,\n    ...options\n  };\n  return _ref4 => {\n    let {\n      active,\n      dragOverlay,\n      transform,\n      ...rest\n    } = _ref4;\n\n    if (!duration) {\n      // Do not animate if animation duration is zero.\n      return;\n    }\n\n    const delta = {\n      x: dragOverlay.rect.left - active.rect.left,\n      y: dragOverlay.rect.top - active.rect.top\n    };\n    const scale = {\n      scaleX: transform.scaleX !== 1 ? active.rect.width * transform.scaleX / dragOverlay.rect.width : 1,\n      scaleY: transform.scaleY !== 1 ? active.rect.height * transform.scaleY / dragOverlay.rect.height : 1\n    };\n    const finalTransform = {\n      x: transform.x - delta.x,\n      y: transform.y - delta.y,\n      ...scale\n    };\n    const animationKeyframes = keyframes({ ...rest,\n      active,\n      dragOverlay,\n      transform: {\n        initial: transform,\n        final: finalTransform\n      }\n    });\n    const [firstKeyframe] = animationKeyframes;\n    const lastKeyframe = animationKeyframes[animationKeyframes.length - 1];\n\n    if (JSON.stringify(firstKeyframe) === JSON.stringify(lastKeyframe)) {\n      // The start and end keyframes are the same, infer that there is no animation needed.\n      return;\n    }\n\n    const cleanup = sideEffects == null ? void 0 : sideEffects({\n      active,\n      dragOverlay,\n      ...rest\n    });\n    const animation = dragOverlay.node.animate(animationKeyframes, {\n      duration,\n      easing,\n      fill: 'forwards'\n    });\n    return new Promise(resolve => {\n      animation.onfinish = () => {\n        cleanup == null ? void 0 : cleanup();\n        resolve();\n      };\n    });\n  };\n}\n\nlet key = 0;\nfunction useKey(id) {\n  return (0,react.useMemo)(() => {\n    if (id == null) {\n      return;\n    }\n\n    key++;\n    return key;\n  }, [id]);\n}\n\nconst DragOverlay = /*#__PURE__*/react.memo(_ref => {\n  let {\n    adjustScale = false,\n    children,\n    dropAnimation: dropAnimationConfig,\n    style,\n    transition,\n    modifiers,\n    wrapperElement = 'div',\n    className,\n    zIndex = 999\n  } = _ref;\n  const {\n    activatorEvent,\n    active,\n    activeNodeRect,\n    containerNodeRect,\n    draggableNodes,\n    droppableContainers,\n    dragOverlay,\n    over,\n    measuringConfiguration,\n    scrollableAncestors,\n    scrollableAncestorRects,\n    windowRect\n  } = useDndContext();\n  const transform = (0,react.useContext)(ActiveDraggableContext);\n  const key = useKey(active == null ? void 0 : active.id);\n  const modifiedTransform = applyModifiers(modifiers, {\n    activatorEvent,\n    active,\n    activeNodeRect,\n    containerNodeRect,\n    draggingNodeRect: dragOverlay.rect,\n    over,\n    overlayNodeRect: dragOverlay.rect,\n    scrollableAncestors,\n    scrollableAncestorRects,\n    transform,\n    windowRect\n  });\n  const initialRect = useInitialValue(activeNodeRect);\n  const dropAnimation = useDropAnimation({\n    config: dropAnimationConfig,\n    draggableNodes,\n    droppableContainers,\n    measuringConfiguration\n  }); // We need to wait for the active node to be measured before connecting the drag overlay ref\n  // otherwise collisions can be computed against a mispositioned drag overlay\n\n  const ref = initialRect ? dragOverlay.setRef : undefined;\n  return react.createElement(NullifiedContextProvider, null, react.createElement(AnimationManager, {\n    animation: dropAnimation\n  }, active && key ? react.createElement(PositionedOverlay, {\n    key: key,\n    id: active.id,\n    ref: ref,\n    as: wrapperElement,\n    activatorEvent: activatorEvent,\n    adjustScale: adjustScale,\n    className: className,\n    transition: transition,\n    rect: initialRect,\n    style: {\n      zIndex,\n      ...style\n    },\n    transform: modifiedTransform\n  }, children) : null));\n});\n\n\n//# sourceMappingURL=core.esm.js.map\n\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./node_modules/@dnd-kit/core/dist/core.esm.js_+_1_modules?");
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "AutoScrollActivator": () => (/* binding */ AutoScrollActivator),
+  "DndContext": () => (/* binding */ DndContext),
+  "DragOverlay": () => (/* binding */ DragOverlay),
+  "KeyboardCode": () => (/* binding */ KeyboardCode),
+  "KeyboardSensor": () => (/* binding */ KeyboardSensor),
+  "MeasuringFrequency": () => (/* binding */ MeasuringFrequency),
+  "MeasuringStrategy": () => (/* binding */ MeasuringStrategy),
+  "MouseSensor": () => (/* binding */ MouseSensor),
+  "PointerSensor": () => (/* binding */ PointerSensor),
+  "TouchSensor": () => (/* binding */ TouchSensor),
+  "TraversalOrder": () => (/* binding */ TraversalOrder),
+  "applyModifiers": () => (/* binding */ applyModifiers),
+  "closestCenter": () => (/* binding */ closestCenter),
+  "closestCorners": () => (/* binding */ closestCorners),
+  "defaultAnnouncements": () => (/* binding */ defaultAnnouncements),
+  "defaultCoordinates": () => (/* binding */ defaultCoordinates),
+  "defaultDropAnimation": () => (/* binding */ defaultDropAnimationConfiguration),
+  "defaultDropAnimationSideEffects": () => (/* binding */ defaultDropAnimationSideEffects),
+  "defaultScreenReaderInstructions": () => (/* binding */ defaultScreenReaderInstructions),
+  "getClientRect": () => (/* binding */ getClientRect),
+  "getFirstCollision": () => (/* binding */ getFirstCollision),
+  "getScrollableAncestors": () => (/* binding */ getScrollableAncestors),
+  "pointerWithin": () => (/* binding */ pointerWithin),
+  "rectIntersection": () => (/* binding */ rectIntersection),
+  "useDndContext": () => (/* binding */ useDndContext),
+  "useDndMonitor": () => (/* binding */ useDndMonitor),
+  "useDraggable": () => (/* binding */ useDraggable),
+  "useDroppable": () => (/* binding */ useDroppable),
+  "useSensor": () => (/* binding */ useSensor),
+  "useSensors": () => (/* binding */ useSensors)
+});
+
+// EXTERNAL MODULE: ./node_modules/react/index.js
+var react = __webpack_require__(7294);
+// EXTERNAL MODULE: ./node_modules/react-dom/index.js
+var react_dom = __webpack_require__(3935);
+// EXTERNAL MODULE: ./node_modules/@dnd-kit/utilities/dist/utilities.esm.js
+var utilities_esm = __webpack_require__(4285);
+;// CONCATENATED MODULE: ./node_modules/@dnd-kit/accessibility/dist/accessibility.esm.js
+
+
+const hiddenStyles = {
+  display: 'none'
+};
+function HiddenText(_ref) {
+  let {
+    id,
+    value
+  } = _ref;
+  return react.createElement("div", {
+    id: id,
+    style: hiddenStyles
+  }, value);
+}
+
+function LiveRegion(_ref) {
+  let {
+    id,
+    announcement,
+    ariaLiveType = "assertive"
+  } = _ref;
+  // Hide element visually but keep it readable by screen readers
+  const visuallyHidden = {
+    position: 'fixed',
+    width: 1,
+    height: 1,
+    margin: -1,
+    border: 0,
+    padding: 0,
+    overflow: 'hidden',
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(100%)',
+    whiteSpace: 'nowrap'
+  };
+  return react.createElement("div", {
+    id: id,
+    style: visuallyHidden,
+    role: "status",
+    "aria-live": ariaLiveType,
+    "aria-atomic": true
+  }, announcement);
+}
+
+function useAnnouncement() {
+  const [announcement, setAnnouncement] = (0,react.useState)('');
+  const announce = (0,react.useCallback)(value => {
+    if (value != null) {
+      setAnnouncement(value);
+    }
+  }, []);
+  return {
+    announce,
+    announcement
+  };
+}
+
+
+//# sourceMappingURL=accessibility.esm.js.map
+
+;// CONCATENATED MODULE: ./node_modules/@dnd-kit/core/dist/core.esm.js
+
+
+
+
+
+const DndMonitorContext = /*#__PURE__*/(0,react.createContext)(null);
+
+function useDndMonitor(listener) {
+  const registerListener = (0,react.useContext)(DndMonitorContext);
+  (0,react.useEffect)(() => {
+    if (!registerListener) {
+      throw new Error('useDndMonitor must be used within a children of <DndContext>');
+    }
+
+    const unsubscribe = registerListener(listener);
+    return unsubscribe;
+  }, [listener, registerListener]);
+}
+
+function useDndMonitorProvider() {
+  const [listeners] = (0,react.useState)(() => new Set());
+  const registerListener = (0,react.useCallback)(listener => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  }, [listeners]);
+  const dispatch = (0,react.useCallback)(_ref => {
+    let {
+      type,
+      event
+    } = _ref;
+    listeners.forEach(listener => {
+      var _listener$type;
+
+      return (_listener$type = listener[type]) == null ? void 0 : _listener$type.call(listener, event);
+    });
+  }, [listeners]);
+  return [dispatch, registerListener];
+}
+
+const defaultScreenReaderInstructions = {
+  draggable: "\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  "
+};
+const defaultAnnouncements = {
+  onDragStart(_ref) {
+    let {
+      active
+    } = _ref;
+    return "Picked up draggable item " + active.id + ".";
+  },
+
+  onDragOver(_ref2) {
+    let {
+      active,
+      over
+    } = _ref2;
+
+    if (over) {
+      return "Draggable item " + active.id + " was moved over droppable area " + over.id + ".";
+    }
+
+    return "Draggable item " + active.id + " is no longer over a droppable area.";
+  },
+
+  onDragEnd(_ref3) {
+    let {
+      active,
+      over
+    } = _ref3;
+
+    if (over) {
+      return "Draggable item " + active.id + " was dropped over droppable area " + over.id;
+    }
+
+    return "Draggable item " + active.id + " was dropped.";
+  },
+
+  onDragCancel(_ref4) {
+    let {
+      active
+    } = _ref4;
+    return "Dragging was cancelled. Draggable item " + active.id + " was dropped.";
+  }
+
+};
+
+function Accessibility(_ref) {
+  let {
+    announcements = defaultAnnouncements,
+    container,
+    hiddenTextDescribedById,
+    screenReaderInstructions = defaultScreenReaderInstructions
+  } = _ref;
+  const {
+    announce,
+    announcement
+  } = useAnnouncement();
+  const liveRegionId = (0,utilities_esm.useUniqueId)("DndLiveRegion");
+  const [mounted, setMounted] = (0,react.useState)(false);
+  (0,react.useEffect)(() => {
+    setMounted(true);
+  }, []);
+  useDndMonitor((0,react.useMemo)(() => ({
+    onDragStart(_ref2) {
+      let {
+        active
+      } = _ref2;
+      announce(announcements.onDragStart({
+        active
+      }));
+    },
+
+    onDragMove(_ref3) {
+      let {
+        active,
+        over
+      } = _ref3;
+
+      if (announcements.onDragMove) {
+        announce(announcements.onDragMove({
+          active,
+          over
+        }));
+      }
+    },
+
+    onDragOver(_ref4) {
+      let {
+        active,
+        over
+      } = _ref4;
+      announce(announcements.onDragOver({
+        active,
+        over
+      }));
+    },
+
+    onDragEnd(_ref5) {
+      let {
+        active,
+        over
+      } = _ref5;
+      announce(announcements.onDragEnd({
+        active,
+        over
+      }));
+    },
+
+    onDragCancel(_ref6) {
+      let {
+        active,
+        over
+      } = _ref6;
+      announce(announcements.onDragCancel({
+        active,
+        over
+      }));
+    }
+
+  }), [announce, announcements]));
+
+  if (!mounted) {
+    return null;
+  }
+
+  const markup = react.createElement(react.Fragment, null, react.createElement(HiddenText, {
+    id: hiddenTextDescribedById,
+    value: screenReaderInstructions.draggable
+  }), react.createElement(LiveRegion, {
+    id: liveRegionId,
+    announcement: announcement
+  }));
+  return container ? (0,react_dom.createPortal)(markup, container) : markup;
+}
+
+var Action;
+
+(function (Action) {
+  Action["DragStart"] = "dragStart";
+  Action["DragMove"] = "dragMove";
+  Action["DragEnd"] = "dragEnd";
+  Action["DragCancel"] = "dragCancel";
+  Action["DragOver"] = "dragOver";
+  Action["RegisterDroppable"] = "registerDroppable";
+  Action["SetDroppableDisabled"] = "setDroppableDisabled";
+  Action["UnregisterDroppable"] = "unregisterDroppable";
+})(Action || (Action = {}));
+
+function noop() {}
+
+function useSensor(sensor, options) {
+  return (0,react.useMemo)(() => ({
+    sensor,
+    options: options != null ? options : {}
+  }), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [sensor, options]);
+}
+
+function useSensors() {
+  for (var _len = arguments.length, sensors = new Array(_len), _key = 0; _key < _len; _key++) {
+    sensors[_key] = arguments[_key];
+  }
+
+  return (0,react.useMemo)(() => [...sensors].filter(sensor => sensor != null), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [...sensors]);
+}
+
+const defaultCoordinates = /*#__PURE__*/Object.freeze({
+  x: 0,
+  y: 0
+});
+
+/**
+ * Returns the distance between two points
+ */
+function distanceBetween(p1, p2) {
+  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+}
+
+function getRelativeTransformOrigin(event, rect) {
+  const eventCoordinates = (0,utilities_esm.getEventCoordinates)(event);
+
+  if (!eventCoordinates) {
+    return '0 0';
+  }
+
+  const transformOrigin = {
+    x: (eventCoordinates.x - rect.left) / rect.width * 100,
+    y: (eventCoordinates.y - rect.top) / rect.height * 100
+  };
+  return transformOrigin.x + "% " + transformOrigin.y + "%";
+}
+
+/**
+ * Sort collisions from smallest to greatest value
+ */
+function sortCollisionsAsc(_ref, _ref2) {
+  let {
+    data: {
+      value: a
+    }
+  } = _ref;
+  let {
+    data: {
+      value: b
+    }
+  } = _ref2;
+  return a - b;
+}
+/**
+ * Sort collisions from greatest to smallest value
+ */
+
+function sortCollisionsDesc(_ref3, _ref4) {
+  let {
+    data: {
+      value: a
+    }
+  } = _ref3;
+  let {
+    data: {
+      value: b
+    }
+  } = _ref4;
+  return b - a;
+}
+/**
+ * Returns the coordinates of the corners of a given rectangle:
+ * [TopLeft {x, y}, TopRight {x, y}, BottomLeft {x, y}, BottomRight {x, y}]
+ */
+
+function cornersOfRectangle(_ref5) {
+  let {
+    left,
+    top,
+    height,
+    width
+  } = _ref5;
+  return [{
+    x: left,
+    y: top
+  }, {
+    x: left + width,
+    y: top
+  }, {
+    x: left,
+    y: top + height
+  }, {
+    x: left + width,
+    y: top + height
+  }];
+}
+function getFirstCollision(collisions, property) {
+  if (!collisions || collisions.length === 0) {
+    return null;
+  }
+
+  const [firstCollision] = collisions;
+  return property ? firstCollision[property] : firstCollision;
+}
+
+/**
+ * Returns the coordinates of the center of a given ClientRect
+ */
+
+function centerOfRectangle(rect, left, top) {
+  if (left === void 0) {
+    left = rect.left;
+  }
+
+  if (top === void 0) {
+    top = rect.top;
+  }
+
+  return {
+    x: left + rect.width * 0.5,
+    y: top + rect.height * 0.5
+  };
+}
+/**
+ * Returns the closest rectangles from an array of rectangles to the center of a given
+ * rectangle.
+ */
+
+
+const closestCenter = _ref => {
+  let {
+    collisionRect,
+    droppableRects,
+    droppableContainers
+  } = _ref;
+  const centerRect = centerOfRectangle(collisionRect, collisionRect.left, collisionRect.top);
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect) {
+      const distBetween = distanceBetween(centerOfRectangle(rect), centerRect);
+      collisions.push({
+        id,
+        data: {
+          droppableContainer,
+          value: distBetween
+        }
+      });
+    }
+  }
+
+  return collisions.sort(sortCollisionsAsc);
+};
+
+/**
+ * Returns the closest rectangles from an array of rectangles to the corners of
+ * another rectangle.
+ */
+
+const closestCorners = _ref => {
+  let {
+    collisionRect,
+    droppableRects,
+    droppableContainers
+  } = _ref;
+  const corners = cornersOfRectangle(collisionRect);
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect) {
+      const rectCorners = cornersOfRectangle(rect);
+      const distances = corners.reduce((accumulator, corner, index) => {
+        return accumulator + distanceBetween(rectCorners[index], corner);
+      }, 0);
+      const effectiveDistance = Number((distances / 4).toFixed(4));
+      collisions.push({
+        id,
+        data: {
+          droppableContainer,
+          value: effectiveDistance
+        }
+      });
+    }
+  }
+
+  return collisions.sort(sortCollisionsAsc);
+};
+
+/**
+ * Returns the intersecting rectangle area between two rectangles
+ */
+
+function getIntersectionRatio(entry, target) {
+  const top = Math.max(target.top, entry.top);
+  const left = Math.max(target.left, entry.left);
+  const right = Math.min(target.left + target.width, entry.left + entry.width);
+  const bottom = Math.min(target.top + target.height, entry.top + entry.height);
+  const width = right - left;
+  const height = bottom - top;
+
+  if (left < right && top < bottom) {
+    const targetArea = target.width * target.height;
+    const entryArea = entry.width * entry.height;
+    const intersectionArea = width * height;
+    const intersectionRatio = intersectionArea / (targetArea + entryArea - intersectionArea);
+    return Number(intersectionRatio.toFixed(4));
+  } // Rectangles do not overlap, or overlap has an area of zero (edge/corner overlap)
+
+
+  return 0;
+}
+/**
+ * Returns the rectangles that has the greatest intersection area with a given
+ * rectangle in an array of rectangles.
+ */
+
+const rectIntersection = _ref => {
+  let {
+    collisionRect,
+    droppableRects,
+    droppableContainers
+  } = _ref;
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect) {
+      const intersectionRatio = getIntersectionRatio(rect, collisionRect);
+
+      if (intersectionRatio > 0) {
+        collisions.push({
+          id,
+          data: {
+            droppableContainer,
+            value: intersectionRatio
+          }
+        });
+      }
+    }
+  }
+
+  return collisions.sort(sortCollisionsDesc);
+};
+
+/**
+ * Check if a given point is contained within a bounding rectangle
+ */
+
+function isPointWithinRect(point, rect) {
+  const {
+    top,
+    left,
+    bottom,
+    right
+  } = rect;
+  return top <= point.y && point.y <= bottom && left <= point.x && point.x <= right;
+}
+/**
+ * Returns the rectangles that the pointer is hovering over
+ */
+
+
+const pointerWithin = _ref => {
+  let {
+    droppableContainers,
+    droppableRects,
+    pointerCoordinates
+  } = _ref;
+
+  if (!pointerCoordinates) {
+    return [];
+  }
+
+  const collisions = [];
+
+  for (const droppableContainer of droppableContainers) {
+    const {
+      id
+    } = droppableContainer;
+    const rect = droppableRects.get(id);
+
+    if (rect && isPointWithinRect(pointerCoordinates, rect)) {
+      /* There may be more than a single rectangle intersecting
+       * with the pointer coordinates. In order to sort the
+       * colliding rectangles, we measure the distance between
+       * the pointer and the corners of the intersecting rectangle
+       */
+      const corners = cornersOfRectangle(rect);
+      const distances = corners.reduce((accumulator, corner) => {
+        return accumulator + distanceBetween(pointerCoordinates, corner);
+      }, 0);
+      const effectiveDistance = Number((distances / 4).toFixed(4));
+      collisions.push({
+        id,
+        data: {
+          droppableContainer,
+          value: effectiveDistance
+        }
+      });
+    }
+  }
+
+  return collisions.sort(sortCollisionsAsc);
+};
+
+function adjustScale(transform, rect1, rect2) {
+  return { ...transform,
+    scaleX: rect1 && rect2 ? rect1.width / rect2.width : 1,
+    scaleY: rect1 && rect2 ? rect1.height / rect2.height : 1
+  };
+}
+
+function getRectDelta(rect1, rect2) {
+  return rect1 && rect2 ? {
+    x: rect1.left - rect2.left,
+    y: rect1.top - rect2.top
+  } : defaultCoordinates;
+}
+
+function createRectAdjustmentFn(modifier) {
+  return function adjustClientRect(rect) {
+    for (var _len = arguments.length, adjustments = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      adjustments[_key - 1] = arguments[_key];
+    }
+
+    return adjustments.reduce((acc, adjustment) => ({ ...acc,
+      top: acc.top + modifier * adjustment.y,
+      bottom: acc.bottom + modifier * adjustment.y,
+      left: acc.left + modifier * adjustment.x,
+      right: acc.right + modifier * adjustment.x
+    }), { ...rect
+    });
+  };
+}
+const getAdjustedRect = /*#__PURE__*/createRectAdjustmentFn(1);
+
+function parseTransform(transform) {
+  if (transform.startsWith('matrix3d(')) {
+    const transformArray = transform.slice(9, -1).split(/, /);
+    return {
+      x: +transformArray[12],
+      y: +transformArray[13],
+      scaleX: +transformArray[0],
+      scaleY: +transformArray[5]
+    };
+  } else if (transform.startsWith('matrix(')) {
+    const transformArray = transform.slice(7, -1).split(/, /);
+    return {
+      x: +transformArray[4],
+      y: +transformArray[5],
+      scaleX: +transformArray[0],
+      scaleY: +transformArray[3]
+    };
+  }
+
+  return null;
+}
+
+function inverseTransform(rect, transform, transformOrigin) {
+  const parsedTransform = parseTransform(transform);
+
+  if (!parsedTransform) {
+    return rect;
+  }
+
+  const {
+    scaleX,
+    scaleY,
+    x: translateX,
+    y: translateY
+  } = parsedTransform;
+  const x = rect.left - translateX - (1 - scaleX) * parseFloat(transformOrigin);
+  const y = rect.top - translateY - (1 - scaleY) * parseFloat(transformOrigin.slice(transformOrigin.indexOf(' ') + 1));
+  const w = scaleX ? rect.width / scaleX : rect.width;
+  const h = scaleY ? rect.height / scaleY : rect.height;
+  return {
+    width: w,
+    height: h,
+    top: y,
+    right: x + w,
+    bottom: y + h,
+    left: x
+  };
+}
+
+const defaultOptions = {
+  ignoreTransform: false
+};
+/**
+ * Returns the bounding client rect of an element relative to the viewport.
+ */
+
+function getClientRect(element, options) {
+  if (options === void 0) {
+    options = defaultOptions;
+  }
+
+  let rect = element.getBoundingClientRect();
+
+  if (options.ignoreTransform) {
+    const {
+      transform,
+      transformOrigin
+    } = (0,utilities_esm.getWindow)(element).getComputedStyle(element);
+
+    if (transform) {
+      rect = inverseTransform(rect, transform, transformOrigin);
+    }
+  }
+
+  const {
+    top,
+    left,
+    width,
+    height,
+    bottom,
+    right
+  } = rect;
+  return {
+    top,
+    left,
+    width,
+    height,
+    bottom,
+    right
+  };
+}
+/**
+ * Returns the bounding client rect of an element relative to the viewport.
+ *
+ * @remarks
+ * The ClientRect returned by this method does not take into account transforms
+ * applied to the element it measures.
+ *
+ */
+
+function getTransformAgnosticClientRect(element) {
+  return getClientRect(element, {
+    ignoreTransform: true
+  });
+}
+
+function getWindowClientRect(element) {
+  const width = element.innerWidth;
+  const height = element.innerHeight;
+  return {
+    top: 0,
+    left: 0,
+    right: width,
+    bottom: height,
+    width,
+    height
+  };
+}
+
+function isFixed(node, computedStyle) {
+  if (computedStyle === void 0) {
+    computedStyle = (0,utilities_esm.getWindow)(node).getComputedStyle(node);
+  }
+
+  return computedStyle.position === 'fixed';
+}
+
+function isScrollable(element, computedStyle) {
+  if (computedStyle === void 0) {
+    computedStyle = (0,utilities_esm.getWindow)(element).getComputedStyle(element);
+  }
+
+  const overflowRegex = /(auto|scroll|overlay)/;
+  const properties = ['overflow', 'overflowX', 'overflowY'];
+  return properties.some(property => {
+    const value = computedStyle[property];
+    return typeof value === 'string' ? overflowRegex.test(value) : false;
+  });
+}
+
+function getScrollableAncestors(element, limit) {
+  const scrollParents = [];
+
+  function findScrollableAncestors(node) {
+    if (limit != null && scrollParents.length >= limit) {
+      return scrollParents;
+    }
+
+    if (!node) {
+      return scrollParents;
+    }
+
+    if ((0,utilities_esm.isDocument)(node) && node.scrollingElement != null && !scrollParents.includes(node.scrollingElement)) {
+      scrollParents.push(node.scrollingElement);
+      return scrollParents;
+    }
+
+    if (!(0,utilities_esm.isHTMLElement)(node) || (0,utilities_esm.isSVGElement)(node)) {
+      return scrollParents;
+    }
+
+    if (scrollParents.includes(node)) {
+      return scrollParents;
+    }
+
+    const computedStyle = (0,utilities_esm.getWindow)(element).getComputedStyle(node);
+
+    if (node !== element) {
+      if (isScrollable(node, computedStyle)) {
+        scrollParents.push(node);
+      }
+    }
+
+    if (isFixed(node, computedStyle)) {
+      return scrollParents;
+    }
+
+    return findScrollableAncestors(node.parentNode);
+  }
+
+  if (!element) {
+    return scrollParents;
+  }
+
+  return findScrollableAncestors(element);
+}
+function getFirstScrollableAncestor(node) {
+  const [firstScrollableAncestor] = getScrollableAncestors(node, 1);
+  return firstScrollableAncestor != null ? firstScrollableAncestor : null;
+}
+
+function getScrollableElement(element) {
+  if (!utilities_esm.canUseDOM || !element) {
+    return null;
+  }
+
+  if ((0,utilities_esm.isWindow)(element)) {
+    return element;
+  }
+
+  if (!(0,utilities_esm.isNode)(element)) {
+    return null;
+  }
+
+  if ((0,utilities_esm.isDocument)(element) || element === (0,utilities_esm.getOwnerDocument)(element).scrollingElement) {
+    return window;
+  }
+
+  if ((0,utilities_esm.isHTMLElement)(element)) {
+    return element;
+  }
+
+  return null;
+}
+
+function getScrollXCoordinate(element) {
+  if ((0,utilities_esm.isWindow)(element)) {
+    return element.scrollX;
+  }
+
+  return element.scrollLeft;
+}
+function getScrollYCoordinate(element) {
+  if ((0,utilities_esm.isWindow)(element)) {
+    return element.scrollY;
+  }
+
+  return element.scrollTop;
+}
+function getScrollCoordinates(element) {
+  return {
+    x: getScrollXCoordinate(element),
+    y: getScrollYCoordinate(element)
+  };
+}
+
+var Direction;
+
+(function (Direction) {
+  Direction[Direction["Forward"] = 1] = "Forward";
+  Direction[Direction["Backward"] = -1] = "Backward";
+})(Direction || (Direction = {}));
+
+function isDocumentScrollingElement(element) {
+  if (!utilities_esm.canUseDOM || !element) {
+    return false;
+  }
+
+  return element === document.scrollingElement;
+}
+
+function getScrollPosition(scrollingContainer) {
+  const minScroll = {
+    x: 0,
+    y: 0
+  };
+  const dimensions = isDocumentScrollingElement(scrollingContainer) ? {
+    height: window.innerHeight,
+    width: window.innerWidth
+  } : {
+    height: scrollingContainer.clientHeight,
+    width: scrollingContainer.clientWidth
+  };
+  const maxScroll = {
+    x: scrollingContainer.scrollWidth - dimensions.width,
+    y: scrollingContainer.scrollHeight - dimensions.height
+  };
+  const isTop = scrollingContainer.scrollTop <= minScroll.y;
+  const isLeft = scrollingContainer.scrollLeft <= minScroll.x;
+  const isBottom = scrollingContainer.scrollTop >= maxScroll.y;
+  const isRight = scrollingContainer.scrollLeft >= maxScroll.x;
+  return {
+    isTop,
+    isLeft,
+    isBottom,
+    isRight,
+    maxScroll,
+    minScroll
+  };
+}
+
+const defaultThreshold = {
+  x: 0.2,
+  y: 0.2
+};
+function getScrollDirectionAndSpeed(scrollContainer, scrollContainerRect, _ref, acceleration, thresholdPercentage) {
+  let {
+    top,
+    left,
+    right,
+    bottom
+  } = _ref;
+
+  if (acceleration === void 0) {
+    acceleration = 10;
+  }
+
+  if (thresholdPercentage === void 0) {
+    thresholdPercentage = defaultThreshold;
+  }
+
+  const {
+    isTop,
+    isBottom,
+    isLeft,
+    isRight
+  } = getScrollPosition(scrollContainer);
+  const direction = {
+    x: 0,
+    y: 0
+  };
+  const speed = {
+    x: 0,
+    y: 0
+  };
+  const threshold = {
+    height: scrollContainerRect.height * thresholdPercentage.y,
+    width: scrollContainerRect.width * thresholdPercentage.x
+  };
+
+  if (!isTop && top <= scrollContainerRect.top + threshold.height) {
+    // Scroll Up
+    direction.y = Direction.Backward;
+    speed.y = acceleration * Math.abs((scrollContainerRect.top + threshold.height - top) / threshold.height);
+  } else if (!isBottom && bottom >= scrollContainerRect.bottom - threshold.height) {
+    // Scroll Down
+    direction.y = Direction.Forward;
+    speed.y = acceleration * Math.abs((scrollContainerRect.bottom - threshold.height - bottom) / threshold.height);
+  }
+
+  if (!isRight && right >= scrollContainerRect.right - threshold.width) {
+    // Scroll Right
+    direction.x = Direction.Forward;
+    speed.x = acceleration * Math.abs((scrollContainerRect.right - threshold.width - right) / threshold.width);
+  } else if (!isLeft && left <= scrollContainerRect.left + threshold.width) {
+    // Scroll Left
+    direction.x = Direction.Backward;
+    speed.x = acceleration * Math.abs((scrollContainerRect.left + threshold.width - left) / threshold.width);
+  }
+
+  return {
+    direction,
+    speed
+  };
+}
+
+function getScrollElementRect(element) {
+  if (element === document.scrollingElement) {
+    const {
+      innerWidth,
+      innerHeight
+    } = window;
+    return {
+      top: 0,
+      left: 0,
+      right: innerWidth,
+      bottom: innerHeight,
+      width: innerWidth,
+      height: innerHeight
+    };
+  }
+
+  const {
+    top,
+    left,
+    right,
+    bottom
+  } = element.getBoundingClientRect();
+  return {
+    top,
+    left,
+    right,
+    bottom,
+    width: element.clientWidth,
+    height: element.clientHeight
+  };
+}
+
+function getScrollOffsets(scrollableAncestors) {
+  return scrollableAncestors.reduce((acc, node) => {
+    return (0,utilities_esm.add)(acc, getScrollCoordinates(node));
+  }, defaultCoordinates);
+}
+function getScrollXOffset(scrollableAncestors) {
+  return scrollableAncestors.reduce((acc, node) => {
+    return acc + getScrollXCoordinate(node);
+  }, 0);
+}
+function getScrollYOffset(scrollableAncestors) {
+  return scrollableAncestors.reduce((acc, node) => {
+    return acc + getScrollYCoordinate(node);
+  }, 0);
+}
+
+function scrollIntoViewIfNeeded(element, measure) {
+  if (measure === void 0) {
+    measure = getClientRect;
+  }
+
+  if (!element) {
+    return;
+  }
+
+  const {
+    top,
+    left,
+    bottom,
+    right
+  } = measure(element);
+  const firstScrollableAncestor = getFirstScrollableAncestor(element);
+
+  if (!firstScrollableAncestor) {
+    return;
+  }
+
+  if (bottom <= 0 || right <= 0 || top >= window.innerHeight || left >= window.innerWidth) {
+    element.scrollIntoView({
+      block: 'center',
+      inline: 'center'
+    });
+  }
+}
+
+const properties = [['x', ['left', 'right'], getScrollXOffset], ['y', ['top', 'bottom'], getScrollYOffset]];
+class Rect {
+  constructor(rect, element) {
+    this.rect = void 0;
+    this.width = void 0;
+    this.height = void 0;
+    this.top = void 0;
+    this.bottom = void 0;
+    this.right = void 0;
+    this.left = void 0;
+    const scrollableAncestors = getScrollableAncestors(element);
+    const scrollOffsets = getScrollOffsets(scrollableAncestors);
+    this.rect = { ...rect
+    };
+    this.width = rect.width;
+    this.height = rect.height;
+
+    for (const [axis, keys, getScrollOffset] of properties) {
+      for (const key of keys) {
+        Object.defineProperty(this, key, {
+          get: () => {
+            const currentOffsets = getScrollOffset(scrollableAncestors);
+            const scrollOffsetsDeltla = scrollOffsets[axis] - currentOffsets;
+            return this.rect[key] + scrollOffsetsDeltla;
+          },
+          enumerable: true
+        });
+      }
+    }
+
+    Object.defineProperty(this, 'rect', {
+      enumerable: false
+    });
+  }
+
+}
+
+class Listeners {
+  constructor(target) {
+    this.target = void 0;
+    this.listeners = [];
+
+    this.removeAll = () => {
+      this.listeners.forEach(listener => {
+        var _this$target;
+
+        return (_this$target = this.target) == null ? void 0 : _this$target.removeEventListener(...listener);
+      });
+    };
+
+    this.target = target;
+  }
+
+  add(eventName, handler, options) {
+    var _this$target2;
+
+    (_this$target2 = this.target) == null ? void 0 : _this$target2.addEventListener(eventName, handler, options);
+    this.listeners.push([eventName, handler, options]);
+  }
+
+}
+
+function getEventListenerTarget(target) {
+  // If the `event.target` element is removed from the document events will still be targeted
+  // at it, and hence won't always bubble up to the window or document anymore.
+  // If there is any risk of an element being removed while it is being dragged,
+  // the best practice is to attach the event listeners directly to the target.
+  // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+  const {
+    EventTarget
+  } = (0,utilities_esm.getWindow)(target);
+  return target instanceof EventTarget ? target : (0,utilities_esm.getOwnerDocument)(target);
+}
+
+function hasExceededDistance(delta, measurement) {
+  const dx = Math.abs(delta.x);
+  const dy = Math.abs(delta.y);
+
+  if (typeof measurement === 'number') {
+    return Math.sqrt(dx ** 2 + dy ** 2) > measurement;
+  }
+
+  if ('x' in measurement && 'y' in measurement) {
+    return dx > measurement.x && dy > measurement.y;
+  }
+
+  if ('x' in measurement) {
+    return dx > measurement.x;
+  }
+
+  if ('y' in measurement) {
+    return dy > measurement.y;
+  }
+
+  return false;
+}
+
+var EventName;
+
+(function (EventName) {
+  EventName["Click"] = "click";
+  EventName["DragStart"] = "dragstart";
+  EventName["Keydown"] = "keydown";
+  EventName["ContextMenu"] = "contextmenu";
+  EventName["Resize"] = "resize";
+  EventName["SelectionChange"] = "selectionchange";
+  EventName["VisibilityChange"] = "visibilitychange";
+})(EventName || (EventName = {}));
+
+function preventDefault(event) {
+  event.preventDefault();
+}
+function stopPropagation(event) {
+  event.stopPropagation();
+}
+
+var KeyboardCode;
+
+(function (KeyboardCode) {
+  KeyboardCode["Space"] = "Space";
+  KeyboardCode["Down"] = "ArrowDown";
+  KeyboardCode["Right"] = "ArrowRight";
+  KeyboardCode["Left"] = "ArrowLeft";
+  KeyboardCode["Up"] = "ArrowUp";
+  KeyboardCode["Esc"] = "Escape";
+  KeyboardCode["Enter"] = "Enter";
+})(KeyboardCode || (KeyboardCode = {}));
+
+const defaultKeyboardCodes = {
+  start: [KeyboardCode.Space, KeyboardCode.Enter],
+  cancel: [KeyboardCode.Esc],
+  end: [KeyboardCode.Space, KeyboardCode.Enter]
+};
+const defaultKeyboardCoordinateGetter = (event, _ref) => {
+  let {
+    currentCoordinates
+  } = _ref;
+
+  switch (event.code) {
+    case KeyboardCode.Right:
+      return { ...currentCoordinates,
+        x: currentCoordinates.x + 25
+      };
+
+    case KeyboardCode.Left:
+      return { ...currentCoordinates,
+        x: currentCoordinates.x - 25
+      };
+
+    case KeyboardCode.Down:
+      return { ...currentCoordinates,
+        y: currentCoordinates.y + 25
+      };
+
+    case KeyboardCode.Up:
+      return { ...currentCoordinates,
+        y: currentCoordinates.y - 25
+      };
+  }
+
+  return undefined;
+};
+
+class KeyboardSensor {
+  constructor(props) {
+    this.props = void 0;
+    this.autoScrollEnabled = false;
+    this.referenceCoordinates = void 0;
+    this.listeners = void 0;
+    this.windowListeners = void 0;
+    this.props = props;
+    const {
+      event: {
+        target
+      }
+    } = props;
+    this.props = props;
+    this.listeners = new Listeners((0,utilities_esm.getOwnerDocument)(target));
+    this.windowListeners = new Listeners((0,utilities_esm.getWindow)(target));
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.attach();
+  }
+
+  attach() {
+    this.handleStart();
+    this.windowListeners.add(EventName.Resize, this.handleCancel);
+    this.windowListeners.add(EventName.VisibilityChange, this.handleCancel);
+    setTimeout(() => this.listeners.add(EventName.Keydown, this.handleKeyDown));
+  }
+
+  handleStart() {
+    const {
+      activeNode,
+      onStart
+    } = this.props;
+    const node = activeNode.node.current;
+
+    if (node) {
+      scrollIntoViewIfNeeded(node);
+    }
+
+    onStart(defaultCoordinates);
+  }
+
+  handleKeyDown(event) {
+    if ((0,utilities_esm.isKeyboardEvent)(event)) {
+      const {
+        active,
+        context,
+        options
+      } = this.props;
+      const {
+        keyboardCodes = defaultKeyboardCodes,
+        coordinateGetter = defaultKeyboardCoordinateGetter,
+        scrollBehavior = 'smooth'
+      } = options;
+      const {
+        code
+      } = event;
+
+      if (keyboardCodes.end.includes(code)) {
+        this.handleEnd(event);
+        return;
+      }
+
+      if (keyboardCodes.cancel.includes(code)) {
+        this.handleCancel(event);
+        return;
+      }
+
+      const {
+        collisionRect
+      } = context.current;
+      const currentCoordinates = collisionRect ? {
+        x: collisionRect.left,
+        y: collisionRect.top
+      } : defaultCoordinates;
+
+      if (!this.referenceCoordinates) {
+        this.referenceCoordinates = currentCoordinates;
+      }
+
+      const newCoordinates = coordinateGetter(event, {
+        active,
+        context: context.current,
+        currentCoordinates
+      });
+
+      if (newCoordinates) {
+        const coordinatesDelta = (0,utilities_esm.subtract)(newCoordinates, currentCoordinates);
+        const scrollDelta = {
+          x: 0,
+          y: 0
+        };
+        const {
+          scrollableAncestors
+        } = context.current;
+
+        for (const scrollContainer of scrollableAncestors) {
+          const direction = event.code;
+          const {
+            isTop,
+            isRight,
+            isLeft,
+            isBottom,
+            maxScroll,
+            minScroll
+          } = getScrollPosition(scrollContainer);
+          const scrollElementRect = getScrollElementRect(scrollContainer);
+          const clampedCoordinates = {
+            x: Math.min(direction === KeyboardCode.Right ? scrollElementRect.right - scrollElementRect.width / 2 : scrollElementRect.right, Math.max(direction === KeyboardCode.Right ? scrollElementRect.left : scrollElementRect.left + scrollElementRect.width / 2, newCoordinates.x)),
+            y: Math.min(direction === KeyboardCode.Down ? scrollElementRect.bottom - scrollElementRect.height / 2 : scrollElementRect.bottom, Math.max(direction === KeyboardCode.Down ? scrollElementRect.top : scrollElementRect.top + scrollElementRect.height / 2, newCoordinates.y))
+          };
+          const canScrollX = direction === KeyboardCode.Right && !isRight || direction === KeyboardCode.Left && !isLeft;
+          const canScrollY = direction === KeyboardCode.Down && !isBottom || direction === KeyboardCode.Up && !isTop;
+
+          if (canScrollX && clampedCoordinates.x !== newCoordinates.x) {
+            const newScrollCoordinates = scrollContainer.scrollLeft + coordinatesDelta.x;
+            const canScrollToNewCoordinates = direction === KeyboardCode.Right && newScrollCoordinates <= maxScroll.x || direction === KeyboardCode.Left && newScrollCoordinates >= minScroll.x;
+
+            if (canScrollToNewCoordinates && !coordinatesDelta.y) {
+              // We don't need to update coordinates, the scroll adjustment alone will trigger
+              // logic to auto-detect the new container we are over
+              scrollContainer.scrollTo({
+                left: newScrollCoordinates,
+                behavior: scrollBehavior
+              });
+              return;
+            }
+
+            if (canScrollToNewCoordinates) {
+              scrollDelta.x = scrollContainer.scrollLeft - newScrollCoordinates;
+            } else {
+              scrollDelta.x = direction === KeyboardCode.Right ? scrollContainer.scrollLeft - maxScroll.x : scrollContainer.scrollLeft - minScroll.x;
+            }
+
+            if (scrollDelta.x) {
+              scrollContainer.scrollBy({
+                left: -scrollDelta.x,
+                behavior: scrollBehavior
+              });
+            }
+
+            break;
+          } else if (canScrollY && clampedCoordinates.y !== newCoordinates.y) {
+            const newScrollCoordinates = scrollContainer.scrollTop + coordinatesDelta.y;
+            const canScrollToNewCoordinates = direction === KeyboardCode.Down && newScrollCoordinates <= maxScroll.y || direction === KeyboardCode.Up && newScrollCoordinates >= minScroll.y;
+
+            if (canScrollToNewCoordinates && !coordinatesDelta.x) {
+              // We don't need to update coordinates, the scroll adjustment alone will trigger
+              // logic to auto-detect the new container we are over
+              scrollContainer.scrollTo({
+                top: newScrollCoordinates,
+                behavior: scrollBehavior
+              });
+              return;
+            }
+
+            if (canScrollToNewCoordinates) {
+              scrollDelta.y = scrollContainer.scrollTop - newScrollCoordinates;
+            } else {
+              scrollDelta.y = direction === KeyboardCode.Down ? scrollContainer.scrollTop - maxScroll.y : scrollContainer.scrollTop - minScroll.y;
+            }
+
+            if (scrollDelta.y) {
+              scrollContainer.scrollBy({
+                top: -scrollDelta.y,
+                behavior: scrollBehavior
+              });
+            }
+
+            break;
+          }
+        }
+
+        this.handleMove(event, (0,utilities_esm.add)((0,utilities_esm.subtract)(newCoordinates, this.referenceCoordinates), scrollDelta));
+      }
+    }
+  }
+
+  handleMove(event, coordinates) {
+    const {
+      onMove
+    } = this.props;
+    event.preventDefault();
+    onMove(coordinates);
+  }
+
+  handleEnd(event) {
+    const {
+      onEnd
+    } = this.props;
+    event.preventDefault();
+    this.detach();
+    onEnd();
+  }
+
+  handleCancel(event) {
+    const {
+      onCancel
+    } = this.props;
+    event.preventDefault();
+    this.detach();
+    onCancel();
+  }
+
+  detach() {
+    this.listeners.removeAll();
+    this.windowListeners.removeAll();
+  }
+
+}
+KeyboardSensor.activators = [{
+  eventName: 'onKeyDown',
+  handler: (event, _ref, _ref2) => {
+    let {
+      keyboardCodes = defaultKeyboardCodes,
+      onActivation
+    } = _ref;
+    let {
+      active
+    } = _ref2;
+    const {
+      code
+    } = event.nativeEvent;
+
+    if (keyboardCodes.start.includes(code)) {
+      const activator = active.activatorNode.current;
+
+      if (activator && event.target !== activator) {
+        return false;
+      }
+
+      event.preventDefault();
+      onActivation == null ? void 0 : onActivation({
+        event: event.nativeEvent
+      });
+      return true;
+    }
+
+    return false;
+  }
+}];
+
+function isDistanceConstraint(constraint) {
+  return Boolean(constraint && 'distance' in constraint);
+}
+
+function isDelayConstraint(constraint) {
+  return Boolean(constraint && 'delay' in constraint);
+}
+
+class AbstractPointerSensor {
+  constructor(props, events, listenerTarget) {
+    var _getEventCoordinates;
+
+    if (listenerTarget === void 0) {
+      listenerTarget = getEventListenerTarget(props.event.target);
+    }
+
+    this.props = void 0;
+    this.events = void 0;
+    this.autoScrollEnabled = true;
+    this.document = void 0;
+    this.activated = false;
+    this.initialCoordinates = void 0;
+    this.timeoutId = null;
+    this.listeners = void 0;
+    this.documentListeners = void 0;
+    this.windowListeners = void 0;
+    this.props = props;
+    this.events = events;
+    const {
+      event
+    } = props;
+    const {
+      target
+    } = event;
+    this.props = props;
+    this.events = events;
+    this.document = (0,utilities_esm.getOwnerDocument)(target);
+    this.documentListeners = new Listeners(this.document);
+    this.listeners = new Listeners(listenerTarget);
+    this.windowListeners = new Listeners((0,utilities_esm.getWindow)(target));
+    this.initialCoordinates = (_getEventCoordinates = (0,utilities_esm.getEventCoordinates)(event)) != null ? _getEventCoordinates : defaultCoordinates;
+    this.handleStart = this.handleStart.bind(this);
+    this.handleMove = this.handleMove.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleKeydown = this.handleKeydown.bind(this);
+    this.removeTextSelection = this.removeTextSelection.bind(this);
+    this.attach();
+  }
+
+  attach() {
+    const {
+      events,
+      props: {
+        options: {
+          activationConstraint,
+          bypassActivationConstraint
+        }
+      }
+    } = this;
+    this.listeners.add(events.move.name, this.handleMove, {
+      passive: false
+    });
+    this.listeners.add(events.end.name, this.handleEnd);
+    this.windowListeners.add(EventName.Resize, this.handleCancel);
+    this.windowListeners.add(EventName.DragStart, preventDefault);
+    this.windowListeners.add(EventName.VisibilityChange, this.handleCancel);
+    this.windowListeners.add(EventName.ContextMenu, preventDefault);
+    this.documentListeners.add(EventName.Keydown, this.handleKeydown);
+
+    if (activationConstraint) {
+      if (bypassActivationConstraint != null && bypassActivationConstraint({
+        event: this.props.event,
+        activeNode: this.props.activeNode,
+        options: this.props.options
+      })) {
+        return this.handleStart();
+      }
+
+      if (isDelayConstraint(activationConstraint)) {
+        this.timeoutId = setTimeout(this.handleStart, activationConstraint.delay);
+        return;
+      }
+
+      if (isDistanceConstraint(activationConstraint)) {
+        return;
+      }
+    }
+
+    this.handleStart();
+  }
+
+  detach() {
+    this.listeners.removeAll();
+    this.windowListeners.removeAll(); // Wait until the next event loop before removing document listeners
+    // This is necessary because we listen for `click` and `selection` events on the document
+
+    setTimeout(this.documentListeners.removeAll, 50);
+
+    if (this.timeoutId !== null) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+  }
+
+  handleStart() {
+    const {
+      initialCoordinates
+    } = this;
+    const {
+      onStart
+    } = this.props;
+
+    if (initialCoordinates) {
+      this.activated = true; // Stop propagation of click events once activation constraints are met
+
+      this.documentListeners.add(EventName.Click, stopPropagation, {
+        capture: true
+      }); // Remove any text selection from the document
+
+      this.removeTextSelection(); // Prevent further text selection while dragging
+
+      this.documentListeners.add(EventName.SelectionChange, this.removeTextSelection);
+      onStart(initialCoordinates);
+    }
+  }
+
+  handleMove(event) {
+    var _getEventCoordinates2;
+
+    const {
+      activated,
+      initialCoordinates,
+      props
+    } = this;
+    const {
+      onMove,
+      options: {
+        activationConstraint
+      }
+    } = props;
+
+    if (!initialCoordinates) {
+      return;
+    }
+
+    const coordinates = (_getEventCoordinates2 = (0,utilities_esm.getEventCoordinates)(event)) != null ? _getEventCoordinates2 : defaultCoordinates;
+    const delta = (0,utilities_esm.subtract)(initialCoordinates, coordinates); // Constraint validation
+
+    if (!activated && activationConstraint) {
+      if (isDistanceConstraint(activationConstraint)) {
+        if (activationConstraint.tolerance != null && hasExceededDistance(delta, activationConstraint.tolerance)) {
+          return this.handleCancel();
+        }
+
+        if (hasExceededDistance(delta, activationConstraint.distance)) {
+          return this.handleStart();
+        }
+      }
+
+      if (isDelayConstraint(activationConstraint)) {
+        if (hasExceededDistance(delta, activationConstraint.tolerance)) {
+          return this.handleCancel();
+        }
+      }
+
+      return;
+    }
+
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
+    onMove(coordinates);
+  }
+
+  handleEnd() {
+    const {
+      onEnd
+    } = this.props;
+    this.detach();
+    onEnd();
+  }
+
+  handleCancel() {
+    const {
+      onCancel
+    } = this.props;
+    this.detach();
+    onCancel();
+  }
+
+  handleKeydown(event) {
+    if (event.code === KeyboardCode.Esc) {
+      this.handleCancel();
+    }
+  }
+
+  removeTextSelection() {
+    var _this$document$getSel;
+
+    (_this$document$getSel = this.document.getSelection()) == null ? void 0 : _this$document$getSel.removeAllRanges();
+  }
+
+}
+
+const events = {
+  move: {
+    name: 'pointermove'
+  },
+  end: {
+    name: 'pointerup'
+  }
+};
+class PointerSensor extends AbstractPointerSensor {
+  constructor(props) {
+    const {
+      event
+    } = props; // Pointer events stop firing if the target is unmounted while dragging
+    // Therefore we attach listeners to the owner document instead
+
+    const listenerTarget = (0,utilities_esm.getOwnerDocument)(event.target);
+    super(props, events, listenerTarget);
+  }
+
+}
+PointerSensor.activators = [{
+  eventName: 'onPointerDown',
+  handler: (_ref, _ref2) => {
+    let {
+      nativeEvent: event
+    } = _ref;
+    let {
+      onActivation
+    } = _ref2;
+
+    if (!event.isPrimary || event.button !== 0) {
+      return false;
+    }
+
+    onActivation == null ? void 0 : onActivation({
+      event
+    });
+    return true;
+  }
+}];
+
+const events$1 = {
+  move: {
+    name: 'mousemove'
+  },
+  end: {
+    name: 'mouseup'
+  }
+};
+var MouseButton;
+
+(function (MouseButton) {
+  MouseButton[MouseButton["RightClick"] = 2] = "RightClick";
+})(MouseButton || (MouseButton = {}));
+
+class MouseSensor extends AbstractPointerSensor {
+  constructor(props) {
+    super(props, events$1, (0,utilities_esm.getOwnerDocument)(props.event.target));
+  }
+
+}
+MouseSensor.activators = [{
+  eventName: 'onMouseDown',
+  handler: (_ref, _ref2) => {
+    let {
+      nativeEvent: event
+    } = _ref;
+    let {
+      onActivation
+    } = _ref2;
+
+    if (event.button === MouseButton.RightClick) {
+      return false;
+    }
+
+    onActivation == null ? void 0 : onActivation({
+      event
+    });
+    return true;
+  }
+}];
+
+const events$2 = {
+  move: {
+    name: 'touchmove'
+  },
+  end: {
+    name: 'touchend'
+  }
+};
+class TouchSensor extends AbstractPointerSensor {
+  constructor(props) {
+    super(props, events$2);
+  }
+
+  static setup() {
+    // Adding a non-capture and non-passive `touchmove` listener in order
+    // to force `event.preventDefault()` calls to work in dynamically added
+    // touchmove event handlers. This is required for iOS Safari.
+    window.addEventListener(events$2.move.name, noop, {
+      capture: false,
+      passive: false
+    });
+    return function teardown() {
+      window.removeEventListener(events$2.move.name, noop);
+    }; // We create a new handler because the teardown function of another sensor
+    // could remove our event listener if we use a referentially equal listener.
+
+    function noop() {}
+  }
+
+}
+TouchSensor.activators = [{
+  eventName: 'onTouchStart',
+  handler: (_ref, _ref2) => {
+    let {
+      nativeEvent: event
+    } = _ref;
+    let {
+      onActivation
+    } = _ref2;
+    const {
+      touches
+    } = event;
+
+    if (touches.length > 1) {
+      return false;
+    }
+
+    onActivation == null ? void 0 : onActivation({
+      event
+    });
+    return true;
+  }
+}];
+
+var AutoScrollActivator;
+
+(function (AutoScrollActivator) {
+  AutoScrollActivator[AutoScrollActivator["Pointer"] = 0] = "Pointer";
+  AutoScrollActivator[AutoScrollActivator["DraggableRect"] = 1] = "DraggableRect";
+})(AutoScrollActivator || (AutoScrollActivator = {}));
+
+var TraversalOrder;
+
+(function (TraversalOrder) {
+  TraversalOrder[TraversalOrder["TreeOrder"] = 0] = "TreeOrder";
+  TraversalOrder[TraversalOrder["ReversedTreeOrder"] = 1] = "ReversedTreeOrder";
+})(TraversalOrder || (TraversalOrder = {}));
+
+function useAutoScroller(_ref) {
+  let {
+    acceleration,
+    activator = AutoScrollActivator.Pointer,
+    canScroll,
+    draggingRect,
+    enabled,
+    interval = 5,
+    order = TraversalOrder.TreeOrder,
+    pointerCoordinates,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    delta,
+    threshold
+  } = _ref;
+  const scrollIntent = useScrollIntent({
+    delta,
+    disabled: !enabled
+  });
+  const [setAutoScrollInterval, clearAutoScrollInterval] = (0,utilities_esm.useInterval)();
+  const scrollSpeed = (0,react.useRef)({
+    x: 0,
+    y: 0
+  });
+  const scrollDirection = (0,react.useRef)({
+    x: 0,
+    y: 0
+  });
+  const rect = (0,react.useMemo)(() => {
+    switch (activator) {
+      case AutoScrollActivator.Pointer:
+        return pointerCoordinates ? {
+          top: pointerCoordinates.y,
+          bottom: pointerCoordinates.y,
+          left: pointerCoordinates.x,
+          right: pointerCoordinates.x
+        } : null;
+
+      case AutoScrollActivator.DraggableRect:
+        return draggingRect;
+    }
+  }, [activator, draggingRect, pointerCoordinates]);
+  const scrollContainerRef = (0,react.useRef)(null);
+  const autoScroll = (0,react.useCallback)(() => {
+    const scrollContainer = scrollContainerRef.current;
+
+    if (!scrollContainer) {
+      return;
+    }
+
+    const scrollLeft = scrollSpeed.current.x * scrollDirection.current.x;
+    const scrollTop = scrollSpeed.current.y * scrollDirection.current.y;
+    scrollContainer.scrollBy(scrollLeft, scrollTop);
+  }, []);
+  const sortedScrollableAncestors = (0,react.useMemo)(() => order === TraversalOrder.TreeOrder ? [...scrollableAncestors].reverse() : scrollableAncestors, [order, scrollableAncestors]);
+  (0,react.useEffect)(() => {
+    if (!enabled || !scrollableAncestors.length || !rect) {
+      clearAutoScrollInterval();
+      return;
+    }
+
+    for (const scrollContainer of sortedScrollableAncestors) {
+      if ((canScroll == null ? void 0 : canScroll(scrollContainer)) === false) {
+        continue;
+      }
+
+      const index = scrollableAncestors.indexOf(scrollContainer);
+      const scrollContainerRect = scrollableAncestorRects[index];
+
+      if (!scrollContainerRect) {
+        continue;
+      }
+
+      const {
+        direction,
+        speed
+      } = getScrollDirectionAndSpeed(scrollContainer, scrollContainerRect, rect, acceleration, threshold);
+
+      for (const axis of ['x', 'y']) {
+        if (!scrollIntent[axis][direction[axis]]) {
+          speed[axis] = 0;
+          direction[axis] = 0;
+        }
+      }
+
+      if (speed.x > 0 || speed.y > 0) {
+        clearAutoScrollInterval();
+        scrollContainerRef.current = scrollContainer;
+        setAutoScrollInterval(autoScroll, interval);
+        scrollSpeed.current = speed;
+        scrollDirection.current = direction;
+        return;
+      }
+    }
+
+    scrollSpeed.current = {
+      x: 0,
+      y: 0
+    };
+    scrollDirection.current = {
+      x: 0,
+      y: 0
+    };
+    clearAutoScrollInterval();
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [acceleration, autoScroll, canScroll, clearAutoScrollInterval, enabled, interval, // eslint-disable-next-line react-hooks/exhaustive-deps
+  JSON.stringify(rect), // eslint-disable-next-line react-hooks/exhaustive-deps
+  JSON.stringify(scrollIntent), setAutoScrollInterval, scrollableAncestors, sortedScrollableAncestors, scrollableAncestorRects, // eslint-disable-next-line react-hooks/exhaustive-deps
+  JSON.stringify(threshold)]);
+}
+const defaultScrollIntent = {
+  x: {
+    [Direction.Backward]: false,
+    [Direction.Forward]: false
+  },
+  y: {
+    [Direction.Backward]: false,
+    [Direction.Forward]: false
+  }
+};
+
+function useScrollIntent(_ref2) {
+  let {
+    delta,
+    disabled
+  } = _ref2;
+  const previousDelta = (0,utilities_esm.usePrevious)(delta);
+  return (0,utilities_esm.useLazyMemo)(previousIntent => {
+    if (disabled || !previousDelta || !previousIntent) {
+      // Reset scroll intent tracking when auto-scrolling is disabled
+      return defaultScrollIntent;
+    }
+
+    const direction = {
+      x: Math.sign(delta.x - previousDelta.x),
+      y: Math.sign(delta.y - previousDelta.y)
+    }; // Keep track of the user intent to scroll in each direction for both axis
+
+    return {
+      x: {
+        [Direction.Backward]: previousIntent.x[Direction.Backward] || direction.x === -1,
+        [Direction.Forward]: previousIntent.x[Direction.Forward] || direction.x === 1
+      },
+      y: {
+        [Direction.Backward]: previousIntent.y[Direction.Backward] || direction.y === -1,
+        [Direction.Forward]: previousIntent.y[Direction.Forward] || direction.y === 1
+      }
+    };
+  }, [disabled, delta, previousDelta]);
+}
+
+function useCachedNode(draggableNodes, id) {
+  const draggableNode = id !== null ? draggableNodes.get(id) : undefined;
+  const node = draggableNode ? draggableNode.node.current : null;
+  return (0,utilities_esm.useLazyMemo)(cachedNode => {
+    var _ref;
+
+    if (id === null) {
+      return null;
+    } // In some cases, the draggable node can unmount while dragging
+    // This is the case for virtualized lists. In those situations,
+    // we fall back to the last known value for that node.
+
+
+    return (_ref = node != null ? node : cachedNode) != null ? _ref : null;
+  }, [node, id]);
+}
+
+function useCombineActivators(sensors, getSyntheticHandler) {
+  return (0,react.useMemo)(() => sensors.reduce((accumulator, sensor) => {
+    const {
+      sensor: Sensor
+    } = sensor;
+    const sensorActivators = Sensor.activators.map(activator => ({
+      eventName: activator.eventName,
+      handler: getSyntheticHandler(activator.handler, sensor)
+    }));
+    return [...accumulator, ...sensorActivators];
+  }, []), [sensors, getSyntheticHandler]);
+}
+
+var MeasuringStrategy;
+
+(function (MeasuringStrategy) {
+  MeasuringStrategy[MeasuringStrategy["Always"] = 0] = "Always";
+  MeasuringStrategy[MeasuringStrategy["BeforeDragging"] = 1] = "BeforeDragging";
+  MeasuringStrategy[MeasuringStrategy["WhileDragging"] = 2] = "WhileDragging";
+})(MeasuringStrategy || (MeasuringStrategy = {}));
+
+var MeasuringFrequency;
+
+(function (MeasuringFrequency) {
+  MeasuringFrequency["Optimized"] = "optimized";
+})(MeasuringFrequency || (MeasuringFrequency = {}));
+
+const defaultValue = /*#__PURE__*/new Map();
+function useDroppableMeasuring(containers, _ref) {
+  let {
+    dragging,
+    dependencies,
+    config
+  } = _ref;
+  const [queue, setQueue] = (0,react.useState)(null);
+  const {
+    frequency,
+    measure,
+    strategy
+  } = config;
+  const containersRef = (0,react.useRef)(containers);
+  const disabled = isDisabled();
+  const disabledRef = (0,utilities_esm.useLatestValue)(disabled);
+  const measureDroppableContainers = (0,react.useCallback)(function (ids) {
+    if (ids === void 0) {
+      ids = [];
+    }
+
+    if (disabledRef.current) {
+      return;
+    }
+
+    setQueue(value => {
+      if (value === null) {
+        return ids;
+      }
+
+      return value.concat(ids.filter(id => !value.includes(id)));
+    });
+  }, [disabledRef]);
+  const timeoutId = (0,react.useRef)(null);
+  const droppableRects = (0,utilities_esm.useLazyMemo)(previousValue => {
+    if (disabled && !dragging) {
+      return defaultValue;
+    }
+
+    if (!previousValue || previousValue === defaultValue || containersRef.current !== containers || queue != null) {
+      const map = new Map();
+
+      for (let container of containers) {
+        if (!container) {
+          continue;
+        }
+
+        if (queue && queue.length > 0 && !queue.includes(container.id) && container.rect.current) {
+          // This container does not need to be re-measured
+          map.set(container.id, container.rect.current);
+          continue;
+        }
+
+        const node = container.node.current;
+        const rect = node ? new Rect(measure(node), node) : null;
+        container.rect.current = rect;
+
+        if (rect) {
+          map.set(container.id, rect);
+        }
+      }
+
+      return map;
+    }
+
+    return previousValue;
+  }, [containers, queue, dragging, disabled, measure]);
+  (0,react.useEffect)(() => {
+    containersRef.current = containers;
+  }, [containers]);
+  (0,react.useEffect)(() => {
+    if (disabled) {
+      return;
+    }
+
+    measureDroppableContainers();
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [dragging, disabled]);
+  (0,react.useEffect)(() => {
+    if (queue && queue.length > 0) {
+      setQueue(null);
+    }
+  }, //eslint-disable-next-line react-hooks/exhaustive-deps
+  [JSON.stringify(queue)]);
+  (0,react.useEffect)(() => {
+    if (disabled || typeof frequency !== 'number' || timeoutId.current !== null) {
+      return;
+    }
+
+    timeoutId.current = setTimeout(() => {
+      measureDroppableContainers();
+      timeoutId.current = null;
+    }, frequency);
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [frequency, disabled, measureDroppableContainers, ...dependencies]);
+  return {
+    droppableRects,
+    measureDroppableContainers,
+    measuringScheduled: queue != null
+  };
+
+  function isDisabled() {
+    switch (strategy) {
+      case MeasuringStrategy.Always:
+        return false;
+
+      case MeasuringStrategy.BeforeDragging:
+        return dragging;
+
+      default:
+        return !dragging;
+    }
+  }
+}
+
+function useInitialValue(value, computeFn) {
+  return (0,utilities_esm.useLazyMemo)(previousValue => {
+    if (!value) {
+      return null;
+    }
+
+    if (previousValue) {
+      return previousValue;
+    }
+
+    return typeof computeFn === 'function' ? computeFn(value) : value;
+  }, [computeFn, value]);
+}
+
+function useInitialRect(node, measure) {
+  return useInitialValue(node, measure);
+}
+
+/**
+ * Returns a new MutationObserver instance.
+ * If `MutationObserver` is undefined in the execution environment, returns `undefined`.
+ */
+
+function useMutationObserver(_ref) {
+  let {
+    callback,
+    disabled
+  } = _ref;
+  const handleMutations = (0,utilities_esm.useEvent)(callback);
+  const mutationObserver = (0,react.useMemo)(() => {
+    if (disabled || typeof window === 'undefined' || typeof window.MutationObserver === 'undefined') {
+      return undefined;
+    }
+
+    const {
+      MutationObserver
+    } = window;
+    return new MutationObserver(handleMutations);
+  }, [handleMutations, disabled]);
+  (0,react.useEffect)(() => {
+    return () => mutationObserver == null ? void 0 : mutationObserver.disconnect();
+  }, [mutationObserver]);
+  return mutationObserver;
+}
+
+/**
+ * Returns a new ResizeObserver instance bound to the `onResize` callback.
+ * If `ResizeObserver` is undefined in the execution environment, returns `undefined`.
+ */
+
+function useResizeObserver(_ref) {
+  let {
+    callback,
+    disabled
+  } = _ref;
+  const handleResize = (0,utilities_esm.useEvent)(callback);
+  const resizeObserver = (0,react.useMemo)(() => {
+    if (disabled || typeof window === 'undefined' || typeof window.ResizeObserver === 'undefined') {
+      return undefined;
+    }
+
+    const {
+      ResizeObserver
+    } = window;
+    return new ResizeObserver(handleResize);
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [disabled]);
+  (0,react.useEffect)(() => {
+    return () => resizeObserver == null ? void 0 : resizeObserver.disconnect();
+  }, [resizeObserver]);
+  return resizeObserver;
+}
+
+function defaultMeasure(element) {
+  return new Rect(getClientRect(element), element);
+}
+
+function useRect(element, measure, fallbackRect) {
+  if (measure === void 0) {
+    measure = defaultMeasure;
+  }
+
+  const [rect, measureRect] = (0,react.useReducer)(reducer, null);
+  const mutationObserver = useMutationObserver({
+    callback(records) {
+      if (!element) {
+        return;
+      }
+
+      for (const record of records) {
+        const {
+          type,
+          target
+        } = record;
+
+        if (type === 'childList' && target instanceof HTMLElement && target.contains(element)) {
+          measureRect();
+          break;
+        }
+      }
+    }
+
+  });
+  const resizeObserver = useResizeObserver({
+    callback: measureRect
+  });
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    measureRect();
+
+    if (element) {
+      resizeObserver == null ? void 0 : resizeObserver.observe(element);
+      mutationObserver == null ? void 0 : mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    } else {
+      resizeObserver == null ? void 0 : resizeObserver.disconnect();
+      mutationObserver == null ? void 0 : mutationObserver.disconnect();
+    }
+  }, [element]);
+  return rect;
+
+  function reducer(currentRect) {
+    if (!element) {
+      return null;
+    }
+
+    if (element.isConnected === false) {
+      var _ref;
+
+      // Fall back to last rect we measured if the element is
+      // no longer connected to the DOM.
+      return (_ref = currentRect != null ? currentRect : fallbackRect) != null ? _ref : null;
+    }
+
+    const newRect = measure(element);
+
+    if (JSON.stringify(currentRect) === JSON.stringify(newRect)) {
+      return currentRect;
+    }
+
+    return newRect;
+  }
+}
+
+function useRectDelta(rect) {
+  const initialRect = useInitialValue(rect);
+  return getRectDelta(rect, initialRect);
+}
+
+const defaultValue$1 = [];
+function useScrollableAncestors(node) {
+  const previousNode = (0,react.useRef)(node);
+  const ancestors = (0,utilities_esm.useLazyMemo)(previousValue => {
+    if (!node) {
+      return defaultValue$1;
+    }
+
+    if (previousValue && previousValue !== defaultValue$1 && node && previousNode.current && node.parentNode === previousNode.current.parentNode) {
+      return previousValue;
+    }
+
+    return getScrollableAncestors(node);
+  }, [node]);
+  (0,react.useEffect)(() => {
+    previousNode.current = node;
+  }, [node]);
+  return ancestors;
+}
+
+function useScrollOffsets(elements) {
+  const [scrollCoordinates, setScrollCoordinates] = (0,react.useState)(null);
+  const prevElements = (0,react.useRef)(elements); // To-do: Throttle the handleScroll callback
+
+  const handleScroll = (0,react.useCallback)(event => {
+    const scrollingElement = getScrollableElement(event.target);
+
+    if (!scrollingElement) {
+      return;
+    }
+
+    setScrollCoordinates(scrollCoordinates => {
+      if (!scrollCoordinates) {
+        return null;
+      }
+
+      scrollCoordinates.set(scrollingElement, getScrollCoordinates(scrollingElement));
+      return new Map(scrollCoordinates);
+    });
+  }, []);
+  (0,react.useEffect)(() => {
+    const previousElements = prevElements.current;
+
+    if (elements !== previousElements) {
+      cleanup(previousElements);
+      const entries = elements.map(element => {
+        const scrollableElement = getScrollableElement(element);
+
+        if (scrollableElement) {
+          scrollableElement.addEventListener('scroll', handleScroll, {
+            passive: true
+          });
+          return [scrollableElement, getScrollCoordinates(scrollableElement)];
+        }
+
+        return null;
+      }).filter(entry => entry != null);
+      setScrollCoordinates(entries.length ? new Map(entries) : null);
+      prevElements.current = elements;
+    }
+
+    return () => {
+      cleanup(elements);
+      cleanup(previousElements);
+    };
+
+    function cleanup(elements) {
+      elements.forEach(element => {
+        const scrollableElement = getScrollableElement(element);
+        scrollableElement == null ? void 0 : scrollableElement.removeEventListener('scroll', handleScroll);
+      });
+    }
+  }, [handleScroll, elements]);
+  return (0,react.useMemo)(() => {
+    if (elements.length) {
+      return scrollCoordinates ? Array.from(scrollCoordinates.values()).reduce((acc, coordinates) => (0,utilities_esm.add)(acc, coordinates), defaultCoordinates) : getScrollOffsets(elements);
+    }
+
+    return defaultCoordinates;
+  }, [elements, scrollCoordinates]);
+}
+
+function useScrollOffsetsDelta(scrollOffsets, dependencies) {
+  if (dependencies === void 0) {
+    dependencies = [];
+  }
+
+  const initialScrollOffsets = (0,react.useRef)(null);
+  (0,react.useEffect)(() => {
+    initialScrollOffsets.current = null;
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  dependencies);
+  (0,react.useEffect)(() => {
+    const hasScrollOffsets = scrollOffsets !== defaultCoordinates;
+
+    if (hasScrollOffsets && !initialScrollOffsets.current) {
+      initialScrollOffsets.current = scrollOffsets;
+    }
+
+    if (!hasScrollOffsets && initialScrollOffsets.current) {
+      initialScrollOffsets.current = null;
+    }
+  }, [scrollOffsets]);
+  return initialScrollOffsets.current ? (0,utilities_esm.subtract)(scrollOffsets, initialScrollOffsets.current) : defaultCoordinates;
+}
+
+function useSensorSetup(sensors) {
+  (0,react.useEffect)(() => {
+    if (!utilities_esm.canUseDOM) {
+      return;
+    }
+
+    const teardownFns = sensors.map(_ref => {
+      let {
+        sensor
+      } = _ref;
+      return sensor.setup == null ? void 0 : sensor.setup();
+    });
+    return () => {
+      for (const teardown of teardownFns) {
+        teardown == null ? void 0 : teardown();
+      }
+    };
+  }, // TO-DO: Sensors length could theoretically change which would not be a valid dependency
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  sensors.map(_ref2 => {
+    let {
+      sensor
+    } = _ref2;
+    return sensor;
+  }));
+}
+
+function useSyntheticListeners(listeners, id) {
+  return (0,react.useMemo)(() => {
+    return listeners.reduce((acc, _ref) => {
+      let {
+        eventName,
+        handler
+      } = _ref;
+
+      acc[eventName] = event => {
+        handler(event, id);
+      };
+
+      return acc;
+    }, {});
+  }, [listeners, id]);
+}
+
+function useWindowRect(element) {
+  return (0,react.useMemo)(() => element ? getWindowClientRect(element) : null, [element]);
+}
+
+const defaultValue$2 = [];
+function useRects(elements, measure) {
+  if (measure === void 0) {
+    measure = getClientRect;
+  }
+
+  const [firstElement] = elements;
+  const windowRect = useWindowRect(firstElement ? (0,utilities_esm.getWindow)(firstElement) : null);
+  const [rects, measureRects] = (0,react.useReducer)(reducer, defaultValue$2);
+  const resizeObserver = useResizeObserver({
+    callback: measureRects
+  });
+
+  if (elements.length > 0 && rects === defaultValue$2) {
+    measureRects();
+  }
+
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    if (elements.length) {
+      elements.forEach(element => resizeObserver == null ? void 0 : resizeObserver.observe(element));
+    } else {
+      resizeObserver == null ? void 0 : resizeObserver.disconnect();
+      measureRects();
+    }
+  }, [elements]);
+  return rects;
+
+  function reducer() {
+    if (!elements.length) {
+      return defaultValue$2;
+    }
+
+    return elements.map(element => isDocumentScrollingElement(element) ? windowRect : new Rect(measure(element), element));
+  }
+}
+
+function getMeasurableNode(node) {
+  if (!node) {
+    return null;
+  }
+
+  if (node.children.length > 1) {
+    return node;
+  }
+
+  const firstChild = node.children[0];
+  return (0,utilities_esm.isHTMLElement)(firstChild) ? firstChild : node;
+}
+
+function useDragOverlayMeasuring(_ref) {
+  let {
+    measure
+  } = _ref;
+  const [rect, setRect] = (0,react.useState)(null);
+  const handleResize = (0,react.useCallback)(entries => {
+    for (const {
+      target
+    } of entries) {
+      if ((0,utilities_esm.isHTMLElement)(target)) {
+        setRect(rect => {
+          const newRect = measure(target);
+          return rect ? { ...rect,
+            width: newRect.width,
+            height: newRect.height
+          } : newRect;
+        });
+        break;
+      }
+    }
+  }, [measure]);
+  const resizeObserver = useResizeObserver({
+    callback: handleResize
+  });
+  const handleNodeChange = (0,react.useCallback)(element => {
+    const node = getMeasurableNode(element);
+    resizeObserver == null ? void 0 : resizeObserver.disconnect();
+
+    if (node) {
+      resizeObserver == null ? void 0 : resizeObserver.observe(node);
+    }
+
+    setRect(node ? measure(node) : null);
+  }, [measure, resizeObserver]);
+  const [nodeRef, setRef] = (0,utilities_esm.useNodeRef)(handleNodeChange);
+  return (0,react.useMemo)(() => ({
+    nodeRef,
+    rect,
+    setRef
+  }), [rect, nodeRef, setRef]);
+}
+
+const defaultSensors = [{
+  sensor: PointerSensor,
+  options: {}
+}, {
+  sensor: KeyboardSensor,
+  options: {}
+}];
+const defaultData = {
+  current: {}
+};
+const defaultMeasuringConfiguration = {
+  draggable: {
+    measure: getTransformAgnosticClientRect
+  },
+  droppable: {
+    measure: getTransformAgnosticClientRect,
+    strategy: MeasuringStrategy.WhileDragging,
+    frequency: MeasuringFrequency.Optimized
+  },
+  dragOverlay: {
+    measure: getClientRect
+  }
+};
+
+class DroppableContainersMap extends Map {
+  get(id) {
+    var _super$get;
+
+    return id != null ? (_super$get = super.get(id)) != null ? _super$get : undefined : undefined;
+  }
+
+  toArray() {
+    return Array.from(this.values());
+  }
+
+  getEnabled() {
+    return this.toArray().filter(_ref => {
+      let {
+        disabled
+      } = _ref;
+      return !disabled;
+    });
+  }
+
+  getNodeFor(id) {
+    var _this$get$node$curren, _this$get;
+
+    return (_this$get$node$curren = (_this$get = this.get(id)) == null ? void 0 : _this$get.node.current) != null ? _this$get$node$curren : undefined;
+  }
+
+}
+
+const defaultPublicContext = {
+  activatorEvent: null,
+  active: null,
+  activeNode: null,
+  activeNodeRect: null,
+  collisions: null,
+  containerNodeRect: null,
+  draggableNodes: /*#__PURE__*/new Map(),
+  droppableRects: /*#__PURE__*/new Map(),
+  droppableContainers: /*#__PURE__*/new DroppableContainersMap(),
+  over: null,
+  dragOverlay: {
+    nodeRef: {
+      current: null
+    },
+    rect: null,
+    setRef: noop
+  },
+  scrollableAncestors: [],
+  scrollableAncestorRects: [],
+  measuringConfiguration: defaultMeasuringConfiguration,
+  measureDroppableContainers: noop,
+  windowRect: null,
+  measuringScheduled: false
+};
+const defaultInternalContext = {
+  activatorEvent: null,
+  activators: [],
+  active: null,
+  activeNodeRect: null,
+  ariaDescribedById: {
+    draggable: ''
+  },
+  dispatch: noop,
+  draggableNodes: /*#__PURE__*/new Map(),
+  over: null,
+  measureDroppableContainers: noop
+};
+const InternalContext = /*#__PURE__*/(0,react.createContext)(defaultInternalContext);
+const PublicContext = /*#__PURE__*/(0,react.createContext)(defaultPublicContext);
+
+function getInitialState() {
+  return {
+    draggable: {
+      active: null,
+      initialCoordinates: {
+        x: 0,
+        y: 0
+      },
+      nodes: new Map(),
+      translate: {
+        x: 0,
+        y: 0
+      }
+    },
+    droppable: {
+      containers: new DroppableContainersMap()
+    }
+  };
+}
+function reducer(state, action) {
+  switch (action.type) {
+    case Action.DragStart:
+      return { ...state,
+        draggable: { ...state.draggable,
+          initialCoordinates: action.initialCoordinates,
+          active: action.active
+        }
+      };
+
+    case Action.DragMove:
+      if (!state.draggable.active) {
+        return state;
+      }
+
+      return { ...state,
+        draggable: { ...state.draggable,
+          translate: {
+            x: action.coordinates.x - state.draggable.initialCoordinates.x,
+            y: action.coordinates.y - state.draggable.initialCoordinates.y
+          }
+        }
+      };
+
+    case Action.DragEnd:
+    case Action.DragCancel:
+      return { ...state,
+        draggable: { ...state.draggable,
+          active: null,
+          initialCoordinates: {
+            x: 0,
+            y: 0
+          },
+          translate: {
+            x: 0,
+            y: 0
+          }
+        }
+      };
+
+    case Action.RegisterDroppable:
+      {
+        const {
+          element
+        } = action;
+        const {
+          id
+        } = element;
+        const containers = new DroppableContainersMap(state.droppable.containers);
+        containers.set(id, element);
+        return { ...state,
+          droppable: { ...state.droppable,
+            containers
+          }
+        };
+      }
+
+    case Action.SetDroppableDisabled:
+      {
+        const {
+          id,
+          key,
+          disabled
+        } = action;
+        const element = state.droppable.containers.get(id);
+
+        if (!element || key !== element.key) {
+          return state;
+        }
+
+        const containers = new DroppableContainersMap(state.droppable.containers);
+        containers.set(id, { ...element,
+          disabled
+        });
+        return { ...state,
+          droppable: { ...state.droppable,
+            containers
+          }
+        };
+      }
+
+    case Action.UnregisterDroppable:
+      {
+        const {
+          id,
+          key
+        } = action;
+        const element = state.droppable.containers.get(id);
+
+        if (!element || key !== element.key) {
+          return state;
+        }
+
+        const containers = new DroppableContainersMap(state.droppable.containers);
+        containers.delete(id);
+        return { ...state,
+          droppable: { ...state.droppable,
+            containers
+          }
+        };
+      }
+
+    default:
+      {
+        return state;
+      }
+  }
+}
+
+function RestoreFocus(_ref) {
+  let {
+    disabled
+  } = _ref;
+  const {
+    active,
+    activatorEvent,
+    draggableNodes
+  } = (0,react.useContext)(InternalContext);
+  const previousActivatorEvent = (0,utilities_esm.usePrevious)(activatorEvent);
+  const previousActiveId = (0,utilities_esm.usePrevious)(active == null ? void 0 : active.id); // Restore keyboard focus on the activator node
+
+  (0,react.useEffect)(() => {
+    if (disabled) {
+      return;
+    }
+
+    if (!activatorEvent && previousActivatorEvent && previousActiveId != null) {
+      if (!(0,utilities_esm.isKeyboardEvent)(previousActivatorEvent)) {
+        return;
+      }
+
+      if (document.activeElement === previousActivatorEvent.target) {
+        // No need to restore focus
+        return;
+      }
+
+      const draggableNode = draggableNodes.get(previousActiveId);
+
+      if (!draggableNode) {
+        return;
+      }
+
+      const {
+        activatorNode,
+        node
+      } = draggableNode;
+
+      if (!activatorNode.current && !node.current) {
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        for (const element of [activatorNode.current, node.current]) {
+          if (!element) {
+            continue;
+          }
+
+          const focusableNode = (0,utilities_esm.findFirstFocusableNode)(element);
+
+          if (focusableNode) {
+            focusableNode.focus();
+            break;
+          }
+        }
+      });
+    }
+  }, [activatorEvent, disabled, draggableNodes, previousActiveId, previousActivatorEvent]);
+  return null;
+}
+
+function applyModifiers(modifiers, _ref) {
+  let {
+    transform,
+    ...args
+  } = _ref;
+  return modifiers != null && modifiers.length ? modifiers.reduce((accumulator, modifier) => {
+    return modifier({
+      transform: accumulator,
+      ...args
+    });
+  }, transform) : transform;
+}
+
+function useMeasuringConfiguration(config) {
+  return (0,react.useMemo)(() => ({
+    draggable: { ...defaultMeasuringConfiguration.draggable,
+      ...(config == null ? void 0 : config.draggable)
+    },
+    droppable: { ...defaultMeasuringConfiguration.droppable,
+      ...(config == null ? void 0 : config.droppable)
+    },
+    dragOverlay: { ...defaultMeasuringConfiguration.dragOverlay,
+      ...(config == null ? void 0 : config.dragOverlay)
+    }
+  }), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [config == null ? void 0 : config.draggable, config == null ? void 0 : config.droppable, config == null ? void 0 : config.dragOverlay]);
+}
+
+function useLayoutShiftScrollCompensation(_ref) {
+  let {
+    activeNode,
+    measure,
+    initialRect,
+    config = true
+  } = _ref;
+  const initialized = (0,react.useRef)(false);
+  const {
+    x,
+    y
+  } = typeof config === 'boolean' ? {
+    x: config,
+    y: config
+  } : config;
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    const disabled = !x && !y;
+
+    if (disabled || !activeNode) {
+      initialized.current = false;
+      return;
+    }
+
+    if (initialized.current || !initialRect) {
+      // Return early if layout shift scroll compensation was already attempted
+      // or if there is no initialRect to compare to.
+      return;
+    } // Get the most up to date node ref for the active draggable
+
+
+    const node = activeNode == null ? void 0 : activeNode.node.current;
+
+    if (!node || node.isConnected === false) {
+      // Return early if there is no attached node ref or if the node is
+      // disconnected from the document.
+      return;
+    }
+
+    const rect = measure(node);
+    const rectDelta = getRectDelta(rect, initialRect);
+
+    if (!x) {
+      rectDelta.x = 0;
+    }
+
+    if (!y) {
+      rectDelta.y = 0;
+    } // Only perform layout shift scroll compensation once
+
+
+    initialized.current = true;
+
+    if (Math.abs(rectDelta.x) > 0 || Math.abs(rectDelta.y) > 0) {
+      const firstScrollableAncestor = getFirstScrollableAncestor(node);
+
+      if (firstScrollableAncestor) {
+        firstScrollableAncestor.scrollBy({
+          top: rectDelta.y,
+          left: rectDelta.x
+        });
+      }
+    }
+  }, [activeNode, x, y, initialRect, measure]);
+}
+
+const ActiveDraggableContext = /*#__PURE__*/(0,react.createContext)({ ...defaultCoordinates,
+  scaleX: 1,
+  scaleY: 1
+});
+var Status;
+
+(function (Status) {
+  Status[Status["Uninitialized"] = 0] = "Uninitialized";
+  Status[Status["Initializing"] = 1] = "Initializing";
+  Status[Status["Initialized"] = 2] = "Initialized";
+})(Status || (Status = {}));
+
+const DndContext = /*#__PURE__*/(0,react.memo)(function DndContext(_ref) {
+  var _sensorContext$curren, _dragOverlay$nodeRef$, _dragOverlay$rect, _over$rect;
+
+  let {
+    id,
+    accessibility,
+    autoScroll = true,
+    children,
+    sensors = defaultSensors,
+    collisionDetection = rectIntersection,
+    measuring,
+    modifiers,
+    ...props
+  } = _ref;
+  const store = (0,react.useReducer)(reducer, undefined, getInitialState);
+  const [state, dispatch] = store;
+  const [dispatchMonitorEvent, registerMonitorListener] = useDndMonitorProvider();
+  const [status, setStatus] = (0,react.useState)(Status.Uninitialized);
+  const isInitialized = status === Status.Initialized;
+  const {
+    draggable: {
+      active: activeId,
+      nodes: draggableNodes,
+      translate
+    },
+    droppable: {
+      containers: droppableContainers
+    }
+  } = state;
+  const node = activeId ? draggableNodes.get(activeId) : null;
+  const activeRects = (0,react.useRef)({
+    initial: null,
+    translated: null
+  });
+  const active = (0,react.useMemo)(() => {
+    var _node$data;
+
+    return activeId != null ? {
+      id: activeId,
+      // It's possible for the active node to unmount while dragging
+      data: (_node$data = node == null ? void 0 : node.data) != null ? _node$data : defaultData,
+      rect: activeRects
+    } : null;
+  }, [activeId, node]);
+  const activeRef = (0,react.useRef)(null);
+  const [activeSensor, setActiveSensor] = (0,react.useState)(null);
+  const [activatorEvent, setActivatorEvent] = (0,react.useState)(null);
+  const latestProps = (0,utilities_esm.useLatestValue)(props, Object.values(props));
+  const draggableDescribedById = (0,utilities_esm.useUniqueId)("DndDescribedBy", id);
+  const enabledDroppableContainers = (0,react.useMemo)(() => droppableContainers.getEnabled(), [droppableContainers]);
+  const measuringConfiguration = useMeasuringConfiguration(measuring);
+  const {
+    droppableRects,
+    measureDroppableContainers,
+    measuringScheduled
+  } = useDroppableMeasuring(enabledDroppableContainers, {
+    dragging: isInitialized,
+    dependencies: [translate.x, translate.y],
+    config: measuringConfiguration.droppable
+  });
+  const activeNode = useCachedNode(draggableNodes, activeId);
+  const activationCoordinates = (0,react.useMemo)(() => activatorEvent ? (0,utilities_esm.getEventCoordinates)(activatorEvent) : null, [activatorEvent]);
+  const autoScrollOptions = getAutoScrollerOptions();
+  const initialActiveNodeRect = useInitialRect(activeNode, measuringConfiguration.draggable.measure);
+  useLayoutShiftScrollCompensation({
+    activeNode: activeId ? draggableNodes.get(activeId) : null,
+    config: autoScrollOptions.layoutShiftCompensation,
+    initialRect: initialActiveNodeRect,
+    measure: measuringConfiguration.draggable.measure
+  });
+  const activeNodeRect = useRect(activeNode, measuringConfiguration.draggable.measure, initialActiveNodeRect);
+  const containerNodeRect = useRect(activeNode ? activeNode.parentElement : null);
+  const sensorContext = (0,react.useRef)({
+    activatorEvent: null,
+    active: null,
+    activeNode,
+    collisionRect: null,
+    collisions: null,
+    droppableRects,
+    draggableNodes,
+    draggingNode: null,
+    draggingNodeRect: null,
+    droppableContainers,
+    over: null,
+    scrollableAncestors: [],
+    scrollAdjustedTranslate: null
+  });
+  const overNode = droppableContainers.getNodeFor((_sensorContext$curren = sensorContext.current.over) == null ? void 0 : _sensorContext$curren.id);
+  const dragOverlay = useDragOverlayMeasuring({
+    measure: measuringConfiguration.dragOverlay.measure
+  }); // Use the rect of the drag overlay if it is mounted
+
+  const draggingNode = (_dragOverlay$nodeRef$ = dragOverlay.nodeRef.current) != null ? _dragOverlay$nodeRef$ : activeNode;
+  const draggingNodeRect = isInitialized ? (_dragOverlay$rect = dragOverlay.rect) != null ? _dragOverlay$rect : activeNodeRect : null;
+  const usesDragOverlay = Boolean(dragOverlay.nodeRef.current && dragOverlay.rect); // The delta between the previous and new position of the draggable node
+  // is only relevant when there is no drag overlay
+
+  const nodeRectDelta = useRectDelta(usesDragOverlay ? null : activeNodeRect); // Get the window rect of the dragging node
+
+  const windowRect = useWindowRect(draggingNode ? (0,utilities_esm.getWindow)(draggingNode) : null); // Get scrollable ancestors of the dragging node
+
+  const scrollableAncestors = useScrollableAncestors(isInitialized ? overNode != null ? overNode : activeNode : null);
+  const scrollableAncestorRects = useRects(scrollableAncestors); // Apply modifiers
+
+  const modifiedTranslate = applyModifiers(modifiers, {
+    transform: {
+      x: translate.x - nodeRectDelta.x,
+      y: translate.y - nodeRectDelta.y,
+      scaleX: 1,
+      scaleY: 1
+    },
+    activatorEvent,
+    active,
+    activeNodeRect,
+    containerNodeRect,
+    draggingNodeRect,
+    over: sensorContext.current.over,
+    overlayNodeRect: dragOverlay.rect,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    windowRect
+  });
+  const pointerCoordinates = activationCoordinates ? (0,utilities_esm.add)(activationCoordinates, translate) : null;
+  const scrollOffsets = useScrollOffsets(scrollableAncestors); // Represents the scroll delta since dragging was initiated
+
+  const scrollAdjustment = useScrollOffsetsDelta(scrollOffsets); // Represents the scroll delta since the last time the active node rect was measured
+
+  const activeNodeScrollDelta = useScrollOffsetsDelta(scrollOffsets, [activeNodeRect]);
+  const scrollAdjustedTranslate = (0,utilities_esm.add)(modifiedTranslate, scrollAdjustment);
+  const collisionRect = draggingNodeRect ? getAdjustedRect(draggingNodeRect, modifiedTranslate) : null;
+  const collisions = active && collisionRect ? collisionDetection({
+    active,
+    collisionRect,
+    droppableRects,
+    droppableContainers: enabledDroppableContainers,
+    pointerCoordinates
+  }) : null;
+  const overId = getFirstCollision(collisions, 'id');
+  const [over, setOver] = (0,react.useState)(null); // When there is no drag overlay used, we need to account for the
+  // window scroll delta
+
+  const appliedTranslate = usesDragOverlay ? modifiedTranslate : (0,utilities_esm.add)(modifiedTranslate, activeNodeScrollDelta);
+  const transform = adjustScale(appliedTranslate, (_over$rect = over == null ? void 0 : over.rect) != null ? _over$rect : null, activeNodeRect);
+  const instantiateSensor = (0,react.useCallback)((event, _ref2) => {
+    let {
+      sensor: Sensor,
+      options
+    } = _ref2;
+
+    if (activeRef.current == null) {
+      return;
+    }
+
+    const activeNode = draggableNodes.get(activeRef.current);
+
+    if (!activeNode) {
+      return;
+    }
+
+    const activatorEvent = event.nativeEvent;
+    const sensorInstance = new Sensor({
+      active: activeRef.current,
+      activeNode,
+      event: activatorEvent,
+      options,
+      // Sensors need to be instantiated with refs for arguments that change over time
+      // otherwise they are frozen in time with the stale arguments
+      context: sensorContext,
+
+      onStart(initialCoordinates) {
+        const id = activeRef.current;
+
+        if (id == null) {
+          return;
+        }
+
+        const draggableNode = draggableNodes.get(id);
+
+        if (!draggableNode) {
+          return;
+        }
+
+        const {
+          onDragStart
+        } = latestProps.current;
+        const event = {
+          active: {
+            id,
+            data: draggableNode.data,
+            rect: activeRects
+          }
+        };
+        (0,react_dom.unstable_batchedUpdates)(() => {
+          onDragStart == null ? void 0 : onDragStart(event);
+          setStatus(Status.Initializing);
+          dispatch({
+            type: Action.DragStart,
+            initialCoordinates,
+            active: id
+          });
+          dispatchMonitorEvent({
+            type: 'onDragStart',
+            event
+          });
+        });
+      },
+
+      onMove(coordinates) {
+        dispatch({
+          type: Action.DragMove,
+          coordinates
+        });
+      },
+
+      onEnd: createHandler(Action.DragEnd),
+      onCancel: createHandler(Action.DragCancel)
+    });
+    (0,react_dom.unstable_batchedUpdates)(() => {
+      setActiveSensor(sensorInstance);
+      setActivatorEvent(event.nativeEvent);
+    });
+
+    function createHandler(type) {
+      return async function handler() {
+        const {
+          active,
+          collisions,
+          over,
+          scrollAdjustedTranslate
+        } = sensorContext.current;
+        let event = null;
+
+        if (active && scrollAdjustedTranslate) {
+          const {
+            cancelDrop
+          } = latestProps.current;
+          event = {
+            activatorEvent,
+            active: active,
+            collisions,
+            delta: scrollAdjustedTranslate,
+            over
+          };
+
+          if (type === Action.DragEnd && typeof cancelDrop === 'function') {
+            const shouldCancel = await Promise.resolve(cancelDrop(event));
+
+            if (shouldCancel) {
+              type = Action.DragCancel;
+            }
+          }
+        }
+
+        activeRef.current = null;
+        (0,react_dom.unstable_batchedUpdates)(() => {
+          dispatch({
+            type
+          });
+          setStatus(Status.Uninitialized);
+          setOver(null);
+          setActiveSensor(null);
+          setActivatorEvent(null);
+          const eventName = type === Action.DragEnd ? 'onDragEnd' : 'onDragCancel';
+
+          if (event) {
+            const handler = latestProps.current[eventName];
+            handler == null ? void 0 : handler(event);
+            dispatchMonitorEvent({
+              type: eventName,
+              event
+            });
+          }
+        });
+      };
+    }
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [draggableNodes]);
+  const bindActivatorToSensorInstantiator = (0,react.useCallback)((handler, sensor) => {
+    return (event, active) => {
+      const nativeEvent = event.nativeEvent;
+      const activeDraggableNode = draggableNodes.get(active);
+
+      if ( // Another sensor is already instantiating
+      activeRef.current !== null || // No active draggable
+      !activeDraggableNode || // Event has already been captured
+      nativeEvent.dndKit || nativeEvent.defaultPrevented) {
+        return;
+      }
+
+      const activationContext = {
+        active: activeDraggableNode
+      };
+      const shouldActivate = handler(event, sensor.options, activationContext);
+
+      if (shouldActivate === true) {
+        nativeEvent.dndKit = {
+          capturedBy: sensor.sensor
+        };
+        activeRef.current = active;
+        instantiateSensor(event, sensor);
+      }
+    };
+  }, [draggableNodes, instantiateSensor]);
+  const activators = useCombineActivators(sensors, bindActivatorToSensorInstantiator);
+  useSensorSetup(sensors);
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    if (activeNodeRect && status === Status.Initializing) {
+      setStatus(Status.Initialized);
+    }
+  }, [activeNodeRect, status]);
+  (0,react.useEffect)(() => {
+    const {
+      onDragMove
+    } = latestProps.current;
+    const {
+      active,
+      activatorEvent,
+      collisions,
+      over
+    } = sensorContext.current;
+
+    if (!active || !activatorEvent) {
+      return;
+    }
+
+    const event = {
+      active,
+      activatorEvent,
+      collisions,
+      delta: {
+        x: scrollAdjustedTranslate.x,
+        y: scrollAdjustedTranslate.y
+      },
+      over
+    };
+    (0,react_dom.unstable_batchedUpdates)(() => {
+      onDragMove == null ? void 0 : onDragMove(event);
+      dispatchMonitorEvent({
+        type: 'onDragMove',
+        event
+      });
+    });
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [scrollAdjustedTranslate.x, scrollAdjustedTranslate.y]);
+  (0,react.useEffect)(() => {
+    const {
+      active,
+      activatorEvent,
+      collisions,
+      droppableContainers,
+      scrollAdjustedTranslate
+    } = sensorContext.current;
+
+    if (!active || activeRef.current == null || !activatorEvent || !scrollAdjustedTranslate) {
+      return;
+    }
+
+    const {
+      onDragOver
+    } = latestProps.current;
+    const overContainer = droppableContainers.get(overId);
+    const over = overContainer && overContainer.rect.current ? {
+      id: overContainer.id,
+      rect: overContainer.rect.current,
+      data: overContainer.data,
+      disabled: overContainer.disabled
+    } : null;
+    const event = {
+      active,
+      activatorEvent,
+      collisions,
+      delta: {
+        x: scrollAdjustedTranslate.x,
+        y: scrollAdjustedTranslate.y
+      },
+      over
+    };
+    (0,react_dom.unstable_batchedUpdates)(() => {
+      setOver(over);
+      onDragOver == null ? void 0 : onDragOver(event);
+      dispatchMonitorEvent({
+        type: 'onDragOver',
+        event
+      });
+    });
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [overId]);
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    sensorContext.current = {
+      activatorEvent,
+      active,
+      activeNode,
+      collisionRect,
+      collisions,
+      droppableRects,
+      draggableNodes,
+      draggingNode,
+      draggingNodeRect,
+      droppableContainers,
+      over,
+      scrollableAncestors,
+      scrollAdjustedTranslate
+    };
+    activeRects.current = {
+      initial: draggingNodeRect,
+      translated: collisionRect
+    };
+  }, [active, activeNode, collisions, collisionRect, draggableNodes, draggingNode, draggingNodeRect, droppableRects, droppableContainers, over, scrollableAncestors, scrollAdjustedTranslate]);
+  useAutoScroller({ ...autoScrollOptions,
+    delta: translate,
+    draggingRect: collisionRect,
+    pointerCoordinates,
+    scrollableAncestors,
+    scrollableAncestorRects
+  });
+  const publicContext = (0,react.useMemo)(() => {
+    const context = {
+      active,
+      activeNode,
+      activeNodeRect,
+      activatorEvent,
+      collisions,
+      containerNodeRect,
+      dragOverlay,
+      draggableNodes,
+      droppableContainers,
+      droppableRects,
+      over,
+      measureDroppableContainers,
+      scrollableAncestors,
+      scrollableAncestorRects,
+      measuringConfiguration,
+      measuringScheduled,
+      windowRect
+    };
+    return context;
+  }, [active, activeNode, activeNodeRect, activatorEvent, collisions, containerNodeRect, dragOverlay, draggableNodes, droppableContainers, droppableRects, over, measureDroppableContainers, scrollableAncestors, scrollableAncestorRects, measuringConfiguration, measuringScheduled, windowRect]);
+  const internalContext = (0,react.useMemo)(() => {
+    const context = {
+      activatorEvent,
+      activators,
+      active,
+      activeNodeRect,
+      ariaDescribedById: {
+        draggable: draggableDescribedById
+      },
+      dispatch,
+      draggableNodes,
+      over,
+      measureDroppableContainers
+    };
+    return context;
+  }, [activatorEvent, activators, active, activeNodeRect, dispatch, draggableDescribedById, draggableNodes, over, measureDroppableContainers]);
+  return react.createElement(DndMonitorContext.Provider, {
+    value: registerMonitorListener
+  }, react.createElement(InternalContext.Provider, {
+    value: internalContext
+  }, react.createElement(PublicContext.Provider, {
+    value: publicContext
+  }, react.createElement(ActiveDraggableContext.Provider, {
+    value: transform
+  }, children)), react.createElement(RestoreFocus, {
+    disabled: (accessibility == null ? void 0 : accessibility.restoreFocus) === false
+  })), react.createElement(Accessibility, { ...accessibility,
+    hiddenTextDescribedById: draggableDescribedById
+  }));
+
+  function getAutoScrollerOptions() {
+    const activeSensorDisablesAutoscroll = (activeSensor == null ? void 0 : activeSensor.autoScrollEnabled) === false;
+    const autoScrollGloballyDisabled = typeof autoScroll === 'object' ? autoScroll.enabled === false : autoScroll === false;
+    const enabled = isInitialized && !activeSensorDisablesAutoscroll && !autoScrollGloballyDisabled;
+
+    if (typeof autoScroll === 'object') {
+      return { ...autoScroll,
+        enabled
+      };
+    }
+
+    return {
+      enabled
+    };
+  }
+});
+
+const NullContext = /*#__PURE__*/(0,react.createContext)(null);
+const defaultRole = 'button';
+const ID_PREFIX = 'Droppable';
+function useDraggable(_ref) {
+  let {
+    id,
+    data,
+    disabled = false,
+    attributes
+  } = _ref;
+  const key = (0,utilities_esm.useUniqueId)(ID_PREFIX);
+  const {
+    activators,
+    activatorEvent,
+    active,
+    activeNodeRect,
+    ariaDescribedById,
+    draggableNodes,
+    over
+  } = (0,react.useContext)(InternalContext);
+  const {
+    role = defaultRole,
+    roleDescription = 'draggable',
+    tabIndex = 0
+  } = attributes != null ? attributes : {};
+  const isDragging = (active == null ? void 0 : active.id) === id;
+  const transform = (0,react.useContext)(isDragging ? ActiveDraggableContext : NullContext);
+  const [node, setNodeRef] = (0,utilities_esm.useNodeRef)();
+  const [activatorNode, setActivatorNodeRef] = (0,utilities_esm.useNodeRef)();
+  const listeners = useSyntheticListeners(activators, id);
+  const dataRef = (0,utilities_esm.useLatestValue)(data);
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    draggableNodes.set(id, {
+      id,
+      key,
+      node,
+      activatorNode,
+      data: dataRef
+    });
+    return () => {
+      const node = draggableNodes.get(id);
+
+      if (node && node.key === key) {
+        draggableNodes.delete(id);
+      }
+    };
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [draggableNodes, id]);
+  const memoizedAttributes = (0,react.useMemo)(() => ({
+    role,
+    tabIndex,
+    'aria-disabled': disabled,
+    'aria-pressed': isDragging && role === defaultRole ? true : undefined,
+    'aria-roledescription': roleDescription,
+    'aria-describedby': ariaDescribedById.draggable
+  }), [disabled, role, tabIndex, isDragging, roleDescription, ariaDescribedById.draggable]);
+  return {
+    active,
+    activatorEvent,
+    activeNodeRect,
+    attributes: memoizedAttributes,
+    isDragging,
+    listeners: disabled ? undefined : listeners,
+    node,
+    over,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform
+  };
+}
+
+function useDndContext() {
+  return (0,react.useContext)(PublicContext);
+}
+
+const ID_PREFIX$1 = 'Droppable';
+const defaultResizeObserverConfig = {
+  timeout: 25
+};
+function useDroppable(_ref) {
+  let {
+    data,
+    disabled = false,
+    id,
+    resizeObserverConfig
+  } = _ref;
+  const key = (0,utilities_esm.useUniqueId)(ID_PREFIX$1);
+  const {
+    active,
+    dispatch,
+    over,
+    measureDroppableContainers
+  } = (0,react.useContext)(InternalContext);
+  const previous = (0,react.useRef)({
+    disabled
+  });
+  const resizeObserverConnected = (0,react.useRef)(false);
+  const rect = (0,react.useRef)(null);
+  const callbackId = (0,react.useRef)(null);
+  const {
+    disabled: resizeObserverDisabled,
+    updateMeasurementsFor,
+    timeout: resizeObserverTimeout
+  } = { ...defaultResizeObserverConfig,
+    ...resizeObserverConfig
+  };
+  const ids = (0,utilities_esm.useLatestValue)(updateMeasurementsFor != null ? updateMeasurementsFor : id);
+  const handleResize = (0,react.useCallback)(() => {
+    if (!resizeObserverConnected.current) {
+      // ResizeObserver invokes the `handleResize` callback as soon as `observe` is called,
+      // assuming the element is rendered and displayed.
+      resizeObserverConnected.current = true;
+      return;
+    }
+
+    if (callbackId.current != null) {
+      clearTimeout(callbackId.current);
+    }
+
+    callbackId.current = setTimeout(() => {
+      measureDroppableContainers(Array.isArray(ids.current) ? ids.current : [ids.current]);
+      callbackId.current = null;
+    }, resizeObserverTimeout);
+  }, //eslint-disable-next-line react-hooks/exhaustive-deps
+  [resizeObserverTimeout]);
+  const resizeObserver = useResizeObserver({
+    callback: handleResize,
+    disabled: resizeObserverDisabled || !active
+  });
+  const handleNodeChange = (0,react.useCallback)((newElement, previousElement) => {
+    if (!resizeObserver) {
+      return;
+    }
+
+    if (previousElement) {
+      resizeObserver.unobserve(previousElement);
+      resizeObserverConnected.current = false;
+    }
+
+    if (newElement) {
+      resizeObserver.observe(newElement);
+    }
+  }, [resizeObserver]);
+  const [nodeRef, setNodeRef] = (0,utilities_esm.useNodeRef)(handleNodeChange);
+  const dataRef = (0,utilities_esm.useLatestValue)(data);
+  (0,react.useEffect)(() => {
+    if (!resizeObserver || !nodeRef.current) {
+      return;
+    }
+
+    resizeObserver.disconnect();
+    resizeObserverConnected.current = false;
+    resizeObserver.observe(nodeRef.current);
+  }, [nodeRef, resizeObserver]);
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    dispatch({
+      type: Action.RegisterDroppable,
+      element: {
+        id,
+        key,
+        disabled,
+        node: nodeRef,
+        rect,
+        data: dataRef
+      }
+    });
+    return () => dispatch({
+      type: Action.UnregisterDroppable,
+      key,
+      id
+    });
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [id]);
+  (0,react.useEffect)(() => {
+    if (disabled !== previous.current.disabled) {
+      dispatch({
+        type: Action.SetDroppableDisabled,
+        id,
+        key,
+        disabled
+      });
+      previous.current.disabled = disabled;
+    }
+  }, [id, key, disabled, dispatch]);
+  return {
+    active,
+    rect,
+    isOver: (over == null ? void 0 : over.id) === id,
+    node: nodeRef,
+    over,
+    setNodeRef
+  };
+}
+
+function AnimationManager(_ref) {
+  let {
+    animation,
+    children
+  } = _ref;
+  const [clonedChildren, setClonedChildren] = (0,react.useState)(null);
+  const [element, setElement] = (0,react.useState)(null);
+  const previousChildren = (0,utilities_esm.usePrevious)(children);
+
+  if (!children && !clonedChildren && previousChildren) {
+    setClonedChildren(previousChildren);
+  }
+
+  (0,utilities_esm.useIsomorphicLayoutEffect)(() => {
+    if (!element) {
+      return;
+    }
+
+    const key = clonedChildren == null ? void 0 : clonedChildren.key;
+    const id = clonedChildren == null ? void 0 : clonedChildren.props.id;
+
+    if (key == null || id == null) {
+      setClonedChildren(null);
+      return;
+    }
+
+    Promise.resolve(animation(id, element)).then(() => {
+      setClonedChildren(null);
+    });
+  }, [animation, clonedChildren, element]);
+  return react.createElement(react.Fragment, null, children, clonedChildren ? (0,react.cloneElement)(clonedChildren, {
+    ref: setElement
+  }) : null);
+}
+
+const defaultTransform = {
+  x: 0,
+  y: 0,
+  scaleX: 1,
+  scaleY: 1
+};
+function NullifiedContextProvider(_ref) {
+  let {
+    children
+  } = _ref;
+  return react.createElement(InternalContext.Provider, {
+    value: defaultInternalContext
+  }, react.createElement(ActiveDraggableContext.Provider, {
+    value: defaultTransform
+  }, children));
+}
+
+const baseStyles = {
+  position: 'fixed',
+  touchAction: 'none'
+};
+
+const defaultTransition = activatorEvent => {
+  const isKeyboardActivator = (0,utilities_esm.isKeyboardEvent)(activatorEvent);
+  return isKeyboardActivator ? 'transform 250ms ease' : undefined;
+};
+
+const PositionedOverlay = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
+  let {
+    as,
+    activatorEvent,
+    adjustScale,
+    children,
+    className,
+    rect,
+    style,
+    transform,
+    transition = defaultTransition
+  } = _ref;
+
+  if (!rect) {
+    return null;
+  }
+
+  const scaleAdjustedTransform = adjustScale ? transform : { ...transform,
+    scaleX: 1,
+    scaleY: 1
+  };
+  const styles = { ...baseStyles,
+    width: rect.width,
+    height: rect.height,
+    top: rect.top,
+    left: rect.left,
+    transform: utilities_esm.CSS.Transform.toString(scaleAdjustedTransform),
+    transformOrigin: adjustScale && activatorEvent ? getRelativeTransformOrigin(activatorEvent, rect) : undefined,
+    transition: typeof transition === 'function' ? transition(activatorEvent) : transition,
+    ...style
+  };
+  return react.createElement(as, {
+    className,
+    style: styles,
+    ref
+  }, children);
+});
+
+const defaultDropAnimationSideEffects = options => _ref => {
+  let {
+    active,
+    dragOverlay
+  } = _ref;
+  const originalStyles = {};
+  const {
+    styles,
+    className
+  } = options;
+
+  if (styles != null && styles.active) {
+    for (const [key, value] of Object.entries(styles.active)) {
+      if (value === undefined) {
+        continue;
+      }
+
+      originalStyles[key] = active.node.style.getPropertyValue(key);
+      active.node.style.setProperty(key, value);
+    }
+  }
+
+  if (styles != null && styles.dragOverlay) {
+    for (const [key, value] of Object.entries(styles.dragOverlay)) {
+      if (value === undefined) {
+        continue;
+      }
+
+      dragOverlay.node.style.setProperty(key, value);
+    }
+  }
+
+  if (className != null && className.active) {
+    active.node.classList.add(className.active);
+  }
+
+  if (className != null && className.dragOverlay) {
+    dragOverlay.node.classList.add(className.dragOverlay);
+  }
+
+  return function cleanup() {
+    for (const [key, value] of Object.entries(originalStyles)) {
+      active.node.style.setProperty(key, value);
+    }
+
+    if (className != null && className.active) {
+      active.node.classList.remove(className.active);
+    }
+  };
+};
+
+const defaultKeyframeResolver = _ref2 => {
+  let {
+    transform: {
+      initial,
+      final
+    }
+  } = _ref2;
+  return [{
+    transform: utilities_esm.CSS.Transform.toString(initial)
+  }, {
+    transform: utilities_esm.CSS.Transform.toString(final)
+  }];
+};
+
+const defaultDropAnimationConfiguration = {
+  duration: 250,
+  easing: 'ease',
+  keyframes: defaultKeyframeResolver,
+  sideEffects: /*#__PURE__*/defaultDropAnimationSideEffects({
+    styles: {
+      active: {
+        opacity: '0'
+      }
+    }
+  })
+};
+function useDropAnimation(_ref3) {
+  let {
+    config,
+    draggableNodes,
+    droppableContainers,
+    measuringConfiguration
+  } = _ref3;
+  return (0,utilities_esm.useEvent)((id, node) => {
+    if (config === null) {
+      return;
+    }
+
+    const activeDraggable = draggableNodes.get(id);
+
+    if (!activeDraggable) {
+      return;
+    }
+
+    const activeNode = activeDraggable.node.current;
+
+    if (!activeNode) {
+      return;
+    }
+
+    const measurableNode = getMeasurableNode(node);
+
+    if (!measurableNode) {
+      return;
+    }
+
+    const {
+      transform
+    } = (0,utilities_esm.getWindow)(node).getComputedStyle(node);
+    const parsedTransform = parseTransform(transform);
+
+    if (!parsedTransform) {
+      return;
+    }
+
+    const animation = typeof config === 'function' ? config : createDefaultDropAnimation(config);
+    scrollIntoViewIfNeeded(activeNode, measuringConfiguration.draggable.measure);
+    return animation({
+      active: {
+        id,
+        data: activeDraggable.data,
+        node: activeNode,
+        rect: measuringConfiguration.draggable.measure(activeNode)
+      },
+      draggableNodes,
+      dragOverlay: {
+        node,
+        rect: measuringConfiguration.dragOverlay.measure(measurableNode)
+      },
+      droppableContainers,
+      measuringConfiguration,
+      transform: parsedTransform
+    });
+  });
+}
+
+function createDefaultDropAnimation(options) {
+  const {
+    duration,
+    easing,
+    sideEffects,
+    keyframes
+  } = { ...defaultDropAnimationConfiguration,
+    ...options
+  };
+  return _ref4 => {
+    let {
+      active,
+      dragOverlay,
+      transform,
+      ...rest
+    } = _ref4;
+
+    if (!duration) {
+      // Do not animate if animation duration is zero.
+      return;
+    }
+
+    const delta = {
+      x: dragOverlay.rect.left - active.rect.left,
+      y: dragOverlay.rect.top - active.rect.top
+    };
+    const scale = {
+      scaleX: transform.scaleX !== 1 ? active.rect.width * transform.scaleX / dragOverlay.rect.width : 1,
+      scaleY: transform.scaleY !== 1 ? active.rect.height * transform.scaleY / dragOverlay.rect.height : 1
+    };
+    const finalTransform = {
+      x: transform.x - delta.x,
+      y: transform.y - delta.y,
+      ...scale
+    };
+    const animationKeyframes = keyframes({ ...rest,
+      active,
+      dragOverlay,
+      transform: {
+        initial: transform,
+        final: finalTransform
+      }
+    });
+    const [firstKeyframe] = animationKeyframes;
+    const lastKeyframe = animationKeyframes[animationKeyframes.length - 1];
+
+    if (JSON.stringify(firstKeyframe) === JSON.stringify(lastKeyframe)) {
+      // The start and end keyframes are the same, infer that there is no animation needed.
+      return;
+    }
+
+    const cleanup = sideEffects == null ? void 0 : sideEffects({
+      active,
+      dragOverlay,
+      ...rest
+    });
+    const animation = dragOverlay.node.animate(animationKeyframes, {
+      duration,
+      easing,
+      fill: 'forwards'
+    });
+    return new Promise(resolve => {
+      animation.onfinish = () => {
+        cleanup == null ? void 0 : cleanup();
+        resolve();
+      };
+    });
+  };
+}
+
+let key = 0;
+function useKey(id) {
+  return (0,react.useMemo)(() => {
+    if (id == null) {
+      return;
+    }
+
+    key++;
+    return key;
+  }, [id]);
+}
+
+const DragOverlay = /*#__PURE__*/react.memo(_ref => {
+  let {
+    adjustScale = false,
+    children,
+    dropAnimation: dropAnimationConfig,
+    style,
+    transition,
+    modifiers,
+    wrapperElement = 'div',
+    className,
+    zIndex = 999
+  } = _ref;
+  const {
+    activatorEvent,
+    active,
+    activeNodeRect,
+    containerNodeRect,
+    draggableNodes,
+    droppableContainers,
+    dragOverlay,
+    over,
+    measuringConfiguration,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    windowRect
+  } = useDndContext();
+  const transform = (0,react.useContext)(ActiveDraggableContext);
+  const key = useKey(active == null ? void 0 : active.id);
+  const modifiedTransform = applyModifiers(modifiers, {
+    activatorEvent,
+    active,
+    activeNodeRect,
+    containerNodeRect,
+    draggingNodeRect: dragOverlay.rect,
+    over,
+    overlayNodeRect: dragOverlay.rect,
+    scrollableAncestors,
+    scrollableAncestorRects,
+    transform,
+    windowRect
+  });
+  const initialRect = useInitialValue(activeNodeRect);
+  const dropAnimation = useDropAnimation({
+    config: dropAnimationConfig,
+    draggableNodes,
+    droppableContainers,
+    measuringConfiguration
+  }); // We need to wait for the active node to be measured before connecting the drag overlay ref
+  // otherwise collisions can be computed against a mispositioned drag overlay
+
+  const ref = initialRect ? dragOverlay.setRef : undefined;
+  return react.createElement(NullifiedContextProvider, null, react.createElement(AnimationManager, {
+    animation: dropAnimation
+  }, active && key ? react.createElement(PositionedOverlay, {
+    key: key,
+    id: active.id,
+    ref: ref,
+    as: wrapperElement,
+    activatorEvent: activatorEvent,
+    adjustScale: adjustScale,
+    className: className,
+    transition: transition,
+    rect: initialRect,
+    style: {
+      zIndex,
+      ...style
+    },
+    transform: modifiedTransform
+  }, children) : null));
+});
+
+
+//# sourceMappingURL=core.esm.js.map
+
 
 /***/ }),
 
@@ -20,7 +4008,139 @@ eval("// ESM COMPAT FLAG\n__webpack_require__.r(__webpack_exports__);\n\n// EXPO
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"createSnapModifier\": () => (/* binding */ createSnapModifier),\n/* harmony export */   \"restrictToFirstScrollableAncestor\": () => (/* binding */ restrictToFirstScrollableAncestor),\n/* harmony export */   \"restrictToHorizontalAxis\": () => (/* binding */ restrictToHorizontalAxis),\n/* harmony export */   \"restrictToParentElement\": () => (/* binding */ restrictToParentElement),\n/* harmony export */   \"restrictToVerticalAxis\": () => (/* binding */ restrictToVerticalAxis),\n/* harmony export */   \"restrictToWindowEdges\": () => (/* binding */ restrictToWindowEdges),\n/* harmony export */   \"snapCenterToCursor\": () => (/* binding */ snapCenterToCursor)\n/* harmony export */ });\n/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4285);\n\n\nfunction createSnapModifier(gridSize) {\n  return _ref => {\n    let {\n      transform\n    } = _ref;\n    return { ...transform,\n      x: Math.ceil(transform.x / gridSize) * gridSize,\n      y: Math.ceil(transform.y / gridSize) * gridSize\n    };\n  };\n}\n\nconst restrictToHorizontalAxis = _ref => {\n  let {\n    transform\n  } = _ref;\n  return { ...transform,\n    y: 0\n  };\n};\n\nfunction restrictToBoundingRect(transform, rect, boundingRect) {\n  const value = { ...transform\n  };\n\n  if (rect.top + transform.y <= boundingRect.top) {\n    value.y = boundingRect.top - rect.top;\n  } else if (rect.bottom + transform.y >= boundingRect.top + boundingRect.height) {\n    value.y = boundingRect.top + boundingRect.height - rect.bottom;\n  }\n\n  if (rect.left + transform.x <= boundingRect.left) {\n    value.x = boundingRect.left - rect.left;\n  } else if (rect.right + transform.x >= boundingRect.left + boundingRect.width) {\n    value.x = boundingRect.left + boundingRect.width - rect.right;\n  }\n\n  return value;\n}\n\nconst restrictToParentElement = _ref => {\n  let {\n    containerNodeRect,\n    draggingNodeRect,\n    transform\n  } = _ref;\n\n  if (!draggingNodeRect || !containerNodeRect) {\n    return transform;\n  }\n\n  return restrictToBoundingRect(transform, draggingNodeRect, containerNodeRect);\n};\n\nconst restrictToFirstScrollableAncestor = _ref => {\n  let {\n    draggingNodeRect,\n    transform,\n    scrollableAncestorRects\n  } = _ref;\n  const firstScrollableAncestorRect = scrollableAncestorRects[0];\n\n  if (!draggingNodeRect || !firstScrollableAncestorRect) {\n    return transform;\n  }\n\n  return restrictToBoundingRect(transform, draggingNodeRect, firstScrollableAncestorRect);\n};\n\nconst restrictToVerticalAxis = _ref => {\n  let {\n    transform\n  } = _ref;\n  return { ...transform,\n    x: 0\n  };\n};\n\nconst restrictToWindowEdges = _ref => {\n  let {\n    transform,\n    draggingNodeRect,\n    windowRect\n  } = _ref;\n\n  if (!draggingNodeRect || !windowRect) {\n    return transform;\n  }\n\n  return restrictToBoundingRect(transform, draggingNodeRect, windowRect);\n};\n\nconst snapCenterToCursor = _ref => {\n  let {\n    activatorEvent,\n    draggingNodeRect,\n    transform\n  } = _ref;\n\n  if (draggingNodeRect && activatorEvent) {\n    const activatorCoordinates = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_0__.getEventCoordinates)(activatorEvent);\n\n    if (!activatorCoordinates) {\n      return transform;\n    }\n\n    const offsetX = activatorCoordinates.x - draggingNodeRect.left;\n    const offsetY = activatorCoordinates.y - draggingNodeRect.top;\n    return { ...transform,\n      x: transform.x + offsetX - draggingNodeRect.width / 2,\n      y: transform.y + offsetY - draggingNodeRect.height / 2\n    };\n  }\n\n  return transform;\n};\n\n\n//# sourceMappingURL=modifiers.esm.js.map\n\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./node_modules/@dnd-kit/modifiers/dist/modifiers.esm.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createSnapModifier": () => (/* binding */ createSnapModifier),
+/* harmony export */   "restrictToFirstScrollableAncestor": () => (/* binding */ restrictToFirstScrollableAncestor),
+/* harmony export */   "restrictToHorizontalAxis": () => (/* binding */ restrictToHorizontalAxis),
+/* harmony export */   "restrictToParentElement": () => (/* binding */ restrictToParentElement),
+/* harmony export */   "restrictToVerticalAxis": () => (/* binding */ restrictToVerticalAxis),
+/* harmony export */   "restrictToWindowEdges": () => (/* binding */ restrictToWindowEdges),
+/* harmony export */   "snapCenterToCursor": () => (/* binding */ snapCenterToCursor)
+/* harmony export */ });
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4285);
+
+
+function createSnapModifier(gridSize) {
+  return _ref => {
+    let {
+      transform
+    } = _ref;
+    return { ...transform,
+      x: Math.ceil(transform.x / gridSize) * gridSize,
+      y: Math.ceil(transform.y / gridSize) * gridSize
+    };
+  };
+}
+
+const restrictToHorizontalAxis = _ref => {
+  let {
+    transform
+  } = _ref;
+  return { ...transform,
+    y: 0
+  };
+};
+
+function restrictToBoundingRect(transform, rect, boundingRect) {
+  const value = { ...transform
+  };
+
+  if (rect.top + transform.y <= boundingRect.top) {
+    value.y = boundingRect.top - rect.top;
+  } else if (rect.bottom + transform.y >= boundingRect.top + boundingRect.height) {
+    value.y = boundingRect.top + boundingRect.height - rect.bottom;
+  }
+
+  if (rect.left + transform.x <= boundingRect.left) {
+    value.x = boundingRect.left - rect.left;
+  } else if (rect.right + transform.x >= boundingRect.left + boundingRect.width) {
+    value.x = boundingRect.left + boundingRect.width - rect.right;
+  }
+
+  return value;
+}
+
+const restrictToParentElement = _ref => {
+  let {
+    containerNodeRect,
+    draggingNodeRect,
+    transform
+  } = _ref;
+
+  if (!draggingNodeRect || !containerNodeRect) {
+    return transform;
+  }
+
+  return restrictToBoundingRect(transform, draggingNodeRect, containerNodeRect);
+};
+
+const restrictToFirstScrollableAncestor = _ref => {
+  let {
+    draggingNodeRect,
+    transform,
+    scrollableAncestorRects
+  } = _ref;
+  const firstScrollableAncestorRect = scrollableAncestorRects[0];
+
+  if (!draggingNodeRect || !firstScrollableAncestorRect) {
+    return transform;
+  }
+
+  return restrictToBoundingRect(transform, draggingNodeRect, firstScrollableAncestorRect);
+};
+
+const restrictToVerticalAxis = _ref => {
+  let {
+    transform
+  } = _ref;
+  return { ...transform,
+    x: 0
+  };
+};
+
+const restrictToWindowEdges = _ref => {
+  let {
+    transform,
+    draggingNodeRect,
+    windowRect
+  } = _ref;
+
+  if (!draggingNodeRect || !windowRect) {
+    return transform;
+  }
+
+  return restrictToBoundingRect(transform, draggingNodeRect, windowRect);
+};
+
+const snapCenterToCursor = _ref => {
+  let {
+    activatorEvent,
+    draggingNodeRect,
+    transform
+  } = _ref;
+
+  if (draggingNodeRect && activatorEvent) {
+    const activatorCoordinates = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_0__.getEventCoordinates)(activatorEvent);
+
+    if (!activatorCoordinates) {
+      return transform;
+    }
+
+    const offsetX = activatorCoordinates.x - draggingNodeRect.left;
+    const offsetY = activatorCoordinates.y - draggingNodeRect.top;
+    return { ...transform,
+      x: transform.x + offsetX - draggingNodeRect.width / 2,
+      y: transform.y + offsetY - draggingNodeRect.height / 2
+    };
+  }
+
+  return transform;
+};
+
+
+//# sourceMappingURL=modifiers.esm.js.map
+
 
 /***/ }),
 
@@ -28,7 +4148,808 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"SortableContext\": () => (/* binding */ SortableContext),\n/* harmony export */   \"arrayMove\": () => (/* binding */ arrayMove),\n/* harmony export */   \"arraySwap\": () => (/* binding */ arraySwap),\n/* harmony export */   \"defaultAnimateLayoutChanges\": () => (/* binding */ defaultAnimateLayoutChanges),\n/* harmony export */   \"defaultNewIndexGetter\": () => (/* binding */ defaultNewIndexGetter),\n/* harmony export */   \"hasSortableData\": () => (/* binding */ hasSortableData),\n/* harmony export */   \"horizontalListSortingStrategy\": () => (/* binding */ horizontalListSortingStrategy),\n/* harmony export */   \"rectSortingStrategy\": () => (/* binding */ rectSortingStrategy),\n/* harmony export */   \"rectSwappingStrategy\": () => (/* binding */ rectSwappingStrategy),\n/* harmony export */   \"sortableKeyboardCoordinates\": () => (/* binding */ sortableKeyboardCoordinates),\n/* harmony export */   \"useSortable\": () => (/* binding */ useSortable),\n/* harmony export */   \"verticalListSortingStrategy\": () => (/* binding */ verticalListSortingStrategy)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7294);\n/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9752);\n/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4285);\n\n\n\n\n/**\r\n * Move an array item to a different position. Returns a new array with the item moved to the new position.\r\n */\nfunction arrayMove(array, from, to) {\n  const newArray = array.slice();\n  newArray.splice(to < 0 ? newArray.length + to : to, 0, newArray.splice(from, 1)[0]);\n  return newArray;\n}\n\n/**\r\n * Swap an array item to a different position. Returns a new array with the item swapped to the new position.\r\n */\nfunction arraySwap(array, from, to) {\n  const newArray = array.slice();\n  newArray[from] = array[to];\n  newArray[to] = array[from];\n  return newArray;\n}\n\nfunction getSortedRects(items, rects) {\n  return items.reduce((accumulator, id, index) => {\n    const rect = rects.get(id);\n\n    if (rect) {\n      accumulator[index] = rect;\n    }\n\n    return accumulator;\n  }, Array(items.length));\n}\n\nfunction isValidIndex(index) {\n  return index !== null && index >= 0;\n}\n\nfunction itemsEqual(a, b) {\n  if (a === b) {\n    return true;\n  }\n\n  if (a.length !== b.length) {\n    return false;\n  }\n\n  for (let i = 0; i < a.length; i++) {\n    if (a[i] !== b[i]) {\n      return false;\n    }\n  }\n\n  return true;\n}\n\nfunction normalizeDisabled(disabled) {\n  if (typeof disabled === 'boolean') {\n    return {\n      draggable: disabled,\n      droppable: disabled\n    };\n  }\n\n  return disabled;\n}\n\n// To-do: We should be calculating scale transformation\nconst defaultScale = {\n  scaleX: 1,\n  scaleY: 1\n};\nconst horizontalListSortingStrategy = _ref => {\n  var _rects$activeIndex;\n\n  let {\n    rects,\n    activeNodeRect: fallbackActiveRect,\n    activeIndex,\n    overIndex,\n    index\n  } = _ref;\n  const activeNodeRect = (_rects$activeIndex = rects[activeIndex]) != null ? _rects$activeIndex : fallbackActiveRect;\n\n  if (!activeNodeRect) {\n    return null;\n  }\n\n  const itemGap = getItemGap(rects, index, activeIndex);\n\n  if (index === activeIndex) {\n    const newIndexRect = rects[overIndex];\n\n    if (!newIndexRect) {\n      return null;\n    }\n\n    return {\n      x: activeIndex < overIndex ? newIndexRect.left + newIndexRect.width - (activeNodeRect.left + activeNodeRect.width) : newIndexRect.left - activeNodeRect.left,\n      y: 0,\n      ...defaultScale\n    };\n  }\n\n  if (index > activeIndex && index <= overIndex) {\n    return {\n      x: -activeNodeRect.width - itemGap,\n      y: 0,\n      ...defaultScale\n    };\n  }\n\n  if (index < activeIndex && index >= overIndex) {\n    return {\n      x: activeNodeRect.width + itemGap,\n      y: 0,\n      ...defaultScale\n    };\n  }\n\n  return {\n    x: 0,\n    y: 0,\n    ...defaultScale\n  };\n};\n\nfunction getItemGap(rects, index, activeIndex) {\n  const currentRect = rects[index];\n  const previousRect = rects[index - 1];\n  const nextRect = rects[index + 1];\n\n  if (!currentRect || !previousRect && !nextRect) {\n    return 0;\n  }\n\n  if (activeIndex < index) {\n    return previousRect ? currentRect.left - (previousRect.left + previousRect.width) : nextRect.left - (currentRect.left + currentRect.width);\n  }\n\n  return nextRect ? nextRect.left - (currentRect.left + currentRect.width) : currentRect.left - (previousRect.left + previousRect.width);\n}\n\nconst rectSortingStrategy = _ref => {\n  let {\n    rects,\n    activeIndex,\n    overIndex,\n    index\n  } = _ref;\n  const newRects = arrayMove(rects, overIndex, activeIndex);\n  const oldRect = rects[index];\n  const newRect = newRects[index];\n\n  if (!newRect || !oldRect) {\n    return null;\n  }\n\n  return {\n    x: newRect.left - oldRect.left,\n    y: newRect.top - oldRect.top,\n    scaleX: newRect.width / oldRect.width,\n    scaleY: newRect.height / oldRect.height\n  };\n};\n\nconst rectSwappingStrategy = _ref => {\n  let {\n    activeIndex,\n    index,\n    rects,\n    overIndex\n  } = _ref;\n  let oldRect;\n  let newRect;\n\n  if (index === activeIndex) {\n    oldRect = rects[index];\n    newRect = rects[overIndex];\n  }\n\n  if (index === overIndex) {\n    oldRect = rects[index];\n    newRect = rects[activeIndex];\n  }\n\n  if (!newRect || !oldRect) {\n    return null;\n  }\n\n  return {\n    x: newRect.left - oldRect.left,\n    y: newRect.top - oldRect.top,\n    scaleX: newRect.width / oldRect.width,\n    scaleY: newRect.height / oldRect.height\n  };\n};\n\n// To-do: We should be calculating scale transformation\nconst defaultScale$1 = {\n  scaleX: 1,\n  scaleY: 1\n};\nconst verticalListSortingStrategy = _ref => {\n  var _rects$activeIndex;\n\n  let {\n    activeIndex,\n    activeNodeRect: fallbackActiveRect,\n    index,\n    rects,\n    overIndex\n  } = _ref;\n  const activeNodeRect = (_rects$activeIndex = rects[activeIndex]) != null ? _rects$activeIndex : fallbackActiveRect;\n\n  if (!activeNodeRect) {\n    return null;\n  }\n\n  if (index === activeIndex) {\n    const overIndexRect = rects[overIndex];\n\n    if (!overIndexRect) {\n      return null;\n    }\n\n    return {\n      x: 0,\n      y: activeIndex < overIndex ? overIndexRect.top + overIndexRect.height - (activeNodeRect.top + activeNodeRect.height) : overIndexRect.top - activeNodeRect.top,\n      ...defaultScale$1\n    };\n  }\n\n  const itemGap = getItemGap$1(rects, index, activeIndex);\n\n  if (index > activeIndex && index <= overIndex) {\n    return {\n      x: 0,\n      y: -activeNodeRect.height - itemGap,\n      ...defaultScale$1\n    };\n  }\n\n  if (index < activeIndex && index >= overIndex) {\n    return {\n      x: 0,\n      y: activeNodeRect.height + itemGap,\n      ...defaultScale$1\n    };\n  }\n\n  return {\n    x: 0,\n    y: 0,\n    ...defaultScale$1\n  };\n};\n\nfunction getItemGap$1(clientRects, index, activeIndex) {\n  const currentRect = clientRects[index];\n  const previousRect = clientRects[index - 1];\n  const nextRect = clientRects[index + 1];\n\n  if (!currentRect) {\n    return 0;\n  }\n\n  if (activeIndex < index) {\n    return previousRect ? currentRect.top - (previousRect.top + previousRect.height) : nextRect ? nextRect.top - (currentRect.top + currentRect.height) : 0;\n  }\n\n  return nextRect ? nextRect.top - (currentRect.top + currentRect.height) : previousRect ? currentRect.top - (previousRect.top + previousRect.height) : 0;\n}\n\nconst ID_PREFIX = 'Sortable';\nconst Context = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext({\n  activeIndex: -1,\n  containerId: ID_PREFIX,\n  disableTransforms: false,\n  items: [],\n  overIndex: -1,\n  useDragOverlay: false,\n  sortedRects: [],\n  strategy: rectSortingStrategy,\n  disabled: {\n    draggable: false,\n    droppable: false\n  }\n});\nfunction SortableContext(_ref) {\n  let {\n    children,\n    id,\n    items: userDefinedItems,\n    strategy = rectSortingStrategy,\n    disabled: disabledProp = false\n  } = _ref;\n  const {\n    active,\n    dragOverlay,\n    droppableRects,\n    over,\n    measureDroppableContainers\n  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDndContext)();\n  const containerId = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useUniqueId)(ID_PREFIX, id);\n  const useDragOverlay = Boolean(dragOverlay.rect !== null);\n  const items = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => userDefinedItems.map(item => typeof item === 'object' && 'id' in item ? item.id : item), [userDefinedItems]);\n  const isDragging = active != null;\n  const activeIndex = active ? items.indexOf(active.id) : -1;\n  const overIndex = over ? items.indexOf(over.id) : -1;\n  const previousItemsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(items);\n  const itemsHaveChanged = !itemsEqual(items, previousItemsRef.current);\n  const disableTransforms = overIndex !== -1 && activeIndex === -1 || itemsHaveChanged;\n  const disabled = normalizeDisabled(disabledProp);\n  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {\n    if (itemsHaveChanged && isDragging) {\n      measureDroppableContainers(items);\n    }\n  }, [itemsHaveChanged, items, isDragging, measureDroppableContainers]);\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    previousItemsRef.current = items;\n  }, [items]);\n  const contextValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({\n    activeIndex,\n    containerId,\n    disabled,\n    disableTransforms,\n    items,\n    overIndex,\n    useDragOverlay,\n    sortedRects: getSortedRects(items, droppableRects),\n    strategy\n  }), // eslint-disable-next-line react-hooks/exhaustive-deps\n  [activeIndex, containerId, disabled.draggable, disabled.droppable, disableTransforms, items, overIndex, droppableRects, useDragOverlay, strategy]);\n  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(Context.Provider, {\n    value: contextValue\n  }, children);\n}\n\nconst defaultNewIndexGetter = _ref => {\n  let {\n    id,\n    items,\n    activeIndex,\n    overIndex\n  } = _ref;\n  return arrayMove(items, activeIndex, overIndex).indexOf(id);\n};\nconst defaultAnimateLayoutChanges = _ref2 => {\n  let {\n    containerId,\n    isSorting,\n    wasDragging,\n    index,\n    items,\n    newIndex,\n    previousItems,\n    previousContainerId,\n    transition\n  } = _ref2;\n\n  if (!transition || !wasDragging) {\n    return false;\n  }\n\n  if (previousItems !== items && index === newIndex) {\n    return false;\n  }\n\n  if (isSorting) {\n    return true;\n  }\n\n  return newIndex !== index && containerId === previousContainerId;\n};\nconst defaultTransition = {\n  duration: 200,\n  easing: 'ease'\n};\nconst transitionProperty = 'transform';\nconst disabledTransition = /*#__PURE__*/_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transition.toString({\n  property: transitionProperty,\n  duration: 0,\n  easing: 'linear'\n});\nconst defaultAttributes = {\n  roleDescription: 'sortable'\n};\n\n/*\r\n * When the index of an item changes while sorting,\r\n * we need to temporarily disable the transforms\r\n */\n\nfunction useDerivedTransform(_ref) {\n  let {\n    disabled,\n    index,\n    node,\n    rect\n  } = _ref;\n  const [derivedTransform, setDerivedtransform] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);\n  const previousIndex = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(index);\n  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {\n    if (!disabled && index !== previousIndex.current && node.current) {\n      const initial = rect.current;\n\n      if (initial) {\n        const current = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getClientRect)(node.current, {\n          ignoreTransform: true\n        });\n        const delta = {\n          x: initial.left - current.left,\n          y: initial.top - current.top,\n          scaleX: initial.width / current.width,\n          scaleY: initial.height / current.height\n        };\n\n        if (delta.x || delta.y) {\n          setDerivedtransform(delta);\n        }\n      }\n    }\n\n    if (index !== previousIndex.current) {\n      previousIndex.current = index;\n    }\n  }, [disabled, index, node, rect]);\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    if (derivedTransform) {\n      setDerivedtransform(null);\n    }\n  }, [derivedTransform]);\n  return derivedTransform;\n}\n\nfunction useSortable(_ref) {\n  let {\n    animateLayoutChanges = defaultAnimateLayoutChanges,\n    attributes: userDefinedAttributes,\n    disabled: localDisabled,\n    data: customData,\n    getNewIndex = defaultNewIndexGetter,\n    id,\n    strategy: localStrategy,\n    resizeObserverConfig,\n    transition = defaultTransition\n  } = _ref;\n  const {\n    items,\n    containerId,\n    activeIndex,\n    disabled: globalDisabled,\n    disableTransforms,\n    sortedRects,\n    overIndex,\n    useDragOverlay,\n    strategy: globalStrategy\n  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(Context);\n  const disabled = normalizeLocalDisabled(localDisabled, globalDisabled);\n  const index = items.indexOf(id);\n  const data = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({\n    sortable: {\n      containerId,\n      index,\n      items\n    },\n    ...customData\n  }), [containerId, customData, index, items]);\n  const itemsAfterCurrentSortable = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => items.slice(items.indexOf(id)), [items, id]);\n  const {\n    rect,\n    node,\n    isOver,\n    setNodeRef: setDroppableNodeRef\n  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDroppable)({\n    id,\n    data,\n    disabled: disabled.droppable,\n    resizeObserverConfig: {\n      updateMeasurementsFor: itemsAfterCurrentSortable,\n      ...resizeObserverConfig\n    }\n  });\n  const {\n    active,\n    activatorEvent,\n    activeNodeRect,\n    attributes,\n    setNodeRef: setDraggableNodeRef,\n    listeners,\n    isDragging,\n    over,\n    setActivatorNodeRef,\n    transform\n  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDraggable)({\n    id,\n    data,\n    attributes: { ...defaultAttributes,\n      ...userDefinedAttributes\n    },\n    disabled: disabled.draggable\n  });\n  const setNodeRef = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useCombinedRefs)(setDroppableNodeRef, setDraggableNodeRef);\n  const isSorting = Boolean(active);\n  const displaceItem = isSorting && !disableTransforms && isValidIndex(activeIndex) && isValidIndex(overIndex);\n  const shouldDisplaceDragSource = !useDragOverlay && isDragging;\n  const dragSourceDisplacement = shouldDisplaceDragSource && displaceItem ? transform : null;\n  const strategy = localStrategy != null ? localStrategy : globalStrategy;\n  const finalTransform = displaceItem ? dragSourceDisplacement != null ? dragSourceDisplacement : strategy({\n    rects: sortedRects,\n    activeNodeRect,\n    activeIndex,\n    overIndex,\n    index\n  }) : null;\n  const newIndex = isValidIndex(activeIndex) && isValidIndex(overIndex) ? getNewIndex({\n    id,\n    items,\n    activeIndex,\n    overIndex\n  }) : index;\n  const activeId = active == null ? void 0 : active.id;\n  const previous = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({\n    activeId,\n    items,\n    newIndex,\n    containerId\n  });\n  const itemsHaveChanged = items !== previous.current.items;\n  const shouldAnimateLayoutChanges = animateLayoutChanges({\n    active,\n    containerId,\n    isDragging,\n    isSorting,\n    id,\n    index,\n    items,\n    newIndex: previous.current.newIndex,\n    previousItems: previous.current.items,\n    previousContainerId: previous.current.containerId,\n    transition,\n    wasDragging: previous.current.activeId != null\n  });\n  const derivedTransform = useDerivedTransform({\n    disabled: !shouldAnimateLayoutChanges,\n    index,\n    node,\n    rect\n  });\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    if (isSorting && previous.current.newIndex !== newIndex) {\n      previous.current.newIndex = newIndex;\n    }\n\n    if (containerId !== previous.current.containerId) {\n      previous.current.containerId = containerId;\n    }\n\n    if (items !== previous.current.items) {\n      previous.current.items = items;\n    }\n  }, [isSorting, newIndex, containerId, items]);\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    if (activeId === previous.current.activeId) {\n      return;\n    }\n\n    if (activeId && !previous.current.activeId) {\n      previous.current.activeId = activeId;\n      return;\n    }\n\n    const timeoutId = setTimeout(() => {\n      previous.current.activeId = activeId;\n    }, 50);\n    return () => clearTimeout(timeoutId);\n  }, [activeId]);\n  return {\n    active,\n    activeIndex,\n    attributes,\n    data,\n    rect,\n    index,\n    newIndex,\n    items,\n    isOver,\n    isSorting,\n    isDragging,\n    listeners,\n    node,\n    overIndex,\n    over,\n    setNodeRef,\n    setActivatorNodeRef,\n    setDroppableNodeRef,\n    setDraggableNodeRef,\n    transform: derivedTransform != null ? derivedTransform : finalTransform,\n    transition: getTransition()\n  };\n\n  function getTransition() {\n    if ( // Temporarily disable transitions for a single frame to set up derived transforms\n    derivedTransform || // Or to prevent items jumping to back to their \"new\" position when items change\n    itemsHaveChanged && previous.current.newIndex === index) {\n      return disabledTransition;\n    }\n\n    if (shouldDisplaceDragSource && !(0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isKeyboardEvent)(activatorEvent) || !transition) {\n      return undefined;\n    }\n\n    if (isSorting || shouldAnimateLayoutChanges) {\n      return _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transition.toString({ ...transition,\n        property: transitionProperty\n      });\n    }\n\n    return undefined;\n  }\n}\n\nfunction normalizeLocalDisabled(localDisabled, globalDisabled) {\n  var _localDisabled$dragga, _localDisabled$droppa;\n\n  if (typeof localDisabled === 'boolean') {\n    return {\n      draggable: localDisabled,\n      // Backwards compatibility\n      droppable: false\n    };\n  }\n\n  return {\n    draggable: (_localDisabled$dragga = localDisabled == null ? void 0 : localDisabled.draggable) != null ? _localDisabled$dragga : globalDisabled.draggable,\n    droppable: (_localDisabled$droppa = localDisabled == null ? void 0 : localDisabled.droppable) != null ? _localDisabled$droppa : globalDisabled.droppable\n  };\n}\n\nfunction hasSortableData(entry) {\n  if (!entry) {\n    return false;\n  }\n\n  const data = entry.data.current;\n\n  if (data && 'sortable' in data && typeof data.sortable === 'object' && 'containerId' in data.sortable && 'items' in data.sortable && 'index' in data.sortable) {\n    return true;\n  }\n\n  return false;\n}\n\nconst directions = [_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Down, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Right, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Up, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Left];\nconst sortableKeyboardCoordinates = (event, _ref) => {\n  let {\n    context: {\n      active,\n      collisionRect,\n      droppableRects,\n      droppableContainers,\n      over,\n      scrollableAncestors\n    }\n  } = _ref;\n\n  if (directions.includes(event.code)) {\n    event.preventDefault();\n\n    if (!active || !collisionRect) {\n      return;\n    }\n\n    const filteredContainers = [];\n    droppableContainers.getEnabled().forEach(entry => {\n      if (!entry || entry != null && entry.disabled) {\n        return;\n      }\n\n      const rect = droppableRects.get(entry.id);\n\n      if (!rect) {\n        return;\n      }\n\n      switch (event.code) {\n        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Down:\n          if (collisionRect.top < rect.top) {\n            filteredContainers.push(entry);\n          }\n\n          break;\n\n        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Up:\n          if (collisionRect.top > rect.top) {\n            filteredContainers.push(entry);\n          }\n\n          break;\n\n        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Left:\n          if (collisionRect.left > rect.left) {\n            filteredContainers.push(entry);\n          }\n\n          break;\n\n        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Right:\n          if (collisionRect.left < rect.left) {\n            filteredContainers.push(entry);\n          }\n\n          break;\n      }\n    });\n    const collisions = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.closestCorners)({\n      active,\n      collisionRect: collisionRect,\n      droppableRects,\n      droppableContainers: filteredContainers,\n      pointerCoordinates: null\n    });\n    let closestId = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getFirstCollision)(collisions, 'id');\n\n    if (closestId === (over == null ? void 0 : over.id) && collisions.length > 1) {\n      closestId = collisions[1].id;\n    }\n\n    if (closestId != null) {\n      const activeDroppable = droppableContainers.get(active.id);\n      const newDroppable = droppableContainers.get(closestId);\n      const newRect = newDroppable ? droppableRects.get(newDroppable.id) : null;\n      const newNode = newDroppable == null ? void 0 : newDroppable.node.current;\n\n      if (newNode && newRect && activeDroppable && newDroppable) {\n        const newScrollAncestors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getScrollableAncestors)(newNode);\n        const hasDifferentScrollAncestors = newScrollAncestors.some((element, index) => scrollableAncestors[index] !== element);\n        const hasSameContainer = isSameContainer(activeDroppable, newDroppable);\n        const isAfterActive = isAfter(activeDroppable, newDroppable);\n        const offset = hasDifferentScrollAncestors || !hasSameContainer ? {\n          x: 0,\n          y: 0\n        } : {\n          x: isAfterActive ? collisionRect.width - newRect.width : 0,\n          y: isAfterActive ? collisionRect.height - newRect.height : 0\n        };\n        const rectCoordinates = {\n          x: newRect.left,\n          y: newRect.top\n        };\n        const newCoordinates = offset.x && offset.y ? rectCoordinates : (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.subtract)(rectCoordinates, offset);\n        return newCoordinates;\n      }\n    }\n  }\n\n  return undefined;\n};\n\nfunction isSameContainer(a, b) {\n  if (!hasSortableData(a) || !hasSortableData(b)) {\n    return false;\n  }\n\n  return a.data.current.sortable.containerId === b.data.current.sortable.containerId;\n}\n\nfunction isAfter(a, b) {\n  if (!hasSortableData(a) || !hasSortableData(b)) {\n    return false;\n  }\n\n  if (!isSameContainer(a, b)) {\n    return false;\n  }\n\n  return a.data.current.sortable.index < b.data.current.sortable.index;\n}\n\n\n//# sourceMappingURL=sortable.esm.js.map\n\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./node_modules/@dnd-kit/sortable/dist/sortable.esm.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SortableContext": () => (/* binding */ SortableContext),
+/* harmony export */   "arrayMove": () => (/* binding */ arrayMove),
+/* harmony export */   "arraySwap": () => (/* binding */ arraySwap),
+/* harmony export */   "defaultAnimateLayoutChanges": () => (/* binding */ defaultAnimateLayoutChanges),
+/* harmony export */   "defaultNewIndexGetter": () => (/* binding */ defaultNewIndexGetter),
+/* harmony export */   "hasSortableData": () => (/* binding */ hasSortableData),
+/* harmony export */   "horizontalListSortingStrategy": () => (/* binding */ horizontalListSortingStrategy),
+/* harmony export */   "rectSortingStrategy": () => (/* binding */ rectSortingStrategy),
+/* harmony export */   "rectSwappingStrategy": () => (/* binding */ rectSwappingStrategy),
+/* harmony export */   "sortableKeyboardCoordinates": () => (/* binding */ sortableKeyboardCoordinates),
+/* harmony export */   "useSortable": () => (/* binding */ useSortable),
+/* harmony export */   "verticalListSortingStrategy": () => (/* binding */ verticalListSortingStrategy)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7294);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9752);
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4285);
+
+
+
+
+/**
+ * Move an array item to a different position. Returns a new array with the item moved to the new position.
+ */
+function arrayMove(array, from, to) {
+  const newArray = array.slice();
+  newArray.splice(to < 0 ? newArray.length + to : to, 0, newArray.splice(from, 1)[0]);
+  return newArray;
+}
+
+/**
+ * Swap an array item to a different position. Returns a new array with the item swapped to the new position.
+ */
+function arraySwap(array, from, to) {
+  const newArray = array.slice();
+  newArray[from] = array[to];
+  newArray[to] = array[from];
+  return newArray;
+}
+
+function getSortedRects(items, rects) {
+  return items.reduce((accumulator, id, index) => {
+    const rect = rects.get(id);
+
+    if (rect) {
+      accumulator[index] = rect;
+    }
+
+    return accumulator;
+  }, Array(items.length));
+}
+
+function isValidIndex(index) {
+  return index !== null && index >= 0;
+}
+
+function itemsEqual(a, b) {
+  if (a === b) {
+    return true;
+  }
+
+  if (a.length !== b.length) {
+    return false;
+  }
+
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function normalizeDisabled(disabled) {
+  if (typeof disabled === 'boolean') {
+    return {
+      draggable: disabled,
+      droppable: disabled
+    };
+  }
+
+  return disabled;
+}
+
+// To-do: We should be calculating scale transformation
+const defaultScale = {
+  scaleX: 1,
+  scaleY: 1
+};
+const horizontalListSortingStrategy = _ref => {
+  var _rects$activeIndex;
+
+  let {
+    rects,
+    activeNodeRect: fallbackActiveRect,
+    activeIndex,
+    overIndex,
+    index
+  } = _ref;
+  const activeNodeRect = (_rects$activeIndex = rects[activeIndex]) != null ? _rects$activeIndex : fallbackActiveRect;
+
+  if (!activeNodeRect) {
+    return null;
+  }
+
+  const itemGap = getItemGap(rects, index, activeIndex);
+
+  if (index === activeIndex) {
+    const newIndexRect = rects[overIndex];
+
+    if (!newIndexRect) {
+      return null;
+    }
+
+    return {
+      x: activeIndex < overIndex ? newIndexRect.left + newIndexRect.width - (activeNodeRect.left + activeNodeRect.width) : newIndexRect.left - activeNodeRect.left,
+      y: 0,
+      ...defaultScale
+    };
+  }
+
+  if (index > activeIndex && index <= overIndex) {
+    return {
+      x: -activeNodeRect.width - itemGap,
+      y: 0,
+      ...defaultScale
+    };
+  }
+
+  if (index < activeIndex && index >= overIndex) {
+    return {
+      x: activeNodeRect.width + itemGap,
+      y: 0,
+      ...defaultScale
+    };
+  }
+
+  return {
+    x: 0,
+    y: 0,
+    ...defaultScale
+  };
+};
+
+function getItemGap(rects, index, activeIndex) {
+  const currentRect = rects[index];
+  const previousRect = rects[index - 1];
+  const nextRect = rects[index + 1];
+
+  if (!currentRect || !previousRect && !nextRect) {
+    return 0;
+  }
+
+  if (activeIndex < index) {
+    return previousRect ? currentRect.left - (previousRect.left + previousRect.width) : nextRect.left - (currentRect.left + currentRect.width);
+  }
+
+  return nextRect ? nextRect.left - (currentRect.left + currentRect.width) : currentRect.left - (previousRect.left + previousRect.width);
+}
+
+const rectSortingStrategy = _ref => {
+  let {
+    rects,
+    activeIndex,
+    overIndex,
+    index
+  } = _ref;
+  const newRects = arrayMove(rects, overIndex, activeIndex);
+  const oldRect = rects[index];
+  const newRect = newRects[index];
+
+  if (!newRect || !oldRect) {
+    return null;
+  }
+
+  return {
+    x: newRect.left - oldRect.left,
+    y: newRect.top - oldRect.top,
+    scaleX: newRect.width / oldRect.width,
+    scaleY: newRect.height / oldRect.height
+  };
+};
+
+const rectSwappingStrategy = _ref => {
+  let {
+    activeIndex,
+    index,
+    rects,
+    overIndex
+  } = _ref;
+  let oldRect;
+  let newRect;
+
+  if (index === activeIndex) {
+    oldRect = rects[index];
+    newRect = rects[overIndex];
+  }
+
+  if (index === overIndex) {
+    oldRect = rects[index];
+    newRect = rects[activeIndex];
+  }
+
+  if (!newRect || !oldRect) {
+    return null;
+  }
+
+  return {
+    x: newRect.left - oldRect.left,
+    y: newRect.top - oldRect.top,
+    scaleX: newRect.width / oldRect.width,
+    scaleY: newRect.height / oldRect.height
+  };
+};
+
+// To-do: We should be calculating scale transformation
+const defaultScale$1 = {
+  scaleX: 1,
+  scaleY: 1
+};
+const verticalListSortingStrategy = _ref => {
+  var _rects$activeIndex;
+
+  let {
+    activeIndex,
+    activeNodeRect: fallbackActiveRect,
+    index,
+    rects,
+    overIndex
+  } = _ref;
+  const activeNodeRect = (_rects$activeIndex = rects[activeIndex]) != null ? _rects$activeIndex : fallbackActiveRect;
+
+  if (!activeNodeRect) {
+    return null;
+  }
+
+  if (index === activeIndex) {
+    const overIndexRect = rects[overIndex];
+
+    if (!overIndexRect) {
+      return null;
+    }
+
+    return {
+      x: 0,
+      y: activeIndex < overIndex ? overIndexRect.top + overIndexRect.height - (activeNodeRect.top + activeNodeRect.height) : overIndexRect.top - activeNodeRect.top,
+      ...defaultScale$1
+    };
+  }
+
+  const itemGap = getItemGap$1(rects, index, activeIndex);
+
+  if (index > activeIndex && index <= overIndex) {
+    return {
+      x: 0,
+      y: -activeNodeRect.height - itemGap,
+      ...defaultScale$1
+    };
+  }
+
+  if (index < activeIndex && index >= overIndex) {
+    return {
+      x: 0,
+      y: activeNodeRect.height + itemGap,
+      ...defaultScale$1
+    };
+  }
+
+  return {
+    x: 0,
+    y: 0,
+    ...defaultScale$1
+  };
+};
+
+function getItemGap$1(clientRects, index, activeIndex) {
+  const currentRect = clientRects[index];
+  const previousRect = clientRects[index - 1];
+  const nextRect = clientRects[index + 1];
+
+  if (!currentRect) {
+    return 0;
+  }
+
+  if (activeIndex < index) {
+    return previousRect ? currentRect.top - (previousRect.top + previousRect.height) : nextRect ? nextRect.top - (currentRect.top + currentRect.height) : 0;
+  }
+
+  return nextRect ? nextRect.top - (currentRect.top + currentRect.height) : previousRect ? currentRect.top - (previousRect.top + previousRect.height) : 0;
+}
+
+const ID_PREFIX = 'Sortable';
+const Context = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext({
+  activeIndex: -1,
+  containerId: ID_PREFIX,
+  disableTransforms: false,
+  items: [],
+  overIndex: -1,
+  useDragOverlay: false,
+  sortedRects: [],
+  strategy: rectSortingStrategy,
+  disabled: {
+    draggable: false,
+    droppable: false
+  }
+});
+function SortableContext(_ref) {
+  let {
+    children,
+    id,
+    items: userDefinedItems,
+    strategy = rectSortingStrategy,
+    disabled: disabledProp = false
+  } = _ref;
+  const {
+    active,
+    dragOverlay,
+    droppableRects,
+    over,
+    measureDroppableContainers
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDndContext)();
+  const containerId = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useUniqueId)(ID_PREFIX, id);
+  const useDragOverlay = Boolean(dragOverlay.rect !== null);
+  const items = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => userDefinedItems.map(item => typeof item === 'object' && 'id' in item ? item.id : item), [userDefinedItems]);
+  const isDragging = active != null;
+  const activeIndex = active ? items.indexOf(active.id) : -1;
+  const overIndex = over ? items.indexOf(over.id) : -1;
+  const previousItemsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(items);
+  const itemsHaveChanged = !itemsEqual(items, previousItemsRef.current);
+  const disableTransforms = overIndex !== -1 && activeIndex === -1 || itemsHaveChanged;
+  const disabled = normalizeDisabled(disabledProp);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    if (itemsHaveChanged && isDragging) {
+      measureDroppableContainers(items);
+    }
+  }, [itemsHaveChanged, items, isDragging, measureDroppableContainers]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    previousItemsRef.current = items;
+  }, [items]);
+  const contextValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    activeIndex,
+    containerId,
+    disabled,
+    disableTransforms,
+    items,
+    overIndex,
+    useDragOverlay,
+    sortedRects: getSortedRects(items, droppableRects),
+    strategy
+  }), // eslint-disable-next-line react-hooks/exhaustive-deps
+  [activeIndex, containerId, disabled.draggable, disabled.droppable, disableTransforms, items, overIndex, droppableRects, useDragOverlay, strategy]);
+  return react__WEBPACK_IMPORTED_MODULE_0__.createElement(Context.Provider, {
+    value: contextValue
+  }, children);
+}
+
+const defaultNewIndexGetter = _ref => {
+  let {
+    id,
+    items,
+    activeIndex,
+    overIndex
+  } = _ref;
+  return arrayMove(items, activeIndex, overIndex).indexOf(id);
+};
+const defaultAnimateLayoutChanges = _ref2 => {
+  let {
+    containerId,
+    isSorting,
+    wasDragging,
+    index,
+    items,
+    newIndex,
+    previousItems,
+    previousContainerId,
+    transition
+  } = _ref2;
+
+  if (!transition || !wasDragging) {
+    return false;
+  }
+
+  if (previousItems !== items && index === newIndex) {
+    return false;
+  }
+
+  if (isSorting) {
+    return true;
+  }
+
+  return newIndex !== index && containerId === previousContainerId;
+};
+const defaultTransition = {
+  duration: 200,
+  easing: 'ease'
+};
+const transitionProperty = 'transform';
+const disabledTransition = /*#__PURE__*/_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transition.toString({
+  property: transitionProperty,
+  duration: 0,
+  easing: 'linear'
+});
+const defaultAttributes = {
+  roleDescription: 'sortable'
+};
+
+/*
+ * When the index of an item changes while sorting,
+ * we need to temporarily disable the transforms
+ */
+
+function useDerivedTransform(_ref) {
+  let {
+    disabled,
+    index,
+    node,
+    rect
+  } = _ref;
+  const [derivedTransform, setDerivedtransform] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const previousIndex = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(index);
+  (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useIsomorphicLayoutEffect)(() => {
+    if (!disabled && index !== previousIndex.current && node.current) {
+      const initial = rect.current;
+
+      if (initial) {
+        const current = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getClientRect)(node.current, {
+          ignoreTransform: true
+        });
+        const delta = {
+          x: initial.left - current.left,
+          y: initial.top - current.top,
+          scaleX: initial.width / current.width,
+          scaleY: initial.height / current.height
+        };
+
+        if (delta.x || delta.y) {
+          setDerivedtransform(delta);
+        }
+      }
+    }
+
+    if (index !== previousIndex.current) {
+      previousIndex.current = index;
+    }
+  }, [disabled, index, node, rect]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (derivedTransform) {
+      setDerivedtransform(null);
+    }
+  }, [derivedTransform]);
+  return derivedTransform;
+}
+
+function useSortable(_ref) {
+  let {
+    animateLayoutChanges = defaultAnimateLayoutChanges,
+    attributes: userDefinedAttributes,
+    disabled: localDisabled,
+    data: customData,
+    getNewIndex = defaultNewIndexGetter,
+    id,
+    strategy: localStrategy,
+    resizeObserverConfig,
+    transition = defaultTransition
+  } = _ref;
+  const {
+    items,
+    containerId,
+    activeIndex,
+    disabled: globalDisabled,
+    disableTransforms,
+    sortedRects,
+    overIndex,
+    useDragOverlay,
+    strategy: globalStrategy
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(Context);
+  const disabled = normalizeLocalDisabled(localDisabled, globalDisabled);
+  const index = items.indexOf(id);
+  const data = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    sortable: {
+      containerId,
+      index,
+      items
+    },
+    ...customData
+  }), [containerId, customData, index, items]);
+  const itemsAfterCurrentSortable = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => items.slice(items.indexOf(id)), [items, id]);
+  const {
+    rect,
+    node,
+    isOver,
+    setNodeRef: setDroppableNodeRef
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDroppable)({
+    id,
+    data,
+    disabled: disabled.droppable,
+    resizeObserverConfig: {
+      updateMeasurementsFor: itemsAfterCurrentSortable,
+      ...resizeObserverConfig
+    }
+  });
+  const {
+    active,
+    activatorEvent,
+    activeNodeRect,
+    attributes,
+    setNodeRef: setDraggableNodeRef,
+    listeners,
+    isDragging,
+    over,
+    setActivatorNodeRef,
+    transform
+  } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.useDraggable)({
+    id,
+    data,
+    attributes: { ...defaultAttributes,
+      ...userDefinedAttributes
+    },
+    disabled: disabled.draggable
+  });
+  const setNodeRef = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.useCombinedRefs)(setDroppableNodeRef, setDraggableNodeRef);
+  const isSorting = Boolean(active);
+  const displaceItem = isSorting && !disableTransforms && isValidIndex(activeIndex) && isValidIndex(overIndex);
+  const shouldDisplaceDragSource = !useDragOverlay && isDragging;
+  const dragSourceDisplacement = shouldDisplaceDragSource && displaceItem ? transform : null;
+  const strategy = localStrategy != null ? localStrategy : globalStrategy;
+  const finalTransform = displaceItem ? dragSourceDisplacement != null ? dragSourceDisplacement : strategy({
+    rects: sortedRects,
+    activeNodeRect,
+    activeIndex,
+    overIndex,
+    index
+  }) : null;
+  const newIndex = isValidIndex(activeIndex) && isValidIndex(overIndex) ? getNewIndex({
+    id,
+    items,
+    activeIndex,
+    overIndex
+  }) : index;
+  const activeId = active == null ? void 0 : active.id;
+  const previous = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    activeId,
+    items,
+    newIndex,
+    containerId
+  });
+  const itemsHaveChanged = items !== previous.current.items;
+  const shouldAnimateLayoutChanges = animateLayoutChanges({
+    active,
+    containerId,
+    isDragging,
+    isSorting,
+    id,
+    index,
+    items,
+    newIndex: previous.current.newIndex,
+    previousItems: previous.current.items,
+    previousContainerId: previous.current.containerId,
+    transition,
+    wasDragging: previous.current.activeId != null
+  });
+  const derivedTransform = useDerivedTransform({
+    disabled: !shouldAnimateLayoutChanges,
+    index,
+    node,
+    rect
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (isSorting && previous.current.newIndex !== newIndex) {
+      previous.current.newIndex = newIndex;
+    }
+
+    if (containerId !== previous.current.containerId) {
+      previous.current.containerId = containerId;
+    }
+
+    if (items !== previous.current.items) {
+      previous.current.items = items;
+    }
+  }, [isSorting, newIndex, containerId, items]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (activeId === previous.current.activeId) {
+      return;
+    }
+
+    if (activeId && !previous.current.activeId) {
+      previous.current.activeId = activeId;
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      previous.current.activeId = activeId;
+    }, 50);
+    return () => clearTimeout(timeoutId);
+  }, [activeId]);
+  return {
+    active,
+    activeIndex,
+    attributes,
+    data,
+    rect,
+    index,
+    newIndex,
+    items,
+    isOver,
+    isSorting,
+    isDragging,
+    listeners,
+    node,
+    overIndex,
+    over,
+    setNodeRef,
+    setActivatorNodeRef,
+    setDroppableNodeRef,
+    setDraggableNodeRef,
+    transform: derivedTransform != null ? derivedTransform : finalTransform,
+    transition: getTransition()
+  };
+
+  function getTransition() {
+    if ( // Temporarily disable transitions for a single frame to set up derived transforms
+    derivedTransform || // Or to prevent items jumping to back to their "new" position when items change
+    itemsHaveChanged && previous.current.newIndex === index) {
+      return disabledTransition;
+    }
+
+    if (shouldDisplaceDragSource && !(0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.isKeyboardEvent)(activatorEvent) || !transition) {
+      return undefined;
+    }
+
+    if (isSorting || shouldAnimateLayoutChanges) {
+      return _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.CSS.Transition.toString({ ...transition,
+        property: transitionProperty
+      });
+    }
+
+    return undefined;
+  }
+}
+
+function normalizeLocalDisabled(localDisabled, globalDisabled) {
+  var _localDisabled$dragga, _localDisabled$droppa;
+
+  if (typeof localDisabled === 'boolean') {
+    return {
+      draggable: localDisabled,
+      // Backwards compatibility
+      droppable: false
+    };
+  }
+
+  return {
+    draggable: (_localDisabled$dragga = localDisabled == null ? void 0 : localDisabled.draggable) != null ? _localDisabled$dragga : globalDisabled.draggable,
+    droppable: (_localDisabled$droppa = localDisabled == null ? void 0 : localDisabled.droppable) != null ? _localDisabled$droppa : globalDisabled.droppable
+  };
+}
+
+function hasSortableData(entry) {
+  if (!entry) {
+    return false;
+  }
+
+  const data = entry.data.current;
+
+  if (data && 'sortable' in data && typeof data.sortable === 'object' && 'containerId' in data.sortable && 'items' in data.sortable && 'index' in data.sortable) {
+    return true;
+  }
+
+  return false;
+}
+
+const directions = [_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Down, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Right, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Up, _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Left];
+const sortableKeyboardCoordinates = (event, _ref) => {
+  let {
+    context: {
+      active,
+      collisionRect,
+      droppableRects,
+      droppableContainers,
+      over,
+      scrollableAncestors
+    }
+  } = _ref;
+
+  if (directions.includes(event.code)) {
+    event.preventDefault();
+
+    if (!active || !collisionRect) {
+      return;
+    }
+
+    const filteredContainers = [];
+    droppableContainers.getEnabled().forEach(entry => {
+      if (!entry || entry != null && entry.disabled) {
+        return;
+      }
+
+      const rect = droppableRects.get(entry.id);
+
+      if (!rect) {
+        return;
+      }
+
+      switch (event.code) {
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Down:
+          if (collisionRect.top < rect.top) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Up:
+          if (collisionRect.top > rect.top) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Left:
+          if (collisionRect.left > rect.left) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+
+        case _dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.KeyboardCode.Right:
+          if (collisionRect.left < rect.left) {
+            filteredContainers.push(entry);
+          }
+
+          break;
+      }
+    });
+    const collisions = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.closestCorners)({
+      active,
+      collisionRect: collisionRect,
+      droppableRects,
+      droppableContainers: filteredContainers,
+      pointerCoordinates: null
+    });
+    let closestId = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getFirstCollision)(collisions, 'id');
+
+    if (closestId === (over == null ? void 0 : over.id) && collisions.length > 1) {
+      closestId = collisions[1].id;
+    }
+
+    if (closestId != null) {
+      const activeDroppable = droppableContainers.get(active.id);
+      const newDroppable = droppableContainers.get(closestId);
+      const newRect = newDroppable ? droppableRects.get(newDroppable.id) : null;
+      const newNode = newDroppable == null ? void 0 : newDroppable.node.current;
+
+      if (newNode && newRect && activeDroppable && newDroppable) {
+        const newScrollAncestors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_1__.getScrollableAncestors)(newNode);
+        const hasDifferentScrollAncestors = newScrollAncestors.some((element, index) => scrollableAncestors[index] !== element);
+        const hasSameContainer = isSameContainer(activeDroppable, newDroppable);
+        const isAfterActive = isAfter(activeDroppable, newDroppable);
+        const offset = hasDifferentScrollAncestors || !hasSameContainer ? {
+          x: 0,
+          y: 0
+        } : {
+          x: isAfterActive ? collisionRect.width - newRect.width : 0,
+          y: isAfterActive ? collisionRect.height - newRect.height : 0
+        };
+        const rectCoordinates = {
+          x: newRect.left,
+          y: newRect.top
+        };
+        const newCoordinates = offset.x && offset.y ? rectCoordinates : (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__.subtract)(rectCoordinates, offset);
+        return newCoordinates;
+      }
+    }
+  }
+
+  return undefined;
+};
+
+function isSameContainer(a, b) {
+  if (!hasSortableData(a) || !hasSortableData(b)) {
+    return false;
+  }
+
+  return a.data.current.sortable.containerId === b.data.current.sortable.containerId;
+}
+
+function isAfter(a, b) {
+  if (!hasSortableData(a) || !hasSortableData(b)) {
+    return false;
+  }
+
+  if (!isSameContainer(a, b)) {
+    return false;
+  }
+
+  return a.data.current.sortable.index < b.data.current.sortable.index;
+}
+
+
+//# sourceMappingURL=sortable.esm.js.map
+
 
 /***/ }),
 
@@ -36,8 +4957,371 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"CSS\": () => (/* binding */ CSS),\n/* harmony export */   \"add\": () => (/* binding */ add),\n/* harmony export */   \"canUseDOM\": () => (/* binding */ canUseDOM),\n/* harmony export */   \"findFirstFocusableNode\": () => (/* binding */ findFirstFocusableNode),\n/* harmony export */   \"getEventCoordinates\": () => (/* binding */ getEventCoordinates),\n/* harmony export */   \"getOwnerDocument\": () => (/* binding */ getOwnerDocument),\n/* harmony export */   \"getWindow\": () => (/* binding */ getWindow),\n/* harmony export */   \"hasViewportRelativeCoordinates\": () => (/* binding */ hasViewportRelativeCoordinates),\n/* harmony export */   \"isDocument\": () => (/* binding */ isDocument),\n/* harmony export */   \"isHTMLElement\": () => (/* binding */ isHTMLElement),\n/* harmony export */   \"isKeyboardEvent\": () => (/* binding */ isKeyboardEvent),\n/* harmony export */   \"isNode\": () => (/* binding */ isNode),\n/* harmony export */   \"isSVGElement\": () => (/* binding */ isSVGElement),\n/* harmony export */   \"isTouchEvent\": () => (/* binding */ isTouchEvent),\n/* harmony export */   \"isWindow\": () => (/* binding */ isWindow),\n/* harmony export */   \"subtract\": () => (/* binding */ subtract),\n/* harmony export */   \"useCombinedRefs\": () => (/* binding */ useCombinedRefs),\n/* harmony export */   \"useEvent\": () => (/* binding */ useEvent),\n/* harmony export */   \"useInterval\": () => (/* binding */ useInterval),\n/* harmony export */   \"useIsomorphicLayoutEffect\": () => (/* binding */ useIsomorphicLayoutEffect),\n/* harmony export */   \"useLatestValue\": () => (/* binding */ useLatestValue),\n/* harmony export */   \"useLazyMemo\": () => (/* binding */ useLazyMemo),\n/* harmony export */   \"useNodeRef\": () => (/* binding */ useNodeRef),\n/* harmony export */   \"usePrevious\": () => (/* binding */ usePrevious),\n/* harmony export */   \"useUniqueId\": () => (/* binding */ useUniqueId)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7294);\n\n\nfunction useCombinedRefs() {\n  for (var _len = arguments.length, refs = new Array(_len), _key = 0; _key < _len; _key++) {\n    refs[_key] = arguments[_key];\n  }\n\n  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => node => {\n    refs.forEach(ref => ref(node));\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  refs);\n}\n\n// https://github.com/facebook/react/blob/master/packages/shared/ExecutionEnvironment.js\nconst canUseDOM = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined';\n\nfunction isWindow(element) {\n  const elementString = Object.prototype.toString.call(element);\n  return elementString === '[object Window]' || // In Electron context the Window object serializes to [object global]\n  elementString === '[object global]';\n}\n\nfunction isNode(node) {\n  return 'nodeType' in node;\n}\n\nfunction getWindow(target) {\n  var _target$ownerDocument, _target$ownerDocument2;\n\n  if (!target) {\n    return window;\n  }\n\n  if (isWindow(target)) {\n    return target;\n  }\n\n  if (!isNode(target)) {\n    return window;\n  }\n\n  return (_target$ownerDocument = (_target$ownerDocument2 = target.ownerDocument) == null ? void 0 : _target$ownerDocument2.defaultView) != null ? _target$ownerDocument : window;\n}\n\nfunction isDocument(node) {\n  const {\n    Document\n  } = getWindow(node);\n  return node instanceof Document;\n}\n\nfunction isHTMLElement(node) {\n  if (isWindow(node)) {\n    return false;\n  }\n\n  return node instanceof getWindow(node).HTMLElement;\n}\n\nfunction isSVGElement(node) {\n  return node instanceof getWindow(node).SVGElement;\n}\n\nfunction getOwnerDocument(target) {\n  if (!target) {\n    return document;\n  }\n\n  if (isWindow(target)) {\n    return target.document;\n  }\n\n  if (!isNode(target)) {\n    return document;\n  }\n\n  if (isDocument(target)) {\n    return target;\n  }\n\n  if (isHTMLElement(target) || isSVGElement(target)) {\n    return target.ownerDocument;\n  }\n\n  return document;\n}\n\n/**\r\n * A hook that resolves to useEffect on the server and useLayoutEffect on the client\r\n * @param callback {function} Callback function that is invoked when the dependencies of the hook change\r\n */\n\nconst useIsomorphicLayoutEffect = canUseDOM ? react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect : react__WEBPACK_IMPORTED_MODULE_0__.useEffect;\n\nfunction useEvent(handler) {\n  const handlerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(handler);\n  useIsomorphicLayoutEffect(() => {\n    handlerRef.current = handler;\n  });\n  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {\n    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {\n      args[_key] = arguments[_key];\n    }\n\n    return handlerRef.current == null ? void 0 : handlerRef.current(...args);\n  }, []);\n}\n\nfunction useInterval() {\n  const intervalRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);\n  const set = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((listener, duration) => {\n    intervalRef.current = setInterval(listener, duration);\n  }, []);\n  const clear = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {\n    if (intervalRef.current !== null) {\n      clearInterval(intervalRef.current);\n      intervalRef.current = null;\n    }\n  }, []);\n  return [set, clear];\n}\n\nfunction useLatestValue(value, dependencies) {\n  if (dependencies === void 0) {\n    dependencies = [value];\n  }\n\n  const valueRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(value);\n  useIsomorphicLayoutEffect(() => {\n    if (valueRef.current !== value) {\n      valueRef.current = value;\n    }\n  }, dependencies);\n  return valueRef;\n}\n\nfunction useLazyMemo(callback, dependencies) {\n  const valueRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();\n  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {\n    const newValue = callback(valueRef.current);\n    valueRef.current = newValue;\n    return newValue;\n  }, // eslint-disable-next-line react-hooks/exhaustive-deps\n  [...dependencies]);\n}\n\nfunction useNodeRef(onChange) {\n  const onChangeHandler = useEvent(onChange);\n  const node = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);\n  const setNodeRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(element => {\n    if (element !== node.current) {\n      onChangeHandler == null ? void 0 : onChangeHandler(element, node.current);\n    }\n\n    node.current = element;\n  }, //eslint-disable-next-line\n  []);\n  return [node, setNodeRef];\n}\n\nfunction usePrevious(value) {\n  const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    ref.current = value;\n  }, [value]);\n  return ref.current;\n}\n\nlet ids = {};\nfunction useUniqueId(prefix, value) {\n  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {\n    if (value) {\n      return value;\n    }\n\n    const id = ids[prefix] == null ? 0 : ids[prefix] + 1;\n    ids[prefix] = id;\n    return prefix + \"-\" + id;\n  }, [prefix, value]);\n}\n\nfunction createAdjustmentFn(modifier) {\n  return function (object) {\n    for (var _len = arguments.length, adjustments = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {\n      adjustments[_key - 1] = arguments[_key];\n    }\n\n    return adjustments.reduce((accumulator, adjustment) => {\n      const entries = Object.entries(adjustment);\n\n      for (const [key, valueAdjustment] of entries) {\n        const value = accumulator[key];\n\n        if (value != null) {\n          accumulator[key] = value + modifier * valueAdjustment;\n        }\n      }\n\n      return accumulator;\n    }, { ...object\n    });\n  };\n}\n\nconst add = /*#__PURE__*/createAdjustmentFn(1);\nconst subtract = /*#__PURE__*/createAdjustmentFn(-1);\n\nfunction hasViewportRelativeCoordinates(event) {\n  return 'clientX' in event && 'clientY' in event;\n}\n\nfunction isKeyboardEvent(event) {\n  if (!event) {\n    return false;\n  }\n\n  const {\n    KeyboardEvent\n  } = getWindow(event.target);\n  return KeyboardEvent && event instanceof KeyboardEvent;\n}\n\nfunction isTouchEvent(event) {\n  if (!event) {\n    return false;\n  }\n\n  const {\n    TouchEvent\n  } = getWindow(event.target);\n  return TouchEvent && event instanceof TouchEvent;\n}\n\n/**\r\n * Returns the normalized x and y coordinates for mouse and touch events.\r\n */\n\nfunction getEventCoordinates(event) {\n  if (isTouchEvent(event)) {\n    if (event.touches && event.touches.length) {\n      const {\n        clientX: x,\n        clientY: y\n      } = event.touches[0];\n      return {\n        x,\n        y\n      };\n    } else if (event.changedTouches && event.changedTouches.length) {\n      const {\n        clientX: x,\n        clientY: y\n      } = event.changedTouches[0];\n      return {\n        x,\n        y\n      };\n    }\n  }\n\n  if (hasViewportRelativeCoordinates(event)) {\n    return {\n      x: event.clientX,\n      y: event.clientY\n    };\n  }\n\n  return null;\n}\n\nconst CSS = /*#__PURE__*/Object.freeze({\n  Translate: {\n    toString(transform) {\n      if (!transform) {\n        return;\n      }\n\n      const {\n        x,\n        y\n      } = transform;\n      return \"translate3d(\" + (x ? Math.round(x) : 0) + \"px, \" + (y ? Math.round(y) : 0) + \"px, 0)\";\n    }\n\n  },\n  Scale: {\n    toString(transform) {\n      if (!transform) {\n        return;\n      }\n\n      const {\n        scaleX,\n        scaleY\n      } = transform;\n      return \"scaleX(\" + scaleX + \") scaleY(\" + scaleY + \")\";\n    }\n\n  },\n  Transform: {\n    toString(transform) {\n      if (!transform) {\n        return;\n      }\n\n      return [CSS.Translate.toString(transform), CSS.Scale.toString(transform)].join(' ');\n    }\n\n  },\n  Transition: {\n    toString(_ref) {\n      let {\n        property,\n        duration,\n        easing\n      } = _ref;\n      return property + \" \" + duration + \"ms \" + easing;\n    }\n\n  }\n});\n\nconst SELECTOR = 'a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not(:disabled),*[tabindex]';\nfunction findFirstFocusableNode(element) {\n  if (element.matches(SELECTOR)) {\n    return element;\n  }\n\n  return element.querySelector(SELECTOR);\n}\n\n\n//# sourceMappingURL=utilities.esm.js.map\n\n\n//# sourceURL=webpack://advanced-custom-post-type-lite/./node_modules/@dnd-kit/utilities/dist/utilities.esm.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CSS": () => (/* binding */ CSS),
+/* harmony export */   "add": () => (/* binding */ add),
+/* harmony export */   "canUseDOM": () => (/* binding */ canUseDOM),
+/* harmony export */   "findFirstFocusableNode": () => (/* binding */ findFirstFocusableNode),
+/* harmony export */   "getEventCoordinates": () => (/* binding */ getEventCoordinates),
+/* harmony export */   "getOwnerDocument": () => (/* binding */ getOwnerDocument),
+/* harmony export */   "getWindow": () => (/* binding */ getWindow),
+/* harmony export */   "hasViewportRelativeCoordinates": () => (/* binding */ hasViewportRelativeCoordinates),
+/* harmony export */   "isDocument": () => (/* binding */ isDocument),
+/* harmony export */   "isHTMLElement": () => (/* binding */ isHTMLElement),
+/* harmony export */   "isKeyboardEvent": () => (/* binding */ isKeyboardEvent),
+/* harmony export */   "isNode": () => (/* binding */ isNode),
+/* harmony export */   "isSVGElement": () => (/* binding */ isSVGElement),
+/* harmony export */   "isTouchEvent": () => (/* binding */ isTouchEvent),
+/* harmony export */   "isWindow": () => (/* binding */ isWindow),
+/* harmony export */   "subtract": () => (/* binding */ subtract),
+/* harmony export */   "useCombinedRefs": () => (/* binding */ useCombinedRefs),
+/* harmony export */   "useEvent": () => (/* binding */ useEvent),
+/* harmony export */   "useInterval": () => (/* binding */ useInterval),
+/* harmony export */   "useIsomorphicLayoutEffect": () => (/* binding */ useIsomorphicLayoutEffect),
+/* harmony export */   "useLatestValue": () => (/* binding */ useLatestValue),
+/* harmony export */   "useLazyMemo": () => (/* binding */ useLazyMemo),
+/* harmony export */   "useNodeRef": () => (/* binding */ useNodeRef),
+/* harmony export */   "usePrevious": () => (/* binding */ usePrevious),
+/* harmony export */   "useUniqueId": () => (/* binding */ useUniqueId)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7294);
+
+
+function useCombinedRefs() {
+  for (var _len = arguments.length, refs = new Array(_len), _key = 0; _key < _len; _key++) {
+    refs[_key] = arguments[_key];
+  }
+
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => node => {
+    refs.forEach(ref => ref(node));
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  refs);
+}
+
+// https://github.com/facebook/react/blob/master/packages/shared/ExecutionEnvironment.js
+const canUseDOM = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined';
+
+function isWindow(element) {
+  const elementString = Object.prototype.toString.call(element);
+  return elementString === '[object Window]' || // In Electron context the Window object serializes to [object global]
+  elementString === '[object global]';
+}
+
+function isNode(node) {
+  return 'nodeType' in node;
+}
+
+function getWindow(target) {
+  var _target$ownerDocument, _target$ownerDocument2;
+
+  if (!target) {
+    return window;
+  }
+
+  if (isWindow(target)) {
+    return target;
+  }
+
+  if (!isNode(target)) {
+    return window;
+  }
+
+  return (_target$ownerDocument = (_target$ownerDocument2 = target.ownerDocument) == null ? void 0 : _target$ownerDocument2.defaultView) != null ? _target$ownerDocument : window;
+}
+
+function isDocument(node) {
+  const {
+    Document
+  } = getWindow(node);
+  return node instanceof Document;
+}
+
+function isHTMLElement(node) {
+  if (isWindow(node)) {
+    return false;
+  }
+
+  return node instanceof getWindow(node).HTMLElement;
+}
+
+function isSVGElement(node) {
+  return node instanceof getWindow(node).SVGElement;
+}
+
+function getOwnerDocument(target) {
+  if (!target) {
+    return document;
+  }
+
+  if (isWindow(target)) {
+    return target.document;
+  }
+
+  if (!isNode(target)) {
+    return document;
+  }
+
+  if (isDocument(target)) {
+    return target;
+  }
+
+  if (isHTMLElement(target) || isSVGElement(target)) {
+    return target.ownerDocument;
+  }
+
+  return document;
+}
+
+/**
+ * A hook that resolves to useEffect on the server and useLayoutEffect on the client
+ * @param callback {function} Callback function that is invoked when the dependencies of the hook change
+ */
+
+const useIsomorphicLayoutEffect = canUseDOM ? react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect : react__WEBPACK_IMPORTED_MODULE_0__.useEffect;
+
+function useEvent(handler) {
+  const handlerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(handler);
+  useIsomorphicLayoutEffect(() => {
+    handlerRef.current = handler;
+  });
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return handlerRef.current == null ? void 0 : handlerRef.current(...args);
+  }, []);
+}
+
+function useInterval() {
+  const intervalRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const set = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((listener, duration) => {
+    intervalRef.current = setInterval(listener, duration);
+  }, []);
+  const clear = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+  return [set, clear];
+}
+
+function useLatestValue(value, dependencies) {
+  if (dependencies === void 0) {
+    dependencies = [value];
+  }
+
+  const valueRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(value);
+  useIsomorphicLayoutEffect(() => {
+    if (valueRef.current !== value) {
+      valueRef.current = value;
+    }
+  }, dependencies);
+  return valueRef;
+}
+
+function useLazyMemo(callback, dependencies) {
+  const valueRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    const newValue = callback(valueRef.current);
+    valueRef.current = newValue;
+    return newValue;
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [...dependencies]);
+}
+
+function useNodeRef(onChange) {
+  const onChangeHandler = useEvent(onChange);
+  const node = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const setNodeRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(element => {
+    if (element !== node.current) {
+      onChangeHandler == null ? void 0 : onChangeHandler(element, node.current);
+    }
+
+    node.current = element;
+  }, //eslint-disable-next-line
+  []);
+  return [node, setNodeRef];
+}
+
+function usePrevious(value) {
+  const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+
+let ids = {};
+function useUniqueId(prefix, value) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (value) {
+      return value;
+    }
+
+    const id = ids[prefix] == null ? 0 : ids[prefix] + 1;
+    ids[prefix] = id;
+    return prefix + "-" + id;
+  }, [prefix, value]);
+}
+
+function createAdjustmentFn(modifier) {
+  return function (object) {
+    for (var _len = arguments.length, adjustments = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      adjustments[_key - 1] = arguments[_key];
+    }
+
+    return adjustments.reduce((accumulator, adjustment) => {
+      const entries = Object.entries(adjustment);
+
+      for (const [key, valueAdjustment] of entries) {
+        const value = accumulator[key];
+
+        if (value != null) {
+          accumulator[key] = value + modifier * valueAdjustment;
+        }
+      }
+
+      return accumulator;
+    }, { ...object
+    });
+  };
+}
+
+const add = /*#__PURE__*/createAdjustmentFn(1);
+const subtract = /*#__PURE__*/createAdjustmentFn(-1);
+
+function hasViewportRelativeCoordinates(event) {
+  return 'clientX' in event && 'clientY' in event;
+}
+
+function isKeyboardEvent(event) {
+  if (!event) {
+    return false;
+  }
+
+  const {
+    KeyboardEvent
+  } = getWindow(event.target);
+  return KeyboardEvent && event instanceof KeyboardEvent;
+}
+
+function isTouchEvent(event) {
+  if (!event) {
+    return false;
+  }
+
+  const {
+    TouchEvent
+  } = getWindow(event.target);
+  return TouchEvent && event instanceof TouchEvent;
+}
+
+/**
+ * Returns the normalized x and y coordinates for mouse and touch events.
+ */
+
+function getEventCoordinates(event) {
+  if (isTouchEvent(event)) {
+    if (event.touches && event.touches.length) {
+      const {
+        clientX: x,
+        clientY: y
+      } = event.touches[0];
+      return {
+        x,
+        y
+      };
+    } else if (event.changedTouches && event.changedTouches.length) {
+      const {
+        clientX: x,
+        clientY: y
+      } = event.changedTouches[0];
+      return {
+        x,
+        y
+      };
+    }
+  }
+
+  if (hasViewportRelativeCoordinates(event)) {
+    return {
+      x: event.clientX,
+      y: event.clientY
+    };
+  }
+
+  return null;
+}
+
+const CSS = /*#__PURE__*/Object.freeze({
+  Translate: {
+    toString(transform) {
+      if (!transform) {
+        return;
+      }
+
+      const {
+        x,
+        y
+      } = transform;
+      return "translate3d(" + (x ? Math.round(x) : 0) + "px, " + (y ? Math.round(y) : 0) + "px, 0)";
+    }
+
+  },
+  Scale: {
+    toString(transform) {
+      if (!transform) {
+        return;
+      }
+
+      const {
+        scaleX,
+        scaleY
+      } = transform;
+      return "scaleX(" + scaleX + ") scaleY(" + scaleY + ")";
+    }
+
+  },
+  Transform: {
+    toString(transform) {
+      if (!transform) {
+        return;
+      }
+
+      return [CSS.Translate.toString(transform), CSS.Scale.toString(transform)].join(' ');
+    }
+
+  },
+  Transition: {
+    toString(_ref) {
+      let {
+        property,
+        duration,
+        easing
+      } = _ref;
+      return property + " " + duration + "ms " + easing;
+    }
+
+  }
+});
+
+const SELECTOR = 'a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not(:disabled),*[tabindex]';
+function findFirstFocusableNode(element) {
+  if (element.matches(SELECTOR)) {
+    return element;
+  }
+
+  return element.querySelector(SELECTOR);
+}
+
+
+//# sourceMappingURL=utilities.esm.js.map
+
 
 /***/ })
 
 }]);
+//# sourceMappingURL=12.js.map

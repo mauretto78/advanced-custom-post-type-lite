@@ -35,7 +35,7 @@ const MetaGroupSettings = ({groupId}) => {
         const newBelong = {
             id: uuidv4(),
             belongsTo: null,
-            operator: null,
+            operator: "=",
             find: null,
             logic: null
         };
