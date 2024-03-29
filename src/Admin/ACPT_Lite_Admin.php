@@ -539,30 +539,28 @@ class ACPT_Lite_Admin
 
 				// 1. POST_TYPE
 				if($metaGroupModel->belongsTo(MetaTypes::CUSTOM_POST_TYPE, Operator::EQUALS, $postType)){
-
 					$postTypeMetaGroups[] = $metaGroupModel;
-
-					$postIds = get_posts([
-						'fields'         => 'ids',
-						'post_type'      => $postType,
-						'posts_per_page' => -1,
-					]);
-
 					$generator = new CustomPostTypeMetaGroupGenerator($metaGroupModel, $postType);
 					$generator->render();
+				}
 
-					// POST_ID
-					if(!empty($postIds)){
-						foreach ($postIds as $postId){
-							if($metaGroupModel->belongsTo(BelongsTo::POST_ID, Operator::EQUALS, $postId)){
-								$postTypeMetaGroups[] = $metaGroupModel;
-								$this->generateMetaBoxesFromPostIds([$postId], $postType, $metaGroupModel);
-							}
+				// 2. POST_ID
+				$postIds = get_posts([
+					'fields'         => 'ids',
+					'post_type'      => $postType,
+					'posts_per_page' => -1,
+				]);
+
+				if(!empty($postIds)){
+					foreach ($postIds as $postId){
+						if($metaGroupModel->belongsTo(BelongsTo::POST_ID, Operator::EQUALS, $postId)){
+							$postTypeMetaGroups[] = $metaGroupModel;
+							$this->generateMetaBoxesFromPostIds([$postId], $postType, $metaGroupModel);
 						}
 					}
 				}
 
-				// 2. POST_TEMPLATE
+				// 3. POST_TEMPLATE
 				if(!empty($templates)){
 					foreach ($templates as $template){
 						$file = get_post_meta($template->ID, '_wp_page_template', true);
@@ -581,7 +579,7 @@ class ACPT_Lite_Admin
 					}
 				}
 
-				// 3. POST_TAX
+				// 4. POST_TAX
 				if(!empty($termIds)){
 					foreach ($termIds as $termId){
 						$taxonomy = $termId['taxonomy'];
@@ -609,7 +607,7 @@ class ACPT_Lite_Admin
 					}
 				}
 
-				// 4. POST_CAT
+				// 5. POST_CAT
 				if(!empty($categoryIds)){
 					foreach ($categoryIds as $categoryId){
 						if($metaGroupModel->belongsTo(BelongsTo::POST_CAT, Operator::EQUALS, $categoryId)){
