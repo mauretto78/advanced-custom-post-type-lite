@@ -13,6 +13,7 @@ use ACPT_Lite\Core\Models\Meta\MetaFieldOptionModel;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\MetaGroupVisibility;
 use ACPT_Lite\Utils\MetaSync\MetaSync;
 
 class MetaRepository extends AbstractRepository
@@ -395,10 +396,6 @@ class MetaRepository extends AbstractRepository
 				'required' => false,
 				'type' => 'string',
 			],
-			'formBuilder' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
 			'lazy' => [
 				'required' => false,
 				'type' => 'boolean',
@@ -419,8 +416,6 @@ class MetaRepository extends AbstractRepository
 		$lazy = isset($args['lazy']) ? $args['lazy'] : false;
 		$boxName = isset($args['boxName']) ? $args['boxName'] : false;
 		$excludeField = isset($args['excludeField']) ? $args['excludeField'] : null;
-		$formBuilder = isset($args['formBuilder']) ? $args['formBuilder'] : false;
-		$gutenberg = isset($args['gutenberg']) ? $args['gutenberg'] : false;
 
 		$groupQueryArgs = [];
 		$groupQuery = "
@@ -498,11 +493,7 @@ class MetaRepository extends AbstractRepository
 			$groupIsVisible = true;
 
 			if($belongsTo){
-				if($find){
-					$groupIsVisible = $groupModel->belongsTo($belongsTo, Operator::EQUALS, $find);
-				} else {
-					$groupIsVisible = $groupModel->belongsTo($belongsTo);
-				}
+				$groupIsVisible = MetaGroupVisibility::isVisible($groupModel, $belongsTo, $find);
 			}
 
 			if($groupIsVisible === true){
