@@ -175,3 +175,4 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 = 2.0.1 (2024-03-30) =
 
 * Meta group location fix
+* Gutenberg block fix
