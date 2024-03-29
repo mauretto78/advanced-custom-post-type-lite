@@ -5,11 +5,11 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create and manage custom post types in seconds. Create and associate taxonomies. Drag & Drop meta box builder that helps you create complex websites with just a few clicks.
+Create and manage custom post types and taxonomies in seconds. Use the meta fields builder to create complex websites with just a few clicks.
 
 == Description ==
 
@@ -176,3 +176,8 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 * Meta group location fix
 * MetaRepository::get() fix
+* Assets fix
+
+= 2.0.2 (2024-03-30) =
+
+* Meta fields bulk delete fix
