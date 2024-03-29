@@ -46,6 +46,12 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
         }
     }, [watchedBelongsTo]);
 
+    useEffect(() => {
+        if(!watchedOperator){
+            setValue(formId("operator"), "=");
+        }
+    }, [watchedOperator]);
+
     /**
      *
      * @return {*[]|*}
