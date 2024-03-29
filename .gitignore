@@ -6,4 +6,3 @@ stats.json
 node_modules/
 /bundle
 .phpunit.result.cache
-assets/build
