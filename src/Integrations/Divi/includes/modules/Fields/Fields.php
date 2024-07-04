@@ -57,7 +57,7 @@ class ACPT_Fields_Divi_Module extends ET_Builder_Module {
      */
     public function enqueue_scripts($args = array(), $conditional_tags = array(), $current_page = array() )
     {
-        wp_register_style( 'acpt-divi-module-css', plugin_dir_url( __FILE__ ) . 'assets/css/fields.css', [], ACPT_PLUGIN_VERSION );
+        wp_register_style( 'acpt-divi-module-css', plugin_dir_url( __FILE__ ) . 'assets/css/fields.css', [], ACPT_LITE_PLUGIN_VERSION );
         wp_enqueue_style( 'acpt-divi-module-css' );
     }
 

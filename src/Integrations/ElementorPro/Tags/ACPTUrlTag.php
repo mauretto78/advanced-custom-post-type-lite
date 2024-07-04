@@ -32,7 +32,7 @@ class ACPTUrlTag extends ACPTAbstractTag
 	 */
 	public function get_title()
 	{
-		return esc_html__( "ACPT URL field", ACPT_PLUGIN_NAME );
+		return esc_html__( "ACPT URL field", ACPT_LITE_PLUGIN_NAME );
 	}
 
 	public function render()

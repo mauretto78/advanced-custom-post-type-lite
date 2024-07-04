@@ -31,7 +31,7 @@ class ACPTImageTag extends ACPTAbstractDataTag
 	 */
 	public function get_title()
 	{
-		return esc_html__( "ACPT Image field", ACPT_PLUGIN_NAME );
+		return esc_html__( "ACPT Image field", ACPT_LITE_PLUGIN_NAME );
 	}
 
 	/**

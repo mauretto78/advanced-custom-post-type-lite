@@ -31,7 +31,7 @@ class ACPTGalleryTag extends ACPTAbstractDataTag
 	 */
 	public function get_title()
 	{
-		return esc_html__( "ACPT Gallery field", ACPT_PLUGIN_NAME );
+		return esc_html__( "ACPT Gallery field", ACPT_LITE_PLUGIN_NAME );
 	}
 
 	public function get_value( array $options = array() )

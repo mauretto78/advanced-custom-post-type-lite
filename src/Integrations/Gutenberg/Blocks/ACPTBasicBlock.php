@@ -736,7 +736,7 @@ class ACPTBasicBlock
 	 */
 	public function enqueueStyle()
 	{
-		wp_register_style( 'gallery-css', plugin_dir_url( __FILE__ ) . '../../../../assets/static/css/gallery.css', [], ACPT_PLUGIN_VERSION );
+		wp_register_style( 'gallery-css', plugin_dir_url( __FILE__ ) . '../../../../assets/static/css/gallery.css', [], ACPT_LITE_PLUGIN_VERSION );
 		wp_enqueue_style( 'gallery-css' );
 	}
 }

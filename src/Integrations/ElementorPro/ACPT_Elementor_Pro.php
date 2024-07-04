@@ -32,7 +32,7 @@ class ACPT_Elementor_Pro extends AbstractIntegration
 		$dynamic_tags_manager->register_group(
 			TagsConstants::GROUP_NAME,
 			[
-				'title' => esc_html__( 'ACPT fields', ACPT_PLUGIN_NAME )
+				'title' => esc_html__( 'ACPT fields', ACPT_LITE_PLUGIN_NAME )
 			]
 		);
 

@@ -65,7 +65,7 @@ class ACPT_Lite_Plugin
     {
         if( false === ACPT_Lite_DB::checkIfSchemaExists()){
 	        $old_version = get_option('acpt_version', 0);
-            ACPT_Lite_DB::createSchema(ACPT_PLUGIN_VERSION, oldPluginVersion($old_version));
+            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, oldPluginVersion($old_version));
             ACPT_Lite_DB::sync();
         }
 
@@ -85,8 +85,8 @@ class ACPT_Lite_Plugin
      */
     private function setName()
     {
-        if ( defined( 'ACPT_PLUGIN_NAME' ) ) {
-            $this->name = ACPT_PLUGIN_NAME;
+        if ( defined( 'ACPT_LITE_PLUGIN_NAME' ) ) {
+            $this->name = ACPT_LITE_PLUGIN_NAME;
         } else {
             $this->name = plugin_dir_path( __FILE__ );
         }
@@ -117,8 +117,8 @@ class ACPT_Lite_Plugin
      */
     private function setVersion()
     {
-        if ( defined( 'ACPT_PLUGIN_VERSION' ) ) {
-            $this->version = ACPT_PLUGIN_VERSION;
+        if ( defined( 'ACPT_LITE_PLUGIN_VERSION' ) ) {
+            $this->version = ACPT_LITE_PLUGIN_VERSION;
         } else {
             $this->version = '1.0.0';
         }

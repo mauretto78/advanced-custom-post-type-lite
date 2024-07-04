@@ -36,7 +36,7 @@ class ACPTUnitOfMeasureTag extends ACPTAbstractTag
 	 */
 	public function get_title()
 	{
-		return esc_html__( "ACPT unit of measure field", ACPT_PLUGIN_NAME );
+		return esc_html__( "ACPT unit of measure field", ACPT_LITE_PLUGIN_NAME );
 	}
 
 	public function register_controls()

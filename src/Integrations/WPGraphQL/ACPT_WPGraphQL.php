@@ -47,7 +47,7 @@ class ACPT_WPGraphQL extends AbstractIntegration
                     register_graphql_field('RootQueryTo'.ucfirst($singleName).'ConnectionWhereArgs',
             'query', [
                             'type' => 'AcptQuery',
-                            'description' => __('The meta query object to filter by', ACPT_PLUGIN_NAME),
+                            'description' => __('The meta query object to filter by', ACPT_LITE_PLUGIN_NAME),
                         ]
                     );
 
@@ -95,26 +95,26 @@ class ACPT_WPGraphQL extends AbstractIntegration
     {
         // acpt
         register_graphql_object_type( 'Acpt', [
-            'description' => __( "ACPT meta data", ACPT_PLUGIN_NAME ),
+            'description' => __( "ACPT meta data", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'meta' => [
                     'type' => [ 'list_of' => 'AcptMetaBox' ],
-                    'description' => __( 'List of all meta', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'List of all meta', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'product_data' => [
                     'type' => [ 'list_of' => 'WooCommerceProductData' ],
-                    'description' => __( 'List of all product data (only for WooCommerce product post type)', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'List of all product data (only for WooCommerce product post type)', ACPT_LITE_PLUGIN_NAME ),
                 ],
             ],
         ] );
 
         // box
         register_graphql_object_type( 'AcptMetaBox', [
-            'description' => __( "ACPT meta box", ACPT_PLUGIN_NAME ),
+            'description' => __( "ACPT meta box", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'meta_box' => [
                     'type' => 'String',
-                    'description' => __( 'The name of the meta box', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The name of the meta box', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'meta_fields' => [
                     'type' => [ 'list_of' => 'AcptMetaField' ]
@@ -124,29 +124,29 @@ class ACPT_WPGraphQL extends AbstractIntegration
 
         // field
         register_graphql_object_type( 'AcptMetaField', [
-            'description' => __( "ACPT meta field", ACPT_PLUGIN_NAME ),
+            'description' => __( "ACPT meta field", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'name' => [
                     'type' => 'String',
-                    'description' => __( 'The name of the meta field', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The name of the meta field', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'type' => [
                     'type' => 'String',
-                    'description' => __( 'The type of the meta field', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The type of the meta field', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'values' => [
                     'type' => [ 'list_of' => 'String' ],
-                    'description' => __( 'The value of the meta field', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The value of the meta field', ACPT_LITE_PLUGIN_NAME ),
                 ],
             ],
         ]);
 
         register_graphql_object_type( 'WooCommerceProductData', [
-            'description' => __( "WooCommerce product data", ACPT_PLUGIN_NAME ),
+            'description' => __( "WooCommerce product data", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'name' => [
                     'type' => 'String',
-                    'description' => __( 'The name of the meta box', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The name of the meta box', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'fields' => [
                     'type' => [ 'list_of' => 'WooCommerceProductDataField' ]
@@ -155,19 +155,19 @@ class ACPT_WPGraphQL extends AbstractIntegration
         ]);
 
         register_graphql_object_type( 'WooCommerceProductDataField', [
-            'description' => __( "WooCommerce product data field", ACPT_PLUGIN_NAME ),
+            'description' => __( "WooCommerce product data field", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'name' => [
                     'type' => 'String',
-                    'description' => __( 'The name of the meta field', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The name of the meta field', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'type' => [
                     'type' => 'String',
-                    'description' => __( 'The type of the meta field', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The type of the meta field', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'values' => [
                     'type' => [ 'list_of' => 'String' ],
-                    'description' => __( 'The value of the meta field', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'The value of the meta field', ACPT_LITE_PLUGIN_NAME ),
                 ],
             ],
         ]);
@@ -177,53 +177,53 @@ class ACPT_WPGraphQL extends AbstractIntegration
 
         // query object
         register_graphql_input_type( 'AcptQuery', [
-            'description' => __( "Query object", ACPT_PLUGIN_NAME ),
+            'description' => __( "Query object", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'meta_query' => [
                     'type' => 'AcptMetaQuery',
-                    'description' => __( 'Meta query', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query', ACPT_LITE_PLUGIN_NAME ),
                 ],
             ]
         ]);
 
         // meta_query
         register_graphql_input_type( 'AcptMetaQuery', [
-            'description' => __( "Meta query object", ACPT_PLUGIN_NAME ),
+            'description' => __( "Meta query object", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'relation' => [
                     'type' => 'String',
-                    'description' => __( 'Meta query relation', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query relation', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'elements' => [
                     'type' => [ 'list_of' => 'AcptMetaQueryElement' ],
-                    'description' => __( 'Meta query element object', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query element object', ACPT_LITE_PLUGIN_NAME ),
                 ],
             ],
         ]);
 
         // meta_query element
         register_graphql_input_type( 'AcptMetaQueryElement', [
-            'description' => __( "Meta query element object", ACPT_PLUGIN_NAME ),
+            'description' => __( "Meta query element object", ACPT_LITE_PLUGIN_NAME ),
             'fields' => [
                 'type' => [
                     'type' => 'String',
-                    'description' => __( 'Meta query element type', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query element type', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'key' => [
                     'type' => 'String',
-                    'description' => __( 'Meta query element key', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query element key', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'value' => [
                     'type' => 'String',
-                    'description' => __( 'Meta query element value', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query element value', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'value_num'  => [
                     'type' => 'Integer',
-                    'description' => __( 'Meta query element value (numeric)', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query element value (numeric)', ACPT_LITE_PLUGIN_NAME ),
                 ],
                 'compare' => [
                     'type' => 'String',
-                    'description' => __( 'Meta query element compare operator', ACPT_PLUGIN_NAME ),
+                    'description' => __( 'Meta query element compare operator', ACPT_LITE_PLUGIN_NAME ),
                 ],
             ],
         ]);

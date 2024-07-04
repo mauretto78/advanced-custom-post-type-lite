@@ -64,7 +64,7 @@ class ACPT_Elementor extends AbstractIntegration
         $elements_manager->add_category(
             'acpt',
             [
-                'title' => esc_html__( 'ACPT', ACPT_PLUGIN_NAME ),
+                'title' => esc_html__( 'ACPT', ACPT_LITE_PLUGIN_NAME ),
                 'icon' => 'fa fa-plug',
             ]
         );

@@ -19,7 +19,7 @@ class Assets
 
 		// add type="module"
 		add_filter('script_loader_tag', function ($tag, $handle, $src) use ($key){
-			$key = ACPT_PLUGIN_NAME.'__'.$key;
+			$key = ACPT_LITE_PLUGIN_NAME.'__'.$key;
 
 			return ($key !== $handle) ? $tag : '<script type="module" src="' . esc_url( $src ) . '"></script>';
 		} , 10, 3);

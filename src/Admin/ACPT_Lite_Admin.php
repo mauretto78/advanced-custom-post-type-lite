@@ -2,31 +2,22 @@
 
 namespace ACPT_Lite\Admin;
 
-use ACPT_Lite\Core\Generators\Attachment\AttachmentMetaGroupsGenerator;
-use ACPT_Lite\Core\Generators\Comment\CommentAdminColumnsGenerator;
-use ACPT_Lite\Core\Generators\Comment\CommentMetaGroupsGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeAdminColumnsGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeMetaBoxGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeMetaGroupsGenerator;
 use ACPT_Lite\Core\Generators\Meta\WooCommerceProductDataGenerator;
-use ACPT_Lite\Core\Generators\OptionPage\OptionPageGenerator;
 use ACPT_Lite\Core\Generators\Taxonomy\TaxonomyMetaGroupsGenerator;
 use ACPT_Lite\Core\Generators\User\UserAdminColumnsGenerator;
 use ACPT_Lite\Core\Generators\User\UserMetaGroupsGenerator;
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
-use ACPT_Lite\Core\Shortcodes\ACPT\AttachmentMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\ACPT\CommentMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\ACPT\OptionPageMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\PostMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\TaxonomyMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\UserMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\Form\FormShortcode;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Integrations\AbstractIntegration;
@@ -207,13 +198,6 @@ class ACPT_Lite_Admin
 		    ];
 	    }
 
-	    if($pagenow === "edit-comments.php"){
-		    $jsAssets['comment_quick_edit_js'] = [
-			    'path' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/comment-quick-edit.js',
-			    'dep'  => ['jquery'],
-		    ];
-	    }
-
 	    $this->staticJsAssets = $jsAssets;
     }
 
@@ -372,124 +356,53 @@ class ACPT_Lite_Admin
 	 */
     private function setPages()
     {
-        if(ACPT_License_Manager::isLicenseValid()){
-            $pages = [
-                [
-                    'pageTitle' => 'Advanced Custom Post Types',
-                    'menuTitle' => 'ACPT',
-                    'capability' => 'read',
-                    'menuSlug' => ACPT_PLUGIN_NAME,
+	    $this->pages = [
+            [
+                'pageTitle' => 'Advanced Custom Post Types',
+                'menuTitle' => 'ACPT',
+                'capability' => 'read',
+                'menuSlug' => ACPT_LITE_PLUGIN_NAME,
+                'template' => 'app',
+                'iconUrl' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/img/advanced-custom-post-type-icon.svg',
+                'position' => 50,
+            ],
+            [
+	            'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+	            'pageTitle' => translate('Custom Post Types', ACPT_LITE_PLUGIN_NAME),
+	            'menuTitle' => translate('Custom Post Types', ACPT_LITE_PLUGIN_NAME),
+	            'capability' => 'manage_options',
+	            'menuSlug' => ACPT_LITE_PLUGIN_NAME,
+	            'template' => 'app',
+	            'position' => 51,
+            ],
+            [
+                    'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                    'pageTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
+                    'menuTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
+                    'capability' => 'manage_options',
+                    'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/taxonomies',
                     'template' => 'app',
-                    'iconUrl' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/img/advanced-custom-post-type-icon.svg',
-                    'position' => 50,
-                ],
-	            [
-		            'parentSlug' => ACPT_PLUGIN_NAME,
-		            'pageTitle' => translate('Custom Post Types', ACPT_PLUGIN_NAME),
-		            'menuTitle' => translate('Custom Post Types', ACPT_PLUGIN_NAME),
-		            'capability' => 'manage_options',
-		            'menuSlug' => ACPT_PLUGIN_NAME,
-		            'template' => 'app',
-		            'position' => 51,
-	            ],
-                [
-                        'parentSlug' => ACPT_PLUGIN_NAME,
-                        'pageTitle' => translate('Taxonomies', ACPT_PLUGIN_NAME),
-                        'menuTitle' => translate('Taxonomies', ACPT_PLUGIN_NAME),
-                        'capability' => 'manage_options',
-                        'menuSlug' => ACPT_PLUGIN_NAME . '#/taxonomies',
-                        'template' => 'app',
-                        'position' => 52,
-                ],
-	            [
-		            'parentSlug' => ACPT_PLUGIN_NAME,
-		            'pageTitle' => translate('Option pages', ACPT_PLUGIN_NAME),
-		            'menuTitle' => translate('Option pages', ACPT_PLUGIN_NAME),
-		            'capability' => 'manage_options',
-		            'menuSlug' => ACPT_PLUGIN_NAME . '#/option-pages',
-		            'template' => 'app',
-		            'position' => 53,
-	            ],
-	            [
-		            'parentSlug' => ACPT_PLUGIN_NAME,
-		            'pageTitle' => translate('Field groups', ACPT_PLUGIN_NAME),
-		            'menuTitle' => translate('Field groups', ACPT_PLUGIN_NAME),
-		            'capability' => 'manage_options',
-		            'menuSlug' => ACPT_PLUGIN_NAME . '#/meta',
-		            'template' => 'app',
-		            'position' => 54,
-	            ],
-            ];
-
-            if($this->isEnabledFormBuilder()){
-	            $pages[] = [
-		            'parentSlug' => ACPT_PLUGIN_NAME,
-		            'pageTitle' => translate('Forms', ACPT_PLUGIN_NAME),
-		            'menuTitle' => translate('Forms', ACPT_PLUGIN_NAME),
-		            'capability' => 'manage_options',
-		            'menuSlug' => ACPT_PLUGIN_NAME . '#/forms',
-		            'template' => 'app',
-		            'position' => 55,
-                ];
-            }
-
-            if(WPMLChecker::isActive() or PolylangChecker::isActive()){
-	            $pages[] = [
-		            'parentSlug' => ACPT_PLUGIN_NAME,
-		            'pageTitle' => translate('WPML', ACPT_PLUGIN_NAME),
-		            'menuTitle' => translate('WPML', ACPT_PLUGIN_NAME),
-		            'capability' => 'manage_options',
-		            'menuSlug' => ACPT_PLUGIN_NAME . '#/wpml',
-		            'template' => 'app',
-		            'position' => 56,
-	            ];
-            }
-
-            $pages[] = [
-		        'parentSlug' => ACPT_PLUGIN_NAME,
-		        'pageTitle' => translate('Tools', ACPT_PLUGIN_NAME),
-		        'menuTitle' => translate('Tools', ACPT_PLUGIN_NAME),
+                    'position' => 52,
+            ],
+            [
+	            'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+	            'pageTitle' => translate('Field groups', ACPT_LITE_PLUGIN_NAME),
+	            'menuTitle' => translate('Field groups', ACPT_LITE_PLUGIN_NAME),
+	            'capability' => 'manage_options',
+	            'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/meta',
+	            'template' => 'app',
+	            'position' => 54,
+            ],
+	        [
+		        'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+		        'pageTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
+		        'menuTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
 		        'capability' => 'manage_options',
-		        'menuSlug' => ACPT_PLUGIN_NAME . '#/tools',
-		        'template' => 'app',
-		        'position' => 57,
-	        ];
-
-	        $pages[] = [
-		        'parentSlug' => ACPT_PLUGIN_NAME,
-		        'pageTitle' => translate('Settings', ACPT_PLUGIN_NAME),
-		        'menuTitle' => translate('Settings', ACPT_PLUGIN_NAME),
-		        'capability' => 'manage_options',
-		        'menuSlug' => ACPT_PLUGIN_NAME . '#/settings',
+		        'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/settings',
 		        'template' => 'app',
 		        'position' => 59,
-	        ];
-
-            $pages[] = [
-	            'parentSlug' => ACPT_PLUGIN_NAME,
-	            'pageTitle' => translate('License', ACPT_PLUGIN_NAME),
-	            'menuTitle' => translate('License', ACPT_PLUGIN_NAME),
-	            'capability' => 'manage_options',
-	            'menuSlug' => ACPT_PLUGIN_NAME . '#/license',
-	            'template' => 'app',
-	            'position' => 60,
-            ];
-
-        } else {
-            $pages = [
-                [
-                    'pageTitle' => 'Advanced Custom Post Types',
-                    'menuTitle' => 'ACPT',
-                    'capability' => 'manage_options',
-                    'menuSlug' => ACPT_PLUGIN_NAME,
-                    'template' => 'activate_license',
-                    'iconUrl' => plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/img/advanced-custom-post-type-icon.svg',
-                    'position' => 50,
-                ],
-            ];
-        }
-
-        $this->pages = $pages;
+	        ]
+        ];
     }
 
 	/**
@@ -577,11 +490,11 @@ class ACPT_Lite_Admin
 		        $viteAssets = Assets::load('assets/src/App/index.jsx', 'acpt_app');
 
 		        foreach ($viteAssets['css'] as $viteCssAssetKey => $viteCssAsset){
-			        wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$viteCssAssetKey, $viteCssAsset, [], ACPT_PLUGIN_VERSION, 'all');
+			        wp_enqueue_style( ACPT_LITE_PLUGIN_NAME.'__'.$viteCssAssetKey, $viteCssAsset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
 		        }
 
 		        foreach ($viteAssets['js'] as $viteJsAssetKey => $viteJsAsset){
-			        wp_enqueue_script(ACPT_PLUGIN_NAME.'__'.$viteJsAssetKey, $viteJsAsset, ['wp-element'],  ACPT_PLUGIN_VERSION, true);
+			        wp_enqueue_script(ACPT_LITE_PLUGIN_NAME.'__'.$viteJsAssetKey, $viteJsAsset, ['wp-element'],  ACPT_LITE_PLUGIN_VERSION, true);
 		        }
             }
         }
@@ -594,7 +507,7 @@ class ACPT_Lite_Admin
 
         // Quick-edit assets
         if($pagenow === 'edit.php'){
-	        wp_enqueue_script( dirname( __FILE__ ).'__quick_edit_js', plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/quick_edit.js', ['jquery'], ACPT_PLUGIN_VERSION, true);
+	        wp_enqueue_script( dirname( __FILE__ ).'__quick_edit_js', plugin_dir_url( dirname( __FILE__ ) ) . '../assets/static/js/quick_edit.js', ['jquery'], ACPT_LITE_PLUGIN_VERSION, true);
         }
 
         // Assets for create/edit post profile/user meta
@@ -614,11 +527,11 @@ class ACPT_Lite_Admin
 
             // other static assets here
             foreach ($this->staticCssAssets as $key => $asset){
-                wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$key, $asset, [], ACPT_PLUGIN_VERSION, 'all');
+                wp_enqueue_style( ACPT_LITE_PLUGIN_NAME.'__'.$key, $asset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
             }
 
             foreach ($this->staticJsAssets as $key => $asset){
-                wp_enqueue_script( ACPT_PLUGIN_NAME.'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_PLUGIN_VERSION, true);
+                wp_enqueue_script( ACPT_LITE_PLUGIN_NAME.'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_LITE_PLUGIN_VERSION, true);
             }
 
             //
@@ -697,11 +610,8 @@ class ACPT_Lite_Admin
     {
 	    $actionLinks = [];
 
-	    if ( 'advanced-custom-post-type/advanced-custom-post-type.php' === $plugin_file ) {
-	        if(ACPT_License_Manager::isLicenseValid()){
-		        $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page=advanced-custom-post-type#/settings' ).'">'.Translator::translate('Settings').'</a>';
-	        }
-
+	    if ( 'advanced-custom-post-type-lite/advanced-custom-post-type-lite.php' === $plugin_file ) {
+		    $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page=advanced-custom-post-type-lite#/settings' ).'">'.Translator::translate('Settings').'</a>';
 		    $actionLinks['documentation'] = '<a target="_blank" href="https://docs.acpt.io/">'.Translator::translate('Documentation').'</a>';
 	    }
 
@@ -754,13 +664,9 @@ class ACPT_Lite_Admin
      */
     private function addShortcodes()
     {
-        add_shortcode('acpt_form', [new FormShortcode(), 'render']);
         add_shortcode('acpt', [new PostMetaShortcode(), 'render']);
         add_shortcode('acpt_user', [new UserMetaShortcode(), 'render']);
         add_shortcode('acpt_tax', [new TaxonomyMetaShortcode(), 'render']);
-        add_shortcode('acpt_option', [new OptionPageMetaShortcode(), 'render']);
-        add_shortcode('acpt_media', [new AttachmentMetaShortcode(), 'render']);
-        add_shortcode('acpt_comm', [new CommentMetaShortcode(), 'render']);
     }
 
 	/**
@@ -801,22 +707,6 @@ class ACPT_Lite_Admin
 			    $postTypeMetaGroups
 		    );
 	    }
-    }
-
-
-    private function registerAttachmentMeta()
-    {
-        (new AttachmentMetaGroupsGenerator())->generate();
-    }
-
-    private function registerCommentMeta()
-    {
-	    (new CommentMetaGroupsGenerator())->generate();
-    }
-
-    private function addCommentColumnsToAdminPanel()
-    {
-	    CommentAdminColumnsGenerator::addColumns();
     }
 
     /**
@@ -869,23 +759,6 @@ class ACPT_Lite_Admin
 	    UserAdminColumnsGenerator::addColumns();
     }
 
-	/**
-	 * Register option pages
-	 *
-	 * @param bool $lazy
-	 *
-	 * @throws \Exception
-	 */
-    private function registerOptionPages($lazy = false)
-    {
-    	$optionPages = OptionPageRepository::get([]);
-
-    	foreach ($optionPages as $optionPage){
-    	    $optionPageGenerator = new OptionPageGenerator($this->loader, $optionPage, $lazy);
-		    $optionPageGenerator->registerPage();
-	    }
-    }
-
     /**
      * Register API fields
      */
@@ -894,21 +767,6 @@ class ACPT_Lite_Admin
         $this->loader->addAction( 'rest_api_init', new ACPT_Lite_Api_Rest_Fields(), 'registerRestFields' );
     }
 
-    /**
-     * Register API endpoints
-     */
-    private function registerRestEndpoint()
-    {
-        $this->loader->addAction( 'rest_api_init', new ACPT_Api_V1(), 'registerRestRoutes' );
-    }
-
-    /**
-     * Include PHP functions
-     */
-    private function includeFunctions()
-    {
-    	require_once __DIR__.'/../../functions/acpt_functions.php';
-    }
 
     /**
      * Run integrations
@@ -983,7 +841,7 @@ class ACPT_Lite_Admin
 	    return (
 		    $pagenow === 'admin.php' and
 		    isset($_GET['page']) and
-		    $_GET['page'] === ACPT_PLUGIN_NAME
+		    $_GET['page'] === ACPT_LITE_PLUGIN_NAME
 	    );
     }
 
@@ -1013,100 +871,71 @@ class ACPT_Lite_Admin
 	    $this->loader->addAction('admin_menu', $this, 'fetchAdminMenu');
 	    Profiler::stop('fetchAdminMenu');
 
-		// run the application only if is activated
-	    if(ACPT_License_Manager::isLicenseValid()){
+	    Profiler::start('transitionPostStatus');
+	    $this->loader->addAction('transition_post_status', $this, 'invalidPostIdsCache', 10, 3);
+	    Profiler::stop('transitionPostStatus');
 
-		    Profiler::start('transitionPostStatus');
-		    $this->loader->addAction('transition_post_status', $this, 'invalidPostIdsCache', 10, 3);
-		    Profiler::stop('transitionPostStatus');
+	    Profiler::start('siteHealth');
+	    $this->loader->addAction('requests-curl.before_request', $this, 'curlBeforeRequest', 9999);
+	    $this->loader->addAction('http_request_timeout', $this, 'extendHttpRequestTimeout');
+	    Profiler::stop('siteHealth');
 
-		    Profiler::start('siteHealth');
-		    $this->loader->addAction('requests-curl.before_request', $this, 'curlBeforeRequest', 9999);
-		    $this->loader->addAction('http_request_timeout', $this, 'extendHttpRequestTimeout');
-		    Profiler::stop('siteHealth');
-
-		    // ajax calls
-		    Profiler::start('ajaxCalls');
-		    foreach ($this->ajaxActions as $action => $callback){
-			    $this->loader->addAction($action, $this->ajax, $callback);
-			    Profiler::lap('ajaxCalls');
-		    }
-		    Profiler::stop('ajaxCalls');
-
-		    // register custom post types and taxonomies. Lazy load custom post type metas
-		    Profiler::start('registerCustomPostTypesAndTaxonomies');
-		    $this->registerCustomPostTypesAndTaxonomies($this->isACPTAppPage());
-		    Profiler::stop('registerCustomPostTypesAndTaxonomies');
-
-		    // add option pages
-		    Profiler::start('registerOptionPages');
-		    $this->registerOptionPages($this->isACPTAppPage());
-		    Profiler::stop('registerOptionPages');
-
-		    // API REST
-		    Profiler::start('RestFieldsAndEndpoints');
-		    $this->registerRestFields();
-		    $this->registerRestEndpoint();
-		    Profiler::stop('RestFieldsAndEndpoints');
-
-		    // lazy load, these functions are not needed in App page
-		    if(!$this->isACPTAppPage()){
-
-			    // shortcodes
-			    Profiler::start('addShortcodes');
-			    $this->addShortcodes();
-			    Profiler::stop('addShortcodes');
-
-			    // register attachment meta
-			    Profiler::start('registerAttachmentMeta');
-			    $this->registerAttachmentMeta();
-			    Profiler::stop('registerAttachmentMeta');
-
-			    // register comments meta
-			    Profiler::start('registerCommentMeta');
-			    $this->registerCommentMeta();
-			    Profiler::stop('registerCommentMeta');
-
-			    // add columns to show in the list panel
-			    Profiler::start('addCustomPostTypeColumnsToAdminPanel');
-			    $this->addCommentColumnsToAdminPanel();
-			    Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
-
-			    // register taxonomy meta
-			    Profiler::start('registerTaxonomyMeta');
-			    $this->registerTaxonomyMeta();
-			    Profiler::stop('registerTaxonomyMeta');
-
-			    // WooCommerce product data
-			    Profiler::start('addWooCommerceProductData');
-			    $this->addWooCommerceProductData();
-			    Profiler::stop('addWooCommerceProductData');
-
-			    // add columns to show in the list panel
-			    Profiler::start('addCustomPostTypeColumnsToAdminPanel');
-			    $this->addCustomPostTypeColumnsToAdminPanel();
-			    Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
-
-			    // register user meta
-			    Profiler::start('registerUserMeta');
-			    $this->registerUserMeta();
-			    Profiler::stop('registerUserMeta');
-
-			    // add user meta columns to show in the admin panel
-			    Profiler::start('addUserMetaColumnsToShow');
-			    $this->addUserMetaColumnsToShow();
-			    Profiler::stop('addUserMetaColumnsToShow');
-
-			    // functions and hooks
-			    Profiler::start('includeFunctions');
-			    $this->includeFunctions();
-			    Profiler::stop('includeFunctions');
-
-			    // run integrations
-			    Profiler::start('runIntegrations');
-			    $this->runIntegrations();
-			    Profiler::stop('runIntegrations');
-		    }
+		// ajax calls
+	    Profiler::start('ajaxCalls');
+	    foreach ($this->ajaxActions as $action => $callback){
+		    $this->loader->addAction($action, $this->ajax, $callback);
+		    Profiler::lap('ajaxCalls');
 	    }
+	    Profiler::stop('ajaxCalls');
+
+	    // register custom post types and taxonomies. Lazy load custom post type metas
+	    Profiler::start('registerCustomPostTypesAndTaxonomies');
+	    $this->registerCustomPostTypesAndTaxonomies($this->isACPTAppPage());
+	    Profiler::stop('registerCustomPostTypesAndTaxonomies');
+
+	    // API REST
+	    Profiler::start('RestFieldsAndEndpoints');
+	    $this->registerRestFields();
+	    Profiler::stop('RestFieldsAndEndpoints');
+
+	    // lazy load, these functions are not needed in App page
+	    if(!$this->isACPTAppPage()){
+
+		    // shortcodes
+		    Profiler::start('addShortcodes');
+		    $this->addShortcodes();
+		    Profiler::stop('addShortcodes');
+
+		    // register taxonomy meta
+		    Profiler::start('registerTaxonomyMeta');
+		    $this->registerTaxonomyMeta();
+		    Profiler::stop('registerTaxonomyMeta');
+
+		    // WooCommerce product data
+		    Profiler::start('addWooCommerceProductData');
+		    $this->addWooCommerceProductData();
+		    Profiler::stop('addWooCommerceProductData');
+
+		    // add columns to show in the list panel
+		    Profiler::start('addCustomPostTypeColumnsToAdminPanel');
+		    $this->addCustomPostTypeColumnsToAdminPanel();
+		    Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
+
+		    // register user meta
+		    Profiler::start('registerUserMeta');
+		    $this->registerUserMeta();
+		    Profiler::stop('registerUserMeta');
+
+		    // add user meta columns to show in the admin panel
+		    Profiler::start('addUserMetaColumnsToShow');
+		    $this->addUserMetaColumnsToShow();
+		    Profiler::stop('addUserMetaColumnsToShow');
+
+		    // run integrations
+		    Profiler::start('runIntegrations');
+		    $this->runIntegrations();
+		    Profiler::stop('runIntegrations');
+	    }
+
     }
 }

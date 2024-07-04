@@ -27,7 +27,7 @@ class Profiler
 	 */
 	public static function start($name)
 	{
-		if(ACPT_DEV_MODE){
+		if(ACPT_LITE_DEV_MODE){
 			do_action( self::START_ACTION, $name );
 		}
 	}
@@ -39,7 +39,7 @@ class Profiler
 	 */
 	public static function lap($name)
 	{
-		if(ACPT_DEV_MODE){
+		if(ACPT_LITE_DEV_MODE){
 			do_action( self::LAP_ACTION, $name );
 		}
 	}
@@ -51,7 +51,7 @@ class Profiler
 	 */
 	public static function stop($name)
 	{
-		if(ACPT_DEV_MODE){
+		if(ACPT_LITE_DEV_MODE){
 			do_action( self::STOP_ACTION, $name );
 		}
 	}
@@ -75,7 +75,7 @@ class Profiler
 			self::LOG_EMERGENCY,
 		];
 
-		if(ACPT_DEV_MODE and in_array($level, $levels)){
+		if(ACPT_LITE_DEV_MODE and in_array($level, $levels)){
 			do_action( $level, $message );
 		}
 	}

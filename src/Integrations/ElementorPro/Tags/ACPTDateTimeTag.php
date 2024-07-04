@@ -33,7 +33,7 @@ class ACPTDateTimeTag extends ACPTAbstractTag
 	 */
 	public function get_title()
 	{
-		return esc_html__( "ACPT Date time field", ACPT_PLUGIN_NAME );
+		return esc_html__( "ACPT Date time field", ACPT_LITE_PLUGIN_NAME );
 	}
 
 	public function register_controls()
@@ -46,7 +46,7 @@ class ACPTDateTimeTag extends ACPTAbstractTag
 				'label' => Translator::translate( 'Date format' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'default' => esc_html__( 'Default', ACPT_PLUGIN_NAME ),
+					'default' => esc_html__( 'Default', ACPT_LITE_PLUGIN_NAME ),
 					"d-M-y" => "dd-mmm-yy (ex. 28-OCT-90)",
 					"d-M-Y" => "dd-mmm-yyyy (ex. 28-OCT-1990)",
 					"d M y" => "mmm yy (ex. 28 OCT 90)",
@@ -66,7 +66,7 @@ class ACPTDateTimeTag extends ACPTAbstractTag
 				'label' => Translator::translate( 'Time format' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'default' => esc_html__( 'Default', ACPT_PLUGIN_NAME ),
+					'default' => esc_html__( 'Default', ACPT_LITE_PLUGIN_NAME ),
 					'G:i' => "G:i (ex. 16:25)",
 					'g:i A' => "g:i A (ex. 4:25 PM)",
 					'H:i' => "H:i (ex. 16:25)",

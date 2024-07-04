@@ -103,7 +103,7 @@ class ACPT_Lite_Ajax
 		$findEntries = $findQuery->execute();
 
 		$globals = [
-			"plugin_version" => ACPT_PLUGIN_VERSION,
+			"plugin_version" => ACPT_LITE_PLUGIN_VERSION,
             "site_url" =>  site_url(),
             "admin_url" => admin_url(),
             "ajax_url" => admin_url( 'admin-ajax.php' ),

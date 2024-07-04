@@ -33,7 +33,7 @@ class FetchLanguagesQuery implements QueryInterface
 		});
 
 		/** @var Translation_Entry $entry */
-		foreach($GLOBALS['l10n'][ACPT_PLUGIN_NAME]->entries as $entry){
+		foreach($GLOBALS['l10n'][ACPT_LITE_PLUGIN_NAME]->entries as $entry){
 			$entries['translations'][$entry->key()] = $entry->translations[0];
 		}
 

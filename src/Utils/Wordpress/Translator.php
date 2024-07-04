@@ -11,10 +11,10 @@ class Translator
 	 */
 	public static function translate($name)
 	{
-		if( $name !== __($name, ACPT_PLUGIN_NAME)){
-			return __($name, ACPT_PLUGIN_NAME);
+		if( $name !== __($name, ACPT_LITE_PLUGIN_NAME)){
+			return __($name, ACPT_LITE_PLUGIN_NAME);
 		}
 
-		return __(ucfirst($name), ACPT_PLUGIN_NAME);
+		return __(ucfirst($name), ACPT_LITE_PLUGIN_NAME);
 	}
 }

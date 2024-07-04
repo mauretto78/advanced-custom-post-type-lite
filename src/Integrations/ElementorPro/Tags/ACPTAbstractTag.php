@@ -57,7 +57,7 @@ abstract class ACPTAbstractTag extends Tag
 	{
 		$fields = DynamicDataProvider::getInstance()->getFields();
 		$options = [
-			'default' => esc_html__( 'Default', ACPT_PLUGIN_NAME )
+			'default' => esc_html__( 'Default', ACPT_LITE_PLUGIN_NAME )
 		];
 
 		if(isset($fields[static::class])){
@@ -72,7 +72,7 @@ abstract class ACPTAbstractTag extends Tag
 			$this->add_control(
 				'field',
 				[
-					'label' => esc_html__( 'Field', ACPT_PLUGIN_NAME ),
+					'label' => esc_html__( 'Field', ACPT_LITE_PLUGIN_NAME ),
 					'type' => Controls_Manager::SELECT,
 					'options' => $options,
 				]
@@ -82,9 +82,9 @@ abstract class ACPTAbstractTag extends Tag
 				$this->add_control(
 					'postId',
 					[
-						'label' => esc_html__( 'Post ID', ACPT_PLUGIN_NAME ),
+						'label' => esc_html__( 'Post ID', ACPT_LITE_PLUGIN_NAME ),
 						'type' => Controls_Manager::TEXT,
-						'description' => esc_html__('It is possible to change the default behavior and make data retrieval from a certain post ID.', ACPT_PLUGIN_NAME ),
+						'description' => esc_html__('It is possible to change the default behavior and make data retrieval from a certain post ID.', ACPT_LITE_PLUGIN_NAME ),
 					]
 				);
 			}

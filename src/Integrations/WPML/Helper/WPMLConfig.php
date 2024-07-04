@@ -19,7 +19,7 @@ class WPMLConfig
 	 */
 	private static function filePath()
 	{
-		return ACPT_PLUGIN_DIR_PATH .'wpml-config.xml';
+		return ACPT_LITE_PLUGIN_DIR_PATH .'wpml-config.xml';
 	}
 
 	/**
