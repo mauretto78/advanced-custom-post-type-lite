@@ -56,7 +56,7 @@ class TaxonomyMetaBoxFieldGenerator
 	 */
     private function getTaxonomyField()
     {
-        $className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'.$this->metaFieldModel->getType().'Field';
+        $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->metaFieldModel->getType().'Field';
 
 	    if(class_exists($className)){
 		    /** @var AbstractField $instance */

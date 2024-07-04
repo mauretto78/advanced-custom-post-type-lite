@@ -6,21 +6,12 @@ use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Integrations\AbstractIntegration;
-use ACPT_Lite\Integrations\Elementor\Controls\CssControl;
-use ACPT_Lite\Integrations\Elementor\Controls\DateFormatControl;
-use ACPT_Lite\Integrations\Elementor\Controls\ElementsControl;
-use ACPT_Lite\Integrations\Elementor\Controls\HeightControl;
-use ACPT_Lite\Integrations\Elementor\Controls\RenderControl;
 use ACPT_Lite\Integrations\Elementor\Controls\ShortcodeControl;
-use ACPT_Lite\Integrations\Elementor\Controls\TargetControl;
-use ACPT_Lite\Integrations\Elementor\Controls\WidthControl;
-use ACPT_Lite\Integrations\Elementor\Controls\WrapperControl;
 use ACPT_Lite\Integrations\Elementor\Widgets\WidgetGenerator;
 use Elementor\Widgets_Manager;
 
-class ACPT_Elementor extends AbstractIntegration
+class ACPT_Lite_Elementor extends AbstractIntegration
 {
     const MINIMUM_ELEMENTOR_VERSION = '2.0.0';
 
@@ -80,30 +71,6 @@ class ACPT_Elementor extends AbstractIntegration
     public function registerElementorWidgets(Widgets_Manager $widgetsManager)
     {
     	try {
-		    // OP fields
-		    $optionPageModels = OptionPageRepository::get();
-
-		    foreach ($optionPageModels as $optionPageModel){
-			    $metaGroups = MetaRepository::get([
-				    'belongsTo' => MetaTypes::OPTION_PAGE,
-				    'find' => $optionPageModel->getMenuSlug(),
-			    ]);
-
-			    if(!empty($metaGroups)){
-				    $this->registerFields($metaGroups, $widgetsManager, MetaTypes::OPTION_PAGE, $optionPageModel->getMenuSlug());
-			    }
-
-			    foreach ($optionPageModel->getChildren() as $childOptionPageModel){
-				    $metaGroups = MetaRepository::get([
-					    'belongsTo' => MetaTypes::OPTION_PAGE,
-					    'find' => $childOptionPageModel->getMenuSlug(),
-				    ]);
-
-				    if(!empty($metaGroups)){
-					    $this->registerFields($metaGroups, $widgetsManager, MetaTypes::OPTION_PAGE, $childOptionPageModel->getMenuSlug());
-				    }
-			    }
-		    }
 
 		    // CPT fields
 		    $args = [];

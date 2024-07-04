@@ -24,9 +24,9 @@ use ACPT_Lite\Integrations\AbstractIntegration;
 use ACPT_Lite\Integrations\Breakdance\ACPT_Breakdance;
 use ACPT_Lite\Integrations\Bricks\ACPT_Bricks;
 use ACPT_Lite\Integrations\Divi\ACPT_Divi;
-use ACPT_Lite\Integrations\Elementor\ACPT_Elementor;
+use ACPT_Lite\Integrations\Elementor\ACPT_Lite_Elementor;
 use ACPT_Lite\Integrations\ElementorPro\ACPT_Elementor_Pro;
-use ACPT_Lite\Integrations\Gutenberg\ACPT_Gutenberg;
+use ACPT_Lite\Integrations\Gutenberg\ACPT_Lite_Gutenberg;
 use ACPT_Lite\Integrations\Oxygen\ACPT_Oxygen;
 use ACPT_Lite\Integrations\Polylang\ACPT_Polylang;
 use ACPT_Lite\Integrations\Polylang\Helper\PolylangChecker;
@@ -774,21 +774,8 @@ class ACPT_Lite_Admin
     private function runIntegrations()
     {
         $integrations = [
-	        ACPT_Breakdance::class,
-	        ACPT_Bricks::class,
-	        ACPT_Divi::class,
-	        ACPT_Elementor::class,
-	        ACPT_Elementor_Pro::class,
-	        ACPT_Gutenberg::class,
-	        ACPT_Oxygen::class,
-	        ACPT_Polylang::class,
-	        ACPT_RankMath::class,
-	        ACPT_WPAllExport::class,
-	        ACPT_WPAllImport::class,
-	        ACPT_WPGraphQL::class,
-	        ACPT_WPML::class,
-            ACPT_Yoast::class,
-	        ACPT_Zion::class,
+	        ACPT_Lite_Elementor::class,
+	        ACPT_Lite_Gutenberg::class,
         ];
 
         foreach ($integrations as $integration){

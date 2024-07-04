@@ -18,7 +18,7 @@ abstract class AbstractACPTShortcode
      */
     protected function getField($type, ShortcodePayload $payload)
     {
-        $className = 'ACPT\\Core\\Shortcodes\\ACPT\\Fields\\'.$type.'Field';
+        $className = 'ACPT_Lite\\Core\\Shortcodes\\ACPT\\Fields\\'.$type.'Field';
 
         if(class_exists($className)){
 	        return new $className($payload);
@@ -65,75 +65,12 @@ abstract class AbstractACPTShortcode
 			$separator = (isset($atts['separator'])) ? $atts['separator'] : null;
 			$classes = (isset($atts['classes'])) ? $atts['classes'] : null;
 
-			if($parent){
-				$key = $this->fieldKey($belongsTo, $find, $box, $parent);
-				@$groupRawValue = Meta::fetch($elementId, $belongsTo, $key, true);
+			$key = $this->fieldKey($belongsTo, $find, $box, $field);
+			$type = Meta::fetch($elementId, $belongsTo, $key.'_type', true);
+			$data = Meta::fetch($elementId, $belongsTo, $key, true);
 
-				if($groupRawValue === null or $groupRawValue === ''){
-
-					// check if is a repeater nested inside a repeater
-					$parentField = MetaRepository::getMetaFieldByName([
-						'boxName' => $box,
-						'fieldName' => $parent,
-					]);
-
-					if($parentField === null){
-						return '';
-					}
-
-					$key = $this->fieldKey($belongsTo, $find, $box, $parentField->getRootParentField()->getName());
-					@$groupRawValue = Meta::fetch($elementId, $belongsTo, $key, true);
-
-					if($groupRawValue === null or $groupRawValue === ''){
-						return '';
-					}
-
-					$realIndex = explode(".", $index);
-
-					if(count($realIndex) !== 2){
-						return null;
-					}
-
-					if(
-						isset($groupRawValue[$parent]) and
-						isset($groupRawValue[$parent][$realIndex[0]]) and
-						isset($groupRawValue[$parent][$realIndex[0]][$field]) and
-						isset($groupRawValue[$parent][$realIndex[0]][$field][$realIndex[1]])
-					){
-						$data = $groupRawValue[$parent][$realIndex[0]][$field][$realIndex[1]];
-						$type = $data['type'];
-					}
-
-					if(!isset($data) and !isset($type)){
-						return '';
-					}
-				}
-
-				if($index !== null and isset($groupRawValue[Strings::toDBFormat($field)][$index])){
-					$data = $groupRawValue[Strings::toDBFormat($field)][$index];
-					$type = $data['type'];
-				}
-
-				if($blockName !== null and $blockIndex !== null){
-					if(isset($groupRawValue['blocks']) and
-					   isset($groupRawValue['blocks'][$blockIndex]) and
-					   isset($groupRawValue['blocks'][$blockIndex][$blockName]) and
-					   isset($groupRawValue['blocks'][$blockIndex][$blockName][Strings::toDBFormat($field)]) and
-					   isset($groupRawValue['blocks'][$blockIndex][$blockName][Strings::toDBFormat($field)][$index])
-					){
-						$data = $groupRawValue['blocks'][$blockIndex][$blockName][Strings::toDBFormat($field)][$index];
-						$type = $data['type'];
-					}
-				}
-
-			} else {
-				$key = $this->fieldKey($belongsTo, $find, $box, $field);
-				$type = Meta::fetch($elementId, $belongsTo, $key.'_type', true);
-				$data = Meta::fetch($elementId, $belongsTo, $key, true);
-
-				if($data === null or $data === ''){
-					return '';
-				}
+			if($data === null or $data === ''){
+				return '';
 			}
 
 			if(!empty($type)){
@@ -185,9 +122,6 @@ abstract class AbstractACPTShortcode
 	private function fieldKey($belongsTo, $find, $box, $field)
 	{
 		$key = '';
-		if($belongsTo === MetaTypes::OPTION_PAGE){
-			$key .= Strings::toDBFormat($find).'_';
-		}
 		$key .= Strings::toDBFormat($box).'_'.Strings::toDBFormat($field);
 
 		return $key;

@@ -34,7 +34,7 @@ class CustomPostTypeMetaBoxFieldGenerator
      */
     private static function getCustomPostTypeField( $postId, MetaFieldModel $metaField): ?AbstractField
     {
-        $className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'.$metaField->getType().'Field';
+        $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$metaField->getType().'Field';
 
 	    if(class_exists($className)){
 	    	/** @var AbstractField $instance */
