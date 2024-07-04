@@ -18,7 +18,6 @@ import {getFormId, hydrateElement} from "../../../utils/fields";
 import PropTypes from "prop-types";
 import CopyMetaBoxesModal from "../Modal/CopyMetaBoxesModal";
 import CopyMetaFieldsModal from "../Modal/CopyMetaFieldsModal";
-import CopyMetaBlocksModal from "../Modal/CopyMetaBlocksModal";
 
 const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
 
@@ -165,11 +164,6 @@ const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
                 fieldIds={selectedElements}
                 modalOpen={copyFieldsModalVisible}
                 setModalOpen={setCopyFieldsModalVisible}
-            />
-            <CopyMetaBlocksModal
-                blockIds={selectedElements}
-                modalOpen={copyBlocksModalVisible}
-                setModalOpen={setCopyBlocksModalVisible}
             />
             {selectedElements && selectedElements.length > 0 && (
                 <div className={`flex-between ${view === 'tab' ? 'mb-24' : ''}`}>

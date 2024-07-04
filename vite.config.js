@@ -13,7 +13,7 @@ function renderChunks(deps) {
 }
 
 export default defineConfig({
-    base: '/wp-content/plugins/advanced-custom-post-type/assets/build',
+    base: '/wp-content/plugins/advanced-custom-post-type-lite/assets/build',
     define: {
         VERSION: JSON.stringify(version),
     },

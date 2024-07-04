@@ -6,22 +6,16 @@ import useTranslation from "../../../../../hooks/useTranslation";
 import {alphanumericallyValid} from "../../../../../utils/validation";
 import {
     fieldHasOptions,
-    fieldIsFlexible,
-    fieldIsRelational,
-    fieldIsRepeater,
     fieldsList,
     fieldTypes
 } from "../../../../../constants/fields";
 import {useFormContext, useWatch} from "react-hook-form";
 import MetaOptionList from "./MetaOptionList";
 import Select from "../../../../../components/Forms/Select";
-import ChildrenFieldsList from "./ChildrenFieldsList";
 import {canFieldHaveValidationAndLogicRules, fieldNestingLevel} from "../../../../../utils/fields";
 import {useDispatch, useSelector} from "react-redux";
-import BlockList from "./BlockList";
 import {updateField} from "../../../../../redux/reducers/metaStateSlice";
 import {slugify, transliterate} from "transliteration";
-import RelationalField from "./RelationalField";
 import {wpAjaxRequest} from "../../../../../utils/ajax";
 import {debounce} from "../../../../../utils/debounce";
 
@@ -294,35 +288,7 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                     fieldIndex={fieldIndex}
                     parentFieldId={field.parentId ? field.parentId : null}
                     options={field.options ? field.options : []}
-                    isMulti={field.type === fieldTypes.SELECT_MULTI || field.type === fieldTypes.CHECKBOX}
-                />
-            )}
-            {fieldIsRepeater(fieldType()) && (
-                <ChildrenFieldsList
-                    nestingLevel={nestingLevel}
-                    view={view}
-                    boxId={boxId}
-                    parentFieldId={field.id}
-                    boxIndex={boxIndex}
-                    parentFieldIndex={fieldIndex}
-                    childrenFields={field.children}
-                />
-            )}
-            {fieldIsFlexible(fieldType()) && (
-                <BlockList
-                    nestingLevel={nestingLevel}
-                    view={view}
-                    boxId={boxId}
-                    parentFieldId={field.id}
-                    boxIndex={boxIndex}
-                    parentFieldIndex={fieldIndex}
-                    blocks={field.blocks}
-                />
-            )}
-            {fieldIsRelational(fieldType()) && (
-                <RelationalField
-                    formId={formId}
-                    field={field}
+                    isMulti={false}
                 />
             )}
         </React.Fragment>

@@ -9,13 +9,12 @@ import useTranslation from "../../../hooks/useTranslation";
 import Tab from "../../../components/Tabs/Tab";
 import BasicTab from "./Tabs/BasicTab";
 import {useFormContext, useWatch} from "react-hook-form";
-import {getFormId, isTextualField} from "../../../utils/fields";
-import {useSelector} from "react-redux";
+import {getFormId} from "../../../utils/fields";
+import {useDispatch, useSelector} from "react-redux";
 import {Icon} from "@iconify/react";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import LazyElement from "../../../components/LazyElement";
 import {setActiveElement} from "../../../redux/reducers/metaStateSlice";
-import {useDispatch} from "react-redux";
 
 const MetaField = ({boxIndex, fieldIndex, view, boxId, field, parentFieldIndex, parentFieldId, parentBlockId, setActiveTab}) => {
 

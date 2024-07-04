@@ -1,29 +1,17 @@
 import React, {lazy, memo, Suspense, useEffect, useState} from 'react';
 import {createHashRouter, RouterProvider} from 'react-router-dom';
 import Loader from "./components/Loader";
-import {Toaster} from "react-hot-toast";
 import {useDispatch} from "react-redux";
 import {fetchGlobalSettings} from "./redux/reducers/fetchGlobalSettingsSlice";
 import WebFont from 'webfontloader';
 import BootError from "./components/Errors/BootError";
 
 // Pages
-const ApiPage = lazy(() => import("./pages/Api"));
 const PageCustomPostTypeListPage = lazy(() => import("./pages/CustomPostTypeList"));
-const ToolsPage = lazy(() => import("./pages/Tools"));
-const DatasetPage = lazy(() => import("./pages/Dataset"));
-const DatasetListPage = lazy(() => import("./pages/DatasetList"));
-const ImportPage = lazy(() => import("./pages/Import"));
-const ExportPage = lazy(() => import("./pages/Export"));
-const FormListPage = lazy(() => import("./pages/FormList"));
-const FormManagerPage = lazy(() => import("./pages/FormManager"));
 const SettingsPage = lazy(() => import("./pages/Settings"));
-const LicensePage = lazy(() => import("./pages/License"));
 const TaxonomyListPage = lazy(() => import("./pages/TaxonomyList"));
 const MetaListPage = lazy(() => import("./pages/MetaList"));
-const OptionPageListPage = lazy(() => import("./pages/OptionPageList"));
 const SaveCustomPostTypePage = lazy(() => import("./pages/SaveCustomPostType"));
-const SaveOptionPages = lazy(() => import("./pages/SaveOptionPages"));
 const SaveTaxonomyPage = lazy(() => import("./pages/SaveTaxonomy"));
 const ViewCustomPostTypePage = lazy(() => import("./pages/ViewCustomPostType"));
 const ViewTaxonomyPage = lazy(() => import("./pages/ViewTaxonomy"));
@@ -34,7 +22,6 @@ const ViewProductDataPage = lazy(() => import("./pages/WooCommerce/ViewProductDa
 const SaveProductDataPage = lazy(() => import("./pages/WooCommerce/SaveProductData"));
 const ProductDataListPage = lazy(() => import("./pages/WooCommerce/ProductDataList"));
 const ProductDataFieldsPage = lazy(() => import("./pages/WooCommerce/ProductDataFields"));
-const WPMLPage = lazy(() => import("./pages/WPML"));
 
 const router = createHashRouter([
         {

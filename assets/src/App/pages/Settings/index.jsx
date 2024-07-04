@@ -14,7 +14,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {saveSettings} from "../../redux/reducers/saveSettingsSlice";
 import {toast} from "react-hot-toast";
 import Toggle from "../../components/Forms/Toggle";
-import {validateGoogleMapsApiKey} from "../../utils/validation";
 import {wpAjaxRequest} from "../../utils/ajax";
 import {fontList} from "../../constants/fonts";
 
