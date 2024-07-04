@@ -31,8 +31,6 @@ use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Deactivator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Includes\ACPT_Lite_Plugin;
-use Phpfastcache\CacheManager;
-use Phpfastcache\Config\ConfigurationOption;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -50,6 +48,13 @@ require_once(plugin_dir_path(__FILE__) . '/functions/meta_get.php');
 ob_start();
 
 /**
+ * Avoid Call to undefined function is_plugin_active() error
+ */
+if( !function_exists('is_plugin_active') ) {
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+}
+
+/**
  * plugin settings
  */
 define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
@@ -58,32 +63,9 @@ define( 'ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ACPT_LITE_DEV_MODE', devMode() );
 
 /**
- * Avoid Call to undefined function is_plugin_active() error
- */
-if( !function_exists('is_plugin_active') ) {
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-}
-
-/**
  * Inject DB Cache
  */
 try {
-	function cacheInstance()
-	{
-		$cacheDir = ACPT_LITE_PLUGIN_DIR_PATH . "cache";
-
-		if(!is_dir($cacheDir)){
-			mkdir($cacheDir, 0777, true);
-		}
-
-		$config = new ConfigurationOption();
-		$config->setPath($cacheDir);
-
-		CacheManager::setDefaultConfig($config);
-
-		return CacheManager::getInstance('files');
-	}
-
 	$isCacheEnabled = SettingsRepository::getSingle('enable_cache');
 
 	if($isCacheEnabled === null or $isCacheEnabled->getValue() == 1){

@@ -67,14 +67,6 @@ abstract class AbstractMetaFieldValueCommand
 			$this->belongsTo = MetaTypes::USER;
 			$this->location = $args['user_id'];
 			$this->identifier = 'user_id';
-		} elseif (isset($args['comment_id'])){
-			$this->belongsTo = MetaTypes::COMMENT;
-			$this->location = $args['comment_id'];
-			$this->identifier = 'comment_id';
-		} elseif (isset($args['option_page'])){
-			$this->belongsTo = MetaTypes::OPTION_PAGE;
-			$this->location = $args['option_page'];
-			$this->identifier = 'option_page';
 		}
 
 		if($this->belongsTo === null and $this->location === null){

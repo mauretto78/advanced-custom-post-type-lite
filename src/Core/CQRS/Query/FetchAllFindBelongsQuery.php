@@ -33,18 +33,9 @@ class FetchAllFindBelongsQuery implements QueryInterface
 			BelongsTo::USER_ID => [$nullValue],
 			MetaTypes::CUSTOM_POST_TYPE => [$nullValue],
 			MetaTypes::TAXONOMY => [$nullValue],
-			MetaTypes::OPTION_PAGE => [$nullValue],
-			MetaTypes::MEDIA => [$nullValue],
 			MetaTypes::META => [$nullValue],
 			MetaTypes::USER => [$nullValue],
 		];
-
-		foreach (MimeTypes::ALLOWED_VALUES as $mimeType){
-			$data[MetaTypes::MEDIA][]  = [
-				'value' => $mimeType,
-				'label' => $mimeType,
-			];
-		}
 
 		$templates = wp_get_theme()->get_page_templates();
 		foreach ($templates as $file => $template){

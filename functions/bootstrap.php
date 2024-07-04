@@ -1,6 +1,6 @@
 <?php
 
-use ACPT\Utils\PHP\Ini;
+use ACPT_Lite\Utils\PHP\Ini;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Core\Pool\ExtendedCacheItemPoolInterface;

@@ -59,7 +59,7 @@ class BelongModel extends AbstractModel implements \JsonSerializable
 		parent::__construct( $id );
 		$this->setBelongsTo($belongsTo);
 
-		if($belongsTo !== MetaTypes::USER and $belongsTo !== MetaTypes::COMMENT){
+		if($belongsTo !== MetaTypes::USER){
 			$this->setOperator($operator);
 		}
 
@@ -204,9 +204,6 @@ class BelongModel extends AbstractModel implements \JsonSerializable
 					BelongsTo::TERM_ID,
 					MetaTypes::CUSTOM_POST_TYPE,
 					MetaTypes::TAXONOMY,
-					MetaTypes::MEDIA,
-					MetaTypes::COMMENT,
-					MetaTypes::OPTION_PAGE,
 					MetaTypes::USER,
 				],
 			],

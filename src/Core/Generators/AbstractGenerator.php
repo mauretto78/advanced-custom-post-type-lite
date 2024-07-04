@@ -84,16 +84,6 @@ abstract class AbstractGenerator
 				$belongsTo = MetaTypes::USER;
 				break;
 
-			case "comment.php":
-				$elementId = $_GET['c'] ?? null;
-				$belongsTo = MetaTypes::COMMENT;
-				break;
-
-			case "admin.php":
-				$elementId = $_GET['page'] ?? null;
-				$belongsTo = MetaTypes::OPTION_PAGE;
-				break;
-
 			case "post-new.php":
 			case "post.php":
 				$elementId = $_GET['post'] ?? null;

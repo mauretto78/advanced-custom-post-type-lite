@@ -21,23 +21,8 @@ use ACPT_Lite\Core\Shortcodes\ACPT\UserMetaShortcode;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Integrations\AbstractIntegration;
-use ACPT_Lite\Integrations\Breakdance\ACPT_Breakdance;
-use ACPT_Lite\Integrations\Bricks\ACPT_Bricks;
-use ACPT_Lite\Integrations\Divi\ACPT_Divi;
 use ACPT_Lite\Integrations\Elementor\ACPT_Lite_Elementor;
-use ACPT_Lite\Integrations\ElementorPro\ACPT_Elementor_Pro;
 use ACPT_Lite\Integrations\Gutenberg\ACPT_Lite_Gutenberg;
-use ACPT_Lite\Integrations\Oxygen\ACPT_Oxygen;
-use ACPT_Lite\Integrations\Polylang\ACPT_Polylang;
-use ACPT_Lite\Integrations\Polylang\Helper\PolylangChecker;
-use ACPT_Lite\Integrations\RankMath\ACPT_RankMath;
-use ACPT_Lite\Integrations\WPAllExport\ACPT_WPAllExport;
-use ACPT_Lite\Integrations\WPAllImport\ACPT_WPAllImport;
-use ACPT_Lite\Integrations\WPGraphQL\ACPT_WPGraphQL;
-use ACPT_Lite\Integrations\WPML\ACPT_WPML;
-use ACPT_Lite\Integrations\WPML\Helper\WPMLChecker;
-use ACPT_Lite\Integrations\Yoast\ACPT_Yoast;
-use ACPT_Lite\Integrations\Zion\ACPT_Zion;
 use ACPT_Lite\Utils\PHP\Maps;
 use ACPT_Lite\Utils\PHP\Profiler;
 use ACPT_Lite\Utils\PHP\Session;
@@ -283,7 +268,6 @@ class ACPT_Lite_Admin
             'wp_ajax_fetchAllFindBelongsAction' => 'fetchAllFindBelongsAction',
             'wp_ajax_fetchAllMetaAction' => 'fetchAllMetaAction',
             'wp_ajax_fetchBoxesAction' => 'fetchBoxesAction',
-            'wp_ajax_fetchCommentMetaValueAction' => 'fetchCommentMetaValueAction',
             'wp_ajax_fetchCustomPostTypesAction' => 'fetchCustomPostTypesAction',
             'wp_ajax_fetchDatasetsAction' => 'fetchDatasetsAction',
             'wp_ajax_fetchElementsAction' => 'fetchElementsAction',
@@ -358,8 +342,8 @@ class ACPT_Lite_Admin
     {
 	    $this->pages = [
             [
-                'pageTitle' => 'Advanced Custom Post Types',
-                'menuTitle' => 'ACPT',
+                'pageTitle' => 'Advanced Custom Post Types Lite',
+                'menuTitle' => 'ACPT Lite',
                 'capability' => 'read',
                 'menuSlug' => ACPT_LITE_PLUGIN_NAME,
                 'template' => 'app',

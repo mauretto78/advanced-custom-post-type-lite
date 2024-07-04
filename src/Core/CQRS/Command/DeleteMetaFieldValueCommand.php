@@ -16,7 +16,6 @@ class DeleteMetaFieldValueCommand extends AbstractMetaFieldValueCommand implemen
 
 		switch ($this->belongsTo){
 
-			case MetaTypes::MEDIA:
 			case MetaTypes::CUSTOM_POST_TYPE:
 				$sql = "
 	                DELETE FROM `{$wpdb->prefix}postmeta`
@@ -47,27 +46,6 @@ class DeleteMetaFieldValueCommand extends AbstractMetaFieldValueCommand implemen
 				$args = [
 					$this->fieldModel->getDbName().'%',
 					$this->location
-				];
-				break;
-
-			case MetaTypes::COMMENT:
-				$sql = "
-	                DELETE FROM `{$wpdb->prefix}commentmeta`
-	                WHERE meta_key LIKE %s AND comment_id = %d
-	            ";
-				$args = [
-					$this->fieldModel->getDbName().'%',
-					$this->location
-				];
-				break;
-
-			case MetaTypes::OPTION_PAGE:
-				$sql = "
-	                DELETE FROM `{$wpdb->prefix}options`
-	                WHERE option_name LIKE %s 
-	            ";
-				$args = [
-					$this->fieldModel->getDbName().'%',
 				];
 				break;
 		}

@@ -1257,34 +1257,6 @@ class ACPT_Lite_Ajax
         return wp_send_json(MetaRepository::getMetaFieldById($id, $lazy));
     }
 
-    public function fetchCommentMetaValueAction()
-    {
-	    if(isset($_POST['data'])){
-		    $data = $this->sanitizeJsonData($_POST['data']);
-
-		    if(!isset($data['fieldName'])){
-			    return wp_send_json([
-				    'success' => false,
-				    'error' => "Missing `fieldName` field"
-			    ]);
-		    }
-
-		    if(!isset($data['commentId'])){
-			    return wp_send_json([
-				    'success' => false,
-				    'error' => "Missing `commentId` field"
-			    ]);
-		    }
-
-		    $fieldName = $data['fieldName'];
-		    $commentId = $data['commentId'];
-
-		    return wp_send_json([
-			    'value' => Meta::fetch($commentId, MetaTypes::COMMENT, $fieldName)
-		    ]);
-	    }
-    }
-
     /**
      * Fetch custom post types
      *

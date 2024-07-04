@@ -432,7 +432,6 @@ abstract class AbstractSaveMetaCommand
 
 		switch ($metaType){
 
-			case MetaTypes::MEDIA:
 			case MetaTypes::CUSTOM_POST_TYPE:
 
 				$sql = "SELECT * FROM `{$wpdb->prefix}postmeta` WHERE meta_key = %s ";
