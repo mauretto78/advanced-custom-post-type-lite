@@ -846,29 +846,6 @@ class ACPT_Lite_Ajax
 	    return wp_send_json($command->execute());
     }
 
-	/**
-	 * Fetch preview link
-	 */
-    public function fetchPreviewLinkAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-
-        try {
-	        $query = new FetchPreviewLinkQuery($data);
-
-	        return wp_send_json([
-	        	'success' => true,
-		        'link' => $query->execute(),
-	        ]);
-
-        } catch (\Exception $exception){
-	        return wp_send_json([
-		        'success' => false,
-		        'error' => $exception->getMessage(),
-	        ]);
-        }
-    }
-
 	public function fetchMetaFieldsFlatMapAction()
 	{
 		$data = $this->sanitizeJsonData($_POST['data']);
@@ -978,27 +955,6 @@ class ACPT_Lite_Ajax
         ]);
     }
 
-    public function fetchHeadersAndFootersAction()
-    {
-        $directory = get_template_directory();
-
-        $headers = array_merge(glob($directory."/header.php"), glob($directory."/header-*.php"));
-        $footers = array_merge(glob($directory."/footer.php"), glob($directory."/footer-*.php"));
-
-        foreach ($headers as $index => $header){
-            $headers[$index] = $this->cleanHeadersAndFootersName($header);
-        }
-
-        foreach ($footers as $index => $footer){
-            $footers[$index] = $this->cleanHeadersAndFootersName($footer);
-        }
-
-        return wp_send_json([
-                'headers' => $headers,
-                'footers' => $footers,
-        ]);
-    }
-
 	/**
 	 * Flush cache
 	 */
@@ -1024,41 +980,6 @@ class ACPT_Lite_Ajax
 			]);
 		}
 	}
-
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function fetchLicenseAction()
-    {
-        if(!ACPT_License_Manager::isLicenseValid()){
-            return wp_send_json([
-                    'error' => 'License is not valid'
-            ]);
-        }
-
-        try {
-	        $query = new FetchLicenseQuery();
-
-	        return wp_send_json($query->execute());
-        } catch (\Exception $exception){
-	        return wp_send_json([
-		        'error' => $exception->getMessage()
-	        ]);
-        }
-    }
-
-    /**
-     * @param $string
-     *
-     * @return string|string[]
-     */
-    private function cleanHeadersAndFootersName( $string)
-    {
-        $directory = get_template_directory();
-
-        return str_replace([$directory, '/', '.php'],'', $string);
-    }
 
     /**
      * @return mixed
