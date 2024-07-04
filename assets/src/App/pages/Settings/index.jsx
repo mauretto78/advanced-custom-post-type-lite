@@ -72,11 +72,7 @@ const Settings = () => {
     const delete_posts = fetchDefaultValue("delete_posts", 0);
     const delete_tables_when_deactivate =fetchDefaultValue("delete_tables_when_deactivate", 0);
     const enable_cache = fetchDefaultValue("enable_cache", 0);
-    const enable_forms = fetchDefaultValue("enable_forms", 0);
     const font = fetchDefaultValue("font", 'Inter');
-    const google_recaptcha_site_key = fetchDefaultValue("google_recaptcha_site_key", '');
-    const google_recaptcha_secret_key = fetchDefaultValue("google_recaptcha_secret_key", '');
-    const google_maps_api_key = fetchDefaultValue("google_maps_api_key", '');
     const language = fetchDefaultValue("language", 'en_US');
     const records_per_page = fetchDefaultValue("records_per_page", 20);
 
@@ -84,14 +80,10 @@ const Settings = () => {
         mode: 'all',
         defaultValues: {
             enable_cache: enable_cache,
-            enable_forms: enable_forms,
             delete_metadata: delete_metadata,
             delete_posts: delete_posts,
             delete_tables_when_deactivate: delete_tables_when_deactivate,
             records_per_page: records_per_page,
-            google_maps_api_key: google_maps_api_key,
-            google_recaptcha_site_key: google_recaptcha_site_key,
-            google_recaptcha_secret_key: google_recaptcha_secret_key,
             language: language,
             font: font,
         }
@@ -101,13 +93,9 @@ const Settings = () => {
         dispatch(saveSettings({
             records_per_page: data.records_per_page,
             enable_cache: data.enable_cache ? 1 : 0,
-            enable_forms: data.enable_forms ? 1 : 0,
             delete_tables_when_deactivate: data.delete_tables_when_deactivate ? 1 : 0,
             delete_posts: data.delete_posts ? 1 : 0,
             delete_metadata: data.delete_metadata ? 1 : 0,
-            google_maps_api_key: data.google_maps_api_key,
-            google_recaptcha_site_key: data.google_recaptcha_site_key,
-            google_recaptcha_secret_key: data.google_recaptcha_secret_key,
             language: data.language ? data.language.value : null,
             font: data.font ? data.font : null
         }));
@@ -219,62 +207,6 @@ const Settings = () => {
                                     validate={{
                                         required: "This field is mandatory"
                                     }}
-                                />
-                            }
-                        />
-                        <CardRow
-                            label={useTranslation("Google Maps API key")}
-                            value={
-                                <Input
-                                    id="google_maps_api_key"
-                                    description={useTranslation("Paste here your Google Maps API key. Needed to use the Address meta field.")}
-                                    register={register}
-                                    errors={errors}
-                                    isRequired={false}
-                                    defaultValue={google_maps_api_key}
-                                    validate={{
-                                        validate: validateGoogleMapsApiKey
-                                    }}
-                                />
-                            }
-                        />
-                        <CardRow
-                            label={useTranslation("Your Google reCAPTCHA site key")}
-                            value={
-                                <Input
-                                    id="google_recaptcha_site_key"
-                                    description={useTranslation("Your Google reCAPTCHA site key. Needed to use the CAPTCHA form field.")}
-                                    register={register}
-                                    errors={errors}
-                                    defaultValue={google_recaptcha_site_key}
-                                    isRequired={false}
-                                />
-                            }
-                        />
-                        <CardRow
-                            label={useTranslation("Your Google reCAPTCHA secret key")}
-                            value={
-                                <Input
-                                    id="google_recaptcha_secret_key"
-                                    description={useTranslation("Your Google reCAPTCHA secret key. Needed to use the CAPTCHA form field.")}
-                                    register={register}
-                                    errors={errors}
-                                    defaultValue={google_recaptcha_site_key}
-                                    isRequired={false}
-                                />
-                            }
-                        />
-                    </Card>
-                    <Card title={useTranslation("Content settings")}>
-                        <CardRow
-                            label={useTranslation("Enable forms")}
-                            value={
-                                <Toggle
-                                    id="enable_forms"
-                                    description={useTranslation("Enable the form builder.")}
-                                    register={register}
-                                    errors={errors}
-                                    defaultValue={enable_forms}
                                 />
                             }
                         />

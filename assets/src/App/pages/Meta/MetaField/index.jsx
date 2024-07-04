@@ -8,12 +8,8 @@ import Tabs from "../../../components/Tabs";
 import useTranslation from "../../../hooks/useTranslation";
 import Tab from "../../../components/Tabs/Tab";
 import BasicTab from "./Tabs/BasicTab";
-import AdvancedTab from "./Tabs/AdvancedTab";
-import ConditionalRenderingTab from "./Tabs/ConditionalRenderingTab";
-import ValidationRulesTab from "./Tabs/ValidationRulesTab";
 import {useFormContext, useWatch} from "react-hook-form";
 import {getFormId, isTextualField} from "../../../utils/fields";
-import {useInsideClick} from "../../../hooks/useInsideClick";
 import {useSelector} from "react-redux";
 import {Icon} from "@iconify/react";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
@@ -180,65 +176,6 @@ const MetaField = ({boxIndex, fieldIndex, view, boxId, field, parentFieldIndex, 
                                             field={field}
                                         />
                                     </Tab>
-                                    <Tab title={
-                                        <React.Fragment>
-                                        <span className="visible-xs">
-                                            <Icon icon="solar:tuning-2-outline" width={24} />
-                                        </span>
-                                            <span className="hidden-xs">
-                                            {useTranslation("ADVANCED OPTIONS")}
-                                        </span>
-                                        </React.Fragment>
-                                    }>
-                                        <AdvancedTab
-                                            boxIndex={boxIndex}
-                                            fieldIndex={fieldIndex}
-                                            field={field}
-                                            formId={formId}
-                                        />
-                                    </Tab>
-                                    <Tab title={
-                                        <React.Fragment>
-                                             <span className="visible-xs">
-                                                <Icon icon="bx:low-vision" width={24} />
-                                            </span>
-                                            <span className="hidden-xs">
-                                                {useTranslation("CONDITIONAL LOGIC")}
-                                            </span>
-                                        </React.Fragment>
-                                    }>
-                                        <ConditionalRenderingTab
-                                            boxIndex={boxIndex}
-                                            fieldIndex={fieldIndex}
-                                            boxId={boxId}
-                                            field={field}
-                                            parentFieldIndex={parentFieldIndex}
-                                            parentFieldId={parentFieldId}
-                                            formId={formId}
-                                        />
-                                    </Tab>
-                                    {isTextualField(watchedFieldType ? watchedFieldType : field.type) && (
-                                        <Tab title={
-                                            <React.Fragment>
-                                            <span className="visible-xs">
-                                                <Icon icon="bx:check-double" width={24} />
-                                            </span>
-                                                <span className="hidden-xs">
-                                                {useTranslation("VALIDATION RULES")}
-                                            </span>
-                                            </React.Fragment>
-                                        }>
-                                            <ValidationRulesTab
-                                                boxIndex={boxIndex}
-                                                fieldIndex={fieldIndex}
-                                                boxId={boxId}
-                                                field={field}
-                                                parentFieldIndex={parentFieldIndex}
-                                                parentFieldId={parentFieldId}
-                                                formId={formId}
-                                            />
-                                        </Tab>
-                                    )}
                                 </Tabs>
                             </div>
                         </div>

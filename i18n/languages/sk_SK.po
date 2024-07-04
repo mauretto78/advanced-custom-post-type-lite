@@ -1,0 +1,3987 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Viorel-Cosmin Miron <cosmin@uhl-services.ch>\n"
+"Language-Team: \n"
+"Language: sk_SK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+msgid "(default true)"
+msgstr "(predvolené true)"
+
+msgid "(e.g. Movie)"
+msgstr "(napr. film)"
+
+msgid "(e.g. Movies)"
+msgstr "(napr. filmy)"
+
+msgid "--Select--"
+msgstr "--Vybrať--"
+
+msgid "A brief description"
+msgstr "Stručný opis"
+
+msgid "Add page"
+msgstr "Pridať stránku"
+
+msgid "ACPT Tools"
+msgstr "Nástroje ACPT"
+
+msgid "ACPT email account"
+msgstr "E-mailové konto ACPT"
+
+msgid "ALERT:"
+msgstr "ALERT:"
+
+msgid "API dashboard"
+msgstr "Prístrojový panel API"
+
+msgid "APIs"
+msgstr "Rozhrania API"
+
+msgid "APIs dashboard panel"
+msgstr "Panel ovládacieho panela API"
+
+msgid "APIs endpoints"
+msgstr "Koncové body API"
+
+msgid "API key"
+msgstr "API kľúč"
+
+msgid "Action required"
+msgstr "Požadované opatrenia"
+
+msgid "Actions"
+msgstr "Akcie"
+
+msgid ""
+"Activate ACPT by your license key to get professional support and automatic "
+"updates from your WordPress dashboard."
+msgstr ""
+"Aktiváciou ACPT pomocou licenčného kľúča získate profesionálnu podporu a "
+"automatické aktualizácie z ovládacieho panela WordPress."
+
+msgid "Activate your license"
+msgstr "Aktivácia licencie"
+
+msgid ""
+"Activate your license key here. Please note that you need also your ACPT "
+"user email"
+msgstr ""
+"Tu si aktivujte licenčný kľúč. Upozorňujeme, že potrebujete aj svoj "
+"používateľský e-mail ACPT"
+
+msgid "Activate your license now"
+msgstr "Aktivujte si licenciu teraz"
+
+msgid "Add"
+msgstr "Pridať"
+
+msgid "Add block"
+msgstr "Pridať blok"
+
+msgid "Add child page"
+msgstr "Pridanie detskej stránky"
+
+msgid "Add element"
+msgstr "Pridať element"
+
+msgid "Add field"
+msgstr "Pridať pole"
+
+msgid "Add meta box"
+msgstr "Pridanie meta poľa"
+
+msgid "Add new {{r}}"
+msgstr "Pridať nový {{r}}"
+
+msgid "Add option"
+msgstr "Pridať možnosť"
+
+msgid "Add or remove {{r}}"
+msgstr "Pridať alebo odstrániť {{r}}"
+
+msgid "Add product data"
+msgstr "Pridanie údajov o produkte"
+
+msgid "Add support for various available post edit features. For more info"
+msgstr ""
+"Pridanie podpory pre rôzne dostupné funkcie úprav príspevkov. Ďalšie "
+"informácie"
+
+msgid "after copying"
+msgstr "po skopírovaní"
+
+msgid "All {{r}}"
+msgstr "Všetky {{r}}"
+
+msgid ""
+"Allowed keys: 'name', name of default term.|'slug', Slug for default "
+"term.|'description', Description for default term"
+msgstr ""
+"Povolené kľúče: 'name', názov predvoleného termínu.|'slug', Slug pre "
+"predvolený termín.|'description', Popis pre predvolený termín"
+
+msgid "Archive template"
+msgstr "Šablóna archívu"
+
+msgid "Archives"
+msgstr "Archívy"
+
+msgid "Are you sure?"
+msgstr "Ste si istý?"
+
+msgid "Array of capabilities for this taxonomy."
+msgstr "Rozsah možností pre túto taxonómiu."
+
+msgid "Associate"
+msgstr "Asociácia"
+
+msgid "Associate custom post types here"
+msgstr "Pripojiť vlastné typy príspevkov tu"
+
+msgid "Associate custom post types to"
+msgstr "Priradenie vlastných typov príspevkov k"
+
+msgid "Associate taxonomies to"
+msgstr "Priradenie taxonómií k"
+
+msgid "Associated icon"
+msgstr "Pridružená ikona"
+
+msgid "Associated meta boxes"
+msgstr "Súvisiace meta políčka"
+
+msgid "Associated meta fields"
+msgstr "Súvisiace meta polia"
+
+msgid "Associated post types"
+msgstr "Súvisiace typy príspevkov"
+
+msgid "Associated taxonomies"
+msgstr "Súvisiace taxonómie"
+
+msgid "Back to {{r}}"
+msgstr "Späť na {{r}}"
+
+msgid "Belongs to"
+msgstr "Patrí do"
+
+msgid "Block list"
+msgstr "Zoznam blokov"
+
+msgid "Block was successfully copied"
+msgstr "Blok bol úspešne skopírovaný"
+
+msgid "CPT"
+msgstr "CPT"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the plural name."
+msgstr ""
+"Reťazec s veľkými a malými písmenami bez interpunkčných znamienok a medzier. "
+"Musí začínať písmenom (nie číslicou). Dôležité je, aby sa líšil od názvu "
+"množného čísla."
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the single name."
+msgstr ""
+"Reťazec s veľkými a malými písmenami bez interpunkčných znamienok a medzier. "
+"Musí začínať písmenom (nie číslicou). Dôležité je, aby sa líšil od "
+"jednotného názvu."
+
+msgid "Capabilities"
+msgstr "Možnosti"
+
+msgid "Capability"
+msgstr "Schopnosti"
+
+msgid "Capability Type"
+msgstr "Typ schopnosti"
+
+msgid "Capability type"
+msgstr "Typ spôsobilosti"
+
+msgid "Changelog"
+msgstr "Zoznam zmien"
+
+msgid "Check `required` in the selected meta field"
+msgstr "Začiarknite políčko `vyžadované` vo vybranom meta poli"
+
+msgid "Check `show in archive` in the selected meta field"
+msgstr "Začiarknite políčko `zobraziť v archíve` vo vybranom meta poli"
+
+msgid "Children list"
+msgstr "Zoznam detí"
+
+msgid "Choose box"
+msgstr "Vyberte si políčko"
+
+msgid "Choose element"
+msgstr "Vyberte si prvok"
+
+msgid "Choose field"
+msgstr "Vyberte pole"
+
+msgid "Choose from most used {{r}}"
+msgstr "Vyberte si z najpoužívanejších {{r}}"
+
+msgid "Choose from the list"
+msgstr "Vyberte si zo zoznamu"
+
+msgid "Choose how to display the related post(s) selector (default: select)"
+msgstr ""
+"Vyberte, ako sa má zobraziť selektor súvisiacich príspevkov (predvolené: "
+"vybrať)"
+
+msgid "Choose the field type"
+msgstr "Vyberte typ poľa"
+
+msgid "Close"
+msgstr "Zatvoriť"
+
+msgid "Condition"
+msgstr "Stav"
+
+msgid "Condition value"
+msgstr "Hodnota stavu"
+
+msgid "Conditional rendering"
+msgstr "Podmienené vykresľovanie"
+
+msgid "Confirm deleting meta box"
+msgstr "Potvrdenie odstránenia meta poľa"
+
+msgid "Confirm deleting meta field"
+msgstr "Potvrdenie odstránenia meta poľa"
+
+msgid "Confirm deleting all"
+msgstr "Potvrdenie odstránenia všetkých"
+
+msgid "Confirm deleting option"
+msgstr "Potvrdenie možnosti vymazania"
+
+msgid ""
+"Copy the conditional logic settings of this meta field to other fields of "
+"this box"
+msgstr ""
+"Skopírovanie nastavení podmienenej logiky tohto meta poľa do iných polí "
+"tohto poľa"
+
+msgid "Copy the meta block"
+msgstr "Skopírujte meta blok"
+
+msgid "Copy the meta box"
+msgstr "Skopírujte meta rámček"
+
+msgid "Copy the meta field"
+msgstr "Kopírovanie meta poľa"
+
+msgid "Copy the selected meta box"
+msgstr "Kopírovanie vybraného metaobalu"
+
+msgid "Copy the selected meta field"
+msgstr "Kopírovanie vybraného meta poľa"
+
+msgid "Copy this block to another meta field"
+msgstr "Skopírujte tento blok do iného meta poľa"
+
+msgid "Copy this meta box"
+msgstr "Skopírujte toto meta políčko"
+
+msgid "Copy this meta box to another"
+msgstr "Skopírujte tento meta rámček do iného"
+
+msgid "Copy this meta field to another meta box"
+msgstr "Kopírovanie tohto meta poľa do iného meta poľa"
+
+msgid "Copyright"
+msgstr "Autorské práva"
+
+msgid "Create"
+msgstr "Vytvoriť"
+
+msgid "Create a meta field in the selected meta box"
+msgstr "Vytvorenie meta poľa vo vybranom meta poli"
+
+msgid "Create a meta option (if applicable) in the selected meta field"
+msgstr "Vytvorenie možnosti meta (ak je to vhodné) vo vybranom poli meta"
+
+msgid "Create a new block (only for Flexible field)"
+msgstr "Vytvorenie nového bloku (len pre flexibilné pole)"
+
+msgid "Create a new condition in the selected meta field"
+msgstr "Vytvorenie novej podmienky vo vybranom meta poli"
+
+msgid "Create new Taxonomy"
+msgstr "Vytvorenie novej taxonómie"
+
+msgid "Create new WooCommerce product data"
+msgstr "Vytvorenie nových údajov o produkte WooCommerce"
+
+msgid "Create new meta box"
+msgstr "Vytvorenie nového meta poľa"
+
+msgid "Create new options after the selected meta option"
+msgstr "Vytvorenie nových možností za vybranou možnosťou meta"
+
+msgid "Create template"
+msgstr "Vytvoriť vzor"
+
+msgid "Custom"
+msgstr "Vlastné"
+
+msgid "Custom Post Type global settings"
+msgstr "Globálne nastavenia vlastného typu príspevku"
+
+msgid "Custom post type data"
+msgstr "Vlastné údaje typu príspevku"
+
+msgid "Custom post type meta successfully saved"
+msgstr "Meta vlastného typu príspevku úspešne uložená"
+
+msgid "Custom post type slug to use instead of default."
+msgstr "Vlastný typ príspevku slug použiť namiesto predvoleného."
+
+msgid ""
+"Custom post type successfully deleted. The browser will refresh after 5 "
+"seconds."
+msgstr ""
+"Vlastný typ príspevku úspešne odstránený. Prehliadač sa obnoví po 5 "
+"sekundách."
+
+msgid ""
+"Custom post type successfully saved. The browser will refresh after 5 "
+"seconds."
+msgstr ""
+"Vlastný typ príspevku úspešne uložený. Prehliadač sa obnoví po 5 sekundách."
+
+msgid "Custom post type was associated to selected taxonomies"
+msgstr "Vlastný typ príspevku bol priradený k vybraným taxonómiám"
+
+msgid "Custom post type"
+msgstr "Custom Typ príspevku"
+
+msgid "Custom post types"
+msgstr "Vlastný príspevok typy"
+
+msgid "Custom query var"
+msgstr "Vlastný dotaz var"
+
+msgid "Custom query var slug to use instead of default."
+msgstr "Vlastný dotaz var slug, ktorý sa má použiť namiesto predvoleného."
+
+msgid "Custom rewrite"
+msgstr "Vlastné prepísanie"
+
+msgid "Custom rewrite rules"
+msgstr "Vlastné pravidlá prepisovania"
+
+msgid "Date format"
+msgstr "Formát dátumu"
+
+msgid "Default term to be used for the taxonomy."
+msgstr "Predvolený termín, ktorý sa má použiť pre taxonómiu."
+
+msgid "Default value"
+msgstr "Základné hodnoty"
+
+msgid "Delete"
+msgstr "Odstrániť"
+
+msgid "Delete ACPT definitions when deactivate the plug-in"
+msgstr "Odstránenie definícií ACPT pri deaktivácii doplnku"
+
+msgid "Delete API key"
+msgstr "Odstránenie kľúča API"
+
+msgid "Delete Taxonomy"
+msgstr "Odstránenie taxonómie"
+
+msgid "Delete WooCommerce product data"
+msgstr "Odstránenie údajov o produkte WooCommerce"
+
+msgid "Delete all"
+msgstr "Zmazať všetko"
+
+msgid "Delete all action"
+msgstr "Odstrániť všetky akcie"
+
+msgid "Delete all images"
+msgstr "Odstránenie všetkých obrázkov"
+
+msgid ""
+"Delete all saved ACPT definitions when you deactivate the plug-in. This "
+"means that if you select NO when you deactivate and then reactivate the plug-"
+"in you will find all the previously saved ACPT definitions (meta fields, "
+"options etc.)"
+msgstr ""
+"Odstránenie všetkých uložených definícií ACPT pri deaktivácii zásuvného "
+"modulu. To znamená, že ak pri deaktivácii vyberiete možnosť NIE a potom "
+"zásuvný modul znova aktivujete, nájdete všetky predtým uložené definície "
+"ACPT (meta polia, možnosti atď.)"
+
+msgid "Delete metadata when delete an ACPT field"
+msgstr "Odstránenie metaúdajov pri odstraňovaní poľa ACPT"
+
+msgid "Delete others pages"
+msgstr "Odstránenie ostatných stránok"
+
+msgid "Delete others posts"
+msgstr "Odstránenie ostatných príspevkov"
+
+msgid "Delete pages"
+msgstr "Odstránenie stránok"
+
+msgid "Delete post metadata when deleting ACPT fields"
+msgstr "Odstránenie metaúdajov príspevku pri odstraňovaní polí ACPT"
+
+msgid ""
+"Delete post metadata when deleting an ACPT field. This means that if you "
+"select YES, when you delete an ACPT meta field all the saved metadata will "
+"be deleted"
+msgstr ""
+"Odstránenie metaúdajov príspevku pri odstraňovaní poľa ACPT. To znamená, že "
+"ak vyberiete možnosť ÁNO, pri vymazaní meta poľa ACPT sa vymažú všetky "
+"uložené metaúdaje"
+
+msgid "Delete posts when delete an ACPT post definition"
+msgstr "Odstránenie príspevkov pri vymazaní definície príspevku ACPT"
+
+msgid ""
+"Delete posts when delete an ACPT post type definition. This means that if "
+"you select YES, when you delete an ACPT post type definition all the saved "
+"posts will be deleted"
+msgstr ""
+"Odstránenie príspevkov pri vymazaní definície typu príspevku ACPT. To "
+"znamená, že ak vyberiete možnosť ÁNO, pri vymazaní definície typu príspevku "
+"ACPT sa vymažú všetky uložené príspevky"
+
+msgid "Delete private pages"
+msgstr "Odstránenie súkromných stránok"
+
+msgid "Delete private posts"
+msgstr "Odstránenie súkromných príspevkov"
+
+msgid "Delete published pages"
+msgstr "Odstránenie publikovaných stránok"
+
+msgid "Delete the meta box in this"
+msgstr "Odstráňte meta políčko v tomto"
+
+msgid "Delete the meta field in this block after copying"
+msgstr "Odstránenie meta poľa v tomto bloku po skopírovaní"
+
+msgid "Delete the meta field in this field after copying"
+msgstr "Odstránenie meta poľa v tomto poli po skopírovaní"
+
+msgid "Delete the selected condition"
+msgstr "Odstránenie vybranej podmienky"
+
+msgid "Delete the selected meta box"
+msgstr "Odstránenie vybraného meta políčka"
+
+msgid "Delete the selected meta field"
+msgstr "Odstránenie vybraného meta poľa"
+
+msgid "Delete the selected meta option"
+msgstr "Odstránenie vybranej možnosti meta"
+
+msgid "Delete this meta box"
+msgstr "Odstránenie tohto meta poľa"
+
+msgid "Delete this meta field"
+msgstr "Odstránenie tohto meta poľa"
+
+msgid "Different name MUST be different from single name"
+msgstr "Iný názov sa MUSÍ líšiť od jednotného názvu"
+
+msgid "Disabled"
+msgstr "Zakázané"
+
+msgid "Displayed on the admin panel"
+msgstr "Zobrazuje sa na paneli správcu"
+
+msgid "Displayed on the sidebar of the admin panel"
+msgstr "Zobrazuje sa na bočnom paneli panela administrátora"
+
+msgid "Documentation"
+msgstr "Dokumentácia"
+
+msgid "Drag your component(s) here"
+msgstr "Potiahnite sem svoj(-é) komponent(-y)"
+
+msgid "Drag your loop component(s) here"
+msgstr "Potiahnite sem zložku(-ky) slučky"
+
+msgid "Duplicate the selected meta box"
+msgstr "Duplikovať vybrané meta políčko"
+
+msgid "Duplicate the selected meta field"
+msgstr "Duplikovať vybrané meta pole"
+
+msgid "Duplicate this block"
+msgstr "Duplikovať tento blok"
+
+msgid "Duplicate this meta box"
+msgstr "Duplikovať toto meta políčko"
+
+msgid "Duplicate this meta field"
+msgstr "Duplikovať toto meta pole"
+
+msgid "Edit"
+msgstr "Upraviť"
+
+msgid "Edit Custom Post Type"
+msgstr "Upraviť vlastný typ príspevku"
+
+msgid "Edit Taxonomy"
+msgstr "Upraviť taxonómiu"
+
+msgid "Edit WooCommerce product data"
+msgstr "Úprava údajov o produkte WooCommerce"
+
+msgid "Edit a Taxonomy"
+msgstr "Úprava taxonómie"
+
+msgid "Edit others pages"
+msgstr "Úprava ostatných stránok"
+
+msgid "Edit others posts"
+msgstr "Upravovať príspevky ostatných"
+
+msgid "Edit pages"
+msgstr "Úprava stránok"
+
+msgid "Edit private pages"
+msgstr "Úprava súkromných stránok"
+
+msgid "Edit private posts"
+msgstr "Úprava súkromných príspevkov"
+
+msgid "Edit published pages"
+msgstr "Úprava uverejnených stránok"
+
+msgid "Element"
+msgstr "Element"
+
+msgid "Elements per page"
+msgstr "Prvky na stránku"
+
+msgid "Elements per row"
+msgstr "Prvky na riadok"
+
+msgid "Elements to display"
+msgstr "Prvky na zobrazenie"
+
+msgid "Enable ACPT visual builder"
+msgstr "Povolenie vizuálneho buildera ACPT"
+
+msgid "Enable the ACPT visual builder to manage your templates."
+msgstr "Povoľte vizuálny nástroj ACPT na správu šablón."
+
+msgid ""
+"Enable the ACPT visual builder. This option allows you to use the integrated "
+"visual builder to create and manage templates for single CPTs, archive "
+"pages, taxonomy terms and relations."
+msgstr ""
+"Povoľte vizuálny nástroj ACPT. Táto možnosť vám umožňuje používať "
+"integrovaný vizuálny zostavovateľ na vytváranie a správu šablón pre "
+"jednotlivé CPT, archívne stránky, taxonomické termíny a vzťahy."
+
+msgid "Error during saving the template"
+msgstr "Chyba pri ukladaní šablóny"
+
+msgid "Error during the activation of the license."
+msgstr "Chyba pri aktivácii licencie."
+
+msgid "Error fetching data"
+msgstr "Chyba pri načítavaní údajov"
+
+msgid "Ex. movie"
+msgstr "Napr. film"
+
+msgid "Ex. movies"
+msgstr "Napr. filmy"
+
+msgid "Expiration date"
+msgstr "Dátum vypršania"
+
+msgid "Export HTML/CSS code"
+msgstr "Export kódu HTML/CSS"
+
+msgid "Export code"
+msgstr "Kód exportu"
+
+msgid "Export custom post types"
+msgstr "Export vlastných typov príspevkov"
+
+msgid "Export data"
+msgstr "Export údajov"
+
+msgid "Export selected elements"
+msgstr "Export vybraných prvkov"
+
+msgid "Export settings and meta fields for selected elements:"
+msgstr "Export nastavení a meta polí pre vybrané prvky:"
+
+msgid "Facebook group"
+msgstr "Skupina na Facebooku"
+
+msgid "Featured image"
+msgstr "Obľúbené obrázky"
+
+msgid "Field columns"
+msgstr "Stĺpce polí"
+
+msgid "Field columns ([1-6] only for repeater field)"
+msgstr "Stĺpce poľa ([1-6] len pre pole opakovača)"
+
+msgid "Field label"
+msgstr "Názov textového poľa"
+
+msgid "Field name cannot be blank"
+msgstr "Názov poľa nemôže byť prázdny"
+
+msgid "Field name max length is 255 characters"
+msgstr "Maximálna dĺžka názvu poľa je 255 znakov"
+
+msgid "Field required"
+msgstr "Požadované pole"
+
+msgid "Field slug"
+msgstr "Poľný slimák"
+
+msgid "Field slug (Ex. gallery or text_1)"
+msgstr "Slíž poľa (napr. gallery alebo text_1)"
+
+msgid ""
+"Field slug. Only alphanumeric (latin) characters allowed, without spaces"
+msgstr ""
+"Poľný slimák. Povolené sú len alfanumerické (latinské) znaky bez medzier"
+
+msgid "Field width"
+msgstr "Šírka poľa"
+
+msgid "Field width in % ([1-100] default value: 100)"
+msgstr "Šírka poľa v % ([1-100] predvolená hodnota: 100)"
+
+msgid "Fields"
+msgstr "Polia"
+
+msgid "Fields count"
+msgstr "Počet polí"
+
+msgid "Filter by date"
+msgstr "Triediť podľa dátumu"
+
+msgid "Filter by {{r}}"
+msgstr "Filtrovanie podľa {{r}}"
+
+msgid "Filter {{r}} list"
+msgstr "Zoznam filtrov {{r}}"
+
+msgid "Filter in admin"
+msgstr "Filter v správe"
+
+msgid "First, create a post for this post type"
+msgstr "Najprv vytvorte príspevok pre tento typ príspevku"
+
+msgid "First, you need to add a block in ACPT settings."
+msgstr "Najprv musíte pridať blok v nastaveniach ACPT."
+
+msgid "Format"
+msgstr "Formát"
+
+msgid ""
+"From this dashboard you can discover and manage every API endpoints exposed "
+"by ACPT. Use the playground to learn how to use every endpoint."
+msgstr ""
+"Na tomto ovládacom paneli môžete zistiť a spravovať všetky koncové body API "
+"vystavené systémom ACPT. Pomocou ihriska sa naučíte používať každý koncový "
+"bod."
+
+msgid "Fullscreen mode"
+msgstr "Režim celej obrazovky"
+
+msgid "General"
+msgstr "Všeobecné"
+
+msgid "Generate"
+msgstr "Generovať"
+
+msgid "Generated at"
+msgstr "Generované v"
+
+msgid "Generating code..."
+msgstr "Generovanie kódu..."
+
+msgid "Go to"
+msgstr "Isť na"
+
+msgid "Google Maps API key"
+msgstr "Google maps API kľúč"
+
+msgid "GraphQL plural name"
+msgstr "Množné číslo jazyka GraphQL"
+
+msgid "GraphQL single name"
+msgstr "Jednotný názov jazyka GraphQL"
+
+msgid "Has archive"
+msgstr "Má archív"
+
+msgid "Headline location"
+msgstr "Umiestnenie titulku"
+
+msgid "Height"
+msgstr "Výška"
+
+msgid "Hide all modals, deselect the current element"
+msgstr "Skryť všetky modály, zrušiť výber aktuálneho prvku"
+
+msgid "Hide in external products"
+msgstr "Skryť v externých produktoch"
+
+msgid "Hide in virtual products"
+msgstr "Skrývanie vo virtuálnych produktoch"
+
+msgid "Hide/show this meta box"
+msgstr "Skryť/zobraziť toto meta okno"
+
+msgid "Hide/show this meta field"
+msgstr "Skryť/zobraziť toto meta pole"
+
+msgid "Hide/show this block"
+msgstr "Skryť/zobraziť tento blok"
+
+msgid "Hide/show this page"
+msgstr "Skryť/zobraziť túto stránku"
+
+msgid "Hierarchical"
+msgstr "Hierarchickej"
+
+msgid "How to display the related post(s) selector?"
+msgstr "Ako zobraziť výber súvisiaceho príspevku (príspevkov)?"
+
+msgid "Icon"
+msgstr "Ikona"
+
+msgid "Import an ACPT backup here."
+msgstr "Tu importujte zálohu ACPT."
+
+msgid "Import custom post types"
+msgstr "Import vlastných typov príspevkov"
+
+msgid "Import data"
+msgstr "Import údajov"
+
+msgid "Insert"
+msgstr "Vložiť"
+
+msgid "Is Public"
+msgstr "Je verejná"
+
+msgid "Key"
+msgstr "Kľúč"
+
+msgid "Label and value are linked"
+msgstr "Štítok a hodnota sú prepojené"
+
+msgid "Label and value are unlinked"
+msgstr "Označenie a hodnota nie sú prepojené"
+
+msgid "Language"
+msgstr "Jazyk"
+
+msgid "Leading term:"
+msgstr "Vedúci termín:"
+
+msgid "Lifetime"
+msgstr "Doživotné"
+
+msgid "Link target"
+msgstr "Cieľ odkazu"
+
+msgid "List {{r}}"
+msgstr "Zoznam {{r}}"
+
+msgid ""
+"Makes this post type available for selection in navigation menus. Default is "
+"value of $public."
+msgstr ""
+"Sprístupní tento typ príspevku na výber v navigačných ponukách. Predvolená "
+"hodnota je $public."
+
+msgid ""
+"Makes this post type available via the admin bar. Default is value of "
+"$show_in_menu."
+msgstr ""
+"Sprístupní tento typ príspevku prostredníctvom panela správcu. Predvolená "
+"hodnota je $show_in_menu."
+
+msgid ""
+"Makes this taxonomy available for selection in navigation menus. If not set, "
+"the default is inherited from $public (default true)."
+msgstr ""
+"Sprístupní túto taxonómiu na výber v navigačných ponukách. Ak nie je "
+"nastavená, predvolené nastavenie sa dedí z $public (predvolené true)."
+
+msgid "Manage"
+msgstr "Spravovať"
+
+msgid "Manage User Meta"
+msgstr "Správa meta používateľa"
+
+msgid "Manage categories"
+msgstr "Správa kategórií"
+
+msgid "Manage content"
+msgstr "Správa obsahu"
+
+msgid "Manage fields"
+msgstr "Správa polí"
+
+msgid "Manage links"
+msgstr "Správa odkazov"
+
+msgid "Manage options"
+msgstr "Správa možností"
+
+msgid "Manage pages"
+msgstr "Správa stránok"
+
+msgid "Manage your license"
+msgstr "Správa licencie"
+
+msgid "Manage your registered license key"
+msgstr "Správa registrovaného licenčného kľúča"
+
+msgid "Max value (used only by numeric and textual fields)"
+msgstr "Maximálna hodnota (používa sa len pri číselných a textových poliach)"
+
+msgid "Maximum blocks allowed"
+msgstr "Maximálne povolené bloky"
+
+msgid "Menu icon"
+msgstr "Ikona ponuky (menu)"
+
+msgid "Menu position"
+msgstr "Pozícia menu"
+
+msgid "Menu slug"
+msgstr "Slimák v ponuke"
+
+msgid "Menu title"
+msgstr "Názov ponuky (menu)"
+
+msgid "Meta box"
+msgstr "Meta box"
+
+msgid "Meta box was successfully copied"
+msgstr "Meta box bol úspešne skopírovaný"
+
+msgid "Meta boxes"
+msgstr "Meta boxy"
+
+msgid "Meta field"
+msgstr "Meta pole"
+
+msgid "Meta field was successfully copied"
+msgstr "Meta pole bolo úspešne skopírované"
+
+msgid "Meta fields"
+msgstr "Meta polia"
+
+msgid "Meta option"
+msgstr "Možnosť Meta"
+
+msgid "Min value (used only by numeric and textual fields)"
+msgstr "Min. hodnota (používa sa len pri číselných a textových poliach)"
+
+msgid "Minimum blocks allowed"
+msgstr "Minimálne povolené bloky"
+
+msgid "Moderate comments"
+msgstr "Mierne pripomienky"
+
+msgid "Most used {{r}}"
+msgstr "Najpoužívanejšie {{r}}"
+
+msgid "My account"
+msgstr "Môj účet"
+
+msgid "My license"
+msgstr "Moja licencia"
+
+msgid "Name"
+msgstr "Meno"
+
+msgid "Native"
+msgstr "Native"
+
+msgid "Navigate the input fields in the selected meta field"
+msgstr "Navigácia vo vstupných poliach vybraného meta poľa"
+
+msgid "Navigate the input fields in the selected meta option"
+msgstr "Navigácia vo vstupných poliach vybranej meta možnosti"
+
+msgid "Navigate the tabs of selected field (go to next tab)"
+msgstr "Prechádzanie po kartách vybraného poľa (prejdite na ďalšiu kartu)"
+
+msgid "Navigate the tabs of selected field (go to previous tab)"
+msgstr ""
+"Prechádzanie po kartách vybraného poľa (prechod na predchádzajúcu kartu)"
+
+msgid "Navigate to next element (box, field, option or condition)"
+msgstr "Prechod na ďalší prvok (políčko, pole, možnosť alebo podmienku)"
+
+msgid "Navigate to previous element (box, field, option or condition)"
+msgstr ""
+"Prechod na predchádzajúci prvok (pole, rámček, možnosť alebo podmienku)"
+
+msgid "Navigation"
+msgstr "Navigácia"
+
+msgid "Navigation list {{r}}"
+msgstr "Navigačný zoznam {{r}}"
+
+msgid "New"
+msgstr "Nový"
+
+msgid "New {{r}}"
+msgstr "Nové {{r}}"
+
+msgid "Next Step"
+msgstr "Ďalší krok"
+
+msgid "No"
+msgstr "Nie"
+
+msgid "No API keys found."
+msgstr "Nenašli sa žiadne kľúče API."
+
+msgid ""
+"No blocks already created. Create the first one now by clicking the button "
+"\"Add block\"!"
+msgstr ""
+"Nie sú vytvorené žiadne bloky. Vytvorte prvý teraz kliknutím na tlačidlo "
+"\"Pridať blok\"!"
+
+msgid ""
+"No blocks saved, generate the first one clicking on \"Add block\" button"
+msgstr ""
+"Žiadne uložené bloky, vygenerujte prvý kliknutím na tlačidlo \"Pridať blok\""
+
+msgid ""
+"No children already created. Create the first one now by clicking the button "
+"\"Add child page\"!"
+msgstr ""
+"Žiadne deti už nie sú vytvorené. Vytvorte prvú kliknutím na tlačidlo "
+"\"Pridať detskú stránku\"!"
+
+msgid "No choice"
+msgstr "Žiadna možnosť voľby"
+
+msgid "No conditions are present."
+msgstr "Nie sú prítomné žiadne podmienky."
+
+msgid ""
+"No conditions are present, click on \"Add condition\" button to add the "
+"first one."
+msgstr ""
+"Nie sú prítomné žiadne podmienky, kliknite na tlačidlo \"Pridať podmienku\" "
+"a pridajte prvú podmienku."
+
+msgid ""
+"No content yet. Drag components in this canvas and start building something "
+"awesome!"
+msgstr ""
+"Zatiaľ bez obsahu. Presuňte komponenty na toto plátno a začnite vytvárať "
+"niečo úžasné!"
+
+msgid "No custom post type found."
+msgstr "Nenašiel sa žiadny vlastný typ príspevku."
+
+msgid "No display"
+msgstr "Bez zobrazenia"
+
+msgid ""
+"No elements saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"Žiadne uložené prvky, vygenerujte prvý kliknutím na tlačidlo \"Pridať prvok\""
+
+msgid ""
+"No field box already created. Create the first one now by clicking the "
+"button \"Add field box\"!"
+msgstr ""
+"Žiadne pole už nie je vytvorené. Vytvorte prvé pole kliknutím na tlačidlo "
+"\"Pridať pole\"!"
+
+msgid ""
+"No fields saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"Žiadne polia nie sú uložené, vygenerujte prvé kliknutím na tlačidlo \"Pridať "
+"prvok\""
+
+msgid ""
+"No fields already created. Create the first one now by clicking the button "
+"\"Add field\"!"
+msgstr ""
+"Nie sú vytvorené žiadne polia. Vytvorte prvé pole kliknutím na tlačidlo "
+"\"Pridať pole\"!"
+
+msgid ""
+"No meta box already created. Create the first one now by clicking the button "
+"\"Add meta box\"!"
+msgstr ""
+"Nie je vytvorený žiadny meta box. Vytvorte si prvý teraz kliknutím na "
+"tlačidlo \"Pridať meta box\"!"
+
+msgid "No option pages found."
+msgstr "Nenašli sa žiadne stránky s možnosťami."
+
+msgid ""
+"No options already created. Create the first one now by clicking the button "
+"\"Add option\"!"
+msgstr ""
+"Nie sú vytvorené žiadne možnosti. Vytvorte si prvú teraz kliknutím na "
+"tlačidlo \"Pridať možnosť\"!"
+
+msgid "No product data found."
+msgstr "Nenašli sa žiadne údaje o výrobku."
+
+msgid "No records message"
+msgstr "Správa Žiadne záznamy"
+
+msgid "No taxonomies found."
+msgstr "Nenašli sa žiadne taxonómie."
+
+msgid "No templates found."
+msgstr "Nenašli sa žiadne šablóny."
+
+msgid "No {{r}}"
+msgstr "Nie {{r}}"
+
+msgid "No {{r}} found"
+msgstr "Nenašiel sa žiadny {{r}}"
+
+msgid "Not allowed"
+msgstr "Nepovolené"
+
+msgid "On the left"
+msgstr "Na ľavej strane"
+
+msgid "On the right"
+msgstr "Vpravo"
+
+msgid "On the top"
+msgstr "Na vrchole"
+
+msgid "Opens in a new window or tab "
+msgstr "Otvorí sa v novom okne alebo karte "
+
+msgid "Opens in the full body of the window"
+msgstr "Otvorí sa v celom tele okna"
+
+msgid "Opens in the parent frame"
+msgstr "Otvorí sa v nadradenom rámci"
+
+msgid "Opens in the same frame as it was clicked"
+msgstr "Otvorí sa v tom istom rámčeku, v akom naň bolo kliknuté"
+
+msgid "Option list"
+msgstr "Zoznam možností"
+
+msgid "Option page meta successfully saved"
+msgstr "Meta stránky možnosti úspešne uložená"
+
+msgid "Single option page"
+msgstr "Stránka s jednou možnosťou"
+
+msgid "Option page"
+msgstr "Stránka s možnosťami"
+
+msgid "Option pages"
+msgstr "Stránky s možnosťami"
+
+msgid "Option pages meta"
+msgstr "Meta stránky možností"
+
+msgid "Order by"
+msgstr "Zoradiť podľa"
+
+msgid "Page description (will be displayed after the title)"
+msgstr "Popis stránky (zobrazí sa za názvom)"
+
+msgid "Page not found"
+msgstr "Stránka sa nenašla"
+
+msgid "Page title"
+msgstr "Názov stránky/možnosti pre-content"
+
+msgid "Parent"
+msgstr "Nadradený"
+
+msgid "Parent item"
+msgstr "Rodič značky"
+
+msgid "Parent {{r}}"
+msgstr "Rodič {{r}}"
+
+msgid ""
+"Paste here your Google Maps API key. Needed to use the Address meta field."
+msgstr ""
+"Sem vložte svoj kľúč API Google Maps. Potrebné na použitie meta poľa Adresa."
+
+msgid "Pattern value (used only by numeric and textual fields)"
+msgstr "Hodnota vzoru (používa sa len v číselných a textových poliach)"
+
+msgid "Pattern value (used only by textual fields)"
+msgstr "Hodnota vzoru (používa sa len v textových poliach)"
+
+msgid "Permalink text"
+msgstr "Trvalý text"
+
+msgid "Plugin version"
+msgstr "Verzia pluginu"
+
+msgid "Plural"
+msgstr "Množné číslo"
+
+msgid "Plural label"
+msgstr "Štítok v množnom čísle"
+
+msgid "Popular {{r}}"
+msgstr "Populárne {{r}}"
+
+msgid "Possible values: customPostType, taxonomy."
+msgstr "Možné hodnoty: customPostType, taxonomy."
+
+msgid "Post count"
+msgstr "Počet príspevkov"
+
+msgid "Post name"
+msgstr "Názov príspevku"
+
+msgid "Preview"
+msgstr "Náhľad"
+
+msgid "Previous Step"
+msgstr "Predchádzajúci krok"
+
+msgid "Product data"
+msgstr "Údaje o výrobku"
+
+msgid "Product data successfully saved"
+msgstr "Údaje o produkte boli úspešne uložené"
+
+msgid "Publicly queryable"
+msgstr "Verejne prístupné vyhľadávanie"
+
+msgid "Publish pages"
+msgstr "Publikovanie stránok"
+
+msgid "Published posts count"
+msgstr "Počet uverejnených príspevkov"
+
+msgid "Published posts count associated with the taxonomy"
+msgstr "Počet uverejnených príspevkov spojených s taxonómiou"
+
+msgid "Query var"
+msgstr "Dotaz var"
+
+msgid "Quick edit"
+msgstr "Rýchla úprava"
+
+msgid "Quick navigation"
+msgstr "Rýchla navigácia"
+
+msgid "REST API Controller class name. Default is 'WP_REST_Terms_Controller'."
+msgstr ""
+"Názov triedy REST API Controller. Predvolená hodnota je "
+"'WP_REST_Terms_Controller'."
+
+msgid "REST API base slug"
+msgstr "Základný slug REST API"
+
+msgid "REST Controller class"
+msgstr "Trieda REST Controller"
+
+msgid "Radio/checkbox"
+msgstr "Rádio/zaškrtávacie políčko"
+
+msgid "Read private pages"
+msgstr "Čítanie súkromných stránok"
+
+msgid "Read private posts"
+msgstr "Čítanie súkromných príspevkov"
+
+msgid "Records per page"
+msgstr "Záznamy na stránku"
+
+msgid "Records per page in ACPT dashboards"
+msgstr "Záznamy na stránku v prístrojových paneloch ACPT"
+
+msgid "Redo"
+msgstr "Opakovať"
+
+msgid "Regenerate"
+msgstr "Regenerovať"
+
+msgid "Register new Custom Post Type"
+msgstr "Registrácia nového vlastného typu príspevku"
+
+msgid "Register the first one"
+msgstr "Zaregistrujte prvý z nich"
+
+msgid "Registered Custom Post Types"
+msgstr "Registrované vlastné typy príspevkov"
+
+msgid "Registered Taxonomies"
+msgstr "Registrované taxonómie"
+
+msgid "Related template"
+msgstr "Súvisiaca šablóna"
+
+msgid "Remove featured image"
+msgstr "Zmazať prezentačný obrázok"
+
+msgid "Return back to list"
+msgstr "Späť na zoznam"
+
+msgid "Rewrite"
+msgstr "Prepísať"
+
+msgid "Save"
+msgstr "Uložiť"
+
+msgid "Save action"
+msgstr "Uložiť akciu"
+
+msgid "Search"
+msgstr "Hľadať"
+
+msgid "Search box"
+msgstr "Vyhľadávanie"
+
+msgid "Search {{r}}"
+msgstr "Vyhľadávanie {{r}}"
+
+msgid "Secret"
+msgstr "Tajný kľúč"
+
+msgid "Select"
+msgstr "Vybrať"
+
+msgid "Select field box from list"
+msgstr "Vyberte pole zo zoznamu"
+
+msgid "Select the inversed field on target"
+msgstr "Vyberte inverzné pole v cieli"
+
+msgid "Select field from list"
+msgstr "Výber poľa zo zoznamu"
+
+msgid "Select field type from list"
+msgstr "Vyberte typ poľa zo zoznamu"
+
+msgid "Select relation type from list"
+msgstr "Vyberte typ vzťahu zo zoznamu"
+
+msgid "Select the element from the list:"
+msgstr "Vyberte prvok zo zoznamu:"
+
+msgid "Select the headline location (default: on the left)"
+msgstr "Vyberte umiestnenie titulku (predvolené: vľavo)"
+
+msgid "Select the template type:"
+msgstr "Vyberte typ šablóny:"
+
+msgid "Separate {{r}} with commas"
+msgstr "Oddeľte {{r}} čiarkami"
+
+msgid "Set featured image"
+msgstr "Nastaviť prezentačný obrázok"
+
+msgid "Set the language of the plug-in"
+msgstr "Nastavenie jazyka zásuvného modulu"
+
+msgid ""
+"Sets the query var key for this taxonomy. Default  key. If false, a taxonomy "
+"cannot be loaded at ?{query_var}={term_slug}. If a string, the query ?"
+"{query_var}={term_slug} will be valid."
+msgstr ""
+"Nastaví kľúč query var pre túto taxonómiu. Predvolený kľúč. Ak je false, "
+"taxonómiu nie je možné načítať pri ?{query_var}={term_slug}. Ak je to "
+"reťazec, bude platný dotaz ?{query_var}={term_slug}."
+
+msgid ""
+"Sets the query_var key for this post type. Defaults to  key. If false, a "
+"post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+"string, the query {post_slug} will be valid."
+msgstr ""
+"Nastaví kľúč query_var pre tento typ príspevku. Predvolené nastavenie je "
+"key. Ak je false, typ príspevku sa nemôže načítať pri ?{query_var}"
+"={post_slug}. Ak je zadaný ako reťazec, bude platný dotaz {post_slug}."
+
+msgid "Settings"
+msgstr "Nastavenia"
+
+msgid "Settings page"
+msgstr "Stránka s nastaveniami"
+
+msgid "Show Tagcloud"
+msgstr "Zobraziť Tagcloud"
+
+msgid "Show admin column"
+msgstr "Zobraziť stĺpec správcu"
+
+msgid "Show in GraphQL"
+msgstr "Zobraziť v jazyku GraphQL"
+
+msgid "Show in REST API"
+msgstr "Zobraziť v rozhraní REST API"
+
+msgid "Show in UI"
+msgstr "Zobraziť v používateľskom rozhraní"
+
+msgid "Show in Wordpress admin post lists page"
+msgstr "Zobraziť na stránke zoznamov príspevkov v aplikácii Wordpress admin"
+
+msgid "Show in admin bar"
+msgstr "Zobraziť v paneli správcu"
+
+msgid "Show in external products"
+msgstr "Zobraziť v externých produktoch"
+
+msgid "Show in grouped products"
+msgstr "Zobraziť v zoskupených produktoch"
+
+msgid "Show in menu"
+msgstr "Zobraziť v ponuke"
+
+msgid "Show in nav menus"
+msgstr "Zobraziť v navigačných ponukách"
+
+msgid "Show in quick edit"
+msgstr "Zobraziť v rýchlych úpravách"
+
+msgid "Show in simple products"
+msgstr "Zobraziť v jednoduchých produktoch"
+
+msgid "Show in variable products"
+msgstr "Zobraziť v premenných produktov"
+
+msgid "Show on UI"
+msgstr "Zobraziť na používateľskom rozhraní"
+
+msgid "Show pagination"
+msgstr "Zobraziť stránkovanie"
+
+msgid "Show the custom post type in WPGraphQL"
+msgstr "Zobrazenie vlastného typu príspevku v jazyku WPGraphQL"
+
+msgid "Show the custom post type in WPGraphQL."
+msgstr "Zobrazenie vlastného typu príspevku v jazyku WPGraphQL."
+
+msgid "Show the product data on the front store page."
+msgstr "Zobrazenie údajov o produkte na úvodnej stránke obchodu."
+
+msgid "Show this legend modal"
+msgstr "Zobraziť túto modálnu legendu"
+
+msgid "Show/hide all fields"
+msgstr "Zobrazenie/skrytie všetkých polí"
+
+msgid "Sing. label"
+msgstr "Spievajte. etiketa"
+
+msgid "Single name MUST be different from plural name"
+msgstr "Jednotlivé meno sa MUSÍ líšiť od množného čísla"
+
+msgid "Single template"
+msgstr "Šablóna príspevku"
+
+msgid "Singular"
+msgstr "Jednotné číslo"
+
+msgid "Singular label"
+msgstr "Jediný štítok"
+
+msgid "Slug"
+msgstr "Slug"
+
+msgid "Sort"
+msgstr "Zoradiť"
+
+msgid "Sort by"
+msgstr "Zoradiť podľa"
+
+msgid "Step value (used only by numeric fields)"
+msgstr "Hodnota kroku (používa sa len pri číselných poliach)"
+
+msgid "Successfully post sync. The browser will refresh after 5 seconds."
+msgstr "Úspešne vykonajte synchronizáciu. Prehliadač sa obnoví po 5 sekundách."
+
+msgid "Support"
+msgstr "Podpora"
+
+msgid "Supports"
+msgstr "Podporuje"
+
+msgid "Surrounding tag"
+msgstr "Okolitá značka"
+
+msgid "Sync with post types"
+msgstr "Synchronizácia s typmi príspevkov"
+
+msgid "Taxonomies"
+msgstr "Triedenia"
+
+msgid "Taxonomies association"
+msgstr "Združenie taxonómií"
+
+msgid "Taxonomy"
+msgstr "Taxonómia"
+
+msgid "Taxonomy data"
+msgstr "Taxonomické údaje"
+
+msgid "Taxonomy meta successfully saved"
+msgstr "Meta taxonómie úspešne uložená"
+
+msgid "Taxonomy settings"
+msgstr "Nastavenia taxonómie"
+
+msgid "Taxonomy slug to use instead of default."
+msgstr "Taxonomy slug, ktorý sa má použiť namiesto predvoleného."
+
+msgid ""
+"Taxonomy slug. The post name/slug. Used for various queries for taxonomy "
+"content."
+msgstr ""
+"Taxonomický slimák. Názov príspevku/slug. Používa sa na rôzne dotazy na "
+"obsah taxonómie."
+
+msgid "Taxonomy successfully deleted"
+msgstr "Taxonómia úspešne odstránená"
+
+msgid "Taxonomy was associated to selected Custom post types"
+msgstr "Taxonómia bola priradená k vybraným Vlastným typom príspevkov"
+
+msgid "Template"
+msgstr "Šablóna"
+
+msgid "Template list"
+msgstr "Zoznam šablón"
+
+msgid "Template saved successfully"
+msgstr "Šablóna bola úspešne uložená"
+
+msgid "Template was successfully deleted."
+msgstr "Šablóna bola úspešne odstránená."
+
+msgid ""
+"Template was successfully deleted. The browser will refresh after 5 seconds."
+msgstr "Šablóna bola úspešne odstránená. Prehliadač sa obnoví po 5 sekundách."
+
+msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Text po. HTML je povolené (napr. &lt;small&gt;)"
+
+msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Text pred. HTML je povolené (napr. &lt;small&gt;)"
+
+msgid "The API key was successfully deleted"
+msgstr "Kľúč API bol úspešne odstránený"
+
+msgid "The archive template for this custom post type"
+msgstr "Šablóna archívu pre tento vlastný typ príspevku"
+
+msgid "The browser will refresh after 5 seconds."
+msgstr "Prehliadač sa obnoví po 5 sekundách."
+
+msgid "The custom post type or taxonomy element."
+msgstr "Vlastný typ príspevku alebo prvok taxonómie."
+
+msgid "The default value for this field"
+msgstr "Predvolená hodnota pre toto pole"
+
+msgid "The description of this field (showed only on admin panel)"
+msgstr "Popis tohto poľa (zobrazuje sa len na paneli administrátora)"
+
+msgid "The field label, non latin characters are allowed"
+msgstr "Označenie poľa, iné ako latinské znaky sú povolené"
+
+msgid "The icon displayed on menu (only for parent pages)"
+msgstr "Ikona zobrazená v menu (len pre nadradené stránky)"
+
+msgid ""
+"The inversed field is the target post type field which is related with this "
+"one in a bidirectional relation"
+msgstr ""
+"Inverzné pole je cieľové pole typu príspevku, ktoré je s týmto poľom spojené "
+"v obojsmernom vzťahu"
+
+msgid ""
+"The limit on how many blocks are allowed ([1-100] only for flexible field)"
+msgstr "Obmedzenie počtu povolených blokov ([1-100] len pre flexibilné pole)"
+
+msgid ""
+"The limit on how many blocks are required ([1-100] only for flexible field)"
+msgstr "Limit počtu požadovaných blokov ([1-100] len pre flexibilné pole)"
+
+msgid "The maximum value (used only by numeric and textual fields)"
+msgstr "Maximálna hodnota (používa sa len pri číselných a textových poliach)"
+
+msgid "The menu title (displayed only in the admin menu)"
+msgstr "Názov ponuky (zobrazuje sa len v ponuke správcu)"
+
+msgid "The minimum value (used only by numeric and textual fields)"
+msgstr "Minimálna hodnota (používa sa len pri číselných a textových poliach)"
+
+msgid "The page slug (used to generate the page URL). Must be unique"
+msgstr ""
+"Slug stránky (používa sa na generovanie adresy URL stránky). Musí byť "
+"jedinečný"
+
+msgid "The page title"
+msgstr "Názov stránky"
+
+msgid "The parent element slug"
+msgstr "Slug nadradeného prvku"
+
+msgid ""
+"The position in the menu order the post type should appear. To work, "
+"$show_in_menu must be true. Default null (at the bottom)."
+msgstr ""
+"Pozícia v poradí ponuky, na ktorej sa má typ príspevku zobraziť. Ak má byť "
+"funkčný, $show_in_menu musí byť true. Predvolene null (na konci)."
+
+msgid "The post name/slug. Used for various queries for taxonomy content."
+msgstr "Názov príspevku/slug. Používa sa na rôzne dotazy na obsah taxonómie."
+
+msgid "The post name/slug. Used for various queries."
+msgstr "Názov príspevku/slug. Používa sa na rôzne dotazy."
+
+msgid "The product data name."
+msgstr "Názov údajov o výrobku."
+
+msgid "The requested page was not found, was deleted or was moved!"
+msgstr "Požadovaná stránka sa nenašla, bola vymazaná alebo presunutá!"
+
+msgid "The single template for taxonomy term"
+msgstr "Jednotná šablóna pre taxonomický termín"
+
+msgid "The single template for this custom post type"
+msgstr "Jediná šablóna pre tento vlastný typ príspevku"
+
+msgid ""
+"The string to use to build the read, edit, and delete capabilities. May be "
+"passed as an array to allow for alternative plurals when using this argument "
+"as a base to construct the capabilities, e.g. array('story', 'stories'). "
+"Default 'post'."
+msgstr ""
+"Reťazec, ktorý sa použije na vytvorenie možností čítania, úprav a mazania. "
+"Môže sa odovzdať ako pole, aby bolo možné použiť alternatívne množné číslo "
+"pri použití tohto argumentu ako základu na zostavenie schopností, napr. "
+"pole('story', 'stories'). Predvolené 'post'."
+
+msgid ""
+"The template type. Possible values: archive, single, related, metaField."
+msgstr "Typ šablóny. Možné hodnoty: archive, single, related, metaField."
+
+msgid ""
+"The template used to display this custom post type when it is releated to "
+"another one. If no template is set, it will be displayed just the title of "
+"the post."
+msgstr ""
+"Šablóna používaná na zobrazenie tohto vlastného typu príspevku, keď je "
+"prepojený s iným typom. Ak nie je nastavená žiadna šablóna, zobrazí sa len "
+"názov príspevku."
+
+msgid "The visual builder can be used with a minimum resolution of 960 px wide"
+msgstr ""
+"Vizuálny builder je možné používať s minimálnym rozlíšením 960 px na šírku"
+
+msgid "The visual builder is disabled. Go to Settings page and enable it."
+msgstr ""
+"Vizuálny builder je vypnutý. Prejdite na stránku Nastavenia a povoľte ho."
+
+msgid "This field is mandatory"
+msgstr "Toto pole je povinné"
+
+msgid ""
+"This is the only time that the secret access key can be viewed or copied. "
+"You cannot recover it later. However, you can delete and create or "
+"regenerate new API key at any time."
+msgstr ""
+"Toto je jediný čas, kedy je možné zobraziť alebo skopírovať tajný prístupový "
+"kľúč. Neskôr ho nemožno obnoviť. Kedykoľvek však môžete vymazať a vytvoriť "
+"alebo regenerovať nový kľúč API."
+
+msgid "This number controls the position of this page in the admin menu"
+msgstr "Toto číslo riadi pozíciu tejto stránky v ponuke administrátora"
+
+msgid "This text will appear after input"
+msgstr "Tento text sa zobrazí po zadaní"
+
+msgid "This text will appear before input"
+msgstr "Tento text sa zobrazí pred vstupom"
+
+msgid ""
+"This tool allows you to import settings and meta fields from previously "
+"exported .acpt files (max size allowed is 2Mb)."
+msgstr ""
+"Tento nástroj umožňuje importovať nastavenia a meta polia z predtým "
+"exportovaných súborov .acpt (maximálna povolená veľkosť je 2 MB)."
+
+msgid "To change the base url of REST API route. Default is"
+msgstr "Zmena základnej url trasy REST API. Predvolená hodnota je"
+
+msgid "Toggle guides"
+msgstr "Prepínanie sprievodcov"
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using  as "
+"slug. To prevent rewrite, set to false. To specify rewrite rules, an array "
+"can be passed with any of these keys:"
+msgstr ""
+"Spúšťa spracovanie prepisov pre túto taxonómiu. Predvolené true, použitie "
+"ako slug. Ak chcete zabrániť prepisovaniu, nastavte hodnotu false. Na "
+"zadanie pravidiel prepisovania možno odovzdať pole s niektorým z týchto "
+"kľúčov:"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Type here your ACPT email account. Ex: mauro@acpt.io"
+msgstr "Sem zadajte svoje e-mailové konto ACPT. Napríklad: mauro@acpt.io"
+
+msgid "Type here your license. Ex: 123e4567-e89b-12d3-a456-426614174000"
+msgstr "Tu zadajte svoj preukaz. Ex: 123e4567-e89b-12d3-a456-426614174000"
+
+msgid "Uncheck `required` in the selected meta field"
+msgstr "Zrušenie začiarknutia políčka `vyžadované` vo vybranom meta poli"
+
+msgid "Uncheck `show in archive` in the selected meta field"
+msgstr ""
+"Zrušenie začiarknutia políčka `zobraziť v archíve` vo vybranom meta poli"
+
+msgid "Undo"
+msgstr "Späť"
+
+msgid "Unfiltered html"
+msgstr "Nefiltrované html"
+
+msgid "Update {{r}}"
+msgstr "Aktualizácia {{r}}"
+
+msgid "Upgrade"
+msgstr "Aktualizácia"
+
+msgid "Upload"
+msgstr "Nahrať"
+
+msgid "Upload file"
+msgstr "Nahrať súbor"
+
+msgid "Upload your file"
+msgstr "Nahrajte svoj súbor"
+
+msgid "Use featured image"
+msgstr "Použiť titulnú fotku"
+
+msgid ""
+"Use this tool to quick export the general settings and meta fields for every "
+"element in a compressed JSON format called .acpt."
+msgstr ""
+"Pomocou tohto nástroja môžete rýchlo exportovať všeobecné nastavenia a meta "
+"polia pre každý prvok do komprimovaného formátu JSON s názvom .acpt."
+
+msgid "Used for the post type admin menu item"
+msgstr "Používa sa pre položku ponuky správcu typu príspevku"
+
+msgid "Used for the taxonomy admin menu item"
+msgstr "Používa sa pre položku ponuky správcu taxonómie"
+
+msgid "Used when a singular label is needed"
+msgstr "Používa sa, keď je potrebný jediný štítok"
+
+msgid "Single user"
+msgstr "Jeden používateľ"
+
+msgid "User"
+msgstr "Používateľ"
+
+msgid "Users"
+msgstr "Užívatelia"
+
+msgid "User meta"
+msgstr "Užívateľské meta"
+
+msgid "User meta successfully saved"
+msgstr "Meta používateľa úspešne uložená"
+
+msgid "View"
+msgstr "Zobraziť"
+
+msgid "View WooCommerce product data"
+msgstr "Zobrazenie údajov o produkte WooCommerce"
+
+msgid "Visibility of product data"
+msgstr "Viditeľnosť údajov o produktoch"
+
+msgid ""
+"WARNING: This action will delete all posts and metadata for this post type. "
+"The action is irreversible."
+msgstr ""
+"VAROVANIE: Táto akcia odstráni všetky príspevky a metadáta pre tento typ "
+"príspevku. Akcia je nezvratná."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"block. The action is irreversible."
+msgstr ""
+"VAROVANIE: Táto akcia odstráni všetky metadáta príspevku súvisiace s týmto "
+"blokom. Akcia je nezvratná."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"box. The action is irreversible."
+msgstr ""
+"UPOZORNENIE: Táto akcia odstráni všetky metadáta príspevku súvisiace s týmto "
+"poľom. Akcia je nezvratná."
+
+msgid "When BB Theme builder is active, the visual builder is disabled."
+msgstr "Keď je aktívny BB Theme builder, vizuálny builder je vypnutý."
+
+msgid "When Oxygen Builder is active, the visual builder is disabled."
+msgstr "Keď je aktívny nástroj Oxygen Builder, vizuálny nástroj je vypnutý."
+
+msgid "Where do you want to copy this meta box?"
+msgstr "Kam chcete skopírovať tento metaobal?"
+
+msgid "Where do you want to copy this meta field?"
+msgstr "Kam chcete toto meta pole skopírovať?"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, must be true. If "
+"true, the post type is shown in its own top level menu. If false, no menu is "
+"shown."
+msgstr ""
+"Kde zobraziť typ príspevku v menu administrátora. Aby to fungovalo, musí to "
+"byť pravda. Ak je true, typ príspevku sa zobrazí vo vlastnom menu najvyššej "
+"úrovne. Ak je false, nezobrazuje sa žiadne menu."
+
+msgid ""
+"Whether a post type is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"Či je typ príspevku určený na verejné použitie buď prostredníctvom rozhrania "
+"správcu, alebo používateľmi front-endu."
+
+msgid ""
+"Whether a taxonomy is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"Či je taxonómia určená na verejné používanie prostredníctvom rozhrania "
+"správcu alebo používateľmi na front-ende."
+
+msgid ""
+"Whether queries can be performed on the front end for the post type as part "
+"of parse_request()."
+msgstr ""
+"Či je možné vykonávať dotazy na front end pre typ príspevku ako súčasť "
+"funkcie parse_request()."
+
+msgid ""
+"Whether terms in this taxonomy should be sorted in the order they are "
+"provided to wp_set_object_terms(). Default null which equates to false."
+msgstr ""
+"Či majú byť termíny v tejto taxonómii zoradené v poradí, v akom boli zadané "
+"do wp_set_object_terms(). Predvolene null, čo sa rovná false."
+
+msgid "Whether the taxonomy is hierarchical. Default false."
+msgstr "Či je taxonómia hierarchická. Predvolené false."
+
+msgid ""
+"Whether the taxonomy is publicly queryable. If not set, the default is "
+"inherited from $public."
+msgstr ""
+"Či je taxonómia verejne vyhľadávaná. Ak nie je nastavená, predvolené "
+"nastavenie sa dedí z $public."
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled."
+msgstr ""
+"Či majú byť archívy typu príspevok, alebo ak je to reťazec, archív slug "
+"použiť. Vygeneruje správne pravidlá prepisovania, ak je zapnutá funkcia "
+"$rewrite."
+
+msgid ""
+"Triggers the handling of rewrites for this post type. To prevent rewrite, "
+"set to false. Defaults to true, using $post_type as slug. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Spúšťa spracovanie prepisov pre tento typ príspevku. Ak chcete zabrániť "
+"prepisovaniu, nastavte hodnotu false. Predvolené nastavenie je true, pričom "
+"ako slug sa použije $post_type. Na zadanie pravidiel prepisovania možno "
+"odovzdať pole s niektorým z týchto kľúčov:"
+
+msgid ""
+"Whether to display a column for the taxonomy on its post type listing "
+"screens. Default false."
+msgstr ""
+"Či sa má zobrazovať stĺpec pre taxonómiu na obrazovkách s výpisom jej typov "
+"príspevkov. Predvolené false."
+
+msgid ""
+"Whether to generate and allow a UI for managing terms in this taxonomy in "
+"the admin. If not set, the default is inherited from $public (default true)."
+msgstr ""
+"Či sa má v správcovi generovať a povoliť používateľské rozhranie na správu "
+"termínov v tejto taxonómii. Ak nie je nastavené, predvolené nastavenie je "
+"zdedené z $public (predvolené true)."
+
+msgid ""
+"Whether to generate and allow a UI for managing this post type in the admin. "
+"Default is value of $public."
+msgstr ""
+"Či sa má generovať a povoliť používateľské rozhranie na správu tohto typu "
+"príspevku v správcovi. Predvolená hodnota je $public."
+
+msgid ""
+"Whether to include the post type in the REST API. Set this to true for the "
+"post type to be available in the block editor. SET TRUE TO ENABLE GUTEMBERG "
+"EDITOR."
+msgstr ""
+"Či má byť typ príspevku zahrnutý do rozhrania REST API. Nastavte túto "
+"hodnotu na true, aby bol typ príspevku dostupný v editore blokov. NASTAVTE "
+"TRUE, AK CHCETE POVOLIŤ EDITOR GUTEMBERG."
+
+msgid ""
+"Whether to include the taxonomy in the REST API. Set this to true for the "
+"taxonomy to be available in the block editor. SET TRUE TO ENABLE "
+"VISUALIZATION ON GUTEMBERG EDITOR."
+msgstr ""
+"Či sa má taxonómia zahrnúť do rozhrania REST API. Nastavte túto hodnotu na "
+"true, aby bola taxonómia dostupná v editore blokov. NASTAVTE TRUE, AK CHCETE "
+"POVOLIŤ VIZUALIZÁCIU V EDITORE GUTEMBERG."
+
+msgid ""
+"Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
+"the default is inherited from $show_ui (default true)."
+msgstr ""
+"Či sa má taxonómia uvádzať v ovládacích prvkoch widgetu Tag Cloud. Ak nie je "
+"nastavené, predvolené nastavenie je zdedené z $show_ui (predvolené true)."
+
+msgid ""
+"Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+"shown as a submenu of the object type menu. If false, no menu is shown. "
+"$show_ui must be true. If not set, default is inherited from $show_ui "
+"(default true)."
+msgstr ""
+"Či sa má taxonómia zobrazovať v ponuke správcu. Ak je to pravda, taxonómia "
+"sa zobrazí ako podmenu ponuky typu objektu. Ak je false, nezobrazí sa žiadne "
+"menu. $show_ui musí byť true. Ak nie je nastavené, predvolené nastavenie sa "
+"dedí z $show_ui (predvolené true)."
+
+msgid ""
+"Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
+"default is inherited from $show_ui (default true)."
+msgstr ""
+"Či sa má taxonómia zobrazovať na paneli rýchlych/celkových úprav. Ak nie je "
+"nastavené, predvolené nastavenie sa dedí z $show_ui (predvolené true)."
+
+msgid "Which does this template belong to?"
+msgstr "Do ktorej šablóny patrí táto šablóna?"
+
+msgid "Width"
+msgstr "Šírka"
+
+msgid "WooCommerce product data"
+msgstr "Údaje o produktoch WooCommerce"
+
+msgid "WooCommerce product data fields successfully saved"
+msgstr "Úspešné uloženie dátových polí produktu WooCommerce"
+
+msgid "WooCommerce product data successfully deleted"
+msgstr "Údaje o produktoch WooCommerce úspešne odstránené"
+
+msgid "Yes"
+msgstr "Áno"
+
+msgid "Yes, delete it"
+msgstr "Áno, odstrániť"
+
+msgid "You are going to delete WooCommerce this product data. Are you sure?"
+msgstr "Vymažete údaje o tomto produkte zo služby WooCommerce. Ste si istí?"
+
+msgid "You are going to delete this API key. Are you sure?"
+msgstr "Vymažete tento kľúč API. Ste si istý?"
+
+msgid "You are going to delete this custom post type. Are you sure?"
+msgstr "Tento vlastný typ príspevku odstránite. Ste si istí?"
+
+msgid ""
+"You are going to delete this meta block definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Vymažete túto definíciu metabloku. Každá definícia poľa v ňom bude "
+"odstránená. Ste si istí?"
+
+msgid ""
+"You are going to delete this meta box definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Túto definíciu metaobalu odstránite. Každá definícia poľa v ňom bude "
+"odstránená. Ste si istí?"
+
+msgid ""
+"You are going to delete this option page definition. Every associated meta "
+"fields and child page will be deleted. Are you sure?"
+msgstr ""
+"Odstránite túto definíciu stránky možností. Všetky súvisiace meta polia a "
+"podriadené stránky budú odstránené. Ste si istí?"
+
+msgid "You are going to delete this taxonomy. Are you sure?"
+msgstr "Túto taxonómiu vymažete. Ste si istý?"
+
+msgid "Delete this block"
+msgstr "Odstránenie tohto bloku"
+
+msgid "Your API keys"
+msgstr "Vaše kľúče API"
+
+msgid "Your favourite ACPT settings"
+msgstr "Vaše obľúbené nastavenia ACPT"
+
+msgid "Your new generated API key"
+msgstr "Váš nový vygenerovaný kľúč API"
+
+msgid "Your theme already has a single template for"
+msgstr "Vaša téma už má jednu šablónu pre"
+
+msgid "Your theme already has an archive template for"
+msgstr "Vaša téma už má šablónu archívu pre"
+
+msgid "`has_archive` set to false"
+msgstr "`has_archive` nastavené na false"
+
+msgid "child element"
+msgstr "podriadený prvok"
+
+msgid "current"
+msgstr "aktuálny"
+
+msgid "custom post type"
+msgstr "vlastný typ príspevku"
+
+msgid "custom post types registered"
+msgstr "registrované vlastné typy príspevkov"
+
+msgid "details"
+msgstr "podrobnosti"
+
+msgid "format"
+msgstr "formát"
+
+msgid "global settings"
+msgstr "globálne nastavenia"
+
+msgid "id"
+msgstr "id"
+
+msgid "is checked"
+msgstr "je skontrolovaný"
+
+msgid "is empty"
+msgstr "je prázdny"
+
+msgid "is equal to"
+msgstr "sa rovná"
+
+msgid "is greater or equals than"
+msgstr "je väčšia alebo rovná ako"
+
+msgid "is greater than"
+msgstr "je väčšia ako"
+
+msgid "is greater than or equal to"
+msgstr "je väčšia alebo rovná"
+
+msgid "is included in"
+msgstr "je zahrnutá v"
+
+msgid "is less or equals than"
+msgstr "je menšia alebo rovná ako"
+
+msgid "is less than"
+msgstr "je menšia ako"
+
+msgid "is less than or equal to"
+msgstr "je menšia alebo rovná"
+
+msgid "is like to"
+msgstr "je ako"
+
+msgid "is not checked"
+msgstr "nie je skontrolovaný"
+
+msgid "is not empty"
+msgstr "is not empty"
+
+msgid "is not equal to"
+msgstr "nie je rovné"
+
+msgid "is not included in"
+msgstr "nie je zahrnutá v"
+
+msgid "is not like"
+msgstr "nie je ako"
+
+msgid "meta boxes"
+msgstr "metaboxy"
+
+msgid "Meta boxes total count"
+msgstr "Celkový počet meta políčok"
+
+msgid "meta fields"
+msgstr "meta polia"
+
+msgid "Meta fields total count"
+msgstr "Celkový počet meta polí"
+
+msgid "min length is"
+msgstr "minimálna dĺžka je"
+
+msgid "old"
+msgstr "starý"
+
+msgid "product data fields"
+msgstr "dátové polia produktu"
+
+msgid "record(s) found"
+msgstr "nájdený záznam(y)"
+
+msgid "see here"
+msgstr "pozri tu"
+
+msgid "slug"
+msgstr "slug"
+
+msgid "taxonomies registered"
+msgstr "registrované taxonómie"
+
+msgid "template"
+msgstr "šablóna"
+
+msgid "title"
+msgstr "názov"
+
+msgid "visibility"
+msgstr "viditeľnosť"
+
+msgid "Visibility"
+msgstr "Viditeľnosť"
+
+msgid "{{r}} published"
+msgstr "{{r}} publikované"
+
+msgid "{{r}} published privately"
+msgstr "{{r}} publikované súkromne"
+
+msgid "{{r}} reverted to draft"
+msgstr "{{r}} vrátené do návrhu"
+
+msgid "{{r}} scheduled"
+msgstr "{{r}} plánované"
+
+msgid "{{r}} updated"
+msgstr "{{r}} aktualizované"
+
+msgid "Address map"
+msgstr "Mapa adries"
+
+msgid "Color"
+msgstr "Farba"
+
+msgid "Currency"
+msgstr "Mena"
+
+msgid "Weight"
+msgstr "Hmotnosť"
+
+msgid "Length"
+msgstr "Dĺžka"
+
+msgid "Date"
+msgstr "Dátum"
+
+msgid "Email address"
+msgstr "E-mailová adresa"
+
+msgid "Number"
+msgstr "Číslo"
+
+msgid "Phone"
+msgstr "Telefón"
+
+msgid "Phone Number"
+msgstr "Telefónne číslo"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "List"
+msgstr "Zoznam"
+
+msgid "Select Multiple"
+msgstr "Viacnásobne vybrať"
+
+msgid "Toggle"
+msgstr "Prepínač"
+
+msgid "Embed content"
+msgstr "Vkladanie obsahu"
+
+msgid "Gallery"
+msgstr "Galéria"
+
+msgid "Image"
+msgstr "Obrázok"
+
+msgid "Post relationship"
+msgstr "Post vzťah"
+
+msgid "Relationship"
+msgstr "Vzťah"
+
+msgid "Time"
+msgstr "Čas"
+
+msgid "Repeater"
+msgstr "Repeater"
+
+msgid "Grouped field (Repeater)"
+msgstr "Zoskupené pole (opakovač)"
+
+msgid "User (select multiple)"
+msgstr "Používateľ (vyberte viacero)"
+
+msgid "Checkbox"
+msgstr "Zaškrtávacie políčko"
+
+msgid "Radio button"
+msgstr "Tlačidlo rádia"
+
+msgid "Date Range"
+msgstr "Rozsah dátumov"
+
+msgid "Flexible content"
+msgstr "Flexibilný obsah"
+
+msgid "is enabled"
+msgstr "je povolená"
+
+msgid "found"
+msgstr "nájdený"
+
+msgid "record(s)"
+msgstr "záznam(y)"
+
+msgid "Copied"
+msgstr "Skopírované"
+
+msgid "Confirm deleting this template?"
+msgstr "Potvrdenie odstránenia tejto šablóny?"
+
+msgid "meta"
+msgstr "meta"
+
+msgid "Meta-key"
+msgstr "Meta-kľúč"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Shortcodes"
+msgstr "Shortcodes"
+
+msgid "Delete custom post type"
+msgstr "Odstránenie vlastného typu príspevku"
+
+msgid "Delete taxonomy"
+msgstr "Odstránenie taxonómie"
+
+msgid "License"
+msgstr "Licencia"
+
+msgid "Tools"
+msgstr "Nástroje"
+
+msgid "Templates"
+msgstr "Šablóny"
+
+msgid "Custom Post Types"
+msgstr "Vlastné typy príspevku"
+
+msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
+msgstr "[Povolené rozšírenie: *.acpt, *.json, *.yaml, *.xml max. veľkosť: 2Mb]"
+
+msgid "Associated taxonomies with the post"
+msgstr "Súvisiace taxonómie s príspevkom"
+
+msgid "Register new Post Type"
+msgstr "Registrácia nového typu príspevku"
+
+msgid "Manage meta fields"
+msgstr "Správa meta polí"
+
+msgid "Create new Custom Post Type"
+msgstr "Vytvorenie nového vlastného typu príspevku"
+
+msgid "Basic"
+msgstr "Základný"
+
+msgid "Labels"
+msgstr "Štítky"
+
+msgid "Minimum configuration"
+msgstr "Minimálna konfigurácia"
+
+msgid "Additional labels"
+msgstr "Ďalšie štítky"
+
+msgid "Other settings"
+msgstr "Iné nastavenia"
+
+msgid "Menu Name"
+msgstr "Názov ponuky"
+
+msgid "Label for the menu name. Default is the same as name."
+msgstr "Označenie názvu ponuky. Predvolené nastavenie je rovnaké ako názov."
+
+msgid "All items"
+msgstr "Všetky položky"
+
+msgid ""
+"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All "
+"Pages’."
+msgstr ""
+"Štítok na označenie všetkých položiek v prepojení podmenu. Predvolené "
+"nastavenie je 'Všetky príspevky' / 'Všetky stránky'."
+
+msgid "Add New"
+msgstr "Pridať nové"
+
+msgid "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+msgstr ""
+"Predvolené nastavenie je \"Pridať nový\" pre hierarchické aj nehierarchické "
+"typy."
+
+msgid "Add New Item"
+msgstr "Pridať novú položku"
+
+msgid ""
+"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New "
+"Page’."
+msgstr ""
+"Štítok na pridanie novej jednotlivej položky. Predvolené nastavenie je "
+"\"Pridať nový príspevok\" / \"Pridať novú stránku\"."
+
+msgid "Edit Item"
+msgstr "Upraviť položku"
+
+msgid ""
+"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+msgstr ""
+"Štítok na úpravu jednotlivej položky. Predvolené nastavenie je \"Upraviť "
+"príspevok\" / \"Upraviť stránku\"."
+
+msgid "New Item"
+msgstr "Nová položka"
+
+msgid "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+msgstr ""
+"Štítok pre názov novej stránky položky. Predvolená hodnota je \"Nový "
+"príspevok\" / \"Nová stránka\"."
+
+msgid "View Item"
+msgstr "Zobraziť položku"
+
+msgid ""
+"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+msgstr ""
+"Štítok na zobrazenie jednotlivej položky. Predvolené nastavenie je "
+"\"Zobraziť príspevok\" / \"Zobraziť stránku\"."
+
+msgid "View Items"
+msgstr "Zobraziť položky"
+
+msgid ""
+"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+msgstr ""
+"Štítok na zobrazenie archívov typov príspevkov. Predvolené nastavenie je "
+"'Zobraziť príspevky' / 'Zobraziť stránky'."
+
+msgid "Search Item"
+msgstr "Vyhľadať položku"
+
+msgid ""
+"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+msgstr ""
+"Štítok na vyhľadávanie viacnásobných položiek. Predvolené nastavenie je "
+"'Hľadať príspevky' / 'Hľadať stránky'."
+
+msgid "Not Found"
+msgstr "Nenájdené"
+
+msgid ""
+"Label used when no items are found. Default is ‘No posts found’ / ‘No pages "
+"found’."
+msgstr ""
+"Štítok sa používa, keď sa nenájdu žiadne položky. Predvolené nastavenie je "
+"'Nenašli sa žiadne príspevky' / 'Nenašli sa žiadne stránky'."
+
+msgid "Not Found in Trash"
+msgstr "Nenašiel sa v koši"
+
+msgid ""
+"Label used when no items are in the Trash. Default is ‘No posts found in "
+"Trash’ / ‘No pages found in Trash’."
+msgstr ""
+"Štítok sa používa, keď sa v koši nenachádzajú žiadne položky. Predvolené "
+"nastavenie je 'V koši sa nenašli žiadne príspevky' / 'V koši sa nenašli "
+"žiadne stránky'."
+
+msgid ""
+"Label used to prefix parents of hierarchical items. Not used on non-"
+"hierarchical post types. Default is ‘Parent Page:’."
+msgstr ""
+"Štítok používaný na prefixovanie rodičovských položiek hierarchického "
+"systému. Nepoužíva sa pri nehierarchických typoch príspevkov. Predvolené "
+"nastavenie je \"Parent Page:\"."
+
+msgid "Featured Image"
+msgstr "Náhľadový obrázok"
+
+msgid ""
+"Label for the featured image meta box title. Default is ‘Featured image’."
+msgstr ""
+"Štítok pre názov metaobrázku featured image. Predvolená hodnota je "
+"\"Odporúčaný obrázok\"."
+
+msgid "Set Featured Image"
+msgstr "Nastaviť odporúčaný obrázok"
+
+msgid "Label for setting the featured image. Default is ‘Set featured image’."
+msgstr ""
+"Štítok na nastavenie hlavného obrázka. Predvolené nastavenie je \"Nastaviť "
+"hlavný obrázok\"."
+
+msgid "Remove Featured Image"
+msgstr "Odstránenie odporúčaného obrázka"
+
+msgid ""
+"Label for removing the featured image. Default is ‘Remove featured image’."
+msgstr ""
+"Štítok na odstránenie zobrazeného obrázka. Predvolené nastavenie je "
+"\"Odstrániť hlavný obrázok\"."
+
+msgid "Use Featured Image"
+msgstr "Použitie odporúčaného obrázka"
+
+msgid ""
+"Label in the media frame for using a featured image. Default is ‘Use as "
+"featured image’."
+msgstr ""
+"Štítok v mediálnom rámčeku pre použitie zobrazeného obrázka. Predvolené "
+"nastavenie je \"Použiť ako hlavný obrázok\"."
+
+msgid ""
+"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page "
+"Archives’."
+msgstr ""
+"Označenie archívov v navigačných ponukách. Predvolené nastavenie je 'Archív "
+"príspevkov' / 'Archív stránok'."
+
+msgid "Insert into item"
+msgstr "Vložiť do položky"
+
+msgid ""
+"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert "
+"into page’."
+msgstr ""
+"Štítok pre tlačidlo mediálneho rámu. Predvolené nastavenie je 'Vložiť do "
+"príspevku' / 'Vložiť do stránky'."
+
+msgid "Uploaded to this Item"
+msgstr "Nahraté do tejto položky"
+
+msgid ""
+"Label for the media frame filter. Default is ‘Uploaded to this post’ / "
+"‘Uploaded to this page’."
+msgstr ""
+"Štítok pre rámový filter s médiami. Predvolené nastavenie je \"Nahraté do "
+"tohto príspevku\" / \"Nahraté na túto stránku\"."
+
+msgid "Filter Items List"
+msgstr "Zoznam položiek filtra"
+
+msgid ""
+"Label for the table views hidden heading. Default is ‘Filter posts list’ / "
+"‘Filter pages list’."
+msgstr ""
+"Štítok pre skrytý nadpis zobrazenia tabuľky. Predvolené nastavenie je "
+"'Filtrovať zoznam príspevkov' / 'Filtrovať zoznam stránok'."
+
+msgid "Items List Navigation"
+msgstr "Navigácia v zozname položiek"
+
+msgid ""
+"Label for the table pagination hidden heading. Default is ‘Posts list "
+"navigation’ / ‘Pages list navigation’."
+msgstr ""
+"Štítok pre skrytý nadpis stránkovania tabuľky. Predvolené nastavenie je "
+"'Navigácia v zozname príspevkov' / 'Navigácia v zozname stránok'."
+
+msgid "Items List"
+msgstr "Zoznam položiek"
+
+msgid ""
+"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+msgstr ""
+"Štítok pre skrytý nadpis tabuľky. Predvolené nastavenie je 'Zoznam "
+"príspevkov' / 'Zoznam stránok'."
+
+msgid "Label for the date filter in list tables. Default is ‘Filter by date’."
+msgstr ""
+"Označenie pre filter dátumu v tabuľkách zoznamov. Predvolená hodnota je "
+"\"Filtrovanie podľa dátumu\"."
+
+msgid "Item published"
+msgstr "Zverejnená položka"
+
+msgid ""
+"Label used when an item is published. Default is ‘Post published.’ / ‘Page "
+"published.’"
+msgstr ""
+"Označenie používané pri zverejnení položky. Predvolené nastavenie je "
+"\"Príspevok zverejnený\" / \"Stránka publikovaná"
+
+msgid "Item published privately"
+msgstr "Súkromne publikovaná položka"
+
+msgid ""
+"Label used when an item is published with private visibility. Default is "
+"‘Post published privately.’ / ‘Page published privately.’"
+msgstr ""
+"Štítok, ktorý sa používa, keď je položka zverejnená s privátnou "
+"viditeľnosťou. Predvolené nastavenie je \"Príspevok zverejnený súkromne\" / "
+"\"Stránka zverejnená súkromne"
+
+msgid "Item reverted to draft"
+msgstr "Položka vrátená do návrhu"
+
+msgid ""
+"Label used when an item is switched to a draft. Default is ‘Post reverted to "
+"draft.’ / ‘Page reverted to draft.’"
+msgstr ""
+"Označenie používané pri prepnutí položky na návrh. Predvolené nastavenie je "
+"\"Príspevok vrátený na koncept\" / \"Stránka vrátená do návrhu"
+
+msgid "Item scheduled"
+msgstr "Položka naplánovaná"
+
+msgid ""
+"Label used when an item is scheduled for publishing. Default is ‘Post "
+"scheduled.’ / ‘Page scheduled.’"
+msgstr ""
+"Označenie používané pri plánovanom zverejnení položky. Predvolené nastavenie "
+"je \"Naplánované zverejnenie\" / \"Stránka naplánovaná"
+
+msgid "Item updated"
+msgstr "Položka bola aktualizovaná"
+
+msgid ""
+"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page "
+"updated.’"
+msgstr ""
+"Štítok používaný pri aktualizácii položky. Predvolené nastavenie je \"Post "
+"updated\" / \"Stránka aktualizovaná"
+
+msgid ""
+"General name for the taxonomy, usually plural. The same as and overridden by "
+"$tax->label. Default 'Tags/Categories'."
+msgstr ""
+"Všeobecný názov pre taxonómiu, zvyčajne v množnom čísle. Rovnaký a nadradený "
+"ako $tax->label. Predvolene \"Tagy/Kategórie\"."
+
+msgid "Singular name"
+msgstr "Názov v jednotnom čísle"
+
+msgid "Name for one object of this taxonomy. Default 'Tag/Category'"
+msgstr "Názov jedného objektu tejto taxonómie. Predvolené \"Tag/Category"
+
+msgid "Search items"
+msgstr "Vyhľadávanie položiek"
+
+msgid "Search Tags/Search Categories"
+msgstr "Vyhľadávanie Značky/kategórie vyhľadávania"
+
+msgid "Popular items"
+msgstr "Obľúbené položky"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Popular "
+"Tags'."
+msgstr ""
+"Toto označenie sa používa len pre nehierarchické taxonómie. Predvolené "
+"nastavenie \"Populárne značky\"."
+
+msgid "All Tags/All Categories"
+msgstr "Všetky značky/všetky kategórie"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Parent "
+"Category'."
+msgstr ""
+"Táto značka sa používa len pre hierarchické taxonómie. Predvolené nastavenie "
+"\"Nadradená kategória\"."
+
+msgid "Parent item colon"
+msgstr "Rodičovská položka dvojbodka"
+
+msgid "The same as parent_item, but with colon : in the end."
+msgstr "Rovnako ako parent_item, ale s dvojbodkou : na konci."
+
+msgid "Edit Tag/Edit Category."
+msgstr "Upraviť značku/kategóriu."
+
+msgid "View Tag/View Category."
+msgstr "Zobraziť značku/zobraziť kategóriu."
+
+msgid "Update item"
+msgstr "Aktualizovať položku"
+
+msgid "Update Tag/Update Category."
+msgstr "Aktualizovať značku/aktualizovať kategóriu."
+
+msgid "Add New Tag/Add New Category."
+msgstr "Pridať nový štítok/ Pridať novú kategóriu."
+
+msgid "New item name"
+msgstr "Názov novej položky"
+
+msgid "New Tag Name/New Category Name."
+msgstr "Názov nového štítku/názov novej kategórie."
+
+msgid "Separate items with commas"
+msgstr "Oddeľte položky čiarkami"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Separate "
+"tags with commas', used in the meta box."
+msgstr ""
+"Toto označenie sa používa len pre nehierarchické taxonómie. Predvolené "
+"nastavenie \"Oddeľte značky čiarkami\", používa sa v metaobale."
+
+msgid "Add or remove items"
+msgstr "Pridávanie alebo odstraňovanie položiek"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Add or "
+"remove tags', used in the meta box when JavaScript is disabled."
+msgstr ""
+"Toto označenie sa používa len pre nehierarchické taxonómie. Predvolené "
+"nastavenie \"Pridať alebo odstrániť značky\", ktoré sa používa v metaobale, "
+"keď je vypnutý JavaScript."
+
+msgid "Choose from most used"
+msgstr "Vybrať z najpoužívanejších"
+
+msgid ""
+"This label is only used on non-hierarchical taxonomies. Default 'Choose from "
+"the most used tags', used in the meta box."
+msgstr ""
+"Táto značka sa používa len pri nehierarchických taxonómiách. Predvolené "
+"nastavenie \"Vyberte si z najpoužívanejších značiek\", ktoré sa používa v "
+"metaobale."
+
+msgid ""
+"No tags found/No categories found', used in the meta box and taxonomy list "
+"table."
+msgstr ""
+"Nenašli sa žiadne značky/Nenašli sa žiadne kategórie\", ktoré sa používajú v "
+"meta rámčeku a tabuľke zoznamu taxonómií."
+
+msgid "No terms"
+msgstr "Žiadne obchodné podmienky"
+
+msgid "No tags/No categories', used in the posts and media list tables."
+msgstr ""
+"Žiadne značky/žiadne kategórie\", ktoré sa používajú v tabuľkách zoznamu "
+"príspevkov a médií."
+
+msgid "Filter by item"
+msgstr "Filtrovanie podľa položky"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Filter by "
+"category', used in the posts list table."
+msgstr ""
+"Táto značka sa používa len pre hierarchické taxonómie. Predvolené nastavenie "
+"\"Filtrovať podľa kategórie\", ktoré sa používa v tabuľke zoznamu príspevkov."
+
+msgid "Items list navigation"
+msgstr "Navigácia v zozname položek"
+
+msgid "Label for the table pagination hidden heading."
+msgstr "Štítok pre skrytý nadpis stránkovania tabuľky."
+
+msgid "Label for the table hidden heading."
+msgstr "Štítok pre skrytý nadpis tabuľky."
+
+msgid "Most used"
+msgstr "Najpoužívanejšie"
+
+msgid "Title for the Most Used tab. Default 'Most Used'."
+msgstr ""
+"Názov najpoužívanejšej karty. Predvolené nastavenie \"Most Used\" "
+"(Najpoužívanejšie)."
+
+msgid "Back to items"
+msgstr "Späť na položky"
+
+msgid "Key length must be 39."
+msgstr "Dĺžka kľúča musí byť 39."
+
+msgid "Not valid format."
+msgstr "Neplatný formát."
+
+msgid "General settings"
+msgstr "Všeobecné nastavenia"
+
+msgid "Content settings"
+msgstr "Nastavenia obsahu"
+
+msgid "Danger zone"
+msgstr "Nebezpečná zóna"
+
+msgid "manage template"
+msgstr "spravovať šablónu"
+
+msgid "Manage template"
+msgstr "Správa šablóny"
+
+msgid "Taxonomy global settings"
+msgstr "Globálne nastavenia taxonómie"
+
+msgid "eg. Text here"
+msgstr "napr. Text tu"
+
+msgid "Thumbnail"
+msgstr "Náhľad"
+
+msgid "Medium"
+msgstr "Stredný"
+
+msgid "Large"
+msgstr "Veľký"
+
+msgid "Full size"
+msgstr "Plná veľkosť"
+
+msgid "ASC"
+msgstr "Vzostupne"
+
+msgid "DESC"
+msgstr "Zostupne"
+
+msgid "eg. 100%"
+msgstr "napr. 100%"
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "Tablet"
+msgstr "Tablet"
+
+msgid "Mobile"
+msgstr "Mobil"
+
+msgid "Keyboard interaction legend"
+msgstr "Legenda interakcie s klávesnicou"
+
+msgid "Keyboard legend"
+msgstr "Legenda klávesnice"
+
+msgid "BASIC"
+msgstr "ZÁKLAD"
+
+msgid "SPECIALIZED FIELDS"
+msgstr "ŠPECIALIZOVANÉ OBLASTI"
+
+msgid "UNIT OF MEASURE"
+msgstr "MERNÁ JEDNOTKA"
+
+msgid "MEDIA"
+msgstr "MÉDIÁ"
+
+msgid "RELATIONS"
+msgstr "PRÍSLUŠENSTVO"
+
+msgid "GROUPED"
+msgstr "SKUPINOVÉ"
+
+msgid "USER RELATIONS"
+msgstr "VZŤAHY S UŽÍVATEĽMI"
+
+msgid "One to One - Unidirectional"
+msgstr "Jeden k jednému - jednosmerný"
+
+msgid "One to One - Bidirectional"
+msgstr "Jeden na jedného - obojsmerné"
+
+msgid "One to Many - Unidirectional"
+msgstr "Jeden na mnohých - jednosmerné"
+
+msgid "One to Many - Bidirectional"
+msgstr "Jeden pre mnohých - obojsmerné"
+
+msgid "Many to One - Unidirectional"
+msgstr "Mnoho na jedného - jednosmerné"
+
+msgid "Many to One - Bidirectional"
+msgstr "Mnoho na jedného - obojsmerné"
+
+msgid "Many to Many - Unidirectional"
+msgstr "Mnoho na mnoho - jednosmerné"
+
+msgid "Many to Many - Bidirectional"
+msgstr "Mnoho na mnoho - obojsmerné"
+
+msgid "Show this field if:"
+msgstr "Toto pole zobrazte, ak:"
+
+msgid "Copy settings"
+msgstr "Nastavenia kopírovania"
+
+msgid "Add condition"
+msgstr "Pridať podmienku"
+
+msgid "ADVANCED OPTIONS"
+msgstr "ROZŠÍRENÉ MOŽNOSTI"
+
+msgid "BASIC OPTIONS"
+msgstr "ZÁKLADNÉ MOŽNOSTI"
+
+msgid "CONDITIONAL LOGIC"
+msgstr "PODMIENENÁ LOGIKA"
+
+msgid "Select option"
+msgstr "Vyberte možnosť"
+
+msgid "operator"
+msgstr "operátor"
+
+msgid "This field"
+msgstr "Toto pole"
+
+msgid "Value"
+msgstr "Hodnota"
+
+msgid "Label"
+msgstr "Štítok"
+
+msgid "Post"
+msgstr "Príspevok"
+
+msgid "Term"
+msgstr "Podmienka"
+
+msgid "Related taxonomies"
+msgstr "Súvisiace taxonómie"
+
+msgid "Other fields"
+msgstr "Ostatné oblasti"
+
+msgid "Invalid visibility condition type"
+msgstr "Neplatný typ podmienky viditeľnosti"
+
+msgid "Invalid visibility condition operator"
+msgstr "Neplatný operátor podmienky viditeľnosti"
+
+msgid "Invalid visibility condition value"
+msgstr "Neplatná hodnota podmienky viditeľnosti"
+
+msgid "Invalid visibility condition logic"
+msgstr "Neplatná logika podmienky viditeľnosti"
+
+msgid "Box label, non latin chars allowed."
+msgstr "Štítok políčka, povolené iné znaky ako latinka."
+
+msgid "Logic"
+msgstr "Logika"
+
+msgid "AND"
+msgstr "A"
+
+msgid "OR"
+msgstr "ALEBO"
+
+msgid "Enter download text link"
+msgstr "Zadajte textové prepojenie na stiahnutie"
+
+msgid "Select images"
+msgstr "Vybrať obrázky"
+
+msgid "Remove element"
+msgstr "Odstrániť prvok"
+
+msgid "Min blocks required"
+msgstr "Požadované min. bloky"
+
+msgid "Max blocks allowed"
+msgstr "Maximálne povolené bloky"
+
+msgid "Browser icons"
+msgstr "Ikony prehliadača"
+
+msgid "Search an icon"
+msgstr "Vyhľadávanie ikony"
+
+msgid "Type at least 3 characters to start searching."
+msgstr "Ak chcete začať vyhľadávanie, zadajte aspoň 3 znaky."
+
+msgid "Example: heart"
+msgstr "Príklad: srdce"
+
+msgid "There was an error during saving data. The error is:"
+msgstr "Pri ukladaní údajov došlo k chybe. Chyba je nasledovná:"
+
+msgid "There was an error during saving data. Minimum number of blocks is:"
+msgstr "Pri ukladaní údajov došlo k chybe. Minimálny počet blokov je:"
+
+msgid "There was an error during saving data. Maximum number of blocks is:"
+msgstr "Pri ukladaní údajov došlo k chybe. Maximálny počet blokov je:"
+
+msgid "Data saved correctly"
+msgstr "Správne uložené údaje"
+
+msgid "No meta boxes aldready created."
+msgstr "Už nie sú vytvorené žiadne meta boxy."
+
+msgid "Create the first one"
+msgstr "Vytvorenie prvého z nich"
+
+msgid "There was an error fetching icons, retry later."
+msgstr "Pri načítavaní ikon došlo k chybe, skúste to neskôr."
+
+msgid "Sorry, no result match."
+msgstr "Je nám ľúto, ale výsledok nezodpovedá."
+
+msgid ""
+"The media gallery is not available. You must admin_enqueue this function: "
+"wp_enqueue_media()"
+msgstr ""
+"Galéria médií nie je k dispozícii. Musíte admin_enqueue túto funkciu: "
+"wp_enqueue_media()"
+
+msgid "Download"
+msgstr "Stiahnuť"
+
+msgid "Upload an Image"
+msgstr "Nahratie obrázka"
+
+msgid "Upload a Video"
+msgstr "Nahrať video"
+
+msgid "Upload a File"
+msgstr "Odoslanie súboru"
+
+msgid "Remove this block"
+msgstr "Odstránenie tohto bloku"
+
+msgid "Show/hide elements in this block"
+msgstr "Zobrazenie/skrytie prvkov v tomto bloku"
+
+msgid "Filterable in Wordpress admin post lists page"
+msgstr "Filtrovateľný v Wordpress admin príspevok zoznamy stránky"
+
+msgid "Quick edit in Wordpress admin post lists page"
+msgstr "Rýchla úprava v administrácii Wordpress zoznamy príspevkov stránky"
+
+msgid "Hide the blank value"
+msgstr "Skryť prázdnu hodnotu"
+
+msgid "Hide the label"
+msgstr "Skryť štítok"
+
+msgid "Enter the URL"
+msgstr "Zadajte adresu URL"
+
+msgid "Enter text link"
+msgstr "Zadajte textový odkaz"
+
+msgid "Settings saved. The browser will refresh after 5 seconds."
+msgstr "Uložené nastavenia. Prehliadač sa obnoví po 5 sekundách."
+
+msgid "Exit"
+msgstr "Ukončiť"
+
+msgid "Option pages successfully saved"
+msgstr "Stránky možností boli úspešne uložené"
+
+msgid "Children page list"
+msgstr "Zoznam stránok pre deti"
+
+msgid "Register new Taxonomy"
+msgstr "Registrácia novej taxonómie"
+
+msgid "Deactivate"
+msgstr "Deaktivovať"
+
+msgid "Choose icon"
+msgstr "Vybrať ikonku"
+
+msgid "Select icon type from the list"
+msgstr "Vyberte typ ikony zo zoznamu"
+
+msgid "Select a Dashicon"
+msgstr "Vyberte ikonu Dashicon"
+
+msgid "Select an icon from another set"
+msgstr "Výber ikony z inej sady"
+
+msgid "Upload an icon image"
+msgstr "Nahratie obrázka ikony"
+
+msgid "ACPT meta import start"
+msgstr "ACPT meta import start"
+
+msgid "ACPT meta import end"
+msgstr "ACPT meta import end"
+
+msgid "Option page total count"
+msgstr "Celkový počet strán možností"
+
+msgid "Show/hide all pages"
+msgstr "Zobraziť/skryť všetky stránky"
+
+msgid "List view"
+msgstr "Zobraziť zoznam"
+
+msgid "Tabular view"
+msgstr "Tabuľkové zobrazenie"
+
+msgid "Switch view"
+msgstr "Zobrazenie prepínača"
+
+msgid "ACPT Date field"
+msgstr "Pole ACPT Dátum"
+
+msgid "ACPT Textual field"
+msgstr "ACPT Textové pole"
+
+msgid "ACPT Link field"
+msgstr "Pole prepojenia ACPT"
+
+msgid "ACPT Image field"
+msgstr "Obrázkové pole ACPT"
+
+msgid "ACPT UOM field"
+msgstr "Pole ACPT UOM"
+
+msgid "Select the date format"
+msgstr "Vyberte formát dátumu"
+
+msgid "Date range separator"
+msgstr "Oddeľovač dátumového rozsahu"
+
+msgid "Select the date range separator"
+msgstr "Vyberte oddeľovač dátumového rozsahu"
+
+msgid "Value format (Decimal points)"
+msgstr "Formát hodnoty (desatinné miesta)"
+
+msgid "Value format (Decimal separator)"
+msgstr "Formát hodnoty (desatinný oddeľovač)"
+
+msgid "Value format (Thousands separator)"
+msgstr "Formát hodnoty (oddeľovač tisícov)"
+
+msgid "Currency format"
+msgstr "Formát meny"
+
+msgid "Currency position"
+msgstr "Pozícia meny"
+
+msgid "Custom Format"
+msgstr "Vlastný formát"
+
+msgid "Render as"
+msgstr "Vykresliť ako"
+
+msgid "Date separator"
+msgstr "Oddeľovač dátumu"
+
+msgid "Classes (separated by space)"
+msgstr "Triedy (oddelené medzerou)"
+
+msgid "Target link"
+msgstr "Cieľové prepojenie"
+
+msgid "Link"
+msgstr "Odkaz"
+
+msgid "Plain text"
+msgstr "Prostý text"
+
+msgid "Size (px)"
+msgstr "Veľkosť (px)"
+
+msgid "Set the icon size."
+msgstr "Nastavenie veľkosti ikony."
+
+msgid "Select the icon color."
+msgstr "Vyberte farbu ikony."
+
+msgid "Spacing (px)"
+msgstr "Medzery (px)"
+
+msgid "Select the icon spacing."
+msgstr "Vyberte rozstup ikon."
+
+msgid "Is clickable?"
+msgstr "Dá sa naň kliknúť?"
+
+msgid "Value and UOM"
+msgstr "Hodnota a UOM"
+
+msgid "Only value"
+msgstr "Jediná hodnota"
+
+msgid "Only UOM"
+msgstr "Iba UOM"
+
+msgid "UOM format"
+msgstr "Formát UOM"
+
+msgid "Select the UOM format."
+msgstr "Vyberte formát UOM."
+
+msgid "Full UOM name"
+msgstr "Úplný názov UOM"
+
+msgid "Abbreviation"
+msgstr "Skratka"
+
+msgid "UOM position"
+msgstr "Pozícia UOM"
+
+msgid "Select the UOM position"
+msgstr "Vyberte pozíciu UOM"
+
+msgid "After value"
+msgstr "Po hodnote"
+
+msgid "Before value"
+msgstr "Pred hodnotou"
+
+msgid "Decimal points"
+msgstr "Desatinné miesta"
+
+msgid "Set the decimal points."
+msgstr "Nastavenie desatinných miest."
+
+msgid "Decimal separator"
+msgstr "Oddeľovač desatinných miest"
+
+msgid "Set the decimal separator."
+msgstr "Nastavenie desatinného oddeľovača."
+
+msgid "Thousands separator"
+msgstr "Oddeľovač tisícov"
+
+msgid "Set the thousands separator."
+msgstr "Nastavte oddeľovač tisícov."
+
+msgid "ACPT Field"
+msgstr "ACPT Field"
+
+msgid "ACPT Icon field"
+msgstr "Pole s ikonou ACPT"
+
+msgid "List format"
+msgstr "Formát zoznamu"
+
+msgid "Select the list format"
+msgstr "Vyberte formát zoznamu"
+
+msgid "String separator"
+msgstr "Oddeľovač reťazcov"
+
+msgid "Select the string separator"
+msgstr "Vyberte oddeľovač reťazcov"
+
+msgid "ACPT Time field"
+msgstr "Časové pole ACPT"
+
+msgid "Time format"
+msgstr "Formát času"
+
+msgid "Select the time format"
+msgstr "Výber formátu času"
+
+msgid "Controls"
+msgstr "Ovládanie"
+
+msgid "Allow video controls."
+msgstr "Povolenie ovládania videa."
+
+msgid "Autoplay"
+msgstr "Automatické prehrávanie"
+
+msgid "Autoplay player."
+msgstr "Automatické prehrávanie."
+
+msgid "Video width"
+msgstr "Šírka videa"
+
+msgid "Video width (% is allowed)."
+msgstr "Šírka videa (% is povolené)."
+
+msgid "Video height"
+msgstr "Výška videa"
+
+msgid "Video height (% is allowed)."
+msgstr "Výška videa (% is povolené)."
+
+msgid "You are going to delete this meta field definition. Are you sure?"
+msgstr "Vymažete túto definíciu meta poľa. Ste si istí?"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related to this "
+"field. The action is irreversible."
+msgstr ""
+"UPOZORNENIE: Táto akcia odstráni všetky metadáta príspevku súvisiace s týmto "
+"poľom. Akcia je nezvratná."
+
+msgid "Show the shortcode"
+msgstr "Zobrazenie skráteného kódu"
+
+msgid "Use this shortcode to display the meta field on your frontend."
+msgstr "Pomocou tohto skráteného kódu zobrazíte meta pole na svojom frontende."
+
+msgid ""
+"Please note that \"N\" stands for a positive integer value, representing the "
+"nested field index (count starts from 0)."
+msgstr ""
+"Upozorňujeme, že \"N\" znamená kladnú celočíselnú hodnotu, ktorá predstavuje "
+"index vnoreného poľa (počet začína od 0)."
+
+msgid "What you want to display?"
+msgstr "Čo chcete zobraziť?"
+
+msgid "Rating"
+msgstr "Hodnotenie"
+
+msgid "ACPT Rating field"
+msgstr "Hodnotiace pole ACPT"
+
+# ######################################
+# version 2.0.0
+# ######################################
+msgid "Field groups"
+msgstr "Skupiny polí"
+
+msgid "Create new Meta group"
+msgstr "Vytvorenie novej skupiny Meta"
+
+msgid "Manage the associate meta field groups"
+msgstr "Správa pridružených skupín meta polí"
+
+msgid "Meta group successfully deleted."
+msgstr "Meta skupina bola úspešne odstránená."
+
+msgid "Meta group"
+msgstr "Skupina Meta"
+
+msgid "Meta groups"
+msgstr "Meta skupiny"
+
+msgid "Group name"
+msgstr "Názov skupiny"
+
+msgid "Group label"
+msgstr "Označenie skupiny"
+
+msgid "No meta group found."
+msgstr "Nenašla sa žiadna meta skupina."
+
+msgid "Delete meta group"
+msgstr "Odstránenie meta skupiny"
+
+msgid "You are going to delete this meta group. Are you sure?"
+msgstr "Túto meta skupinu odstránite. Ste si istý?"
+
+msgid "Forms"
+msgstr "Formuláre"
+
+msgid "Forms list"
+msgstr "Zoznam formulárov"
+
+msgid "Copied to the clipboard!"
+msgstr "Skopírované do schránky!"
+
+msgid "Confirm deactivating license"
+msgstr "Potvrdenie deaktivácie licencie"
+
+msgid ""
+"License successfully deactivated. The browser will refresh after 5 seconds."
+msgstr ""
+"Licencia bola úspešne deaktivovaná. Prehliadač sa obnoví po 5 sekundách."
+
+msgid "max length is"
+msgstr "maximálna dĺžka je"
+
+msgid "The element(s) this group is associated with"
+msgstr "Prvok(-y), s ktorým(-i) je táto skupina spojená"
+
+msgid "This group belongs to"
+msgstr "Táto skupina patrí do"
+
+msgid "VALIDATION RULES"
+msgstr "PRAVIDLÁ VALIDÁCIE"
+
+msgid "Validation"
+msgstr "Overenie"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add rule\"!"
+msgstr ""
+"Žiadne pravidlá už neboli vytvorené. Vytvorte prvé kliknutím na tlačidlo "
+"\"Pridať pravidlo\"!"
+
+msgid "maximum value"
+msgstr "maximálna hodnota"
+
+msgid "minimum value"
+msgstr "minimálna hodnota"
+
+msgid "regular expression"
+msgstr "regulárny výraz"
+
+msgid "Confirm deleting block"
+msgstr "Potvrdenie odstránenia bloku"
+
+msgid "Confirm deleting validation rule"
+msgstr "Potvrdenie odstránenia pravidla overovania"
+
+msgid "Confirm deleting conditional rendering element"
+msgstr "Potvrdenie odstránenia prvku podmieneného vykresľovania"
+
+msgid "Insert values separated by comma. Ex: 12, 54, foo"
+msgstr "Vložte hodnoty oddelené čiarkou. Napríklad: 12, 54, foo"
+
+msgid "This is the meta-key of this field."
+msgstr "Toto je meta-kľúč tohto poľa."
+
+msgid ""
+"Use it in functions like get_post_meta() to retrieve saved meta field data."
+msgstr ""
+"Použite ho vo funkciách, ako je get_post_meta(), na načítanie uložených "
+"údajov meta polí."
+
+msgid "Copied to clipboard"
+msgstr "Skopírované do schránky"
+
+msgid "Meta group settings successfully saved"
+msgstr "Nastavenia meta skupiny boli úspešne uložené"
+
+msgid "Delete this option page"
+msgstr "Odstránenie tejto možnosti stránky"
+
+msgid "Confirm deleting page"
+msgstr "Potvrdenie odstránenia stránky"
+
+msgid "Performances"
+msgstr "Predstavenia"
+
+msgid "Flush the ACPT cache"
+msgstr "Vypláchnutie vyrovnávacej pamäte ACPT"
+
+msgid "Flush cache"
+msgstr "Vyprázdnenie vyrovnávacej pamäte"
+
+msgid "Cache was successfully flushed"
+msgstr "Vyrovnávacia pamäť bola úspešne prepláchnutá"
+
+msgid "Enable ACPT cache"
+msgstr "Povolenie vyrovnávacej pamäte ACPT"
+
+msgid "Enable the ACPT cache to optimize the plugin performances."
+msgstr ""
+"Povolenie vyrovnávacej pamäte ACPT na optimalizáciu výkonu zásuvného modulu."
+
+msgid ""
+"Enable the ACPT cache. The cache stores the MySQL results in simple textual "
+"files to avoid useless DB calls."
+msgstr ""
+"Povolenie vyrovnávacej pamäte ACPT. Táto vyrovnávacia pamäť ukladá výsledky "
+"MySQL do jednoduchých textových súborov, aby sa zabránilo zbytočným volaniam "
+"DB."
+
+msgid "select all"
+msgstr "vybrať všetky"
+
+msgid "deselect all"
+msgstr "zrušiť výber všetkých"
+
+msgid "UOM default value"
+msgstr "Predvolená hodnota UOM"
+
+msgid "Location"
+msgstr "Lokalita"
+
+msgid "Open settings"
+msgstr "Otvoriť nastavenia"
+
+msgid "Close settings"
+msgstr "Zatvoriť nastavenia"
+
+msgid "Auto slug ON"
+msgstr "Automatické zapnutie slimáka"
+
+msgid "Auto slug OFF"
+msgstr "Automatické vypnutie slimáka"
+
+msgid "Show"
+msgstr "Zobraziť"
+
+msgid "File was successfully exported"
+msgstr "Súbor bol úspešne exportovaný"
+
+msgid "File was successfully imported"
+msgstr "Súbor bol úspešne importovaný"
+
+msgid "All users"
+msgstr "Všetci používatelia"
+
+msgid "Select items"
+msgstr "Vybrať položky"
+
+msgid "Filter items"
+msgstr "Filtrovanie položiek"
+
+msgid "Invalid data provided"
+msgstr "Poskytnuté neplatné údaje"
+
+msgid "Group name error(s). Please fix it."
+msgstr "Chyby v názve skupiny. Prosím, opravte ju."
+
+msgid "Location rules error(s). Please fix it."
+msgstr "Chyby v pravidlách umiestnenia. Prosím, opravte ju."
+
+msgid "Post type"
+msgstr ""
+"Šablóna nastavení pre určitý typ príspevku: ovplyvňuje zobrazenie iba "
+"jedného konkrétneho typu príspevku. Pri úprave kategórií a / alebo "
+"príspevkov určitého typu je možné ich prepísať"
+
+msgid "Post template"
+msgstr "Šablóna príspevku"
+
+msgid "Post category"
+msgstr "Kategória príspevkov"
+
+msgid "Post taxonomy"
+msgstr "Taxonómia príspevkov"
+
+msgid "Value is not blank"
+msgstr "Hodnota nie je prázdna"
+
+msgid "Value is blank"
+msgstr "Hodnota je prázdna"
+
+msgid "Value is not equal to {{v}}"
+msgstr "Hodnota sa nerovná {{v}}"
+
+msgid "Value is lower or equals than {{v}}"
+msgstr "Hodnota je nižšia alebo rovná ako {{v}}"
+
+msgid "Value is lower than {{v}}"
+msgstr "Hodnota je nižšia ako {{v}}"
+
+msgid "Value is greatest or equals than {{v}}"
+msgstr "Hodnota je väčšia alebo rovná ako {{v}}"
+
+msgid "Value is greatest than {{v}}"
+msgstr "Hodnota je väčšia ako {{v}}"
+
+msgid "The maximum length is {{v}}"
+msgstr "Maximálna dĺžka je {{v}}"
+
+msgid "The minimum length is {{v}}"
+msgstr "Minimálna dĺžka je {{v}}"
+
+msgid "Regex value is not matching {{v}}"
+msgstr "Hodnota regexu sa nezhoduje {{v}}"
+
+msgid "All pages"
+msgstr "Všetky stránky"
+
+msgid "Related entities and relationship"
+msgstr "Súvisiace subjekty a vzťahy"
+
+msgid "Target field"
+msgstr "Cieľové pole"
+
+msgid "The relationship between the selected entities"
+msgstr "Vzťah medzi vybranými subjektmi"
+
+msgid "The first entity involved in the relationship"
+msgstr "Prvý subjekt zapojený do vzťahu"
+
+msgid "The second entity involved in the relationship"
+msgstr "Druhý subjekt zapojený do vzťahu"
+
+msgid "Selected items"
+msgstr "Vybrané položky"
+
+msgid "From entity is not a custom post type"
+msgstr "Z entity nie je vlastný typ príspevku"
+
+msgid "From entity is not a taxonomy"
+msgstr "Z entity nie je taxonómia"
+
+msgid "From entity is not valid"
+msgstr "Z entity nie je platná"
+
+msgid "From entity is not an user"
+msgstr "Z entity nie je používateľ"
+
+msgid "From entity is not an option page"
+msgstr "Od subjektu nie je možnosť stránky"
+
+msgid "No relation set on this field."
+msgstr "V tomto poli nie je nastavený žiadny vzťah."
+
+msgid "You are going to delete this template. Are you sure?"
+msgstr "Túto šablónu odstránite. Ste si istý?"
+
+msgid "Template successfully deleted."
+msgstr "Šablóna bola úspešne odstránená."
+
+msgid "Manage product data fields"
+msgstr "Správa dátových polí produktu"
+
+msgid ""
+"No pages already created. Create the first one now by clicking the button "
+"\"Add page\"!"
+msgstr ""
+"Žiadne stránky už nie sú vytvorené. Vytvorte si prvú kliknutím na tlačidlo "
+"\"Pridať stránku\"!"
+
+msgid "Delete the meta box after copying"
+msgstr "Odstránenie meta poľa po kopírovaní"
+
+msgid "Create form"
+msgstr "Vytvoriť formulár"
+
+msgid "Create a new form"
+msgstr "Vytvorenie nového formulára"
+
+msgid "Edit form"
+msgstr "Upraviť formulár"
+
+msgid "No forms found."
+msgstr "Žiadne formuláre neboli nájdené."
+
+msgid "Form name"
+msgstr "Názov formulára"
+
+msgid "Form label"
+msgstr "Štítok formulára"
+
+msgid "Action"
+msgstr "Akcia"
+
+msgid "Post management"
+msgstr "Manažment príspevkov"
+
+msgid "Custom action"
+msgstr "Vlastná akcia"
+
+msgid "Method"
+msgstr "Spôsob"
+
+msgid "PHP custom handling"
+msgstr "Vlastné spracovanie PHP"
+
+msgid "Field mapping"
+msgstr "Mapovanie polí"
+
+msgid "List to populate from"
+msgstr "Zoznam, z ktorého sa má vyplniť"
+
+msgid "If blank, the current post_ID will be used"
+msgstr "Ak je prázdne, použije sa aktuálne post_ID"
+
+msgid "If blank, the current queried term_ID will be used"
+msgstr "Ak je prázdne, použije sa aktuálne hľadané term_ID"
+
+msgid "If blank, the current logged user ID will be used"
+msgstr "Ak je prázdne, použije sa aktuálne prihlásené ID používateľa"
+
+msgid "Form successfully saved"
+msgstr "Formulár bol úspešne uložený"
+
+msgid "Delete form"
+msgstr "Odstrániť formulár"
+
+msgid "You are going to delete this form. Are you sure?"
+msgstr "Tento formulár vymažete. Ste si istý?"
+
+msgid "Form successfully deleted"
+msgstr "Formulár bol úspešne odstránený"
+
+msgid "Form manager"
+msgstr "Správca formulára"
+
+msgid "Form fields"
+msgstr "Výber farby orámovania polí formulára"
+
+msgid "Drop elements here"
+msgstr "Sem umiestnite prvky Drop"
+
+msgid "CSS classes"
+msgstr "Triedy CSS"
+
+msgid "Placeholder"
+msgstr "Popis políčka"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Layout"
+msgstr "Rozloženie"
+
+msgid "Alignment"
+msgstr "Zarovnanie"
+
+msgid "Add rule"
+msgstr "Pridať pravidlo"
+
+msgid "Step value"
+msgstr "Hodnota kroku"
+
+msgid "Rows value"
+msgstr "Hodnota riadkov"
+
+msgid "Cols value"
+msgstr "Hodnota stĺpcov"
+
+msgid "Type value"
+msgstr "Hodnota typu"
+
+msgid "Standard fields"
+msgstr "Štandardné polia"
+
+msgid "ACPT fields"
+msgstr "Polia ACPT"
+
+msgid "WordPress user fields"
+msgstr "Používateľské polia WordPress"
+
+msgid "WordPress post fields"
+msgstr "Polia príspevkov WordPress"
+
+msgid "Reset fields"
+msgstr "Obnovenie polí"
+
+msgid "Columns"
+msgstr "Stĺpce"
+
+msgid "Ajax action"
+msgstr "Akcia Ajax"
+
+msgid "Ajax success response handling"
+msgstr "Spracovanie úspešnej odpovede Ajaxu"
+
+msgid "Allow empty value"
+msgstr "Povoliť prázdnu hodnotu"
+
+msgid "Enable editor"
+msgstr "Povolenie editora"
+
+msgid "Your Google reCAPTCHA site key"
+msgstr "Váš kľúč stránky Google reCAPTCHA"
+
+msgid "Your Google reCAPTCHA secret key"
+msgstr "Váš tajný kľúč Google reCAPTCHA"
+
+msgid "Your Google reCAPTCHA site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Váš kľúč stránky Google reCAPTCHA. Potrebný na použitie formulárového poľa "
+"CAPTCHA."
+
+msgid "Your Google reCAPTCHA secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Váš tajný kľúč Google reCAPTCHA. Potrebný na použitie formulárového poľa "
+"CAPTCHA."
+
+msgid "Maximum date"
+msgstr "Maximálny dátum"
+
+msgid "Minimum date"
+msgstr "Minimálny dátum"
+
+msgid "Icon set"
+msgstr "Súbor ikon"
+
+msgid "Enable forms"
+msgstr "Povolenie formulárov"
+
+msgid "Enable the form builder."
+msgstr "Povoľte nástroj na vytváranie formulárov."
+
+msgid "Create new post"
+msgstr "Vytvoriť nový príspevok"
+
+msgid "Create new user"
+msgstr "Vytvorenie nového používateľa"
+
+msgid "Create new term"
+msgstr "Vytvorenie nového termínu"
+
+msgid "Name is already taken"
+msgstr "Názov je už obsadený"
+
+msgid "Copy"
+msgstr "Kopírovať"
+
+msgid "Duplicate"
+msgstr "Duplikovať"
+
+msgid "Execute"
+msgstr "Vykonať"
+
+msgid "Copy selected meta boxes"
+msgstr "Kopírovanie vybraných meta polí"
+
+msgid "Copy selected meta fields"
+msgstr "Kopírovanie vybraných meta polí"
+
+msgid "Delete after copying"
+msgstr "Odstrániť po kopírovaní"
+
+msgid "Copy selected meta blocks"
+msgstr "Kopírovanie vybraných metablokov"
+
+msgid "Scroll to top"
+msgstr "Zrolovať na začiatok"
+
+msgid "Select this element"
+msgstr "Vyberte tento prvok"
+
+msgid "Deselect this element"
+msgstr "Zrušenie výberu tohto prvku"
+
+msgid "Submit a bug"
+msgstr "Odoslanie chyby"
+
+msgid "Multiple"
+msgstr "Hromadne"
+
+msgid "Input file accepts"
+msgstr "Vstupný súbor prijíma"
+
+msgid "Maximum size"
+msgstr "Maximálna veľkosť"
+
+msgid "Minimum size"
+msgstr "Minimálna veľkosť"
+
+msgid "Remove"
+msgstr "Odstrániť"
+
+msgid "These CSS classes will be applied to back-end editor fields"
+msgstr "Tieto triedy CSS sa použijú na polia back-end editora"
+
+msgid "Add CSS classes to back-end editor fields (ex. class-active pulse)"
+msgstr "Pridanie tried CSS do polí back-end editora (napr. class-active pulse)"
+
+msgid "Duplicate this option page"
+msgstr "Duplikovať túto stránku s možnosťami"
+
+msgid "Copy this option page"
+msgstr "Skopírujte túto stránku s možnosťami"
+
+msgid "Delete the meta option page after copying"
+msgstr "Odstránenie stránky s meta možnosťami po skopírovaní"
+
+msgid "Page was successfully copied"
+msgstr "Stránka bola úspešne skopírovaná"
+
+msgid "Unknown error, please retry later"
+msgstr "Neznáma chyba, skúste to prosím neskôr"
+
+msgid "Whether the post type is hierarchical (e.g. page). Default false."
+msgstr "Či je typ príspevku hierarchický (napr. stránka). Predvolené false."
+
+msgid "Default positions for Core Menu Items"
+msgstr "Predvolené pozície pre položky základnej ponuky"
+
+msgid ""
+"The position in the menu order this page should appear. The higher the "
+"number, the lower its position in the menu."
+msgstr ""
+"Pozícia v poradí ponuky, na ktorej sa má táto stránka zobraziť. Čím vyššie "
+"číslo, tým nižšia je jej pozícia v ponuke."
+
+msgid "Default positions"
+msgstr "Predvolené pozície"
+
+msgid "Custom post type list"
+msgstr "Zoznam vlastných typov príspevkov"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, $show_ui must be "
+"true. If true, the post type is shown in its own top level menu. If false, "
+"no menu is shown."
+msgstr ""
+"Kde zobraziť typ príspevku v menu administrátora. Aby to fungovalo, $show_ui "
+"musí byť true. Ak je true, typ príspevku sa zobrazí vo vlastnom menu "
+"najvyššej úrovne. Ak je false, nezobrazí sa žiadne menu."
+
+msgid "To change the base url of REST API route. Default is $post_type."
+msgstr "Zmena základnej url trasy REST API. Predvolená hodnota je $post_type."
+
+msgid "Associated WooCommerce product data"
+msgstr "Pridružené údaje o produkte WooCommerce"
+
+msgid "Label displayed after a term has been updated."
+msgstr "Štítok zobrazený po aktualizácii termínu."
+
+msgid "To change the base url of REST API route. Default is $taxonomy."
+msgstr "Zmena základnej url trasy REST API. Predvolená hodnota je $taxonomy."
+
+msgid ""
+"Sets the query var key for this taxonomy. Default $taxonomy key. If false, a "
+"taxonomy cannot be loaded at ?{query_var}={term_slug}. If a string, the "
+"query ?{query_var}={term_slug} will be valid."
+msgstr ""
+"Nastaví kľúč query var pre túto taxonómiu. Predvolený kľúč $taxonomy. Ak je "
+"false, taxonómiu nie je možné načítať pri ?{query_var}={term_slug}. Ak je to "
+"reťazec, bude platný dotaz ?{query_var}={term_slug}."
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using "
+"$taxonomy as slug. To prevent rewrite, set to false. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Spúšťa spracovanie prepisov pre túto taxonómiu. Predvolené true, použitie "
+"$taxonomy ako slug. Ak chcete zabrániť prepisovaniu, nastavte hodnotu false. "
+"Na špecifikáciu pravidiel prepisovania možno odovzdať pole s niektorým z "
+"týchto kľúčov:"
+
+msgid "Add field box"
+msgstr "Pridanie poľa"
+
+msgid "From"
+msgstr "Od"
+
+msgid "To"
+msgstr "Do"
+
+msgid "Set the number of records per page in your ACPT dashboards."
+msgstr "Nastavenie počtu záznamov na stránku v ovládacích paneloch ACPT."
+
+msgid "Field type"
+msgstr "Typ poľa"
+
+msgid "Display as"
+msgstr "Zobrazenie ako"
+
+msgid "Standard view"
+msgstr "Štandardné zobrazenie"
+
+msgid "Accordion"
+msgstr "Harmonika"
+
+msgid "Horizontal tabs"
+msgstr "Horizontálne karty"
+
+msgid "Vertical tabs"
+msgstr "Zvislé karty"
+
+msgid "Product data name"
+msgstr "Názov údajov o výrobku"
+
+msgid "Eye dropper"
+msgstr "Očné kvapkadlo"
+
+msgid "Unordered list"
+msgstr "Neusporiadaný zoznam"
+
+msgid "Ordered list"
+msgstr "Objednaný zoznam"
+
+msgid "Font"
+msgstr "Písmo"
+
+msgid "Set the font of the plug-in"
+msgstr "Nastavenie písma zásuvného modulu"
+
+msgid "After"
+msgstr "Po"
+
+msgid "Before"
+msgstr "Pred"
+
+msgid "Country"
+msgstr "Krajina"
+
+msgid "The application cannot be booted"
+msgstr "Aplikáciu nemožno spustiť"
+
+msgid "An unexpected error has occurred"
+msgstr "Vyskytla sa neočakávaná chyba"
+
+msgid "Dataset"
+msgstr "Súbor údajov"
+
+msgid ""
+"Build reusable dataset for meta fields and forms values. Import your dataset "
+"from CSV, JSON or YAML with a few clicks."
+msgstr ""
+"Vytvorenie opakovane použiteľného súboru údajov pre meta polia a hodnoty "
+"formulárov. Importujte súbor údajov z CSV, JSON alebo YAML niekoľkými "
+"kliknutiami."
+
+msgid "Dataset successfully saved"
+msgstr "Súbor údajov bol úspešne uložený"
+
+msgid "Dataset name"
+msgstr "Názov súboru údajov"
+
+msgid "Dataset label"
+msgstr "Označenie súboru údajov"
+
+msgid "Edit dataset"
+msgstr "Úprava súboru údajov"
+
+msgid "Create a new dataset"
+msgstr "Vytvorenie nového súboru údajov"
+
+msgid "Create dataset"
+msgstr "Vytvorenie súboru údajov"
+
+msgid "No dataset found."
+msgstr "Nenašiel sa žiadny súbor údajov."
+
+msgid "Items count"
+msgstr "Počet položiek"
+
+msgid "Dataset successfully deleted."
+msgstr "Súbor údajov bol úspešne odstránený."
+
+msgid "Delete dataset"
+msgstr "Odstránenie súboru údajov"
+
+msgid "Manage dataset"
+msgstr "Správa súboru údajov"
+
+msgid "Load dataset"
+msgstr "Načítanie súboru údajov"
+
+msgid "Dataset loaded correctly"
+msgstr "Súbor údajov sa načítal správne"
+
+msgid "You are going to delete this dataset. Are you sure?"
+msgstr "Túto sadu údajov vymažete. Ste si istí?"
+
+msgid "Select/deselect all fields"
+msgstr "Vybrať/zrušiť výber všetkých polí"
+
+msgid "Show/hide elements"
+msgstr "Zobrazenie/skrytie prvkov"
+
+msgid ""
+"The limit on how many elements are required ([1-100] only for repeater field)"
+msgstr "Obmedzenie počtu požadovaných prvkov ([1-100] len pre pole opakovača)"
+
+msgid "Minimum elements allowed"
+msgstr "Minimálne povolené prvky"
+
+msgid ""
+"The limit on how many elements are allowed ([1-100] only for repeater field)"
+msgstr "Obmedzenie počtu povolených prvkov ([1-100] len pre pole opakovača)"
+
+msgid "Maximum elements allowed"
+msgstr "Maximálne povolené prvky"
+
+msgid ""
+"Something went wrong. Try clicking the reload the application button to "
+"reload the application."
+msgstr ""
+"Niečo sa pokazilo. Skúste kliknúť na tlačidlo Reload the application (Znovu "
+"načítať aplikáciu), aby sa aplikácia znovu načítala."
+
+msgid "The application has crashed"
+msgstr "Aplikácia sa zrútila"
+
+msgid "Reload the application"
+msgstr "Opätovné načítanie aplikácie"
+
+msgid "Value is equals to {{v}}"
+msgstr "Hodnota sa rovná {{v}}"
+
+msgid "Textual fields settings"
+msgstr "Nastavenia textových polí"
+
+msgid "File field settings"
+msgstr "Nastavenia polí súborov"
+
+msgid "Radio field settings"
+msgstr "Nastavenia rádiového poľa"
+
+msgid "Nestable fields layout settings"
+msgstr "Nastavenia rozloženia vnoriteľných polí"
+
+msgid "Unit of measure fields settings"
+msgstr "Nastavenia polí merných jednotiek"
+
+msgid "URL field settings"
+msgstr "Nastavenia poľa URL"
+
+msgid "WPML Settings"
+msgstr "Nastavenia WPML"
+
+msgid "The file wpml-config.xml was successfully generated."
+msgstr "Súbor wpml-config.xml bol úspešne vygenerovaný."
+
+msgid "The file wpml-config.xml was not successfully generated."
+msgstr "Súbor wpml-config.xml nebol úspešne vygenerovaný."
+
+msgid "This is the generated wpml-config.xml file:"
+msgstr "Toto je vygenerovaný súbor wpml-config.xml:"
+
+msgid "Attachment"
+msgstr "Príloha"
+
+msgid "All formats"
+msgstr "Všetky formáty"
