@@ -34,7 +34,6 @@ class MetaGroupBelongsRepository extends AbstractRepository
 					BelongsTo::TERM_ID,
 					MetaTypes::CUSTOM_POST_TYPE,
 					MetaTypes::TAXONOMY,
-					MetaTypes::OPTION_PAGE,
 					MetaTypes::USER,
 				],
 			],

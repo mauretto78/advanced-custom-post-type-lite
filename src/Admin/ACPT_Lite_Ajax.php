@@ -8,10 +8,7 @@ use ACPT_Lite\Core\CQRS\Command\AssocTaxonomyToCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaBlockCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaBoxCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaFieldCommand;
-use ACPT_Lite\Core\CQRS\Command\CopyOptionPageCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteCustomPostTypeCommand;
-use ACPT_Lite\Core\CQRS\Command\DeleteDatasetCommand;
-use ACPT_Lite\Core\CQRS\Command\DeleteFormCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteMetaGroupCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteTaxonomyCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteWooCommerceProductDataCommand;
@@ -33,39 +30,21 @@ use ACPT_Lite\Core\CQRS\Query\CalculateShortCodeQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchAllFindBelongsQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchElementsQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchFindQuery;
-use ACPT_Lite\Core\CQRS\Query\FetchFormFieldsQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchLanguagesQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchLicenseQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchMetaFieldsFromBelongsQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchPostTypeTaxonomiesQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchPreviewLinkQuery;
 use ACPT_Lite\Core\CQRS\Query\GenerateGutenbergTemplateQuery;
-use ACPT_Lite\Core\Generators\Meta\FieldBlockGenerator;
-use ACPT_Lite\Core\Generators\Meta\RepeaterFieldGenerator;
-use ACPT_Lite\Core\Helper\Currencies;
-use ACPT_Lite\Core\Helper\Lengths;
 use ACPT_Lite\Core\Helper\Uuid;
-use ACPT_Lite\Core\Helper\Weights;
-use ACPT_Lite\Core\Repository\ApiRepository;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
-use ACPT_Lite\Core\Repository\DatasetRepository;
-use ACPT_Lite\Core\Repository\FormRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
-use ACPT_Lite\Integrations\Polylang\Helper\PolylangChecker;
-use ACPT_Lite\Integrations\WPML\Helper\WPMLChecker;
-use ACPT_Lite\Integrations\WPML\Helper\WPMLConfig;
-use ACPT_Lite\Integrations\WPML\Provider\MetaFieldsProvider;
-use ACPT_Lite\Utils\Checker\FieldsVisibilityLiveChecker;
-use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Data\Sanitizer;
 use ACPT_Lite\Utils\Data\WooCommerceNormalizer;
-use ACPT_Lite\Utils\ExportCode\ExportCodeStrings;
-use ACPT_Lite\Utils\Http\ACPTApiClient;
 use ACPT_Lite\Utils\PHP\Browser;
 use ACPT_Lite\Utils\PHP\Sluggify;
 use ACPT_Lite\Utils\Wordpress\Translator;
@@ -290,24 +269,6 @@ class ACPT_Lite_Ajax
 	    }
     }
 
-    public function checkIsVisibleAction()
-    {
-	    $data = $this->sanitizeJsonData($_POST['data']);
-
-	    try {
-		    return wp_send_json(
-			    FieldsVisibilityLiveChecker::check(
-				    Visibility::IS_BACKEND,
-				    $data['elementId'],
-				    $data['belongsTo'],
-				    $data['values']
-			    )
-		    );
-	    } catch (\Exception $exception){
-		    return wp_send_json([]);
-	    }
-    }
-
 	/**
 	 * @throws \Exception
 	 */
@@ -496,72 +457,6 @@ class ACPT_Lite_Ajax
 		}
 	}
 
-	public function copyOptionPageAction()
-	{
-		if(isset($_POST['data'])) {
-			$data = $this->sanitizeJsonData($_POST['data']);
-
-			try {
-				$command = new CopyOptionPageCommand($data);
-				$command->execute();
-
-				$return = [
-					'success' => true,
-				];
-			} catch (\Exception $exception){
-				$return = [
-					'success' => false,
-					'error' => $exception->getMessage()
-				];
-			}
-
-			return wp_send_json($return);
-		}
-	}
-
-	public function copyOptionPagesAction()
-	{
-		if(isset($_POST['data'])) {
-			$data = $this->sanitizeJsonData($_POST['data']);
-
-			if(!isset($data['pageIds'])){
-				return wp_send_json([
-					'success' => false,
-					'error' => '`pageIds` is missing'
-				]);
-			}
-
-			if(!is_array($data['pageIds'])){
-				return wp_send_json([
-					'success' => false,
-					'error' => '`pageIds` is not an array'
-				]);
-			}
-
-			try {
-				foreach ($data['pageIds'] as $pageId){
-					$command = new CopyOptionPageCommand([
-						'targetPageId' => $data['targetPageId'],
-						'pageId' => $pageId,
-						'deletePage' => $data['deletePage']
-					]);
-					$command->execute();
-				}
-
-				$return = [
-					'success' => true,
-				];
-			} catch (\Exception $exception){
-				$return = [
-					'success' => false,
-					'error' => $exception->getMessage()
-				];
-			}
-
-			return wp_send_json($return);
-		}
-	}
-
 	public function copyMetaFieldsAction()
 	{
 		if(isset($_POST['data'])) {
@@ -598,107 +493,6 @@ class ACPT_Lite_Ajax
 			return wp_send_json($return);
 		}
 	}
-
-	public function copyMetaBlockAction()
-	{
-		if(isset($_POST['data'])) {
-			$data = $this->sanitizeJsonData($_POST['data']);
-
-			try {
-				$command = new CopyMetaBlockCommand($data);
-				$command->execute();
-
-				$return = [
-					'success' => true,
-				];
-			} catch (\Exception $exception){
-				$return = [
-					'success' => false,
-					'error' => $exception->getMessage()
-				];
-			}
-
-			return wp_send_json($return);
-		}
-	}
-
-	public function copyMetaBlocksAction()
-	{
-		if(isset($_POST['data'])) {
-			$data = $this->sanitizeJsonData($_POST['data']);
-
-			if(!isset($data['blockIds'])){
-				return wp_send_json([
-					'success' => false,
-					'error' => 'Missing blockIds'
-				]);
-			}
-
-			try {
-				foreach ($data['blockIds'] as $blockId){
-					$command = new CopyMetaBlockCommand([
-						'blockId' => $blockId,
-						'targetFieldId' => $data['targetFieldId'],
-						'delete' => $data['delete'],
-					]);
-					$command->execute();
-
-					$return = [
-						'success' => true,
-					];
-				}
-
-			} catch (\Exception $exception){
-				$return = [
-					'success' => false,
-					'error' => $exception->getMessage()
-				];
-			}
-
-			return wp_send_json($return);
-		}
-	}
-
-    /**
-     * Delete API key
-     *
-     * @return mixed
-     */
-    public function deleteApiKeyAction()
-    {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-
-            if(!isset($data['id'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing id'
-                ]);
-            }
-
-            $id = $data['id'];
-
-            try {
-                ApiRepository::delete($id);
-
-                $return = [
-                        'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                        'success' => false,
-                        'error' => $exception->getMessage()
-                ];
-            }
-
-            return wp_send_json($return);
-        }
-
-        return wp_send_json([
-                'success' => false,
-                'error' => 'no data was sent'
-        ]);
-    }
 
     /**
      * Delete custom post type
@@ -763,48 +557,6 @@ class ACPT_Lite_Ajax
 
 			try {
 				$command = new DeleteDatasetCommand($id);
-				$command->execute();
-
-				$return = [
-					'success' => true,
-				];
-			} catch (\Exception $exception){
-				$return = [
-					'success' => false,
-					'error' => $exception->getMessage()
-				];
-			}
-
-			return wp_send_json($return);
-		}
-
-		return wp_send_json([
-			'success' => false,
-			'error' => 'no postType was sent'
-		]);
-	}
-
-	/**
-	 * Delete custom post type
-	 *
-	 * @return mixed
-	 */
-	public function deleteFormAction()
-	{
-		if(isset($_POST['data'])){
-			$data = $this->sanitizeJsonData($_POST['data']);
-
-			if(!isset($data['id'])){
-				return wp_send_json([
-					'success' => false,
-					'error' => 'Missing id'
-				]);
-			}
-
-			$id = $data['id'];
-
-			try {
-				$command = new DeleteFormCommand($id);
 				$command->execute();
 
 				$return = [
@@ -1138,26 +890,6 @@ class ACPT_Lite_Ajax
     }
 
 	/**
-	 * Fetch form fields
-	 */
-    public function fetchFormFieldsAction()
-    {
-	    $data = $this->sanitizeJsonData($_POST['data']);
-
-	    if(!isset($data['id'])){
-		    return wp_send_json([
-			    'success' => false,
-			    'error' => 'Missing params (`id`)'
-		    ]);
-	    }
-
-	    $id = $data['id'];
-	    $command = new FetchFormFieldsQuery($id);
-
-	    return wp_send_json($command->execute());
-    }
-
-	/**
 	 * Fetch preview link
 	 */
     public function fetchPreviewLinkAction()
@@ -1360,34 +1092,6 @@ class ACPT_Lite_Ajax
     }
 
     /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function deactivateLicenseAction()
-    {
-        if(!ACPT_License_Manager::isLicenseValid()){
-            return wp_send_json([
-                    'error' => 'License is not valid'
-            ]);
-        }
-
-        $licenseActivation = ACPT_License_Manager::getLicense();
-        $deactivation = ACPTApiClient::call('/license/deactivate', [
-            'id' => $licenseActivation['activation_id'],
-        ]);
-
-        if(!isset($deactivation['id'])){
-            return wp_send_json([
-                    'error' => 'Error during fetching the license'
-            ]);
-        }
-
-        ACPT_License_Manager::destroy();
-
-        return wp_send_json($deactivation['id']);
-    }
-
-    /**
      * @param $string
      *
      * @return string|string[]
@@ -1397,30 +1101,6 @@ class ACPT_Lite_Ajax
         $directory = get_template_directory();
 
         return str_replace([$directory, '/', '.php'],'', $string);
-    }
-
-	/**
-	 * @throws \Exception
-	 */
-    public function exportCodeAction()
-    {
-	    if(isset($_POST['data'])){
-		    $data = $this->sanitizeJsonData($_POST['data']);
-
-		    if(!isset($data['find']) and !isset($data['belongsTo'])){
-			    return wp_send_json([
-				    'success' => false,
-				    'error' => 'Missing params (`find`, `belongsTo`)'
-			    ]);
-		    }
-
-		    return wp_send_json(ExportCodeStrings::export($data['belongsTo'], $data['find']));
-	    }
-
-	    return wp_send_json([
-		    'success' => false,
-		    'error' => 'no data was sent'
-	    ]);
     }
 
     /**
@@ -1592,7 +1272,6 @@ class ACPT_Lite_Ajax
 			$groups = [
 				MetaTypes::CUSTOM_POST_TYPE => [],
 				MetaTypes::TAXONOMY => [],
-				MetaTypes::OPTION_PAGE => [],
 			];
 
 			$customPostTypes = CustomPostTypeRepository::get([]);
@@ -1611,14 +1290,6 @@ class ACPT_Lite_Ajax
 				]);
 			}
 
-			$optionPageSlugs = OptionPageRepository::getAllSlugs();
-			foreach ($optionPageSlugs as $optionPageSlug){
-				$groups[MetaTypes::OPTION_PAGE][$optionPageSlug] = MetaRepository::get([
-					'belongsTo' => MetaTypes::OPTION_PAGE,
-					'find' => $optionPageSlug
-				]);
-			}
-
 			return wp_send_json($groups);
 		} catch (\Exception $exception){
 			return wp_send_json([
@@ -1626,76 +1297,6 @@ class ACPT_Lite_Ajax
 				'error' => $exception->getMessage()
 			]);
 		}
-	}
-
-	/**
-	 * Fetch OP meta fields
-	 */
-	public function fetchOptionPagesMetaAction()
-	{
-		try {
-			$groups = [];
-			$optionPageSlugs = OptionPageRepository::getAllSlugs();
-
-			foreach ($optionPageSlugs as $optionPageSlug){
-				$groups[$optionPageSlug] = MetaRepository::get([
-					'belongsTo' => MetaTypes::OPTION_PAGE,
-					'find' => $optionPageSlug
-				]);
-			}
-
-			return wp_send_json($groups);
-		} catch (\Exception $exception){
-			return wp_send_json([
-				'success' => false,
-				'error' => $exception->getMessage()
-			]);
-		}
-	}
-
-	public function fetchDatasetsAction()
-	{
-		if(isset($_POST['data'])){
-			$data = $this->sanitizeJsonData($_POST['data']);
-			$page = isset($data['page']) ? $data['page'] : null;
-			$perPage = isset($data['perPage']) ? $data['perPage'] : null;
-		}
-
-		if(isset($data['id'])){
-			return wp_send_json(
-				DatasetRepository::getById($data['id'])
-			);
-		}
-
-		return wp_send_json([
-			'count' => DatasetRepository::count(),
-			'records' => DatasetRepository::get([
-				'page' => isset($page) ? $page : 1,
-				'perPage' => isset($perPage) ? $perPage : 20,
-			]),
-		]);
-	}
-
-	/**
-	 * Fetch paginated forms
-	 *
-	 * @throws \Exception
-	 */
-	public function fetchFormsAction()
-	{
-		if(isset($_POST['data'])){
-			$data = $this->sanitizeJsonData($_POST['data']);
-			$page = isset($data['page']) ? $data['page'] : null;
-			$perPage = isset($data['perPage']) ? $data['perPage'] : null;
-		}
-
-		return wp_send_json([
-			'count' => FormRepository::count(),
-			'records' => FormRepository::get([
-				'page' => isset($page) ? $page : 1,
-				'perPage' => isset($perPage) ? $perPage : 20,
-			]),
-		]);
 	}
 
     /**
