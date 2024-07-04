@@ -11,20 +11,9 @@ class SelectField extends AbstractField
 	{
 		$cssClass = 'acpt-select2 acpt-admin-meta-field-input';
 
-		if($this->isChild() or $this->isNestedInABlock()){
 
-			if($this->isLeadingField()){
-				$cssClass .= ' acpt-leading-field';
-			}
-
-			$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'[type]" value="'.MetaFieldModel::SELECT_TYPE.'">';
-			$field .= '<input type="hidden" name="'. esc_attr($this->getIdName()).'[original_name]" value="'.$this->metaField->getName().'">';
-			$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'[value]" name="'. esc_attr($this->getIdName()).'[value]" class="'.$cssClass.'" '.$this->appendDataValidateAndLogicAttributes() . '>';
-		} else {
-			$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::SELECT_TYPE.'">';
-			$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="'.$cssClass.'" '.$this->appendDataValidateAndLogicAttributes() . '>';
-		}
-
+		$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::SELECT_TYPE.'">';
+		$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="'.$cssClass.'">';
 		$selectedOptions = $this->selectedOptions($this->metaField->getOptions());
 		$field .= '<option value="">'.Translator::translate("--Select--").'</option>';
 

@@ -19,7 +19,7 @@ class Meta
 		$fetched = null;
 
 		switch ($belongsTo){
-			case MetaTypes::MEDIA:
+
 			case MetaTypes::CUSTOM_POST_TYPE:
 				$fetched = get_post_meta((int)$id, $key, $single);
 				break;
@@ -28,16 +28,8 @@ class Meta
 				$fetched = get_term_meta((int)$id, $key, $single);
 				break;
 
-			case MetaTypes::OPTION_PAGE:
-				$fetched = get_option($key);
-				break;
-
 			case MetaTypes::USER:
 				$fetched = get_user_meta((int)$id, $key, $single);
-				break;
-
-			case MetaTypes::COMMENT:
-				$fetched = get_comment_meta((int)$id, $key, $single);
 				break;
 		}
 
@@ -57,13 +49,8 @@ class Meta
 	public static function delete($id, $belongsTo, $key)
 	{
 		switch($belongsTo){
-			case MetaTypes::MEDIA:
 			case MetaTypes::CUSTOM_POST_TYPE:
 				delete_post_meta((int)$id, $key);
-				break;
-
-			case MetaTypes::OPTION_PAGE:
-				delete_option($key);
 				break;
 
 			case MetaTypes::TAXONOMY:
@@ -72,10 +59,6 @@ class Meta
 
 			case MetaTypes::USER:
 				delete_user_meta((int)$id, $key);
-				break;
-
-			case MetaTypes::COMMENT:
-				delete_comment_meta((int)$id, $key);
 				break;
 		}
 	}
@@ -93,21 +76,14 @@ class Meta
 		$value = wp_unslash($value);
 
 		switch($belongsTo){
-			case MetaTypes::MEDIA:
 			case MetaTypes::CUSTOM_POST_TYPE:
 				return update_post_meta((int)$id, $key, $value);
-
-			case MetaTypes::OPTION_PAGE:
-				return update_option($key, $value);
 
 			case MetaTypes::TAXONOMY:
 				return update_term_meta((int)$id, $key, $value);
 
 			case MetaTypes::USER:
 				return update_user_meta((int)$id, $key, $value);
-
-			case MetaTypes::COMMENT:
-				return update_comment_meta((int)$id, $key, $value);
 		}
 	}
 }
