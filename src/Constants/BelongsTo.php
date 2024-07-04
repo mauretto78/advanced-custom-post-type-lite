@@ -18,8 +18,11 @@ class BelongsTo
 		self::POST_TEMPLATE,
 		self::TERM_ID,
 		self::USER_ID,
+		MetaTypes::COMMENT,
 		MetaTypes::CUSTOM_POST_TYPE,
 		MetaTypes::TAXONOMY,
+		MetaTypes::MEDIA,
+		MetaTypes::OPTION_PAGE,
 		MetaTypes::USER,
 	];
 }

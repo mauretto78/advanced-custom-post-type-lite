@@ -5,7 +5,7 @@ namespace ACPT_Lite\Core\CQRS\Command;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
-class DeleteMetaFieldValueCommand extends SaveMetaFieldValueCommand implements CommandInterface
+class DeleteMetaFieldValueCommand extends AbstractMetaFieldValueCommand implements CommandInterface
 {
 	/**
 	 * @throws \Exception
@@ -15,6 +15,8 @@ class DeleteMetaFieldValueCommand extends SaveMetaFieldValueCommand implements C
 		global $wpdb;
 
 		switch ($this->belongsTo){
+
+			case MetaTypes::MEDIA:
 			case MetaTypes::CUSTOM_POST_TYPE:
 				$sql = "
 	                DELETE FROM `{$wpdb->prefix}postmeta`
@@ -48,6 +50,17 @@ class DeleteMetaFieldValueCommand extends SaveMetaFieldValueCommand implements C
 				];
 				break;
 
+			case MetaTypes::COMMENT:
+				$sql = "
+	                DELETE FROM `{$wpdb->prefix}commentmeta`
+	                WHERE meta_key LIKE %s AND comment_id = %d
+	            ";
+				$args = [
+					$this->fieldModel->getDbName().'%',
+					$this->location
+				];
+				break;
+
 			case MetaTypes::OPTION_PAGE:
 				$sql = "
 	                DELETE FROM `{$wpdb->prefix}options`
@@ -60,7 +73,7 @@ class DeleteMetaFieldValueCommand extends SaveMetaFieldValueCommand implements C
 		}
 
 		if(isset($sql) and isset($args)){
-			ACPT_DB::executeQueryOrThrowException($sql, $args);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, $args);
 		}
 	}
 }

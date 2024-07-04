@@ -6,7 +6,9 @@ use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
+use ACPT_Lite\Core\Models\Validation\ValidationRuleModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
+use ACPT_Lite\Core\ValueObjects\RelatedEntityValueObject;
 
 class MetaFieldModel extends AbstractModel implements \JsonSerializable
 {
@@ -87,11 +89,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	private array $options = [];
 
 	/**
-	 * @var MetaFieldModel[]
-	 */
-	private array $children = [];
-
-	/**
 	 * @var string
 	 */
 	private ?string $parentId = null;
@@ -140,7 +137,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		$this->description          = $description;
 		$this->label                = $label;
 		$this->options              = [];
-		$this->children             = [];
 	}
 
 	/**
@@ -393,95 +389,17 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	/**
 	 * @return bool
 	 */
-	public function hasChildren()
+	public function isFilterable(): bool
 	{
-		return !empty($this->children);
-	}
+		$filterableTypes = [
+			self::DATE_TYPE,
+			self::EMAIL_TYPE,
+			self::SELECT_TYPE,
+			self::TEXT_TYPE,
+			self::TEXTAREA_TYPE,
+		];
 
-	/**
-	 * @param MetaFieldModel $field
-	 */
-	public function addChild(MetaFieldModel $field)
-	{
-		if(!$this->existsInCollection($field->getId(), $this->children)){
-			$this->children[] = $field;
-		}
-	}
-
-	/**
-	 * @param MetaFieldModel $field
-	 */
-	public function removeChild(MetaFieldModel $field)
-	{
-		$this->children = $this->removeFromCollection($field->getId(), $this->children);
-	}
-
-	/**
-	 * Clear all children
-	 */
-	public function clearChildren()
-	{
-		$this->children = [];
-	}
-
-	/**
-	 * @return MetaFieldModel[]
-	 */
-	public function getChildren(): array
-	{
-		return $this->children;
-	}
-
-	/**
-	 * @param $name
-	 *
-	 * @return MetaFieldModel|null
-	 */
-	public function getChild($name): ?MetaFieldModel
-	{
-		foreach ($this->getChildren() as $child){
-			if($name === $child->getName()){
-				return $child;
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param string $parentId
-	 */
-	public function setParentId( $parentId )
-	{
-		$this->parentId = $parentId;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getParentId(): ?string
-	{
-		return $this->parentId;
-	}
-
-	/**
-	 * @return MetaFieldModel|null
-	 */
-	public function getParentField(): ?MetaFieldModel
-	{
-		if(!$this->hasParent()){
-			return null;
-		}
-
-		return $this->getBox()->findAFieldById($this->getParentId());
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function hasParent(): bool
-	{
-		return $this->getParentId() !== null;
+		return in_array($this->type, $filterableTypes);
 	}
 
 	/**
@@ -489,7 +407,15 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	 */
 	public function getDbName()
 	{
-		return Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
+		$dbName = '';
+
+		if($this->getBelongsToLabel() === MetaTypes::OPTION_PAGE and $this->getFindLabel() !== null){
+			$dbName .= Strings::toDBFormat($this->getFindLabel()). '_';
+		}
+
+		$dbName .= Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
+
+		return $dbName;
 	}
 
 	/**
@@ -497,13 +423,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	 */
 	public function getUiName()
 	{
-		$uiName = Strings::toHumanReadableFormat($this->getBox()->getUiName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
-
-		if($this->getParentId()){
-			$uiName .= ' [children]';
-		}
-
-		return $uiName;
+		return Strings::toHumanReadableFormat($this->getBox()->getUiName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
 	}
 
 	/**
@@ -526,20 +446,11 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		$duplicate->box = $duplicateFrom;
 
 		$duplicatedOptions = $duplicate->getOptions();
-
-		$duplicatedChildren = $duplicate->getChildren();
-
 		$duplicate->options = [];
-		$duplicate->children = [];
 
 		foreach ($duplicatedOptions as $option){
 			$optionFieldModel = $option->duplicateFrom($duplicate);
 			$duplicate->addOption($optionFieldModel);
-		}
-
-		foreach ($duplicatedChildren as $child){
-			$childModel = $child->duplicateFromParent($duplicate);
-			$duplicate->addChild($childModel);
 		}
 
 		return $duplicate;
@@ -559,20 +470,13 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		return $duplicate;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getGroup(): ?string
-	{
-		return 'basic';
-	}
-
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize()
 	{
 		return [
 			'id' => $this->id,
 			'boxId' => $this->getBox()->getId(),
+			'groupId' => $this->getBox()->getGroup()->getId(),
 			'boxName' => $this->getBox()->getName(),
 			'db_name' => $this->getDbName(),
 			'ui_name' => $this->getUiName(),
@@ -590,10 +494,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 			'filterableInAdmin' => (bool)$this->filterableInAdmin,
 			'sort' => (int)$this->sort,
 			'options' => $this->options,
-			'hasChildren' => $this->hasChildren(),
-			'children' => $this->getChildren(),
-			'parentId' => $this->getParentId(),
-			'parentName' => ($this->hasParent() ? $this->getParentField()->getName() : null),
+			'isFilterable' => $this->isFilterable(),
 		];
 	}
 
@@ -625,14 +526,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		$fieldModel->changeName(Strings::getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
 		$arrayOfFieldNames[] = $fieldModel->getName();
 
-		if(isset($data['parentId']) and !empty($data['parentId']) and (!isset($data['blockId']) or empty($data['blockId']))){
-			$fieldModel->setParentId($data['parentId']);
-		}
-
-		if(isset($data['parent_id']) and !empty($data['parent_id']) and (!isset($data['block_id']) or empty($data['block_id']))){
-			$fieldModel->setParentId($data['parent_id']);
-		}
-
 		if(isset($data['quickEdit'])){
 			$fieldModel->setQuickEdit($data['quickEdit']);
 		}
@@ -662,14 +555,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 				]);
 
 				$fieldModel->addOption($optionModel);
-			}
-		}
-
-		if(isset($data['children']) and is_array($data['children'])){
-			foreach ($data['children'] as $childIndex => $child){
-				$child['parentId'] = $fieldModel->getId();
-				$childModel = self::fullHydrateFromArray($box, $childIndex, $child, $arrayOfFieldNames, $arrayOfBlockNames);
-				$fieldModel->addChild($childModel);
 			}
 		}
 
@@ -707,33 +592,60 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function canFieldHaveValidationAndLogicRules(): bool
+	{
+		$allowed = [
+			self::TEXT_TYPE,
+			self::TEXTAREA_TYPE,
+			self::SELECT_TYPE,
+			self::DATE_TYPE,
+			self::EMAIL_TYPE,
+		];
+
+		return in_array($this->getType(), $allowed);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isTextual(): bool
+	{
+		$allowed = [
+			self::DATE_TYPE,
+			self::EMAIL_TYPE,
+			self::TEXT_TYPE,
+			self::TEXTAREA_TYPE,
+			self::SELECT_TYPE,
+		];
+
+		return in_array($this->getType(), $allowed);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getGroup(): ?string
+	{
+		return 'basic';
+	}
+
+	/**
 	 * @param string $format
 	 *
 	 * @return array
 	 */
 	public function arrayRepresentation(string $format = 'full'): array
 	{
-		$childrenArray = [];
 		$optionsArray = [];
-
-		foreach ($this->getChildren() as $childModel){
-			$childrenArray[] = $childModel->arrayRepresentation();
-		}
-
-		foreach ($this->getOptions() as $optionModel){
-			$optionsArray[] = [
-				'id' => $optionModel->getId(),
-				'label' => $optionModel->getLabel(),
-				'value' => $optionModel->getValue(),
-				'sort' => (int)$optionModel->getSort(),
-			];
-		}
 
 		return [
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'label' => $this->getLabel(),
 			'type' => $this->getType(),
+			'group' => $this->getGroup(),
 			'belongsToLabel' => $this->getBelongsToLabel(),
 			'findLabel' => $this->getFindLabel(),
 			'defaultValue' => $this->getDefaultValue(),
@@ -742,7 +654,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 			'isRequired' => (bool)$this->isRequired(),
 			'sort' => (int)$this->getSort(),
 			'options' => $optionsArray,
-			'children' => $childrenArray,
 		];
 	}
 
@@ -762,6 +673,10 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 				'instanceOf' => MetaBoxModel::class
 			],
 			'boxId' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'groupId' => [
 				'required' => false,
 				'type' => 'string',
 			],

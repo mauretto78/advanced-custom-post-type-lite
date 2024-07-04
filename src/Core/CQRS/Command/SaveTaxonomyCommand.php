@@ -29,56 +29,60 @@ class SaveTaxonomyCommand implements CommandInterface {
 	 */
 	public function execute()
 	{
-		$data = $this->data;
-		$model = TaxonomyModel::hydrateFromArray([
-			'id' => ($data['id'] ? $data['id'] : Uuid::v4()),
-			'slug' => @$data["slug"],
-			'singular' => @$data["singular_label"],
-			'plural' => @$data["plural_label"],
-			'native' => false,
-			'labels' => @$data['labels'],
-			'settings' =>  @$data['settings'],
-		]);
+		try {
+			$data = $this->data;
+			$model = TaxonomyModel::hydrateFromArray([
+				'id' => ($data['id'] ? $data['id'] : Uuid::v4()),
+				'slug' => @$data["slug"],
+				'singular' => @$data["singular_label"],
+				'plural' => @$data["plural_label"],
+				'native' => false,
+				'labels' => @$data['labels'],
+				'settings' =>  @$data['settings'],
+			]);
 
-		TaxonomyRepository::save($model);
+			TaxonomyRepository::save($model);
 
-		// Assoc post types
-		if(isset($data['post_types'])){
-			foreach ($data['post_types'] as $post_type){
+			// Assoc post types
+			if(isset($data['post_types'])){
+				foreach ($data['post_types'] as $post_type){
 
-				// Assoc ACPT post type definition
-				$post_id = CustomPostTypeRepository::getId($post_type);
-				$command = new AssocTaxonomyToCustomPostTypeCommand($post_id, $model->getId());
-				$command->execute();
+					// Assoc ACPT post type definition
+					$post_id = CustomPostTypeRepository::getId($post_type);
+					$command = new AssocTaxonomyToCustomPostTypeCommand($post_id, $model->getId());
+					$command->execute();
 
-				$modelOptions = array_merge(
-					[
-						'singular_label' =>  $data["singular_label"],
-						'plural' => $data["plural_label"],
-						'labels' => $data['labels'],
-					],
-					$data['settings']
-				);
+					$modelOptions = array_merge(
+						[
+							'singular_label' =>  $data["singular_label"],
+							'plural' => $data["plural_label"],
+							'labels' => $data['labels'],
+						],
+						$data['settings']
+					);
 
-				$options = array_merge(
-					[
-						"hierarchical" => false,
-						"label" => $data["slug"],
-						"singular_label" => $data["plural_label"],
-						"show_ui" => true,
-						"query_var" => true,
-						'show_admin_column' => true,
-						"show_in_rest" => true,
-						"rewrite" => ["slug" => strtolower($data["slug"])]
-					], $modelOptions
-				);
+					$options = array_merge(
+						[
+							"hierarchical" => false,
+							"label" => $data["slug"],
+							"singular_label" => $data["plural_label"],
+							"show_ui" => true,
+							"query_var" => true,
+							'show_admin_column' => true,
+							"show_in_rest" => true,
+							"rewrite" => ["slug" => strtolower($data["slug"])]
+						], $modelOptions
+					);
 
-				register_taxonomy(strtolower($data["slug"]), $post_type, $options);
+					register_taxonomy(strtolower($data["slug"]), $post_type, $options);
 
-				return true;
+					return true;
+				}
 			}
-		}
 
-		return $model->getId();
+			return $model->getId();
+		} catch (\Exception $exception){
+			return null;
+		}
 	}
 }

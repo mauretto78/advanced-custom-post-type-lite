@@ -5,17 +5,18 @@ namespace ACPT_Lite\Core\Traits;
 use ACPT_Lite\Constants\Operator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Belong\BelongModel;
+use ACPT_Lite\Utils\PHP\Logics;
 
 trait BelongsToTrait
 {
 	/**
 	 * @param string $belongsTo
 	 * @param string|null $operator
-	 * @param string|null $find
+	 * @param null $find
 	 *
 	 * @return bool
 	 */
-	public function belongsTo(string $belongsTo, ?string $operator = null, ?string $find = null): bool
+	public function belongsTo(string $belongsTo, ?string $operator = null, $find = null): bool
 	{
 		if(!method_exists(static::class, 'getBelongs')){
 			return false;
@@ -29,42 +30,7 @@ trait BelongsToTrait
 				return false;
 			}
 
-			$logicBlocks = [];
-			$storedLogicBlocks = [];
-
-			foreach ($belongs as $index => $belong){
-
-				$isLast = $index === (count($belongs)-1);
-				$logic = $belong->getLogic();
-
-				// AND
-				if($logic === 'AND' and !$isLast){
-					if(!empty($storedLogicBlocks)){
-						$storedLogicBlocks[] = $belong;
-						$logicBlocks[] = $storedLogicBlocks;
-						$storedLogicBlocks = [];
-					} else {
-						$logicBlocks[] = [$belong];
-					}
-				}
-
-				// OR
-				if($logic === 'OR' and !$isLast){
-					$storedLogicBlocks[] = $belong;
-				}
-
-				// Last element
-				if($isLast){
-					if(!empty($storedLogicBlocks)){
-						$storedLogicBlocks[] = $belong;
-						$logicBlocks[] = $storedLogicBlocks;
-						$storedLogicBlocks = [];
-					} else {
-						$logicBlocks[] = [$belong];
-					}
-				}
-			}
-
+			$logicBlocks = Logics::extractLogicBlocks($belongs);
 			$logics = [];
 
 			foreach ($logicBlocks as $logicBlock){
@@ -82,11 +48,11 @@ trait BelongsToTrait
 	 * @param BelongModel[] $belongModels
 	 * @param string $belongsTo
 	 * @param string|null $operator
-	 * @param string|null $find
+	 * @param null $find
 	 *
 	 * @return bool
 	 */
-	private function returnTrueOrFalseForALogicBlock(array $belongModels, string $belongsTo, ?string $operator = null, ?string $find = null): bool
+	private function returnTrueOrFalseForALogicBlock(array $belongModels, string $belongsTo, ?string $operator = null, $find = null): bool
 	{
 		$matches = 0;
 

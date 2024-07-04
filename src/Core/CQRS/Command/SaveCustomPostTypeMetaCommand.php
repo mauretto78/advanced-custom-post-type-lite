@@ -2,28 +2,20 @@
 
 namespace ACPT_Lite\Core\CQRS\Command;
 
-use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
-use ACPT_Lite\Core\Validators\MetaDataValidator;
-use ACPT_Lite\Utils\Sanitizer;
-use ACPT_Lite\Utils\Arrays;
 
-class SaveCustomPostTypeMetaCommand implements CommandInterface
+class SaveCustomPostTypeMetaCommand extends AbstractSaveMetaCommand implements CommandInterface
 {
 	/**
 	 * @var int
 	 */
-	private $postId;
+	protected $postId;
 
 	/**
 	 * @var array
 	 */
-	private array $data;
-
-	/**
-	 * @var array
-	 */
-	private array $metaGroups;
+	protected array $metaGroups;
 
 	/**
 	 * SaveCustomPostTypeMetaCommand constructor.
@@ -34,8 +26,8 @@ class SaveCustomPostTypeMetaCommand implements CommandInterface
 	 */
 	public function __construct($postId, array $metaGroups = [], array $data = [])
 	{
+		parent::__construct($data);
 		$this->postId = $postId;
-		$this->data = $data;
 		$this->metaGroups = $metaGroups;
 	}
 
@@ -48,68 +40,11 @@ class SaveCustomPostTypeMetaCommand implements CommandInterface
 		foreach ($this->metaGroups as $metaGroup){
 			foreach ($metaGroup->getBoxes() as $boxModel) {
 				foreach ($boxModel->getFields() as $fieldModel) {
-					$this->saveField($fieldModel);
+					$fieldModel->setBelongsToLabel(MetaTypes::CUSTOM_POST_TYPE);
+					$fieldModel->setFindLabel(get_post_type($this->postId));
+					$this->saveField($fieldModel, $this->postId, MetaTypes::CUSTOM_POST_TYPE);
 				}
 			}
-		}
-	}
-
-	/**
-	 * @param MetaFieldModel $fieldModel
-	 *
-	 * @throws \Exception
-	 */
-	private function saveField(MetaFieldModel $fieldModel)
-	{
-		$data = $this->data;
-		$idName = $fieldModel->getDbName();
-
-		if(isset($data[$idName])){
-			$rawValue = $data[$idName];
-
-			// validation
-			try {
-				MetaDataValidator::validate($fieldModel->getType(), $rawValue, $fieldModel->isRequired());
-			} catch (\Exception $exception){
-				wp_die('There was an error during saving data. The error is: ' . $exception->getMessage());
-			}
-
-			$value = $rawValue;
-
-			if(is_array($value)){
-				$value = Arrays::reindex($value);
-			}
-
-			update_post_meta(
-				$this->postId,
-				$idName,
-				Sanitizer::sanitizeRawData($fieldModel->getType(), $value)
-			);
-
-			$extras = [
-				'id',
-				'type',
-				'label',
-				'currency',
-				'weight',
-				'length',
-				'lat',
-				'lng',
-			];
-
-			foreach ($extras as $extra){
-				if(isset($data[$idName.'_'.$extra])){
-					update_post_meta($this->postId, $idName.'_'.$extra, Sanitizer::sanitizeRawData(MetaFieldModel::TEXT_TYPE, $data[$idName.'_'.$extra] ) );
-				}
-			}
-
-		} else {
-			update_post_meta($this->postId, $idName, '');
-		}
-
-		if(!empty($errors)){
-			set_transient( "acpt_plugin_error_msg_".$this->postId, $errors, 60 );
-			add_filter( 'redirect_post_location', [$this, 'addNoticeQueryVar'], 99 );
 		}
 	}
 

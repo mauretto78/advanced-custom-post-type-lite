@@ -25,6 +25,14 @@ class AddGroupIdToMetaBoxLiteMigration extends ACPT_Lite_Schema_Migration
 			"ALTER TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX)."` DROP COLUMN `group_id` ",
 		];
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function version(): string
+	{
+		return '2.0.0';
+	}
 }
 
 

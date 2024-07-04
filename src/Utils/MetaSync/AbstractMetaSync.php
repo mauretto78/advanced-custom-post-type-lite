@@ -34,7 +34,7 @@ abstract class AbstractMetaSync
 	{
 		// check if box already exists
 		$query = "SELECT * FROM 
-            `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` 
+            `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` 
             WHERE id = %s 
         ";
 		$results = ACPT_Lite_DB::getResults($query, [$metaBoxModel->getId()]);
@@ -54,8 +54,8 @@ abstract class AbstractMetaSync
 	protected static function getMetaFieldData(MetaFieldModel $fieldModel)
 	{
 		$query = "SELECT * FROM 
-            `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
-            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
+            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b ON b.id = f.meta_box_id
             WHERE f.id = %s 
             GROUP BY f.id
         ";
@@ -76,8 +76,8 @@ abstract class AbstractMetaSync
 	protected static function getParentMetaFieldData(MetaFieldModel $fieldModel)
 	{
 		$query = "SELECT * FROM 
-            `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
-            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
+            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b ON b.id = f.meta_box_id
             WHERE f.id = %s 
             GROUP BY f.id
         ";

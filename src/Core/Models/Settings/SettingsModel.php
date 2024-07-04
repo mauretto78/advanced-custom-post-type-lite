@@ -8,7 +8,7 @@ use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
  * SettingsModel
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type-lite
+ * @package    advanced-custom-post-type
  * @subpackage advanced-custom-post-type/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
@@ -79,4 +79,24 @@ class SettingsModel extends AbstractModel implements \JsonSerializable
         ];
     }
 
+	/**
+	 * @inheritDoc
+	 */
+	public static function validationRules(): array
+	{
+		return [
+			'id' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'key' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'value' => [
+				'required' => true,
+				'type' => 'string|integer',
+			],
+		];
+	}
 }

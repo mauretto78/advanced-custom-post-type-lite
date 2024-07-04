@@ -22,11 +22,16 @@ class Icon
 			return $icon;
 		}
 
+		// SVG icon
+		if(Strings::contains('data:image', $icon)){
+			return $icon;
+		}
+
 		// add dashicons: for retro-compatibility
 		if(!Strings::contains('dashicons', $icon)){
 			return 'dashicons-'.$icon;
 		}
 
 		return str_replace('dashicons:','dashicons-', $icon);
-	}
+	}	
 }

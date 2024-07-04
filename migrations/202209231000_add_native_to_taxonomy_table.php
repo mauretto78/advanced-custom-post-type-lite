@@ -37,4 +37,9 @@ class AddNativeToTaxonomyTableLiteMigration extends ACPT_Lite_Schema_Migration
 			"ALTER TABLE `".ACPT_Lite_DB::TABLE_TAXONOMY."` DROP COLUMN `native` ",
 		];
 	}
+
+	public function version(): string
+	{
+		return '1.0.17';
+	}
 }

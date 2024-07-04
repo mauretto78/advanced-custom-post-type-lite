@@ -3,7 +3,7 @@
 namespace ACPT_Lite\Core\Validators;
 
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Utils\Assert;
+use ACPT_Lite\Utils\PHP\Assert;
 
 class MetaDataValidator
 {
@@ -16,6 +16,10 @@ class MetaDataValidator
 	{
 		if($isRequired){
 			Assert::notEmpty($rawData);
+		}
+
+		if(!$isRequired and empty($rawData)){
+			return;
 		}
 
 		switch ($type){

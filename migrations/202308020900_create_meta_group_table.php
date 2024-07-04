@@ -45,4 +45,12 @@ class CreateMetaGroupsTableLiteMigration extends ACPT_Lite_Schema_Migration
 			$this->deleteTableQuery(ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)),
 		];
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function version(): string
+	{
+		return '2.0.0';
+	}
 }

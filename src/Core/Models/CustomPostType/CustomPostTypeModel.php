@@ -3,8 +3,6 @@
 namespace ACPT_Lite\Core\Models\CustomPostType;
 
 use ACPT_Lite\Core\Helper\Icon;
-use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxFieldModel;
-use ACPT_Lite\Core\Models\Abstracts\AbstractMetaBoxModel;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
@@ -13,7 +11,7 @@ use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
  * CustomPostTypeModel
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type-lite
+ * @package    advanced-custom-post-type
  * @subpackage advanced-custom-post-type/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
@@ -22,78 +20,78 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $singular;
+    private string $singular;
 
     /**
      * @var string
      */
-    private $plural;
+    private string $plural;
 
     /**
      * @var string
      */
-    private $icon;
+    private string $icon;
 
     /**
      * @var bool
      */
-    private $native;
+    private bool $native;
 
     /**
      * @var int
      */
-    private $postCount;
+    private int $postCount = 0;
 
     /**
      * @var array
      */
-    private $supports = [];
+    private array $supports = [];
 
     /**
      * @var array
      */
-    private $labels = [];
+    private array $labels = [];
 
     /**
      * @var array
      */
-    private $settings = [];
+    private array $settings = [];
 
     /**
      * @var TaxonomyModel[]
      */
-    private $taxonomies = [];
+    private array $taxonomies = [];
 
     /**
      * @var WooCommerceProductDataModel[]
      */
-    private $woocommerceProductData = [];
+    private array $woocommerceProductData = [];
 
-    /**
-     * CustomPostTypeModel constructor.
-     *
-     * @param       $id
-     * @param       $name
-     * @param       $singular
-     * @param       $plural
-     * @param       $icon
-     * @param       $native
-     * @param array $supports
-     * @param array $labels
-     * @param array $settings
-     */
+	/**
+	 * CustomPostTypeModel constructor.
+	 *
+	 * @param string $id
+	 * @param string $name
+	 * @param string $singular
+	 * @param string $plural
+	 * @param string $icon
+	 * @param bool $native
+	 * @param array $supports
+	 * @param array $labels
+	 * @param array $settings
+	 */
     public function __construct(
-        $id,
-        $name,
-        $singular,
-        $plural,
-        $icon,
-        $native,
+        string $id,
+        string $name,
+        string $singular,
+        string $plural,
+        string $icon,
+        bool $native,
         array $supports,
         array $labels,
         array $settings
@@ -107,6 +105,9 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
         $this->supports = $supports;
         $this->labels   = $labels;
         $this->settings = $settings;
+        $this->taxonomies = [];
+        $this->woocommerceProductData = [];
+        $this->postCount = 0;
     }
 
     /**
@@ -135,7 +136,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -143,7 +144,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return string
      */
-    public function getSingular()
+    public function getSingular(): string
     {
         return $this->singular;
     }
@@ -151,17 +152,17 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return string
      */
-    public function getPlural()
+    public function getPlural(): string
     {
         return $this->plural;
     }
 
-    /**
-     * @return string
-     */
-    public function getIcon()
+	/**
+	 * @return string
+	 */
+    public function getIcon(): string
     {
-        return $this->icon;
+	    return $this->icon;
     }
 
 	/**
@@ -175,7 +176,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return array
      */
-    public function getSupports()
+    public function getSupports(): array
     {
         return $this->supports;
     }
@@ -183,7 +184,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return array
      */
-    public function getLabels()
+    public function getLabels(): array
     {
         return $this->labels;
     }
@@ -191,9 +192,17 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return array
      */
-    public function getSettings()
+    public function getSettings(): array
     {
-	    return $this->normalizeSettings($this->settings);
+        return $this->normalizeSettings($this->settings);
+    }
+
+    /**
+     * @param array $settings
+     */
+    public function modifySettings(array $settings)
+    {
+        $this->settings = $this->normalizeSettings($settings);
     }
 
 	/**
@@ -201,20 +210,20 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
 	 *
 	 * @return array
 	 */
-	private function normalizeSettings(array $settings)
-	{
-		// menu_position MUST be integer to have effect
-		if(isset($settings['menu_position']) and $settings['menu_position'] !== null){
-			$settings['menu_position'] = (int)$settings['menu_position'];
-		}
+    private function normalizeSettings(array $settings): array
+    {
+    	// menu_position MUST be integer to have effect
+	    if(isset($settings['menu_position']) and $settings['menu_position'] !== null){
+		    $settings['menu_position'] = (int)$settings['menu_position'];
+	    }
 
-		return $settings;
-	}
+	    return $settings;
+    }
 
     /**
      * @param int $postCount
      */
-    public function setPostCount($postCount)
+    public function setPostCount(int $postCount)
     {
         $this->postCount = $postCount;
     }
@@ -222,7 +231,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return int
      */
-    public function getPostCount()
+    public function getPostCount(): int
     {
         return $this->postCount;
     }
@@ -230,7 +239,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return bool
      */
-    public function isNative()
+    public function isNative(): bool
     {
         return $this->native;
     }
@@ -256,25 +265,16 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     /**
      * @return TaxonomyModel[]
      */
-    public function getTaxonomies()
+    public function getTaxonomies(): array
     {
         return $this->taxonomies;
     }
 
     /**
-     * Checks if 'product' if from WooCommerce
-     *
-     * @return bool
-     */
-    public function isWooCommerce()
-    {
-        return $this->name === 'product' and class_exists( 'woocommerce' );
-    }
-
-    /**
      * @return WooCommerceProductDataModel[]
      */
-    public function getWoocommerceProductData() {
+    public function getWoocommerceProductData(): array
+    {
         return $this->woocommerceProductData;
     }
 
@@ -289,12 +289,23 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
+     * Checks if 'product' if from WooCommerce
+     *
+     * @return bool
+     */
+    public function isWooCommerce(): bool
+    {
+        return $this->name === 'product' and in_array( 'woocommerce/woocommerce.php',  get_option( 'active_plugins' )  );
+    }
+
+    /**
      * @return array
      */
-    public function arrayRepresentation()
+    public function arrayRepresentation(): array
     {
         $taxonomyArray = [];
-        foreach ($this->taxonomies as $taxonomy){
+
+        foreach ($this->getTaxonomies() as $taxonomy){
             $taxonomyArray[] = [
                 'id' => $taxonomy->getId(),
                 'slug' => $taxonomy->getSlug(),
@@ -311,7 +322,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'name' => $this->name,
             'singular' => $this->singular,
             'plural' => $this->plural,
-            'icon' => $this->icon,
+            'icon' => $this->renderIcon(),
             'postCount' => (isset($this->postCount) and null !== $this->postCount) ? $this->postCount : 0,
             'supports' => $this->supports,
             'labels' => $this->labels,
@@ -342,7 +353,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'name' => $this->name,
             'singular' => $this->singular,
             'plural' => $this->plural,
-            'icon' => $this->icon,
+            'icon' => $this->renderIcon(),
             'isNative' => $this->isNative(),
             'postCount' => (isset($this->postCount) and null !== $this->postCount) ? $this->postCount : 0,
             'supports' => $this->supports,
@@ -353,4 +364,51 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'woocommerceProductData' => $this->woocommerceProductData,
         ];
     }
+
+	/**
+	 * @return array
+	 */
+	public static function validationRules(): array
+	{
+    	return [
+		    'id' => [
+			    'required' => false,
+			    'type' => 'string',
+		    ],
+		    'name' => [
+			    'required' => true,
+			    'type' => 'string',
+		    ],
+		    'singular' => [
+			    'required' => true,
+			    'type' => 'string',
+		    ],
+		    'plural' => [
+			    'required' => true,
+			    'type' => 'string',
+		    ],
+		    'icon' => [
+			    'required' => true,
+			    'type' => 'string',
+		    ],
+		    'native' => [
+			    'required' => true,
+			    'type' => 'boolean',
+		    ],
+		    'supports' => [
+			    'required' => true,
+			    'type' => 'array',
+		    ],
+		    'labels' => [
+			    'required' => true,
+			    'type' => 'array',
+		    ],
+		    'settings' => [
+			    'required' => true,
+			    'type' => 'array',
+		    ]
+	    ];
+	}
+
+
 }

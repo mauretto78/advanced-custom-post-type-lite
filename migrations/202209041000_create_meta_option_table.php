@@ -34,4 +34,9 @@ class CreateMetaOptionTableLiteMigration extends ACPT_Lite_Schema_Migration
 			$this->deleteTableQuery(ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)),
 		];
 	}
+
+	public function version(): string
+	{
+		return '1.0.17';
+	}
 }

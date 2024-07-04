@@ -49,7 +49,7 @@ class UserMetaFieldGenerator
 	 */
     private function getUserMetaField()
     {
-	    $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->metaField->getType().'Field';
+	    $className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'.$this->metaField->getType().'Field';
 
 	    if(class_exists($className)){
 		    /** @var AbstractField $instance */

@@ -11,8 +11,34 @@ class TextareaField extends AbstractField
 	 */
 	public function render()
 	{
-		$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::TEXTAREA_TYPE.'">';
-		$field .= '<textarea '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="acpt-form-control" rows="8" cols="50"';
+		$cssClass = 'regular-text acpt-admin-meta-field-input';
+
+		if($this->isLeadingField()){
+			$cssClass .= ' acpt-leading-field';
+		}
+
+		if($this->isChild() or $this->isNestedInABlock()){
+			$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'[type]" value="'.MetaFieldModel::TEXTAREA_TYPE.'">';
+			$field .= '<input type="hidden" name="'. esc_attr($this->getIdName()).'[original_name]" value="'.$this->metaField->getName().'">';
+			$field .= '<textarea '.$this->required().' id="'.esc_attr($this->getIdName()).'[value]" name="'. esc_attr($this->getIdName()).'[value]" class="'.$cssClass.'" rows="8" cols="50"';
+		} else {
+			$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::TEXTAREA_TYPE.'">';
+			$field .= '<textarea '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="'.$cssClass.'" rows="8" cols="50"';
+
+		}
+
+		$min = $this->getAdvancedOption('min');
+		$max = $this->getAdvancedOption('max');
+
+		if($min){
+			$field .= ' minlength="'.$min.'"';
+		}
+
+		if($max){
+			$field .= ' maxlength="'.$max.'"';
+		}
+
+		$field .= $this->appendDataValidateAndLogicAttributes();
 		$field .= '>';
 
 		$field .= esc_attr($this->getDefaultValue()).'</textarea>';

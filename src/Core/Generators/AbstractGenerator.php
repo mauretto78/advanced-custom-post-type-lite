@@ -2,6 +2,10 @@
 
 namespace ACPT_Lite\Core\Generators;
 
+use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Utils\PHP\Url;
+
 /**
  * *************************************************
  * AbstractGenerator class
@@ -57,12 +61,164 @@ abstract class AbstractGenerator
         add_action( 'admin_head', $cb );
     }
 
-    /**
-     * @return string
-     */
-    protected function generateNonce()
-    {
-        return  plugin_basename(__FILE__) . '/src/Core/Generators/CustomPostTypeGenerator.php';
-    }
+	/**
+	 * Enqueue JS scripts
+	 *
+	 * @param $action
+	 */
+	public function enqueueScripts($action)
+	{
+		global $pagenow;
+
+		$belongsTo = null;
+		$elementId = null;
+
+		switch ($pagenow){
+			case "profile.php":
+				$elementId = wp_get_current_user()->ID;
+				$belongsTo = MetaTypes::USER;
+				break;
+
+			case "user-edit.php":
+				$elementId = $_GET['user_id'] ?? null;
+				$belongsTo = MetaTypes::USER;
+				break;
+
+			case "comment.php":
+				$elementId = $_GET['c'] ?? null;
+				$belongsTo = MetaTypes::COMMENT;
+				break;
+
+			case "admin.php":
+				$elementId = $_GET['page'] ?? null;
+				$belongsTo = MetaTypes::OPTION_PAGE;
+				break;
+
+			case "post-new.php":
+			case "post.php":
+				$elementId = $_GET['post'] ?? null;
+				$belongsTo = MetaTypes::CUSTOM_POST_TYPE;
+				break;
+
+			case "edit-tags.php":
+				$elementId = $_GET['taxonomy'] ?? null;
+				$belongsTo = MetaTypes::TAXONOMY;
+				break;
+
+			case "term.php":
+				$elementId = $_GET['tag_ID'] ?? null;
+				$belongsTo = MetaTypes::TAXONOMY;
+				break;
+
+		}
+
+		// validation
+		wp_register_script('ACPTFormValidator',  plugin_dir_url( dirname( __FILE__ ) ) . '../../assets/static/js/ACPTFormValidator.js' );
+		wp_enqueue_script('ACPTFormValidator');
+
+		wp_register_script( 'ACPTFormValidator-run', '', [], '', true );
+		wp_enqueue_script('ACPTFormValidator-run');
+		wp_add_inline_script( 'ACPTFormValidator-run', '
+			window.addEventListener("load", () => {
+				const validator = new ACPTFormValidator("'.$action.'");
+				validator.run();
+			});
+		');
+
+		if($elementId !== null and $belongsTo !== null){
+
+			// conditional rules
+			wp_register_script('ACPTConditionalRules',  plugin_dir_url( dirname( __FILE__ ) ) . '../../assets/static/js/ACPTConditionalRules.js' );
+			wp_enqueue_script('ACPTConditionalRules');
+
+			wp_register_script( 'ACPTConditionalRules-run', '', [], '', true );
+			wp_enqueue_script('ACPTConditionalRules-run');
+			wp_add_inline_script( 'ACPTConditionalRules-run', '
+				const conditionalRules = new ACPTConditionalRules("'.Url::fullUrl().'", "'.$belongsTo.'", "'.$elementId.'");
+				conditionalRules.run();
+			');
+		}
+	}
+
+	/**
+	 * This method is used by CPT and Comment meta field generators
+	 *
+	 * @param MetaFieldModel $fieldModel
+	 *
+	 * @return array
+	 */
+	protected function generateMetaBoxFieldArray(MetaFieldModel $fieldModel)
+	{
+		$options = [];
+
+		foreach ($fieldModel->getOptions() as $optionModel){
+			$options[] = [
+				'label' => $optionModel->getLabel(),
+				'value' => $optionModel->getValue(),
+			];
+		}
+
+		$relations = [];
+		$children = [];
+
+		if($fieldModel->hasChildren()){
+			foreach ($fieldModel->getChildren() as $childFieldModel){
+				$children[] = $this->generateMetaBoxFieldArray($childFieldModel);
+			}
+		}
+
+		$advancedOptions = [];
+
+		foreach ($fieldModel->getAdvancedOptions() as $advancedOptionModel){
+			$advancedOptions[] = [
+				'key' => $advancedOptionModel->getKey(),
+				'value' => $advancedOptionModel->getValue(),
+			];
+		}
+
+		$validationRules = [];
+
+		foreach ($fieldModel->getValidationRules() as $validationRuleModel){
+			$validationRules[] = [
+				'condition' => $validationRuleModel->getCondition(),
+				'value' => $validationRuleModel->getValue(),
+			];
+		}
+
+		$blocks = [];
+
+		foreach ($fieldModel->getBlocks() as $blockModel){
+
+			$nestedFields = [];
+
+			foreach ($blockModel->getFields() as $nestedFieldModel){
+				$nestedFields[] = $this->generateMetaBoxFieldArray($nestedFieldModel);
+			}
+
+			$blocks[] = [
+				'id' => $blockModel->getId(),
+				'name' => $blockModel->getName(),
+				'label' => $blockModel->getLabel(),
+				'fields' => $nestedFields
+			];
+		}
+
+		return [
+			'id' => $fieldModel->getId(),
+			'type' => $fieldModel->getType(),
+			'name' => $fieldModel->getName(),
+			'defaultValue' => $fieldModel->getDefaultValue(),
+			'description' => $fieldModel->getDescription(),
+			'isRequired' => $fieldModel->isRequired(),
+			'isShowInArchive' => $fieldModel->isShowInArchive(),
+			'sort' => $fieldModel->getSort(),
+			'options' => $options,
+			'relations' => $relations,
+			'children' => $children,
+			'advancedOptions' => $advancedOptions,
+			'validationRules' => $validationRules,
+			'blocks' => $blocks,
+		];
+	}
 }
 

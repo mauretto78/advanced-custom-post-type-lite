@@ -10,12 +10,17 @@ abstract class ACPT_Lite_Schema_Migration
 	protected string $charsetCollation;
 
 	/**
-	 * ACPT_Lite_Schema_Migration constructor.
+	 * ACPT_Schema_Migration constructor.
 	 */
 	public function __construct()
 	{
 		$this->charsetCollation = ACPT_Lite_DB::getCharsetCollation();
 	}
+
+	/**
+	 * @return string
+	 */
+	public abstract function version(): string;
 
 	/**
      * Up query
@@ -32,13 +37,17 @@ abstract class ACPT_Lite_Schema_Migration
     public abstract function down(): array;
 
 	/**
-	 * @param string $table
+	 * @param $table
 	 *
 	 * @return string
 	 */
     protected function renameTableQuery($table): string
     {
-    	return "RENAME TABLE `".$table."` TO `".ACPT_Lite_DB::prefixedTableName($table)."`;";
+    	if(ACPT_Lite_DB::tableExists(ACPT_Lite_DB::prefixedTableName($table))){
+    		return '';
+	    }
+
+    	return "RENAME TABLE `".$table."` TO `" . ACPT_Lite_DB::prefixedTableName($table) . "`;";
     }
 
 	/**

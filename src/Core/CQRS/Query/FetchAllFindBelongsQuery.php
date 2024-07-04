@@ -4,10 +4,12 @@ namespace ACPT_Lite\Core\CQRS\Query;
 
 use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Constants\MimeTypes;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
+use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
-use ACPT_Lite\Utils\Translator;
+use ACPT_Lite\Utils\Wordpress\Translator;
 
 class FetchAllFindBelongsQuery implements QueryInterface
 {
@@ -31,9 +33,18 @@ class FetchAllFindBelongsQuery implements QueryInterface
 			BelongsTo::USER_ID => [$nullValue],
 			MetaTypes::CUSTOM_POST_TYPE => [$nullValue],
 			MetaTypes::TAXONOMY => [$nullValue],
+			MetaTypes::OPTION_PAGE => [$nullValue],
+			MetaTypes::MEDIA => [$nullValue],
 			MetaTypes::META => [$nullValue],
 			MetaTypes::USER => [$nullValue],
 		];
+
+		foreach (MimeTypes::ALLOWED_VALUES as $mimeType){
+			$data[MetaTypes::MEDIA][]  = [
+				'value' => $mimeType,
+				'label' => $mimeType,
+			];
+		}
 
 		$templates = wp_get_theme()->get_page_templates();
 		foreach ($templates as $file => $template){
@@ -47,6 +58,7 @@ class FetchAllFindBelongsQuery implements QueryInterface
 			"orderby" => "name",
 			"hide_empty" => false
 		]);
+
 		foreach ($categories as $category){
 			$data[BelongsTo::POST_CAT][]  = [
 				'value' => $category->term_id,
@@ -60,6 +72,7 @@ class FetchAllFindBelongsQuery implements QueryInterface
 				'display_name',
 			]
 		]);
+
 		foreach ($users as $user){
 			$data[BelongsTo::USER_ID][]  = [
 				'value' => $user->id,
@@ -68,10 +81,11 @@ class FetchAllFindBelongsQuery implements QueryInterface
 		}
 
 		$customPostTypes = CustomPostTypeRepository::get([]);
+
 		foreach ($customPostTypes as $customPostType){
 			$data[MetaTypes::CUSTOM_POST_TYPE][]  = [
 				'value' => $customPostType->getName(),
-				'label' => $customPostType->getName(),
+				'label' => $customPostType->getSingular(),
 			];
 
 			$posts = [];
@@ -98,10 +112,11 @@ class FetchAllFindBelongsQuery implements QueryInterface
 		}
 
 		$taxonomies = TaxonomyRepository::get([]);
+
 		foreach ($taxonomies as $taxonomy){
 			$data[MetaTypes::TAXONOMY][]  = [
 				'value' => $taxonomy->getSlug(),
-				'label' => $taxonomy->getSlug(),
+				'label' => $taxonomy->getSingular(),
 			];
 
 			$terms = [];
@@ -131,7 +146,24 @@ class FetchAllFindBelongsQuery implements QueryInterface
 			}
 		}
 
+		$optionPages = OptionPageRepository::get([]);
+
+		foreach ($optionPages as $optionPage){
+			$data[MetaTypes::OPTION_PAGE][]  = [
+				'value' => $optionPage->getMenuSlug(),
+				'label' => $optionPage->getMenuTitle(),
+			];
+
+			foreach ($optionPage->getChildren() as $childOptionPage){
+				$data[MetaTypes::OPTION_PAGE][]  = [
+					'value' => $childOptionPage->getMenuSlug(),
+					'label' => $childOptionPage->getMenuTitle(),
+				];
+			}
+		}
+
 		$metaGroups = MetaRepository::get(['lazy' => true]);
+
 		foreach ($metaGroups as $metaGroup){
 			$data[MetaTypes::META][]  = [
 				'value' => $metaGroup->getId(),

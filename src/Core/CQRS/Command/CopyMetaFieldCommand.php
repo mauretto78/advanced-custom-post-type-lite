@@ -53,6 +53,7 @@ class CopyMetaFieldCommand implements CommandInterface
 				'enum' => [
 					'box',
 					'field',
+					'block',
 				]
 			],
 			'delete' => [
@@ -88,6 +89,19 @@ class CopyMetaFieldCommand implements CommandInterface
 		$duplicatedMetaField = $metaBoxField->duplicate();
 
 		switch ($this->targetEntityType){
+
+			case "block":
+				$targetBlockModel = MetaRepository::getMetaBlockById($this->targetEntityId);
+
+				if(empty($targetBlockModel)){
+					throw new Exception('Target meta block was not found');
+				}
+
+				$duplicatedMetaField->setBlockId($this->targetEntityId);
+				$this->saveMetaField($duplicatedMetaField);
+
+				break;
+
 			case "field":
 				$targetFieldModel = MetaRepository::getMetaFieldById($this->targetEntityId);
 
@@ -119,6 +133,10 @@ class CopyMetaFieldCommand implements CommandInterface
 				}
 
 				$duplicatedMetaField->changeBox($targetBoxModel);
+
+				if($duplicatedMetaField->hasParentBlock()){
+					$duplicatedMetaField->setBlockId(null);
+				}
 
 				// avoid duplicated box/field names
 				$arrayOfFieldNames = [];

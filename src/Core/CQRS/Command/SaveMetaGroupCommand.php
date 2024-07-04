@@ -11,8 +11,8 @@ use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
-use ACPT_Lite\Utils\Arrays;
-use ACPT_Lite\Utils\Sluggify;
+use ACPT_Lite\Utils\PHP\Arrays;
+use ACPT_Lite\Utils\PHP\Sluggify;
 
 class SaveMetaGroupCommand implements CommandInterface
 {
@@ -119,21 +119,24 @@ class SaveMetaGroupCommand implements CommandInterface
 
 		$groupModel->changeName(Strings::getTheFirstAvailableName($groupModel->getName(), $arrayOfGroupNames));
 
-		// belongs
+		// belongs$belongs
 		foreach ($belongs as $belongIndex => $belong){
 
 			$belongsTo = $belong['belongsTo'] ?? $belong['belongs_to'];
-			$belongModel = BelongModel::hydrateFromArray([
-				'id' => (isset($belong['id']) ? $belong['id'] : Uuid::v4()),
-				'belongsTo' => @$belongsTo,
-				'operator' => @$belong['operator'],
-				'find' => (is_array($belong['find']) ? implode(",", $belong['find']) : $belong['find']),
-				'logic' => (isset($belong['logic']) ? $belong['logic'] : null),
-				'sort' => ($belongIndex+1),
-			]);
 
-			$groupModel->addBelong($belongModel);
-			$ids[$groupId]['belongs'][] = $belongModel->getId();
+			if(!empty($belongsTo)){
+				$belongModel = BelongModel::hydrateFromArray([
+					'id' => (isset($belong['id']) ? $belong['id'] : Uuid::v4()),
+					'belongsTo' => @$belongsTo,
+					'operator' => @$belong['operator'],
+					'find' => (is_array($belong['find']) ? implode(",", $belong['find']) : $belong['find']),
+					'logic' => (isset($belong['logic']) ? $belong['logic'] : null),
+					'sort' => ($belongIndex+1),
+				]);
+
+				$groupModel->addBelong($belongModel);
+				$ids[$groupId]['belongs'][] = $belongModel->getId();
+			}
 		}
 
 		// boxes
@@ -221,6 +224,12 @@ class SaveMetaGroupCommand implements CommandInterface
 			'groupId' => $groupModel->getId(),
 			'ids' => $ids[$groupId]
 		]);
+
+		// remove orphan blocks
+		MetaRepository::removeOrphanBlocks();
+
+		// remove orphan visibility conditions
+		MetaRepository::removeOrphanVisibilityConditions();
 
 		return $groupId;
 	}
@@ -339,9 +348,37 @@ class SaveMetaGroupCommand implements CommandInterface
 			$ids[$groupId]['options'][] = $option->getId();
 		}
 
+		foreach ($fieldModel->getVisibilityConditions() as $condition){
+			$ids[$groupId]['visibilityConditions'][] = $condition->getId();
+		}
+
+		foreach ($fieldModel->getValidationRules() as $rule){
+			$ids[$groupId]['validationRules'][] = $rule->getId();
+		}
+
 		foreach ($fieldModel->getChildren() as $child){
 			$ids[$groupId]['fields'][] = $child->getId();
 			$this->appendIdsOfFieldModel($groupId, $child, $ids);
+		}
+
+		foreach ($fieldModel->getBlocks() as $block){
+			$ids[$groupId]['blocks'][] = $block->getId();
+			foreach ($block->getFields() as $child){
+				$ids[$groupId]['fields'][] = $child->getId();
+				$this->appendIdsOfFieldModel($groupId, $child, $ids);
+			}
+		}
+
+		foreach ($fieldModel->getRelations() as $relation){
+			$ids[$groupId]['relations'][] = $relation->getId();
+
+			if($relation->getInversedBy()){
+				$inversedRelation = MetaRepository::findInversedRelation($relation);
+
+				if($inversedRelation){
+					$ids[$groupId]['relations'][] = $inversedRelation->getId();
+				}
+			}
 		}
 	}
 

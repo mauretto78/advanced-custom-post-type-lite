@@ -15,5 +15,3 @@ abstract class ACPT_Lite_Api
         return new \WP_Error( "rest_error", $message, ['status' => $code ] );
     }
 }
-
-

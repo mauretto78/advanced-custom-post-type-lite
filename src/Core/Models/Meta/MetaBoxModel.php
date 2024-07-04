@@ -165,33 +165,15 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 				return $field;
 			}
 
-			foreach ($field->getChildren() as $child){
-				return $this->findAFieldById($child->getId(), $field->getChildren());
+			if ($field->hasChildren()){
+				return $this->findAFieldById($fieldId, $field->getChildren());
 			}
 
+			// @TODO to be fixed in 2.0.14 beta3
 			foreach ($field->getBlocks() as $block){
 				foreach ($block->getFields() as $field){
 					return $this->findAFieldById($field->getId(), $block->getFields());
 				}
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param $fieldName
-	 * @param MetaFieldModel[] $fields
-	 *
-	 * @return MetaFieldModel|null
-	 */
-	public function findAFieldByName($fieldName, $fields = null): ?MetaFieldModel
-	{
-		$fields = $fields ?? $this->getFields();
-
-		foreach($fields as $field) {
-			if($field->getName() === $fieldName){
-				return $field;
 			}
 		}
 
@@ -271,6 +253,7 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 			'name' => $this->getName(),
 			'label' => $this->getLabel(),
 			'UIName' => $this->getUiName(),
+			'groupId' => $this->getGroup()->getId(),
 			'sort' => $this->getSort(),
 			'fields' => $this->getFields(),
 		];
@@ -289,6 +272,7 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 				"name" => $this->getName(),
 				"label" => $this->getLabel(),
 				"UIName" => $this->getUIName(),
+				'groupId' => $this->getGroup()->getId(),
 				"sort" => (int)$this->getSort(),
 				"count" => count($this->getFields()),
 			];
@@ -307,6 +291,7 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 				"name" => $this->getName(),
 				"label" => $this->getLabel(),
 				"UIName" => $this->getUIName(),
+				'groupId' => $this->getGroup()->getId(),
 				"sort" => (int)$this->getSort(),
 				"fields" => $fieldsArray
 			];
@@ -327,6 +312,10 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 				'required' => true,
 				'type' => 'object',
 				'instanceOf' => MetaGroupModel::class,
+			],
+			'groupId' => [
+				'required' => false,
+				'type' => 'string',
 			],
 			'name' => [
 				'required' => true,

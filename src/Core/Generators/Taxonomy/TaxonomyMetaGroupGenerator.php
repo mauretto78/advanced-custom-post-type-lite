@@ -65,8 +65,10 @@ class TaxonomyMetaGroupGenerator extends AbstractGenerator
 	{
 		$return = '<div class="taxonomy-meta-box-group" id="'.$this->groupModel->getId().'">';
 
+		wp_editor('', 'no-show'); // Hack for enqueuing WP Editor
+
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
-			$return .= '<h3 class="taxonomy-meta-box-group-title">'.$metaBoxModel->getName().'</h3>';
+			$return .= '<h3 class="taxonomy-meta-box-group-title">'.$metaBoxModel->getUiName().'</h3>';
 			$return .= '<div class="taxonomy-meta-fields" style="margin-bottom: 10px">';
 
 			foreach ($metaBoxModel->getFields() as $metaBoxFieldModel) {
@@ -96,8 +98,6 @@ class TaxonomyMetaGroupGenerator extends AbstractGenerator
 			$return .= '</div>';
 
 			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-accordion-content">';
-
-			$return .= '<div class="taxonomy-meta-box-group no-borders">';
 			$return .= '<div class="taxonomy-meta-fields">';
 
 			foreach ($metaBoxModel->getFields() as $fieldModel){
@@ -106,8 +106,6 @@ class TaxonomyMetaGroupGenerator extends AbstractGenerator
 			}
 
 			$return .= '</div>';
-			$return .= '</div>';
-
 			$return .= '</div>';
 			$return .= '</div>';
 		}
@@ -136,16 +134,10 @@ class TaxonomyMetaGroupGenerator extends AbstractGenerator
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
 			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-horizontal-panel '.($index === 0 ? 'active' : '').'">';
 
-			$return .= '<div class="taxonomy-meta-box-group no-borders">';
-			$return .= '<div class="taxonomy-meta-fields">';
-
 			foreach ($metaBoxModel->getFields() as $fieldModel){
 				$taxonomyMetaBoxFieldGenerator = new TaxonomyMetaBoxFieldGenerator($fieldModel, $this->termId);
 				$return .= $taxonomyMetaBoxFieldGenerator->generate();
 			}
-
-			$return .= '</div>';
-			$return .= '</div>';
 
 			$return .= '</div>';
 		}
@@ -174,16 +166,12 @@ class TaxonomyMetaGroupGenerator extends AbstractGenerator
 		$return .= '<div class="acpt-admin-vertical-panels">';
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
 			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-vertical-panel '.($index === 0 ? 'active' : '').'">';
-			$return .= '<div class="taxonomy-meta-box-group no-borders">';
-			$return .= '<div class="taxonomy-meta-fields">';
 
 			foreach ($metaBoxModel->getFields() as $fieldModel){
 				$taxonomyMetaBoxFieldGenerator = new TaxonomyMetaBoxFieldGenerator($fieldModel, $this->termId);
 				$return .= $taxonomyMetaBoxFieldGenerator->generate();
 			}
 
-			$return .= '</div>';
-			$return .= '</div>';
 			$return .= '</div>';
 		}
 

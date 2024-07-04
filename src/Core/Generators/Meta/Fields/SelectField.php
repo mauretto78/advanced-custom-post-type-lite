@@ -3,14 +3,28 @@
 namespace ACPT_Lite\Core\Generators\Meta\Fields;
 
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Utils\Translator;
+use ACPT_Lite\Utils\Wordpress\Translator;
 
 class SelectField extends AbstractField
 {
 	public function render()
 	{
-		$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::SELECT_TYPE.'">';
-		$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="acpt-select2 acpt-form-control">';
+		$cssClass = 'acpt-select2 acpt-admin-meta-field-input';
+
+		if($this->isChild() or $this->isNestedInABlock()){
+
+			if($this->isLeadingField()){
+				$cssClass .= ' acpt-leading-field';
+			}
+
+			$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'[type]" value="'.MetaFieldModel::SELECT_TYPE.'">';
+			$field .= '<input type="hidden" name="'. esc_attr($this->getIdName()).'[original_name]" value="'.$this->metaField->getName().'">';
+			$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'[value]" name="'. esc_attr($this->getIdName()).'[value]" class="'.$cssClass.'" '.$this->appendDataValidateAndLogicAttributes() . '>';
+		} else {
+			$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::SELECT_TYPE.'">';
+			$field .= '<select '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" class="'.$cssClass.'" '.$this->appendDataValidateAndLogicAttributes() . '>';
+		}
+
 		$selectedOptions = $this->selectedOptions($this->metaField->getOptions());
 		$field .= '<option value="">'.Translator::translate("--Select--").'</option>';
 

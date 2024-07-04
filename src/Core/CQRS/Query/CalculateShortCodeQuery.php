@@ -87,19 +87,27 @@ class CalculateShortCodeQuery implements QueryInterface
 
 				$base = null;
 
-				if(
-					$belongsTo['belongsTo'] === MetaTypes::CUSTOM_POST_TYPE or
-					$belongsTo['belongsTo'] === 'POST_ID' or
-					$belongsTo['belongsTo'] === 'POST_CAT' or
-					$belongsTo['belongsTo'] === 'POST_TAX' or
-					$belongsTo['belongsTo'] === 'POST_TEMPLATE'
-				){
-					$base = 'acpt';
-				} else if($belongsTo['belongsTo'] === MetaTypes::TAXONOMY or $belongsTo['belongsTo'] === 'TERM_ID'){
-					$base = 'acpt_tax';
-				} else if($belongsTo['belongsTo'] === MetaTypes::USER or $belongsTo['belongsTo'] === 'USER_ID'){
-					$base = 'acpt_user';
-				}
+	            if(
+		            $belongsTo['belongsTo'] === MetaTypes::CUSTOM_POST_TYPE or
+		            $belongsTo['belongsTo'] === 'POST_ID' or
+		            $belongsTo['belongsTo'] === 'POST_CAT' or
+		            $belongsTo['belongsTo'] === 'POST_TAX' or
+		            $belongsTo['belongsTo'] === 'POST_TEMPLATE'
+	            ){
+		            $base = 'acpt';
+	            } else if($belongsTo['belongsTo'] === MetaTypes::TAXONOMY or $belongsTo['belongsTo'] === 'TERM_ID'){
+		            $base = 'acpt_tax';
+	            } else if($belongsTo['belongsTo'] === MetaTypes::OPTION_PAGE){
+		            $base = 'acpt_option page="'.$belongsTo['find'].'"';
+	            } else if($belongsTo['belongsTo'] === MetaTypes::USER or $belongsTo['belongsTo'] === 'USER_ID'){
+		            $base = 'acpt_user';
+	            }
+
+	            if(isset($this->data['parentBlockName'])){
+		            $base .= ' root="'.$this->data['fieldRootName'].'" index="'.$this->data['index'].'" block_name="'.$this->data['parentBlockName'].'" block_index="'.$this->data['blockIndexInfo'].'"';
+	            } else if(isset($this->data['parentFieldName'])){
+	            	$base .= ' root="'.$this->data['fieldRootName'].'" parent="'.$this->data['parentFieldName'].'" index="'.$this->data['index'].'"';
+	            }
 
 				if($base !== null){
 					$shortCodes[] = '['.$base.' box="'.$this->data['boxName'].'" field="'.$this->data['fieldName'].'"]';

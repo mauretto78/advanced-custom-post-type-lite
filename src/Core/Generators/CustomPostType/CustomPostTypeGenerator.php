@@ -2,11 +2,14 @@
 
 namespace ACPT_Lite\Core\Generators\CustomPostType;
 
+use ACPT_Lite\Constants\ReservedTerms;
 use ACPT_Lite\Core\CQRS\Command\SaveCustomPostTypeMetaCommand;
 use ACPT_Lite\Core\Generators\AbstractGenerator;
+use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
+use ACPT_Lite\Utils\Wordpress\WPAttachment;
 
 /**
  * *************************************************
@@ -95,7 +98,9 @@ class CustomPostTypeGenerator extends AbstractGenerator
 	    // register taxonomies first
 	    foreach ($taxonomies as $taxonomyModel){
 	        if(!$taxonomyModel->isNative()){
-		        $this->registerTaxonomy($taxonomyModel);
+	            if(!in_array($taxonomyModel->getSlug(), ReservedTerms::list())){
+		            $this->registerTaxonomy($taxonomyModel);
+	            }
 	        } else {
 		        register_taxonomy_for_object_type($taxonomyModel->getSlug(), $this->postTypeName);
 	        }
@@ -144,6 +149,14 @@ class CustomPostTypeGenerator extends AbstractGenerator
 
 	        // Take user provided options, and override the defaults.
 	        $args = array_merge($args, $this->postTypeArgs);
+
+	        // SVG icons
+            if(Strings::isUrl($args['menu_icon'])){
+	            $attachment = WPAttachment::fromUrl($args['menu_icon']);
+	            if($attachment->isSVG()){
+		            $args['menu_icon'] = 'data:image/svg+xml;base64,' . base64_encode( file_get_contents($attachment->getPath()) );
+                }
+            }
 
 	        register_post_type($this->postTypeName, $args);
 
