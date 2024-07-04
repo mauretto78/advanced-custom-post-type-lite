@@ -6,6 +6,10 @@
   border: $border-thickness solid $light-gray;
 }
 
+.with-primary-border {
+  border: $border-thickness solid $primary-color;
+}
+
 .b-bottom-1 {
   border-bottom: $border-thickness solid $light-gray;
 }
@@ -48,6 +52,10 @@
 
 .bg-pale-gray {
   background: $pale-gray;
+}
+
+.bg-secondary {
+  background: $secondary-color;
 }
 
 /**
@@ -209,8 +217,20 @@
 }
 
 /**
+ * OVERFLOW
+ */
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/**
  *  WIDTH AND SPACING
  */
+
+.fit-content {
+  width: fit-content;
+}
 
 .max-w-400 {
   max-width: 400px;
@@ -220,7 +240,23 @@
   width: 100%;
 }
 
+.w-80 {
+  width: 80%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
 .w-40 {
+  width: 40%;
+}
+
+.w-20 {
   width: 40%;
 }
 

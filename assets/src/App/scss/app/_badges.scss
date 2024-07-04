@@ -1,8 +1,8 @@
 .acpt-badge {
   display: inline-block;
-  padding: 6px 10px;
+  padding: 6px 10px !important;
   border-radius: $border-radius;
-  color: $gray;
+  color: $gray !important;
   background: $pale-gray;
   border: none;
   outline: none;
@@ -38,16 +38,16 @@
   }
 
   &.acpt-badge-disabled {
-    color: $gray;
+    color: $gray !important;
     background: $light-gray;
   }
 
   &.acpt-badge-warning {
     background: $warning-bg;
-    color: $warning-color;
+    color: $warning-color !important;
 
     .badge-link {
-      color: $warning-color;
+      color: $warning-color !important;
     }
 
     &.with-border {
@@ -57,10 +57,10 @@
 
   &.acpt-badge-info {
     background: $info-bg;
-    color: $info-color;
+    color: $info-color !important;
 
     .badge-link {
-      color: $info-color;
+      color: $info-color !important;
     }
 
     &.with-border {
@@ -70,10 +70,10 @@
 
   &.acpt-badge-primary {
     background: $primary-color;
-    color: $white;
+    color: $white !important;
 
     .badge-link {
-      color: $primary-color;
+      color: $primary-color !important;
     }
 
     &.with-border {
@@ -83,10 +83,10 @@
 
   &.acpt-badge-secondary {
     background: $secondary-color;
-    color: $primary-color;
+    color: $primary-color !important;
 
     .badge-link {
-      color: $primary-color;
+      color: $primary-color !important;
     }
 
     &.with-border {
@@ -96,10 +96,10 @@
 
   &.acpt-badge-success {
     background: $success-bg;
-    color: $success-color;
+    color: $success-color !important;
 
     .badge-link {
-      color: $success-color;
+      color: $success-color !important;
     }
 
     &.with-border {
@@ -109,10 +109,10 @@
 
   &.acpt-badge-danger {
     background: $danger-bg;
-    color: $danger-color;
+    color: $danger-color !important;
 
     .badge-link {
-      color: $danger-color;
+      color: $danger-color !important;
     }
 
     &.with-border {

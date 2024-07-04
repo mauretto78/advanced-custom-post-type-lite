@@ -23,6 +23,7 @@
       fill: $gray;
     }
 
+    &.selected,
     &:hover {
       border: $border-thickness solid $primary-color;
 
