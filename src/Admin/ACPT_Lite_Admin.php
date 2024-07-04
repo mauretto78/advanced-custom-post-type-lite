@@ -253,9 +253,6 @@ class ACPT_Lite_Admin
             'wp_ajax_deleteWooCommerceProductDataFieldsAction' => 'deleteWooCommerceProductDataFieldsAction',
             'wp_ajax_deleteUserMetaAction' => 'deleteUserMetaAction',
             'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
-            'wp_ajax_exportFileAction' => 'exportFileAction',
-            'wp_ajax_fetchApiKeysAction' => 'fetchApiKeysAction',
-            'wp_ajax_fetchApiKeysCountAction' => 'fetchApiKeysCountAction',
             'wp_ajax_fetchAllFindBelongsAction' => 'fetchAllFindBelongsAction',
             'wp_ajax_fetchAllMetaAction' => 'fetchAllMetaAction',
             'wp_ajax_fetchBoxesAction' => 'fetchBoxesAction',
@@ -301,9 +298,6 @@ class ACPT_Lite_Admin
             'wp_ajax_resetTaxonomiesAction' => 'resetTaxonomiesAction',
             'wp_ajax_resetWooCommerceProductDataAction' => 'resetWooCommerceProductDataAction',
             'wp_ajax_saveCustomPostTypeAction' => 'saveCustomPostTypeAction',
-            'wp_ajax_saveFormAction' => 'saveFormAction',
-            'wp_ajax_saveFormFieldsAction' => 'saveFormFieldsAction',
-            'wp_ajax_saveDatasetAction' => 'saveDatasetAction',
             'wp_ajax_saveMetaAction' => 'saveMetaAction',
             'wp_ajax_saveOptionPagesAction' => 'saveOptionPagesAction',
             'wp_ajax_saveSettingsAction' => 'saveSettingsAction',
@@ -316,7 +310,6 @@ class ACPT_Lite_Admin
             'wp_ajax_isWPGraphQLActiveAction' => 'isWPGraphQLActiveAction',
             'wp_ajax_isOxygenBuilderActiveAction' => 'isOxygenBuilderActiveAction',
             'wp_ajax_isBBThemeBuilderActiveAction' => 'isBBThemeBuilderActiveAction',
-            'wp_ajax_wpmlConfigAction' => 'wpmlConfigAction',
         ];
     }
 
