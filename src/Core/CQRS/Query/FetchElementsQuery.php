@@ -4,7 +4,6 @@ namespace ACPT_Lite\Core\CQRS\Query;
 
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 
 class FetchElementsQuery implements QueryInterface
@@ -62,29 +61,6 @@ class FetchElementsQuery implements QueryInterface
 					'label' => $tax->getSlug(),
 					'value' => $tax->getSlug()
 				];
-			}
-		}
-
-		if($this->belongsTo === MetaTypes::OPTION_PAGE){
-			$pages = OptionPageRepository::get([
-			]);
-
-			foreach ($pages as $page){
-				if($page->getMenuSlug() !== $this->exclude){
-					$result[] = [
-						'label' => $page->getPageTitle(),
-						'value' => $page->getMenuSlug()
-					];
-				}
-
-				foreach ($page->getChildren() as $childPage){
-					if($childPage->getMenuSlug() !== $this->exclude){
-						$result[] = [
-							'label' => $childPage->getPageTitle(),
-							'value' => $childPage->getMenuSlug()
-						];
-					}
-				}
 			}
 		}
 

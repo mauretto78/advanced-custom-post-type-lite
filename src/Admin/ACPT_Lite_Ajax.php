@@ -59,7 +59,6 @@ class ACPT_Lite_Ajax
 		try {
 			$language = SettingsRepository::getSingle('language') ? SettingsRepository::getSingle('language')->getValue() : 'en_US';
 			$font = SettingsRepository::getSingle('font') ? SettingsRepository::getSingle('font')->getValue() : 'Inter';
-			$enableVisualEditor = SettingsRepository::getSingle('enable_visual_editor') ? true : false;
 		} catch (\Exception $exception){
 			$language = 'en_US';
 			$font = 'Inter';
@@ -86,12 +85,6 @@ class ACPT_Lite_Ajax
 			"browser" => Browser::getBrowser(),
             "available_languages" => $languageEntries['languages'],
             "translations" =>  $languageEntries['translations'],
-			"enable_visual_editor" => $enableVisualEditor,
-		    "uom" => [
-		    	"currency" => Currencies::getSymbolList(),
-                "length" => Lengths::getSymbolList(),
-                "weight" => Weights::getSymbolList(),
-		    ],
 		];
 
 		$settings = SettingsRepository::get();

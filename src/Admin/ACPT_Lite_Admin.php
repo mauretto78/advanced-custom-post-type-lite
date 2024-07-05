@@ -816,62 +816,62 @@ class ACPT_Lite_Admin
 	    $this->loader->addAction('requests-curl.before_request', $this, 'curlBeforeRequest', 9999);
 	    $this->loader->addAction('http_request_timeout', $this, 'extendHttpRequestTimeout');
 	    Profiler::stop('siteHealth');
-//
-//		// ajax calls
-//	    Profiler::start('ajaxCalls');
-//	    foreach ($this->ajaxActions as $action => $callback){
-//		    $this->loader->addAction($action, $this->ajax, $callback);
-//		    Profiler::lap('ajaxCalls');
-//	    }
-//	    Profiler::stop('ajaxCalls');
-//
-//	    // register custom post types and taxonomies. Lazy load custom post type metas
-//	    Profiler::start('registerCustomPostTypesAndTaxonomies');
-//	    $this->registerCustomPostTypesAndTaxonomies($this->isACPTAppPage());
-//	    Profiler::stop('registerCustomPostTypesAndTaxonomies');
-//
-//	    // API REST
-//	    Profiler::start('RestFieldsAndEndpoints');
-//	    $this->registerRestFields();
-//	    Profiler::stop('RestFieldsAndEndpoints');
 
-	    // lazy load, these functions are not needed in App page
-//	    if(!$this->isACPTAppPage()){
-//
-//		    // shortcodes
-//		    Profiler::start('addShortcodes');
-//		    $this->addShortcodes();
-//		    Profiler::stop('addShortcodes');
-//
-//		    // register taxonomy meta
-//		    Profiler::start('registerTaxonomyMeta');
-//		    $this->registerTaxonomyMeta();
-//		    Profiler::stop('registerTaxonomyMeta');
-//
-//		    // WooCommerce product data
-//		    Profiler::start('addWooCommerceProductData');
-//		    $this->addWooCommerceProductData();
-//		    Profiler::stop('addWooCommerceProductData');
-//
-//		    // add columns to show in the list panel
-//		    Profiler::start('addCustomPostTypeColumnsToAdminPanel');
-//		    $this->addCustomPostTypeColumnsToAdminPanel();
-//		    Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
-//
-//		    // register user meta
-//		    Profiler::start('registerUserMeta');
-//		    $this->registerUserMeta();
-//		    Profiler::stop('registerUserMeta');
-//
-//		    // add user meta columns to show in the admin panel
-//		    Profiler::start('addUserMetaColumnsToShow');
-//		    $this->addUserMetaColumnsToShow();
-//		    Profiler::stop('addUserMetaColumnsToShow');
-//
-//		    // run integrations
-//		    Profiler::start('runIntegrations');
-//		    $this->runIntegrations();
-//		    Profiler::stop('runIntegrations');
-//	    }
+		// ajax calls
+	    Profiler::start('ajaxCalls');
+	    foreach ($this->ajaxActions as $action => $callback){
+		    $this->loader->addAction($action, $this->ajax, $callback);
+		    Profiler::lap('ajaxCalls');
+	    }
+	    Profiler::stop('ajaxCalls');
+
+	    // register custom post types and taxonomies. Lazy load custom post type metas
+	    Profiler::start('registerCustomPostTypesAndTaxonomies');
+	    $this->registerCustomPostTypesAndTaxonomies($this->isACPTAppPage());
+	    Profiler::stop('registerCustomPostTypesAndTaxonomies');
+
+	    // API REST
+	    Profiler::start('RestFieldsAndEndpoints');
+	    $this->registerRestFields();
+	    Profiler::stop('RestFieldsAndEndpoints');
+
+        // lazy load, these functions are not needed in App page
+	    if(!$this->isACPTAppPage()){
+
+		    // shortcodes
+		    Profiler::start('addShortcodes');
+		    $this->addShortcodes();
+		    Profiler::stop('addShortcodes');
+
+		    // register taxonomy meta
+		    Profiler::start('registerTaxonomyMeta');
+		    $this->registerTaxonomyMeta();
+		    Profiler::stop('registerTaxonomyMeta');
+
+		    // WooCommerce product data
+		    Profiler::start('addWooCommerceProductData');
+		    $this->addWooCommerceProductData();
+		    Profiler::stop('addWooCommerceProductData');
+
+		    // add columns to show in the list panel
+		    Profiler::start('addCustomPostTypeColumnsToAdminPanel');
+		    $this->addCustomPostTypeColumnsToAdminPanel();
+		    Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
+
+		    // register user meta
+		    Profiler::start('registerUserMeta');
+		    $this->registerUserMeta();
+		    Profiler::stop('registerUserMeta');
+
+		    // add user meta columns to show in the admin panel
+		    Profiler::start('addUserMetaColumnsToShow');
+		    $this->addUserMetaColumnsToShow();
+		    Profiler::stop('addUserMetaColumnsToShow');
+
+		    // run integrations
+		    Profiler::start('runIntegrations');
+		    $this->runIntegrations();
+		    Profiler::stop('runIntegrations');
+	    }
     }
 }

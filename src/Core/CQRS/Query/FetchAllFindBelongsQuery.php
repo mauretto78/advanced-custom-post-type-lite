@@ -4,10 +4,8 @@ namespace ACPT_Lite\Core\CQRS\Query;
 
 use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Constants\MimeTypes;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Utils\Wordpress\Translator;
 
@@ -134,22 +132,6 @@ class FetchAllFindBelongsQuery implements QueryInterface
 
 				$data[BelongsTo::POST_TAX][] = $taxGroup;
 				$data[BelongsTo::TERM_ID][] = $taxGroup;
-			}
-		}
-
-		$optionPages = OptionPageRepository::get([]);
-
-		foreach ($optionPages as $optionPage){
-			$data[MetaTypes::OPTION_PAGE][]  = [
-				'value' => $optionPage->getMenuSlug(),
-				'label' => $optionPage->getMenuTitle(),
-			];
-
-			foreach ($optionPage->getChildren() as $childOptionPage){
-				$data[MetaTypes::OPTION_PAGE][]  = [
-					'value' => $childOptionPage->getMenuSlug(),
-					'label' => $childOptionPage->getMenuTitle(),
-				];
 			}
 		}
 
