@@ -29,7 +29,7 @@ class ACPT_Lite_Activator
 
         // check for version lite
         // and deactivate lite version if enabled
-        $pluginLite = 'advanced-custom-post-type-lite/advanced-custom-post-type-lite.php';
+        $pluginLite = 'acpt-lite/acpt-lite.php';
 
         if (is_plugin_active($pluginLite) ) {
             deactivate_plugins($pluginLite);
