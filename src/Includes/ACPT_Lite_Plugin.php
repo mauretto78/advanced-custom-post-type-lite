@@ -71,8 +71,6 @@ class ACPT_Lite_Plugin
 
 	    ACPT_Lite_DB_Tools::runHealthCheck();
 
-        $this->disableACPTLite();
-
         $this->loader = $loader;
         $this->setName();
         $this->setVersion();
@@ -89,18 +87,6 @@ class ACPT_Lite_Plugin
             $this->name = ACPT_LITE_PLUGIN_NAME;
         } else {
             $this->name = plugin_dir_path( __FILE__ );
-        }
-    }
-
-    /**
-     * Disable ACPT Lite plugin if it's yet active
-     */
-    private function disableACPTLite()
-    {
-        $pluginLite = 'advanced-custom-post-type-lite/advanced-custom-post-type-lite.php';
-
-        if (is_plugin_active($pluginLite) ) {
-            deactivate_plugins($pluginLite);
         }
     }
 

@@ -43,6 +43,7 @@ if ( ! defined( 'WPINC' ) ) {
 require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
 require_once(plugin_dir_path(__FILE__) . '/functions/bootstrap.php');
 require_once(plugin_dir_path(__FILE__) . '/functions/meta_get.php');
+require_once(plugin_dir_path(__FILE__) . '/functions/meta_set.php');
 
 // Fix PHP headers
 ob_start();

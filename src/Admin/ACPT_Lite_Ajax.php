@@ -610,24 +610,6 @@ class ACPT_Lite_Ajax
         ]);
     }
 
-    public function deleteOptionPagesAction()
-    {
-	    try {
-		    OptionPageRepository::deleteAll();
-
-		    $return = [
-			    'success' => true,
-		    ];
-	    } catch (\Exception $exception){
-		    $return = [
-			    'success' => false,
-			    'error' => $exception->getMessage()
-		    ];
-	    }
-
-	    return wp_send_json($return);
-    }
-
     /**
      * Delete a taxonomy
      *
@@ -1459,31 +1441,6 @@ class ACPT_Lite_Ajax
         }
 
         return wp_send_json($return);
-    }
-
-	/**
-	 * Save option page
-	 */
-    public function saveOptionPagesAction()
-    {
-	    $data = $this->sanitizeJsonData($_POST['data']);
-
-	    try {
-	    	$pages = (isset($data['pages']) and is_array($data['pages'])) ? $data['pages'] : [];
-	    	$command = new SaveOptionPagesCommand($pages);
-
-		    $return = [
-			    'ids' => $command->execute(),
-			    'success' => true
-		    ];
-	    } catch (\Exception $exception){
-		    $return = [
-			    'success' => false,
-			    'error' => $exception->getMessage()
-		    ];
-	    }
-
-	    return wp_send_json($return);
     }
 
     /**
