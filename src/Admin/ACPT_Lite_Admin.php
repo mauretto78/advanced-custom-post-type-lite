@@ -563,6 +563,7 @@ class ACPT_Lite_Admin
 	    if ( 'advanced-custom-post-type-lite/advanced-custom-post-type-lite.php' === $plugin_file ) {
 		    $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page=advanced-custom-post-type-lite#/settings' ).'">'.Translator::translate('Settings').'</a>';
 		    $actionLinks['documentation'] = '<a target="_blank" href="https://docs.acpt.io/">'.Translator::translate('Documentation').'</a>';
+		    $actionLinks['upgrade_to_pro'] = '<a class="delete" target="_blank" href="https://acpt.io/checkout/">'.Translator::translate('Upgrade to PRO').'</a>';
 	    }
 
 	    return array_merge($actionLinks, $actions);
