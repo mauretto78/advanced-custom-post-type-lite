@@ -123,14 +123,6 @@ abstract class AbstractField
 	}
 
 	/**
-	 * @return int
-	 */
-	public function getBlockIndex(): int
-	{
-		return $this->blockIndex;
-	}
-
-	/**
 	 * @return mixed
 	 */
 	public function getValue()
