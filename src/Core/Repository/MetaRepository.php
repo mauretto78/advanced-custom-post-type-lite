@@ -1633,6 +1633,22 @@ class MetaRepository extends AbstractRepository
 		    $groupId,
 	    ]);
 
+		$deleteBoxesQuery = "
+	        DELETE b
+			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
+			WHERE b.group_id = %s
+	    ";
+
+		if(isset($ids['boxes']) and !empty($ids['boxes'])){
+			$deleteBoxesQuery .= " AND id NOT IN ('".implode("','",$ids['boxes'])."')";
+		}
+
+		$deleteBoxesQuery .= ";";
+
+		ACPT_Lite_DB::executeQueryOrThrowException($deleteBoxesQuery, [
+			$groupId,
+		]);
+
 	    // Delete metadata
 	    if($deleteMetadata !== null and $deleteMetadata->getValue() == 1){
 		    $queryForIdsToDelete = "
@@ -1657,7 +1673,7 @@ class MetaRepository extends AbstractRepository
 		    if(!empty($fieldIds)){
 			    self::deletePostMetaData($fieldIds);
 			    self::deleteTaxonomyMetaData($fieldIds);
-			    self::deleteOptionPageMetaData($fieldIds);
+			    self::deleteUserMetaData($fieldIds);
 		    }
 	    }
 

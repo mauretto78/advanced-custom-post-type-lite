@@ -46,26 +46,6 @@ const fetchFields = async () => {
              */
             const formatField = (groupName, box, field, parent = null) => {
 
-                let blocks = [];
-                let children = [];
-
-                field.blocks && field.blocks.map((b) => {
-                    let block = {
-                        name: b.name,
-                        fields: []
-                    };
-
-                    b.fields && b.fields.map((c) => {
-                        block.fields.push(formatField(groupName, box, c, field));
-                    });
-
-                    blocks.push(block);
-                });
-
-                field.children && field.children.map((c) => {
-                    children.push(formatField(groupName, box, c, field));
-                });
-
                 return {
                     group: groupName,
                     value: find +'_'+field.db_name,
@@ -75,14 +55,10 @@ const fetchFields = async () => {
                     type: field.type,
                     belongsTo: belongsTo,
                     find: find,
-                    relations: field.relations.length > 0 ? {
-                        relationship: field.relations[0].relationship,
-                        from: field.relations[0].from,
-                        to: field.relations[0].to,
-                    } : null,
-                    parent_field: parent ? parent.name : null,
-                    blocks: blocks,
-                    children: children
+                    relations: null,
+                    parent_field: null,
+                    blocks: [],
+                    children: []
                 };
             };
 

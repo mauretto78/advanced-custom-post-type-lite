@@ -39,19 +39,6 @@ export const fetchMeta = async () => {
             find: typenow,
             records: results.records
         });
-
-        // 2. Fetch OP meta fields
-        let results2 = await wpAjaxRequest('fetchOptionPagesMetaAction', {
-            page: pagenow,
-        });
-
-        for (const [key, value] of Object.entries(results2)) {
-            meta.push({
-                belongsTo: metaTypes.OPTION_PAGE,
-                find: key,
-                records: value
-            });
-        }
     }
 
     return meta;
