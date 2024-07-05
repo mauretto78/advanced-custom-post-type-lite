@@ -95,7 +95,7 @@ const Settings = () => {
             delete_tables_when_deactivate: data.delete_tables_when_deactivate ? 1 : 0,
             delete_posts: data.delete_posts ? 1 : 0,
             delete_metadata: data.delete_metadata ? 1 : 0,
-            language: data.language ? data.language.value : null,
+            language: data.language ? data.language : null,
             font: data.font ? data.font : null
         }));
         setFormSubmitted(true);
