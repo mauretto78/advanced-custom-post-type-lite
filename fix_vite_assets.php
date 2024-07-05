@@ -27,7 +27,7 @@ function fixViteAssets()
 	}
 
 	$str = file_get_contents($root);
-	$str = str_replace('"/wp-content/plugins/advanced-custom-post-type-lite/assets/build/"', ' document.globals.site_url+"/wp-content/plugins/advanced-custom-post-type-lite/assets/build/"', $str);
+	$str = str_replace('"/wp-content/plugins/acpt-lite/assets/build/"', ' document.globals.site_url+"/wp-content/plugins/acpt-lite/assets/build/"', $str);
 
 	if(!file_put_contents($root, $str)){
 		throw new \Exception("Build root file is not writable");
