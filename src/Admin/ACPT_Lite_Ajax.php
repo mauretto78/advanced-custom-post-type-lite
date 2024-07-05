@@ -917,7 +917,7 @@ class ACPT_Lite_Ajax
 
         if($postType){
             return wp_send_json(CustomPostTypeRepository::get([
-                    'postType' => $postType
+                'postType' => $postType
             ]));
         }
 

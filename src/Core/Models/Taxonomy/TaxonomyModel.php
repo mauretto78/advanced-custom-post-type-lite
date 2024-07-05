@@ -103,7 +103,6 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
 	    }
 
         if(strlen($slug) > 32){
-
             throw new \Exception('Slug must not exceed 32 characters.');
         }
 

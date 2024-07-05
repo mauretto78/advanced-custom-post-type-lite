@@ -1,0 +1,1 @@
+import{j as p}from"./fields-B4O9Q4Yk.js";import"./vendor-BwziPlmK.js";import{P as t,I as x}from"./index-Mr2Vpbfl.js";const e=({status:o})=>{const r=o?"bx:bx-check":"bx:bx-x",s=o?"#02C39A":"#F94144";return p.jsx(x,{icon:r,color:s,width:"18px"})};e.propTypes={status:t.bool.isRequired};export{e as B};

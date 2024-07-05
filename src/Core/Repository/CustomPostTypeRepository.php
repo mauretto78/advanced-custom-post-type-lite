@@ -206,6 +206,7 @@ class CustomPostTypeRepository extends AbstractRepository
                         t.singular,
                         t.plural,
                         t.labels,
+                        t.native,
                         t.settings
                     FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "` t
                     JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "` p ON p.taxonomy_id = t.id
