@@ -27,10 +27,6 @@ class MetaSync
 					TaxonomyMetaSync::syncBox($metaBoxModel, $belong->getFind());
 					break;
 
-				case MetaTypes::OPTION_PAGE:
-					OptionPageMetaSync::syncBox($metaBoxModel, $belong->getFind());
-					break;
-
 				case MetaTypes::USER:
 					UserMetaSync::syncBox($metaBoxModel);
 					break;
@@ -55,10 +51,6 @@ class MetaSync
 
 				case MetaTypes::TAXONOMY:
 					TaxonomyMetaSync::syncField($fieldModel, $belong->getFind());
-					break;
-
-				case MetaTypes::OPTION_PAGE:
-					OptionPageMetaSync::syncField($fieldModel, $belong->getFind());
 					break;
 
 				case MetaTypes::USER:

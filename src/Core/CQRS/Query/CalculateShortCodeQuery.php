@@ -97,8 +97,6 @@ class CalculateShortCodeQuery implements QueryInterface
 		            $base = 'acpt';
 	            } else if($belongsTo['belongsTo'] === MetaTypes::TAXONOMY or $belongsTo['belongsTo'] === 'TERM_ID'){
 		            $base = 'acpt_tax';
-	            } else if($belongsTo['belongsTo'] === MetaTypes::OPTION_PAGE){
-		            $base = 'acpt_option page="'.$belongsTo['find'].'"';
 	            } else if($belongsTo['belongsTo'] === MetaTypes::USER or $belongsTo['belongsTo'] === 'USER_ID'){
 		            $base = 'acpt_user';
 	            }

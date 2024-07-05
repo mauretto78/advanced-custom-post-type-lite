@@ -44,10 +44,7 @@ class GenerateGutenbergTemplateQuery implements QueryInterface
 	{
 		$findValue = null;
 
-		if(isset($this->field['belongsTo']) and $this->field['belongsTo'] === MetaTypes::OPTION_PAGE){
-			$find = 'option_page';
-			$findValue = $this->field['find'];
-		} elseif(isset($this->field['belongsTo']) and $this->field['belongsTo'] === MetaTypes::TAXONOMY){
+		if(isset($this->field['belongsTo']) and $this->field['belongsTo'] === MetaTypes::TAXONOMY){
 			$find = 'term_id';
 			$termId = null;
 

@@ -155,27 +155,14 @@ const MetaField = ({boxIndex, fieldIndex, view, boxId, field, parentFieldIndex, 
                         </div>
                         <div ref={parent}>
                             <div className={`${(view === 'list' || view === 'accordion') && isClosed() ? 'hidden' : ''}`}>
-                                <Tabs>
-                                    <Tab title={
-                                        <React.Fragment>
-                                        <span className="visible-xs">
-                                            <Icon icon="bx:cog" width={24} />
-                                        </span>
-                                            <span className="hidden-xs">
-                                            {useTranslation("BASIC OPTIONS")}
-                                        </span>
-                                        </React.Fragment>
-                                    }>
-                                        <BasicTab
-                                            view={view}
-                                            boxIndex={boxIndex}
-                                            fieldIndex={fieldIndex}
-                                            formId={formId}
-                                            boxId={boxId}
-                                            field={field}
-                                        />
-                                    </Tab>
-                                </Tabs>
+                                <BasicTab
+                                    view={view}
+                                    boxIndex={boxIndex}
+                                    fieldIndex={fieldIndex}
+                                    formId={formId}
+                                    boxId={boxId}
+                                    field={field}
+                                />
                             </div>
                         </div>
                     </div>

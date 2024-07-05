@@ -132,24 +132,6 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                 ]
             },
             {
-                label: useTranslation("Attachment"),
-                options: [
-                    {value: metaTypes.MEDIA, label: useTranslation("Attachment")},
-                ]
-            },
-            {
-                label: useTranslation("Option pages"),
-                options: [
-                    {value: metaTypes.OPTION_PAGE, label: useTranslation("Option page")},
-                ]
-            },
-            {
-                label: useTranslation("Comments"),
-                options: [
-                    {value: metaTypes.COMMENT, label: useTranslation("All comments")},
-                ]
-            },
-            {
                 label: useTranslation("Users"),
                 options: [
                     {value: metaTypes.USER, label: useTranslation("All users")},

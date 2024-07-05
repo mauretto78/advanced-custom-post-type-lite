@@ -408,11 +408,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	public function getDbName()
 	{
 		$dbName = '';
-
-		if($this->getBelongsToLabel() === MetaTypes::OPTION_PAGE and $this->getFindLabel() !== null){
-			$dbName .= Strings::toDBFormat($this->getFindLabel()). '_';
-		}
-
 		$dbName .= Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
 
 		return $dbName;

@@ -84,10 +84,6 @@ abstract class AbstractMetaFieldValueCommand
 	{
 		$loc = $location ? $location : $this->location;
 
-		if($this->belongsTo === MetaTypes::OPTION_PAGE){
-			$key = $loc.'_'.$key;
-		}
-
 		return Meta::fetch($loc, $this->belongsTo, $key);
 	}
 
@@ -111,10 +107,6 @@ abstract class AbstractMetaFieldValueCommand
 	protected function set($key, $value, $location = null)
 	{
 		$loc = $location ? $location : $this->location;
-
-		if($this->belongsTo === MetaTypes::OPTION_PAGE){
-			$key = $loc.'_'.$key;
-		}
 
 		return Meta::save($loc, $this->belongsTo, $key, $value);
 	}
