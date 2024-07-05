@@ -99,6 +99,10 @@ class ACPT_Lite_Loader
      */
     private function callAddAction($hook)
     {
-        add_action( $hook['hook'], [$hook['component'], $hook['callback']], $hook['priority'], $hook['accepted_args'] );
+        if(is_callable($hook['callback'])){
+            add_action( $hook['hook'], $hook['callback'], $hook['priority'], $hook['accepted_args'] );
+        } else {
+            add_action( $hook['hook'], [$hook['component'], $hook['callback']], $hook['priority'], $hook['accepted_args'] );
+        }
     }
 }

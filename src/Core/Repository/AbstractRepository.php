@@ -3,7 +3,7 @@
 namespace ACPT_Lite\Core\Repository;
 
 use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
-use ACPT_Lite\Utils\Arrays;
+use ACPT_Lite\Utils\PHP\Arrays;
 
 abstract class AbstractRepository
 {

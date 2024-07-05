@@ -3,9 +3,12 @@
 namespace ACPT_Lite\Core\CQRS\Command;
 
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeGenerator;
+use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Utils\PHP\Image;
+use ACPT_Lite\Utils\Wordpress\WPAttachment;
 
 class SaveCustomPostTypeCommand implements CommandInterface
 {
@@ -26,6 +29,16 @@ class SaveCustomPostTypeCommand implements CommandInterface
 	public function execute()
 	{
 		$data = $this->data;
+
+		// Custom icon image resize
+		if(isset($data['icon']) and Strings::isUrl($data['icon'])){
+			$attachment = WPAttachment::fromUrl($data['icon']);
+
+			if($attachment->isImage()){
+				$data['icon'] = Image::resize($attachment, 20, 20);
+			}
+		}
+
 		$model = CustomPostTypeModel::hydrateFromArray([
 			'id' => ($data['id'] ? $data['id'] : Uuid::v4()),
 			'name' => @$data['name'],

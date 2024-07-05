@@ -2,9 +2,9 @@
 
 namespace ACPT_Lite\Core\CQRS\Query;
 
-use ACPT_Lite\Core\CQRS\Command\SaveMetaFieldValueCommand;
+use ACPT_Lite\Core\CQRS\Command\AbstractMetaFieldValueCommand;
 
-class FetchMetaFieldValueQuery extends SaveMetaFieldValueCommand implements QueryInterface
+class FetchMetaFieldValueQuery extends AbstractMetaFieldValueCommand implements QueryInterface
 {
 	/**
 	 * @return mixed

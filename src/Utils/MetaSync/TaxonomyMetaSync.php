@@ -5,6 +5,7 @@ namespace ACPT_Lite\Utils\MetaSync;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class TaxonomyMetaSync extends AbstractMetaSync
@@ -38,10 +39,10 @@ class TaxonomyMetaSync extends AbstractMetaSync
 		if($newKey !== $oldKey){
 			$sql = "UPDATE `{$wpdb->prefix}termmeta` tm 
                     JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
-                    JOIN `wp_term_taxonomy` tax ON tax.term_id=t.term_id
+                    JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                     SET tm.meta_key=REPLACE(tm.meta_key, %s, %s) 
                     WHERE tm.meta_key LIKE %s AND tax.taxonomy=%s";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey.'%', $taxonomy]);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey . '%', $taxonomy]);
 		}
 	}
 
@@ -93,8 +94,9 @@ class TaxonomyMetaSync extends AbstractMetaSync
 			$sql = "
                 UPDATE `{$wpdb->prefix}termmeta` tm 
                 JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
+                JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                 SET tm.meta_key=%s 
-                WHERE tm.meta_key=%s AND t.slug=%s
+                WHERE tm.meta_key=%s AND tax.taxonomy=%s
             ";
 
 			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$newKey, $oldKey, $taxonomy]);
@@ -102,10 +104,11 @@ class TaxonomyMetaSync extends AbstractMetaSync
 			$sql = "
                 UPDATE `{$wpdb->prefix}termmeta` tm 
                 JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
+                JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                 SET meta_key=REPLACE(tm.meta_key, %s, %s) 
-                WHERE tm.meta_key LIKE %s AND t.slug=%s
+                WHERE tm.meta_key LIKE %s AND tax.taxonomy=%s
             ";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%', $taxonomy]);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [ $oldKey . '_', $newKey . '_', $oldKey . '_%', $taxonomy]);
 		}
 	}
 }

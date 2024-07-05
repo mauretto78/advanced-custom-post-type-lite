@@ -7,7 +7,7 @@ use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
-use ACPT_Lite\Utils\Translator;
+use ACPT_Lite\Utils\Wordpress\Translator;
 
 class FetchAllFindBelongsQuery implements QueryInterface
 {
@@ -47,6 +47,7 @@ class FetchAllFindBelongsQuery implements QueryInterface
 			"orderby" => "name",
 			"hide_empty" => false
 		]);
+
 		foreach ($categories as $category){
 			$data[BelongsTo::POST_CAT][]  = [
 				'value' => $category->term_id,
@@ -60,6 +61,7 @@ class FetchAllFindBelongsQuery implements QueryInterface
 				'display_name',
 			]
 		]);
+
 		foreach ($users as $user){
 			$data[BelongsTo::USER_ID][]  = [
 				'value' => $user->id,
@@ -68,10 +70,11 @@ class FetchAllFindBelongsQuery implements QueryInterface
 		}
 
 		$customPostTypes = CustomPostTypeRepository::get([]);
+
 		foreach ($customPostTypes as $customPostType){
 			$data[MetaTypes::CUSTOM_POST_TYPE][]  = [
 				'value' => $customPostType->getName(),
-				'label' => $customPostType->getName(),
+				'label' => $customPostType->getSingular(),
 			];
 
 			$posts = [];
@@ -98,10 +101,11 @@ class FetchAllFindBelongsQuery implements QueryInterface
 		}
 
 		$taxonomies = TaxonomyRepository::get([]);
+
 		foreach ($taxonomies as $taxonomy){
 			$data[MetaTypes::TAXONOMY][]  = [
 				'value' => $taxonomy->getSlug(),
-				'label' => $taxonomy->getSlug(),
+				'label' => $taxonomy->getSingular(),
 			];
 
 			$terms = [];
@@ -132,6 +136,7 @@ class FetchAllFindBelongsQuery implements QueryInterface
 		}
 
 		$metaGroups = MetaRepository::get(['lazy' => true]);
+
 		foreach ($metaGroups as $metaGroup){
 			$data[MetaTypes::META][]  = [
 				'value' => $metaGroup->getId(),

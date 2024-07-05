@@ -65,4 +65,9 @@ class AddParentIdToCustomPostTypeTableLiteMigration extends ACPT_Lite_Schema_Mig
 			"ALTER TABLE `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD."` DROP COLUMN `filter_in_admin` ",
 		];
 	}
+
+	public function version(): string
+	{
+		return '1.0.17';
+	}
 }

@@ -3964,14 +3964,195 @@ msgstr "Lista desordenada"
 msgid "Ordered list"
 msgstr "Lista ordenada"
 
-msgid "Upgrade to PRO"
-msgstr "Actualízate a PRO"
-
 msgid "Font"
 msgstr "Fuente"
 
 msgid "Set the font of the plug-in"
 msgstr "Establecer el fuente del plug-in"
 
-msgid "Rate this plugin"
-msgstr "Evalúa este plugin"
+msgid "After"
+msgstr "Después"
+
+msgid "Before"
+msgstr "Antes"
+
+msgid "Country"
+msgstr "País"
+
+msgid "The application cannot be booted"
+msgstr "La aplicación no se pudo inicializar"
+
+msgid "An unexpected error has occurred"
+msgstr "Ha ocurrido un error inesperado"
+
+msgid "Dataset"
+msgstr "Conjunto de datos"
+
+msgid ""
+"Build reusable dataset for meta fields and forms values. Import your dataset "
+"from CSV, JSON or YAML with a few clicks."
+msgstr ""
+"Cree un conjunto de datos reutilizable. Importa un conjunto de datos desde "
+"CSV, JSON o YAML con unos pocos clics."
+
+msgid "Dataset successfully saved"
+msgstr "Conjunto de datos guardado correctamente"
+
+msgid "Dataset name"
+msgstr "Nombre del conjunto de datos"
+
+msgid "Dataset label"
+msgstr "Etiqueta del conjunto de datos"
+
+msgid "Edit dataset"
+msgstr "Editar conjunto de datos"
+
+msgid "Create a new dataset"
+msgstr "Crear un nuevo conjunto de datos"
+
+msgid "Create dataset"
+msgstr "Crear conjunto de datos"
+
+msgid "No dataset found."
+msgstr "No se encontraron conjuntos de datos."
+
+msgid "Items count"
+msgstr "Recuento de elementos"
+
+msgid "Dataset successfully deleted."
+msgstr "El conjunto de datos se eliminó correctamente."
+
+msgid "Delete dataset"
+msgstr "Eliminar conjunto de datos"
+
+msgid "Manage dataset"
+msgstr "Administrar conjunto de datos"
+
+msgid "Load dataset"
+msgstr "Cargar conjunto de datos"
+
+msgid "Dataset loaded correctly"
+msgstr "Conjunto de datos guardados correctamente"
+
+msgid "You are going to delete this dataset. Are you sure?"
+msgstr "Vas a borrar esto conjunto de datos. ¿Confirmas?"
+
+msgid "Select/deselect all fields"
+msgstr "Seleccionar/deseleccionar todos los elementos"
+
+msgid "Show/hide elements"
+msgstr "Seleccionar/deseleccionar elementos"
+
+msgid ""
+"The limit on how many elements are required ([1-100] only for repeater field)"
+msgstr ""
+"El límite de cuántos elementos se requieren ([1-100] solo para el campo "
+"repeater)"
+
+msgid "Minimum elements allowed"
+msgstr "Mínimo de elementos permitidos"
+
+msgid ""
+"The limit on how many elements are allowed ([1-100] only for repeater field)"
+msgstr ""
+"El límite de cuántos elementos se permiten ([1-100] solo para el campo "
+"repeater)"
+
+msgid "Maximum elements allowed"
+msgstr "Máximo de elementos permitidos"
+
+msgid ""
+"Something went wrong. Try clicking the reload the application button to "
+"reload the application."
+msgstr ""
+"Algo salió mal. Intentar hacer clic en el botón recargar la aplicación para "
+"recargar la aplicación."
+
+msgid "The application has crashed"
+msgstr "La aplicación se detuvo"
+
+msgid "Reload the application"
+msgstr "Recargar la aplicación"
+
+msgid "Value is equals to {{v}}"
+msgstr "El valor es igual a {{v}}"
+
+msgid "Textual fields settings"
+msgstr "Configuración de campo textual"
+
+msgid "File field settings"
+msgstr "Configuración de campo file"
+
+msgid "Radio field settings"
+msgstr "Configuración de campo radio"
+
+msgid "Nestable fields layout settings"
+msgstr "Configuración de diseño de campos anidados"
+
+msgid "Unit of measure fields settings"
+msgstr "Configuración de campos de unidad de medida"
+
+msgid "URL field settings"
+msgstr "Configuración de campo URL"
+
+msgid "WPML Settings"
+msgstr "Ajustes WPML"
+
+msgid "The file wpml-config.xml was successfully generated."
+msgstr "El archivo wpml-config.xml se generó correctamente."
+
+msgid "The file wpml-config.xml was not successfully generated."
+msgstr "El archivo wpml-config.xml no se generó correctamente."
+
+msgid "This is the generated wpml-config.xml file:"
+msgstr "Este es el archivo wpml-config.xml generado:"
+
+msgid "Attachment"
+msgstr "Elemento media"
+
+msgid "All formats"
+msgstr "Todos los formatos"
+
+msgid "Type the address or point a location on the map"
+msgstr "Escribe la dirección o clica en un punto en el mapa"
+
+msgid "All comments"
+msgstr "Todos los comentarios"
+
+msgid "Nested fields"
+msgstr "Campos anidados"
+
+msgid "Row"
+msgstr "Línea"
+
+msgid "Block"
+msgstr "Bloque"
+
+msgid "Table"
+msgstr "Tabla"
+
+msgid "The look of the field for admins and editors."
+msgstr "Vista del campo para administradores y editores."
+
+msgid "Field layout"
+msgstr "Aspecto del campo"
+
+msgid ""
+"The leading field (which will be displayed when the repeater is collapsed)."
+msgstr ""
+"El campo líder (que se mostrará cuando el campo repetidor está contraído)."
+
+msgid "Leading field"
+msgstr "Campo líder"
+
+msgid "Reset the map"
+msgstr "Reestablecer el mapa"
+
+msgid "Successful outcome message"
+msgstr "Mensaje de resultado exitoso"
+
+msgid "Delete all blocks"
+msgstr "Eliminar todos los bloques"
+
+msgid "Something went wrong, please retry."
+msgstr "Algo salió mal, inténtalo de nuevo."

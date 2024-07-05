@@ -2,10 +2,14 @@
 
 namespace ACPT_Lite\Integrations\Gutenberg\Blocks;
 
-use ACPT_Lite\Core\CQRS\Query\FetchMetaFieldValueQuery;
+use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
+use ACPT_Lite\Utils\PHP\Country;
+use ACPT_Lite\Utils\PHP\Maps;
+use ACPT_Lite\Utils\PHP\Phone;
+use ACPT_Lite\Utils\Wordpress\WPAttachment;
+use ACPT_Lite\Utils\Wordpress\WPUtils;
 
 class ACPTBasicBlock
 {
@@ -50,18 +54,54 @@ class ACPTBasicBlock
 	 */
 	private function getRawData($field, $attributes = [])
 	{
-		global $post;
+		$findValue = null;
 
-		$find = 'post_id';
-		$findValue = $post->ID;
+		// try to calculate $find and $findValue
+		if(isset($field['belongsTo']) and $field['belongsTo'] === MetaTypes::TAXONOMY){
+			$find = 'term_id';
+			$termId = null;
 
-		$rawData = $this->getAcptField([
+			// Front-end rendering
+			$queriedObject = get_queried_object();
+			if($queriedObject instanceof \WP_Term){
+				$termId = $queriedObject->term_id;
+			}
+
+			// try to calculate $termId from HTTP_REFERER (AJAX request)
+			if($termId === null){
+				$referer = $_SERVER['HTTP_REFERER'];
+				$parsedReferer = parse_url($referer);
+				parse_str(  $parsedReferer['query'], $parsedRefererArray );
+
+				$prefix = wp_get_theme()->get_stylesheet()."//".$field['find']."-";
+				$taxonomySlug = str_replace($prefix, "", $parsedRefererArray['postId']);
+
+				$term = get_term_by('slug', $taxonomySlug, $field['find'] );
+				$termId = $term->term_id;
+			}
+
+			$findValue = (isset($attributes['postId']) and $attributes['postId'] < 99999999999999999) ? $attributes['postId'] : $termId;
+		} else {
+			global $post;
+
+			$find = 'post_id';
+			$findValue = (isset($attributes['postId']) and $attributes['postId'] < 99999999999999999) ? $attributes['postId'] : $post->ID;
+		}
+
+		// static preview if no context is available
+		if(empty($findValue)){
+			return '{acpt_'.$field['box'].'_'.$field['field'].'}';
+		}
+
+		$args = [
 			$find => $findValue,
 			'box_name' => $field['box'],
 			'field_name' => $field['field'],
-		]);
+		];
 
-		if($rawData === null){
+		$rawData = get_acpt_field($args);
+
+		if(empty($rawData)){
 			return null;
 		}
 
@@ -77,74 +117,22 @@ class ACPTBasicBlock
 			case MetaFieldModel::EMAIL_TYPE:
 
 				if(isset($attributes['display']) and $attributes['display'] === 'link'){
-					return '<a href="mailto:'.$rawData.'">'.$rawData.'</a>';
+					return '<a href="mailto:'.sanitize_email(strip_tags($rawData)).'">'.$rawData.'</a>';
 				}
 
 				return $rawData;
 
+			// TEXTAREA_TYPE
+			case MetaFieldModel::TEXTAREA_TYPE:
+
+				if(!is_string($rawData)){
+					return null;
+				}
+
+				return WPUtils::renderShortCode($rawData, true);
+
 			default:
-				return $rawData;
-		}
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return mixed|null
-	 */
-	private function getAcptField($args = [])
-	{
-		try {
-			// validate array
-			$mandatory_keys = [
-				'post_id' => [
-					'required' => false,
-					'type' => 'integer',
-				],
-				'term_id' => [
-					'required' => false,
-					'type' => 'integer',
-				],
-				'user_id' => [
-					'required' => false,
-					'type' => 'integer',
-				],
-				'option_page' => [
-					'required' => false,
-					'type' => 'string',
-				],
-				'box_name' => [
-					'required' => true,
-					'type' => 'string',
-				],
-				'field_name' => [
-					'required' => true,
-					'type' => 'string',
-				],
-			];
-
-			$validator = new ArgumentsArrayValidator();
-
-			if(!$validator->validate($mandatory_keys, $args)){
-				return null;
-			}
-
-			$field_name = explode(".", $args['field_name']);
-
-			$meta_field_model = MetaRepository::getMetaFieldByName([
-				'boxName' => $args['box_name'] ?? $args['boxName'],
-				'fieldName' => $field_name[0]
-			]);
-
-			if($meta_field_model === null){
-				return null;
-			}
-
-			$query = new FetchMetaFieldValueQuery($meta_field_model, $args);
-
-			return $query->execute();
-		} catch (\Exception $exception){
-			return null;
+				return do_shortcode($rawData);
 		}
 	}
 }

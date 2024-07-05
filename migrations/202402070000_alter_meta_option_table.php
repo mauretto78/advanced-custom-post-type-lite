@@ -25,6 +25,14 @@ class AlterMetaOptionLiteMigration extends ACPT_Lite_Schema_Migration
 			"ALTER TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` DROP COLUMN `is_default`",
 		];
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function version(): string
+	{
+		return '2.0.0';
+	}
 }
 
 

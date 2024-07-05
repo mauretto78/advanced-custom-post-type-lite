@@ -164,35 +164,6 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 			if($field->getId() === $fieldId){
 				return $field;
 			}
-
-			foreach ($field->getChildren() as $child){
-				return $this->findAFieldById($child->getId(), $field->getChildren());
-			}
-
-			foreach ($field->getBlocks() as $block){
-				foreach ($block->getFields() as $field){
-					return $this->findAFieldById($field->getId(), $block->getFields());
-				}
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param $fieldName
-	 * @param MetaFieldModel[] $fields
-	 *
-	 * @return MetaFieldModel|null
-	 */
-	public function findAFieldByName($fieldName, $fields = null): ?MetaFieldModel
-	{
-		$fields = $fields ?? $this->getFields();
-
-		foreach($fields as $field) {
-			if($field->getName() === $fieldName){
-				return $field;
-			}
 		}
 
 		return null;
@@ -209,18 +180,6 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 		foreach($fields as $fieldIndex => $field) {
 			if($field->getName() === $fieldName){
 				unset($fields[$fieldIndex]);
-			}
-
-			foreach ($field->getChildren() as $child){
-				$fields = $field->getChildren();
-				$this->removeAField($child->getName(), $fields);
-			}
-
-			foreach ($field->getBlocks() as $block){
-				foreach ($block->getFields() as $field){
-					$fields = $block->getFields();
-					$this->removeAField($field->getName(), $fields);
-				}
 			}
 		}
 
@@ -271,6 +230,7 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 			'name' => $this->getName(),
 			'label' => $this->getLabel(),
 			'UIName' => $this->getUiName(),
+			'groupId' => $this->getGroup()->getId(),
 			'sort' => $this->getSort(),
 			'fields' => $this->getFields(),
 		];
@@ -289,6 +249,7 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 				"name" => $this->getName(),
 				"label" => $this->getLabel(),
 				"UIName" => $this->getUIName(),
+				'groupId' => $this->getGroup()->getId(),
 				"sort" => (int)$this->getSort(),
 				"count" => count($this->getFields()),
 			];
@@ -307,6 +268,7 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 				"name" => $this->getName(),
 				"label" => $this->getLabel(),
 				"UIName" => $this->getUIName(),
+				'groupId' => $this->getGroup()->getId(),
 				"sort" => (int)$this->getSort(),
 				"fields" => $fieldsArray
 			];
@@ -327,6 +289,10 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 				'required' => true,
 				'type' => 'object',
 				'instanceOf' => MetaGroupModel::class,
+			],
+			'groupId' => [
+				'required' => false,
+				'type' => 'string',
 			],
 			'name' => [
 				'required' => true,

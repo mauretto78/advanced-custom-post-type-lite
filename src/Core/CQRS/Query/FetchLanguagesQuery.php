@@ -2,9 +2,8 @@
 
 namespace ACPT_Lite\Core\CQRS\Query;
 
-use ACPT_Lite\Utils\Language;
-use Sepia\PoParser\Parser;
-use Sepia\PoParser\SourceHandler\FileSystem;
+use ACPT_Lite\Utils\PHP\Language;
+use Translation_Entry;
 
 class FetchLanguagesQuery implements QueryInterface
 {
@@ -13,9 +12,6 @@ class FetchLanguagesQuery implements QueryInterface
 	 */
 	public function execute()
 	{
-		$fileHandler = new FileSystem(__DIR__.'/../../../../i18n/languages/advanced-custom-post-type-lite.pot');
-		$poParser = new Parser($fileHandler);
-		$catalog  = $poParser->parse();
 		$entries = [
 			'languages' => [],
 			'translations' => [],
@@ -36,8 +32,9 @@ class FetchLanguagesQuery implements QueryInterface
 			return strcmp($a['label'], $b['label']);
 		});
 
-		foreach($catalog->getEntries() as $entry){
-			$entries['translations'][$entry->getMsgId()] = esc_html__($entry->getMsgId(), ACPT_LITE_PLUGIN_NAME);
+		/** @var Translation_Entry $entry */
+		foreach($GLOBALS['l10n'][ACPT_LITE_PLUGIN_NAME]->entries as $entry){
+			$entries['translations'][$entry->key()] = $entry->translations[0];
 		}
 
 		return $entries;

@@ -24,16 +24,11 @@ class ShortcodeControl extends \Elementor\Base_Data_Control
                 </label>
             <# } #>
             <div class="elementor-control-input-wrapper">
-                <input
-                    style="background: #e6e9ec;"
-                    type="text"
-                    readonly
-                    id="<?php $this->print_control_uid(); ?>"
-                    class="elementor-control-tag-area acpt-shortcode-elementor-control"
-                    placeholder="{{ view.getControlPlaceholder() }}"
-                    data-setting="{{ data.name }}"
-                    value="{{ data.default }}"
-                />
+                <div
+                    style="background: #e6e9ec; padding: 5px; border-radius: 3px; border: 1px solid #d5d8dc;"
+                >
+                    {{{ data.default }}}
+                </div>
             </div>
             <# if ( data.description ) { #>
                 <div class="elementor-control-field-description">

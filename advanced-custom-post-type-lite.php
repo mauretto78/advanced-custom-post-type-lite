@@ -16,7 +16,7 @@
  * Plugin Name:       ACPT Lite
  * Plugin URI:        https://wordpress.org/plugins/acpt-lite
  * Description:       Create and manage custom post types, with advanced custom fields and taxonomies management
- * Version:           2.0.2
+ * Version:           2.0.3
  * Author:            Mauro Cassani
  * Author URI:        https://github.com/mauretto78
  * License:           GPL-2.0+
@@ -31,9 +31,6 @@ use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Deactivator;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Includes\ACPT_Lite_Plugin;
-use ACPT_Lite\Utils\Session;
-use Phpfastcache\CacheManager;
-use Phpfastcache\Config\ConfigurationOption;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -44,17 +41,12 @@ if ( ! defined( 'WPINC' ) ) {
  * Composer init
  */
 require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
+require_once(plugin_dir_path(__FILE__) . '/functions/bootstrap.php');
+require_once(plugin_dir_path(__FILE__) . '/functions/meta_get.php');
+require_once(plugin_dir_path(__FILE__) . '/functions/meta_set.php');
 
 // Fix PHP headers
 ob_start();
-Session::start();
-
-/**
- * plugin settings
- */
-define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
-define( 'ACPT_LITE_PLUGIN_VERSION', '2.0.2' );
-define( 'ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
  * Avoid Call to undefined function is_plugin_active() error
@@ -64,25 +56,17 @@ if( !function_exists('is_plugin_active') ) {
 }
 
 /**
+ * plugin settings
+ */
+define( 'ACPT_LITE_PLUGIN_NAME', 'advanced-custom-post-type-lite' );
+define( 'ACPT_LITE_PLUGIN_VERSION', '2.0.3' );
+define( 'ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
+define( 'ACPT_LITE_DEV_MODE', devMode() );
+
+/**
  * Inject DB Cache
  */
 try {
-	function cacheInstance()
-	{
-		$cacheDir = ACPT_LITE_PLUGIN_DIR_PATH . "cache";
-
-		if(!is_dir($cacheDir)){
-			mkdir($cacheDir, 0777, true);
-		}
-
-		$config = new ConfigurationOption();
-		$config->setPath($cacheDir);
-
-		CacheManager::setDefaultConfig($config);
-
-		return CacheManager::getInstance('files');
-	}
-
 	$isCacheEnabled = SettingsRepository::getSingle('enable_cache');
 
 	if($isCacheEnabled === null or $isCacheEnabled->getValue() == 1){
@@ -120,7 +104,8 @@ class ACPT_Lite
 
         if ($old_version != $current_version) {
 
-            ACPT_Lite_DB::createSchema();
+	        ACPT_Lite_DB::flushCache();
+            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, oldPluginVersion($old_version));
             ACPT_Lite_DB::sync();
 
             update_option('acpt_lite_version', $current_version, false);
@@ -154,18 +139,17 @@ function appsero_init_tracker_acpt_lite() {
 
 appsero_init_tracker_acpt_lite();
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-$plugin = new ACPT_Lite_Plugin(new ACPT_Lite_Loader());
-
 try {
+	/**
+	 * Begins execution of the plugin.
+	 *
+	 * Since everything within the plugin is registered via hooks,
+	 * then kicking off the plugin from this point in the file does
+	 * not affect the page life cycle.
+	 *
+	 * @since    1.0.0
+	 */
+	$plugin = new ACPT_Lite_Plugin(new ACPT_Lite_Loader());
     $plugin->run();
 } catch (\Exception $exception){
 

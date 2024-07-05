@@ -3,17 +3,13 @@
 namespace ACPT_Lite\Integrations\Elementor;
 
 use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Integrations\AbstractIntegration;
-use ACPT_Lite\Integrations\Elementor\Controls\DateFormatControl;
-use ACPT_Lite\Integrations\Elementor\Controls\ElementsControl;
-use ACPT_Lite\Integrations\Elementor\Controls\HeightControl;
 use ACPT_Lite\Integrations\Elementor\Controls\ShortcodeControl;
-use ACPT_Lite\Integrations\Elementor\Controls\TargetControl;
-use ACPT_Lite\Integrations\Elementor\Controls\RenderControl;
-use ACPT_Lite\Integrations\Elementor\Controls\WidthControl;
 use ACPT_Lite\Integrations\Elementor\Widgets\WidgetGenerator;
+use Elementor\Widgets_Manager;
 
 class ACPT_Lite_Elementor extends AbstractIntegration
 {
@@ -44,15 +40,9 @@ class ACPT_Lite_Elementor extends AbstractIntegration
      *
      * @param $controls_manager
      */
-    function registerElementorControls( $controls_manager )
+    public function registerElementorControls( $controls_manager )
     {
-        $controls_manager->register( new ShortcodeControl() );
-        $controls_manager->register( new DateFormatControl() );
-        $controls_manager->register( new ElementsControl() );
-        $controls_manager->register( new WidthControl() );
-        $controls_manager->register( new HeightControl() );
-        $controls_manager->register( new TargetControl() );
-        $controls_manager->register( new RenderControl() );
+	    $controls_manager->register( new ShortcodeControl() );
     }
 
     /**
@@ -74,37 +64,63 @@ class ACPT_Lite_Elementor extends AbstractIntegration
     /**
      * https://github.com/wpacademy/wpac-material-cards-elementor
      *
-     * @param $widgets_manager
+     * @param Widgets_Manager $widgetsManager
      * @throws \Exception
      * @since 1.0.3
      */
-    public function registerElementorWidgets($widgets_manager)
+    public function registerElementorWidgets(Widgets_Manager $widgetsManager)
     {
-        $postType = (isset($_GET['post'])) ? get_post_type($_GET['post']) : null;
-        $customPostTypeModels = CustomPostTypeRepository::get([
-            'postType' => $postType
-        ]);
+    	try {
 
-        foreach ($customPostTypeModels as $customPostTypeModel){
-            $metaGroups = MetaRepository::get([
-                'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
-                'find' => $customPostTypeModel->getName(),
-            ]);
+		    // CPT fields
+		    $args = [];
+		    $postType = (isset($_GET['post'])) ? get_post_type($_GET['post']) : null;
 
-            foreach ($metaGroups as $group){
-	            foreach ($group->getBoxes() as $metaBox){
-		            foreach ($metaBox->getFields() as $boxFieldModel){
+		    if($postType !== null and $postType !== 'elementor_library'){
+			    $args = [
+				    'postType' => $postType
+			    ];
+		    }
 
-			            $boxFieldModel->setBelongsToLabel(MetaTypes::CUSTOM_POST_TYPE);
-			            $boxFieldModel->setFindLabel($postType);
+		    $customPostTypeModels = CustomPostTypeRepository::get($args);
 
-			            $widgets_manager->register( new WidgetGenerator([], [
-				            'boxFieldModel' => $boxFieldModel
-			            ]));
-		            }
-	            }
-            }
-        }
+		    foreach ($customPostTypeModels as $customPostTypeModel){
+			    $metaGroups = MetaRepository::get([
+				    'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
+				    'find' => $customPostTypeModel->getName(),
+			    ]);
+
+			    if(!empty($metaGroups)){
+				    $this->registerFields($metaGroups, $widgetsManager, MetaTypes::CUSTOM_POST_TYPE, $customPostTypeModel->getName());
+			    }
+		    }
+	    } catch (\Exception $exception){}
+    }
+
+	/**
+	 * @param MetaGroupModel[] $metaGroups
+	 * @param Widgets_Manager $widgetsManager
+	 * @param $belongsTo
+	 * @param $find
+	 *
+	 * @throws \Exception
+	 */
+    private function registerFields($metaGroups, Widgets_Manager $widgetsManager, $belongsTo, $find)
+    {
+	    foreach ($metaGroups as $group){
+		    foreach ($group->getBoxes() as $metaBox){
+			    foreach ($metaBox->getFields() as $boxFieldModel){
+
+				    $boxFieldModel->setBelongsToLabel($belongsTo);
+				    $boxFieldModel->setFindLabel($find);
+
+				    $widgetsManager->register( new WidgetGenerator([], [
+					    'boxFieldModel' => $boxFieldModel,
+					    'find' => $find,
+				    ]));
+			    }
+		    }
+	    }
     }
 
     /**

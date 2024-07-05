@@ -5,6 +5,7 @@ namespace ACPT_Lite\Utils\MetaSync;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class UserMetaSync extends AbstractMetaSync
@@ -39,7 +40,7 @@ class UserMetaSync extends AbstractMetaSync
 			$sql = "UPDATE `{$wpdb->prefix}usermeta` um 
                     SET um.meta_key=REPLACE(um.meta_key, %s, %s) 
                     WHERE um.meta_key LIKE %s";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey.'%']);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey . '%']);
 		}
 	}
 
@@ -101,7 +102,7 @@ class UserMetaSync extends AbstractMetaSync
                 SET meta_key=REPLACE(um.meta_key, %s, %s) 
                 WHERE um.meta_key LIKE %s
             ";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%']);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [ $oldKey . '_', $newKey . '_', $oldKey . '_%']);
 		}
 	}
 }

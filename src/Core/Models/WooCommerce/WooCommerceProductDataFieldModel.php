@@ -207,8 +207,55 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
             'defaultValue' => $this->defaultValue,
             'description' => $this->description,
             'isRequired' => (bool)$this->required,
-            'sort' => $this->sort,
+            'sort' => (int)$this->sort,
             'options' => $this->options,
         ];
     }
+
+	public static function validationRules(): array
+	{
+		return [
+			'id' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'productDataModelId' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'productDataModel' => [
+				'required' => false,
+				'type' => 'object',
+				'instanceOf' => WooCommerceProductDataModel::class
+			],
+			'name' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'new_name' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'type' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'required' => [
+				'required' => true,
+				'type' => 'boolean',
+			],
+			'sort' => [
+				'required' => false,
+				'type' => 'string|integer',
+			],
+			'defaultValue' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'description' => [
+				'required' => false,
+				'type' => 'string',
+			],
+		];
+	}
 }

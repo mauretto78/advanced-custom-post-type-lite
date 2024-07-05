@@ -15,7 +15,7 @@ use ACPT_Lite\Admin\ACPT_Lite_Ajax;
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type-lite
+ * @package    advanced-custom-post-type
  * @subpackage advanced-custom-post-type/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
@@ -58,14 +58,18 @@ class ACPT_Lite_Plugin
      *
      * @param ACPT_Lite_Loader $loader
      *
+     * @throws \Exception
      * @since    1.0.0
      */
     public function __construct( ACPT_Lite_Loader $loader)
     {
-        if(false === ACPT_Lite_DB::checkIfSchemaExists()){
-            ACPT_Lite_DB::createSchema();
+        if( false === ACPT_Lite_DB::checkIfSchemaExists()){
+	        $old_version = get_option('acpt_version', 0);
+            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, oldPluginVersion($old_version));
             ACPT_Lite_DB::sync();
         }
+
+	    ACPT_Lite_DB_Tools::runHealthCheck();
 
         $this->loader = $loader;
         $this->setName();
@@ -129,13 +133,14 @@ class ACPT_Lite_Plugin
         $i18n->run();
     }
 
-    /**
-     * Run all scripts related to the admin area functionality
-     * of the plugin.
-     *
-     * @since    1.0.0
-     * @access   private
-     */
+	/**
+	 * Run all scripts related to the admin area functionality
+	 * of the plugin.
+	 *
+	 * @throws \Exception
+	 * @since    1.0.0
+	 * @access   private
+	 */
     private function runAdmin()
     {
         $admin = new ACPT_Lite_Admin($this->loader, new ACPT_Lite_Ajax());

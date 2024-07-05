@@ -53,6 +53,8 @@ class TaxonomyMetaBoxGenerator extends AbstractGenerator
      */
     public function addMetaBoxes($taxonomy)
     {
+        $this->enqueueScripts('add-tax');
+
         $metaGroups = MetaRepository::get([
 	        'belongsTo' => MetaTypes::TAXONOMY,
 	        'find' => $taxonomy,
@@ -84,6 +86,8 @@ class TaxonomyMetaBoxGenerator extends AbstractGenerator
      */
     public function editMetaBoxes($term)
     {
+	    $this->enqueueScripts('edit-tax');
+
         $taxonomy = $term->taxonomy;
         $termId = $term->term_id;
 

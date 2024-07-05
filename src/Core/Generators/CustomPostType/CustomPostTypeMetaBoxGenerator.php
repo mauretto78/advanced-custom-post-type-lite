@@ -29,7 +29,7 @@ class CustomPostTypeMetaBoxGenerator extends AbstractGenerator
             echo ' enctype="multipart/form-data"';
         });
 
-        $this->adminInit(function() use( $metaBoxModel, $formFields, $postTypeName, $postId) {
+        $this->adminInit(function() use($metaBoxModel, $formFields, $postTypeName, $postId) {
 
 			if(
 				$postId === null or

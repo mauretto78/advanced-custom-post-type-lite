@@ -98,7 +98,41 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
             'fieldId' => $this->getProductDataField()->getId(),
             'label' => $this->label,
             'value' => $this->value,
-            'sort' => $this->sort
+            'sort' => (int)$this->sort
         ];
     }
+
+	/**
+	 * @inheritDoc
+	 */
+	public static function validationRules(): array
+	{
+		return [
+			'id' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'productDataFieldId' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'productDataField' => [
+				'required' => false,
+				'type' => 'object',
+				'instanceOf' => WooCommerceProductDataFieldModel::class
+			],
+			'label' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'value' => [
+				'required' => true,
+				'type' => 'string|integer',
+			],
+			'sort' => [
+				'required' => false,
+				'type' => 'string|integer',
+			],
+		];
+	}
 }

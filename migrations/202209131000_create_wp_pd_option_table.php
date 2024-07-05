@@ -34,4 +34,9 @@ class CreateWooCommerceProductDataOptionTableLiteMigration extends ACPT_Lite_Sch
 			$this->deleteTableQuery(ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)),
 		];
 	}
+
+	public function version(): string
+	{
+		return '1.0.17';
+	}
 }

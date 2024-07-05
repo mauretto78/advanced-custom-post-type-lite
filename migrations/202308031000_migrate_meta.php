@@ -345,6 +345,14 @@ class MigrateMetaLiteMigration extends ACPT_Lite_Schema_Migration
 			"RENAME TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` TO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION)."`;",
 		];
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function version(): string
+	{
+		return '2.0.0';
+	}
 }
 
 

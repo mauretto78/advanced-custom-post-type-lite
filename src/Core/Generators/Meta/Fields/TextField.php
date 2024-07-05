@@ -9,6 +9,11 @@ class TextField extends AbstractField
 	public function render()
 	{
 		$cssClass = 'regular-text acpt-admin-meta-field-input';
+
+		if($this->hasErrors()){
+			$cssClass .= ' has-errors';
+		}
+
 		$field = '<input type="hidden" name="'. esc_attr($this->getIdName()).'_type" value="'.MetaFieldModel::TEXT_TYPE.'">';
 		$field .= '<input '.$this->required().' id="'.esc_attr($this->getIdName()).'" name="'. esc_attr($this->getIdName()).'" type="text" class="'.$cssClass.'" value="'.esc_attr($this->getDefaultValue()).'"';
 		$field .= '>';

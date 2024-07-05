@@ -2,6 +2,10 @@
 
 namespace ACPT_Lite\Core\Generators;
 
+use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Utils\PHP\Url;
+
 /**
  * *************************************************
  * AbstractGenerator class
@@ -57,12 +61,43 @@ abstract class AbstractGenerator
         add_action( 'admin_head', $cb );
     }
 
-    /**
-     * @return string
-     */
-    protected function generateNonce()
-    {
-        return  plugin_basename(__FILE__) . '/src/Core/Generators/CustomPostTypeGenerator.php';
-    }
+	/**
+	 * Enqueue JS scripts
+	 *
+	 * @param $action
+	 */
+	public function enqueueScripts($action)
+	{
+	}
+
+	/**
+	 * This method is used by CPT and Comment meta field generators
+	 *
+	 * @param MetaFieldModel $fieldModel
+	 *
+	 * @return array
+	 */
+	protected function generateMetaBoxFieldArray(MetaFieldModel $fieldModel)
+	{
+		$options = [];
+
+		foreach ($fieldModel->getOptions() as $optionModel){
+			$options[] = [
+				'label' => $optionModel->getLabel(),
+				'value' => $optionModel->getValue(),
+			];
+		}
+
+		return [
+			'id' => $fieldModel->getId(),
+			'type' => $fieldModel->getType(),
+			'name' => $fieldModel->getName(),
+			'defaultValue' => $fieldModel->getDefaultValue(),
+			'description' => $fieldModel->getDescription(),
+			'isRequired' => $fieldModel->isRequired(),
+			'isShowInArchive' => $fieldModel->isShowInArchive(),
+			'sort' => $fieldModel->getSort(),
+		];
+	}
 }
 

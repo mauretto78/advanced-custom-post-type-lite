@@ -28,12 +28,22 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
 	 */
 	public function registerBlocks()
 	{
+		if ( ! function_exists( 'register_block_type' ) ) {
+			// Block editor is not available.
+			return;
+		}
+
 		// basic-block
 		register_block_type( 'advanced-custom-post-type/basic-block', [
 			'api_version' => 3,
 			'editor_script' => 'block_js',
+			'editor_style' => 'block_css',
 			'render_callback' => [new ACPTBasicBlock(), 'render'],
 			'attributes'      => [
+				'postId'      => [
+					'default' => 99999999999999999,
+					'type'    => 'integer'
+				],
 				'field'            => [
 					'default' => null,
 					'type'    => 'string'

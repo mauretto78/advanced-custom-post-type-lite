@@ -11,8 +11,8 @@ use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
-use ACPT_Lite\Utils\Arrays;
-use ACPT_Lite\Utils\Sluggify;
+use ACPT_Lite\Utils\PHP\Arrays;
+use ACPT_Lite\Utils\PHP\Sluggify;
 
 class SaveMetaGroupCommand implements CommandInterface
 {
@@ -104,10 +104,6 @@ class SaveMetaGroupCommand implements CommandInterface
 			'boxes' => [],
 			'fields' => [],
 			'options' => [],
-			'visibilityConditions' => [],
-			'validationRules' => [],
-			'relations' => [],
-			'blocks' => [],
 		];
 
 		$groupModel = MetaGroupModel::hydrateFromArray([
@@ -119,21 +115,24 @@ class SaveMetaGroupCommand implements CommandInterface
 
 		$groupModel->changeName(Strings::getTheFirstAvailableName($groupModel->getName(), $arrayOfGroupNames));
 
-		// belongs
+		// belongs$belongs
 		foreach ($belongs as $belongIndex => $belong){
 
 			$belongsTo = $belong['belongsTo'] ?? $belong['belongs_to'];
-			$belongModel = BelongModel::hydrateFromArray([
-				'id' => (isset($belong['id']) ? $belong['id'] : Uuid::v4()),
-				'belongsTo' => @$belongsTo,
-				'operator' => @$belong['operator'],
-				'find' => (is_array($belong['find']) ? implode(",", $belong['find']) : $belong['find']),
-				'logic' => (isset($belong['logic']) ? $belong['logic'] : null),
-				'sort' => ($belongIndex+1),
-			]);
 
-			$groupModel->addBelong($belongModel);
-			$ids[$groupId]['belongs'][] = $belongModel->getId();
+			if(!empty($belongsTo)){
+				$belongModel = BelongModel::hydrateFromArray([
+					'id' => (isset($belong['id']) ? $belong['id'] : Uuid::v4()),
+					'belongsTo' => @$belongsTo,
+					'operator' => @$belong['operator'],
+					'find' => (is_array($belong['find']) ? implode(",", $belong['find']) : $belong['find']),
+					'logic' => (isset($belong['logic']) ? $belong['logic'] : null),
+					'sort' => ($belongIndex+1),
+				]);
+
+				$groupModel->addBelong($belongModel);
+				$ids[$groupId]['belongs'][] = $belongModel->getId();
+			}
 		}
 
 		// boxes
@@ -251,22 +250,6 @@ class SaveMetaGroupCommand implements CommandInterface
 					$diff = Arrays::reindex($diff);
 					$arrayOfFieldNames = array_merge($arrayOfFieldNames, $diff);
 				}
-
-				$blockNamesCopy = [];
-				$this->getAllBlockNames($field, $blockNamesCopy);
-
-				if(isset($allNames['blocks']) and is_array($allNames['blocks']) and !empty($allNames['blocks']) and !empty($fieldNamesCopy)){
-
-					$diff = [];
-					foreach ($allNames['blocks'] as $index => $allNamesField){
-						if (is_array($fieldNamesCopy) and isset($fieldNamesCopy[$index])){
-							$diff[] = array_diff($allNames['blocks'][$index], $fieldNamesCopy[$index]);
-						}
-					}
-
-					$diff = Arrays::reindex($diff);
-					$arrayOfBlockNames = array_merge($arrayOfBlockNames, $diff);
-				}
 			}
 		}
 	}
@@ -283,48 +266,7 @@ class SaveMetaGroupCommand implements CommandInterface
 				'name' => $field['name'],
 			];
 		}
-
-		if(!empty($field['children'])){
-			foreach ($field['children'] as $child){
-				$this->getAllFieldNames($child, $fieldNames);
-			}
-		}
-
-		if(!empty($field['blocks'])){
-			foreach ($field['blocks'] as $block){
-				if(!empty($block['fields'])){
-					foreach ($block['fields'] as $child){
-						$this->getAllFieldNames($child, $fieldNames);
-					}
-				}
-			}
-		}
 	}
-
-	/**
-	 * @param $field
-	 * @param $blockNames
-	 */
-	private function getAllBlockNames($field, &$blockNames)
-	{
-		if(!empty($field['blocks'])){
-			foreach ($field['blocks'] as $block){
-				if(isset($block['id'])){
-					$blockNames[] = [
-						'id' => $block['id'],
-						'name' => $block['name'],
-					];
-				}
-
-				if(!empty($block['fields'])){
-					foreach ($block['fields'] as $child){
-						$this->getAllBlockNames($child, $blockNames);
-					}
-				}
-			}
-		}
-	}
-
 
 	/**
 	 * @param $groupId
@@ -337,11 +279,6 @@ class SaveMetaGroupCommand implements CommandInterface
 	{
 		foreach ($fieldModel->getOptions() as $option){
 			$ids[$groupId]['options'][] = $option->getId();
-		}
-
-		foreach ($fieldModel->getChildren() as $child){
-			$ids[$groupId]['fields'][] = $child->getId();
-			$this->appendIdsOfFieldModel($groupId, $child, $ids);
 		}
 	}
 

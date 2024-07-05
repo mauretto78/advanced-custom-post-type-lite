@@ -31,4 +31,12 @@ class ChangeIconLiteMigration extends ACPT_Lite_Schema_Migration
 			"ALTER TABLE `".ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE."` CHANGE COLUMN `icon` `icon` VARCHAR(50) NOT NULL ",
 		];
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function version(): string
+	{
+		return '1.0.17';
+	}
 }

@@ -82,7 +82,7 @@ class FetchMetaFieldsFromBelongsQuery implements QueryInterface
 
 				break;
 		}
-
+		
 		return $data;
 	}
 }

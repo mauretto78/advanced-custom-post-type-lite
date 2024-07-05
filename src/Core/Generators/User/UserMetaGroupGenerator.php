@@ -69,14 +69,14 @@ class UserMetaGroupGenerator extends AbstractGenerator
 		foreach ($this->groupModel->getBoxes() as $boxModel){
 			$return .= '<div class="acpt-user-meta-box">';
 			$return .= '<h3>'. ((!empty($boxModel->getLabel())) ? $boxModel->getLabel() : $boxModel->getName()) . '</h3>';
-			$return .= '<table class="form-table" id="user-meta-box-'. $boxModel->getId().'">';
+			$return .= '<div class="acpt-user-meta-box-wrapper" id="user-meta-box-'. $boxModel->getId().'">';
 
 			foreach ($boxModel->getFields() as $fieldModel) {
 				$userFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
 				$return .= $userFieldGenerator->generate();
 			}
 
-			$return .= '</table>';
+			$return .= '</div>';
 			$return .= '</div>';
 		}
 
@@ -97,16 +97,13 @@ class UserMetaGroupGenerator extends AbstractGenerator
 			$return .= '</div>';
 
 			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-accordion-content">';
-
-			$return .= '<div class="acpt-user-meta-box no-borders">';
-			$return .= '<table class="form-table" id="user-meta-box-'. $metaBoxModel->getId().'">';
+			$return .= '<div class="acpt-user-meta-box-wrapper" id="user-meta-box-'. $metaBoxModel->getId().'">';
 
 			foreach ($metaBoxModel->getFields() as $fieldModel){
 				$taxonomyMetaBoxFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
 				$return .= $taxonomyMetaBoxFieldGenerator->generate();
 			}
 
-			$return .= '</table>';
 			$return .= '</div>';
 
 			$return .= '</div>';
@@ -124,7 +121,7 @@ class UserMetaGroupGenerator extends AbstractGenerator
 	 */
 	private function verticalTabs()
 	{
-		$return = '<div class="acpt-admin-vertical-tabs-wrapper" id="'.$this->groupModel->getId().'">';
+		$return = '<div class="acpt-admin-vertical-tabs-wrapper" id="'.$this->groupModel->getId().'" style="max-width: 1400px;">';
 
 		$return .= '<div class="acpt-admin-vertical-tabs">';
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
@@ -134,19 +131,15 @@ class UserMetaGroupGenerator extends AbstractGenerator
 		}
 		$return .= '</div>';
 
-		$return .= '<div class="acpt-admin-vertical-panels" style="max-width: 1400px;">';
+		$return .= '<div class="acpt-admin-vertical-panels">';
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
 			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-vertical-panel '.($index === 0 ? 'active' : '').'">';
-			$return .= '<div class="acpt-user-meta-box no-borders">';
-			$return .= '<table class="form-table" id="user-meta-box-'. $metaBoxModel->getId().'">';
 
 			foreach ($metaBoxModel->getFields() as $fieldModel){
 				$taxonomyMetaBoxFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
 				$return .= $taxonomyMetaBoxFieldGenerator->generate();
 			}
 
-			$return .= '</table>';
-			$return .= '</div>';
 			$return .= '</div>';
 		}
 
@@ -171,16 +164,12 @@ class UserMetaGroupGenerator extends AbstractGenerator
 		$return .= '<div class="acpt-admin-horizontal-panels" style="max-width: 1400px;">';
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
 			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-horizontal-panel '.($index === 0 ? 'active' : '').'">';
-			$return .= '<div class="acpt-user-meta-box no-borders">';
-			$return .= '<table class="form-table" id="user-meta-box-'. $metaBoxModel->getId().'">';
 
 			foreach ($metaBoxModel->getFields() as $fieldModel) {
 				$userFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
 				$return .= $userFieldGenerator->generate();
 			}
 
-			$return .= '</table>';
-			$return .= '</div>';
 			$return .= '</div>';
 		}
 
@@ -189,6 +178,4 @@ class UserMetaGroupGenerator extends AbstractGenerator
 
 		return $return;
 	}
-
-
 }

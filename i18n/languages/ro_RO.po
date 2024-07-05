@@ -1,0 +1,4040 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Viorel-Cosmin Miron <cosmin@uhl-services.ch>\n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+msgid "(default true)"
+msgstr "(implicit true)"
+
+msgid "(e.g. Movie)"
+msgstr "(de exemplu, film)"
+
+msgid "(e.g. Movies)"
+msgstr "(de exemplu, filme)"
+
+msgid "--Select--"
+msgstr "--Selectează--"
+
+msgid "A brief description"
+msgstr "O scurtă descriere"
+
+msgid "Add page"
+msgstr "Adăugă pagină"
+
+msgid "ACPT Tools"
+msgstr "Instrumente ACPT"
+
+msgid "ACPT email account"
+msgstr "Cont de e-mail ACPT"
+
+msgid "ALERT:"
+msgstr "ALERTĂ:"
+
+msgid "API dashboard"
+msgstr "Tablou de bord API"
+
+msgid "APIs"
+msgstr "API-uri"
+
+msgid "APIs dashboard panel"
+msgstr "Panoul de bord API-uri"
+
+msgid "APIs endpoints"
+msgstr "Puncte finale API"
+
+msgid "API key"
+msgstr "Cheie API"
+
+msgid "Action required"
+msgstr "Acțiune necesară"
+
+msgid "Actions"
+msgstr "Actiuni"
+
+msgid ""
+"Activate ACPT by your license key to get professional support and automatic "
+"updates from your WordPress dashboard."
+msgstr ""
+"Activați ACPT prin cheia dvs. de licență pentru a beneficia de asistență "
+"profesională și de actualizări automate din tabloul de bord WordPress."
+
+msgid "Activate your license"
+msgstr "Activarea cheii de licență"
+
+msgid ""
+"Activate your license key here. Please note that you need also your ACPT "
+"user email"
+msgstr ""
+"Activați cheia de licență aici. Vă rugăm să rețineți că aveți nevoie și de e-"
+"mailul dumneavoastră de utilizator ACPT"
+
+msgid "Activate your license now"
+msgstr "Activați licența acum"
+
+msgid "Add"
+msgstr "Adaugă"
+
+msgid "Add block"
+msgstr "Adăugați un bloc"
+
+msgid "Add child page"
+msgstr "Adăugați pagina copil"
+
+msgid "Add element"
+msgstr "Adăugare element"
+
+msgid "Add field"
+msgstr "Adaugă câmp"
+
+msgid "Add meta box"
+msgstr "Adăugați caseta meta"
+
+msgid "Add new {{r}}"
+msgstr "Adăugați un nou {{r}}"
+
+msgid "Add option"
+msgstr "Adaugă opțiune"
+
+msgid "Add or remove {{r}}"
+msgstr "Adăugați sau eliminați {{r}}"
+
+msgid "Add product data"
+msgstr "Adăugați date despre produs"
+
+msgid "Add support for various available post edit features. For more info"
+msgstr ""
+"Adăugarea de suport pentru diferite funcții de editare a posturilor "
+"disponibile. Pentru mai multe informații"
+
+msgid "after copying"
+msgstr "după copierea"
+
+msgid "All {{r}}"
+msgstr "Toate {{r}}"
+
+msgid ""
+"Allowed keys: 'name', name of default term.|'slug', Slug for default "
+"term.|'description', Description for default term"
+msgstr ""
+"Chei permise: \"name\", numele termenului implicit.|\"slug\", Denumirea "
+"termenului implicit.|\"description\", Descrierea termenului implicit"
+
+msgid "Archive template"
+msgstr "Șablon de arhivă"
+
+msgid "Archives"
+msgstr "Arhive"
+
+msgid "Are you sure?"
+msgstr "Esti sigur?"
+
+msgid "Array of capabilities for this taxonomy."
+msgstr "Ansamblu de capacități pentru această taxonomie."
+
+msgid "Associate"
+msgstr "Asociat"
+
+msgid "Associate custom post types here"
+msgstr "Asociați aici tipurile de mesaje personalizate"
+
+msgid "Associate custom post types to"
+msgstr "Asociați tipurile de postări personalizate la"
+
+msgid "Associate taxonomies to"
+msgstr "Asociați taxonomiile la"
+
+msgid "Associated icon"
+msgstr "Pictograma asociată"
+
+msgid "Associated meta boxes"
+msgstr "Casete meta asociate"
+
+msgid "Associated meta fields"
+msgstr "Câmpuri meta asociate"
+
+msgid "Associated post types"
+msgstr "Tipuri de posturi asociate"
+
+msgid "Associated taxonomies"
+msgstr "Taxonomii asociate"
+
+msgid "Back to {{r}}"
+msgstr "Înapoi la {{r}}"
+
+msgid "Belongs to"
+msgstr "Aparține"
+
+msgid "Block list"
+msgstr "Lista de blocuri"
+
+msgid "Block was successfully copied"
+msgstr "Blocul a fost copiat cu succes"
+
+msgid "CPT"
+msgstr "CPT"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the plural name."
+msgstr ""
+"Șir de caractere cu majuscule, fără semne de punctuație sau spații. Trebuie "
+"să înceapă cu o literă (nu cu un număr). Este important să fie diferit de "
+"numele pluralului."
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the single name."
+msgstr ""
+"Șir de caractere cu majuscule, fără semne de punctuație sau spații. Trebuie "
+"să înceapă cu o literă (nu cu un număr). Este important să fie diferit de "
+"numele unic."
+
+msgid "Capabilities"
+msgstr "Permisiuni"
+
+msgid "Capability"
+msgstr "Permisiuni"
+
+msgid "Capability Type"
+msgstr "Tipul de capacitate"
+
+msgid "Capability type"
+msgstr "Tipul de capacitate"
+
+msgid "Changelog"
+msgstr "Jurnal de modificari"
+
+msgid "Check `required` in the selected meta field"
+msgstr "Bifați `required` în câmpul meta selectat"
+
+msgid "Check `show in archive` in the selected meta field"
+msgstr "Bifați `show in archive` în câmpul meta selectat"
+
+msgid "Children list"
+msgstr "Lista copiilor"
+
+msgid "Choose box"
+msgstr "Alegeți caseta"
+
+msgid "Choose element"
+msgstr "Alegeți elementul"
+
+msgid "Choose field"
+msgstr "Alegeți câmpul"
+
+msgid "Choose from most used {{r}}"
+msgstr "Alegeți dintre cele mai utilizate {{r}}"
+
+msgid "Choose from the list"
+msgstr "Alegeți din listă"
+
+msgid "Choose how to display the related post(s) selector (default: select)"
+msgstr ""
+"Alegeți cum să afișați selectorul de postări asociate (implicit: select)"
+
+msgid "Choose the field type"
+msgstr "Alegeți tipul de câmp"
+
+msgid "Close"
+msgstr "Închide"
+
+msgid "Condition"
+msgstr "Condiție"
+
+msgid "Condition value"
+msgstr "Valoarea condiției"
+
+msgid "Conditional rendering"
+msgstr "Redare condiționată"
+
+msgid "Confirm deleting meta box"
+msgstr "Confirmarea ștergerii casetei meta"
+
+msgid "Confirm deleting meta field"
+msgstr "Confirmarea ștergerii câmpului meta"
+
+msgid "Confirm deleting all"
+msgstr "Confirmați ștergerea tuturor"
+
+msgid "Confirm deleting option"
+msgstr "Confirmați opțiunea de ștergere"
+
+msgid ""
+"Copy the conditional logic settings of this meta field to other fields of "
+"this box"
+msgstr ""
+"Copierea setărilor logice condiționate ale acestui câmp meta în alte câmpuri "
+"din această casetă"
+
+msgid "Copy the meta block"
+msgstr "Copiați blocul meta"
+
+msgid "Copy the meta box"
+msgstr "Copiați caseta meta"
+
+msgid "Copy the meta field"
+msgstr "Copiați câmpul meta"
+
+msgid "Copy the selected meta box"
+msgstr "Copiați caseta meta selectată"
+
+msgid "Copy the selected meta field"
+msgstr "Copiați câmpul meta selectat"
+
+msgid "Copy this block to another meta field"
+msgstr "Copiați acest bloc în alt câmp meta"
+
+msgid "Copy this meta box"
+msgstr "Copiați această casetă meta"
+
+msgid "Copy this meta box to another"
+msgstr "Copiați această meta-căsuță în altă casetă"
+
+msgid "Copy this meta field to another meta box"
+msgstr "Copiați acest câmp meta într-o altă casetă meta"
+
+msgid "Copyright"
+msgstr "Copyright"
+
+msgid "Create"
+msgstr "Creeaza"
+
+msgid "Create a meta field in the selected meta box"
+msgstr "Creați un câmp meta în caseta meta selectată"
+
+msgid "Create a meta option (if applicable) in the selected meta field"
+msgstr "Creați o opțiune meta (dacă este cazul) în câmpul meta selectat"
+
+msgid "Create a new block (only for Flexible field)"
+msgstr "Creați un bloc nou (numai pentru câmpul flexibil)"
+
+msgid "Create a new condition in the selected meta field"
+msgstr "Creați o nouă condiție în câmpul meta selectat"
+
+msgid "Create new Taxonomy"
+msgstr "Creați o nouă taxonomie"
+
+msgid "Create new WooCommerce product data"
+msgstr "Creați noi date de produs WooCommerce"
+
+msgid "Create new meta box"
+msgstr "Creați o nouă casetă meta"
+
+msgid "Create new options after the selected meta option"
+msgstr "Creați noi opțiuni după opțiunea meta selectată"
+
+msgid "Create template"
+msgstr "Crează un nou șablon"
+
+msgid "Custom"
+msgstr "Personalizat"
+
+msgid "Custom Post Type global settings"
+msgstr "Setări globale ale tipului de post personalizat"
+
+msgid "Custom post type data"
+msgstr "Date personalizate de tip post tip"
+
+msgid "Custom post type meta successfully saved"
+msgstr "Tipul de post personalizat meta salvat cu succes"
+
+msgid "Custom post type slug to use instead of default."
+msgstr ""
+"Slug-ul tipului de post personalizat care trebuie utilizat în locul celui "
+"implicit."
+
+msgid ""
+"Custom post type successfully deleted. The browser will refresh after 5 "
+"seconds."
+msgstr ""
+"Tipul de mesaj personalizat a fost eliminat cu succes. Browserul se va "
+"reîmprospăta după 5 secunde."
+
+msgid ""
+"Custom post type successfully saved. The browser will refresh after 5 "
+"seconds."
+msgstr ""
+"Tipul de mesaj personalizat a fost salvat cu succes. Browserul se va "
+"reîmprospăta după 5 secunde."
+
+msgid "Custom post type was associated to selected taxonomies"
+msgstr "Tipul de post personalizat a fost asociat la taxonomiile selectate"
+
+msgid "Custom post type"
+msgstr "Tipul de postari personalizate"
+
+msgid "Custom post types"
+msgstr "Tipuri de posturi personalizate"
+
+msgid "Custom query var"
+msgstr "Interogare personalizată var"
+
+msgid "Custom query var slug to use instead of default."
+msgstr ""
+"Slug personalizat al variabilei de interogare care trebuie utilizat în locul "
+"celui implicit."
+
+msgid "Custom rewrite"
+msgstr "Rescriere personalizată"
+
+msgid "Custom rewrite rules"
+msgstr "Reguli de rescriere personalizate"
+
+msgid "Date format"
+msgstr "Formatul datei"
+
+msgid "Default term to be used for the taxonomy."
+msgstr "Termen implicit care urmează să fie utilizat pentru taxonomie."
+
+msgid "Default value"
+msgstr "Valoarea implicită"
+
+msgid "Delete"
+msgstr "Şterge"
+
+msgid "Delete ACPT definitions when deactivate the plug-in"
+msgstr "Ștergeți definițiile ACPT atunci când dezactivați plug-in-ul"
+
+msgid "Delete API key"
+msgstr "Ștergeți cheia API"
+
+msgid "Delete Taxonomy"
+msgstr "Ștergerea taxonomiei"
+
+msgid "Delete WooCommerce product data"
+msgstr "Ștergeți datele produsului WooCommerce"
+
+msgid "Delete all"
+msgstr "Șterge tot"
+
+msgid "Delete all action"
+msgstr "Ștergeți toate acțiunile"
+
+msgid "Delete all images"
+msgstr "Ștergeți toate imaginile"
+
+msgid ""
+"Delete all saved ACPT definitions when you deactivate the plug-in. This "
+"means that if you select NO when you deactivate and then reactivate the plug-"
+"in you will find all the previously saved ACPT definitions (meta fields, "
+"options etc.)"
+msgstr ""
+"Ștergeți toate definițiile ACPT salvate atunci când dezactivați plug-in-ul. "
+"Acest lucru înseamnă că, dacă selectați NU la dezactivarea și apoi "
+"reactivați plug-in-ul, veți găsi toate definițiile ACPT salvate anterior "
+"(câmpuri meta, opțiuni etc.)"
+
+msgid "Delete metadata when delete an ACPT field"
+msgstr "Ștergerea metadatelor la ștergerea unui câmp ACPT"
+
+msgid "Delete others pages"
+msgstr "Ștergeți alte pagini"
+
+msgid "Delete others posts"
+msgstr "Șterge postările altora"
+
+msgid "Delete pages"
+msgstr "Ștergeți paginile"
+
+msgid "Delete post metadata when deleting ACPT fields"
+msgstr "Ștergerea metadatelor postului la ștergerea câmpurilor ACPT"
+
+msgid ""
+"Delete post metadata when deleting an ACPT field. This means that if you "
+"select YES, when you delete an ACPT meta field all the saved metadata will "
+"be deleted"
+msgstr ""
+"Ștergerea metadatelor postului la ștergerea unui câmp ACPT. Acest lucru "
+"înseamnă că, dacă selectați DA, atunci când ștergeți un câmp meta ACPT, "
+"toate metadatele salvate vor fi șterse"
+
+msgid "Delete posts when delete an ACPT post definition"
+msgstr "Ștergerea posturilor atunci când se șterge o definiție de post ACPT"
+
+msgid ""
+"Delete posts when delete an ACPT post type definition. This means that if "
+"you select YES, when you delete an ACPT post type definition all the saved "
+"posts will be deleted"
+msgstr ""
+"Ștergeți posturile atunci când ștergeți o definiție a tipului de post ACPT. "
+"Aceasta înseamnă că, dacă selectați DA, atunci când ștergeți o definiție de "
+"tip de post ACPT, toate posturile salvate vor fi șterse"
+
+msgid "Delete private pages"
+msgstr "Ștergeți paginile private"
+
+msgid "Delete private posts"
+msgstr "Ștergeți postările private"
+
+msgid "Delete published pages"
+msgstr "Ștergeți paginile publicate"
+
+msgid "Delete the meta box in this"
+msgstr "Ștergeți caseta meta din acest"
+
+msgid "Delete the meta field in this block after copying"
+msgstr "Ștergeți câmpul meta din acest bloc după copiere"
+
+msgid "Delete the meta field in this field after copying"
+msgstr "Ștergeți câmpul meta din acest câmp după copiere"
+
+msgid "Delete the selected condition"
+msgstr "Ștergeți condiția selectată"
+
+msgid "Delete the selected meta box"
+msgstr "Ștergeți caseta meta selectată"
+
+msgid "Delete the selected meta field"
+msgstr "Ștergeți câmpul meta selectat"
+
+msgid "Delete the selected meta option"
+msgstr "Ștergeți opțiunea meta selectată"
+
+msgid "Delete this meta box"
+msgstr "Ștergeți această casetă meta"
+
+msgid "Delete this meta field"
+msgstr "Ștergeți acest câmp meta"
+
+msgid "Different name MUST be different from single name"
+msgstr "Numele diferit TREBUIE să fie diferit de numele unic"
+
+msgid "Disabled"
+msgstr "Dezactivat"
+
+msgid "Displayed on the admin panel"
+msgstr "Afișat pe panoul de administrare"
+
+msgid "Displayed on the sidebar of the admin panel"
+msgstr "Afișat în bara laterală a panoului de administrare"
+
+msgid "Documentation"
+msgstr "Documentație"
+
+msgid "Drag your component(s) here"
+msgstr "Trageți componentele aici"
+
+msgid "Drag your loop component(s) here"
+msgstr "Trageți aici componenta (componentele) de buclă"
+
+msgid "Duplicate the selected meta box"
+msgstr "Duplicați caseta meta selectată"
+
+msgid "Duplicate the selected meta field"
+msgstr "Duplicarea câmpului meta selectat"
+
+msgid "Duplicate this block"
+msgstr "Duplicarea acestui bloc"
+
+msgid "Duplicate this meta box"
+msgstr "Duplicarea acestei casete meta"
+
+msgid "Duplicate this meta field"
+msgstr "Duplicarea acestui câmp meta"
+
+msgid "Edit"
+msgstr "Editare"
+
+msgid "Edit Custom Post Type"
+msgstr "Editați tipul de post personalizat"
+
+msgid "Edit Taxonomy"
+msgstr "Editarea taxonomiei"
+
+msgid "Edit WooCommerce product data"
+msgstr "Editați datele produsului WooCommerce"
+
+msgid "Edit a Taxonomy"
+msgstr "Editarea unei taxonomii"
+
+msgid "Edit others pages"
+msgstr "Editați alte pagini"
+
+msgid "Edit others posts"
+msgstr "Editează postările altora"
+
+msgid "Edit pages"
+msgstr "Editarea paginilor"
+
+msgid "Edit private pages"
+msgstr "Editarea paginilor private"
+
+msgid "Edit private posts"
+msgstr "Editarea mesajelor private"
+
+msgid "Edit published pages"
+msgstr "Editați paginile publicate"
+
+msgid "Element"
+msgstr "Element"
+
+msgid "Elements per page"
+msgstr "Elemente pe pagină"
+
+msgid "Elements per row"
+msgstr "Elemente pe rând"
+
+msgid "Elements to display"
+msgstr "Elemente de afișat"
+
+msgid "Enable ACPT visual builder"
+msgstr "Activați constructorul vizual ACPT"
+
+msgid "Enable the ACPT visual builder to manage your templates."
+msgstr "Activați constructorul vizual ACPT pentru a vă gestiona șabloanele."
+
+msgid ""
+"Enable the ACPT visual builder. This option allows you to use the integrated "
+"visual builder to create and manage templates for single CPTs, archive "
+"pages, taxonomy terms and relations."
+msgstr ""
+"Activați constructorul vizual ACPT. Această opțiune vă permite să utilizați "
+"constructorul vizual integrat pentru a crea și gestiona șabloane pentru CPT-"
+"uri unice, pagini de arhivă, termeni de taxonomie și relații."
+
+msgid "Error during saving the template"
+msgstr "Eroare în timpul salvării șablonului"
+
+msgid "Error during the activation of the license."
+msgstr "Eroare în timpul activării licenței."
+
+msgid "Error fetching data"
+msgstr "Eroare la preluarea datelor"
+
+msgid "Ex. movie"
+msgstr "Ex. film"
+
+msgid "Ex. movies"
+msgstr "Ex. filme"
+
+msgid "Expiration date"
+msgstr "Data de expirare"
+
+msgid "Export HTML/CSS code"
+msgstr "Exportați codul HTML/CSS"
+
+msgid "Export code"
+msgstr "Cod de export"
+
+msgid "Export custom post types"
+msgstr "Exportați tipuri de posturi personalizate"
+
+msgid "Export data"
+msgstr "Exporta date"
+
+msgid "Export selected elements"
+msgstr "Exportați elementele selectate"
+
+msgid "Export settings and meta fields for selected elements:"
+msgstr "Exportați setările și câmpurile meta pentru elementele selectate:"
+
+msgid "Facebook group"
+msgstr "Grup Facebook"
+
+msgid "Featured image"
+msgstr "Imagine reprezentativă"
+
+msgid "Field columns"
+msgstr "Coloane de câmp"
+
+msgid "Field columns ([1-6] only for repeater field)"
+msgstr "Coloane de câmp ([1-6] numai pentru câmpul de repetare)"
+
+msgid "Field label"
+msgstr "Etichetă de câmp"
+
+msgid "Field name cannot be blank"
+msgstr "Numele câmpului nu poate fi gol"
+
+msgid "Field name max length is 255 characters"
+msgstr "Lungimea maximă a numelui câmpului este de 255 de caractere"
+
+msgid "Field required"
+msgstr "Câmp obligatoriu"
+
+msgid "Field slug"
+msgstr "Melc de câmp"
+
+msgid "Field slug (Ex. gallery or text_1)"
+msgstr "Field slug (ex. gallery sau text_1)"
+
+msgid ""
+"Field slug. Only alphanumeric (latin) characters allowed, without spaces"
+msgstr ""
+"Lovitură de câmp. Sunt permise numai caractere alfanumerice (latine), fără "
+"spații"
+
+msgid "Field width"
+msgstr "Lățimea câmpului"
+
+msgid "Field width in % ([1-100] default value: 100)"
+msgstr "Lățimea câmpului în % ([1-100] valoare implicită: 100)"
+
+msgid "Fields"
+msgstr "Câmpuri"
+
+msgid "Fields count"
+msgstr "Numărătoarea câmpurilor"
+
+msgid "Filter by date"
+msgstr "Filtrează după dată"
+
+msgid "Filter by {{r}}"
+msgstr "Filtrează după {{r}}"
+
+msgid "Filter {{r}} list"
+msgstr "Filtru {{r}} listă"
+
+msgid "Filter in admin"
+msgstr "Filtru în admin"
+
+msgid "First, create a post for this post type"
+msgstr "Mai întâi, creați o postare pentru acest tip de postare"
+
+msgid "First, you need to add a block in ACPT settings."
+msgstr "În primul rând, trebuie să adăugați un bloc în setările ACPT."
+
+msgid "Format"
+msgstr "Format"
+
+msgid ""
+"From this dashboard you can discover and manage every API endpoints exposed "
+"by ACPT. Use the playground to learn how to use every endpoint."
+msgstr ""
+"Din acest tablou de bord puteți descoperi și gestiona toate punctele finale "
+"API expuse de ACPT. Utilizați locul de joacă pentru a învăța cum să "
+"utilizați fiecare punct final."
+
+msgid "Fullscreen mode"
+msgstr "Modul ecran complet"
+
+msgid "General"
+msgstr "General"
+
+msgid "Generate"
+msgstr "Genereaza"
+
+msgid "Generated at"
+msgstr "Generat la"
+
+msgid "Generating code..."
+msgstr "Generarea de cod..."
+
+msgid "Go to"
+msgstr "Mergi la"
+
+msgid "Google Maps API key"
+msgstr "Cheie API Google Maps"
+
+msgid "GraphQL plural name"
+msgstr "Nume plural GraphQL"
+
+msgid "GraphQL single name"
+msgstr "GraphQL nume unic"
+
+msgid "Has archive"
+msgstr "Are arhivă"
+
+msgid "Headline location"
+msgstr "Locația titlului"
+
+msgid "Height"
+msgstr "Înălțime"
+
+msgid "Hide all modals, deselect the current element"
+msgstr "Ascundeți toate modalele, deselectați elementul curent"
+
+msgid "Hide in external products"
+msgstr "Ascundeți-vă în produse externe"
+
+msgid "Hide in virtual products"
+msgstr "Ascundeți-vă în produsele virtuale"
+
+msgid "Hide/show this meta box"
+msgstr "Ascundeți/afișați această casetă meta"
+
+msgid "Hide/show this meta field"
+msgstr "Ascundeți/afișați acest câmp meta"
+
+msgid "Hide/show this block"
+msgstr "Ascundeți/afișați acest bloc"
+
+msgid "Hide/show this page"
+msgstr "Ascundeți/afișați această pagină"
+
+msgid "Hierarchical"
+msgstr "Ierarhică"
+
+msgid "How to display the related post(s) selector?"
+msgstr "Cum se afișează selectorul de postări conexe?"
+
+msgid "Icon"
+msgstr "Iconiță"
+
+msgid "Import an ACPT backup here."
+msgstr "Importați o copie de rezervă ACPT aici."
+
+msgid "Import custom post types"
+msgstr "Importați tipuri de mesaje personalizate"
+
+msgid "Import data"
+msgstr "Importați date"
+
+msgid "Insert"
+msgstr "Introduceți"
+
+msgid "Is Public"
+msgstr "Este public"
+
+msgid "Key"
+msgstr "Cheie"
+
+msgid "Label and value are linked"
+msgstr "Eticheta și valoarea sunt legate"
+
+msgid "Label and value are unlinked"
+msgstr "Eticheta și valoarea nu sunt legate între ele"
+
+msgid "Language"
+msgstr "Limbă"
+
+msgid "Leading term:"
+msgstr "Termen principal:"
+
+msgid "Lifetime"
+msgstr "Pe viață"
+
+msgid "Link target"
+msgstr "Se deschide în"
+
+msgid "List {{r}}"
+msgstr "Lista {{r}}"
+
+msgid ""
+"Makes this post type available for selection in navigation menus. Default is "
+"value of $public."
+msgstr ""
+"Face ca acest tip de articol să fie disponibil pentru a fi selectat în "
+"meniurile de navigare. Valoarea implicită este valoarea $public."
+
+msgid ""
+"Makes this post type available via the admin bar. Default is value of "
+"$show_in_menu."
+msgstr ""
+"Face ca acest tip de mesaj să fie disponibil prin intermediul barei de "
+"administrare. Valoarea implicită este valoarea lui $show_in_menu."
+
+msgid ""
+"Makes this taxonomy available for selection in navigation menus. If not set, "
+"the default is inherited from $public (default true)."
+msgstr ""
+"Face ca această taxonomie să fie disponibilă pentru a fi selectată în "
+"meniurile de navigare. Dacă nu este setată, valoarea implicită este "
+"moștenită de la $public (valoare implicită true)."
+
+msgid "Manage"
+msgstr "Administrare"
+
+msgid "Manage User Meta"
+msgstr "Gestionați Meta utilizator"
+
+msgid "Manage categories"
+msgstr "Gestionați categoriile"
+
+msgid "Manage content"
+msgstr "Gestionați conținutul"
+
+msgid "Manage fields"
+msgstr "Gestionați câmpurile"
+
+msgid "Manage links"
+msgstr "Gestionați legăturile"
+
+msgid "Manage options"
+msgstr "Gestionați opțiunile"
+
+msgid "Manage pages"
+msgstr "Gestionați paginile"
+
+msgid "Manage your license"
+msgstr "Gestionați licența dvs"
+
+msgid "Manage your registered license key"
+msgstr "Gestionați cheia de licență înregistrată"
+
+msgid "Max value (used only by numeric and textual fields)"
+msgstr "Valoarea maximă (utilizată numai de câmpurile numerice și textuale)"
+
+msgid "Maximum blocks allowed"
+msgstr "Blocuri maxime permise"
+
+msgid "Menu icon"
+msgstr "Pictograma de meniu"
+
+msgid "Menu position"
+msgstr "Poziția meniului"
+
+msgid "Menu slug"
+msgstr "Meniul slug"
+
+msgid "Menu title"
+msgstr "Titlu portofoliu"
+
+msgid "Meta box"
+msgstr "Caseta meta"
+
+msgid "Meta box was successfully copied"
+msgstr "Caseta meta a fost copiată cu succes"
+
+msgid "Meta boxes"
+msgstr "Casete meta"
+
+msgid "Meta field"
+msgstr "Câmpul meta"
+
+msgid "Meta field was successfully copied"
+msgstr "Câmpul Meta a fost copiat cu succes"
+
+msgid "Meta fields"
+msgstr "Câmpuri meta"
+
+msgid "Meta option"
+msgstr "Opțiunea Meta"
+
+msgid "Min value (used only by numeric and textual fields)"
+msgstr "Valoarea minimă (utilizată numai de câmpurile numerice și textuale)"
+
+msgid "Minimum blocks allowed"
+msgstr "Blocuri minime permise"
+
+msgid "Moderate comments"
+msgstr "Comentarii moderate"
+
+msgid "Most used {{r}}"
+msgstr "Cel mai utilizat {{r}}"
+
+msgid "My account"
+msgstr "Contul meu"
+
+msgid "My license"
+msgstr "Licența mea"
+
+msgid "Name"
+msgstr "Nume"
+
+msgid "Native"
+msgstr "Nativ"
+
+msgid "Navigate the input fields in the selected meta field"
+msgstr "Navigați în câmpurile de intrare din metacâmpurile selectate"
+
+msgid "Navigate the input fields in the selected meta option"
+msgstr ""
+"Navigați în câmpurile de introducere a datelor în opțiunea meta selectată"
+
+msgid "Navigate the tabs of selected field (go to next tab)"
+msgstr "Navigați în filele din câmpul selectat (treceți la fila următoare)"
+
+msgid "Navigate the tabs of selected field (go to previous tab)"
+msgstr "Navigați în filele din câmpul selectat (mergeți la fila anterioară)"
+
+msgid "Navigate to next element (box, field, option or condition)"
+msgstr "Navigați la elementul următor (casetă, câmp, opțiune sau condiție)"
+
+msgid "Navigate to previous element (box, field, option or condition)"
+msgstr "Navigați la elementul anterior (casetă, câmp, opțiune sau condiție)"
+
+msgid "Navigation"
+msgstr "Navigare"
+
+msgid "Navigation list {{r}}"
+msgstr "Lista de navigare {{r}}"
+
+msgid "New"
+msgstr "Nou"
+
+msgid "New {{r}}"
+msgstr "Nou {{r}}"
+
+msgid "Next Step"
+msgstr "Pasul următor"
+
+msgid "No"
+msgstr "Nu"
+
+msgid "No API keys found."
+msgstr "Nu s-au găsit chei API."
+
+msgid ""
+"No blocks already created. Create the first one now by clicking the button "
+"\"Add block\"!"
+msgstr ""
+"Nu există blocuri deja create. Creați primul bloc acum, făcând clic pe "
+"butonul \"Adaugă bloc\"!"
+
+msgid ""
+"No blocks saved, generate the first one clicking on \"Add block\" button"
+msgstr ""
+"Niciun bloc salvat, generați primul bloc apăsând pe butonul \"Add block\""
+
+msgid ""
+"No children already created. Create the first one now by clicking the button "
+"\"Add child page\"!"
+msgstr ""
+"Nu există copii deja creați. Creați-l acum pe primul, făcând clic pe butonul "
+"\"Adaugă pagină copil\"!"
+
+msgid "No choice"
+msgstr "Nicio alegere"
+
+msgid "No conditions are present."
+msgstr "Nu sunt prezente condiții."
+
+msgid ""
+"No conditions are present, click on \"Add condition\" button to add the "
+"first one."
+msgstr ""
+"Nu există condiții, faceți clic pe butonul \"Add condition\" (Adaugă "
+"condiție) pentru a o adăuga pe prima."
+
+msgid ""
+"No content yet. Drag components in this canvas and start building something "
+"awesome!"
+msgstr ""
+"Încă nu există conținut. Trageți componentele în acest canvas și începeți să "
+"construiți ceva minunat!"
+
+msgid "No custom post type found."
+msgstr "Nu s-a găsit niciun tip de post personalizat."
+
+msgid "No display"
+msgstr "Fără afișaj"
+
+msgid ""
+"No elements saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"Niciun element salvat, generați primul element făcând clic pe butonul "
+"\"Adaugă element\""
+
+msgid ""
+"No field box already created. Create the first one now by clicking the "
+"button \"Add field box\"!"
+msgstr ""
+"Nu există nicio casetă de câmp deja creată. Creați-o acum pe prima, făcând "
+"clic pe butonul \"Add field box\"!"
+
+msgid ""
+"No fields saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"Niciun câmp salvat, generați primul câmp făcând clic pe butonul \"Add "
+"element\""
+
+msgid ""
+"No fields already created. Create the first one now by clicking the button "
+"\"Add field\"!"
+msgstr ""
+"Nu există câmpuri deja create. Creați-l acum pe primul, făcând clic pe "
+"butonul \"Adaugă câmp\"!"
+
+msgid ""
+"No meta box already created. Create the first one now by clicking the button "
+"\"Add meta box\"!"
+msgstr ""
+"Nu a fost creată deja nicio casetă meta. Creați-o acum pe prima, făcând clic "
+"pe butonul \"Adaugă caseta meta\"!"
+
+msgid "No option pages found."
+msgstr "Nu s-au găsit pagini de opțiuni."
+
+msgid ""
+"No options already created. Create the first one now by clicking the button "
+"\"Add option\"!"
+msgstr ""
+"Nu există opțiuni deja create. Creați-o pe prima acum, făcând clic pe "
+"butonul \"Adaugă opțiune\"!"
+
+msgid "No product data found."
+msgstr "Nu s-au găsit date despre produs."
+
+msgid "No records message"
+msgstr "Mesaj fără înregistrări"
+
+msgid "No taxonomies found."
+msgstr "Nu s-au găsit taxonomii."
+
+msgid "No templates found."
+msgstr "Nu s-au găsit șabloane."
+
+msgid "No {{r}}"
+msgstr "Nu {{r}}"
+
+msgid "No {{r}} found"
+msgstr "Nu {{r}} găsit"
+
+msgid "Not allowed"
+msgstr "Nepermis"
+
+msgid "On the left"
+msgstr "La stânga"
+
+msgid "On the right"
+msgstr "La dreapta"
+
+msgid "On the top"
+msgstr "În partea de sus"
+
+msgid "Opens in a new window or tab "
+msgstr "Se deschide într-o fereastră sau filă nouă "
+
+msgid "Opens in the full body of the window"
+msgstr "Se deschide în corpul complet al ferestrei"
+
+msgid "Opens in the parent frame"
+msgstr "Se deschide în cadrul părinte"
+
+msgid "Opens in the same frame as it was clicked"
+msgstr "Se deschide în același cadru în care s-a făcut clic pe ea"
+
+msgid "Option list"
+msgstr "Lista de opțiuni"
+
+msgid "Option page meta successfully saved"
+msgstr "Opțiunea pagina meta a fost salvată cu succes"
+
+msgid "Single option page"
+msgstr "Pagina cu o singură opțiune"
+
+msgid "Option page"
+msgstr "Pagina de opțiuni"
+
+msgid "Option pages"
+msgstr "Pagini de opțiuni"
+
+msgid "Option pages meta"
+msgstr "Pagini de opțiuni meta"
+
+msgid "Order by"
+msgstr "Ordonat după"
+
+msgid "Page description (will be displayed after the title)"
+msgstr "Descrierea paginii (va fi afișată după titlu)"
+
+msgid "Page not found"
+msgstr "Pagina nu a fost gasita"
+
+msgid "Page title"
+msgstr "Titlu pagină"
+
+msgid "Parent"
+msgstr "Părinte"
+
+msgid "Parent item"
+msgstr "(fără parinte)"
+
+msgid "Parent {{r}}"
+msgstr "Părinte {{r}}"
+
+msgid ""
+"Paste here your Google Maps API key. Needed to use the Address meta field."
+msgstr ""
+"Lipiți aici cheia API Google Maps. Este necesară pentru a utiliza "
+"metacâmpului Adresă."
+
+msgid "Pattern value (used only by numeric and textual fields)"
+msgstr "Valoarea modelului (utilizată numai de câmpurile numerice și textuale)"
+
+msgid "Pattern value (used only by textual fields)"
+msgstr "Valoarea modelului (utilizată numai de câmpurile textuale)"
+
+msgid "Permalink text"
+msgstr "Permalink text"
+
+msgid "Plugin version"
+msgstr "Versiunea Plugin-ului"
+
+msgid "Plural"
+msgstr "Plural"
+
+msgid "Plural label"
+msgstr "Etichetă plurală"
+
+msgid "Popular {{r}}"
+msgstr "Popular {{r}}"
+
+msgid "Possible values: customPostType, taxonomy."
+msgstr "Valori posibile: customPostType, taxonomy."
+
+msgid "Post count"
+msgstr "Post Count"
+
+msgid "Post name"
+msgstr "Numele postului"
+
+msgid "Preview"
+msgstr "Previzualizați"
+
+msgid "Previous Step"
+msgstr "Pasul anterior"
+
+msgid "Product data"
+msgstr "Date despre produs"
+
+msgid "Product data successfully saved"
+msgstr "Datele produsului au fost salvate cu succes"
+
+msgid "Publicly queryable"
+msgstr "Interogabil în mod public"
+
+msgid "Publish pages"
+msgstr "Publicarea paginilor"
+
+msgid "Published posts count"
+msgstr "Numărătoarea postărilor publicate"
+
+msgid "Published posts count associated with the taxonomy"
+msgstr "Numărul de postări publicate asociate taxonomiei"
+
+msgid "Query var"
+msgstr "Interogare var"
+
+msgid "Quick edit"
+msgstr "Editare rapidă"
+
+msgid "Quick navigation"
+msgstr "Navigare rapidă"
+
+msgid "REST API Controller class name. Default is 'WP_REST_Terms_Controller'."
+msgstr ""
+"Numele clasei REST API Controller. Valoarea implicită este "
+"\"WP_REST_Terms_Controller\"."
+
+msgid "REST API base slug"
+msgstr "Slug de bază REST API"
+
+msgid "REST Controller class"
+msgstr "Clasa REST Controller"
+
+msgid "Radio/checkbox"
+msgstr "Radio/checkbox"
+
+msgid "Read private pages"
+msgstr "Citiți paginile private"
+
+msgid "Read private posts"
+msgstr "Citiți mesajele private"
+
+msgid "Records per page"
+msgstr "Înregistrări pe pagină"
+
+msgid "Records per page in ACPT dashboards"
+msgstr "Înregistrări pe pagină în tablourile de bord ACPT"
+
+msgid "Redo"
+msgstr "Refă"
+
+msgid "Regenerate"
+msgstr "Regenerare"
+
+msgid "Register new Custom Post Type"
+msgstr "Înregistrați noul tip de mesaj personalizat"
+
+msgid "Register the first one"
+msgstr "Înregistrează-l pe primul"
+
+msgid "Registered Custom Post Types"
+msgstr "Tipuri de mesaje personalizate înregistrate"
+
+msgid "Registered Taxonomies"
+msgstr "Taxonomii înregistrate"
+
+msgid "Related template"
+msgstr "Șablon conex"
+
+msgid "Remove featured image"
+msgstr "Eliminare imagine evidențiată"
+
+msgid "Return back to list"
+msgstr "Înapoi la listă"
+
+msgid "Rewrite"
+msgstr "Rescrie"
+
+msgid "Save"
+msgstr "Salvează"
+
+msgid "Save action"
+msgstr "Acțiune de salvare"
+
+msgid "Search"
+msgstr "Caută"
+
+msgid "Search box"
+msgstr "Caseta de căutare"
+
+msgid "Search {{r}}"
+msgstr "Căutare {{r}}"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Select"
+msgstr "Selectați"
+
+msgid "Select field box from list"
+msgstr "Selectați caseta de câmp din listă"
+
+msgid "Select the inversed field on target"
+msgstr "Selectați câmpul inversat pe țintă"
+
+msgid "Select field from list"
+msgstr "Selectați câmpul din listă"
+
+msgid "Select field type from list"
+msgstr "Selectați tipul de câmp din listă"
+
+msgid "Select relation type from list"
+msgstr "Selectați tipul de relație din listă"
+
+msgid "Select the element from the list:"
+msgstr "Selectați elementul din listă:"
+
+msgid "Select the headline location (default: on the left)"
+msgstr "Selectați locația titlului (implicit: în stânga)"
+
+msgid "Select the template type:"
+msgstr "Selectați tipul de șablon:"
+
+msgid "Separate {{r}} with commas"
+msgstr "Separați {{r}} cu virgule"
+
+msgid "Set featured image"
+msgstr "Setare imagine recomandate"
+
+msgid "Set the language of the plug-in"
+msgstr "Setați limba plug-in-ului"
+
+msgid ""
+"Sets the query var key for this taxonomy. Default  key. If false, a taxonomy "
+"cannot be loaded at ?{query_var}={term_slug}. If a string, the query ?"
+"{query_var}={term_slug} will be valid."
+msgstr ""
+"Stabilește cheia de interogare pentru această taxonomie. Cheie implicită. "
+"Dacă este falsă, o taxonomie nu poate fi încărcată la ?{query_var}"
+"={term_slug}. Dacă este un șir de caractere, interogarea ?{query_var}"
+"={term_slug} va fi validă."
+
+msgid ""
+"Sets the query_var key for this post type. Defaults to  key. If false, a "
+"post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+"string, the query {post_slug} will be valid."
+msgstr ""
+"Stabilește cheia query_var pentru acest tip de post. Valoarea implicită este "
+"key. Dacă este falsă, un tip de post nu poate fi încărcat la ?{query_var}"
+"={post_slug}. Dacă este specificat ca un șir de caractere, interogarea "
+"{post_slug} va fi validă."
+
+msgid "Settings"
+msgstr "Setări"
+
+msgid "Settings page"
+msgstr "Pagina opțiuni"
+
+msgid "Show Tagcloud"
+msgstr "Arată Tagcloud"
+
+msgid "Show admin column"
+msgstr "Afișați coloana admin"
+
+msgid "Show in GraphQL"
+msgstr "Arată în GraphQL"
+
+msgid "Show in REST API"
+msgstr "Arată în REST API"
+
+msgid "Show in UI"
+msgstr "Afișați în UI"
+
+msgid "Show in Wordpress admin post lists page"
+msgstr "Afișează în pagina de liste de post din Wordpress admin"
+
+msgid "Show in admin bar"
+msgstr "Afișați în bara de administrare"
+
+msgid "Show in external products"
+msgstr "Arată în produsele externe"
+
+msgid "Show in grouped products"
+msgstr "Arată în produse grupate"
+
+msgid "Show in menu"
+msgstr "Afișare în meniu"
+
+msgid "Show in nav menus"
+msgstr "Afișați în meniurile de navigare"
+
+msgid "Show in quick edit"
+msgstr "Afișați în editare rapidă"
+
+msgid "Show in simple products"
+msgstr "Arată în produse simple"
+
+msgid "Show in variable products"
+msgstr "Afișați în produse variabile"
+
+msgid "Show on UI"
+msgstr "Afișați pe UI"
+
+msgid "Show pagination"
+msgstr "Afișați paginarea"
+
+msgid "Show the custom post type in WPGraphQL"
+msgstr "Afișarea tipului de mesaj personalizat în WPGraphQL"
+
+msgid "Show the custom post type in WPGraphQL."
+msgstr "Afișează tipul de mesaj personalizat în WPGraphQL."
+
+msgid "Show the product data on the front store page."
+msgstr "Afișați datele produsului pe pagina principală a magazinului."
+
+msgid "Show this legend modal"
+msgstr "Arată această legendă modală"
+
+msgid "Show/hide all fields"
+msgstr "Afișați/ascundeți toate câmpurile"
+
+msgid "Sing. label"
+msgstr "Cântă. etichetă"
+
+msgid "Single name MUST be different from plural name"
+msgstr "Numele unic TREBUIE să fie diferit de numele plural"
+
+msgid "Single template"
+msgstr "Șablon unic"
+
+msgid "Singular"
+msgstr "Singular"
+
+msgid "Singular label"
+msgstr "Etichetă singulară"
+
+msgid "Slug"
+msgstr "Slug"
+
+msgid "Sort"
+msgstr "Sorteaza"
+
+msgid "Sort by"
+msgstr "Sortați după"
+
+msgid "Step value (used only by numeric fields)"
+msgstr "Valoarea pasului (utilizată numai de câmpurile numerice)"
+
+msgid "Successfully post sync. The browser will refresh after 5 seconds."
+msgstr ""
+"Post-sincronizare reușită. Browserul se va reîmprospăta după 5 secunde."
+
+msgid "Support"
+msgstr "Suport"
+
+msgid "Supports"
+msgstr "Suportă"
+
+msgid "Surrounding tag"
+msgstr "Etichetă înconjurătoare"
+
+msgid "Sync with post types"
+msgstr "Sincronizare cu tipurile de post"
+
+msgid "Taxonomies"
+msgstr "Taxonomii"
+
+msgid "Taxonomies association"
+msgstr "Asocierea taxonomiilor"
+
+msgid "Taxonomy"
+msgstr "Taxonomie"
+
+msgid "Taxonomy data"
+msgstr "Date taxonomice"
+
+msgid "Taxonomy meta successfully saved"
+msgstr "Meta taxonomie salvată cu succes"
+
+msgid "Taxonomy settings"
+msgstr "Setări de taxonomie"
+
+msgid "Taxonomy slug to use instead of default."
+msgstr "Denumirea taxonomiei care trebuie folosită în locul celei implicite."
+
+msgid ""
+"Taxonomy slug. The post name/slug. Used for various queries for taxonomy "
+"content."
+msgstr ""
+"Taxonomie melc. Numele/slug-ul postului. Utilizat pentru diverse interogări "
+"pentru conținutul taxonomiei."
+
+msgid "Taxonomy successfully deleted"
+msgstr "Taxonomie ștearsă cu succes"
+
+msgid "Taxonomy was associated to selected Custom post types"
+msgstr ""
+"Taxonomia a fost asociată la tipurile de postări personalizate selectate"
+
+msgid "Template"
+msgstr "Șablon"
+
+msgid "Template list"
+msgstr "Lista de șabloane"
+
+msgid "Template saved successfully"
+msgstr "Șablon salvat cu succes"
+
+msgid "Template was successfully deleted."
+msgstr "Șablonul a fost șters cu succes."
+
+msgid ""
+"Template was successfully deleted. The browser will refresh after 5 seconds."
+msgstr ""
+"Șablonul a fost șters cu succes. Browserul se va reîmprospăta după 5 secunde."
+
+msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Text după. HTML este permis (ex. &lt;small&gt;)"
+
+msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Text înainte. HTML este permis (ex. &lt;small&gt;)"
+
+msgid "The API key was successfully deleted"
+msgstr "Cheia API a fost ștearsă cu succes"
+
+msgid "The archive template for this custom post type"
+msgstr "Șablonul de arhivă pentru acest tip de post personalizat"
+
+msgid "The browser will refresh after 5 seconds."
+msgstr "Browserul se va reîmprospăta după 5 secunde."
+
+msgid "The custom post type or taxonomy element."
+msgstr "Tipul de mesaj personalizat sau elementul de taxonomie."
+
+msgid "The default value for this field"
+msgstr "Valoarea implicită pentru acest câmp"
+
+msgid "The description of this field (showed only on admin panel)"
+msgstr "Descrierea acestui câmp (se afișează numai în panoul de administrare)"
+
+msgid "The field label, non latin characters are allowed"
+msgstr "Eticheta câmpului, sunt permise caracterele non-latine"
+
+msgid "The icon displayed on menu (only for parent pages)"
+msgstr "Pictograma afișată în meniu (numai pentru paginile părintești)"
+
+msgid ""
+"The inversed field is the target post type field which is related with this "
+"one in a bidirectional relation"
+msgstr ""
+"Câmpul inversat este câmpul de tip post țintă, care este legat de acesta "
+"într-o relație bidirecțională"
+
+msgid ""
+"The limit on how many blocks are allowed ([1-100] only for flexible field)"
+msgstr ""
+"Limita numărului de blocuri permise ([1-100] numai pentru câmpul flexibil)"
+
+msgid ""
+"The limit on how many blocks are required ([1-100] only for flexible field)"
+msgstr ""
+"Limita numărului de blocuri necesare ([1-100] numai pentru câmpul flexibil)"
+
+msgid "The maximum value (used only by numeric and textual fields)"
+msgstr "Valoarea maximă (utilizată numai de câmpurile numerice și textuale)"
+
+msgid "The menu title (displayed only in the admin menu)"
+msgstr "Titlul meniului (afișat doar în meniul de administrare)"
+
+msgid "The minimum value (used only by numeric and textual fields)"
+msgstr "Valoarea minimă (utilizată numai de câmpurile numerice și textuale)"
+
+msgid "The page slug (used to generate the page URL). Must be unique"
+msgstr ""
+"Slug-ul paginii (utilizat pentru a genera URL-ul paginii). Trebuie să fie "
+"unic"
+
+msgid "The page title"
+msgstr "Titlul paginii"
+
+msgid "The parent element slug"
+msgstr "Elementul părinte slug"
+
+msgid ""
+"The position in the menu order the post type should appear. To work, "
+"$show_in_menu must be true. Default null (at the bottom)."
+msgstr ""
+"Poziția în ordinea meniului în care trebuie să apară tipul de post. Pentru a "
+"funcționa, $show_in_menu trebuie să fie true. Valoarea implicită este nulă "
+"(în partea de jos)."
+
+msgid "The post name/slug. Used for various queries for taxonomy content."
+msgstr ""
+"Numele postului/slug. Utilizat pentru diverse interogări pentru conținutul "
+"taxonomiei."
+
+msgid "The post name/slug. Used for various queries."
+msgstr "Numele postului/slug. Utilizat pentru diverse interogări."
+
+msgid "The product data name."
+msgstr "Denumirea datelor produsului."
+
+msgid "The requested page was not found, was deleted or was moved!"
+msgstr "Pagina solicitată nu a fost găsită, a fost ștearsă sau a fost mutată!"
+
+msgid "The single template for taxonomy term"
+msgstr "Șablonul unic pentru termenul taxonomic"
+
+msgid "The single template for this custom post type"
+msgstr "Șablonul unic pentru acest tip de post personalizat"
+
+msgid ""
+"The string to use to build the read, edit, and delete capabilities. May be "
+"passed as an array to allow for alternative plurals when using this argument "
+"as a base to construct the capabilities, e.g. array('story', 'stories'). "
+"Default 'post'."
+msgstr ""
+"Șirul de caractere care trebuie utilizat pentru a construi capacitățile de "
+"citire, editare și ștergere. Poate fi transmis sub formă de matrice pentru a "
+"permite folosirea pluralului alternativ atunci când se utilizează acest "
+"argument ca bază pentru construirea capacităților, de exemplu "
+"array(\"story\", \"stories\"). Valoarea implicită este \"post\"."
+
+msgid ""
+"The template type. Possible values: archive, single, related, metaField."
+msgstr "Tipul de șablon. Valori posibile: archive, single, related, metaField."
+
+msgid ""
+"The template used to display this custom post type when it is releated to "
+"another one. If no template is set, it will be displayed just the title of "
+"the post."
+msgstr ""
+"Șablonul utilizat pentru a afișa acest tip de articol personalizat atunci "
+"când este asociat cu un alt tip de articol. Dacă nu este setat niciun "
+"șablon, va fi afișat doar titlul postării."
+
+msgid "The visual builder can be used with a minimum resolution of 960 px wide"
+msgstr ""
+"Constructorul vizual poate fi utilizat cu o rezoluție minimă de 960 px lățime"
+
+msgid "The visual builder is disabled. Go to Settings page and enable it."
+msgstr ""
+"Constructorul vizual este dezactivat. Mergeți la pagina Setări și activați-l."
+
+msgid "This field is mandatory"
+msgstr "Acest câmp este obligatoriu"
+
+msgid ""
+"This is the only time that the secret access key can be viewed or copied. "
+"You cannot recover it later. However, you can delete and create or "
+"regenerate new API key at any time."
+msgstr ""
+"Acesta este singurul moment în care cheia de acces secretă poate fi "
+"vizualizată sau copiată. Nu o puteți recupera ulterior. Cu toate acestea, "
+"puteți șterge și crea sau regenera o nouă cheie API în orice moment."
+
+msgid "This number controls the position of this page in the admin menu"
+msgstr ""
+"Acest număr controlează poziția acestei pagini în meniul de administrare"
+
+msgid "This text will appear after input"
+msgstr "Acest text va apărea după introducere"
+
+msgid "This text will appear before input"
+msgstr "Acest text va apărea înainte de intrare"
+
+msgid ""
+"This tool allows you to import settings and meta fields from previously "
+"exported .acpt files (max size allowed is 2Mb)."
+msgstr ""
+"Acest instrument vă permite să importați setări și câmpuri meta din fișiere ."
+"acpt exportate anterior (dimensiunea maximă permisă este de 2Mb)."
+
+msgid "To change the base url of REST API route. Default is"
+msgstr ""
+"Pentru a modifica adresa URL de bază a rutei API REST. Valoarea implicită "
+"este"
+
+msgid "Toggle guides"
+msgstr "Comută ghidaje"
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using  as "
+"slug. To prevent rewrite, set to false. To specify rewrite rules, an array "
+"can be passed with any of these keys:"
+msgstr ""
+"Declanșează gestionarea rescrierilor pentru această taxonomie. Valoarea "
+"implicită true, folosind ca slug. Pentru a împiedica rescrierea, setați la "
+"false. Pentru a specifica regulile de rescriere, se poate trece o matrice cu "
+"oricare dintre aceste chei:"
+
+msgid "Type"
+msgstr "Tip"
+
+msgid "Type here your ACPT email account. Ex: mauro@acpt.io"
+msgstr "Introduceți aici contul dvs. de e-mail ACPT. Ex: mauro@acpt.io"
+
+msgid "Type here your license. Ex: 123e4567-e89b-12d3-a456-426614174000"
+msgstr ""
+"Introduceți aici licența dumneavoastră. Ex: 123e4567-e89b-12d3-"
+"a456-426614174000"
+
+msgid "Uncheck `required` in the selected meta field"
+msgstr "Debifați `required` în câmpul meta selectat"
+
+msgid "Uncheck `show in archive` in the selected meta field"
+msgstr "Debifați `show in archive` în câmpul meta selectat"
+
+msgid "Undo"
+msgstr "Anulare"
+
+msgid "Unfiltered html"
+msgstr "Html nefiltrat"
+
+msgid "Update {{r}}"
+msgstr "Actualizare {{r}}"
+
+msgid "Upgrade"
+msgstr "Actualizați"
+
+msgid "Upload"
+msgstr "Încarcă"
+
+msgid "Upload file"
+msgstr "Încarcă  fișier"
+
+msgid "Upload your file"
+msgstr "Încărcați fișierul dvs"
+
+msgid "Use featured image"
+msgstr "Folosește imaginea reprezentativă"
+
+msgid ""
+"Use this tool to quick export the general settings and meta fields for every "
+"element in a compressed JSON format called .acpt."
+msgstr ""
+"Utilizați acest instrument pentru a exporta rapid setările generale și "
+"câmpurile meta pentru fiecare element într-un format JSON comprimat numit ."
+"acpt."
+
+msgid "Used for the post type admin menu item"
+msgstr "Utilizat pentru elementul de meniu admin post type"
+
+msgid "Used for the taxonomy admin menu item"
+msgstr "Utilizat pentru elementul de meniu pentru administrarea taxonomiei"
+
+msgid "Used when a singular label is needed"
+msgstr "Se utilizează atunci când este necesară o etichetă singulară"
+
+msgid "Single user"
+msgstr "Utilizator unic"
+
+msgid "User"
+msgstr "Utilizator"
+
+msgid "Users"
+msgstr "Utilizatorii"
+
+msgid "User meta"
+msgstr "Meta Utilizator"
+
+msgid "User meta successfully saved"
+msgstr "User meta salvat cu succes"
+
+msgid "View"
+msgstr "Vizualizare"
+
+msgid "View WooCommerce product data"
+msgstr "Vizualizați datele produsului WooCommerce"
+
+msgid "Visibility of product data"
+msgstr "Vizibilitatea datelor privind produsele"
+
+msgid ""
+"WARNING: This action will delete all posts and metadata for this post type. "
+"The action is irreversible."
+msgstr ""
+"AVERTISMENT: Această acțiune va șterge toate postările și metadatele pentru "
+"acest tip de postare. Acțiunea este ireversibilă."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"block. The action is irreversible."
+msgstr ""
+"AVERTISMENT: Această acțiune va șterge toate metadatele postării legate de "
+"acest bloc. Acțiunea este ireversibilă."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"box. The action is irreversible."
+msgstr ""
+"AVERTISMENT: Această acțiune va șterge toate metadatele postării legate de "
+"această casetă. Acțiunea este ireversibilă."
+
+msgid "When BB Theme builder is active, the visual builder is disabled."
+msgstr ""
+"Atunci când BB Theme builder este activ, constructorul vizual este "
+"dezactivat."
+
+msgid "When Oxygen Builder is active, the visual builder is disabled."
+msgstr ""
+"Atunci când Oxygen Builder este activ, constructorul vizual este dezactivat."
+
+msgid "Where do you want to copy this meta box?"
+msgstr "Unde doriți să copiați această meta-cutie?"
+
+msgid "Where do you want to copy this meta field?"
+msgstr "Unde doriți să copiați acest câmp meta?"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, must be true. If "
+"true, the post type is shown in its own top level menu. If false, no menu is "
+"shown."
+msgstr ""
+"Unde să se afișeze tipul de post în meniul de administrare. Pentru a "
+"funcționa, trebuie să fie adevărat. Dacă este adevărat, tipul de post este "
+"afișat în propriul meniu de nivel superior. Dacă este falsă, nu este afișat "
+"niciun meniu."
+
+msgid ""
+"Whether a post type is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"Dacă un tip de post este destinat utilizării publice, fie prin intermediul "
+"interfeței de administrare, fie de către utilizatorii din front-end."
+
+msgid ""
+"Whether a taxonomy is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"Dacă o taxonomie este destinată utilizării publice, fie prin intermediul "
+"interfeței de administrare, fie de către utilizatorii front-end."
+
+msgid ""
+"Whether queries can be performed on the front end for the post type as part "
+"of parse_request()."
+msgstr ""
+"Dacă pot fi efectuate interogări în front-end pentru tipul de post ca parte "
+"a parse_request()."
+
+msgid ""
+"Whether terms in this taxonomy should be sorted in the order they are "
+"provided to wp_set_object_terms(). Default null which equates to false."
+msgstr ""
+"Dacă termenii din această taxonomie trebuie să fie sortați în ordinea în "
+"care sunt furnizați la wp_set_object_terms(). Valoarea implicită este null, "
+"ceea ce echivalează cu false."
+
+msgid "Whether the taxonomy is hierarchical. Default false."
+msgstr "Dacă taxonomia este ierarhică. Valoarea implicită este falsă."
+
+msgid ""
+"Whether the taxonomy is publicly queryable. If not set, the default is "
+"inherited from $public."
+msgstr ""
+"Dacă taxonomia poate fi interogată public. Dacă nu este setată, valoarea "
+"implicită este moștenită de la $public."
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled."
+msgstr ""
+"Dacă ar trebui să existe arhive de tip post sau, dacă este un șir de "
+"caractere, slug-ul arhivei care trebuie utilizat. Va genera regulile de "
+"rescriere corespunzătoare dacă $rewrite este activat."
+
+msgid ""
+"Triggers the handling of rewrites for this post type. To prevent rewrite, "
+"set to false. Defaults to true, using $post_type as slug. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Declanșează gestionarea rescrierilor pentru acest tip de mesaj. Pentru a "
+"împiedica rescrierea, setați la false. Valoarea implicită este true, "
+"folosind $post_type ca slug. Pentru a specifica regulile de rescriere, se "
+"poate trece o matrice cu oricare dintre aceste chei:"
+
+msgid ""
+"Whether to display a column for the taxonomy on its post type listing "
+"screens. Default false."
+msgstr ""
+"Dacă se afișează o coloană pentru taxonomie pe ecranele de listare a tipului "
+"de articol. Valoarea implicită false."
+
+msgid ""
+"Whether to generate and allow a UI for managing terms in this taxonomy in "
+"the admin. If not set, the default is inherited from $public (default true)."
+msgstr ""
+"Dacă se generează și se permite o interfață de utilizare pentru gestionarea "
+"termenilor din această taxonomie în administrator. Dacă nu este setată, "
+"valoarea implicită este moștenită de la $public (valoarea implicită true)."
+
+msgid ""
+"Whether to generate and allow a UI for managing this post type in the admin. "
+"Default is value of $public."
+msgstr ""
+"Dacă se generează și se permite o interfață de utilizare pentru gestionarea "
+"acestui tip de mesaj în administratorul de fișiere. Valoarea implicită este "
+"valoarea $public."
+
+msgid ""
+"Whether to include the post type in the REST API. Set this to true for the "
+"post type to be available in the block editor. SET TRUE TO ENABLE GUTEMBERG "
+"EDITOR."
+msgstr ""
+"Dacă se include tipul de mesaj în REST API. Setați acest lucru la true "
+"pentru ca tipul de mesaj să fie disponibil în editorul de blocuri. SETAȚI "
+"TRUE PENTRU A ACTIVA EDITORUL GUTEMBERG."
+
+msgid ""
+"Whether to include the taxonomy in the REST API. Set this to true for the "
+"taxonomy to be available in the block editor. SET TRUE TO ENABLE "
+"VISUALIZATION ON GUTEMBERG EDITOR."
+msgstr ""
+"Dacă se include taxonomia în API REST. Setați acest lucru la true pentru ca "
+"taxonomia să fie disponibilă în editorul de blocuri. SETAȚI TRUE PENTRU A "
+"ACTIVA VIZUALIZAREA ÎN EDITORUL GUTEMBERG."
+
+msgid ""
+"Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
+"the default is inherited from $show_ui (default true)."
+msgstr ""
+"Dacă se va lista taxonomia în controalele Tag Cloud Widget. Dacă nu este "
+"setat, valoarea implicită este moștenită de la $show_ui (implicit true)."
+
+msgid ""
+"Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+"shown as a submenu of the object type menu. If false, no menu is shown. "
+"$show_ui must be true. If not set, default is inherited from $show_ui "
+"(default true)."
+msgstr ""
+"Dacă se afișează taxonomia în meniul de administrare. Dacă este adevărat, "
+"taxonomia este afișată ca un submeniu al meniului tipului de obiect. Dacă "
+"este falsă, nu se afișează niciun meniu. $show_ui trebuie să fie true. Dacă "
+"nu este setat, valoarea implicită este moștenită de la $show_ui (implicit "
+"true)."
+
+msgid ""
+"Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
+"default is inherited from $show_ui (default true)."
+msgstr ""
+"Dacă se afișează taxonomia în panoul de editare rapidă/în bloc. Dacă nu este "
+"setat, valoarea implicită este moștenită de la $show_ui (implicit true)."
+
+msgid "Which does this template belong to?"
+msgstr "Cui aparține acest șablon?"
+
+msgid "Width"
+msgstr "Lăţime"
+
+msgid "WooCommerce product data"
+msgstr "Datele produsului WooCommerce"
+
+msgid "WooCommerce product data fields successfully saved"
+msgstr "Câmpurile de date ale produsului WooCommerce au fost salvate cu succes"
+
+msgid "WooCommerce product data successfully deleted"
+msgstr "Datele produsului WooCommerce au fost șterse cu succes"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "Yes, delete it"
+msgstr "Da, ștergeți acest lucru"
+
+msgid "You are going to delete WooCommerce this product data. Are you sure?"
+msgstr "Veți șterge datele acestui produs WooCommerce. Sunteți sigur?"
+
+msgid "You are going to delete this API key. Are you sure?"
+msgstr "Aveți de gând să ștergeți această cheie API. Sunteți sigur?"
+
+msgid "You are going to delete this custom post type. Are you sure?"
+msgstr "Veți șterge acest tip de post personalizat. Sunteți sigur?"
+
+msgid ""
+"You are going to delete this meta block definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Veți șterge definiția acestui meta-bloc. Fiecare definiție de câmp din "
+"interiorul acestuia va fi ștearsă. Sunteți sigur?"
+
+msgid ""
+"You are going to delete this meta box definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Veți șterge această definiție de metabox. Fiecare definiție de câmp din "
+"interiorul acesteia va fi ștearsă. Sunteți sigur?"
+
+msgid ""
+"You are going to delete this option page definition. Every associated meta "
+"fields and child page will be deleted. Are you sure?"
+msgstr ""
+"Veți șterge definiția acestei pagini de opțiuni. Toate câmpurile meta "
+"asociate și pagina copil vor fi șterse. Sunteți sigur?"
+
+msgid "You are going to delete this taxonomy. Are you sure?"
+msgstr "Veți șterge această taxonomie. Sunteți sigur?"
+
+msgid "Delete this block"
+msgstr "Ștergeți acest bloc"
+
+msgid "Your API keys"
+msgstr "Cheile dumneavoastră API"
+
+msgid "Your favourite ACPT settings"
+msgstr "Setările dvs. preferate ACPT"
+
+msgid "Your new generated API key"
+msgstr "Noua ta cheie API generată"
+
+msgid "Your theme already has a single template for"
+msgstr "Tema dvs. are deja un singur șablon pentru"
+
+msgid "Your theme already has an archive template for"
+msgstr "Tema dvs. are deja un șablon de arhivă pentru"
+
+msgid "`has_archive` set to false"
+msgstr "`has_archive` setat la false"
+
+msgid "child element"
+msgstr "element copil"
+
+msgid "current"
+msgstr "curent"
+
+msgid "custom post type"
+msgstr "tip de post personalizat"
+
+msgid "custom post types registered"
+msgstr "tipuri de mesaje personalizate înregistrate"
+
+msgid "details"
+msgstr "detalii"
+
+msgid "format"
+msgstr "format"
+
+msgid "global settings"
+msgstr "setări globale"
+
+msgid "id"
+msgstr "id"
+
+msgid "is checked"
+msgstr "se verifică"
+
+msgid "is empty"
+msgstr "e gol"
+
+msgid "is equal to"
+msgstr "este egal cu"
+
+msgid "is greater or equals than"
+msgstr "este mai mare sau egală cu"
+
+msgid "is greater than"
+msgstr "mai mare decât"
+
+msgid "is greater than or equal to"
+msgstr "%1$s trebuie să fie mai mare sau egală cu %2$d"
+
+msgid "is included in"
+msgstr "este inclus în"
+
+msgid "is less or equals than"
+msgstr "este mai mică sau egală cu"
+
+msgid "is less than"
+msgstr "mai puţin"
+
+msgid "is less than or equal to"
+msgstr "%1$s trebuie să fie mai mică sau egală cu %2$d"
+
+msgid "is like to"
+msgstr "este ca și cum"
+
+msgid "is not checked"
+msgstr "nu este verificat"
+
+msgid "is not empty"
+msgstr "nu e gol"
+
+msgid "is not equal to"
+msgstr "nu este egal cu"
+
+msgid "is not included in"
+msgstr "nu este inclus în"
+
+msgid "is not like"
+msgstr "nu este ca"
+
+msgid "meta boxes"
+msgstr "casete meta"
+
+msgid "Meta boxes total count"
+msgstr "Numărul total de cutii meta"
+
+msgid "meta fields"
+msgstr "câmpuri meta"
+
+msgid "Meta fields total count"
+msgstr "Numărul total de câmpuri meta"
+
+msgid "min length is"
+msgstr "lungimea minimă este"
+
+msgid "old"
+msgstr "vechi"
+
+msgid "product data fields"
+msgstr "câmpuri de date ale produsului"
+
+msgid "record(s) found"
+msgstr "înregistrare(e) găsită(e)"
+
+msgid "see here"
+msgstr "vezi aici"
+
+msgid "slug"
+msgstr "slug"
+
+msgid "taxonomies registered"
+msgstr "taxonomii înregistrate"
+
+msgid "template"
+msgstr "șablon"
+
+msgid "title"
+msgstr "titlu"
+
+msgid "visibility"
+msgstr "vizibilitate"
+
+msgid "Visibility"
+msgstr "Vizibilitate"
+
+msgid "{{r}} published"
+msgstr "{{r}} publicat"
+
+msgid "{{r}} published privately"
+msgstr "{{r}} publicat privat"
+
+msgid "{{r}} reverted to draft"
+msgstr "{{r}} a revenit la proiect"
+
+msgid "{{r}} scheduled"
+msgstr "{{r}} programat"
+
+msgid "{{r}} updated"
+msgstr "{{r}} actualizat"
+
+msgid "Address map"
+msgstr "Harta adreselor"
+
+msgid "Color"
+msgstr "Culoare"
+
+msgid "Currency"
+msgstr "Moneda"
+
+msgid "Weight"
+msgstr "Greutate"
+
+msgid "Length"
+msgstr "Lungime"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Email address"
+msgstr "Adresă email"
+
+msgid "Number"
+msgstr "Număr"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Phone Number"
+msgstr "Număr de telefon"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "List"
+msgstr "Listă"
+
+msgid "Select Multiple"
+msgstr "Selectați mai multe valori"
+
+msgid "Toggle"
+msgstr "Schimba"
+
+msgid "Embed content"
+msgstr "Încorporați conținut"
+
+msgid "Gallery"
+msgstr "Galerie"
+
+msgid "Image"
+msgstr "Imagine"
+
+msgid "Post relationship"
+msgstr "Relația de post"
+
+msgid "Relationship"
+msgstr "Relaţie"
+
+msgid "Time"
+msgstr "Timp"
+
+msgid "Repeater"
+msgstr "Repetitiv"
+
+msgid "Grouped field (Repeater)"
+msgstr "Câmp grupat (Repeater)"
+
+msgid "User (select multiple)"
+msgstr "Utilizator (selectați mai multe)"
+
+msgid "Checkbox"
+msgstr "Căsuță de bifat"
+
+msgid "Radio button"
+msgstr "Buton de radio"
+
+msgid "Date Range"
+msgstr "Interval de date"
+
+msgid "Flexible content"
+msgstr "Conținut flexibil"
+
+msgid "is enabled"
+msgstr "este activată"
+
+msgid "found"
+msgstr "găsit"
+
+msgid "record(s)"
+msgstr "înregistrare(e)"
+
+msgid "Copied"
+msgstr "Copiat"
+
+msgid "Confirm deleting this template?"
+msgstr "Confirmați ștergerea acestui șablon?"
+
+msgid "meta"
+msgstr "meta"
+
+msgid "Meta-key"
+msgstr "Meta-cheie"
+
+msgid "Shortcode"
+msgstr "Cod scurt"
+
+msgid "Shortcodes"
+msgstr "Shortcode"
+
+msgid "Delete custom post type"
+msgstr "Ștergeți tipul de post personalizat"
+
+msgid "Delete taxonomy"
+msgstr "Ștergeți taxonomia"
+
+msgid "License"
+msgstr "Licență"
+
+msgid "Tools"
+msgstr "Unelte"
+
+msgid "Templates"
+msgstr "Șabloane"
+
+msgid "Custom Post Types"
+msgstr "Tipuri de Post personalizate"
+
+msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
+msgstr ""
+"[Extensie permisă: *.acpt, *.json, *.yaml, *.xml dimensiune maximă: 2Mb]"
+
+msgid "Associated taxonomies with the post"
+msgstr "Taxonomii asociate cu postul"
+
+msgid "Register new Post Type"
+msgstr "Înregistrați un nou tip de mesaj"
+
+msgid "Manage meta fields"
+msgstr "Gestionați câmpurile meta"
+
+msgid "Create new Custom Post Type"
+msgstr "Creați un nou tip de post personalizat"
+
+msgid "Basic"
+msgstr "De baza"
+
+msgid "Labels"
+msgstr "Etichete"
+
+msgid "Minimum configuration"
+msgstr "Configurație minimă"
+
+msgid "Additional labels"
+msgstr "Etichete suplimentare"
+
+msgid "Other settings"
+msgstr "Alte setări"
+
+msgid "Menu Name"
+msgstr "Nume Produs"
+
+msgid "Label for the menu name. Default is the same as name."
+msgstr ""
+"Etichetă pentru numele meniului. Valoarea implicită este aceeași cu cea a "
+"numelui."
+
+msgid "All items"
+msgstr "Toate anunturile"
+
+msgid ""
+"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All "
+"Pages’."
+msgstr ""
+"Etichetă pentru a desemna toate elementele dintr-o legătură de submeniu. "
+"Valoarea implicită este \"Toate postările\" / \"Toate paginile\"."
+
+msgid "Add New"
+msgstr "Adaugă nou"
+
+msgid "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+msgstr ""
+"Valoarea implicită este \"Add New\" pentru ambele tipuri, ierarhice și "
+"neierarhice."
+
+msgid "Add New Item"
+msgstr "Adaugăre nou element"
+
+msgid ""
+"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New "
+"Page’."
+msgstr ""
+"Etichetă pentru adăugarea unui nou element singular. Valoarea implicită este "
+"\"Add New Post\" / \"Add New Page\"."
+
+msgid "Edit Item"
+msgstr "Editează elementul"
+
+msgid ""
+"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+msgstr ""
+"Etichetă pentru editarea unui element singular. Valoarea implicită este "
+"\"Edit Post\" / \"Edit Page\"."
+
+msgid "New Item"
+msgstr "Element nou"
+
+msgid "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+msgstr ""
+"Etichetă pentru titlul paginii noului articol. Valoarea implicită este \"New "
+"Post\" / \"New Page\"."
+
+msgid "View Item"
+msgstr "Vizualizează obiect"
+
+msgid ""
+"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+msgstr ""
+"Etichetă pentru vizualizarea unui singur element. Valoarea implicită este "
+"\"Vizualizare mesaj\" / \"Vizualizare pagină\"."
+
+msgid "View Items"
+msgstr "Vizualizare Articole"
+
+msgid ""
+"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+msgstr ""
+"Etichetă pentru vizualizarea arhivelor de tip post. Valoarea implicită este "
+"\"Vizualizare postări\" / \"Vizualizare pagini\"."
+
+msgid "Search Item"
+msgstr "Căutare Articol"
+
+msgid ""
+"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+msgstr ""
+"Etichetă pentru căutarea de articole la plural. Valoarea implicită este "
+"\"Search Posts\" / \"Search Pages\"."
+
+msgid "Not Found"
+msgstr "Nu a fost gasit"
+
+msgid ""
+"Label used when no items are found. Default is ‘No posts found’ / ‘No pages "
+"found’."
+msgstr ""
+"Etichetă utilizată atunci când nu se găsește niciun articol. Valoarea "
+"implicită este \"Nu s-au găsit postări\" / \"Nu s-au găsit pagini\"."
+
+msgid "Not Found in Trash"
+msgstr "Niciun subiect găsit în Gunoi"
+
+msgid ""
+"Label used when no items are in the Trash. Default is ‘No posts found in "
+"Trash’ / ‘No pages found in Trash’."
+msgstr ""
+"Etichetă utilizată atunci când nu există elemente în coșul de gunoi. "
+"Valoarea implicită este \"Nu s-au găsit mesaje în coșul de gunoi\" / \"Nu s-"
+"au găsit pagini în coșul de gunoi\"."
+
+msgid ""
+"Label used to prefix parents of hierarchical items. Not used on non-"
+"hierarchical post types. Default is ‘Parent Page:’."
+msgstr ""
+"Etichetă utilizată pentru a prefixa părinții elementelor ierarhice. Nu se "
+"utilizează pentru tipurile de postări neierarhice. Valoarea implicită este "
+"\"Parent Page:\"."
+
+msgid "Featured Image"
+msgstr "Imagine recomandată"
+
+msgid ""
+"Label for the featured image meta box title. Default is ‘Featured image’."
+msgstr ""
+"Etichetă pentru titlul casetei meta a imaginii recomandate. Valoarea "
+"implicită este \"Featured image\"."
+
+msgid "Set Featured Image"
+msgstr "Setați imaginea initiala"
+
+msgid "Label for setting the featured image. Default is ‘Set featured image’."
+msgstr ""
+"Etichetă pentru setarea imaginii recomandate. Valoarea implicită este \"Set "
+"featured image\"."
+
+msgid "Remove Featured Image"
+msgstr "Eliminare imagine recomandata"
+
+msgid ""
+"Label for removing the featured image. Default is ‘Remove featured image’."
+msgstr ""
+"Etichetă pentru eliminarea imaginii prezentate. Valoarea implicită este "
+"\"Remove featured image\"."
+
+msgid "Use Featured Image"
+msgstr "Utilizați imaginea prezentată"
+
+msgid ""
+"Label in the media frame for using a featured image. Default is ‘Use as "
+"featured image’."
+msgstr ""
+"Etichetă în cadrul media pentru utilizarea unei imagini recomandate. "
+"Valoarea implicită este \"Use as featured image\"."
+
+msgid ""
+"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page "
+"Archives’."
+msgstr ""
+"Etichetă pentru arhive în meniurile de navigare. Valoarea implicită este "
+"\"Arhive postări\" / \"Arhive pagini\"."
+
+msgid "Insert into item"
+msgstr "Inserare în element"
+
+msgid ""
+"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert "
+"into page’."
+msgstr ""
+"Etichetă pentru butonul cadrului media. Valoarea implicită este \"Insert "
+"into post\" / \"Insert into page\"."
+
+msgid "Uploaded to this Item"
+msgstr "Încărcat la acest articol"
+
+msgid ""
+"Label for the media frame filter. Default is ‘Uploaded to this post’ / "
+"‘Uploaded to this page’."
+msgstr ""
+"Etichetă pentru filtrul cu ramă media. Valoarea implicită este \"Uploaded to "
+"this post\" / \"Uploaded to this page\"."
+
+msgid "Filter Items List"
+msgstr "Lista elementelor de filtrare"
+
+msgid ""
+"Label for the table views hidden heading. Default is ‘Filter posts list’ / "
+"‘Filter pages list’."
+msgstr ""
+"Etichetă pentru titlul ascuns al vizualizărilor de tabel. Valoarea implicită "
+"este \"Filtrează lista de mesaje\" / \"Filtrează lista de pagini\"."
+
+msgid "Items List Navigation"
+msgstr "Navigare în lista de articole"
+
+msgid ""
+"Label for the table pagination hidden heading. Default is ‘Posts list "
+"navigation’ / ‘Pages list navigation’."
+msgstr ""
+"Etichetă pentru titlul ascuns al paginării tabelului. Valoarea implicită "
+"este \"Posts list navigation\" / \"Pages list navigation\"."
+
+msgid "Items List"
+msgstr "Lista articolelor"
+
+msgid ""
+"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+msgstr ""
+"Etichetă pentru titlul ascuns al tabelului. Valoarea implicită este \"Posts "
+"list\" / \"Pages list\"."
+
+msgid "Label for the date filter in list tables. Default is ‘Filter by date’."
+msgstr ""
+"Etichetă pentru filtrul de date în tabelele cu liste. Valoarea implicită "
+"este \"Filter by date\"."
+
+msgid "Item published"
+msgstr "Articol publicat"
+
+msgid ""
+"Label used when an item is published. Default is ‘Post published.’ / ‘Page "
+"published.’"
+msgstr ""
+"Etichetă utilizată atunci când un articol este publicat. Valoarea implicită "
+"este \"Post publicat\" / \"Pagină publicată\""
+
+msgid "Item published privately"
+msgstr "Articol publicat în privat"
+
+msgid ""
+"Label used when an item is published with private visibility. Default is "
+"‘Post published privately.’ / ‘Page published privately.’"
+msgstr ""
+"Etichetă utilizată atunci când un element este publicat cu vizibilitate "
+"privată. Valoarea implicită este \"Post publicat în mod privat\" / \"Pagina "
+"publicată în mod privat\""
+
+msgid "Item reverted to draft"
+msgstr "Postul a revenit la stadiul de proiect"
+
+msgid ""
+"Label used when an item is switched to a draft. Default is ‘Post reverted to "
+"draft.’ / ‘Page reverted to draft.’"
+msgstr ""
+"Etichetă utilizată atunci când un articol este trecut în draft. Valoarea "
+"implicită este \"Post revenit la draft\" / \"Page reverted to draft"
+
+msgid "Item scheduled"
+msgstr "Articol programat"
+
+msgid ""
+"Label used when an item is scheduled for publishing. Default is ‘Post "
+"scheduled.’ / ‘Page scheduled.’"
+msgstr ""
+"Etichetă utilizată atunci când un articol este programat pentru publicare. "
+"Valoarea implicită este \"Postare programată\" / \"Pagină programată\""
+
+msgid "Item updated"
+msgstr "Actualizare productelor"
+
+msgid ""
+"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page "
+"updated.’"
+msgstr ""
+"Etichetă utilizată atunci când un articol este actualizat. Valoarea "
+"implicită este \"Post actualizat\" / \"Pagina actualizată\""
+
+msgid ""
+"General name for the taxonomy, usually plural. The same as and overridden by "
+"$tax->label. Default 'Tags/Categories'."
+msgstr ""
+"Denumire generală a taxonomiei, de obicei la plural. Același lucru ca și "
+"$tax->label și este înlocuit de acesta. Valoarea implicită este \"Tags/"
+"Categories\"."
+
+msgid "Singular name"
+msgstr "Nume singular"
+
+msgid "Name for one object of this taxonomy. Default 'Tag/Category'"
+msgstr ""
+"Denumire pentru un obiect din această taxonomie. Valoarea implicită \"Tag/"
+"Category\""
+
+msgid "Search items"
+msgstr "Căutarea elementelor"
+
+msgid "Search Tags/Search Categories"
+msgstr "Căutați etichete/Categorii de căutare"
+
+msgid "Popular items"
+msgstr "Masini populare"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Popular "
+"Tags'."
+msgstr ""
+"Această etichetă este utilizată numai pentru taxonomiile neierarhice. "
+"Valoarea implicită este \"Popular Tags\"."
+
+msgid "All Tags/All Categories"
+msgstr "Toate etichetele/toate categoriile"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Parent "
+"Category'."
+msgstr ""
+"Această etichetă este utilizată numai pentru taxonomiile ierarhice. Valoarea "
+"implicită este \"Parent Category\"."
+
+msgid "Parent item colon"
+msgstr "Articolul părinte colon"
+
+msgid "The same as parent_item, but with colon : in the end."
+msgstr "La fel ca parent_item, dar cu două puncte : la sfârșit."
+
+msgid "Edit Tag/Edit Category."
+msgstr "Editare etichetă/Editare categorie."
+
+msgid "View Tag/View Category."
+msgstr "Vezi etichetă/vedeți categoria."
+
+msgid "Update item"
+msgstr "Postul de actualizare"
+
+msgid "Update Tag/Update Category."
+msgstr "Actualizați eticheta/actualizați categoria."
+
+msgid "Add New Tag/Add New Category."
+msgstr "Adăugați o etichetă nouă/Adaugați o categorie nouă."
+
+msgid "New item name"
+msgstr "Denumirea noului articol"
+
+msgid "New Tag Name/New Category Name."
+msgstr "Nume nou de etichetă/Numele noii categorii."
+
+msgid "Separate items with commas"
+msgstr "Separați elementele cu virgule"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Separate "
+"tags with commas', used in the meta box."
+msgstr ""
+"Această etichetă este utilizată numai pentru taxonomiile neierarhice. "
+"Valoarea implicită \"Separați etichetele cu virgule\", utilizată în caseta "
+"meta."
+
+msgid "Add or remove items"
+msgstr "Adăugați sau eliminați elemente"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Add or "
+"remove tags', used in the meta box when JavaScript is disabled."
+msgstr ""
+"Această etichetă este utilizată numai pentru taxonomiile neierarhice. "
+"Default \"Adaugă sau elimină etichete\", utilizat în caseta meta atunci când "
+"JavaScript este dezactivat."
+
+msgid "Choose from most used"
+msgstr "Alegeți dintre cele mai utilizate"
+
+msgid ""
+"This label is only used on non-hierarchical taxonomies. Default 'Choose from "
+"the most used tags', used in the meta box."
+msgstr ""
+"Această etichetă este utilizată numai în cazul taxonomiilor neierarhice. "
+"Default \"Choose from the most used tags\" (Alege dintre cele mai utilizate "
+"etichete), utilizată în caseta meta."
+
+msgid ""
+"No tags found/No categories found', used in the meta box and taxonomy list "
+"table."
+msgstr ""
+"Nu s-au găsit etichete/Nu s-au găsit categorii\", utilizat în caseta meta și "
+"în tabelul cu lista de taxonomie."
+
+msgid "No terms"
+msgstr "Fără termeni"
+
+msgid "No tags/No categories', used in the posts and media list tables."
+msgstr ""
+"Fără etichete/Nu există categorii\", utilizat în tabelele cu listele de "
+"mesaje și media."
+
+msgid "Filter by item"
+msgstr "Filtrează după articol"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Filter by "
+"category', used in the posts list table."
+msgstr ""
+"Această etichetă este utilizată numai pentru taxonomiile ierarhice. Valoarea "
+"implicită \"Filter by category\" (Filtrează după categorie), utilizată în "
+"tabelul cu lista de mesaje."
+
+msgid "Items list navigation"
+msgstr "Navigare în lista de articole"
+
+msgid "Label for the table pagination hidden heading."
+msgstr "Etichetă pentru titlul ascuns al paginării tabelului."
+
+msgid "Label for the table hidden heading."
+msgstr "Etichetă pentru titlul ascuns al tabelului."
+
+msgid "Most used"
+msgstr "Cele mai utilizate"
+
+msgid "Title for the Most Used tab. Default 'Most Used'."
+msgstr ""
+"Titlu pentru fila Cea mai utilizată. Valoarea implicită \"Most Used\" (Cel "
+"mai utilizat)."
+
+msgid "Back to items"
+msgstr "Înapoi la articole"
+
+msgid "Key length must be 39."
+msgstr "Lungimea cheii trebuie să fie de 39."
+
+msgid "Not valid format."
+msgstr "Format nevalabil."
+
+msgid "General settings"
+msgstr "Setări generale"
+
+msgid "Content settings"
+msgstr "Setări de conținut"
+
+msgid "Danger zone"
+msgstr "Zona de pericol"
+
+msgid "manage template"
+msgstr "gestiona șablonul"
+
+msgid "Manage template"
+msgstr "Gestionați șablonul"
+
+msgid "Taxonomy global settings"
+msgstr "Setări globale ale taxonomiei"
+
+msgid "eg. Text here"
+msgstr "ex. Text aici"
+
+msgid "Thumbnail"
+msgstr "Miniatură"
+
+msgid "Medium"
+msgstr "Mediu"
+
+msgid "Large"
+msgstr "Mare"
+
+msgid "Full size"
+msgstr "Dimensiune completă"
+
+msgid "ASC"
+msgstr "ASC"
+
+msgid "DESC"
+msgstr "DESC"
+
+msgid "eg. 100%"
+msgstr "ex. 100%"
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "Tablet"
+msgstr "Tabletă"
+
+msgid "Mobile"
+msgstr "Mobil"
+
+msgid "Keyboard interaction legend"
+msgstr "Legenda interacțiunii cu tastatura"
+
+msgid "Keyboard legend"
+msgstr "Legenda tastaturii"
+
+msgid "BASIC"
+msgstr "BASIC"
+
+msgid "SPECIALIZED FIELDS"
+msgstr "DOMENII SPECIALIZATE"
+
+msgid "UNIT OF MEASURE"
+msgstr "UNITATE DE MĂSURĂ"
+
+msgid "MEDIA"
+msgstr "MEDIA"
+
+msgid "RELATIONS"
+msgstr "RELAȚII"
+
+msgid "GROUPED"
+msgstr "GRUPAT"
+
+msgid "USER RELATIONS"
+msgstr "RELAȚII CU UTILIZATORII"
+
+msgid "One to One - Unidirectional"
+msgstr "Unu la unu - Unidirecțional"
+
+msgid "One to One - Bidirectional"
+msgstr "Unu la unu - bidirecțional"
+
+msgid "One to Many - Unidirectional"
+msgstr "De la unul la mai multe - Unidirecțional"
+
+msgid "One to Many - Bidirectional"
+msgstr "Unu la mai mulți - Bidirecțional"
+
+msgid "Many to One - Unidirectional"
+msgstr "De la mulți la unul - Unidirecțional"
+
+msgid "Many to One - Bidirectional"
+msgstr "De la mulți la unul - Bidirecțional"
+
+msgid "Many to Many - Unidirectional"
+msgstr "De la mulți la mulți - unidirecțional"
+
+msgid "Many to Many - Bidirectional"
+msgstr "De la mulți la mulți - Bidirecțional"
+
+msgid "Show this field if:"
+msgstr "Afișați acest câmp dacă:"
+
+msgid "Copy settings"
+msgstr "Setări de copiere"
+
+msgid "Add condition"
+msgstr "Adăugați o condiție"
+
+msgid "ADVANCED OPTIONS"
+msgstr "OPȚIUNI AVANSATE"
+
+msgid "BASIC OPTIONS"
+msgstr "OPȚIUNI DE BAZĂ"
+
+msgid "CONDITIONAL LOGIC"
+msgstr "LOGICA CONDIȚIONALĂ"
+
+msgid "Select option"
+msgstr "Selectaţi opţiunea despre locatii model"
+
+msgid "operator"
+msgstr "operator"
+
+msgid "This field"
+msgstr "Acest câmp"
+
+msgid "Value"
+msgstr "Valoare"
+
+msgid "Label"
+msgstr "Etichetă"
+
+msgid "Post"
+msgstr "Articol"
+
+msgid "Term"
+msgstr "Termen"
+
+msgid "Related taxonomies"
+msgstr "Taxonomii conexe"
+
+msgid "Other fields"
+msgstr "Alte domenii"
+
+msgid "Invalid visibility condition type"
+msgstr "Tip de condiție de vizibilitate invalidă"
+
+msgid "Invalid visibility condition operator"
+msgstr "Operator de condiție de vizibilitate invalid"
+
+msgid "Invalid visibility condition value"
+msgstr "Valoare invalidă a condiției de vizibilitate"
+
+msgid "Invalid visibility condition logic"
+msgstr "Logică invalidă a condițiilor de vizibilitate"
+
+msgid "Box label, non latin chars allowed."
+msgstr "Etichetă de căsuță, sunt permise caracterele altele decât cele latine."
+
+msgid "Logic"
+msgstr "Logic"
+
+msgid "AND"
+msgstr "ȘI"
+
+msgid "OR"
+msgstr "SAU"
+
+msgid "Enter download text link"
+msgstr "Introduceți linkul de text pentru descărcare"
+
+msgid "Select images"
+msgstr "Selectează imagini"
+
+msgid "Remove element"
+msgstr "Eliminarea elementului"
+
+msgid "Min blocks required"
+msgstr "Blocuri minime necesare"
+
+msgid "Max blocks allowed"
+msgstr "Blocuri maxime permise"
+
+msgid "Browser icons"
+msgstr "Pictogramele browserului"
+
+msgid "Search an icon"
+msgstr "Căutați o pictogramă"
+
+msgid "Type at least 3 characters to start searching."
+msgstr "Introduceți cel puțin 3 caractere pentru a începe căutarea."
+
+msgid "Example: heart"
+msgstr "Exemplu: inima"
+
+msgid "There was an error during saving data. The error is:"
+msgstr ""
+"S-a produs o eroare în timpul salvării datelor. Eroarea este următoarea:"
+
+msgid "There was an error during saving data. Minimum number of blocks is:"
+msgstr ""
+"S-a produs o eroare în timpul salvării datelor. Numărul minim de blocuri "
+"este:"
+
+msgid "There was an error during saving data. Maximum number of blocks is:"
+msgstr ""
+"S-a produs o eroare în timpul salvării datelor. Numărul maxim de blocuri "
+"este:"
+
+msgid "Data saved correctly"
+msgstr "Date salvate corect"
+
+msgid "No meta boxes aldready created."
+msgstr "Nu sunt deja create metabox-uri."
+
+msgid "Create the first one"
+msgstr "Creați primul"
+
+msgid "There was an error fetching icons, retry later."
+msgstr ""
+"S-a produs o eroare la preluarea pictogramelor, încercați din nou mai târziu."
+
+msgid "Sorry, no result match."
+msgstr "Ne pare rău, nu se potrivesc rezultatele."
+
+msgid ""
+"The media gallery is not available. You must admin_enqueue this function: "
+"wp_enqueue_media()"
+msgstr ""
+"Galeria media nu este disponibilă. Trebuie să admin_enqueue această funcție: "
+"wp_enqueue_media()"
+
+msgid "Download"
+msgstr "Descărcare"
+
+msgid "Upload an Image"
+msgstr "Încărcați o imagine"
+
+msgid "Upload a Video"
+msgstr "Încărcarea unui videoclip"
+
+msgid "Upload a File"
+msgstr "Încărcați un fișier"
+
+msgid "Remove this block"
+msgstr "Îndepărtați acest bloc"
+
+msgid "Show/hide elements in this block"
+msgstr "Afișați/ascundeți elementele din acest bloc"
+
+msgid "Filterable in Wordpress admin post lists page"
+msgstr "Filtrabil în Wordpress admin post listele de post pagină"
+
+msgid "Quick edit in Wordpress admin post lists page"
+msgstr "Editare rapidă în Wordpress admin post liste pagina post liste"
+
+msgid "Hide the blank value"
+msgstr "Ascundeți valoarea goală"
+
+msgid "Hide the label"
+msgstr "Ascundeți eticheta"
+
+msgid "Enter the URL"
+msgstr "Introduceți URL-ul"
+
+msgid "Enter text link"
+msgstr "Introduceți link-ul de text"
+
+msgid "Settings saved. The browser will refresh after 5 seconds."
+msgstr "Setări salvate. Browserul se va reîmprospăta după 5 secunde."
+
+msgid "Exit"
+msgstr "Ieșire"
+
+msgid "Option pages successfully saved"
+msgstr "Pagini de opțiuni salvate cu succes"
+
+msgid "Children page list"
+msgstr "Lista de pagini pentru copii"
+
+msgid "Register new Taxonomy"
+msgstr "Înregistrarea unei noi taxonomii"
+
+msgid "Deactivate"
+msgstr "Dezactivați"
+
+msgid "Choose icon"
+msgstr "Alege iconiță"
+
+msgid "Select icon type from the list"
+msgstr "Selectați tipul de pictogramă din listă"
+
+msgid "Select a Dashicon"
+msgstr "Selectați un Dashicon"
+
+msgid "Select an icon from another set"
+msgstr "Selectați o pictogramă dintr-un alt set"
+
+msgid "Upload an icon image"
+msgstr "Încărcați o imagine de pictogramă"
+
+msgid "ACPT meta import start"
+msgstr "ACPT meta import start"
+
+msgid "ACPT meta import end"
+msgstr "ACPT meta import end"
+
+msgid "Option page total count"
+msgstr "Numărul total de pagini ale opțiunii"
+
+msgid "Show/hide all pages"
+msgstr "Afișați/ascundeți toate paginile"
+
+msgid "List view"
+msgstr "Vizualizare listă"
+
+msgid "Tabular view"
+msgstr "Vizualizare tabelară"
+
+msgid "Switch view"
+msgstr "Vedere comutator"
+
+msgid "ACPT Date field"
+msgstr "ACPT Câmpul de date"
+
+msgid "ACPT Textual field"
+msgstr "ACPT Câmp textual"
+
+msgid "ACPT Link field"
+msgstr "Câmpul ACPT Link"
+
+msgid "ACPT Image field"
+msgstr "Câmpul de imagine ACPT"
+
+msgid "ACPT UOM field"
+msgstr "Câmpul ACPT UOM"
+
+msgid "Select the date format"
+msgstr "Selectați formatul datei"
+
+msgid "Date range separator"
+msgstr "Separator de intervale de date"
+
+msgid "Select the date range separator"
+msgstr "Selectați separatorul intervalului de date"
+
+msgid "Value format (Decimal points)"
+msgstr "Formatul valorii (puncte zecimale)"
+
+msgid "Value format (Decimal separator)"
+msgstr "Formatul valorii (separator zecimal)"
+
+msgid "Value format (Thousands separator)"
+msgstr "Formatul valorii (Separator de mii)"
+
+msgid "Currency format"
+msgstr "Formatul monedei"
+
+msgid "Currency position"
+msgstr "Poziția valutară"
+
+msgid "Custom Format"
+msgstr "Format personalizat"
+
+msgid "Render as"
+msgstr "Redă ca"
+
+msgid "Date separator"
+msgstr "Separator de date"
+
+msgid "Classes (separated by space)"
+msgstr "Clase (separate prin spațiu)"
+
+msgid "Target link"
+msgstr "Link țintă"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Plain text"
+msgstr "Text simplu"
+
+msgid "Size (px)"
+msgstr "Dimensiune (px)"
+
+msgid "Set the icon size."
+msgstr "Setați dimensiunea pictogramei."
+
+msgid "Select the icon color."
+msgstr "Selectați culoarea pictogramei."
+
+msgid "Spacing (px)"
+msgstr "Spațiere (px)"
+
+msgid "Select the icon spacing."
+msgstr "Selectați spațierea pictogramelor."
+
+msgid "Is clickable?"
+msgstr "Este clickable?"
+
+msgid "Value and UOM"
+msgstr "Valoare și UOM"
+
+msgid "Only value"
+msgstr "Numai valoarea"
+
+msgid "Only UOM"
+msgstr "Numai UOM"
+
+msgid "UOM format"
+msgstr "Formatul UOM"
+
+msgid "Select the UOM format."
+msgstr "Selectați formatul UOM."
+
+msgid "Full UOM name"
+msgstr "Denumirea completă a UOM"
+
+msgid "Abbreviation"
+msgstr "Abreviere"
+
+msgid "UOM position"
+msgstr "Poziția UOM"
+
+msgid "Select the UOM position"
+msgstr "Selectați poziția UOM"
+
+msgid "After value"
+msgstr "După valoare"
+
+msgid "Before value"
+msgstr "Înainte de valoare"
+
+msgid "Decimal points"
+msgstr "Puncte zecimale"
+
+msgid "Set the decimal points."
+msgstr "Setați punctele zecimale."
+
+msgid "Decimal separator"
+msgstr "Separator zecimal"
+
+msgid "Set the decimal separator."
+msgstr "Setați separatorul zecimal."
+
+msgid "Thousands separator"
+msgstr "Separatoare de mii"
+
+msgid "Set the thousands separator."
+msgstr "Setați separatorul de mii."
+
+msgid "ACPT Field"
+msgstr "Domeniul ACPT"
+
+msgid "ACPT Icon field"
+msgstr "Câmpul de pictograme ACPT"
+
+msgid "List format"
+msgstr "Formatul listei"
+
+msgid "Select the list format"
+msgstr "Selectați formatul listei"
+
+msgid "String separator"
+msgstr "Separator de șiruri"
+
+msgid "Select the string separator"
+msgstr "Selectați separatorul de șiruri de caractere"
+
+msgid "ACPT Time field"
+msgstr "ACPT Câmpul de timp"
+
+msgid "Time format"
+msgstr "Formatul timpului"
+
+msgid "Select the time format"
+msgstr "Selectați formatul orei"
+
+msgid "Controls"
+msgstr "Controale"
+
+msgid "Allow video controls."
+msgstr "Permiteți controale video."
+
+msgid "Autoplay"
+msgstr "Redare automată"
+
+msgid "Autoplay player."
+msgstr "Jucător cu redare automată."
+
+msgid "Video width"
+msgstr "Latime prezentare video"
+
+msgid "Video width (% is allowed)."
+msgstr "Lățimea video (% is permisă)."
+
+msgid "Video height"
+msgstr "Înălţime Video"
+
+msgid "Video height (% is allowed)."
+msgstr "Înălțimea video (% is permisă)."
+
+msgid "You are going to delete this meta field definition. Are you sure?"
+msgstr "Veți șterge această definiție de câmp meta. Sunteți sigur?"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related to this "
+"field. The action is irreversible."
+msgstr ""
+"AVERTISMENT: Această acțiune va șterge toate metadatele postării legate de "
+"acest câmp. Acțiunea este ireversibilă."
+
+msgid "Show the shortcode"
+msgstr "Afișați codul scurt"
+
+msgid "Use this shortcode to display the meta field on your frontend."
+msgstr "Folosiți acest cod scurt pentru a afișa câmpul meta pe frontend."
+
+msgid ""
+"Please note that \"N\" stands for a positive integer value, representing the "
+"nested field index (count starts from 0)."
+msgstr ""
+"Vă rugăm să rețineți că \"N\" reprezintă o valoare întreagă pozitivă, "
+"reprezentând indexul câmpului imbricate (numărul începe de la 0)."
+
+msgid "What you want to display?"
+msgstr "Ce doriți să afișați?"
+
+msgid "Rating"
+msgstr "Evaluare"
+
+msgid "ACPT Rating field"
+msgstr "Câmpul de rating ACPT"
+
+# ######################################
+# version 2.0.0
+# ######################################
+msgid "Field groups"
+msgstr "Grupuri de teren"
+
+msgid "Create new Meta group"
+msgstr "Creați un nou Meta grup"
+
+msgid "Manage the associate meta field groups"
+msgstr "Gestionați grupurile de metacâmpuri asociate"
+
+msgid "Meta group successfully deleted."
+msgstr "Meta grup șters cu succes."
+
+msgid "Meta group"
+msgstr "Meta grup"
+
+msgid "Meta groups"
+msgstr "Meta grupuri"
+
+msgid "Group name"
+msgstr "Nume grup"
+
+msgid "Group label"
+msgstr "Eticheta grupului"
+
+msgid "No meta group found."
+msgstr "Nu s-a găsit niciun metagrup."
+
+msgid "Delete meta group"
+msgstr "Ștergerea metagrupului"
+
+msgid "You are going to delete this meta group. Are you sure?"
+msgstr "Veți șterge acest metagrup. Sunteți sigur?"
+
+msgid "Forms"
+msgstr "Formulare"
+
+msgid "Forms list"
+msgstr "Lista de formulare"
+
+msgid "Copied to the clipboard!"
+msgstr "Copiat în clipboard!"
+
+msgid "Confirm deactivating license"
+msgstr "Confirmați dezactivarea licenței"
+
+msgid ""
+"License successfully deactivated. The browser will refresh after 5 seconds."
+msgstr ""
+"Licența a fost dezactivată cu succes. Browserul se va reîmprospăta după 5 "
+"secunde."
+
+msgid "max length is"
+msgstr "lungimea maximă este"
+
+msgid "The element(s) this group is associated with"
+msgstr "Elementul (elementele) la care este asociat acest grup"
+
+msgid "This group belongs to"
+msgstr "Acest grup aparține"
+
+msgid "VALIDATION RULES"
+msgstr "REGULI DE VALIDARE"
+
+msgid "Validation"
+msgstr "Validare"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add rule\"!"
+msgstr ""
+"Nu există reguli deja create. Creați-o acum pe prima, făcând clic pe butonul "
+"\"Adaugă regulă\"!"
+
+msgid "maximum value"
+msgstr "valoarea maximă"
+
+msgid "minimum value"
+msgstr "valoarea minimă"
+
+msgid "regular expression"
+msgstr "expresie regulată"
+
+msgid "Confirm deleting block"
+msgstr "Confirmați ștergerea blocului"
+
+msgid "Confirm deleting validation rule"
+msgstr "Confirmarea ștergerii regulii de validare"
+
+msgid "Confirm deleting conditional rendering element"
+msgstr "Confirmarea ștergerii elementului de redare condiționată"
+
+msgid "Insert values separated by comma. Ex: 12, 54, foo"
+msgstr "Introduceți valori separate prin virgulă. Ex: 12, 54, foo"
+
+msgid "This is the meta-key of this field."
+msgstr "Aceasta este metacheia acestui câmp."
+
+msgid ""
+"Use it in functions like get_post_meta() to retrieve saved meta field data."
+msgstr ""
+"Folosiți-o în funcții precum get_post_meta() pentru a prelua datele din "
+"câmpurile meta salvate."
+
+msgid "Copied to clipboard"
+msgstr "Cod copiat în clipboard cu succes"
+
+msgid "Meta group settings successfully saved"
+msgstr "Setările metagrupului au fost salvate cu succes"
+
+msgid "Delete this option page"
+msgstr "Ștergeți această pagină de opțiuni"
+
+msgid "Confirm deleting page"
+msgstr "Confirmarea ștergerii paginii"
+
+msgid "Performances"
+msgstr "Spectacole"
+
+msgid "Flush the ACPT cache"
+msgstr "Ștergeți memoria cache ACPT"
+
+msgid "Flush cache"
+msgstr "Ștergeți memoria cache"
+
+msgid "Cache was successfully flushed"
+msgstr "Memoria cache a fost curățată cu succes"
+
+msgid "Enable ACPT cache"
+msgstr "Activați memoria cache ACPT"
+
+msgid "Enable the ACPT cache to optimize the plugin performances."
+msgstr ""
+"Activați memoria cache ACPT pentru a optimiza performanțele plugin-ului."
+
+msgid ""
+"Enable the ACPT cache. The cache stores the MySQL results in simple textual "
+"files to avoid useless DB calls."
+msgstr ""
+"Activați memoria cache ACPT. Memoria cache stochează rezultatele MySQL în "
+"fișiere textuale simple pentru a evita apelurile inutile la BD."
+
+msgid "select all"
+msgstr "selectați toate"
+
+msgid "deselect all"
+msgstr "deselectați toate"
+
+msgid "UOM default value"
+msgstr "Valoarea implicită UOM"
+
+msgid "Location"
+msgstr "Locaţie"
+
+msgid "Open settings"
+msgstr "Deschide setările"
+
+msgid "Close settings"
+msgstr "Închideți setările"
+
+msgid "Auto slug ON"
+msgstr "Auto slug ON"
+
+msgid "Auto slug OFF"
+msgstr "Auto slug OFF"
+
+msgid "Show"
+msgstr "Arată"
+
+msgid "File was successfully exported"
+msgstr "Fișierul a fost exportat cu succes"
+
+msgid "File was successfully imported"
+msgstr "Fișierul a fost importat cu succes"
+
+msgid "All users"
+msgstr "Toți utilizatorii"
+
+msgid "Select items"
+msgstr "Selectare elemente"
+
+msgid "Filter items"
+msgstr "Filtrarea elementelor"
+
+msgid "Invalid data provided"
+msgstr "Date invalide furnizate"
+
+msgid "Group name error(s). Please fix it."
+msgstr "Eroare(e) de nume de grup. Vă rugăm să o remediați."
+
+msgid "Location rules error(s). Please fix it."
+msgstr "Reguli de localizare eroare(e). Vă rugăm să o remediați."
+
+msgid "Post type"
+msgstr "Tip post"
+
+msgid "Post template"
+msgstr "Șablon de publicare"
+
+msgid "Post category"
+msgstr "Categoria de post"
+
+msgid "Post taxonomy"
+msgstr "Taxonomia postului"
+
+msgid "Value is not blank"
+msgstr "Valoarea nu este goală"
+
+msgid "Value is blank"
+msgstr "Valoarea este goală"
+
+msgid "Value is not equal to {{v}}"
+msgstr "Valoarea nu este egală cu {{v}}"
+
+msgid "Value is lower or equals than {{v}}"
+msgstr "Valoarea este mai mică sau egală cu {{v}}"
+
+msgid "Value is lower than {{v}}"
+msgstr "Valoarea este mai mică decât {{v}}"
+
+msgid "Value is greatest or equals than {{v}}"
+msgstr "Valoarea este mai mare sau egală cu {{v}}"
+
+msgid "Value is greatest than {{v}}"
+msgstr "Valoarea este mai mare decât {{v}}"
+
+msgid "The maximum length is {{v}}"
+msgstr "Lungimea maximă este {{v}}"
+
+msgid "The minimum length is {{v}}"
+msgstr "Lungimea minimă este {{v}}"
+
+msgid "Regex value is not matching {{v}}"
+msgstr "Valoarea Regex nu se potrivește {{v}}"
+
+msgid "All pages"
+msgstr "Toate paginile"
+
+msgid "Related entities and relationship"
+msgstr "Entități afiliate și relații"
+
+msgid "Target field"
+msgstr "Câmpul țintă"
+
+msgid "The relationship between the selected entities"
+msgstr "Relația dintre entitățile selectate"
+
+msgid "The first entity involved in the relationship"
+msgstr "Prima entitate implicată în relație"
+
+msgid "The second entity involved in the relationship"
+msgstr "A doua entitate implicată în relație"
+
+msgid "Selected items"
+msgstr "Elemente selectate"
+
+msgid "From entity is not a custom post type"
+msgstr "De la entitate nu este un tip de post personalizat"
+
+msgid "From entity is not a taxonomy"
+msgstr "De la entitate nu este o taxonomie"
+
+msgid "From entity is not valid"
+msgstr "De la entitate nu este valid"
+
+msgid "From entity is not an user"
+msgstr "De la entitate nu este un utilizator"
+
+msgid "From entity is not an option page"
+msgstr "Din entitate nu este o pagină de opțiune"
+
+msgid "No relation set on this field."
+msgstr "Acest câmp nu are nicio relație."
+
+msgid "You are going to delete this template. Are you sure?"
+msgstr "Veți șterge acest șablon. Sunteți sigur?"
+
+msgid "Template successfully deleted."
+msgstr "Șablonul a fost șters cu succes."
+
+msgid "Manage product data fields"
+msgstr "Gestionați câmpurile de date ale produsului"
+
+msgid ""
+"No pages already created. Create the first one now by clicking the button "
+"\"Add page\"!"
+msgstr ""
+"Nu există pagini deja create. Creați prima pagină acum, făcând clic pe "
+"butonul \"Adaugă pagină\"!"
+
+msgid "Delete the meta box after copying"
+msgstr "Ștergeți caseta meta după copiere"
+
+msgid "Create form"
+msgstr "Creați formularul"
+
+msgid "Create a new form"
+msgstr "Creați un nou formular"
+
+msgid "Edit form"
+msgstr "Editați Formular"
+
+msgid "No forms found."
+msgstr "Nu s-a găsit nici un formular."
+
+msgid "Form name"
+msgstr "Numele formularului"
+
+msgid "Form label"
+msgstr "Etichetă formular"
+
+msgid "Action"
+msgstr "Acțiune"
+
+msgid "Post management"
+msgstr "Managementul postului"
+
+msgid "Custom action"
+msgstr "Acțiune personalizată"
+
+msgid "Method"
+msgstr "Metodă"
+
+msgid "PHP custom handling"
+msgstr "Manipulare personalizată PHP"
+
+msgid "Field mapping"
+msgstr "Cartografierea câmpurilor"
+
+msgid "List to populate from"
+msgstr "Listă din care să se populeze"
+
+msgid "If blank, the current post_ID will be used"
+msgstr "Dacă este gol, se va folosi post_ID-ul curent"
+
+msgid "If blank, the current queried term_ID will be used"
+msgstr "Dacă este gol, se va folosi termenul_ID interogat curent"
+
+msgid "If blank, the current logged user ID will be used"
+msgstr "Dacă este gol, se va utiliza ID-ul utilizatorului curent înregistrat"
+
+msgid "Form successfully saved"
+msgstr "Formular salvat cu succes"
+
+msgid "Delete form"
+msgstr "Ștergere formular"
+
+msgid "You are going to delete this form. Are you sure?"
+msgstr "Aveți de gând să ștergeți acest formular. Sunteți sigur?"
+
+msgid "Form successfully deleted"
+msgstr "Formular șters cu succes"
+
+msgid "Form manager"
+msgstr "Manager de formular"
+
+msgid "Form fields"
+msgstr "Câmpuri de formular"
+
+msgid "Drop elements here"
+msgstr "Aruncați elementele aici"
+
+msgid "CSS classes"
+msgstr "Clase CSS"
+
+msgid "Placeholder"
+msgstr "Înlocuitor"
+
+msgid "Description"
+msgstr "Descriere"
+
+msgid "Layout"
+msgstr "Aspect"
+
+msgid "Alignment"
+msgstr "Aliniere"
+
+msgid "Add rule"
+msgstr "Adăugare regulă"
+
+msgid "Step value"
+msgstr "Valoarea pasului"
+
+msgid "Rows value"
+msgstr "Valoarea rândurilor"
+
+msgid "Cols value"
+msgstr "Valoarea colilor"
+
+msgid "Type value"
+msgstr "Valoarea de tip"
+
+msgid "Standard fields"
+msgstr "Câmpuri standard"
+
+msgid "ACPT fields"
+msgstr "Câmpurile ACPT"
+
+msgid "WordPress user fields"
+msgstr "Câmpurile de utilizator WordPress"
+
+msgid "WordPress post fields"
+msgstr "Câmpuri de post WordPress"
+
+msgid "Reset fields"
+msgstr "Resetați câmpurile"
+
+msgid "Columns"
+msgstr "Coloane"
+
+msgid "Ajax action"
+msgstr "Acțiune Ajax"
+
+msgid "Ajax success response handling"
+msgstr "Gestionarea răspunsului de succes Ajax"
+
+msgid "Allow empty value"
+msgstr "Permiteți o valoare goală"
+
+msgid "Enable editor"
+msgstr "Activează editorul"
+
+msgid "Your Google reCAPTCHA site key"
+msgstr "Cheia site-ului Google reCAPTCHA"
+
+msgid "Your Google reCAPTCHA secret key"
+msgstr "Cheia ta secretă Google reCAPTCHA"
+
+msgid "Your Google reCAPTCHA site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Cheia site-ului Google reCAPTCHA. Necesară pentru a utiliza câmpul de "
+"formular CAPTCHA."
+
+msgid "Your Google reCAPTCHA secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Cheia ta secretă Google reCAPTCHA. Necesară pentru a utiliza câmpul de "
+"formular CAPTCHA."
+
+msgid "Maximum date"
+msgstr "Data maximă"
+
+msgid "Minimum date"
+msgstr "Data minimă"
+
+msgid "Icon set"
+msgstr "Set de pictograme"
+
+msgid "Enable forms"
+msgstr "Activați formularele"
+
+msgid "Enable the form builder."
+msgstr "Activați constructorul de formulare."
+
+msgid "Create new post"
+msgstr "Creați un post nou"
+
+msgid "Create new user"
+msgstr "Creare utilizator nou"
+
+msgid "Create new term"
+msgstr "Crearea unui nou termen"
+
+msgid "Name is already taken"
+msgstr "Numele este deja luat"
+
+msgid "Copy"
+msgstr "Copiază"
+
+msgid "Duplicate"
+msgstr "Duplicare"
+
+msgid "Execute"
+msgstr "Executa"
+
+msgid "Copy selected meta boxes"
+msgstr "Copiați casetele meta selectate"
+
+msgid "Copy selected meta fields"
+msgstr "Copierea câmpurilor meta selectate"
+
+msgid "Delete after copying"
+msgstr "Ștergeți după copiere"
+
+msgid "Copy selected meta blocks"
+msgstr "Copierea blocurilor meta selectate"
+
+msgid "Scroll to top"
+msgstr "Derulaţi în sus"
+
+msgid "Select this element"
+msgstr "Selectați acest element"
+
+msgid "Deselect this element"
+msgstr "Deselectați acest element"
+
+msgid "Submit a bug"
+msgstr "Trimiteți un bug"
+
+msgid "Multiple"
+msgstr "Mai multe"
+
+msgid "Input file accepts"
+msgstr "Fișierul de intrare acceptă"
+
+msgid "Maximum size"
+msgstr "Mărime maximă"
+
+msgid "Minimum size"
+msgstr "Dimensiune minimă"
+
+msgid "Remove"
+msgstr "Elimină"
+
+msgid "These CSS classes will be applied to back-end editor fields"
+msgstr "Aceste clase CSS vor fi aplicate la câmpurile editorului din back-end"
+
+msgid "Add CSS classes to back-end editor fields (ex. class-active pulse)"
+msgstr ""
+"Adăugarea de clase CSS la câmpurile editorului back-end (ex. class-active "
+"pulse)"
+
+msgid "Duplicate this option page"
+msgstr "Duplicarea acestei pagini de opțiuni"
+
+msgid "Copy this option page"
+msgstr "Copiați această pagină de opțiuni"
+
+msgid "Delete the meta option page after copying"
+msgstr "Ștergeți pagina de opțiuni meta după copiere"
+
+msgid "Page was successfully copied"
+msgstr "Pagina a fost copiată cu succes"
+
+msgid "Unknown error, please retry later"
+msgstr "Eroare necunoscută, vă rugăm să încercați din nou mai târziu"
+
+msgid "Whether the post type is hierarchical (e.g. page). Default false."
+msgstr ""
+"Dacă tipul de post este ierarhic (de exemplu, pagină). Valoarea implicită "
+"false."
+
+msgid "Default positions for Core Menu Items"
+msgstr "Poziții implicite pentru elementele din meniul principal"
+
+msgid ""
+"The position in the menu order this page should appear. The higher the "
+"number, the lower its position in the menu."
+msgstr ""
+"Poziția în ordinea meniului în care trebuie să apară această pagină. Cu cât "
+"numărul este mai mare, cu atât poziția sa în meniu este mai mică."
+
+msgid "Default positions"
+msgstr "Poziții implicite"
+
+msgid "Custom post type list"
+msgstr "Lista de tipuri de posturi personalizate"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, $show_ui must be "
+"true. If true, the post type is shown in its own top level menu. If false, "
+"no menu is shown."
+msgstr ""
+"Unde să se afișeze tipul de post în meniul de administrare. Pentru a "
+"funcționa, $show_ui trebuie să fie true. Dacă este adevărat, tipul de "
+"articol este afișat în propriul meniu de nivel superior. Dacă este falsă, nu "
+"este afișat niciun meniu."
+
+msgid "To change the base url of REST API route. Default is $post_type."
+msgstr ""
+"Pentru a modifica adresa URL de bază a rutei API REST. Valoarea implicită "
+"este $post_type."
+
+msgid "Associated WooCommerce product data"
+msgstr "Date asociate produsului WooCommerce"
+
+msgid "Label displayed after a term has been updated."
+msgstr "Etichetă afișată după ce un termen a fost actualizat."
+
+msgid "To change the base url of REST API route. Default is $taxonomy."
+msgstr ""
+"Pentru a modifica adresa URL de bază a rutei API REST. Valoarea implicită "
+"este $taxonomy."
+
+msgid ""
+"Sets the query var key for this taxonomy. Default $taxonomy key. If false, a "
+"taxonomy cannot be loaded at ?{query_var}={term_slug}. If a string, the "
+"query ?{query_var}={term_slug} will be valid."
+msgstr ""
+"Stabilește cheia de interogare pentru această taxonomie. Cheia implicită "
+"$taxonomy. Dacă este falsă, o taxonomie nu poate fi încărcată la ?{query_var}"
+"={term_slug}. Dacă este un șir de caractere, interogarea ?{query_var}"
+"={term_slug} va fi validă."
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using "
+"$taxonomy as slug. To prevent rewrite, set to false. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Declanșează gestionarea rescrierilor pentru această taxonomie. Valoarea "
+"implicită true, folosind $taxonomy ca slug. Pentru a împiedica rescrierea, "
+"setați la false. Pentru a specifica regulile de rescriere, se poate trece o "
+"matrice cu oricare dintre aceste chei:"
+
+msgid "Add field box"
+msgstr "Caseta de adăugare a câmpului"
+
+msgid "From"
+msgstr "Din"
+
+msgid "To"
+msgstr "La"
+
+msgid "Set the number of records per page in your ACPT dashboards."
+msgstr "Setați numărul de înregistrări pe pagină în tablourile de bord ACPT."
+
+msgid "Field type"
+msgstr "Tipul de câmp"
+
+msgid "Display as"
+msgstr "Nume afișat"
+
+msgid "Standard view"
+msgstr "Vedere standard"
+
+msgid "Accordion"
+msgstr "Acordeon"
+
+msgid "Horizontal tabs"
+msgstr "File orizontale"
+
+msgid "Vertical tabs"
+msgstr "File verticale"
+
+msgid "Product data name"
+msgstr "Denumirea datelor produsului"
+
+msgid "Eye dropper"
+msgstr "Picătură pentru ochi"
+
+msgid "Unordered list"
+msgstr "Listă neordonată"
+
+msgid "Ordered list"
+msgstr "Listă ordonată"
+
+msgid "Font"
+msgstr "Font"
+
+msgid "Set the font of the plug-in"
+msgstr "Setați fontul plug-in-ului"
+
+msgid "After"
+msgstr "După"
+
+msgid "Before"
+msgstr "Înainte"
+
+msgid "Country"
+msgstr "Țară"
+
+msgid "The application cannot be booted"
+msgstr "Aplicația nu poate fi pornită"
+
+msgid "An unexpected error has occurred"
+msgstr "A apărut o eroare neașteptată"
+
+msgid "Dataset"
+msgstr "Set de date"
+
+msgid ""
+"Build reusable dataset for meta fields and forms values. Import your dataset "
+"from CSV, JSON or YAML with a few clicks."
+msgstr ""
+"Construiți un set de date reutilizabile pentru câmpurile meta și valorile "
+"formularelor. Importați setul de date din CSV, JSON sau YAML cu câteva "
+"clicuri."
+
+msgid "Dataset successfully saved"
+msgstr "Set de date salvat cu succes"
+
+msgid "Dataset name"
+msgstr "Numele setului de date"
+
+msgid "Dataset label"
+msgstr "Eticheta setului de date"
+
+msgid "Edit dataset"
+msgstr "Editați setul de date"
+
+msgid "Create a new dataset"
+msgstr "Creați un nou set de date"
+
+msgid "Create dataset"
+msgstr "Creați setul de date"
+
+msgid "No dataset found."
+msgstr "Nu s-a găsit niciun set de date."
+
+msgid "Items count"
+msgstr "Numărul de elemente"
+
+msgid "Dataset successfully deleted."
+msgstr "Setul de date a fost șters cu succes."
+
+msgid "Delete dataset"
+msgstr "Ștergeți setul de date"
+
+msgid "Manage dataset"
+msgstr "Gestionați setul de date"
+
+msgid "Load dataset"
+msgstr "Încărcați setul de date"
+
+msgid "Dataset loaded correctly"
+msgstr "Set de date încărcat corect"
+
+msgid "You are going to delete this dataset. Are you sure?"
+msgstr "Aveți de gând să ștergeți acest set de date. Sunteți sigur?"
+
+msgid "Select/deselect all fields"
+msgstr "Selectați/deselectați toate câmpurile"
+
+msgid "Show/hide elements"
+msgstr "Afișați / ascundeți elementele"
+
+msgid ""
+"The limit on how many elements are required ([1-100] only for repeater field)"
+msgstr ""
+"Limita numărului de elemente necesare ([1-100] numai pentru câmpul repetor)"
+
+msgid "Minimum elements allowed"
+msgstr "Elemente minime permise"
+
+msgid ""
+"The limit on how many elements are allowed ([1-100] only for repeater field)"
+msgstr ""
+"Limita numărului de elemente permise ([1-100] numai pentru câmpul repetor)"
+
+msgid "Maximum elements allowed"
+msgstr "Numărul maxim de elemente permise"
+
+msgid ""
+"Something went wrong. Try clicking the reload the application button to "
+"reload the application."
+msgstr ""
+"Ceva a mers prost. Încercați să faceți clic pe butonul de reîncărcare a "
+"aplicației pentru a reîncărca aplicația."
+
+msgid "The application has crashed"
+msgstr "Aplicația s-a blocat"
+
+msgid "Reload the application"
+msgstr "Reîncărcați aplicația"
+
+msgid "Value is equals to {{v}}"
+msgstr "Valoarea este egală cu {{v}}"
+
+msgid "Textual fields settings"
+msgstr "Setări pentru câmpurile textuale"
+
+msgid "File field settings"
+msgstr "Setări ale câmpului de fișier"
+
+msgid "Radio field settings"
+msgstr "Setări ale câmpului radio"
+
+msgid "Nestable fields layout settings"
+msgstr "Setări de prezentare a câmpurilor încorporabile"
+
+msgid "Unit of measure fields settings"
+msgstr "Setări ale câmpurilor de unități de măsură"
+
+msgid "URL field settings"
+msgstr "Setări ale câmpului URL"
+
+msgid "WPML Settings"
+msgstr "Setări WPML"
+
+msgid "The file wpml-config.xml was successfully generated."
+msgstr "Fișierul wpml-config.xml a fost generat cu succes."
+
+msgid "The file wpml-config.xml was not successfully generated."
+msgstr "Fișierul wpml-config.xml nu a fost generat cu succes."
+
+msgid "This is the generated wpml-config.xml file:"
+msgstr "Acesta este fișierul wpml-config.xml generat:"
+
+msgid "Attachment"
+msgstr "Atașament"
+
+msgid "All formats"
+msgstr "Toate formatele"

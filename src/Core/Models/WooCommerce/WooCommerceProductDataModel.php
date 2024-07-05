@@ -162,4 +162,41 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
             'fields' => $this->fields
         ];
     }
+
+	/**
+	 * @inheritDoc
+	 */
+	public static function validationRules(): array
+	{
+		return [
+			'id' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'name' => [
+				'required' => true,
+				'type' => 'string',
+			],
+			'new_name' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'icon' => [
+				'required' => true,
+				'type' => 'string|array|object',
+			],
+			'visibility' => [
+				'required' => true,
+				'type' => 'string|array',
+			],
+			'showInUI' => [
+				'required' => true,
+				'type' => 'boolean',
+			],
+			'fields' => [
+				'required' => false,
+				'type' => 'array',
+			],
+		];
+	}
 }

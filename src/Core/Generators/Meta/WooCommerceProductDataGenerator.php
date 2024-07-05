@@ -2,10 +2,12 @@
 
 namespace ACPT_Lite\Core\Generators\Meta;
 
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Generators\AbstractGenerator;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
+use ACPT_Lite\Utils\Data\Meta;
 
 class WooCommerceProductDataGenerator extends AbstractGenerator
 {
@@ -87,7 +89,7 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
                 foreach ($productDataModel->getFields() as $fieldModel){
 
                     $fieldSluggedName = $sluggedName . '_' . $fieldModel->getSluggedName();
-                    $field_value = metadata_exists( 'post', $post->ID, '_' .$fieldSluggedName ) ? get_post_meta( $post->ID, '_' .$fieldSluggedName, true ) : $fieldModel->getDefaultValue();
+                    $field_value = metadata_exists( 'post', $post->ID, '_' .$fieldSluggedName ) ? Meta::fetch( $post->ID, MetaTypes::CUSTOM_POST_TYPE, '_' .$fieldSluggedName, true ) : $fieldModel->getDefaultValue();
 
                     $options = [];
 
@@ -219,7 +221,7 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
             foreach ($productDataModel->getFields() as $fieldModel){
                 $sluggedName = $productDataModel->getSluggedName();
                 $fieldSluggedName = $sluggedName . '_' . $fieldModel->getSluggedName();
-                $fields[$fieldModel->getName()] = metadata_exists( 'post', $post->ID, '_'.$fieldSluggedName ) ? get_post_meta( $post->ID, '_'.$fieldSluggedName, true ) : '';
+                $fields[$fieldModel->getName()] = metadata_exists( 'post', $post->ID, '_'.$fieldSluggedName ) ? Meta::fetch( $post->ID, MetaTypes::CUSTOM_POST_TYPE, '_'.$fieldSluggedName, true ) : '';
             }
 
             if($activeTab  === $productDataModel->getSluggedName().'_tab'){

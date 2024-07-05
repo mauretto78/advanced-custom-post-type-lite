@@ -1,9 +1,9 @@
 .acpt-btn-switch {
   cursor: pointer;
   padding: $space-8;
-  border: $border-thickness solid $pale-gray;
+  border: $border-thickness solid $light-gray;
   background: $pale-gray;
-  color: $gray;
+  color: $medium-gray;
   border-radius: $border-radius;
   display: flex;
   align-items: center;
@@ -62,6 +62,18 @@
     &:hover,
     &:focus {
       background: darken($light-gray, 8%);
+    }
+  }
+
+  &.acpt-btn-bordered {
+    color: $gray;
+    background: $white;
+    border: $border-thickness solid $light-gray;
+
+    &:hover,
+    &:focus {
+      color: $primary-color;
+      border: $border-thickness solid $primary-color;
     }
   }
 

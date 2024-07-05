@@ -5,7 +5,7 @@ namespace ACPT_Lite\Core\Repository;
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
-class SettingsRepository
+class SettingsRepository extends AbstractRepository
 {
     /**
      * @param $key
@@ -39,7 +39,7 @@ class SettingsRepository
                 id, 
                 meta_key,
                 meta_value
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS)."`
+            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS) . "`
             ";
 
         if($key){
@@ -59,7 +59,7 @@ class SettingsRepository
 
         return $results;
     }
-
+    
     /**
      * @param SettingsModel $settingsModel
      *
@@ -68,7 +68,7 @@ class SettingsRepository
     public static function save(SettingsModel $settingsModel)
     {
         $sql = "
-            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS)."` 
+            INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS) . "` 
             (`id`,
             `meta_key`,
             `meta_value`
@@ -88,7 +88,6 @@ class SettingsRepository
                 $settingsModel->getKey(),
                 $settingsModel->getValue(),
         ]);
-
-        ACPT_Lite_DB::invalidateCacheTag(self::class);
+	    ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 }

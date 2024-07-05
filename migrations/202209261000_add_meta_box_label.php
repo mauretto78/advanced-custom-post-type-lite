@@ -59,4 +59,9 @@ class AddMetaBoxLabelLiteMigration extends ACPT_Lite_Schema_Migration
 			"ALTER TABLE `".ACPT_Lite_DB::TABLE_USER_META_BOX."` DROP COLUMN `meta_box_label` ",
 		];
 	}
+
+	public function version(): string
+	{
+		return '1.0.17';
+	}
 }

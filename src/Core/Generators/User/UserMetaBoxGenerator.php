@@ -5,7 +5,7 @@ namespace ACPT_Lite\Core\Generators\User;
 use ACPT_Lite\Core\CQRS\Command\SaveUserMetaCommand;
 use ACPT_Lite\Core\Generators\AbstractGenerator;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
-use ACPT_Lite\Utils\Translator;
+use ACPT_Lite\Utils\Wordpress\Translator;
 
 /**
  * *************************************************
@@ -57,27 +57,42 @@ class UserMetaBoxGenerator extends AbstractGenerator
      */
     public function addMetaBoxes(\WP_User $user)
     {
-        if(
-            $this->userId === null or
-            (isset($_GET['user_id']) and $_GET['user_id'] == $this->userId)
-        ):
+	    $this->enqueueScripts('save-user');
 
-        echo '<h3>'.Translator::translate("ACPT fields").'</h3>';
-
-	    foreach ($this->metaGroups as $metaGroup):
-            $generator = new UserMetaGroupGenerator($metaGroup, $user);
-		    echo $generator->render();
-        endforeach;
-        endif;
+        if($this->showMetaBox($user)){
+	        echo '<h3>'.Translator::translate("ACPT fields").'</h3>';
+	        foreach ($this->metaGroups as $metaGroup){
+		        $generator = new UserMetaGroupGenerator($metaGroup, $user);
+		        echo $generator->render();
+	        }
+        }
     }
 
 	/**
-	 * Save data
+	 * @param \WP_User $user
+	 *
+	 * @return bool
+	 */
+    private function showMetaBox(\WP_User $user)
+    {
+    	if($user->ID === get_current_user_id()){
+    		return true;
+	    }
+
+	    return (
+		    $this->userId === null or
+		    (isset($_GET['user_id']) and $_GET['user_id'] == $this->userId)
+	    );
+    }
+
+	/**
+	 * @param $userId
+	 *
 	 * @throws \Exception
 	 */
-    public function saveData($user_id)
+    public function saveData($userId)
     {
-        $command = new SaveUserMetaCommand($user_id, $this->metaGroups);
+        $command = new SaveUserMetaCommand($userId, $this->metaGroups, $_POST);
 	    $command->execute();
     }
 }
