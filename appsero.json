@@ -1,4 +1,5 @@
 {
+  "name": "advanced-custom-post-type-lite",
   "exclude": [
     ".phpunit.result.cache",
     "roadmap.md",
