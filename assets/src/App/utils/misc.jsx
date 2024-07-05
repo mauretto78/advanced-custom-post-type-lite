@@ -26,7 +26,7 @@ export const metaTitle = (title) => {
  */
 export const changeCurrentAdminMenuLink = (link) => {
 
-    const menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type-lite .wp-submenu');
+    const menuWrapper = document.querySelector('#toplevel_page_acpt-lite .wp-submenu');
 
     menuWrapper.childNodes.forEach((currentValue, currentIndex, listObj) => {
         const links = currentValue.getElementsByTagName('a');
@@ -34,7 +34,7 @@ export const changeCurrentAdminMenuLink = (link) => {
         for(let i = 0; i < links.length; i++) {
             let elem = links[i];
             let href = elem.getAttribute("href");
-            let toCompare = 'admin.php?page=advanced-custom-post-type-lite'+link;
+            let toCompare = 'admin.php?page=acpt-lite'+link;
 
             if( toCompare === href ){
                 currentValue.classList.add("current");
