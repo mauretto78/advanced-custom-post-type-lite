@@ -68,66 +68,6 @@ abstract class AbstractGenerator
 	 */
 	public function enqueueScripts($action)
 	{
-		global $pagenow;
-
-		$belongsTo = null;
-		$elementId = null;
-
-		switch ($pagenow){
-			case "profile.php":
-				$elementId = wp_get_current_user()->ID;
-				$belongsTo = MetaTypes::USER;
-				break;
-
-			case "user-edit.php":
-				$elementId = $_GET['user_id'] ?? null;
-				$belongsTo = MetaTypes::USER;
-				break;
-
-			case "post-new.php":
-			case "post.php":
-				$elementId = $_GET['post'] ?? null;
-				$belongsTo = MetaTypes::CUSTOM_POST_TYPE;
-				break;
-
-			case "edit-tags.php":
-				$elementId = $_GET['taxonomy'] ?? null;
-				$belongsTo = MetaTypes::TAXONOMY;
-				break;
-
-			case "term.php":
-				$elementId = $_GET['tag_ID'] ?? null;
-				$belongsTo = MetaTypes::TAXONOMY;
-				break;
-
-		}
-
-		// validation
-		wp_register_script('ACPTFormValidator',  plugin_dir_url( dirname( __FILE__ ) ) . '../../assets/static/js/ACPTFormValidator.js' );
-		wp_enqueue_script('ACPTFormValidator');
-
-		wp_register_script( 'ACPTFormValidator-run', '', [], '', true );
-		wp_enqueue_script('ACPTFormValidator-run');
-		wp_add_inline_script( 'ACPTFormValidator-run', '
-			window.addEventListener("load", () => {
-				const validator = new ACPTFormValidator("'.$action.'");
-				validator.run();
-			});
-		');
-
-		if($elementId !== null and $belongsTo !== null){
-
-			// conditional rules
-			wp_register_script('ACPTConditionalRules',  plugin_dir_url( dirname( __FILE__ ) ) . '../../assets/static/js/ACPTConditionalRules.js' );
-			wp_enqueue_script('ACPTConditionalRules');
-
-			wp_register_script( 'ACPTConditionalRules-run', '', [], '', true );
-			wp_enqueue_script('ACPTConditionalRules-run');
-			wp_add_inline_script( 'ACPTConditionalRules-run', '
-				const conditionalRules = new ACPTConditionalRules("'.Url::fullUrl().'", "'.$belongsTo.'", "'.$elementId.'");
-				conditionalRules.run();
-			');
-		}
 	}
 
 	/**

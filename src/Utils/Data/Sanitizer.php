@@ -20,30 +20,11 @@ class Sanitizer
 	{
 		switch ($type){
 
-			case MetaFieldModel::ICON_TYPE:
-				return Sanitizer::sanitizeSVG($rawData);
-
 			case MetaFieldModel::EMAIL_TYPE:
 				return sanitize_email($rawData);
 
-			case MetaFieldModel::URL_TYPE:
-				return esc_url_raw($rawData);
-
 			case MetaFieldModel::TEXTAREA_TYPE:
 				return stripslashes_deep(sanitize_textarea_field($rawData));
-
-			case MetaFieldModel::EDITOR_TYPE:
-			case MetaFieldModel::HTML_TYPE:
-				return Sanitizer::wpKsesWithSVG( $rawData );
-
-			case is_array($rawData):
-			case MetaFieldModel::GALLERY_TYPE:
-			case MetaFieldModel::CHECKBOX_TYPE:
-			case MetaFieldModel::SELECT_MULTI_TYPE:
-			case MetaFieldModel::LIST_TYPE:
-			case MetaFieldModel::USER_MULTI_TYPE:
-				return Sanitizer::recursiveSanitizeRawData($rawData);
-				break;
 
 			default:
 				return stripslashes_deep(sanitize_text_field($rawData));
@@ -77,41 +58,6 @@ class Sanitizer
         }
 
         return $array;
-    }
-
-	/**
-	 * Improved wp_kses() with support for SVG
-	 *
-	 * @param $string
-	 *
-	 * @return string
-	 */
-    private static function wpKsesWithSVG($string)
-    {
-	    $svgArgs = [
-		    'svg'   => [
-			    'class'           => true,
-			    'aria-hidden'     => true,
-			    'aria-labelledby' => true,
-			    'role'            => true,
-			    'xmlns'           => true,
-			    'width'           => true,
-			    'height'          => true,
-			    'viewBox'         => true,
-			    'viewbox'         => true
-		    ],
-		    'g'     => [ 'fill' => true ],
-		    'title' => [ 'title' => true ],
-		    'path'  => [
-			    'd'    => true,
-			    'fill' => true
-		    ]
-	    ];
-
-	    $ksesDefaults = wp_kses_allowed_html( 'post' );
-	    $allowedTags = array_merge( $ksesDefaults, $svgArgs );
-
-	    return wp_kses( self::escapeField($string), $allowedTags );
     }
 
 	/**

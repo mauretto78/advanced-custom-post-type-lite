@@ -104,10 +104,6 @@ class SaveMetaGroupCommand implements CommandInterface
 			'boxes' => [],
 			'fields' => [],
 			'options' => [],
-			'visibilityConditions' => [],
-			'validationRules' => [],
-			'relations' => [],
-			'blocks' => [],
 		];
 
 		$groupModel = MetaGroupModel::hydrateFromArray([

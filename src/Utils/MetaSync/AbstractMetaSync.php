@@ -69,28 +69,6 @@ abstract class AbstractMetaSync
 	}
 
 	/**
-	 * @param MetaFieldModel $fieldModel
-	 *
-	 * @return mixed|bool
-	 */
-	protected static function getParentMetaFieldData(MetaFieldModel $fieldModel)
-	{
-		$query = "SELECT * FROM 
-            `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b ON b.id = f.meta_box_id
-            WHERE f.id = %s 
-            GROUP BY f.id
-        ";
-		$results = ACPT_Lite_DB::getResults($query, [$fieldModel->getParentId()]);
-
-		if(isset($results[0]) and count($results) === 1){
-			return $results[0];
-		}
-
-		return false;
-	}
-
-	/**
 	 * @param $oldBoxName
 	 * @param $newBoxName
 	 *
