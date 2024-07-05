@@ -128,7 +128,7 @@ class CustomPostTypeAdminColumnsGenerator
 
 							//get unique values of the meta field to filer by.
 							$metaKey = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
-							$metaLabel = ($metaBoxFieldModel->getAdvancedOption('label')) ? $metaBoxFieldModel->getAdvancedOption('label') : $metaBoxFieldModel->getName();
+							$metaLabel = $metaBoxFieldModel->getLabelOrName();
 
 							$selected = '';
 							if ( isset($_REQUEST[$metaKey]) ) {

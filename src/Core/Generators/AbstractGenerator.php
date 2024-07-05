@@ -148,51 +148,6 @@ abstract class AbstractGenerator
 			];
 		}
 
-		$relations = [];
-		$children = [];
-
-		if($fieldModel->hasChildren()){
-			foreach ($fieldModel->getChildren() as $childFieldModel){
-				$children[] = $this->generateMetaBoxFieldArray($childFieldModel);
-			}
-		}
-
-		$advancedOptions = [];
-
-		foreach ($fieldModel->getAdvancedOptions() as $advancedOptionModel){
-			$advancedOptions[] = [
-				'key' => $advancedOptionModel->getKey(),
-				'value' => $advancedOptionModel->getValue(),
-			];
-		}
-
-		$validationRules = [];
-
-		foreach ($fieldModel->getValidationRules() as $validationRuleModel){
-			$validationRules[] = [
-				'condition' => $validationRuleModel->getCondition(),
-				'value' => $validationRuleModel->getValue(),
-			];
-		}
-
-		$blocks = [];
-
-		foreach ($fieldModel->getBlocks() as $blockModel){
-
-			$nestedFields = [];
-
-			foreach ($blockModel->getFields() as $nestedFieldModel){
-				$nestedFields[] = $this->generateMetaBoxFieldArray($nestedFieldModel);
-			}
-
-			$blocks[] = [
-				'id' => $blockModel->getId(),
-				'name' => $blockModel->getName(),
-				'label' => $blockModel->getLabel(),
-				'fields' => $nestedFields
-			];
-		}
-
 		return [
 			'id' => $fieldModel->getId(),
 			'type' => $fieldModel->getType(),
@@ -202,12 +157,6 @@ abstract class AbstractGenerator
 			'isRequired' => $fieldModel->isRequired(),
 			'isShowInArchive' => $fieldModel->isShowInArchive(),
 			'sort' => $fieldModel->getSort(),
-			'options' => $options,
-			'relations' => $relations,
-			'children' => $children,
-			'advancedOptions' => $advancedOptions,
-			'validationRules' => $validationRules,
-			'blocks' => $blocks,
 		];
 	}
 }

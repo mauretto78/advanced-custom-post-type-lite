@@ -139,18 +139,17 @@ function appsero_init_tracker_acpt_lite() {
 
 appsero_init_tracker_acpt_lite();
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-$plugin = new ACPT_Lite_Plugin(new ACPT_Lite_Loader());
-
 try {
+	/**
+	 * Begins execution of the plugin.
+	 *
+	 * Since everything within the plugin is registered via hooks,
+	 * then kicking off the plugin from this point in the file does
+	 * not affect the page life cycle.
+	 *
+	 * @since    1.0.0
+	 */
+	$plugin = new ACPT_Lite_Plugin(new ACPT_Lite_Loader());
     $plugin->run();
 } catch (\Exception $exception){
 
