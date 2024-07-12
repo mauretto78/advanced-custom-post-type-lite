@@ -101,3 +101,38 @@ if( !function_exists('get_acpt_field') )
 		}
 	}
 }
+
+if( !function_exists('get_acpt_meta_field_objects') )
+{
+	function get_acpt_meta_field_objects($belongsTo, $find = null)
+	{
+		$fields = [];
+
+		try {
+			$args = [
+				'belongsTo' => $belongsTo,
+			];
+
+			if($find !== null){
+				$args['find'] = $find;
+			}
+
+			$groups = MetaRepository::get($args);
+
+			foreach ($groups as $group){
+				foreach ($group->getBoxes() as $box){
+					foreach ($box->getFields() as $field){
+						$field->setBelongsToLabel($belongsTo);
+						$field->setFindLabel($find);
+						$fields[] = $field->toStdObject();
+					}
+				}
+			}
+
+			return $fields;
+
+		} catch (\Exception $exception){
+			return [];
+		}
+	}
+}

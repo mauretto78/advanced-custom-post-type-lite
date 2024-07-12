@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -182,6 +182,10 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 * Meta fields bulk delete fix
 
-= 2.0.3 (2024-07-05) =
+= 2.0.6 (2024-07-05) =
 
 * Improvements and fixes from ACPT v2.0.14
+
+= 2.0.7 (2024-07-12) =
+
+* Added get_acpt_field and get_acpt_meta_field_objects functions
