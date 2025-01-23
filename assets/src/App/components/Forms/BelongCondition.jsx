@@ -119,6 +119,7 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                 options: [
                     {value: metaTypes.CUSTOM_POST_TYPE, label: useTranslation("Post type")},
                     {value: "POST_ID", label: useTranslation("Post")},
+                    {value: "PARENT_POST_ID", label: useTranslation("Post parent")},
                     {value: "POST_CAT", label: useTranslation("Post category")},
                     {value: "POST_TAX", label: useTranslation("Post taxonomy")},
                     {value: "POST_TEMPLATE", label: useTranslation("Post template")},
@@ -129,6 +130,24 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                 options: [
                     {value: metaTypes.TAXONOMY, label: useTranslation("Taxonomy")},
                     {value: "TERM_ID", label: useTranslation("Term")},
+                ]
+            },
+            {
+                label: useTranslation("Attachment"),
+                options: [
+                    {value: metaTypes.MEDIA, label: useTranslation("Attachment")},
+                ]
+            },
+            {
+                label: useTranslation("Option pages"),
+                options: [
+                    {value: metaTypes.OPTION_PAGE, label: useTranslation("Option page")},
+                ]
+            },
+            {
+                label: useTranslation("Comments"),
+                options: [
+                    {value: metaTypes.COMMENT, label: useTranslation("All comments")},
                 ]
             },
             {
@@ -185,13 +204,13 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
     };
 
     return (
-        <div id={belong.id} className="i-flex-center s-8">
+        <tr id={belong.id}>
             <InputHidden
                 register={register}
                 id={formId("id")}
                 value={belong.id}
             />
-            <div className="w-100">
+            <td>
                 <Select
                     register={register}
                     id={formId("belongsTo")}
@@ -205,10 +224,9 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                         required: useTranslation("This field is mandatory"),
                     }}
                 />
-            </div>
-            <div className="w-40">
+            </td>
+            <td>
                 <Select
-                    muted={true}
                     register={register}
                     id={formId("operator")}
                     values={operators}
@@ -217,8 +235,8 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                     disabled={isDisabled()}
                     validate={validate()}
                 />
-            </div>
-            <div className="w-100">
+            </td>
+            <td>
                 {watchedOperator === 'IN' || watchedOperator === 'NOT_IN' ? (
                     <SelectMulti
                         register={register}
@@ -241,11 +259,10 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                         validate={validate()}
                     />
                 )}
-            </div>
-            <div className="w-40">
+            </td>
+            <td>
                 {!isLast && (
                     <Select
-                        muted={true}
                         register={register}
                         id={formId("logic")}
                         values={logics}
@@ -255,8 +272,8 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                         }}
                     />
                 )}
-            </div>
-            <div>
+            </td>
+            <td>
                 <a
                     href="#"
                     onClick={e => {
@@ -267,11 +284,11 @@ const BelongCondition = ({id, control, register, errors, belong, handleDeleteBel
                     <Tooltip
                         icon={false}
                         tip={useTranslation("Delete")}
-                        label={<Icon icon="bx-minus"/>}
+                        label={<Icon icon="bx-trash" width={18} color="#F94144" />}
                     />
                 </a>
-            </div>
-        </div>
+            </td>
+        </tr>
     );
 };
 

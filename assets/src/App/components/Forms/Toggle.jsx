@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {get} from 'react-hook-form';
 
-const Toggle = ({id, defaultValue = 0, description, validate, register, errors}) => {
+const Toggle = ({id, defaultValue = 0, description, validate, register, errors, onChangeCapture}) => {
 
     const error = get(errors, id);
 
@@ -18,6 +18,7 @@ const Toggle = ({id, defaultValue = 0, description, validate, register, errors})
                     type="checkbox"
                     data-cy={`toggle-checkbox-${id}`}
                     defaultChecked={defaultValue}
+                    onChangeCapture={onChangeCapture}
                     {...register(id, validate)}
                 />
                 <span className="slider round"/>
@@ -34,6 +35,7 @@ Toggle.propTypes = {
     id: PropTypes.string.isRequired,
     defaultValue: PropTypes.bool,
     description: PropTypes.string,
+    onChangeCapture: PropTypes.func,
     validate: PropTypes.func,
     register: PropTypes.func.isRequired,
     errors: PropTypes.array.isRequired,

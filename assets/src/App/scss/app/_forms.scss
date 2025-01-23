@@ -12,6 +12,7 @@
   color: $black;
   display: block;
   margin-bottom: $space-8;
+  font-weight: bold;
 }
 
 input[type=number].form-control {
@@ -60,7 +61,7 @@ select.form-control {
     background-size: auto;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23dddddd" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
     color: $gray;
-    padding-right: 60px !important;
+    padding-right: 48px !important;
   }
 
   optgroup {
@@ -71,6 +72,46 @@ select.form-control {
     option {
       background: $white;
       color: $gray;
+    }
+  }
+}
+
+.acpt-color-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $space-12;
+  border: $border-thickness solid $light-gray;
+  border-radius: $border-radius;
+  width: 100%;
+  max-width: 100%;
+  min-height: 46px;
+  overflow: hidden;
+
+  input {
+    padding: 0;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      border: none;
+      box-shadow: none;
+      outline: none;
+    }
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+      border: none;
+      height: 100%;
+      min-height: 46px;
+    }
+
+    &::-webkit-color-swatch {
+      border: none;
+      height: 100%;
+      min-height: 46px;
     }
   }
 }
@@ -157,7 +198,7 @@ select.form-control {
 }
 
 .checkbox {
-  display: block;
+  display: inline-flex;
   position: relative;
   cursor: pointer;
   margin: 0;
@@ -235,12 +276,12 @@ select.form-control {
     &:after {
       content: '';
       position: absolute;
-      left: 4px;
-      top: 4px;
+      left: 5px;
+      top: 5px;
       background: $primary-color;
       border-radius: 100%;
-      width: 18px;
-      height: 18px;
+      width: 10px;
+      height: 10px;
       opacity: 0;
     }
   }
@@ -491,7 +532,6 @@ select.form-control {
         }
       }
     }
-
   }
 }
 

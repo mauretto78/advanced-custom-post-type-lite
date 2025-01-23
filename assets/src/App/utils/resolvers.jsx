@@ -11,6 +11,10 @@ export const resolveField = (fieldType) => {
     let label = 'Address';
 
     switch (fieldType) {
+        case fieldTypes.ADDRESS_MULTI:
+            icon="bx:bxs-map";
+            label="Address(multiple)";
+            break;
         case fieldTypes.BUTTON:
             icon="bx:bx-pointer";
             label="Button";
@@ -18,6 +22,10 @@ export const resolveField = (fieldType) => {
         case fieldTypes.CAPTCHA:
             icon="bx:bx-lock";
             label="Captcha";
+            break;
+        case fieldTypes.CLONE:
+            icon="bx:bx-copy-alt";
+            label="Clone";
             break;
         case fieldTypes.COUNTRY:
             icon="bx:bx-flag";
@@ -58,6 +66,10 @@ export const resolveField = (fieldType) => {
         case fieldTypes.NUMBER:
             icon="bx:bx-hash";
             label="Number";
+            break;
+        case fieldTypes.PASSWORD:
+            icon="bx:bx-key";
+            label="Password";
             break;
         case fieldTypes.PHONE:
             icon="bx:bx-phone";
@@ -131,6 +143,10 @@ export const resolveField = (fieldType) => {
             icon="bx:bx-video";
             label="Video";
             break;
+        case fieldTypes.TABLE:
+            icon="bx:table";
+            label="Table";
+            break;
         case fieldTypes.POST:
             icon="bx:bx-repost";
             label="Relationship";
@@ -138,6 +154,10 @@ export const resolveField = (fieldType) => {
         case fieldTypes.TIME:
             icon="bx:time-five";
             label="Time";
+            break;
+        case fieldTypes.TURNSTILE:
+            icon="fa-brands:cloudflare";
+            label="Cloudflare Turnstile";
             break;
         case fieldTypes.REPEATER:
             icon="bx:folder-plus";
@@ -183,6 +203,10 @@ export const resolveField = (fieldType) => {
             icon="bx:star";
             label="Rating";
             break;
+        case fieldTypes.WORDPRESS_POST_THUMBNAIL:
+            icon="bxl:wordpress";
+            label="PostThumbnail";
+            break;
         case fieldTypes.WORDPRESS_POST_TITLE:
             icon="bxl:wordpress";
             label="PostTitle";
@@ -203,6 +227,10 @@ export const resolveField = (fieldType) => {
             icon="bxl:wordpress";
             label="PostAuthor";
             break;
+        case  fieldTypes.WORDPRESS_POST_TAXONOMIES:
+            icon="bxl:wordpress";
+            label="PostTaxonomies";
+            break;
         case fieldTypes.WORDPRESS_USER_EMAIL:
             icon="bxl:wordpress";
             label="UserEmail";
@@ -222,6 +250,10 @@ export const resolveField = (fieldType) => {
         case  fieldTypes.WORDPRESS_USER_PASSWORD:
             icon="bxl:wordpress";
             label="UserPassword";
+            break;
+        case  fieldTypes.WORDPRESS_USER_BIO:
+            icon="bxl:wordpress";
+            label="UserBio";
             break;
         case fieldTypes.WORDPRESS_TERM_NAME:
             icon="bxl:wordpress";

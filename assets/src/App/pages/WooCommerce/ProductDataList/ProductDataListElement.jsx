@@ -8,12 +8,34 @@ import Boolean from "../../../components/Boolean";
 import WooCommerceProductDataVisibility from "../../../components/WooCommerceProductDataVisibility";
 import DeleteWooCommerceProductDataModal from "../Modal/DeleteWooCommerceProductDataModal";
 import {useFormContext} from "react-hook-form";
+import {wpAjaxRequest} from "../../../utils/ajax";
+import {setCookieMessage} from "../../../utils/cookies";
+import {scrollToTop} from "../../../utils/scroll";
+import {refreshPage} from "../../../utils/misc";
+import {toast} from "react-hot-toast";
 
 const ProductDataListElement = memo(({record, page, perPage}) => {
 
     // manage form state
     const { register } = useFormContext();
     const formId = `elements.${record.id}`;
+
+    const handleDuplicate = () => {
+        wpAjaxRequest('duplicateAction', {belongsTo: "woo_product_data", find: record.id})
+            .then(res => {
+                if(res.success === true){
+                    setCookieMessage("WooCommerce product data successfully duplicated.");
+                    scrollToTop();
+                    refreshPage();
+                } else {
+                    toast.error(res.error);
+                }
+            }).catch(err => {
+            console.error(err);
+            toast.error(useTranslation("Unknown error, please retry later"));
+        })
+        ;
+    };
 
     return (
         <React.Fragment>
@@ -74,6 +96,15 @@ const ProductDataListElement = memo(({record, page, perPage}) => {
                         <Link to={`/product-data/product/edit/${record.id}`}>
                             {useTranslation("Edit")}
                         </Link>
+                        <a
+                            href="#"
+                            onClick={e => {
+                                e.preventDefault();
+                                handleDuplicate();
+                            }}
+                        >
+                            {useTranslation("Duplicate")}
+                        </a>
                         <DeleteWooCommerceProductDataModal
                             id={record.id}
                             page={page}

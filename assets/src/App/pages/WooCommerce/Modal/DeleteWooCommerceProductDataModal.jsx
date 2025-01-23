@@ -7,7 +7,8 @@ import {styleVariants} from "../../../constants/styles";
 import {useDispatch} from "react-redux";
 import {deleteWooCommerceProductData} from "../../../redux/reducers/deleteWooCommerceProductDataSlice";
 import {toast} from "react-hot-toast";
-import {fetchWooCommerceProductData} from "../../../redux/reducers/fetchWooCommerceProductDataSlice";
+import {setCookieMessage} from "../../../utils/cookies";
+import {refreshPage} from "../../../utils/misc";
 
 const DeleteWooCommerceProductDataModal = ({id, page, perPage}) => {
 
@@ -15,7 +16,7 @@ const DeleteWooCommerceProductDataModal = ({id, page, perPage}) => {
     const dispatch = useDispatch();
     
     // mange local state
-    const [modalVisible, setmodalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     
     const handleDelete = () => {
         dispatch(deleteWooCommerceProductData(id))
@@ -23,12 +24,9 @@ const DeleteWooCommerceProductDataModal = ({id, page, perPage}) => {
                 const payload = res.payload;
 
                 if(payload.success){
-                    setmodalVisible(!modalVisible);
-                    toast.success(useTranslation("WooCommerce product data successfully deleted"));
-                    dispatch(fetchWooCommerceProductData({
-                        page: page ? page : 1,
-                        perPage: perPage
-                    }));
+                    setModalVisible(!modalVisible);
+                    setCookieMessage("WooCommerce product data successfully deleted");
+                    refreshPage();
                 } else {
                     toast.error(payload.error);
                 }
@@ -51,7 +49,7 @@ const DeleteWooCommerceProductDataModal = ({id, page, perPage}) => {
         <Button
             style={styleVariants.SECONDARY}
             onClick={() => {
-                setmodalVisible(!modalVisible);
+                setModalVisible(!modalVisible);
             }}
         >
             {useTranslation("Return back to list")}
@@ -66,10 +64,11 @@ const DeleteWooCommerceProductDataModal = ({id, page, perPage}) => {
                 </div>
             </Modal>
             <a
+                className={`color-${styleVariants.DANGER}`}
                 href="#"
                 onClick={e => {
                     e.preventDefault();
-                    setmodalVisible(!modalVisible);
+                    setModalVisible(!modalVisible);
                 }}
             >
                 {useTranslation("Delete")}

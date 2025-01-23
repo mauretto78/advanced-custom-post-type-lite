@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import CardRow from "../../../components/Card/CardRow";
 import useTranslation from "../../../hooks/useTranslation";
 import Boolean from "../../../components/Boolean";
+import Card from "../../../components/Card";
+import Badge from "../../../components/Badge";
 
 const Settings = ({data}) => {
 
     if(data.length > 0) {
         return (
-            <div className="with-border b-rounded">
+            <Card>
                 <CardRow
                     label={useTranslation("Is Public")}
                     value={<Boolean status={data[0].settings.public} />}
@@ -55,9 +57,13 @@ const Settings = ({data}) => {
                 />
                 <CardRow
                     label={useTranslation("Capabilities")}
-                    value={data[0].settings.capabilities && data[0].settings.capabilities.map((s)=>(
-                        <div>{s}</div>
-                    ))}
+                    value={
+                        <div className="i-flex-center s-8">
+                            {data[0].settings.capabilities && data[0].settings.capabilities.map((s)=>(
+                                <Badge>{s}</Badge>
+                            ))}
+                        </div>
+                    }
                 />
                 <CardRow
                     label={useTranslation("Rewrite")}
@@ -75,7 +81,7 @@ const Settings = ({data}) => {
                     label={useTranslation("Custom query var")}
                     value={<Boolean status={data[0].settings.custom_query_var} />}
                 />
-            </div>
+            </Card>
         );
     }
 };

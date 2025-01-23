@@ -91,6 +91,20 @@ export const substring = (string, limit = 60) => {
 
 /**
  *
+ * @param str
+ * @return {boolean}
+ */
+export const isValidJSON = (str) => {
+    try {
+        JSON.parse(str);
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
+
+/**
+ *
  * @param uuid
  * @return {*|boolean}
  */
@@ -176,3 +190,20 @@ export const pregMatchAll = (regex, str) => {
 export const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+/**
+ *
+ * @param string
+ * @return {boolean}
+ */
+export const isValidHttpUrl = (string) => {
+    let url;
+
+    try {
+        url = new URL(string);
+    } catch (_) {
+        return false;
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+}

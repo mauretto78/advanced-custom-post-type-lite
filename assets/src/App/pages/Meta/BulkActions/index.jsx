@@ -18,8 +18,9 @@ import {getFormId, hydrateElement} from "../../../utils/fields";
 import PropTypes from "prop-types";
 import CopyMetaBoxesModal from "../Modal/CopyMetaBoxesModal";
 import CopyMetaFieldsModal from "../Modal/CopyMetaFieldsModal";
+import CopyMetaBlocksModal from "../Modal/CopyMetaBlocksModal";
 
-const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
+const BulkActions = ({setFieldTab, setBoxTab, setBlockTab}) => {
 
     // manage global state
     const dispatch = useDispatch();
@@ -101,7 +102,9 @@ const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
                 // delete
                 case "delete":
                     if(selectedElementsType === 'box'){
-                        setValue("boxes", watchedBoxes.filter(b => b.id !== element.id));
+
+                        const boxes = watchedBoxes ? watchedBoxes.filter(b => b.id !== element.id) : [];
+                        setValue("boxes", boxes);
 
                         if(setBoxTab){
                             setBoxTab(0);
@@ -110,7 +113,7 @@ const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
                         dispatch(deleteBox(element.id));
                     } else if(selectedElementsType === 'block'){
                         const formId = getFormId(watchedBoxes, element.boxId, element.id, false);
-                        const blocks = getValues(formId).filter(f => f.id !== element.id);
+                        const blocks = getValues(formId) ? getValues(formId).filter(f => f.id !== element.id) : [];
 
                         setValue(formId, blocks);
 
@@ -126,7 +129,7 @@ const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
 
                     } else {
                         const formId = getFormId(watchedBoxes, element.boxId, element.id, false);
-                        const fields = getValues(formId).filter(f => f.id !== element.id);
+                        const fields = getValues(formId) ? getValues(formId).filter(f => f.id !== element.id) : [];
 
                         setValue(formId, fields);
 
@@ -165,8 +168,13 @@ const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
                 modalOpen={copyFieldsModalVisible}
                 setModalOpen={setCopyFieldsModalVisible}
             />
+            <CopyMetaBlocksModal
+                blockIds={selectedElements}
+                modalOpen={copyBlocksModalVisible}
+                setModalOpen={setCopyBlocksModalVisible}
+            />
             {selectedElements && selectedElements.length > 0 && (
-                <div className={`flex-between ${view === 'tab' ? 'mb-24' : ''}`}>
+                <div className="flex-between">
                     <div>
                         {selectedElements.length} {useTranslation("Selected items")}
                     </div>
@@ -202,11 +210,6 @@ const BulkActions = ({view, setFieldTab, setBoxTab, setBlockTab}) => {
 };
 
 BulkActions.propTypes = {
-    view: PropTypes.oneOf([
-        "tab",
-        "accordion",
-        "list"
-    ]).isRequired,
     setBoxTab: PropTypes.func,
     setFieldTab: PropTypes.func,
     setBlockTab: PropTypes.func,

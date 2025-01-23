@@ -6,15 +6,13 @@ import PageNotFound from "../404";
 import ButtonLink from "../../components/ButtonLink";
 import {styleVariants} from "../../constants/styles";
 import useTranslation from "../../hooks/useTranslation";
-import {metaTitle} from "../../utils/misc";
+import {changeCurrentAdminMenuLink, metaTitle} from "../../utils/misc";
 import {fetchTaxonomies} from "../../redux/reducers/fetchTaxonomiesSlice";
 import Layout from "../../layout/Layout";
 import Basic from "./Tabs/Basic";
 import Labels from "./Tabs/Labels";
 import Settings from "./Tabs/Settings";
-import Tab from "../../components/Tabs/Tab";
-import Tabs from "../../components/Tabs";
-import Card from "../../components/Card";
+import {flushCookieMessages} from "../../utils/cookies";
 
 const ViewTaxonomy = () => {
 
@@ -43,6 +41,7 @@ const ViewTaxonomy = () => {
                 if(res.payload.length !== 1){
                     setFetchError(true);
                 }
+                flushCookieMessages();
             })
             .catch(err => {
                 setFetchError(true);
@@ -51,11 +50,8 @@ const ViewTaxonomy = () => {
         ;
 
         metaTitle(useTranslation("Taxonomy global settings"));
+        changeCurrentAdminMenuLink('#/taxonomies');
     }, [taxonomy]);
-
-    const handleStepChange = (step) => {
-        setActiveTab(step);
-    };
 
     if(loading){
         return <Loader/>;
@@ -70,6 +66,13 @@ const ViewTaxonomy = () => {
     const actions = [
         <ButtonLink style={styleVariants.PRIMARY} to={`/edit_taxonomy/${taxonomy}/${activeTab}`}>{useTranslation("Edit")}</ButtonLink>,
         <ButtonLink style={styleVariants.SECONDARY} to={`/assoc-post-taxonomy/${taxonomy}`}>{useTranslation("Taxonomies association")}</ButtonLink>,
+        <ButtonLink style={styleVariants.WARNING} to={`/permissions/taxonomy/${taxonomy}/${data.length > 0 ? data[0].id : ""}`}>{useTranslation("Permissions")}</ButtonLink>,
+    ];
+
+    const tabs = [
+        "Basic",
+        "Labels",
+        "Settings"
     ];
 
     return (
@@ -86,22 +89,24 @@ const ViewTaxonomy = () => {
                 }
             ]}
         >
-            <Card style="with-shadow p-24">
-                <Tabs
-                    handleClick={handleStepChange}
-                    defaultActiveTab={activeTab}
-                >
-                    <Tab title={useTranslation("Basic")}>
-                        <Basic data={data}/>
-                    </Tab>
-                    <Tab title={useTranslation("Labels")}>
-                        <Labels data={data}/>
-                    </Tab>
-                    <Tab title={useTranslation("Settings")}>
-                        <Settings data={data} />
-                    </Tab>
-                </Tabs>
-            </Card>
+            <div>
+                <div className="i-flex-center mb-8 s-8">
+                    {tabs.map((tab, index) => (
+                        <button
+                            type="button"
+                            className={`acpt-btn acpt-btn-${(parseInt(index) === parseInt(activeTab)) ? "white text-bold color-black" : "default"}`}
+                            onClick={() => {
+                                setActiveTab(parseInt(index));
+                            }}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+                {activeTab === 0 && (<Basic data={data}/>)}
+                {activeTab === 1 && (<Labels data={data} taxonomy={taxonomy}/>)}
+                {activeTab === 2 && (<Settings data={data} />)}
+            </div>
         </Layout>
     );
 };

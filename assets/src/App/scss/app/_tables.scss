@@ -18,6 +18,7 @@
     tr:last-child > th,
     tr:last-child > td {
       padding-bottom: 0;
+      border: none;
     }
   }
 
@@ -40,9 +41,11 @@
   }
 
   th {
-    font-weight: normal;
     text-align: left;
-    color: $black;
+    color: $primary-color;
+    background: $secondary-color;
+    border-color: $secondary-color;
+    font-weight: bold;
   }
 
   tbody > tr:last-child td {

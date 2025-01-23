@@ -4,6 +4,7 @@ import {Icon} from "@iconify/react";
 import {Tooltip as ReactTooltip} from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css'
 import {randomAlphabeticString} from "../../utils/strings";
+import ReactDOMServer from 'react-dom/server';
 
 const Tooltip = ({label, tip, icon = true}) => {
 
@@ -14,7 +15,7 @@ const Tooltip = ({label, tip, icon = true}) => {
             <span
                 className="i-flex-center s-8 cursor-help"
                 data-tooltip-id={id}
-                data-tooltip-content={tip}
+                data-tooltip-html={ReactDOMServer.renderToStaticMarkup(tip)}
                 data-tooltip-place="top"
             >
                 <div className="acpt-tooltip-label">

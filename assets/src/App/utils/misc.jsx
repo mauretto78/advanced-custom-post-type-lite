@@ -26,7 +26,7 @@ export const metaTitle = (title) => {
  */
 export const changeCurrentAdminMenuLink = (link) => {
 
-    const menuWrapper = document.querySelector('#toplevel_page_acpt-lite .wp-submenu');
+    const menuWrapper = document.querySelector('#toplevel_page_advanced-custom-post-type .wp-submenu');
 
     menuWrapper.childNodes.forEach((currentValue, currentIndex, listObj) => {
         const links = currentValue.getElementsByTagName('a');
@@ -34,7 +34,7 @@ export const changeCurrentAdminMenuLink = (link) => {
         for(let i = 0; i < links.length; i++) {
             let elem = links[i];
             let href = elem.getAttribute("href");
-            let toCompare = 'admin.php?page=acpt-lite'+link;
+            let toCompare = 'admin.php?page=advanced-custom-post-type'+link;
 
             if( toCompare === href ){
                 currentValue.classList.add("current");
@@ -49,6 +49,23 @@ export const refreshPage = (timeout = 0) => {
     setTimeout(function () {
         window.location.reload();
     }, timeout);
+};
+
+/**
+ * This function redirect and reload the page
+ *
+ * @param page
+ */
+export const refreshAndRedirectTo = (page = null) => {
+
+    let redirectUrl = `${document.globals.globals.admin_url}admin.php?page=advanced-custom-post-type#/`;
+
+    if(page !== null){
+        redirectUrl += page;
+    }
+
+    window.location.href = redirectUrl;
+    window.location.assign(window.location.href)
 };
 
 export const  delay = (time) => {

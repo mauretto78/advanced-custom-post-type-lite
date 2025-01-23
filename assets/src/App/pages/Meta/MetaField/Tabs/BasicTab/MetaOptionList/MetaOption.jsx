@@ -43,7 +43,7 @@ const MetaOption = ({index, boxIndex, fieldIndex, boxId, fieldId, parentFieldId,
     });
 
     // DND-kit
-    const {attributes, listeners, setNodeRef, transform} = useSortable({id: option.id});
+    const {attributes, listeners, setNodeRef, isDragging, transform} = useSortable({id: option.id});
     const style = {
         transform: CSS.Translate.toString(transform)
     };
@@ -92,105 +92,117 @@ const MetaOption = ({index, boxIndex, fieldIndex, boxId, fieldId, parentFieldId,
     };
 
     return (
-        <div className="i-flex-center s-8" style={style} ref={setNodeRef}>
+        <React.Fragment>
             <InputHidden
                 id={formId("id")}
                 value={option.id}
                 register={register}
             />
-            <span className="cursor-move top-2 handle" {...attributes} {...listeners}>
-                <Icon icon="bx:dots-vertical-rounded" color="#777" width={18} />
-            </span>
-            <span className="w-100">
-                <Input
-                    id={formId("label")}
-                    register={register}
-                    errors={errors}
-                    defaultValue={label()}
-                    onChangeCapture={e => {
-                        if(linkedOption){
-                            setValue(formId("value"), e.target.value);
-                        }
-                    }}
-                    onClick={e => {
-                        if(option.label && e.target.value === 'label'){
-                            resetField(formId("label"));
-                        }
-                    }}
-                    validate={{
-                        required: useTranslation("This field is mandatory"),
-                        maxLength: {
-                            value: 255,
-                            message: "max length is 255"
-                        }
-                    }}
-                />
-            </span>
-            <span className="w-100">
-                <Input
-                    id={formId("value")}
-                    register={register}
-                    errors={errors}
-                    defaultValue={value()}
-                    onChangeCapture={e => {
-                        if(linkedOption){
-                            setValue(formId("label"), e.target.value);
-                        }
-                    }}
-                    onClick={e => {
-                        if(option.value && e.target.value === 'value'){
-                            resetField(formId("value"));
-                        }
-                    }}
-                    validate={{
-                        required: useTranslation("This field is mandatory"),
-                        maxLength: {
-                            value: 255,
-                            message: "max length is 255"
-                        }
-                    }}
-                />
-            </span>
-            <span className="i-flex-center s-8">
-                 <Tooltip
-                     label={
-                         <button
-                             type="button"
-                             className={`acpt-btn-switch ${linkedOption ? 'active' : ''}`}
-                             onClick={e => {
-                                 e.preventDefault();
-                                 setLinkedOption(!linkedOption);
-                             }}
-                         >
-                             <Icon icon="bx:bx-link" width="18px"/>
-                         </button>
-                     }
-                     tip={useTranslation(linkedOption ? "Label and value are linked" : "Label and value are unlinked")}
-                     icon={false}
-                 />
-                 <Tooltip
-                     label={
-                         <ButtonSwitch
-                             control={control}
-                             defaultValue={typeof watchedIsDefault  === "boolean" ? watchedIsDefault :  option.isDefault}
-                             errors={errors}
-                             icon="bx:check"
-                             id={formId("isDefault")}
-                             externalOnChange={handleIsDefault}
+            <tr
+                style={style}
+                ref={setNodeRef}
+                className={`bg-white ${isDragging ? "b-rounded z-100 with-drop-shadow" : ""}`}
+            >
+                <td>
+                     <span className="cursor-move top-2 handle" {...attributes} {...listeners}>
+                        <Icon icon="bx:dots-vertical-rounded" color="#777" width={18} />
+                    </span>
+                </td>
+                <td>
+                    <Input
+                        id={formId("label")}
+                        register={register}
+                        errors={errors}
+                        defaultValue={label()}
+                        onChangeCapture={e => {
+                            if(linkedOption){
+                                setValue(formId("value"), e.target.value);
+                            }
+                        }}
+                        onClick={e => {
+                            if(option.label && e.target.value === 'label'){
+                                resetField(formId("label"));
+                            }
+                        }}
+                        validate={{
+                            required: useTranslation("This field is mandatory"),
+                            maxLength: {
+                                value: 255,
+                                message: "max length is 255"
+                            }
+                        }}
+                    />
+                </td>
+                <td>
+                    <Input
+                        id={formId("value")}
+                        register={register}
+                        errors={errors}
+                        defaultValue={value()}
+                        onChangeCapture={e => {
+                            if(linkedOption){
+                                setValue(formId("label"), e.target.value);
+                            }
+                        }}
+                        onClick={e => {
+                            if(option.value && e.target.value === 'value'){
+                                resetField(formId("value"));
+                            }
+                        }}
+                        validate={{
+                            required: useTranslation("This field is mandatory"),
+                            maxLength: {
+                                value: 255,
+                                message: "max length is 255"
+                            }
+                        }}
+                    />
+                </td>
+                <td>
+                    <span className="i-flex-center s-8">
+                         <Tooltip
+                             label={
+                                 <button
+                                     type="button"
+                                     className={`acpt-btn-switch ${linkedOption ? 'active' : ''}`}
+                                     onClick={e => {
+                                         e.preventDefault();
+                                         setLinkedOption(!linkedOption);
+                                     }}
+                                 >
+                                     <Icon icon="bx:bx-link" width="18px"/>
+                                 </button>
+                             }
+                             tip={useTranslation(linkedOption ? "Label and value are linked" : "Label and value are unlinked")}
+                             icon={false}
                          />
-                     }
-                     tip={useTranslation("Default value")}
-                     icon={false}
-                 />
-            </span>
-            <DeleteMetaOptionModal
-                boxId={boxId}
-                fieldId={fieldId}
-                optionId={option.id}
-                parentFieldId={parentFieldId}
-                optionIndex={index}
-            />
-        </div>
+                         <Tooltip
+                             label={
+                                 <ButtonSwitch
+                                     control={control}
+                                     defaultValue={typeof watchedIsDefault  === "boolean" ? watchedIsDefault :  option.isDefault}
+                                     errors={errors}
+                                     icon="bx:check"
+                                     id={formId("isDefault")}
+                                     externalOnChange={handleIsDefault}
+                                 />
+                             }
+                             tip={useTranslation("Default value")}
+                             icon={false}
+                         />
+                    </span>
+                </td>
+                <td>
+                    <DeleteMetaOptionModal
+                        boxId={boxId}
+                        fieldId={fieldId}
+                        optionId={option.id}
+                        parentFieldId={parentFieldId}
+                        optionIndex={index}
+                    />
+                </td>
+            </tr>
+        </React.Fragment>
     );
 };
 

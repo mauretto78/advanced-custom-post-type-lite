@@ -13,6 +13,7 @@ import LabelsStep from "./Steps/LabelsStep";
 import SettingsStep from "./Steps/SettingsStep";
 import {saveTaxonomy} from "../../redux/reducers/saveTaxonomySlice";
 import {toast} from "react-hot-toast";
+import {setCookieMessage} from "../../utils/cookies";
 
 const SaveTaxonomy = ({}) => {
 
@@ -105,15 +106,17 @@ const SaveTaxonomy = ({}) => {
         setFormValues(formValues);
         scrollToTop();
 
-        if(stepActive === 2){
+        const isFormComplete = Object.keys(formValues).length === 3;
+
+        if(isFormComplete){
             dispatch(saveTaxonomy(formValues))
                 .then(res => {
                     const payload = res.payload;
 
                     if(payload.success){
+                        setCookieMessage("Taxonomy successfully saved.");
                         navigate('/taxonomies');
-                        toast.success(useTranslation("Taxonomy successfully saved. The browser will refresh after 5 seconds."));
-                        refreshPage(5000);
+                        refreshPage();
                     } else {
                         toast.error(payload.error);
                     }
@@ -148,6 +151,7 @@ const SaveTaxonomy = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <LabelsStep
                         edit={edit}
@@ -158,6 +162,7 @@ const SaveTaxonomy = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <SettingsStep
                         title={title}
@@ -167,7 +172,9 @@ const SaveTaxonomy = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                         loading={loading}
+                        edit={edit}
                     />
                 ]}
                 activeStep={stepActive}

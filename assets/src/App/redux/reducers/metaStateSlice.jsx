@@ -127,6 +127,14 @@ export const metaStateSlice = createSlice({
                 state.group.boxes[boxIndex] = appendBoxElement(state.group.boxes, boxId, rule, fieldId, "validationRules");
             }
         },
+        addPermission: (state, action) => {
+            if(action.payload){
+                const {boxId, fieldId, permission} = action.payload;
+                const boxIndex =  state.group.boxes.findIndex((b) => b.id === boxId);
+
+                state.group.boxes[boxIndex] = appendBoxElement(state.group.boxes, boxId, permission, fieldId, "permissions");
+            }
+        },
         deleteAllBoxes: (state) => {
             state.group = {
                 ...state.group,
@@ -155,7 +163,7 @@ export const metaStateSlice = createSlice({
             if(action.payload){
                 state.group = {
                     ...state.group,
-                    boxes: state.group.boxes.filter((b) => b.id !== action.payload)
+                    boxes: state.group.boxes ? state.group.boxes.filter((b) => b.id !== action.payload) : []
                 };
 
                 state.selectedElements = [];
@@ -222,6 +230,14 @@ export const metaStateSlice = createSlice({
                 const boxIndex =  state.group.boxes.findIndex((b) => b.id === boxId);
 
                 state.group.boxes[boxIndex] = deleteBoxElement(state.group.boxes, boxId, ruleId, fieldId, "validationRules");
+            }
+        },
+        deletePermission: (state, action) => {
+            if(action.payload){
+                const {boxId, fieldId, parentFieldId, permissionId} = action.payload;
+                const boxIndex =  state.group.boxes.findIndex((b) => b.id === boxId);
+
+                state.group.boxes[boxIndex] = deleteBoxElement(state.group.boxes, boxId, permissionId, fieldId, "permissions");
             }
         },
         deselectAllElements: (state, action) => {
@@ -336,7 +352,15 @@ export const metaStateSlice = createSlice({
                 const {element, selected, type} = action.payload;
 
                 if(selected === true){
-                    state.selectedElements.push(element);
+
+                    const isAlreadySelected = () => {
+                        return state.selectedElements.filter(e => e.id === element.id).length > 0;
+                    };
+
+                    if(!isAlreadySelected()){
+                        state.selectedElements.push(element); // check if already exists
+                    }
+
                 } else {
                     state.selectedElements = state.selectedElements.filter(e => e.id !== element.id);
                 }
@@ -379,6 +403,7 @@ export const {
     addOption,
     addConditionalRenderingElement,
     addValidationRule,
+    addPermission,
     duplicateBox,
     duplicateField,
     deleteAllBoxes,
@@ -389,6 +414,7 @@ export const {
     deleteField,
     deleteOption,
     deleteValidationRule,
+    deletePermission,
     deselectAllElements,
     hideAll,
     hideElement,

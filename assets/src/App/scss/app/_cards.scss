@@ -38,6 +38,7 @@
 
       .label {
         color: $black;
+        font-weight: bold;
         width: 300px;
 
         @media screen and (max-width: 767px){

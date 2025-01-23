@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {get} from 'react-hook-form';
 
-const Radio = ({id, values, description, validate, register, errors}) => {
+const Radio = ({id, values, description, validate, register, style, errors}) => {
 
     const error = get(errors, id);
 
     return (
         <React.Fragment>
-            <div className="flex-column s-8">
+            <div className={`${style === 'inline' ? 'i-flex-center' : 'flex-column'} s-8`} style={{minHeight: "46px"}}>
                 {Object.keys(values).map((keyName, index) => (
                     <label className="radio" htmlFor={`${id}_${index}`}>
                         <input
@@ -18,10 +18,10 @@ const Radio = ({id, values, description, validate, register, errors}) => {
                             aria-invalid={error ? "true" : "false"}
                             type="radio"
                             id={`${id}_${index}`}
-                            {...register(`${id}_${index}`, {...validate})}
+                            {...register(id, {...validate})}
                         />
                         <span>
-                            {keyName}
+                            {values[keyName]['label']}
                         </span>
                     </label>
                 ))}
@@ -42,6 +42,7 @@ Radio.propTypes = {
     validate: PropTypes.func,
     register: PropTypes.func.isRequired,
     errors: PropTypes.array.isRequired,
+    style: PropTypes.string,
 };
 
 export default Radio;

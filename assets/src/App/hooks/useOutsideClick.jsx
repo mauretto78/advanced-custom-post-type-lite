@@ -1,9 +1,21 @@
 import {useEffect} from "react";
+import {isIterable} from "../utils/objects";
 
-export const useOutsideClick = (ref, callback) => {
+export const useOutsideClick = (refs, callback) => {
 
     const handleOutsideTitleBoxClick = e => {
-        if (ref && ref.current && !ref.current.contains(e.target)) {
+
+        let matches = 0;
+
+        if(isIterable(refs)){
+            refs.map((ref)=>{
+                if (ref && ref.current && ref.current.contains(e.target)) {
+                    matches++;
+                }
+            });
+        }
+
+        if(matches === 0 && typeof callback === 'function'){
             callback();
         }
     };
@@ -14,6 +26,6 @@ export const useOutsideClick = (ref, callback) => {
         return () => {
             document.removeEventListener("mousedown", handleOutsideTitleBoxClick);
         };
-    }, [ref]);
+    }, [refs]);
 };
 

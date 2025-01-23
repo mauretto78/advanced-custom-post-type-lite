@@ -1,30 +1,36 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useReducer, useRef} from 'react';
 import Layout from "../../layout/Layout";
 import useTranslation from "../../hooks/useTranslation";
-import {changeCurrentAdminMenuLink, metaTitle} from "../../utils/misc";
+import {changeCurrentAdminMenuLink, metaTitle, refreshPage} from "../../utils/misc";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchMeta} from "../../redux/reducers/fetchMetaSlice";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {filterByLabel} from "../../utils/objects";
 import Loader from "../../components/Loader";
 import ButtonLink from "../../components/ButtonLink";
 import {styleVariants} from "../../constants/styles";
-import Alert from "../../components/Alert";
 import MetaListElement from "./MetaListElement";
 import Pagination from "../../components/Pagination";
 import {FormProvider, useForm, useWatch} from "react-hook-form";
 import {metaTypes} from "../../constants/metaTypes";
 import {wpAjaxRequest} from "../../utils/ajax";
 import {toast} from "react-hot-toast";
-import BulkActions from "./BulkActions";
+import BulkActions from "../../components/BulkActions";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {scrollToTop} from "../../utils/scroll";
+import {hiddenElements, hideElements, isElementHidden} from "../../utils/localStorage";
+import {flushCookieMessages, setCookieMessage} from "../../utils/cookies";
 
 const MetaList = () => {
 
     const documentGlobals = document.globals;
     const settings = documentGlobals.settings;
     const globals = documentGlobals.globals;
+
+    const hiddenElms = hiddenElements(metaTypes.CUSTOM_POST_TYPE);
+
+    // re-render component
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     // auto-animate
     const [parent] = useAutoAnimate();
@@ -57,7 +63,9 @@ const MetaList = () => {
         dispatch(fetchMeta({
             page: page ? page : 1,
             perPage: perPage
-        }));
+        })).then(res => {
+            flushCookieMessages();
+        });
 
     }, [page]);
 
@@ -94,56 +102,68 @@ const MetaList = () => {
     }, [watchedElements]);
 
     /**
-     *
-     * @return {boolean}
+     * re-render the app when hidden elements are restored
      */
-    const showBulkActions = () => {
-
-        if(!watchedElements){
-            return false;
-        }
-
-        for (const [key, value] of Object.entries(watchedElements)) {
-            if(value === true){
-                return true;
-            }
-        }
-
-        return false;
-    };
+    document.addEventListener("restoredElement", function(){
+        forceUpdate();
+    });
 
     const onSubmit = (data) => {
         methods.reset();
         data.belongsTo = metaTypes.META;
+        const action = data.action;
 
-        wpAjaxRequest('bulkActionsAction', data)
-            .then(res => {
-                if(res.success === true){
+        if(!action){
+            return;
+        }
 
-                    // flush message
-                    switch (data.action) {
-                        case "delete":
-                            toast.success(useTranslation("Meta group successfully deleted."));
+        switch(action){
+            // hide elements
+            case "hide":
+                hideElements(data);
+                break;
+
+            // delete elements
+            // duplicate elements
+            case "delete":
+            case "duplicate":
+                wpAjaxRequest('bulkActionsAction', data)
+                    .then(res => {
+                        if(res.success === true){
+
+                            // flush message
+                            switch (data.action) {
+                                case "delete":
+                                    setCookieMessage("Meta group successfully deleted.");
+                                    break;
+
+                                case "duplicate":
+                                    setCookieMessage("Meta group successfully duplicated.");
+                                    break;
+                            }
+
                             methods.resetField("elements");
                             scrollToTop();
+                            refreshPage();
+                        } else {
+                            toast.error(res.error);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        toast.error(useTranslation("Unknown error, please retry later"));
+                    })
+                ;
+                break;
+        }
+    };
 
-                            // refresh items
-                            dispatch(fetchMeta({
-                                page: page ? page : 1,
-                                perPage: perPage
-                            }));
-
-                            break;
-                    }
-                } else {
-                    toast.error(res.error);
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                toast.error(useTranslation("Unknown error, please retry later"));
-            })
-        ;
+    const handleSelectAll = (checked) => {
+        data.records
+            .filter(r => !isElementHidden(r.id, metaTypes.META))
+            .map((r) => {
+            methods.setValue(`elements.${r.id}`, checked);
+        });
     };
 
     const actions = [
@@ -170,14 +190,10 @@ const MetaList = () => {
                         }
                     ]}
                 >
-                    <div ref={parent}>
-                        {showBulkActions() && (
-                            <BulkActions />
-                        )}
-                    </div>
+                    <BulkActions belongsTo={metaTypes.META} />
                     {data.records && data.records.length > 0 ? (
-                        <div className="responsive">
-                            <table className={`acpt-table with-shadow ${globals.is_rtl ? 'rtl' : ''}`}>
+                        <div className="responsive with-shadow b-rounded">
+                            <table className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}>
                                 <thead>
                                     <tr>
                                         <th style={{
@@ -189,11 +205,7 @@ const MetaList = () => {
                                                     type="checkbox"
                                                     id="all"
                                                     defaultChecked={false}
-                                                    onClick={e => {
-                                                        data.records.map((r) => {
-                                                            methods.setValue(`elements.${r.id}`, e.currentTarget.checked);
-                                                        });
-                                                    }}
+                                                    onClick={e => handleSelectAll(e.currentTarget.checked)}
                                                 />
                                                 <span/>
                                             </label>
@@ -208,6 +220,12 @@ const MetaList = () => {
                                             {useTranslation("Display as")}
                                         </th>
                                         <th>
+                                            {useTranslation("Context")}
+                                        </th>
+                                        <th>
+                                            {useTranslation("Priority")}
+                                        </th>
+                                        <th>
                                             {useTranslation("Location")}
                                         </th>
                                         <th>
@@ -219,18 +237,22 @@ const MetaList = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.records && data.records.map((record) => (
-                                        <MetaListElement
-                                            page={page}
-                                            record={record}
-                                            key={record.id}
-                                        />
-                                    ))}
+                                    {data.records && data.records.map((record) => {
+                                        if(!isElementHidden(record.id, metaTypes.META)){
+                                            return (
+                                                <MetaListElement
+                                                    page={page}
+                                                    record={record}
+                                                    key={record.id}
+                                                />
+                                            );
+                                        }
+                                    })}
                                 </tbody>
                                 {totalPages > 1 && (
                                     <tfoot>
                                     <tr>
-                                        <td colSpan={7}>
+                                        <td colSpan={9}>
                                             <Pagination
                                                 currentPage={page ? parseInt(page) : 1}
                                                 totalPages={totalPages}
@@ -243,9 +265,22 @@ const MetaList = () => {
                             </table>
                         </div>
                     ) : (
-                        <Alert style={styleVariants.SECONDARY}>
-                            {useTranslation("No meta group found.")} <Link to="/register_meta">{useTranslation("Register the first one")}</Link>!
-                        </Alert>
+                        <div className="p-24 bg-white with-shadow">
+                            <div className="b-maxi b-rounded p-24 flex-column s-12 text-center">
+                                <span>
+                                    {useTranslation('No meta group found.')}
+                                </span>
+                                <div>
+                                    <ButtonLink
+                                        type="button"
+                                        style={styleVariants.SECONDARY}
+                                        to="/register_meta"
+                                    >
+                                        {useTranslation("Create new Meta group")}
+                                    </ButtonLink>
+                                </div>
+                            </div>
+                        </div>
                     )}
                 </Layout>
             </form>

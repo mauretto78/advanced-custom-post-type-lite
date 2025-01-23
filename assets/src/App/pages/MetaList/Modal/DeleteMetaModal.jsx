@@ -8,9 +8,10 @@ import {useDispatch} from "react-redux";
 import {deleteMeta} from "../../../redux/reducers/deleteMetaSlice";
 import {toast} from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
-import {fetchMeta} from "../../../redux/reducers/fetchMetaSlice";
 import {filterByLabel} from "../../../utils/objects";
 import {useFormContext} from "react-hook-form";
+import {setCookieMessage} from "../../../utils/cookies";
+import {refreshPage} from "../../../utils/misc";
 
 const DeleteMetaModal = ({page, id}) => {
 
@@ -39,11 +40,8 @@ const DeleteMetaModal = ({page, id}) => {
                     reset();
                     navigate('/meta');
                     setmodalVisible(!modalVisible);
-                    toast.success(useTranslation("Meta group successfully deleted."));
-                    dispatch(fetchMeta({
-                        page: page ? page : 1,
-                        perPage: perPage
-                    }));
+                    setCookieMessage("Meta group successfully deleted.");
+                    refreshPage();
                 } else {
                     toast.error(payload.error);
                 }
@@ -79,6 +77,7 @@ const DeleteMetaModal = ({page, id}) => {
                 </div>
             </Modal>
             <a
+                className={`color-${styleVariants.DANGER}`}
                 href="#"
                 onClick={e => {
                     e.preventDefault();

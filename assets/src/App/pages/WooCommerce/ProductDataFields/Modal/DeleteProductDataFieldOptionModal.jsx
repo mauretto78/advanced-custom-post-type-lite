@@ -65,7 +65,7 @@ const DeleteProductDataFieldOptionModal = ({fieldIndex, optionIndex}) => {
                 <Tooltip
                     icon={false}
                     tip={useTranslation("Delete")}
-                    label={<Icon icon="bx-minus"/>}
+                    label={<Icon icon="bx-trash" width={18} color="#F94144" />}
                 />
             </a>
         </span>

@@ -14,6 +14,7 @@ import {saveCustomPostType} from "../../redux/reducers/saveCustomPostTypeSlice";
 import {toast} from "react-hot-toast";
 import Loader from "../../components/Loader";
 import PageNotFound from "../404";
+import {setCookieMessage} from "../../utils/cookies";
 
 const SaveCustomPostType = ({}) => {
 
@@ -127,15 +128,17 @@ const SaveCustomPostType = ({}) => {
         setFormValues(formValues);
         scrollToTop();
 
-        if(stepActive === 2){
+        const isFormComplete = Object.keys(formValues).length === 3;
+
+        if(isFormComplete){
             dispatch(saveCustomPostType(formValues))
                 .then(res => {
                     const payload = res.payload;
 
                     if(payload.success){
-                        navigate('/');
-                        toast.success(useTranslation("Custom post type successfully saved. The browser will refresh after 5 seconds."));
-                        refreshPage(5000);
+                        setCookieMessage("Custom post type successfully saved.");
+                        navigate("/");
+                        refreshPage();
                     } else {
                         toast.error(payload.error);
                     }
@@ -170,6 +173,7 @@ const SaveCustomPostType = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <LabelsStep
                         edit={edit}
@@ -180,6 +184,7 @@ const SaveCustomPostType = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <SettingsStep
                         edit={edit}
@@ -190,6 +195,7 @@ const SaveCustomPostType = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                         isWPGraphQLActive={isWPGraphQLActive}
                         loading={loading}
                     />

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useReducer, useRef} from 'react';
 import Layout from "../../layout/Layout";
 import useTranslation from "../../hooks/useTranslation";
 import {changeCurrentAdminMenuLink, metaTitle, refreshPage} from "../../utils/misc";
@@ -16,15 +16,22 @@ import TaxonomyListElement from "./TaxonomyListElement";
 import {FormProvider, useForm, useWatch} from "react-hook-form";
 import {wpAjaxRequest} from "../../utils/ajax";
 import {toast} from "react-hot-toast";
-import BulkActions from "./BulkActions";
 import {metaTypes} from "../../constants/metaTypes";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {scrollToTop} from "../../utils/scroll";
+import BulkActions from "../../components/BulkActions";
+import {hiddenElements, hideElements, isElementHidden} from "../../utils/localStorage";
+import {flushCookieMessages, setCookieMessage} from "../../utils/cookies";
 
 const TaxonomyList = () => {
 
     const globals = document.globals;
     const settings = globals.settings;
+
+    const hiddenElms = hiddenElements(metaTypes.TAXONOMY);
+
+    // re-render component
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     // auto-animate
     const [parent] = useAutoAnimate();
@@ -57,7 +64,9 @@ const TaxonomyList = () => {
         dispatch(fetchTaxonomies({
             page: page ? page : 1,
             perPage: perPage
-        }));
+        })).then(res => {
+            flushCookieMessages();
+        });
     }, [page]);
 
     useEffect(() => {
@@ -93,56 +102,69 @@ const TaxonomyList = () => {
     }, [watchedElements]);
 
     /**
-     *
-     * @return {boolean}
+     * re-render the app when hidden elements are restored
      */
-    const showBulkActions = () => {
-
-        if(!watchedElements){
-            return false;
-        }
-
-        for (const [key, value] of Object.entries(watchedElements)) {
-            if(value === true){
-                return true;
-            }
-        }
-
-        return false;
-    };
+    document.addEventListener("restoredElement", function(){
+        forceUpdate();
+    });
 
     const onSubmit = (data) => {
         methods.reset();
         data.belongsTo = metaTypes.TAXONOMY;
-        wpAjaxRequest('bulkActionsAction', data)
-            .then(res => {
-                if(res.success === true){
+        const action = data.action;
 
-                    // flush message
-                    switch (data.action) {
-                        case "delete":
-                            toast.success(useTranslation("Taxonomy successfully deleted. The browser will refresh after 5 seconds."));
-                            methods.resetField("elements");
+        if(!action){
+            return;
+        }
+
+        switch(action) {
+
+            // hide elements
+            case "hide":
+                hideElements(data);
+                break;
+
+            // delete elements
+            // duplicate elements
+            case "delete":
+            case "duplicate":
+                wpAjaxRequest('bulkActionsAction', data)
+                    .then(res => {
+                        if(res.success === true){
+
+                            // flush message
+                            switch (data.action) {
+                                case "delete":
+                                    setCookieMessage("Taxonomy successfully deleted.");
+                                    break;
+
+                                case "duplicate":
+                                    setCookieMessage("Taxonomy successfully duplicated.");
+                                    break;
+                            }
+
                             scrollToTop();
+                            refreshPage();
+                        } else {
+                            toast.error(res.error);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        toast.error(useTranslation("Unknown error, please retry later"));
+                    })
+                ;
+                break;
+        }
+    };
 
-                            // refresh items
-                            dispatch(fetchTaxonomies({
-                                page: page ? page : 1,
-                                perPage: perPage
-                            }));
-
-                            refreshPage(5000);
-                            break;
-                    }
-                } else {
-                    toast.error(res.error);
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                toast.error(useTranslation("Unknown error, please retry later"));
-            })
-        ;
+    const handleSelectAll = (checked) => {
+        data.records
+            .filter(r => r.isNative === false)
+            .filter(r => !isElementHidden(r.slug, metaTypes.TAXONOMY))
+            .map((r) => {
+                methods.setValue(`elements.${r.slug}`, checked);
+            });
     };
 
     const actions = [
@@ -167,16 +189,12 @@ const TaxonomyList = () => {
                         }
                     ]}
                 >
-                    <div ref={parent}>
-                        {showBulkActions() && (
-                            <BulkActions />
-                        )}
-                    </div>
+                    <BulkActions belongsTo={metaTypes.TAXONOMY} />
                     {data.records && data.records.length > 0 ? (
-                        <div className="responsive">
+                        <div className="responsive with-shadow b-rounded">
                             <table
                                 data-cy="cpt-table"
-                                className={`acpt-table with-shadow ${globals.is_rtl ? 'rtl' : ''}`}
+                                className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}
                             >
                                 <thead>
                                 <tr>
@@ -193,11 +211,7 @@ const TaxonomyList = () => {
                                                 type="checkbox"
                                                 id="all"
                                                 defaultChecked={false}
-                                                onClick={e => {
-                                                    data.records.filter(r => r.isNative === false).map((r) => {
-                                                        methods.setValue(`elements.${r.slug}`, e.currentTarget.checked);
-                                                    });
-                                                }}
+                                                onClick={e => handleSelectAll(e.currentTarget.checked)}
                                             />
                                             <span/>
                                         </label>
@@ -226,14 +240,23 @@ const TaxonomyList = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {data.records && data.records.map((record) => (
-                                        <TaxonomyListElement key={record.id} record={record}/>
-                                    ))}
+                                    {data.records && data.records.map((record) => {
+                                        if(!isElementHidden(record.slug, metaTypes.TAXONOMY)){
+                                            return (
+                                                <TaxonomyListElement
+                                                    key={record.id}
+                                                    record={record}
+                                                    page={page}
+                                                    perPage={perPage}
+                                                />
+                                            );
+                                        }
+                                    })}
                                 </tbody>
                                 {totalPages > 1 && (
                                     <tfoot>
                                     <tr>
-                                        <td colSpan={7}>
+                                        <td colSpan={6}>
                                             <Pagination
                                                 currentPage={page ? parseInt(page) : 1}
                                                 totalPages={totalPages}

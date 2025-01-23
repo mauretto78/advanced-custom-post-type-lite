@@ -9,7 +9,7 @@ import Tooltip from "../../../components/Tooltip";
 import DeleteMetaBoxModal from "../Modal/DeleteMetaBoxModal";
 import CopyMetaBoxModal from "../Modal/CopyMetaBoxModal";
 import {useDispatch, useSelector} from "react-redux";
-import {addBox, hideElement, selectElement, showElement} from "../../../redux/reducers/metaStateSlice";
+import {addBox, addField, hideElement, showElement} from "../../../redux/reducers/metaStateSlice";
 import {alphanumericallyValid} from "../../../utils/validation";
 import {saveIsClosed} from "../../../utils/localStorage";
 import {get, useFieldArray, useFormContext, useWatch} from 'react-hook-form';
@@ -21,8 +21,10 @@ import {slugify, transliterate} from 'transliteration';
 import {wpAjaxRequest} from "../../../utils/ajax";
 import ElementSelector from "../BulkActions/ElementSelector";
 import {debounce} from "../../../utils/debounce";
+import {v4 as uuidv4} from "uuid";
+import {fieldTypes} from "../../../constants/fields";
 
-const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) => {
+const MetaBoxHeader = ({index, box, listeners, attributes, setActiveTab}) => {
 
     // manage form state
     const formId = (value) => {
@@ -53,7 +55,7 @@ const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) 
 
     // manage global state
     const dispatch = useDispatch();
-    const {closedElements, selectedElements, selectedElementsType} = useSelector(state => state.metaState);
+    const {closedElements, selectedElementsType} = useSelector(state => state.metaState);
 
     /**
      *
@@ -128,7 +130,7 @@ const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) 
         // check for other box names
         let otherBoxNames = [];
 
-        watchedBoxes.map((box, i) => {
+        watchedBoxes && watchedBoxes.map((box, i) => {
             if(i !== index){
                 otherBoxNames.push(box.name);
             }
@@ -175,68 +177,48 @@ const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) 
         return true;
     };
 
-    /**
-     * Handle select/deselect all fields
-     */
-    const handleSelectAllFields = () => {
-
-        /**
-         *
-         * @return {boolean}
-         */
-        const isFirstFieldSelected = () => {
-
-            const firstFieldId  = (box && box.fields && box.fields.length > 0) ? box.fields[0].id : null;
-            const selectedFields = selectedElements.filter(f => f.id === firstFieldId);
-
-            if(selectedFields && selectedFields.length === 1){
-                return true;
-            }
-
-            return false;
+    const handleAddField = () => {
+        const field = {
+            id: uuidv4(),
+            boxId: box.id,
+            name: 'meta_box_field',
+            label: 'meta box field',
+            type: fieldTypes.TEXT,
+            defaultValue: "",
+            description: "",
+            isRequired: false,
+            showInArchive: false,
+            quickEdit: false,
+            filterableInAdmin: false,
+            sort: 1,
+            advancedOptions: [],
+            options: [],
+            blocks: [],
+            blockId: null,
+            validationRules: [],
+            visibilityConditions: [],
+            hasManyRelation: [],
+            children: [],
+            parentId: null,
+            isATextualField: true,
+            isFilterable: true,
+            isSaved: false
         };
 
-        box && box.fields && box.fields.map((f) => {
-            dispatch(selectElement({
-                    element: f,
-                    selected: !isFirstFieldSelected(),
-                    type: 'field'
-                }
-            ));
-        });
-    };
-
-    /**
-     *
-     * @return {string}
-     */
-    const boxClassName = () => {
-        let css = 'flex-between s-8 for-xs';
-
-        if(view === 'accordion'){
-            css = css +' p-24 bg-pale-gray';
-
-            if(!isClosed()){
-                css = css + ' b-bottom-1';
-            }
-        }
-
-        return css;
+        dispatch(addField({boxId: box.id, parentFieldId: null, parentBlockId: null, field}));
     };
 
     return (
-        <div className={boxClassName()}>
+        <div className="flex-between p-24 s-8 for-xs">
             <InputHidden
                 id={formId("id")}
                 value={box.id}
                 register={register}
             />
             <span className="i-flex-center s-8">
-                {(view === 'list' || view === 'accordion') && (
-                    <span className="cursor-move top-2 handle" {...attributes} {...listeners}>
-                        <Icon icon="bx:dots-vertical-rounded" color="#777" width={18} />
-                    </span>
-                )}
+                <span className="cursor-move top-2 handle" {...attributes} {...listeners}>
+                    <Icon icon="bx:dots-vertical-rounded" color="#777" width={18} />
+                </span>
                 {selectedElementsType !== 'field' && selectedElementsType !== 'block' && canCopyTheBox() && (
                     <ElementSelector
                         elementType="box"
@@ -248,7 +230,7 @@ const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) 
                 <h3 className={`${!formVisible ? '' : 'hidden'}`}>
                     {name()}
                 </h3>
-                <span className={`top-1 color-gray ${!formVisible ? '' : 'hidden'}`}>
+                <span className={`color-gray ${!formVisible ? '' : 'hidden'}`}>
                     {label()}
                 </span>
                 <div className={`i-flex-center s-8 ${formVisible ? '' : 'hidden'}`}>
@@ -334,21 +316,6 @@ const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) 
                             href="#"
                             onClick={e => {
                                 e.preventDefault();
-                                handleSelectAllFields();
-                            }}
-                        >
-                            <Icon icon="bx:checkbox-checked" width={24} />
-                        </a>
-                    }
-                    tip={useTranslation("Select/deselect all fields")}
-                    icon={false}
-                />
-                <Tooltip
-                    label={
-                        <a
-                            href="#"
-                            onClick={e => {
-                                e.preventDefault();
                                 const duplicatedBox = cloneBox(watchedBox);
                                 dispatch(addBox(duplicatedBox));
                                 append(duplicatedBox);
@@ -388,23 +355,36 @@ const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) 
                     tip={useTranslation("Delete this meta box")}
                     icon={false}
                 />
-                {(view === 'list' || view === 'accordion') && (
-                    <Tooltip
-                        label={
-                            <a
-                                href="#"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    handleToggleClose();
-                                }}
-                            >
-                                <Icon icon="bx:expand-alt" width={18} />
-                            </a>
-                        }
-                        tip={useTranslation("Hide/show this meta box")}
-                        icon={false}
-                    />
-                )}
+                <Tooltip
+                    label={
+                        <a
+                            href="#"
+                            onClick={e => {
+                                e.preventDefault();
+                                handleAddField();
+                            }}
+                        >
+                            <Icon icon="bx:plus-circle" width={18} />
+                        </a>
+                    }
+                    tip={useTranslation("Add field")}
+                    icon={false}
+                />
+                <Tooltip
+                    label={
+                        <a
+                            href="#"
+                            onClick={e => {
+                                e.preventDefault();
+                                handleToggleClose();
+                            }}
+                        >
+                            <Icon icon="bx:expand-alt" width={18} />
+                        </a>
+                    }
+                    tip={useTranslation("Hide/show this meta box")}
+                    icon={false}
+                />
             </span>
         </div>
     );
@@ -412,10 +392,6 @@ const MetaBoxHeader = ({index, box, view, listeners, attributes, setActiveTab}) 
 
 MetaBoxHeader.propTypes = {
     box: PropTypes.object.isRequired,
-    view: PropTypes.oneOf([
-        "list",
-        "tabular"
-    ]).isRequired,
     setActiveTab: PropTypes.func,
     attributes: PropTypes.object,
     listeners: PropTypes.object,

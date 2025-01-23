@@ -6,20 +6,28 @@ import useTranslation from "../../../../../hooks/useTranslation";
 import {alphanumericallyValid} from "../../../../../utils/validation";
 import {
     fieldHasOptions,
+    fieldIsFlexible,
+    fieldIsRelational,
+    fieldIsRepeater,
     fieldsList,
     fieldTypes
 } from "../../../../../constants/fields";
 import {useFormContext, useWatch} from "react-hook-form";
 import MetaOptionList from "./MetaOptionList";
 import Select from "../../../../../components/Forms/Select";
+import ChildrenFieldsList from "./ChildrenFieldsList";
 import {canFieldHaveValidationAndLogicRules, fieldNestingLevel} from "../../../../../utils/fields";
 import {useDispatch, useSelector} from "react-redux";
+import BlockList from "./BlockList";
 import {updateField} from "../../../../../redux/reducers/metaStateSlice";
 import {slugify, transliterate} from "transliteration";
+import RelationalField from "./RelationalField";
 import {wpAjaxRequest} from "../../../../../utils/ajax";
 import {debounce} from "../../../../../utils/debounce";
+import Textarea from "../../../../../components/Forms/Textarea";
+import MetaFieldDefaultValue from "./MetaFieldDefaultValue";
 
-const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
+const BasicTab = ({formId, boxIndex, fieldIndex, boxId, field}) => {
 
     // manage global state
     const {group} = useSelector(state => state.metaState);
@@ -85,6 +93,26 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
             unregister(formId("blocks"));
             unregister(formId("children"));
 
+            if(!updatedField['children']){
+                updatedField.children = [];
+            }
+
+            if(!updatedField['blocks']){
+                updatedField.blocks = [];
+            }
+
+            if(!updatedField['relations']){
+                updatedField.relations = [];
+            }
+
+            if(!updatedField['visibilityConditions']){
+                updatedField.visibilityConditions = [];
+            }
+
+            if(!updatedField['validationRules']){
+                updatedField.validationRules = [];
+            }
+
             dispatch(updateField({field: updatedField, boxId}));
         }
     };
@@ -122,7 +150,7 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
         // check for other box names
         let otherFieldNames = [];
 
-        watchedFields.map((field, i) => {
+        watchedFields && watchedFields.map((field, i) => {
             if(i !== fieldIndex){
                 otherFieldNames.push(field.name);
             }
@@ -159,6 +187,7 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                                     <span>{useTranslation("Field label")}</span>
                                     <a
                                         href="#"
+                                        style={{fontWeight: "normal"}}
                                         onClick={e => {
                                             e.preventDefault();
                                             setAutoSlug(!autoSlug);
@@ -240,36 +269,19 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                     </div>
                 </div>
                 <div className="container align-end">
-                    <div className="col-6">
-                        <Label
-                            id={formId("defaultValue")}
-                            label={useTranslation("The default value for this field")}
-                        />
-                        <Input
-                            id={formId("defaultValue")}
-                            register={register}
-                            errors={errors}
-                            placeholder={useTranslation("Default value")}
-                            defaultValue={field.defaultValue}
-                            validate={{
-                                maxLength: {
-                                    value: 255,
-                                    message: "max length is 255"
-                                }
-                            }}
-                        />
-                    </div>
-                    <div className="col-6">
+                    <div className="col-12">
                         <Label
                             id={formId("description")}
                             label={useTranslation("The description of this field (showed only on admin panel)")}
                         />
-                        <Input
+                        <Textarea
                             id={formId("description")}
                             register={register}
+                            defaultValue={field.description}
                             errors={errors}
                             placeholder={useTranslation("A brief description")}
-                            defaultValue={field.description}
+                            characterLimit={255}
+                            rows={4}
                             validate={{
                                 maxLength: {
                                     value: 255,
@@ -279,6 +291,10 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                         />
                     </div>
                 </div>
+                <MetaFieldDefaultValue
+                    field={field}
+                    formId={formId}
+                />
             </div>
             {fieldHasOptions(fieldType()) && (
                 <MetaOptionList
@@ -288,7 +304,33 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                     fieldIndex={fieldIndex}
                     parentFieldId={field.parentId ? field.parentId : null}
                     options={field.options ? field.options : []}
-                    isMulti={false}
+                    isMulti={field.type === fieldTypes.SELECT_MULTI || field.type === fieldTypes.CHECKBOX}
+                />
+            )}
+            {fieldIsRepeater(fieldType()) && (
+                <ChildrenFieldsList
+                    nestingLevel={nestingLevel}
+                    boxId={boxId}
+                    parentFieldId={field.id}
+                    boxIndex={boxIndex}
+                    parentFieldIndex={fieldIndex}
+                    childrenFields={field.children}
+                />
+            )}
+            {fieldIsFlexible(fieldType()) && (
+                <BlockList
+                    nestingLevel={nestingLevel}
+                    boxId={boxId}
+                    parentFieldId={field.id}
+                    boxIndex={boxIndex}
+                    parentFieldIndex={fieldIndex}
+                    blocks={field.blocks}
+                />
+            )}
+            {fieldIsRelational(fieldType()) && (
+                <RelationalField
+                    formId={formId}
+                    field={field}
                 />
             )}
         </React.Fragment>
@@ -296,10 +338,6 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
 };
 
 BasicTab.propTypes = {
-    view: PropTypes.oneOf([
-        "list",
-        "tabular"
-    ]).isRequired,
     formId: PropTypes.func.isRequired,
     boxIndex: PropTypes.number.isRequired,
     fieldIndex: PropTypes.number.isRequired,

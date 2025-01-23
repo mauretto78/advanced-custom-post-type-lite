@@ -65,8 +65,8 @@ const AssocCustomPostTypeToTaxonomy = () => {
             ]}
         >
             {fetchedTaxonomies.length  > 0 && fetchedPosts.records && fetchedPosts.records.length > 0 ? (
-                <div className="responsive">
-                    <table className={`acpt-table with-shadow ${globals.is_rtl ? 'rtl' : ''}`}>
+                <div className="responsive with-shadow b-rounded">
+                    <table className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}>
                         <thead>
                             <tr>
                                 <th>

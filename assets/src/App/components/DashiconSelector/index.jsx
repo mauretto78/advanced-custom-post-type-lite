@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import useTranslation from "../../hooks/useTranslation";
 import DashiconSelectorItem from "./DashiconSelectorItem";
 import PropTypes from 'prop-types';
+import {isValidHttpUrl} from "../../utils/strings";
 
 const DashiconSelector = ({type, defaultIcon = null, callback}) => {
 
@@ -45,7 +46,7 @@ const DashiconSelector = ({type, defaultIcon = null, callback}) => {
     const openWpMedia = () => {
 
         if (!wp || !wp.media) {
-            alert(useTranslation('The media gallery is not available. You must admin_enqueue this function: wp_enqueue_media()'));
+                alert(useTranslation('The media gallery is not available. You must admin_enqueue this function: wp_enqueue_media()'));
             return;
         }
 
@@ -73,7 +74,7 @@ const DashiconSelector = ({type, defaultIcon = null, callback}) => {
     if (type === 'image') {
         return (
             <React.Fragment>
-                {defaultIcon && (
+                {defaultIcon && isValidHttpUrl(defaultIcon) && (
                     <div className="fit-content mt-8 mb-8 p-8 with-border b-rounded">
                         <img src={defaultIcon} alt="" width={128} />
                     </div>

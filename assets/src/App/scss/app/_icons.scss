@@ -1,0 +1,13 @@
+.circle-icon {
+  padding: $space-2;
+  border-radius: 100%;
+  border: $border-thickness solid $primary-color;
+}
+
+.rounded-icon {
+  margin: auto;
+  background: $pale-gray;
+  border-radius: 100%;
+  padding: $space-12;
+  color: $black;
+}

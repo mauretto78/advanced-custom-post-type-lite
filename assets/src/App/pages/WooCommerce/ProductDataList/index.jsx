@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useReducer, useRef} from 'react';
 import useTranslation from "../../../hooks/useTranslation";
 import Layout from "../../../layout/Layout";
 import {styleVariants} from "../../../constants/styles";
@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useParams} from "react-router-dom";
 import {filterByLabel} from "../../../utils/objects";
 import Loader from "../../../components/Loader";
-import {metaTitle} from "../../../utils/misc";
+import {metaTitle, refreshPage} from "../../../utils/misc";
 import {fetchWooCommerceProductData} from "../../../redux/reducers/fetchWooCommerceProductDataSlice";
 import Alert from "../../../components/Alert";
 import Pagination from "../../../components/Pagination";
@@ -16,16 +16,17 @@ import {FormProvider, useForm, useWatch} from "react-hook-form";
 import {wpAjaxRequest} from "../../../utils/ajax";
 import {toast} from "react-hot-toast";
 import {scrollToTop} from "../../../utils/scroll";
-import {useAutoAnimate} from "@formkit/auto-animate/react";
-import BulkActions from "./BulkActions";
+import BulkActions from "../../../components/BulkActions";
+import {hideElements, isElementHidden} from "../../../utils/localStorage";
+import {flushCookieMessages, setCookieMessage} from "../../../utils/cookies";
 
 const ProductDataList = ({}) => {
 
     const globals = document.globals;
     const settings = globals.settings;
 
-    // auto-animate
-    const [parent] = useAutoAnimate();
+    // re-render component
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     // ref
     const ref = useRef();
@@ -54,7 +55,9 @@ const ProductDataList = ({}) => {
         dispatch(fetchWooCommerceProductData({
             page: page ? page : 1,
             perPage: perPage
-        }));
+        })).then(res => {
+            flushCookieMessages();
+        });
     }, [page]);
 
     const actions = [
@@ -66,24 +69,20 @@ const ProductDataList = ({}) => {
         </ButtonLink>
     ];
 
-    /**
-     *
-     * @return {boolean}
-     */
-    const showBulkActions = () => {
-
-        if(!watchedElements){
-            return false;
-        }
-
-        for (const [key, value] of Object.entries(watchedElements)) {
-            if(value === true){
-                return true;
-            }
-        }
-
-        return false;
+    const handleSelectAll = (checked) => {
+        data.records
+            .filter(r => !isElementHidden(r.id, "woo_product_data"))
+            .map((r) => {
+                methods.setValue(`elements.${r.id}`, checked);
+            });
     };
+
+    /**
+     * re-render the app when hidden elements are restored
+     */
+    document.addEventListener("restoredElement", function(){
+        forceUpdate();
+    });
 
     /**
      *
@@ -92,35 +91,51 @@ const ProductDataList = ({}) => {
     const onSubmit = (data) => {
         methods.reset();
         data.belongsTo = "woo_product_data";
+        const action = data.action;
 
-        wpAjaxRequest('bulkActionsAction', data)
-            .then(res => {
-                if(res.success === true){
+        if(!action){
+            return;
+        }
 
-                    // flush message
-                    switch (data.action) {
-                        case "delete":
-                            toast.success(useTranslation("WooCommerce product data successfully deleted"));
+        switch(action) {
+            // hide elements
+            case "hide":
+                hideElements(data);
+                break;
+
+            // delete elements
+            // duplicate elements
+            case "delete":
+            case "duplicate":
+                wpAjaxRequest('bulkActionsAction', data)
+                    .then(res => {
+                        if(res.success === true){
+
+                            // flush message
+                            switch (action) {
+                                case "delete":
+                                    setCookieMessage("WooCommerce product data successfully deleted");
+                                    break;
+
+                                case "duplicate":
+                                    setCookieMessage("WooCommerce product data successfully duplicated");
+                                    break;
+                            }
+
                             methods.resetField("elements");
                             scrollToTop();
+                            refreshPage();
 
-                            // refresh items
-                            dispatch(fetchWooCommerceProductData({
-                                page: page ? page : 1,
-                                perPage: perPage
-                            }));
-
-                            break;
-                    }
-                } else {
-                    toast.error(res.error);
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                toast.error(useTranslation("Unknown error, please retry later"));
-            })
-        ;
+                        } else {
+                            toast.error(res.error);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        toast.error(useTranslation("Unknown error, please retry later"));
+                    })
+                ;
+        }
     };
 
     if(loading){
@@ -145,14 +160,10 @@ const ProductDataList = ({}) => {
                         }
                     ]}
                 >
-                    <div ref={parent}>
-                        {showBulkActions() && (
-                            <BulkActions />
-                        )}
-                    </div>
+                    <BulkActions belongsTo="woo_product_data" />
                     {data.records && data.records.length > 0 ? (
-                        <div className="responsive">
-                            <table className={`acpt-table with-shadow ${globals.is_rtl ? 'rtl' : ''}`}>
+                        <div className="responsive with-shadow b-rounded">
+                            <table className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}>
                                 <thead>
                                     <tr>
                                         <th style={{
@@ -165,9 +176,7 @@ const ProductDataList = ({}) => {
                                                     id="all"
                                                     defaultChecked={false}
                                                     onClick={e => {
-                                                        data.records.map((r) => {
-                                                            methods.setValue(`elements.${r.id}`, e.currentTarget.checked);
-                                                        });
+                                                        data.records.map((r) => handleSelectAll(e.currentTarget.checked));
                                                     }}
                                                 />
                                                 <span/>
@@ -192,19 +201,23 @@ const ProductDataList = ({}) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.records && data.records.map((record) => (
-                                        <ProductDataListElement
-                                            key={record.id}
-                                            record={record}
-                                            page={page ? page : 1}
-                                            perPage={perPage}
-                                        />
-                                    ))}
+                                    {data.records && data.records.map((record) => {
+                                        if(!isElementHidden(record.id, "woo_product_data")){
+                                            return (
+                                                <ProductDataListElement
+                                                    key={record.id}
+                                                    record={record}
+                                                    page={page ? page : 1}
+                                                    perPage={perPage}
+                                                />
+                                            );
+                                        }
+                                    })}
                                 </tbody>
                                 {totalPages > 1 && (
                                     <tfoot>
                                         <tr>
-                                            <td colSpan={7}>
+                                            <td colSpan={6}>
                                                 <Pagination
                                                     currentPage={page ? parseInt(page) : 1}
                                                     totalPages={totalPages}

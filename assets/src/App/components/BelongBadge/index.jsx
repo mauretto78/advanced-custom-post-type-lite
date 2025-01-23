@@ -40,6 +40,7 @@ const BelongBadge = ({belongsTo, find}) => {
     };
 
     if(
+        belongsTo === "PARENT_POST_ID" ||
         belongsTo === "POST_ID" ||
         belongsTo === "POST_TAX" ||
         belongsTo === "POST_CAT" ||

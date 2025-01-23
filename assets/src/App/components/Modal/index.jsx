@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Button from "../Button";
 import {useOutsideClick} from "../../hooks/useOutsideClick";
 
-const Modal = ( {title, size = 'medium', visible = false, textAlign = "left", padding = 24, buttons = [], testId, children}) => {
+const Modal = ( {title, size = 'medium', visible = false, setVisible = null, textAlign = "left", padding = 24, buttons = [], testId, children}) => {
 
     // manage local state
     const didMountRef = useRef(false);
@@ -20,8 +20,12 @@ const Modal = ( {title, size = 'medium', visible = false, textAlign = "left", pa
         }
     }, [visible]);
 
-    useOutsideClick(node, () => {
+    useOutsideClick([node], () => {
         setClosed(true);
+
+        if(setVisible){
+            setVisible(false);
+        }
     });
 
     if(closed){
@@ -43,6 +47,10 @@ const Modal = ( {title, size = 'medium', visible = false, textAlign = "left", pa
                         onClick={(e) => {
                             e.preventDefault();
                             setClosed(!closed);
+
+                            if(setVisible){
+                                setVisible(closed);
+                            }
                         }}
                     >
                         <Icon icon="bx:bx-x" color="#777" width={24} />
@@ -67,6 +75,7 @@ const Modal = ( {title, size = 'medium', visible = false, textAlign = "left", pa
 Modal.propTypes = {
     title: PropTypes.string.isRequired,
     visible: PropTypes.bool,
+    setVisible: PropTypes.func,
     padding: PropTypes.number,
     testId: PropTypes.string,
     buttons: PropTypes.arrayOf(Button),
