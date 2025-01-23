@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Includes;
 
-abstract class ACPT_Schema_Migration
+abstract class ACPT_Lite_Schema_Migration
 {
 	/**
 	 * @var string

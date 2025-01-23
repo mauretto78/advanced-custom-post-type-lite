@@ -28,6 +28,5 @@ class DeleteMetaGroupCommand implements CommandInterface
 	public function execute()
 	{
 		MetaRepository::deleteMetaGroup($this->id);
-		MetaRepository::removeOrphanRelationships();
 	}
 }

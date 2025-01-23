@@ -1,9 +1,9 @@
 <?php
 
 use ACPT_Lite\Includes\ACPT_Lite_DB;
-use ACPT_Lite\Includes\ACPT_Schema_Migration;
+use ACPT_Lite\Includes\ACPT_Lite_Schema_Migration;
 
-class AddContextAndPriorityToMetaBox extends ACPT_Schema_Migration
+class AddContextAndPriorityToMetaBox extends ACPT_Lite_Schema_Migration
 {
 	/**
 	 * @return array

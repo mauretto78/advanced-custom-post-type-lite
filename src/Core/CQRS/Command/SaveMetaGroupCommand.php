@@ -243,12 +243,6 @@ class SaveMetaGroupCommand implements CommandInterface
 			'ids' => $ids[$groupId]
 		]);
 
-		// remove orphan blocks
-		MetaRepository::removeOrphanBlocks();
-
-		// remove orphan visibility conditions
-		MetaRepository::removeOrphanVisibilityConditions();
-
 		return $groupId;
 	}
 
@@ -277,22 +271,6 @@ class SaveMetaGroupCommand implements CommandInterface
 
 					$diff = Arrays::reindex($diff);
 					$arrayOfFieldNames = array_merge($arrayOfFieldNames, $diff);
-				}
-
-				$blockNamesCopy = [];
-				$this->getAllBlockNames($field, $blockNamesCopy);
-
-				if(isset($allNames['blocks']) and is_array($allNames['blocks']) and !empty($allNames['blocks']) and !empty($fieldNamesCopy)){
-
-					$diff = [];
-					foreach ($allNames['blocks'] as $index => $allNamesField){
-						if (is_array($fieldNamesCopy) and isset($fieldNamesCopy[$index])){
-							$diff[] = array_diff($allNames['blocks'][$index], $fieldNamesCopy[$index]);
-						}
-					}
-
-					$diff = Arrays::reindex($diff);
-					$arrayOfBlockNames = array_merge($arrayOfBlockNames, $diff);
 				}
 			}
 		}
@@ -329,31 +307,6 @@ class SaveMetaGroupCommand implements CommandInterface
 	}
 
 	/**
-	 * @param $field
-	 * @param $blockNames
-	 */
-	private function getAllBlockNames($field, &$blockNames)
-	{
-		if(!empty($field['blocks'])){
-			foreach ($field['blocks'] as $block){
-				if(isset($block['id'])){
-					$blockNames[] = [
-						'id' => $block['id'],
-						'name' => $block['name'],
-					];
-				}
-
-				if(!empty($block['fields'])){
-					foreach ($block['fields'] as $child){
-						$this->getAllBlockNames($child, $blockNames);
-					}
-				}
-			}
-		}
-	}
-
-
-	/**
 	 * @param $groupId
 	 * @param MetaFieldModel $fieldModel
 	 * @param $ids
@@ -364,39 +317,6 @@ class SaveMetaGroupCommand implements CommandInterface
 	{
 		foreach ($fieldModel->getOptions() as $option){
 			$ids[$groupId]['options'][] = $option->getId();
-		}
-
-		foreach ($fieldModel->getVisibilityConditions() as $condition){
-			$ids[$groupId]['visibilityConditions'][] = $condition->getId();
-		}
-
-		foreach ($fieldModel->getValidationRules() as $rule){
-			$ids[$groupId]['validationRules'][] = $rule->getId();
-		}
-
-		foreach ($fieldModel->getChildren() as $child){
-			$ids[$groupId]['fields'][] = $child->getId();
-			$this->appendIdsOfFieldModel($groupId, $child, $ids);
-		}
-
-		foreach ($fieldModel->getBlocks() as $block){
-			$ids[$groupId]['blocks'][] = $block->getId();
-			foreach ($block->getFields() as $child){
-				$ids[$groupId]['fields'][] = $child->getId();
-				$this->appendIdsOfFieldModel($groupId, $child, $ids);
-			}
-		}
-
-		foreach ($fieldModel->getRelations() as $relation){
-			$ids[$groupId]['relations'][] = $relation->getId();
-
-			if($relation->getInversedBy()){
-				$inversedRelation = MetaRepository::findInversedRelation($relation);
-
-				if($inversedRelation){
-					$ids[$groupId]['relations'][] = $inversedRelation->getId();
-				}
-			}
 		}
 	}
 

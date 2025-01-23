@@ -48,6 +48,10 @@ class ACPT_Lite_DB
     const TABLE_META_FIELD = 'acpt_lite_meta_field';
     const TABLE_META_OPTION = 'acpt_lite_meta_option';
 
+    // NOT USED
+    const TABLE_CUSTOM_POST_TYPE_RELATION = 'acpt_lite_custom_post_type_relation';
+    const TABLE_CUSTOM_POST_TEMPLATE = 'acpt_lite_custom_post_template';
+
 	/**
 	 * @var ExtendedCacheItemPoolInterface
 	 */

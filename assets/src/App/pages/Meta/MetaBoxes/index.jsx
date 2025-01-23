@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import {styleVariants} from "../../../constants/styles";
 import useTranslation from "../../../hooks/useTranslation";
@@ -17,7 +17,7 @@ import Button from "../../../components/Button";
 import {delay} from "../../../utils/misc";
 import {scrollToId} from "../../../utils/scroll";
 import {Icon} from "@iconify/react";
-import {saveCloseAll, saveShowAll, toggleNavigation, isNavigationEnabled} from "../../../utils/localStorage";
+import {isNavigationEnabled, saveCloseAll, saveShowAll, toggleNavigation} from "../../../utils/localStorage";
 import {getElementIds} from "../../../utils/fields";
 import QuickNavigation from "../QuickNavigation";
 

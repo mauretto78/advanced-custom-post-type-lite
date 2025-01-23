@@ -17,7 +17,6 @@ const PageCustomPostTypeListPage = lazy(() => import("./pages/CustomPostTypeList
 const ProductDataFieldsPage = lazy(() => import("./pages/WooCommerce/ProductDataFields"));
 const ProductDataListPage = lazy(() => import("./pages/WooCommerce/ProductDataList"));
 const SaveCustomPostTypePage = lazy(() => import("./pages/SaveCustomPostType"));
-const SaveOptionPages = lazy(() => import("./pages/SaveOptionPages"));
 const SaveProductDataPage = lazy(() => import("./pages/WooCommerce/SaveProductData"));
 const SaveTaxonomyPage = lazy(() => import("./pages/SaveTaxonomy"));
 const SettingsPage = lazy(() => import("./pages/Settings"));

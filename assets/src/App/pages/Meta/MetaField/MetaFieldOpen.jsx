@@ -1,13 +1,11 @@
 import React from "react";
-import Tabs from "../../../components/Tabs";
-import Tab from "../../../components/Tabs/Tab";
 import {Icon} from "@iconify/react";
 import useTranslation from "../../../hooks/useTranslation";
 import BasicTab from "./Tabs/BasicTab";
 import {useSortable} from "@dnd-kit/sortable";
 import {CSS} from "@dnd-kit/utilities";
 import {get, useFormContext, useWatch} from "react-hook-form";
-import {canCopyTheField, formatFieldForSelection, isTextualField, metaFieldFormId} from "../../../utils/fields";
+import {canCopyTheField, formatFieldForSelection, metaFieldFormId} from "../../../utils/fields";
 import {useDispatch, useSelector} from "react-redux";
 import ElementSelector from "../BulkActions/ElementSelector";
 import MetaFieldActions from "./Commons/MetaFieldActions";

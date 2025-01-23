@@ -8,7 +8,6 @@ use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
-use ACPT_Lite\Core\Traits\PermissionTrait;
 use ACPT_Lite\Utils\Wordpress\Translator;
 
 /**
@@ -21,8 +20,6 @@ use ACPT_Lite\Utils\Wordpress\Translator;
  */
 class TaxonomyModel extends AbstractModel implements \JsonSerializable
 {
-	use PermissionTrait;
-
     /**
      * @var string
      */
@@ -269,13 +266,6 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
         $duplicate->permissions = [];
         $duplicate->setSlug(Strings::getTheFirstAvailableName($duplicate->getSlug(), TaxonomyRepository::getSlugs()), false);
 
-        $permissions = $duplicate->getPermissions();
-        $duplicate->permissions = [];
-
-        foreach ($permissions as $permissionModel){
-            $duplicate->permissions[] = $permissionModel->duplicateFromEntityId($duplicate->getId());
-        }
-
         return $duplicate;
     }
 
@@ -297,7 +287,6 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
 			    'supports' => $postTypeModel->getSupports(),
 			    'labels' => $postTypeModel->getLabels(),
 			    'settings' => $postTypeModel->getSettings(),
-			    'permissions' => $postTypeModel->getPermissions(),
 		    ];
 	    }
 
@@ -311,7 +300,6 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
 		    'labels' => $this->labels,
 		    'settings' => $this->settings,
 		    'customPostTypes' => $customPostTypesArray,
-		    'permissions' => $this->getPermissions(),
 	    ];
     }
 
@@ -331,7 +319,6 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
                 'supports' => $postTypeModel->getSupports(),
                 'labels' => $postTypeModel->getLabels(),
                 'settings' => $postTypeModel->getSettings(),
-                'permissions' => $postTypeModel->getPermissions(),
             ];
         }
 
@@ -345,7 +332,6 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
             'labels' => $this->labels,
             'settings' => $this->settings,
             'customPostTypes' => $customPostTypesArray,
-            'permissions' => $this->getPermissions(),
         ];
     }
 

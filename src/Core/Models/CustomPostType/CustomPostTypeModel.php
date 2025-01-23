@@ -9,7 +9,6 @@ use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
-use ACPT_Lite\Core\Traits\PermissionTrait;
 use ACPT_Lite\Utils\Wordpress\Translator;
 
 /**
@@ -22,8 +21,6 @@ use ACPT_Lite\Utils\Wordpress\Translator;
  */
 class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
 {
-	use PermissionTrait;
-
     /**
      * @var string
      */
@@ -365,13 +362,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
         $duplicate->permissions = [];
         $duplicate->setName(Strings::getTheFirstAvailableName($duplicate->getName(), CustomPostTypeRepository::getNames()));
 
-        $permissions = $duplicate->getPermissions();
-        $duplicate->permissions = [];
-
-        foreach ($permissions as $permissionModel){
-            $duplicate->permissions[] = $permissionModel->duplicateFromEntityId($duplicate->getId());
-        }
-
         return $duplicate;
     }
 
@@ -391,7 +381,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                 'labels' => $taxonomy->getLabels(),
                 'settings' => $taxonomy->getSettings(),
                 'postCount' => $taxonomy->getPostCount(),
-                'permissions' => $taxonomy->getPermissions(),
             ];
         }
 
@@ -405,7 +394,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'supports' => $this->supports,
             'labels' => $this->labels,
             'settings' => $this->settings,
-            'permissions' => $this->getPermissions(),
             'taxonomies' => $taxonomyArray,
         ];
     }
@@ -424,7 +412,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                 'settings' => $taxonomy->getSettings(),
                 'postCount' => $taxonomy->getPostCount(),
                 'isNative' => $taxonomy->isNative(),
-                'permissions' => $taxonomy->getPermissions(),
             ];
         }
 
@@ -440,7 +427,6 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'labels' => $this->labels,
             'settings' => $this->settings,
             'taxonomies' => $taxonomyArray,
-            'permissions' => $this->getPermissions(),
             'isWooCommerce' => $this->isWooCommerce(),
             'woocommerceProductData' => $this->woocommerceProductData,
         ];

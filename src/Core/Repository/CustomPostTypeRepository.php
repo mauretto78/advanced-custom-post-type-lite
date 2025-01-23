@@ -71,7 +71,6 @@ class CustomPostTypeRepository extends AbstractRepository
                     WooCommerceProductDataRepository::clear();
                 }
 
-                MetaRepository::removeOrphanRelationships();
                 ACPT_Lite_DB::executeQueryOrThrowException($sql, [$postModel->getId()]);
                 ACPT_Lite_DB::commitTransaction();
 	            ACPT_Lite_DB::invalidateCacheTag(self::class);

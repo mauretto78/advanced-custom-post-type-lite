@@ -1,6 +1,5 @@
 import React, {useRef, useState} from 'react';
 import useTranslation from "../../hooks/useTranslation";
-import {Link} from "react-router-dom";
 import {Icon} from "@iconify/react";
 import {useOutsideClick} from "../../hooks/useOutsideClick";
 
