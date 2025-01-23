@@ -6,7 +6,7 @@ import CardRow from "../../../components/Card/CardRow";
 import {useFormContext} from "react-hook-form";
 import Toggle from "../../../components/Forms/Toggle";
 
-const ContentSettingsTab = ({enable_cpt, enable_tax, enable_op, enable_meta, enable_forms}) => {
+const ContentSettingsTab = ({enable_cpt, enable_tax, enable_meta}) => {
 
     const { register, formState: {errors} } = useFormContext();
 
@@ -37,18 +37,6 @@ const ContentSettingsTab = ({enable_cpt, enable_tax, enable_op, enable_meta, ena
                 }
             />
             <CardRow
-                label={useTranslation("Enable Option Pages")}
-                value={
-                    <Toggle
-                        id="enable_op"
-                        description={useTranslation("Enable the Option Pages manager.")}
-                        register={register}
-                        errors={errors}
-                        defaultValue={enable_op}
-                    />
-                }
-            />
-            <CardRow
                 label={useTranslation("Enable meta fields")}
                 value={
                     <Toggle
@@ -57,18 +45,6 @@ const ContentSettingsTab = ({enable_cpt, enable_tax, enable_op, enable_meta, ena
                         register={register}
                         errors={errors}
                         defaultValue={enable_meta}
-                    />
-                }
-            />
-            <CardRow
-                label={useTranslation("Enable forms")}
-                value={
-                    <Toggle
-                        id="enable_forms"
-                        description={useTranslation("Enable the form builder.")}
-                        register={register}
-                        errors={errors}
-                        defaultValue={enable_forms}
                     />
                 }
             />
