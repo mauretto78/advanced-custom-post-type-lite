@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT_Lite\Core\Shortcodes\ACPT\Fields;
+namespace ACPT_Lite\Core\Shortcodes\ACPT_Lite\Fields;
 
 use ACPT_Lite\Constants\ExtraFields;
 use ACPT_Lite\Constants\MetaTypes;
@@ -9,7 +9,7 @@ use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\OptionPageRepository;
-use ACPT_Lite\Core\Shortcodes\ACPT\DTO\ShortcodePayload;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\DTO\ShortcodePayload;
 use ACPT_Lite\Utils\Checker\FieldVisibilityChecker;
 use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Wordpress\Users;

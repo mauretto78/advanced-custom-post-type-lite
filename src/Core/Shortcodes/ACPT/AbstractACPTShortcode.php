@@ -6,8 +6,8 @@ use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Shortcodes\ACPT\DTO\ShortcodePayload;
-use ACPT_Lite\Core\Shortcodes\ACPT\Fields\AbstractField;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\DTO\ShortcodePayload;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\Fields\AbstractField;
 use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Settings\Settings;
 
@@ -20,7 +20,7 @@ abstract class AbstractACPTShortcode
      */
     protected function getField($type, ShortcodePayload $payload)
     {
-        $className = 'ACPT\\Core\\Shortcodes\\ACPT\\Fields\\'.$type.'Field';
+        $className = 'ACPT_Lite\\Core\\Shortcodes\\ACPT_Lite\\Fields\\'.$type.'Field';
 
         if(class_exists($className)){
 	        return new $className($payload);

@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT\Core\Generators\Comment;
+namespace ACPT_Lite\Core\Generators\Comment;
 
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Generators\AbstractGenerator;
@@ -62,7 +62,7 @@ class CommentMetaFieldGenerator extends AbstractGenerator
 			return null;
 		}
 
-		$className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
+		$className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
 		$commentId = $commentId ? $commentId : 0;
 
 		if(class_exists($className)){

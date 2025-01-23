@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT_Lite\Core\Shortcodes\ACPT\Fields;
+namespace ACPT_Lite\Core\Shortcodes\ACPT_Lite\Fields;
 
 class DateField extends AbstractField
 {

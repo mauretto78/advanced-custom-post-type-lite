@@ -48,7 +48,7 @@ class WooCommerceProductVariationMetaField
      */
     public function generate(): ?AbstractField
     {
-        $className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'. $this->metaField->getType().'Field';
+        $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'. $this->metaField->getType().'Field';
         $value = $this->variationData[$this->metaField->getDbName()][0] ?? null;
 
         if(!empty($value) and is_serialized($value)){

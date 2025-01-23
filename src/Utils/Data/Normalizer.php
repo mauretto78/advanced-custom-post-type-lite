@@ -4,7 +4,7 @@ namespace ACPT_Lite\Utils\Data;
 
 /**
  * Class Normalizer
- * @package ACPT\Utils
+ * @package ACPT_Lite\Utils
  */
 class Normalizer
 {

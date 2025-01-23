@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT\Core\Generators\Attachment;
+namespace ACPT_Lite\Core\Generators\Attachment;
 
 use ACPT_Lite\Core\CQRS\Command\SaveCustomPostTypeMetaCommand;
 use ACPT_Lite\Core\Generators\AbstractGenerator;

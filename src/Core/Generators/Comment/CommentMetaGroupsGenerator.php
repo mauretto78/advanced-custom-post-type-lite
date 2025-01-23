@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT\Core\Generators\Comment;
+namespace ACPT_Lite\Core\Generators\Comment;
 
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\CQRS\Command\SaveCommentMetaCommand;

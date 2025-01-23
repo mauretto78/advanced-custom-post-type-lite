@@ -3,6 +3,9 @@
 namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\Generators\Attachment\AttachmentMetaGroupsGenerator;
+use ACPT_Lite\Core\Generators\Comment\CommentAdminColumnsGenerator;
+use ACPT_Lite\Core\Generators\Comment\CommentMetaGroupsGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeAdminColumnsGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeMetaBoxGenerator;
@@ -16,11 +19,11 @@ use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
-use ACPT_Lite\Core\Shortcodes\ACPT\AttachmentMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\ACPT\CommentMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\ACPT\PostMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\ACPT\TaxonomyMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\ACPT\UserMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\AttachmentMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\CommentMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\PostMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\TaxonomyMetaShortcode;
+use ACPT_Lite\Core\Shortcodes\ACPT_Lite\UserMetaShortcode;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Integrations\AbstractIntegration;
@@ -640,11 +643,9 @@ class ACPT_Lite_Admin
      */
     private function addShortcodes()
     {
-        add_shortcode('acpt_form', [new FormShortcode(), 'render']);
         add_shortcode('acpt', [new PostMetaShortcode(), 'render']);
         add_shortcode('acpt_user', [new UserMetaShortcode(), 'render']);
         add_shortcode('acpt_tax', [new TaxonomyMetaShortcode(), 'render']);
-        add_shortcode('acpt_option', [new OptionPageMetaShortcode(), 'render']);
         add_shortcode('acpt_media', [new AttachmentMetaShortcode(), 'render']);
         add_shortcode('acpt_comm', [new CommentMetaShortcode(), 'render']);
     }
@@ -811,53 +812,12 @@ class ACPT_Lite_Admin
 	    UserAdminColumnsGenerator::addColumns();
     }
 
-	/**
-	 * Register option pages
-	 *
-	 * @param bool $lazy
-	 *
-	 * @throws \Exception
-	 */
-    private function registerOptionPages($lazy = false)
-    {
-	    $optionPages = OptionPageRepository::get([]);
-
-	    foreach ($optionPages as $optionPage){
-		    $optionPageGenerator = new OptionPageGenerator($this->loader, $optionPage, $lazy);
-		    $optionPageGenerator->registerPage();
-	    }
-    }
-
     /**
      * Register API fields
      */
     private function registerRestFields()
     {
         $this->loader->addAction( 'rest_api_init', new ACPT_Lite_Api_Rest_Fields(), 'registerRestFields' );
-    }
-
-    /**
-     * Register API endpoints
-     */
-    private function registerRestEndpoint()
-    {
-        $this->loader->addAction( 'rest_api_init', new ACPT_Api_V1(), 'registerRestRoutes' );
-    }
-
-	/**
-	 * Register roles and set permissions
-	 */
-    private function registerRolesAndSetPermissions()
-    {
-	    $this->loader->addAction( 'admin_init', new ACPT_Permissions(), 'setPermissions', 999);
-    }
-
-    /**
-     * Include PHP functions
-     */
-    private function includeFunctions()
-    {
-	    require_once ACPT_LITE_PLUGIN_DIR_PATH.'/functions/acpt_functions.php';
     }
 
     /**
@@ -959,109 +919,82 @@ class ACPT_Lite_Admin
 	    $this->loader->addAction('admin_menu', $this, 'fetchAdminMenu');
 	    Profiler::stop('fetchAdminMenu');
 
-	    // register roles and set permissions
-	    Profiler::start('registerRolesAndSetPermissions');
-	    $this->registerRolesAndSetPermissions();
-	    Profiler::stop('registerRolesAndSetPermissions');
+        Profiler::start('transitionPostStatus');
+        $this->loader->addAction('transition_post_status', $this, 'invalidPostIdsCache', 10, 3);
+        Profiler::stop('transitionPostStatus');
 
-		// run the application only if is activated
-	    if(ACPT_License_Manager::isLicenseValid()){
+        Profiler::start('siteHealth');
+        $this->loader->addAction('requests-curl.before_request', $this, 'curlBeforeRequest', 9999);
+        $this->loader->addAction('http_request_timeout', $this, 'extendHttpRequestTimeout');
+        Profiler::stop('siteHealth');
 
-		    Profiler::start('transitionPostStatus');
-		    $this->loader->addAction('transition_post_status', $this, 'invalidPostIdsCache', 10, 3);
-		    Profiler::stop('transitionPostStatus');
+        // ajax calls
+        Profiler::start('ajaxCalls');
+        foreach ($this->ajaxActions as $action => $callback){
+            $this->loader->addAction($action, $this->ajax, $callback);
+            Profiler::lap('ajaxCalls');
+        }
+        Profiler::stop('ajaxCalls');
 
-		    Profiler::start('siteHealth');
-		    $this->loader->addAction('requests-curl.before_request', $this, 'curlBeforeRequest', 9999);
-		    $this->loader->addAction('http_request_timeout', $this, 'extendHttpRequestTimeout');
-		    Profiler::stop('siteHealth');
+        // register custom post types and taxonomies. Lazy load custom post type metas
+        Profiler::start('registerCustomPostTypesAndTaxonomies');
+        $this->registerCustomPostTypesAndTaxonomies($this->isACPTAppPage());
+        Profiler::stop('registerCustomPostTypesAndTaxonomies');
 
-		    // ajax calls
-		    Profiler::start('ajaxCalls');
-		    foreach ($this->ajaxActions as $action => $callback){
-			    $this->loader->addAction($action, $this->ajax, $callback);
-			    Profiler::lap('ajaxCalls');
-		    }
-		    Profiler::stop('ajaxCalls');
+        // lazy load, these functions are not needed in App page
+        if(!$this->isACPTAppPage()){
 
-		    // register custom post types and taxonomies. Lazy load custom post type metas
-		    Profiler::start('registerCustomPostTypesAndTaxonomies');
-		    $this->registerCustomPostTypesAndTaxonomies($this->isACPTAppPage());
-		    Profiler::stop('registerCustomPostTypesAndTaxonomies');
+            // shortcodes
+            Profiler::start('addShortcodes');
+            $this->addShortcodes();
+            Profiler::stop('addShortcodes');
 
-		    if(Settings::get(SettingsModel::ENABLE_OP, 1) == 1){
-			    // add option pages
-			    Profiler::start('registerOptionPages');
-			    $this->registerOptionPages($this->isACPTAppPage());
-			    Profiler::stop('registerOptionPages');
-		    }
+            if(Settings::get(SettingsModel::ENABLE_META, 1) == 1){
+                // register attachment meta
+                Profiler::start('registerAttachmentMeta');
+                $this->registerAttachmentMeta();
+                Profiler::stop('registerAttachmentMeta');
 
-		    // API REST
-		    Profiler::start('RestFieldsAndEndpoints');
-		    $this->registerRestFields();
-		    $this->registerRestEndpoint();
-		    Profiler::stop('RestFieldsAndEndpoints');
+                // register comments meta
+                Profiler::start('registerCommentMeta');
+                $this->registerCommentMeta();
+                Profiler::stop('registerCommentMeta');
 
-		    // lazy load, these functions are not needed in App page
-		    if(!$this->isACPTAppPage()){
+                // add columns to show in the list panel
+                Profiler::start('addCustomPostTypeColumnsToAdminPanel');
+                $this->addCommentColumnsToAdminPanel();
+                Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
 
-                // shortcodes
-			    Profiler::start('addShortcodes');
-			    $this->addShortcodes();
-			    Profiler::stop('addShortcodes');
+                // register taxonomy meta
+                Profiler::start('registerTaxonomyMeta');
+                $this->registerTaxonomyMeta();
+                Profiler::stop('registerTaxonomyMeta');
 
-			    if(Settings::get(SettingsModel::ENABLE_META, 1) == 1){
-				    // register attachment meta
-				    Profiler::start('registerAttachmentMeta');
-				    $this->registerAttachmentMeta();
-				    Profiler::stop('registerAttachmentMeta');
+                // add columns to show in the CPT list panel
+                Profiler::start('addCustomPostTypeColumnsToAdminPanel');
+                $this->addCustomPostTypeColumnsToAdminPanel();
+                Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
 
-				    // register comments meta
-				    Profiler::start('registerCommentMeta');
-				    $this->registerCommentMeta();
-				    Profiler::stop('registerCommentMeta');
+                // add columns to show in the taxonomy list panel
+                Profiler::start('addTaxonomyColumnsToAdminPanel');
+                $this->addTaxonomyColumnsToAdminPanel();
+                Profiler::stop('addTaxonomyColumnsToAdminPanel');
 
-				    // add columns to show in the list panel
-				    Profiler::start('addCustomPostTypeColumnsToAdminPanel');
-				    $this->addCommentColumnsToAdminPanel();
-				    Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
+                // register user meta
+                Profiler::start('registerUserMeta');
+                $this->registerUserMeta();
+                Profiler::stop('registerUserMeta');
 
-				    // register taxonomy meta
-				    Profiler::start('registerTaxonomyMeta');
-				    $this->registerTaxonomyMeta();
-				    Profiler::stop('registerTaxonomyMeta');
+                // add user meta columns to show in the admin panel
+                Profiler::start('addUserMetaColumnsToShow');
+                $this->addUserMetaColumnsToShow();
+                Profiler::stop('addUserMetaColumnsToShow');
+            }
 
-				    // add columns to show in the CPT list panel
-				    Profiler::start('addCustomPostTypeColumnsToAdminPanel');
-				    $this->addCustomPostTypeColumnsToAdminPanel();
-				    Profiler::stop('addCustomPostTypeColumnsToAdminPanel');
-
-                    // add columns to show in the taxonomy list panel
-                    Profiler::start('addTaxonomyColumnsToAdminPanel');
-                    $this->addTaxonomyColumnsToAdminPanel();
-                    Profiler::stop('addTaxonomyColumnsToAdminPanel');
-
-				    // register user meta
-				    Profiler::start('registerUserMeta');
-				    $this->registerUserMeta();
-				    Profiler::stop('registerUserMeta');
-
-				    // add user meta columns to show in the admin panel
-				    Profiler::start('addUserMetaColumnsToShow');
-				    $this->addUserMetaColumnsToShow();
-				    Profiler::stop('addUserMetaColumnsToShow');
-			    }
-
-			    // functions and hooks
-			    Profiler::start('includeFunctions');
-			    $this->includeFunctions();
-			    Profiler::stop('includeFunctions');
-
-			    // run integrations
-			    Profiler::start('runIntegrations');
-			    $this->runIntegrations();
-			    Profiler::stop('runIntegrations');
-		    }
-	    }
+            // run integrations
+            Profiler::start('runIntegrations');
+            $this->runIntegrations();
+            Profiler::stop('runIntegrations');
+        }
     }
 }

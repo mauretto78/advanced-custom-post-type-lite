@@ -59,7 +59,7 @@ class OptionPageMetaBoxFieldGenerator extends AbstractGenerator
 	 */
 	private function getOptionPageField()
 	{
-		$className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
+		$className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
 
 		if(class_exists($className)){
 			/** @var AbstractField $instance */

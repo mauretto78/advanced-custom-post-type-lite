@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT\Core\Generators\Attachment;
+namespace ACPT_Lite\Core\Generators\Attachment;
 
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Generators\AbstractGenerator;
@@ -44,7 +44,7 @@ class AttachmentMetaFieldGenerator extends AbstractGenerator
 	 */
 	private function getAttachmentMetaField()
 	{
-		$className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
+		$className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
 
 		if(class_exists($className)){
 			/** @var AbstractField $instance */

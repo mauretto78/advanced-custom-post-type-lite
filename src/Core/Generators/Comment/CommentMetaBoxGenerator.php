@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT\Core\Generators\Comment;
+namespace ACPT_Lite\Core\Generators\Comment;
 
 use ACPT_Lite\Core\Generators\AbstractGenerator;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
