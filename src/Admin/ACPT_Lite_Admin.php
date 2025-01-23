@@ -210,6 +210,7 @@ class ACPT_Lite_Admin
             'wp_ajax_deleteUserMetaAction' => 'deleteUserMetaAction',
             'wp_ajax_duplicateAction' => 'duplicateAction',
             'wp_ajax_doShortcodeAction' => 'doShortcodeAction',
+            'wp_ajax_exportCodeAction' => 'exportCodeAction',
             'wp_ajax_fetchAllFindBelongsAction' => 'fetchAllFindBelongsAction',
             'wp_ajax_fetchAllMetaAction' => 'fetchAllMetaAction',
             'wp_ajax_fetchBoxesAction' => 'fetchBoxesAction',

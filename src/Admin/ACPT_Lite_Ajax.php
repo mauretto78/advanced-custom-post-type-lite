@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Admin;
 
+use ACPT_Lite\Utils\ExportCode\ExportCodeStrings;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\CQRS\Command\AssocTaxonomyToCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\CopyMetaBoxCommand;
@@ -790,6 +791,30 @@ class ACPT_Lite_Ajax
                 'success' => true,
                 'data' => WPUtils::renderShortCode($shortcode)
         ]);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function exportCodeAction()
+    {
+        if(isset($_POST['data'])){
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if(!isset($data['find']) and !isset($data['belongsTo'])){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing params (`find`, `belongsTo`)'
+                ], 500);
+            }
+
+            return wp_send_json(ExportCodeStrings::export($data['belongsTo'], $data['find']));
+        }
+
+        return wp_send_json([
+            'success' => false,
+            'error' => 'no data was sent'
+        ], 500);
     }
 
 	/**

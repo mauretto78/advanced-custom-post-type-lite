@@ -134,12 +134,6 @@ const CustomPostTypeElement = memo(({record, showWooCommerceColumn, page, perPag
                                 postType={record.name}
                             />
                             <ExportCodeModal belongsTo={metaTypes.CUSTOM_POST_TYPE} find={record.name} />
-                            <Link
-                                to={`/permissions/post/${record.name}/${record.id}`}
-                                className="color-warning"
-                            >
-                                {useTranslation("Permissions")}
-                            </Link>
                         </div>
                     )}
                 </td>

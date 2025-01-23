@@ -10,7 +10,6 @@ import {fetchSettingValue} from "./utils/objects";
 // Pages
 const AssocCustomPostTypeToTaxonomyPage = lazy(() => import("./pages/AssocCustomPostTypeToTaxonomy"));
 const AssocTaxonomyToCustomPostTypePage = lazy(() => import("./pages/AssocTaxonomyToCustomPostType"));
-const HealthCheckPage = lazy(() => import("./pages/HealthCheck"));
 const MetaListPage = lazy(() => import("./pages/MetaList"));
 const MetaPage = lazy(() => import("./pages/Meta"));
 const PageCustomPostTypeListPage = lazy(() => import("./pages/CustomPostTypeList"));
@@ -89,7 +88,7 @@ const App = memo(() => {
                             },
                             {
                                 path:'/:page?',
-                                name: "CPT dashboard page",
+                                name: "Custom post types list page",
                                 element: <Suspense fallback={<Loader/>}><PageCustomPostTypeListPage /></Suspense>
                             },
                             {
@@ -138,7 +137,7 @@ const App = memo(() => {
                             },
                             {
                                 path:'/taxonomies/:page?',
-                                name: "CPT dashboard page",
+                                name: "Taxonomy list page",
                                 element: <Suspense fallback={<Loader/>}><TaxonomyListPage /></Suspense>
                             },
                             {
@@ -167,7 +166,7 @@ const App = memo(() => {
                             },
                             {
                                 path:'/meta/:page?',
-                                name: "Meta fields page",
+                                name: "Meta groups list page",
                                 element: <Suspense fallback={<Loader/>}><MetaListPage /></Suspense>
                             });
                     }

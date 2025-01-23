@@ -66,7 +66,6 @@ const ViewTaxonomy = () => {
     const actions = [
         <ButtonLink style={styleVariants.PRIMARY} to={`/edit_taxonomy/${taxonomy}/${activeTab}`}>{useTranslation("Edit")}</ButtonLink>,
         <ButtonLink style={styleVariants.SECONDARY} to={`/assoc-post-taxonomy/${taxonomy}`}>{useTranslation("Taxonomies association")}</ButtonLink>,
-        <ButtonLink style={styleVariants.WARNING} to={`/permissions/taxonomy/${taxonomy}/${data.length > 0 ? data[0].id : ""}`}>{useTranslation("Permissions")}</ButtonLink>,
     ];
 
     const tabs = [

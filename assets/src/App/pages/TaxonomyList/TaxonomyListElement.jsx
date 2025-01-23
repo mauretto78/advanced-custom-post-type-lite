@@ -116,12 +116,6 @@ const TaxonomyListElement = memo(({record, page, perPage}) => {
                                 belongsTo={metaTypes.TAXONOMY}
                                 find={record.slug}
                             />
-                            <Link
-                                to={`/permissions/taxonomy/${record.slug}/${record.id}`}
-                                className="color-warning"
-                            >
-                                {useTranslation("Permissions")}
-                            </Link>
                         </div>
                     )}
                 </td>
