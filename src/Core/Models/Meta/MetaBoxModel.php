@@ -175,25 +175,6 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 			if($field->getId() === $fieldId){
 				return $field;
 			}
-
-			if ($field->hasChildren()){
-				$nestedId = $this->findAFieldById($fieldId, $field->getChildren());
-
-				if($nestedId !== null){
-					return $nestedId;
-				}
-			}
-
-			// @TODO to be fixed in 2.0.14 beta3
-			foreach ($field->getBlocks() as $block){
-				foreach ($block->getFields() as $field){
-					$nestedId = $this->findAFieldById($field->getId(), $block->getFields());
-
-					if($nestedId !== null){
-						return $nestedId;
-					}
-				}
-			}
 		}
 
 		return null;
@@ -210,18 +191,6 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 		foreach($fields as $fieldIndex => $field) {
 			if($field->getName() === $fieldName){
 				unset($fields[$fieldIndex]);
-			}
-
-			foreach ($field->getChildren() as $child){
-				$fields = $field->getChildren();
-				$this->removeAField($child->getName(), $fields);
-			}
-
-			foreach ($field->getBlocks() as $block){
-				foreach ($block->getFields() as $field){
-					$fields = $block->getFields();
-					$this->removeAField($field->getName(), $fields);
-				}
 			}
 		}
 

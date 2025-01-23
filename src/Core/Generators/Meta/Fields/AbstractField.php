@@ -349,4 +349,9 @@ abstract class AbstractField
 
         return $return;
 	}
+
+	protected function hasErrors()
+    {
+        return false;
+    }
 }

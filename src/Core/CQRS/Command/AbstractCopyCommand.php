@@ -74,37 +74,7 @@ abstract class AbstractCopyCommand
 		$duplicatedMetaField->changeName(Strings::getTheFirstAvailableName($duplicatedMetaField->getName(), $this->metaNames['fields']));
 		$this->metaNames['fields'][] = $duplicatedMetaField->getName();
 
-		if($duplicatedMetaField->hasChildren()){
-			foreach ($duplicatedMetaField->getChildren() as $index => $childFieldModel){
-				$duplicatedMetaField->setChild($index, $this->copyField($childFieldModel, $targetBoxModel));
-			}
-		}
-
-		if($duplicatedMetaField->hasBlocks()){
-			foreach ($duplicatedMetaField->getBlocks() as $index => $blockModel){
-				$duplicatedMetaField->setBlock($index, $this->copyBlock($blockModel, $duplicatedMetaField));
-			}
-		}
 
 		return $duplicatedMetaField;
-	}
-
-	/**
-	 * @param MetaFieldBlockModel $blockModel
-	 * @param MetaFieldModel $targetMetaField
-	 *
-	 * @return MetaFieldBlockModel
-	 */
-	protected function copyBlock(MetaFieldBlockModel $blockModel, MetaFieldModel $targetMetaField)
-	{
-		$duplicatedMetaBlock = $blockModel->duplicateFrom($targetMetaField);
-		$duplicatedMetaBlock->changeName(Strings::getTheFirstAvailableName($duplicatedMetaBlock->getName(), $this->metaNames['blocks']));
-		$this->metaNames['blocks'][] = $duplicatedMetaBlock->getName();
-
-		foreach ($duplicatedMetaBlock->getFields() as $index => $childFieldModel){
-			$duplicatedMetaBlock->setField($index, $this->copyField($childFieldModel, $targetMetaField->getBox()));
-		}
-
-		return $duplicatedMetaBlock;
 	}
 }
