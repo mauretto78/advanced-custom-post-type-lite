@@ -20,7 +20,7 @@ class Fields
         /** @var MetaFieldModel $field */
         foreach($fields as $index => $field){
 
-            $width = $field->getAdvancedOption('width') ? $field->getAdvancedOption('width') : 100;
+            $width = 100;
             $sum = $sum + $width;
             $sumRows[] = $field;
 
