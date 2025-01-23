@@ -205,9 +205,7 @@ class MetaGroupModel extends AbstractModel implements \JsonSerializable
 		$count = 0;
 
 		foreach ($this->getBoxes() as $boxModel){
-			$count = $count + count(array_filter($boxModel->getFields(), function (MetaFieldModel $field){
-			    return $field->getForgedBy() === null;
-            }));
+			$count = $count + count($boxModel->getFields());
 		}
 
 		return $count;

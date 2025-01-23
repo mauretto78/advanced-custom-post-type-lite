@@ -21,32 +21,13 @@ class Sanitizer
 	{
 		switch ($type){
 
-			case MetaFieldModel::ICON_TYPE:
-				return Sanitizer::sanitizeSVG($rawData);
-
 			case MetaFieldModel::EMAIL_TYPE:
 				return sanitize_email($rawData);
-
-			case MetaFieldModel::URL_TYPE:
-				return esc_url_raw($rawData);
 
 			case MetaFieldModel::TEXTAREA_TYPE:
 				return stripslashes_deep(sanitize_textarea_field($rawData));
 
-			case FormFieldModel::WORDPRESS_USER_BIO:
-			case FormFieldModel::WORDPRESS_POST_CONTENT:
-			case FormFieldModel::WORDPRESS_POST_EXCERPT:
-			case FormFieldModel::WORDPRESS_TERM_DESCRIPTION:
-			case MetaFieldModel::EDITOR_TYPE:
-			case MetaFieldModel::HTML_TYPE:
-				return Sanitizer::customWpKses( $rawData );
-
 			case is_array($rawData):
-			case MetaFieldModel::GALLERY_TYPE:
-			case MetaFieldModel::CHECKBOX_TYPE:
-			case MetaFieldModel::SELECT_MULTI_TYPE:
-			case MetaFieldModel::LIST_TYPE:
-			case MetaFieldModel::USER_MULTI_TYPE:
 				return Sanitizer::recursiveSanitizeRawData($rawData);
 				break;
 
