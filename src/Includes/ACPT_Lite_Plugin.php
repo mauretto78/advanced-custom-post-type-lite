@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Includes;
 
-use ACPT_Lite\Admin\ACPT_Admin;
+use ACPT_Lite\Admin\ACPT_Lite_Admin;
 
 /**
  * The core plugin class.
@@ -161,7 +161,7 @@ class ACPT_Lite_Plugin
 	 */
     private function runAdmin()
     {
-        $admin = new ACPT_Admin($this->loader);
+        $admin = new ACPT_Lite_Admin($this->loader);
         $admin->run();
     }
 

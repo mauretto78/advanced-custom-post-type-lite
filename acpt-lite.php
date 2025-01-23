@@ -29,7 +29,6 @@ use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Includes\ACPT_Lite_Activator;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Deactivator;
-use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Includes\ACPT_Lite_Plugin;
 
 // If this file is called directly, abort.
@@ -149,7 +148,7 @@ try {
 	 *
 	 * @since    1.0.0
 	 */
-	$plugin = new ACPT_Lite_Plugin(new ACPT_Lite_Loader());
+	$plugin = new ACPT_Lite_Plugin();
     $plugin->run();
 } catch (\Exception $exception){
 

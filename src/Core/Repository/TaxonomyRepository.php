@@ -248,12 +248,6 @@ class TaxonomyRepository extends AbstractRepository
 			        $taxonomyModel->addCustomPostType($postModel);
 		        }
 
-		        // Permissions
-		        $permissions = PermissionRepository::getByEntityId($taxonomyModel->getId());
-		        foreach ($permissions as $permission){
-			        $taxonomyModel->addPermission($permission);
-		        }
-
 		        $results[] = $taxonomyModel;
 	        } catch (\Exception $exception){}
         }

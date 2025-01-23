@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Integrations\WooCommerce\Generators;
 
 use ACPT_Lite\Core\Generators\AbstractGenerator;
-use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeMetaBoxFieldGenerator;
 use ACPT_Lite\Core\Helper\Fields;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;

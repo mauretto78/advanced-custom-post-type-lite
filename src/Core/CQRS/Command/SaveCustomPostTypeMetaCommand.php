@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Core\CQRS\Command;
 
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 
 class SaveCustomPostTypeMetaCommand extends AbstractSaveMetaCommand implements CommandInterface
 {

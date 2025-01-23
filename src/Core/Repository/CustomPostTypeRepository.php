@@ -188,12 +188,6 @@ class CustomPostTypeRepository extends AbstractRepository
 	            $postModel = self::addWooCommerceDataToPostTypeModel($postModel);
 	            $postModel->setPostCount($post->post_count);
 
-	            // Permissions
-	            $permissions = PermissionRepository::getByEntityId($post->id);
-	            foreach ($permissions as $permission){
-		            $postModel->addPermission($permission);
-	            }
-
 	            $results[] = $postModel;
             } catch (\Exception $exception){}
         }
@@ -234,12 +228,6 @@ class CustomPostTypeRepository extends AbstractRepository
 		            'labels' => json_decode($taxonomy->labels, true),
 		            'settings' => json_decode($taxonomy->settings, true),
 	            ]);
-
-	            // Permissions
-	            $permissions = PermissionRepository::getByEntityId($taxonomy->id);
-	            foreach ($permissions as $permission){
-		            $taxonomyModel->addPermission($permission);
-	            }
 
 	            $postModel->addTaxonomy($taxonomyModel);
             } catch (\Exception $exception){}
