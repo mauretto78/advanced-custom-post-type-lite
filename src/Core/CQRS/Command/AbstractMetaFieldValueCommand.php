@@ -67,6 +67,14 @@ abstract class AbstractMetaFieldValueCommand
 			$this->belongsTo = MetaTypes::USER;
 			$this->location = $args['user_id'];
 			$this->identifier = 'user_id';
+		} elseif (isset($args['comment_id'])){
+			$this->belongsTo = MetaTypes::COMMENT;
+			$this->location = $args['comment_id'];
+			$this->identifier = 'comment_id';
+		} elseif (isset($args['option_page'])){
+			$this->belongsTo = MetaTypes::OPTION_PAGE;
+			$this->location = $args['option_page'];
+			$this->identifier = 'option_page';
 		}
 
 		if($this->belongsTo === null and $this->location === null){
@@ -83,6 +91,10 @@ abstract class AbstractMetaFieldValueCommand
 	protected function get($key, $location = null)
 	{
 		$loc = $location ? $location : $this->location;
+
+		if($this->belongsTo === MetaTypes::OPTION_PAGE){
+			$key = $loc.'_'.$key;
+		}
 
 		return Meta::fetch($loc, $this->belongsTo, $key);
 	}
@@ -107,6 +119,10 @@ abstract class AbstractMetaFieldValueCommand
 	protected function set($key, $value, $location = null)
 	{
 		$loc = $location ? $location : $this->location;
+
+		if($this->belongsTo === MetaTypes::OPTION_PAGE){
+			$key = $loc.'_'.$key;
+		}
 
 		return Meta::save($loc, $this->belongsTo, $key, $value);
 	}

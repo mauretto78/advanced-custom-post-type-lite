@@ -58,6 +58,7 @@ class TaxonomyMetaBoxGenerator extends AbstractGenerator
         $metaGroups = MetaRepository::get([
 	        'belongsTo' => MetaTypes::TAXONOMY,
 	        'find' => $taxonomy,
+            'clonedFields' => true
         ]);
 
 	    $this->generateMetaBoxes($metaGroups, $taxonomy);
@@ -73,6 +74,7 @@ class TaxonomyMetaBoxGenerator extends AbstractGenerator
 			    $metaGroups = MetaRepository::get([
 				    'belongsTo' => BelongsTo::TERM_ID,
 				    'find' => $termId,
+                    'clonedFields' => true
 			    ]);
 
 			    $this->generateMetaBoxes($metaGroups, $taxonomy, $termId);
@@ -94,26 +96,10 @@ class TaxonomyMetaBoxGenerator extends AbstractGenerator
 	    $metaGroups = MetaRepository::get([
 		    'belongsTo' => MetaTypes::TAXONOMY,
 		    'find' => $taxonomy,
+            'clonedFields' => true
 	    ]);
 
 	    $this->generateMetaBoxes($metaGroups, $taxonomy, $termId);
-
-	    $terms = get_terms([
-		    'taxonomy' => $taxonomy,
-		    'hide_empty' => false,
-		    'fields' => 'ids',
-	    ]);
-
-	    if(!empty($terms)){
-		    foreach ($terms as $termId){
-			    $metaGroups = MetaRepository::get([
-				    'belongsTo' => BelongsTo::TERM_ID,
-				    'find' => $termId,
-			    ]);
-
-			    $this->generateMetaBoxes($metaGroups, $taxonomy, $termId);
-		    }
-	    }
     }
 
 	/**

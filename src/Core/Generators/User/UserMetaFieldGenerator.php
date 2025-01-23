@@ -30,18 +30,12 @@ class UserMetaFieldGenerator
         $this->user = $user;
     }
 
-    /**
-     * @return mixed
-     */
+	/**
+	 * @return AbstractField|null
+	 */
     public function generate()
     {
-        $field = $this->getUserMetaField();
-
-	    if($field){
-		    return $field->render();
-	    }
-
-	    return null;
+	    return $this->getUserMetaField();
     }
 
 	/**
@@ -49,7 +43,7 @@ class UserMetaFieldGenerator
 	 */
     private function getUserMetaField()
     {
-	    $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->metaField->getType().'Field';
+	    $className = 'ACPT\\Core\\Generators\\Meta\\Fields\\'.$this->metaField->getType().'Field';
 
 	    if(class_exists($className)){
 		    /** @var AbstractField $instance */

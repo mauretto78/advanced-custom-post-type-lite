@@ -2,8 +2,10 @@
 
 namespace ACPT_Lite\Core\Models\Meta;
 
+use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
+use ACPT_Lite\Core\Repository\MetaRepository;
 
 class MetaBoxModel extends AbstractModel implements \JsonSerializable
 {
@@ -20,7 +22,7 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 	/**
 	 * @var string
 	 */
-	private ?string $label;
+	private ?string $label = null;
 
 	/**
 	 * @var int
@@ -141,6 +143,15 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 	}
 
 	/**
+	 * @param $index
+	 * @param MetaFieldModel $fieldModel
+	 */
+	public function setField($index, MetaFieldModel $fieldModel): void
+	{
+		$this->fields[$index] = $fieldModel;
+	}
+
+	/**
 	 * @param MetaFieldModel $field
 	 *
 	 * @return bool
@@ -164,6 +175,25 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 			if($field->getId() === $fieldId){
 				return $field;
 			}
+
+			if ($field->hasChildren()){
+				$nestedId = $this->findAFieldById($fieldId, $field->getChildren());
+
+				if($nestedId !== null){
+					return $nestedId;
+				}
+			}
+
+			// @TODO to be fixed in 2.0.14 beta3
+			foreach ($field->getBlocks() as $block){
+				foreach ($block->getFields() as $field){
+					$nestedId = $this->findAFieldById($field->getId(), $block->getFields());
+
+					if($nestedId !== null){
+						return $nestedId;
+					}
+				}
+			}
 		}
 
 		return null;
@@ -180,6 +210,18 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 		foreach($fields as $fieldIndex => $field) {
 			if($field->getName() === $fieldName){
 				unset($fields[$fieldIndex]);
+			}
+
+			foreach ($field->getChildren() as $child){
+				$fields = $field->getChildren();
+				$this->removeAField($child->getName(), $fields);
+			}
+
+			foreach ($field->getBlocks() as $block){
+				foreach ($block->getFields() as $field){
+					$fields = $block->getFields();
+					$this->removeAField($field->getName(), $fields);
+				}
 			}
 		}
 
@@ -221,6 +263,27 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
 
 		return $duplicate;
 	}
+
+    /**
+     * @param MetaGroupModel $groupModel
+     * @return MetaBoxModel
+     */
+    public function duplicateFrom(MetaGroupModel $groupModel): MetaBoxModel
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->group = $groupModel;
+        $duplicate->changeName(Strings::getTheFirstAvailableName($duplicate->getName(), MetaRepository::getBoxNames()));
+        $duplicatedFields = $duplicate->getFields();
+        $duplicate->fields = [];
+
+        foreach ($duplicatedFields as $field){
+            $duplicatedFieldModel = $field->duplicateFrom($duplicate);
+            $duplicate->addField($duplicatedFieldModel);
+        }
+
+        return $duplicate;
+    }
 
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize()

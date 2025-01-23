@@ -2,7 +2,10 @@
 
 namespace ACPT_Lite\Core\Models\WooCommerce;
 
+use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
+use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 
 /**
  * WooCommerceProductDataModel
@@ -71,8 +74,17 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
+    }
+
+    /**
+     * @param $name
+     */
+    public function changeName($name)
+    {
+        $this->name = $name;
     }
 
     public function getSluggedName()
@@ -146,6 +158,25 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
     public function getFields()
     {
         return $this->fields;
+    }
+
+    /**
+     * @return WooCommerceProductDataModel
+     */
+    public function duplicate(): WooCommerceProductDataModel
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->changeName(Strings::getTheFirstAvailableName($duplicate->getName(), WooCommerceProductDataRepository::getProductDataNames()));
+
+        $fields = $duplicate->getFields();
+        $duplicate->fields = [];
+
+        foreach ($fields as $fieldModel){
+            $duplicate->fields[] = $fieldModel->duplicateFrom($duplicate);
+        }
+
+        return $duplicate;
     }
 
 	#[\ReturnTypeWillChange]

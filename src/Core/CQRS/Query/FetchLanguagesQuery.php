@@ -17,7 +17,7 @@ class FetchLanguagesQuery implements QueryInterface
 			'translations' => [],
 		];
 
-		$languageDir = __DIR__.'/../../../../i18n/languages';
+		$languageDir = ACPT_PLUGIN_DIR_PATH.'/i18n/languages';
 		foreach (new \DirectoryIterator($languageDir) as $file){
 			if($file->getExtension() === 'po'){
 				$languageCode = str_replace('.po','', $file->getFilename());
@@ -33,7 +33,7 @@ class FetchLanguagesQuery implements QueryInterface
 		});
 
 		/** @var Translation_Entry $entry */
-		foreach($GLOBALS['l10n'][ACPT_LITE_PLUGIN_NAME]->entries as $entry){
+		foreach($GLOBALS['l10n'][ACPT_PLUGIN_NAME]->entries as $entry){
 			$entries['translations'][$entry->key()] = $entry->translations[0];
 		}
 

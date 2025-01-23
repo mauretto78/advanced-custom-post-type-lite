@@ -16,6 +16,7 @@ class UserAdminColumnsGenerator
 		try {
 			$metaGroups = MetaRepository::get([
 				'belongsTo' => MetaTypes::USER,
+                'clonedFields' => true,
 			]);
 
 			add_filter( 'manage_users_columns', function ($column) use ($metaGroups) {

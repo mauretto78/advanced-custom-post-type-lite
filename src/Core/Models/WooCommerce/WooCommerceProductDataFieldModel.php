@@ -3,7 +3,9 @@
 namespace ACPT_Lite\Core\Models\WooCommerce;
 
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
+use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 
 /**
  * WooCommerceProductDataFieldModel
@@ -16,10 +18,25 @@ use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSerializable
 {
     const CHECKBOX_TYPE = 'Checkbox';
+    const COLOR_TYPE = 'Color';
+    const DATE_TYPE = 'Date';
+    const DATE_TIME_TYPE = 'DateTime';
+    const EMAIL_TYPE = 'Email';
+    const NUMBER_TYPE = 'Number';
+    const PHONE_TYPE = 'Phone';
+    const POST_OBJECT_TYPE = 'PostObject';
+    const POST_OBJECT_MULTI_TYPE = 'PostObjectMulti';
     const RADIO_TYPE = 'Radio';
     const SELECT_TYPE = 'Select';
+    const SELECT_MULTI_TYPE = 'SelectMulti';
+    const TERM_OBJECT_TYPE = 'TermObject';
+    const TERM_OBJECT_MULTI_TYPE = 'TermObjectMulti';
     const TEXT_TYPE = 'Text';
     const TEXTAREA_TYPE = 'Textarea';
+    const TIME_TYPE = 'Time';
+    const URL_TYPE = 'Url';
+    const USER_TYPE = 'User';
+    const USER_MULTI_TYPE = 'UserMulti';
 
     /**
      * @var WooCommerceProductDataModel
@@ -113,8 +130,17 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
+    }
+
+    /**
+     * @param $name
+     */
+    public function changeName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -194,6 +220,27 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
         return Strings::toHumanReadableFormat($this->getProductData()->getName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
     }
 
+    /**
+     * @param WooCommerceProductDataModel $productDataModel
+     * @return WooCommerceProductDataFieldModel
+     */
+    public function duplicateFrom(WooCommerceProductDataModel $productDataModel)
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->changeName(Strings::getTheFirstAvailableName($duplicate->getName(), WooCommerceProductDataRepository::getProductDataFieldNames()));
+        $duplicate->productData = $productDataModel;
+
+        $options = $duplicate->getOptions();
+        $duplicate->options = [];
+
+        foreach ($options as $optionModel){
+            $duplicate->options[] = $optionModel->duplicateFrom($duplicate);
+        }
+
+        return $duplicate;
+    }
+
 	#[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
@@ -239,6 +286,28 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
 			'type' => [
 				'required' => true,
 				'type' => 'string',
+                'enum' => [
+                    WooCommerceProductDataFieldModel::CHECKBOX_TYPE,
+                    WooCommerceProductDataFieldModel::COLOR_TYPE,
+                    WooCommerceProductDataFieldModel::DATE_TYPE,
+                    WooCommerceProductDataFieldModel::DATE_TIME_TYPE,
+                    WooCommerceProductDataFieldModel::EMAIL_TYPE,
+                    WooCommerceProductDataFieldModel::NUMBER_TYPE,
+                    WooCommerceProductDataFieldModel::PHONE_TYPE,
+                    WooCommerceProductDataFieldModel::POST_OBJECT_TYPE,
+                    WooCommerceProductDataFieldModel::POST_OBJECT_MULTI_TYPE,
+                    WooCommerceProductDataFieldModel::RADIO_TYPE,
+                    WooCommerceProductDataFieldModel::SELECT_TYPE,
+                    WooCommerceProductDataFieldModel::SELECT_MULTI_TYPE,
+                    WooCommerceProductDataFieldModel::TERM_OBJECT_TYPE,
+                    WooCommerceProductDataFieldModel::TERM_OBJECT_MULTI_TYPE,
+                    WooCommerceProductDataFieldModel::TEXT_TYPE,
+                    WooCommerceProductDataFieldModel::TEXTAREA_TYPE,
+                    WooCommerceProductDataFieldModel::TIME_TYPE,
+                    WooCommerceProductDataFieldModel::URL_TYPE,
+                    WooCommerceProductDataFieldModel::USER_TYPE,
+                    WooCommerceProductDataFieldModel::USER_MULTI_TYPE,
+                ],
 			],
 			'required' => [
 				'required' => true,

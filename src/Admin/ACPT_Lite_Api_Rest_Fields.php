@@ -93,6 +93,18 @@ class ACPT_Lite_Api_Rest_Fields extends ACPT_Lite_Api
 			        return $this->restError("Meta field does not exists");
 		        }
 
+		        $listTypes = [
+			        MetaFieldModel::GALLERY_TYPE,
+			        MetaFieldModel::LIST_TYPE,
+			        MetaFieldModel::SELECT_MULTI_TYPE,
+		        ];
+
+		        if(in_array($singleMeta->getType() , $listTypes)){
+			        if(!is_array($value)){
+				        return $this->restError("Value MUST be an array");
+			        }
+		        }
+
 		        save_acpt_meta_field_value([
 			        'post_id' => $object->ID,
 			        'box_name' => Strings::toDBFormat($box),

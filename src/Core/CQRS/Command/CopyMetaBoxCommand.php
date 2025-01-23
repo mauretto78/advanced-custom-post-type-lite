@@ -2,12 +2,11 @@
 
 namespace ACPT_Lite\Core\CQRS\Command;
 
-use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
-class CopyMetaBoxCommand implements CommandInterface
+class CopyMetaBoxCommand extends AbstractCopyCommand implements CommandInterface
 {
 	/**
 	 * @var string
@@ -31,6 +30,7 @@ class CopyMetaBoxCommand implements CommandInterface
 	 */
 	public function __construct($data)
 	{
+		parent::__construct();
 		$validationRules = [
 			'boxId' => [
 				'required' => true,
@@ -72,27 +72,12 @@ class CopyMetaBoxCommand implements CommandInterface
 		}
 
 		$metaBox = MetaRepository::getMetaBoxById($this->boxId);
-		$duplicatedMetaBox = $metaBox->duplicate();
-		$duplicatedMetaBox->changeGroup($targetMetaGroup[0]);
 
-		// avoid duplicated box/field names
-		$arrayOfBoxNames = [];
-		$arrayOfFieldNames = [];
-
-		foreach ($targetMetaGroup[0]->getBoxes() as $targetMetaBox){
-			$arrayOfBoxNames[] = $targetMetaBox->getName();
-
-			foreach ($targetMetaBox->getFields() as $targetField){
-				$arrayOfFieldNames[] = $targetField->getName();
-			}
+		if(empty($metaBox)){
+			throw new \Exception("Box id not found");
 		}
 
-		$duplicatedMetaBox->changeName(Strings::getTheFirstAvailableName($duplicatedMetaBox->getName(), $arrayOfBoxNames));
-
-		foreach ($duplicatedMetaBox->getFields() as $duplicatedMetaBoxFieldModel){
-			$duplicatedMetaBoxFieldModel->changeName(Strings::getTheFirstAvailableName($duplicatedMetaBoxFieldModel->getName(), $arrayOfFieldNames));
-			$arrayOfFieldNames[] = $duplicatedMetaBoxFieldModel->getName();
-		}
+		$duplicatedMetaBox = $this->copyBox($metaBox, $targetMetaGroup[0]);
 
 		ACPT_Lite_DB::startTransaction();
 

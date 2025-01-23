@@ -2,6 +2,8 @@
 
 namespace ACPT_Lite\Utils\PHP;
 
+use ACPT_Lite\Core\Helper\Strings;
+
 class Objects
 {
 	/**
@@ -52,6 +54,10 @@ class Objects
 
 				$destination->$name = $arrayOfValues;
 			} else {
+				if(Strings::isJson($value)){
+					$value = json_decode($value);
+				}
+
 				$destination->$name = $value;
 			}
 		}

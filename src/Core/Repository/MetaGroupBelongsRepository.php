@@ -34,6 +34,7 @@ class MetaGroupBelongsRepository extends AbstractRepository
 					BelongsTo::TERM_ID,
 					MetaTypes::CUSTOM_POST_TYPE,
 					MetaTypes::TAXONOMY,
+					MetaTypes::OPTION_PAGE,
 					MetaTypes::USER,
 				],
 			],
@@ -57,8 +58,8 @@ class MetaGroupBelongsRepository extends AbstractRepository
 	        	g.sort,
 	        	b.id_group
 	        FROM 
-				`" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "` g
-				JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "` b on b.id_belong = g.id
+				`".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
+				JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` b on b.id_belong = g.id
 			WHERE  1 = 1
 	    ";
 

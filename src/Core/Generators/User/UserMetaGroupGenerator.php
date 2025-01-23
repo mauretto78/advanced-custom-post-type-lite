@@ -4,6 +4,7 @@ namespace ACPT_Lite\Core\Generators\User;
 
 use ACPT_Lite\Constants\MetaGroupDisplay;
 use ACPT_Lite\Core\Generators\AbstractGenerator;
+use ACPT_Lite\Core\Helper\Fields;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 
 /**
@@ -67,17 +68,27 @@ class UserMetaGroupGenerator extends AbstractGenerator
 		$return = '';
 
 		foreach ($this->groupModel->getBoxes() as $boxModel){
-			$return .= '<div class="acpt-user-meta-box">';
-			$return .= '<h3>'. ((!empty($boxModel->getLabel())) ? $boxModel->getLabel() : $boxModel->getName()) . '</h3>';
-			$return .= '<div class="acpt-user-meta-box-wrapper" id="user-meta-box-'. $boxModel->getId().'">';
 
-			foreach ($boxModel->getFields() as $fieldModel) {
-				$userFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
-				$return .= $userFieldGenerator->generate();
+			$rows = $this->fieldRows($boxModel->getFields());
+
+			if(!empty($rows)){
+				$return .= '<div class="acpt-metabox acpt-user-meta-box">';
+				$return .= '<h3>'. ((!empty($boxModel->getLabel())) ? $boxModel->getLabel() : $boxModel->getName()) . '</h3>';
+				$return .= '<div class="acpt-user-meta-box-wrapper" id="user-meta-box-'. $boxModel->getId().'">';
+
+				foreach ($rows as $row){
+					$return .= "<div class='acpt-admin-meta-row ".($row['isVisible'] == 0 ? ' hidden' : '')."'>";
+
+					foreach ($row['fields'] as $field){
+						$return .= $field;
+					}
+
+					$return .= "</div>";
+				}
+
+				$return .= '</div>';
+				$return .= '</div>';
 			}
-
-			$return .= '</div>';
-			$return .= '</div>';
 		}
 
 		return $return;
@@ -91,23 +102,32 @@ class UserMetaGroupGenerator extends AbstractGenerator
 		$return = '<div class="acpt-admin-accordion-wrapper" style="max-width: 1400px;" id="'.$this->groupModel->getId().'">';
 
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
-			$return .= '<div class="acpt-admin-accordion-item '.($index === 0 ? 'active' : '').'" data-target="'.$metaBoxModel->getId().'">';
-			$return .= '<div class="acpt-admin-accordion-title">';
-			$return .= $metaBoxModel->getUiName();
-			$return .= '</div>';
 
-			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-accordion-content">';
-			$return .= '<div class="acpt-user-meta-box-wrapper" id="user-meta-box-'. $metaBoxModel->getId().'">';
+			$rows = $this->fieldRows($metaBoxModel->getFields());
 
-			foreach ($metaBoxModel->getFields() as $fieldModel){
-				$taxonomyMetaBoxFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
-				$return .= $taxonomyMetaBoxFieldGenerator->generate();
+			if(!empty($rows)){
+				$return .= '<div class="acpt-metabox acpt-admin-accordion-item '.($index === 0 ? 'active' : '').'" data-target="'.$metaBoxModel->getId().'">';
+				$return .= '<div class="acpt-admin-accordion-title">';
+				$return .= $metaBoxModel->getUiName();
+				$return .= '</div>';
+
+				$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-accordion-content">';
+				$return .= '<div class="acpt-user-meta-box-wrapper" id="user-meta-box-'. $metaBoxModel->getId().'">';
+
+				foreach ($rows as $row){
+					$return .= "<div class='acpt-admin-meta-row ".($row['isVisible'] == 0 ? ' hidden' : '')."'>";
+
+					foreach ($row['fields'] as $field){
+						$return .= $field;
+					}
+
+					$return .= "</div>";
+				}
+
+				$return .= '</div>';
+				$return .= '</div>';
+				$return .= '</div>';
 			}
-
-			$return .= '</div>';
-
-			$return .= '</div>';
-			$return .= '</div>';
 		}
 
 		$return .= '</div>';
@@ -121,26 +141,41 @@ class UserMetaGroupGenerator extends AbstractGenerator
 	 */
 	private function verticalTabs()
 	{
-		$return = '<div class="acpt-admin-vertical-tabs-wrapper" id="'.$this->groupModel->getId().'" style="max-width: 1400px;">';
-
+		$return = '<div class="acpt-metabox acpt-admin-vertical-tabs-wrapper" id="'.$this->groupModel->getId().'" style="max-width: 1400px;">';
 		$return .= '<div class="acpt-admin-vertical-tabs">';
-		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
-			$return .= '<div class="acpt-admin-vertical-tab '.($index === 0 ? 'active' : '').'" data-target="'.$metaBoxModel->getId().'">';
-			$return .= $metaBoxModel->getUiName();
-			$return .= '</div>';
-		}
-		$return .= '</div>';
 
-		$return .= '<div class="acpt-admin-vertical-panels">';
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
-			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-vertical-panel '.($index === 0 ? 'active' : '').'">';
+			$rows = $this->fieldRows($metaBoxModel->getFields());
 
-			foreach ($metaBoxModel->getFields() as $fieldModel){
-				$taxonomyMetaBoxFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
-				$return .= $taxonomyMetaBoxFieldGenerator->generate();
+			if(!empty($rows)){
+				$return .= '<div class="acpt-admin-vertical-tab '.($index === 0 ? 'active' : '').'" data-target="'.$metaBoxModel->getId().'">';
+				$return .= $metaBoxModel->getUiName();
+				$return .= '</div>';
 			}
+		}
 
-			$return .= '</div>';
+		$return .= '</div>';
+		$return .= '<div class="acpt-admin-vertical-panels">';
+
+		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
+
+			$rows = $this->fieldRows($metaBoxModel->getFields());
+
+			if(!empty($rows)){
+				$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-vertical-panel '.($index === 0 ? 'active' : '').'">';
+
+				foreach ($rows as $row){
+					$return .= "<div class='acpt-admin-meta-row ".($row['isVisible'] == 0 ? ' hidden' : '')."'>";
+
+					foreach ($row['fields'] as $field){
+						$return .= $field;
+					}
+
+					$return .= "</div>";
+				}
+
+				$return .= '</div>';
+			}
 		}
 
 		$return .= '</div>';
@@ -149,33 +184,89 @@ class UserMetaGroupGenerator extends AbstractGenerator
 		return $return;
 	}
 
+	/**
+	 * @return string
+	 */
 	private function horizontalTabs()
 	{
-		$return = '<div class="acpt-admin-horizontal-tabs-wrapper" id="'.$this->groupModel->getId().'">';
-
+		$return = '<div class="acpt-metabox acpt-admin-horizontal-tabs-wrapper" id="'.$this->groupModel->getId().'">';
 		$return .= '<div class="acpt-admin-horizontal-tabs">';
-		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
-			$return .= '<div class="acpt-admin-horizontal-tab '.($index === 0 ? 'active' : '').'" data-target="'.$metaBoxModel->getId().'">';
-			$return .= $metaBoxModel->getUiName();
-			$return .= '</div>';
-		}
-		$return .= '</div>';
 
-		$return .= '<div class="acpt-admin-horizontal-panels" style="max-width: 1400px;">';
 		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
-			$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-horizontal-panel '.($index === 0 ? 'active' : '').'">';
+			$rows = $this->fieldRows($metaBoxModel->getFields());
 
-			foreach ($metaBoxModel->getFields() as $fieldModel) {
-				$userFieldGenerator = new UserMetaFieldGenerator($fieldModel, $this->user);
-				$return .= $userFieldGenerator->generate();
+			if(!empty($rows)){
+				$return .= '<div class="acpt-admin-horizontal-tab '.($index === 0 ? 'active' : '').'" data-target="'.$metaBoxModel->getId().'">';
+				$return .= $metaBoxModel->getUiName();
+				$return .= '</div>';
 			}
+		}
 
-			$return .= '</div>';
+		$return .= '</div>';
+		$return .= '<div class="acpt-admin-horizontal-panels" style="max-width: 1400px;">';
+
+		foreach ($this->groupModel->getBoxes() as $index => $metaBoxModel){
+			$rows = $this->fieldRows($metaBoxModel->getFields());
+
+			if(!empty($rows)){
+				$return .= '<div id="'.$metaBoxModel->getId().'" class="acpt-admin-horizontal-panel '.($index === 0 ? 'active' : '').'">';
+
+				foreach ($rows as $row){
+					$return .= "<div class='acpt-admin-meta-row ".($row['isVisible'] == 0 ? ' hidden' : '')."'>";
+
+					foreach ($row['fields'] as $field){
+						$return .= $field;
+					}
+
+					$return .= "</div>";
+				}
+
+				$return .= '</div>';
+			}
 		}
 
 		$return .= '</div>';
 		$return .= '</div>';
 
 		return $return;
+	}
+
+	/**
+	 * @param $fields
+	 *
+	 * @return array
+	 */
+	private function fieldRows($fields)
+	{
+		$rows = Fields::extractFieldRows($fields);
+		$fieldRows = [];
+		$visibleFieldsTotalCount = 0;
+
+		// build the field rows array
+		foreach ($rows as $index => $row){
+
+			$visibleFieldsRowCount = 0;
+
+			foreach ($row as $field){
+				$userFieldGenerator = new UserMetaFieldGenerator($field, $this->user);
+				$userField = $userFieldGenerator->generate();
+
+				if($userField){
+					if($userField->isVisible()){
+						$visibleFieldsTotalCount++;
+						$visibleFieldsRowCount++;
+					}
+
+					$fieldRows[$index]['fields'][] = $userField->render();
+					$fieldRows[$index]['isVisible'] = $visibleFieldsRowCount;
+				}
+			}
+		}
+
+		if($visibleFieldsTotalCount > 0){
+			return $fieldRows;
+		}
+
+		return [];
 	}
 }

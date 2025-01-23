@@ -2,7 +2,7 @@
 
 namespace ACPT_Lite\Includes;
 
-use ACPT_Lite\Core\Repository\SettingsRepository;
+use ACPT_Lite\Utils\Settings\Settings;
 
 /**
  * Define the internationalization functionality
@@ -30,29 +30,13 @@ use ACPT_Lite\Core\Repository\SettingsRepository;
  */
 class ACPT_Lite_Internalization
 {
-    /**
-     * @var ACPT_Lite_Loader
-     */
-    private $loader;
-
-    public function __construct( ACPT_Lite_Loader $loader)
-    {
-        $this->loader = $loader;
-    }
-
 	/**
 	 * @return string
 	 */
     private function getLocale()
     {
     	try {
-		    $language = SettingsRepository::getSingle('language');
-
-		    if($language !== null){
-			    return $language->getValue();
-		    }
-
-		    return 'en_US';
+		    return Settings::get('language', 'en_US');
 	    } catch (\Exception $exception){
 		    return 'en_US';
 	    }
@@ -64,11 +48,11 @@ class ACPT_Lite_Internalization
     public function run()
     {
 	    // Needed to load menu pages translations
-	    load_textdomain( ACPT_LITE_PLUGIN_NAME, __DIR__ . '/../../i18n/languages/'.$this->getLocale().'.mo');
+	    load_textdomain( ACPT_PLUGIN_NAME, ACPT_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
 
 	    add_action( 'plugins_loaded', function (){
-		    unload_textdomain( ACPT_LITE_PLUGIN_NAME, false);
-		    load_textdomain( ACPT_LITE_PLUGIN_NAME, __DIR__ . '/../../i18n/languages/'.$this->getLocale().'.mo');
+		    unload_textdomain( ACPT_PLUGIN_NAME, false);
+		    load_textdomain( ACPT_PLUGIN_NAME, ACPT_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
 	    } );
     }
 }

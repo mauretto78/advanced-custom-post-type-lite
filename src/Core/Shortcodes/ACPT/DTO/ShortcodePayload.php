@@ -24,4 +24,5 @@ class ShortcodePayload
     public $list = null;
     public $classes = null;
     public $separator = null;
+    public $adminView = null;
 }

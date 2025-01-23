@@ -2,13 +2,23 @@
 
 namespace ACPT_Lite\Integrations\Elementor;
 
-use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\Models\Belong\BelongModel;
+use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
-use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Integrations\AbstractIntegration;
+use ACPT_Lite\Integrations\Elementor\Controls\CssControl;
+use ACPT_Lite\Integrations\Elementor\Controls\DateFormatControl;
+use ACPT_Lite\Integrations\Elementor\Controls\ElementsControl;
+use ACPT_Lite\Integrations\Elementor\Controls\HeightControl;
+use ACPT_Lite\Integrations\Elementor\Controls\RenderControl;
 use ACPT_Lite\Integrations\Elementor\Controls\ShortcodeControl;
+use ACPT_Lite\Integrations\Elementor\Controls\TargetControl;
+use ACPT_Lite\Integrations\Elementor\Controls\WidthControl;
+use ACPT_Lite\Integrations\Elementor\Controls\WrapperControl;
 use ACPT_Lite\Integrations\Elementor\Widgets\WidgetGenerator;
+use ACPT_Lite\Utils\Settings\Settings;
 use Elementor\Widgets_Manager;
 
 class ACPT_Lite_Elementor extends AbstractIntegration
@@ -20,7 +30,15 @@ class ACPT_Lite_Elementor extends AbstractIntegration
      */
     protected function isActive()
     {
-        return is_plugin_active( 'elementor/elementor.php' );
+	    $isActive = is_plugin_active( 'elementor/elementor.php' );
+
+	    if(!$isActive){
+		    return false;
+	    }
+
+	    $enabledMeta = Settings::get(SettingsModel::ENABLE_META, 1) == 1;
+
+        return $enabledMeta and $isActive;
     }
 
     /**
@@ -55,7 +73,7 @@ class ACPT_Lite_Elementor extends AbstractIntegration
         $elements_manager->add_category(
             'acpt',
             [
-                'title' => esc_html__( 'ACPT', ACPT_LITE_PLUGIN_NAME ),
+                'title' => esc_html__( 'ACPT', ACPT_PLUGIN_NAME ),
                 'icon' => 'fa fa-plug',
             ]
         );
@@ -71,56 +89,44 @@ class ACPT_Lite_Elementor extends AbstractIntegration
     public function registerElementorWidgets(Widgets_Manager $widgetsManager)
     {
     	try {
+            $fieldGroups = MetaRepository::get([
+                'clonedFields' => true
+            ]);
 
-		    // CPT fields
-		    $args = [];
-		    $postType = (isset($_GET['post'])) ? get_post_type($_GET['post']) : null;
-
-		    if($postType !== null and $postType !== 'elementor_library'){
-			    $args = [
-				    'postType' => $postType
-			    ];
-		    }
-
-		    $customPostTypeModels = CustomPostTypeRepository::get($args);
-
-		    foreach ($customPostTypeModels as $customPostTypeModel){
-			    $metaGroups = MetaRepository::get([
-				    'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
-				    'find' => $customPostTypeModel->getName(),
-			    ]);
-
-			    if(!empty($metaGroups)){
-				    $this->registerFields($metaGroups, $widgetsManager, MetaTypes::CUSTOM_POST_TYPE, $customPostTypeModel->getName());
-			    }
-		    }
+            foreach ($fieldGroups as $fieldGroup){
+                if(count($fieldGroup->getBelongs()) > 0){
+                    foreach ($fieldGroup->getBelongs() as $belong){
+                        $this->registerFields($fieldGroup, $widgetsManager, $belong);
+                    }
+                }
+            }
 	    } catch (\Exception $exception){}
     }
 
-	/**
-	 * @param MetaGroupModel[] $metaGroups
-	 * @param Widgets_Manager $widgetsManager
-	 * @param $belongsTo
-	 * @param $find
-	 *
-	 * @throws \Exception
-	 */
-    private function registerFields($metaGroups, Widgets_Manager $widgetsManager, $belongsTo, $find)
+    /**
+     * @param MetaGroupModel $metaGroup
+     * @param Widgets_Manager $widgetsManager
+     * @param BelongModel $belong
+     * @throws \Exception
+     */
+    private function registerFields(MetaGroupModel $metaGroup, Widgets_Manager $widgetsManager, BelongModel $belong)
     {
-	    foreach ($metaGroups as $group){
-		    foreach ($group->getBoxes() as $metaBox){
-			    foreach ($metaBox->getFields() as $boxFieldModel){
+        foreach ($metaGroup->getBoxes() as $metaBox){
+            foreach ($metaBox->getFields() as $boxFieldModel){
 
-				    $boxFieldModel->setBelongsToLabel($belongsTo);
-				    $boxFieldModel->setFindLabel($find);
+                $notAllowedTypes = [
+                    MetaFieldModel::CLONE_TYPE
+                ];
 
-				    $widgetsManager->register( new WidgetGenerator([], [
-					    'boxFieldModel' => $boxFieldModel,
-					    'find' => $find,
-				    ]));
-			    }
-		    }
-	    }
+                if(!in_array($boxFieldModel->getType(), $notAllowedTypes)){
+                    $boxFieldModel->setBelongsAndFindLabels($belong);
+                    $widgetsManager->register( new WidgetGenerator([], [
+                        'boxFieldModel' => $boxFieldModel,
+                        'find' => $boxFieldModel->getFindLabel(),
+                    ]));
+                }
+            }
+        }
     }
 
     /**

@@ -78,22 +78,26 @@ trait BelongsToTrait
 							break;
 
 						case Operator::IN:
-							$check = Strings::matches($find, $belongModel->getFind());
+                            if(is_string($find) and is_string($belongModel->getFind())){
+                                $check = Strings::matches($find, $belongModel->getFind());
 
-							if(count($check) > 0){
-								$matches++;
-							}
+                                if(count($check) > 0){
+                                    $matches++;
+                                }
+                            }
 
 							break;
 
 						case Operator::NOT_IN:
-							$check = Strings::matches($find, $belongModel->getFind());
+                            if(is_string($find) and is_string($belongModel->getFind())){
+                                $check = Strings::matches($find, $belongModel->getFind());
 
-							if( empty($check)){
-								$matches++;
-							}
+                                if( empty($check)){
+                                    $matches++;
+                                }
+                            }
 
-							break;
+                            break;
 					}
 				}
 
@@ -101,25 +105,25 @@ trait BelongsToTrait
 					case Operator::EQUALS:
 
 						if( $belongModel->getOperator() === Operator::NOT_EQUALS){
-
 							if($find !== $belongModel->getFind()){
 								$matches++;
 							}
-
 						} elseif( $belongModel->getOperator() === Operator::IN){
-							$check = Strings::matches($find, $belongModel->getFind());
+						    if(is_string($find) and is_string($belongModel->getFind())){
+                                $check = Strings::matches($find, $belongModel->getFind());
 
-							if(count($check) > 0){
-								$matches++;
-							}
+                                if(count($check) > 0){
+                                    $matches++;
+                                }
+                            }
 						} elseif( $belongModel->getOperator() === Operator::NOT_IN){
+                            if(is_string($find) and is_string($belongModel->getFind())){
+                                $check = Strings::matches($find, $belongModel->getFind());
 
-							$check = Strings::matches($find, $belongModel->getFind());
-
-							if(empty($check)){
-								$matches++;
-							}
-
+                                if(empty($check)){
+                                    $matches++;
+                                }
+                            }
 						} elseif($belongModel->getFind() === $find){
 							$matches++;
 						}
@@ -135,24 +139,31 @@ trait BelongsToTrait
 						break;
 
 					case Operator::IN:
-						$check = Strings::matches($find, $belongModel->getFind());
+                        if(is_string($find) and is_string($belongModel->getFind())){
+                            $check = Strings::matches($find, $belongModel->getFind());
 
-						if( $belongModel->getOperator() === Operator::NOT_IN){
-							if(empty($check)){
-								$matches++;
-							}
-						} elseif(count($check) > 0){
-							$matches++;
-						}
+                            if( $belongModel->getOperator() === Operator::NOT_IN){
+                                if(empty($check)){
+                                    $matches++;
+                                }
+                            } elseif(count($check) > 0){
+                                $matches++;
+                            }
+                        }
 
 						break;
 
 					case Operator::NOT_IN:
-						$check = Strings::matches($find, $belongModel->getFind());
+                        if(is_string($find) and is_string($belongModel->getFind())){
+                            $check = Strings::matches($find, $belongModel->getFind());
 
-						if(empty($check)){
-							$matches++;
-						}
+                            if(empty($check)){
+                                $matches++;
+                            }
+                        }
+
+                        break;
+
 				}
 			}
 		}

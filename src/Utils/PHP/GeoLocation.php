@@ -63,34 +63,98 @@ class GeoLocation
 	public static function getCity($lat, $lng)
 	{
 		try {
-			$url = 'https://nominatim.openstreetmap.org/reverse?lat='.$lat.'&lon='.$lng.'&format=json';
-			$request = CURL::get($url);
-			$json = json_decode($request);
+            // try with Google maps
+            $apiKey = Maps::googleMapsKey();
 
-			if(empty($json)){
-				return null;
-			}
+            if($apiKey){
+                return self::getCityFromGoogleMaps($lat, $lng, $apiKey);
+            }
 
-			if(!isset($json->address)){
-				return null;
-			}
-
-			$address = $json->address;
-
-			if(isset($address->city)){
-				return $address->city;
-			}
-
-			if(isset($address->town)){
-				return $address->town;
-			}
-
-			return $address->county;
-
+			return self::getCityFromOpenStreetMaps($lat, $lng);
 		} catch (\Exception $exception){
 			return null;
 		}
 	}
+
+    /**
+     * @param $lat
+     * @param $lng
+     * @param $apiKey
+     * @return string|null
+     */
+	private static function getCityFromGoogleMaps($lat, $lng, $apiKey)
+    {
+        try {
+            $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$lng.'&key='.$apiKey;
+            $request = CURL::get($url);
+
+            // check http status @TODO
+
+            $json = json_decode($request);
+
+            if(empty($json)){
+                return null;
+            }
+
+            if(!isset($json->results)){
+                return null;
+            }
+
+            if(empty($json->results)){
+                return null;
+            }
+
+            if(!is_array($json->results)){
+                return null;
+            }
+
+            foreach ($json->results as $result){
+                if(isset($result->address_components) and is_array($result->address_components)){
+                    foreach ($result->address_components as $address_components){
+                        if(isset($address_components['types']) and is_array($address_components['types']) and in_array("locality", $address_components['types'])){
+                            return $address_components['long_name'] ?? $address_components['short_name'] ?? null;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        } catch (\Exception $exception){
+            return self::getCityFromOpenStreetMaps($lat, $lat);
+        }
+    }
+
+    /**
+     * @param $lat
+     * @param $lng
+     * @return string|null
+     */
+    private static function getCityFromOpenStreetMaps($lat, $lng)
+    {
+        $url = 'https://nominatim.openstreetmap.org/reverse?lat='.$lat.'&lon='.$lng.'&format=json';
+        $request = CURL::get($url);
+        $json = json_decode($request);
+
+        if(empty($json)){
+            return null;
+        }
+
+        if(!isset($json->address)){
+            return null;
+        }
+
+        $address = $json->address;
+
+        if(isset($address->city)){
+            return $address->city;
+        }
+
+        if(isset($address->town)){
+            return $address->town;
+        }
+
+        return $address->county;
+    }
 
 	/**
 	 * @param $lat

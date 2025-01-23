@@ -3,9 +3,14 @@
 namespace ACPT_Lite\Core\Models\CustomPostType;
 
 use ACPT_Lite\Core\Helper\Icon;
+use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
+use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
+use ACPT_Lite\Core\Traits\PermissionTrait;
+use ACPT_Lite\Utils\Wordpress\Translator;
 
 /**
  * CustomPostTypeModel
@@ -17,6 +22,8 @@ use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
  */
 class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
 {
+	use PermissionTrait;
+
     /**
      * @var string
      */
@@ -107,6 +114,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
         $this->settings = $settings;
         $this->taxonomies = [];
         $this->woocommerceProductData = [];
+	    $this->permissions  = [];
         $this->postCount = 0;
     }
 
@@ -187,6 +195,54 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     public function getLabels(): array
     {
         return $this->labels;
+    }
+
+    /**
+     * @param $labels
+     */
+    public function setLabels($labels): void
+    {
+        $this->labels = $labels;
+    }
+
+    /**
+     * @return array
+     */
+    public function defaultLabels()
+    {
+        $plural = $this->getPlural();
+        $singular = $this->getSingular();
+
+        return [
+            'menu_name' => $plural,
+            'all_items' => Translator::translate("All {{r}}", ["r" => $plural]),
+            'add_new' => Translator::translate("Add") . " " . $singular,
+            'add_new_item' => Translator::translate("Add new {{r}}", ["r" => $singular]),
+            'edit_item' => Translator::translate("Edit") . " ". $singular,
+            'new_item' => Translator::translate("New") . " "  . $singular,
+            'view_item' => Translator::translate("View") . " "  . $singular,
+            'view_items' => Translator::translate("View") . " "  .  $plural,
+            'search_item' => Translator::translate("Search") . " "  .  $plural,
+            'not_found' => Translator::translate("No {{r}} found", ["r" => $singular]),
+            'not_found_in_trash' => Translator::translate("No {{r}} found", ["r" => $singular]),
+            'parent_item_colon' => Translator::translate("Parent item"),
+            'featured_image' => Translator::translate("Featured image"),
+            'set_featured_image' => Translator::translate("Set featured image"),
+            'remove_featured_image' => Translator::translate("Remove featured image"),
+            'use_featured_image' => Translator::translate("Use featured image"),
+            'archives' => Translator::translate("Archives"),
+            'insert_into_item' => Translator::translate("Insert"),
+            'uploaded_to_this_item' => Translator::translate("Upload"),
+            'filter_items_list' => Translator::translate("Filter {{r}} list", ["r" => $plural]),
+            'items_list_navigation' => Translator::translate("Navigation list {{r}}", ["r" => $plural]),
+            'items_list' => Translator::translate("List {{r}}", ["r" => $plural]),
+            'filter_by_date' => Translator::translate("Filter by date"),
+            'item_published' => Translator::translate("{{r}} published", ["r" => $singular]),
+            'item_published_privately' => Translator::translate("{{r}} published privately", ["r" => $singular]),
+            'item_reverted_to_draft' => Translator::translate("{{r}} reverted to draft", ["r" => $singular]),
+            'item_scheduled' => Translator::translate("{{r}} scheduled", ["r" => $singular]),
+            'item_updated' => Translator::translate("{{r}} updated", ["r" => $singular]),
+        ];
     }
 
     /**
@@ -299,6 +355,27 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
+     * @return CustomPostTypeModel
+     * @throws \Exception
+     */
+    public function duplicate(): CustomPostTypeModel
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->permissions = [];
+        $duplicate->setName(Strings::getTheFirstAvailableName($duplicate->getName(), CustomPostTypeRepository::getNames()));
+
+        $permissions = $duplicate->getPermissions();
+        $duplicate->permissions = [];
+
+        foreach ($permissions as $permissionModel){
+            $duplicate->permissions[] = $permissionModel->duplicateFromEntityId($duplicate->getId());
+        }
+
+        return $duplicate;
+    }
+
+    /**
      * @return array
      */
     public function arrayRepresentation(): array
@@ -314,6 +391,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                 'labels' => $taxonomy->getLabels(),
                 'settings' => $taxonomy->getSettings(),
                 'postCount' => $taxonomy->getPostCount(),
+                'permissions' => $taxonomy->getPermissions(),
             ];
         }
 
@@ -327,6 +405,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'supports' => $this->supports,
             'labels' => $this->labels,
             'settings' => $this->settings,
+            'permissions' => $this->getPermissions(),
             'taxonomies' => $taxonomyArray,
         ];
     }
@@ -345,6 +424,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
                 'settings' => $taxonomy->getSettings(),
                 'postCount' => $taxonomy->getPostCount(),
                 'isNative' => $taxonomy->isNative(),
+                'permissions' => $taxonomy->getPermissions(),
             ];
         }
 
@@ -360,6 +440,7 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
             'labels' => $this->labels,
             'settings' => $this->settings,
             'taxonomies' => $taxonomyArray,
+            'permissions' => $this->getPermissions(),
             'isWooCommerce' => $this->isWooCommerce(),
             'woocommerceProductData' => $this->woocommerceProductData,
         ];
@@ -411,4 +492,34 @@ class CustomPostTypeModel extends AbstractModel implements \JsonSerializable
 	}
 
 
+	/**
+	 * @inheritDoc
+	 */
+	public function capabilityType(): string
+	{
+		if(isset($this->getSettings()['capability_type']) and $this->getSettings()['capability_type'] !== 'post'){
+			return $this->getSettings()['capability_type'];
+		}
+
+		return $this->getName();
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function capabilities(): array
+	{
+		return [
+			'edit_s',
+			'edit_private_s',
+			'edit_published_s',
+			'edit_others_s',
+			'publish_s',
+			'read_private_s',
+			'delete_s',
+			'delete_private_s',
+			'delete_published_s',
+			'delete_others_s',
+		];
+	}
 }

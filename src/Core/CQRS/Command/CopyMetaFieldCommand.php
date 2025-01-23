@@ -2,14 +2,13 @@
 
 namespace ACPT_Lite\Core\CQRS\Command;
 
-use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use Exception;
 
-class CopyMetaFieldCommand implements CommandInterface
+class CopyMetaFieldCommand extends AbstractCopyCommand implements CommandInterface
 {
 	/**
 	 * @var string
@@ -38,6 +37,7 @@ class CopyMetaFieldCommand implements CommandInterface
 	 */
 	public function __construct($data)
 	{
+		parent::__construct();
 		$validationRules = [
 			'fieldId' => [
 				'required' => true,
@@ -86,10 +86,23 @@ class CopyMetaFieldCommand implements CommandInterface
 			throw new Exception('Meta field was not found. If you haven\'t saved the field yet, please SAVE it and then try to copy.');
 		}
 
-		$duplicatedMetaField = $metaBoxField->duplicate();
-
 		switch ($this->targetEntityType){
 
+			// copy a field inside a block
+			case "block":
+				$targetBlockModel = MetaRepository::getMetaBlockById($this->targetEntityId);
+
+				if(empty($targetBlockModel)){
+					throw new Exception('Target meta block was not found');
+				}
+
+				$duplicatedMetaField = $this->copyField($metaBoxField, $metaBoxField->getBox());
+				$duplicatedMetaField->setBlockId($this->targetEntityId);
+				$this->saveMetaField($duplicatedMetaField);
+
+				break;
+
+			// copy a field inside a nestable field
 			case "field":
 				$targetFieldModel = MetaRepository::getMetaFieldById($this->targetEntityId);
 
@@ -97,11 +110,23 @@ class CopyMetaFieldCommand implements CommandInterface
 					throw new Exception('Target meta field was not found');
 				}
 
-				$duplicatedMetaField->changeBox($targetFieldModel->getBox());
+				$duplicatedMetaField = $this->copyField($metaBoxField, $targetFieldModel->getBox());
+
+				switch ($targetFieldModel->getType()){
+					case MetaFieldModel::FLEXIBLE_CONTENT_TYPE:
+						$duplicatedMetaField->setBlockId($targetFieldModel->getBlockId());
+						break;
+
+					case MetaFieldModel::REPEATER_TYPE:
+						$duplicatedMetaField->setParentId($targetFieldModel->getId());
+						break;
+				}
+
 				$this->saveMetaField($duplicatedMetaField);
 
 				break;
 
+			// copy a field inside a box
 			case "box":
 				$targetBoxModel = MetaRepository::getMetaBoxById($this->targetEntityId);
 
@@ -109,16 +134,14 @@ class CopyMetaFieldCommand implements CommandInterface
 					throw new Exception('Target meta box was not found');
 				}
 
-				$duplicatedMetaField->changeBox($targetBoxModel);
+				$duplicatedMetaField = $this->copyField($metaBoxField, $targetBoxModel);
 
-				// avoid duplicated box/field names
-				$arrayOfFieldNames = [];
-
-				foreach ($targetBoxModel->getFields() as $fieldModel){
-					$arrayOfFieldNames[] = $fieldModel->getName();
+				if($duplicatedMetaField->hasParentBlock()){
+					$duplicatedMetaField->setBlockId(null);
 				}
 
-				$duplicatedMetaField->changeName(Strings::getTheFirstAvailableName($duplicatedMetaField->getName(), $arrayOfFieldNames));
+				$duplicatedMetaField->setBlockId(null);
+				$duplicatedMetaField->setParentId(null);
 				$this->saveMetaField($duplicatedMetaField);
 
 				break;

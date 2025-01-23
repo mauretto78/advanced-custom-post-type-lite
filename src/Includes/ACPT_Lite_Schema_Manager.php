@@ -20,7 +20,7 @@ class ACPT_Lite_Schema_Manager
         $migrations = self::getMigrations();
 
         foreach ($migrations as $migration){
-        	if( $migration instanceof ACPT_Lite_Schema_Migration){
+        	if($migration instanceof ACPT_Schema_Migration){
                 if(self::isTheMigrationNeeded($migration->version(), $newVersion, $oldVersion)){
 	                $up = $migration->up();
 
@@ -68,17 +68,34 @@ class ACPT_Lite_Schema_Manager
 	    global $wpdb;
 
 	    $tables = [
+		    ACPT_Lite_DB::TABLE_API_KEYS,
 		    ACPT_Lite_DB::TABLE_BELONG,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
+		    ACPT_Lite_DB::TABLE_DATASET,
+		    ACPT_Lite_DB::TABLE_DATASET_ITEM,
+		    ACPT_Lite_DB::TABLE_FORM,
+		    ACPT_Lite_DB::TABLE_FORM_SUBMISSION,
+		    ACPT_Lite_DB::TABLE_FORM_FIELD,
+		    ACPT_Lite_DB::TABLE_FORM_METADATA,
 		    ACPT_Lite_DB::TABLE_META_GROUP_BELONG,
+		    ACPT_Lite_DB::TABLE_META_ADVANCED_OPTION,
+		    ACPT_Lite_DB::TABLE_META_BLOCK,
 		    ACPT_Lite_DB::TABLE_META_BOX,
 		    ACPT_Lite_DB::TABLE_META_FIELD,
 		    ACPT_Lite_DB::TABLE_META_GROUP,
 		    ACPT_Lite_DB::TABLE_META_OPTION,
+		    ACPT_Lite_DB::TABLE_META_RELATION,
+		    ACPT_Lite_DB::TABLE_META_VISIBILITY,
+		    ACPT_Lite_DB::TABLE_OPTION_PAGE,
+		    ACPT_Lite_DB::TABLE_PERMISSION,
 		    ACPT_Lite_DB::TABLE_SETTINGS,
 		    ACPT_Lite_DB::TABLE_TAXONOMY,
 		    ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
+		    ACPT_Lite_DB::TABLE_TEMPLATE,
+		    ACPT_Lite_DB::TABLE_VALIDATION_RULE,
+		    ACPT_Lite_DB::TABLE_VALIDATION_RULE_FIELD_PIVOT,
+		    ACPT_Lite_DB::TABLE_VALIDATION_RULE_FORM_FIELD_PIVOT,
 		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
 		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
 		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
@@ -88,7 +105,7 @@ class ACPT_Lite_Schema_Manager
 	    	ACPT_Lite_DB::startTransaction();
 
 		    foreach ($tables as $table){
-			    ACPT_Lite_DB::executeQueryOrThrowException( "DROP TABLE IF EXISTS `" . ACPT_Lite_DB::prefixedTableName($table) . "`;");
+			    ACPT_Lite_DB::executeQueryOrThrowException("DROP TABLE IF EXISTS `".ACPT_Lite_DB::prefixedTableName($table)."`;");
 		    }
 
 		    ACPT_Lite_DB::commitTransaction();
@@ -109,13 +126,19 @@ class ACPT_Lite_Schema_Manager
     	global $wpdb;
 
     	$tables = [
+		    ACPT_Lite_DB::TABLE_API_KEYS,
+		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_ADVANCED_OPTION,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION,
+		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_VISIBILITY,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION,
+		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_BLOCK,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
 		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE,
+		    ACPT_Lite_DB::TABLE_OPTION_PAGE,
+		    ACPT_Lite_DB::TABLE_OPTION_PAGE_META_BOX,
 		    ACPT_Lite_DB::TABLE_TAXONOMY,
 		    ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX,
 		    ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
@@ -134,7 +157,7 @@ class ACPT_Lite_Schema_Manager
     }
 
 	/**
-	 * @return ACPT_Lite_Schema_Migration[]|array
+	 * @return ACPT_Schema_Migration[]|array
 	 */
 	private static function getMigrations()
     {
@@ -143,9 +166,9 @@ class ACPT_Lite_Schema_Manager
 	    $classes = FS::getDirClasses($migrationsDir);
 
 	    foreach ($classes as $class){
-		    if(is_subclass_of($class, ACPT_Lite_Schema_Migration::class)){
+		    if(is_subclass_of($class, ACPT_Schema_Migration::class)){
 
-			    /** @var ACPT_Lite_Schema_Migration $migrationInstance */
+			    /** @var ACPT_Schema_Migration $migrationInstance */
 			    $migrationInstance = new $class;
 			    $migrations[] = $migrationInstance;
 		    }

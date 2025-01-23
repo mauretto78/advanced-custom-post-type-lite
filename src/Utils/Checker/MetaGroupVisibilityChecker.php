@@ -6,8 +6,8 @@ use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Constants\Operator;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
-use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Utils\Data\Meta;
+use ACPT_Lite\Utils\Wordpress\Terms;
 
 class MetaGroupVisibilityChecker
 {
@@ -21,87 +21,148 @@ class MetaGroupVisibilityChecker
 	public static function isVisible(MetaGroupModel $group, $belongsTo, $find = null): bool
 	{
 		try {
-			if($find !== null){
-				if($group->belongsTo($belongsTo, Operator::EQUALS, $find)){
-					return true;
-				}
+			if($find !== null) {
+                if ($group->belongsTo($belongsTo, Operator::EQUALS, (string)$find)) {
+                    return true;
+                }
 
-				if($belongsTo === MetaTypes::CUSTOM_POST_TYPE){
+                switch ($belongsTo){
 
-					// 2. POST_ID
-					$postIds = get_posts([
-						'fields'         => 'ids',
-						'post_type'      => $find,
-						'posts_per_page' => -1,
-					]);
+                    case BelongsTo::POST_ID:
 
-					if(!empty($postIds)){
-						foreach ($postIds as $postId){
-							if($group->belongsTo(BelongsTo::POST_ID, Operator::EQUALS, $postId)){
-								return true;
-							}
-						}
-					}
+                        foreach ($group->getBelongs() as $belongModel) {
+                            $operator = $belongModel->getOperator();
 
-					// 3. POST_TEMPLATE
-					$templates =  get_pages([
-						'meta_key' => '_wp_page_template',
-					]);
+                            if ($group->belongsTo(BelongsTo::POST_ID, $operator, (string)$find)) {
+                                return true;
+                            }
+                        }
 
-					if(!empty($templates)){
-						foreach ($templates as $template){
-							$file = Meta::fetch($template->ID, MetaTypes::CUSTOM_POST_TYPE, '_wp_page_template', true);
-							if($group->belongsTo(BelongsTo::POST_TEMPLATE, Operator::EQUALS, $file)){
-								return true;
-							}
-						}
-					}
+                        break;
 
-					// 4. POST_TAX
-					$termIds = [];
-					$taxonomies = TaxonomyRepository::get();
+                    // CUSTOM_POST_TYPE
+                    case MetaTypes::CUSTOM_POST_TYPE:
 
-					foreach ($taxonomies as $taxonomy){
-						$queriedTerms = get_terms([
-							'taxonomy'   => $taxonomy->getSlug(),
-							'hide_empty' => false,
-							'fields' => 'ids',
-						]);
+                        // this is the current post we are editing
+                        $postId = $_GET['post'] ?? $_POST['post_ID'] ?? null;
+                        $post = get_post($postId);
 
-						$termIds[] = [
-							'taxonomy' => $taxonomy->getSlug(),
-							'terms'    => $queriedTerms,
-						];
-					}
+                        if ($post instanceof \WP_Post) {
+                            foreach ($group->getBelongs() as $belongModel) {
 
-					if(!empty($termIds)){
-						foreach ($termIds as $termId){
-							$taxonomy = $termId['taxonomy'];
-							$terms    = $termId['terms'];
+                                $operator = $belongModel->getOperator();
 
-							foreach ($terms as $term){
-								if($group->belongsTo(BelongsTo::POST_TAX, Operator::EQUALS, $term)){
-									return true;
-								}
-							}
-						}
-					}
+                                switch ($belongModel->getBelongsTo()) {
 
-					// 5. POST_CAT
-					$categoryIds = get_terms([
-						'taxonomy'   => 'category',
-						'hide_empty' => false,
-						'fields' => 'ids',
-					]);
+                                    // 2. POST_ID
+                                    case BelongsTo::POST_ID:
 
-					if(!empty($categoryIds)){
-						foreach ($categoryIds as $categoryId){
-							if($group->belongsTo(BelongsTo::POST_CAT, Operator::EQUALS, $categoryId)){
-								return true;
-							}
-						}
-					}
-				}
+                                        if ($group->belongsTo(BelongsTo::POST_ID, $operator, (string)$post->ID)) {
+                                            return true;
+                                        }
+
+                                        break;
+
+                                    // 3. PARENT_POST_ID
+                                    case BelongsTo::PARENT_POST_ID:
+
+                                        $postParent = get_post_parent($post->ID);
+
+                                        if($postParent !== null){
+                                            if ($group->belongsTo(BelongsTo::PARENT_POST_ID, $operator, (string)$postParent->ID)) {
+                                                return true;
+                                            }
+                                        } else {
+                                            if ($group->belongsTo(BelongsTo::PARENT_POST_ID, $operator, (string)$post->ID)) {
+                                                return true;
+                                            }
+                                        }
+
+                                        break;
+
+                                    // 4. POST_TEMPLATE
+                                    case BelongsTo::POST_TEMPLATE:
+
+                                        $file = Meta::fetch($post->ID, MetaTypes::CUSTOM_POST_TYPE, '_wp_page_template', true);
+                                        if ($group->belongsTo(BelongsTo::POST_TEMPLATE, $operator, $file)) {
+                                            return true;
+                                        }
+
+                                        break;
+
+                                    // 5. POST_TAX
+                                    // 6. POST_CAT
+                                    case BelongsTo::POST_TAX:
+                                    case BelongsTo::POST_CAT:
+                                        $terms = Terms::getForPostId($post->ID);
+                                        $conditions = [];
+
+                                        if(!empty($terms)){
+                                            foreach ($terms as $term) {
+                                                $conditions[] = $group->belongsTo($belongModel->getBelongsTo(), $operator, $term->term_taxonomy_id);
+                                            }
+                                        } else {
+                                            if($operator === Operator::NOT_IN or $operator === Operator::NOT_EQUALS){
+                                                $conditions[] = $group->belongsTo($belongModel->getBelongsTo(), $operator, "999999999999999999999999999999999");
+                                            }
+                                        }
+
+                                        if(!empty($conditions)){
+                                            if($operator === Operator::EQUALS or $operator === Operator::NOT_EQUALS){
+                                                if(!in_array(false, $conditions)){
+                                                    return true;
+                                                }
+                                            } else {
+                                                if(in_array(true, $conditions)){
+                                                    return true;
+                                                }
+                                            }
+                                        }
+
+                                        break;
+                                }
+                            }
+                        }
+
+                        break;
+
+                    // TAXONOMY
+                    case MetaTypes::TAXONOMY:
+                        if(isset($_GET['tag_ID'])){
+                            foreach ($group->getBelongs() as $belongModel) {
+
+                                $operator = $belongModel->getOperator();
+
+                                if($belongModel->getBelongsTo() === BelongsTo::TERM_ID){
+                                    if ($group->belongsTo(BelongsTo::TERM_ID, $operator, (string)$_GET['tag_ID'])) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+
+                        break;
+
+                    // USER
+                    case MetaTypes::USER:
+
+                        $userId = (isset($_GET['user_id'])) ? $_GET['user_id'] : get_current_user_id();
+
+                        if(!empty($userId)){
+                            foreach ($group->getBelongs() as $belongModel) {
+
+                                $operator = $belongModel->getOperator();
+
+                                if($belongModel->getBelongsTo() === BelongsTo::USER_ID){
+                                    if ($group->belongsTo(BelongsTo::USER_ID, $operator, (string)$userId)) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+
+                        break;
+                }
 
 				return false;
 			}

@@ -6,6 +6,7 @@ use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeGenerator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
+use ACPT_Lite\Core\Models\Permission\PermissionModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Utils\PHP\Image;
 use ACPT_Lite\Utils\Wordpress\WPAttachment;
@@ -39,7 +40,7 @@ class SaveCustomPostTypeCommand implements CommandInterface
 			}
 		}
 
-		$model = CustomPostTypeModel::hydrateFromArray([
+		$postTypeModel = CustomPostTypeModel::hydrateFromArray([
 			'id' => ($data['id'] ? $data['id'] : Uuid::v4()),
 			'name' => @$data['name'],
 			'singular' => @$data["singular_label"],
@@ -51,28 +52,40 @@ class SaveCustomPostTypeCommand implements CommandInterface
 			'settings' =>  @$data['settings'],
 		]);
 
-		CustomPostTypeRepository::save($model);
+		CustomPostTypeRepository::save($postTypeModel);
+
+		$permissions = $data['permissions'] ?? [];
+
+		if(is_array($permissions) and !empty($permissions)){
+			foreach ($permissions as $permissionIndex => $permission){
+				$permissionModel = PermissionModel::hydrateFromArray([
+					'id' => (isset($permission["id"]) ? $permission["id"] : Uuid::v4()),
+					'entityId' => $postTypeModel->getId(),
+					'userRole' => $permission['userRole'] ?? $permission['user_role'],
+					'permissions' => $permission['permissions'] ?? [],
+					'sort' => ($permissionIndex+1),
+				]);
+
+				$postTypeModel->addPermission($permissionModel);
+			}
+		}
 
 		// generate CPT in WP tables
-		$customPostTypeGenerator = new CustomPostTypeGenerator(
-			$model->getName(),
-			$model->isNative(),
-			$model->isWooCommerce(),
-			array_merge(
-				[
-					'supports' => $model->getSupports(),
-					'label' => $model->getPlural(),
-					'labels' => $model->getLabels(),
-					"menu_icon" => $model->getIcon()
-				],
-				$model->getSettings()
-			)
-		);
-
+		$customPostTypeGenerator = new CustomPostTypeGenerator($postTypeModel);
 		$customPostTypeGenerator->registerPostType();
 		$this->flushPermalinkRules();
 
-		return $model->getId();
+		// save permissions
+		if($postTypeModel->hasPermissions()){
+			$command = new SavePermissionCommand([
+				'entityId' => $postTypeModel->getId(),
+				'items' => $postTypeModel->gerPermissionsAsArray()
+			]);
+
+			$command->execute();
+		}
+
+		return $postTypeModel->getId();
 	}
 
 	/**

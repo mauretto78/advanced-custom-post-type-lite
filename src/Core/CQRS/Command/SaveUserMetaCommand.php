@@ -46,8 +46,10 @@ class SaveUserMetaCommand extends AbstractSaveMetaCommand implements CommandInte
 		foreach ($this->metaGroups as $metaGroup){
 			foreach ($metaGroup->getBoxes() as $boxModel){
 				foreach ($boxModel->getFields() as $fieldModel){
-					$fieldModel->setBelongsToLabel(MetaTypes::USER);
-					$this->saveField($fieldModel, $this->userId, MetaTypes::USER);
+					if($this->hasField($fieldModel)){
+						$fieldModel->setBelongsToLabel(MetaTypes::USER);
+						$this->saveField($fieldModel, $this->userId, MetaTypes::USER);
+					}
 				}
 			}
 		}

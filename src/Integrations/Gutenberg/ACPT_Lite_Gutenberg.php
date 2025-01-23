@@ -2,8 +2,10 @@
 
 namespace ACPT_Lite\Integrations\Gutenberg;
 
+use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Integrations\AbstractIntegration;
 use ACPT_Lite\Integrations\Gutenberg\Blocks\ACPTBasicBlock;
+use ACPT_Lite\Utils\Settings\Settings;
 
 class ACPT_Lite_Gutenberg extends AbstractIntegration
 {
@@ -12,7 +14,7 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
 	 */
 	protected function isActive()
 	{
-		return true;
+		return Settings::get(SettingsModel::ENABLE_META, 1) == 1;
 	}
 
 	/**
@@ -146,6 +148,12 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
 				],
 			]
 		]);
+
+		// enqueue basic block styles
+		wp_enqueue_block_style( "advanced-custom-post-type/basic-block", [
+			'handle' => "advanced-custom-post-type/basic-block",
+			'src'    => plugins_url( 'advanced-custom-post-type/assets/static/css/gallery.css')
+		] );
 	}
 }
 

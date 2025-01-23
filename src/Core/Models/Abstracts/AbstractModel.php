@@ -3,8 +3,8 @@
 namespace ACPT_Lite\Core\Models\Abstracts;
 
 use ACPT_Lite\Core\Helper\Uuid;
+use ACPT_Lite\Core\Traits\CollectionsTrait;
 use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
-use ACPT_Lite\Utils\PHP\Arrays;
 use ACPT_Lite\Utils\PHP\Objects;
 use ReflectionClass;
 
@@ -18,6 +18,8 @@ use ReflectionClass;
  */
 abstract class AbstractModel
 {
+	use CollectionsTrait;
+
     /**
      * @var string
      */
@@ -118,42 +120,6 @@ abstract class AbstractModel
         }
 
         return new $className($id, ...$values);
-    }
-
-    /**
-     * @param $id
-     * @param $collection
-     *
-     * @return bool
-     */
-    protected function existsInCollection($id, $collection): bool
-    {
-        foreach ($collection as $item){
-            if ($item->getId() === $id) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-	/**
-	 * @param $id
-	 * @param $collection
-	 *
-	 * @return mixed
-	 */
-    protected function removeFromCollection($id, $collection)
-    {
-        if($this->existsInCollection($id, $collection)){
-            foreach ($collection as $index => $item){
-                if ($id === $item->getId()) {
-                    unset($collection[$index]);
-                }
-            }
-        }
-
-        return Arrays::reindex($collection);
     }
 
 	/**

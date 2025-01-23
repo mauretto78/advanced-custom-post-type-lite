@@ -17,19 +17,25 @@ class SaveCustomPostTypeMetaCommand extends AbstractSaveMetaCommand implements C
 	 */
 	protected array $metaGroups;
 
-	/**
-	 * SaveCustomPostTypeMetaCommand constructor.
-	 *
-	 * @param $postId
-	 * @param MetaGroupModel[] $metaGroups
-	 * @param array $data
-	 */
-	public function __construct($postId, array $metaGroups = [], array $data = [])
+    /**
+     * @var null
+     */
+    protected $WooCommerceLoopIndex;
+
+    /**
+     * SaveCustomPostTypeMetaCommand constructor.
+     * @param $postId
+     * @param array $metaGroups
+     * @param array $data
+     * @param null $WooCommerceLoopIndex
+     */
+	public function __construct($postId, array $metaGroups = [], array $data = [], $WooCommerceLoopIndex = null)
 	{
 		parent::__construct($data);
 		$this->postId = $postId;
 		$this->metaGroups = $metaGroups;
-	}
+        $this->WooCommerceLoopIndex = $WooCommerceLoopIndex;
+    }
 
 	/**
 	 * @inheritDoc
@@ -40,9 +46,11 @@ class SaveCustomPostTypeMetaCommand extends AbstractSaveMetaCommand implements C
 		foreach ($this->metaGroups as $metaGroup){
 			foreach ($metaGroup->getBoxes() as $boxModel) {
 				foreach ($boxModel->getFields() as $fieldModel) {
-					$fieldModel->setBelongsToLabel(MetaTypes::CUSTOM_POST_TYPE);
-					$fieldModel->setFindLabel(get_post_type($this->postId));
-					$this->saveField($fieldModel, $this->postId, MetaTypes::CUSTOM_POST_TYPE);
+					if($this->hasField($fieldModel)){
+						$fieldModel->setBelongsToLabel(MetaTypes::CUSTOM_POST_TYPE);
+						$fieldModel->setFindLabel(get_post_type($this->postId));
+						$this->saveField($fieldModel, $this->postId, MetaTypes::CUSTOM_POST_TYPE);
+					}
 				}
 			}
 		}

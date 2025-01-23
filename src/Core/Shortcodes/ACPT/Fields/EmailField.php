@@ -16,7 +16,7 @@ class EmailField extends AbstractField
 		    return null;
 	    }
 
-        return $this->addBeforeAndAfter($this->renderEmail($rawData['value']));
+        return $this->renderEmail($rawData['value']);
     }
 
 	/**
@@ -30,6 +30,6 @@ class EmailField extends AbstractField
 			return $email;
 		}
 
-		return '<a href="mailto:' . sanitize_email($email) . '">' . $email . '</a>';
+		return '<a href="mailto:' . sanitize_email($email) . '">' . $this->addBeforeAndAfter($email) . '</a>';
 	}
 }

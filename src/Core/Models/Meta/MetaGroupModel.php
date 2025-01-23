@@ -2,10 +2,13 @@
 
 namespace ACPT_Lite\Core\Models\Meta;
 
+use ACPT_Lite\Constants\MetaBox;
 use ACPT_Lite\Constants\MetaGroupDisplay;
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\Belong\BelongModel;
+use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Traits\BelongsToTrait;
 
 class MetaGroupModel extends AbstractModel implements \JsonSerializable
@@ -26,6 +29,16 @@ class MetaGroupModel extends AbstractModel implements \JsonSerializable
 	 * @var string
 	 */
 	private ?string $display = MetaGroupDisplay::STANDARD;
+
+	/**
+	 * @var string
+	 */
+	private ?string $context = null;
+
+	/**
+	 * @var string
+	 */
+	private ?string $priority = null;
 
 	/**
 	 * @var BelongModel[]
@@ -192,10 +205,88 @@ class MetaGroupModel extends AbstractModel implements \JsonSerializable
 		$count = 0;
 
 		foreach ($this->getBoxes() as $boxModel){
-			$count = $count + count($boxModel->getFields());
+			$count = $count + count(array_filter($boxModel->getFields(), function (MetaFieldModel $field){
+			    return $field->getForgedBy() === null;
+            }));
 		}
 
 		return $count;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getContext()
+	{
+		return $this->context;
+	}
+
+	/**
+	 * @param $context
+	 *
+	 * @throws \Exception
+	 */
+	public function setContext($context)
+	{
+		$allowedValues = [
+			MetaBox::CONTEXT_ADVANCED,
+			MetaBox::CONTEXT_NORMAL,
+			MetaBox::CONTEXT_SIDE,
+		];
+
+		if(!in_array($context, $allowedValues)){
+			throw new \Exception("Context is not valid");
+		}
+
+		$this->context = $context;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPriority()
+	{
+		return $this->priority;
+	}
+
+    /**
+     * @return MetaGroupModel
+     */
+    public function duplicate(): MetaGroupModel
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->changeName(Strings::getTheFirstAvailableName($duplicate->getName(), MetaRepository::getGroupNames()));
+
+        $boxes = $duplicate->getBoxes();
+        $duplicate->boxes = [];
+
+        foreach ($boxes as $boxModel){
+            $duplicate->boxes[] = $boxModel->duplicateFrom($duplicate);
+        }
+
+        return $duplicate;
+    }
+
+	/**
+	 * @param $priority
+	 *
+	 * @throws \Exception
+	 */
+	public function setPriority($priority)
+	{
+		$allowedValues = [
+			MetaBox::PRIORITY_CORE,
+			MetaBox::PRIORITY_DEFAULT,
+			MetaBox::PRIORITY_HIGH,
+			MetaBox::PRIORITY_LOW,
+		];
+
+		if(!in_array($priority, $allowedValues)){
+			throw new \Exception("Priority is not valid");
+		}
+
+		$this->priority = $priority;
 	}
 
 	#[\ReturnTypeWillChange]
@@ -210,6 +301,8 @@ class MetaGroupModel extends AbstractModel implements \JsonSerializable
 			'belongs' => $this->getBelongs(),
 			"fieldsCount" => $this->getFieldsCount(),
 			'boxes' => $this->getBoxes(),
+			'context' => $this->getContext(),
+			'priority' => $this->getPriority(),
 		];
 	}
 
@@ -239,7 +332,9 @@ class MetaGroupModel extends AbstractModel implements \JsonSerializable
 			'UIName' => $this->getUIName(),
 			'belongs' => $belongs,
 			"fieldsCount" => $this->getFieldsCount(),
-			'boxes' => $boxes
+			'boxes' => $boxes,
+			'context' => $this->getContext(),
+			'priority' => $this->getPriority(),
 		];
 	}
 
@@ -284,6 +379,14 @@ class MetaGroupModel extends AbstractModel implements \JsonSerializable
 			'boxes' => [
 				'required' => false,
 				'type' => 'array',
+			],
+			'context' => [
+				'required' => false,
+				'type' => 'string',
+			],
+			'priority' => [
+				'required' => false,
+				'type' => 'string',
 			],
 		];
 	}

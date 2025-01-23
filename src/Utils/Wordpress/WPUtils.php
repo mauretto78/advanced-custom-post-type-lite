@@ -2,8 +2,74 @@
 
 namespace ACPT_Lite\Utils\Wordpress;
 
+use ACPT_Lite\Core\CQRS\Command\SaveCustomPostTypeMetaCommand;
+use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
+
 class WPUtils
 {
+    /**
+     * This function is triggered by save_post_xxxx action
+     *
+     * @param $postId
+     * @param MetaGroupModel[] $metaGroups
+     * @param null $WooCommerceLoopIndex
+     * @throws \Exception
+     */
+    public static function handleSavePost($postId, $metaGroups = [], $WooCommerceLoopIndex = null)
+    {
+        if(!empty($_POST)){
+            $data = $_POST;
+        } else {
+            // bulk edit
+            if (isset($_REQUEST[ '_wpnonce' ]) and !wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'bulk-posts')){
+                return;
+            }
+
+            $data = $_REQUEST;
+        }
+
+        if(!empty($data)){
+            $command = new SaveCustomPostTypeMetaCommand($postId, $metaGroups, $data, $WooCommerceLoopIndex);
+            $command->execute();
+        }
+    }
+
+	/**
+	 * @param $id
+	 *
+	 * @return bool
+	 */
+	public static function postExists($id)
+	{
+		return (new \WP_Query(['post_type' => 'any', 'p' => $id]))->found_posts > 0;
+	}
+
+	/**
+	 * @param $tid
+	 *
+	 * @return bool
+	 */
+	public static function termExists($tid)
+	{
+		$term = get_term( $tid );
+
+		return $term instanceof \WP_Term;
+	}
+
+	/**
+	 * @param $uid
+	 *
+	 * @return bool
+	 */
+	public static function userExists($uid)
+	{
+		global $wpdb;
+
+		$count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users WHERE ID = %d", $uid));
+
+		return $count == 1;
+	}
+
     /**
      * This function replaces locate_template function
      * in order to fix undefined constants issue
@@ -77,4 +143,23 @@ class WPUtils
 
 		return do_shortcode($value);
 	}
+
+    /**
+     * This function removes <p></p> and \n from a string
+     *
+     * @param $value
+     * @return string|null
+     */
+    public static function removeEmptyParagraphs($value)
+    {
+        if(!is_string($value)){
+            return null;
+        }
+
+        $value = wpautop($value);
+        $value = str_replace("<p></p>","", $value);
+        $value = str_replace(PHP_EOL,"", $value);
+
+        return $value;
+    }
 }
