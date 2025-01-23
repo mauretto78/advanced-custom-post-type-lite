@@ -1,30 +1,15 @@
 import {inArray, isIterable} from './objects';
 import {fieldTypes} from "../constants/fields";
-import useTranslation from "../hooks/useTranslation";
 
 /**
  * @return bool
  */
 export const canBeQuickEdited = (type) => {
     const allowed = [
-        fieldTypes.CHECKBOX,
-        fieldTypes.COLOR,
-        fieldTypes.RADIO,
         fieldTypes.SELECT,
-        fieldTypes.SELECT_MULTI,
         fieldTypes.EMAIL,
-        fieldTypes.NUMBER,
-        fieldTypes.RANGE,
-        fieldTypes.PASSWORD,
-        fieldTypes.PHONE,
-        fieldTypes.POST_OBJECT,
-        fieldTypes.POST_OBJECT_MULTI,
-        fieldTypes.TERM_OBJECT,
-        fieldTypes.TERM_OBJECT_MULTI,
         fieldTypes.TEXT,
         fieldTypes.TEXTAREA,
-        fieldTypes.USER,
-        fieldTypes.USER_MULTI,
     ];
 
     return inArray(type, allowed);
@@ -35,14 +20,8 @@ export const canBeQuickEdited = (type) => {
  */
 export const isFilterable = (type) => {
     const allowed = [
-        fieldTypes.COLOR,
         fieldTypes.DATE,
-        fieldTypes.DATE_TIME,
         fieldTypes.EMAIL,
-        fieldTypes.NUMBER,
-        fieldTypes.RANGE,
-        fieldTypes.PHONE,
-        fieldTypes.RADIO,
         fieldTypes.SELECT,
         fieldTypes.TEXT,
         fieldTypes.TEXTAREA,
@@ -53,212 +32,14 @@ export const isFilterable = (type) => {
 
 export const canHaveAfterAndBefore = (type) => {
     const allowed = [
-        fieldTypes.CHECKBOX,
-        fieldTypes.COUNTRY,
-        fieldTypes.CURRENCY,
         fieldTypes.DATE,
-        fieldTypes.DATE_RANGE,
-        fieldTypes.DATE_TIME,
         fieldTypes.EMAIL,
-        fieldTypes.HTML,
-        fieldTypes.LENGTH,
-        fieldTypes.NUMBER,
-        fieldTypes.PHONE,
-        fieldTypes.RADIO,
         fieldTypes.SELECT,
-        fieldTypes.SELECT_MULTI,
         fieldTypes.TEXTAREA,
         fieldTypes.TEXT,
-        fieldTypes.TIME,
-        fieldTypes.URL,
-        fieldTypes.WEIGHT,
     ];
 
     return inArray(type, allowed);
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const isTextualField = (type) => {
-    const allowed = [
-        fieldTypes.ADDRESS,
-        fieldTypes.CHECKBOX,
-        fieldTypes.COLOR,
-        fieldTypes.COUNTRY,
-        fieldTypes.CURRENCY,
-        fieldTypes.DATE,
-        fieldTypes.DATE_TIME,
-        fieldTypes.EMAIL,
-        fieldTypes.LENGTH,
-        fieldTypes.NUMBER,
-        fieldTypes.PHONE,
-        fieldTypes.RANGE,
-        fieldTypes.RADIO,
-        fieldTypes.RATING,
-        fieldTypes.TEXT,
-        fieldTypes.TEXTAREA,
-        fieldTypes.TIME,
-        fieldTypes.SELECT,
-        fieldTypes.SELECT_MULTI,
-        fieldTypes.URL,
-        fieldTypes.WEIGHT,
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isUOMField = (type) => {
-    const allowed = [
-        fieldTypes.CURRENCY,
-        fieldTypes.LENGTH,
-        fieldTypes.WEIGHT,
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isPasswordField = (type) => {
-    const allowed = [
-        fieldTypes.PASSWORD,
-
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isNestableField = (type) => {
-    const allowed = [
-        fieldTypes.REPEATER,
-        fieldTypes.FLEXIBLE,
-
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isDateField = (type) => {
-    return  type === fieldTypes.DATE || type === fieldTypes.DATE_RANGE;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isDateTimeField = (type) => {
-    return  type === fieldTypes.DATE_TIME;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isTimeField = (type) => {
-    return  type === fieldTypes.TIME;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isUserField = (type) => {
-    return  type === fieldTypes.USER || type === fieldTypes.USER_MULTI;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isTermObjectField = (type) => {
-    return  type === fieldTypes.TERM_OBJECT || type === fieldTypes.TERM_OBJECT_MULTI;
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const isPostObjectField = (type) => {
-    return type === fieldTypes.POST_OBJECT || type === fieldTypes.POST_OBJECT_MULTI;
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const isRelationalField = (type) => {
-    return type === fieldTypes.POST;
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const isCloneField = (type) => {
-    return  type === fieldTypes.CLONE;
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const isImageField = (type) => {
-    return  type === fieldTypes.IMAGE;
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const isFileField = (type) => {
-    return  type === fieldTypes.FILE;
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const isTextarea = (type) => {
-    return  type === fieldTypes.TEXTAREA || type === fieldTypes.EDITOR;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isRadioField = (type) => {
-    return  type === fieldTypes.RADIO;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isURLField = (type) => {
-    return  type === fieldTypes.URL;
 };
 
 /**
@@ -305,92 +86,6 @@ export const formatFieldForSelection = (field, boxId, parentFieldId, parentBlock
         parentFieldId: parentFieldId,
         parentBlockId: parentBlockId
     };
-};
-
-/**
- *
- * @return {[{label: string, value: string}, {label: string, value: string}, {label: string, value: string}]}
- */
-export const postFieldLayouts = () => {
-    return [
-        {label: useTranslation("Only name or title"), value: "basic"},
-        {label: useTranslation("With image"), value: "image"}
-    ];
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const canFieldHaveValidationAndLogicRules = (type) => {
-    const allowed = [
-        fieldTypes.RATING,
-        fieldTypes.NUMBER,
-        fieldTypes.TEXT,
-        fieldTypes.TEXTAREA,
-        fieldTypes.RADIO,
-        fieldTypes.CHECKBOX,
-        fieldTypes.SELECT,
-        fieldTypes.SELECT_MULTI,
-        fieldTypes.DATE,
-        fieldTypes.DATE_TIME,
-        fieldTypes.TIME,
-        fieldTypes.URL,
-        fieldTypes.PHONE,
-        fieldTypes.EMAIL,
-        fieldTypes.COLOR,
-        fieldTypes.CURRENCY,
-        fieldTypes.WEIGHT,
-        fieldTypes.LENGTH,
-        fieldTypes.TOGGLE,
-        fieldTypes.PASSWORD,
-        fieldTypes.POST,
-        fieldTypes.POST_OBJECT,
-        fieldTypes.POST_OBJECT_MULTI,
-        fieldTypes.TERM_OBJECT,
-        fieldTypes.TERM_OBJECT_MULTI,
-        fieldTypes.USER,
-        fieldTypes.USER_MULTI,
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- * Get a field map of a box
- * (used by ConditionalRenderingElement)
- *
- * @param box
- * @return {[]}
- */
-export const getFieldsMap = (box) => {
-    let fields = [];
-
-    const recursiveAddFields = (field, parentFields) => {
-
-        fields.push({
-            field: field,
-            fields: parentFields.filter(f => f.id !== field.id)
-        });
-
-        field.children && field.children.map((c) => {
-            recursiveAddFields(c, field.children);
-        });
-
-        field.blocks && field.blocks.map((b) => {
-            fields.push(b.id);
-            b.fields && b.fields.map((c) => {
-                recursiveAddFields(c, b.fields);
-            });
-        });
-    };
-
-    box.fields && box.fields.map((f) => {
-        recursiveAddFields(f, box.fields);
-    });
-
-    return fields;
 };
 
 /**

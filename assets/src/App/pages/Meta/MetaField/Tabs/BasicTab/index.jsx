@@ -4,24 +4,14 @@ import Input from "../../../../../components/Forms/Input";
 import Label from "../../../../../components/Forms/Label";
 import useTranslation from "../../../../../hooks/useTranslation";
 import {alphanumericallyValid} from "../../../../../utils/validation";
-import {
-    fieldHasOptions,
-    fieldIsFlexible,
-    fieldIsRelational,
-    fieldIsRepeater,
-    fieldsList,
-    fieldTypes
-} from "../../../../../constants/fields";
+import {fieldHasOptions, fieldsList} from "../../../../../constants/fields";
 import {useFormContext, useWatch} from "react-hook-form";
 import MetaOptionList from "./MetaOptionList";
 import Select from "../../../../../components/Forms/Select";
-import ChildrenFieldsList from "./ChildrenFieldsList";
-import {canFieldHaveValidationAndLogicRules, fieldNestingLevel} from "../../../../../utils/fields";
+import {fieldNestingLevel} from "../../../../../utils/fields";
 import {useDispatch, useSelector} from "react-redux";
-import BlockList from "./BlockList";
 import {updateField} from "../../../../../redux/reducers/metaStateSlice";
 import {slugify, transliterate} from "transliteration";
-import RelationalField from "./RelationalField";
 import {wpAjaxRequest} from "../../../../../utils/ajax";
 import {debounce} from "../../../../../utils/debounce";
 import Textarea from "../../../../../components/Forms/Textarea";
@@ -67,52 +57,6 @@ const BasicTab = ({formId, boxIndex, fieldIndex, boxId, field}) => {
         if(fieldType() !== type){
             const updatedField = {...field};
             updatedField.type = type;
-
-            if(type !== fieldTypes.REPEATER){
-                updatedField.children = [];
-            }
-
-            if(type !== fieldTypes.FLEXIBLE){
-                updatedField.blocks = [];
-            }
-
-            if(type !== fieldTypes.POST){
-                updatedField.relations = [];
-            }
-
-            if(!canFieldHaveValidationAndLogicRules(type)){
-                unregister(formId("relations"));
-                unregister(formId("visibilityConditions"));
-                unregister(formId("validationRules"));
-                updatedField.visibilityConditions = [];
-                updatedField.validationRules = [];
-                updatedField.relations = [];
-            }
-
-            unregister(formId("relations"));
-            unregister(formId("blocks"));
-            unregister(formId("children"));
-
-            if(!updatedField['children']){
-                updatedField.children = [];
-            }
-
-            if(!updatedField['blocks']){
-                updatedField.blocks = [];
-            }
-
-            if(!updatedField['relations']){
-                updatedField.relations = [];
-            }
-
-            if(!updatedField['visibilityConditions']){
-                updatedField.visibilityConditions = [];
-            }
-
-            if(!updatedField['validationRules']){
-                updatedField.validationRules = [];
-            }
-
             dispatch(updateField({field: updatedField, boxId}));
         }
     };
@@ -304,33 +248,7 @@ const BasicTab = ({formId, boxIndex, fieldIndex, boxId, field}) => {
                     fieldIndex={fieldIndex}
                     parentFieldId={field.parentId ? field.parentId : null}
                     options={field.options ? field.options : []}
-                    isMulti={field.type === fieldTypes.SELECT_MULTI || field.type === fieldTypes.CHECKBOX}
-                />
-            )}
-            {fieldIsRepeater(fieldType()) && (
-                <ChildrenFieldsList
-                    nestingLevel={nestingLevel}
-                    boxId={boxId}
-                    parentFieldId={field.id}
-                    boxIndex={boxIndex}
-                    parentFieldIndex={fieldIndex}
-                    childrenFields={field.children}
-                />
-            )}
-            {fieldIsFlexible(fieldType()) && (
-                <BlockList
-                    nestingLevel={nestingLevel}
-                    boxId={boxId}
-                    parentFieldId={field.id}
-                    boxIndex={boxIndex}
-                    parentFieldIndex={fieldIndex}
-                    blocks={field.blocks}
-                />
-            )}
-            {fieldIsRelational(fieldType()) && (
-                <RelationalField
-                    formId={formId}
-                    field={field}
+                    isMulti={false}
                 />
             )}
         </React.Fragment>

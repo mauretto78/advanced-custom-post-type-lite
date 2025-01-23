@@ -732,20 +732,6 @@ class MetaRepository extends AbstractRepository
                 f.field_name as name
             FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
 	    ";
-		$blockQuery = "
-	        SELECT 
-                b.id, 
-                b.block_name as name
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BLOCK)."` b
-	    ";
-
-		$groups = ACPT_Lite_DB::getResults($groupQuery, []);
-		foreach ($groups as $group){
-			$names['groups'][] = [
-				'id' => $group->id,
-				'name' => $group->name,
-			];
-		}
 
 		$boxes = ACPT_Lite_DB::getResults($boxQuery, []);
 		foreach ($boxes as $box){
@@ -760,14 +746,6 @@ class MetaRepository extends AbstractRepository
 			$names['fields'][] = [
 				'id' => $field->id,
 				'name' => $field->name,
-			];
-		}
-
-		$blocks = ACPT_Lite_DB::getResults($blockQuery, []);
-		foreach ($blocks as $block){
-			$names['blocks'][] = [
-				'id' => $block->id,
-				'name' => $block->name,
 			];
 		}
 

@@ -781,70 +781,131 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 					MetaFieldModel::TEXTAREA_TYPE,
 				],
 			],
-			'showInArchive' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'required' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'isRequired' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'quickEdit' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'filterableInAdmin' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'defaultValue' => [
-				'required' => false,
-				'type' => 'boolean|string|array',
-			],
-			'description' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'sort' => [
-				'required' => false,
-				'type' => 'string|integer',
-			],
-			'isATextualField' => [
-				'required' => false,
-				'type' => 'boolean|integer',
-			],
-			'canHaveAfterAndBefore' => [
-				'required' => false,
-				'type' => 'boolean|integer',
-			],
-			'isFilterable' => [
-				'required' => false,
-				'type' => 'boolean|integer',
-			],
-			'options' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'isSaved' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'belongsToLabel' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'findLabel' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'group' => [
-				'required' => false,
-				'type' => 'string',
-			],
+            'blockId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'blockName' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'parentId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'parentName' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'showInArchive' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'required' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'isRequired' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'quickEdit' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'filterableInAdmin' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'defaultValue' => [
+                'required' => false,
+                'type' => 'boolean|string|array',
+            ],
+            'description' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'sort' => [
+                'required' => false,
+                'type' => 'string|integer',
+            ],
+            'hasManyRelation' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'hasChildren' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'isATextualField' => [
+                'required' => false,
+                'type' => 'boolean|integer',
+            ],
+            'canHaveAfterAndBefore' => [
+                'required' => false,
+                'type' => 'boolean|integer',
+            ],
+            'isFilterable' => [
+                'required' => false,
+                'type' => 'boolean|integer',
+            ],
+            'advancedOptions' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'permissions' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'options' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'validationRules' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'relations' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'visibilityConditions' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'children' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'blocks' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'isSaved' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'belongsToLabel' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'findLabel' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'group' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'forgedBy' => [
+                'required' => false,
+                'type' => 'array|string',
+            ],
+            'clonedFields' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+
 		];
 	}
 

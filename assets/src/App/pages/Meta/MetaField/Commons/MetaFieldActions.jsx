@@ -14,7 +14,7 @@ import CopyMetaFieldModal from "../../Modal/CopyMetaFieldModal";
 import DeleteMetaFieldModal from "../../Modal/DeleteMetaFieldModal";
 import {saveIsClosed} from "../../../../utils/localStorage";
 import MetaFieldShortCodeModal from "../../Modal/MetaFieldShortCodeModal";
-import {fieldIsFlexible, fieldIsRepeater, fieldTypes} from "../../../../constants/fields";
+import {fieldTypes} from "../../../../constants/fields";
 import {v4 as uuidv4} from "uuid";
 
 const MetaFieldActions = ({boxIndex, fieldIndex, boxId, field, parentFieldIndex, parentFieldId, parentBlockId}) => {
@@ -187,40 +187,7 @@ const MetaFieldActions = ({boxIndex, fieldIndex, boxId, field, parentFieldIndex,
                 tip={useTranslation("Delete this meta field")}
                 icon={false}
             />
-            {fieldIsRepeater(fieldType()) && (
-                <Tooltip
-                    label={
-                        <a
-                            href="#"
-                            onClick={e => {
-                                e.preventDefault();
-                                handleAddChildField();
-                            }}
-                        >
-                            <Icon icon="bx:plus-circle" width={18} />
-                        </a>
-                    }
-                    tip={useTranslation("Add field")}
-                    icon={false}
-                />
-            )}
-            {fieldIsFlexible(fieldType()) && (
-                <Tooltip
-                    label={
-                        <a
-                            href="#"
-                            onClick={e => {
-                                e.preventDefault();
-                                handleAddBlock();
-                            }}
-                        >
-                            <Icon icon="bx:plus-circle" width={18} />
-                        </a>
-                    }
-                    tip={useTranslation("Add block")}
-                    icon={false}
-                />
-            )}
+
             <Tooltip
                 label={
                     <a

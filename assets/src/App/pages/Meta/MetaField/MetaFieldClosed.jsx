@@ -6,7 +6,6 @@ import useTranslation from "../../../hooks/useTranslation";
 import {get, useFieldArray, useFormContext, useWatch} from "react-hook-form";
 import {
     canCopyTheField,
-    canFieldHaveValidationAndLogicRules,
     fieldNestingLevel,
     formatFieldForSelection,
     getFormId,
@@ -20,7 +19,7 @@ import MetaFieldActions from "./Commons/MetaFieldActions";
 import MetaFieldSwitches from "./Commons/MetaFieldSwitches";
 import MetaFieldIds from "./Commons/MetaFieldIds";
 import {useOutsideClick} from "../../../hooks/useOutsideClick";
-import {fieldIsFlexible, fieldIsRepeater, fieldsList, fieldTypes} from "../../../constants/fields";
+import {fieldsList, fieldTypes} from "../../../constants/fields";
 import Select from "../../../components/Forms/Select";
 import {setBlocks, setFields, updateField} from "../../../redux/reducers/metaStateSlice";
 import {debounce} from "../../../utils/debounce";
@@ -29,9 +28,6 @@ import {slugify, transliterate} from "transliteration";
 import {wpAjaxRequest} from "../../../utils/ajax";
 import {alphanumericallyValid} from "../../../utils/validation";
 import Tooltip from "../../../components/Tooltip";
-import SortableList from "../../../components/SortableList";
-import MetaField from "./index";
-import MetaBlock from "../MetaBlock";
 
 const MetaFieldClosed = ({boxIndex, fieldIndex, boxId, field, parentFieldIndex, parentFieldId, parentBlockId, isMainView}) => {
 
@@ -156,52 +152,6 @@ const MetaFieldClosed = ({boxIndex, fieldIndex, boxId, field, parentFieldIndex, 
         if(fieldType() !== type){
             const updatedField = {...field};
             updatedField.type = type;
-
-            if(type !== fieldTypes.REPEATER){
-                updatedField.children = [];
-            }
-
-            if(type !== fieldTypes.FLEXIBLE){
-                updatedField.blocks = [];
-            }
-
-            if(type !== fieldTypes.POST){
-                updatedField.relations = [];
-            }
-
-            if(!canFieldHaveValidationAndLogicRules(type)){
-                unregister(formId("relations"));
-                unregister(formId("visibilityConditions"));
-                unregister(formId("validationRules"));
-                updatedField.visibilityConditions = [];
-                updatedField.validationRules = [];
-                updatedField.relations = [];
-            }
-
-            unregister(formId("relations"));
-            unregister(formId("blocks"));
-            unregister(formId("children"));
-
-            if(!updatedField['children']){
-                updatedField.children = [];
-            }
-
-            if(!updatedField['blocks']){
-                updatedField.blocks = [];
-            }
-
-            if(!updatedField['relations']){
-                updatedField.relations = [];
-            }
-
-            if(!updatedField['visibilityConditions']){
-                updatedField.visibilityConditions = [];
-            }
-
-            if(!updatedField['validationRules']){
-                updatedField.validationRules = [];
-            }
-
             dispatch(updateField({field: updatedField, boxId}));
         }
     };
@@ -562,46 +512,6 @@ const MetaFieldClosed = ({boxIndex, fieldIndex, boxId, field, parentFieldIndex, 
                     />
                 </td>
             </tr>
-            {fieldIsRepeater(fieldType()) && field.children && (
-                <SortableList
-                    onDragEnd={handleNestedFieldsDragEnd}
-                    items={field.children}
-                >
-                    <React.Fragment>
-                        {field.children && field.children.length > 0 && field.children.map((child, childIndex) => (
-                            <MetaField
-                                isMainView={true}
-                                boxIndex={boxIndex}
-                                fieldIndex={childIndex}
-                                boxId={boxId}
-                                field={child}
-                                parentFieldIndex={fieldIndex}
-                                parentFieldId={field.id}
-                            />
-                        ))}
-                    </React.Fragment>
-                </SortableList>
-            )}
-            {fieldIsFlexible(fieldType()) && field.blocks && (
-                <SortableList
-                    onDragEnd={handleNestedBlocksDragEnd}
-                    items={field.blocks}
-                >
-                    <React.Fragment>
-                        {field.blocks && field.blocks.length > 0 && field.blocks.map((block, childBlockIndex) => (
-                            <MetaBlock
-                                isMainView={true}
-                                blockIndex={childBlockIndex}
-                                block={block}
-                                boxIndex={boxIndex}
-                                boxId={boxId}
-                                parentFieldIndex={parentFieldIndex}
-                                parentFieldId={field.id}
-                            />
-                        ))}
-                    </React.Fragment>
-                </SortableList>
-            )}
         </React.Fragment>
     );
 };
