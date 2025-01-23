@@ -68,8 +68,6 @@ class ACPT_Lite_Plugin
 
 	    ACPT_Lite_DB_Tools::runHealthCheck();
 
-        $this->disableACPTLite();
-
         $this->loader = new ACPT_Lite_Loader();
         $this->setName();
         $this->setVersion();
@@ -87,25 +85,6 @@ class ACPT_Lite_Plugin
         } else {
             $this->name = plugin_dir_path( __FILE__ );
         }
-    }
-
-    /**
-     * Disable ACPT Lite plugin if it's yet active
-     */
-    private function disableACPTLite()
-    {
-        $pluginLite = 'advanced-custom-post-type-lite/advanced-custom-post-type-lite.php';
-
-        if (is_plugin_active($pluginLite) ) {
-            deactivate_plugins($pluginLite);
-        }
-
-        // plugin root file was changed in ACPT Lite v2.0.6
-	    $pluginLite = 'acpt-lite/acpt-lite.php';
-
-	    if (is_plugin_active($pluginLite) ) {
-		    deactivate_plugins($pluginLite);
-	    }
     }
 
     /**

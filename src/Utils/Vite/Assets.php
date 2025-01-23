@@ -34,10 +34,10 @@ class Assets
 					$asset = $entry['file'];
 					$styles = $entry['css'];
 
-					$resources['js'][$key] = plugins_url( 'advanced-custom-post-type/assets/build/').$asset;
+					$resources['js'][$key] = plugins_url( 'acpt-lite/assets/build/').$asset;
 
 					foreach ($styles as $style){
-						$resources['css'][$key] = plugins_url( 'advanced-custom-post-type/assets/build/').$style;
+						$resources['css'][$key] = plugins_url( 'acpt-lite/assets/build/').$style;
 					}
 				}
 			}

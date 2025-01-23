@@ -132,8 +132,8 @@ class ACPT_Lite_Admin
 
 	    if(in_array($pagenow, $allowedPages) and !$this->isACPTAppPage()){
 		    $this->staticCssAssets = [
-			    'admin_selectize_css' => plugins_url(  'advanced-custom-post-type/assets/vendor/selectize/selectize.default.min.css'),
-			    'admin_css' => plugins_url(  'advanced-custom-post-type/assets/static/css/admin.css'),
+			    'admin_selectize_css' => plugins_url(  'acpt-lite/assets/vendor/selectize/selectize.default.min.css'),
+			    'admin_css' => plugins_url(  'acpt-lite/assets/static/css/admin.css'),
 		    ];
 	    }
     }
@@ -161,24 +161,24 @@ class ACPT_Lite_Admin
 
 	    if(in_array($pagenow, $allowedPages) and !$this->isACPTAppPage()){
 		    $jsAssets['admin_selectize_js'] = [
-			    'path' => plugins_url( 'advanced-custom-post-type/assets/vendor/selectize/selectize.min.js'),
+			    'path' => plugins_url( 'acpt-lite/assets/vendor/selectize/selectize.min.js'),
 			    'dep'  => ['jquery'],
 		    ];
 
 		    $jsAssets['admin_commons_js'] = [
-			    'path' => plugins_url( 'advanced-custom-post-type/assets/static/js/commons.js'),
+			    'path' => plugins_url( 'acpt-lite/assets/static/js/commons.js'),
 			    'dep'  => ['jquery'],
 		    ];
 
 		    $jsAssets['admin_js'] = [
-			    'path' => plugins_url( 'advanced-custom-post-type/assets/static/js/admin.js'),
+			    'path' => plugins_url( 'acpt-lite/assets/static/js/admin.js'),
 			    'dep'  => ['jquery'],
 		    ];
 	    }
 
 	    if($pagenow === "edit-comments.php"){
 		    $jsAssets['comment_quick_edit_js'] = [
-			    'path' => plugins_url( 'advanced-custom-post-type/assets/static/js/comment-quick-edit.js'),
+			    'path' => plugins_url( 'acpt-lite/assets/static/js/comment-quick-edit.js'),
 			    'dep'  => ['jquery'],
 		    ];
 	    }
@@ -269,7 +269,7 @@ class ACPT_Lite_Admin
                 'capability' => 'manage_options',
                 'menuSlug' => ACPT_LITE_PLUGIN_NAME,
                 'template' => 'app',
-                'iconUrl' => plugins_url( 'advanced-custom-post-type/assets/static/img/advanced-custom-post-type-icon.svg'),
+                'iconUrl' => plugins_url( 'acpt-lite/assets/static/img/advanced-custom-post-type-icon.svg'),
                 'position' => 50,
             ]
         ];
@@ -397,12 +397,12 @@ class ACPT_Lite_Admin
 		        $viteAssets = Assets::load('assets/src/App/index.jsx', 'acpt_app');
 
 		        foreach ($viteAssets['css'] as $viteCssAssetKey => $viteCssAsset){
-			        wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$viteCssAssetKey, $viteCssAsset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
+			        wp_enqueue_style( ACPT_LITE_PLUGIN_NAME.'__'.$viteCssAssetKey, $viteCssAsset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
 		        }
 
 		        foreach ($viteAssets['js'] as $viteJsAssetKey => $viteJsAsset){
-			        wp_enqueue_script(ACPT_PLUGIN_NAME.'__'.$viteJsAssetKey, $viteJsAsset, ['wp-element'],  ACPT_LITE_PLUGIN_VERSION, true);
-			        wp_localize_script(ACPT_PLUGIN_NAME.'__'.$viteJsAssetKey, 'acpt', ['pluginsUrl' => plugins_url()]);
+			        wp_enqueue_script(ACPT_LITE_PLUGIN_NAME.'__'.$viteJsAssetKey, $viteJsAsset, ['wp-element'],  ACPT_LITE_PLUGIN_VERSION, true);
+			        wp_localize_script(ACPT_LITE_PLUGIN_NAME.'__'.$viteJsAssetKey, 'acpt_lite', ['pluginsUrl' => plugins_url()]);
 		        }
             }
         }
@@ -422,7 +422,7 @@ class ACPT_Lite_Admin
 
         // Quick-edit assets
         if($pagenow === 'edit.php'){
-	        wp_enqueue_script( ACPT_PLUGIN_NAME.'__quick_edit_js', plugins_url( 'advanced-custom-post-type/assets/static/js/quick_edit.js'), ['jquery'], ACPT_LITE_PLUGIN_VERSION, true);
+	        wp_enqueue_script( ACPT_LITE_PLUGIN_NAME.'__quick_edit_js', plugins_url( 'acpt-lite/assets/static/js/quick_edit.js'), ['jquery'], ACPT_LITE_PLUGIN_VERSION, true);
         }
 
 	    // Gutenberg assets
@@ -461,11 +461,11 @@ class ACPT_Lite_Admin
 	        if(in_array($pagenow, $allowedPages)) {
 		        // other static assets here
 		        foreach ($this->staticCssAssets as $key => $asset){
-			        wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$key, $asset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
+			        wp_enqueue_style( ACPT_LITE_PLUGIN_NAME.'__'.$key, $asset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
 		        }
 
 		        foreach ($this->staticJsAssets as $key => $asset){
-			        wp_enqueue_script( ACPT_PLUGIN_NAME.'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_LITE_PLUGIN_VERSION, true);
+			        wp_enqueue_script( ACPT_LITE_PLUGIN_NAME.'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_LITE_PLUGIN_VERSION, true);
 		        }
 
 		        //
@@ -486,14 +486,6 @@ class ACPT_Lite_Admin
 
 		        // media
 		        wp_enqueue_media();
-
-		        //
-		        // =================================
-		        // ICONIFY
-		        // =================================
-		        //
-		        wp_register_script('iconify',  plugins_url( 'advanced-custom-post-type/assets/vendor/iconify/iconify.min.js') );
-		        wp_enqueue_script('iconify');
 	        }
         }
     }
@@ -845,7 +837,7 @@ class ACPT_Lite_Admin
 	    return (
 		    $pagenow === 'admin.php' and
 		    isset($_GET['page']) and
-		    $_GET['page'] === ACPT_PLUGIN_NAME
+		    $_GET['page'] === ACPT_LITE_PLUGIN_NAME
 	    );
     }
 

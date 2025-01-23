@@ -137,34 +137,6 @@ abstract class AbstractGenerator
 				break;
 
 		}
-
-		// validation
-		wp_register_script('ACPTFormValidator',  plugins_url( 'advanced-custom-post-type/assets/static/js/ACPTFormValidator.js') );
-		wp_enqueue_script('ACPTFormValidator');
-
-		wp_register_script( 'ACPTFormValidator-run', '', [], '', true );
-		wp_enqueue_script('ACPTFormValidator-run');
-		wp_add_inline_script( 'ACPTFormValidator-run', '
-			window.addEventListener("load", () => {
-				const validator = new ACPTFormValidator("'.$action.'");
-				validator.run();
-			});
-		');
-
-		if($elementId !== null and $belongsTo !== null){
-
-			// conditional rules
-			wp_register_script('ACPTConditionalRules',  plugins_url( 'advanced-custom-post-type/assets/static/js/ACPTConditionalRules.js') );
-			wp_enqueue_script('ACPTConditionalRules');
-
-			wp_register_script( 'ACPTConditionalRules-run', '', [], '', true );
-			wp_enqueue_script('ACPTConditionalRules-run');
-			wp_add_inline_script( 'ACPTConditionalRules-run', '
-				const conditionalRules = new ACPTConditionalRules("'.Url::fullUrl().'", "'.$action.'", "'.$belongsTo.'", "'.$elementId.'");
-				conditionalRules.run();
-				
-			');
-		}
 	}
 
 	/**

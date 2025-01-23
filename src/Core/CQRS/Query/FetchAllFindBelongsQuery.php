@@ -5,10 +5,7 @@ namespace ACPT_Lite\Core\CQRS\Query;
 use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Constants\MimeTypes;
-use ACPT_Lite\Core\Repository\DatasetRepository;
-use ACPT_Lite\Core\Repository\FormRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Utils\Wordpress\Translator;
 
 class FetchAllFindBelongsQuery implements QueryInterface
@@ -28,13 +25,10 @@ class FetchAllFindBelongsQuery implements QueryInterface
             MetaTypes::TAXONOMY => $this->taxonomies()[MetaTypes::TAXONOMY],
             BelongsTo::TERM_ID => $this->taxonomies()[BelongsTo::TERM_ID],
             BelongsTo::POST_TAX => $this->taxonomies()[BelongsTo::POST_TAX],
-            MetaTypes::OPTION_PAGE => $this->optionPages(),
             MetaTypes::MEDIA => $this->mimeTypes(),
             MetaTypes::META => $this->metaGroups(),
             MetaTypes::USER => $this->allUsers(),
             BelongsTo::USER_ID => $this->users(),
-            'form' => $this->forms(),
-            'dataset' => $this->dataSets(),
             'woo_product_data' => $this->productData(),
         ];
 	}
@@ -172,78 +166,6 @@ class FetchAllFindBelongsQuery implements QueryInterface
             $data[]  = [
                 'value' => $metaGroup->getId(),
                 'label' => $metaGroup->getUIName(),
-            ];
-        }
-
-        return $data;
-    }
-
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    private function optionPages()
-    {
-        $data = [$this->nullValue()];
-        $optionPages = OptionPageRepository::get([
-            'sortedBy' => 'menu_slug'
-        ]);
-
-        foreach ($optionPages as $optionPage){
-            $data[]  = [
-                'id' => $optionPage->getId(),
-                'value' => $optionPage->getMenuSlug(),
-                'label' => $optionPage->getMenuTitle(),
-            ];
-
-            foreach ($optionPage->getChildren() as $childOptionPage){
-                $data[]  = [
-                    'id' => $childOptionPage->getId(),
-                    'value' => $childOptionPage->getMenuSlug(),
-                    'label' => $childOptionPage->getMenuTitle(),
-                ];
-            }
-        }
-
-        return $data;
-    }
-
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    private function forms()
-    {
-        $data = [$this->nullValue()];
-        $forms = FormRepository::get([
-            'lazy' => true
-        ]);
-
-        foreach ($forms as $form){
-            $data[]  = [
-                'value' => $form->getId(),
-                'label' => $form->getName(),
-            ];
-        }
-
-        return $data;
-    }
-
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    private function dataSets()
-    {
-        $data = [$this->nullValue()];
-        $datasets = DatasetRepository::get([
-            'lazy' => true
-        ]);
-
-        foreach ($datasets as $dataset){
-            $data[]  = [
-                'value' => $dataset->getId(),
-                'label' => $dataset->getName(),
             ];
         }
 

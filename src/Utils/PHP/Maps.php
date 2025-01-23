@@ -105,9 +105,9 @@ class Maps
 
 		} else {
 			// use Leaflet
-			wp_enqueue_script( 'leaflet-js', plugins_url( 'advanced-custom-post-type/assets/vendor/leaflet/leaflet.min.js'), [], '1.9.4', true);
-			wp_enqueue_script( 'leaflet-geosearch-js', plugins_url( 'advanced-custom-post-type/assets/vendor/leaflet/geosearch.bundle.min.js'), [], '4.0.0', true);
-			wp_enqueue_style( 'leaflet-css', plugins_url( 'advanced-custom-post-type/assets/vendor/leaflet/leaflet.min.css'), [], '1.9.4', 'all');
+			wp_enqueue_script( 'leaflet-js', plugins_url( 'acpt-lite/assets/vendor/leaflet/leaflet.min.js'), [], '1.9.4', true);
+			wp_enqueue_script( 'leaflet-geosearch-js', plugins_url( 'acpt-lite/assets/vendor/leaflet/geosearch.bundle.min.js'), [], '4.0.0', true);
+			wp_enqueue_style( 'leaflet-css', plugins_url( 'acpt-lite/assets/vendor/leaflet/leaflet.min.css'), [], '1.9.4', 'all');
 
 			wp_register_script( 'leaflet-multi-point-run', '', [], '', true );
 			wp_enqueue_script('leaflet-multi-point-run');

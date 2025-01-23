@@ -2,8 +2,6 @@
 
 namespace ACPT_Lite\Utils\Wordpress;
 
-use ACPT_Lite\Integrations\Polylang\Helper\PolylangChecker;
-
 class Translator
 {
 	/**
@@ -40,11 +38,6 @@ class Translator
 	 */
 	public static function translateString($string)
 	{
-		// Polylang
-		if(PolylangChecker::isActive() and function_exists('pll__')){
-			return pll__($string);
-		}
-
-		return $string;
+		return __($string);
 	}
 }

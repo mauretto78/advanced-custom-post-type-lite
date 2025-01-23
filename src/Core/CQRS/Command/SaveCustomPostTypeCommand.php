@@ -54,36 +54,10 @@ class SaveCustomPostTypeCommand implements CommandInterface
 
 		CustomPostTypeRepository::save($postTypeModel);
 
-		$permissions = $data['permissions'] ?? [];
-
-		if(is_array($permissions) and !empty($permissions)){
-			foreach ($permissions as $permissionIndex => $permission){
-				$permissionModel = PermissionModel::hydrateFromArray([
-					'id' => (isset($permission["id"]) ? $permission["id"] : Uuid::v4()),
-					'entityId' => $postTypeModel->getId(),
-					'userRole' => $permission['userRole'] ?? $permission['user_role'],
-					'permissions' => $permission['permissions'] ?? [],
-					'sort' => ($permissionIndex+1),
-				]);
-
-				$postTypeModel->addPermission($permissionModel);
-			}
-		}
-
 		// generate CPT in WP tables
 		$customPostTypeGenerator = new CustomPostTypeGenerator($postTypeModel);
 		$customPostTypeGenerator->registerPostType();
 		$this->flushPermalinkRules();
-
-		// save permissions
-		if($postTypeModel->hasPermissions()){
-			$command = new SavePermissionCommand([
-				'entityId' => $postTypeModel->getId(),
-				'items' => $postTypeModel->gerPermissionsAsArray()
-			]);
-
-			$command->execute();
-		}
 
 		return $postTypeModel->getId();
 	}

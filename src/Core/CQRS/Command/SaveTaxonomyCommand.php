@@ -128,16 +128,6 @@ class SaveTaxonomyCommand implements CommandInterface {
 						], $modelOptions
 					);
 
-					if($taxonomyModel->hasPermissions()){
-						$capabilityType = $taxonomyModel->getSlug()."s";
-						$options['capabilities'] = [
-							'manage_terms' => 'manage_'.$capabilityType,
-							'edit_terms' => 'edit_'.$capabilityType,
-							'delete_terms' => 'delete_'.$capabilityType,
-							'assign_terms' => 'assign_'.$capabilityType
-						];
-					}
-
 					if(!taxonomy_exists(strtolower($data["slug"]))){
 						register_taxonomy(
 							strtolower($data["slug"]),
@@ -146,16 +136,6 @@ class SaveTaxonomyCommand implements CommandInterface {
 						);
 					}
 				}
-			}
-
-			// save permissions
-			if($taxonomyModel->hasPermissions()){
-				$command = new SavePermissionCommand([
-					'entityId' => $taxonomyModel->getId(),
-					'items' => $taxonomyModel->gerPermissionsAsArray()
-				]);
-
-				$command->execute();
 			}
 
 			return $taxonomyModel->getId();

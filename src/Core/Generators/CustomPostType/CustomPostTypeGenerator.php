@@ -218,30 +218,6 @@ class CustomPostTypeGenerator extends AbstractGenerator
 				        }
 			        }
 
-			        // Override capabilities for roles permissions managing
-			        if($this->postTypeModel->hasPermissions()){
-				        $args['map_meta_cap'] = true;
-
-				        if($args['capability_type'] === 'post'){
-					        $args['capabilities'] = [
-						        'edit_post' => 'edit_'.$this->postTypeName,
-						        'edit_posts' => 'edit_'.$this->postTypeName.'s',
-						        'edit_private_posts' => 'edit_private_'.$this->postTypeName.'s',
-						        'edit_published_posts' => 'edit_published_'.$this->postTypeName.'s',
-						        'edit_others_posts' =>  'edit_others_'.$this->postTypeName.'s',
-						        'publish_post' => 'publish_'.$this->postTypeName,
-						        'publish_posts' => 'publish_'.$this->postTypeName.'s',
-						        'read_post' => 'read_'.$this->postTypeName.'s',
-						        'read_private_posts' => 'read_private_'.$this->postTypeName.'s',
-						        'delete_post' => 'delete_'.$this->postTypeName,
-						        'delete_posts' => 'delete_'.$this->postTypeName.'s',
-						        'delete_private_posts' => 'delete_private_'.$this->postTypeName.'s',
-						        'delete_published_posts' => 'delete_published_'.$this->postTypeName.'s',
-						        'delete_others_posts' => 'delete_others_'.$this->postTypeName.'s',
-					        ];
-				        }
-			        }
-
 			        // register post type only if does not exists
 			        if(!post_type_exists($this->postTypeName)){
 
@@ -487,16 +463,6 @@ class CustomPostTypeGenerator extends AbstractGenerator
 	    foreach ($taxonomyModel->getCustomPostTypes() as $customPostTypeModel){
 		    $customPostTypesArray[] = $customPostTypeModel->getName();
         }
-
-	    if($taxonomyModel->hasPermissions()){
-	        $capabilityType = $taxonomyModel->getSlug()."s";
-		    $options['capabilities'] = [
-			    'manage_terms' => 'manage_'.$capabilityType,
-			    'edit_terms' => 'edit_'.$capabilityType,
-			    'delete_terms' => 'delete_'.$capabilityType,
-			    'assign_terms' => 'assign_'.$capabilityType
-            ];
-	    }
 
 	    if(!taxonomy_exists(strtolower($taxonomyName))){
 		    register_taxonomy(

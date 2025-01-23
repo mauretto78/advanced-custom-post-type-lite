@@ -150,9 +150,9 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
 		]);
 
 		// enqueue basic block styles
-		wp_enqueue_block_style( "advanced-custom-post-type/basic-block", [
-			'handle' => "advanced-custom-post-type/basic-block",
-			'src'    => plugins_url( 'advanced-custom-post-type/assets/static/css/gallery.css')
+		wp_enqueue_block_style( "acpt-lite/basic-block", [
+			'handle' => "acpt-lite/basic-block",
+			'src'    => plugins_url( 'acpt-lite/assets/static/css/gallery.css')
 		] );
 	}
 }

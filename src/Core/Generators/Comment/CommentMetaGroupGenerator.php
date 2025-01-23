@@ -250,7 +250,7 @@ class CommentMetaGroupGenerator extends AbstractGenerator
 
 	private function enqueueAssets()
 	{
-		wp_enqueue_script( 'acpt_admin_js', plugins_url( 'advanced-custom-post-type/assets/static/js/admin.js'), ['jquery'], ACPT_LITE_PLUGIN_VERSION, true);
-		wp_enqueue_style( 'acpt_comments_css', plugins_url( 'advanced-custom-post-type/assets/static/css/comments.css'), [], ACPT_LITE_PLUGIN_VERSION, 'all');
+		wp_enqueue_script( 'acpt_admin_js', plugins_url( 'acpt-lite/assets/static/js/admin.js'), ['jquery'], ACPT_LITE_PLUGIN_VERSION, true);
+		wp_enqueue_style( 'acpt_comments_css', plugins_url( 'acpt-lite/assets/static/css/comments.css'), [], ACPT_LITE_PLUGIN_VERSION, 'all');
 	}
 }
