@@ -32,8 +32,8 @@ class ACPT_Lite_Deactivator
 
 	    if($destroySchema == 1){
 		    ACPT_Lite_DB::destroySchema();
-		    delete_option('acpt_version');
-		    delete_option('acpt_current_version');
+		    delete_option('acpt_lite_version');
+		    delete_option('acpt_lite_current_version');
 	    }
     }
 }

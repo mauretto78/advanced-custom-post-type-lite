@@ -61,8 +61,8 @@ class ACPT_Lite_Plugin
     public function __construct()
     {
         if(false === ACPT_Lite_DB::checkIfSchemaExists()){
-	        $old_version = get_option('acpt_version', 0);
-	        ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_current_version') ?? oldPluginVersion($old_version));
+	        $old_version = get_option('acpt_lite_version', 0);
+	        ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_lite_current_version') ?? oldPluginVersion($old_version));
             ACPT_Lite_DB::sync();
         }
 
