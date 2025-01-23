@@ -296,7 +296,7 @@ class CustomPostTypeGenerator extends AbstractGenerator
                 3  => __( 'Custom field deleted.'),
                 4  => $this->translateMessage('updated'),
                 /* translators: %s: date and time of the revision */
-                5  => isset( $_GET['revision'] ) ? sprintf( __( $n . ' restored to revision from %s', ACPT_PLUGIN_NAME ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+                5  => isset( $_GET['revision'] ) ? sprintf( __( $n . ' restored to revision from %s', ACPT_LITE_PLUGIN_NAME ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
                 6  => $this->translateMessage('published') . $viewPostLinkHtml,
                 7  => $this->translateMessage('saved'),
                 8  => $this->translateMessage('published') . $viewPostLinkHtml,
@@ -323,11 +323,11 @@ class CustomPostTypeGenerator extends AbstractGenerator
         $singular = Translator::translateString($this->postTypeModel->getSingular());
 
         $bulkMessages[$this->postTypeName] = [
-            'updated'   => _n( '%s '.$singular.' updated.', '%s '.$plural.' updated.', $bulkCounts['updated'], ACPT_PLUGIN_NAME ),
-            'locked'    => _n( '%s '.$singular.' not updated, somebody is editing it.', '%s '.$plural.' not updated, somebody is editing them.', $bulkCounts['locked'], ACPT_PLUGIN_NAME ),
-            'deleted'   => _n( '%s '.$singular.' permanently deleted.', '%s '.$plural.' permanently deleted.', $bulkCounts['deleted'], ACPT_PLUGIN_NAME ),
-            'trashed'   => _n( '%s '.$singular.' moved to the Trash.', '%s '.$plural.' moved to the Trash.', $bulkCounts['trashed'], ACPT_PLUGIN_NAME ),
-            'untrashed' => _n( '%s '.$singular.' restored from the Trash.', '%s '.$plural.' restored from the Trash.', $bulkCounts['untrashed'], ACPT_PLUGIN_NAME ),
+            'updated'   => _n( '%s '.$singular.' updated.', '%s '.$plural.' updated.', $bulkCounts['updated'], ACPT_LITE_PLUGIN_NAME ),
+            'locked'    => _n( '%s '.$singular.' not updated, somebody is editing it.', '%s '.$plural.' not updated, somebody is editing them.', $bulkCounts['locked'], ACPT_LITE_PLUGIN_NAME ),
+            'deleted'   => _n( '%s '.$singular.' permanently deleted.', '%s '.$plural.' permanently deleted.', $bulkCounts['deleted'], ACPT_LITE_PLUGIN_NAME ),
+            'trashed'   => _n( '%s '.$singular.' moved to the Trash.', '%s '.$plural.' moved to the Trash.', $bulkCounts['trashed'], ACPT_LITE_PLUGIN_NAME ),
+            'untrashed' => _n( '%s '.$singular.' restored from the Trash.', '%s '.$plural.' restored from the Trash.', $bulkCounts['untrashed'], ACPT_LITE_PLUGIN_NAME ),
         ];
 
         return $bulkMessages;
@@ -355,7 +355,7 @@ class CustomPostTypeGenerator extends AbstractGenerator
             return null;
         }
 
-        return __(str_replace("%s", $n, $translations[$key]), ACPT_PLUGIN_NAME);
+        return __(str_replace("%s", $n, $translations[$key]), ACPT_LITE_PLUGIN_NAME);
     }
 
     /**

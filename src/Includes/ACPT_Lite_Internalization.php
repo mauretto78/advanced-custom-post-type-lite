@@ -48,11 +48,11 @@ class ACPT_Lite_Internalization
     public function run()
     {
 	    // Needed to load menu pages translations
-	    load_textdomain( ACPT_PLUGIN_NAME, ACPT_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
+	    load_textdomain( ACPT_LITE_PLUGIN_NAME, ACPT_LITE_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
 
 	    add_action( 'plugins_loaded', function (){
-		    unload_textdomain( ACPT_PLUGIN_NAME, false);
-		    load_textdomain( ACPT_PLUGIN_NAME, ACPT_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
+		    unload_textdomain( ACPT_LITE_PLUGIN_NAME, false);
+		    load_textdomain( ACPT_LITE_PLUGIN_NAME, ACPT_LITE_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
 	    } );
     }
 }

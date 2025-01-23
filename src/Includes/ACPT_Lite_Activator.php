@@ -40,7 +40,7 @@ class ACPT_Lite_Activator
 	        deactivate_plugins($pluginLiteAfter206);
         } else {
 	        $old_version = get_option('acpt_version', 0);
-	        ACPT_Lite_DB::createSchema(ACPT_PLUGIN_VERSION, get_option('acpt_current_version') ?? oldPluginVersion($old_version));
+	        ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_current_version') ?? oldPluginVersion($old_version));
             ACPT_Lite_DB::sync();
         }
 

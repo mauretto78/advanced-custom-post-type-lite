@@ -19,12 +19,12 @@ class Assets
 
 		// add type="module"
 		add_filter('script_loader_tag', function ($tag, $handle, $src) use ($key){
-			$key = ACPT_PLUGIN_NAME.'__'.$key;
+			$key = ACPT_LITE_PLUGIN_NAME.'__'.$key;
 
 			return ($key !== $handle) ? $tag : '<script type="module" src="' . esc_url( $src ) . '"></script>';
 		} , 10, 3);
 
-		$manifest = ACPT_PLUGIN_DIR_PATH."/assets/build/.vite/manifest.json";
+		$manifest = ACPT_LITE_PLUGIN_DIR_PATH."/assets/build/.vite/manifest.json";
 
 		if(file_exists($manifest)){
 			$json = json_decode(file_get_contents($manifest), true);

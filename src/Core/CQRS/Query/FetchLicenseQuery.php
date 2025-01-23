@@ -13,7 +13,7 @@ class FetchLicenseQuery implements QueryInterface
 	 */
 	public function execute()
 	{
-		$currentVersion = ACPT_PLUGIN_VERSION;
+		$currentVersion = ACPT_LITE_PLUGIN_VERSION;
 		$licenseActivation = ACPT_License_Manager::getLicense();
 		$activation = ACPTApiClient::call('/license/activation/fetch', [
 			'id' => $licenseActivation['activation_id'],

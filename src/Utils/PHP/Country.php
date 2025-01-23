@@ -11,7 +11,7 @@ class Country
 	 */
 	public static function getFlag($iso2Code)
 	{
-		$image = ACPT_PLUGIN_DIR_PATH . '/assets/static/img/flags/'.$iso2Code.'.png';
+		$image = ACPT_LITE_PLUGIN_DIR_PATH . '/assets/static/img/flags/'.$iso2Code.'.png';
 
 		if(file_exists($image)){
 			$imgData = base64_encode(file_get_contents($image));

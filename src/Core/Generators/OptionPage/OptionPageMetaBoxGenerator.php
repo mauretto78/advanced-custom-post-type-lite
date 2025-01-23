@@ -64,7 +64,7 @@ class OptionPageMetaBoxGenerator extends AbstractGenerator
 		$return .= '<h2 class="hnadle ui-sortable-handle">'.$boxLabel.'</h2>';
 		$return .= '<div class="handle-actions hide-if-no-js">';
 		$return .= '<button type="button" class="handlediv" aria-expanded="true">';
-		$return .= '<span class="screen-reader-text">'.__('Activate/deactivate the panel', ACPT_PLUGIN_NAME).':</span>';
+		$return .= '<span class="screen-reader-text">'.__('Activate/deactivate the panel', ACPT_LITE_PLUGIN_NAME).':</span>';
 		$return .= '<span class="toggle-indicator acpt-toggle-indicator" data-target="'.$this->getIdName().'" aria-hidden="true"></span>';
 		$return .= '</button>';
 		$return .= '</div>';

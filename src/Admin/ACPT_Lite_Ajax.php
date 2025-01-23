@@ -125,7 +125,7 @@ class ACPT_Lite_Ajax
 		$findEntries = $findQuery->execute();
 
 		$globals = [
-			"plugin_version" => ACPT_PLUGIN_VERSION,
+			"plugin_version" => ACPT_LITE_PLUGIN_VERSION,
             "site_url" =>  site_url(),
             "admin_url" => admin_url(),
             "ajax_url" => admin_url( 'admin-ajax.php' ),
@@ -166,7 +166,7 @@ class ACPT_Lite_Ajax
 		// | =====================================================|
 
 		$savedVersion = get_option('acpt_current_version') ?? oldPluginVersion(get_option('acpt_version', 0));
-		$versionCheck = ($savedVersion === ACPT_PLUGIN_VERSION) ? 'ok' : 'Saved version is not aligned';
+		$versionCheck = ($savedVersion === ACPT_LITE_PLUGIN_VERSION) ? 'ok' : 'Saved version is not aligned';
 
 		// cache
 		$cacheCheck = 'ok';

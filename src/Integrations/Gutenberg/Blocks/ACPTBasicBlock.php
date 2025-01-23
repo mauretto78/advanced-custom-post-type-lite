@@ -799,7 +799,7 @@ class ACPTBasicBlock
 	 */
 	public function enqueueStyle()
 	{
-		wp_register_style( 'gallery-css', plugins_url( 'advanced-custom-post-type/assets/static/css/gallery.css'), [], ACPT_PLUGIN_VERSION );
+		wp_register_style( 'gallery-css', plugins_url( 'advanced-custom-post-type/assets/static/css/gallery.css'), [], ACPT_LITE_PLUGIN_VERSION );
 		wp_enqueue_style( 'gallery-css' );
 	}
 }

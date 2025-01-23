@@ -211,54 +211,13 @@ class MetaRepository extends AbstractRepository
                 WHERE meta_box_id = %s
             ";
 
-		$sql4 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_VISIBILITY)."`
-                WHERE meta_box_id = %s
-            ";
-
-		$sql5 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_RELATION)."`
-                WHERE meta_box_id = %s
-            ";
-
-		$sql6 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_ADVANCED_OPTION)."`
-                WHERE meta_box_id = %s
-            ";
-
 		try {
 			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$boxId]);
 			ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$boxId]);
 			ACPT_Lite_DB::executeQueryOrThrowException($sql3, [$boxId]);
-			ACPT_Lite_DB::executeQueryOrThrowException($sql4, [$boxId]);
-			ACPT_Lite_DB::executeQueryOrThrowException($sql5, [$boxId]);
-			ACPT_Lite_DB::executeQueryOrThrowException($sql6, [$boxId]);
 		} catch (\Exception $exception){
 			ACPT_Lite_DB::rollbackTransaction();
 			throw new \Exception($exception->getMessage());
-		}
-
-		// select all validation rules
-	    $sql = "
-	        SELECT v.id FROM 
-				`".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE)."` v
-				join `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE_FIELD_PIVOT)."` vp on vp.rule_id=v.id
-				join wp_acpt_meta_field f on f.id = vp.field_id 
-				join wp_acpt_meta_box b on b.id = f.meta_box_id
-				where b.id =  %s
-			;
-	    ";
-
-        $rules = ACPT_Lite_DB::getResults($sql, [
-	        $boxId
-        ]);
-
-        foreach ($rules as $rule){
-	        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE)."` WHERE id = %s", [$rule->id]);
-	        ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE_FIELD_PIVOT)."` WHERE rule_id = %s", [$rule->id]);
 		}
 
         ACPT_Lite_DB::commitTransaction();
@@ -296,46 +255,6 @@ class MetaRepository extends AbstractRepository
 	}
 
 	/**
-	 * @param string $blockId
-	 *
-	 * @throws \Exception
-	 */
-	public static function deleteMetaBlock(string $blockId)
-	{
-		ACPT_Lite_DB::startTransaction();
-
-		$sql = "
-            DELETE
-                FROM `".ACPT_Lite_DB::TABLE_META_BLOCK."`
-                WHERE id = %s
-            ";
-
-		try {
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$blockId]);
-
-			$sql = "
-		        SELECT f.id FROM 
-					`".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
-					where f.block_id =  %s
-				;
-		    ";
-
-			$blocks = ACPT_Lite_DB::getResults($sql, [ $blockId ]);
-
-			foreach ($blocks as $block){
-				self::deleteMetaField($block->id);
-			}
-
-		} catch (\Exception $exception){
-			ACPT_Lite_DB::rollbackTransaction();
-			throw new \Exception($exception->getMessage());
-		}
-
-		ACPT_Lite_DB::commitTransaction();
-		ACPT_Lite_DB::invalidateCacheTag(self::class);
-	}
-
-	/**
 	 * Delete meta field model
 	 *
 	 * @param string $fieldId
@@ -357,53 +276,13 @@ class MetaRepository extends AbstractRepository
                 WHERE meta_field_id = %s
             ";
 
-		$sql3 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_VISIBILITY)."`
-                WHERE meta_field_id = %s
-            ";
-
-		$sql4 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_RELATION)."`
-                WHERE meta_field_id = %s
-            ";
-
-		$sql5 = "
-            DELETE
-                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_ADVANCED_OPTION)."`
-                WHERE meta_field_id = %s
-            ";
-
 		try {
 			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$fieldId]);
 			ACPT_Lite_DB::executeQueryOrThrowException($sql2, [$fieldId]);
-			ACPT_Lite_DB::executeQueryOrThrowException($sql3, [$fieldId]);
-			ACPT_Lite_DB::executeQueryOrThrowException($sql4, [$fieldId]);
-			ACPT_Lite_DB::executeQueryOrThrowException($sql5, [$fieldId]);
         } catch (\Exception $exception){
             ACPT_Lite_DB::rollbackTransaction();
             throw new \Exception($exception->getMessage());
         }
-
-	    // select all validation rules
-	    $sql = "
-	        SELECT v.id FROM 
-				`".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE)."` v
-				join `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE_FIELD_PIVOT)."` vp on vp.rule_id=v.id
-				join wp_acpt_meta_field f on f.id = vp.field_id 
-				where  vp.field_id  =  %s
-			;
-	    ";
-
-	    $rules = ACPT_Lite_DB::getResults($sql, [
-		    $fieldId
-	    ]);
-
-	    foreach ($rules as $rule){
-		    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE)."` WHERE id = %s", [$rule->id]);
-		    ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE_FIELD_PIVOT)."` WHERE rule_id = %s", [$rule->id]);
-	    }
 
         ACPT_Lite_DB::commitTransaction();
 	    ACPT_Lite_DB::invalidateCacheTag(self::class);
@@ -742,24 +621,7 @@ class MetaRepository extends AbstractRepository
 						// Meta box fields
 						foreach ($fields as $fieldIndex => $field){
 							$fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel, $excludeField, $belongsTo, $find, $clonedFields);
-
-							// if is for formBuilder
-							if($formBuilder){
-								if( !$fieldModel->isRelational() and !$fieldModel->isNestable()){
-									$boxModel->addField($fieldModel);
-								}
-							} else {
-								$boxModel->addField($fieldModel);
-							}
-
-							// add cloned fields
-                            if($clonedFields){
-                                if($fieldModel->getType() === MetaFieldModel::CLONE_TYPE){
-                                    foreach ($fieldModel->getClonedFields() as $clonedField){
-                                        $boxModel->addField($clonedField);
-                                    }
-                                }
-                            }
+							$boxModel->addField($fieldModel);
 						}
 
 						$groupModel->addBox($boxModel);
@@ -957,189 +819,8 @@ class MetaRepository extends AbstractRepository
 			$fieldModel->setFilterableInAdmin(true);
 	    }
 
-	    if(isset($field->parent_id)){
-		    $fieldModel->setParentId($field->parent_id);
-	    }
-
-	    if(isset($field->block_id)){
-		    $fieldModel->setBlockId($field->block_id);
-	    }
-
 		if($fieldModel === null){
 			return null;
-		}
-
-		if(isset($field->parent_id)){
-			$fieldModel->setParentId($field->parent_id);
-		}
-
-		if(isset($field->block_id)){
-			$fieldModel->setBlockId($field->block_id);
-		}
-
-	    // Permissions
-	    $permissions = PermissionRepository::getByEntityId($fieldModel->getId());
-	    foreach ($permissions as $permission){
-		    $fieldModel->addPermission($permission);
-	    }
-
-		// Blocks
-	    $blocks = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                meta_box_id as boxId,
-                meta_field_id as fieldId,
-                block_name as name,
-                block_label as label,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BLOCK)."`
-            WHERE meta_field_id = %s 
-            ORDER BY sort
-        ;", [$field->id]);
-
-		foreach ($blocks as $block){
-			try {
-				$blockModel = MetaFieldBlockModel::hydrateFromArray([
-					'id' => $block->id,
-					'metaField' => $fieldModel,
-					'name' => $block->name,
-					'sort' => $block->sort,
-					'label' => $block->label,
-				]);
-
-				// select fields
-				$excludeQuery = $excludeField ? " AND id != %s" : "";
-				$blockChildrenFieldsArgs = [$blockModel->getId()];
-
-				if($excludeField){
-					$blockChildrenFieldsArgs[] = $excludeField;
-				}
-
-				$blockChildrenFields = ACPT_Lite_DB::getResults("
-            	SELECT
-	                id,
-	                field_name as name,
-	                field_label as label,
-	                field_type,
-	                field_default_value,
-	                field_description,
-	                required,
-	                showInArchive,
-	                sort
-	            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
-	            WHERE block_id = %s
-	            ".$excludeQuery."
-	            ORDER BY sort
-	        ;", $blockChildrenFieldsArgs);
-
-				foreach ($blockChildrenFields as $child){
-					$childFieldModel = self::hydrateMetaBoxFieldModel($child, $boxModel, $excludeField);
-					$childFieldModel->setBlockId($block->id);
-					$blockModel->addField($childFieldModel);
-
-                    if($clonedFields){
-                        if($childFieldModel->getType() === MetaFieldModel::CLONE_TYPE){
-                            foreach ($childFieldModel->getClonedFields() as $clonedField){
-                                $blockModel->addField($clonedField);
-                            }
-                        }
-                    }
-				}
-
-				$fieldModel->addBlock($blockModel);
-			} catch (\Exception $exception){}
-		}
-
-		// Children
-	    $excludeQuery = $excludeField ? " AND id != %s" : "";
-	    $childrenArgs = [$field->id];
-
-	    if($excludeField){
-		    $childrenArgs[] = $excludeField;
-	    }
-
-		$children = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                field_name as name,
-                field_label as label,
-                field_type,
-                field_default_value,
-                field_description,
-                required,
-                showInArchive,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
-            WHERE parent_id = %s 
-            ".$excludeQuery."
-            ORDER BY sort
-        ;", $childrenArgs);
-
-		foreach ($children as $child){
-			$childFieldModel = self::hydrateMetaBoxFieldModel($child, $boxModel);
-			$childFieldModel->setParentId($field->id);
-
-            if($clonedFields){
-                if($childFieldModel->getType() === MetaFieldModel::CLONE_TYPE){
-                    foreach ($childFieldModel->getClonedFields() as $clonedField){
-                        $fieldModel->addChild($clonedField);
-                    }
-                }
-            }
-
-			$fieldModel->addChild($childFieldModel);
-		}
-
-	    // Validation rules
-	    $validationRules = ACPT_Lite_DB::getResults("
-            SELECT
-                v.id,
-                v.rule_condition as `condition`,
-                v.rule_value as `value`,
-                v.message as `message`
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE)."` v
-            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_VALIDATION_RULE_FIELD_PIVOT)."` vp ON vp.rule_id = v.id
-            WHERE vp.field_id = %s
-            ORDER BY v.sort
-        ;", [$field->id]);
-
-        foreach ($validationRules as $ruleIndex => $validationRule){
-		    try {
-			    $validationRuleModel = ValidationRuleModel::hydrateFromArray([
-				    'id' => $validationRule->id,
-				    'condition' => $validationRule->condition,
-				    'value' => $validationRule->value,
-				    'message' => $validationRule->message,
-				    'sort' => ($ruleIndex+1),
-			    ]);
-
-			    $fieldModel->addValidationRule($validationRuleModel);
-		    } catch (\Exception $exception){}
-	    }
-
-        // Advanced options
-        $advancedOptions = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                meta_box_id as boxId,
-                meta_field_id as fieldId,
-                option_key as okey,
-                option_value as value
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_ADVANCED_OPTION)."`
-            WHERE meta_field_id = %s
-        ;", [$field->id]);
-
-		foreach ($advancedOptions as $advancedOption){
-			try {
-				$optionModel = MetaFieldAdvancedOptionModel::hydrateFromArray([
-					'id' => $advancedOption->id,
-					'metaField' => $fieldModel,
-					'key' => $advancedOption->okey,
-					'value' => $advancedOption->value,
-				]);
-
-				$fieldModel->addAdvancedOption($optionModel);
-			} catch (\Exception $exception){}
 		}
 
 		// Options
@@ -1170,101 +851,6 @@ class MetaRepository extends AbstractRepository
 
 				$fieldModel->addOption($optionModel);
 			} catch (\Exception $exception){}
-		}
-
-		// Visibility conditions
-		$visibilityConditions = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                meta_box_id as boxId,
-                meta_field_id as fieldId,
-                visibility_type as type,
-                operator,
-                visibility_value as value,
-                logic,
-                back_end,
-				front_end,
-                sort
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_VISIBILITY)."`
-            WHERE meta_field_id = %s
-            ORDER BY sort
-        ;", [$field->id]);
-
-		foreach ($visibilityConditions as $visibilityCondition){
-			try {
-				$type = json_decode($visibilityCondition->type, true);
-
-				if($type === null or empty($type)){
-					throw new \Exception('Type is not valid: is not allowed as string, neither is not a valid MetaBoxFieldModel instance');
-				}
-
-				if($type['type'] === 'OTHER_FIELDS' and Uuid::isValid($type['value'])){
-					$type['value'] = self::getMetaFieldById($type['value'], true);
-				}
-
-				$visibilityConditionModel = MetaFieldVisibilityModel::hydrateFromArray([
-					'id' => $visibilityCondition->id,
-					'metaField' => $fieldModel,
-					'type' => $type,
-					'value' => $visibilityCondition->value,
-					'operator' => $visibilityCondition->operator,
-					'logic' => $visibilityCondition->logic,
-					'sort' => $visibilityCondition->sort,
-					'backEnd' => $visibilityCondition->back_end == 1,
-					'frontEnd' => $visibilityCondition->front_end == 1,
-				]);
-
-				$fieldModel->addVisibilityCondition($visibilityConditionModel);
-			} catch (\Exception $exception){}
-		}
-
-		// Relations
-		$relations = ACPT_Lite_DB::getResults("
-            SELECT
-                id,
-                meta_box_id as boxId,
-                meta_field_id as fieldId,
-                relationship as type,
-                relation_from,
-                relation_to,
-                inversed_meta_box_id as inversedBoxId,
-                inversed_meta_box_name as inversedBoxName,
-                inversed_meta_field_id as inversedFieldId,
-                inversed_meta_field_name as inversedFieldName
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_RELATION)."`
-            WHERE meta_field_id = %s
-        ;", [$field->id]);
-
-		foreach ($relations as $relation){
-
-			if(!empty($relation->type)){
-				try {
-					$fromJson = json_decode($relation->relation_from);
-					$toJson = json_decode($relation->relation_to);
-
-					$from = new RelatedEntityValueObject($fromJson->type, $fromJson->value);
-					$to = new RelatedEntityValueObject($toJson->type, $toJson->value);
-
-					$relationModel = MetaFieldRelationshipModel::hydrateFromArray([
-						'id' => $relation->id,
-						'relationship' => $relation->type,
-						'from' => $from,
-						'to' => $to,
-						'metaField' => $fieldModel,
-					]);
-
-					if(isset($relation->inversedFieldId) and null !== $relation->inversedFieldId){
-
-						$inversedBy = self::getMetaFieldById($relation->inversedFieldId, true);
-
-						if(null !== $inversedBy){
-							$relationModel->setInversedBy($inversedBy);
-						}
-					}
-
-					$fieldModel->addRelation($relationModel);
-				} catch (\Exception $exception){}
-			}
 		}
 
 		return $fieldModel;
@@ -1402,41 +988,6 @@ class MetaRepository extends AbstractRepository
 	        ;";
 
 		$fields = ACPT_Lite_DB::getResults($sql, [$fieldName, $boxName]);
-
-		if(empty($fields)){
-
-		    // cloned fields
-		    if(!empty($forgedBy)){
-                $cloneField = MetaRepository::getMetaFieldByName([
-                    'boxName' => $forgedBy['box_name'] ?? $forgedBy['boxName'] ?? '',
-                    'fieldName' => $forgedBy['field_name'] ?? $forgedBy['fieldName'] ?? ''
-                ]);
-
-                if($cloneField === null){
-                    return null;
-                }
-
-                $filteredClonedFields = array_filter($cloneField->getClonedFields(true), function (MetaFieldModel $clonedField) use($fieldName) {
-                    return $clonedField->getName() === $fieldName;
-                });
-
-                if(count($filteredClonedFields) !== 1){
-                    return null;
-                }
-
-                $fieldModel = array_values($filteredClonedFields)[0];
-
-                if($fieldModel === null){
-                    return null;
-                }
-
-                $fieldModel->forgeBy($cloneField);
-
-                return $fieldModel;
-            }
-
-		    return null;
-		}
 
 		$field = $fields[0];
 		$boxModel = self::getMetaBoxById($field->meta_box_id, $lazy);

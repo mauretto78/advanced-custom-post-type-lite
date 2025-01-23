@@ -3,9 +3,6 @@
 namespace ACPT_Lite\Admin;
 
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Core\Generators\Attachment\AttachmentMetaGroupsGenerator;
-use ACPT_Lite\Core\Generators\Comment\CommentAdminColumnsGenerator;
-use ACPT_Lite\Core\Generators\Comment\CommentMetaGroupsGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeAdminColumnsGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeGenerator;
 use ACPT_Lite\Core\Generators\CustomPostType\CustomPostTypeMetaBoxGenerator;
@@ -18,37 +15,18 @@ use ACPT_Lite\Core\Generators\User\UserMetaGroupsGenerator;
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Core\Shortcodes\ACPT\AttachmentMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\CommentMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\ACPT\OptionPageMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\PostMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\TaxonomyMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\UserMetaShortcode;
-use ACPT_Lite\Core\Shortcodes\Form\FormShortcode;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Includes\ACPT_Lite_Loader;
 use ACPT_Lite\Integrations\AbstractIntegration;
-use ACPT_Lite\Integrations\Breakdance\ACPT_Breakdance;
-use ACPT_Lite\Integrations\Bricks\ACPT_Bricks;
-use ACPT_Lite\Integrations\Divi\ACPT_Divi;
 use ACPT_Lite\Integrations\Elementor\ACPT_Lite_Elementor;
-use ACPT_Lite\Integrations\ElementorPro\ACPT_Elementor_Pro;
 use ACPT_Lite\Integrations\Gutenberg\ACPT_Lite_Gutenberg;
-use ACPT_Lite\Integrations\Oxygen\ACPT_Oxygen;
-use ACPT_Lite\Integrations\Polylang\ACPT_Polylang;
-use ACPT_Lite\Integrations\Polylang\Helper\PolylangChecker;
-use ACPT_Lite\Integrations\RankMath\ACPT_RankMath;
 use ACPT_Lite\Integrations\WooCommerce\ACPT_Lite_WooCommerce;
-use ACPT_Lite\Integrations\WPAllExport\ACPT_WPAllExport;
-use ACPT_Lite\Integrations\WPAllImport\ACPT_WPAllImport;
-use ACPT_Lite\Integrations\WPGraphQL\ACPT_WPGraphQL;
-use ACPT_Lite\Integrations\WPGridBuilder\ACPT_WPGridBuilder;
-use ACPT_Lite\Integrations\WPML\ACPT_WPML;
-use ACPT_Lite\Integrations\WPML\Helper\WPMLChecker;
-use ACPT_Lite\Integrations\Yoast\ACPT_Yoast;
-use ACPT_Lite\Integrations\Zion\ACPT_Zion;
 use ACPT_Lite\Utils\PHP\Maps;
 use ACPT_Lite\Utils\PHP\Profiler;
 use ACPT_Lite\Utils\PHP\Server;
@@ -325,147 +303,63 @@ class ACPT_Lite_Admin
 	 */
     private function setPages()
     {
-        if(ACPT_License_Manager::isLicenseValid()){
+        $pages = [
+            [
+                'pageTitle' => 'Advanced Custom Post Types',
+                'menuTitle' => 'ACPT Lite',
+                'capability' => 'manage_options',
+                'menuSlug' => ACPT_LITE_PLUGIN_NAME,
+                'template' => 'app',
+                'iconUrl' => plugins_url( 'advanced-custom-post-type/assets/static/img/advanced-custom-post-type-icon.svg'),
+                'position' => 50,
+            ]
+        ];
 
-            $pages = [
-                [
-                    'pageTitle' => 'Advanced Custom Post Types',
-                    'menuTitle' => 'ACPT',
-                    'capability' => 'manage_options',
-                    'menuSlug' => ACPT_PLUGIN_NAME,
-                    'template' => 'app',
-                    'iconUrl' => plugins_url( 'advanced-custom-post-type/assets/static/img/advanced-custom-post-type-icon.svg'),
-                    'position' => 50,
-                ]
-            ];
-
-	        if(Settings::get(SettingsModel::ENABLE_CPT, 1) == 1){
-		        $pages[] = [
-			        'parentSlug' => ACPT_PLUGIN_NAME,
-			        'pageTitle' => translate('Custom Post Types', ACPT_PLUGIN_NAME),
-			        'menuTitle' => translate('Custom Post Types', ACPT_PLUGIN_NAME),
-			        'capability' => 'manage_options',
-			        'menuSlug' => ACPT_PLUGIN_NAME,
-			        'template' => 'app',
-			        'position' => 51,
-		        ];
-	        }
-
-	        if(Settings::get(SettingsModel::ENABLE_TAX,1) == 1){
-		        $pages[] = [
-			        'parentSlug' => ACPT_PLUGIN_NAME,
-			        'pageTitle' => translate('Taxonomies', ACPT_PLUGIN_NAME),
-			        'menuTitle' => translate('Taxonomies', ACPT_PLUGIN_NAME),
-			        'capability' => 'manage_options',
-			        'menuSlug' => ACPT_PLUGIN_NAME . '#/taxonomies',
-			        'template' => 'app',
-			        'position' => 52,
-		        ];
-	        }
-
-	        if(Settings::get(SettingsModel::ENABLE_OP, 1) == 1){
-		        $pages[] = [
-			        'parentSlug' => ACPT_PLUGIN_NAME,
-			        'pageTitle' => translate('Option pages', ACPT_PLUGIN_NAME),
-			        'menuTitle' => translate('Option pages', ACPT_PLUGIN_NAME),
-			        'capability' => 'manage_options',
-			        'menuSlug' => ACPT_PLUGIN_NAME . '#/option-pages',
-			        'template' => 'app',
-			        'position' => 53,
-		        ];
-	        }
-
-	        if(Settings::get(SettingsModel::ENABLE_META, 1) == 1){
-		        $pages[] = [
-			        'parentSlug' => ACPT_PLUGIN_NAME,
-			        'pageTitle' => translate('Field groups', ACPT_PLUGIN_NAME),
-			        'menuTitle' => translate('Field groups', ACPT_PLUGIN_NAME),
-			        'capability' => 'manage_options',
-			        'menuSlug' => ACPT_PLUGIN_NAME . '#/meta',
-			        'template' => 'app',
-			        'position' => 54,
-		        ];
-	        }
-
-            if(Settings::get(SettingsModel::ENABLE_FORMS, 0) == 1){
-	            $pages[] = [
-		            'parentSlug' => ACPT_PLUGIN_NAME,
-		            'pageTitle' => translate('Forms', ACPT_PLUGIN_NAME),
-		            'menuTitle' => translate('Forms', ACPT_PLUGIN_NAME),
-		            'capability' => 'manage_options',
-		            'menuSlug' => ACPT_PLUGIN_NAME . '#/forms',
-		            'template' => 'app',
-		            'position' => 55,
-                ];
-            }
-
-            if(WPMLChecker::isActive()){
-	            $pages[] = [
-		            'parentSlug' => ACPT_PLUGIN_NAME,
-		            'pageTitle' => translate('WPML', ACPT_PLUGIN_NAME),
-		            'menuTitle' => translate('WPML', ACPT_PLUGIN_NAME),
-		            'capability' => 'manage_options',
-		            'menuSlug' => ACPT_PLUGIN_NAME . '#/wpml',
-		            'template' => 'app',
-		            'position' => 56,
-	            ];
-            }
-
-	        if(PolylangChecker::isActive()){
-		        $pages[] = [
-			        'parentSlug' => ACPT_PLUGIN_NAME,
-			        'pageTitle' => translate('Polylang', ACPT_PLUGIN_NAME),
-			        'menuTitle' => translate('Polylang', ACPT_PLUGIN_NAME),
-			        'capability' => 'manage_options',
-			        'menuSlug' => ACPT_PLUGIN_NAME . '#/polylang',
-			        'template' => 'app',
-			        'position' => 56,
-		        ];
-	        }
-
+        if(Settings::get(SettingsModel::ENABLE_CPT, 1) == 1){
             $pages[] = [
-		        'parentSlug' => ACPT_PLUGIN_NAME,
-		        'pageTitle' => translate('Tools', ACPT_PLUGIN_NAME),
-		        'menuTitle' => translate('Tools', ACPT_PLUGIN_NAME),
-		        'capability' => 'manage_options',
-		        'menuSlug' => ACPT_PLUGIN_NAME . '#/tools',
-		        'template' => 'app',
-		        'position' => 57,
-	        ];
-
-	        $pages[] = [
-		        'parentSlug' => ACPT_PLUGIN_NAME,
-		        'pageTitle' => translate('Settings', ACPT_PLUGIN_NAME),
-		        'menuTitle' => translate('Settings', ACPT_PLUGIN_NAME),
-		        'capability' => 'manage_options',
-		        'menuSlug' => ACPT_PLUGIN_NAME . '#/settings',
-		        'template' => 'app',
-		        'position' => 59,
-	        ];
-
-            $pages[] = [
-	            'parentSlug' => ACPT_PLUGIN_NAME,
-	            'pageTitle' => translate('License', ACPT_PLUGIN_NAME),
-	            'menuTitle' => translate('License', ACPT_PLUGIN_NAME),
-	            'capability' => 'manage_options',
-	            'menuSlug' => ACPT_PLUGIN_NAME . '#/license',
-	            'template' => 'app',
-	            'position' => 60,
-            ];
-
-        } else {
-            $pages = [
-                [
-                    'pageTitle' => 'Advanced Custom Post Types',
-                    'menuTitle' => 'ACPT',
-                    'capability' => 'manage_options',
-                    'menuSlug' => ACPT_PLUGIN_NAME,
-                    'template' => 'activate_license',
-                    'iconUrl' => plugins_url( 'advanced-custom-post-type/assets/static/img/advanced-custom-post-type-icon.svg'),
-                    'position' => 50,
-                ],
+                'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                'pageTitle' => translate('Custom Post Types', ACPT_LITE_PLUGIN_NAME),
+                'menuTitle' => translate('Custom Post Types', ACPT_LITE_PLUGIN_NAME),
+                'capability' => 'manage_options',
+                'menuSlug' => ACPT_LITE_PLUGIN_NAME,
+                'template' => 'app',
+                'position' => 51,
             ];
         }
+
+        if(Settings::get(SettingsModel::ENABLE_TAX,1) == 1){
+            $pages[] = [
+                'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                'pageTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
+                'menuTitle' => translate('Taxonomies', ACPT_LITE_PLUGIN_NAME),
+                'capability' => 'manage_options',
+                'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/taxonomies',
+                'template' => 'app',
+                'position' => 52,
+            ];
+        }
+
+        if(Settings::get(SettingsModel::ENABLE_META, 1) == 1){
+            $pages[] = [
+                'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+                'pageTitle' => translate('Field groups', ACPT_LITE_PLUGIN_NAME),
+                'menuTitle' => translate('Field groups', ACPT_LITE_PLUGIN_NAME),
+                'capability' => 'manage_options',
+                'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/meta',
+                'template' => 'app',
+                'position' => 54,
+            ];
+        }
+
+        $pages[] = [
+            'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+            'pageTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
+            'menuTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
+            'capability' => 'manage_options',
+            'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/settings',
+            'template' => 'app',
+            'position' => 59,
+        ];
 
         $this->pages = $pages;
     }
@@ -544,11 +438,11 @@ class ACPT_Lite_Admin
 		        $viteAssets = Assets::load('assets/src/App/index.jsx', 'acpt_app');
 
 		        foreach ($viteAssets['css'] as $viteCssAssetKey => $viteCssAsset){
-			        wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$viteCssAssetKey, $viteCssAsset, [], ACPT_PLUGIN_VERSION, 'all');
+			        wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$viteCssAssetKey, $viteCssAsset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
 		        }
 
 		        foreach ($viteAssets['js'] as $viteJsAssetKey => $viteJsAsset){
-			        wp_enqueue_script(ACPT_PLUGIN_NAME.'__'.$viteJsAssetKey, $viteJsAsset, ['wp-element'],  ACPT_PLUGIN_VERSION, true);
+			        wp_enqueue_script(ACPT_PLUGIN_NAME.'__'.$viteJsAssetKey, $viteJsAsset, ['wp-element'],  ACPT_LITE_PLUGIN_VERSION, true);
 			        wp_localize_script(ACPT_PLUGIN_NAME.'__'.$viteJsAssetKey, 'acpt', ['pluginsUrl' => plugins_url()]);
 		        }
             }
@@ -569,7 +463,7 @@ class ACPT_Lite_Admin
 
         // Quick-edit assets
         if($pagenow === 'edit.php'){
-	        wp_enqueue_script( ACPT_PLUGIN_NAME.'__quick_edit_js', plugins_url( 'advanced-custom-post-type/assets/static/js/quick_edit.js'), ['jquery'], ACPT_PLUGIN_VERSION, true);
+	        wp_enqueue_script( ACPT_PLUGIN_NAME.'__quick_edit_js', plugins_url( 'advanced-custom-post-type/assets/static/js/quick_edit.js'), ['jquery'], ACPT_LITE_PLUGIN_VERSION, true);
         }
 
 	    // Gutenberg assets
@@ -608,11 +502,11 @@ class ACPT_Lite_Admin
 	        if(in_array($pagenow, $allowedPages)) {
 		        // other static assets here
 		        foreach ($this->staticCssAssets as $key => $asset){
-			        wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$key, $asset, [], ACPT_PLUGIN_VERSION, 'all');
+			        wp_enqueue_style( ACPT_PLUGIN_NAME.'__'.$key, $asset, [], ACPT_LITE_PLUGIN_VERSION, 'all');
 		        }
 
 		        foreach ($this->staticJsAssets as $key => $asset){
-			        wp_enqueue_script( ACPT_PLUGIN_NAME.'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_PLUGIN_VERSION, true);
+			        wp_enqueue_script( ACPT_PLUGIN_NAME.'__'.$key, $asset['path'], isset($asset['dep']) ? $asset['dep'] : [], ACPT_LITE_PLUGIN_VERSION, true);
 		        }
 
 		        //
@@ -692,11 +586,8 @@ class ACPT_Lite_Admin
     {
 	    $actionLinks = [];
 
-	    if ( 'advanced-custom-post-type/advanced-custom-post-type.php' === $plugin_file ) {
-	        if(ACPT_License_Manager::isLicenseValid()){
-		        $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page=advanced-custom-post-type#/settings' ).'">'.Translator::translate('Settings').'</a>';
-	        }
-
+	    if ( 'acpt-lite/acpt-lite.php' === $plugin_file ) {
+	        $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page=advanced-custom-post-type#/settings' ).'">'.Translator::translate('Settings').'</a>';
 		    $actionLinks['documentation'] = '<a target="_blank" href="https://docs.acpt.io/">'.Translator::translate('Documentation').'</a>';
 	    }
 
@@ -966,7 +857,7 @@ class ACPT_Lite_Admin
      */
     private function includeFunctions()
     {
-	    require_once ACPT_PLUGIN_DIR_PATH.'/functions/acpt_functions.php';
+	    require_once ACPT_LITE_PLUGIN_DIR_PATH.'/functions/acpt_functions.php';
     }
 
     /**
@@ -975,23 +866,9 @@ class ACPT_Lite_Admin
     private function runIntegrations()
     {
         $integrations = [
-	        ACPT_Breakdance::class,
-	        ACPT_Bricks::class,
-	        ACPT_Divi::class,
 	        ACPT_Lite_Elementor::class,
-	        ACPT_Elementor_Pro::class,
 	        ACPT_Lite_Gutenberg::class,
-	        ACPT_Oxygen::class,
-	        ACPT_Polylang::class,
-	        ACPT_RankMath::class,
 	        ACPT_Lite_WooCommerce::class,
-	        ACPT_WPAllExport::class,
-	        ACPT_WPAllImport::class,
-	        ACPT_WPGraphQL::class,
-	        ACPT_WPGridBuilder::class,
-	        ACPT_WPML::class,
-            ACPT_Yoast::class,
-	        ACPT_Zion::class,
         ];
 
         foreach ($integrations as $integration){
