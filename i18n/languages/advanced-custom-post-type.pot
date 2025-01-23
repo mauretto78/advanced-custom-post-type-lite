@@ -307,10 +307,10 @@ msgstr ""
 msgid "Custom post type slug to use instead of default."
 msgstr ""
 
-msgid "Custom post type successfully deleted. The browser will refresh after 5 seconds."
+msgid "Custom post type successfully deleted."
 msgstr ""
 
-msgid "Custom post type successfully saved. The browser will refresh after 5 seconds."
+msgid "Custom post type successfully saved."
 msgstr ""
 
 msgid "Custom post type was associated to selected taxonomies"
@@ -382,6 +382,9 @@ msgstr ""
 msgid "Delete pages"
 msgstr ""
 
+msgid "Delete posts"
+msgstr ""
+
 msgid "Delete post metadata when deleting ACPT fields"
 msgstr ""
 
@@ -401,6 +404,9 @@ msgid "Delete private posts"
 msgstr ""
 
 msgid "Delete published pages"
+msgstr ""
+
+msgid "Delete published posts"
 msgstr ""
 
 msgid "Delete the meta box in this"
@@ -490,6 +496,9 @@ msgstr ""
 msgid "Edit pages"
 msgstr ""
 
+msgid "Edit posts"
+msgstr ""
+
 msgid "Edit private pages"
 msgstr ""
 
@@ -497,6 +506,9 @@ msgid "Edit private posts"
 msgstr ""
 
 msgid "Edit published pages"
+msgstr ""
+
+msgid "Edit published posts"
 msgstr ""
 
 msgid "Element"
@@ -569,6 +581,9 @@ msgid "Field columns ([1-6] only for repeater field)"
 msgstr ""
 
 msgid "Field label"
+msgstr ""
+
+msgid "Field name"
 msgstr ""
 
 msgid "Field name cannot be blank"
@@ -1051,6 +1066,9 @@ msgstr ""
 msgid "Publish pages"
 msgstr ""
 
+msgid "Publish posts"
+msgstr ""
+
 msgid "Published posts count"
 msgstr ""
 
@@ -1076,6 +1094,9 @@ msgid "REST Controller class"
 msgstr ""
 
 msgid "Radio/checkbox"
+msgstr ""
+
+msgid "Read "
 msgstr ""
 
 msgid "Read private pages"
@@ -1276,7 +1297,7 @@ msgstr ""
 msgid "Step value (used only by numeric fields)"
 msgstr ""
 
-msgid "Successfully post sync. The browser will refresh after 5 seconds."
+msgid "Successfully post sync."
 msgstr ""
 
 msgid "Support"
@@ -1331,9 +1352,6 @@ msgid "Template saved successfully"
 msgstr ""
 
 msgid "Template was successfully deleted."
-msgstr ""
-
-msgid "Template was successfully deleted. The browser will refresh after 5 seconds."
 msgstr ""
 
 msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
@@ -1487,6 +1505,9 @@ msgid "Upload"
 msgstr ""
 
 msgid "Upload file"
+msgstr ""
+
+msgid "Upload files"
 msgstr ""
 
 msgid "Upload your file"
@@ -2362,6 +2383,9 @@ msgstr ""
 msgid "Post"
 msgstr ""
 
+msgid "Post parent"
+msgstr ""
+
 msgid "Term"
 msgstr ""
 
@@ -2410,10 +2434,13 @@ msgstr ""
 msgid "Max blocks allowed"
 msgstr ""
 
-msgid "Browser icons"
+msgid "Browse icons"
 msgstr ""
 
-msgid "Search an icon"
+msgid "Upload a SVG file"
+msgstr ""
+
+msgid "Choose an icon"
 msgstr ""
 
 msgid "Type at least 3 characters to start searching."
@@ -2464,6 +2491,12 @@ msgstr ""
 msgid "Remove this block"
 msgstr ""
 
+msgid "Show elements"
+msgstr ""
+
+msgid "Hide elements"
+msgstr ""
+
 msgid "Show/hide elements in this block"
 msgstr ""
 
@@ -2485,7 +2518,7 @@ msgstr ""
 msgid "Enter text link"
 msgstr ""
 
-msgid "Settings saved. The browser will refresh after 5 seconds."
+msgid "Settings saved."
 msgstr ""
 
 msgid "Exit"
@@ -2838,6 +2871,9 @@ msgid "This is the meta-key of this field."
 msgstr ""
 
 msgid "Use it in functions like get_post_meta() to retrieve saved meta field data."
+msgstr ""
+
+msgid "Prepend the option page slug to retrieve option page meta fields."
 msgstr ""
 
 msgid "Copied to clipboard"
@@ -3275,6 +3311,18 @@ msgstr ""
 msgid "Where to show the post type in the admin menu. To work, $show_ui must be true. If true, the post type is shown in its own top level menu. If false, no menu is shown."
 msgstr ""
 
+msgid "Custom show in menu rule"
+msgstr ""
+
+msgid "Standard settings"
+msgstr ""
+
+msgid "Set custom settings"
+msgstr ""
+
+msgid "Where to show the post type in the admin menu. Set a custom show in menu rule here. For more info"
+msgstr ""
+
 msgid "To change the base url of REST API route. Default is $post_type."
 msgstr ""
 
@@ -3510,4 +3558,349 @@ msgid "Delete all blocks"
 msgstr ""
 
 msgid "Something went wrong, please retry."
+msgstr ""
+
+msgid "Connect external services"
+msgstr ""
+
+msgid "Your Cloudflare Turnstile site key"
+msgstr ""
+
+msgid "Your Cloudflare Turnstile site key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Your Cloudflare Turnstile secret key"
+msgstr ""
+
+msgid "Your Cloudflare Turnstile secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Health check"
+msgstr ""
+
+msgid "Check the health check of the application, and repair any installation error."
+msgstr ""
+
+msgid "Run health check"
+msgstr ""
+
+msgid "Launch the repair"
+msgstr ""
+
+msgid "DB status"
+msgstr ""
+
+msgid "The repair was carried out successfully."
+msgstr ""
+
+msgid "Post object settings"
+msgstr ""
+
+msgid "Term object settings"
+msgstr ""
+
+msgid "Filter by post type"
+msgstr ""
+
+msgid "Filter by post status"
+msgstr ""
+
+msgid "Filter by taxonomy"
+msgstr ""
+
+msgid "Polylang Settings"
+msgstr ""
+
+msgid "Textarea settings"
+msgstr ""
+
+msgid "The cols value (used only by textarea fields)"
+msgstr ""
+
+msgid "The rows value (used only by textarea fields)"
+msgstr ""
+
+msgid "Context"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "User settings"
+msgstr ""
+
+msgid "Filter by role"
+msgstr ""
+
+msgid "Relational field settings"
+msgstr ""
+
+msgid "Only name or title"
+msgstr ""
+
+msgid "With image"
+msgstr ""
+
+msgid "Date field settings"
+msgstr ""
+
+msgid "Datetime field settings"
+msgstr ""
+
+msgid "Time field settings"
+msgstr ""
+
+msgid "Select the field vertical alignment (default: center)"
+msgstr ""
+
+msgid "Vertical alignment"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Bottom"
+msgstr ""
+
+msgid "The maximum size is {{v}}"
+msgstr ""
+
+msgid "The minimum size is {{v}}"
+msgstr ""
+
+msgid "Set as post thumbnail"
+msgstr ""
+
+msgid "Sync with post terms"
+msgstr ""
+
+msgid "Image settings"
+msgstr ""
+
+msgid "Permissions"
+msgstr ""
+
+msgid "Manage permissions of"
+msgstr ""
+
+msgid "Add permission"
+msgstr ""
+
+msgid "No permissions found."
+msgstr ""
+
+msgid "User role"
+msgstr ""
+
+msgid "Confirm deleting permission"
+msgstr ""
+
+msgid "Permissions successfully saved"
+msgstr ""
+
+msgid "No permissions are present, click on \"Add permission\" button to add the first one."
+msgstr ""
+
+msgid "Confirm deleting permission element"
+msgstr ""
+
+msgid "Assign"
+msgstr ""
+
+msgid "Child field"
+msgstr ""
+
+msgid "Child block"
+msgstr ""
+
+msgid "No fields found"
+msgstr ""
+
+msgid "Reset to the default values"
+msgstr ""
+
+msgid "Override here the default settings:"
+msgstr ""
+
+msgid "Style"
+msgstr ""
+
+msgid "Settings successfully saved"
+msgstr ""
+
+msgid "Save this table as template"
+msgstr ""
+
+msgid "Import template"
+msgstr ""
+
+msgid "Choose the template"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Border style"
+msgstr ""
+
+msgid "Border weight"
+msgstr ""
+
+msgid "Border color"
+msgstr ""
+
+msgid "Main background"
+msgstr ""
+
+msgid "Alt background"
+msgstr ""
+
+msgid "Add header"
+msgstr ""
+
+msgid "Add footer"
+msgstr ""
+
+msgid "Save as template"
+msgstr ""
+
+msgid "Create table"
+msgstr ""
+
+msgid "Edit table settings"
+msgstr ""
+
+msgid "No table already created."
+msgstr ""
+
+msgid "JSON data is not valid."
+msgstr ""
+
+msgid "Delete row"
+msgstr ""
+
+msgid "Add row"
+msgstr ""
+
+msgid "Delete column"
+msgstr ""
+
+msgid "Add column"
+msgstr ""
+
+msgid "Border"
+msgstr ""
+
+msgid "Text color"
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Option pages successfully deleted."
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Preview element"
+msgstr ""
+
+msgid "No records found."
+msgstr ""
+
+msgid "Show data"
+msgstr ""
+
+msgid "Enable custom post types"
+msgstr ""
+
+msgid "Enable custom post types manager"
+msgstr ""
+
+msgid "Enable Option Pages"
+msgstr ""
+
+msgid "Enable the Option Pages manager."
+msgstr ""
+
+msgid "Enable meta fields"
+msgstr ""
+
+msgid "Enable the meta fields manager."
+msgstr ""
+
+msgid "Clone field settings"
+msgstr ""
+
+msgid "Select fields to clone"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Restore elements"
+msgstr ""
+
+msgid "hidden elements"
+msgstr ""
+
+msgid "Front URL prefix"
+msgstr ""
+
+msgid "Alters the post type permalink structure to add a prefix to singular posts URLs (ex. /movie/titanic). Default value is the post type name."
+msgstr ""
+
+msgid "Custom post type successfully duplicated."
+msgstr ""
+
+msgid "Option pages successfully duplicated."
+msgstr ""
+
+msgid "Taxonomy successfully duplicated."
+msgstr ""
+
+msgid "Dataset successfully duplicated."
+msgstr ""
+
+msgid "Form successfully duplicated."
+msgstr ""
+
+msgid "WooCommerce product data successfully duplicated"
+msgstr ""
+
+msgid "Please wait"
+msgstr ""
+
+msgid "Labels successfully regenerated"
+msgstr ""
+
+msgid "No image selected"
+msgstr ""
+
+msgid "No video selected"
+msgstr ""
+
+msgid "No file selected"
+msgstr ""
+
+msgid "Password field settings"
+msgstr ""
+
+msgid "Algorithm"
+msgstr ""
+
+msgid "Should the permalink structure be prepended with the front base. (example: if your permalink structure is /blog/, then your links will be: false->/news/, true->/blog/news/). Defaults to true"
 msgstr ""

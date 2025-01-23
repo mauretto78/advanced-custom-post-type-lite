@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 msgid "(default true)"
 msgstr "(valor predeterminado true)"
@@ -256,15 +256,11 @@ msgstr "Valor de condición"
 msgid "Conditional rendering"
 msgstr "Renderización condicional"
 
-#, fuzzy
-#| msgid "Confirm deleting block"
 msgid "Confirm deleting meta box"
-msgstr "¿Confirmas que quieres eliminar este bloque?"
+msgstr "¿Confirmas que quieres eliminar este box?"
 
-#, fuzzy
-#| msgid "Confirm deleting all"
 msgid "Confirm deleting meta field"
-msgstr "Confirmar eliminación de todo"
+msgstr "Confirmar eliminación de metacampo"
 
 msgid "Confirm deleting all"
 msgstr "Confirmar eliminación de todo"
@@ -357,19 +353,13 @@ msgid "Custom post type slug to use instead of default."
 msgstr ""
 "Slug de tipo de post personalizado para usar en lugar de predeterminado."
 
-msgid ""
-"Custom post type successfully deleted. The browser will refresh after 5 "
-"seconds."
-msgstr ""
-"El tipo de post personalizado se eliminó correctamente. El navegador se "
-"actualizará después de 5 segundos."
+msgid "Custom post type successfully deleted."
+msgstr "El tipo de post personalizado se eliminó correctamente."
 
-msgid ""
-"Custom post type successfully saved. The browser will refresh after 5 "
-"seconds."
-msgstr ""
-"El tipo de post personalizado se guardó correctamente. El navegador se "
-"actualizará después de 5 segundos."
+#, fuzzy
+#| msgid "Custom post type successfully saved"
+msgid "Custom post type successfully saved."
+msgstr "El tipo de post personalizado se guardó correctamente."
 
 msgid "Custom post type was associated to selected taxonomies"
 msgstr "El tipo de post personalizado se asoció a las taxonomías seleccionadas"
@@ -451,6 +441,11 @@ msgstr "Eliminar otros posts"
 msgid "Delete pages"
 msgstr "Eliminar páginas"
 
+#, fuzzy
+#| msgid "Delete others posts"
+msgid "Delete posts"
+msgstr "Eliminar otros posts"
+
 msgid "Delete post metadata when deleting ACPT fields"
 msgstr "Al eliminar campos ACPT, eliminas los metadatos del post"
 
@@ -483,6 +478,9 @@ msgstr "Eliminar posts privados"
 
 msgid "Delete published pages"
 msgstr "Eliminar páginas publicadas"
+
+msgid "Delete published posts"
+msgstr "Eliminar posts publicadas"
 
 msgid "Delete the meta box in this"
 msgstr "Eliminar el meta box en este"
@@ -571,6 +569,11 @@ msgstr "Editar otros posts"
 msgid "Edit pages"
 msgstr "Editar páginas"
 
+#, fuzzy
+#| msgid "Edit others posts"
+msgid "Edit posts"
+msgstr "Editar otros posts"
+
 msgid "Edit private pages"
 msgstr "Editar páginas privadas"
 
@@ -579,6 +582,9 @@ msgstr "Editar posts privados"
 
 msgid "Edit published pages"
 msgstr "Editar páginas publicadas"
+
+msgid "Edit published posts"
+msgstr "Editar posts publicadas"
 
 msgid "Element"
 msgstr "Elemento"
@@ -650,15 +656,18 @@ msgstr "Grupo de Facebook"
 msgid "Featured image"
 msgstr "Imagen destacada"
 
-#, fuzzy
-#| msgid "Fields count"
 msgid "Field columns"
-msgstr "Recuento de campos"
+msgstr "Columnas de campos"
 
 msgid "Field columns ([1-6] only for repeater field)"
 msgstr "Columnas de campo ([1-6] solo para el campo repetidor)"
 
 msgid "Field label"
+msgstr "Etiqueta de campo"
+
+#, fuzzy
+#| msgid "Field label"
+msgid "Field name"
 msgstr "Etiqueta de campo"
 
 msgid "Field name cannot be blank"
@@ -1227,6 +1236,11 @@ msgstr "Consultable públicamente"
 msgid "Publish pages"
 msgstr "Publicar páginas"
 
+#, fuzzy
+#| msgid "Publish pages"
+msgid "Publish posts"
+msgstr "Publicar páginas"
+
 msgid "Published posts count"
 msgstr "Recuento de posts publicados"
 
@@ -1255,6 +1269,9 @@ msgstr "Clase REST Controller"
 
 msgid "Radio/checkbox"
 msgstr "Radio/casilla de verificación"
+
+msgid "Read "
+msgstr ""
 
 msgid "Read private pages"
 msgstr "Leer páginas privadas"
@@ -1322,10 +1339,8 @@ msgstr "Seleccionar"
 msgid "Select field box from list"
 msgstr "Selecciona el box de campo de la lista"
 
-#, fuzzy
-#| msgid "Select the list format"
 msgid "Select the inversed field on target"
-msgstr "Selecciona el formato de lista"
+msgstr "Selecciona el campo invertido en el target"
 
 msgid "Select field from list"
 msgstr "Selecciona el campo de la lista"
@@ -1470,10 +1485,8 @@ msgstr "Ordenar por"
 msgid "Step value (used only by numeric fields)"
 msgstr "Valor del paso (se usa solo para campos numéricos)"
 
-msgid "Successfully post sync. The browser will refresh after 5 seconds."
-msgstr ""
-"Sincronización del post correcta. El navegador se actualizará después de "
-"5 segundos."
+msgid "Successfully post sync."
+msgstr "Sincronización del post correcta."
 
 msgid "Support"
 msgstr "Soporte"
@@ -1533,12 +1546,6 @@ msgstr "Plantilla guardada correctamente"
 
 msgid "Template was successfully deleted."
 msgstr "La plantilla se eliminó correctamente."
-
-msgid ""
-"Template was successfully deleted. The browser will refresh after 5 seconds."
-msgstr ""
-"La plantilla se eliminó correctamente. El navegador se actualizará después "
-"de 5 segundos."
 
 #, fuzzy
 #| msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
@@ -1756,6 +1763,11 @@ msgid "Upload"
 msgstr "Cargar"
 
 msgid "Upload file"
+msgstr "Cargar archivo"
+
+#, fuzzy
+#| msgid "Upload file"
+msgid "Upload files"
 msgstr "Cargar archivo"
 
 msgid "Upload your file"
@@ -2280,7 +2292,7 @@ msgid "Time"
 msgstr "Hora"
 
 msgid "Repeater"
-msgstr ""
+msgstr "Repetidor"
 
 msgid "Grouped field (Repeater)"
 msgstr "Campo agrupado (repetidor)"
@@ -2319,7 +2331,7 @@ msgid "meta"
 msgstr "meta"
 
 msgid "Meta-key"
-msgstr ""
+msgstr "Meta-clave"
 
 #, fuzzy
 #| msgid "Export code"
@@ -2927,6 +2939,11 @@ msgstr "Etiqueta"
 msgid "Post"
 msgstr "Post"
 
+#, fuzzy
+#| msgid "Parent"
+msgid "Post parent"
+msgstr "Principal"
+
 msgid "Term"
 msgstr "Término"
 
@@ -2975,11 +2992,14 @@ msgstr "Bloques mínimos requeridos"
 msgid "Max blocks allowed"
 msgstr "Bloques máximos permitidos"
 
-msgid "Browser icons"
-msgstr "Íconos del navegador"
+msgid "Browse icons"
+msgstr "navegar Íconos"
 
-msgid "Search an icon"
-msgstr "Buscar un ícono"
+msgid "Upload a SVG file"
+msgstr "Cargar archivo SVG"
+
+msgid "Choose an icon"
+msgstr "Elige un ícono"
 
 msgid "Type at least 3 characters to start searching."
 msgstr "Escribe al menos 3 caracteres para comenzar a buscar."
@@ -3033,6 +3053,16 @@ msgstr "Cargar archivo"
 msgid "Remove this block"
 msgstr "Eliminar este bloque"
 
+#, fuzzy
+#| msgid "Show/hide elements"
+msgid "Show elements"
+msgstr "Seleccionar/deseleccionar elementos"
+
+#, fuzzy
+#| msgid "Show/hide elements"
+msgid "Hide elements"
+msgstr "Seleccionar/deseleccionar elementos"
+
 msgid "Show/hide elements in this block"
 msgstr "Mostrar/ocultar elementos en este bloque"
 
@@ -3054,9 +3084,8 @@ msgstr "Introducir la URL"
 msgid "Enter text link"
 msgstr "Introducir enlace de texto"
 
-msgid "Settings saved. The browser will refresh after 5 seconds."
-msgstr ""
-"Configuración guardada. El navegador se actualizará después de 5 segundos."
+msgid "Settings saved."
+msgstr "Configuración guardada."
 
 msgid "Exit"
 msgstr "Salir"
@@ -3423,6 +3452,9 @@ msgid ""
 msgstr ""
 "Úsalo en funciones como get_post_meta() para recuperar los datos de los meta "
 "guardados."
+
+msgid "Prepend the option page slug to retrieve option page meta fields."
+msgstr ""
 
 msgid "Copied to clipboard"
 msgstr "Copiado al portapapeles"
@@ -3886,6 +3918,22 @@ msgstr ""
 "muestra en su propio menú de nivel superior. Si es false, no se muestra "
 "ningún menú."
 
+msgid "Custom show in menu rule"
+msgstr "Reglas personalizadas de visualización en el menú"
+
+msgid "Standard settings"
+msgstr "Ajustes estándar"
+
+msgid "Set custom settings"
+msgstr "Establecer ajustes personalizados"
+
+msgid ""
+"Where to show the post type in the admin menu. Set a custom show in menu "
+"rule here. For more info"
+msgstr ""
+"Dónde mostrar el tipo de post en el menú de admin. Ajuste reglas "
+"personalizadas de visualización en el menú. Para más información"
+
 msgid "To change the base url of REST API route. Default is $post_type."
 msgstr ""
 "Para cambiar la URL base de la ruta API REST. El valor predeterminado es "
@@ -4156,3 +4204,366 @@ msgstr "Eliminar todos los bloques"
 
 msgid "Something went wrong, please retry."
 msgstr "Algo salió mal, inténtalo de nuevo."
+
+msgid "Connect external services"
+msgstr "Conectar servicios externos"
+
+msgid "Your Cloudflare Turnstile site key"
+msgstr "Su clave de sitio Cloudflare Turnstile"
+
+msgid ""
+"Your Cloudflare Turnstile site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Tu clave de sitio Cloudflare Turnstile. Necesario para utilizar el campo del "
+"formulario CAPTCHA."
+
+msgid "Your Cloudflare Turnstile secret key"
+msgstr "La clave secreta de tu Cloudflare Turnstile"
+
+msgid ""
+"Your Cloudflare Turnstile secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Tu clave secreta de Cloudflare Turnstile. Necesario para utilizar el campo "
+"del formulario CAPTCHA."
+
+msgid "Health check"
+msgstr "Comprobación de estado"
+
+msgid ""
+"Check the health check of the application, and repair any installation error."
+msgstr ""
+"Verifica la comprobación de estado de la app y repara cualquier error de "
+"instalación."
+
+msgid "Run health check"
+msgstr "Ejecutar comprobación de estado"
+
+msgid "Launch the repair"
+msgstr "Lanzar la reparación"
+
+msgid "DB status"
+msgstr "Estado del DB"
+
+msgid "The repair was carried out successfully."
+msgstr "Reparación ejecutada correctamente"
+
+msgid "Post object settings"
+msgstr "Ajustes del objeto post"
+
+msgid "Term object settings"
+msgstr "Ajustes del objeto termino"
+
+msgid "Filter by post type"
+msgstr "Filtrar por tipo de post"
+
+msgid "Filter by post status"
+msgstr "Filtrar por el estado del post"
+
+msgid "Filter by taxonomy"
+msgstr "Filtrar por taxonomía"
+
+msgid "Polylang Settings"
+msgstr "Ajustes Polylang"
+
+msgid "Textarea settings"
+msgstr "Configuración de campo área de texto"
+
+msgid "The cols value (used only by textarea fields)"
+msgstr "Valor de cols (se usa solo para campos de área de texto)"
+
+msgid "The rows value (used only by textarea fields)"
+msgstr "Valor de rows (se usa solo para campos de área de texto)"
+
+msgid "Context"
+msgstr "Contexto"
+
+msgid "Priority"
+msgstr "Prioridad"
+
+msgid "User settings"
+msgstr "Ajustes usiario"
+
+msgid "Filter by role"
+msgstr "Filtrar por role"
+
+msgid "Relational field settings"
+msgstr "Configuración de campo relacional"
+
+msgid "Only name or title"
+msgstr "Sólo nombre o título"
+
+msgid "With image"
+msgstr "Con imágen"
+
+msgid "Date field settings"
+msgstr "Configuración de campo fecha"
+
+msgid "Datetime field settings"
+msgstr "Configuración de campo fecha y tiempo"
+
+msgid "Time field settings"
+msgstr "Configuración de campo tiempo"
+
+msgid "Select the field vertical alignment (default: center)"
+msgstr "Seleccionar la alineación vertical (predeterminado: al centro)"
+
+msgid "Vertical alignment"
+msgstr "Alineación vertical"
+
+msgid "Center"
+msgstr "Al centro"
+
+msgid "Top"
+msgstr "Arriba"
+
+msgid "Bottom"
+msgstr "Abajo"
+
+msgid "The maximum size is {{v}}"
+msgstr "El tamaño máximo es {{v}}"
+
+msgid "The minimum size is {{v}}"
+msgstr "El tamaño mínimo es {{v}}"
+
+msgid "Set as post thumbnail"
+msgstr "Establecer como imagen destacada"
+
+msgid "Sync with post terms"
+msgstr "Sincronizar con terminos de post"
+
+msgid "Image settings"
+msgstr "Configuración imagen"
+
+msgid "Permissions"
+msgstr "Permisos"
+
+msgid "Manage permissions of"
+msgstr "Administrar permisos de"
+
+msgid "Add permission"
+msgstr "Crear permiso"
+
+msgid "No permissions found."
+msgstr "No se encontrò ningun permiso."
+
+msgid "User role"
+msgstr "Rol de usuario"
+
+msgid "Confirm deleting permission"
+msgstr "Confirmar eliminación de permiso"
+
+msgid "Permissions successfully saved"
+msgstr "Permiso guardado correctamente"
+
+msgid ""
+"No permissions are present, click on \"Add permission\" button to add the "
+"first one."
+msgstr ""
+"No hay permisos presentes, haz clic en el botón “Agregar permiso” para "
+"añadir el primero."
+
+msgid "Confirm deleting permission element"
+msgstr "Confirmar eliminación de permiso"
+
+msgid "Assign"
+msgstr "Asignar"
+
+msgid "Child field"
+msgstr "Campo hijo"
+
+msgid "Child block"
+msgstr "Bloque hijo"
+
+msgid "No fields found"
+msgstr "No se encontrò ningun campo."
+
+msgid "Reset to the default values"
+msgstr "Volver a valor predeterminados"
+
+msgid "Override here the default settings:"
+msgstr "Anule aquí la configuración predeterminada:"
+
+msgid "Style"
+msgstr "Estilo"
+
+msgid "Settings successfully saved"
+msgstr "Estilo guardado correctamente"
+
+msgid "Save this table as template"
+msgstr "Salva esta tabla como plantilla"
+
+msgid "Import template"
+msgstr "Importa el template"
+
+msgid "Choose the template"
+msgstr "Seleccionar plantilla"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Border style"
+msgstr "Estilo del borde"
+
+msgid "Border weight"
+msgstr "Grosor del borde"
+
+msgid "Border color"
+msgstr "Color del borde"
+
+msgid "Main background"
+msgstr "Fondo principal"
+
+msgid "Alt background"
+msgstr "Fondo secundario"
+
+msgid "Add header"
+msgstr "Agregar encabezado"
+
+msgid "Add footer"
+msgstr "Agregar pié de tabla"
+
+msgid "Save as template"
+msgstr "Save como plantilla"
+
+msgid "Create table"
+msgstr "Crear tabla"
+
+msgid "Edit table settings"
+msgstr "Editar configuración de tabla"
+
+msgid "No table already created."
+msgstr "No tablas ya creadas."
+
+msgid "JSON data is not valid."
+msgstr "El JSON no es válido"
+
+msgid "Delete row"
+msgstr "Borrar fila"
+
+msgid "Add row"
+msgstr "Agregar fila"
+
+msgid "Delete column"
+msgstr "Borrar columna"
+
+msgid "Add column"
+msgstr "Agregar columna"
+
+msgid "Border"
+msgstr "Borde"
+
+msgid "Text color"
+msgstr "Color"
+
+msgid "Background"
+msgstr "Fondo"
+
+msgid "Rows"
+msgstr "Filas"
+
+msgid "Option pages successfully deleted."
+msgstr "Páginas de opciones borradas correctamente"
+
+msgid "Clear"
+msgstr "Borrar todo"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Preview element"
+msgstr "Elemento vista previa"
+
+msgid "No records found."
+msgstr "No resultados encontrados"
+
+msgid "Show data"
+msgstr "Mostrar datos"
+
+msgid "Enable custom post types"
+msgstr "Habilitar tipos de post personalizados"
+
+msgid "Enable custom post types manager"
+msgstr "Habilitar el editor de tipos de post personalizados"
+
+msgid "Enable Option Pages"
+msgstr "Habilitar páginas de opciones"
+
+msgid "Enable the Option Pages manager."
+msgstr "Habilitar el editor de páginas."
+
+msgid "Enable meta fields"
+msgstr "Habilitar metacampos"
+
+msgid "Enable the meta fields manager."
+msgstr "Habilitar el editor de metacampos."
+
+msgid "Clone field settings"
+msgstr "Configuración de campo clon"
+
+msgid "Select fields to clone"
+msgstr "Seleccionar los campo para clonar"
+
+msgid "Hide"
+msgstr "Esconder"
+
+msgid "Restore"
+msgstr "Restaurar"
+
+msgid "Restore elements"
+msgstr "Restaurar elementos"
+
+msgid "hidden elements"
+msgstr "elementos escondidos"
+
+msgid "Front URL prefix"
+msgstr "Prefijo de front URL"
+
+msgid ""
+"Alters the post type permalink structure to add a prefix to singular posts "
+"URLs (ex. /movie/titanic). Default value is the post type name."
+msgstr ""
+"Modificar la estructura del permalink del tipo de post para agregar un "
+"prefijo a las URL de posts singulares (por ejemplo, /movie/titanic). El "
+"valor predeterminado es el nombre del tipo de post."
+
+msgid "Custom post type successfully duplicated."
+msgstr "El tipo de post personalizado se duplicó correctamente."
+
+msgid "Option pages successfully duplicated."
+msgstr "Páginas de opciones duplicadas correctamente"
+
+msgid "Taxonomy successfully duplicated."
+msgstr "Taxonomía duplicada correctamente"
+
+msgid "Dataset successfully duplicated."
+msgstr "El conjunto de datos se duplicó correctamente."
+
+msgid "Form successfully duplicated."
+msgstr "Formulario se duplicó correctamente"
+
+msgid "WooCommerce product data successfully duplicated"
+msgstr "Datos del producto de WooCommerce duplicados con éxito"
+
+msgid "Please wait"
+msgstr "Espere por favor"
+
+msgid "Labels successfully regenerated"
+msgstr "Etiquetas regeneradas correctamente"
+
+msgid "No image selected"
+msgstr "Ninguna imagen seleccionado"
+
+msgid "No video selected"
+msgstr "Ningún video seleccionado"
+
+msgid "No file selected"
+msgstr "Ningún archivo seleccionado"
+
+msgid "Password field settings"
+msgstr "Configuración de campo contraseña"
+
+msgid "Algorithm"
+msgstr "Algoritmo"
+
+#~ msgid "Search an icon"
+#~ msgstr "Buscar un ícono"

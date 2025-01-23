@@ -351,17 +351,14 @@ msgid "Custom post type slug to use instead of default."
 msgstr "Vlastný typ príspevku slug použiť namiesto predvoleného."
 
 msgid ""
-"Custom post type successfully deleted. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully deleted."
 msgstr ""
-"Vlastný typ príspevku úspešne odstránený. Prehliadač sa obnoví po 5 "
-"sekundách."
+"Vlastný typ príspevku úspešne odstránený."
 
 msgid ""
-"Custom post type successfully saved. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully saved."
 msgstr ""
-"Vlastný typ príspevku úspešne uložený. Prehliadač sa obnoví po 5 sekundách."
+"Vlastný typ príspevku úspešne uložený.."
 
 msgid "Custom post type was associated to selected taxonomies"
 msgstr "Vlastný typ príspevku bol priradený k vybraným taxonómiám"
@@ -1428,8 +1425,8 @@ msgstr "Zoradiť podľa"
 msgid "Step value (used only by numeric fields)"
 msgstr "Hodnota kroku (používa sa len pri číselných poliach)"
 
-msgid "Successfully post sync. The browser will refresh after 5 seconds."
-msgstr "Úspešne vykonajte synchronizáciu. Prehliadač sa obnoví po 5 sekundách."
+msgid "Successfully post sync."
+msgstr "Úspešne vykonajte synchronizáciu."
 
 msgid "Support"
 msgstr "Podpora"
@@ -1488,10 +1485,6 @@ msgstr "Šablóna bola úspešne uložená"
 
 msgid "Template was successfully deleted."
 msgstr "Šablóna bola úspešne odstránená."
-
-msgid ""
-"Template was successfully deleted. The browser will refresh after 5 seconds."
-msgstr "Šablóna bola úspešne odstránená. Prehliadač sa obnoví po 5 sekundách."
 
 msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
 msgstr "Text po. HTML je povolené (napr. &lt;small&gt;)"
@@ -2855,7 +2848,7 @@ msgstr "Požadované min. bloky"
 msgid "Max blocks allowed"
 msgstr "Maximálne povolené bloky"
 
-msgid "Browser icons"
+msgid "Browse icons"
 msgstr "Ikony prehliadača"
 
 msgid "Search an icon"
@@ -2934,8 +2927,8 @@ msgstr "Zadajte adresu URL"
 msgid "Enter text link"
 msgstr "Zadajte textový odkaz"
 
-msgid "Settings saved. The browser will refresh after 5 seconds."
-msgstr "Uložené nastavenia. Prehliadač sa obnoví po 5 sekundách."
+msgid "Settings saved."
+msgstr "Uložené nastavenia."
 
 msgid "Exit"
 msgstr "Ukončiť"
