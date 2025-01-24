@@ -92,30 +92,12 @@ class ACPT_Lite
     {
         ACPT_Lite_Deactivator::deactivate();
     }
-
-    /**
-     * Check for plugin upgrades
-     */
-    public static function checkForPluginUpgrades()
-    {
-        $old_version = get_option('acpt_lite_version', 0);
-        $current_version = filemtime(__FILE__);
-
-        if ($old_version != $current_version) {
-
-	        ACPT_Lite_DB::flushCache();
-            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, oldPluginVersion($old_version));
-            ACPT_Lite_DB::sync();
-
-            update_option('acpt_lite_version', $current_version, false);
-        }
-    }
 }
 
 register_activation_hook( __FILE__, [new ACPT_Lite(), 'activate'] );
 register_deactivation_hook( __FILE__, [new ACPT_Lite(), 'deactivate'] );
 
-ACPT_Lite::checkForPluginUpgrades();
+checkForPluginUpgrades();
 
 /**
  * APPSERO

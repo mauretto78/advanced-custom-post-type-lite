@@ -23,6 +23,7 @@ const TaxonomyListPage = lazy(() => import("./pages/TaxonomyList"));
 const ViewCustomPostTypePage = lazy(() => import("./pages/ViewCustomPostType"));
 const ViewTaxonomyPage = lazy(() => import("./pages/ViewTaxonomy"));
 const ViewProductDataPage = lazy(() => import("./pages/WooCommerce/ViewProductData"));
+const HealthCheckPage = lazy(() => import("./pages/HealthCheck"));
 
 const App = memo(() => {
 
@@ -76,7 +77,13 @@ const App = memo(() => {
                             path:"/settings",
                             name: "Settings page",
                             element: <Suspense fallback={<Loader/>}><SettingsPage /></Suspense>
-                        }
+                        },
+                        {
+                            path:"/health-check",
+                            name: "HealthCheck page",
+                            element: <Suspense fallback={<Loader/>}><HealthCheckPage /></Suspense>
+                        },
+
                     ];
 
                     // post types related pages

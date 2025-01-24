@@ -313,12 +313,22 @@ class ACPT_Lite_Admin
 
         $pages[] = [
             'parentSlug' => ACPT_LITE_PLUGIN_NAME,
+            'pageTitle' => translate('Health check', ACPT_LITE_PLUGIN_NAME),
+            'menuTitle' => translate('Health check', ACPT_LITE_PLUGIN_NAME),
+            'capability' => 'manage_options',
+            'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/health-check',
+            'template' => 'app',
+            'position' => 59,
+        ];
+
+        $pages[] = [
+            'parentSlug' => ACPT_LITE_PLUGIN_NAME,
             'pageTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
             'menuTitle' => translate('Settings', ACPT_LITE_PLUGIN_NAME),
             'capability' => 'manage_options',
             'menuSlug' => ACPT_LITE_PLUGIN_NAME . '#/settings',
             'template' => 'app',
-            'position' => 59,
+            'position' => 60,
         ];
 
         $this->pages = $pages;

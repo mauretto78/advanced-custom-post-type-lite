@@ -59,7 +59,7 @@ const HealthCheck = () => {
 
     useEffect(() => {
         metaTitle(useTranslation("Health check"));
-        changeCurrentAdminMenuLink('#/tools');
+        changeCurrentAdminMenuLink('#/health-check');
         runHealthCheck();
     }, []);
 
