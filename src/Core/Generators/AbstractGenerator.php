@@ -5,9 +5,6 @@ namespace ACPT_Lite\Core\Generators;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Utils\PHP\Url;
-use ACPT_Lite\Utils\Wordpress\Posts;
-use ACPT_Lite\Utils\Wordpress\Terms;
-use ACPT_Lite\Utils\Wordpress\Users;
 
 /**
  * *************************************************
