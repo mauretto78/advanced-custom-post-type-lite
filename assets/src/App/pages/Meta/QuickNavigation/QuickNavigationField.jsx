@@ -6,11 +6,20 @@ import {useFormContext, useWatch} from "react-hook-form";
 import {scrollToId} from "../../../utils/scroll";
 import {getFormId} from "../../../utils/fields";
 import {useSelector} from "react-redux";
+import {useSortable} from "@dnd-kit/sortable";
+import {CSS} from "@dnd-kit/utilities";
+import {Icon} from "@iconify/react";
 
 const QuickNavigationField = ({level, boxId, field}) => {
 
     // manage global state
     const {group} = useSelector(state => state.metaState);
+
+    // DND-kit
+    const {attributes, listeners, setNodeRef, isDragging, transform} = useSortable({id: field.id});
+    const style = {
+        transform: CSS.Translate.toString(transform)
+    };
 
     // manage form state
     const { control } = useFormContext();
@@ -20,8 +29,16 @@ const QuickNavigationField = ({level, boxId, field}) => {
     });
 
     return (
-        <React.Fragment>
-            <div key={field.id} className={`tree-el flex-between s-8`} style={{"--level": level}}>
+        <div
+            key={field.id}
+            className={`tree-el flex-between s-8`}
+            ref={setNodeRef}
+            style={style}
+        >
+            <div className="i-flex-center s-8">
+                <span className="cursor-move top-2 handle" {...attributes} {...listeners}>
+                    <Icon icon="bx:dots-vertical-rounded" color="#777" width={18} />
+                </span>
                 <span
                     className={`cursor-pointer text-ellipsis`}
                     onClick={(e) => {
@@ -31,11 +48,11 @@ const QuickNavigationField = ({level, boxId, field}) => {
                 >
                     {watchedFieldName ? watchedFieldName : field.name}
                 </span>
-                <Badge style={styleVariants.SECONDARY}>
-                    C
-                </Badge>
             </div>
-        </React.Fragment>
+            <Badge style={styleVariants.SECONDARY}>
+                C
+            </Badge>
+        </div>
     );
 };
 
