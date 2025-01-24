@@ -4,8 +4,16 @@ import QuickNavigationField from "./QuickNavigationField";
 import {Icon} from "@iconify/react";
 import {useFormContext, useWatch} from "react-hook-form";
 import {scrollToId} from "../../../utils/scroll";
+import {useSortable} from "@dnd-kit/sortable";
+import {CSS} from "@dnd-kit/utilities";
 
 const QuickNavigationBox = ({index, box}) => {
+
+    // DND-kit
+    const {attributes, listeners, setNodeRef, isDragging, transform} = useSortable({id: box.id});
+    const style = {
+        transform: CSS.Translate.toString(transform)
+    };
 
     const { control } = useFormContext();
     const watchedBoxName = useWatch({
@@ -19,19 +27,29 @@ const QuickNavigationBox = ({index, box}) => {
     const [isClosed, setIsClosed] = useState(false);
 
     return (
-        <div key={box.id} className="b-rounded with-shadow bg-white p-24">
+        <div
+            ref={setNodeRef}
+            key={box.id}
+            style={style}
+            className="b-rounded with-shadow bg-white p-24"
+        >
             <h3 className={`${(!isClosed && box.fields && box.fields.length > 0) ? 'mb-24' : ''} flex-between s-8`}>
+                <div className="i-flex-center s-8">
+                    <span className="cursor-move top-2 handle" {...attributes} {...listeners}>
+                        <Icon icon="bx:dots-vertical-rounded" color="#777" width={18} />
+                    </span>
+                    <span
+                        className="text-ellipsis cursor-pointer"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            scrollToId(box.id);
+                        }}
+                    >
+                        {watchedBoxName ? watchedBoxName : box.name}
+                    </span>
+                </div>
                 <span className="cursor-pointer top-2" onClick={() => setIsClosed(!isClosed)}>
                     <Icon width={18} icon={!isClosed ? 'bx:chevron-down' : 'bx:chevron-up'} color="#777" />
-                </span>
-                <span
-                    className="text-ellipsis cursor-pointer"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        scrollToId(box.id);
-                    }}
-                >
-                    {watchedBoxName ? watchedBoxName : box.name}
                 </span>
             </h3>
             {!isClosed && box.fields && box.fields.length > 0 && (
