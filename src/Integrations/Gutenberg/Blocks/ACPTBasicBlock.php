@@ -125,10 +125,6 @@ class ACPTBasicBlock
 			$rawData = get_acpt_field($args);
 		}
 
-		if(!is_acpt_field_visible($args)){
-			return null;
-		}
-
 		if(empty($rawData)){
 			return null;
 		}

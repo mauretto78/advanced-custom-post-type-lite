@@ -122,9 +122,9 @@
       "_vendor-Bd2ZL6QG.js"
     ]
   },
-  "_index-!~{00o}~.js": {
+  "_index-!~{00n}~.js": {
     "file": "assets/index-DjbMNrcR.css",
-    "src": "_index-!~{00o}~.js"
+    "src": "_index-!~{00n}~.js"
   },
   "_index-B5TNQZ8i.js": {
     "file": "assets/index-B5TNQZ8i.js",
@@ -646,14 +646,13 @@
     ]
   },
   "assets/src/Gutenberg/index.jsx": {
-    "file": "assets/index-DPN1cFji.js",
+    "file": "assets/index-BAq7bg7I.js",
     "name": "index",
     "src": "assets/src/Gutenberg/index.jsx",
     "isEntry": true,
     "imports": [
       "_fields-PF-HBT_1.js",
-      "_vendor-Bd2ZL6QG.js",
-      "_metaTypes-Bb9tjSPe.js"
+      "_vendor-Bd2ZL6QG.js"
     ],
     "css": [
       "assets/index-Ce7v6qqo.css"

@@ -9,7 +9,7 @@ const DateFormatControls = ({attributes, setAttributes}) => {
     } = wp.components;
 
     const options = [
-        {label: __("--Select---", "acpt"), value: null},
+        {label: __("--Select---", "acpt"), value: ""},
         {value:"d-M-y", label: "dd-mmm-yy (ex. 28-OCT-90)"},
         {value:"d-M-Y", label: "dd-mmm-yyyy (ex. 28-OCT-1990)"},
         {value:"d M y", label: "mmm yy (ex. 28 OCT 90)"},

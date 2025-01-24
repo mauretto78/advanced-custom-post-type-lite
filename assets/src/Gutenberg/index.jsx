@@ -8,7 +8,7 @@ import {logoIcon} from "./icons/logoIcon";
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { useBlockProps, InnerBlocks } = wp.blockEditor;
+const { useBlockProps } = wp.blockEditor;
 
 if ( isLodash() ) {
     _.noConflict();
@@ -44,8 +44,7 @@ const fetchFields = async () => {
              * @param parent
              * @return {{field: *, children: [], find: null, parent_field: (null|null), box: *, label: string, type: *, value: string, belongsTo: *, group: *}}
              */
-            const formatField = (groupName, box, field, parent = null) => {
-
+            const formatField = (groupName, box, field) => {
                 return {
                     group: groupName,
                     value: find +'_'+field.db_name,
