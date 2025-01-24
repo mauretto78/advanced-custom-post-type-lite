@@ -1,6 +1,6 @@
 <?php
 
-namespace ACPT_Lite\Core\Shortcodes\ACPT_Lite\DTO;
+namespace ACPT_Lite\Core\Shortcodes\ACPT\DTO;
 
 class ShortcodePayload
 {

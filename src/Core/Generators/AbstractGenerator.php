@@ -196,106 +196,13 @@ abstract class AbstractGenerator
 
 		switch ($metaBoxFieldModel->getType()){
 
-			// CHECKBOX
-			case MetaFieldModel::CHECKBOX_TYPE:
-				$checkbox = '';
-
-				foreach ($metaBoxFieldModel->getOptions() as $index => $option){
-					$id = $key . "_" . $index;
-					$checked = (in_array($option->getValue(), $value)) ? "checked='checked'": "";
-					$checkbox .= '<div style="display: flex; gap: 5px; align-content: center; align-items: center; flex-wrap: wrap;">';
-					$checkbox .= '<input id="'.$id.'" name="'. $key. '[]" value="'.$option->getValue().'" type="checkbox" '.$checked.'>';
-					$checkbox .= '<label for="'.$id.'">'.$option->getLabel().'</label>';
-					$checkbox .= '</div>';
-				}
-
-				$return .= $checkbox;
-				break;
-
-			// COLOR
-			case MetaFieldModel::COLOR_TYPE:
-				$return .= '<input type="color" name="'. $key. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" value="'. $value.'">';
-				break;
-
 			// EMAIL_TYPE
 			case MetaFieldModel::EMAIL_TYPE:
 				$return .= '<input type="email" name="'. $key. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" value="'. $value.'">';
 				break;
 
-			// NUMBER_TYPE
-			case MetaFieldModel::NUMBER_TYPE:
-				$return .= '<input type="number" name="'. $key. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" value="'. $value.'">';
-				break;
-
-            // PASSWORD
-            case MetaFieldModel::PASSWORD_TYPE:
-                $return .= '<input type="password" name="'. $key. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" >';
-                break;
-
-			// POST_OBJECT
-			case MetaFieldModel::POST_OBJECT_TYPE:
-			case MetaFieldModel::POST_OBJECT_MULTI_TYPE:
-
-				if($metaBoxFieldModel->getType() === MetaFieldModel::POST_OBJECT_TYPE){
-					$fieldName = $key;
-				} else {
-					$fieldName = $key."[]";
-				}
-
-				$postList = self::postTypeList($metaBoxFieldModel);
-
-				if(is_array($postList)){
-
-					$multiple = ($metaBoxFieldModel->getType() === MetaFieldModel::POST_OBJECT_MULTI_TYPE) ? 'multiple' : '';
-					$style = ($metaBoxFieldModel->getType() === MetaFieldModel::POST_OBJECT_MULTI_TYPE) ? 'width: 100%;' : '';
-					$select = '<select name="'. $fieldName. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" '.$multiple.' style="'.$style.'">';
-					$selected = '';
-
-					foreach($postList as $element){
-						$select .= '<optgroup label="'.$element['postType'].'">';
-
-						foreach ($element['posts'] as $id => $post){
-
-							if($metaBoxFieldModel->getType() === MetaFieldModel::POST_OBJECT_TYPE){
-								$selected = selected( $value, $id, false );
-							} else {
-								if(is_array($value)){
-									$selected = selected(in_array($id, $value), true, false);
-								}
-							}
-
-							$select .= '<option '.$selected.' value="'.$id.'">'.esc_html($post).'</option>';
-						}
-
-						$select .= '</optgroup>';
-					}
-
-					$select .= '</select>';
-					$return .= $select;
-				}
-
-				break;
-
-			// RADIO_TYPE
-			case MetaFieldModel::RADIO_TYPE:
-
-				$radio = '';
-
-				foreach ($metaBoxFieldModel->getOptions() as $index => $option){
-					$id = $key . "_" . $index;
-					$radio .= '<div style="display: flex; gap: 5px; align-content: center; align-items: center; flex-wrap: wrap;">';
-					$radio .= '<input id="'.$id.'" name="'. $key. '" value="'.$option->getValue().'" type="radio" '.checked( $value, $option->getValue(), false ).'>';
-					$radio .= '<label for="'.$id.'">'.$option->getLabel().'</label>';
-					$radio .= '</div>';
-				}
-
-				$return .= $radio;
-				break;
-
 			// SELECT_TYPE
-			// SELECT_MULTI_TYPE
 			case MetaFieldModel::SELECT_TYPE:
-			case MetaFieldModel::SELECT_MULTI_TYPE:
 
 				if($metaBoxFieldModel->getType() === MetaFieldModel::SELECT_TYPE){
 					$fieldName = $key;
@@ -303,8 +210,8 @@ abstract class AbstractGenerator
 					$fieldName = $key."[]";
 				}
 
-				$multiple = ($metaBoxFieldModel->getType() === MetaFieldModel::SELECT_MULTI_TYPE) ? 'multiple' : '';
-				$style = ($metaBoxFieldModel->getType() === MetaFieldModel::SELECT_MULTI_TYPE) ? 'width: 100%;' : '';
+				$multiple = '';
+				$style = '';
 				$select = '<select name="'. $fieldName. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" '.$multiple.' style="'.$style.'">';
 				$selected = '';
 
@@ -324,89 +231,9 @@ abstract class AbstractGenerator
 				$return .= $select;
 				break;
 
-			// TERM_OBJECT
-			case MetaFieldModel::TERM_OBJECT_TYPE:
-			case MetaFieldModel::TERM_OBJECT_MULTI_TYPE:
-
-				if($metaBoxFieldModel->getType() === MetaFieldModel::TERM_OBJECT_TYPE){
-					$fieldName = $key;
-				} else {
-					$fieldName = $key."[]";
-				}
-
-				$postList = self::termList($metaBoxFieldModel);
-
-				if(is_array($postList)){
-
-					$multiple = ($metaBoxFieldModel->getType() === MetaFieldModel::TERM_OBJECT_MULTI_TYPE) ? 'multiple' : '';
-					$style = ($metaBoxFieldModel->getType() === MetaFieldModel::TERM_OBJECT_MULTI_TYPE) ? 'width: 100%;' : '';
-					$select = '<select name="'. $fieldName. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" '.$multiple.' style="'.$style.'">';
-					$selected = '';
-
-					foreach($postList as $element){
-						$select .= '<optgroup label="'.$element['taxonomy'].'">';
-
-						foreach ($element['terms'] as $id => $post){
-							if($metaBoxFieldModel->getType() === MetaFieldModel::TERM_OBJECT_TYPE){
-								$selected = selected( $value, $id, false );
-							} else {
-								if(is_array($value)){
-									$selected = selected(in_array($id, $value), true, false);
-								}
-							}
-
-							$select .= '<option '.$selected.' value="'.$id.'">'.esc_html($post).'</option>';
-						}
-
-						$select .= '</optgroup>';
-					}
-
-					$select .= '</select>';
-					$return .= $select;
-				}
-
-				break;
-
 			// TEXTAREA_TYPE
 			case MetaFieldModel::TEXTAREA_TYPE:
 				$return .= '<textarea name="'. $key. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" rows="5">'. $value.'</textarea>';
-				break;
-
-			// USER
-			case MetaFieldModel::USER_TYPE:
-			case MetaFieldModel::USER_MULTI_TYPE:
-
-				if($metaBoxFieldModel->getType() === MetaFieldModel::USER_TYPE){
-					$fieldName = $key;
-				} else {
-					$fieldName = $key."[]";
-				}
-
-				$userList = self::userList($metaBoxFieldModel);
-
-				if(is_array($userList)){
-					$multiple = ($metaBoxFieldModel->getType() === MetaFieldModel::USER_MULTI_TYPE) ? 'multiple' : '';
-					$style = ($metaBoxFieldModel->getType() === MetaFieldModel::USER_MULTI_TYPE) ? 'width: 100%;' : '';
-					$select = '<select name="'. $fieldName. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" '.$multiple.' style="'.$style.'">';
-					$selected = '';
-
-					foreach ($userList as $id => $user){
-						if($metaBoxFieldModel->getType() === MetaFieldModel::USER_TYPE){
-							$selected = selected( $value, $id, false );
-						} else {
-							if(is_array($value)){
-								$selected = selected(in_array($id, $value), true, false);
-							}
-						}
-
-						$select .= '<option '.$selected.' value="'.$id.'">'.esc_html($user).'</option>';
-					}
-
-					$select .= '</select>';
-
-					$return .= $select;
-				}
-
 				break;
 
 			default:
@@ -423,64 +250,6 @@ abstract class AbstractGenerator
 		$return .= '</fieldset>';
 
 		return $return;
-	}
-
-	/**
-	 *
-	 *
-	 * @param MetaFieldModel $fieldModel
-	 *
-	 * @return array
-	 */
-	private static function postTypeList(MetaFieldModel $fieldModel)
-	{
-		$postQuery = [];
-
-		if($fieldModel->getAdvancedOption('filter_post_type')){
-			$postQuery['post_type'] = $fieldModel->getAdvancedOption('filter_post_type');
-		}
-
-		if($fieldModel->getAdvancedOption('filter_post_status')){
-			$postQuery['post_status'] = $fieldModel->getAdvancedOption('filter_post_status');
-		}
-
-		if($fieldModel->getAdvancedOption('filter_taxonomy')){
-			$postQuery['taxonomy'] = $fieldModel->getAdvancedOption('filter_taxonomy');
-		}
-
-		return Posts::getList($postQuery);
-	}
-
-	/**
-	 * @param MetaFieldModel $fieldModel
-	 *
-	 * @return array
-	 */
-	private static function termList(MetaFieldModel $fieldModel)
-	{
-		$termQuery = [];
-
-		if($fieldModel->getAdvancedOption('filter_taxonomy')){
-			$termQuery['taxonomy'] = $fieldModel->getAdvancedOption('filter_taxonomy');
-		}
-
-		return Terms::getList($termQuery);
-	}
-
-	/**
-	 * @param MetaFieldModel $fieldModel
-	 *
-	 * @return array
-	 */
-	private static function userList(MetaFieldModel $fieldModel)
-	{
-		$userQuery = [];
-
-		if($fieldModel->getAdvancedOption('filter_role')){
-			$userQuery['role'] = $fieldModel->getAdvancedOption('filter_role');
-		}
-
-		return Users::getList($userQuery);
 	}
 
     /**

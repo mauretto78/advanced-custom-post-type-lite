@@ -1,16 +1,13 @@
 <?php
 
-namespace ACPT_Lite\Core\Shortcodes\ACPT_Lite\Fields;
+namespace ACPT_Lite\Core\Shortcodes\ACPT\Fields;
 
 use ACPT_Lite\Constants\ExtraFields;
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Constants\Visibility;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\Repository\OptionPageRepository;
-use ACPT_Lite\Core\Shortcodes\ACPT_Lite\DTO\ShortcodePayload;
-use ACPT_Lite\Utils\Checker\FieldVisibilityChecker;
+use ACPT_Lite\Core\Shortcodes\ACPT\DTO\ShortcodePayload;
 use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Wordpress\Users;
 
@@ -115,20 +112,6 @@ abstract class AbstractField
         $before = null;
         $after  = null;
 
-        if($this->metaBoxFieldModel){
-            $advanced_options = $this->metaBoxFieldModel->getAdvancedOptions();
-
-            foreach ($advanced_options as $advanced_option){
-                if($advanced_option->getKey() === 'after'){
-                    $after = $advanced_option->getValue();
-                }
-
-                if($advanced_option->getKey() === 'before'){
-                    $before = $advanced_option->getValue();
-                }
-            }
-        }
-
         return [
             'after' => $after,
             'before' => $before,
@@ -140,15 +123,6 @@ abstract class AbstractField
      */
     protected function isFieldVisible()
     {
-        if($this->metaBoxFieldModel !== null and $this->payload->id !== null){
-	        return FieldVisibilityChecker::check(
-	        	Visibility::IS_FRONTEND,
-		        $this->payload->id,
-		        $this->payload->belongsTo,
-		        $this->metaBoxFieldModel
-	        );
-        }
-
         return true;
     }
 
