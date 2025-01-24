@@ -130,15 +130,6 @@ const Settings = () => {
                                enable_tax={enable_tax}
                            />
                         </Tab>
-                        <Tab title={useTranslation("Connect external services")}>
-                            <ConnectExternalServicesTab
-                                google_maps_api_key={google_maps_api_key}
-                                google_recaptcha_site_key={google_recaptcha_site_key}
-                                google_recaptcha_secret_key={google_recaptcha_secret_key}
-                                cloudflare_turnstile_site_key={cloudflare_turnstile_site_key}
-                                cloudflare_turnstile_secret_key={cloudflare_turnstile_secret_key}
-                            />
-                        </Tab>
                         <Tab title={useTranslation("Performances")}>
                             <PerformancesTab enable_cache={enable_cache} />
                         </Tab>
