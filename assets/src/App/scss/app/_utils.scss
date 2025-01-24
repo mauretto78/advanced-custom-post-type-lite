@@ -535,8 +535,10 @@ a.color-warning {
   }
 }
 
-.responsive {
-  overflow-x: auto;
+@media screen and (max-width: 960px){
+  .responsive {
+    overflow-x: auto;
+  }
 }
 
 .acpt-code {
