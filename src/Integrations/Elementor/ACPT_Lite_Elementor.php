@@ -113,18 +113,11 @@ class ACPT_Lite_Elementor extends AbstractIntegration
     {
         foreach ($metaGroup->getBoxes() as $metaBox){
             foreach ($metaBox->getFields() as $boxFieldModel){
-
-                $notAllowedTypes = [
-                    MetaFieldModel::CLONE_TYPE
-                ];
-
-                if(!in_array($boxFieldModel->getType(), $notAllowedTypes)){
-                    $boxFieldModel->setBelongsAndFindLabels($belong);
-                    $widgetsManager->register( new WidgetGenerator([], [
-                        'boxFieldModel' => $boxFieldModel,
-                        'find' => $boxFieldModel->getFindLabel(),
-                    ]));
-                }
+                $boxFieldModel->setBelongsAndFindLabels($belong);
+                $widgetsManager->register( new WidgetGenerator([], [
+                    'boxFieldModel' => $boxFieldModel,
+                    'find' => $boxFieldModel->getFindLabel(),
+                ]));
             }
         }
     }

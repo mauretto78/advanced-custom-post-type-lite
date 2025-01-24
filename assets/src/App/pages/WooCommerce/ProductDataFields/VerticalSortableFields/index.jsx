@@ -95,7 +95,7 @@ const VerticalSortableFields = ({fields}) => {
 
     return (
         <React.Fragment>
-            <div className="flex-between s-8">
+            <div className={`flex-between s-8 ${fields.length === 0 ? " mb-12" : ""}`}>
                 <div className="i-flex-center s-8">
                     <h3>
                         {useTranslation("product data fields")}

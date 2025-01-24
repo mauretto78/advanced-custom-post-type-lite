@@ -4,6 +4,9 @@ import {useFormContext, useWatch} from "react-hook-form";
 import {scrollToId} from "../../../../utils/scroll";
 import {styleVariants} from "../../../../constants/styles";
 import Badge from "../../../../components/Badge";
+import {useSortable} from "@dnd-kit/sortable";
+import {CSS} from "@dnd-kit/utilities";
+import {Icon} from "@iconify/react";
 
 const QuickNavigationField = ({field, index}) => {
 
@@ -13,9 +16,23 @@ const QuickNavigationField = ({field, index}) => {
         name: `fields.${index}.name`
     });
 
+    // DND-kit
+    const {attributes, listeners, setNodeRef, isDragging, transform} = useSortable({id: field.id});
+    const style = {
+        transform: CSS.Translate.toString(transform)
+    };
+
     return (
-        <React.Fragment>
-            <div className="tree-el flex-between s-8" style={{"--level": 0}}>
+        <div
+            className="tree-el flex-between s-8"
+            key={field.id}
+            ref={setNodeRef}
+            style={style}
+        >
+            <div className="i-flex-center s-8">
+                <span className="cursor-move top-2 handle" {...attributes} {...listeners}>
+                    <Icon icon="bx:dots-vertical-rounded" color="#777" width={18} />
+                </span>
                 <span
                     className="text-ellipsis cursor-pointer"
                     onClick={(e) => {
@@ -25,11 +42,11 @@ const QuickNavigationField = ({field, index}) => {
                 >
                     {watchedBoxName ? watchedBoxName : field.name}
                 </span>
-                <Badge style={styleVariants.SECONDARY}>
-                    F
-                </Badge>
             </div>
-        </React.Fragment>
+            <Badge style={styleVariants.SECONDARY}>
+                F
+            </Badge>
+        </div>
     );
 };
 

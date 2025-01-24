@@ -4,7 +4,7 @@ import {useSortable} from "@dnd-kit/sortable";
 import {CSS} from "@dnd-kit/utilities";
 import {useDispatch, useSelector} from "react-redux";
 import {get, useFormContext, useWatch} from "react-hook-form";
-import {RADIO, SELECT, SELECT_MULTI, WooCommerceFieldsList} from "../../../../constants/woocommerce_fields";
+import {SELECT, WooCommerceFieldsList} from "../../../../constants/woocommerce_fields";
 import InputHidden from "../../../../components/Forms/InputHidden";
 import Label from "../../../../components/Forms/Label";
 import Select from "../../../../components/Forms/Select";
@@ -82,9 +82,7 @@ const ProductDataFieldOpen = ({field, index}) => {
 
     const fieldHasOptions = (fieldType) => {
         return (
-            fieldType === SELECT ||
-            fieldType === SELECT_MULTI ||
-            fieldType === RADIO
+            fieldType === SELECT
         );
     };
 
