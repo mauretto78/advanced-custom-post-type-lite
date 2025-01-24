@@ -40,8 +40,6 @@ const QuickNavigationBox = ({index, box}) => {
                         <React.Fragment>
                             <QuickNavigationField
                                 level={0}
-                                boxIndex={index}
-                                fieldIndex={fieldIndex}
                                 boxId={box.id}
                                 field={field}
                             />
