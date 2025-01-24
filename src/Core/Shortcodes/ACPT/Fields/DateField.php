@@ -35,34 +35,10 @@ class DateField extends AbstractField
     		return $this->payload->dateFormat;
 	    }
 
-    	if($this->metaBoxFieldModel !== null and $this->metaBoxFieldModel->getAdvancedOption('date_format') !== null){
-    		return $this->metaBoxFieldModel->getAdvancedOption('date_format');
-	    }
-
 	    if(!empty(get_option('date_format'))){
 		    return get_option('date_format');
 	    }
 
 	    return "Y-m-d";
-    }
-
-	/**
-	 * @return mixed|void|null
-	 */
-    protected function getDefaultTimeFormat()
-    {
-	    if(!empty($this->payload->timeFormat)){
-		    return $this->payload->timeFormat;
-	    }
-
-	    if($this->metaBoxFieldModel !== null and  $this->metaBoxFieldModel->getAdvancedOption('time_format') !== null){
-		    return $this->metaBoxFieldModel->getAdvancedOption('time_format');
-	    }
-
-	    if(!empty(get_option('time_format'))){
-	    	return get_option('time_format');
-	    }
-
-	    return "H:i";
     }
 }

@@ -397,6 +397,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	public function canBeQuickEdited(): bool
 	{
 		$textualTypes = [
+            self::DATE_TYPE,
 			self::SELECT_TYPE,
 			self::EMAIL_TYPE,
 			self::TEXT_TYPE,

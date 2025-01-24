@@ -9,7 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {useFieldArray, useFormContext} from "react-hook-form";
 import {getFormId} from "../../../../../../utils/fields";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
-import LoadDatasetModal from "../../../../Modal/LoadDatasetModal";
 
 const MetaOptionList = ({boxId, boxIndex, fieldIndex, fieldId, parentFieldId, options, isMulti}) => {
 
@@ -131,11 +130,6 @@ const MetaOptionList = ({boxId, boxIndex, fieldIndex, fieldId, parentFieldId, op
                         >
                             {useTranslation("Add option")}
                         </a>
-                        <LoadDatasetModal
-                            boxId={boxId}
-                            fieldId={fieldId}
-                            parentFieldId={parentFieldId}
-                        />
                     </div>
                 </div>
             ) : (
@@ -153,11 +147,6 @@ const MetaOptionList = ({boxId, boxIndex, fieldIndex, fieldId, parentFieldId, op
                         >
                             {useTranslation("Add option")}
                         </a>
-                        <LoadDatasetModal
-                            boxId={boxId}
-                            fieldId={fieldId}
-                            parentFieldId={parentFieldId}
-                        />
                     </div>
                 </div>
             )}

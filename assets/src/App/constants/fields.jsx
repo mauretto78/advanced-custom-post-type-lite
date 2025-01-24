@@ -37,19 +37,11 @@ export const fieldsList = (nestingLevel) => {
         {
             label: useTranslation("BASIC"),
             options: [
-                fieldListElement(fieldTypes.EDITOR),
-                fieldListElement(fieldTypes.NUMBER),
-                fieldListElement(fieldTypes.RANGE),
+                fieldListElement(fieldTypes.DATE),
+                fieldListElement(fieldTypes.EMAIL),
                 fieldListElement(fieldTypes.TEXT),
                 fieldListElement(fieldTypes.TEXTAREA),
-                fieldListElement(fieldTypes.PASSWORD),
-                fieldListElement(fieldTypes.LIST),
-                fieldListElement(fieldTypes.HTML),
                 fieldListElement(fieldTypes.SELECT),
-                fieldListElement(fieldTypes.SELECT_MULTI),
-                fieldListElement(fieldTypes.TOGGLE),
-                fieldListElement(fieldTypes.CHECKBOX),
-                fieldListElement(fieldTypes.RADIO),
             ]
         },
 

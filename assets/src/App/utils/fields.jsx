@@ -6,6 +6,7 @@ import {fieldTypes} from "../constants/fields";
  */
 export const canBeQuickEdited = (type) => {
     const allowed = [
+        fieldTypes.DATE,
         fieldTypes.SELECT,
         fieldTypes.EMAIL,
         fieldTypes.TEXT,

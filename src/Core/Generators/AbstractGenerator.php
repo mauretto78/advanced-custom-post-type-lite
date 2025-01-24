@@ -193,6 +193,11 @@ abstract class AbstractGenerator
 
 		switch ($metaBoxFieldModel->getType()){
 
+            // DATE_TYPE
+            case MetaFieldModel::DATE_TYPE:
+                $return .= '<input type="date" name="'. $key. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" value="'. $value.'">';
+                break;
+
 			// EMAIL_TYPE
 			case MetaFieldModel::EMAIL_TYPE:
 				$return .= '<input type="email" name="'. $key. '" data-acpt-column="column-'. $key. '" class="inline-edit-menu-order-input" value="'. $value.'">';
