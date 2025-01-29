@@ -190,6 +190,6 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 * Added get_acpt_field and get_acpt_meta_field_objects functions
 
-= 2.0.8 (2025-01-24) =
+= 2.0.8 (2025-01-29) =
 
 * Improvements and fixes from ACPT v2.0.20
