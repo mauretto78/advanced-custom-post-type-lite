@@ -143,7 +143,7 @@ class ACPT_Lite_Ajax
 	{
 		try {
 			// version
-			$current_version = filemtime(plugin_dir_path( __FILE__ ) . "../../advanced-custom-post-type.php");
+			$current_version = filemtime(plugin_dir_path( __FILE__ ) . "../../".ACPT_LITE_PLUGIN_NAME.".php");
 			update_option('acpt_lite_version', $current_version, false);
 
 			// cache
