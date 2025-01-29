@@ -5,4 +5,6 @@ stats.json
 /vendor/
 node_modules/
 /bundle
+/tags/
+/trunk/
 .phpunit.result.cache
