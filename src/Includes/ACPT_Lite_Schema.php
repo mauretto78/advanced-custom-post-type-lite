@@ -21,25 +21,57 @@ class ACPT_Lite_Schema
     	return [
 		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG ) => [
 			    'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG )."` (
-					  `field_id` varchar(36) NOT NULL,
-					  `rule_id` varchar(36)  NOT NULL,
-					  PRIMARY KEY (`field_id`,`rule_id`)
+					    `id` VARCHAR(36) UNIQUE NOT NULL,
+                        `belongs` VARCHAR(36) NOT NULL,
+                        `operator` VARCHAR(20) NULL,
+                        `find` VARCHAR(255) NULL,
+                        `logic` VARCHAR(3) DEFAULT NULL,
+                        `sort` INT(11),
+                        PRIMARY KEY(`id`)
 					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
-				    'field_id' => [
-					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 36,
-					    'unique' => false,
-					    'nullable' => false,
-					    'default' => null
-				    ],
-				    'rule_id' => [
-					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 36,
-					    'unique' => false,
-					    'nullable' => false,
-					    'default' => null
-				    ],
+                    'id' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 36,
+                        'unique' => true,
+                        'nullable' => false,
+                        'default' => null
+                    ],
+                    'belongs' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 36,
+                        'unique' => false,
+                        'nullable' => false,
+                        'default' => null
+                    ],
+                    'operator' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 20,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => null
+                    ],
+                    'find' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => null
+                    ],
+                    'logic' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 3,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => null
+                    ],
+                    'sort'  => [
+                        'type' => self::COLUMN_INT,
+                        'length' => 11,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => 'NULL'
+                    ],
 			    ],
 		    ],
 		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) => [
