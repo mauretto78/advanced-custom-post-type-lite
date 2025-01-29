@@ -549,7 +549,7 @@ class ACPT_Lite_Admin
 	    $actionLinks = [];
 
 	    if ( 'acpt-lite/acpt-lite.php' === $plugin_file ) {
-	        $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page=advanced-custom-post-type#/settings' ).'">'.Translator::translate('Settings').'</a>';
+	        $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page='.ACPT_LITE_PLUGIN_NAME.'#/settings' ).'">'.Translator::translate('Settings').'</a>';
 		    $actionLinks['documentation'] = '<a target="_blank" href="https://docs.acpt.io/">'.Translator::translate('Documentation').'</a>';
 	    }
 
