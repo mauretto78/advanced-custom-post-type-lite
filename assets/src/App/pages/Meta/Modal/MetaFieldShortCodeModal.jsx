@@ -121,9 +121,10 @@ const MetaFieldShortCodeModal = ({boxId, field, parentFieldId, parentBlockId}) =
                                     <Tooltip
                                         label={useTranslation("Meta-key")}
                                         tip={
-                                            <div className="flex-column s-8 color-gray">
+                                            <div className="flex-column s-4">
                                                 <div>{useTranslation("This is the meta-key of this field.")}</div>
                                                 <div>{useTranslation("Use it in functions like get_post_meta() to retrieve saved meta field data.")}</div>
+                                                <div>{useTranslation("Prepend the option page slug to retrieve option page meta fields.")}<br/>Example: page-slug_{metaKey}</div>
                                             </div>
                                         }
                                     />
@@ -136,11 +137,7 @@ const MetaFieldShortCodeModal = ({boxId, field, parentFieldId, parentBlockId}) =
                                 <div className="mb-8 color-black">
                                     <Tooltip
                                         label={shortCodes && shortCodes.length > 1 ? useTranslation("Shortcodes") : useTranslation("Shortcode")}
-                                        tip={
-                                            <div className="flex-column s-8 color-gray">
-                                                <div>{useTranslation("Use this shortcode to display the meta field on your frontend.")}</div>
-                                            </div>
-                                        }
+                                        tip={useTranslation("Use this shortcode to display the meta field on your frontend.")}
                                     />
                                 </div>
                                 {shortCodes && (

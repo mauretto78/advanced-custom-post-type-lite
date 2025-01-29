@@ -36,7 +36,22 @@ class FetchFindQuery implements QueryInterface
 	{
 		$return = '';
 
+		// Prevent any error if one of those functions is undefined:
+		if( !function_exists('get_post') ) {
+			include_once( ABSPATH . 'wp-includes/post.php' );
+		}
+
+		if( !function_exists('get_user_by') ) {
+			include_once( ABSPATH . 'wp-includes/pluggable.php' );
+		}
+
+		if( !function_exists('get_term') ) {
+			include_once( ABSPATH . 'wp-includes/taxonomy.php' );
+		}
+
 		switch ($this->belongsTo){
+
+			case BelongsTo::PARENT_POST_ID:
 			case BelongsTo::POST_ID:
 				$return = get_the_title($this->id);
 				break;

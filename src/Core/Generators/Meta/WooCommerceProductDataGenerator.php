@@ -8,6 +8,10 @@ use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 use ACPT_Lite\Utils\Data\Meta;
+use ACPT_Lite\Utils\Wordpress\Posts;
+use ACPT_Lite\Utils\Wordpress\Terms;
+use ACPT_Lite\Utils\Wordpress\Translator;
+use ACPT_Lite\Utils\Wordpress\Users;
 
 class WooCommerceProductDataGenerator extends AbstractGenerator
 {
@@ -95,69 +99,170 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
 
                     /** @var WooCommerceProductDataFieldOptionModel $option */
                     foreach($fieldModel->getOptions() as $option){
-                        $options[$option->getValue()] = $option->getLabel();
+                        $options[Translator::translateString($option->getValue())] = Translator::translateString($option->getLabel());
                     }
 
-                    //@TODO add multi select
-                    // https://jeroensormani.com/adding-custom-woocommerce-product-fields/
-
                     switch ($fieldModel->getType()){
+
+                        case WooCommerceProductDataFieldModel::EMAIL_TYPE:
                         case WooCommerceProductDataFieldModel::TEXT_TYPE:
-                                woocommerce_wp_text_input( [
-                                        'id' => $fieldSluggedName,
-                                        'name' => $fieldSluggedName,
-                                        'value' => $field_value,
-                                        'label' => __($fieldModel->getName(), 'woocommerce'),
-                                        'description' => __($fieldModel->getDescription(), 'woocommerce'),
-                                        'desc_tip' => true,
-                                ] );
+                        case WooCommerceProductDataFieldModel::PHONE_TYPE:
+                        case WooCommerceProductDataFieldModel::NUMBER_TYPE:
+                        case WooCommerceProductDataFieldModel::URL_TYPE:
+                        case WooCommerceProductDataFieldModel::COLOR_TYPE:
+                        case WooCommerceProductDataFieldModel::DATE_TYPE:
+                        case WooCommerceProductDataFieldModel::DATE_TIME_TYPE:
+
+                            $type = $this->getTextInputType($fieldModel->getType());
+
+                            woocommerce_wp_text_input( [
+                                'id' => $fieldSluggedName,
+                                'name' => $fieldSluggedName,
+                                'type' => $type,
+                                'value' => $field_value,
+                                'label' => __($fieldModel->getName(), 'woocommerce'),
+                                'description' => __($fieldModel->getDescription(), 'woocommerce'),
+                                'desc_tip' => true,
+                            ] );
                             break;
 
                         case WooCommerceProductDataFieldModel::TEXTAREA_TYPE:
                             woocommerce_wp_textarea_input( [
-                                    'id' => $fieldSluggedName,
-                                    'name' => $fieldSluggedName,
-                                    'value' => $field_value,
-                                    'label' => __($fieldModel->getName(), 'woocommerce'),
-                                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
-                                    'desc_tip' => true,
+                                'id' => $fieldSluggedName,
+                                'name' => $fieldSluggedName,
+                                'value' => $field_value,
+                                'label' => __($fieldModel->getName(), 'woocommerce'),
+                                'description' => __($fieldModel->getDescription(), 'woocommerce'),
+                                'desc_tip' => true,
                             ] );
                             break;
 
                         case WooCommerceProductDataFieldModel::SELECT_TYPE:
                             woocommerce_wp_select( [
-                                    'id' => $fieldSluggedName,
-                                    'name' => $fieldSluggedName,
-                                    'value' => $field_value,
-                                    'label' => __($fieldModel->getName(), 'woocommerce'),
-                                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
-                                    'options' => $options,
-                                    'desc_tip' => true,
+                                'id' => $fieldSluggedName,
+                                'name' => $fieldSluggedName,
+                                'value' => $field_value,
+                                'label' => __($fieldModel->getName(), 'woocommerce'),
+                                'description' => __($fieldModel->getDescription(), 'woocommerce'),
+                                'options' => $options,
+                                'desc_tip' => true,
                             ] );
                             break;
 
+	                    case WooCommerceProductDataFieldModel::SELECT_MULTI_TYPE:
+		                    woocommerce_wp_select( [
+			                    'id' => $fieldSluggedName,
+			                    'name' => $fieldSluggedName.'[]',
+			                    'value' => $field_value,
+			                    'label' => __($fieldModel->getName(), 'woocommerce'),
+			                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
+			                    'options' => $options,
+			                    'desc_tip' => true,
+			                    'class' => 'wc-enhanced-select',
+			                    'custom_attributes' => array('multiple' => 'multiple')
+                            ] );
+		                    break;
+
                         case WooCommerceProductDataFieldModel::RADIO_TYPE:
                             woocommerce_wp_radio( [
-                                    'id' => $fieldSluggedName,
-                                    'name' => $fieldSluggedName,
-                                    'value' => $field_value,
-                                    'label' => __($fieldModel->getName(), 'woocommerce'),
-                                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
-                                    'options' => $options,
-                                    'desc_tip' => true,
+                                'id' => $fieldSluggedName,
+                                'name' => $fieldSluggedName,
+                                'value' => $field_value,
+                                'label' => __($fieldModel->getName(), 'woocommerce'),
+                                'description' => __($fieldModel->getDescription(), 'woocommerce'),
+                                'options' => $options,
+                                'desc_tip' => true,
                             ] );
                             break;
 
                         case WooCommerceProductDataFieldModel::CHECKBOX_TYPE:
                             woocommerce_wp_checkbox( [
-                                    'id' => $fieldSluggedName,
-                                    'name' => $fieldSluggedName,
-                                    'value' => $field_value,
-                                    'label' => __($fieldModel->getName(), 'woocommerce'),
-                                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
-                                    'desc_tip' => true,
+                                'id' => $fieldSluggedName,
+                                'name' => $fieldSluggedName,
+                                'value' => $field_value,
+                                'label' => __($fieldModel->getName(), 'woocommerce'),
+                                'description' => __($fieldModel->getDescription(), 'woocommerce'),
+                                'desc_tip' => true,
                             ] );
                             break;
+
+	                    case WooCommerceProductDataFieldModel::POST_OBJECT_TYPE:
+		                    woocommerce_wp_select( [
+			                    'id' => $fieldSluggedName,
+			                    'name' => $fieldSluggedName,
+			                    'value' => $field_value,
+			                    'label' => __($fieldModel->getName(), 'woocommerce'),
+			                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
+			                    'options' => $this->getPostList(),
+			                    'desc_tip' => true,
+		                    ] );
+		                    break;
+
+	                    case WooCommerceProductDataFieldModel::POST_OBJECT_MULTI_TYPE:
+		                    woocommerce_wp_select( [
+			                    'id' => $fieldSluggedName,
+			                    'name' => $fieldSluggedName.'[]',
+			                    'value' => $field_value,
+			                    'label' => __($fieldModel->getName(), 'woocommerce'),
+			                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
+			                    'options' => $this->getPostList(),
+			                    'desc_tip' => true,
+			                    'class' => 'wc-enhanced-select',
+			                    'custom_attributes' => array('multiple' => 'multiple')
+		                    ] );
+		                    break;
+
+	                    case WooCommerceProductDataFieldModel::TERM_OBJECT_TYPE:
+		                    woocommerce_wp_select( [
+			                    'id' => $fieldSluggedName,
+			                    'name' => $fieldSluggedName,
+			                    'value' => $field_value,
+			                    'label' => __($fieldModel->getName(), 'woocommerce'),
+			                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
+			                    'options' => $this->getTermsList(),
+			                    'desc_tip' => true,
+		                    ] );
+		                    break;
+
+	                    case WooCommerceProductDataFieldModel::TERM_OBJECT_MULTI_TYPE:
+		                    woocommerce_wp_select( [
+			                    'id' => $fieldSluggedName,
+			                    'name' => $fieldSluggedName.'[]',
+			                    'value' => $field_value,
+			                    'label' => __($fieldModel->getName(), 'woocommerce'),
+			                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
+			                    'options' => $this->getTermsList(),
+			                    'desc_tip' => true,
+			                    'class' => 'wc-enhanced-select',
+			                    'custom_attributes' => array('multiple' => 'multiple')
+		                    ] );
+		                    break;
+
+	                    case WooCommerceProductDataFieldModel::USER_TYPE:
+		                    woocommerce_wp_select( [
+			                    'id' => $fieldSluggedName,
+			                    'name' => $fieldSluggedName,
+			                    'value' => $field_value,
+			                    'label' => __($fieldModel->getName(), 'woocommerce'),
+			                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
+			                    'options' => $this->getUserList(),
+			                    'desc_tip' => true,
+		                    ] );
+		                    break;
+
+	                    case WooCommerceProductDataFieldModel::USER_MULTI_TYPE:
+		                    woocommerce_wp_select( [
+			                    'id' => $fieldSluggedName,
+			                    'name' => $fieldSluggedName.'[]',
+			                    'value' => $field_value,
+			                    'label' => __($fieldModel->getName(), 'woocommerce'),
+			                    'description' => __($fieldModel->getDescription(), 'woocommerce'),
+			                    'options' => $this->getUserList(),
+			                    'desc_tip' => true,
+			                    'class' => 'wc-enhanced-select',
+			                    'custom_attributes' => array('multiple' => 'multiple')
+		                    ] );
+		                    break;
                     }
                 }
                 ?>
@@ -165,6 +270,88 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
             <?php
         }
     }
+
+    /**
+     * @param $type
+     * @return string
+     */
+    private function getTextInputType($type)
+    {
+        switch ($type){
+            case WooCommerceProductDataFieldModel::EMAIL_TYPE:
+                return 'email';
+
+            case WooCommerceProductDataFieldModel::PHONE_TYPE:
+                return 'tel';
+
+            case WooCommerceProductDataFieldModel::NUMBER_TYPE:
+                return 'number';
+
+            case WooCommerceProductDataFieldModel::URL_TYPE:
+                return 'url';
+
+            case WooCommerceProductDataFieldModel::COLOR_TYPE:
+                return 'color';
+
+            case WooCommerceProductDataFieldModel::DATE_TYPE:
+                return 'date';
+
+            case WooCommerceProductDataFieldModel::DATE_TIME_TYPE:
+                return 'datetime-local';
+
+            default:
+            case WooCommerceProductDataFieldModel::TEXT_TYPE:
+                return 'text';
+        }
+    }
+
+	/**
+	 * @return array
+	 */
+    private function getPostList()
+    {
+        $items = [];
+        $posts = Posts::getList([]);
+
+	    foreach($posts as $element){
+		    foreach ($element['posts'] as $id => $post){
+			    $items[$id] = $element['postType'] . ' - ' . $post;
+		    }
+	    }
+
+    	return $items;
+    }
+
+	/**
+	 * @return array
+	 */
+	private function getTermsList()
+	{
+		$items = [];
+		$posts = Terms::getList([]);
+
+		foreach($posts as $element){
+			foreach ($element['terms'] as $id => $term){
+				$items[$id] = $element['taxonomy'] . ' - ' . $term;
+			}
+		}
+
+		return $items;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getUserList()
+	{
+		$items = [];
+
+		foreach(Users::getList() as $id => $user){
+			$items[$id] = $user;
+		}
+
+		return $items;
+	}
 
     /**
      * Save data
@@ -180,12 +367,32 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
                 $sluggedName = $productDataModel->getSluggedName();
                 $fieldSluggedName = $sluggedName . '_' . $fieldModel->getSluggedName();
 
-                $fieldValue = isset($_POST[$fieldSluggedName]) && !empty($_POST[$fieldSluggedName]) ? sanitize_text_field($_POST[$fieldSluggedName]) : '';
+                $fieldValue = isset($_POST[$fieldSluggedName]) && !empty($_POST[$fieldSluggedName]) ? $this->sanitizeData($_POST[$fieldSluggedName]) : '';
                 $product->update_meta_data('_'.$fieldSluggedName, $fieldValue );
             }
         }
 
         $product->save();
+    }
+
+	/**
+	 * @param $data
+	 *
+	 * @return array|string
+	 */
+    private function sanitizeData($data)
+    {
+        if(is_array($data)){
+            $sanitized = [];
+
+            foreach ($data as $datum){
+	            $sanitized[] = sanitize_text_field($datum);
+            }
+
+            return $sanitized;
+        }
+
+        return sanitize_text_field($data);
     }
 
     /**
@@ -233,6 +440,9 @@ class WooCommerceProductDataGenerator extends AbstractGenerator
 
                 foreach ($fields as $label => $field){
                     if($field and $field !== ''){
+
+                        $field = (is_array($field)) ? (implode(", ", $field)) : $field;
+
                         echo '<tr>';
                         echo '<th align="left">'.$label.'</th>';
                         echo '<td>'.$field.'</td>';

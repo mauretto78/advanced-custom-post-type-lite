@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useReducer, useRef} from 'react';
 import Layout from "../../layout/Layout";
 import useTranslation from "../../hooks/useTranslation";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,18 +15,23 @@ import Pagination from "../../components/Pagination";
 import ButtonLink from "../../components/ButtonLink";
 import {toast} from "react-hot-toast";
 import {FormProvider, useForm, useWatch} from "react-hook-form";
-import BulkActions from "./BulkActions";
 import {wpAjaxRequest} from "../../utils/ajax";
 import {metaTypes} from "../../constants/metaTypes";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {scrollToTop} from "../../utils/scroll";
 import SyncPostsModal from "./Modal/SyncPostsModal";
+import BulkActions from "../../components/BulkActions";
+import {hideElements, isElementHidden} from "../../utils/localStorage";
+import {flushCookieMessages, setCookieMessage} from "../../utils/cookies";
 
 const CustomPostTypeList = () => {
 
     const documentGlobals = document.globals;
     const settings = documentGlobals.settings;
     const globals = documentGlobals.globals;
+
+    // re-render component
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     // auto-animate
     const [parent] = useAutoAnimate();
@@ -53,14 +58,22 @@ const CustomPostTypeList = () => {
     const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
     const totalPages = Math.ceil( data.count / perPage );
 
+    /**
+     * init
+     */
     useEffect(() => {
         metaTitle(useTranslation("Registered Custom Post Types"));
         dispatch(fetchCustomPostTypes({
             page: page ? page : 1,
             perPage: perPage
-        }));
+        })).then(res => {
+            flushCookieMessages();
+        });
     }, [page]);
 
+    /**
+     * toggle select all
+     */
     useEffect(() => {
 
         /**
@@ -94,57 +107,62 @@ const CustomPostTypeList = () => {
     }, [watchedElements]);
 
     /**
-     *
-     * @return {boolean}
+     * re-render the app when hidden elements are restored
      */
-    const showBulkActions = () => {
-
-        if(!watchedElements){
-            return false;
-        }
-
-        for (const [key, value] of Object.entries(watchedElements)) {
-            if(value === true){
-                return true;
-            }
-        }
-
-        return false;
-    };
+    document.addEventListener("restoredElement", function(){
+        forceUpdate();
+    });
 
     const onSubmit = (data) => {
         methods.reset();
         data.belongsTo = metaTypes.CUSTOM_POST_TYPE;
+        const action = data.action;
 
-        wpAjaxRequest('bulkActionsAction', data)
-            .then(res => {
-                if(res.success === true){
+        if(!action){
+            return;
+        }
 
-                    // flush message
-                    switch (data.action) {
-                        case "delete":
-                            toast.success(useTranslation("Custom post type successfully deleted. The browser will refresh after 5 seconds."));
-                            methods.resetField("elements");
+        switch(action){
+
+            // hide elements
+            case "hide":
+                hideElements(data);
+                break;
+
+            // delete elements
+            // duplicate elements
+            case "delete":
+            case "duplicate":
+                wpAjaxRequest('bulkActionsAction', data)
+                    .then(res => {
+                        if(res.success === true){
+
+                            // flush message
+                            switch (action) {
+                                case "delete":
+                                    setCookieMessage("Custom post type successfully deleted.");
+                                    break;
+
+                                case "duplicate":
+                                    setCookieMessage("Custom post type successfully duplicated.");
+                                    break;
+                            }
+
                             scrollToTop();
+                            refreshPage();
+                        } else {
+                            toast.error(res.error);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        toast.error(useTranslation("Unknown error, please retry later"));
+                    })
+                ;
+                break;
+        }
 
-                            // refresh items
-                            dispatch(fetchCustomPostTypes({
-                                page: page ? page : 1,
-                                perPage: perPage
-                            }));
-
-                            refreshPage(5000);
-                            break;
-                    }
-                } else {
-                    toast.error(res.error);
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                toast.error(useTranslation("Unknown error, please retry later"));
-            })
-        ;
+        methods.resetField("elements");
     };
 
     /**
@@ -166,6 +184,15 @@ const CustomPostTypeList = () => {
         });
 
         return match > 0;
+    };
+
+    const handleSelectAll = (checked) => {
+        data.records
+            .filter(r => r.isNative === false)
+            .filter(r => !isElementHidden(r.name, metaTypes.CUSTOM_POST_TYPE))
+            .map((r) => {
+                methods.setValue(`elements.${r.name}`, checked);
+        });
     };
 
     const actions = [
@@ -193,16 +220,12 @@ const CustomPostTypeList = () => {
                         }
                     ]}
                 >
-                    <div ref={parent}>
-                        {showBulkActions() && (
-                            <BulkActions />
-                        )}
-                    </div>
+                    <BulkActions belongsTo={metaTypes.CUSTOM_POST_TYPE} />
                     {data.records && data.records.length > 0 ? (
-                        <div className="responsive">
+                        <div className="responsive with-shadow b-rounded">
                             <table
                                 data-cy="cpt-table"
-                                className={`acpt-table with-shadow ${globals.is_rtl ? 'rtl' : ''}`}
+                                className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}
                             >
                                 <thead>
                                     <tr>
@@ -219,11 +242,7 @@ const CustomPostTypeList = () => {
                                                     type="checkbox"
                                                     id="all"
                                                     defaultChecked={false}
-                                                    onClick={e => {
-                                                        data.records.filter(r => r.isNative === false).map((r) => {
-                                                            methods.setValue(`elements.${r.name}`, e.currentTarget.checked);
-                                                        });
-                                                    }}
+                                                    onClick={e => handleSelectAll(e.currentTarget.checked)}
                                                 />
                                                 <span/>
                                             </label>
@@ -258,18 +277,24 @@ const CustomPostTypeList = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.records && data.records.map((record) => (
-                                        <CustomPostTypeElement
-                                            key={record.id}
-                                            record={record}
-                                            showWooCommerceColumn={showWooCommerceColumn()}
-                                        />
-                                    ))}
+                                    {data.records && data.records.map((record) => {
+                                        if(!isElementHidden(record.name, metaTypes.CUSTOM_POST_TYPE)){
+                                            return (
+                                                <CustomPostTypeElement
+                                                    key={record.id}
+                                                    record={record}
+                                                    page={page}
+                                                    perPage={perPage}
+                                                    showWooCommerceColumn={showWooCommerceColumn()}
+                                                />
+                                            );
+                                        }
+                                    })}
                                 </tbody>
                                 {totalPages > 1 && (
                                     <tfoot>
                                     <tr>
-                                        <td colSpan={7}>
+                                        <td colSpan={showWooCommerceColumn() ? 8 : 7}>
                                             <Pagination
                                                 currentPage={page ? parseInt(page) : 1}
                                                 totalPages={totalPages}
@@ -291,7 +316,5 @@ const CustomPostTypeList = () => {
         </FormProvider>
     );
 };
-
-CustomPostTypeList.propTypes = {};
 
 export default CustomPostTypeList;

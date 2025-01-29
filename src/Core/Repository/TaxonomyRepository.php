@@ -22,7 +22,7 @@ class TaxonomyRepository extends AbstractRepository
     {
         $sql = "
             INSERT INTO
-                `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "`
+                `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."`
                 (
                     `custom_post_type_id`, 
                     `taxonomy_id` 
@@ -52,10 +52,14 @@ class TaxonomyRepository extends AbstractRepository
         $baseQuery = "
             SELECT 
                 count(id) as count
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."`
             ";
 
         $results = ACPT_Lite_DB::getResults($baseQuery);
+
+        if(empty($results)){
+            return 0;
+        }
 
         return (int)$results[0]->count;
     }
@@ -72,8 +76,8 @@ class TaxonomyRepository extends AbstractRepository
         $taxonomyId = self::getId($taxonomy);
 
         if($taxonomyId){
-            ACPT_Lite_DB::executeQueryOrThrowException( "DELETE FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "` WHERE id = %s;", [$taxonomyId]);
-            ACPT_Lite_DB::executeQueryOrThrowException( "DELETE FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "` WHERE taxonomy_id = %s;", [$taxonomyId]);
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` WHERE id = %s;", [$taxonomyId]);
+            ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` WHERE taxonomy_id = %s;", [$taxonomyId]);
             MetaRepository::deleteBelongs(MetaTypes::TAXONOMY, $taxonomy);
         }
 
@@ -91,7 +95,7 @@ class TaxonomyRepository extends AbstractRepository
     {
         $sql = "
             DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."`
                 WHERE custom_post_type_id = %s
             ";
 
@@ -112,7 +116,7 @@ class TaxonomyRepository extends AbstractRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."`
             WHERE slug = %s
             ";
 
@@ -138,8 +142,8 @@ class TaxonomyRepository extends AbstractRepository
         $args = [];
 
 	    if(isset($meta['customPostType'])){
-		    $join .= " LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "` tp ON tp.taxonomy_id = t.id";
-		    $join .= " LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "` cp ON cp.id = tp.custom_post_type_id ";
+		    $join .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` tp ON tp.taxonomy_id = t.id";
+		    $join .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` cp ON cp.id = tp.custom_post_type_id ";
 	    }
 
         $baseQuery = "
@@ -151,7 +155,7 @@ class TaxonomyRepository extends AbstractRepository
                 t.labels,
                 t.native,
                 t.settings
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "` t
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` t
             ".$join."
             WHERE 1=1
             ";
@@ -201,7 +205,7 @@ class TaxonomyRepository extends AbstractRepository
 		        $sql = "
                 SELECT 
                     SUM(count) as count
-                FROM `" . ACPT_Lite_DB::prefix() . "term_taxonomy` 
+                FROM `".ACPT_Lite_DB::prefix()."term_taxonomy` 
                 WHERE `taxonomy` = %s 
             ";
 
@@ -212,21 +216,21 @@ class TaxonomyRepository extends AbstractRepository
 		        $count = (count($res) > 0 and isset($res[0]->count) ) ? $res[0]->count : 0;
 		        $taxonomyModel->setPostCount($count);
 
-		        $customPostTypes = ACPT_Lite_DB::getResults( "
-                SELECT
-                    c.id,
-                    c.post_name,
-                    c.singular,
-                    c.plural,
-                    c.icon,
-                    c.native,
-                    c.supports,
-                    c.labels,
-                    c.settings
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "` c
-                JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "` p ON p.custom_post_type_id = c.id
-                WHERE p.taxonomy_id = %s
-            ;", [$taxonomyModel->getId()]);
+		        $customPostTypes = ACPT_Lite_DB::getResults("
+	                SELECT
+	                    c.id,
+	                    c.post_name,
+	                    c.singular,
+	                    c.plural,
+	                    c.icon,
+	                    c.native,
+	                    c.supports,
+	                    c.labels,
+	                    c.settings
+	                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` c
+	                JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` p ON p.custom_post_type_id = c.id
+	                WHERE p.taxonomy_id = %s
+	            ;", [$taxonomyModel->getId()]);
 
 		        foreach ($customPostTypes as $post){
 			        $postModel = CustomPostTypeModel::hydrateFromArray([
@@ -264,7 +268,7 @@ class TaxonomyRepository extends AbstractRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."`
             WHERE slug = %s
             ";
 
@@ -278,6 +282,28 @@ class TaxonomyRepository extends AbstractRepository
     }
 
     /**
+     * @return string[]
+     */
+    public static function getSlugs()
+    {
+        $names = [];
+        $query = "
+	        SELECT 
+                t.id, 
+                t.slug as slug
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` t
+	    ";
+
+        $taxonomies = ACPT_Lite_DB::getResults($query, []);
+
+        foreach ($taxonomies as $taxonomy){
+            $names[] = $taxonomy->slug;
+        }
+
+        return $names;
+    }
+
+    /**
      * @param TaxonomyModel $taxonomyModel
      *
      * @throws \Exception
@@ -285,7 +311,7 @@ class TaxonomyRepository extends AbstractRepository
     public static function save(TaxonomyModel $taxonomyModel)
     {
         $sql = "
-            INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` 
             (`id`,
             `slug`,
             `singular`,
@@ -340,7 +366,7 @@ class TaxonomyRepository extends AbstractRepository
     {
         $sql = "
             DELETE FROM
-                `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "`
+                `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."`
                 WHERE
                    `custom_post_type_id` = %s AND `taxonomy_id` = %s
             ";

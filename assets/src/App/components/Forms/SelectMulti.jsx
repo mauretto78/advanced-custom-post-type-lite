@@ -72,7 +72,6 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
                                         if(!disabled){
                                             setCurrentValues((val) => {
                                                 const newArray = val.filter(v => v !== value);
-
                                                 setValue(id, newArray);
                                                 setDropdownOpen(false);
 

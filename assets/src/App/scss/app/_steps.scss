@@ -64,6 +64,14 @@
       color: $gray;
       display: inline-block;
     }
+
+    &.active {
+      font-weight: bold;
+
+      .description {
+        color: $black;
+      }
+    }
   }
 
   &.rtl {

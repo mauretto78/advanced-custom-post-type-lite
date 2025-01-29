@@ -27,12 +27,22 @@ const IconPicker = ({callback, id, validate, register, description, defaultValue
         }
     }, [defaultValue]);
 
+    /**
+     *
+     * @param iconPickerChoice
+     */
+    const openTheModal = (iconPickerChoice) => {
+        setIconPicker(iconPickerChoice);
+        setModalVisible(!modalVisible);
+    };
+
     return (
         <React.Fragment>
             {modalVisible && (
                 <Modal
                     title={useTranslation("Choose icon")}
                     visible={modalVisible}
+                    setVisible={setModalVisible}
                     testId={id}
                 >
                     <div className="text-left">
@@ -66,7 +76,6 @@ const IconPicker = ({callback, id, validate, register, description, defaultValue
                     )}
                 </Modal>
             )}
-
             <div className="flex-center s-8">
                 {icon && (
                     <ElementIcon value={icon} />
@@ -80,18 +89,32 @@ const IconPicker = ({callback, id, validate, register, description, defaultValue
                     className={`hidden`}
                     {...register(id, validate)}
                 />
-                <Button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setModalVisible(!modalVisible);
-                    }}
-                    style={styleVariants.SECONDARY}
-                    size="sm"
-                    testId={id}
-                >
-                    {useTranslation("Choose icon")}
-                </Button>
+                <div className="i-flex-center s-8">
+                    <Button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openTheModal("dashicon");
+                        }}
+                        style={styleVariants.SECONDARY}
+                        size="sm"
+                        testId={`${id}_dashicon`}
+                    >
+                        {useTranslation("Choose icon")}
+                    </Button>
+                    <Button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openTheModal("image");
+                        }}
+                        style={styleVariants.BORDERED}
+                        size="sm"
+                        testId={`${id}_image`}
+                    >
+                        {useTranslation("Upload an icon image")}
+                    </Button>
+                </div>
             </div>
             {description && (
                 <div className="form-description">{description}</div>

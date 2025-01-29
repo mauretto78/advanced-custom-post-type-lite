@@ -4,7 +4,7 @@ import Modal from "../../../components/Modal";
 import Button from "../../../components/Button";
 import {styleVariants} from "../../../constants/styles";
 import {useDispatch} from "react-redux";
-import {deleteAllBoxes} from "../../../redux/reducers/metaStateSlice";
+import {deleteAllBoxes, deselectAllElements} from "../../../redux/reducers/metaStateSlice";
 import {useFormContext} from "react-hook-form";
 
 const DeleteAllMetaBoxesModal = () => {
@@ -22,6 +22,7 @@ const DeleteAllMetaBoxesModal = () => {
         <Button style={styleVariants.SUCCESS} onClick={(e) => {
             e.preventDefault();
             dispatch(deleteAllBoxes());
+            dispatch(deselectAllElements());
             unregister("boxes");
             setModalOpen(!modalOpen);
         }}>

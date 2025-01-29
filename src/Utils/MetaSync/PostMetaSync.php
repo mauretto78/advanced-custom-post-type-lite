@@ -5,7 +5,6 @@ namespace ACPT_Lite\Utils\MetaSync;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class PostMetaSync extends AbstractMetaSync
@@ -40,7 +39,7 @@ class PostMetaSync extends AbstractMetaSync
                     JOIN `{$wpdb->prefix}posts` p ON p.ID=pm.post_id
                     SET pm.meta_key=REPLACE(pm.meta_key, %s, %s) 
                     WHERE pm.meta_key LIKE %s AND p.post_type=%s";
-		    ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey . '%', $postType]);
+		    ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey.'%', $postType]);
 	    }
     }
 
@@ -52,7 +51,7 @@ class PostMetaSync extends AbstractMetaSync
 	 */
 	public static function syncField(MetaFieldModel $fieldModel, $find = null)
 	{
-		self::updatePostMetaWhenFieldNameChanges($fieldModel, $find);
+        self::updatePostMetaWhenFieldNameChanges($fieldModel, $find);
 	}
 
 	/**
@@ -104,7 +103,7 @@ class PostMetaSync extends AbstractMetaSync
                 SET meta_key=REPLACE(pm.meta_key, %s, %s) 
                 WHERE pm.meta_key LIKE %s AND p.post_type=%s
             ";
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [ $oldKey . '_', $newKey . '_', $oldKey . '_%', $postType]);
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%', $postType]);
         }
     }
 }

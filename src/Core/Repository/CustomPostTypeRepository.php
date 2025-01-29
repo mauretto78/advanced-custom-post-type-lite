@@ -20,10 +20,14 @@ class CustomPostTypeRepository extends AbstractRepository
         $baseQuery = "
             SELECT 
                 count(id) as count
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
             ";
 
         $results = ACPT_Lite_DB::getResults($baseQuery);
+
+        if(empty($results)){
+            return 0;
+        }
 
         return (int)$results[0]->count;
     }
@@ -55,7 +59,7 @@ class CustomPostTypeRepository extends AbstractRepository
             try {
                 $sql = "
                     DELETE
-                        FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
                         WHERE id = %s
                     ";
 
@@ -98,7 +102,7 @@ class CustomPostTypeRepository extends AbstractRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
             WHERE post_name = %s
             ";
 
@@ -133,8 +137,8 @@ class CustomPostTypeRepository extends AbstractRepository
                 cp.labels,
                 cp.settings,
                 COUNT(p.id) as post_count
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "` cp
-            LEFT JOIN `" . ACPT_Lite_DB::prefix() . "posts` p ON p.post_type = cp.post_name AND p.`post_status` = %s
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` cp
+            LEFT JOIN `".ACPT_Lite_DB::prefix()."posts` p ON p.post_type = cp.post_name AND p.`post_status` = %s
             WHERE 1=1
             ";
 
@@ -199,17 +203,17 @@ class CustomPostTypeRepository extends AbstractRepository
      */
     private static function addTaxonomiesToPostTypeModel(CustomPostTypeModel $postModel)
     {
-        $taxonomies = ACPT_Lite_DB::getResults( "
+        $taxonomies = ACPT_Lite_DB::getResults("
                     SELECT
                         t.id,
                         t.slug ,
                         t.singular,
                         t.plural,
                         t.labels,
-                        t.native,
+                         t.native,
                         t.settings
-                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "` t
-                    JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "` p ON p.taxonomy_id = t.id
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` t
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` p ON p.taxonomy_id = t.id
                     WHERE p.custom_post_type_id = %s
                 ;", [$postModel->getId()]);
 
@@ -241,14 +245,14 @@ class CustomPostTypeRepository extends AbstractRepository
     private static function addWooCommerceDataToPostTypeModel( CustomPostTypeModel $postModel)
     {
         if($postModel->isWooCommerce()){
-            $productData = ACPT_Lite_DB::getResults( "
+            $productData = ACPT_Lite_DB::getResults("
                         SELECT 
                             id,
                             product_data_name,
                             icon,
                             visibility,
                             show_in_ui
-                        FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA) . "`
+                        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
                     ;", []);
 
             foreach ($productData as $productDatum){
@@ -260,7 +264,7 @@ class CustomPostTypeRepository extends AbstractRepository
                         'showInUI' => $productDatum->show_in_ui == '0' ? false : true,
                 ]);
 
-                $productDataFields = ACPT_Lite_DB::getResults( "
+                $productDataFields = ACPT_Lite_DB::getResults("
                             SELECT 
                                 id,
                                 product_data_id,
@@ -268,7 +272,7 @@ class CustomPostTypeRepository extends AbstractRepository
                                 field_type,
                                 required,
                                 sort
-                            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD) . "`
+                            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."`
                             WHERE product_data_id = %s ORDER BY sort DESC
                         ;", [$productDatum->id]);
 
@@ -297,6 +301,28 @@ class CustomPostTypeRepository extends AbstractRepository
     }
 
     /**
+     * @return string[]
+     */
+    public static function getNames()
+    {
+        $names = [];
+        $query = "
+	        SELECT 
+                p.id, 
+                p.post_name as name 
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` p
+	    ";
+
+        $postTypes = ACPT_Lite_DB::getResults($query, []);
+
+        foreach ($postTypes as $postType){
+            $names[] = $postType->name;
+        }
+
+        return $names;
+    }
+
+    /**
      * Get the id of a post type by registered name
      *
      * @since    1.0.0
@@ -309,7 +335,7 @@ class CustomPostTypeRepository extends AbstractRepository
         $baseQuery = "
             SELECT 
                 id
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
             WHERE post_name = %s
             ";
 
@@ -334,7 +360,7 @@ class CustomPostTypeRepository extends AbstractRepository
     public static function save(CustomPostTypeModel $model)
     {
         $sql = "
-            INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "` 
+            INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` 
             (`id`,
             `post_name` ,
             `singular` ,

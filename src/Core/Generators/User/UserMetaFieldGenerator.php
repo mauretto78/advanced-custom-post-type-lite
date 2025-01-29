@@ -30,18 +30,12 @@ class UserMetaFieldGenerator
         $this->user = $user;
     }
 
-    /**
-     * @return mixed
-     */
+	/**
+	 * @return AbstractField|null
+	 */
     public function generate()
     {
-        $field = $this->getUserMetaField();
-
-	    if($field){
-		    return $field->render();
-	    }
-
-	    return null;
+	    return $this->getUserMetaField();
     }
 
 	/**

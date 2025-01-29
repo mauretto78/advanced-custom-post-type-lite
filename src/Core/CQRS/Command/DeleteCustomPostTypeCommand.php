@@ -4,7 +4,7 @@ namespace ACPT_Lite\Core\CQRS\Command;
 
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
-use ACPT_Lite\Core\Repository\SettingsRepository;
+use ACPT_Lite\Utils\Settings\Settings;
 
 class DeleteCustomPostTypeCommand implements CommandInterface
 {
@@ -31,9 +31,9 @@ class DeleteCustomPostTypeCommand implements CommandInterface
 	{
 		// Delete posts option
 		$deletePosts = false;
-		$deletePostsOption = SettingsRepository::getSingle(SettingsModel::DELETE_POSTS_KEY);
+		$deletePostsOption = Settings::get(SettingsModel::DELETE_POSTS_KEY, 0);
 
-		if($deletePostsOption !== null and $deletePostsOption->getValue() == 1){
+		if($deletePostsOption == 1){
 			$deletePosts = true;
 		}
 

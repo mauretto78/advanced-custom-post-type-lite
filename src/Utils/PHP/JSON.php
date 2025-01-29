@@ -4,6 +4,17 @@ namespace ACPT_Lite\Utils\PHP;
 
 class JSON
 {
+    /**
+     * @param $string
+     * @return bool
+     */
+    public static function isValid($string)
+    {
+        json_decode($string);
+
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+
 	/**
 	 * @param array $object
 	 *

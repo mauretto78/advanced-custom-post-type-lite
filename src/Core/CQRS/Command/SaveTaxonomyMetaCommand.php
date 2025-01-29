@@ -39,11 +39,13 @@ class SaveTaxonomyMetaCommand extends AbstractSaveMetaCommand implements Command
 		$taxonomyMetaGroups = MetaRepository::get([
 			'belongsTo' => MetaTypes::TAXONOMY,
 			'find' => $taxonomy,
+            'clonedFields' => true,
 		]);
 
 		$termMetaGroups = MetaRepository::get([
 			'belongsTo' => BelongsTo::TERM_ID,
 			'find' => $termId,
+            'clonedFields' => true,
 		]);
 
 		/** @var MetaGroupModel[] $metaGroups */
@@ -52,9 +54,11 @@ class SaveTaxonomyMetaCommand extends AbstractSaveMetaCommand implements Command
 		foreach ($metaGroups as $metaGroup){
 			foreach ($metaGroup->getBoxes() as $metaBoxModel) {
 				foreach ($metaBoxModel->getFields() as $fieldModel){
-					$fieldModel->setBelongsToLabel(MetaTypes::TAXONOMY);
-					$fieldModel->setFindLabel($taxonomy);
-					$this->saveField($fieldModel, $this->termId, MetaTypes::TAXONOMY);
+					if($this->hasField($fieldModel)){
+						$fieldModel->setBelongsToLabel(MetaTypes::TAXONOMY);
+						$fieldModel->setFindLabel($taxonomy);
+						$this->saveField($fieldModel, $this->termId, MetaTypes::TAXONOMY);
+					}
 				}
 			}
 		}

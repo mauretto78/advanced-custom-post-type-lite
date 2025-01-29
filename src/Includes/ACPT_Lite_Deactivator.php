@@ -3,7 +3,7 @@
 namespace ACPT_Lite\Includes;
 
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
-use ACPT_Lite\Core\Repository\SettingsRepository;
+use ACPT_Lite\Utils\Settings\Settings;
 
 /**
  * Fired during plugin deactivation.
@@ -28,11 +28,12 @@ class ACPT_Lite_Deactivator
     public static function deactivate()
     {
 	    // Delete all saved ACPT definitions when you deactivate the plug-in
-	    $deleteTablesSettings = SettingsRepository::getSingle(SettingsModel::DELETE_TABLES_WHEN_DEACTIVATE_KEY);
-	    $destroySchema = ($deleteTablesSettings !== null) ? $deleteTablesSettings->getValue() : 0;
+	    $destroySchema = Settings::get(SettingsModel::DELETE_TABLES_WHEN_DEACTIVATE_KEY, 0);
 
 	    if($destroySchema == 1){
 		    ACPT_Lite_DB::destroySchema();
+		    delete_option('acpt_lite_version');
+		    delete_option('acpt_lite_current_version');
 	    }
     }
 }

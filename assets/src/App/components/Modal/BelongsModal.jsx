@@ -37,8 +37,24 @@ const BelongsModal = ({belongs}) => {
                 string = "Taxonomy";
                 break;
 
+            case metaTypes.OPTION_PAGE:
+                string = "Option page";
+                break;
+
             case metaTypes.USER:
                 string = "All users";
+                break;
+
+            case metaTypes.COMMENT:
+                string = "All comments";
+                break;
+
+            case metaTypes.MEDIA:
+                string = "Attachment";
+                break;
+
+            case "PARENT_POST_ID":
+                string = "Post parent";
                 break;
 
             case "POST_ID":

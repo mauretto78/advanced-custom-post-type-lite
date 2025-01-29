@@ -60,7 +60,7 @@ class UserMetaBoxGenerator extends AbstractGenerator
 	    $this->enqueueScripts('save-user');
 
         if($this->showMetaBox($user)){
-	        echo '<h3>'.Translator::translate("ACPT fields").'</h3>';
+	        echo '<h3 id="acpt-user-meta-h3">'.Translator::translate("ACPT fields").'</h3>';
 	        foreach ($this->metaGroups as $metaGroup){
 		        $generator = new UserMetaGroupGenerator($metaGroup, $user);
 		        echo $generator->render();

@@ -20,7 +20,7 @@ const Header = ({title, actions}) => {
                 </div>
             </div>
             <div className="acpt-header-bottom flex-between for-xs">
-                <h1>{title}</h1>
+                {typeof title === 'string' ? <h1>{title}</h1> : title}
                 {actions && (
                     <div className="i-flex-center s-8 for-xs">
                         {actions.map((action)=> action)}

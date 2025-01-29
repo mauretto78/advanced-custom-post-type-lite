@@ -67,7 +67,7 @@ const DeleteMetaOptionModal = ({boxId, fieldId, optionId, parentFieldId, optionI
                 <Tooltip
                     icon={false}
                     tip={useTranslation("Delete")}
-                    label={<Icon icon="bx-minus"/>}
+                    label={<Icon icon="bx-trash" width={18} color="#F94144" />}
                 />
             </a>
         </span>

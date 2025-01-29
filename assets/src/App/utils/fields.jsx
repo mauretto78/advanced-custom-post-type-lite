@@ -2,161 +2,91 @@ import {inArray, isIterable} from './objects';
 import {fieldTypes} from "../constants/fields";
 
 /**
- *
- * @param type
- * @return {boolean}
+ * @return bool
  */
-export const isTextualField = (type) => {
+export const canBeQuickEdited = (type) => {
     const allowed = [
-        fieldTypes.ADDRESS,
-        fieldTypes.CHECKBOX,
-        fieldTypes.COLOR,
-        fieldTypes.COUNTRY,
-        fieldTypes.CURRENCY,
         fieldTypes.DATE,
-        fieldTypes.DATE_TIME,
+        fieldTypes.SELECT,
         fieldTypes.EMAIL,
-        fieldTypes.LENGTH,
-        fieldTypes.NUMBER,
-        fieldTypes.PHONE,
-        fieldTypes.RADIO,
-        fieldTypes.RATING,
         fieldTypes.TEXT,
         fieldTypes.TEXTAREA,
-        fieldTypes.TIME,
+    ];
+
+    return inArray(type, allowed);
+}
+
+/**
+ * @return bool
+ */
+export const isFilterable = (type) => {
+    const allowed = [
+        fieldTypes.DATE,
+        fieldTypes.EMAIL,
         fieldTypes.SELECT,
-        fieldTypes.SELECT_MULTI,
-        fieldTypes.URL,
-        fieldTypes.WEIGHT,
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isUOMField = (type) => {
-    const allowed = [
-        fieldTypes.CURRENCY,
-        fieldTypes.LENGTH,
-        fieldTypes.WEIGHT,
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isNestableField = (type) => {
-    const allowed = [
-        fieldTypes.REPEATER,
-        fieldTypes.FLEXIBLE,
-
-    ];
-
-    return inArray(type, allowed);
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isFileField = (type) => {
-    return  type === fieldTypes.FILE;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isRadioField = (type) => {
-    return  type === fieldTypes.RADIO;
-};
-
-/**
- *
- * @return {boolean}
- */
-export const isURLField = (type) => {
-    return  type === fieldTypes.URL;
-};
-
-/**
- *
- * @param type
- * @return {boolean}
- */
-export const canFieldHaveValidationAndLogicRules = (type) => {
-    const allowed = [
-        fieldTypes.RATING,
-        fieldTypes.NUMBER,
         fieldTypes.TEXT,
         fieldTypes.TEXTAREA,
-        fieldTypes.RADIO,
-        fieldTypes.CHECKBOX,
-        fieldTypes.SELECT,
-        fieldTypes.SELECT_MULTI,
+    ];
+
+    return inArray(type, allowed);
+};
+
+export const canHaveAfterAndBefore = (type) => {
+    const allowed = [
         fieldTypes.DATE,
-        fieldTypes.DATE_TIME,
-        fieldTypes.TIME,
-        fieldTypes.URL,
-        fieldTypes.PHONE,
         fieldTypes.EMAIL,
-        fieldTypes.COLOR,
-        fieldTypes.CURRENCY,
-        fieldTypes.WEIGHT,
-        fieldTypes.LENGTH,
-        fieldTypes.TOGGLE,
-        fieldTypes.POST,
-        fieldTypes.POST_OBJECT,
-        fieldTypes.POST_OBJECT_MULTI,
-        fieldTypes.TERM_OBJECT,
-        fieldTypes.TERM_OBJECT_MULTI,
-        fieldTypes.USER,
-        fieldTypes.USER_MULTI,
+        fieldTypes.SELECT,
+        fieldTypes.TEXTAREA,
+        fieldTypes.TEXT,
     ];
 
     return inArray(type, allowed);
 };
 
 /**
- * Get a field map of a box
- * (used by ConditionalRenderingElement)
  *
- * @param box
- * @return {[]}
+ * @return {boolean}
  */
-export const getFieldsMap = (box) => {
-    let fields = [];
+export const canCopyTheField = (isSaved) => {
 
-    const recursiveAddFields = (field, parentFields) => {
+    if(typeof isSaved !== 'undefined' && isSaved === false){
+        return false
+    }
 
-        fields.push({
-            field: field,
-            fields: parentFields.filter(f => f.id !== field.id)
-        });
+    return true;
+};
 
-        field.children && field.children.map((c) => {
-            recursiveAddFields(c, field.children);
-        });
+/**
+ *
+ * @param field
+ * @param boxId
+ * @param parentFieldId
+ * @param parentBlockId
+ * @return {{id: *, parentBlockId: *, parentFieldId: *, boxId: *}}
+ */
+export const formatFieldForSelection = (field, boxId, parentFieldId, parentBlockId) => {
 
-        field.blocks && field.blocks.map((b) => {
-            fields.push(b.id);
-            b.fields && b.fields.map((c) => {
-                recursiveAddFields(c, b.fields);
-            });
-        });
-    };
+    let children = [];
 
-    box.fields && box.fields.map((f) => {
-        recursiveAddFields(f, box.fields);
+    // repeater fields
+    field.children && field.children.map((c)=>{
+        children.push(formatFieldForSelection(c, boxId, field.id, parentBlockId));
     });
 
-    return fields;
+    // flexible fields
+    field.blocks && field.blocks.map((b)=>{
+        b.fields && b.fields.map((c)=>{
+            children.push(formatFieldForSelection(c, boxId, field.id, b.id));
+        });
+    });
+
+    return {
+        id: field.id,
+        boxId: boxId,
+        children: children,
+        parentFieldId: parentFieldId,
+        parentBlockId: parentBlockId
+    };
 };
 
 /**
@@ -185,8 +115,12 @@ export const getElementIds = (boxes) => {
     boxes && boxes.map((b)=>{
         ids.push(b.id);
 
-        b.fields && b.fields.map((f) => {
+        b.fields && b.fields.length > 0 && b.fields.map((f) => {
             recursiveAddIds(f);
+        });
+
+        b.children && b.children.length > 0 && b.children.map((c) => {
+            recursiveAddIds(c);
         });
     });
 
@@ -388,4 +322,16 @@ export const updateBoxElement = (boxes, boxId, element) => {
     obj[lastIndex] = element;
 
     return boxes[boxIndex];
+};
+
+/**
+ *
+ * @param boxes
+ * @param boxId
+ * @param fieldId
+ * @param value
+ * @return {string}
+ */
+export const metaFieldFormId = (boxes, boxId, fieldId, value) => {
+    return `${getFormId(boxes, boxId, fieldId)}.${value}`;
 };

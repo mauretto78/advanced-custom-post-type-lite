@@ -20,7 +20,7 @@ class ACPT_Lite_Schema_Manager
         $migrations = self::getMigrations();
 
         foreach ($migrations as $migration){
-        	if( $migration instanceof ACPT_Lite_Schema_Migration){
+        	if($migration instanceof ACPT_Lite_Schema_Migration){
                 if(self::isTheMigrationNeeded($migration->version(), $newVersion, $oldVersion)){
 	                $up = $migration->up();
 
@@ -68,27 +68,33 @@ class ACPT_Lite_Schema_Manager
 	    global $wpdb;
 
 	    $tables = [
-		    ACPT_Lite_DB::TABLE_BELONG,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
-		    ACPT_Lite_DB::TABLE_META_GROUP_BELONG,
-		    ACPT_Lite_DB::TABLE_META_BOX,
-		    ACPT_Lite_DB::TABLE_META_FIELD,
-		    ACPT_Lite_DB::TABLE_META_GROUP,
-		    ACPT_Lite_DB::TABLE_META_OPTION,
-		    ACPT_Lite_DB::TABLE_SETTINGS,
-		    ACPT_Lite_DB::TABLE_TAXONOMY,
-		    ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
-		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
-		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
-		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION,
+            ACPT_Lite_DB::TABLE_TAXONOMY,
+            ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX,
+            ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
+            ACPT_Lite_DB::TABLE_SETTINGS,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
+            ACPT_Lite_DB::TABLE_USER_META_BOX,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION,
+            ACPT_Lite_DB::TABLE_BELONG,
+            ACPT_Lite_DB::TABLE_META_GROUP_BELONG,
+            ACPT_Lite_DB::TABLE_META_GROUP,
+            ACPT_Lite_DB::TABLE_META_BOX,
+            ACPT_Lite_DB::TABLE_META_FIELD,
+            ACPT_Lite_DB::TABLE_META_OPTION,
 	    ];
 
 	    try {
 	    	ACPT_Lite_DB::startTransaction();
 
 		    foreach ($tables as $table){
-			    ACPT_Lite_DB::executeQueryOrThrowException( "DROP TABLE IF EXISTS `" . ACPT_Lite_DB::prefixedTableName($table) . "`;");
+			    ACPT_Lite_DB::executeQueryOrThrowException("DROP TABLE IF EXISTS `".ACPT_Lite_DB::prefixedTableName($table)."`;");
 		    }
 
 		    ACPT_Lite_DB::commitTransaction();
@@ -109,23 +115,26 @@ class ACPT_Lite_Schema_Manager
     	global $wpdb;
 
     	$tables = [
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_RELATION,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_IMPORT,
-		    ACPT_Lite_DB::TABLE_CUSTOM_POST_TEMPLATE,
-		    ACPT_Lite_DB::TABLE_TAXONOMY,
-		    ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX,
-		    ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
-		    ACPT_Lite_DB::TABLE_SETTINGS,
-		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
-		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
-		    ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
-		    ACPT_Lite_DB::TABLE_USER_META_BOX,
-		    ACPT_Lite_DB::TABLE_USER_META_FIELD,
-		    ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_META_BOX,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_FIELD,
+            ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE_OPTION,
+            ACPT_Lite_DB::TABLE_TAXONOMY,
+            ACPT_Lite_DB::TABLE_TAXONOMY_META_BOX,
+            ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT,
+            ACPT_Lite_DB::TABLE_SETTINGS,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD,
+            ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION,
+            ACPT_Lite_DB::TABLE_USER_META_BOX,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD,
+            ACPT_Lite_DB::TABLE_USER_META_FIELD_OPTION,
+            ACPT_Lite_DB::TABLE_BELONG,
+            ACPT_Lite_DB::TABLE_META_GROUP_BELONG,
+            ACPT_Lite_DB::TABLE_META_GROUP,
+            ACPT_Lite_DB::TABLE_META_BOX,
+            ACPT_Lite_DB::TABLE_META_FIELD,
+            ACPT_Lite_DB::TABLE_META_OPTION,
 	    ];
 
 	    foreach ($tables as $table){

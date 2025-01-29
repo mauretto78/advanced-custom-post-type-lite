@@ -10,8 +10,9 @@ import {deleteTaxonomy} from "../../../redux/reducers/deleteTaxonomySlice";
 import {toast} from "react-hot-toast";
 import {refreshPage} from "../../../utils/misc";
 import {useFormContext} from "react-hook-form";
+import {setCookieMessage} from "../../../utils/cookies";
 
-const DeleteTaxonomyModal = ({taxonomy}) => {
+const DeleteTaxonomyModal = ({taxonomy, page, perPage}) => {
 
     // manage form state
     const { reset } = useFormContext();
@@ -32,10 +33,9 @@ const DeleteTaxonomyModal = ({taxonomy}) => {
 
                 if(payload.success){
                     reset();
-                    navigate('/taxonomies');
                     setModalOpen(!modalOpen);
-                    toast.success(useTranslation("Taxonomy successfully deleted. The browser will refresh after 5 seconds."));
-                    refreshPage(5000);
+                    setCookieMessage("Taxonomy successfully deleted.");
+                    refreshPage();
                 } else {
                     toast.error(payload.error);
                 }
@@ -73,6 +73,7 @@ const DeleteTaxonomyModal = ({taxonomy}) => {
                 </div>
             </Modal>
             <a
+                className={`color-${styleVariants.DANGER}`}
                 href="#"
                 onClick={e => {
                     e.preventDefault();
@@ -87,6 +88,8 @@ const DeleteTaxonomyModal = ({taxonomy}) => {
 };
 
 DeleteTaxonomyModal.propTypes = {
+    page: PropTypes.number.isRequired,
+    perPage: PropTypes.number.isRequired,
     taxonomy: PropTypes.string.isRequired,
 };
 

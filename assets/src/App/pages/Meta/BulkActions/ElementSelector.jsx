@@ -20,6 +20,31 @@ const ElementSelector = ({element, elementType}) => {
         return filter.length > 0
     };
 
+    const handleSelect = (selected) => {
+        dispatch(selectElement({
+                element: element,
+                selected: selected,
+                type: elementType
+            }
+        ));
+
+        element.children && element.children.map((c) => {
+            dispatch(selectElement({
+                element: c,
+                selected: selected,
+                type: elementType
+            }));
+
+            c.children && c.children.map((cc) => {
+                dispatch(selectElement({
+                    element: cc,
+                    selected: selected,
+                    type: elementType
+                }));
+            });
+        });
+    };
+
     return (
         <Tooltip
             label={
@@ -28,14 +53,7 @@ const ElementSelector = ({element, elementType}) => {
                         id={`select-${element.id}`}
                         type="checkbox"
                         checked={isSelected()}
-                        onChange={e => {
-                            dispatch(selectElement({
-                                    element: element,
-                                    selected: e.target.checked,
-                                    type: elementType
-                                }
-                            ));
-                        }}
+                        onChange={e => handleSelect(e.target.checked)}
                     />
                     <span/>
                 </label>

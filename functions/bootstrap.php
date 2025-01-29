@@ -1,23 +1,10 @@
 <?php
 
+use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\PHP\Ini;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Core\Pool\ExtendedCacheItemPoolInterface;
-
-// Prevent any error if one of those functions is undefined:
-
-if( !function_exists('get_user_by') ) {
-	include_once( ABSPATH . 'wp-includes/pluggable.php' );
-}
-
-if( !function_exists('get_term') ) {
-	include_once( ABSPATH . 'wp-includes/taxonomy.php' );
-}
-
-if( !function_exists('get_post') ) {
-	include_once( ABSPATH . 'wp-includes/post.php' );
-}
 
 /**
  * Run the application in dev mode
@@ -26,11 +13,16 @@ if( !function_exists('get_post') ) {
  */
 function devMode()
 {
-	if(!is_plugin_active( 'query-monitor/query-monitor.php' )){
-		return false;
-	}
+    if(!is_plugin_active( 'query-monitor/query-monitor.php' )){
+        return false;
+    }
 
-	return site_url() === 'http://localhost:8000';
+    $devSites = [
+        'http://localhost:8000',
+        'http://localhost:10003',
+    ];
+
+    return in_array(site_url(), $devSites);
 }
 
 /**
@@ -39,18 +31,57 @@ function devMode()
  */
 function cacheInstance()
 {
-	$cacheDir = plugin_dir_path( __FILE__ ) . "/../cache";
+    $cacheDir = plugin_dir_path( __FILE__ ) . "/../cache";
 
-	if(!is_dir($cacheDir)){
-		mkdir($cacheDir, 0777, true);
-	}
+    if(!is_dir($cacheDir)){
+        mkdir($cacheDir, 0777, true);
+    }
 
-	$config = new ConfigurationOption();
-	$config->setPath($cacheDir);
+    $config = new ConfigurationOption();
+    $config->setPath($cacheDir);
 
-	CacheManager::setDefaultConfig($config);
+    CacheManager::setDefaultConfig($config);
 
-	return CacheManager::getInstance('files');
+    return CacheManager::getInstance('files');
+}
+
+/**
+ * @return bool
+ */
+function isCacheEnabled()
+{
+    $query = "
+            SELECT 
+                id, 
+                meta_key,
+                meta_value
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS)."` WHERE meta_key = %s
+            ";
+
+    $res = ACPT_Lite_DB::getResults($query, ['enable_cache']);
+
+    if(empty($res) or $res[0]->meta_value == 1){
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Init the DB
+ */
+function initDB()
+{
+    /**
+     * Inject DB Cache
+     */
+    try {
+        if(isCacheEnabled()){
+            ACPT_Lite_DB::injectCache(cacheInstance());
+        }
+    } catch (\Exception $exception){
+        // do nothing
+    }
 }
 
 /**
@@ -62,18 +93,45 @@ function cacheInstance()
  */
 function oldPluginVersion($old_version)
 {
-	if(empty($old_version) or $old_version == 0){
-		return null;
-	}
+    if(empty($old_version) or $old_version == 0){
+        return null;
+    }
 
-	$date = date("Y-m-d", $old_version);
+    if(!is_numeric($old_version)){
+        return null;
+    }
 
-	if($date == "1970-01-01"){
-		return null;
-	}
+    $date = date("Y-m-d", $old_version);
 
-	$config = Ini::read(__DIR__.'/../config.ini');
-	$pluginVersions = $config['versions'];
+    if($date == "1970-01-01"){
+        return null;
+    }
 
-	return (isset(array_flip($pluginVersions)[$date])) ? array_flip($pluginVersions)[$date] : null;
+    $config = Ini::read(__DIR__.'/../config.ini');
+    $pluginVersions = $config['versions'];
+
+    return (isset(array_flip($pluginVersions)[$date])) ? array_flip($pluginVersions)[$date] : null;
+}
+
+/**
+ * Check for plugin upgrades
+ */
+function checkForPluginUpgrades()
+{
+    try {
+        $old_version = (!empty(get_option('acpt_lite_current_version'))) ? get_option('acpt_lite_current_version') : get_option('acpt_lite_version', 0);
+        $current_version = (!empty(get_option('acpt_lite_current_version'))) ? ACPT_LITE_PLUGIN_VERSION : filemtime(__FILE__);
+
+        if ($old_version != $current_version) {
+
+            ACPT_Lite_DB::flushCache();
+            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_lite_current_version') ?? oldPluginVersion($old_version));
+            ACPT_Lite_DB::sync();
+
+            update_option('acpt_lite_version', $current_version, false);
+            update_option('acpt_lite_current_version', ACPT_LITE_PLUGIN_VERSION, false);
+        }
+    } catch (\Exception $exception){
+        // do nothing
+    }
 }

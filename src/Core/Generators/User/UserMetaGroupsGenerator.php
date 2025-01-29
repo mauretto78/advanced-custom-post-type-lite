@@ -22,6 +22,7 @@ class UserMetaGroupsGenerator extends AbstractGenerator
 		try {
 			$metaGroups = MetaRepository::get([
 				'belongsTo' => MetaTypes::USER,
+                'clonedFields' => true,
 			]);
 
 			if(!empty($metaGroups)){
@@ -43,6 +44,7 @@ class UserMetaGroupsGenerator extends AbstractGenerator
 		try {
 			$metaGroups = MetaRepository::get([
 				'belongsTo' => BelongsTo::USER_ID,
+                'clonedFields' => true
 			]);
 
 			foreach ($metaGroups as $metaGroup){
@@ -74,39 +76,49 @@ class UserMetaGroupsGenerator extends AbstractGenerator
 
 		$logicBlocks = Logics::extractLogicBlocks($belongs);
 
-		foreach ($logicBlocks as $index => $logicBlock){
-			$isLast = $index === (count($logicBlock)-1);
-			$query .= ' AND ( ';
+		if(!empty($logicBlocks)){
+            foreach ($logicBlocks as $index => $logicBlock){
 
-			/** @var BelongModel[] $logicBlock */
-			foreach ($logicBlock as $logicBlockElement){
-				switch ($logicBlockElement->getOperator()){
-					case Operator::EQUALS:
-						$query .= " u.ID = %s ";
-						$args[] = $logicBlockElement->getFind();
-						break;
+                // consider only USER_ID conditions
+                $filteredLogicBlockElement = array_filter($logicBlock, function (BelongModel $logicBlockElement){
+                    $belongsTo = $logicBlockElement->getBelongsTo();
 
-					case Operator::NOT_EQUALS:
-						$query .= " u.ID != %s ";
-						$args[] = $logicBlockElement->getFind();
-						break;
+                    return $belongsTo === BelongsTo::USER_ID;
+                });
 
-					case Operator::IN:
-						$query .= 'u.ID IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).') ';
-						break;
+                $isLast = $index === (count($filteredLogicBlockElement)-1);
+                $query .= ' AND ( ';
 
-					case Operator::NOT_IN:
-						$query .= 'u.ID NOT IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).') ';
-						break;
-				}
+                /** @var BelongModel[] $filteredLogicBlockElement */
+                foreach ($filteredLogicBlockElement as $logicBlockElement){
+                    switch ($logicBlockElement->getOperator()){
+                        case Operator::EQUALS:
+                            $query .= " u.ID = %s ";
+                            $args[] = $logicBlockElement->getFind();
+                            break;
 
-				if($logicBlockElement->getLogic() and !$isLast){
-					$query .= $logicBlockElement->getLogic();
-				}
-			}
+                        case Operator::NOT_EQUALS:
+                            $query .= " u.ID != %s ";
+                            $args[] = $logicBlockElement->getFind();
+                            break;
 
-			$query .= ' ) ';
-		}
+                        case Operator::IN:
+                            $query .= ' u.ID IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).') ';
+                            break;
+
+                        case Operator::NOT_IN:
+                            $query .= ' u.ID NOT IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).') ';
+                            break;
+                    }
+
+                    if($logicBlockElement->getLogic() and !$isLast){
+                        $query .= $logicBlockElement->getLogic();
+                    }
+                }
+
+                $query .= ' ) ';
+            }
+        }
 
 		// fetch data
 		$userIds = [];

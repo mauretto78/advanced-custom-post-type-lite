@@ -57,7 +57,7 @@ const DeleteProductDataFieldModal = ({field, index}) => {
                     setModalOpen(!modalOpen);;
                 }}
             >
-                <Icon icon="bx-trash" width={18} />
+                <Icon icon="bx-trash" width={18} color="#F94144" />
             </a>
         </React.Fragment>
     );

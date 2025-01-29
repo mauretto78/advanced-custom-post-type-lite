@@ -17,6 +17,7 @@
       cursor: pointer;
 
       &.active {
+        font-weight: bold;
         background: $white;
         color: $black;
         border-radius: 0 $border-radius $border-radius $border-radius;
@@ -39,29 +40,36 @@
     display: flex;
     gap: $space-8;
     padding: 0;
-    margin: 0;
 
     li {
       background: $white;
-      position: relative;
-      bottom: -1px;
       padding: $space-12;
       border: $border-thickness solid $light-gray;
-      border-radius: $border-radius $border-radius 0 0;
+      color: $medium-gray;
+      border-radius: $border-radius;
       cursor: pointer;
       margin: 0;
 
+      &:hover {
+        border: $border-thickness solid $medium-gray;
+        color: $gray;
+      }
+
       &.active {
-        color: $black;
-        border-bottom: calc(#{$border-thickness}*2) solid $white;
+        font-weight: bold;
+        color: $primary-color;
+        border: $border-thickness solid $primary-color;
+      }
+
+      &.danger.active {
+        font-weight: bold;
+        color: $danger-color;
+        border: $border-thickness solid $danger-color;
       }
     }
   }
 
   .tab-panel {
-    padding: $space-24;
-    border: $border-thickness solid $light-gray;
-    background: $white;
-    border-radius: 0 $border-radius $border-radius $border-radius;
+
   }
 }

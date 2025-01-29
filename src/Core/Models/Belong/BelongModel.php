@@ -59,7 +59,7 @@ class BelongModel extends AbstractModel implements \JsonSerializable
 		parent::__construct( $id );
 		$this->setBelongsTo($belongsTo);
 
-		if($belongsTo !== MetaTypes::USER){
+		if($belongsTo !== MetaTypes::USER and $belongsTo !== MetaTypes::COMMENT){
 			$this->setOperator($operator);
 		}
 
@@ -196,6 +196,7 @@ class BelongModel extends AbstractModel implements \JsonSerializable
 				'required' => true,
 				'type' => 'string',
 				'enum' => [
+					BelongsTo::PARENT_POST_ID,
 					BelongsTo::POST_ID,
 					BelongsTo::POST_CAT,
 					BelongsTo::POST_TAX,
@@ -204,6 +205,9 @@ class BelongModel extends AbstractModel implements \JsonSerializable
 					BelongsTo::TERM_ID,
 					MetaTypes::CUSTOM_POST_TYPE,
 					MetaTypes::TAXONOMY,
+					MetaTypes::MEDIA,
+					MetaTypes::COMMENT,
+					MetaTypes::OPTION_PAGE,
 					MetaTypes::USER,
 				],
 			],
@@ -233,4 +237,70 @@ class BelongModel extends AbstractModel implements \JsonSerializable
 			],
 		];
 	}
+
+    /**
+     * @return string|null
+     */
+	public function getFindAsSting(): ?string
+    {
+        $belongsTo = $this->getBelongsTo();
+        $explodedFind = explode(",", $this->getFind());
+        $find = [];
+
+        switch ($belongsTo){
+            case BelongsTo::PARENT_POST_ID:
+            case BelongsTo::POST_ID:
+                foreach ($explodedFind as $f){
+                    $find[] = get_the_title($f);
+                }
+                break;
+
+            case BelongsTo::TERM_ID:
+            case BelongsTo::POST_TAX:
+                foreach ($explodedFind as $f){
+                    $term = get_term($f);
+                    $find[] = ($term instanceof \WP_Term) ? $term->name : $f;
+                }
+                break;
+
+            case BelongsTo::POST_CAT:
+                foreach ($explodedFind as $f){
+                    $catName = get_cat_name($f);
+                    $find[] = (!empty($catName)) ? $catName : $f;
+                }
+                break;
+
+            case BelongsTo::POST_TEMPLATE:
+                foreach ($explodedFind as $f){
+                    $templates = wp_get_theme()->get_page_templates();
+                    $find[] = (isset($templates[$f])) ? $templates[$f] : $f;
+                }
+                break;
+
+            case BelongsTo::USER_ID:
+                foreach ($explodedFind as $f){
+                    $user = get_user_by('id', $f);
+                    $find[] = $user->display_name;
+                }
+                break;
+
+            case MetaTypes::USER:
+                $find = ["users"];
+                break;
+
+            default:
+                $find = $explodedFind;
+                break;
+        }
+
+        if(empty($find)){
+            return null;
+        }
+
+        if(!is_array($find)){
+            return null;
+        }
+
+        return implode(", ", $find);
+    }
 }

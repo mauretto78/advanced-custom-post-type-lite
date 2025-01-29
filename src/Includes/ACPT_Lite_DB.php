@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Includes;
 
+use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
 use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
@@ -25,30 +26,31 @@ class ACPT_Lite_DB
     /**
      * Table names
      */
-	const TABLE_CUSTOM_POST_TYPE = 'acpt_lite_custom_post_type';
-	const TABLE_CUSTOM_POST_TYPE_META_BOX = 'acpt_lite_custom_post_type_meta_box';
-	const TABLE_CUSTOM_POST_TYPE_FIELD = 'acpt_lite_custom_post_type_field';
-	const TABLE_CUSTOM_POST_TYPE_OPTION = 'acpt_lite_custom_post_type_option';
-	const TABLE_CUSTOM_POST_TYPE_RELATION = 'acpt_lite_custom_post_type_relation';
-	const TABLE_CUSTOM_POST_TYPE_IMPORT = 'acpt_lite_custom_post_type_import';
-	const TABLE_CUSTOM_POST_TEMPLATE = 'acpt_lite_custom_post_template';
-	const TABLE_TAXONOMY = 'acpt_lite_taxonomy';
-	const TABLE_TAXONOMY_META_BOX = 'acpt_lite_taxonomy_meta_box';
-	const TABLE_TAXONOMY_PIVOT = 'acpt_lite_taxonomy_pivot';
-	const TABLE_SETTINGS = 'acpt_lite_settings';
-	const TABLE_WOOCOMMERCE_PRODUCT_DATA = 'acpt_lite_woocommerce_product_data';
-	const TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD = 'acpt_lite_woocommerce_product_data_field';
-	const TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION = 'acpt_lite_woocommerce_product_data_option';
-	const TABLE_USER_META_BOX     = 'acpt_lite_user_meta_box';
-	const TABLE_USER_META_FIELD        = 'acpt_lite_user_field';
-	const TABLE_USER_META_FIELD_OPTION = 'acpt_lite_user_field_option';
+    const TABLE_CUSTOM_POST_TYPE = 'acpt_lite_custom_post_type';
+    const TABLE_CUSTOM_POST_TYPE_META_BOX = 'acpt_lite_custom_post_type_meta_box';
+    const TABLE_CUSTOM_POST_TYPE_FIELD = 'acpt_lite_custom_post_type_field';
+    const TABLE_CUSTOM_POST_TYPE_OPTION = 'acpt_lite_custom_post_type_option';
+    const TABLE_TAXONOMY = 'acpt_lite_taxonomy';
+    const TABLE_TAXONOMY_META_BOX = 'acpt_lite_taxonomy_meta_box';
+    const TABLE_TAXONOMY_PIVOT = 'acpt_lite_taxonomy_pivot';
+    const TABLE_SETTINGS = 'acpt_lite_settings';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA = 'acpt_lite_woocommerce_product_data';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD = 'acpt_lite_woocommerce_product_data_field';
+    const TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION = 'acpt_lite_woocommerce_product_data_option';
+    const TABLE_USER_META_BOX     = 'acpt_lite_user_meta_box';
+    const TABLE_USER_META_FIELD        = 'acpt_lite_user_field';
+    const TABLE_USER_META_FIELD_OPTION = 'acpt_lite_user_field_option';
 
-	const TABLE_BELONG = 'acpt_lite_belong';
-	const TABLE_META_GROUP_BELONG = 'acpt_lite_group_belong';
-	const TABLE_META_GROUP = 'acpt_lite_meta_group';
-	const TABLE_META_BOX = 'acpt_lite_meta_box';
-	const TABLE_META_FIELD = 'acpt_lite_meta_field';
-	const TABLE_META_OPTION = 'acpt_lite_meta_option';
+    const TABLE_BELONG = 'acpt_lite_belong';
+    const TABLE_META_GROUP_BELONG = 'acpt_lite_group_belong';
+    const TABLE_META_GROUP = 'acpt_lite_meta_group';
+    const TABLE_META_BOX = 'acpt_lite_meta_box';
+    const TABLE_META_FIELD = 'acpt_lite_meta_field';
+    const TABLE_META_OPTION = 'acpt_lite_meta_option';
+
+    // NOT USED
+    const TABLE_CUSTOM_POST_TYPE_RELATION = 'acpt_lite_custom_post_type_relation';
+    const TABLE_CUSTOM_POST_TEMPLATE = 'acpt_lite_custom_post_template';
 
 	/**
 	 * @var ExtendedCacheItemPoolInterface
@@ -111,8 +113,6 @@ class ACPT_Lite_DB
         } catch (\Exception $exception){
             return false;
         }
-
-        return false;
     }
 
 	/**
@@ -124,8 +124,19 @@ class ACPT_Lite_DB
         $createSchema = ACPT_Lite_Schema_Manager::up($newVersion, $oldVersion);
 
         if(!$createSchema){
-            echo esc_html($createSchema);
-            die();
+	        // in case of failure, try to repair
+	        $issues = ACPT_Lite_DB_Tools::healthCheck();
+
+	        if(!empty($issues)){
+		        ACPT_Lite_DB_Tools::repair($issues);
+	        }
+
+	        $issuesAfterRepair = ACPT_Lite_DB_Tools::healthCheck();
+
+	        if(!empty($issuesAfterRepair)){
+		        echo esc_html("Error during creation of schema");
+		        die();
+	        }
         }
     }
 
@@ -152,8 +163,10 @@ class ACPT_Lite_DB
      */
     public static function sync()
     {
-	    self::createNativePostTypes();
-	    self::createNativeTaxonomies();
+        if(ACPT_Lite_DB::checkIfSchemaExists()){
+            self::createNativePostTypes();
+            self::createNativeTaxonomies();
+        }
     }
 
     /**
@@ -312,7 +325,7 @@ class ACPT_Lite_DB
 
 		if(self::$cache){
 			try {
-				$cacheKey = md5($preparedQuery);
+				$cacheKey = md5(Strings::removeAllExtraSpaces($preparedQuery));
 				$cachedElement = self::$cache->getItem($cacheKey);
 
 				if (!$cachedElement->isHit()) {
@@ -391,6 +404,10 @@ class ACPT_Lite_DB
      */
     public static function prefixedTableName($table)
     {
+        if(self::prefix() == ''){
+            return $table;
+        }
+
         return self::prefix().$table;
     }
 

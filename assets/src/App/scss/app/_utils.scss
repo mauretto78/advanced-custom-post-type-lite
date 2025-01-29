@@ -10,6 +10,14 @@
   border: $border-thickness solid $primary-color;
 }
 
+.with-active-border {
+  border-left: 5px solid $primary-color;
+}
+
+.b-top-1 {
+  border-top: $border-thickness solid $light-gray;
+}
+
 .b-bottom-1 {
   border-bottom: $border-thickness solid $light-gray;
 }
@@ -20,6 +28,18 @@
 
 .with-shadow {
   box-shadow: $box-shadow;
+}
+
+.with-drop-shadow {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+.b-maxi {
+  border: $space-4 solid $secondary-color;
+}
+
+.b-secondary {
+  border-color: $secondary-color;
 }
 
 /**
@@ -54,8 +74,44 @@
   background: $pale-gray;
 }
 
+.bg-light-gray {
+  background: $light-gray;
+}
+
+.bg-medium-gray {
+  background: $medium-gray;
+}
+
+.bg-gray {
+  background: $gray;
+}
+
 .bg-secondary {
   background: $secondary-color;
+}
+
+/**
+ * FONT SIZE
+ */
+
+.font-sm {
+  font-size: $small-font-size;
+}
+
+.font-regular {
+  font-size: $font-size;
+}
+
+.text-normal {
+  font-weight: normal;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.break-spaces {
+  white-space: break-spaces;
 }
 
 /**
@@ -84,6 +140,24 @@
 
 .color-danger {
   color: $danger-color;
+}
+
+a.color-danger {
+  &:hover,
+  &:focus {
+    color: darken($danger-color, 8%);
+  }
+}
+
+.color-warning {
+  color: $warning-color;
+}
+
+a.color-warning {
+  &:hover,
+  &:focus {
+    color: darken($warning-color, 8%);
+  }
 }
 
 /**
@@ -216,12 +290,36 @@
   }
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 /**
  * OVERFLOW
  */
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+/**
+ * COLOR
+ */
+
+.color-danger {
+  color: $danger-color;
+}
+
+.color-info {
+  color: $info-color;
+}
+
+.color-success {
+  color: $success-color;
+}
+
+.color-warning {
+  color: $warning-color;
 }
 
 /**
@@ -232,8 +330,20 @@
   width: fit-content;
 }
 
+.max-w-70pc {
+  max-width: 70%;
+
+  @media screen and (max-width: 960px){
+    max-width: 100%;
+  }
+}
+
 .max-w-400 {
   max-width: 400px;
+
+  @media screen and (max-width: 400px){
+    max-width: 100%;
+  }
 }
 
 .w-100 {
@@ -276,56 +386,77 @@
   gap: $space-24;
 }
 
+.mt-0 {
+  margin-top: 0 !important;
+}
+
 .mt-4 {
-  margin-top: $space-4;
+  margin-top: $space-4 !important;
 }
 
 .mt-8 {
-  margin-top: $space-8;
+  margin-top: $space-8 !important;
 }
 
 .mt-12 {
-  margin-top: $space-12;
+  margin-top: $space-12 !important;
 }
 
 .mt-24 {
-  margin-top: $space-24;
+  margin-top: $space-24 !important;
 }
 
 .mb-4 {
-  margin-bottom: $space-4;
+  margin-bottom: $space-4 !important;
 }
 
 .mb-8 {
-  margin-bottom: $space-8;
+  margin-bottom: $space-8 !important;
 }
 
 .mb-12 {
-  margin-bottom: $space-12;
+  margin-bottom: $space-12 !important;
 }
 
 .mb-24 {
-  margin-bottom: $space-24;
+  margin-bottom: $space-24 !important;
+}
+
+.mx-24 {
+  margin-left: $space-24 !important;
+  margin-right: $space-24 !important;
+}
+
+.m-auto {
+  margin: auto !important;
 }
 
 .m-0 {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .m-4 {
-  margin: $space-4;
+  margin: $space-4 !important;
 }
 
 .m-8 {
-  margin: $space-8;
+  margin: $space-8 !important;
 }
 
 .m-12 {
-  margin: $space-12;
+  margin: $space-12 !important;
 }
 
 .m-24 {
-  margin: $space-24;
+  margin: $space-24 !important;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-2 {
+  padding: $space-2;
 }
 
 .p-4 {
@@ -342,6 +473,44 @@
 
 .p-24 {
   padding: $space-24;
+}
+
+.px-8 {
+  padding-left: $space-8;
+  padding-right: $space-8;
+}
+
+.px-12 {
+  padding-left: $space-12;
+  padding-right: $space-12;
+}
+
+.px-24 {
+  padding-left: $space-24;
+  padding-right: $space-24;
+}
+
+.py-4 {
+  padding-top: $space-4;
+  padding-bottom: $space-4;
+}
+
+.py-8 {
+  padding-top: $space-8;
+  padding-bottom: $space-8;
+}
+
+.py-24 {
+  padding-top: $space-24;
+  padding-bottom: $space-24;
+}
+
+.pl-8 {
+  padding-left: $space-8 !important;
+}
+
+.pb-24 {
+  padding-bottom: $space-24;
 }
 
 /**
@@ -366,12 +535,11 @@
   }
 }
 
-.responsive {
-  @media screen and (max-width: 960px) {
+@media screen and (max-width: 960px){
+  .responsive {
     overflow-x: auto;
   }
 }
-
 
 .acpt-code {
   font-family: Monaco, Courier New, monospace;
@@ -383,6 +551,12 @@
 
 .line {
   width: $space-24;
+  height: $border-thickness;
+  background-color: $light-gray;
+}
+
+.line-separator {
+  width: 100%;
   height: $border-thickness;
   background-color: $light-gray;
 }

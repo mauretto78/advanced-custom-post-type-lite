@@ -10,7 +10,7 @@ class DateField extends AbstractField
             return null;
         }
 
-        $dateFormat = $this->payload->dateFormat ? $this->payload->dateFormat : get_option('date_format');
+        $dateFormat = $this->getDefaultDateFormat();
 	    $rawData = $this->fetchRawData();
 
 	    if(!isset($rawData['value'])){
@@ -18,11 +18,27 @@ class DateField extends AbstractField
 	    }
 
         try {
-	        $date = new \DateTime($this->fetchMeta($rawData['value']));
+	        $date = new \DateTime($rawData['value']);
 
 	        return $this->addBeforeAndAfter($this->formatDate($dateFormat, $date));
         } catch (\Exception $exception) {
 	    	return null;
         }
+    }
+
+	/**
+	 * @return mixed|void|null
+	 */
+    protected function getDefaultDateFormat()
+    {
+    	if(!empty($this->payload->dateFormat)){
+    		return $this->payload->dateFormat;
+	    }
+
+	    if(!empty(get_option('date_format'))){
+		    return get_option('date_format');
+	    }
+
+	    return "Y-m-d";
     }
 }

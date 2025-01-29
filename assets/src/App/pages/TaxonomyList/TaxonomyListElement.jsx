@@ -9,12 +9,34 @@ import {Link} from "react-router-dom";
 import DeleteTaxonomyModal from "./Modal/DeleteTaxonomyModal";
 import {useFormContext} from "react-hook-form";
 import FieldGroupsModal from "../../components/Modal/FieldGroupsModal";
+import {wpAjaxRequest} from "../../utils/ajax";
+import {setCookieMessage} from "../../utils/cookies";
+import {scrollToTop} from "../../utils/scroll";
+import {refreshPage} from "../../utils/misc";
+import {toast} from "react-hot-toast";
 
-const TaxonomyListElement = memo(({record}) => {
+const TaxonomyListElement = memo(({record, page, perPage}) => {
 
     // manage form state
     const { register } = useFormContext();
     const formId = `elements.${record.slug}`;
+
+    const handleDuplicate = () => {
+        wpAjaxRequest('duplicateAction', {belongsTo: metaTypes.TAXONOMY, find: record.slug})
+            .then(res => {
+                if(res.success === true){
+                    setCookieMessage("Taxonomy successfully duplicated.");
+                    scrollToTop();
+                    refreshPage();
+                } else {
+                    toast.error(res.error);
+                }
+            }).catch(err => {
+            console.error(err);
+            toast.error(useTranslation("Unknown error, please retry later"));
+        })
+        ;
+    };
 
     return (
         <React.Fragment>
@@ -76,7 +98,20 @@ const TaxonomyListElement = memo(({record}) => {
                             <a href={`#/edit_taxonomy/${record.slug}`}>
                                 {useTranslation("Edit")}
                             </a>
-                            <DeleteTaxonomyModal taxonomy={record.slug} />
+                            <a
+                                href="#"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    handleDuplicate();
+                                }}
+                            >
+                                {useTranslation("Duplicate")}
+                            </a>
+                            <DeleteTaxonomyModal
+                                page={page}
+                                perPage={perPage}
+                                taxonomy={record.slug}
+                            />
                             <ExportCodeModal
                                 belongsTo={metaTypes.TAXONOMY}
                                 find={record.slug}
@@ -90,6 +125,8 @@ const TaxonomyListElement = memo(({record}) => {
 });
 
 TaxonomyListElement.propTypes = {
+    page: PropTypes.number.isRequired,
+    perPage: PropTypes.number.isRequired,
     record: PropTypes.object.isRequired
 };
 

@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
 import PropTypes from 'prop-types';
 import Modal from "../../../components/Modal";
 import useTranslation from "../../../hooks/useTranslation";
@@ -12,8 +11,9 @@ import {deleteCustomPostType} from "../../../redux/reducers/deleteCustomPostType
 import {toast} from "react-hot-toast";
 import {refreshPage} from "../../../utils/misc";
 import {useFormContext} from "react-hook-form";
+import {setCookieMessage} from "../../../utils/cookies";
 
-const DeleteCustomPostTypeModal = ({postType}) => {
+const DeleteCustomPostTypeModal = ({postType, page, perPage}) => {
 
     const globals = document.globals;
     const settings = globals.settings;
@@ -28,9 +28,6 @@ const DeleteCustomPostTypeModal = ({postType}) => {
     // manage local state
     const [modalOpen, setModalOpen] = useState(false);
 
-    // manage redirect
-    const navigate = useNavigate();
-
     const handleDeletePostType = () => {
         dispatch(deleteCustomPostType(postType, 'all'))
             .then(res => {
@@ -38,10 +35,9 @@ const DeleteCustomPostTypeModal = ({postType}) => {
 
                 if(payload.success){
                     reset();
-                    navigate('/');
                     setModalOpen(!modalOpen);
-                    toast.success(useTranslation("Custom post type successfully deleted. The browser will refresh after 5 seconds."));
-                    refreshPage(5000);
+                    setCookieMessage("Custom post type successfully deleted.");
+                    refreshPage();
                 } else {
                     toast.error(payload.error);
                 }
@@ -87,6 +83,7 @@ const DeleteCustomPostTypeModal = ({postType}) => {
             </Modal>
             <a
                 href="#"
+                className={`color-${styleVariants.DANGER}`}
                 onClick={e => {
                     e.preventDefault();
                     setModalOpen(!modalOpen);
@@ -99,6 +96,8 @@ const DeleteCustomPostTypeModal = ({postType}) => {
 };
 
 DeleteCustomPostTypeModal.propTypes = {
+    page: PropTypes.number.isRequired,
+    perPage: PropTypes.number.isRequired,
     postType: PropTypes.string.isRequired,
 };
 

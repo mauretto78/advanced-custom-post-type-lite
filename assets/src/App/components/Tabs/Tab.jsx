@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const Tab = ({title, children}) => {
+const Tab = ({title, style, children}) => {
     return (
         <div>
             {children}

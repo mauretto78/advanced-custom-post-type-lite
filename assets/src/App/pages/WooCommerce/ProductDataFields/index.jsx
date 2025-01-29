@@ -5,11 +5,8 @@ import {styleVariants} from "../../../constants/styles";
 import useTranslation from "../../../hooks/useTranslation";
 import Layout from "../../../layout/Layout";
 import {useDispatch, useSelector} from "react-redux";
-import {savedView} from "../../../utils/localStorage";
 import DeleteAllFieldsModal from "./Modal/DeleteAllFieldsModal";
 import {isEmpty} from "../../../utils/objects";
-import ListView from "./ListView";
-import TabularView from "./TabularView";
 import Loader from "../../../components/Loader";
 import PageNotFound from "../../404";
 import {v4 as uuidv4} from "uuid";
@@ -22,6 +19,8 @@ import {saveWooCommerceProductDataFields} from "../../../redux/reducers/saveWooC
 import InputHidden from "../../../components/Forms/InputHidden";
 import {addField, hydrateState} from "../../../redux/reducers/productDataFieldsStateSlice";
 import {fetchProductDataFields} from "../../../redux/reducers/fetchProductDataFieldsSlice";
+import VerticalSortableFields from "./VerticalSortableFields";
+import {useAutoAnimate} from "@formkit/auto-animate/react";
 
 const ProductDataFields = ({}) => {
 
@@ -33,11 +32,12 @@ const ProductDataFields = ({}) => {
     // manage local state
     const {id} = useParams();
     const [fetchError, setFetchError] = useState(false);
-    const [view, setView] = useState(savedView("wc_fields_manage_view"));
-    const [activeTab, setActiveTab] = useState(0);
 
     // manage redirect
     const navigate = useNavigate();
+
+    // auto-animate
+    const [parent] = useAutoAnimate();
 
     // form init
     const methods = useForm({
@@ -77,7 +77,6 @@ const ProductDataFields = ({}) => {
         };
 
         dispatch(addField({field: newField}));
-        setActiveTab(fields.length);
 
         delay(1).then(()=>{
             scrollToId(newFieldId);
@@ -168,22 +167,9 @@ const ProductDataFields = ({}) => {
                         id="productDataId"
                         value={id}
                     />
-                    {view === 'list' ? (
-                        <ListView
-                            setActiveTab={setActiveTab}
-                            view={view}
-                            setView={setView}
-                            fields={!isEmpty(fields) ? fields : []}
-                        />
-                    ) : (
-                        <TabularView
-                            activeTab={activeTab}
-                            setActiveTab={setActiveTab}
-                            view={view}
-                            setView={setView}
-                            fields={!isEmpty(fields) ? fields : []}
-                        />
-                    )}
+                    <div ref={parent}>
+                        <VerticalSortableFields fields={!isEmpty(fields) ? fields : []} />
+                    </div>
                 </Layout>
             </form>
         </FormProvider>

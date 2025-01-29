@@ -58,7 +58,7 @@ class Files
 	}
 
 	/**
-	 * @param $path
+	 * @param string $path
 	 * @param null $originalFileName
 	 * @param null $parentPostId
 	 *
@@ -66,11 +66,19 @@ class Files
 	 */
 	public static function uploadFile($path, $originalFileName = null, $parentPostId = null)
 	{
+		if(empty($path)){
+			return false;
+		}
+
 		$pathInfo    = pathinfo($path);
 		$filename    = ($originalFileName !== null) ? $originalFileName : $pathInfo['basename'];
 		$wpUploadDir = wp_upload_dir();
 		$fileType    = wp_check_filetype( $filename, null );
 		$fileContent = file_get_contents($path);
+
+		if($fileContent === false){
+			return false;
+		}
 
 		$upload =  wp_upload_bits($filename, null, $fileContent);
 

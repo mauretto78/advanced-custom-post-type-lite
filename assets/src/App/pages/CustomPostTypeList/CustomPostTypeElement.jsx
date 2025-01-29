@@ -10,12 +10,34 @@ import {isset} from "../../utils/objects";
 import DeleteCustomPostTypeModal from "./Modal/DeleteCustomPostTypeModal";
 import {useFormContext} from "react-hook-form";
 import FieldGroupsModal from "../../components/Modal/FieldGroupsModal";
+import {wpAjaxRequest} from "../../utils/ajax";
+import {setCookieMessage} from "../../utils/cookies";
+import {scrollToTop} from "../../utils/scroll";
+import {refreshPage} from "../../utils/misc";
+import {toast} from "react-hot-toast";
 
-const CustomPostTypeElement = memo(({record, showWooCommerceColumn}) => {
+const CustomPostTypeElement = memo(({record, showWooCommerceColumn, page, perPage}) => {
 
     // manage form state
     const { register } = useFormContext();
     const formId = `elements.${record.name}`;
+
+    const handleDuplicate = () => {
+        wpAjaxRequest('duplicateAction', {belongsTo: metaTypes.CUSTOM_POST_TYPE, find: record.name})
+            .then(res => {
+                if(res.success === true){
+                    setCookieMessage("Custom post type successfully duplicated.");
+                    scrollToTop();
+                    refreshPage();
+                } else {
+                    toast.error(res.error);
+                }
+            }).catch(err => {
+            console.error(err);
+            toast.error(useTranslation("Unknown error, please retry later"));
+        })
+        ;
+    };
 
     return (
         <React.Fragment>
@@ -97,7 +119,20 @@ const CustomPostTypeElement = memo(({record, showWooCommerceColumn}) => {
                             <Link to={`edit/${record.name}`}>
                                 {useTranslation("Edit")}
                             </Link>
-                            <DeleteCustomPostTypeModal postType={record.name} />
+                            <a
+                                href="#"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    handleDuplicate();
+                                }}
+                            >
+                                {useTranslation("Duplicate")}
+                            </a>
+                            <DeleteCustomPostTypeModal
+                                page={page}
+                                perPage={perPage}
+                                postType={record.name}
+                            />
                             <ExportCodeModal belongsTo={metaTypes.CUSTOM_POST_TYPE} find={record.name} />
                         </div>
                     )}
@@ -109,6 +144,8 @@ const CustomPostTypeElement = memo(({record, showWooCommerceColumn}) => {
 });
 
 CustomPostTypeElement.propTypes = {
+    page: PropTypes.number.isRequired,
+    perPage: PropTypes.number.isRequired,
     record: PropTypes.object.isRequired,
     showWooCommerceColumn: PropTypes.bool.isRequired,
 };

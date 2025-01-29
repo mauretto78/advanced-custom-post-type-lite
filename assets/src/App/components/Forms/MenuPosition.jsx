@@ -108,8 +108,8 @@ const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
                 id={id}
                 value={defaultValue}
             />
-            <div className="i-flex-center s-8">
-                <div className="acpt-select">
+            <div className="i-flex-center s-8 w-100">
+                <div className="acpt-select w-50">
                     <select
                         ref={positionRef}
                         data-cy={`position-${id}`}
@@ -122,7 +122,7 @@ const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
                         <option value="before">{useTranslation("Before")}</option>
                     </select>
                 </div>
-                <div className="acpt-select">
+                <div className="acpt-select w-50">
                     <select
                         ref={menuRef}
                         data-cy={`menu-${id}`}

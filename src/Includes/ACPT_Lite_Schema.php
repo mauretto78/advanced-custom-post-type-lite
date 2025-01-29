@@ -19,31 +19,63 @@ class ACPT_Lite_Schema
     public static function get()
     {
     	return [
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG )                          => [
-			    'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG ) . "` (
-					  `field_id` varchar(36) NOT NULL,
-					  `rule_id` varchar(36)  NOT NULL,
-					  PRIMARY KEY (`field_id`,`rule_id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG ) => [
+			    'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG )."` (
+					    `id` VARCHAR(36) UNIQUE NOT NULL,
+                        `belongs` VARCHAR(36) NOT NULL,
+                        `operator` VARCHAR(20) NULL,
+                        `find` VARCHAR(255) NULL,
+                        `logic` VARCHAR(3) DEFAULT NULL,
+                        `sort` INT(11),
+                        PRIMARY KEY(`id`)
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
-				    'field_id' => [
-					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 36,
-					    'unique' => false,
-					    'nullable' => false,
-					    'default' => null
-				    ],
-				    'rule_id' => [
-					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 36,
-					    'unique' => false,
-					    'nullable' => false,
-					    'default' => null
-				    ],
+                    'id' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 36,
+                        'unique' => true,
+                        'nullable' => false,
+                        'default' => null
+                    ],
+                    'belongs' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 36,
+                        'unique' => false,
+                        'nullable' => false,
+                        'default' => null
+                    ],
+                    'operator' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 20,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => null
+                    ],
+                    'find' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => null
+                    ],
+                    'logic' => [
+                        'type' => self::COLUMN_VARCHAR,
+                        'length' => 3,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => null
+                    ],
+                    'sort'  => [
+                        'type' => self::COLUMN_INT,
+                        'length' => 11,
+                        'unique' => false,
+                        'nullable' => true,
+                        'default' => 'NULL'
+                    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)                 => [
-			    'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE) => [
+			    'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` (
 					  `id` varchar(36) NOT NULL,
 					  `post_name` varchar(20) NOT NULL,
 					  `singular` varchar(255)  NOT NULL,
@@ -56,7 +88,7 @@ class ACPT_Lite_Schema
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`),
 					  UNIQUE KEY `post_name` (`post_name`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -123,12 +155,12 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)                => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` (
 					  `group_id` varchar(36)  NOT NULL,
 					  `belong_id` varchar(36) NOT NULL,
 					  PRIMARY KEY (`group_id`,`belong_id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'group_id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -146,8 +178,8 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)                         => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` (
 					  `id` varchar(36)  NOT NULL,
 					  `meta_box_name` varchar(50) NOT NULL,
 					  `sort` int DEFAULT NULL,
@@ -155,7 +187,7 @@ class ACPT_Lite_Schema
 					  `group_id` varchar(36) DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -173,7 +205,7 @@ class ACPT_Lite_Schema
 				    ],
 				    'meta_box_name' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null
@@ -194,8 +226,8 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)                       => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` (
 					  `id` varchar(36) NOT NULL,
 					  `meta_box_id` varchar(36) NOT NULL,
 					  `field_name` varchar(50) NOT NULL,
@@ -212,7 +244,7 @@ class ACPT_Lite_Schema
 					  `field_label` varchar(255) DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -230,7 +262,7 @@ class ACPT_Lite_Schema
 				    ],
 				    'field_name' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null
@@ -244,7 +276,7 @@ class ACPT_Lite_Schema
 				    ],
 				    'field_default_value' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => true,
 					    'default' => 'NULL'
@@ -314,16 +346,18 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)                       => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` (
 					  `id` varchar(36) NOT NULL,
-					  `group_name` varchar(255) NOT NULL,
+					  `group_name` varchar(248) NOT NULL,
 					  `label` varchar(255) DEFAULT NULL,
 					  `display` varchar(55) DEFAULT NULL,
+					  `context` varchar(36) DEFAULT NULL,
+					  `priority` varchar(36) DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`),
 					  UNIQUE KEY `group_name` (`group_name`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -334,7 +368,7 @@ class ACPT_Lite_Schema
 				    ],
 				    'group_name' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 255,
+					    'length' => 248,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null
@@ -353,10 +387,24 @@ class ACPT_Lite_Schema
 					    'nullable' => true,
 					    'default' => 'NULL'
 				    ],
+				    'context' => [
+					    'type' => self::COLUMN_VARCHAR,
+					    'length' => 36,
+					    'unique' => false,
+					    'nullable' => true,
+					    'default' => 'NULL'
+				    ],
+				    'priority' => [
+					    'type' => self::COLUMN_VARCHAR,
+					    'length' => 36,
+					    'unique' => false,
+					    'nullable' => true,
+					    'default' => 'NULL'
+				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)                      => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` (
 					  `id` varchar(36) NOT NULL,
 					  `meta_box_id` varchar(36) NOT NULL,
 					  `meta_field_id` varchar(36) NOT NULL,
@@ -366,7 +414,7 @@ class ACPT_Lite_Schema
 					  `is_default` tinyint(1) NOT NULL DEFAULT '0',
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -391,14 +439,14 @@ class ACPT_Lite_Schema
 				    ],
 				    'option_label' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null
 				    ],
 				    'option_value' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => true,
 					    'default' => 'NULL'
@@ -419,15 +467,15 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS)                         => [
-			    'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS) => [
+			    'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_SETTINGS)."` (
 					  `id` varchar(36)  NOT NULL,
 					  `meta_key` varchar(32) NOT NULL,
 					  `meta_value` varchar(255) NOT NULL,
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`),
 					  UNIQUE KEY `meta_key` (`meta_key`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -452,8 +500,8 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)                         => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY)."` (
 					  `id` varchar(36) NOT NULL,
 					  `slug` varchar(32) NOT NULL,
 					  `singular` varchar(255) NOT NULL,
@@ -464,7 +512,7 @@ class ACPT_Lite_Schema
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`),
 					  UNIQUE KEY `slug` (`slug`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -501,7 +549,7 @@ class ACPT_Lite_Schema
 					    'nullable' => true,
 					    'default' => '0'
 				    ],
-				    'supports' => [
+				    'settings' => [
 					    'type' => self::COLUMN_TEXT,
 					    'length' => null,
 					    'unique' => false,
@@ -517,12 +565,12 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)                   => [
-			    'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT) => [
+			    'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` (
 					  `custom_post_type_id` varchar(36) NOT NULL,
 					  `taxonomy_id` varchar(36) NOT NULL,
 					  PRIMARY KEY (`custom_post_type_id`,`taxonomy_id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'custom_post_type_id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -540,8 +588,8 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)         => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."` (
 					  `id` varchar(36) NOT NULL,
 					  `product_data_name` varchar(32) NOT NULL,
 					  `icon` varchar(255) NOT NULL,
@@ -550,7 +598,7 @@ class ACPT_Lite_Schema
 					  `content` text,
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -573,7 +621,7 @@ class ACPT_Lite_Schema
 					    'nullable' => false,
 					    'default' => null
 				    ],
-				    'text' => [
+				    'visibility' => [
 					    'type' => self::COLUMN_TEXT,
 					    'length' => null,
 					    'unique' => false,
@@ -596,8 +644,8 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)   => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` (
 					  `id` varchar(36) NOT NULL,
 					  `product_data_id` varchar(36) NOT NULL,
 					  `field_name` varchar(50) NOT NULL,
@@ -608,7 +656,7 @@ class ACPT_Lite_Schema
 					  `sort` int DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -626,7 +674,7 @@ class ACPT_Lite_Schema
 				    ],
 				    'field_name' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null
@@ -640,7 +688,7 @@ class ACPT_Lite_Schema
 				    ],
 				    'field_default_value' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null
@@ -668,8 +716,8 @@ class ACPT_Lite_Schema
 				    ],
 			    ],
 		    ],
-		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)  => [
-		    	'create' => "CREATE TABLE `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION) . "` (
+		    ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION) => [
+		    	'create' => "CREATE TABLE `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` (
 					  `id` varchar(36) NOT NULL,
 					  `product_data_id` varchar(36) NOT NULL,
 					  `product_data_field_id` varchar(36) NOT NULL,
@@ -678,7 +726,7 @@ class ACPT_Lite_Schema
 					  `sort` int DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  UNIQUE KEY `id` (`id`)
-					) " . ACPT_Lite_DB::getCharsetCollation() . ";",
+					) ".ACPT_Lite_DB::getCharsetCollation().";",
 			    'columns' => [
 				    'id' => [
 					    'type' => self::COLUMN_VARCHAR,
@@ -703,14 +751,14 @@ class ACPT_Lite_Schema
 				    ],
 				    'option_label' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null
 				    ],
 				    'option_value' => [
 					    'type' => self::COLUMN_VARCHAR,
-					    'length' => 50,
+					    'length' => 255,
 					    'unique' => false,
 					    'nullable' => false,
 					    'default' => null

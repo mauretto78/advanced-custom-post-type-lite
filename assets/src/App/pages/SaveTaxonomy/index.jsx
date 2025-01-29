@@ -13,6 +13,7 @@ import LabelsStep from "./Steps/LabelsStep";
 import SettingsStep from "./Steps/SettingsStep";
 import {saveTaxonomy} from "../../redux/reducers/saveTaxonomySlice";
 import {toast} from "react-hot-toast";
+import {setCookieMessage} from "../../utils/cookies";
 
 const SaveTaxonomy = ({}) => {
 
@@ -28,6 +29,7 @@ const SaveTaxonomy = ({}) => {
     const [fetchError, setFetchError] = useState(false);
     const [stepActive, setStepActive] = useState(step ? parseInt(step) : 0);
     const [formValues, setFormValues] = useState({});
+    const [title, setTitle] = useState(taxonomy && formValues[1] ? useTranslation("Edit") + " " + formValues[1].singular_label : useTranslation("Create new Taxonomy"));
 
     // manage redirect
     const navigate = useNavigate();
@@ -37,8 +39,14 @@ const SaveTaxonomy = ({}) => {
     }
 
     useEffect(() => {
+        if(taxonomy && formValues[1]){
+            setTitle(useTranslation("Edit") + " " + formValues[1].singular_label);
+        }
+
+    }, [formValues]);
+
+    useEffect(() => {
         if(taxonomy){
-            metaTitle(useTranslation("Edit Taxonomy"));
             dispatch(fetchTaxonomies({
                 taxonomy:taxonomy
             }))
@@ -55,7 +63,9 @@ const SaveTaxonomy = ({}) => {
                             },
                             2: res.payload[0].labels,
                             3: res.payload[0].settings,
-                        })
+                        });
+
+                        metaTitle(`${useTranslation("Edit")} ${res.payload[0].singular}`);
                     }
 
                 })
@@ -73,14 +83,13 @@ const SaveTaxonomy = ({}) => {
         }
     }, []);
 
-    const title = taxonomy ? useTranslation("Edit Taxonomy") : useTranslation("Create new Taxonomy");
     const crumbs = [
         {
             label: useTranslation("Registered Taxonomies"),
             link: "/taxonomies"
         },
         {
-            label: taxonomy ? useTranslation("Edit Taxonomy") : useTranslation("Create new Taxonomy")
+            label: title
         }
     ];
 
@@ -105,15 +114,17 @@ const SaveTaxonomy = ({}) => {
         setFormValues(formValues);
         scrollToTop();
 
-        if(stepActive === 2){
+        const isFormComplete = Object.keys(formValues).length === 3;
+
+        if(isFormComplete){
             dispatch(saveTaxonomy(formValues))
                 .then(res => {
                     const payload = res.payload;
 
                     if(payload.success){
+                        setCookieMessage("Taxonomy successfully saved.");
                         navigate('/taxonomies');
-                        toast.success(useTranslation("Taxonomy successfully saved. The browser will refresh after 5 seconds."));
-                        refreshPage(5000);
+                        refreshPage();
                     } else {
                         toast.error(payload.error);
                     }
@@ -148,6 +159,7 @@ const SaveTaxonomy = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <LabelsStep
                         edit={edit}
@@ -158,6 +170,7 @@ const SaveTaxonomy = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <SettingsStep
                         title={title}
@@ -167,7 +180,9 @@ const SaveTaxonomy = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                         loading={loading}
+                        edit={edit}
                     />
                 ]}
                 activeStep={stepActive}

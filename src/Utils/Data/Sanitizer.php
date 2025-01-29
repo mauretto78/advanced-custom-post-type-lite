@@ -4,6 +4,7 @@ namespace ACPT_Lite\Utils\Data;
 
 use ACPT_Lite\Constants\HTMLTag;
 use ACPT_Lite\Core\Helper\Strings;
+use ACPT_Lite\Core\Models\Form\FormFieldModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 
 class Sanitizer
@@ -25,6 +26,10 @@ class Sanitizer
 
 			case MetaFieldModel::TEXTAREA_TYPE:
 				return stripslashes_deep(sanitize_textarea_field($rawData));
+
+			case is_array($rawData):
+				return Sanitizer::recursiveSanitizeRawData($rawData);
+				break;
 
 			default:
 				return stripslashes_deep(sanitize_text_field($rawData));
@@ -58,6 +63,54 @@ class Sanitizer
         }
 
         return $array;
+    }
+
+	/**
+	 * Improved wp_kses() with support for SVG and iframe
+	 *
+	 * @param $string
+	 *
+	 * @return string
+	 */
+    private static function customWpKses($string)
+    {
+	    $svgArgs = [
+		    'svg'   => [
+			    'class'           => true,
+			    'aria-hidden'     => true,
+			    'aria-labelledby' => true,
+			    'role'            => true,
+			    'xmlns'           => true,
+			    'width'           => true,
+			    'height'          => true,
+			    'viewBox'         => true,
+			    'viewbox'         => true
+		    ],
+            'iframe' => [
+                'title' => true,
+                'frameborder' => true,
+                'width' => true,
+                'height' => true,
+                'style' => true,
+                'src' => true,
+                'type' => true,
+                'allowscriptaccess' => true,
+                'allowfullscreen' => true,
+                'allownetworking' => true,
+                'scrolling' => true,
+            ],
+		    'g'     => [ 'fill' => true ],
+		    'title' => [ 'title' => true ],
+		    'path'  => [
+			    'd'    => true,
+			    'fill' => true
+		    ]
+	    ];
+
+	    $ksesDefaults = wp_kses_allowed_html( 'post' );
+	    $allowedTags = array_merge( $ksesDefaults, $svgArgs );
+
+	    return wp_kses( self::escapeField($string), $allowedTags );
     }
 
 	/**

@@ -4,5 +4,9 @@
 
   .acpt-main-wrapper {
     padding: $space-24;
+
+    @media screen and (max-width: 767px){
+      padding-left: $space-36;
+    }
   }
 }

@@ -2,17 +2,22 @@
   cursor: pointer;
   padding: $space-8;
   border: $border-thickness solid $light-gray;
-  background: $pale-gray;
   color: $medium-gray;
   border-radius: $border-radius;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+
+  &:hover {
+    border: $border-thickness solid $medium-gray;
+    color: $gray;
+  }
 
   &.active {
-    background: $white;
-    border: $border-thickness solid $light-gray;
-    color: $black;
+    font-weight: bold;
+    border: $border-thickness solid $primary-color;
+    color: $primary-color;
   }
 
   &.disabled {

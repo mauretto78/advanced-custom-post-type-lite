@@ -3,12 +3,9 @@
 namespace ACPT_Lite\Integrations\Gutenberg\Blocks;
 
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Utils\PHP\Country;
-use ACPT_Lite\Utils\PHP\Maps;
-use ACPT_Lite\Utils\PHP\Phone;
-use ACPT_Lite\Utils\Wordpress\WPAttachment;
+use ACPT_Lite\Utils\PHP\Date;
+use ACPT_Lite\Utils\PHP\Email;
 use ACPT_Lite\Utils\Wordpress\WPUtils;
 
 class ACPTBasicBlock
@@ -57,7 +54,10 @@ class ACPTBasicBlock
 		$findValue = null;
 
 		// try to calculate $find and $findValue
-		if(isset($field['belongsTo']) and $field['belongsTo'] === MetaTypes::TAXONOMY){
+		if(isset($field['belongsTo']) and $field['belongsTo'] === MetaTypes::OPTION_PAGE){
+			$findValue = $field['find'];
+			$find = 'option_page';
+		} elseif(isset($field['belongsTo']) and $field['belongsTo'] === MetaTypes::TAXONOMY){
 			$find = 'term_id';
 			$termId = null;
 
@@ -93,13 +93,37 @@ class ACPTBasicBlock
 			return '{acpt_'.$field['box'].'_'.$field['field'].'}';
 		}
 
-		$args = [
-			$find => $findValue,
-			'box_name' => $field['box'],
-			'field_name' => $field['field'],
-		];
+		if(isset($field['block_name'])){
+			$args = [
+				$find => $findValue,
+				'box_name' => $field['box'],
+				'field_name' => $field['field'],
+				'parent_field_name' => $field['parent_field'],
+				'index' => $field['index'],
+				'block_name' => $field['block_name'],
+				'block_index' => $field['block_index'],
+			];
 
-		$rawData = get_acpt_field($args);
+			$rawData = get_acpt_block_child_field($args);
+		} elseif(isset($field['parent_field'])){
+			$args = [
+				$find => $findValue,
+				'box_name' => $field['box'],
+				'field_name' => $field['field'],
+				'parent_field_name' => $field['parent_field'],
+				'index' => $field['index'],
+			];
+
+			$rawData = get_acpt_child_field($args);
+		} else {
+			$args = [
+				$find => $findValue,
+				'box_name' => $field['box'],
+				'field_name' => $field['field'],
+			];
+
+			$rawData = get_acpt_field($args);
+		}
 
 		if(empty($rawData)){
 			return null;
@@ -109,15 +133,22 @@ class ACPTBasicBlock
 
 			// DATE_TYPE
 			case MetaFieldModel::DATE_TYPE:
-				$format = !empty($attributes['dateFormat']) ? $attributes['dateFormat'] : get_option( 'date_format' ) ?? 'Y-m-d';
 
-				return  date_i18n($format, strtotime($rawData));
+				if( !empty($attributes['dateFormat']) and Date::isDateFormatValid($attributes['dateFormat']) ){
+					return date_i18n($attributes['dateFormat'], strtotime($rawData));
+				}
+
+				return $rawData;
 
 			// EMAIL_TYPE
 			case MetaFieldModel::EMAIL_TYPE:
 
-				if(isset($attributes['display']) and $attributes['display'] === 'link'){
-					return '<a href="mailto:'.sanitize_email(strip_tags($rawData)).'">'.$rawData.'</a>';
+				if(!is_string($rawData)){
+					return null;
+				}
+
+				if(isset($attributes['display']) and $attributes['display'] === 'link' and $rawData !== null){
+					return '<a href="mailto:'.Email::sanitize($rawData).'">'.$rawData.'</a>';
 				}
 
 				return $rawData;

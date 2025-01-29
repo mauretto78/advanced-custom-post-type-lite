@@ -3,36 +3,56 @@
 namespace ACPT_Lite\Core\Generators\CustomPostType;
 
 use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\Generators\AbstractGenerator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
-use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
+use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Wordpress\Nonce;
 use ACPT_Lite\Utils\Wordpress\Translator;
 
-class CustomPostTypeAdminColumnsGenerator
+class CustomPostTypeAdminColumnsGenerator extends AbstractGenerator
 {
-	public static function addColumns(CustomPostTypeModel $postTypeModel)
+	/**
+     * Add meta fields to the posts table
+     *
+	 * @param CustomPostTypeModel $postTypeModel
+	 *
+	 * @throws \Exception
+	 */
+	public static function addColumns($postTypeModel)
 	{
-		$manageEditAction = 'manage_edit-'.$postTypeModel->getName().'_columns';
-		$manageEditSortAction = 'manage_edit-'.$postTypeModel->getName().'_sortable_columns';
-		$customColumnsAction = 'manage_'.$postTypeModel->getName().'_posts_custom_column';
+	    $postTypeName = ($postTypeModel instanceof CustomPostTypeModel) ? $postTypeModel->getName() : $postTypeModel;
+
+		$manageEditAction = 'manage_edit-'.$postTypeName.'_columns';
+		$manageEditSortAction = 'manage_edit-'.$postTypeName.'_sortable_columns';
+		$customColumnsAction = 'manage_'.$postTypeName.'_posts_custom_column';
 
 		$metaGroups = MetaRepository::get([
 			'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
-			'find' => $postTypeModel->getName()
+			'find' => $postTypeName,
+            'clonedFields' => true
 		]);
 
 		// add columns to show
 		add_filter($manageEditAction, function($columns) use ($postTypeModel, $metaGroups) {
+
+			if($postTypeModel instanceof CustomPostTypeModel and !$postTypeModel->isNative()){
+				foreach ( $postTypeModel->getTaxonomies() as $taxonomy ) {
+					if(!$taxonomy->isNative() and !isset($columns[$taxonomy->getSlug()])){
+						$columns[$taxonomy->getSlug()] = $taxonomy->getSingular();
+					}
+				}
+			}
+
 			foreach($metaGroups as $metaGroup){
 				foreach ($metaGroup->getBoxes() as $metaBoxModel){
 					foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
 						if ($metaBoxFieldModel->isShowInArchive()){
 							$key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
 							$value = Strings::toHumanReadableFormat($metaBoxFieldModel->getName());
-
 							$columns[$key] = $value;
 						}
 					}
@@ -42,12 +62,65 @@ class CustomPostTypeAdminColumnsGenerator
 			return $columns;
 		});
 
+		// display value on columns to show
+		add_action($customColumnsAction, function($name) use ($postTypeModel, $metaGroups) {
+			global $post;
+
+			if($postTypeModel instanceof CustomPostTypeModel and !$postTypeModel->isNative()){
+				foreach ($postTypeModel->getTaxonomies() as $taxonomy) {
+					if(!$taxonomy->isNative() and $name === $taxonomy->getSlug()){
+
+						$display = self::displayTaxonomy($postTypeModel, $taxonomy);
+
+						if($display){
+							$terms = wp_get_post_terms((int)$post->ID, $taxonomy->getSlug());
+
+							if(empty($terms)){
+								echo "—";
+							}
+
+							if(is_array($terms)){
+								/** @var \WP_Term $term */
+								foreach ($terms as $index => $term){
+									echo '<a href="edit.php?post_type='.$postTypeModel->getName().'&'.$term->taxonomy.'='.$term->slug.'">'.$term->name.'</a>';
+
+									if(($index+1) !== count($terms)){
+										echo ", ";
+									}
+								}
+							}
+						}
+					}
+				}
+            }
+
+			foreach ($metaGroups as $metaGroup){
+				foreach ($metaGroup->getBoxes() as $metaBoxModel){
+					foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
+						if ($metaBoxFieldModel->isShowInArchive()){
+							$boxName = Strings::toDBFormat($metaBoxModel->getName());
+							$fieldName  = Strings::toDBFormat($metaBoxFieldModel->getName());
+							$key = $boxName.'_'.$fieldName;
+
+							if($key === $name){
+								echo do_shortcode('[acpt admin_view="true" preview="true" pid="'.$post->ID.'" box="'.esc_attr($boxName).'" field="'.esc_attr($fieldName).'"]');
+							}
+						}
+					}
+				}
+			}
+		});
+
 		// add sortable columns
 		add_filter( $manageEditSortAction, function($columns) use ($postTypeModel, $metaGroups){
 			foreach($metaGroups as $metaGroup){
 				foreach ($metaGroup->getBoxes() as $metaBoxModel){
 					foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
-						if ($metaBoxFieldModel->isShowInArchive() and $metaBoxFieldModel->isFilterable() and $metaBoxFieldModel->isFilterableInAdmin()){
+						if (
+                            $metaBoxFieldModel->isShowInArchive() and
+                            $metaBoxFieldModel->isFilterable() and
+                            $metaBoxFieldModel->isFilterableInAdmin()
+                        ){
 							$key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
 							$value = Strings::toHumanReadableFormat($metaBoxFieldModel->getName());
 
@@ -60,39 +133,51 @@ class CustomPostTypeAdminColumnsGenerator
 			return $columns;
 		} );
 
-		// display value on columns to show
-		add_action($customColumnsAction, function($name) use ($postTypeModel, $metaGroups) {
-			global $post;
-
-			foreach ($metaGroups as $metaGroup){
-				foreach ($metaGroup->getBoxes() as $metaBoxModel){
-					foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
-						if ($metaBoxFieldModel->isShowInArchive()){
-							$key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
-
-							if($key === $name){
-								echo do_shortcode('[acpt preview="true" pid="'.$post->ID.'" box="'.esc_attr($metaBoxModel->getName()).'" field="'.esc_attr($metaBoxFieldModel->getName()).'"]');
-							}
-						}
-					}
-				}
-			}
-		});
-
 		// modify the main posts query
 		add_action('pre_get_posts', function ($query) use ($postTypeModel, $metaGroups) {
-			if ( is_admin() && $query->is_main_query() ) {
+
+            global $wpdb;
+
+            if(!$query->is_main_query()) {
+                return;
+            }
+
+		    // filter queries on back-end
+			if ( is_admin() ) {
 				$scr = get_current_screen();
 
 				if ( $scr->base !== 'edit' && $scr->post_type !== 'events' ) {
 					return;
 				}
 
+				if($postTypeModel instanceof CustomPostTypeModel and !$postTypeModel->isNative()){
+					foreach ($postTypeModel->getTaxonomies() as $taxonomy) {
+						if (!$taxonomy->isNative() and isset($_GET[$taxonomy->getSlug()]) && $_GET[$taxonomy->getSlug()] != 0) {
+
+							$display = self::displayTaxonomy($postTypeModel, $taxonomy);
+
+							if($display){
+								$term = sanitize_text_field($_GET[$taxonomy->getSlug()]);
+								$query->set('tax_query', [
+									[
+										'taxonomy' => $taxonomy->getSlug(),
+										'field' => 'slug',
+										'terms' => $term
+									]
+								]);
+							}
+						}
+					}
+                }
+
 				foreach ($metaGroups as $metaGroup){
 					foreach ($metaGroup->getBoxes() as $metaBoxModel){
 						foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
-							if ($metaBoxFieldModel->isShowInArchive() and $metaBoxFieldModel->isFilterable() and $metaBoxFieldModel->isFilterableInAdmin()){
-
+							if (
+                                $metaBoxFieldModel->isShowInArchive() and
+                                $metaBoxFieldModel->isFilterable() and
+                                $metaBoxFieldModel->isFilterableInAdmin()
+                            ){
 								$metaKey = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
 
 								if (isset($_GET[$metaKey]) && $_GET[$metaKey] != 0) {
@@ -111,20 +196,102 @@ class CustomPostTypeAdminColumnsGenerator
 						}
 					}
 				}
-			}
+			} else {
+                // alter frontend URL prefixes
+                if(!$postTypeModel instanceof CustomPostTypeModel){
+                    return;
+                }
+
+                $frontEndUrlPrefix = $postTypeModel->getSettings()['front_url_prefix'] ?? null;
+
+                if($frontEndUrlPrefix === null){
+                    return;
+                }
+
+                if($frontEndUrlPrefix !== ""){
+
+                    $urlArr = explode("/", $_SERVER['REQUEST_URI']);
+                    $frontEndUrlPrefixArr = explode("/", $frontEndUrlPrefix);
+                    $check = array_values(array_intersect($urlArr, $frontEndUrlPrefixArr));
+
+                    if($frontEndUrlPrefixArr == $check){
+                        $postName = $query->get("attachment");
+
+                        $postType = $wpdb->get_var(
+                            $wpdb->prepare(
+                                'SELECT post_type FROM ' . $wpdb->posts . ' WHERE post_name = %s LIMIT 1',
+                                $postName
+                            )
+                        );
+
+                        if($postTypeModel->getName() === $postType){
+                            $query->set($postTypeModel->getName(), $postName);
+                            $query->set('post_type', $postType);
+                            $query->is_single = true;
+                            $query->is_page = false;
+                        }
+                    }
+
+                } else {
+
+                    // remove frontend URL prefix
+                    if( count($query->query) === 2 and isset($query->query['page']) and !empty($query->query['name']) ){
+                        $postTypes = get_post_types([
+                            'public' => true,
+                            '_builtin' => false,
+                        ]);
+
+                        $query->set('post_type', array_merge(['page', 'post'], $postTypes));
+                    }
+                }
+            }
 		});
 
 		// add filterable columns
-		add_action( 'restrict_manage_posts', function($post_type) use ($postTypeModel, $metaGroups) {
+		add_action( 'restrict_manage_posts', function($post_type) use ($postTypeModel, $postTypeName, $metaGroups) {
 
-			if($post_type !== $postTypeModel->getName()){
+			if($post_type !== $postTypeName){
 				return;
+			}
+
+			if($postTypeModel instanceof CustomPostTypeModel and !$postTypeModel->isNative()){
+				foreach ($postTypeModel->getTaxonomies() as $taxonomy) {
+
+					$display = self::displayTaxonomy($postTypeModel, $taxonomy);
+
+					if(!$taxonomy->isNative() and $display){
+						$metaKey = $taxonomy->getSlug();
+						$selected = '';
+						if ( isset($_REQUEST[$metaKey]) ) {
+							$selected = $_REQUEST[$metaKey];
+						}
+
+						echo '<select id="'.$metaKey.'" name="'.$metaKey.'">';
+						echo '<option value="0">' . Translator::translate('Select') . ' ' . $taxonomy->getSingular() .' </option>';
+
+						$terms = get_terms([
+							'taxonomy'   => $taxonomy->getSlug(),
+							'hide_empty' => false,
+						]);
+
+						foreach($terms as $term){
+							$isSelected = ($term->name == $selected) ? ' selected="selected"':'';
+							echo '<option value="'.$term->name.'"'.$isSelected.'>' . $term->name . ' </option>';
+						}
+
+						echo '</select>';
+					}
+				}
 			}
 
 			foreach($metaGroups as $metaGroup){
 				foreach ($metaGroup->getBoxes() as $metaBoxModel){
 					foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
-						if ($metaBoxFieldModel->isShowInArchive() and $metaBoxFieldModel->isFilterable() and $metaBoxFieldModel->isFilterableInAdmin()){
+						if (
+                            $metaBoxFieldModel->isShowInArchive() and
+                            $metaBoxFieldModel->isFilterable() and
+                            $metaBoxFieldModel->isFilterableInAdmin()
+                        ){
 
 							//get unique values of the meta field to filer by.
 							$metaKey = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
@@ -169,51 +336,64 @@ class CustomPostTypeAdminColumnsGenerator
 		});
 
 		// quick edit
-		add_action( 'quick_edit_custom_box', function($column_name) use ($postTypeModel, $metaGroups) {
+		add_action( 'quick_edit_custom_box', function($columnName) use ($postTypeModel, $postTypeName, $metaGroups) {
 			global $post;
 
-			foreach ($metaGroups as $metaGroup){
-				foreach ($metaGroup->getBoxes() as $metaBoxModel){
-					foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
-						if (
-							$metaBoxFieldModel->isShowInArchive() and
-							$metaBoxFieldModel->isForQuickEdit() and
-							$metaBoxFieldModel->isATextualField()
-						){
-							$key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
-							$key = esc_html($key);
-							$label = Strings::toHumanReadableFormat($metaBoxFieldModel->getName());
-							$value = Meta::fetch( $post->ID, MetaTypes::CUSTOM_POST_TYPE, $key, true );
-							if( $column_name === $key ):
-								Nonce::field();
-								?>
-                                <fieldset class="inline-edit-col-right" id="#edit-<?php echo $key; ?>">
-                                    <input type="hidden" name="meta_fields[]" value="<?php echo $key; ?>">
-                                    <input type="hidden" name="meta_fields[]" value="<?php echo $key; ?>_type">
-                                    <input type="hidden" name="<?php echo $key; ?>_type" value="<?php echo $metaBoxFieldModel->getType(); ?>">
-                                    <input type="hidden" name="<?php echo $key; ?>_required" value="<?php echo $metaBoxFieldModel->isRequired(); ?>">
-                                    <div class="inline-edit-col">
-                                        <label>
-                                            <span class="title"><?php echo $label; ?></span>
-                                            <span class="input-text-wrap">
-                                                <?php if($metaBoxFieldModel->getType() === MetaFieldModel::EMAIL_TYPE): ?>
-                                                    <input type="email" name="<?php echo $key; ?>" data-acpt-column="column-<?php echo $key; ?>" class="inline-edit-menu-order-input" value="<?php echo $value; ?>">
-                                                <?php elseif($metaBoxFieldModel->getType() === MetaFieldModel::TEXTAREA_TYPE): ?>
-                                                    <textarea name="<?php echo $key; ?>" data-acpt-column="column-<?php echo $key; ?>" class="inline-edit-menu-order-input" rows="5"><?php echo $value; ?>"</textarea>
-                                                <?php elseif($metaBoxFieldModel->getType() === MetaFieldModel::NUMBER_TYPE): ?>
-                                                    <input type="number" name="<?php echo $key; ?>" data-acpt-column="column-<?php echo $key; ?>" class="inline-edit-menu-order-input" value="<?php echo $value; ?>">
-                                                <?php else: ?>
-                                                    <input type="text" name="<?php echo $key; ?>" data-acpt-column="column-<?php echo $key; ?>" class="inline-edit-menu-order-input" value="<?php echo $value; ?>">
-                                                <?php endif; ?>
-									        </span>
-                                        </label>
-                                    </div>
-                                </fieldset>
-							<?php endif;
-						}
-					}
-				}
-			}
-		} );
+			if($post !== null and $post->post_type === $postTypeName){
+                self::generateQuickEditFields($metaGroups, $columnName, $post->ID);
+            }
+        } );
+
+		// bulk edit
+        add_action( 'bulk_edit_custom_box', function ($columnName, $postType) use ($postTypeModel, $postTypeName, $metaGroups) {
+            if($postType === $postTypeName){
+                self::generateQuickEditFields($metaGroups, $columnName);
+            }
+        }, 10, 2 );
+	}
+
+    /**
+     * @param MetaGroupModel[] $metaGroups
+     * @param string $columnName
+     * @param null $postId
+     */
+	private static function generateQuickEditFields($metaGroups, $columnName, $postId = null)
+    {
+        foreach ($metaGroups as $metaGroup){
+            foreach ($metaGroup->getBoxes() as $metaBoxModel){
+                foreach ($metaBoxModel->getFields() as $metaBoxFieldModel){
+                    if (
+                        $metaBoxFieldModel->isShowInArchive() and
+                        $metaBoxFieldModel->isForQuickEdit() and
+                        $metaBoxFieldModel->canBeQuickEdited()
+                    ){
+                        $key = Strings::toDBFormat($metaBoxModel->getName()).'_'.Strings::toDBFormat($metaBoxFieldModel->getName());
+                        $key = esc_html($key);
+                        $label = Strings::toHumanReadableFormat($metaBoxFieldModel->getName());
+                        $value = "";
+
+                        if(!empty($postId)){
+                            $value = Meta::fetch( $postId, MetaTypes::CUSTOM_POST_TYPE, $key, true );
+                        }
+
+                        if( $columnName === $key ){
+                            Nonce::field();
+                            echo self::generateQuickEditField($key, $label, $value, $metaBoxFieldModel);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+	/**
+	 * @param CustomPostTypeModel $postTypeModel
+	 * @param TaxonomyModel $taxonomy
+	 *
+	 * @return bool
+	 */
+	private static function displayTaxonomy(CustomPostTypeModel $postTypeModel, TaxonomyModel $taxonomy): bool
+	{
+		return ($postTypeModel->isWooCommerce() and $taxonomy->isWooCommerceNative()) ? false : true;
 	}
 }

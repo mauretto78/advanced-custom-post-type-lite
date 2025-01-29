@@ -5,32 +5,48 @@ namespace ACPT_Lite\Utils\Wordpress;
 class Users
 {
 	/**
+	 * @param array $args
+	 *
 	 * @return array
 	 */
-    public static function getList(): array
+    public static function getList($args = []): array
     {
-        $list = [];
-        $users = get_users( [
-            'fields' => [
-                'ID',
-                'display_name',
-            ],
-        ]);
+    	try {
+		    $list = [];
+			$roleParam = isset($args['role']) ? $args['role'] : null;
+			$queryParams = [
+				'fields' => [
+					'ID',
+					'display_name',
+				],
+			];
 
-        usort($users, function ($a, $b){
-            if(isset($a->last_name) and isset($b->last_name)){
-                return strnatcasecmp($a->last_name, $b->last_name);
-            }
+		    if(is_array($roleParam)){
+			    $queryParams['role__in'] = $roleParam;
+		    } elseif(is_numeric($roleParam)){
+			    $queryParams['role'] = $roleParam;
+		    }
 
-            return false;
-        });
+		    $users = get_users($queryParams);
 
-        foreach($users as $user){
-	        $wpUser = new \WP_User($user->ID);
-            $list[$user->ID] = self::getUserLabel($wpUser);
-        }
+		    usort($users, function ($a, $b){
+			    if(isset($a->last_name) and isset($b->last_name)){
+				    return strnatcasecmp($a->last_name, $b->last_name);
+			    }
 
-        return $list;
+			    return 0;
+		    });
+
+		    foreach($users as $user){
+			    $wpUser = new \WP_User($user->ID);
+			    $list[$user->ID] = self::getUserLabel($wpUser);
+		    }
+
+		    return $list;
+
+	    } catch (\Exception $exception){
+		    return [];
+	    }
     }
 
     /**

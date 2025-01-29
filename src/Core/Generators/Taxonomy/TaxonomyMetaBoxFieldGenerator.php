@@ -37,18 +37,12 @@ class TaxonomyMetaBoxFieldGenerator
         $this->termId = $termId;
     }
 
-    /**
-     * @return mixed
-     */
+	/**
+	 * @return AbstractField|null
+	 */
     public function generate()
     {
-        $field = self::getTaxonomyField();
-
-	    if($field){
-		    return $field->render();
-	    }
-
-	    return null;
+	    return self::getTaxonomyField();
     }
 
 	/**

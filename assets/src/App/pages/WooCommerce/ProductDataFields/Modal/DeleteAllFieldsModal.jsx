@@ -5,7 +5,7 @@ import Button from "../../../../components/Button";
 import {styleVariants} from "../../../../constants/styles";
 import {useDispatch} from "react-redux";
 import {useFormContext} from "react-hook-form";
-import {deleteAllFields} from "../../../../redux/reducers/productDataFieldsStateSlice";
+import {deleteAllFields, deselectAllElements} from "../../../../redux/reducers/productDataFieldsStateSlice";
 
 const DeleteAllFieldsModal = () => {
 
@@ -22,6 +22,7 @@ const DeleteAllFieldsModal = () => {
         <Button style={styleVariants.SUCCESS} onClick={(e) => {
             e.preventDefault();
             dispatch(deleteAllFields());
+            dispatch(deselectAllElements());
             setValue("fields", []);
             setModalOpen(!modalOpen);
         }}>

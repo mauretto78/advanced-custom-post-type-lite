@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Core\Models\WooCommerce;
 
+use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 
 /**
@@ -87,6 +88,19 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
     public function getSort()
     {
         return $this->sort;
+    }
+
+    /**
+     * @param WooCommerceProductDataFieldModel $fieldModel
+     * @return WooCommerceProductDataFieldOptionModel
+     */
+    public function duplicateFrom(WooCommerceProductDataFieldModel $fieldModel)
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->productDataField = $fieldModel;
+
+        return $duplicate;
     }
 
 	#[\ReturnTypeWillChange]

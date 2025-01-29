@@ -2,17 +2,10 @@
 
 namespace ACPT_Lite\Integrations\Elementor\Widgets;
 
+use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Core\Helper\Currencies;
-use ACPT_Lite\Core\Helper\Lengths;
-use ACPT_Lite\Core\Helper\Strings;
-use ACPT_Lite\Core\Helper\Weights;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Core\Shortcodes\ACPT\OptionPageMetaShortcode;
 use ACPT_Lite\Core\Shortcodes\ACPT\PostMetaShortcode;
-use ACPT_Lite\Utils\PHP\Date;
-use ACPT_Lite\Utils\Wordpress\WPAttachment;
-use ACPT_Lite\Utils\Wordpress\WPUtils;
 
 class WidgetRender
 {
@@ -28,14 +21,30 @@ class WidgetRender
 		$context = null;
 		$contextId = null;
 
-		if($fieldModel->getBelongsToLabel() === MetaTypes::CUSTOM_POST_TYPE){
-			$context = 'post_id';
-			$contextId = (isset($_GET['post']) and get_post_type($_GET['post']) !== 'elementor_library') ? $_GET['post'] : null;
-			if($contextId === null){
-				global $post;
-				$contextId = $post->ID;
-			}
-		}
+        $belongsTo = $fieldModel->getBelongsToLabel();
+
+        switch ($belongsTo){
+            case BelongsTo::PARENT_POST_ID:
+            case BelongsTo::POST_ID:
+            case MetaTypes::CUSTOM_POST_TYPE:
+            case BelongsTo::POST_TAX:
+            case BelongsTo::POST_CAT:
+            case BelongsTo::POST_TEMPLATE:
+                $context = 'post_id';
+                $contextId = (isset($_GET['post']) and get_post_type($_GET['post']) !== 'elementor_library') ? $_GET['post'] : null;
+
+                if($contextId === null){
+                    global $post;
+                    $contextId = $post->ID;
+                }
+
+                break;
+
+            case MetaTypes::OPTION_PAGE:
+                $context = 'option_page';
+                $contextId = $fieldModel->getFindLabel();
+                break;
+        }
 
 		if($context === null and $contextId === null){
 			return null;
@@ -50,6 +59,10 @@ class WidgetRender
 		$dateFormat = (isset($settings['acpt_dateformat'])) ? $settings['acpt_dateformat'] : null;
 		$timeFormat = (isset($settings['acpt_timeformat'])) ? $settings['acpt_timeformat'] : null;
 		$render = (isset($settings['acpt_render'])) ? $settings['acpt_render'] : null;
+		$repeaterTemplate = (isset($settings['acpt_repeater'])) ? $settings['acpt_repeater'] : null;
+		$repeaterWrapper = (isset($settings['acpt_wrapper'])) ? $settings['acpt_wrapper'] : 'div';
+		$cssRepeaterWrapper = (isset($settings['acpt_css'])) ? $settings['acpt_css'] : '';
+		$block = (isset($settings['acpt_block'])) ? $settings['acpt_block'] : null;
 
 		if (
 			$_SERVER['PHP_SELF'] === '/wp-admin/post.php' or

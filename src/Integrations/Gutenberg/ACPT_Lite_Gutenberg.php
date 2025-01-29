@@ -2,8 +2,10 @@
 
 namespace ACPT_Lite\Integrations\Gutenberg;
 
+use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Integrations\AbstractIntegration;
 use ACPT_Lite\Integrations\Gutenberg\Blocks\ACPTBasicBlock;
+use ACPT_Lite\Utils\Settings\Settings;
 
 class ACPT_Lite_Gutenberg extends AbstractIntegration
 {
@@ -12,7 +14,7 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
 	 */
 	protected function isActive()
 	{
-		return true;
+		return Settings::get(SettingsModel::ENABLE_META, 1) == 1;
 	}
 
 	/**

@@ -35,6 +35,27 @@ abstract class AbstractSaveMetaCommand
 	}
 
 	/**
+	 * @param MetaFieldModel $fieldModel
+	 *
+	 * @return bool
+	 */
+	protected function hasField(MetaFieldModel $fieldModel)
+	{
+	    $key = $fieldModel->getDbName();
+
+	    if($this->WooCommerceLoopIndex !== null){
+            $key .= "_".$this->WooCommerceLoopIndex;
+        }
+
+	    $key .= "_id";
+
+		return (
+			isset($this->data[$key]) and
+			$this->data[$key] === $fieldModel->getId()
+		);
+	}
+
+	/**
 	 * Save a meta field
 	 *
 	 * @param MetaFieldModel $fieldModel
@@ -48,39 +69,48 @@ abstract class AbstractSaveMetaCommand
 		$data = $this->data;
 		$idName = $fieldModel->getDbName();
 
+		$key = $idName;
+
+        if($this->WooCommerceLoopIndex !== null){
+            $key .= "_".$this->WooCommerceLoopIndex;
+        }
+
 		// handling files from comment forms
-		if(isset($files[$idName])){
-			$rawFile = $files[$idName];
-			$fileUploaded = Files::uploadFile($rawFile['tmp_name'], $rawFile['name']);
+        if(isset($this->files[$key])){
+			$rawFile = $this->files[$key];
 
-			if($fileUploaded !== false){
-				$fileUploadedUrl = $fileUploaded['url'];
-				$fileUploadedId  = $fileUploaded['attachmentId'];
+			if(!empty($rawFile['tmp_name'])){
+				$fileUploaded = Files::uploadFile($rawFile['tmp_name'], $rawFile['name']);
 
-				Meta::save(
-					$elementId,
-					$belongsTo,
-					$idName,
-					$fileUploadedUrl
-				);
+				if($fileUploaded !== false){
+					$fileUploadedUrl = $fileUploaded['url'];
+					$fileUploadedId  = $fileUploaded['attachmentId'];
 
-				Meta::save(
-					$elementId,
-					$belongsTo,
-					$idName.'_id',
-					$fileUploadedId
-				);
+					Meta::save(
+						$elementId,
+						$belongsTo,
+						$idName,
+						$fileUploadedUrl
+					);
 
-				Meta::save(
-					$elementId,
-					$belongsTo,
-					$idName.'_type',
-					$fieldModel->getType()
-				);
+					Meta::save(
+						$elementId,
+						$belongsTo,
+						$idName.'_id',
+						$fileUploadedId
+					);
+
+					Meta::save(
+						$elementId,
+						$belongsTo,
+						$idName.'_type',
+						$fieldModel->getType()
+					);
+				}
 			}
 
-		} elseif(isset($data[$idName])){
-			$rawValue = $data[$idName];
+		} elseif(isset($data[$key])){
+			$rawValue = $data[$key];
 
 			// validation
 			try {
@@ -89,56 +119,49 @@ abstract class AbstractSaveMetaCommand
 				wp_die('There was an error during saving data. The error is: ' . $exception->getMessage());
 			}
 
-			$value = $rawValue;
+            $value = $rawValue;
 
-			if(is_array($value)){
-				$value = Arrays::reindex($value);
-			}
+            if(is_array($value)){
+                $value = Arrays::reindex($value);
+            }
 
-			Meta::save(
-				$elementId,
-				$belongsTo,
-				$idName,
-				Sanitizer::sanitizeRawData($fieldModel->getType(), $this->convertMetaDataToDBFormat($value))
-			);
+            Meta::save(
+                $elementId,
+                $belongsTo,
+                $idName,
+                Sanitizer::sanitizeRawData($fieldModel->getType(), $value)
+            );
 
-			foreach (ExtraFields::ALLOWED_VALUES as $extra){
-				if(isset($data[$idName.'_'.$extra])){
-					Meta::save(
-						$elementId,
-						$belongsTo,
-						$idName.'_'.$extra,
-						Sanitizer::sanitizeRawData(MetaFieldModel::TEXT_TYPE, $data[$idName.'_'.$extra] )
-					);
-				}
-			}
+            // Extra fields
+            foreach (ExtraFields::ALLOWED_VALUES as $extra){
+                if(isset($data[$key.'_'.$extra])){
+                    Meta::save(
+                        $elementId,
+                        $belongsTo,
+                        $idName.'_'.$extra,
+                        Sanitizer::sanitizeRawData(MetaFieldModel::TEXT_TYPE, $data[$key.'_'.$extra] )
+                    );
+                }
+            }
 
 		} else {
-			Meta::save(
-				$elementId,
-				$belongsTo,
-				$idName,
-				''
-			);
+
+			// blank the field only if it already exists
+			$metaFieldToBeBlanked = Meta::fetch($elementId, $belongsTo, $idName);
+
+			if($metaFieldToBeBlanked !== null){
+				Meta::save(
+					$elementId,
+					$belongsTo,
+					$idName,
+					''
+				);
+			}
 		}
 
 		if(!empty($errors)){
 			Transient::set( "acpt_plugin_error_msg_".$elementId, $errors, 60 );
 			add_filter( 'redirect_post_location', [$this, 'addNoticeQueryVar'], 99 );
 		}
-	}
-
-	/**
-	 * This function normalize the raw data before saving in DB.
-	 * Is needed to convert relationship values from strings (1,37,47) to arrays [1, 37, 47]
-	 *
-	 * @param $rawValue
-	 *
-	 * @return mixed
-	 * @throws \Exception
-	 */
-	protected function convertMetaDataToDBFormat($rawValue)
-	{
-		return $rawValue;
 	}
 }

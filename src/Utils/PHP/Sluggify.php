@@ -16,6 +16,10 @@ class Sluggify
     {
 	    $result = '';
 
+	    if(!is_string($string)){
+		    return $result;
+	    }
+
         if ( is_scalar( $string ) ) {
 	        $result = strtolower( $string );
 	        $result = ltrim($result);

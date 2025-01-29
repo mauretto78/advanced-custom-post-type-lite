@@ -104,6 +104,10 @@ class SaveMetaGroupCommand implements CommandInterface
 			'boxes' => [],
 			'fields' => [],
 			'options' => [],
+			'visibilityConditions' => [],
+			'validationRules' => [],
+			'relations' => [],
+			'blocks' => [],
 		];
 
 		$groupModel = MetaGroupModel::hydrateFromArray([
@@ -113,10 +117,28 @@ class SaveMetaGroupCommand implements CommandInterface
 			'display' => ($data['display'] ?? MetaGroupDisplay::STANDARD),
 		]);
 
+		if(isset($data['priority']) and !empty($data['priority'])){
+			$groupModel->setPriority($data['priority']);
+		}
+
+		if(isset($data['context']) and !empty($data['context'])){
+			$groupModel->setContext($data['context']);
+		}
+
+		if(empty($groupModel->getContext())){
+			$groupModel->setContext('advanced');
+		}
+
+		if(empty($groupModel->getPriority())){
+			$groupModel->setPriority('default');
+		}
+
 		$groupModel->changeName(Strings::getTheFirstAvailableName($groupModel->getName(), $arrayOfGroupNames));
 
-		// belongs$belongs
+		// belongs
 		foreach ($belongs as $belongIndex => $belong){
+
+		    // @TODO saving in cache
 
 			$belongsTo = $belong['belongsTo'] ?? $belong['belongs_to'];
 
@@ -265,6 +287,22 @@ class SaveMetaGroupCommand implements CommandInterface
 				'id' => $field['id'],
 				'name' => $field['name'],
 			];
+		}
+
+		if(!empty($field['children'])){
+			foreach ($field['children'] as $child){
+				$this->getAllFieldNames($child, $fieldNames);
+			}
+		}
+
+		if(!empty($field['blocks'])){
+			foreach ($field['blocks'] as $block){
+				if(!empty($block['fields'])){
+					foreach ($block['fields'] as $child){
+						$this->getAllFieldNames($child, $fieldNames);
+					}
+				}
+			}
 		}
 	}
 

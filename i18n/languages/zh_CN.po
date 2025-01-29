@@ -332,14 +332,12 @@ msgid "Custom post type slug to use instead of default."
 msgstr "要使用的自定义帖子类型 slug 代替默认值。"
 
 msgid ""
-"Custom post type successfully deleted. The browser will refresh after 5 "
-"seconds."
-msgstr "自定义帖子类型已成功删除。浏览器将在 5 秒后刷新。"
+"Custom post type successfully deleted."
+msgstr "自定义帖子类型已成功删除。"
 
 msgid ""
-"Custom post type successfully saved. The browser will refresh after 5 "
-"seconds."
-msgstr "自定义帖子类型已成功保存。浏览器将在 5 秒后刷新。"
+"Custom post type successfully saved."
+msgstr "自定义帖子类型已成功保存。"
 
 msgid "Custom post type was associated to selected taxonomies"
 msgstr "自定义帖子类型与选定的分类相关联"
@@ -1329,8 +1327,8 @@ msgstr "排序方式"
 msgid "Step value (used only by numeric fields)"
 msgstr "步进值（仅用于数字字段）"
 
-msgid "Successfully post sync. The browser will refresh after 5 seconds."
-msgstr "成功发布同步。浏览器将在 5 秒后刷新。"
+msgid "Successfully post sync."
+msgstr "成功发布同步。"
 
 msgid "Support"
 msgstr "支持"
@@ -1387,10 +1385,6 @@ msgstr "模板已成功保存"
 
 msgid "Template was successfully deleted."
 msgstr "模板已成功删除。"
-
-msgid ""
-"Template was successfully deleted. The browser will refresh after 5 seconds."
-msgstr "模板已成功删除。浏览器将在 5 秒后刷新。"
 
 msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
 msgstr "之后的文字。允许 HTML（例如 &lt;/small&gt;）"
@@ -2594,7 +2588,7 @@ msgstr "所需的最小块数"
 msgid "Max blocks allowed"
 msgstr "允许的最大块数"
 
-msgid "Browser icons"
+msgid "Browse icons"
 msgstr "浏览器图标"
 
 msgid "Search an icon"
@@ -2671,8 +2665,8 @@ msgstr "输入网址"
 msgid "Enter text link"
 msgstr "输入文本链接"
 
-msgid "Settings saved. The browser will refresh after 5 seconds."
-msgstr "设置已保存。浏览器将在 5 秒后刷新。"
+msgid "Settings saved."
+msgstr "设置已保存。"
 
 msgid "Exit"
 msgstr "退出"

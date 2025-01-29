@@ -20,6 +20,10 @@ export const wpAjaxRequest = async (action, data) => {
         body: formData
     });
 
+    if(response.status >= 400){
+        throw new Error(response.statusText);
+    }
+
     return await response.json();
 };
 

@@ -9,7 +9,7 @@ const MetaFieldType = ({fieldType, css}) => {
     const {icon, label} = resolveField(fieldType);
 
     return (
-        <span className={`i-flex-center s-4 ${css ? css : ''}`}>
+        <span className={`bg-white i-flex-center s-4 ${css ? css : ''}`}>
             <Icon icon={icon} width={18} />
             <span className="flex-shrink">{useTranslation(label)}</span>
         </span>

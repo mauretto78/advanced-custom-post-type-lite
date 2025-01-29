@@ -13,7 +13,10 @@ use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 use ACPT_Lite\Utils\Checker\MetaGroupVisibilityChecker;
+use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\MetaSync\MetaSync;
+use ACPT_Lite\Utils\Settings\Settings;
+use ACPT_Lite\Utils\Wordpress\Posts;
 
 class MetaRepository extends AbstractRepository
 {
@@ -25,7 +28,7 @@ class MetaRepository extends AbstractRepository
 		$baseQuery = "
             SELECT 
                 count(id) as count
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."`
             ";
 
 		$results = ACPT_Lite_DB::getResults($baseQuery);
@@ -72,7 +75,7 @@ class MetaRepository extends AbstractRepository
 	{
 		$sql = "
 			SELECT b.id FROM 
-			 `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG) . "` b
+			 `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
 			WHERE b.belongs =  %s
 			AND b.find =  %s
 		;";
@@ -85,7 +88,7 @@ class MetaRepository extends AbstractRepository
 		foreach ($belongs as $belong){
 			$sql = "
 	            DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."`
                 WHERE id = %s
             ";
 
@@ -93,7 +96,7 @@ class MetaRepository extends AbstractRepository
 
 			$sql = "
 	            DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."`
                 WHERE belong_id = %s
             ";
 
@@ -113,15 +116,37 @@ class MetaRepository extends AbstractRepository
 		try {
 			$sql = "
 	            DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."`
                 WHERE id = %s
             ";
 
 			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$id]);
 
+            $belongQuery = "
+		        SELECT 
+		        	b.id
+	            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+	            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` bb on bb.belong_id = b.id
+	            WHERE bb.group_id = %s
+	            GROUP BY b.id
+	            ORDER BY b.sort
+		    ";
+
+            $belongs = ACPT_Lite_DB::getResults($belongQuery, [$id]);
+
+            foreach ($belongs as $belong){
+                $sql = "
+	            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."`
+                WHERE id = %s
+            ";
+
+                ACPT_Lite_DB::executeQueryOrThrowException($sql, [$belong->id]);
+            }
+
 			$sql = "
 	            DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."`
                 WHERE group_id = %s
             ";
 
@@ -129,7 +154,7 @@ class MetaRepository extends AbstractRepository
 
 			$sql = "
 				SELECT b.id FROM 
-				 `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b
+				 `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
 				where b.group_id =  %s
 			;";
 
@@ -163,23 +188,21 @@ class MetaRepository extends AbstractRepository
     {
         $sql = "
             DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
                 WHERE id = %s
             ";
 
 		$sql2 = "
             DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
                 WHERE meta_box_id = %s
             ";
 
 		$sql3 = "
             DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."`
                 WHERE meta_box_id = %s
             ";
-
-
 
 		try {
 			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$boxId]);
@@ -236,13 +259,13 @@ class MetaRepository extends AbstractRepository
 
 		$sql = "
             DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
                 WHERE id = %s
             ";
 
 		$sql2 = "
             DELETE
-                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "`
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."`
                 WHERE meta_field_id = %s
             ";
 
@@ -281,7 +304,7 @@ class MetaRepository extends AbstractRepository
 	    $baseQuery = "
             SELECT
                 id
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
             WHERE meta_box_name = %s
         ";
 
@@ -324,8 +347,8 @@ class MetaRepository extends AbstractRepository
 	    $baseQuery = "
             SELECT 
                 f.id
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b ON b.id = f.meta_box_id
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
             WHERE b.meta_box_name = %s
             AND f.field_name = %s
         ";
@@ -353,8 +376,8 @@ class MetaRepository extends AbstractRepository
                 f.meta_box_id as box_id,
                 f.field_name as name,
                 b.meta_box_name as box_name
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-            LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b ON b.id = f.meta_box_id
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
             WHERE f.id != %s
 	    ";
 
@@ -403,6 +426,14 @@ class MetaRepository extends AbstractRepository
 				'required' => false,
 				'type' => 'boolean',
 			],
+            'clonedFields' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'sortedBy' => [
+                'required' => false,
+                'type' => 'string',
+            ],
 			'lazy' => [
 				'required' => false,
 				'type' => 'boolean',
@@ -420,6 +451,7 @@ class MetaRepository extends AbstractRepository
 	    $boxName = isset($args['boxName']) ? $args['boxName'] : false;
 	    $excludeField = isset($args['excludeField']) ? $args['excludeField'] : null;
 	    $formBuilder = isset($args['formBuilder']) ? $args['formBuilder'] : false;
+	    $clonedFields = (isset($args['clonedFields']) and $args['clonedFields'] === true) ? true : false;
 
 	    $groupQueryArgs = [];
 	    $groupQuery = "
@@ -427,9 +459,11 @@ class MetaRepository extends AbstractRepository
                 g.id, 
                 g.group_name as name,
                 g.label,
-                g.display
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "` g
-            LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "` b ON b.group_id = g.id
+                g.display,
+                g.priority,
+                g.context
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
+            LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` b ON b.group_id = g.id
             WHERE 1 = 1
 	    ";
 
@@ -456,6 +490,14 @@ class MetaRepository extends AbstractRepository
 				'display'    => $group->display,
 			]);
 
+		    if(!empty($group->priority)){
+			    $groupModel->setPriority($group->priority);
+		    }
+
+		    if(!empty($group->context)){
+			    $groupModel->setContext($group->context);
+		    }
+
 		    $belongQuery = "
 		        SELECT 
 		        	b.id,
@@ -464,8 +506,8 @@ class MetaRepository extends AbstractRepository
 					b.find,
 					b.logic,
 					b.sort
-	            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG) . "` b
-	            LEFT JOIN  `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "` bb on bb.belong_id = b.id
+	            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+	            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` bb on bb.belong_id = b.id
 	            WHERE bb.group_id = %s
 	            GROUP BY b.id
 	            ORDER BY b.sort
@@ -514,7 +556,7 @@ class MetaRepository extends AbstractRepository
 			                meta_box_name as name,
 			                meta_box_label as label,
 			                sort
-			            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "`
+			            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
 			            WHERE group_id = %s
 					";
 
@@ -552,7 +594,7 @@ class MetaRepository extends AbstractRepository
 		                        filter_in_admin,
 		                        quick_edit,
 		                        sort
-		                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "`
+		                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
 		                    WHERE meta_box_id = %s
 		                    AND parent_id IS NULL
 		                    AND block_id IS NULL
@@ -571,7 +613,7 @@ class MetaRepository extends AbstractRepository
 
 						// Meta box fields
 						foreach ($fields as $fieldIndex => $field){
-							$fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel, $excludeField, $belongsTo, $find);
+							$fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel, $excludeField, $belongsTo, $find, $clonedFields);
 							$boxModel->addField($fieldModel);
 						}
 
@@ -586,6 +628,72 @@ class MetaRepository extends AbstractRepository
 		return $results;
 	}
 
+    /**
+     * @return string[]
+     */
+    public static function getGroupNames()
+    {
+        $names = [];
+        $query = "
+	        SELECT 
+                g.id, 
+                g.group_name as name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
+	    ";
+
+        $elements = ACPT_Lite_DB::getResults($query, []);
+
+        foreach ($elements as $element){
+            $names[] = $element->name;
+        }
+
+        return $names;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getBoxNames()
+    {
+        $names = [];
+        $query = "
+	        SELECT 
+                b.id, 
+                b.meta_box_name as name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
+	    ";
+
+        $elements = ACPT_Lite_DB::getResults($query, []);
+
+        foreach ($elements as $element){
+            $names[] = $element->name;
+        }
+
+        return $names;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getFieldNames()
+    {
+        $names = [];
+        $query = "
+	        SELECT 
+                f.id, 
+                f.field_name as name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+	    ";
+
+        $elements = ACPT_Lite_DB::getResults($query, []);
+
+        foreach ($elements as $element){
+            $names[] = $element->name;
+        }
+
+        return $names;
+    }
+
 	/**
 	 * @return array
 	 */
@@ -595,37 +703,29 @@ class MetaRepository extends AbstractRepository
 			'groups' => [],
 			'boxes' => [],
 			'fields' => [],
+			'blocks' => [],
 		];
 
 		$groupQuery = "
 	        SELECT 
                 g.id, 
                 g.group_name as name
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "` g
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
 	    ";
 
 		$boxQuery = "
 	        SELECT 
                 b.id, 
                 b.meta_box_name as name
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
 	    ";
 
 		$fieldQuery = "
 	        SELECT 
                 f.id, 
                 f.field_name as name
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
 	    ";
-
-
-		$groups = ACPT_Lite_DB::getResults($groupQuery, []);
-		foreach ($groups as $group){
-			$names['groups'][] = [
-				'id' => $group->id,
-				'name' => $group->name,
-			];
-		}
 
 		$boxes = ACPT_Lite_DB::getResults($boxQuery, []);
 		foreach ($boxes as $box){
@@ -654,11 +754,12 @@ class MetaRepository extends AbstractRepository
 	 * @param null $excludeField
 	 * @param null $belongsTo
 	 * @param null $find
+	 * @param false $clonedFields
 	 *
 	 * @return MetaFieldModel
 	 * @throws \Exception
 	 */
-	public static function hydrateMetaBoxFieldModel($field, MetaBoxModel $boxModel, $excludeField = null, $belongsTo = null, $find = null): ?MetaFieldModel
+	public static function hydrateMetaBoxFieldModel($field, MetaBoxModel $boxModel, $excludeField = null, $belongsTo = null, $find = null, $clonedFields = false): ?MetaFieldModel
     {
 	    $fieldModel = MetaFieldModel::hydrateFromArray([
 		    'id' => $field->id,
@@ -694,7 +795,7 @@ class MetaRepository extends AbstractRepository
 		}
 
 		// Options
-		$options = ACPT_Lite_DB::getResults( "
+		$options = ACPT_Lite_DB::getResults("
             SELECT
                 id,
                 meta_box_id as boxId,
@@ -703,7 +804,7 @@ class MetaRepository extends AbstractRepository
                 option_value as value,
                 sort,
                 is_default
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."`
             WHERE meta_field_id = %s
             ORDER BY sort
         ;", [$field->id]);
@@ -741,7 +842,7 @@ class MetaRepository extends AbstractRepository
                 meta_box_name as name,
                 meta_box_label as label,
                 sort
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
             WHERE meta_box_name = %s
             ORDER BY sort
 		";
@@ -782,7 +883,7 @@ class MetaRepository extends AbstractRepository
 	            filter_in_admin,
 	            quick_edit,
 	            sort
-	        FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "`
+	        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
 	        WHERE meta_box_id = %s
 	        AND parent_id IS NULL
 	        AND block_id IS NULL
@@ -817,6 +918,10 @@ class MetaRepository extends AbstractRepository
 		        'required' => true,
 		        'type' => 'string',
 	        ],
+	        'forgedBy' => [
+		        'required' => false,
+		        'type' => 'array',
+	        ],
 	        'lazy' => [
 		        'required' => false,
 		        'type' => 'boolean',
@@ -828,6 +933,7 @@ class MetaRepository extends AbstractRepository
 		$boxName = $args['box_name'] ?? $args['boxName'];
 		$fieldName = $args['field_name'] ?? $args['fieldName'];
 		$lazy = $args['lazy'] ?? false;
+		$forgedBy = $args['forgedBy'] ?? [];
 
 		$sql = "
 	            SELECT
@@ -847,16 +953,12 @@ class MetaRepository extends AbstractRepository
 	                f.parent_id,
 					f.block_id,
 	                f.sort
-	            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-	            JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b
+	            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+	            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON f.meta_box_id = b.id
 	            WHERE f.field_name = %s AND b.meta_box_name = %s
 	        ;";
 
 		$fields = ACPT_Lite_DB::getResults($sql, [$fieldName, $boxName]);
-
-		if(empty($fields)){
-			return null;
-		}
 
 		$field = $fields[0];
 		$boxModel = self::getMetaBoxById($field->meta_box_id, $lazy);
@@ -880,7 +982,11 @@ class MetaRepository extends AbstractRepository
 			]);
 		}
 
-		return self::hydrateMetaBoxFieldModel($field, $boxModel);
+		$fieldModel = self::hydrateMetaBoxFieldModel($field, $boxModel);
+
+
+
+		return $fieldModel;
 	}
 
 	/**
@@ -899,7 +1005,7 @@ class MetaRepository extends AbstractRepository
                 meta_box_name as name,
                 meta_box_label as label,
                 sort
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."`
             WHERE id = %s
             ";
 
@@ -914,8 +1020,10 @@ class MetaRepository extends AbstractRepository
             	    SELECT 
 	                    g.id, 
 	                    g.group_name as name,
-	                    g.label
-	                FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "` g
+	                    g.label,
+	                    g.context,
+	                    g.priority
+	                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g
 	                WHERE id = %s
             	";
 				    $group = ACPT_Lite_DB::getResults($sql, [
@@ -932,6 +1040,14 @@ class MetaRepository extends AbstractRepository
 					    'label' => $group[0]->label,
 				    ]);
 
+				    if(!empty($group[0]->priority)){
+					    $groupModel->setPriority($group[0]->priority);
+				    }
+
+				    if(!empty($group[0]->context)){
+					    $groupModel->setContext($group[0]->context);
+				    }
+
 				    // belongs
 				    $belongQuery = "
 			        SELECT 
@@ -941,8 +1057,8 @@ class MetaRepository extends AbstractRepository
 						b.find,
 						b.logic,
 						b.sort
-		            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG) . "` b
-		            LEFT JOIN  `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "` bb on bb.belong_id = b.id
+		            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+		            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` bb on bb.belong_id = b.id
 		            WHERE bb.group_id = %s
 		            GROUP BY b.id
 		            ORDER BY b.sort
@@ -989,7 +1105,7 @@ class MetaRepository extends AbstractRepository
 		                        filter_in_admin,
 		                        quick_edit,
 		                        sort
-		                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "`
+		                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
 		                    WHERE meta_box_id = %s
 		                    AND parent_id IS NULL
 		                    AND block_id IS NULL ORDER BY sort;
@@ -1015,6 +1131,120 @@ class MetaRepository extends AbstractRepository
     }
 
 	/**
+	 * @param string $name
+	 * @param bool $lazy
+	 *
+	 * @return MetaFieldBlockModel|null
+	 * @throws \Exception
+	 */
+	public static function getMetaBlockByName($name, $lazy = false)
+	{
+		$sql = "
+            SELECT
+                `id`,
+                `meta_box_id` as `metaBoxId`,
+                `meta_field_id` as `metaFieldId`,
+                `block_name` as `name`,
+                `block_label` as `label`,
+                `sort` 
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BLOCK)."`
+            WHERE block_name = %s
+        ;";
+
+		$blocks = ACPT_Lite_DB::getResults($sql, [$name]);
+
+		foreach ($blocks as $blockIndex => $block) {
+			try {
+				$fieldModel = self::getMetaFieldById($block->metaFieldId);
+
+				if($fieldModel === null){
+					return null;
+				}
+
+				$blockModel = MetaFieldBlockModel::hydrateFromArray([
+					'id' => $block->id,
+					'metaField' => $fieldModel,
+					'name' => $block->name,
+					'sort' => $block->sort,
+					'label' => $block->label,
+				]);
+
+				if(!$lazy){
+					$nestedFieldModels = self::getMetaFields([
+						'blockId' => $block->id,
+						'sortBy' => 'sort',
+					]);
+
+					$blockModel->setFields($nestedFieldModels);
+				}
+
+				return $blockModel;
+			} catch (\Exception $exception){
+				return null;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param $id
+	 * @param bool $lazy
+	 *
+	 * @return MetaFieldBlockModel|null
+	 * @throws \Exception
+	 */
+	public static function getMetaBlockById($id, $lazy = false)
+    {
+		$sql = "
+            SELECT
+                `id`,
+                `meta_box_id` as `metaBoxId`,
+                `meta_field_id` as `metaFieldId`,
+                `block_name` as `name`,
+                `block_label` as `label`,
+                `sort` 
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BLOCK)."`
+            WHERE id = %s
+        ;";
+
+		$blocks = ACPT_Lite_DB::getResults($sql, [$id]);
+
+		foreach ($blocks as $blockIndex => $block) {
+			try {
+				$fieldModel = self::getMetaFieldById($block->metaFieldId);
+
+				if($fieldModel === null){
+					return null;
+				}
+
+				$blockModel = MetaFieldBlockModel::hydrateFromArray([
+					'id' => $block->id,
+					'metaField' => $fieldModel,
+					'name' => $block->name,
+					'sort' => $block->sort,
+					'label' => $block->label,
+				]);
+
+				if(!$lazy){
+					$nestedFieldModels = self::getMetaFields([
+						'blockId' => $block->id,
+						'sortBy' => 'sort',
+					]);
+
+					$blockModel->setFields($nestedFieldModels);
+				}
+
+				return $blockModel;
+			} catch (\Exception $exception){
+				return null;
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * @param string $id
      * @param bool $lazy
      *
@@ -1030,7 +1260,7 @@ class MetaRepository extends AbstractRepository
                 field_name as name,
                 field_label as label,
                 field_default_value,
-                field_description as description,
+                field_description,
                 field_type,
                 parent_id,
                 block_id,
@@ -1041,7 +1271,7 @@ class MetaRepository extends AbstractRepository
                 parent_id,
 				block_id,
                 sort
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "`
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
             WHERE id = %s
         ;";
 
@@ -1055,6 +1285,7 @@ class MetaRepository extends AbstractRepository
 			        return null;
 		        }
 
+		        // lazy mode
 		        if($lazy){
 
 		        	$metaField = MetaFieldModel::hydrateFromArray([
@@ -1065,15 +1296,23 @@ class MetaRepository extends AbstractRepository
 				        'type'          => $field->field_type,
 				        'isRequired'    => $field->required == 1,
 				        'defaultValue'  => $field->field_default_value,
-				        'description'   => $field->description,
+				        'description'   => $field->field_description,
 				        'showInArchive' => $field->showInArchive == 1,
 				        'sort'          => $field->sort
 			        ]);
 
+		        	if(isset($field->parent_id) and !empty($field->parent_id)){
+				        $metaField->setParentId($field->parent_id);
+			        }
+
+			        if(isset($field->block_id) and !empty($field->block_id)){
+				        $metaField->setBlockId($field->block_id);
+			        }
+
 			        return $metaField;
 		        }
 
-		        // fields
+		        // children fields
 		        $sql = "
 			        SELECT
 			            id,
@@ -1088,7 +1327,7 @@ class MetaRepository extends AbstractRepository
 			            filter_in_admin,
 			            quick_edit,
 			            sort
-			        FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "`
+			        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."`
 			        WHERE meta_box_id = %s
 			        AND parent_id IS NULL
 			        AND block_id IS NULL
@@ -1155,17 +1394,17 @@ class MetaRepository extends AbstractRepository
                 f.field_name as name,
                 f.field_label as label,
                 f.field_default_value as default_value,
-                f.field_description as description,
+                f.field_description,
                 f.field_type,
                 f.required,
                 f.showInArchive,
                 f.filter_in_admin,
                 f.quick_edit,
                 f.sort
-            FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
         ";
 
-		$sql .= " LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b ON b.id = f.meta_box_id";
+		$sql .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id";
 	    $sql .= " WHERE 1 = 1";
 
 		if($types){
@@ -1196,7 +1435,7 @@ class MetaRepository extends AbstractRepository
 							'type'          => $field->field_type,
 							'isRequired'    => $field->required,
 							'defaultValue'  => $field->default_value,
-							'description'   => $field->description,
+							'description'   => $field->field_description,
 							'showInArchive' => $field->showInArchive,
 							'sort'          => $field->sort
 						]);
@@ -1206,6 +1445,42 @@ class MetaRepository extends AbstractRepository
 				}
 			} catch (\Exception $exception){}
 	    }
+
+		return $results;
+	}
+
+	/**
+	 * @return MetaFieldOptionModel[]
+	 */
+	public static function getAllOptions()
+	{
+		$results = [];
+		$options = ACPT_Lite_DB::getResults("
+            SELECT
+                id,
+                meta_box_id as boxId,
+                meta_field_id as fieldId,
+                option_label as label,
+                option_value as value,
+                sort,
+                is_default
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."`
+            ORDER BY sort
+        ;", []);
+
+		foreach ($options as $option){
+			try {
+				$fieldModel = self::getMetaFieldById($option->fieldId);
+				$results[] = MetaFieldOptionModel::hydrateFromArray([
+					'id' => $option->id,
+					'metaField' => $fieldModel,
+					'label' => $option->label,
+					'value' => $option->value,
+					'sort' => $option->sort,
+					'isDefault' => $option->is_default == '0' ? false : true,
+				]);
+			} catch (\Exception $exception){}
+		}
 
 		return $results;
 	}
@@ -1223,13 +1498,17 @@ class MetaRepository extends AbstractRepository
 
 		try {
 			$sql = "
-                INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "` 
+                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` 
                 (
                     `id`,
                     `group_name`,
                     `label`,
-                    `display`
+                    `display`,
+                    `priority`,
+                    `context`
                 ) VALUES (
+                    %s,
+                    %s,
                     %s,
                     %s,
                     %s,
@@ -1237,7 +1516,9 @@ class MetaRepository extends AbstractRepository
                 ) ON DUPLICATE KEY UPDATE 
                     `group_name` = %s,
                     `label` = %s,
-                    `display` = %s
+                    `display` = %s,
+                    `priority` = %s,
+                    `context` = %s
             ;";
 
 			ACPT_Lite_DB::executeQueryOrThrowException($sql, [
@@ -1245,14 +1526,18 @@ class MetaRepository extends AbstractRepository
 				$group->getName(),
 				$group->getLabel(),
 				$group->getDisplay(),
+				$group->getPriority(),
+				$group->getContext(),
 				$group->getName(),
 				$group->getLabel(),
 				$group->getDisplay(),
+				$group->getPriority(),
+				$group->getContext(),
 			]);
 
 			foreach($group->getBelongs() as $belong){
 				$sql = "
-	                INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG) . "` 
+	                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` 
 	                (
 	                    `id`,
 	                    `belongs`,
@@ -1290,7 +1575,7 @@ class MetaRepository extends AbstractRepository
 				]);
 
 				$sql = "
-	                INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "`
+	                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."`
 	                (
 	                    `group_id`,
 	                    `belong_id`
@@ -1337,7 +1622,7 @@ class MetaRepository extends AbstractRepository
 	        MetaSync::syncBox($metaBoxModel);
 
 	        $sql = "
-                INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` 
+                INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` 
                 (
                     `id`,
                     `group_id`,
@@ -1398,7 +1683,7 @@ class MetaRepository extends AbstractRepository
 
 			foreach ($fieldModel->getOptions() as $optionModel){
 				$sql = "
-                    INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "` 
+                    INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` 
                     (`id`,
                     `meta_box_id` ,
                     `meta_field_id` ,
@@ -1439,6 +1724,7 @@ class MetaRepository extends AbstractRepository
 					$optionModel->isDefault()
 				]);
 			}
+
 		} catch (\Exception $exception){
 			ACPT_Lite_DB::rollbackTransaction();
 		}
@@ -1508,7 +1794,7 @@ class MetaRepository extends AbstractRepository
 			$data['values'][] = $isFilterableInAdmin;
 		}
 
-		$sql = "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` ( `id`,";
+		$sql = "INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` ( `id`,";
 
 		foreach ($data['fields'] as $index => $field){
 			$sql .= '`'.$field.'`';
@@ -1579,12 +1865,40 @@ class MetaRepository extends AbstractRepository
 		$groupId = $args['groupId'];
 
 		// Delete metadata
-		$deleteMetadata = SettingsRepository::getSingle(SettingsModel::DELETE_POSTMETA_KEY);
+		$deleteMetadata = Settings::get(SettingsModel::DELETE_POSTMETA_KEY, 0);
 
 	    // Delete ACPT definitions
+        $belongQuery = "
+            SELECT 
+                b.id
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` bb on bb.belong_id = b.id
+            WHERE bb.group_id = %s
+        ";
+
+        if(isset($ids['belongs']) and !empty($ids['belongs'])){
+            $belongQuery .= " AND bb.belong_id NOT IN ('".implode("','",$ids['belongs'])."')";
+        }
+
+        $belongQuery .= "GROUP BY b.id;";
+        $belongs = ACPT_Lite_DB::getResults($belongQuery, [$groupId]);
+
+        foreach ($belongs as $belong){
+
+            // @TODO delete belong from cache
+
+            $sql = "
+	            DELETE
+                FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."`
+                WHERE id = %s
+            ";
+
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$belong->id]);
+        }
+
 	    $deleteBelongsQuery = "
 	        DELETE b
-	        FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG) . "` b
+	        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` b
 	        WHERE b.group_id = %s
 	    ";
 
@@ -1600,8 +1914,8 @@ class MetaRepository extends AbstractRepository
 
 	    $deleteFieldsQuery = "
 			DELETE f 
-			FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f 
-			LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b on b.id=f.meta_box_id 
+			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f 
+			LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id=f.meta_box_id 
 			WHERE b.group_id = %s
 		";
 
@@ -1618,8 +1932,8 @@ class MetaRepository extends AbstractRepository
 	    // Delete options
 	    $deleteOptionsQuery = "
 	    	DELETE o
-			FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "` o
-			LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b on b.id=o.meta_box_id
+			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` o
+			LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id=o.meta_box_id
 			WHERE b.group_id = %s
 	    ";
 
@@ -1633,28 +1947,28 @@ class MetaRepository extends AbstractRepository
 		    $groupId,
 	    ]);
 
-		$deleteBoxesQuery = "
+	    $deleteBoxesQuery = "
 	        DELETE b
 			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
 			WHERE b.group_id = %s
 	    ";
 
-		if(isset($ids['boxes']) and !empty($ids['boxes'])){
-			$deleteBoxesQuery .= " AND id NOT IN ('".implode("','",$ids['boxes'])."')";
-		}
+	    if(isset($ids['boxes']) and !empty($ids['boxes'])){
+		    $deleteBoxesQuery .= " AND id NOT IN ('".implode("','",$ids['boxes'])."')";
+	    }
 
-		$deleteBoxesQuery .= ";";
+	    $deleteBoxesQuery .= ";";
 
-		ACPT_Lite_DB::executeQueryOrThrowException($deleteBoxesQuery, [
-			$groupId,
-		]);
+	    ACPT_Lite_DB::executeQueryOrThrowException($deleteBoxesQuery, [
+		    $groupId,
+	    ]);
 
 	    // Delete metadata
-	    if($deleteMetadata !== null and $deleteMetadata->getValue() == 1){
+	    if($deleteMetadata == 1){
 		    $queryForIdsToDelete = "
 		            SELECT f.id
-		             	FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-						LEFT JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b ON b.id = f.meta_box_id
+		             	FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+						LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
 						WHERE b.group_id = %s
 						AND f.id NOT IN ('".implode("','", $ids['fields'])."')
 						AND f.parent_id IS NULL
@@ -1673,7 +1987,6 @@ class MetaRepository extends AbstractRepository
 		    if(!empty($fieldIds)){
 			    self::deletePostMetaData($fieldIds);
 			    self::deleteTaxonomyMetaData($fieldIds);
-			    self::deleteUserMetaData($fieldIds);
 		    }
 	    }
 
@@ -1698,8 +2011,8 @@ class MetaRepository extends AbstractRepository
                         b.meta_box_name,
                         f.field_name,
                         f.field_type
-                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-                    JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b on b.id = f.meta_box_id
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
                     WHERE f.id = %s AND parent_id IS NULL
                 ";
 
@@ -1739,8 +2052,8 @@ class MetaRepository extends AbstractRepository
                         b.meta_box_name,
                         f.field_name,
                         f.field_type
-                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-                    JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b on b.id = f.meta_box_id
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
                     WHERE f.id = %s AND parent_id IS NULL
                 ";
 
@@ -1780,8 +2093,8 @@ class MetaRepository extends AbstractRepository
                         b.meta_box_name,
                         f.field_name,
                         f.field_type
-                    FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` f
-                    JOIN `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` b on b.id = f.meta_box_id
+                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
                     WHERE f.id = %s AND parent_id IS NULL
                 ";
 
@@ -1806,6 +2119,186 @@ class MetaRepository extends AbstractRepository
 	}
 
 	/**
+	 * @throws \Exception
+	 */
+	public static function removeOrphanBoxesAndFields()
+	{
+		$query = "DELETE f, b from `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f 
+            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
+            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP)."` g ON g.id = b.group_id 
+            WHERE g.id IS NULL;";
+
+		ACPT_Lite_DB::executeQueryOrThrowException($query, []);
+	}
+
+
+
+	/**
+	 * @param MetaFieldRelationshipModel $relationModel
+	 *
+	 * @return MetaFieldRelationshipModel|null
+	 * @throws \Exception
+	 */
+    public static function findInversedRelation(MetaFieldRelationshipModel $relationModel): ?MetaFieldRelationshipModel
+    {
+    	if($relationModel->getInversedBy() === null){
+    		return null;
+	    }
+
+	    try {
+		    $relations = ACPT_Lite_DB::getResults('
+		        SELECT
+	                id,
+	                meta_box_id as boxId,
+	                meta_field_id as fieldId,
+	                relationship as type,
+	                relation_from,
+	                relation_to,
+	                inversed_meta_box_id as inversedBoxId,
+	                inversed_meta_box_name as inversedBoxName,
+	                inversed_meta_field_id as inversedFieldId,
+	                inversed_meta_field_name as inversedFieldName
+	            FROM `'.ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_RELATION).'`
+	            WHERE 
+	                meta_box_id = %s AND
+	                meta_field_id = %s 
+		        ;', [
+					    $relationModel->getInversedBy()->getBox()->getId(),
+					    $relationModel->getInversedBy()->getId(),
+				    ]
+			    );
+
+		    foreach ($relations as $relation){
+				if(!empty($relation->type)){
+					$fromJson = json_decode($relation->relation_from);
+					$toJson = json_decode($relation->relation_to);
+
+					$from = new RelatedEntityValueObject($fromJson->type, $fromJson->value);
+					$to = new RelatedEntityValueObject($toJson->type, $toJson->value);
+
+					$inversedRelationModel = MetaFieldRelationshipModel::hydrateFromArray([
+						'id' => $relation->id,
+						'relationship' => $relation->type,
+						'from' => $from,
+						'to' => $to,
+						'metaField' => $relationModel->getInversedBy(),
+					]);
+
+					$inversedRelationModel->setInversedBy($relationModel->getMetaField());
+
+					return $inversedRelationModel;
+				}
+		    }
+
+	    } catch (\Exception $exception){
+    		return null;
+	    }
+
+	    return null;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllAssociatedPostTypesAndTaxonomies()
+    {
+        $postTypeNames = [];
+        $taxonomyNames = [];
+
+        $sql = "SELECT 
+		        	b.find,
+		        	b.belongs
+	            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_BELONG)."` b
+	            LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` bb on bb.belong_id = b.id
+	            GROUP BY b.id
+	            ORDER BY b.sort";
+
+        $belongs = ACPT_Lite_DB::getResults($sql, []);
+
+        foreach ($belongs as $belong){
+
+            $find = explode(",", $belong->find);
+
+            switch ($belong->belongs){
+
+                // 1. CUSTOM_POST_TYPE
+                case MetaTypes::CUSTOM_POST_TYPE:
+                    $postTypeNames = array_merge($postTypeNames, $find);
+                    break;
+
+                // 2. PARENT_POST_ID
+                case BelongsTo::PARENT_POST_ID:
+
+                    foreach ($find as $postId){
+                        $postTypeNames[] = get_post_type($postId);
+
+                        $childPages = get_children([
+                            'post_parent' => $postId
+                        ]);
+
+                        foreach ($childPages as $child) {
+                            $postTypeNames[] = get_post_type($child->ID);
+                        }
+                    }
+
+                    break;
+
+                // 3. POST_ID
+                case BelongsTo::POST_ID:
+                    foreach ($find as $postId){
+                        $postTypeNames[] = get_post_type($postId);
+                    }
+
+                    break;
+
+                // 4. POST_TEMPLATE
+                case BelongsTo::POST_TEMPLATE:
+                    foreach ($find as $postId){
+                        $file = Meta::fetch($postId, MetaTypes::CUSTOM_POST_TYPE, '_wp_page_template', true);
+                        $postTypeNames[] = $file;
+                    }
+
+                    break;
+
+                // 5. POST_TAX
+                case BelongsTo::POST_TAX:
+                case BelongsTo::POST_CAT:
+                    foreach ($find as $termId){
+                        $posts = Posts::getForTermId($termId);
+
+                        foreach ($posts as $post){
+                            $postTypeNames[] = get_post_type($post->object_id);
+                        }
+                    }
+
+                    break;
+
+                // 6. TAXONOMY
+                case MetaTypes::TAXONOMY:
+                    $taxonomyNames = array_merge($taxonomyNames, $find);
+                    break;
+
+                // 7. TERM_ID
+                case BelongsTo::TERM_ID:
+                    foreach ($find as $termId){
+                        $term = get_term( $termId );
+
+                        if($term instanceof \WP_Term){
+                            $taxonomyNames[] = $term->name;
+                        }
+                    }
+
+                    break;
+            }
+        }
+
+        return [
+            'postTypeNames' => array_unique($postTypeNames),
+            'taxonomyNames' => array_unique($taxonomyNames),
+        ];
+    }
+
+	/**
 	 * ***********************************
 	 *  GENERAL PURPOSE METHODS
 	 * ***********************************
@@ -1827,7 +2320,10 @@ class MetaRepository extends AbstractRepository
                 	BelongsTo::TERM_ID,
                     MetaTypes::CUSTOM_POST_TYPE,
                     MetaTypes::TAXONOMY,
+                    MetaTypes::OPTION_PAGE,
                     MetaTypes::USER,
+                    MetaTypes::MEDIA,
+                    MetaTypes::COMMENT,
                 ],
             ],
             'find' => [

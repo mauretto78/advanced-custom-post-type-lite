@@ -9,7 +9,6 @@ import Alert from "../../../../../components/Alert";
 import {styleVariants} from "../../../../../constants/styles";
 import SortableList from "../../../../../components/SortableList";
 import ProductDataFieldOption from "./ProductDataFieldOption";
-import LoadDatasetModal from "../../../Modal/LoadDatasetModal";
 
 const ProductDataFieldOptionsList = ({fieldId, fieldIndex, options}) => {
 
@@ -90,10 +89,6 @@ const ProductDataFieldOptionsList = ({fieldId, fieldIndex, options}) => {
                     >
                         {useTranslation("Add option")}
                     </a>
-                    <LoadDatasetModal
-                        fieldId={fieldId}
-                        fieldIndex={fieldIndex}
-                    />
                 </div>
             </fieldset>
         </div>

@@ -9,7 +9,7 @@ use Webmozart\Assert\InvalidArgumentException;
  * This class is partially overwritten for PHP 5.6 compatibility.
  *
  * Class Assert
- * @package ACPT\Utils
+ * @package ACPT_Lite\Utils
  */
 class Assert extends WebmozartAssert
 {

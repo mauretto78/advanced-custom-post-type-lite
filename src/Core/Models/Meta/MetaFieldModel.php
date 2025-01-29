@@ -6,17 +6,17 @@ use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
-use ACPT_Lite\Core\Models\Validation\ValidationRuleModel;
+use ACPT_Lite\Core\Models\Belong\BelongModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
-use ACPT_Lite\Core\ValueObjects\RelatedEntityValueObject;
+use ACPT_Lite\Utils\Wordpress\Translator;
 
 class MetaFieldModel extends AbstractModel implements \JsonSerializable
 {
-	const DATE_TYPE = 'Date';
-	const EMAIL_TYPE = 'Email';
-	const SELECT_TYPE = 'Select';
-	const TEXTAREA_TYPE = 'Textarea';
-	const TEXT_TYPE = 'Text';
+    const DATE_TYPE = 'Date';
+    const EMAIL_TYPE = 'Email';
+    const SELECT_TYPE = 'Select';
+    const TEXTAREA_TYPE = 'Textarea';
+    const TEXT_TYPE = 'Text';
 
 	/**
 	 * @var MetaBoxModel
@@ -88,17 +88,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	 */
 	private array $options = [];
 
-	/**
-	 * @var string
-	 */
-	private ?string $parentId = null;
-
-	/**
-	 * @var string
-	 */
-	private ?string $blockId = null;
-
-	/**
+    /**
 	 * MetaFieldModel constructor.
 	 *
 	 * @param string $id
@@ -122,7 +112,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		bool $showInArchive,
 		bool $isRequired,
 		int $sort,
-		?string $defaultValue = null,
+		$defaultValue = null,
 		?string $description = null,
 		?string $label = null
 	) {
@@ -133,7 +123,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		$this->showInArchive        = $showInArchive;
 		$this->isRequired           = $isRequired;
 		$this->sort                 = $sort;
-		$this->defaultValue         = $defaultValue;
+		$this->defaultValue         = (is_array($defaultValue)) ? json_encode($defaultValue) : $defaultValue;
 		$this->description          = $description;
 		$this->label                = $label;
 		$this->options              = [];
@@ -297,7 +287,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	/**
 	 * @param bool $quickEdit
 	 */
-	public function setQuickEdit($quickEdit )
+	public function setQuickEdit($quickEdit)
 	{
 		$this->quickEdit = $quickEdit;
 	}
@@ -379,11 +369,42 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 
 		foreach ($this->getOptions() as $option){
 			if($option->getValue() === $value){
-				return $option->getLabel();
+				return Translator::translateString($option->getLabel());
 			}
 		}
 
 		return null;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isATextualField(): bool
+	{
+		$textualTypes = [
+			self::SELECT_TYPE,
+			self::EMAIL_TYPE,
+			self::TEXT_TYPE,
+			self::TEXTAREA_TYPE,
+		];
+
+		return in_array($this->type, $textualTypes);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function canBeQuickEdited(): bool
+	{
+		$textualTypes = [
+            self::DATE_TYPE,
+			self::SELECT_TYPE,
+			self::EMAIL_TYPE,
+			self::TEXT_TYPE,
+			self::TEXTAREA_TYPE,
+		];
+
+		return in_array($this->type, $textualTypes);
 	}
 
 	/**
@@ -408,6 +429,11 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	public function getDbName()
 	{
 		$dbName = '';
+
+		if($this->getBelongsToLabel() === MetaTypes::OPTION_PAGE and $this->getFindLabel() !== null){
+			$dbName .= Strings::toDBFormat($this->getFindLabel()). '_';
+		}
+
 		$dbName .= Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
 
 		return $dbName;
@@ -418,7 +444,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	 */
 	public function getUiName()
 	{
-		return Strings::toHumanReadableFormat($this->getBox()->getUiName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
+        return Strings::toHumanReadableFormat($this->getBox()->getUiName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
 	}
 
 	/**
@@ -439,9 +465,11 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 		$duplicate = clone $this;
 		$duplicate->id = Uuid::v4();
 		$duplicate->box = $duplicateFrom;
+        $duplicate->changeName(Strings::getTheFirstAvailableName($duplicate->getName(), MetaRepository::getFieldNames()));
 
 		$duplicatedOptions = $duplicate->getOptions();
 		$duplicate->options = [];
+
 
 		foreach ($duplicatedOptions as $option){
 			$optionFieldModel = $option->duplicateFrom($duplicate);
@@ -460,7 +488,6 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	{
 		$duplicate = clone $this;
 		$duplicate->id = Uuid::v4();
-		$duplicate->parentId = $duplicateFrom->getId();
 
 		return $duplicate;
 	}
@@ -489,6 +516,8 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 			'filterableInAdmin' => (bool)$this->filterableInAdmin,
 			'sort' => (int)$this->sort,
 			'options' => $this->options,
+			'isATextualField' => $this->isATextualField(),
+			'canHaveAfterAndBefore' => $this->canHaveAfterAndBefore(),
 			'isFilterable' => $this->isFilterable(),
 		];
 	}
@@ -505,6 +534,8 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	 */
 	public static function fullHydrateFromArray(MetaBoxModel $box, $fieldIndex, $data, &$arrayOfFieldNames, &$arrayOfBlockNames)
 	{
+        $defaultValue = $data['defaultValue'] ?? $data['default_value'] ?? null;
+
 		$fieldModel = self::hydrateFromArray([
 			'id' => (isset($data["id"]) ? $data["id"] : Uuid::v4()),
 			'box' => $box,
@@ -514,7 +545,7 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 			'sort' => ($fieldIndex+1),
 			'showInArchive' => $data['showInArchive'] ?? $data['show_in_archive'] ?? false,
 			'isRequired' => $data['isRequired'] ?? $data['is_required'] ?? false,
-		    'defaultValue' => $data['defaultValue'] ?? $data['default_value'] ?? null,
+		    'defaultValue' => $defaultValue,
 		    'description' => $data['description'] ?? null,
 		]);
 
@@ -589,6 +620,14 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	/**
 	 * @return bool
 	 */
+	public function canBeDisplayedWithShortcode(): bool
+	{
+		return !$this->isRelational() and !$this->isNestable();
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function canFieldHaveValidationAndLogicRules(): bool
 	{
 		$allowed = [
@@ -619,6 +658,22 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function canHaveAfterAndBefore(): bool
+	{
+		$allowed = [
+			self::DATE_TYPE,
+			self::EMAIL_TYPE,
+			self::SELECT_TYPE,
+			self::TEXTAREA_TYPE,
+			self::TEXT_TYPE,
+		];
+
+		return in_array($this->getType(), $allowed);
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getGroup(): ?string
@@ -634,6 +689,15 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 	public function arrayRepresentation(string $format = 'full'): array
 	{
 		$optionsArray = [];
+
+		foreach ($this->getOptions() as $optionModel){
+			$optionsArray[] = [
+				'id' => $optionModel->getId(),
+				'label' => $optionModel->getLabel(),
+				'value' => $optionModel->getValue(),
+				'sort' => (int)$optionModel->getSort(),
+			];
+		}
 
 		return [
 			'id' => $this->getId(),
@@ -718,114 +782,160 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
 					MetaFieldModel::TEXTAREA_TYPE,
 				],
 			],
-			'blockId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'blockName' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'parentId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'parentName' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'showInArchive' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'required' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'isRequired' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'quickEdit' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'filterableInAdmin' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'defaultValue' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'description' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'sort' => [
-				'required' => false,
-				'type' => 'string|integer',
-			],
-			'hasManyRelation' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'hasChildren' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'isATextualField' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'isFilterable' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'advancedOptions' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'options' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'validationRules' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'relations' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'visibilityConditions' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'children' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'blocks' => [
-				'required' => false,
-				'type' => 'array',
-			],
-			'isSaved' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'belongsToLabel' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'findLabel' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'group' => [
-				'required' => false,
-				'type' => 'string',
-			],
+            'blockId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'blockName' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'parentId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'parentName' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'showInArchive' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'required' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'isRequired' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'quickEdit' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'filterableInAdmin' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'defaultValue' => [
+                'required' => false,
+                'type' => 'boolean|string|array',
+            ],
+            'description' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'sort' => [
+                'required' => false,
+                'type' => 'string|integer',
+            ],
+            'hasManyRelation' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'hasChildren' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'isATextualField' => [
+                'required' => false,
+                'type' => 'boolean|integer',
+            ],
+            'canHaveAfterAndBefore' => [
+                'required' => false,
+                'type' => 'boolean|integer',
+            ],
+            'isFilterable' => [
+                'required' => false,
+                'type' => 'boolean|integer',
+            ],
+            'advancedOptions' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'permissions' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'options' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'validationRules' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'relations' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'visibilityConditions' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'children' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'blocks' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+            'isSaved' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'belongsToLabel' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'findLabel' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'group' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'forgedBy' => [
+                'required' => false,
+                'type' => 'array|string',
+            ],
+            'clonedFields' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+
 		];
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function capabilityType(): string
+	{
+		return Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function capabilities(): array
+	{
+		return [
+			'edit',
+			'read',
+		];
+	}
+
+    /**
+     * @param BelongModel $belong
+     */
+    public function setBelongsAndFindLabels(BelongModel $belong)
+    {
+        $belongsTo = $belong->getBelongsTo();
+        $this->setBelongsToLabel($belongsTo);
+        $this->setFindLabel($belong->getFindAsSting());
+    }
 }

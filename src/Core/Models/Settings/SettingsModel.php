@@ -20,8 +20,13 @@ class SettingsModel extends AbstractModel implements \JsonSerializable
 	const GOOGLE_MAPS_API_KEY = 'google_maps_api_key';
 	const GOOGLE_RECAPTCHA_SITE_KEY = 'google_recaptcha_site_key';
 	const GOOGLE_RECAPTCHA_SECRET_KEY = 'google_recaptcha_secret_key';
-	const ENABLE_VISUAL_EDITOR_KEY = 'enable_visual_editor';
+	const CLOUDFLARE_TURNSTILE_SITE_KEY = 'cloudflare_turnstile_site_key';
+	const CLOUDFLARE_TURNSTILE_SECRET_KEY = 'cloudflare_turnstile_secret_key';
 	const ENABLE_FORMS = 'enable_forms';
+	const ENABLE_CPT = 'enable_cpt';
+	const ENABLE_TAX = 'enable_tax';
+	const ENABLE_OP = 'enable_op';
+	const ENABLE_META = 'enable_meta';
 	const DELETE_TABLES_WHEN_DEACTIVATE_KEY = 'delete_tables_when_deactivate';
 	const DELETE_POSTS_KEY = 'delete_posts';
 	const DELETE_POSTMETA_KEY = 'delete_metadata';

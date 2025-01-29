@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {get} from 'react-hook-form';
 
-const Select = ({size= 'default', placeholder, id, defaultValue, description, values, onChangeCapture, validate, register, errors, disabled, muted}) => {
+const Select = ({size= 'default', placeholder, id, defaultValue, description, values, onChangeCapture, validate, register, errors, disabled, muted, style}) => {
 
     const error = get(errors, id);
 
@@ -14,7 +14,10 @@ const Select = ({size= 'default', placeholder, id, defaultValue, description, va
     const renderSelectElement = (value = null) => {
         return (
             <React.Fragment>
-                <div className={`${!muted ? 'acpt-select' : ''}`}>
+                <div
+                    style={style}
+                    className={`${!muted ? 'acpt-select' : ''}`}
+                >
                     <select
                         id={id}
                         name={id}
@@ -80,6 +83,7 @@ Select.propTypes = {
         'default',
         'sm',
     ]),
+    style: PropTypes.string,
     placeholder: PropTypes.string,
     defaultValue: PropTypes.string,
     description: PropTypes.string,

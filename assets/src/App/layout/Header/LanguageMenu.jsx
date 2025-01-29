@@ -3,12 +3,14 @@ import {Icon} from "@iconify/react";
 import {useDispatch, useSelector} from "react-redux";
 import {saveSettings} from "../../redux/reducers/saveSettingsSlice";
 import {toast} from "react-hot-toast";
-import useTranslation from "../../hooks/useTranslation";
 import {refreshPage} from "../../utils/misc";
+import {dontShowCookieMessage, flushCookieMessages, setCookieMessage} from "../../utils/cookies";
+import {useLocation} from "react-router-dom";
 
 const LanguageMenu = () => {
 
     const settings = document.globals;
+    const location = useLocation();
 
     // redux global state
     const { loading, error, success } = useSelector(state => state.saveSettings);
@@ -26,12 +28,16 @@ const LanguageMenu = () => {
 
     useEffect(() => {
         if(!loading && success){
-            toast.success(useTranslation("Settings saved. The browser will refresh after 5 seconds."));
-            refreshPage(5000);
+            setCookieMessage("Settings saved.");
+            refreshPage();
         }
 
         if(!loading && error){
             toast.error(error);
+        }
+
+        if(dontShowCookieMessage(location.pathname) === false){
+            flushCookieMessages();
         }
 
     }, [loading]);

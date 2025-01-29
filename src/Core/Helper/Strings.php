@@ -15,6 +15,18 @@ class Strings
 	/**
 	 * @param $string
 	 *
+	 * @return string|string[]
+	 */
+	public static function escapeForJSON($string)
+	{
+		$string = str_replace('\"', '\\\\\\\\\"', $string);
+
+		return $string;
+	}
+
+	/**
+	 * @param $string
+	 *
 	 * @return bool
 	 */
 	public static function exists($string)
@@ -98,6 +110,10 @@ class Strings
      */
     public static function contains($needle, $haystack)
     {
+        if(empty($haystack)){
+            return false;
+        }
+
         return strpos($haystack, $needle) !== false;
     }
 
@@ -259,8 +275,12 @@ class Strings
 	 *
 	 * @return bool
 	 */
-	public static function alphanumericallyValid($string)
+	public static function alphanumericallyValid($string): bool
 	{
+		if(!is_string($string)){
+			return false;
+		}
+
 		$regex = '/^[0-9a-zA-Z_-]+$/iu';
 
 		preg_match_all($regex, $string, $matches);
@@ -273,8 +293,12 @@ class Strings
 	 *
 	 * @return bool
 	 */
-	public static function isJson($string)
+	public static function isJson($string): bool
 	{
+		if(!is_string($string)){
+			return false;
+		}
+
 		json_decode($string);
 
 		return json_last_error() === JSON_ERROR_NONE;
@@ -285,8 +309,12 @@ class Strings
 	 *
 	 * @return bool
 	 */
-	public static function isUrl($string)
+	public static function isUrl($string): bool
 	{
+		if(!is_string($string)){
+			return false;
+		}
+
 		return (filter_var($string, FILTER_VALIDATE_URL) ? true : false);
 	}
 
@@ -450,6 +478,85 @@ class Strings
 		}
 
 		return "'" . implode("','", $array) . "'";
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function generateRandomId()
+	{
+		return 'id_'.rand(999999,111111);
+	}
+
+	/**
+	 * @param $from
+	 *
+	 * @return int|null
+	 */
+	public static function convertToBytes($from)
+	{
+		try {
+			return (int)preg_replace_callback('/^\s*(\d+)\s*(?:([kmgt]?)b?)?\s*$/i', function ($m) {
+				switch (strtolower($m[2])) {
+					case 't': $m[1] *= 1024;
+					case 'g': $m[1] *= 1024;
+					case 'm': $m[1] *= 1024;
+					case 'k': $m[1] *= 1024;
+				}
+
+				return $m[1];
+			}, $from);
+		} catch(\Exception $e){
+			return $from;
+		}
+	}
+
+	/**
+	 * @param string $str
+	 * @param string $substr
+	 *
+	 * @return bool
+	 */
+	public static function endsWith($str, $substr)
+	{
+		return strrpos($str, $substr) === strlen($str) - strlen($substr);
+	}
+
+	/**
+	 * This function adds _$b to $a.
+	 *
+	 * If $a ends with _s, like this example:
+	 *
+	 * $a = access_private_s
+	 * $b = movie
+	 *
+	 * returns access_private_movie_s
+	 *
+	 * @param string $a
+	 * @param string $b
+	 *
+	 * @return string
+	 */
+	public static function pluralize($a, $b)
+	{
+		if(self::endsWith($a, "_s")){
+
+			$a = substr($a, 0, -2) . '';
+
+			return $a."_".$b."_s";
+		}
+
+		return $a."_".$b;
+	}
+
+	/**
+	 * @param $string
+	 *
+	 * @return string
+	 */
+	public static function removeAllExtraSpaces($string)
+	{
+		return preg_replace('/\s+/', ' ', $string);
 	}
 }
 

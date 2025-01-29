@@ -4,22 +4,20 @@ import Input from "../../../../../components/Forms/Input";
 import Label from "../../../../../components/Forms/Label";
 import useTranslation from "../../../../../hooks/useTranslation";
 import {alphanumericallyValid} from "../../../../../utils/validation";
-import {
-    fieldHasOptions,
-    fieldsList,
-    fieldTypes
-} from "../../../../../constants/fields";
+import {fieldHasOptions, fieldsList} from "../../../../../constants/fields";
 import {useFormContext, useWatch} from "react-hook-form";
 import MetaOptionList from "./MetaOptionList";
 import Select from "../../../../../components/Forms/Select";
-import {canFieldHaveValidationAndLogicRules, fieldNestingLevel} from "../../../../../utils/fields";
+import {fieldNestingLevel} from "../../../../../utils/fields";
 import {useDispatch, useSelector} from "react-redux";
 import {updateField} from "../../../../../redux/reducers/metaStateSlice";
 import {slugify, transliterate} from "transliteration";
 import {wpAjaxRequest} from "../../../../../utils/ajax";
 import {debounce} from "../../../../../utils/debounce";
+import Textarea from "../../../../../components/Forms/Textarea";
+import MetaFieldDefaultValue from "./MetaFieldDefaultValue";
 
-const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
+const BasicTab = ({formId, boxIndex, fieldIndex, boxId, field}) => {
 
     // manage global state
     const {group} = useSelector(state => state.metaState);
@@ -59,32 +57,6 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
         if(fieldType() !== type){
             const updatedField = {...field};
             updatedField.type = type;
-
-            if(type !== fieldTypes.REPEATER){
-                updatedField.children = [];
-            }
-
-            if(type !== fieldTypes.FLEXIBLE){
-                updatedField.blocks = [];
-            }
-
-            if(type !== fieldTypes.POST){
-                updatedField.relations = [];
-            }
-
-            if(!canFieldHaveValidationAndLogicRules(type)){
-                unregister(formId("relations"));
-                unregister(formId("visibilityConditions"));
-                unregister(formId("validationRules"));
-                updatedField.visibilityConditions = [];
-                updatedField.validationRules = [];
-                updatedField.relations = [];
-            }
-
-            unregister(formId("relations"));
-            unregister(formId("blocks"));
-            unregister(formId("children"));
-
             dispatch(updateField({field: updatedField, boxId}));
         }
     };
@@ -122,7 +94,7 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
         // check for other box names
         let otherFieldNames = [];
 
-        watchedFields.map((field, i) => {
+        watchedFields && watchedFields.map((field, i) => {
             if(i !== fieldIndex){
                 otherFieldNames.push(field.name);
             }
@@ -159,6 +131,7 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                                     <span>{useTranslation("Field label")}</span>
                                     <a
                                         href="#"
+                                        style={{fontWeight: "normal"}}
                                         onClick={e => {
                                             e.preventDefault();
                                             setAutoSlug(!autoSlug);
@@ -240,36 +213,19 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                     </div>
                 </div>
                 <div className="container align-end">
-                    <div className="col-6">
-                        <Label
-                            id={formId("defaultValue")}
-                            label={useTranslation("The default value for this field")}
-                        />
-                        <Input
-                            id={formId("defaultValue")}
-                            register={register}
-                            errors={errors}
-                            placeholder={useTranslation("Default value")}
-                            defaultValue={field.defaultValue}
-                            validate={{
-                                maxLength: {
-                                    value: 255,
-                                    message: "max length is 255"
-                                }
-                            }}
-                        />
-                    </div>
-                    <div className="col-6">
+                    <div className="col-12">
                         <Label
                             id={formId("description")}
                             label={useTranslation("The description of this field (showed only on admin panel)")}
                         />
-                        <Input
+                        <Textarea
                             id={formId("description")}
                             register={register}
+                            defaultValue={field.description}
                             errors={errors}
                             placeholder={useTranslation("A brief description")}
-                            defaultValue={field.description}
+                            characterLimit={255}
+                            rows={4}
                             validate={{
                                 maxLength: {
                                     value: 255,
@@ -279,6 +235,10 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
                         />
                     </div>
                 </div>
+                <MetaFieldDefaultValue
+                    field={field}
+                    formId={formId}
+                />
             </div>
             {fieldHasOptions(fieldType()) && (
                 <MetaOptionList
@@ -296,10 +256,6 @@ const BasicTab = ({view, formId, boxIndex, fieldIndex, boxId, field}) => {
 };
 
 BasicTab.propTypes = {
-    view: PropTypes.oneOf([
-        "list",
-        "tabular"
-    ]).isRequired,
     formId: PropTypes.func.isRequired,
     boxIndex: PropTypes.number.isRequired,
     fieldIndex: PropTypes.number.isRequired,

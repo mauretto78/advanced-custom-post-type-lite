@@ -4,6 +4,7 @@ namespace ACPT_Lite\Utils\PHP;
 
 use ACPT_Lite\Constants\Visibility;
 use ACPT_Lite\Core\Models\Belong\BelongModel;
+use ACPT_Lite\Core\Models\Meta\MetaFieldVisibilityModel;
 
 class Logics
 {
@@ -29,6 +30,7 @@ class Logics
 		foreach ($elements as $index => $element){
 
 			if(
+				($element instanceof MetaFieldVisibilityModel and self::hasConditionToBeConsidered($visibility, $element)) or
 				$element instanceof BelongModel
 			){
 				$isLast = $index === (count($elements)-1);
@@ -64,5 +66,24 @@ class Logics
 		}
 
 		return $logicBlocks;
+	}
+
+	/**
+	 * @param $visibility
+	 * @param MetaFieldVisibilityModel $visibilityCondition
+	 *
+	 * @return bool
+	 */
+	private static function hasConditionToBeConsidered($visibility, MetaFieldVisibilityModel $visibilityCondition): bool
+	{
+		if($visibility === Visibility::IS_BACKEND and $visibilityCondition->isBackEnd()){
+			return true;
+		}
+
+		if($visibility === Visibility::IS_FRONTEND and $visibilityCondition->isFrontEnd()){
+			return true;
+		}
+
+		return false;
 	}
 }

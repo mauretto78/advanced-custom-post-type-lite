@@ -15,15 +15,9 @@ class CustomPostTypeMetaBoxFieldGenerator
      * @return AbstractField
      * @throws \Exception
      */
-    public static function generate($postId, MetaFieldModel $metaField)
+    public static function generate(MetaFieldModel $metaField, $postId = null)
     {
-        $field = self::getCustomPostTypeField($postId, $metaField);
-
-        if($field){
-	        echo $field->render();
-        }
-
-        return null;
+	    return self::getCustomPostTypeField($metaField, $postId);
     }
 
     /**
@@ -32,7 +26,7 @@ class CustomPostTypeMetaBoxFieldGenerator
      *
      * @return AbstractField
      */
-    private static function getCustomPostTypeField( $postId, MetaFieldModel $metaField): ?AbstractField
+    private static function getCustomPostTypeField(MetaFieldModel $metaField, $postId = null): ?AbstractField
     {
         $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$metaField->getType().'Field';
 

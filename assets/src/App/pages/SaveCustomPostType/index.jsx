@@ -14,6 +14,7 @@ import {saveCustomPostType} from "../../redux/reducers/saveCustomPostTypeSlice";
 import {toast} from "react-hot-toast";
 import Loader from "../../components/Loader";
 import PageNotFound from "../404";
+import {setCookieMessage} from "../../utils/cookies";
 
 const SaveCustomPostType = ({}) => {
 
@@ -30,6 +31,7 @@ const SaveCustomPostType = ({}) => {
     const [stepActive, setStepActive] = useState(step ? parseInt(step) : 0);
     const [formValues, setFormValues] = useState({});
     const [isWPGraphQLActive, setIsWPGraphQLActive] = useState(false);
+    const [title, setTitle] = useState(postType && formValues[1] ? useTranslation("Edit") + " " + formValues[1].singular_label : useTranslation("Create new Custom Post Type"));
 
     // manage redirect
     const navigate = useNavigate();
@@ -37,6 +39,13 @@ const SaveCustomPostType = ({}) => {
     if(postType === 'page' || postType === 'post'){
         navigate('/');
     }
+
+    useEffect(() => {
+        if(postType && formValues[1]){
+            setTitle(useTranslation("Edit") + " " + formValues[1].singular_label);
+        }
+
+    }, [formValues]);
 
     // is WPGraphQL active?
     useEffect(()=>{
@@ -52,7 +61,6 @@ const SaveCustomPostType = ({}) => {
 
     useEffect(() => {
         if(postType){
-            metaTitle(useTranslation("Edit Custom Post Type"));
             setEdit(true);
             dispatch(fetchCustomPostTypes({
                 postType:postType
@@ -82,7 +90,9 @@ const SaveCustomPostType = ({}) => {
                             },
                             2: res.payload[0].labels,
                             3: res.payload[0].settings,
-                        })
+                        });
+
+                        metaTitle(`${useTranslation("Edit")} ${res.payload[0].singular}`);
                     }
                 })
                 .catch(err => {
@@ -95,14 +105,13 @@ const SaveCustomPostType = ({}) => {
         }
     }, []);
 
-    const title = postType ? useTranslation("Edit Custom Post Type") : useTranslation("Create new Custom Post Type");
     const crumbs = [
         {
             label: useTranslation("Registered Custom Post Types"),
             link: "/"
         },
         {
-            label: postType ? useTranslation("Edit Custom Post Type") : useTranslation("Create new Custom Post Type")
+            label: title
         }
     ];
 
@@ -127,15 +136,17 @@ const SaveCustomPostType = ({}) => {
         setFormValues(formValues);
         scrollToTop();
 
-        if(stepActive === 2){
+        const isFormComplete = Object.keys(formValues).length === 3;
+
+        if(isFormComplete){
             dispatch(saveCustomPostType(formValues))
                 .then(res => {
                     const payload = res.payload;
 
                     if(payload.success){
-                        navigate('/');
-                        toast.success(useTranslation("Custom post type successfully saved. The browser will refresh after 5 seconds."));
-                        refreshPage(5000);
+                        setCookieMessage("Custom post type successfully saved.");
+                        navigate("/");
+                        refreshPage();
                     } else {
                         toast.error(payload.error);
                     }
@@ -170,6 +181,7 @@ const SaveCustomPostType = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <LabelsStep
                         edit={edit}
@@ -180,6 +192,7 @@ const SaveCustomPostType = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                     />,
                     <SettingsStep
                         edit={edit}
@@ -190,6 +203,7 @@ const SaveCustomPostType = ({}) => {
                         setStepActive={setStepActive}
                         handleSubmit={handleSubmit}
                         formValues={formValues}
+                        setFormValues={setFormValues}
                         isWPGraphQLActive={isWPGraphQLActive}
                         loading={loading}
                     />

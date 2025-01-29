@@ -10,7 +10,6 @@ use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Belong\BelongModel;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
-use ACPT_Lite\Utils\PHP\Logics;
 
 class CustomPostTypeMetaGroupsGenerator
 {
@@ -19,22 +18,22 @@ class CustomPostTypeMetaGroupsGenerator
 	 */
 	private $metaGroupModels;
 
-	/**
-	 * @var string
-	 */
-	private $postType;
+    /**
+     * @var string
+     */
+    private $postType;
 
-	/**
-	 * CustomPostTypeMetaGroupsGenerator constructor.
-	 *
-	 * @param $postType
-	 * @param $metaGroupModels
-	 */
+    /**
+     * CustomPostTypeMetaGroupsGenerator constructor.
+     *
+     * @param $postType
+     * @param $metaGroupModels
+     */
 	public function __construct($postType, $metaGroupModels)
 	{
 		$this->metaGroupModels = $metaGroupModels;
-		$this->postType = $postType;
-	}
+        $this->postType = $postType;
+    }
 
 	/**
 	 * Generate meta boxes related to post types
@@ -51,6 +50,7 @@ class CustomPostTypeMetaGroupsGenerator
 			$otherAndConditions = false;
 			$allowedConditions = [
 				MetaTypes::CUSTOM_POST_TYPE,
+				BelongsTo::PARENT_POST_ID,
 				BelongsTo::POST_ID,
 				BelongsTo::POST_TEMPLATE,
 				BelongsTo::POST_TAX,
@@ -68,38 +68,16 @@ class CustomPostTypeMetaGroupsGenerator
 						$otherAndConditions = true;
 					}
 
-					if(isset($metaGroupModel->getBelongs()[$index-1]) and $metaGroupModel->getBelongs()[$index-1]->getLogic() === Logic::AND  ){
+					if(isset($metaGroupModel->getBelongs()[$index-1]) and $metaGroupModel->getBelongs()[$index-1]->getLogic() === Logic::AND ){
 						$otherAndConditions = true;
 					}
 				}
 			}
 
-			$specificCptBelongs = array_filter($cptBelongs, function (BelongModel $belong) {
-				return $belong->getBelongsTo() === MetaTypes::CUSTOM_POST_TYPE;
-			});
-
-			$thereAreOnlySpecificCptConditions = count($specificCptBelongs) === count($cptBelongs);
-
 			if($otherAndConditions === false){
-
-				$logicBlocks = Logics::extractLogicBlocks($cptBelongs);
-
-				if(
-					$thereAreOnlySpecificCptConditions and
-					!empty($cptBelongs) and
-					$this->showBoxesOnCurrentPostType($this->postType, $logicBlocks)
-				){
-					$groups[] = $metaGroupModel;
-					$generator = new CustomPostTypeMetaGroupGenerator($metaGroupModel, $this->postType);
-					$generator->render();
-				} else {
-					$postIds = $this->getPostsIdsFromBelongs($logicBlocks);
-
-					if(!empty($postIds)){
-						$groups[] = $metaGroupModel;
-						$this->generateMetaBoxesFromPostIds($postIds, $this->postType, $metaGroupModel);
-					}
-				}
+                $groups[] = $metaGroupModel;
+                $generator = new CustomPostTypeMetaGroupGenerator($metaGroupModel, $this->postType);
+                $generator->render();
 			}
 		}
 
@@ -154,6 +132,10 @@ class CustomPostTypeMetaGroupsGenerator
 					$value = trim($value);
 					$value = explode(',', $value);
 
+					if(!is_array($postType)){
+						$postType = [$postType];
+					}
+
 					$check = array_intersect($postType, $value);
 
 					if(count($check) > 0){
@@ -164,6 +146,10 @@ class CustomPostTypeMetaGroupsGenerator
 				case Operator::NOT_IN:
 					$value = trim($value);
 					$value = explode(',', $value);
+
+					if(!is_array($postType)){
+						$postType = [$postType];
+					}
 
 					$check = array_intersect($postType, $value);
 
@@ -230,7 +216,32 @@ class CustomPostTypeMetaGroupsGenerator
 
 						break;
 
-					// 2. POST_ID
+                    // 2. PARENT_POST_ID
+                    case BelongsTo::PARENT_POST_ID:
+                        switch ($logicBlockElement->getOperator()){
+                            case Operator::EQUALS:
+                                $query .= ' (p.ID = %s or p.post_parent = %s) ';
+                                $args[] = $logicBlockElement->getFind();
+                                $args[] = $logicBlockElement->getFind();
+                                break;
+
+                            case Operator::NOT_EQUALS:
+                                $query .= ' (p.ID != %s or p.post_parent != %s) ';
+                                $args[] = $logicBlockElement->getFind();
+                                $args[] = $logicBlockElement->getFind();
+                                break;
+
+                            case Operator::IN:
+                                $query .= ' (p.ID IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).') or p.post_parent IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).')) ';
+                                break;
+
+                            case Operator::NOT_IN:
+                                $query .= ' (p.ID NOT IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).') or p.post_parent NOT IN ('.Strings::formatForInStatement($logicBlockElement->getFind()).')) ';
+                                break;
+                        }
+                        break;
+
+					// 3. POST_ID
 					case BelongsTo::POST_ID:
 						switch ($logicBlockElement->getOperator()){
 							case Operator::EQUALS:
@@ -254,7 +265,7 @@ class CustomPostTypeMetaGroupsGenerator
 
 						break;
 
-					// 3. POST_TEMPLATE
+					// 4. POST_TEMPLATE
 					case BelongsTo::POST_TEMPLATE:
 						switch ($logicBlockElement->getOperator()){
 							case Operator::EQUALS:
@@ -278,8 +289,8 @@ class CustomPostTypeMetaGroupsGenerator
 
 						break;
 
-					// 4. POST_TAX
-					// 5. POST_CAT
+					// 5. POST_TAX
+					// 6. POST_CAT
 					case BelongsTo::POST_TAX:
 					case BelongsTo::POST_CAT:
 						switch ($logicBlockElement->getOperator()){
@@ -313,6 +324,9 @@ class CustomPostTypeMetaGroupsGenerator
 			$query .= ' ) ';
 		}
 
+		// fix any wrong closed query
+		$query = str_replace([' OR ) ', ' AND ) '],' ) ', $query);
+
 		// close the query
 		$query .= "AND p.post_status IN ('publish', 'draft', 'private', 'auto-draft', 'inherit') GROUP BY p.ID ORDER BY p.ID";
 
@@ -325,20 +339,5 @@ class CustomPostTypeMetaGroupsGenerator
 		}
 
 		return $postIds;
-	}
-
-	/**
-	 * @param $postIds
-	 * @param $postType
-	 * @param MetaGroupModel $metaGroupModel
-	 */
-	private function generateMetaBoxesFromPostIds($postIds, $postType, MetaGroupModel $metaGroupModel)
-	{
-		if(!empty($postIds)){
-			foreach ($postIds as $postId){
-				$generator = new CustomPostTypeMetaGroupGenerator($metaGroupModel, $postType, $postId);
-				$generator->render();
-			}
-		}
 	}
 }

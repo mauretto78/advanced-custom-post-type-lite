@@ -19,6 +19,10 @@ class FetchLicenseQuery implements QueryInterface
 			'id' => $licenseActivation['activation_id'],
 		]);
 
+		if(isset($activation['error'])){
+		    throw new \Exception($activation['error']);
+        }
+
 		unset($licenseActivation['license']);
 
 		$versionInfo = [

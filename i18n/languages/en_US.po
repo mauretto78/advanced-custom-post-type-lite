@@ -352,18 +352,14 @@ msgid "Custom post type slug to use instead of default."
 msgstr "Custom post type slug to use instead of default."
 
 msgid ""
-"Custom post type successfully deleted. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully deleted."
 msgstr ""
-"Custom post type successfully deleted. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully deleted."
 
 msgid ""
-"Custom post type successfully saved. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully saved."
 msgstr ""
-"Custom post type successfully saved. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully saved."
 
 msgid "Custom post type was associated to selected taxonomies"
 msgstr "Custom post type was associated to selected taxonomies"
@@ -1448,8 +1444,8 @@ msgstr "Sort by"
 msgid "Step value (used only by numeric fields)"
 msgstr "Step value (used only by numeric fields)"
 
-msgid "Successfully post sync. The browser will refresh after 5 seconds."
-msgstr "Successfully post sync. The browser will refresh after 5 seconds."
+msgid "Successfully post sync."
+msgstr "Successfully post sync."
 
 msgid "Support"
 msgstr "Support"
@@ -1508,11 +1504,6 @@ msgstr "Template saved successfully"
 
 msgid "Template was successfully deleted."
 msgstr "Template was successfully deleted."
-
-msgid ""
-"Template was successfully deleted. The browser will refresh after 5 seconds."
-msgstr ""
-"Template was successfully deleted. The browser will refresh after 5 seconds."
 
 #, fuzzy
 #| msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
@@ -2895,8 +2886,8 @@ msgstr "Min blocks required"
 msgid "Max blocks allowed"
 msgstr "Max blocks allowed"
 
-msgid "Browser icons"
-msgstr "Browser icons"
+msgid "Browse icons"
+msgstr "Browse icons"
 
 msgid "Search an icon"
 msgstr "Search an icon"
@@ -2974,8 +2965,8 @@ msgstr "Enter the URL"
 msgid "Enter text link"
 msgstr "Enter text link"
 
-msgid "Settings saved. The browser will refresh after 5 seconds."
-msgstr "Settings saved. The browser will refresh after 5 seconds."
+msgid "Settings saved."
+msgstr "Settings saved."
 
 msgid "Exit"
 msgstr "Exit"

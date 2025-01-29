@@ -43,11 +43,15 @@ abstract class ACPT_Lite_Schema_Migration
 	 */
     protected function renameTableQuery($table): string
     {
+        if(ACPT_Lite_DB::prefix() == ''){
+            return '';
+        }
+
     	if(ACPT_Lite_DB::tableExists(ACPT_Lite_DB::prefixedTableName($table))){
     		return '';
 	    }
 
-    	return "RENAME TABLE `".$table."` TO `" . ACPT_Lite_DB::prefixedTableName($table) . "`;";
+    	return "RENAME TABLE `".$table."` TO `".ACPT_Lite_DB::prefixedTableName($table)."`;";
     }
 
 	/**

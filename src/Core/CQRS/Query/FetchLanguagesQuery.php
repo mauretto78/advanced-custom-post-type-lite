@@ -17,7 +17,7 @@ class FetchLanguagesQuery implements QueryInterface
 			'translations' => [],
 		];
 
-		$languageDir = __DIR__.'/../../../../i18n/languages';
+		$languageDir = ACPT_LITE_PLUGIN_DIR_PATH.'/i18n/languages';
 		foreach (new \DirectoryIterator($languageDir) as $file){
 			if($file->getExtension() === 'po'){
 				$languageCode = str_replace('.po','', $file->getFilename());

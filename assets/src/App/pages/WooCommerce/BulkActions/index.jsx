@@ -4,11 +4,10 @@ import useTranslation from "../../../hooks/useTranslation";
 import {styleVariants} from "../../../constants/styles";
 import Button from "../../../components/Button";
 import {addField, deleteField, deselectAllElements} from "../../../redux/reducers/productDataFieldsStateSlice";
-import PropTypes from "prop-types";
 import {useFormContext, useWatch} from "react-hook-form";
 import {cloneWCField} from "../../../utils/cloners";
 
-const BulkActions = ({view, setFieldTab}) => {
+const BulkActions = () => {
 
     // manage global state
     const dispatch = useDispatch();
@@ -48,11 +47,6 @@ const BulkActions = ({view, setFieldTab}) => {
                     const deletedField = {...watchedField};
                     const fields = getValues("fields").filter(f => f.id !== element.id);
                     setValue("fields", fields);
-
-                    if(setFieldTab){
-                        setFieldTab(0);
-                    }
-
                     dispatch(deleteField({field: deletedField}));
 
                     break;
@@ -101,14 +95,6 @@ const BulkActions = ({view, setFieldTab}) => {
             )}
         </React.Fragment>
     );
-};
-
-BulkActions.propTypes = {
-    view: PropTypes.oneOf([
-        "tab",
-        "list"
-    ]).isRequired,
-    setFieldTab: PropTypes.func,
 };
 
 export default BulkActions;

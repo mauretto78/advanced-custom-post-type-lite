@@ -12,7 +12,7 @@ const PluginMenu = () => {
     const [isVisible, setIsVisible] = useState(false);
     const node = useRef();
 
-    useOutsideClick(node, () => {
+    useOutsideClick([node], () => {
         setIsVisible(false);
     });
 

@@ -10,35 +10,37 @@ use ACPT_Lite\Core\CQRS\Command\DeleteCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteMetaGroupCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteTaxonomyCommand;
 use ACPT_Lite\Core\CQRS\Command\DeleteWooCommerceProductDataCommand;
+use ACPT_Lite\Core\CQRS\Command\DuplicateCustomPostTypeCommand;
+use ACPT_Lite\Core\CQRS\Command\DuplicateMetaGroupCommand;
+use ACPT_Lite\Core\CQRS\Command\DuplicateTaxonomyCommand;
+use ACPT_Lite\Core\CQRS\Command\DuplicateWooCommerceProductDataCommand;
+use ACPT_Lite\Core\CQRS\Command\RegeneratePostLabelsCommand;
+use ACPT_Lite\Core\CQRS\Command\RegenerateTaxonomyLabelsCommand;
 use ACPT_Lite\Core\CQRS\Command\SaveCustomPostTypeCommand;
 use ACPT_Lite\Core\CQRS\Command\SaveMetaGroupCommand;
 use ACPT_Lite\Core\CQRS\Command\SaveSettingsCommand;
 use ACPT_Lite\Core\CQRS\Command\SaveTaxonomyCommand;
-use ACPT_Lite\Core\CQRS\Command\SaveWooCommerceProductDataCommand;
-use ACPT_Lite\Core\CQRS\Command\SaveWooCommerceProductDataFieldsCommand;
 use ACPT_Lite\Core\CQRS\Query\CalculateShortCodeQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchAllFindBelongsQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchElementsQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchFindQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchLanguagesQuery;
-use ACPT_Lite\Core\CQRS\Query\FetchLicenseQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchMetaFieldsFromBelongsQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchPostTypeTaxonomiesQuery;
 use ACPT_Lite\Core\CQRS\Query\FetchPreviewLinkQuery;
-use ACPT_Lite\Core\CQRS\Query\GenerateGutenbergTemplateQuery;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Repository\SettingsRepository;
 use ACPT_Lite\Core\Repository\TaxonomyRepository;
-use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Includes\ACPT_Lite_DB_Tools;
+use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Data\Sanitizer;
-use ACPT_Lite\Utils\Data\WooCommerceNormalizer;
+use ACPT_Lite\Utils\ExportCode\ExportCodeStrings;
 use ACPT_Lite\Utils\PHP\Browser;
 use ACPT_Lite\Utils\PHP\Sluggify;
-use ACPT_Lite\Utils\Wordpress\Translator;
-use ACPT_Lite\Utils\Wordpress\WPLinks;
+use ACPT_Lite\Utils\Settings\Settings;
 use ACPT_Lite\Utils\Wordpress\WPUtils;
 
 /**
@@ -57,8 +59,8 @@ class ACPT_Lite_Ajax
 	public function globalSettingsAction()
 	{
 		try {
-			$language = SettingsRepository::getSingle('language') ? SettingsRepository::getSingle('language')->getValue() : 'en_US';
-			$font = SettingsRepository::getSingle('font') ? SettingsRepository::getSingle('font')->getValue() : 'Inter';
+			$language = Settings::get('language', 'en_US');
+			$font = Settings::get('font', 'Inter');
 		} catch (\Exception $exception){
 			$language = 'en_US';
 			$font = 'Inter';
@@ -93,6 +95,81 @@ class ACPT_Lite_Ajax
 			'globals' => $globals,
 			'settings' => $settings,
 		]);
+	}
+
+	public function healthCheckAction()
+	{
+		// version
+
+		// | ==========================================================|
+		// | LEGACY FORMAT | get_option('acpt_lite_version')           |
+		// | ==========================================================|
+		// | NEW FORMAT    | get_option('acpt_lite_current_version')   |
+		// | ==========================================================|
+
+		$savedVersion = (!empty(get_option('acpt_lite_current_version'))) ? get_option('acpt_lite_current_version') : oldPluginVersion(get_option('acpt_lite_version', 0));
+		$versionCheck = ($savedVersion === ACPT_LITE_PLUGIN_VERSION) ? 'ok' : 'Saved version is not aligned';
+
+		// cache
+		$cacheCheck = 'ok';
+		try {
+			$isCacheEnabled = Settings::get('enable_cache', 1);
+
+			if($isCacheEnabled == 1){
+				$cacheDir = plugin_dir_path( __FILE__ ) . "../../cache";
+
+				if(!is_dir($cacheDir)){
+					$cacheCheck = 'The cache directory does not exists';
+				} elseif(!is_writable($cacheDir)){
+					$cacheCheck = 'The cache directory is not writable';
+				}
+			}
+		} catch (\Exception $exception){
+			$cacheCheck = $exception->getMessage();
+		}
+
+		// db
+		$dbHealthCheck = ACPT_Lite_DB_Tools::healthCheck();
+		$dbCheck = (empty($dbHealthCheck)) ? 'ok' : 'Missing tables or columns';
+
+		return wp_send_json([
+			'db' => $dbCheck,
+			'version' => $versionCheck,
+			'cache' => $cacheCheck,
+		]);
+	}
+
+	public function runRepairAction()
+	{
+		try {
+			// version
+			$current_version = filemtime(plugin_dir_path( __FILE__ ) . "../../advanced-custom-post-type.php");
+			update_option('acpt_lite_version', $current_version, false);
+
+			// cache
+			$cacheDir = plugin_dir_path( __FILE__ ) . "../../cache";
+
+			if(!is_dir($cacheDir)){
+				mkdir($cacheDir, 0777, true);
+			}
+
+			if(!is_writable($cacheDir)){
+				chmod($cacheDir, 0777);
+			}
+
+			// db
+			if(ACPT_Lite_DB_Tools::repair(ACPT_Lite_DB_Tools::healthCheck()) === false){
+				throw new \Exception("DB repair failed");
+			}
+
+			return wp_send_json([
+				'success' => 'ok',
+			]);
+		} catch (\Exception $exception){
+			return wp_send_json([
+				'error' => $exception->getMessage(),
+			]);
+		}
 	}
 
 	/**
@@ -187,10 +264,13 @@ class ACPT_Lite_Ajax
 
 		    try {
 		    	switch ($action){
+
+		    	    // delete
 				    case "delete":
 				    	foreach ($elements as $element => $toDelete){
 				    		if($toDelete){
 							    switch ($belongsTo){
+
 								    default:
 								    case MetaTypes::CUSTOM_POST_TYPE:
 									    $command = new DeleteCustomPostTypeCommand($element);
@@ -204,22 +284,50 @@ class ACPT_Lite_Ajax
 									    $command = new DeleteMetaGroupCommand($element);
 									    break;
 
-								    case "form":
-									    $command = new DeleteFormCommand($element);
-									    break;
-
-								    case "dataset":
-									    $command = new DeleteDatasetCommand($element);
-									    break;
-
 								    case "woo_product_data":
 									    $command = new DeleteWooCommerceProductDataCommand($element);
 								    	break;
 							    }
 
-							    $command->execute();
+							    if($command !== null){
+                                    $command->execute();
+                                }
 						    }
 					    }
+
+                        break;
+
+                    // duplicate
+                    case "duplicate":
+                        foreach ($elements as $element => $toDuplicate){
+                            if($toDuplicate){
+                                switch ($belongsTo){
+
+                                    default:
+                                    case MetaTypes::CUSTOM_POST_TYPE:
+                                        $command = new DuplicateCustomPostTypeCommand($element);
+                                        break;
+
+                                    case MetaTypes::TAXONOMY:
+                                        $command = new DuplicateTaxonomyCommand($element);
+                                        break;
+
+                                    case MetaTypes::META:
+                                        $command = new DuplicateMetaGroupCommand($element);
+                                        break;
+
+                                    case "woo_product_data":
+                                        $command = new DuplicateWooCommerceProductDataCommand($element);
+                                        break;
+                                }
+
+                                if($command !== null){
+                                    $command->execute();
+                                }
+                            }
+                        }
+
+                        break;
 			    }
 
 			    return wp_send_json([
@@ -519,48 +627,6 @@ class ACPT_Lite_Ajax
         ]);
     }
 
-	/**
-	 * Delete custom post type
-	 *
-	 * @return mixed
-	 */
-	public function deleteDatasetAction()
-	{
-		if(isset($_POST['data'])){
-			$data = $this->sanitizeJsonData($_POST['data']);
-
-			if(!isset($data['id'])){
-				return wp_send_json([
-					'success' => false,
-					'error' => 'Missing id'
-				]);
-			}
-
-			$id = $data['id'];
-
-			try {
-				$command = new DeleteDatasetCommand($id);
-				$command->execute();
-
-				$return = [
-					'success' => true,
-				];
-			} catch (\Exception $exception){
-				$return = [
-					'success' => false,
-					'error' => $exception->getMessage()
-				];
-			}
-
-			return wp_send_json($return);
-		}
-
-		return wp_send_json([
-			'success' => false,
-			'error' => 'no postType was sent'
-		]);
-	}
-
     /**
      * Delete a meta group
      *
@@ -645,82 +711,64 @@ class ACPT_Lite_Ajax
         ]);
     }
 
-	/**
-	 * Delete WC product data
-	 */
-    public function deleteWooCommerceProductDataAction()
+    public function duplicateAction()
     {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
+        $data = $this->sanitizeJsonData($_POST['data']);
 
-            if(!isset($data['id'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing id'
-                ]);
-            }
-
-            $id = $data['id'];
-
-            try {
-                $command = new DeleteWooCommerceProductDataCommand($id);
-	            $command->execute();
-
-                $return = [
-                        'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                        'success' => false,
-                        'error' => $exception->getMessage()
-                ];
-            }
-
-            return wp_send_json($return);
+        if(!isset($data['find'])){
+            return wp_send_json([
+                'success' => false,
+                'error' => 'Missing `find`'
+            ]);
         }
 
-        return wp_send_json([
+        if(!isset($data['belongsTo'])){
+            return wp_send_json([
                 'success' => false,
-                'error' => 'no WooCommerce product data was sent'
-        ]);
-    }
-
-	/**
-	 * Delete WC product data fields
-	 */
-    public function deleteWooCommerceProductDataFieldsAction()
-    {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-
-            if(!isset($data['id'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing id'
-                ]);
-            }
-            $id = $data['id'];
-
-            try {
-                WooCommerceProductDataRepository::deleteFields($id);
-
-                $return = [
-                        'success' => true,
-                ];
-            } catch (\Exception $exception){
-                $return = [
-                        'success' => false,
-                        'error' => $exception->getMessage()
-                ];
-            }
-
-            return wp_send_json($return);
+                'error' => 'Missing `belongsTo`'
+            ]);
         }
 
-        return wp_send_json([
+        try {
+            $belongsTo = $data['belongsTo'];
+            $element = $data['find'];
+
+            switch ($belongsTo){
+
+                default:
+                case MetaTypes::CUSTOM_POST_TYPE:
+                    $command = new DuplicateCustomPostTypeCommand($element);
+                    break;
+
+                case MetaTypes::TAXONOMY:
+                    $command = new DuplicateTaxonomyCommand($element);
+                    break;
+
+                case MetaTypes::META:
+                    $command = new DuplicateMetaGroupCommand($element);
+                    break;
+
+                case "woo_product_data":
+                    $command = new DuplicateWooCommerceProductDataCommand($element);
+                    break;
+            }
+
+            if($command !== null){
+                $command->execute();
+            }
+
+            $return = [
+                'success' => true,
+            ];
+
+        } catch (\Exception $exception){
+            $return = [
                 'success' => false,
-                'error' => 'no WooCommerce product data was sent'
-        ]);
+                'error' => $exception->getMessage()
+            ];
+        }
+
+        return wp_send_json($return);
     }
 
     /**
@@ -743,6 +791,30 @@ class ACPT_Lite_Ajax
                 'success' => true,
                 'data' => WPUtils::renderShortCode($shortcode)
         ]);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function exportCodeAction()
+    {
+        if(isset($_POST['data'])){
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if(!isset($data['find']) and !isset($data['belongsTo'])){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing params (`find`, `belongsTo`)'
+                ], 500);
+            }
+
+            return wp_send_json(ExportCodeStrings::export($data['belongsTo'], $data['find']));
+        }
+
+        return wp_send_json([
+            'success' => false,
+            'error' => 'no data was sent'
+        ], 500);
     }
 
 	/**
@@ -821,6 +893,29 @@ class ACPT_Lite_Ajax
 	    return wp_send_json($command->execute());
     }
 
+	/**
+	 * Fetch preview link
+	 */
+    public function fetchPreviewLinkAction()
+    {
+        $data = $this->sanitizeJsonData($_POST['data']);
+
+        try {
+	        $query = new FetchPreviewLinkQuery($data);
+
+	        return wp_send_json([
+	        	'success' => true,
+		        'link' => $query->execute(),
+	        ]);
+
+        } catch (\Exception $exception){
+	        return wp_send_json([
+		        'success' => false,
+		        'error' => $exception->getMessage(),
+	        ]);
+        }
+    }
+
 	public function fetchMetaFieldsFlatMapAction()
 	{
 		$data = $this->sanitizeJsonData($_POST['data']);
@@ -865,7 +960,7 @@ class ACPT_Lite_Ajax
         }
 
         // user fields
-	    if($data['belongsTo'] === MetaTypes::USER){
+	    if(isset($data['belongsTo']) and $data['belongsTo'] === MetaTypes::USER){
 	    	unset($data['find']);
 	    }
 
@@ -898,6 +993,34 @@ class ACPT_Lite_Ajax
         return wp_send_json(MetaRepository::getMetaFieldById($id, $lazy));
     }
 
+    public function fetchCommentMetaValueAction()
+    {
+	    if(isset($_POST['data'])){
+		    $data = $this->sanitizeJsonData($_POST['data']);
+
+		    if(!isset($data['fieldName'])){
+			    return wp_send_json([
+				    'success' => false,
+				    'error' => "Missing `fieldName` field"
+			    ]);
+		    }
+
+		    if(!isset($data['commentId'])){
+			    return wp_send_json([
+				    'success' => false,
+				    'error' => "Missing `commentId` field"
+			    ]);
+		    }
+
+		    $fieldName = $data['fieldName'];
+		    $commentId = $data['commentId'];
+
+		    return wp_send_json([
+			    'value' => Meta::fetch($commentId, MetaTypes::COMMENT, $fieldName)
+		    ]);
+	    }
+    }
+
     /**
      * Fetch custom post types
      *
@@ -917,7 +1040,7 @@ class ACPT_Lite_Ajax
 
         if($postType){
             return wp_send_json(CustomPostTypeRepository::get([
-                'postType' => $postType
+                    'postType' => $postType
             ]));
         }
 
@@ -927,6 +1050,27 @@ class ACPT_Lite_Ajax
 		        'page' => isset($page) ? $page : 1,
 		        'perPage' => isset($perPage) ? $perPage : 20,
 	        ]),
+        ]);
+    }
+
+    public function fetchHeadersAndFootersAction()
+    {
+        $directory = get_template_directory();
+
+        $headers = array_merge(glob($directory."/header.php"), glob($directory."/header-*.php"));
+        $footers = array_merge(glob($directory."/footer.php"), glob($directory."/footer-*.php"));
+
+        foreach ($headers as $index => $header){
+            $headers[$index] = $this->cleanHeadersAndFootersName($header);
+        }
+
+        foreach ($footers as $index => $footer){
+            $footers[$index] = $this->cleanHeadersAndFootersName($footer);
+        }
+
+        return wp_send_json([
+                'headers' => $headers,
+                'footers' => $footers,
         ]);
     }
 
@@ -957,84 +1101,24 @@ class ACPT_Lite_Ajax
 	}
 
     /**
+     * @param $string
+     *
+     * @return string|string[]
+     */
+    private function cleanHeadersAndFootersName( $string)
+    {
+        $directory = get_template_directory();
+
+        return str_replace([$directory, '/', '.php'],'', $string);
+    }
+
+    /**
      * @return mixed
      * @throws \Exception
      */
     public function fetchSettingsAction()
     {
         return wp_send_json(SettingsRepository::get());
-    }
-
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function fetchWooCommerceProductDataAction()
-    {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-
-            if(isset($data['id'])){
-	            return wp_send_json(WooCommerceProductDataRepository::get($data)[0]);
-            }
-
-	        return wp_send_json([
-		        'count' => WooCommerceProductDataRepository::count(),
-		        'records' => WooCommerceProductDataRepository::get($data),
-	        ]);
-        }
-
-        return wp_send_json([]);
-    }
-
-    public function fetchWooCommerceProductDataFieldsAction()
-    {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-
-            if(!isset($data['id'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing post id'
-                ]);
-            }
-
-            $id = $data['id'];
-
-            try {
-                $return = WooCommerceProductDataRepository::getFields($id);
-            } catch (\Exception $exception){
-                $return = [
-                        'success' => false,
-                        'error' => $exception->getMessage()
-                ];
-            }
-
-            return wp_send_json($return);
-        }
-
-        return wp_send_json([
-                'success' => false,
-                'error' => 'no id was sent'
-        ]);
-    }
-
-    /**
-     * Fetch theme's registered sidebars
-     *
-     * @return mixed
-     */
-    public function fetchSidebarsAction()
-    {
-        global $wp_registered_sidebars;
-
-        $sidebars = [];
-
-        foreach ($wp_registered_sidebars as $sidebar){
-            $sidebars[] = $sidebar;
-        }
-
-        return wp_send_json($sidebars);
     }
 
 	/**
@@ -1053,7 +1137,8 @@ class ACPT_Lite_Ajax
 			foreach ($customPostTypes as $customPostTypeModel){
 				$groups[MetaTypes::CUSTOM_POST_TYPE][$customPostTypeModel->getName()] = MetaRepository::get([
 					'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
-					'find' => $customPostTypeModel->getName()
+					'find' => $customPostTypeModel->getName(),
+                    'clonedFields' => true,
 				]);
 			}
 
@@ -1061,7 +1146,8 @@ class ACPT_Lite_Ajax
 			foreach ($taxonomies as $taxonomy){
 				$groups[MetaTypes::TAXONOMY][$taxonomy->getSlug()] = MetaRepository::get([
 					'belongsTo' => MetaTypes::TAXONOMY,
-					'find' => $taxonomy->getSlug()
+					'find' => $taxonomy->getSlug(),
+                    'clonedFields' => true,
 				]);
 			}
 
@@ -1070,7 +1156,7 @@ class ACPT_Lite_Ajax
 			return wp_send_json([
 				'success' => false,
 				'error' => $exception->getMessage()
-			]);
+			], 500);
 		}
 	}
 
@@ -1090,7 +1176,7 @@ class ACPT_Lite_Ajax
 			    return wp_send_json([
 				    'success' => false,
 				    'error' => 'Missing belongsTo'
-			    ]);
+			    ], 500);
 		    }
 
 		    $belongsTo = $data['belongsTo'];
@@ -1104,99 +1190,7 @@ class ACPT_Lite_Ajax
 	    return wp_send_json([
 		    'success' => false,
 		    'error' => 'no params were sent'
-	    ]);
-    }
-
-    /**
-     * fetch post data from id
-     *
-     * @return mixed
-     */
-    public function fetchPostDataAction()
-    {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-
-            if(!isset($data['id'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing post id'
-                ]);
-            }
-
-            $postId = $data['id'];
-            $post = get_post((int)$postId, "ARRAY_A");
-
-            $isWooCommerce = $post['post_type'] === 'product' and class_exists( 'woocommerce' );
-
-            $post['thumbnail'] = [
-                    'id' => get_post_thumbnail_id($postId),
-                    'title' => get_post((int)get_post_thumbnail_id($postId))->post_title,
-                    'excerpt' => get_post((int)get_post_thumbnail_id($postId))->post_excerpt,
-                    'description' => get_post((int)get_post_thumbnail_id($postId))->post_content,
-                    'url' => get_the_post_thumbnail_url($postId),
-            ];
-            $post['author'] = get_userdata($post['post_author']);
-            $post['links'] =  [
-                    'prev' => WPLinks::getPrevLink($postId),
-                    'next' => WPLinks::getNextLink($postId),
-            ];
-
-            $post['taxonomies'] = WPLinks::getTaxonomiesLinks($postId, $post['post_type']);
-            $post['isWooCommerce'] = $isWooCommerce;
-            $post['WooCommerceData'] = ($isWooCommerce) ? WooCommerceNormalizer::objectToArray($postId) : [];
-
-            return wp_send_json($post);
-        }
-
-        return wp_send_json([
-                'success' => false,
-                'error' => 'no postType was sent'
-        ]);
-    }
-
-    /**
-     * Fetch posts
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    public function fetchPostsAction()
-    {
-        if(isset($_POST['data'])){
-            $data = $this->sanitizeJsonData($_POST['data']);
-
-            if(!isset($data['postType'])){
-                return wp_send_json([
-                        'success' => false,
-                        'error' => 'Missing postType'
-                ]);
-            }
-
-            $loop = (new ACPT_Hooks())->loop([
-                    'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
-                    'find' => $data['postType'],
-                    'perPage' => isset($data['perPage']) ? $data['perPage'] : -1,
-                    'sortOrder' => (isset($data['sortOrder'])) ? $data['sortOrder']: 'ASC',
-                    'sortBy' => (isset($data['sortBy'])) ? $data['sortBy']: null,
-            ]);
-
-            while ( $loop->have_posts() ) : $loop->the_post();
-                $return[] = [
-                        'id' => get_the_ID(),
-                        'title' => get_the_title(),
-                ];
-            endwhile;
-
-            wp_reset_postdata();
-
-            return wp_send_json($return);
-        }
-
-        return wp_send_json([
-                'success' => false,
-                'error' => 'no postType was sent'
-        ]);
+	    ], 500);
     }
 
     /**
@@ -1243,7 +1237,7 @@ class ACPT_Lite_Ajax
                 return wp_send_json([
                     'success' => false,
                     'error' => 'Missing taxonomy'
-                ]);
+                ], 500);
             }
 
             $terms = get_terms([
@@ -1268,46 +1262,8 @@ class ACPT_Lite_Ajax
         return wp_send_json([
             'success' => false,
             'error' => 'no data was sent'
-        ]);
+        ], 500);
     }
-
-	/**
-	 * Generate a template for Gutenberg inner blocks
-	 */
-	public function generateGutenbergTemplateAction()
-	{
-		if(isset($_POST['data'])) {
-
-			$data = $this->sanitizeJsonData($_POST['data']);
-
-			if(!isset($data['field'])){
-				return wp_send_json([
-					'success' => false,
-					'error' => 'Missing `field`'
-				]);
-			}
-
-			$attributes = $data['attributes'] ?? [];
-
-			try {
-				$query = new GenerateGutenbergTemplateQuery($data['field'], $data['contextId'], $attributes);
-				$template = $query->execute();
-
-				return wp_send_json($template);
-
-			} catch (\Exception $exception){
-				return wp_send_json([
-					'success' => false,
-					'error' => $exception->getMessage()
-				]);
-			}
-		}
-
-		return wp_send_json([
-			'success' => false,
-			'error' => 'no data was sent'
-		]);
-	}
 
 	/**
 	 * Return the string translations
@@ -1318,6 +1274,70 @@ class ACPT_Lite_Ajax
 	    $query = new FetchLanguagesQuery();
 
 	    return wp_send_json($query->execute());
+    }
+
+    /**
+     * Regenerate post type labels
+     */
+    public function regeneratePostLabelsAction()
+    {
+        if(isset($_POST['data'])) {
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if(!isset($data['postType'])){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing `postType`'
+                ], 500);
+            }
+
+            try {
+                $postType = $data['postType'];
+                $command = new RegeneratePostLabelsCommand($postType);
+                $command->execute();
+
+                return wp_send_json([
+                    'success' => true,
+                ]);
+            } catch (\Exception $exception){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => $exception->getMessage()
+                ], 500);
+            }
+        }
+    }
+
+    /**
+     * Regenerate taxonomy labels
+     */
+    public function regenerateTaxonomyLabelsAction()
+    {
+        if(isset($_POST['data'])) {
+            $data = $this->sanitizeJsonData($_POST['data']);
+
+            if(!isset($data['taxonomy'])){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => 'Missing `taxonomy`'
+                ], 500);
+            }
+
+            try {
+                $taxonomy = $data['taxonomy'];
+                $command = new RegenerateTaxonomyLabelsCommand($taxonomy);
+                $command->execute();
+
+                return wp_send_json([
+                    'success' => true,
+                ]);
+            } catch (\Exception $exception){
+                return wp_send_json([
+                    'success' => false,
+                    'error' => $exception->getMessage()
+                ], 500);
+            }
+        }
     }
 
     /**
@@ -1336,16 +1356,6 @@ class ACPT_Lite_Ajax
      * @return mixed
      */
     public function resetTaxonomiesAction()
-    {
-        return wp_send_json([]);
-    }
-
-    /**
-     * Reset all taxonomies
-     *
-     * @return mixed
-     */
-    public function resetWooCommerceProductDataAction()
     {
         return wp_send_json([]);
     }
@@ -1388,18 +1398,20 @@ class ACPT_Lite_Ajax
 
             $command = new SaveCustomPostTypeCommand($data);
 
+            $httpStatus = 200;
             $return = [
             	'id' => $command->execute(),
                 'success' => true,
             ];
         } catch (\Exception $exception){
+            $httpStatus = 500;
             $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
+                'success' => false,
+                'error' => $exception->getMessage()
             ];
         }
 
-        return wp_send_json($return);
+        return wp_send_json($return, $httpStatus);
     }
 
     /**
@@ -1416,24 +1428,25 @@ class ACPT_Lite_Ajax
 		    return wp_send_json([
 			    'success' => false,
 			    'error' => 'No data sent'
-		    ]);
+		    ], 500);
 	    }
 
         try {
-	        $command = new SaveMetaGroupCommand($data);
-
-	        $return = [
+            $httpStatus = 200;
+            $command = new SaveMetaGroupCommand($data);
+            $return = [
 		        'id' => $command->execute(),
 		        'success' => true
 	        ];
         } catch (\Exception $exception){
-	        $return = [
+            $httpStatus = 500;
+            $return = [
 		        'success' => false,
 		        'error' => $exception->getMessage()
 	        ];
         }
 
-        return wp_send_json($return);
+        return wp_send_json($return, $httpStatus);
     }
 
     /**
@@ -1447,18 +1460,20 @@ class ACPT_Lite_Ajax
         try {
             $command = new SaveSettingsCommand($data);
 	        $command->execute();
+            $httpStatus = 200;
 
             $return = [
                     'success' => true
             ];
         } catch (\Exception $exception){
+            $httpStatus = 500;
             $return = [
                     'success' => false,
                     'error' => $exception->getMessage()
             ];
         }
 
-        return wp_send_json($return);
+        return wp_send_json($return, $httpStatus);
     }
 
     /**
@@ -1501,65 +1516,21 @@ class ACPT_Lite_Ajax
 
             $command = new SaveTaxonomyCommand($data);
 	        $command->execute();
+            $httpStatus = 200;
 
             $return = [
             	'id' => $id,
                 'success' => true,
             ];
         } catch (\Exception $exception){
+            $httpStatus = 500;
             $return = [
                     'success' => false,
                     'error' => $exception->getMessage()
             ];
         }
 
-        return wp_send_json($return);
-    }
-
-    /**
-     * Creates a product data
-     */
-    public function saveWooCommerceProductDataAction()
-    {
-        $data = $this->sanitizeJsonData($_POST['data']);
-
-        try {
-            $command = new SaveWooCommerceProductDataCommand($data);
-	        $command->execute();
-
-            $return = [
-                    'success' => true
-            ];
-        } catch (\Exception $exception){
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function saveWooCommerceProductDataFieldsAction()
-    {
-        try {
-        	$data = $this->sanitizeJsonData($_POST['data']);
-            $command = new SaveWooCommerceProductDataFieldsCommand($data);
-            $return = [
-                    'ids' => $command->execute(),
-                    'success' => true
-            ];
-        } catch (\Exception $exception) {
-            $return = [
-                    'success' => false,
-                    'error' => $exception->getMessage()
-            ];
-        }
-
-        return wp_send_json($return);
+        return wp_send_json($return, $httpStatus);
     }
 
     /**
@@ -1574,27 +1545,29 @@ class ACPT_Lite_Ajax
 			    return wp_send_json([
 				    'success' => false,
 				    'error' => 'Missing postType'
-			    ]);
+			    ], 500);
 		    }
 
 		    try {
 				$postTypes = $data['postTypes'];
+                $httpStatus = 200;
 
-				foreach ($postTypes as $postType){
-					CustomPostTypeRepository::createCustomPostType($postType);
-				}
+                foreach ($postTypes as $postType){
+                    CustomPostTypeRepository::createCustomPostType($postType);
+                }
 
-			    $return = [
+                $return = [
 				    'success' => true
 			    ];
-		    } catch (\Exception $exception){
-			    $return = [
+            } catch (\Exception $exception){
+                $httpStatus = 500;
+                $return = [
 				    'success' => false,
 				    'error' => $exception->getMessage()
 			    ];
 		    }
 
-		    return wp_send_json($return);
+		    return wp_send_json($return, $httpStatus);
 	    }
     }
 
@@ -1623,7 +1596,7 @@ class ACPT_Lite_Ajax
         return wp_send_json([
                 'success' => false,
                 'error' => 'no string was sent'
-        ]);
+        ], 500);
     }
 
     /**
@@ -1631,7 +1604,7 @@ class ACPT_Lite_Ajax
      *
      * @return mixed
      */
-    private function sanitizeJsonData($data)
+    protected function sanitizeJsonData($data)
     {
         $jsonDecoded = json_decode(wp_unslash($data), true);
 
@@ -1702,7 +1675,7 @@ class ACPT_Lite_Ajax
                 return wp_send_json([
                         'success' => false,
                         'error' => 'Missing postType'
-                ]);
+                ], 500);
             }
 
             $postType = $data['postType'];

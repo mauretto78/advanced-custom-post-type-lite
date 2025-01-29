@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Includes;
 
 use ACPT_Lite\Admin\ACPT_Lite_Admin;
-use ACPT_Lite\Admin\ACPT_Lite_Ajax;
 
 /**
  * The core plugin class.
@@ -56,22 +55,20 @@ class ACPT_Lite_Plugin
      * Load the dependencies, define the locale, and set the hooks for the admin area and
      * the public-facing side of the site.
      *
-     * @param ACPT_Lite_Loader $loader
-     *
      * @throws \Exception
      * @since    1.0.0
      */
-    public function __construct( ACPT_Lite_Loader $loader)
+    public function __construct()
     {
-        if( false === ACPT_Lite_DB::checkIfSchemaExists()){
-	        $old_version = get_option('acpt_version', 0);
-            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, oldPluginVersion($old_version));
+        if(false === ACPT_Lite_DB::checkIfSchemaExists()){
+	        $old_version = get_option('acpt_lite_version', 0);
+	        ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_lite_current_version') ?? oldPluginVersion($old_version));
             ACPT_Lite_DB::sync();
         }
 
 	    ACPT_Lite_DB_Tools::runHealthCheck();
 
-        $this->loader = $loader;
+        $this->loader = new ACPT_Lite_Loader();
         $this->setName();
         $this->setVersion();
         $this->runInternalization();
@@ -129,7 +126,7 @@ class ACPT_Lite_Plugin
      */
     private function runInternalization()
     {
-        $i18n = new ACPT_Lite_Internalization($this->loader);
+        $i18n = new ACPT_Lite_Internalization();
         $i18n->run();
     }
 
@@ -143,7 +140,7 @@ class ACPT_Lite_Plugin
 	 */
     private function runAdmin()
     {
-        $admin = new ACPT_Lite_Admin($this->loader, new ACPT_Lite_Ajax());
+        $admin = new ACPT_Lite_Admin($this->loader);
         $admin->run();
     }
 

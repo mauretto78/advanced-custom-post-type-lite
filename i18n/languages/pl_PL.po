@@ -408,19 +408,15 @@ msgstr "Niestandardowy slug typu postu do użycia zamiast domyślnego."
 
 #, fuzzy
 msgid ""
-"Custom post type successfully deleted. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully deleted."
 msgstr ""
-"Niestandardowy typ postu został pomyślnie usunięty. Przeglądarka odświeży "
-"się po 5 sekundach."
+"Niestandardowy typ postu został pomyślnie usunięty."
 
 #, fuzzy
 msgid ""
-"Custom post type successfully saved. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully saved."
 msgstr ""
-"Niestandardowy typ postu został pomyślnie zapisany. Przeglądarka odświeży "
-"się po 5 sekundach."
+"Niestandardowy typ postu został pomyślnie zapisany."
 
 #, fuzzy
 msgid "Custom post type was associated to selected taxonomies"
@@ -1661,9 +1657,9 @@ msgid "Step value (used only by numeric fields)"
 msgstr "Wartość kroku (używana tylko w polach numerycznych)"
 
 #, fuzzy
-msgid "Successfully post sync. The browser will refresh after 5 seconds."
+msgid "Successfully post sync."
 msgstr ""
-"Pomyślnie zsynchronizowano post. Przeglądarka odświeży się po 5 sekundach."
+"Pomyślnie zsynchronizowano post."
 
 msgid "Support"
 msgstr "Wsparcie"
@@ -1736,12 +1732,6 @@ msgstr "Szablon został pomyślnie zapisany"
 #, fuzzy
 msgid "Template was successfully deleted."
 msgstr "Szablon został pomyślnie usunięty."
-
-#, fuzzy
-msgid ""
-"Template was successfully deleted. The browser will refresh after 5 seconds."
-msgstr ""
-"Szablon został pomyślnie usunięty. Przeglądarka odświeży się po 5 sekundach."
 
 #, fuzzy
 msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
@@ -3300,7 +3290,7 @@ msgid "Max blocks allowed"
 msgstr "Maksymalna dozwolona liczba bloków"
 
 #, fuzzy
-msgid "Browser icons"
+msgid "Browse icons"
 msgstr "Ikony przeglądarki"
 
 #, fuzzy
@@ -3405,8 +3395,8 @@ msgid "Enter text link"
 msgstr "Wprowadź łącze tekstowe"
 
 #, fuzzy
-msgid "Settings saved. The browser will refresh after 5 seconds."
-msgstr "Ustawienia zostały zapisane. Przeglądarka odświeży się po 5 sekundach."
+msgid "Settings saved."
+msgstr "Ustawienia zostały zapisane."
 
 msgid "Exit"
 msgstr "Wyjście"

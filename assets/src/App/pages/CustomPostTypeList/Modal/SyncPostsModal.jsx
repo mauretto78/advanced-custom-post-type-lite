@@ -7,6 +7,7 @@ import {wpAjaxRequest} from "../../../utils/ajax";
 import {refreshPage} from "../../../utils/misc";
 import {toast} from "react-hot-toast";
 import Alert from "../../../components/Alert";
+import {setCookieMessage} from "../../../utils/cookies";
 
 const SyncPostsModal = () => {
 
@@ -40,8 +41,8 @@ const SyncPostsModal = () => {
             .then(res => {
 
                 if(res.success){
-                    toast.success(useTranslation("Successfully post sync. The browser will refresh after 5 seconds."));
-                    refreshPage(5000);
+                    setCookieMessage("Successfully post sync.");
+                    refreshPage();
                 }
 
                 if(res.error){

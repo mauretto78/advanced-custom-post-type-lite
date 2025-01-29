@@ -11,18 +11,16 @@ import {fetchMeta} from "../../redux/reducers/fetchMetaSlice";
 import Loader from "../../components/Loader";
 import {v4 as uuidv4} from "uuid";
 import {isEmpty} from "../../utils/objects";
-import ListView from "./ListView";
-import TabularView from "./TabularView";
-import AccordionView from "./AccordionView";
+import MetaBoxes from "./MetaBoxes";
 import PageNotFound from "../404";
 import {addBox, hydrateState, unsetActiveElement} from "../../redux/reducers/metaStateSlice";
 import DeleteAllMetaBoxesModal from "./Modal/DeleteAllMetaBoxesModal";
-import {savedView} from "../../utils/localStorage";
 import {scrollToId, scrollToTop} from "../../utils/scroll";
 import {saveMeta} from "../../redux/reducers/saveMetaSlice";
 import toast from "react-hot-toast";
 import {useConfirmTabClose} from "../../hooks/useConfirmTabClose";
 import {useOutsideClick} from "../../hooks/useOutsideClick";
+import MetaGroupTitle from "./MetaGroup/MetaGroupTitle";
 
 const Meta = () => {
 
@@ -42,7 +40,6 @@ const Meta = () => {
     const [isSubmitting, setIsSubmitted] = useState(false);
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
     const [fetchError, setFetchError] = useState(false);
-    const [view, setView] = useState(savedView(groupId));
     const [activeBoxTab, setActiveBoxTab] = useState(0);
 
     // manage redirect
@@ -59,7 +56,7 @@ const Meta = () => {
 
     useConfirmTabClose(hasUnsavedChanges);
 
-    useOutsideClick(ref, () => {
+    useOutsideClick([ref], () => {
         dispatch(unsetActiveElement());
     });
 
@@ -83,7 +80,7 @@ const Meta = () => {
         setActiveBoxTab(group.boxes ? group.boxes.length : 0);
 
         delay(1).then(()=>{
-            scrollToId(`lazy-${newBoxId}`);
+            scrollToId(`${newBoxId}`);
         });
     };
 
@@ -104,6 +101,8 @@ const Meta = () => {
                     methods.setValue('name', res.payload.name);
                     methods.setValue('label', res.payload.label);
                     methods.setValue('display', res.payload.display);
+                    methods.setValue('context', res.payload.context);
+                    methods.setValue('priority', res.payload.priority);
                     res.payload.belongs && res.payload.belongs.map((belong, index) => {
                         methods.setValue(`belongs.${index}.id`, belong.id);
                         methods.setValue(`belongs.${index}.belongsTo`, belong.belongsTo);
@@ -192,14 +191,11 @@ const Meta = () => {
                 const payload = res.payload;
 
                 if(payload.success){
-                    if(!id){
-                        navigate('/meta');
-                    }
-
                     methods.reset({}, { keepValues: true, keepIsSubmitted: true });
                     setHasUnsavedChanges(false);
                     toast.success(useTranslation("Meta group settings successfully saved"));
                     dispatch(hydrateState(data));
+                    updateDocumentGlobalsVar(data);
                     scrollToTop();
                 } else {
                     toast.error(payload.error);
@@ -213,6 +209,33 @@ const Meta = () => {
                 setIsSubmitted(false);
             })
         ;
+    };
+
+    const updateDocumentGlobalsVar = (data) => {
+
+        let newMeta = [];
+
+        document.globals.globals.find.meta.map((g) => {
+            if(g.value === data.id){
+                newMeta.push({value: data.id, label: data.name});
+            } else {
+                newMeta.push(g);
+            }
+        });
+
+        const meta = {
+            meta: newMeta
+        };
+
+        const find = {
+            find: {...document.globals.globals.find, ...meta}
+        };
+
+        const mod = {
+            globals: {...document.globals.globals, ...find}
+        };
+
+        document.globals = {...document.globals, ...mod};
     };
 
     const actions = [
@@ -253,7 +276,7 @@ const Meta = () => {
                     }}
                 >
                     <Layout
-                        title={useTranslation("Manage meta fields")}
+                        title={<MetaGroupTitle groupId={groupId} />}
                         actions={actions}
                         crumbs={[
                             {
@@ -266,35 +289,9 @@ const Meta = () => {
                         ]}
                     >
                         <div ref={ref}>
-                            {view === 'list' ? (
-                                <ListView
-                                    view={view}
-                                    setView={setView}
-                                    boxes={!isEmpty(group) ? group.boxes : []}
-                                />
-                            ) : (
-                                <React.Fragment>
-                                    {view === 'accordion' ? (
-                                        <AccordionView
-                                            activeBoxTab={activeBoxTab}
-                                            setActiveBoxTab={setActiveBoxTab}
-                                            view={view}
-                                            setView={setView}
-                                            boxes={!isEmpty(group) ? group.boxes : []}
-                                        />
-                                    ) : (
-                                        <React.Fragment>
-                                            <TabularView
-                                                activeBoxTab={activeBoxTab}
-                                                setActiveBoxTab={setActiveBoxTab}
-                                                view={view}
-                                                setView={setView}
-                                                boxes={!isEmpty(group) ? group.boxes : []}
-                                            />
-                                        </React.Fragment>
-                                    )}
-                                </React.Fragment>
-                            )}
+                            <MetaBoxes
+                                boxes={!isEmpty(group) ? group.boxes : []}
+                            />
                         </div>
                     </Layout>
                 </form>

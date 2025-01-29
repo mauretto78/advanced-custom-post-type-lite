@@ -12,6 +12,10 @@
     }
   }
 
+  .react-tooltip {
+    z-index: 9999;
+  }
+
   .acpt-tooltip-tip {
     position: absolute;
     top: 60px;

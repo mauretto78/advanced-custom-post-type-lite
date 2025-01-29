@@ -4,15 +4,35 @@ namespace ACPT_Lite\Utils\PHP;
 
 class Url
 {
+    /**
+     * This functions is used instead of global $pagenow
+     * bacause in some Multisite installations $pagenow does not work as expected
+     * (it returns NULL)
+     *
+     * @return string
+     */
+    public static function pagenow()
+    {
+        $uri = $_SERVER['PHP_SELF'];
+        $lastLetter = substr($uri, -1);
+
+        if($lastLetter === "/"){
+            $uri = rtrim($uri, "/");
+        }
+
+        $uri = explode('/', $uri);
+
+        return end($uri);
+    }
+
 	/**
 	 * @return string
 	 */
     public static function host()
     {
         if(isset($_SERVER['HTTPS'])){
-            $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-        }
-        else{
+            $protocol = ($_SERVER['HTTPS'] and $_SERVER['HTTPS'] != "off") ? "https" : "http";
+        } else{
             $protocol = 'http';
         }
 
@@ -26,6 +46,10 @@ class Url
 	 */
     public static function baseUri($queryString = [])
     {
+    	if(php_sapi_name() === 'cli'){
+    		return 'http://localhost:8000';
+	    }
+
         $baseUri = str_replace( '?'.$_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI'] );
 
         $uri = self::host() . $baseUri;
@@ -35,6 +59,16 @@ class Url
         }
 
         return $uri;
+    }
+
+	/**
+	 * @param $url
+	 *
+	 * @return string|string[]
+	 */
+    public static function secureUrl($url)
+    {
+	    return str_ireplace( 'http://', 'https://', $url );
     }
 
 	/**
@@ -72,4 +106,22 @@ class Url
 
 	    return $pageURL;
     }
+
+	/**
+	 * @param $url
+	 *
+	 * @return string|null
+	 */
+	public static function sanitize($url)
+	{
+		if($url === null){
+			return null;
+		}
+
+		if(!is_string($url)){
+			return null;
+		}
+
+		return esc_url(strip_tags($url));
+	}
 }

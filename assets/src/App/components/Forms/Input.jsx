@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {get} from 'react-hook-form';
 
-const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defaultValue, description, step, min, max, readOnly, onClick, onChangeCapture, validate, register, errors, disabled = false}) => {
+const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defaultValue, description, step, min, max, readOnly, onClick, onChangeCapture, validate, register, errors, autoFocus = false, disabled = false}) => {
 
     const error = get(errors, id);
 
@@ -14,10 +14,11 @@ const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defau
                 data-cy={`input-${id}`}
                 name={id}
                 type={type}
+                autoFocus={autoFocus}
                 disabled={disabled}
-                min={min ? min : 0}
-                max={max}
-                step={step ? min : 1}
+                min={min ? min : null}
+                max={max ? max : null}
+                step={step ? step : "any"}
                 defaultValue={defaultValue}
                 placeholder={placeholder}
                 onChangeCapture={onChangeCapture}
@@ -29,7 +30,7 @@ const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defau
             />
             {error && <div data-cy={`input-error-${id}`} className="invalid-feedback"><span dangerouslySetInnerHTML={{__html: error.message}}/></div>}
             {description && (
-                <div className="form-description">{description}</div>
+                <div className="form-description" dangerouslySetInnerHTML={{__html: description}} />
             )}
         </React.Fragment>
     );
@@ -53,14 +54,18 @@ Input.propTypes = {
     validate: PropTypes.func,
     register: PropTypes.func.isRequired,
     errors: PropTypes.array.isRequired,
+    autoFocus: PropTypes.bool,
     disabled: PropTypes.bool,
     type: PropTypes.oneOf([
         'text',
+        'color',
         'email',
         'number',
+        'phone',
         'tel',
         'url',
         'date',
+        'datetime-local',
         'time',
     ]),
 

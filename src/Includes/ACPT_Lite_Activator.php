@@ -29,13 +29,18 @@ class ACPT_Lite_Activator
 
         // check for version lite
         // and deactivate lite version if enabled
-        $pluginLite = 'acpt-lite/acpt-lite.php';
+        $pluginLite = 'advanced-custom-post-type-lite/advanced-custom-post-type-lite.php';
+
+	    // plugin root file was changed in ACPT Lite v2.0.6
+	    $pluginLiteAfter206 = 'acpt-lite/acpt-lite.php';
 
         if (is_plugin_active($pluginLite) ) {
             deactivate_plugins($pluginLite);
+        } elseif(is_plugin_active($pluginLiteAfter206)){
+	        deactivate_plugins($pluginLiteAfter206);
         } else {
-	        $old_version = get_option('acpt_version', 0);
-            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, oldPluginVersion($old_version));
+	        $old_version = get_option('acpt_lite_version', 0);
+	        ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_lite_current_version') ?? oldPluginVersion($old_version));
             ACPT_Lite_DB::sync();
         }
 

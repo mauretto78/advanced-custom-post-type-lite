@@ -18,7 +18,7 @@
 
   .tree-el {
     position: relative;
-    padding-left: calc(#{$space-36} + (#{$space-12} * var(--level)));
+    padding-left: $space-24;
 
     //$space-36 *
 
@@ -27,7 +27,7 @@
       position: absolute;
       height: 1px;
       background: $light-gray;
-      width:calc(#{$space-12} + (#{$space-12} * var(--level)));;
+      width: $space-12;
       top: 50%;
       left: 8px;
     }

@@ -5,7 +5,6 @@ namespace ACPT_Lite\Utils\MetaSync;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class TaxonomyMetaSync extends AbstractMetaSync
@@ -42,7 +41,7 @@ class TaxonomyMetaSync extends AbstractMetaSync
                     JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                     SET tm.meta_key=REPLACE(tm.meta_key, %s, %s) 
                     WHERE tm.meta_key LIKE %s AND tax.taxonomy=%s";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey . '%', $taxonomy]);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey.'%', $taxonomy]);
 		}
 	}
 
@@ -54,7 +53,7 @@ class TaxonomyMetaSync extends AbstractMetaSync
 	 */
 	public static function syncField(MetaFieldModel $fieldModel, $find = null)
 	{
-		self::updatePostMetaWhenFieldNameChanges($fieldModel, $find);
+	    self::updatePostMetaWhenFieldNameChanges($fieldModel, $find);
 	}
 
 	/**
@@ -108,7 +107,7 @@ class TaxonomyMetaSync extends AbstractMetaSync
                 SET meta_key=REPLACE(tm.meta_key, %s, %s) 
                 WHERE tm.meta_key LIKE %s AND tax.taxonomy=%s
             ";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [ $oldKey . '_', $newKey . '_', $oldKey . '_%', $taxonomy]);
+			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%', $taxonomy]);
 		}
 	}
 }

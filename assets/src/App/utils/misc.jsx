@@ -51,6 +51,23 @@ export const refreshPage = (timeout = 0) => {
     }, timeout);
 };
 
+/**
+ * This function redirect and reload the page
+ *
+ * @param page
+ */
+export const refreshAndRedirectTo = (page = null) => {
+
+    let redirectUrl = `${document.globals.globals.admin_url}admin.php?page=acpt-lite#/`;
+
+    if(page !== null){
+        redirectUrl += page;
+    }
+
+    window.location.href = redirectUrl;
+    window.location.assign(window.location.href)
+};
+
 export const  delay = (time) => {
     return new Promise(resolve => setTimeout(resolve, time));
 };

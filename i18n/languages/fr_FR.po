@@ -353,18 +353,14 @@ msgstr ""
 "défini par défaut."
 
 msgid ""
-"Custom post type successfully deleted. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully deleted."
 msgstr ""
-"Le type de contenu personnalisé a été supprimé avec succès. Le navigateur se "
-"rechargera dans 5 secondes."
+"Le type de contenu personnalisé a été supprimé avec succès."
 
 msgid ""
-"Custom post type successfully saved. The browser will refresh after 5 "
-"seconds."
+"Custom post type successfully saved."
 msgstr ""
-"Le type de contenu personnalisé a été enregistré avec succès. Le navigateur "
-"se rechargera dans 5 secondes."
+"Le type de contenu personnalisé a été enregistré avec succès."
 
 msgid "Custom post type was associated to selected taxonomies"
 msgstr ""
@@ -1427,10 +1423,9 @@ msgstr "Trier par"
 msgid "Step value (used only by numeric fields)"
 msgstr "Valeur du pas (utilisée uniquement par les champs numériques)"
 
-msgid "Successfully post sync. The browser will refresh after 5 seconds."
+msgid "Successfully post sync."
 msgstr ""
-"Synchronisation des publications réussie. Le navigateur se rechargera dans 5 "
-"secondes."
+"Synchronisation des publications réussie."
 
 msgid "Support"
 msgstr "Support"
@@ -1490,12 +1485,6 @@ msgstr "Modèle enregistré avec succès"
 
 msgid "Template was successfully deleted."
 msgstr "Le modèle a été supprimé avec succès."
-
-msgid ""
-"Template was successfully deleted. The browser will refresh after 5 seconds."
-msgstr ""
-"Le modèle a été supprimé avec succès. Le navigateur se rechargera dans 5 "
-"secondes."
 
 #, fuzzy
 #| msgid "Text after. HTML is allowed (ex. </small>)"
@@ -2879,7 +2868,7 @@ msgstr "Nombre minimum de blocs requis"
 msgid "Max blocks allowed"
 msgstr "Nombre maximum de blocs autorisés"
 
-msgid "Browser icons"
+msgid "Browse icons"
 msgstr "Choisir une icône"
 
 msgid "Search an icon"
@@ -2970,8 +2959,8 @@ msgstr "Saisir l'URL"
 msgid "Enter text link"
 msgstr "Saisir le texte du lien"
 
-msgid "Settings saved. The browser will refresh after 5 seconds."
-msgstr "Paramètres enregistrés. Le navigateur se rechargera dans 5 secondes."
+msgid "Settings saved."
+msgstr "Paramètres enregistrés."
 
 msgid "Exit"
 msgstr "Quitter"

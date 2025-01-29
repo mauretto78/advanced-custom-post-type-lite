@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import Tab from "./Tab";
 import {randomAlphabeticString} from "../../utils/strings";
 
-const Tabs = ({handleClick, defaultActiveTab = 0, children}) => {
+const Tabs = ({handleClick, defaultActiveTab = 0, children, halfMargin}) => {
 
     // manage local state
     const [activeTab, setActiveTab] = useState(defaultActiveTab);
     const id = randomAlphabeticString();
 
-    const handleSetActiveTable = (index) => {
+    const handleSetActiveTab = (index) => {
         setActiveTab(index);
 
         if(handleClick){
@@ -27,7 +27,7 @@ const Tabs = ({handleClick, defaultActiveTab = 0, children}) => {
                 <React.Fragment>
                     <ul
                         role="tablist"
-                        className="tablist"
+                        className={`tablist ${halfMargin ? "mb-12": "mb-24"}`}
                     >
                         {children.map((child, index) => {
 
@@ -43,9 +43,9 @@ const Tabs = ({handleClick, defaultActiveTab = 0, children}) => {
                                     aria-controls={`tabpanel-${id}-${index+1}`}
                                     tabIndex={index+1}
                                     role="tab"
-                                    className={`acpt-accordion-tab ${activeTab === index ? 'active' : ''}`}
+                                    className={`acpt-accordion-tab ${child.props.style ? child.props.style : ''} ${activeTab === index ? 'active' : ''}`}
                                     key={index}
-                                    onClick={e => handleSetActiveTable(index)}
+                                    onClick={e => handleSetActiveTab(index)}
                                 >
                                     {(child.props && child.props.title) ? child.props.title : `Tab ${index+1}`}
                                 </li>
@@ -72,6 +72,7 @@ const Tabs = ({handleClick, defaultActiveTab = 0, children}) => {
 Tabs.propTypes = {
     handleClick: PropTypes.func,
     defaultActiveTab: PropTypes.number,
+    halfMargin: PropTypes.bool,
     children: PropTypes.arrayOf(Tab)
 };
 

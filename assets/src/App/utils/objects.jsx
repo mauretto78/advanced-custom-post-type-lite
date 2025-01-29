@@ -1,3 +1,8 @@
+
+export const arrayIsIncluded = (arr, target) => {
+    return target.every(v => arr.includes(v));
+};
+
 /**
  *
  * @param needle
@@ -176,7 +181,40 @@ export const escapedJsonToObject = (json) => {
     return json.replaceAll("&quot;", '"');
 };
 
+/**
+ * Used to fetch setting value
+ * @param key
+ * @param settings
+ * @param defaultValue
+ * @return {number|*}
+ */
+export const fetchSettingValue = (key, settings, defaultValue) => {
 
+    if(typeof settings !== 'object'){
+        return defaultValue;
+    }
 
+    if(settings.length === 0){
+        return defaultValue;
+    }
 
+    if(typeof filterByLabel(settings, 'key', key) === 'undefined'){
+        return defaultValue;
+    }
 
+    if(isEmpty(filterByLabel(settings, 'key', key))){
+        return defaultValue;
+    }
+
+    const value = filterByLabel(settings, 'key', key).value;
+
+    if(value === "1"){
+        return 1;
+    }
+
+    if(value === "0"){
+        return 0;
+    }
+
+    return value;
+};

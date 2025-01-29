@@ -40,8 +40,8 @@ const FieldGroupsModal = ({belongsTo, find}) => {
                 ) : (
                     <React.Fragment>
                         {data.records && data.records.length > 0 ? (
-                            <div className="responsive">
-                                <table className={`acpt-table with-border b-rounded ${globals.is_rtl ? 'rtl' : ''}`}>
+                            <div className="responsive with-shadow b-rounded">
+                                <table className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}>
                                     <thead>
                                     <tr>
                                         <th>

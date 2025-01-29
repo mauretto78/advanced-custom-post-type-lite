@@ -4,19 +4,22 @@ import MetaBoxHeader from "./MetaBoxHeader";
 import {useSortable} from "@dnd-kit/sortable";
 import {CSS} from "@dnd-kit/utilities";
 import VerticalSortableMetaFields from "./VerticalSortableMetaFields";
-import HorizontalSortableMetaFields from "./HorizontalSortableMetaFields";
 import {useSelector} from "react-redux";
+import {useAutoAnimate} from "@formkit/auto-animate/react";
 
-const MetaBox = ({index, box, view, setActiveTab}) => {
+const MetaBox = ({index, box, setActiveTab}) => {
 
     // DND-kit
-    const {attributes, listeners, setNodeRef, transform} = useSortable({id: box.id});
+    const {attributes, listeners, setNodeRef, isDragging, transform} = useSortable({id: box.id});
     const style = {
         transform: CSS.Translate.toString(transform)
     };
 
     // manage global state
     const {closedElements} = useSelector(state => state.metaState);
+
+    // auto-animate
+    const [parent] = useAutoAnimate();
 
     /**
      *
@@ -28,55 +31,29 @@ const MetaBox = ({index, box, view, setActiveTab}) => {
         return filter.length === 1;
     };
 
-    const boxClassName = () => {
-        if(view === 'list' || view === 'accordion'){
-            let css = 'bg-white b-rounded with-shadow';
-
-            if(view === 'list'){
-                css = css +' p-24';
-            }
-
-            return css;
-        }
-
-        return '';
-    };
-
     return (
         <div
             id={box.id}
-            className={boxClassName()}
-            ref={(view === 'list' || view === 'accordion') ? setNodeRef : null}
-            style={(view === 'list' || view === 'accordion') ? style : null}
+            className={`bg-white b-rounded ${isDragging ? "z-100 with-drop-shadow" : "with-shadow"}`}
+            ref={setNodeRef}
+            style={style}
         >
-            <div className={(view === 'tabular' || (!isClosed() && view === 'list')) ? 'mb-24' : ''}>
-                <MetaBoxHeader
-                    index={index}
-                    setActiveTab={setActiveTab}
-                    attributes={(view === 'list' || view === 'accordion') ? attributes : null}
-                    listeners={(view === 'list' || view === 'accordion') ? listeners : null}
-                    box={box}
-                    view={view}
-                />
-            </div>
-            {(view === 'list' || view === 'accordion') ? (
-                <div className={`${isClosed() ? 'hidden' : ''}`}>
+            <MetaBoxHeader
+                index={index}
+                setActiveTab={setActiveTab}
+                attributes={attributes }
+                listeners={listeners}
+                box={box}
+            />
+            <div ref={parent}>
+                {!isClosed() && (
                     <VerticalSortableMetaFields
                         boxIndex={index}
                         boxId={box.id}
                         fields={box.fields}
-                        view={view}
                     />
-                </div>
-            ) : (
-                <div>
-                    <HorizontalSortableMetaFields
-                        boxIndex={index}
-                        boxId={box.id}
-                        fields={box.fields}
-                    />
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };
@@ -85,10 +62,6 @@ MetaBox.propTypes = {
     index: PropTypes.number.isRequired,
     box: PropTypes.object.isRequired,
     setActiveTab: PropTypes.func,
-    view: PropTypes.oneOf([
-        "list",
-        "tabular"
-    ]).isRequired,
 };
 
 export default MetaBox;

@@ -75,6 +75,9 @@ class WidgetGenerator extends \Elementor\Widget_Base
             case MetaFieldModel::DATE_TYPE:
                 return 'eicon-date';
 
+            case MetaFieldModel::EMAIL_TYPE:
+                return 'eicon-mail';
+
             case MetaFieldModel::SELECT_TYPE:
                 return 'eicon-select';
 
@@ -125,6 +128,9 @@ class WidgetGenerator extends \Elementor\Widget_Base
 
         $contexts = $this->getContexts();
 
+	    // Group 1
+        // Group 2
+
         // Group 3
         if(in_array($this->boxFieldModel->getType(), $contexts['group3'])){
             $this->add_control(
@@ -150,6 +156,10 @@ class WidgetGenerator extends \Elementor\Widget_Base
             );
         }
 
+        // Group 4
+	    // Group 5
+	    // Group 6
+
 	    // Group 7
 	    if(in_array($this->boxFieldModel->getType(), $contexts['group7'])){
 		    $this->add_control(
@@ -167,6 +177,10 @@ class WidgetGenerator extends \Elementor\Widget_Base
 			    ]
 		    );
 	    }
+
+	    // Group 8
+	    // Group 9
+	    // Group 10
 
         $this->end_controls_section();
     }
@@ -188,8 +202,16 @@ class WidgetGenerator extends \Elementor\Widget_Base
     private function getContexts()
     {
     	return [
+		    'group1' => [],
+		    'group2' => [],
 		    'group3' => [MetaFieldModel::DATE_TYPE],
-		    'group7' => [MetaFieldModel::EMAIL_TYPE,],
+		    'group4' => [],
+		    'group5' => [],
+		    'group6' => [],
+		    'group7' => [MetaFieldModel::EMAIL_TYPE],
+		    'group8' => [],
+		    'group9' => [],
+		    'group10' => [],
 	    ];
     }
 }

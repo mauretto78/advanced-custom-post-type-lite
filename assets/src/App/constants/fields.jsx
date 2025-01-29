@@ -18,7 +18,7 @@ export const fieldTypes = {
     EMAIL: 'Email',
     SELECT: 'Select',
     TEXT: 'Text',
-    TEXTAREA: 'Textarea',
+    TEXTAREA: 'Textarea'
 };
 
 /**
@@ -33,7 +33,7 @@ export const fieldsList = (nestingLevel) => {
         return {label: useTranslation(label), value: fieldType};
     };
 
-    return [
+    let baseOptions = [
         {
             label: useTranslation("BASIC"),
             options: [
@@ -46,6 +46,8 @@ export const fieldsList = (nestingLevel) => {
         },
 
     ];
+
+    return baseOptions;
 };
 
 /**
@@ -57,5 +59,41 @@ export const fieldHasOptions = (fieldType) => {
 
     return (
         fieldType === fieldTypes.SELECT
+    );
+};
+
+/**
+ *
+ * @param fieldType
+ * @return {boolean}
+ */
+export const fieldIsRepeater = (fieldType) => {
+
+    return (
+        fieldType === fieldTypes.REPEATER
+    );
+};
+
+/**
+ *
+ * @param fieldType
+ * @return {boolean}
+ */
+export const fieldIsFlexible = (fieldType) => {
+
+    return (
+        fieldType === fieldTypes.FLEXIBLE
+    );
+};
+
+/**
+ *
+ * @param fieldType
+ * @return {boolean}
+ */
+export const fieldIsRelational = (fieldType) => {
+
+    return (
+        fieldType === fieldTypes.POST
     );
 };

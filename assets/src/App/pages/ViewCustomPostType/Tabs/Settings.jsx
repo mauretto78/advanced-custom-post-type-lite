@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import CardRow from "../../../components/Card/CardRow";
 import useTranslation from "../../../hooks/useTranslation";
 import Boolean from "../../../components/Boolean";
+import Card from "../../../components/Card";
 
 const Settings = ({data, isWPGraphQLActive = false}) => {
 
     if(data.length > 0){
         return (
-            <div className="with-border b-rounded">
+            <Card>
                 {isWPGraphQLActive && (
                     <React.Fragment>
                         <CardRow
@@ -43,7 +44,7 @@ const Settings = ({data, isWPGraphQLActive = false}) => {
                 />
                 <CardRow
                     label={useTranslation("Show in menu")}
-                    value={<Boolean status={data[0].settings.show_in_menu}/>}
+                    value={(typeof data[0].settings.show_in_menu === 'string') ? data[0].settings.show_in_menu : <Boolean status={data[0].settings.show_in_menu}/>}
                 />
                 <CardRow
                     label={useTranslation("Show in nav menus")}
@@ -89,7 +90,11 @@ const Settings = ({data, isWPGraphQLActive = false}) => {
                     label={useTranslation("Custom query var")}
                     value={data[0].settings.custom_query_var}
                 />
-            </div>
+                <CardRow
+                    label={useTranslation("Front URL prefix")}
+                    value={data[0].settings.front_url_prefix}
+                />
+            </Card>
         );
     }
 };

@@ -4,12 +4,13 @@ import CardRow from "../../../components/Card/CardRow";
 import useTranslation from "../../../hooks/useTranslation";
 import ElementIcon from "../../../components/ElementIcon";
 import Badge from "../../../components/Badge";
+import Card from "../../../components/Card";
 
 const Basic = ({data}) => {
 
     if(data.length > 0){
         return (
-            <div className="with-border b-rounded">
+            <Card>
                 <CardRow
                     label={useTranslation("Name")}
                     value={data[0].name}
@@ -36,7 +37,7 @@ const Basic = ({data}) => {
                         </div>
                     }
                 />
-            </div>
+            </Card>
         );
     }
 };

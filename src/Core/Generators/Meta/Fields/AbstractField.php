@@ -2,12 +2,12 @@
 
 namespace ACPT_Lite\Core\Generators\Meta\Fields;
 
+use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldOptionModel;
 use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Data\Sanitizer;
-use ACPT_Lite\Utils\PHP\Session;
 
 abstract class AbstractField
 {
@@ -17,11 +17,6 @@ abstract class AbstractField
 	 * @var MetaFieldModel
 	 */
 	protected MetaFieldModel $metaField;
-
-	/**
-	 * @var MetaFieldModel
-	 */
-	protected ?MetaFieldModel $parentMetaField = null;
 
 	/**
 	 * @var string
@@ -36,54 +31,49 @@ abstract class AbstractField
 	/**
 	 * @var
 	 */
-	protected $index = 0;
-
-	/**
-	 * @var
-	 */
 	protected $value;
 
-	/**
-	 * @var null
-	 */
-	protected $parentName;
+    /**
+     * @var null
+     */
+    protected $WooCommerceLoopIndex;
 
-	/**
-	 * @var int
-	 */
-	protected int $blockIndex;
-
-	/**
-	 * AbstractField constructor.
-	 *
-	 * @param MetaFieldModel $metaField
-	 * @param $belongsTo
-	 * @param $find
-	 * @param int $index
-	 * @param null $value
-	 * @param null $parentName
-	 * @param int $blockIndex
-	 *
-	 * @throws \Exception
-	 */
+    /**
+     * AbstractField constructor.
+     * @param MetaFieldModel $metaField
+     * @param $belongsTo
+     * @param $find
+     * @param null $value
+     */
 	public function __construct(
 		MetaFieldModel $metaField,
 		$belongsTo,
 		$find,
-		$index = 0,
-		$value = null,
-		$parentName = null,
-		$blockIndex = 0
+		$value = null
 	)
 	{
 		$this->metaField = $metaField;
 		$this->belongsTo = $belongsTo;
 		$this->find = $find;
 		$this->value = $value;
-		$this->parentName = $parentName;
-		$this->index = $index;
-		$this->blockIndex = $blockIndex;
 	}
+
+    /**
+     * @param mixed $value
+     */
+    public function setValue($value): void
+    {
+        $this->value = $value;
+    }
+
+    /**
+     * @param null $WooCommerceLoopIndex
+     */
+    public function setWooCommerceLoopIndex($WooCommerceLoopIndex): void
+    {
+        $this->WooCommerceLoopIndex = $WooCommerceLoopIndex;
+    }
+
 
 	/**
 	 * @return mixed
@@ -112,14 +102,6 @@ abstract class AbstractField
 	public function getFind(): string
 	{
 		return $this->find;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getIndex()
-	{
-		return $this->index;
 	}
 
 	/**
@@ -181,9 +163,27 @@ abstract class AbstractField
 	protected function getIdName()
 	{
 		$idName = '';
-		$idName .= Strings::toDBFormat($this->metaField->getBox()->getName()) . '_' . Strings::toDBFormat($this->metaField->getName());
+
+		// add prefix for OP fields
+		if($this->belongsTo === MetaTypes::OPTION_PAGE and $this->find !== null){
+			$idName .= Strings::toDBFormat($this->find)."_";
+		}
+
+		$idName .= Strings::toDBFormat($this->metaField->getBox()->getName()) . '_' . $this->metaField->getNormalizedName();
+
+		if($this->WooCommerceLoopIndex !== null){
+            $idName .= "_".$this->WooCommerceLoopIndex;
+        }
 
 		return esc_html($idName);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isVisible()
+	{
+		return true;
 	}
 
 	/**
@@ -197,11 +197,35 @@ abstract class AbstractField
 	}
 
 	/**
-	 * @return string
+	 * @return mixed|null
 	 */
-	protected function generateRandomId()
+	protected function getDefaultValue()
 	{
-		return 'id_'.rand(999999,111111);
+        if($this->value){
+            return $this->value;
+        }
+
+		$value = $this->getData($this->getIdName());
+
+		if($value !== null and $value !== ''){
+			return $value;
+		}
+
+		return $this->formatDefaultValue($this->metaField->getDefaultValue());
+	}
+
+	/**
+	 * @param $string
+	 *
+	 * @return mixed
+	 */
+	private function formatDefaultValue($string)
+	{
+		if(Strings::isJson($string)){
+			return json_decode($string, true);
+		}
+
+		return $string;
 	}
 
 	/**
@@ -247,11 +271,13 @@ abstract class AbstractField
 	{
 		$css = '';
 		$headlineAlignment = 'top';
+		$verticalAlignment = 'center';
 		$width = '100';
 		$widthStyle = $width.'%';
+		$isHidden = ($this->isVisible() === false) ? 'hidden' : '';
 
-		$return = '<div class="acpt-admin-meta-wrapper acpt-w-'.$width.' '.$css.'" data-id="'.$this->metaField->getId().'" id="'.$this->metaField->getId().'" style="width: '.$widthStyle.';">';
-		$return .= '<div class="acpt-admin-meta sort-'.esc_attr($this->getMetaField()->getSort()).'">';
+		$return = '<div class="acpt-admin-meta-wrapper '.$isHidden.' acpt-w-'.$width.' '.$css.'" data-id="'.$this->metaField->getId().'" id="'.$this->metaField->getId().'" style="width: '.$widthStyle.';">';
+		$return .= '<div class="acpt-admin-meta sort-'.esc_attr($this->getMetaField()->getSort()).'" style="align-items: '.$verticalAlignment.';">';
 
 		$return .= $this->renderFieldWrapper($field, $headlineAlignment);
 		$return .= '</div>';
@@ -284,7 +310,7 @@ abstract class AbstractField
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	private function renderFieldLabel()
 	{
@@ -312,70 +338,20 @@ abstract class AbstractField
 	private function renderFieldValue($field)
 	{
 		$return = '<div class="acpt-admin-meta-field">';
-		$return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'">';
-		$return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_type">';
-		$return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_id">';
-		$return .= '<input type="hidden" name="'.esc_html($this->getIdName()).'_id" value="'. esc_html($this->metaField->getId()) .'">';
-		$return .= '<input type="hidden" name="'.esc_attr($this->getIdName()).'_required" value="'.esc_attr($this->metaField->isRequired()) . '">';
-		$return .= Sanitizer::escapeField($field);
-		$return .= $this->renderErrors();
-		$return .= '</div>';
+        $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'">';
+        $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_type">';
+        $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_id">';
 
-		return $return;
+        $return .= '<input type="hidden" name="'.esc_html($this->getIdName()).'_id" value="'. esc_html($this->metaField->getId()) .'">';
+        $return .= '<input type="hidden" name="'.esc_attr($this->getIdName()).'_required" value="'.esc_attr($this->metaField->isRequired()) . '">';
+        $return .= Sanitizer::escapeField($field);
+        $return .= '</div>';
+
+        return $return;
 	}
 
-	/**
-	 * @return bool
-	 */
 	protected function hasErrors()
-	{
-		if(Session::has(self::ERRORS_SESSION_KEY)){
-			foreach (Session::get(self::ERRORS_SESSION_KEY) as $id => $errors){
-				if($id === $this->metaField->getId()){
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function renderErrors()
-	{
-		$id = 'acpt-error-list-'.$this->getIdName();
-		$errorsList = '<ul class="acpt-error-list" id="'.$id.'">';
-
-		if(Session::has(self::ERRORS_SESSION_KEY)){
-			foreach (Session::get(self::ERRORS_SESSION_KEY) as $id => $errors){
-				foreach ($errors as $error){
-					if($id === $this->metaField->getId()){
-						$errorsList .= '<li>'.$error.'</li>';
-					}
-				}
-			}
-
-			Session::flush(self::ERRORS_SESSION_KEY);
-		}
-
-		$errorsList .= '</ul>';
-
-		return $errorsList;
-	}
-
-	/**
-	 * @return mixed|null
-	 */
-	protected function getDefaultValue()
-	{
-		$value = $this->getData($this->getIdName());
-
-		if($value !== null and $value !== ''){
-			return $value;
-		}
-
-		return $this->metaField->getDefaultValue();
-	}
+    {
+        return false;
+    }
 }

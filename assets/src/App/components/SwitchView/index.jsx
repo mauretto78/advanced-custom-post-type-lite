@@ -11,15 +11,15 @@ const SwitchView = ({view, setView, localStorageKey, choices}) => {
     choices.map(c => {
         switch (c) {
             case "list":
-                buttons.push(<button data-cy="list-view" type="button" onClick={() => handleSwitchView('list')}><Icon icon="bx:list-ul" width={18} /></button>);
+                buttons.push(<button data-cy="list-view" data-view="list" type="button" onClick={() => handleSwitchView('list')}><Icon icon="bx:list-ul" width={18} /></button>);
                 break;
 
             case "accordion":
-                buttons.push(<button data-cy="accordion-view" type="button" onClick={() => handleSwitchView('accordion')}><Icon icon="nimbus:accordion" width={18} /></button>);
+                buttons.push(<button data-cy="accordion-view" data-view="accordion" type="button" onClick={() => handleSwitchView('accordion')}><Icon icon="nimbus:accordion" width={18} /></button>);
                 break;
 
             case "tabular":
-                buttons.push(<button data-cy="tabular-view" type="button" onClick={() => handleSwitchView('tabular')}><Icon icon="bx:table" width={18} /></button>);
+                buttons.push(<button data-cy="tabular-view" data-view="tabular" type="button" onClick={() => handleSwitchView('tabular')}><Icon icon="bx:table" width={18} /></button>);
                 break;
         }
     });
@@ -33,10 +33,10 @@ const SwitchView = ({view, setView, localStorageKey, choices}) => {
             case "list":
                 return 0;
 
-            case "accordion":
+            case "tabular":
                 return 1;
 
-            case "tabular":
+            case "accordion":
                 return 2;
         }
     };
@@ -56,7 +56,7 @@ const SwitchView = ({view, setView, localStorageKey, choices}) => {
 
     return (
         <ButtonGroup
-            activeBtn={getActivetBtn()}
+            activeBtn={view}
             buttons={buttons}
         />
     );
