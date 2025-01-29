@@ -31,6 +31,7 @@ const SaveCustomPostType = ({}) => {
     const [stepActive, setStepActive] = useState(step ? parseInt(step) : 0);
     const [formValues, setFormValues] = useState({});
     const [isWPGraphQLActive, setIsWPGraphQLActive] = useState(false);
+    const [title, setTitle] = useState(postType && formValues[1] ? useTranslation("Edit") + " " + formValues[1].singular_label : useTranslation("Create new Custom Post Type"));
 
     // manage redirect
     const navigate = useNavigate();
@@ -38,6 +39,13 @@ const SaveCustomPostType = ({}) => {
     if(postType === 'page' || postType === 'post'){
         navigate('/');
     }
+
+    useEffect(() => {
+        if(postType && formValues[1]){
+            setTitle(useTranslation("Edit") + " " + formValues[1].singular_label);
+        }
+
+    }, [formValues]);
 
     // is WPGraphQL active?
     useEffect(()=>{
@@ -53,7 +61,6 @@ const SaveCustomPostType = ({}) => {
 
     useEffect(() => {
         if(postType){
-            metaTitle(useTranslation("Edit Custom Post Type"));
             setEdit(true);
             dispatch(fetchCustomPostTypes({
                 postType:postType
@@ -83,7 +90,9 @@ const SaveCustomPostType = ({}) => {
                             },
                             2: res.payload[0].labels,
                             3: res.payload[0].settings,
-                        })
+                        });
+
+                        metaTitle(`${useTranslation("Edit")} ${res.payload[0].singular}`);
                     }
                 })
                 .catch(err => {
@@ -96,14 +105,13 @@ const SaveCustomPostType = ({}) => {
         }
     }, []);
 
-    const title = postType ? useTranslation("Edit Custom Post Type") : useTranslation("Create new Custom Post Type");
     const crumbs = [
         {
             label: useTranslation("Registered Custom Post Types"),
             link: "/"
         },
         {
-            label: postType ? useTranslation("Edit Custom Post Type") : useTranslation("Create new Custom Post Type")
+            label: title
         }
     ];
 

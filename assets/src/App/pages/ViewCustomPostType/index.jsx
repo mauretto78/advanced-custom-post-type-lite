@@ -55,6 +55,8 @@ const ViewCustomPostType = () => {
                 if(res.payload.length !== 1){
                     setFetchError(true);
                 }
+
+                metaTitle(`${res.payload[0].singular}: ${useTranslation("global settings")}`);
                 flushCookieMessages();
             })
             .catch(err => {
@@ -62,7 +64,6 @@ const ViewCustomPostType = () => {
                 console.error(err);
             })
         ;
-        metaTitle(useTranslation("Custom Post Type global settings"));
     }, [postType]);
 
     if(loading){
@@ -96,7 +97,7 @@ const ViewCustomPostType = () => {
                     link: "/"
                 },
                 {
-                    label: `${postType}: ${useTranslation("global settings")}`
+                    label: `${data.length > 0 ? data[0].singular : ""}: ${useTranslation("global settings")}`
                 }
             ]}
         >

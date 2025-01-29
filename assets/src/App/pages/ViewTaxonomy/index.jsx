@@ -41,6 +41,8 @@ const ViewTaxonomy = () => {
                 if(res.payload.length !== 1){
                     setFetchError(true);
                 }
+
+                metaTitle(`${res.payload[0].singular}: ${useTranslation("global settings")}`);
                 flushCookieMessages();
             })
             .catch(err => {
@@ -49,7 +51,6 @@ const ViewTaxonomy = () => {
             })
         ;
 
-        metaTitle(useTranslation("Taxonomy global settings"));
         changeCurrentAdminMenuLink('#/taxonomies');
     }, [taxonomy]);
 
@@ -84,7 +85,7 @@ const ViewTaxonomy = () => {
                     link: "/taxonomies"
                 },
                 {
-                    label: useTranslation("Taxonomy global settings")
+                    label: `${data.length > 0 ? data[0].singular : ""}: ${useTranslation("global settings")}`
                 }
             ]}
         >

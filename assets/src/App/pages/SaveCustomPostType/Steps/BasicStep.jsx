@@ -116,6 +116,17 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
         methods.setValue('post_name', sluggifyString(post_name, 20));
     };
 
+    const handleSingularLabelChange = (label) => {
+        if(formValues[1]){
+            setFormValues((f) => {
+                const fCopy = {...f};
+                fCopy[1].singular_label = label;
+
+                return fCopy;
+            });
+        }
+    };
+
     const onSubmit = (data) => {
         handleSubmit(data, 1);
 
@@ -186,6 +197,7 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
                                     register={methods.register}
                                     errors={methods.formState.errors}
                                     isRequired={true}
+                                    onChangeCapture={(e) => handleSingularLabelChange(e.currentTarget.value)}
                                     validate={{
                                         required: useTranslation("This field is mandatory")
                                     }}

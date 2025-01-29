@@ -29,6 +29,7 @@ const SaveTaxonomy = ({}) => {
     const [fetchError, setFetchError] = useState(false);
     const [stepActive, setStepActive] = useState(step ? parseInt(step) : 0);
     const [formValues, setFormValues] = useState({});
+    const [title, setTitle] = useState(taxonomy && formValues[1] ? useTranslation("Edit") + " " + formValues[1].singular_label : useTranslation("Create new Taxonomy"));
 
     // manage redirect
     const navigate = useNavigate();
@@ -38,8 +39,14 @@ const SaveTaxonomy = ({}) => {
     }
 
     useEffect(() => {
+        if(taxonomy && formValues[1]){
+            setTitle(useTranslation("Edit") + " " + formValues[1].singular_label);
+        }
+
+    }, [formValues]);
+
+    useEffect(() => {
         if(taxonomy){
-            metaTitle(useTranslation("Edit Taxonomy"));
             dispatch(fetchTaxonomies({
                 taxonomy:taxonomy
             }))
@@ -56,7 +63,9 @@ const SaveTaxonomy = ({}) => {
                             },
                             2: res.payload[0].labels,
                             3: res.payload[0].settings,
-                        })
+                        });
+
+                        metaTitle(`${useTranslation("Edit")} ${res.payload[0].singular}`);
                     }
 
                 })
@@ -74,14 +83,13 @@ const SaveTaxonomy = ({}) => {
         }
     }, []);
 
-    const title = taxonomy ? useTranslation("Edit Taxonomy") : useTranslation("Create new Taxonomy");
     const crumbs = [
         {
             label: useTranslation("Registered Taxonomies"),
             link: "/taxonomies"
         },
         {
-            label: taxonomy ? useTranslation("Edit Taxonomy") : useTranslation("Create new Taxonomy")
+            label: title
         }
     ];
 
