@@ -107,7 +107,7 @@ class ACPT_Lite_Ajax
 		// | NEW FORMAT    | get_option('acpt_lite_current_version')   |
 		// | ==========================================================|
 
-		$savedVersion = (!empty(get_option('acpt_lite_current_version'))) ? get_option('acpt_lite_current_version') : oldPluginVersion(get_option('acpt_lite_version', 0));
+		$savedVersion = (!empty(get_option('acpt_lite_current_version'))) ? get_option('acpt_lite_current_version') : oldACPTLitePluginVersion(get_option('acpt_lite_version', 0));
 		$versionCheck = ($savedVersion === ACPT_LITE_PLUGIN_VERSION) ? 'ok' : 'Saved version is not aligned';
 
 		// cache

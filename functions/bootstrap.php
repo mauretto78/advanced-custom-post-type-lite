@@ -11,7 +11,7 @@ use Phpfastcache\Core\Pool\ExtendedCacheItemPoolInterface;
  *
  * @return bool
  */
-function devMode()
+function devACPTLiteMode()
 {
     if(!is_plugin_active( 'query-monitor/query-monitor.php' )){
         return false;
@@ -29,7 +29,7 @@ function devMode()
  * @return ExtendedCacheItemPoolInterface
  * @throws \Exception
  */
-function cacheInstance()
+function cacheACPTLiteInstance()
 {
     $cacheDir = plugin_dir_path( __FILE__ ) . "/../cache";
 
@@ -48,7 +48,7 @@ function cacheInstance()
 /**
  * @return bool
  */
-function isCacheEnabled()
+function isACPTLiteCacheEnabled()
 {
     $query = "
             SELECT 
@@ -70,14 +70,14 @@ function isCacheEnabled()
 /**
  * Init the DB
  */
-function initDB()
+function initACPTLiteDB()
 {
     /**
      * Inject DB Cache
      */
     try {
-        if(isCacheEnabled()){
-            ACPT_Lite_DB::injectCache(cacheInstance());
+        if(isACPTLiteCacheEnabled()){
+            ACPT_Lite_DB::injectCache(cacheACPTLiteInstance());
         }
     } catch (\Exception $exception){
         // do nothing
@@ -91,7 +91,7 @@ function initDB()
  *
  * @return string
  */
-function oldPluginVersion($old_version)
+function oldACPTLitePluginVersion($old_version)
 {
     if(empty($old_version) or $old_version == 0){
         return null;
@@ -116,7 +116,7 @@ function oldPluginVersion($old_version)
 /**
  * Check for plugin upgrades
  */
-function checkForPluginUpgrades()
+function checkForACPTLitePluginUpgrades()
 {
     try {
         $old_version = (!empty(get_option('acpt_lite_current_version'))) ? get_option('acpt_lite_current_version') : get_option('acpt_lite_version', 0);
@@ -125,7 +125,7 @@ function checkForPluginUpgrades()
         if ($old_version != $current_version) {
 
             ACPT_Lite_DB::flushCache();
-            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_lite_current_version') ?? oldPluginVersion($old_version));
+            ACPT_Lite_DB::createSchema(ACPT_LITE_PLUGIN_VERSION, get_option('acpt_lite_current_version') ?? oldACPTLitePluginVersion($old_version));
             ACPT_Lite_DB::sync();
 
             update_option('acpt_lite_version', $current_version, false);

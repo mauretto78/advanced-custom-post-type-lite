@@ -16,7 +16,7 @@
  * Plugin Name:       ACPT Lite
  * Plugin URI:        https://wordpress.org/plugins/acpt-lite
  * Description:       Create and manage custom post types, with advanced custom fields and taxonomies management
- * Version:           2.0.9
+ * Version:           2.0.10
  * Author:            Mauro Cassani
  * Author URI:        https://github.com/mauretto78
  * License:           GPL-2.0+
@@ -58,9 +58,9 @@ if( !function_exists('is_plugin_active') ) {
  * plugin settings
  */
 define( 'ACPT_LITE_PLUGIN_NAME', 'acpt-lite' );
-define( 'ACPT_LITE_PLUGIN_VERSION', '2.0.9' );
+define( 'ACPT_LITE_PLUGIN_VERSION', '2.0.10' );
 define( 'ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
-define( 'ACPT_LITE_DEV_MODE', devMode() );
+define( 'ACPT_LITE_DEV_MODE', devACPTLiteMode() );
 
 /**
  * Inject DB Cache
@@ -69,7 +69,7 @@ try {
 	$isCacheEnabled = SettingsRepository::getSingle('enable_cache');
 
 	if($isCacheEnabled === null or $isCacheEnabled->getValue() == 1){
-		ACPT_Lite_DB::injectCache(cacheInstance());
+		ACPT_Lite_DB::injectCache(cacheACPTLiteInstance());
 	}
 } catch (\Exception $exception){
 	// do nothing
@@ -97,7 +97,7 @@ class ACPT_Lite
 register_activation_hook( __FILE__, [new ACPT_Lite(), 'activate'] );
 register_deactivation_hook( __FILE__, [new ACPT_Lite(), 'deactivate'] );
 
-checkForPluginUpgrades();
+checkForACPTLitePluginUpgrades();
 
 /**
  * APPSERO

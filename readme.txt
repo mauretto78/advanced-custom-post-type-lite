@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
 Requires at least: 5.1
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 2.0.9
+Stable tag: 2.0.10
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -190,6 +190,6 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 * Added get_acpt_field and get_acpt_meta_field_objects functions
 
-= 2.0.9 (2025-01-29) =
+= 2.0.10 (2025-01-30) =
 
 * Improvements and fixes from ACPT v2.0.20
