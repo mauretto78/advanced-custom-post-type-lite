@@ -551,6 +551,7 @@ class ACPT_Lite_Admin
 	    if ( 'acpt-lite/acpt-lite.php' === $plugin_file ) {
 	        $actionLinks['settings'] = '<a href="'.admin_url( 'admin.php?page='.ACPT_LITE_PLUGIN_NAME.'#/settings' ).'">'.Translator::translate('Settings').'</a>';
 		    $actionLinks['documentation'] = '<a target="_blank" href="https://docs.acpt.io/">'.Translator::translate('Documentation').'</a>';
+		    $actionLinks['pro'] = '<a style="color: #F94144; font-weight:bold" target="_blank" href="https://acpt.io/checkout">'.Translator::translate('Upgrade to PRO').'</a>';
 	    }
 
 	    return array_merge($actionLinks, $actions);
