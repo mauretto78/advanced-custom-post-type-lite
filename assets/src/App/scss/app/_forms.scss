@@ -1,6 +1,29 @@
+@use "variables";
+
+.search-input {
+  position: relative;
+  width: variables.$space-60 * 5 + variables.$space-24;
+
+  .form-control,
+  .form-control.sm,
+  .form-control.xs {
+    padding-left: variables.$space-36 - variables.$space-4 !important;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: variables.$space-8 + variables.$space-2;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: variables.$primary-color;
+    display: flex;
+  }
+}
+
 .form-group {
   display: flex;
-  gap: $space-8;
+  gap: variables.$space-8;
   flex-direction: column;
 
   &.inline {
@@ -9,10 +32,19 @@
 }
 
 .form-label {
-  color: $black;
+  color: variables.$black;
   display: block;
-  margin-bottom: $space-8;
+  margin-bottom: variables.$space-8;
   font-weight: bold;
+  text-wrap: auto;
+
+  &.sm {
+    font-size: variables.$small-font-size;
+  }
+
+  &.xs {
+    font-size: variables.$xs-font-size;
+  }
 }
 
 input[type=number].form-control {
@@ -31,7 +63,6 @@ select.muted {
   padding: 0;
   margin: 0;
   width: 100%;
-  text-align: center;
   border: none;
   outline: none;
   box-shadow: none;
@@ -39,8 +70,13 @@ select.muted {
   -moz-appearance: none;
   appearance: none;
   background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23dddddd" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+  background-position: right variables.$space-14 center;
+  background-image: variables.$select-caret;
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
+    background-image: variables.$select-caret-hover;
+  }
 
   &:disabled:hover,
   &:disabled:focus,
@@ -57,21 +93,48 @@ select.form-control {
 
   &:not([multiple]){
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: right variables.$space-8 + variables.$space-2 center;
     background-size: auto;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23dddddd" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
-    color: $gray;
-    padding-right: 48px !important;
+    background-image: variables.$select-caret;
+    // Live/interactive selects use normal text color — muted gray is reserved
+    // for a genuinely disabled control below, so an active dropdown with a
+    // real value no longer reads as inert/disabled at all times.
+    color: variables.$black;
+    padding-right: variables.$space-48 !important;
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      background-image: variables.$select-caret-hover;
+    }
+  }
+
+  &:disabled {
+    color: variables.$gray;
+    opacity: .6;
+    cursor: not-allowed;
+  }
+
+  // Size variants: shrink caret + reclaim right padding as much as possible
+  &.sm:not([multiple]) {
+    background-position: right variables.$space-8 center;
+    background-size: 16px 16px; // smaller arrow
+    padding-right: variables.$space-36 !important; // reduced from 48px
+  }
+
+  &.xs:not([multiple]) {
+    background-position: right variables.$space-6 center;
+    background-size: 14px 14px; // even smaller arrow
+    padding-right: variables.$space-24 + variables.$space-8 !important; // as tight as possible while keeping room
   }
 
   optgroup {
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: $light-gray;
+    color: variables.$light-gray;
 
     option {
-      background: $white;
-      color: $gray;
+      background: variables.$white;
+      color: variables.$gray;
     }
   }
 }
@@ -80,101 +143,164 @@ select.form-control {
   position: relative;
   display: flex;
   align-items: center;
-  gap: $space-12;
-  border: $border-thickness solid $light-gray;
-  border-radius: $border-radius;
-  width: 100%;
-  max-width: 100%;
-  min-height: 46px;
+  width: auto;
   overflow: hidden;
 
-  input {
+  .acpt-color-picker-label {
+    border: variables.$border-thickness solid variables.$light-gray;
+    border-radius: variables.$border-radius 0 0 variables.$border-radius;
+    height: variables.$space-36 - variables.$space-2 - variables.$border-thickness;
     padding: 0;
     margin: 0;
-    border: none;
     cursor: pointer;
+    width: variables.$space-36 + variables.$space-6;
+  }
 
-    &:hover,
-    &:focus {
-      border: none;
-      box-shadow: none;
-      outline: none;
-    }
+  input {
+    height: variables.$space-36 + variables.$space-6;
+    opacity: 0;
+  }
 
-    &::-webkit-color-swatch-wrapper {
-      padding: 0;
-      border: none;
-      height: 100%;
-      min-height: 46px;
-    }
-
-    &::-webkit-color-swatch {
-      border: none;
-      height: 100%;
-      min-height: 46px;
-    }
+  .color-value {
+    border: variables.$border-thickness solid variables.$light-gray;
+    border-left: none;
+    border-radius: 0 variables.$border-radius variables.$border-radius 0;
+    padding: variables.$space-8 - variables.$border-thickness variables.$space-14;
+    height: variables.$space-18 + variables.$border-thickness;
+    width: variables.$space-60 + variables.$space-4 + variables.$border-thickness;
   }
 }
 
 .acpt-select {
   position: relative;
+  max-height: 56px;
+
+  &.disabled:after {
+    opacity: .5;
+    cursor: not-allowed;
+  }
 
   &:not(.is-multi){
+
     &:after {
       content: "";
       position: absolute;
-      right: 44px;
+      right: variables.$space-48 - variables.$space-4;
       top: 0;
       width: 1px;
       bottom: 0;
-      background: $light-gray;
+      background: variables.$light-gray;
+    }
+
+    // :has(select:hover) is the authoritative signal — native <select>
+    // elements don't reliably bubble :hover to ancestors in every browser
+    // (WebKit replaced-element quirk); plain &:hover is kept alongside it
+    // as a harmless belt-and-suspenders fallback.
+    &:not(.disabled):hover,
+    &:not(.disabled):has(select:hover),
+    &:not(.disabled):focus-within {
+      &:after {
+        background: variables.$gray;
+      }
+    }
+
+    // Keep divider aligned with the reduced right padding on small selects
+    &.sm:after {
+      right: variables.$space-24 + variables.$space-8;
+      bottom: 0;
+    }
+
+    &.xs:after {
+      right: variables.$space-24 + variables.$space-4;
+      bottom: 0;
     }
   }
 }
 
+.field-with-errors {
+  .form-control {
+    border: variables.$border-thickness solid variables.$danger-color !important;
+  }
+
+  .form-label {
+    color: variables.$danger-color !important;
+  }
+}
+
 .form-control {
-  padding: 7px 14px !important;
-  border: $border-thickness solid $light-gray;
-  border-radius: $border-radius;
+  padding: variables.$space-8 - variables.$border-thickness variables.$space-14 !important;
+  border: variables.$border-thickness solid variables.$light-gray;
+  border-radius: variables.$border-radius;
   width: 100%;
   max-width: 100%;
-  min-height: 46px;
-  color: $gray;
+  min-height: 56px;
+  color: variables.$gray;
+  background-color: variables.$white;
+
+  &.w-auto {
+    width: auto;
+  }
+
+  &.w-full-mobile {
+    @media screen and (max-width: 960px){
+      width: 100% !important;
+    }
+  }
+
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    background-color: variables.$white;
+    border-color: variables.$light-gray;
+    text-shadow: none;
+  }
 
   &[type=file]::file-selector-button {
-    margin-right: $space-8;
+    margin-right: variables.$space-8;
     border: none;
-    background: $light-gray;
-    padding: 7px 14px;
-    border-radius: $border-radius;
-    color: $gray;
+    background: variables.$light-gray;
+    padding: variables.$space-8 - variables.$border-thickness variables.$space-14;
+    border-radius: variables.$border-radius;
+    color: variables.$gray;
     cursor: pointer;
     transition: background .2s ease-in-out;
   }
 
   &[type=file]::file-selector-button:hover {
-    color: $gray;
-    background: darken($light-gray, 8%);
+    color: variables.$gray;
+    background: var(--acpt-darken-light-gray);
   }
 
   &.sm {
+    min-height: variables.$space-36 + variables.$space-6;
+    font-size: variables.$small-font-size;
+    padding: 5px 10px !important;
+  }
+
+  &.xs {
     min-height: 40px;
-    padding: 5px 10px;
+    font-size: variables.$xs-font-size;
+    padding: 4px 8px !important;
   }
 
   &.readonly,
   &[readonly] {
-    background: $pale-gray;
+    color: variables.$medium-gray;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    border: variables.$border-thickness solid variables.$gray;
   }
 
   &:focus {
     outline: none;
     box-shadow: none;
-    border: $border-thickness solid $primary-color;
+    border: variables.$border-thickness solid variables.$primary-color;
   }
 
   &.has-errors {
-    border: $border-thickness solid $danger-color !important;
+    border: variables.$border-thickness solid variables.$danger-color !important;
   }
 
   &:disabled:hover,
@@ -185,15 +311,15 @@ select.form-control {
   }
 
   &::-webkit-input-placeholder {
-    color: $light-gray;
+    color: variables.$medium-gray;
   }
 
   &:-ms-input-placeholder {
-    color: $light-gray;
+    color: variables.$medium-gray;
   }
 
   &::placeholder {
-    color: $light-gray;
+    color: variables.$medium-gray;
   }
 }
 
@@ -213,21 +339,21 @@ select.form-control {
   span {
     display: inline-flex;
     align-items: center;
-    gap: $space-8;
+    gap: variables.$space-8;
     cursor: pointer;
-    background: $white;
-    border-radius: $border-radius;
+    background: variables.$white;
+    border-radius: variables.$border-radius;
 
     &:before {
       content: '';
-      border: 2px solid $light-gray;
-      width: $space-18;
-      height: $space-18;
-      border-radius: $border-radius;
+      border: 2px solid variables.$light-gray;
+      width: variables.$space-18;
+      height: variables.$space-18;
+      border-radius: variables.$border-radius;
     }
 
     &:after {
-      border: solid $white;
+      border: solid variables.$primary-color-white;
       border-width: 0 2px 2px 0;
       content: "";
       height: 8px;
@@ -240,12 +366,17 @@ select.form-control {
     }
   }
 
-  input:checked + span::before {
-    border: 2px solid $primary-color;
-    background: $primary-color;
+  // `~` (general sibling), not `+` (adjacent sibling): some callers (e.g. the
+  // Permissions matrix, for its own accessible-name fix) render a second,
+  // visually-hidden `screen-reader-text` span between the input and this
+  // visible indicator span. `+` would only ever match that hidden span,
+  // leaving the real indicator never reflecting :checked at all.
+  input:checked ~ span::before {
+    border: 2px solid variables.$primary-color;
+    background: variables.$primary-color;
   }
 
-  input:checked + span::after {
+  input:checked ~ span::after {
     opacity: 1;
   }
 }
@@ -262,14 +393,14 @@ select.form-control {
   span {
     display: inline-flex;
     align-items: center;
-    gap: $space-8;
+    gap: variables.$space-8;
     cursor: pointer;
 
     &:before {
       content: '';
-      border: $border-thickness solid $light-gray;
-      width: $space-18;
-      height: $space-18;
+      border: variables.$border-thickness solid variables.$light-gray;
+      width: variables.$space-18;
+      height: variables.$space-18;
       border-radius: 100%;
     }
 
@@ -278,7 +409,7 @@ select.form-control {
       position: absolute;
       left: 5px;
       top: 5px;
-      background: $primary-color;
+      background: variables.$primary-color;
       border-radius: 100%;
       width: 10px;
       height: 10px;
@@ -287,7 +418,7 @@ select.form-control {
   }
 
   input:checked + span::before {
-    border: 1px solid $primary-color;
+    border: 1px solid variables.$primary-color;
   }
 
   input:checked + span::after {
@@ -296,18 +427,61 @@ select.form-control {
 }
 
 .invalid-feedback {
-  margin-top: $space-4;
-  color: $danger-color;
+  margin-top: variables.$space-4;
+  color: variables.$danger-color;
 }
 
 .form-description {
-  margin-top: $space-8;
+  margin-top: variables.$space-8;
 }
 
 .toggle-group {
   display: flex;
   align-items: center;
-  gap: $space-8;
+  gap: variables.$space-8;
+
+  &.disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  &.sm {
+    .toggle {
+      height: 22px;
+      width: 38px;
+
+      input:checked + .slider:before {
+        transform: translateX(16px);
+        left: 3px;
+      }
+
+      .slider:before {
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+      }
+    }
+  }
+
+  &.xs {
+    .toggle {
+      height: 18px;
+      width: 32px;
+
+      input:checked + .slider:before {
+        transform: translateX(14px);
+        left: 3px;
+      }
+
+      .slider:before {
+        height: 12px;
+        width: 12px;
+        left: 3px;
+        bottom: 3px;
+      }
+    }
+  }
 
   .toggle {
     display: inline-block;
@@ -330,11 +504,11 @@ select.form-control {
       }
 
       &:checked + .slider {
-        background-color: $primary-color;
+        background-color: variables.$primary-color;
       }
 
       &:focus + .slider {
-        box-shadow: 0 0 1px $primary-color;
+        box-shadow: 0 0 1px variables.$primary-color;
       }
 
       &:checked + .slider:before {
@@ -352,7 +526,7 @@ select.form-control {
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: $light-gray;
+      background-color: variables.$light-gray;
       -webkit-transition: .4s;
       transition: .4s;
 
@@ -371,7 +545,7 @@ select.form-control {
         width: 22px;
         left: 4px;
         bottom: 4px;
-        background-color: $white;
+        background-color: variables.$white;
         -webkit-transition: .4s;
         transition: .4s;
       }
@@ -388,14 +562,14 @@ select.form-control {
   position: relative;
 
   .placeholder {
-    background: $white;
+    background: variables.$white;
     cursor: pointer;
-    border: $border-thickness solid $light-gray;
-    border-radius: $border-radius;
+    border: variables.$border-thickness solid variables.$light-gray;
+    border-radius: variables.$border-radius;
     width: 100%;
     max-width: 100%;
-    min-height: 46px;
-    color: $gray;
+    min-height: variables.$space-56 - variables.$space-2;
+    color: variables.$gray;
     display: flex;
     align-items: center;
 
@@ -403,7 +577,7 @@ select.form-control {
     &.disabled:focus,
     &.disabled {
       z-index: -1;
-      background: $pale-gray;
+      background: variables.$pale-gray;
       opacity: .5;
       cursor: not-allowed;
 
@@ -412,40 +586,53 @@ select.form-control {
       }
     }
 
-    &:focus {
-      outline: none;
-      box-shadow: none;
-      border: $border-thickness solid $primary-color;
+    &:not(.disabled):hover {
+      border: variables.$border-thickness solid variables.$gray;
+
+      .divider {
+        background: variables.$gray;
+      }
+    }
+
+    &:not(.disabled):focus {
+      outline: 2px solid variables.$primary-color !important;
+      outline-offset: 2px !important;
+      border: variables.$border-thickness solid variables.$primary-color;
     }
 
     &.has-errors {
-      border: $border-thickness solid $danger-color !important;
+      border: variables.$border-thickness solid variables.$danger-color !important;
     }
 
     .items {
       align-items: center;
-      padding: 7px 14px;
+      padding: variables.$space-8 - variables.$border-thickness variables.$space-14;
       display: flex;
       flex-wrap: wrap;
-      gap: $space-8;
+      gap: variables.$space-8;
       width: 100%;
 
       .item {
         align-items: center;
-        border-radius: $border-radius;
-        background: $pale-gray;
+        border-radius: variables.$border-radius;
+        background: variables.$pale-gray;
         padding: 6px 10px;
         display: flex;
-        gap: $space-8;
+        gap: variables.$space-8;
+
+        .label {
+          font-weight: normal;
+          width: auto;
+        }
 
         .close-item {
           display: flex;
           justify-content: center;
           align-items: center;
-          font-size: $h3-font-size;
-          color: $gray;
+          font-size: variables.$h3-font-size;
+          color: variables.$gray;
           outline: none;
-          background: $white;
+          background: variables.$white;
           border-radius: 100%;
           padding: 3px;
           width: 14px;
@@ -453,56 +640,99 @@ select.form-control {
 
           &:hover,
           &:focus {
-            color: darken($gray, 8%);
+            color: var(--acpt-darken-gray);
           }
         }
       }
     }
 
+    &.sm {
+      font-size: variables.$small-font-size;
+
+      .items {
+        padding: 6px 12px;
+      }
+
+      .caret {
+        background-position: center;
+        background-size: 14px 14px;
+        padding: 6px;
+      }
+    }
+
+    &.xs {
+      font-size: variables.$xs-font-size;
+
+      .items {
+        padding: 4px 8px;
+      }
+
+      .caret {
+        background-position: center;
+        background-size: 14px 14px;
+        padding: 4px;
+      }
+    }
+
     .close {
-      padding: 7px 14px;
-      font-size: $h3-font-size;
-      color: $gray;
+      padding: variables.$space-8 - variables.$border-thickness variables.$space-14;
+      font-size: variables.$h3-font-size;
+      color: variables.$gray;
       outline: none;
 
       &:hover,
       &:focus {
-        color: darken($gray, 8%);
+        color: var(--acpt-darken-gray);
       }
     }
 
     .divider {
       align-self: stretch;
-      width: $border-thickness;
-      background: $light-gray;
+      width: variables.$border-thickness;
+      background: variables.$light-gray;
+    }
+
+    &:not(.disabled):hover .divider,
+    &:not(.disabled):focus .divider {
+      background: variables.$gray;
     }
 
     .caret {
-      padding: 7px 14px;
+      padding: variables.$space-8 - variables.$border-thickness variables.$space-10;
       background-repeat: no-repeat;
-      background-position: right 14px center;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23dddddd" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
-      color: $gray;
+      background-position: center;
+      background-image: variables.$select-caret;
+      color: variables.$gray;
       width: 28px;
       height: 18px;
+    }
+
+    &:not(.disabled):hover .caret,
+    &:not(.disabled):focus .caret {
+      background-image: variables.$select-caret-hover;
     }
   }
 
   .select-items {
-    top: calc(100% + #{$space-8});
+    top: calc(100% + #{variables.$space-8});
     left: 0;
     right: 0;
     width: 100%;
     z-index: 100;
     position: absolute;
-    background: $white;
-    box-shadow: $box-shadow;
-    border-radius: $border-radius;
+    background: variables.$white;
+    box-shadow: variables.$box-shadow;
+    border-radius: variables.$border-radius;
     margin: 0;
 
     .search-box {
       padding: 14px;
-      border-bottom: $border-thickness solid $light-gray;
+      border-bottom: variables.$border-thickness solid variables.$light-gray;
+    }
+
+    .select-all {
+      border-top: variables.$border-thickness solid variables.$light-gray;
+      padding: 14px;
     }
 
     .select-items-list {
@@ -513,15 +743,16 @@ select.form-control {
       list-style: none;
 
       li {
-        padding: 7px 14px;
+        padding: variables.$space-8 - variables.$border-thickness variables.$space-14;
+        margin: 0;
         cursor: pointer;
 
         &:hover {
-          background: $pale-gray;
+          background: variables.$pale-gray;
         }
 
         &.optgroup {
-          color: $light-gray;
+          color: variables.$light-gray;
           cursor: default;
           text-transform: uppercase;
           letter-spacing: 1px;
@@ -535,4 +766,154 @@ select.form-control {
   }
 }
 
+.display-mode-selector {
+  display: flex;
+  border-radius: variables.$border-radius;
+  gap: variables.$space-12;
+  flex-wrap: wrap;
 
+  .mode-option {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: variables.$space-12;
+    align-items: center;
+    justify-content: center;
+    border-radius: variables.$border-radius;
+    border: variables.$border-thickness solid variables.$light-gray;
+    cursor: pointer;
+    padding: variables.$space-24;
+    transition: all 0.2s ease;
+    color: variables.$gray;
+    width: 120px;
+
+    input {
+      display: none;
+    }
+
+    &:hover {
+      background-color: variables.$pale-gray;
+    }
+
+    &.active {
+      border: variables.$border-thickness solid variables.$primary-color;
+      color: variables.$primary-color;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &.has-errors {
+    border: variables.$border-thickness solid variables.$danger-color;
+  }
+
+  .micon {
+    width: 56px;
+    height: 40px;
+    border: variables.$border-thickness solid variables.$light-gray;
+    border-radius: variables.$border-radius;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .mi-left {
+      width: 14px;
+      background: variables.$light-gray;
+      border-right: variables.$border-thickness solid variables.$light-gray;
+      display: flex;
+      flex-direction: column;
+      padding: 3px 2px;
+      gap: 2px;
+    }
+
+    .mi-body {
+      flex: 1;
+      padding: 3px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .mi-row {
+      height: 3px;
+      background: variables.$light-gray;
+      border-radius: 1px;
+    }
+
+    .mi-vtab {
+      height: 5px;
+      background: variables.$pale-gray;
+      border-radius: variables.$border-thickness;
+
+      &.a {
+        background: variables.$primary-color;
+      }
+    }
+
+    .mi-top {
+      height: 11px;
+      background: variables.$pale-gray;
+      border-right: variables.$border-thickness solid variables.$light-gray;
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+      gap: 3px;
+    }
+
+    .mi-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: variables.$light-gray;
+    }
+
+    .mi-htabs {
+      height: 11px;
+      background: variables.$pale-gray;
+      border-bottom: variables.$border-thickness solid variables.$light-gray;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 3px;
+      gap: 2px;
+    }
+
+    .mi-htab {
+      height: 8px;
+      width: 13px;
+      background: variables.$light-gray;
+      border-radius: 2px 2px 0 0;
+
+      &.a {
+        background: variables.$primary-color;
+      }
+    }
+
+    &.accordion {
+      gap: 2px;
+      padding: 4px;
+
+      .mi-acc {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .mi-acc-head {
+          height: 6px;
+          background: variables.$pale-gray;
+          border-radius: variables.$border-thickness;
+
+          &.a {
+            background: variables.$primary-color;
+          }
+        }
+
+        .mi-body {
+          padding: 2px 4px;
+        }
+      }
+    }
+  }
+}

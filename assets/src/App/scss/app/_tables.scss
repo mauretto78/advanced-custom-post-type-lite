@@ -1,13 +1,29 @@
+@use "variables";
+
 .acpt-table {
-  background: #fff;
+  background: variables.$white;
   width: 100%;
-  border-radius: $border-radius;
+  border: variables.$border-thickness solid variables.$light-gray;
+  border-radius: variables.$border-radius;
   border-spacing: 0;
 
+  &.rounded {
+    thead > tr > th:first-child {
+      border-top-left-radius: variables.$border-radius;
+    }
+
+    thead > tr > th:last-child {
+      border-top-right-radius: variables.$border-radius;
+    }
+  }
+
   &.spaceless {
+    border: none;
+
     th,
     td {
-      padding: $space-24 0;
+      padding: variables.$space-24 0;
+      background: transparent;
     }
 
     tr:first-child > th,
@@ -36,15 +52,14 @@
   th,
   td {
     white-space: nowrap;
-    padding: $space-24;
-    border-bottom: $border-thickness solid $light-gray;
+    padding: variables.$space-24;
+    border-bottom: variables.$border-thickness solid variables.$light-gray;
   }
 
   th {
     text-align: left;
-    color: $primary-color;
-    background: $secondary-color;
-    border-color: $secondary-color;
+    color: variables.$black;
+    background: variables.$pale-gray;
     font-weight: bold;
   }
 
@@ -53,6 +68,26 @@
   }
 
   tfoot > tr > td {
-    border-top: $border-thickness solid $light-gray;
+    border-top: variables.$border-thickness solid variables.$light-gray;
+  }
+
+  .all-white {
+    th, td {
+      background: transparent;
+      border-color: variables.$light-gray;
+    }
+  }
+
+  &.no-style {
+    padding: 0;
+    margin: 0;
+
+    tr, th, td {
+      padding: 0;
+      margin: 0;
+      border:none;
+    }
   }
 }
+
+

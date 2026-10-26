@@ -19,8 +19,12 @@ const initialState = {
  */
 export const saveWooCommerceProductDataFields = createAsyncThunk(
     "wc/product-data/fields/save",
-    async (data) => {
-        return await wpAjaxRequest("saveWooCommerceProductDataFieldsAction", data);
+    async (data, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("saveWooCommerceProductDataFieldsAction", data);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const saveWooCommerceProductDataFieldsSlice = createSlice({
     name: 'wc/product-data/fields/save',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [saveWooCommerceProductDataFields.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [saveWooCommerceProductDataFields.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(saveWooCommerceProductDataFields.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(saveWooCommerceProductDataFields.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [saveWooCommerceProductDataFields.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(saveWooCommerceProductDataFields.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

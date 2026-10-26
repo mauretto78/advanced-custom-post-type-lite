@@ -1,21 +1,14 @@
 {
   "exclude": [
-    ".phpunit.result.cache",
-    "roadmap.md",
-    "README.md",
+    ".gitignore",
     "appsero.json",
     "composer.json",
     "composer.lock",
     "package.json",
-    "package-lock.json",
-    ".gitignore",
-    "assets/src",
-    "yarn.lock",
-    "fix_vite_assets.php",
+    "pnpm-lock.yaml",
     "vite.config.js",
-    "yarn-error.log",
-    "node_modules",
-    "tests",
-    "cache"
+    "README.md",
+    "assets/src",
+    "node_modules"
   ]
 }

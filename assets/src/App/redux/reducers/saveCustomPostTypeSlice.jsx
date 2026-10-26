@@ -19,8 +19,12 @@ const initialState = {
  */
 export const saveCustomPostType = createAsyncThunk(
     "custom-post-type/save",
-    async (data) => {
-        return await wpAjaxRequest("saveCustomPostTypeAction", data);
+    async (data, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("saveCustomPostTypeAction", data);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const saveCustomPostTypeSlice = createSlice({
     name: 'custom-post-type/save',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [saveCustomPostType.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [saveCustomPostType.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(saveCustomPostType.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(saveCustomPostType.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [saveCustomPostType.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(saveCustomPostType.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

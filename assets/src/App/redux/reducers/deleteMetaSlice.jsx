@@ -19,8 +19,12 @@ const initialState = {
  */
 export const deleteMeta = createAsyncThunk(
     "meta/delete",
-    async (id) => {
-        return await wpAjaxRequest("deleteMetaAction", {id:id});
+    async (id, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("deleteMetaAction", {id:id});
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const deleteMetaSlice = createSlice({
     name: 'custom-post-type/delete',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [deleteMeta.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [deleteMeta.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(deleteMeta.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(deleteMeta.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [deleteMeta.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(deleteMeta.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

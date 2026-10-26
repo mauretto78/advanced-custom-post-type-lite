@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {assocTaxonomyToPostType} from "../../redux/reducers/assocTaxonomyToPostTypeSlice";
 import {toast} from "react-hot-toast";
 import useTranslation from "../../hooks/useTranslation";
+import {taxonomyProps} from "../../props/cptTaxonomyProps.js";
 
 const AssocTaxonomyToCustomPostTypeElement = ({record, postType, defaultChecked}) => {
 
@@ -22,7 +23,7 @@ const AssocTaxonomyToCustomPostTypeElement = ({record, postType, defaultChecked}
                 }
 
                 if(payload.error){
-                    toast.error(error);
+                    toast.error(payload.error);
                 }
             })
             .catch(err => console.error(err))
@@ -45,9 +46,10 @@ const AssocTaxonomyToCustomPostTypeElement = ({record, postType, defaultChecked}
             </td>
             <td>
                 <label
-                    data-cy={`assoc-${record.slug}-to-${postType}`}
+                    data-testid={`assoc-${record.slug}-to-${postType}`}
                     className="checkbox"
                     htmlFor={record.id}
+                    aria-label={`${useTranslation("Select")} ${record.slug}`}
                 >
                     <input
                         id={record.id}
@@ -67,7 +69,7 @@ const AssocTaxonomyToCustomPostTypeElement = ({record, postType, defaultChecked}
 
 AssocTaxonomyToCustomPostTypeElement.propTypes = {
     postType: PropTypes.string.isRequired,
-    record: PropTypes.object.isRequired,
+    record: PropTypes.shape(taxonomyProps).isRequired,
     defaultChecked: PropTypes.bool.isRequired,
 };
 

@@ -294,7 +294,6 @@ msgid "Copy this block to another meta field"
 msgstr "Copiar este bloque a otro metacampo"
 
 #, fuzzy
-#| msgid "Copy the meta box"
 msgid "Copy this meta box"
 msgstr "Copiar el meta box"
 
@@ -357,7 +356,6 @@ msgid "Custom post type successfully deleted."
 msgstr "El tipo de post personalizado se eliminó correctamente."
 
 #, fuzzy
-#| msgid "Custom post type successfully saved"
 msgid "Custom post type successfully saved."
 msgstr "El tipo de post personalizado se guardó correctamente."
 
@@ -365,12 +363,11 @@ msgid "Custom post type was associated to selected taxonomies"
 msgstr "El tipo de post personalizado se asoció a las taxonomías seleccionadas"
 
 #, fuzzy
-#| msgid "Custom post types"
 msgid "Custom post type"
 msgstr "Tipos de post personalizados"
 
 msgid "Custom post types"
-msgstr "Tipos de post personalizados"
+msgstr ""
 
 msgid "Custom query var"
 msgstr "Variable de query personalizada"
@@ -441,10 +438,8 @@ msgstr "Eliminar otros posts"
 msgid "Delete pages"
 msgstr "Eliminar páginas"
 
-#, fuzzy
-#| msgid "Delete others posts"
 msgid "Delete posts"
-msgstr "Eliminar otros posts"
+msgstr ""
 
 msgid "Delete post metadata when deleting ACPT fields"
 msgstr "Al eliminar campos ACPT, eliminas los metadatos del post"
@@ -569,10 +564,8 @@ msgstr "Editar otros posts"
 msgid "Edit pages"
 msgstr "Editar páginas"
 
-#, fuzzy
-#| msgid "Edit others posts"
 msgid "Edit posts"
-msgstr "Editar otros posts"
+msgstr ""
 
 msgid "Edit private pages"
 msgstr "Editar páginas privadas"
@@ -643,6 +636,9 @@ msgstr "Exportar tipos de post personalizados"
 msgid "Export data"
 msgstr "Exportar datos"
 
+msgid "Export settings"
+msgstr "Exportar ajustes"
+
 msgid "Export selected elements"
 msgstr "Exportar elementos seleccionados"
 
@@ -665,10 +661,8 @@ msgstr "Columnas de campo ([1-6] solo para el campo repetidor)"
 msgid "Field label"
 msgstr "Etiqueta de campo"
 
-#, fuzzy
-#| msgid "Field label"
 msgid "Field name"
-msgstr "Etiqueta de campo"
+msgstr ""
 
 msgid "Field name cannot be blank"
 msgstr "El nombre del campo no puede estar vacío"
@@ -680,7 +674,6 @@ msgid "Field required"
 msgstr "Campo obligatorio"
 
 #, fuzzy
-#| msgid "Fields"
 msgid "Field slug"
 msgstr "Campos"
 
@@ -700,7 +693,7 @@ msgid "Field width in % ([1-100] default value: 100)"
 msgstr "Ancho del campo en % ([1-100] valor predeterminado: 100)"
 
 msgid "Fields"
-msgstr "Campos"
+msgstr ""
 
 msgid "Fields count"
 msgstr "Recuento de campos"
@@ -727,12 +720,9 @@ msgid "Format"
 msgstr "Formato"
 
 msgid ""
-"From this dashboard you can discover and manage every API endpoints exposed "
-"by ACPT. Use the playground to learn how to use every endpoint."
+"Discover, manage and test every REST endpoint exposed by ACPT via live "
+"Swagger UI."
 msgstr ""
-"Desde este panel de control puedes descubrir y administrar todos los puntos "
-"finales de la API expuestos por ACPT. Usa el playground para aprender a usar "
-"cada punto final."
 
 msgid "Fullscreen mode"
 msgstr "Modo de pantalla completa"
@@ -785,15 +775,11 @@ msgstr "Ocultar/mostrar este meta box"
 msgid "Hide/show this meta field"
 msgstr "Ocultar/mostrar este metacampo"
 
-#, fuzzy
-#| msgid "Hide/show this meta box"
 msgid "Hide/show this block"
-msgstr "Ocultar/mostrar este meta box"
+msgstr ""
 
-#, fuzzy
-#| msgid "Hide/show this meta field"
 msgid "Hide/show this page"
-msgstr "Ocultar/mostrar este metacampo"
+msgstr ""
 
 msgid "Hierarchical"
 msgstr "Jerárquico"
@@ -812,6 +798,9 @@ msgstr "Importar tipos de post personalizados"
 
 msgid "Import data"
 msgstr "Importar datos"
+
+msgid "Import settings"
+msgstr "Importar ajustes"
 
 msgid "Insert"
 msgstr "Insertar"
@@ -843,36 +832,20 @@ msgstr "Destino del enlace"
 msgid "List {{r}}"
 msgstr "Lista {{r}}"
 
-#, fuzzy
-#| msgid ""
-#| "Makes this post type available via the admin bar. Default is value of"
 msgid ""
 "Makes this post type available for selection in navigation menus. Default is "
 "value of $public."
 msgstr ""
-"Hace que este tipo de publicación esté disponible a través de la barra de "
-"admin. El valor predeterminado es el valor de"
 
-#, fuzzy
-#| msgid ""
-#| "Makes this post type available via the admin bar. Default is value of"
 msgid ""
 "Makes this post type available via the admin bar. Default is value of "
 "$show_in_menu."
 msgstr ""
-"Hace que este tipo de publicación esté disponible a través de la barra de "
-"admin. El valor predeterminado es el valor de"
 
-#, fuzzy
-#| msgid ""
-#| "Makes this taxonomy available for selection in navigation menus. If not "
-#| "set, the default is inherited from"
 msgid ""
 "Makes this taxonomy available for selection in navigation menus. If not set, "
 "the default is inherited from $public (default true)."
 msgstr ""
-"Hace que esta taxonomía esté disponible para su selección en los menús de "
-"navegación. Si no se establece, el valor predeterminado se hereda de"
 
 msgid "Manage"
 msgstr "Administrar"
@@ -1146,17 +1119,15 @@ msgid "Option page meta successfully saved"
 msgstr "Meta de la página de opciones guardado correctamente"
 
 #, fuzzy
-#| msgid "Delete this option page"
 msgid "Single option page"
 msgstr "Eliminar esta página"
 
 #, fuzzy
-#| msgid "Option pages"
 msgid "Option page"
 msgstr "Páginas de opciones"
 
 msgid "Option pages"
-msgstr "Páginas de opciones"
+msgstr ""
 
 msgid "Option pages meta"
 msgstr "Meta de las páginas de opción"
@@ -1178,6 +1149,9 @@ msgstr "Principal"
 
 msgid "Parent item"
 msgstr "Elemento principal"
+
+msgid "Parent WP admin menu"
+msgstr ""
 
 msgid "Parent {{r}}"
 msgstr "{{r}} principal"
@@ -1236,10 +1210,8 @@ msgstr "Consultable públicamente"
 msgid "Publish pages"
 msgstr "Publicar páginas"
 
-#, fuzzy
-#| msgid "Publish pages"
 msgid "Publish posts"
-msgstr "Publicar páginas"
+msgstr ""
 
 msgid "Published posts count"
 msgstr "Recuento de posts publicados"
@@ -1548,7 +1520,6 @@ msgid "Template was successfully deleted."
 msgstr "La plantilla se eliminó correctamente."
 
 #, fuzzy
-#| msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
 msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
 msgstr "Texto después. Se permite HTML (por ejemplo, &lt;/small&gt;)"
 
@@ -1618,16 +1589,10 @@ msgstr "El título de página"
 msgid "The parent element slug"
 msgstr "El slug del elemento principal"
 
-#, fuzzy
-#| msgid ""
-#| "The position in the menu order the post type should appear. To work,  "
-#| "must be true. Default null (at the bottom)."
 msgid ""
 "The position in the menu order the post type should appear. To work, "
 "$show_in_menu must be true. Default null (at the bottom)."
 msgstr ""
-"Debe aparecer la posición en el orden del menú del tipo de post. Para "
-"trabajar, debe ser true. Null predeterminado (en la parte inferior)."
 
 msgid "The post name/slug. Used for various queries for taxonomy content."
 msgstr ""
@@ -1706,12 +1671,9 @@ msgid "This text will appear before input"
 msgstr "Este texto aparecerá antes de la entrada"
 
 msgid ""
-"This tool allows you to import settings and meta fields from previously "
-"exported .acpt files (max size allowed is 2Mb)."
+"Restore settings and meta fields from a previously exported .acpt file. "
+"Maximum file size is 2 MB."
 msgstr ""
-"Esta herramienta te permite importar configuraciones y metacampos de "
-"archivos .acpt previamente exportados (el tamaño máximo permitido es de "
-"2 Mb)."
 
 msgid "To change the base url of REST API route. Default is"
 msgstr ""
@@ -1765,10 +1727,8 @@ msgstr "Cargar"
 msgid "Upload file"
 msgstr "Cargar archivo"
 
-#, fuzzy
-#| msgid "Upload file"
 msgid "Upload files"
-msgstr "Cargar archivo"
+msgstr ""
 
 msgid "Upload your file"
 msgstr "Subir tu archivo"
@@ -1777,12 +1737,9 @@ msgid "Use featured image"
 msgstr "Usar imagen destacada"
 
 msgid ""
-"Use this tool to quick export the general settings and meta fields for every "
-"element in a compressed JSON format called .acpt."
+"Export your settings and meta field definitions into a compressed .acpt JSON "
+"archive for backup or migration."
 msgstr ""
-"Usa esta herramienta para exportar rápidamente la configuración general y "
-"los metacampos para cada elemento en un formato JSON comprimido llamado ."
-"acpt."
 
 msgid "Used for the post type admin menu item"
 msgstr "Se usa para el elemento de menú admin del tipo de post"
@@ -1793,18 +1750,14 @@ msgstr "Se usa para el elemento de menú de admin de taxonomía"
 msgid "Used when a singular label is needed"
 msgstr "Se usa cuando se necesita una etiqueta singular"
 
-#, fuzzy
-#| msgid "Singular"
 msgid "Single user"
-msgstr "Singular"
+msgstr ""
 
 msgid "User"
 msgstr "Usuario"
 
-#, fuzzy
-#| msgid "User"
 msgid "Users"
-msgstr "Usuario"
+msgstr ""
 
 msgid "User meta"
 msgstr "Meta de usuario"
@@ -1855,19 +1808,11 @@ msgstr "¿Dónde quieres copiar este meta box?"
 msgid "Where do you want to copy this meta field?"
 msgstr "¿Dónde quieres copiar este metacampo?"
 
-#, fuzzy
-#| msgid ""
-#| "Where to show the post type in the admin menu. To work,  must be true. If "
-#| "true, the post type is shown in its own top level menu. If false, no menu "
-#| "is shown."
 msgid ""
 "Where to show the post type in the admin menu. To work, must be true. If "
 "true, the post type is shown in its own top level menu. If false, no menu is "
 "shown."
 msgstr ""
-"Dónde mostrar el tipo de post en el menú de admin. Para que funcione, debe "
-"ser true. Si lo es, el tipo de post se muestra en su propio menú de nivel "
-"superior. Si es false, no se muestra ningún menú."
 
 msgid ""
 "Whether a post type is intended for use publicly either via the admin "
@@ -1901,27 +1846,15 @@ msgstr ""
 msgid "Whether the taxonomy is hierarchical. Default false."
 msgstr "Si la taxonomía es jerárquica. False por defecto."
 
-#, fuzzy
-#| msgid ""
-#| "Whether the taxonomy is publicly queryable. If not set, the default is "
-#| "inherited from"
 msgid ""
 "Whether the taxonomy is publicly queryable. If not set, the default is "
 "inherited from $public."
 msgstr ""
-"Si la taxonomía se puede consultar públicamente. Si no se establece, el "
-"valor predeterminado se hereda de"
 
-#, fuzzy
-#| msgid ""
-#| "Whether there should be post type archives, or if a string, the archive "
-#| "slug to use. Will generate the proper rewrite rules if"
 msgid ""
 "Whether there should be post type archives, or if a string, the archive slug "
 "to use. Will generate the proper rewrite rules if $rewrite is enabled."
 msgstr ""
-"Si debe haber archivos de tipo post, o si es una cadena, el slug de archivo "
-"a usarse. Generará las reglas de reescritura adecuadas si"
 
 msgid ""
 "Triggers the handling of rewrites for this post type. To prevent rewrite, "
@@ -1940,27 +1873,15 @@ msgstr ""
 "Si se debe mostrar una columna para la taxonomía en sus pantallas de listado "
 "de tipo de publicación. Falso por defecto."
 
-#, fuzzy
-#| msgid ""
-#| "Whether to generate and allow a UI for managing terms in this taxonomy in "
-#| "the admin. If not set, the default is inherited from"
 msgid ""
 "Whether to generate and allow a UI for managing terms in this taxonomy in "
 "the admin. If not set, the default is inherited from $public (default true)."
 msgstr ""
-"Si generar y permitir un UI para gestionar términos en esta taxonomía en el "
-"admin. Si no se establece, el valor predeterminado se hereda de"
 
-#, fuzzy
-#| msgid ""
-#| "Whether to generate and allow a UI for managing this post type in the "
-#| "admin. Default is value of"
 msgid ""
 "Whether to generate and allow a UI for managing this post type in the admin. "
 "Default is value of $public."
 msgstr ""
-"Si generar y permitir una UI para gestionar este tipo de post en el admin. "
-"El valor predeterminado es el valor de"
 
 msgid ""
 "Whether to include the post type in the REST API. Set this to true for the "
@@ -1980,43 +1901,22 @@ msgstr ""
 "que la taxonomía esté disponible en el editor de bloques. CONFIGURA TRUE "
 "PARA HABILITAR LA VISUALIZACIÓN EN GUTEMBERG EDITOR."
 
-#, fuzzy
-#| msgid ""
-#| "Whether to list the taxonomy in the Tag Cloud Widget controls. If not "
-#| "set, the default is inherited from"
 msgid ""
 "Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
 "the default is inherited from $show_ui (default true)."
 msgstr ""
-"Si se debe enumerar la taxonomía en los controles del widget de nube de "
-"etiquetas. Si no se establece, el valor predeterminado se hereda de"
 
-#, fuzzy
-#| msgid ""
-#| "Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
-#| "shown as a submenu of the object type menu. If false, no menu is shown.  "
-#| "must be true. If not set, default is inherited from  (default true)."
 msgid ""
 "Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
 "shown as a submenu of the object type menu. If false, no menu is shown. "
 "$show_ui must be true. If not set, default is inherited from $show_ui "
 "(default true)."
 msgstr ""
-"Si mostrar la taxonomía en el menú de admin. Si es True, la taxonomía se "
-"muestra como un submenú del menú de tipo de objeto. Si es False, no se "
-"muestra ningún menú. Debe ser verdadero. Si no se establece, el valor "
-"predeterminado se hereda de (valor predeterminado True)."
 
-#, fuzzy
-#| msgid ""
-#| "Whether to show the taxonomy in the quick/bulk edit panel. It not set, "
-#| "the default is inherited from"
 msgid ""
 "Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
 "default is inherited from $show_ui (default true)."
 msgstr ""
-"Si mostrar la taxonomía en el panel de edición rápida/masiva. No está "
-"configurado, el valor predeterminado se hereda de"
 
 msgid "Which does this template belong to?"
 msgstr "¿A cuál pertenece esta plantilla?"
@@ -2072,10 +1972,8 @@ msgstr ""
 msgid "You are going to delete this taxonomy. Are you sure?"
 msgstr "Vas a eliminar esta taxonomía. ¿Confirmas?"
 
-#, fuzzy
-#| msgid "Duplicate this block"
 msgid "Delete this block"
-msgstr "Duplicar este bloque"
+msgstr ""
 
 msgid "Your API keys"
 msgstr "Tus claves API"
@@ -2209,10 +2107,8 @@ msgstr "título"
 msgid "visibility"
 msgstr "visibilidad"
 
-#, fuzzy
-#| msgid "visibility"
 msgid "Visibility"
-msgstr "visibilidad"
+msgstr ""
 
 msgid "{{r}} published"
 msgstr "{{r}} publicado"
@@ -2283,10 +2179,8 @@ msgstr "Imagen"
 msgid "Post relationship"
 msgstr "Relación del post"
 
-#, fuzzy
-#| msgid "Post relationship"
 msgid "Relationship"
-msgstr "Relación del post"
+msgstr ""
 
 msgid "Time"
 msgstr "Hora"
@@ -2333,15 +2227,11 @@ msgstr "meta"
 msgid "Meta-key"
 msgstr "Meta-clave"
 
-#, fuzzy
-#| msgid "Export code"
 msgid "Shortcode"
-msgstr "Exportar código"
+msgstr ""
 
-#, fuzzy
-#| msgid "Export code"
 msgid "Shortcodes"
-msgstr "Exportar código"
+msgstr ""
 
 msgid "Delete custom post type"
 msgstr "Eliminar tipo de post personalizado"
@@ -2362,7 +2252,6 @@ msgid "Custom Post Types"
 msgstr "Tipos de post personalizado"
 
 #, fuzzy
-#| msgid "[Allowed extension: *.acpt, max size: 2Mb]"
 msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
 msgstr "[Extensión permitida: *.acpt, tamaño máximo: 2 Mb]"
 
@@ -2811,10 +2700,8 @@ msgstr "Zona de peligro"
 msgid "manage template"
 msgstr "administrar plantilla"
 
-#, fuzzy
-#| msgid "manage template"
 msgid "Manage template"
-msgstr "administrar plantilla"
+msgstr ""
 
 msgid "Taxonomy global settings"
 msgstr "Configuración global de taxonomía"
@@ -2939,10 +2826,8 @@ msgstr "Etiqueta"
 msgid "Post"
 msgstr "Post"
 
-#, fuzzy
-#| msgid "Parent"
 msgid "Post parent"
-msgstr "Principal"
+msgstr ""
 
 msgid "Term"
 msgstr "Término"
@@ -3054,14 +2939,11 @@ msgid "Remove this block"
 msgstr "Eliminar este bloque"
 
 #, fuzzy
-#| msgid "Show/hide elements"
 msgid "Show elements"
 msgstr "Seleccionar/deseleccionar elementos"
 
-#, fuzzy
-#| msgid "Show/hide elements"
 msgid "Hide elements"
-msgstr "Seleccionar/deseleccionar elementos"
+msgstr ""
 
 msgid "Show/hide elements in this block"
 msgstr "Mostrar/ocultar elementos en este bloque"
@@ -3463,7 +3345,7 @@ msgid "Meta group settings successfully saved"
 msgstr "Grupo guardado correctamente"
 
 msgid "Delete this option page"
-msgstr "Eliminar esta página"
+msgstr ""
 
 msgid "Confirm deleting page"
 msgstr "¿Confirmas que quieres eliminar esta página?"
@@ -3479,6 +3361,12 @@ msgstr "Borrar la caché"
 
 msgid "Cache was successfully flushed"
 msgstr "La caché se vació correctamente"
+
+msgid "Could not flush the cache"
+msgstr ""
+
+msgid "Flushing…"
+msgstr ""
 
 msgid "Enable ACPT cache"
 msgstr "Habilitar la caché de ACPT"
@@ -3549,6 +3437,9 @@ msgstr "Tipo de post"
 
 msgid "Post template"
 msgstr "Template para el post"
+
+msgid "Post format"
+msgstr ""
 
 msgid "Post category"
 msgstr "Categoría del post"
@@ -3816,6 +3707,12 @@ msgstr "Crear un nuevo término"
 msgid "Name is already taken"
 msgstr "Nombre ya usado"
 
+msgid "No Meta box duplicate names are allowed"
+msgstr ""
+
+msgid "No Meta field duplicate names are allowed"
+msgstr ""
+
 msgid "Copy"
 msgstr "Copiar"
 
@@ -4037,11 +3934,9 @@ msgid "Dataset"
 msgstr "Conjunto de datos"
 
 msgid ""
-"Build reusable dataset for meta fields and forms values. Import your dataset "
-"from CSV, JSON or YAML with a few clicks."
+"Build reusable datasets for meta fields and forms. Import from CSV, JSON or "
+"YAML."
 msgstr ""
-"Cree un conjunto de datos reutilizable. Importa un conjunto de datos desde "
-"CSV, JSON o YAML con unos pocos clics."
 
 msgid "Dataset successfully saved"
 msgstr "Conjunto de datos guardado correctamente"
@@ -4089,22 +3984,16 @@ msgid "Select/deselect all fields"
 msgstr "Seleccionar/deseleccionar todos los elementos"
 
 msgid "Show/hide elements"
-msgstr "Seleccionar/deseleccionar elementos"
-
-msgid ""
-"The limit on how many elements are required ([1-100] only for repeater field)"
 msgstr ""
-"El límite de cuántos elementos se requieren ([1-100] solo para el campo "
-"repeater)"
+
+msgid "The limit on how many elements are required ([1-100])"
+msgstr "El límite de cuántos elementos se requieren ([1-100])"
 
 msgid "Minimum elements allowed"
 msgstr "Mínimo de elementos permitidos"
 
-msgid ""
-"The limit on how many elements are allowed ([1-100] only for repeater field)"
-msgstr ""
-"El límite de cuántos elementos se permiten ([1-100] solo para el campo "
-"repeater)"
+msgid "The limit on how many elements are allowed ([1-100])"
+msgstr "El límite de cuántos elementos se permiten ([1-100])"
 
 msgid "Maximum elements allowed"
 msgstr "Máximo de elementos permitidos"
@@ -4230,10 +4119,9 @@ msgid "Health check"
 msgstr "Comprobación de estado"
 
 msgid ""
-"Check the health check of the application, and repair any installation error."
+"Inspect the application state and automatically repair installation errors "
+"or schema issues."
 msgstr ""
-"Verifica la comprobación de estado de la app y repara cualquier error de "
-"instalación."
 
 msgid "Run health check"
 msgstr "Ejecutar comprobación de estado"
@@ -4564,6 +4452,2650 @@ msgstr "Configuración de campo contraseña"
 
 msgid "Algorithm"
 msgstr "Algoritmo"
+
+msgid ""
+"Should the permalink structure be prepended with the front base. (example: "
+"if your permalink structure is /blog/, then your links will be: false->/"
+"news/, true->/blog/news/). Defaults to true"
+msgstr ""
+"¿Debería anteponerse a la estructura del enlace permanente el refijo base? "
+"(ejemplo: si su estructura de enlace permanente es /blog/, entonces sus "
+"enlaces serán: falso->/noticias/, verdadero->/blog/noticias/). El valor "
+"predeterminado es true"
+
+msgid "Resolution"
+msgstr "Resolución"
+
+msgid "Color dark"
+msgstr "Color oscuro"
+
+msgid "Color light"
+msgstr "Color claro"
+
+msgid "Post status"
+msgstr "Estado del post"
+
+msgid "The updated or new post status"
+msgstr "El estado del post creado o modificado"
+
+msgid "Add images to the gallery"
+msgstr "Agrerar imágenes a la galería"
+
+msgid "Enable custom blocks"
+msgstr "Habilitar bloques personalizados"
+
+msgid "Enable the custom blocks manager."
+msgstr "Habilitar el editor de bloques personalizados."
+
+msgid "Dynamic blocks list"
+msgstr "Lista de bloques dinámicos"
+
+msgid "Create new block"
+msgstr "Crear un nuevo bloque"
+
+msgid "General configuration"
+msgstr "Configuración general"
+
+msgid "Add controls to the block"
+msgstr "Agrerar controles al bloque"
+
+msgid "Add custom CSS to the block"
+msgstr "Agrerar CSS personalizado al bloque"
+
+msgid "Add the callback to the block"
+msgstr "Agrerar callback al bloque"
+
+msgid "Custom SVG"
+msgstr "SVG Personalizado"
+
+msgid "Confirm deleting control"
+msgstr "Confirmar eliminación del control"
+
+msgid "Declare block support for certain features"
+msgstr "Declarar el soporte del bloques para ciertas funciones"
+
+msgid "Block callback"
+msgstr "Callback del bloque"
+
+msgid "This is the block's code that will be run. Make use of TWIG syntax."
+msgstr ""
+"Este es el código del bloque que se ejecutará. Utilice la sintaxis TWIG."
+
+msgid ""
+"No block controls already created. Create the first one now by clicking the "
+"button \"Add control\"!"
+msgstr ""
+"No se han creado bloques. ¡Crea el primero ahora, haz clic en el botón "
+"“Agregar bloque”!"
+
+msgid "Block controls"
+msgstr "Controles del bloque"
+
+msgid "Add control"
+msgstr "Agregar control"
+
+msgid "Control slug"
+msgstr "Slug del control"
+
+msgid "Control slug (Ex. gallery or text_1)"
+msgstr "Slug del control (por ejemplo, galería o text_1)"
+
+msgid "Choose the control type"
+msgstr "Elegir el tipo de control"
+
+msgid "The description of this control (showed only on admin panel)"
+msgstr "La descripción de este control (solo se muestra en el panel de admin)"
+
+msgid "Duplicate this control"
+msgstr "Duplicar este control"
+
+msgid "Delete this block control"
+msgstr "Duplicar este control"
+
+msgid "Hide/show this block control"
+msgstr "Ocultar/mostrar este control"
+
+msgid "Icon type"
+msgstr "Tipo de icono"
+
+msgid "The background color of the icon"
+msgstr "El color de fondo del icono"
+
+msgid "The foreground color of the icon"
+msgstr "El color del icono"
+
+msgid "Keywords"
+msgstr "Palabras clave"
+
+msgid ""
+"An array of search terms to help user discover the block while searching."
+msgstr ""
+"Una serie de términos de búsqueda para ayudar al usuario a descubrir el "
+"bloque."
+
+msgid "The block category"
+msgstr "La categoría del bloque"
+
+msgid "Block category"
+msgstr "Categoría del bloque"
+
+msgid "The block label"
+msgstr "La etiqueta del bloque"
+
+msgid "Block label"
+msgstr "Etiqueta del bloque"
+
+msgid "Block CSS"
+msgstr "CSS del bloque"
+
+msgid "Enter the CSS that will be used on the block here."
+msgstr "Agregar aquí el CSS que se utilizará en el bloque."
+
+msgid "Anchor"
+msgstr "Ancla"
+
+msgid "Anchors let you link directly to a specific block on a page."
+msgstr ""
+"Los anclajes permiten vincular directamente a un bloque específico en una "
+"página."
+
+msgid "Align"
+msgstr "Alineación"
+
+msgid "This property adds block controls."
+msgstr "Esta propiedad agrega controles al bloque."
+
+msgid "Align wide"
+msgstr "Alineación ancha"
+
+msgid "This property allows to enable wide alignment for your theme."
+msgstr "Esta propiedad permite habilitar una alineación amplia para su tema."
+
+msgid "Enable background image control."
+msgstr "Habilitar el control de imagen de fondo."
+
+msgid "Enable/disable background image + size control."
+msgstr "Habilitar/deshabilitar imagen de fondo + control de tamaño."
+
+msgid "Enable/disable background and text color support."
+msgstr "Habilitar/deshabilitar el soporte de colores de fondo y de texto."
+
+msgid "Enable/disable button color support."
+msgstr "Habilitar/deshabilitar la compatibilidad de colores de los botones."
+
+msgid "Enable/disable contrast checker widget in the block editor UI."
+msgstr ""
+"Habilitar/deshabilitar el verificador de contraste en el editor de bloques."
+
+msgid "Enable/disable gradient backgrounds support."
+msgstr "Habilitar/deshabilitar la compatibilidad con fondos degradados."
+
+msgid "Enable/disable heading color support."
+msgstr "Habilitar/deshabilitar suporte para el color del encabezado."
+
+msgid "Enable/disable link colors control."
+msgstr "Habilitar/deshabilitar el control de colores de los enlaces."
+
+msgid "Enable/disable background and text, but not link."
+msgstr "Habilitar/deshabilitar fondo y texto, pero no el enlace."
+
+msgid "Dimensions"
+msgstr "Dimensiones"
+
+msgid "Enable/disable aspect ratio control."
+msgstr "Habilitar/deshabilitar el control de la relación de aspecto"
+
+msgid "Enable/disable min height control."
+msgstr "Habilitar/deshabilitar el control de altura mínima."
+
+msgid "Filter"
+msgstr "Filtrar"
+
+msgid "Enable/disable duotone support."
+msgstr "Habilitar/deshabilitar el soporte de duotono."
+
+msgid "Enable/disable support for an HTML mode."
+msgstr "Habilitar/deshabilitar el soporte al modo HTML."
+
+msgid "Lock"
+msgstr "Bloquear"
+
+msgid "Enable/disable the ability to toggle the lock state."
+msgstr "Habilitar/deshabilitar la capacidad de alternar el estado de bloqueo."
+
+msgid "Determine if a block can be used multiple times."
+msgstr "Determinar si un bloque se puede utilizar varias veces."
+
+msgid "Position"
+msgstr "Posición"
+
+msgid "Enable/disable selecting sticky position."
+msgstr "Habilitar/deshabilitar la selección de posición sticky."
+
+msgid "Renaming"
+msgstr "Cambiar el nombre"
+
+msgid "Determine if a block can be renamed in the editor."
+msgstr "Determinar si se puede cambiar el nombre de un bloque en el editor."
+
+msgid "Reusable"
+msgstr "Reutilizable"
+
+msgid "Enable/disable the ability of being converted into a reusable block."
+msgstr ""
+"Habilitar/deshabilitar la capacidad de convertir un bloque en reutilizable."
+
+msgid "Shadow"
+msgstr "Sombras"
+
+msgid "Enable/disable the shadow picker."
+msgstr "Habilitar/deshabilitar el selector de sombras."
+
+msgid "Spacing"
+msgstr "Espaciado"
+
+msgid "Enable/disable margin for arbitrary sides."
+msgstr "Habilitar/deshabilitar márgenes para lados arbitrarios."
+
+msgid "Enable/disable padding for all sides."
+msgstr "Habilitar/deshabilitar el padding para todos los lados."
+
+msgid "Enable/disable axial (column/row) block spacing controls."
+msgstr ""
+"Habilitar/deshabilitar los controles de espaciado de bloques axiales "
+"(columna/fila)."
+
+msgid "Typography"
+msgstr "Tipografía"
+
+msgid "Enable/disable support and UI control for font-size."
+msgstr "Habilitar/deshabilitar el soporte y el control del tamaño de fuentes."
+
+msgid "Declare support for specific text alignment options."
+msgstr "Declarar soporte para opciones de alineación de texto específicas."
+
+msgid "No block found."
+msgstr "No se encontrò ningun bloque."
+
+msgid "You are going to delete this block. Are you sure?"
+msgstr "Vas a borrar este bloque. ¿Confirmas?"
+
+msgid "Choose a standard category"
+msgstr "Elija una categoría estándar"
+
+msgid "Enter a custom category"
+msgstr "Ingrese una categoría personalizada"
+
+msgid "Enable beta versions"
+msgstr "Habilitar versiones beta"
+
+msgid "Enable the download of beta versions."
+msgstr "Habilitar la descarga de versiones beta."
+
+msgid "Audio field settings"
+msgstr "Configuración de campo audio"
+
+msgid "Use the custom audio player"
+msgstr "Habilitar el player musical personalizado"
+
+msgid "Skin"
+msgstr "Tema"
+
+msgid "Set the desired skin to be applied to the UI interface"
+msgstr "Establecer el tema que desea aplicar a la interfaz de usuario"
+
+msgid "Add new post a link it"
+msgstr "Crear y selccionar un nuevo post"
+
+msgid "Create a new post"
+msgstr "Crear un nuevo post"
+
+msgid "Gallery settings"
+msgstr "Ajustes galería"
+
+msgid "Video settings"
+msgstr "Ajustes videos"
+
+msgid "Disable media upload"
+msgstr "Deshabilitar la carga de medios"
+
+msgid "CSS variables"
+msgstr "Variables CSS"
+
+msgid ""
+"Should the permastruct be prepended with WP_Rewrite::$front. Default true."
+msgstr ""
+"¿Se debe anteponer WP_Rewrite::$front a la estructura permanente? El valor "
+"predeterminado es true."
+
+msgid "Either hierarchical rewrite tag or not. Default false."
+msgstr ""
+"Si la taxonomia tiene la etiqueta de reescritura jerárquica o no. Valor "
+"predeterminado: false."
+
+msgid "Rewrite hierarchical"
+msgstr "Reescritura jerárquica"
+
+msgid "Disable cover in custom the audio player"
+msgstr "Deactivar imagen cover en el player musical personalizado"
+
+msgid "Box settings"
+msgstr "Configuración meta box"
+
+msgid "Delete unused MySQL tables"
+msgstr "Eliminar tablas MySQL no utilizadas"
+
+msgid ""
+"If this option is enabled, all MySQL tables that are not in use — such as "
+"forms and dynamic blocks — will be deleted. Enable this option only if you "
+"are sure of what you are doing!"
+msgstr ""
+"Si esta opción está activada, se eliminarán todas las tablas MySQL que no "
+"estén en uso, como formularios y bloques dinámicos. ¡Active esta opción solo "
+"si está seguro de lo que hace"
+
+msgid "Apply to meta boxes"
+msgstr "Aplicar al meta box"
+
+msgid "Don't apply to meta boxes"
+msgstr "No aplicar al meta box"
+
+msgid "Bulk edit"
+msgstr "Edición masiva"
+
+msgid "Cache driver"
+msgstr "Driver de la caché"
+
+msgid "Set the desired cache driver to improve ACPT performances"
+msgstr ""
+"Configurar la carpeta de la caché deseado para mejorar el rendimiento de ACPT"
+
+msgid "Cache folder settings"
+msgstr "Configuración de la carpeta de la caché"
+
+#, fuzzy
+msgid "Cache folder (absolute path)"
+msgstr "Configuración de la carpeta de la caché"
+
+msgid ""
+"Optional: specify an absolute server path for the cache directory (e.g. /var/"
+"cache/acpt). Leave empty to use the default plugin directory."
+msgstr ""
+
+msgid "Redis settings"
+msgstr "Configuración de Redis"
+
+msgid "Memcached settings"
+msgstr "Configuración de Memcached"
+
+msgid "INFO"
+msgstr "INFO"
+
+msgid "SIZE"
+msgstr "TAMAÑO"
+
+msgid "ITEMS"
+msgstr "OBJECTOS"
+
+msgid "Set the cache folder"
+msgstr "Establecer la carpeta de la caché"
+
+msgid "Set the Redis host"
+msgstr "Establecer el host de Redis"
+
+msgid "Set the Redis port"
+msgstr "Establecer el puerto de Redis"
+
+msgid "Set the Redis database"
+msgstr "Establecer la base de datos de Redis"
+
+msgid "Set the Memcached host"
+msgstr "Establecer el host de Memcached"
+
+msgid "Set the Memcached port"
+msgstr "Establecer el puerto de Memcached"
+
+msgid "Driver connection ok"
+msgstr "Conexión al driver ok"
+
+msgid "Test driver connection"
+msgstr "Testar la conexión con el driver"
+
+msgid "Enable cache for meta data"
+msgstr "Habilitar la  caché para los meta datos"
+
+msgid "Full"
+msgstr "Completo"
+
+msgid "Visual and Text"
+msgstr "Visual y textual"
+
+msgid "Visual Only"
+msgstr "Solo visual"
+
+msgid "Text Only"
+msgstr "Solo textual"
+
+msgid "Toolbar"
+msgstr "Barra de herramientas"
+
+msgid "Tabs"
+msgstr "Tab"
+
+msgid "Set the first image as post thumbnail"
+msgstr "Establecer la primera imagen como destacada"
+
+msgid "Allow dangerous content"
+msgstr "Permitir contenido peligroso"
+
+msgid "URL structure type"
+msgstr "Tipo de estructura de URL"
+
+msgid "Absolute (ex. http://example.com)"
+msgstr "Absoluta (ex. http://example.com)"
+
+msgid "Relative (ex. /path/example/field)"
+msgstr "Relativa(ex. /path/example/field)"
+
+msgid "Enable logs"
+msgstr "Habilitar log"
+
+msgid ""
+"Turn on full logging to keep a detailed record of everything. This helps to "
+"spot bugs more easily and understand what went wrong if something breaks."
+msgstr ""
+"Activa el registro completo de log para mantener un registro detallado de "
+"todo. Esto facilita la detección de errores y permite comprender qué falló "
+"si algo falla."
+
+msgid "Logs manager"
+msgstr "Editor de log"
+
+msgid "No logs found"
+msgstr "No se encontrò ningun log"
+
+msgid "Severity"
+msgstr "Gravedad"
+
+msgid "Message"
+msgstr "Mensaje"
+
+msgid "Filter by"
+msgstr "Filtrar por"
+
+msgid "Jump to version"
+msgstr "Ir a la versión"
+
+msgid "Show only"
+msgstr "Mostrar solamente"
+
+msgid "Select files"
+msgstr "Seleccionar files"
+
+msgid "Max items allowed"
+msgstr "Elementos máximos permitidos"
+
+msgid "Open a ticket"
+msgstr "Abrir un ticket"
+
+msgid "Select post status"
+msgstr "Selectionar el estado del post"
+
+msgid "Apply to Front-End"
+msgstr "Aplicar a Front-End"
+
+msgid "Apply to Back-End"
+msgstr "Aplicar a Back-End"
+
+msgid "Sync language with locale"
+msgstr "Sincronizar idioma con el idioma del sitio"
+
+msgid ""
+"Automatically synchronize the application language with the selected locale "
+"settings, if applicable."
+msgstr ""
+"Sincronizar automáticamente el idioma de la aplicación con el idioma del "
+"sitio, si el aplicable."
+
+msgid "Table pagination"
+msgstr "Paginación de la tabla"
+
+msgid "Set the number of rows per page"
+msgstr "Establecer la cantidad de elementos por página"
+
+msgid "Set the table as sortable"
+msgstr "Establecer esta tabla como ordenable"
+
+msgid "Import CSV"
+msgstr "Importar CSV"
+
+msgid "Add tab"
+msgstr "Crear tab"
+
+msgid ""
+"No tabs already created. Create the first one now by clicking the button "
+"\"Add tab\"!"
+msgstr ""
+"No hay tabs ya creadas. ¡Crea la primera ahora haciendo clic en el botón "
+"\"Agregar tab\"!"
+
+msgid "No extra settings available"
+msgstr "No hay ninguna configuración extra disponible"
+
+msgid "No tabs available"
+msgstr "No hay tabs disponibles"
+
+msgid "No steps available"
+msgstr "No hay pasos disponibles"
+
+msgid "Release elements here"
+msgstr "Liberar elementos aquí"
+
+msgid "Date from"
+msgstr "Fecha desde"
+
+msgid "Date to"
+msgstr "Fecha hasta"
+
+msgid "Single click to edit"
+msgstr "Un solo clic para editar"
+
+msgid "Double click to toggle this element"
+msgstr "Doble clic para alternar este elemento"
+
+msgid "Double click to close this element"
+msgstr "Doble clic para cerrar este elemento"
+
+msgid "Double click to open this element"
+msgstr "Doble clic para abrir este elemento"
+
+msgid ""
+"Enable the WordPress admin menu for faster, easier dashboard navigation."
+msgstr ""
+"Habilite el menú de administración de WordPress para una navegación más "
+"rápida y sencilla en el panel de control."
+
+msgid "Enable Admin menu"
+msgstr "Habilite el menú de administración"
+
+msgid "Google Sheets API key"
+msgstr "Clave API de Google Sheets"
+
+msgid ""
+"Paste here your Google Sheets API key. Needed to import sheets into Table "
+"fields."
+msgstr ""
+"Pega aquí tu clave API de Google Sheets. Es necesario para importar hojas a "
+"los campos tabla."
+
+msgid "Form settings"
+msgstr "Configuracion de formularios"
+
+msgid "Email delivery"
+msgstr "Entrega de correos electrónicos"
+
+msgid "Restrict the form submission rates"
+msgstr "Restringir el envío de formularios"
+
+msgid "Adjust the values of the form’s CSS variables"
+msgstr "Ajustar los valores de las variables CSS del formulario"
+
+msgid "Trigger an email once the form is submitted"
+msgstr "Enviar un correo electrónico una vez enviado el formulario"
+
+msgid "Sync with taxonomies"
+msgstr "Sincronizar con Taxonomías"
+
+msgid "No taxonomy found."
+msgstr "No se encontraron taxonomías."
+
+msgid "Successfully taxonomy sync."
+msgstr "Sincronización de taxonomías correcta."
+
+msgid "Edit meta box"
+msgstr "Editar meta box"
+
+msgid "Available only if `show in archive` is enabled"
+msgstr "Disponible solo si está habilitado `mostrar en archivo`"
+
+msgid "Email preview"
+msgstr "Vista previa de correo electrónico"
+
+msgid "Subject"
+msgstr "Sujeto"
+
+msgid "Rule"
+msgstr "Regla"
+
+msgid "Limit"
+msgstr "Limite"
+
+msgid "Submission limits"
+msgstr "Límites de envío"
+
+msgid "Email settings"
+msgstr "Configuración de correo electrónico"
+
+msgid "Post archive"
+msgstr "Archivo posts"
+
+msgid "Taxonomy archive"
+msgstr "Archivo taxonomía"
+
+msgid "Copy after"
+msgstr "Copia despues de"
+
+msgid "Enable custom content type"
+msgstr ""
+
+msgid "Enable the custom content type manager."
+msgstr ""
+
+msgid "Create new table"
+msgstr ""
+
+msgid "Registered tables"
+msgstr ""
+
+msgid "ID Strategy"
+msgstr ""
+
+msgid "The ID table strategy"
+msgstr ""
+
+msgid "Table label"
+msgstr ""
+
+msgid "The table label"
+msgstr ""
+
+msgid "Table columns"
+msgstr ""
+
+msgid "Table name"
+msgstr ""
+
+msgid "The table name. Must be unique"
+msgstr ""
+
+msgid "Indexes"
+msgstr ""
+
+msgid "Indexes and foreign keys"
+msgstr ""
+
+msgid "Charset and collation"
+msgstr ""
+
+msgid "The table charset and collation"
+msgstr ""
+
+msgid "Delete this column"
+msgstr ""
+
+msgid "Confirm deleting column"
+msgstr ""
+
+msgid ""
+"No columns already created. Create the first one now by clicking the button "
+"\"Add column\"!"
+msgstr ""
+
+msgid "Column label"
+msgstr ""
+
+msgid "Column slug"
+msgstr ""
+
+msgid "Column slug (Ex. gallery or text_1)"
+msgstr ""
+
+msgid "Choose the column type"
+msgstr ""
+
+msgid "This key is already declared"
+msgstr ""
+
+msgid "UI field type mapping"
+msgstr ""
+
+msgid ""
+"No indexes already created. Create the first one now by clicking the button "
+"\"Add index\"!"
+msgstr ""
+"¡Aún no se han creado índices. Crea el primero ahora haciendo clic en "
+"\"Añadir índice\"!"
+
+msgid "Add index"
+msgstr ""
+
+msgid "Timestamps"
+msgstr ""
+
+msgid "Add timestamps columns (`created_at` and `updated_at`) to the table."
+msgstr ""
+
+msgid "Soft delete"
+msgstr ""
+
+msgid "Implement soft delete on this table."
+msgstr ""
+
+msgid ""
+"No foreign keys already created. Create the first one now by clicking the "
+"button \"Add foreign key\"!"
+msgstr ""
+"¡Aún no se han creado claves foráneas. Crea la primera ahora haciendo clic "
+"en \"Añadir clave foránea\"!"
+
+msgid "Reference table"
+msgstr ""
+
+msgid "Reference columns"
+msgstr ""
+
+msgid "Referring columns"
+msgstr ""
+
+msgid "Referenced table"
+msgstr ""
+
+msgid "Referenced columns"
+msgstr ""
+
+msgid "Confirm deleting key"
+msgstr ""
+
+msgid "Is primary key"
+msgstr ""
+
+msgid ""
+"You cannot create an index or a foreign key until at least one column has "
+"been defined. Please create a column first."
+msgstr ""
+
+msgid "Select time format"
+msgstr "Seleccionar el formato de hora"
+
+msgid "Custom time format"
+msgstr "Formato de hora personalizado"
+
+msgid "Select date format"
+msgstr "Seleccionar el formato de fecha"
+
+msgid "Custom date format"
+msgstr "Formato de fecha personalizado"
+
+msgid "The label of the Add element button"
+msgstr "La etiqueta del botón Agregar elemento"
+
+msgid "Add element button label"
+msgstr "La etiqueta del botón Agregar elemento"
+
+msgid "The label of the Remove element button"
+msgstr "La etiqueta del botón Eliminar elemento"
+
+msgid "Remove element button label"
+msgstr "La etiqueta del botón Eliminar elemento"
+
+msgid "Preview size"
+msgstr "Tamaño de vista previa"
+
+msgid "Restrict image extensions"
+msgstr "Restringir extensiones de imagen"
+
+msgid "Minimum width"
+msgstr "Anchura minima"
+
+msgid "Minimum height"
+msgstr "Altura minima"
+
+msgid "Maximum width"
+msgstr "Anchura máxima"
+
+msgid "Maximum height"
+msgstr "Altura máxima"
+
+msgid "Default sorting"
+msgstr "Ordenamiento predeterminado"
+
+msgid ""
+"Sets the default sort order for posts in the admin list table. Defaults to "
+"WordPress standard (Date, Descending)."
+msgstr ""
+"Establecer el ordenamiento de los posts. Por defecto, se utilizarà el "
+"estándar de WordPress (Fecha, Descendente)."
+
+msgid "Restrict the field to only show posts created by the logged in user"
+msgstr ""
+"Restringir el campo para mostrar únicamente las publicaciones creadas por el "
+"usuario que ha iniciado sesión."
+
+msgid "Key parts"
+msgstr ""
+
+msgid "Table successfully saved"
+msgstr ""
+
+msgid "Schema status"
+msgstr ""
+
+msgid "Stats"
+msgstr ""
+
+msgid "Operation successfully executed"
+msgstr ""
+
+msgid ""
+"The following queries will be executed to synchronize the table schema. Are "
+"you sure?"
+msgstr ""
+
+msgid "The following queries will be executed to synchronize the table schema:"
+msgstr ""
+
+msgid "No table selected"
+msgstr ""
+
+msgid "Execute database operations"
+msgstr ""
+
+msgid "Length is required for this column type"
+msgstr ""
+
+msgid "Column name `id` is reserved"
+msgstr ""
+
+msgid "Virtual"
+msgstr ""
+
+msgid "Storage type"
+msgstr ""
+
+msgid "Relational type"
+msgstr ""
+
+msgid "Each record relates to exactly one record in the other table"
+msgstr ""
+
+msgid "One record relates to multiple records in the other table"
+msgstr ""
+
+msgid "Multiple records relate to one record in the other table"
+msgstr ""
+
+msgid "Multiple records relate to multiple records in the other table"
+msgstr ""
+
+msgid "Target table"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Self-referential — useful for parent/child hierarchies"
+msgstr ""
+
+msgid "Meta keys manager"
+msgstr ""
+
+msgid ""
+"Browse, search and manage every raw meta key stored by ACPT. Edit values "
+"directly or clean up stale entries across post types, taxonomies and users."
+msgstr ""
+
+msgid "Table stats"
+msgstr ""
+
+msgid "No stats available"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Associated to"
+msgstr ""
+
+msgid "No meta keys found."
+msgstr ""
+
+msgid "Clean orphan keys"
+msgstr ""
+
+msgid "Add meta key"
+msgstr ""
+
+msgid "Delete meta key"
+msgstr ""
+
+msgid "You are going to delete this meta key. Are you sure?"
+msgstr ""
+
+msgid "The record was successfully updated"
+msgstr ""
+
+msgid ""
+"Select the tables to include in this group. Tables define the schema and "
+"fields for storing custom content records."
+msgstr ""
+
+msgid ""
+"Define location rules to control where this group's tables appear in the "
+"WordPress admin. Rules can target post types, taxonomies, users, or option "
+"pages."
+msgstr ""
+
+msgid "--Select---"
+msgstr "--Seleccionar---"
+
+msgid "A brief description (shown only in the admin panel)"
+msgstr "Una breve descripción (mostrada solo en el panel de administración)"
+
+msgid ""
+"ALERT: The visual builder can be used with a minimum resolution of 960 px "
+"wide"
+msgstr ""
+"ALERTA: El constructor visual puede usarse con una resolución mínima de 960 "
+"px de ancho"
+
+msgid "Accept"
+msgstr "Aceptar"
+
+msgid "Actual settings"
+msgstr "Configuración actual"
+
+msgid "Add a meta box to get started"
+msgstr "Añade un meta box para comenzar"
+
+msgid "Add foreign key"
+msgstr "Añadir clave foránea"
+
+msgid "Add key part"
+msgstr "Añadir parte de clave"
+
+msgid "Add new item"
+msgstr "Añadir nuevo elemento"
+
+msgid "Add new record"
+msgstr "Añadir nuevo registro"
+
+msgid "Add record"
+msgstr "Añadir registro"
+
+msgid "Add value"
+msgstr "Añadir valor"
+
+msgid "Advanced Mode"
+msgstr "Modo avanzado"
+
+msgid "Advanced options"
+msgstr "Opciones avanzadas"
+
+msgid "Ajax"
+msgstr "Ajax"
+
+msgid "All Tables"
+msgstr "Todas las tablas"
+
+msgid "Allow HTML"
+msgstr "Permitir HTML"
+
+msgid "Anonymous users"
+msgstr "Usuarios anónimos"
+
+msgid "Assign this table to a group"
+msgstr "Asignar esta tabla a un grupo"
+
+msgid "Associated Tables"
+msgstr "Tablas asociadas"
+
+msgid "Attachments"
+msgstr "Adjuntos"
+
+msgid "Automatic"
+msgstr "Automático"
+
+msgid "BLOB"
+msgstr "BLOB"
+
+msgid "Basic options"
+msgstr "Opciones básicas"
+
+msgid "Bcc"
+msgstr "Cco"
+
+msgid "Block name"
+msgstr "Nombre de bloque"
+
+msgid "Blocks"
+msgstr "Bloques"
+
+msgid "Body"
+msgstr "Cuerpo"
+
+msgid "Browser"
+msgstr "Navegador"
+
+msgid "CURL"
+msgstr "CURL"
+
+msgid "CURRENT_TIMESTAMP"
+msgstr "CURRENT_TIMESTAMP"
+
+msgid "Cache"
+msgstr "Caché"
+
+msgid "Cache stats"
+msgstr "Estadísticas de caché"
+
+msgid "Callback"
+msgstr "Callback"
+
+msgid "Category"
+msgstr "Categoría"
+
+msgid "Cc"
+msgstr "Cc"
+
+msgid "Charset"
+msgstr "Juego de caracteres"
+
+msgid "Child page"
+msgstr "Página hija"
+
+msgid "Children"
+msgstr "Hijos"
+
+msgid "Choose the icon"
+msgstr "Elegir el icono"
+
+msgid "Click on a page card to edit its settings"
+msgstr "Haz clic en una tarjeta de página para editar su configuración"
+
+msgid "Click to edit"
+msgstr "Haz clic para editar"
+
+msgid "Collate"
+msgstr "Cotejamiento"
+
+msgid "Cols"
+msgstr "Columnas"
+
+msgid "Column"
+msgstr "Columna"
+
+msgid "Column Name"
+msgstr "Nombre de columna"
+
+msgid "Column length"
+msgstr "Longitud de columna"
+
+msgid "Column length must be numeric"
+msgstr "La longitud de columna debe ser numérica"
+
+msgid "Column options"
+msgstr "Opciones de columna"
+
+msgid "Column values"
+msgstr "Valores de columna"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "Confirm deleting field"
+msgstr "Confirmar eliminación del campo"
+
+msgid "Confirm deleting index"
+msgstr "Confirmar eliminación del índice"
+
+msgid "Confirm deleting wpml-config.xml file"
+msgstr "Confirmar eliminación del archivo wpml-config.xml"
+
+msgid "Control label"
+msgstr "Etiqueta de control"
+
+msgid "Control type"
+msgstr "Tipo de control"
+
+msgid "Copy this meta block"
+msgstr "Copiar este meta bloque"
+
+msgid "Copy this meta field"
+msgstr "Copiar este meta campo"
+
+msgid "Copy this meta option page"
+msgstr "Copiar esta página de opciones meta"
+
+msgid "Create new Group"
+msgstr "Crear nuevo grupo"
+
+msgid "Create new Table"
+msgstr "Crear nueva tabla"
+
+msgid "Create wpml-config.xml file"
+msgstr "Crear archivo wpml-config.xml"
+
+msgid "Custom Tables"
+msgstr "Tablas personalizadas"
+
+msgid "Custom settings"
+msgstr "Configuración personalizada"
+
+msgid "DATE & TIME"
+msgstr "FECHA Y HORA"
+
+msgid "Dark"
+msgstr "Oscuro"
+
+msgid "Data"
+msgstr "Datos"
+
+msgid "Dataset is empty"
+msgstr "El conjunto de datos está vacío"
+
+msgid "Dataset list"
+msgstr "Lista de conjuntos de datos"
+
+msgid "Dataset not found"
+msgstr "Conjunto de datos no encontrado"
+
+msgid "Default percent"
+msgstr "Porcentaje predeterminado"
+
+msgid "Default term"
+msgstr "Término predeterminado"
+
+msgid "Delete Column"
+msgstr "Eliminar columna"
+
+msgid "Delete Table"
+msgstr "Eliminar tabla"
+
+msgid "Delete Table Group"
+msgstr "Eliminar grupo de tablas"
+
+msgid "Delete block"
+msgstr "Eliminar bloque"
+
+msgid "Delete box"
+msgstr "Eliminar box"
+
+msgid "Delete field"
+msgstr "Eliminar campo"
+
+msgid "Delete option page"
+msgstr "Eliminar página de opciones"
+
+msgid "Delete others"
+msgstr "Eliminar otros"
+
+msgid "Delete page"
+msgstr "Eliminar página"
+
+msgid "Delete private"
+msgstr "Eliminar privados"
+
+msgid "Delete published"
+msgstr "Eliminar publicados"
+
+msgid "Delete the meta block after copying"
+msgstr "Eliminar el meta bloque después de copiar"
+
+msgid "Delete the meta field after copying"
+msgstr "Eliminar el meta campo después de copiar"
+
+msgid "Descending"
+msgstr "Descendente"
+
+msgid "Deselect all"
+msgstr "Deseleccionar todo"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Disable cover in the custom audio player"
+msgstr "Deshabilitar portada en el reproductor de audio personalizado"
+
+msgid "Display"
+msgstr "Mostrar"
+
+msgid "Display as translated"
+msgstr "Mostrar como traducido"
+
+msgid "Display mode"
+msgstr "Modo de visualización"
+
+msgid "Display settings"
+msgstr "Configuración de visualización"
+
+msgid "Drag a control type from the sidebar to get started"
+msgstr "Arrastra un tipo de control desde la barra lateral para comenzar"
+
+msgid "Drag a field type from the sidebar to get started"
+msgstr "Arrastra un tipo de campo desde la barra lateral para comenzar"
+
+msgid "Drop children fields here"
+msgstr "Suelta aquí los campos hijos"
+
+msgid "Drop children pages here"
+msgstr ""
+
+msgid "Duotone"
+msgstr "Duotono"
+
+msgid "Duplicate rules are not allowed."
+msgstr "No se permiten reglas duplicadas."
+
+msgid "ENUM"
+msgstr "ENUM"
+
+msgid "Edit item"
+msgstr "Editar elemento"
+
+msgid "Edit others"
+msgstr "Editar otros"
+
+msgid "Edit private"
+msgstr "Editar privados"
+
+msgid "Edit published"
+msgstr "Editar publicados"
+
+msgid "Edit record"
+msgstr "Editar registro"
+
+msgid "Editor for"
+msgstr "Editor para"
+
+msgid "Email body"
+msgstr "Cuerpo del correo"
+
+msgid "Enable dynamic blocks"
+msgstr "Habilitar bloques dinámicos"
+
+msgid "Enable select2"
+msgstr "Habilitar select2"
+
+msgid "Enable taxonomies"
+msgstr "Habilitar taxonomías"
+
+msgid "Enable the custom post types manager."
+msgstr "Habilitar el gestor de tipos de entradas personalizadas."
+
+msgid "Enable the dynamic blocks manager."
+msgstr "Habilitar el gestor de bloques dinámicos."
+
+msgid "Enable the taxonomies manager."
+msgstr "Habilitar el gestor de taxonomías."
+
+msgid "Enable/disable contrast checker widget in the block editor UI.."
+msgstr ""
+"Habilitar/deshabilitar el widget verificador de contraste en la interfaz del "
+"editor de bloques.."
+
+msgid "Enter a valid JSON value."
+msgstr "Introduce un valor JSON válido."
+
+msgid "Enter custom SVG"
+msgstr "Introduce SVG personalizado"
+
+msgid "Enter whatever items you want; separate them with COMMA or ENTER."
+msgstr "Introduce los elementos que desees; sepáralos con COMA o INTRO."
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Error during import occurred"
+msgstr "Ocurrió un error durante la importación"
+
+msgid "Error message"
+msgstr "Mensaje de error"
+
+msgid "Errors"
+msgstr "Errores"
+
+msgid "Extra"
+msgstr "Extra"
+
+msgid "Field"
+msgstr "Campo"
+
+msgid "Field Mapping Preview"
+msgstr "Vista previa de mapeo de campos"
+
+msgid "Field on target table that holds the back-reference"
+msgstr "Campo en la tabla de destino que contiene la referencia inversa"
+
+msgid "Field selector"
+msgstr "Selector de campo"
+
+msgid "Field slug (Ex. name_frk)"
+msgstr "Slug de campo (Ej. name_frk)"
+
+msgid "Field slug (Ex. name_idx)"
+msgstr "Slug de campo (Ej. name_idx)"
+
+msgid "Field slug (e.g. my_field)"
+msgstr "Slug de campo (p.ej. my_field)"
+
+msgid "Fields to clone"
+msgstr "Campos a clonar"
+
+msgid "File was successfully deleted."
+msgstr "El archivo se eliminó correctamente."
+
+msgid "Font size"
+msgstr "Tamaño de fuente"
+
+msgid "Footer"
+msgstr "Pie de página"
+
+msgid "Foreign keys"
+msgstr "Claves foráneas"
+
+msgid "Form submissions"
+msgstr "Envíos de formulario"
+
+msgid "Forms submissions"
+msgstr "Envíos de formularios"
+
+msgid "Go to next step"
+msgstr "Ir al paso siguiente"
+
+msgid "Go to prev step"
+msgstr "Ir al paso anterior"
+
+msgid "Group"
+msgstr "Grupo"
+
+msgid "Group successfully saved"
+msgstr "Grupo guardado con éxito"
+
+msgid "HTML"
+msgstr "HTML"
+
+msgid "HTML settings"
+msgstr "Configuración HTML"
+
+msgid "Header"
+msgstr "Encabezado"
+
+msgid "Hide title"
+msgstr "Ocultar título"
+
+msgid "Hide toggle visibility"
+msgstr "Ocultar interruptor de visibilidad"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "Human-readable label for this group"
+msgstr "Etiqueta legible para este grupo"
+
+msgid "ID settings"
+msgstr "Configuración de ID"
+
+msgid "ID strategy"
+msgstr "Estrategia de ID"
+
+msgid "INVERSE SOURCE"
+msgstr "INVERSE SOURCE"
+
+msgid "INVERSE TARGET"
+msgstr "INVERSE TARGET"
+
+msgid "INVISIBLE"
+msgstr "INVISIBLE"
+
+msgid ""
+"If enabled, the logged in user who submitted the form will also receive this "
+"email as a confirmation"
+msgstr ""
+"Si está habilitado, el usuario conectado que envió el formulario también "
+"recibirá este correo como confirmación"
+
+msgid "Index options"
+msgstr "Opciones de índice"
+
+msgid "Inverse field"
+msgstr "Campo inverso"
+
+msgid "Inverse field configuration"
+msgstr "Configuración del campo inverso"
+
+msgid "Items list"
+msgstr "Lista de elementos"
+
+msgid "Label column"
+msgstr "Columna de etiqueta"
+
+msgid "Label default value"
+msgstr "Valor predeterminado de etiqueta"
+
+msgid "Label placeholder"
+msgstr "Marcador de posición de etiqueta"
+
+msgid "Left"
+msgstr "Izquierda"
+
+msgid "Length must be at least 1"
+msgstr "La longitud debe ser al menos 1"
+
+msgid "Level"
+msgstr "Nivel"
+
+msgid "Light"
+msgstr "Claro"
+
+msgid "Link URL"
+msgstr "URL del enlace"
+
+msgid "Loading..."
+msgstr "Cargando..."
+
+msgid "Location rules"
+msgstr "Reglas de ubicación"
+
+msgid "Log context"
+msgstr "Contexto del registro"
+
+msgid "Logged user"
+msgstr "Usuario conectado"
+
+msgid "Logged users"
+msgstr "Usuarios conectados"
+
+msgid "Manage cache items"
+msgstr "Gestionar elementos de caché"
+
+msgid "Manage option pages"
+msgstr "Gestionar páginas de opciones"
+
+msgid "Manage permissions"
+msgstr "Gestionar permisos"
+
+msgid "Max"
+msgstr "Máx"
+
+msgid "Max value"
+msgstr "Valor máximo"
+
+msgid "Maximum value"
+msgstr "Valor máximo"
+
+msgid "Meta block"
+msgstr "Meta bloque"
+
+msgid "Meta block was successfully copied"
+msgstr "El meta bloque se copió correctamente"
+
+msgid "Min"
+msgstr "Mín"
+
+msgid "Min value"
+msgstr "Valor mínimo"
+
+msgid "Minimum value"
+msgstr "Valor mínimo"
+
+msgid "Missing dependency installer, retry now"
+msgstr "Instalador de dependencia faltante, reintentar ahora"
+
+msgid "Multiple field"
+msgstr "Campo múltiple"
+
+msgid "NOW()"
+msgstr "NOW()"
+
+msgid "NUMERIC"
+msgstr "NUMERIC"
+
+msgid "No blocks yet"
+msgstr "Sin bloques aún"
+
+msgid "No boxes registered"
+msgstr "Sin boxes registrados"
+
+msgid "No columns found."
+msgstr "No se encontraron columnas."
+
+msgid "No columns selected"
+msgstr "Sin columnas seleccionadas"
+
+msgid "No controls created"
+msgstr "Sin controles creados"
+
+msgid "No custom post types found."
+msgstr "No se encontraron tipos de entradas personalizadas."
+
+msgid "No distraction"
+msgstr "Sin distracciones"
+
+msgid "No editable columns found for this table."
+msgstr "No se encontraron columnas editables para esta tabla."
+
+msgid "No fields registered."
+msgstr "No hay campos registrados."
+
+msgid "No foreign keys found."
+msgstr "No se encontraron claves foráneas."
+
+msgid "No group"
+msgstr "Sin grupo"
+
+msgid "No index found."
+msgstr "No se encontró ningún índice."
+
+msgid "No items"
+msgstr "Sin elementos"
+
+msgid "No items imported"
+msgstr "Sin elementos importados"
+
+msgid ""
+"No key parts are present, click on \"Add key part\" button to add the first "
+"one."
+msgstr ""
+"No hay partes de clave, haz clic en \"Añadir parte de clave\" para añadir la "
+"primera."
+
+msgid "No location rules defined."
+msgstr "No hay reglas de ubicación definidas."
+
+msgid ""
+"No option pages created yet. Click \"Add page\" to create the first one!"
+msgstr ""
+"¡Aún no se han creado páginas de opciones. Haz clic en \"Añadir página\" "
+"para crear la primera!"
+
+msgid "No options"
+msgstr "Sin opciones"
+
+msgid ""
+"No options are present, click on \"Add option\" button to add the first one."
+msgstr ""
+"No hay opciones presentes, haz clic en \"Añadir opción\" para añadir la "
+"primera."
+
+msgid "No page selected"
+msgstr "Sin página seleccionada"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add condition\"!"
+msgstr ""
+"¡Aún no se han creado reglas. Crea la primera ahora haciendo clic en "
+"\"Añadir condición\"!"
+
+msgid "No table groups found."
+msgstr "No se encontraron grupos de tablas."
+
+msgid "No tables associated to this group."
+msgstr "No hay tablas asociadas a este grupo."
+
+msgid "No tables found in this group."
+msgstr "No se encontraron tablas en este grupo."
+
+msgid "No tables found."
+msgstr "No se encontraron tablas."
+
+msgid ""
+"No values already created. Create the first one now by clicking the button "
+"\"Add value\"!"
+msgstr ""
+"¡Aún no se han creado valores. Crea el primero ahora haciendo clic en "
+"\"Añadir valor\"!"
+
+msgid "No wpml-config.xml found."
+msgstr "No se encontró wpml-config.xml."
+
+msgid "Email"
+msgstr ""
+
+msgid "None"
+msgstr "Ninguno"
+
+msgid "Not found"
+msgstr "No encontrado"
+
+msgid "Nullable"
+msgstr "Nullable"
+
+msgid "ON CHANGE"
+msgstr "ON CHANGE"
+
+msgid "On delete"
+msgstr "Al eliminar"
+
+msgid "On update"
+msgstr "Al actualizar"
+
+msgid "Opens in a new window or tab"
+msgstr "Abre en una nueva ventana o pestaña"
+
+msgid "Operator"
+msgstr "Operador"
+
+msgid "Options"
+msgstr "Opciones"
+
+msgid "Other columns"
+msgstr "Otras columnas"
+
+msgid "PERMISSIONS"
+msgstr "PERMISSIONS"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Plural label. Used for the taxonomy admin menu item"
+msgstr "Etiqueta plural. Usada para el elemento del menú admin de la taxonomía"
+
+msgid "Position sticky"
+msgstr "Posición fija"
+
+msgid "Post types"
+msgstr "Tipos de entradas"
+
+msgid "Posts"
+msgstr "Entradas"
+
+msgid "Prev Step"
+msgstr "Paso anterior"
+
+msgid "REST controller class"
+msgstr "Clase controlador REST"
+
+msgid "Read"
+msgstr "Leer"
+
+msgid "Record created successfully."
+msgstr "Registro creado con éxito."
+
+msgid "Record updated successfully."
+msgstr "Registro actualizado con éxito."
+
+msgid "Redirect after form submission"
+msgstr "Redirigir después del envío del formulario"
+
+msgid "Redirect timeout (seconds)"
+msgstr "Tiempo de espera de redirección (segundos)"
+
+msgid "Registered Tables"
+msgstr "Tablas registradas"
+
+msgid "Registered dynamic blocks"
+msgstr "Bloques dinámicos registrados"
+
+msgid "Reply to"
+msgstr "Responder a"
+
+msgid "Required"
+msgstr "Obligatorio"
+
+msgid "Rest APIs"
+msgstr "APIs REST"
+
+msgid "Right"
+msgstr "Derecha"
+
+msgid "Role"
+msgstr "Rol"
+
+msgid "SOURCE"
+msgstr "SOURCE"
+
+msgid "STRING"
+msgstr "STRING"
+
+msgid "Save record"
+msgstr "Guardar registro"
+
+msgid "Search an element saved in cache by its content."
+msgstr "Busca un elemento guardado en caché por su contenido."
+
+msgid "Select a location first"
+msgstr "Selecciona primero una ubicación"
+
+msgid "Select a target table"
+msgstr "Selecciona una tabla de destino"
+
+msgid "Select all"
+msgstr "Seleccionar todo"
+
+msgid "Select capability"
+msgstr "Seleccionar capacidad"
+
+msgid "Select page"
+msgstr "Seleccionar página"
+
+msgid "Select pages"
+msgstr "Seleccionar páginas"
+
+msgid "Select tables..."
+msgstr "Seleccionar tablas..."
+
+msgid "Select taxonomies"
+msgstr "Seleccionar taxonomías"
+
+msgid "Select taxonomy"
+msgstr "Seleccionar taxonomía"
+
+msgid "Select the ID generation strategy"
+msgstr "Seleccionar la estrategia de generación de ID"
+
+msgid "Select the column"
+msgstr "Seleccionar la columna"
+
+msgid "Select the key"
+msgstr "Seleccionar la clave"
+
+msgid "Select user"
+msgstr "Seleccionar usuario"
+
+msgid "Select users"
+msgstr "Seleccionar usuarios"
+
+msgid "Selector"
+msgstr "Selector"
+
+msgid "Self-referential"
+msgstr "Auto-referencial"
+
+msgid "Send confirmation email to logged in user"
+msgstr "Enviar correo de confirmación al usuario conectado"
+
+msgid "Shortcode preview"
+msgstr "Vista previa de shortcode"
+
+msgid "Show errors"
+msgstr "Mostrar errores"
+
+msgid "Shown in dropdown"
+msgstr "Mostrado en desplegable"
+
+msgid "Singular label. Used when a singular label is needed"
+msgstr "Etiqueta singular. Usada cuando se necesita una etiqueta singular"
+
+msgid "Sorry, no posts matched your criteria."
+msgstr "Lo sentimos, ninguna entrada coincide con tus criterios."
+
+msgid "Sorting"
+msgstr "Ordenación"
+
+msgid "Specific user"
+msgstr "Usuario específico"
+
+msgid "Step"
+msgstr "Paso"
+
+msgid "Stored in FK column"
+msgstr "Almacenado en columna FK"
+
+msgid "Stored in inverse FK"
+msgstr "Almacenado en FK inversa"
+
+msgid "Strategy"
+msgstr "Estrategia"
+
+msgid "Submissions"
+msgstr "Envíos"
+
+msgid "Sync"
+msgstr "Sincronizar"
+
+msgid "TARGET"
+msgstr "TARGET"
+
+msgid "Table Groups"
+msgstr "Grupos de tablas"
+
+msgid "Table foreign keys"
+msgstr "Claves foráneas de tabla"
+
+msgid "Table indexes"
+msgstr "Índices de tabla"
+
+msgid "Table settings"
+msgstr "Configuración de tabla"
+
+msgid "Tables"
+msgstr "Tablas"
+
+msgid "Tag element"
+msgstr "Elemento etiqueta"
+
+msgid "Text settings"
+msgstr "Configuración de texto"
+
+msgid "The block name/slug. Must be unique"
+msgstr "El nombre/slug del bloque. Debe ser único"
+
+msgid "The default percent value"
+msgstr "El valor porcentual predeterminado"
+
+msgid "This box"
+msgstr "Este box"
+
+msgid "Translate"
+msgstr "Traducir"
+
+msgid "UI"
+msgstr "UI"
+
+msgid "UI Type"
+msgstr "Tipo de UI"
+
+msgid "UNSIGNED"
+msgstr "UNSIGNED"
+
+msgid "UNSIGNED ZEROFILL"
+msgstr "UNSIGNED ZEROFILL"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Unique"
+msgstr "Único"
+
+msgid "Unique slug identifier (auto-filled from label)"
+msgstr "Identificador slug único (relleno automáticamente desde la etiqueta)"
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Update the current post"
+msgstr "Actualizar la entrada actual"
+
+msgid "VISIBLE"
+msgstr "VISIBLE"
+
+msgid "Validation rules"
+msgstr "Reglas de validación"
+
+msgid "Value already exists."
+msgstr "El valor ya existe."
+
+msgid "Value column"
+msgstr "Columna de valor"
+
+msgid "Values"
+msgstr "Valores"
+
+msgid "Variable"
+msgstr "Variable"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "View item"
+msgstr "Ver elemento"
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled. "
+"Default false."
+msgstr ""
+"Si deben existir archivos del tipo de entrada, o una cadena como slug del "
+"archivo. Generará las reglas de reescritura adecuadas si $rewrite está "
+"habilitado. Por defecto: false."
+
+msgid "Wide"
+msgstr "Ancho"
+
+msgid "With front"
+msgstr "Con front"
+
+msgid "Yes, execute it"
+msgstr "Sí, ejecutarlo"
+
+msgid "You are going to delete this option page. Are you sure?"
+msgstr "Vas a eliminar esta página de opciones. ¿Estás seguro?"
+
+msgid "You are going to delete this table group. Are you sure?"
+msgstr "Vas a eliminar este grupo de tablas. ¿Estás seguro?"
+
+msgid "You are going to delete this table. Are you sure?"
+msgstr "Vas a eliminar esta tabla. ¿Estás seguro?"
+
+msgid "coming soon"
+msgstr "próximamente"
+
+msgid "date"
+msgstr "fecha"
+
+msgid "eg. 300px"
+msgstr "ej. 300px"
+
+msgid "group settings"
+msgstr "configuración de grupo"
+
+msgid "group_name"
+msgstr "group_name"
+
+msgid "height"
+msgstr "altura"
+
+msgid "label"
+msgstr "etiqueta"
+
+msgid "max length is 20"
+msgstr "longitud máxima es 20"
+
+msgid "max length is 255"
+msgstr "longitud máxima es 255"
+
+msgid "order_by"
+msgstr "order_by"
+
+msgid "per_page"
+msgstr "per_page"
+
+msgid "render"
+msgstr "render"
+
+msgid "table"
+msgstr "tabla"
+
+msgid "table settings"
+msgstr "configuración de tabla"
+
+msgid "tables"
+msgstr "tablas"
+
+msgid "target"
+msgstr "destino"
+
+msgid "this table"
+msgstr "esta tabla"
+
+msgid "value"
+msgstr "valor"
+
+msgid "width"
+msgstr "ancho"
+
+msgid "Product data fields"
+msgstr "Campos de datos de producto"
+
+msgid "Publish"
+msgstr "Publicar"
+
+msgid "Show schema create SQL query"
+msgstr "Mostrar consulta SQL de creación de esquema"
+
+msgid "Show schema"
+msgstr "Mostrar esquema"
+
+msgid "Table record"
+msgstr ""
+
+msgid "Form identity and submission feedback"
+msgstr ""
+
+msgid "Redirect after submission"
+msgstr ""
+
+msgid "Where users land once the form is sent"
+msgstr ""
+
+msgid "Auto slug"
+msgstr ""
+
+msgid "Custom AJAX handler for this form"
+msgstr ""
+
+msgid "External endpoint this form submits to"
+msgstr ""
+
+msgid "PHP function executed on submission"
+msgstr ""
+
+msgid "Email notification settings"
+msgstr ""
+
+msgid "What the form creates and which fields it maps"
+msgstr ""
+
+msgid "Which table record this form writes to"
+msgstr ""
+
+msgid "Colors"
+msgstr ""
+
+msgid "Font sizes"
+msgstr ""
+
+msgid "Radius and thickness settings"
+msgstr ""
+
+msgid "Color palette for light and dark modes"
+msgstr ""
+
+msgid "Gap and padding values"
+msgstr ""
+
+msgid "Font weights"
+msgstr ""
+
+msgid "Font size scale"
+msgstr ""
+
+msgid "Enable or disable email notifications for this form"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Who sends and receives this email"
+msgstr ""
+
+msgid "Subject & attachments"
+msgstr ""
+
+msgid "Email subject and file attachments"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "HTML structure, visual style and preview"
+msgstr ""
+
+msgid "Adjust the values of the form's CSS variables"
+msgstr ""
+
+msgid "Create a new record"
+msgstr ""
+
+msgid "Define who can submit this form and how many times"
+msgstr ""
+
+msgid "No columns available. Select a table first."
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Redirect to"
+msgstr ""
+
+msgid "Table to fill"
+msgstr ""
+
+msgid "Add image"
+msgstr "Añadir imagen"
+
+msgid "Advanced"
+msgstr "Avanzado"
+
+msgid "Change image"
+msgstr "Cambiar imagen"
+
+msgid "Child"
+msgstr "Hijo"
+
+msgid "Click to edit label"
+msgstr "Haz clic para editar la etiqueta"
+
+msgid "Click to rename"
+msgstr "Haz clic para renombrar"
+
+msgid "Core"
+msgstr "Núcleo"
+
+msgid "Default"
+msgstr "Predeterminado"
+
+msgid "Description (showed only on admin panel)"
+msgstr "Descripción (se muestra solo en el panel de administración)"
+
+msgid "Drop columns here"
+msgstr "Suelta las columnas aquí"
+
+msgid "Drop fields here"
+msgstr "Suelta los campos aquí"
+
+msgid "Heading (optional)"
+msgstr "Encabezado (opcional)"
+
+msgid "Hide the collapse/expand toggle."
+msgstr "Oculta el interruptor de contraer/expandir."
+
+msgid "Hide the meta box title."
+msgstr "Oculta el título del meta box."
+
+msgid "Hide toggle"
+msgstr "Ocultar interruptor"
+
+msgid "High"
+msgstr "Alta"
+
+msgid "Link label"
+msgstr "Etiqueta del enlace"
+
+msgid "Low"
+msgstr "Baja"
+
+msgid "Message content"
+msgstr "Contenido del mensaje"
+
+msgid "Message settings"
+msgstr "Ajustes del mensaje"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Optional heading shown above the message"
+msgstr "Encabezado opcional que se muestra encima del mensaje"
+
+msgid "Order within the context."
+msgstr "Orden dentro del contexto."
+
+msgid "Release"
+msgstr "Soltar"
+
+msgid "Show label"
+msgstr "Mostrar etiqueta"
+
+msgid "Side"
+msgstr "Lateral"
+
+msgid "Sidebar position"
+msgstr "Posición de la barra lateral"
+
+msgid "Sorted"
+msgstr "Ordenado"
+
+msgid "Tab selected"
+msgstr "Pestaña seleccionada"
+
+msgid "The instructional text shown to the user"
+msgstr "El texto informativo que se muestra al usuario"
+
+msgid ""
+"Where the meta box appears in the post editor (applies when this table is "
+"attached to a CPT)."
+msgstr ""
+"Dónde aparece el meta box en el editor de entradas (se aplica cuando esta "
+"tabla está asociada a un CPT)."
+
+msgid ""
+"You cannot create a foreign key until at least one column has been defined. "
+"Please create a column first."
+msgstr ""
+"No puedes crear una clave foránea hasta que se haya definido al menos una "
+"columna. Crea primero una columna."
+
+msgid "Enable Abilities API"
+msgstr "Habilitar Abilities API"
+
+msgid ""
+"Expose ACPT post types, taxonomies and fields as WordPress Abilities API "
+"abilities."
+msgstr ""
+"Expóner los tipos de entrada, taxonomías y campos de ACPT como capacidades "
+"de WordPress Abilities API."
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Dynamic blocks"
+msgstr "Bloques dinámicos"
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid "If an item already exists"
+msgstr "Si un elemento ya existe"
+
+msgid "Overwrite it — replace the existing version with the imported one"
+msgstr "Sobrescribirlo: reemplazar la versión existente por la importada"
+
+msgid "Review import"
+msgstr "Revisar importación"
+
+msgid "Settings were successfully imported"
+msgstr "La configuración se importó correctamente"
+
+msgid "Skip it — keep the existing version, import only new items"
+msgstr ""
+"Omitirlo: mantener la versión existente, importar solo los elementos nuevos"
+
+msgid "Table groups"
+msgstr "Grupos de tablas"
+
+msgid "Upload new file"
+msgstr "Subir nuevo archivo"
+
+msgid "columns"
+msgstr "columnas"
+
+msgid "exists"
+msgstr "existente"
+
+msgid "fields"
+msgstr "campos"
+
+msgid ""
+"items already exist on this site. Choose how to handle them before importing."
+msgstr ""
+"Ya existen elementos en este sitio. Elige cómo gestionarlos antes de "
+"importar."
+
+msgid "new"
+msgstr "nuevo"
+
+msgid "picked up"
+msgstr ""
+
+msgid "moved to a new position"
+msgstr ""
+
+msgid "is no longer over a drop target"
+msgstr ""
+
+msgid "dropped"
+msgstr ""
+
+msgid "Drop cancelled"
+msgstr ""
+
+msgid "released outside a valid drop target"
+msgstr ""
+
+msgid "Dragging cancelled"
+msgstr ""
+
+msgid "was returned to its original position"
+msgstr ""
+
+msgid "Item"
+msgstr ""
+
+msgid "New field"
+msgstr ""
+
+msgid "Control"
+msgstr ""
+
+msgid "New control"
+msgstr ""
+
+msgid "New column"
+msgstr ""
+
+msgid "Block field"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Actions for"
+msgstr ""
+
+msgid "WooCommerce"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Sidebar on the left"
+msgstr ""
+
+msgid "Sidebar on the right"
+msgstr ""
+
+msgid "Inline"
+msgstr ""
+
+msgid "Justify"
+msgstr ""
+
+msgid "Link label and value"
+msgstr ""
+
+msgid "Automatic slug"
+msgstr ""
+
+msgid "Snippet format"
+msgstr ""
+
+msgid "WordPress native snippet"
+msgstr ""
+
+msgid "ACPT function snippet"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
+msgid "Requires \"Expose via REST API\" on the table."
+msgstr ""
+
+msgid "Click to change the type"
+msgstr ""
+
+msgid "Showing {{start}}–{{end}} of {{total}} records"
+msgstr ""
+
+msgid "AUTO_INCREMENT"
+msgstr ""
+
+msgid "Allow in block bindings"
+msgstr ""
+
+msgid "Block slug"
+msgstr ""
+
+msgid "Clear all"
+msgstr ""
+
+msgid ""
+"Column was successfully copied. Sync the target table to apply the change."
+msgstr ""
+
+msgid "Copy to another table"
+msgstr ""
+
+msgid "Could not delete meta field value"
+msgstr ""
+
+msgid "Default image"
+msgstr ""
+
+msgid "Delete the column from this table after copying"
+msgstr ""
+
+msgid "Deselect"
+msgstr ""
+
+msgid "Drag to reorder"
+msgstr ""
+
+msgid "Edit label"
+msgstr ""
+
+msgid "Enable email notifications"
+msgstr ""
+
+msgid "Import data. Acceptable file formats: JSON, YAML, CSV, YAML"
+msgstr ""
+
+msgid "No other table is available to copy this column into."
+msgstr ""
+
+msgid ""
+"Only post types registered through ACPT are listed here. Don't see the post "
+"type you're looking for (e.g. one added by another plugin, like "
+"WooCommerce's Product)?"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record successfully deleted"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Select the level of changes to show"
+msgstr ""
+
+msgid "Sync it in first from the Custom Post Types list"
+msgstr ""
+
+msgid "The file size is too big"
+msgstr ""
+
+msgid "The timeout cannot be negative"
+msgstr ""
+
+msgid "Unable to load the table schema"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Value to copy"
+msgstr ""
+
+msgid "Show sidebar"
+msgstr ""
+
+msgid "Hide sidebar"
+msgstr ""
+
+msgid "Show meta box"
+msgstr ""
+
+msgid ""
+"Whether to show the taxonomy meta box on the post edit screen (classic "
+"editor). Turn it off when the terms are assigned through a custom field. "
+"Default true."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\", which stores JSON. "
+"MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Remove \"{{column}}\" from the index, or change the column to a type that "
+"can be indexed (for example INT or VARCHAR)."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\" ({{type}}). MySQL can "
+"index this type only on its first characters."
+msgstr ""
+
+msgid "Set a length on \"{{column}}\" in the index (for example 191)."
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" links the column \"{{column}}\" ({{type}}) to "
+"\"{{refColumn}}\" ({{refType}}) in the table \"{{refTable}}\". MySQL needs "
+"both columns to have the same type."
+msgstr ""
+
+msgid ""
+"An index uses a column that stores JSON. MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and remove the JSON column from the index, or change "
+"the column type."
+msgstr ""
+
+msgid ""
+"An index uses a text column without a length. MySQL can index this type only "
+"on its first characters."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and set a length on the text column (for example 191)."
+msgstr ""
+
+msgid ""
+"A foreign key links two columns MySQL cannot connect: they must have the "
+"same type, and the referenced column must be a primary key or have a unique "
+"index."
+msgstr ""
+
+msgid ""
+"Open the Foreign keys step and check that each column has the same type as "
+"the column it points to."
+msgstr ""
+
+msgid ""
+"Some rows already in the table point to records that do not exist in the "
+"referenced table, so the foreign key cannot be added."
+msgstr ""
+
+msgid "Fix or clear those values in the table records, then sync again."
+msgstr ""
+
+msgid ""
+"A unique index cannot be added because some rows already share the same "
+"value."
+msgstr ""
+
+msgid ""
+"Make the values unique in the table records, or make the index not unique."
+msgstr ""
+
+msgid "Some values already in the table do not fit the new column type."
+msgstr ""
+
+msgid ""
+"Change those values in the table records, or choose a column type that fits "
+"them."
+msgstr ""
+
+msgid "MySQL refused to change the table."
+msgstr ""
+
+msgid "Check the technical details below, or contact support with them."
+msgstr ""
+
+msgid "The table was not created."
+msgstr ""
+
+msgid ""
+"Part of the changes were already applied to the table and cannot be undone "
+"automatically (see the technical details)."
+msgstr ""
+
+msgid "No changes were applied to the table."
+msgstr ""
+
+msgid "Technical details"
+msgstr ""
+
+msgid "Statements that would run"
+msgstr ""
+
+msgid "Open the Indexes step"
+msgstr ""
+
+msgid "Open the Foreign keys step"
+msgstr ""
+
+msgid "This table can't be synced yet. Fix these problems, then try again:"
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Choose "
+"another column or delete this key part."
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+msgid "Not synced"
+msgstr ""
+
+msgid "Not created"
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" empties the column \"{{column}}\" (SET NULL) "
+"when the linked record changes, but the column does not allow empty values."
+msgstr ""
+
+msgid ""
+"Allow empty values on \"{{column}}\" in the Columns step (Advanced Mode), or "
+"choose another \"On delete\" / \"On update\" action."
+msgstr ""
+
+msgid ""
+"In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete the foreign key."
+msgstr ""
+
+msgid ""
+"The column \"{{column}}\" ({{type}}) can't be linked to "
+"\"{{refColumn}}\" ({{refType}}): MySQL needs both columns to have the same "
+"type. In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete this foreign key."
+msgstr ""
+
+msgid ""
+"\"SET NULL\" empties the column \"{{column}}\" when the linked record "
+"changes, but the column doesn't allow empty values. Allow empty values on "
+"\"{{column}}\" in the Columns step (Advanced Mode), or choose another action."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Edit the key "
+"parts to choose another column, or delete this index."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" ({{type}}) can be indexed only on its first characters. Edit "
+"the key parts and set a length (for example 191)."
+msgstr ""
+
+msgid "Datasets"
+msgstr ""
+
+msgid "Feeds"
+msgstr ""
+
+msgid ""
+"Whether the archive of this post type has an RSS feed (/{slug}/feed/). When "
+"off, the feed URLs redirect to the archive and the feed link is removed from "
+"the page head. Defaults to true"
+msgstr ""
+
+#~ msgid ""
+#~ "From this dashboard you can discover and manage every API endpoints "
+#~ "exposed by ACPT. Use the playground to learn how to use every endpoint."
+#~ msgstr ""
+#~ "Desde este panel de control puedes descubrir y administrar todos los "
+#~ "puntos finales de la API expuestos por ACPT. Usa el playground para "
+#~ "aprender a usar cada punto final."
+
+#~ msgid ""
+#~ "This tool allows you to import settings and meta fields from previously "
+#~ "exported .acpt files (max size allowed is 2Mb)."
+#~ msgstr ""
+#~ "Esta herramienta te permite importar configuraciones y metacampos de "
+#~ "archivos .acpt previamente exportados (el tamaño máximo permitido es de "
+#~ "2 Mb)."
+
+#~ msgid ""
+#~ "Use this tool to quick export the general settings and meta fields for "
+#~ "every element in a compressed JSON format called .acpt."
+#~ msgstr ""
+#~ "Usa esta herramienta para exportar rápidamente la configuración general y "
+#~ "los metacampos para cada elemento en un formato JSON comprimido llamado ."
+#~ "acpt."
+
+#~ msgid ""
+#~ "Build reusable dataset for meta fields and forms values. Import your "
+#~ "dataset from CSV, JSON or YAML with a few clicks."
+#~ msgstr ""
+#~ "Cree un conjunto de datos reutilizable. Importa un conjunto de datos "
+#~ "desde CSV, JSON o YAML con unos pocos clics."
+
+#~ msgid ""
+#~ "Check the health check of the application, and repair any installation "
+#~ "error."
+#~ msgstr ""
+#~ "Verifica la comprobación de estado de la app y repara cualquier error de "
+#~ "instalación."
 
 #~ msgid "Search an icon"
 #~ msgstr "Buscar un ícono"

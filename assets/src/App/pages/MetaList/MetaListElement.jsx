@@ -5,7 +5,6 @@ import useTranslation from "../../hooks/useTranslation";
 import DeleteMetaModal from "./Modal/DeleteMetaModal";
 import BelongsModal from "../../components/Modal/BelongsModal";
 import {useFormContext} from "react-hook-form";
-import {fieldGroupsDisplay} from "../../constants/fields";
 import {styleVariants} from "../../constants/styles";
 import Badge from "../../components/Badge";
 import {wpAjaxRequest} from "../../utils/ajax";
@@ -14,9 +13,14 @@ import {toast} from "react-hot-toast";
 import {setCookieMessage} from "../../utils/cookies";
 import {scrollToTop} from "../../utils/scroll";
 import {refreshPage} from "../../utils/misc";
+import {Icon} from "@iconify/react";
+import {primaryColor} from "../../utils/colors";
+import DropdownMenu from "../../components/DropdownMenu";
+import LockedExportCode from "../../lite/LockedExportCode.jsx";
+import {hideElement} from "../../utils/localStorage.jsx";
+import DisplayBadge from "../../components/DisplayBadge/index.jsx";
 
-const MetaListElement = memo(({record, page}) => {
-
+const MetaListElement = memo(({record, page, handleSelect}) => {
     // manage form state
     const { register } = useFormContext();
     const formId = `elements.${record.id}`;
@@ -40,56 +44,10 @@ const MetaListElement = memo(({record, page}) => {
 
     /**
      *
-     * @param display
-     * @return {*}
-     */
-    const displayAs = (display) => {
-
-        let variant;
-        let label;
-
-        switch (display) {
-            default:
-            case fieldGroupsDisplay.STANDARD:
-                variant = styleVariants.INFO;
-                label = useTranslation("Standard view");
-                break;
-            case fieldGroupsDisplay.ACCORDION:
-                variant = styleVariants.SUCCESS;
-                label = useTranslation("Accordion");
-                break;
-            case fieldGroupsDisplay.HORIZONTAL_TABS:
-                variant = styleVariants.WARNING;
-                label = useTranslation("Horizontal tabs");
-                break;
-            case fieldGroupsDisplay.VERTICAL_TABS:
-                variant = styleVariants.DANGER;
-                label = useTranslation("Vertical tabs");
-                break;
-        }
-
-        if(!variant){
-            return null;
-        }
-
-        if(!label){
-            return null;
-        }
-
-        return (
-            <Badge style={variant}>
-                {label}
-            </Badge>
-        );
-    };
-
-    /**
-     *
      * @param context
      * @return {*}
      */
     const context = (context) => {
-
         let variant;
 
         switch (context) {
@@ -123,7 +81,6 @@ const MetaListElement = memo(({record, page}) => {
      * @return {*}
      */
     const priority = (priority) => {
-
         let variant;
 
         switch (priority) {
@@ -161,13 +118,14 @@ const MetaListElement = memo(({record, page}) => {
                 <td style={{
                     width: "24px"
                 }}>
-                    <label className="checkbox" htmlFor={formId}>
+                    <label className="checkbox" htmlFor={formId} data-testid={`select-${record.name}`}>
                         <input
                             type="checkbox"
                             id={formId}
                             name={formId}
                             defaultChecked={false}
                             {...register(formId)}
+                            onClick={e => handleSelect(record.id, e.currentTarget.checked, e)}
                         />
                         <span/>
                     </label>
@@ -179,7 +137,7 @@ const MetaListElement = memo(({record, page}) => {
                     {record.label}
                 </td>
                 <td>
-                    {displayAs(record.display)}
+                    <DisplayBadge display={record.display} />
                 </td>
                 <td>
                     {context(record.context)}
@@ -194,24 +152,44 @@ const MetaListElement = memo(({record, page}) => {
                     {record.fieldsCount}
                 </td>
                 <td>
-                    <div className="i-flex-center s-8">
-                        <Link to={`/edit_meta/${record.id}`}>
-                            {useTranslation("Edit")}
-                        </Link>
-                        <a
-                            href="#"
-                            onClick={e => {
+                    <DropdownMenu
+                        name="meta-field-menu"
+                        label={`${useTranslation("Actions for")} ${record.label || record.name}`}
+                        buttonClass={styleVariants.OUTLINED_SECONDARY}
+                        anchor={
+                            <Icon icon="bx:dots-vertical-rounded" color={primaryColor()} width={24} />
+                        }
+                        links={[
+                            <Link to={`/edit_meta/${record.id}`}>
+                                {useTranslation("Edit")}
+                            </Link>,
+                            <button
+                                type="button"
+                                className="btn-reset"
+                                onClick={e => {
                                 e.preventDefault();
                                 handleDuplicate();
-                            }}
-                        >
-                            {useTranslation("Duplicate")}
-                        </a>
-                        <DeleteMetaModal
-                            id={record.id}
-                            page={page}
-                        />
-                    </div>
+                            }}>
+                                {useTranslation("Duplicate")}
+                            </button>,
+                            <DeleteMetaModal
+                                id={record.id}
+                                page={page}
+                            />,
+                            <LockedExportCode feature="field-group" />,
+                            <button
+                                type="button"
+                                className="btn-reset"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    hideElement(record.id, metaTypes.META);
+                                    const event = new Event('hideElement');
+                                    document.dispatchEvent(event);
+                                }}>
+                                {useTranslation("Hide")}
+                            </button>,
+                        ]}
+                    />
                 </td>
             </tr>
         </React.Fragment>
@@ -220,7 +198,8 @@ const MetaListElement = memo(({record, page}) => {
 
 MetaListElement.propTypes = {
     page: PropTypes.number.isRequired,
-    record: PropTypes.object.isRequired
+    record: PropTypes.object.isRequired,
+    handleSelect: PropTypes.func.isRequired,
 };
 
 export default MetaListElement;

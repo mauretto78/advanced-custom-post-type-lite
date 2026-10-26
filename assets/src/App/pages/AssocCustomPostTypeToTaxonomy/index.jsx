@@ -2,23 +2,23 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useParams} from "react-router-dom";
 import Loader from "../../components/Loader";
-import {metaTitle} from "../../utils/misc";
+import {metaTitle, isRTLOrientation} from "../../utils/misc";
 import useTranslation from "../../hooks/useTranslation";
 import {fetchTaxonomies} from "../../redux/reducers/fetchTaxonomiesSlice";
 import {fetchCustomPostTypes} from "../../redux/reducers/fetchCustomPostTypesSlice";
 import Layout from "../../layout/Layout";
 import Alert from "../../components/Alert";
 import {styleVariants} from "../../constants/styles";
-import {filterById, isEmpty} from "../../utils/objects";
+import {filterById, filterByLabel, isEmpty} from "../../utils/objects";
 import AssocCustomPostTypeToTaxonomyElement from "./AssocCustomPostTypeToTaxonomyElement";
 import Tooltip from "../../components/Tooltip";
 import ButtonLink from "../../components/ButtonLink";
+import Pagination from "../../components/Pagination/index.jsx";
 
 const AssocCustomPostTypeToTaxonomy = () => {
 
     const documentGlobals = document.globals;
     const settings = documentGlobals.settings;
-    const globals = documentGlobals.globals;
 
     // manage global state
     const dispatch = useDispatch();
@@ -27,21 +27,27 @@ const AssocCustomPostTypeToTaxonomy = () => {
 
     // manage local state
     const {taxonomy} = useParams();
+    const {page} = useParams();
+    const perPage = (settings?.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
+    const totalPages = Math.ceil( fetchedPosts.count / perPage );
 
     useEffect(() => {
         metaTitle(useTranslation(`${useTranslation("Associate custom post types to")} ${taxonomy}`));
         dispatch(fetchTaxonomies({
             taxonomy: taxonomy
         }));
-        dispatch(fetchCustomPostTypes());
-    }, []);
+        dispatch(fetchCustomPostTypes({
+            page: page ? page : 1,
+            perPage: perPage
+        }));
+    }, [page, taxonomy]);
 
     if(loadingTaxonomies && loadingPosts){
         return <Loader/>;
     }
 
     const actions = [
-        <ButtonLink style={styleVariants.PRIMARY} to="/register_taxonomy">
+        <ButtonLink key="register-new-taxonomy" style={styleVariants.PRIMARY} size="sm" icon="bx:plus" to="/register_taxonomy">
             {useTranslation("Register new Taxonomy")}
         </ButtonLink>,
     ];
@@ -64,9 +70,12 @@ const AssocCustomPostTypeToTaxonomy = () => {
                 }
             ]}
         >
+            <Alert style={styleVariants.SECONDARY} className="mb-24">
+                {useTranslation("Only post types registered through ACPT are listed here. Don't see the post type you're looking for (e.g. one added by another plugin, like WooCommerce's Product)?")} <Link to="/">{useTranslation("Sync it in first from the Custom Post Types list")}</Link>.
+            </Alert>
             {fetchedTaxonomies.length  > 0 && fetchedPosts.records && fetchedPosts.records.length > 0 ? (
                 <div className="responsive with-shadow b-rounded">
-                    <table className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}>
+                    <table data-testid="taxonomy-table" className={`acpt-table rounded ${isRTLOrientation()}`}>
                         <thead>
                             <tr>
                                 <th>
@@ -102,6 +111,19 @@ const AssocCustomPostTypeToTaxonomy = () => {
                             />
                         ))}
                         </tbody>
+                        {totalPages > 1 && (
+                            <tfoot>
+                            <tr>
+                                <td colSpan={5}>
+                                    <Pagination
+                                        currentPage={page ? parseInt(page) : 1}
+                                        totalRows={fetchedPosts.count}
+                                        baseLink={`/assoc-post-taxonomy/${taxonomy}`}
+                                    />
+                                </td>
+                            </tr>
+                            </tfoot>
+                        )}
                     </table>
                 </div>
             ) : (

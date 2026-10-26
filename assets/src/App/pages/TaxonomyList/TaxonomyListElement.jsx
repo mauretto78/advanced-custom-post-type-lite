@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
-import ExportCodeModal from "../../components/Modal/ExportCodeModal";
+import LockedExportCode from "../../lite/LockedExportCode.jsx";
 import {metaTypes} from "../../constants/metaTypes";
 import useTranslation from "../../hooks/useTranslation";
 import ElementTypeBadge from "../../components/ElementTypeBadge";
@@ -14,9 +14,14 @@ import {setCookieMessage} from "../../utils/cookies";
 import {scrollToTop} from "../../utils/scroll";
 import {refreshPage} from "../../utils/misc";
 import {toast} from "react-hot-toast";
+import {Icon} from "@iconify/react";
+import {primaryColor} from "../../utils/colors";
+import DropdownMenu from "../../components/DropdownMenu";
+import {styleVariants} from "../../constants/styles";
+import {hideElement} from "../../utils/localStorage.jsx";
+import {taxonomyProps} from "../../props/cptTaxonomyProps.js";
 
-const TaxonomyListElement = memo(({record, page, perPage}) => {
-
+const TaxonomyListElement = memo(({record, page, perPage, handleSelect}) => {
     // manage form state
     const { register } = useFormContext();
     const formId = `elements.${record.slug}`;
@@ -48,7 +53,7 @@ const TaxonomyListElement = memo(({record, page, perPage}) => {
                         <label
                             className="checkbox"
                             htmlFor={formId}
-                            data-cy={`select-${record.slug}`}
+                            data-testid={`select-${record.slug}`}
                         >
                             <input
                                 type="checkbox"
@@ -56,6 +61,7 @@ const TaxonomyListElement = memo(({record, page, perPage}) => {
                                 name={formId}
                                 defaultChecked={false}
                                 {...register(formId)}
+                                onClick={e => handleSelect(record.slug, e.target.checked, e)}
                             />
                             <span/>
                         </label>
@@ -91,32 +97,48 @@ const TaxonomyListElement = memo(({record, page, perPage}) => {
                 </td>
                 <td>
                     {!record.isNative && (
-                        <div className="i-flex-center s-8">
-                            <a href={`#/view_taxonomy/${record.slug}`}>
-                                {useTranslation("View")}
-                            </a>
-                            <a href={`#/edit_taxonomy/${record.slug}`}>
-                                {useTranslation("Edit")}
-                            </a>
-                            <a
-                                href="#"
-                                onClick={e => {
+                        <DropdownMenu
+                            name="block-menu"
+                            label={`${useTranslation("Actions for")} ${record.slug}`}
+                            buttonClass={styleVariants.OUTLINED_SECONDARY}
+                            anchor={
+                                <Icon icon="bx:dots-vertical-rounded" color={primaryColor()} width={24} />
+                            }
+                            links={[
+                                <Link to={`/view_taxonomy/${record.slug}`}>
+                                    {useTranslation("View")}
+                                </Link>,
+                                <Link to={`/edit_taxonomy/${record.slug}`}>
+                                    {useTranslation("Edit")}
+                                </Link>,
+                                <button
+                                    type="button"
+                                    className="btn-reset"
+                                    onClick={e => {
                                     e.preventDefault();
                                     handleDuplicate();
-                                }}
-                            >
-                                {useTranslation("Duplicate")}
-                            </a>
-                            <DeleteTaxonomyModal
-                                page={page}
-                                perPage={perPage}
-                                taxonomy={record.slug}
-                            />
-                            <ExportCodeModal
-                                belongsTo={metaTypes.TAXONOMY}
-                                find={record.slug}
-                            />
-                        </div>
+                                }}>
+                                    {useTranslation("Duplicate")}
+                                </button>,
+                                <DeleteTaxonomyModal
+                                    page={page}
+                                    perPage={perPage}
+                                    taxonomy={record.slug}
+                                />,
+                                <LockedExportCode feature="taxonomy" />,
+                                <button
+                                    type="button"
+                                    className="btn-reset"
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        hideElement(record.slug, metaTypes.TAXONOMY);
+                                        const event = new Event('hideElement');
+                                        document.dispatchEvent(event);
+                                    }}>
+                                    {useTranslation("Hide")}
+                                </button>,
+                            ]}
+                        />
                     )}
                 </td>
             </tr>
@@ -127,7 +149,8 @@ const TaxonomyListElement = memo(({record, page, perPage}) => {
 TaxonomyListElement.propTypes = {
     page: PropTypes.number.isRequired,
     perPage: PropTypes.number.isRequired,
-    record: PropTypes.object.isRequired
+    record: PropTypes.shape(taxonomyProps).isRequired,
+    handleSelect: PropTypes.func.isRequired,
 };
 
 export default TaxonomyListElement;

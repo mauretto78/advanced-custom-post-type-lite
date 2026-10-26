@@ -8,78 +8,95 @@ use ACPT_Lite\Core\Validators\ArgumentsArrayValidator;
 
 class FetchPreviewLinkQuery implements QueryInterface
 {
-	/**
-	 * @var array
-	 */
-	private array $data;
+    /**
+     * @var array<string, mixed>
+     */
+    private array $data;
 
-	/**
-	 * FetchPreviewLinkQuery constructor.
-	 *
-	 * @param array $data
-	 */
-	public function __construct(array $data = [])
-	{
-		$this->data = $data;
-	}
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function __construct(array $data = [])
+    {
+        $this->data = $data;
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function execute()
-	{
-		$mandatory_keys = [
-			'id' => [
-				'required' => true,
-				'type' => 'string|integer',
-			],
-			'type' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'belongsTo' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'find' => [
-				'required' => true,
-				'type' => 'string',
-			]
-		];
+    /**
+     * @return string
+     */
+    public function execute(): string
+    {
+        $mandatory_keys = [
+            'id' => [
+                'required' => true,
+                'type' => 'string|integer',
+            ],
+            'type' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'belongsTo' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'find' => [
+                'required' => true,
+                'type' => 'string',
+            ]
+        ];
 
-		$validator = new ArgumentsArrayValidator();
+        $validator = new ArgumentsArrayValidator();
 
-		if(!$validator->validate($mandatory_keys, $this->data)){
-			throw new \InvalidArgumentException($validator->errorMessage());
-		}
+        if (!$validator->validate($mandatory_keys, $this->data)) {
+            throw new \InvalidArgumentException($validator->errorMessage());
+        }
 
-		$id = $this->data['id'];
-		$type = $this->data['type'];
-		$find = $this->data['find'];
-		$belongsTo = $this->data['belongsTo'];
+        $id = $this->data['id'];
+        $type = $this->data['type'];
+        $find = $this->data['find'];
+        $belongsTo = $this->data['belongsTo'];
 
-		if($type === 'single'){
+        if ($type === 'single') {
+            if ($belongsTo === BelongsTo::TERM_ID) {
+                $link = get_term_link((int)$id, $find);
 
-			if($belongsTo === BelongsTo::TERM_ID){
-				return get_term_link($id);
-			}
+                if (is_string($link)) {
+                    return $link;
+                }
+            }
 
-			return get_the_permalink($id);
-		}
+            $link = get_the_permalink((int)$id);
 
-		if($belongsTo === MetaTypes::CUSTOM_POST_TYPE){
-			if($find === 'post'){
-				$category = get_the_category($id);
-				$archiveLink = get_category_link($category);
-			} else {
-				$archiveLink = get_post_type_archive_link($find);
-			}
+            if ($link === false) {
+                return '';
+            }
 
-			return $archiveLink;
-		}
+            return $link;
+        }
 
-		if($belongsTo === MetaTypes::TAXONOMY){
-			return get_term_link($id);
-		}
-	}
+        if ($belongsTo === MetaTypes::CUSTOM_POST_TYPE) {
+            if ($find === 'post') {
+                $categories = get_the_category($id);
+                $archiveLink = !empty($categories) ? get_category_link($categories[0]) : '';
+            } else {
+                $archiveLink = get_post_type_archive_link($find);
+            }
+
+            if ($archiveLink === false) {
+                return '';
+            }
+
+            return $archiveLink;
+        }
+
+        if ($belongsTo === MetaTypes::TAXONOMY) {
+            $link = get_term_link((int)$id, $find);
+
+            if (is_string($link)) {
+                return $link;
+            }
+        }
+
+        return '';
+    }
 }

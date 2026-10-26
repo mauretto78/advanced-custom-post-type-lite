@@ -4,115 +4,132 @@ namespace ACPT_Lite\Utils\Wordpress;
 
 class Files
 {
-	/**
-	 * @param $url
-	 * @param null $originalFileName
-	 * @param null $parentPostId
-	 *
-	 * @return array|bool
-	 */
-	public static function downloadFromUrl($url, $originalFileName = null, $parentPostId = null)
-	{
-		$fileName = basename($url);
-		$wpUploadPath = wp_upload_dir()['path'];
-		$filePath = $wpUploadPath . '/' . $fileName;
+    /**
+     * Retrieves a sorted list of allowed MIME types, including an additional entry for "All formats".
+     *
+     * @return string[] A sorted array of MIME types.
+     */
+    public static function getMimeType(): array
+    {
+        $mimeTypes = get_allowed_mime_types();
+        $mimeTypes[] = "All formats";
 
-		if(file_put_contents($filePath, file_get_contents($url))){
-			$file = self::uploadFile($filePath, $originalFileName, $parentPostId);
+        usort($mimeTypes, function ($a, $b) {
+            return strtolower($a) <=> strtolower($b);
+        });
 
-			@unlink($filePath);
+        return $mimeTypes;
+    }
 
-			return $file;
-		}
+    /**
+     * @param string $url
+     * @param string|null $originalFileName
+     * @param int|null $parentPostId
+     * @return array<string, mixed>|false
+     */
+    public static function downloadFromUrl(string $url, ?string $originalFileName = null, ?int $parentPostId = null)
+    {
+        $fileName = basename($url);
+        $wpUploadPath = wp_upload_dir()['path'];
+        $filePath = $wpUploadPath . '/' . $fileName;
 
-		@unlink($filePath);
+        if (file_put_contents($filePath, file_get_contents($url))) {
+            $file = self::uploadFile($filePath, $originalFileName, $parentPostId);
 
-		return false;
-	}
+            @unlink($filePath);
 
-	/**
-	 * @param $url
-	 *
-	 * @return bool
-	 */
-	public static function deleteFile($url)
-	{
-		$attachments = get_posts([
-			'posts_per_page' => 1,
-			'post_type'      => 'attachment',
-			'guid'           => $url,
-			'fields'         => 'ids',
-		]);
+            return $file;
+        }
 
-		if(empty($attachments)){
-			return false;
-		}
+        @unlink($filePath);
 
-		foreach ($attachments as $attachmentID){
-			$attachmentPath = get_attached_file( $attachmentID);
-			$deleteAttachment = wp_delete_attachment($attachmentID, true);
-			$deleteFile = @unlink($attachmentPath);
-		}
+        return false;
+    }
 
-		return true;
-	}
+    /**
+     * @param string $url
+     * @return bool
+     */
+    public static function deleteFile(string $url): bool
+    {
+        $attachments = get_posts([
+            'posts_per_page' => 1,
+            'post_type'      => 'attachment',
+            'guid'           => $url,
+            'fields'         => 'ids',
+        ]);
 
-	/**
-	 * @param string $path
-	 * @param null $originalFileName
-	 * @param null $parentPostId
-	 *
-	 * @return array|bool
-	 */
-	public static function uploadFile($path, $originalFileName = null, $parentPostId = null)
-	{
-		if(empty($path)){
-			return false;
-		}
+        if (empty($attachments)) {
+            return false;
+        }
 
-		$pathInfo    = pathinfo($path);
-		$filename    = ($originalFileName !== null) ? $originalFileName : $pathInfo['basename'];
-		$wpUploadDir = wp_upload_dir();
-		$fileType    = wp_check_filetype( $filename, null );
-		$fileContent = file_get_contents($path);
+        foreach ($attachments as $attachmentID) {
+            $attachmentPath = get_attached_file($attachmentID);
 
-		if($fileContent === false){
-			return false;
-		}
+            if ($attachmentPath !== false) {
+                wp_delete_attachment($attachmentID, true);
+                @unlink($attachmentPath);
+            }
+        }
 
-		$upload =  wp_upload_bits($filename, null, $fileContent);
+        return true;
+    }
 
-		if ( ! empty( $upload['error'] ) ) {
-			return false;
-		}
+    /**
+     * @param string $path
+     * @param string|null $originalFileName
+     * @param int|null $parentPostId
+     * @return array<string, mixed>|false
+     */
+    public static function uploadFile(string $path, $originalFileName = null, $parentPostId = null)
+    {
+        if (empty($path)) {
+            return false;
+        }
 
-		$filePath = $upload['file'];
+        $pathInfo    = pathinfo($path);
+        $filename    = ($originalFileName !== null) ? $originalFileName : $pathInfo['basename'];
+        $wpUploadDir = wp_upload_dir();
+        $fileType    = wp_check_filetype($filename, null);
+        $fileContent = file_get_contents($path);
 
-		$postInfo = [
-			'guid'           => $wpUploadDir['url'] . '/' . $filename,
-			'post_mime_type' => $fileType['type'],
-			'post_title'     => $filename,
-			'post_content'   => '',
-			'post_status'    => 'inherit',
-		];
+        if ($fileContent === false) {
+            return false;
+        }
 
-		// Create the attachment.
-		$attachId = wp_insert_attachment( $postInfo, $filePath, $parentPostId );
+        $upload =  wp_upload_bits($filename, null, $fileContent);
 
-		if (!function_exists('wp_generate_attachment_metadata')){
-			require_once(ABSPATH . 'wp-admin/includes/image.php');
-			require_once(ABSPATH . 'wp-admin/includes/file.php');
-			require_once(ABSPATH . 'wp-admin/includes/media.php');
-		}
+        if (! empty($upload['error'])) {
+            return false;
+        }
 
-		// Generate the attachment metadata.
-		$attachData = wp_generate_attachment_metadata( $attachId, $filePath );
+        $filePath = $upload['file'];
 
-		// Assign metadata to attachment.
-		wp_update_attachment_metadata( $attachId, $attachData );
+        $postInfo = [
+            'guid'           => $wpUploadDir['url'] . '/' . $filename,
+            'post_mime_type' => $fileType['type'],
+            'post_title'     => $filename,
+            'post_content'   => '',
+            'post_status'    => 'inherit',
+        ];
 
-		$upload['attachmentId'] = $attachId;
+        // Create the attachment.
+        $attachId = wp_insert_attachment($postInfo, $filePath, (int)$parentPostId);
 
-		return $upload;
-	}
+        if (!function_exists('wp_generate_attachment_metadata')) {
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+            require_once(ABSPATH . 'wp-admin/includes/file.php');
+            require_once(ABSPATH . 'wp-admin/includes/media.php');
+        }
+
+        // Generate the attachment metadata.
+        $attachData = wp_generate_attachment_metadata($attachId, $filePath);
+
+        // Assign metadata to attachment.
+        wp_update_attachment_metadata($attachId, $attachData);
+
+        $upload['attachmentId'] = $attachId;
+
+        return $upload;
+    }
 }

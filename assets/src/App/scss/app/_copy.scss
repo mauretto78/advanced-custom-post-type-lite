@@ -1,13 +1,62 @@
+@use "variables";
+
 .acpt-copy-element {
   position: relative;
+  width: 100%;
 
   .form-control {
-    padding-right: 44px;
+    font-family: Monaco, Courier New, monospace;
+    padding-right: variables.$space-48 !important;
+    background: variables.$pale-gray;
+    // the base .form-control text color ($gray) only clears 4.5:1 against white;
+    // on the pale-gray readonly background it measured ~4.4:1 (#1282). $black is
+    // well clear against both.
+    color: variables.$black;
+
+    &.sm {
+      font-size: variables.$small-font-size;
+      padding-right: variables.$space-36 !important;
+    }
+  }
+
+  .divider {
+    background: variables.$white;
+    border-left: variables.$border-thickness solid variables.$light-gray;
+    width: variables.$space-48;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    bottom: 1px;
+    border-top-right-radius: calc(#{(variables.$border-radius)} / 2);
+    border-bottom-right-radius: calc(#{(variables.$border-radius)} / 2);
+  }
+
+  &.sm {
+    .divider {
+      width: variables.$space-36;
+    }
   }
 
   .copy-element-link {
     position: absolute;
-    right: 14px;
-    top: 14px;
+    right: variables.$space-14;
+    top: variables.$space-20;
+  }
+
+  &.sm {
+    .copy-element-link {
+      right: variables.$space-10;
+      top: variables.$space-14;
+    }
+  }
+
+  &:hover {
+    .divider {
+      border-color: variables.$medium-gray;
+    }
+
+    .form-control {
+      border-color: variables.$medium-gray;
+    }
   }
 }

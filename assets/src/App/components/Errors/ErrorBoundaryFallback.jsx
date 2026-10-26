@@ -55,7 +55,9 @@ const ErrorBoundaryFallback = ({error, resetErrorBoundary}) => {
 };
 
 ErrorBoundaryFallback.propTypes = {
-    error: PropTypes.string.isRequired,
+    error: PropTypes.shape({
+        message: PropTypes.string
+    }).isRequired,
     resetErrorBoundary: PropTypes.func.isRequired,
 };
 

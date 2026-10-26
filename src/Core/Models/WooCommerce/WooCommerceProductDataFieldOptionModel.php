@@ -9,8 +9,8 @@ use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
  * WooCommerceProductDataFieldOptionModel
  *
  * @since      1.0.1
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/core
+ * @package    acpt-lite
+ * @subpackage acpt-lite/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \JsonSerializable
@@ -18,38 +18,38 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
     /**
      * @var WooCommerceProductDataFieldModel
      */
-    private $productDataField;
+    private WooCommerceProductDataFieldModel $productDataField;
 
     /**
      * @var string
      */
-    private $label;
+    private string $label;
 
     /**
      * @var string
      */
-    private $value;
+    private string $value;
 
     /**
      * @var int
      */
-    private $sort;
+    private int $sort;
 
     /**
      * WooCommerceProductDataFieldOptionModel constructor.
      *
-     * @param                                  $id
+     * @param string                           $id
      * @param WooCommerceProductDataFieldModel $productDataField
-     * @param                                  $label
-     * @param                                  $value
-     * @param                                  $sort
+     * @param string                           $label
+     * @param string                           $value
+     * @param int                              $sort
      */
     public function __construct(
-            $id,
-            WooCommerceProductDataFieldModel $productDataField,
-            $label,
-            $value,
-            $sort
+        string $id,
+        WooCommerceProductDataFieldModel $productDataField,
+        string $label,
+        string $value,
+        int $sort
     ) {
         parent::__construct($id);
         $this->productDataField = $productDataField;
@@ -61,7 +61,7 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
     /**
      * @return WooCommerceProductDataFieldModel
      */
-    public function getProductDataField()
+    public function getProductDataField(): WooCommerceProductDataFieldModel
     {
         return $this->productDataField;
     }
@@ -69,7 +69,7 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
     /**
      * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
@@ -77,7 +77,7 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -85,7 +85,7 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
     /**
      * @return int
      */
-    public function getSort()
+    public function getSort(): int
     {
         return $this->sort;
     }
@@ -94,7 +94,7 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
      * @param WooCommerceProductDataFieldModel $fieldModel
      * @return WooCommerceProductDataFieldOptionModel
      */
-    public function duplicateFrom(WooCommerceProductDataFieldModel $fieldModel)
+    public function duplicateFrom(WooCommerceProductDataFieldModel $fieldModel): WooCommerceProductDataFieldOptionModel
     {
         $duplicate = clone $this;
         $duplicate->id = Uuid::v4();
@@ -103,7 +103,7 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
         return $duplicate;
     }
 
-	#[\ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [
@@ -116,37 +116,37 @@ class WooCommerceProductDataFieldOptionModel extends AbstractModel implements \J
         ];
     }
 
-	/**
-	 * @inheritDoc
-	 */
-	public static function validationRules(): array
-	{
-		return [
-			'id' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'productDataFieldId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'productDataField' => [
-				'required' => false,
-				'type' => 'object',
-				'instanceOf' => WooCommerceProductDataFieldModel::class
-			],
-			'label' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'value' => [
-				'required' => true,
-				'type' => 'string|integer',
-			],
-			'sort' => [
-				'required' => false,
-				'type' => 'string|integer',
-			],
-		];
-	}
+    /**
+     * @return array<string, mixed>
+     */
+    public static function validationRules(): array
+    {
+        return [
+            'id' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'productDataFieldId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'productDataField' => [
+                'required' => false,
+                'type' => 'object',
+                'instanceOf' => WooCommerceProductDataFieldModel::class
+            ],
+            'label' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'value' => [
+                'required' => true,
+                'type' => 'string|integer',
+            ],
+            'sort' => [
+                'required' => false,
+                'type' => 'string|integer',
+            ],
+        ];
+    }
 }

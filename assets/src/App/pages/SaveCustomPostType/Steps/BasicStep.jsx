@@ -14,7 +14,7 @@ import {asyncIsPostTypeNameValid, isPostTypeNameValid} from "../../../utils/vali
 import {sluggifyString} from "../../../utils/strings";
 import IconPicker from "../../../components/Forms/IconPicker";
 import Checkbox from "../../../components/Forms/Checkbox";
-import NavigationButtons from "../NavigationButtons";
+import NavigationButtons from "../../../components/NavigationButtons";
 
 const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleSubmit, edit = false, formValues, setFormValues = null}) => {
 
@@ -81,17 +81,17 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
         if(formValues && formValues[1]){
             setIcon(formValues[1].icon);
             setSupports({
-                title: formValues[1].support_0,
-                editor: formValues[1].support_1,
-                thumbnail: formValues[1].support_2,
-                excerpt: formValues[1].support_3,
-                author: formValues[1].support_4,
-                trackbacks: formValues[1].support_5,
-                custom_fields: formValues[1].support_6,
-                comments: formValues[1].support_7,
-                revisions: formValues[1].support_8,
-                page_attributes: formValues[1].support_9,
-                post_formats: formValues[1].support_10,
+                title: !!formValues[1].support_0,
+                editor: !!formValues[1].support_1,
+                thumbnail: !!formValues[1].support_2,
+                excerpt: !!formValues[1].support_3,
+                author: !!formValues[1].support_4,
+                trackbacks: !!formValues[1].support_5,
+                custom_fields: !!formValues[1].support_6,
+                comments: !!formValues[1].support_7,
+                revisions: !!formValues[1].support_8,
+                page_attributes: !!formValues[1].support_9,
+                post_formats: !!formValues[1].support_10,
             });
 
             methods.setValue("post_name", formValues[1].post_name);
@@ -137,8 +137,12 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
 
     const actions = [
         <Button
+            key="next-step"
             testId="next-step"
-            style={edit ? styleVariants.PRIMARY : styleVariants.SECONDARY}
+            style={edit ? styleVariants.PRIMARY : styleVariants.OUTLINED_PRIMARY}
+            size="sm"
+            icon={edit ? "bx:save" : "bx:chevron-right"}
+            iconPosition={edit ? "left" : "right"}
         >
             {useTranslation(edit ? "Save" : "Next Step")}
         </Button>
@@ -227,7 +231,7 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
                                 <IconPicker
                                     id="icon"
                                     callback={(value) => {
-                                        methods.setValue("icon", value);
+                                        methods.setValue("icon", value, { shouldValidate: true });
                                     }}
                                     defaultValue={icon}
                                     register={methods.register}
@@ -305,7 +309,7 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
 
 BasicStep.propTypes = {
     headings: PropTypes.arrayOf(PropTypes.shape({
-        label:  PropTypes.string.isRequired,
+        title:  PropTypes.string.isRequired,
         description:  PropTypes.string.isRequired,
     })).isRequired,
     title: PropTypes.string.isRequired,

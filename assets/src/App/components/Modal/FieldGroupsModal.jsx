@@ -7,11 +7,9 @@ import {styleVariants} from "../../constants/styles";
 import {fetchMeta} from "../../redux/reducers/fetchMetaSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import {isRTLOrientation} from "../../utils/misc";
 
 const FieldGroupsModal = ({belongsTo, find}) => {
-
-    const documentGlobals = document.globals;
-    const globals = documentGlobals.globals;
 
     // manage global state
     const dispatch = useDispatch();
@@ -41,7 +39,7 @@ const FieldGroupsModal = ({belongsTo, find}) => {
                     <React.Fragment>
                         {data.records && data.records.length > 0 ? (
                             <div className="responsive with-shadow b-rounded">
-                                <table className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}>
+                                <table className={`acpt-table ${isRTLOrientation()}`}>
                                     <thead>
                                     <tr>
                                         <th>
@@ -57,7 +55,7 @@ const FieldGroupsModal = ({belongsTo, find}) => {
                                     </thead>
                                     <tbody>
                                     {data.records.map((record) => (
-                                        <tr>
+                                        <tr key={record.id}>
                                             <td>
                                                 {record.name}
                                             </td>
@@ -85,15 +83,16 @@ const FieldGroupsModal = ({belongsTo, find}) => {
                     </React.Fragment>
                 )}
             </Modal>
-            <a
-                href="#"
+            <button
+                type="button"
+                className="btn-reset"
                 onClick={e => {
                     e.preventDefault();
                     setModalOpen(!modalOpen);
                 }}
             >
                 {useTranslation("Show")}
-            </a>
+            </button>
         </React.Fragment>
     );
 };

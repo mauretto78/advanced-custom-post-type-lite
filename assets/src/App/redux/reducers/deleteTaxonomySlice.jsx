@@ -19,8 +19,12 @@ const initialState = {
  */
 export const deleteTaxonomy = createAsyncThunk(
     "taxonomy/delete",
-    async (taxonomy) => {
-        return await wpAjaxRequest("deleteTaxonomyAction", {taxonomy:taxonomy});
+    async (taxonomy, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("deleteTaxonomyAction", {taxonomy:taxonomy});
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const deleteTaxonomySlice = createSlice({
     name: 'taxonomy/delete',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [deleteTaxonomy.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [deleteTaxonomy.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(deleteTaxonomy.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(deleteTaxonomy.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [deleteTaxonomy.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(deleteTaxonomy.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

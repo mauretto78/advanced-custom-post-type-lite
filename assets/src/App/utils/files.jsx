@@ -1,3 +1,50 @@
+/**
+ * Checks if a file exists at the given URL.
+ *
+ * This function verifies whether the specified URL points to an existing file
+ * by making a synchronous HTTP `HEAD` request to the resource. It first validates
+ * that the input string is a well-formed HTTP or HTTPS URL. If the validation fails,
+ * it returns `false`. Otherwise, it performs the request to determine the file's existence.
+ *
+ * Note: Due to the use of synchronous requests, its usage may block further execution,
+ * and it is not recommended for performance-sensitive applications.
+ *
+ * @param {string} url - The URL to check the existence of.
+ * @returns {boolean} - Returns `true` if the file exists, otherwise `false`.
+ */
+export const fileExists = (url) =>
+{
+    function isValidHttpUrl(string) {
+
+        if(
+            string === null ||
+            string === '' ||
+            string === undefined
+        ){
+            return false;
+        }
+
+        let url;
+
+        try {
+            url = new URL(string);
+        } catch (_) {
+            return false;
+        }
+
+        return url.protocol === "http:" || url.protocol === "https:";
+    }
+
+    if(!isValidHttpUrl(url)){
+        return false;
+    }
+
+    const http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+
+    return http.status >= 200 && http.status < 300;
+};
 
 /**
  * Nicely format bytes to a human readable string
@@ -10,6 +57,15 @@
  * @return {string}
  */
 export const formatBytes = (bytes, decimals = 2) => {
+
+    if(
+        bytes === null ||
+        bytes === '' ||
+        bytes === undefined
+    ){
+        return ''
+    }
+
     if (bytes === 0) return '0 Bytes';
 
     const k = 1024;
@@ -45,5 +101,9 @@ export const download = (filename, text) => {
  * @return {*}
  */
 export const getFileExtension = (filename) => {
+
+    // check if filename is string
+    if(typeof filename !== 'string'){return ''}
+
     return filename.split('.').pop();
 };

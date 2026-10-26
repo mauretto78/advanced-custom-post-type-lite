@@ -1,10 +1,11 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import useTranslation from "../../hooks/useTranslation";
-import Select from "./Select";
 import InputHidden from "./InputHidden";
+import {sizes} from "../../constants/forms.jsx";
+import {stripHtml} from "../../utils/strings.jsx";
 
-const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
+const MenuPosition = ({id, size = "default", register, setValue, defaultValue, description}) => {
 
     const positionRef = useRef(null);
     const menuRef = useRef(null);
@@ -24,17 +25,6 @@ const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
      * @return {[]}
      */
     const menuItems = () => {
-
-        const stripHtml = (label) => {
-
-            const stripped = label.replace(/(<([^>]+)>)/gi, "");
-
-            if(label.length !== stripped.length){
-                return label.split(" ")[0];
-            }
-
-            return label;
-        };
 
         let menu = [];
 
@@ -61,16 +51,18 @@ const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
             }
         }
 
+        const defaultValueInt = parseInt(defaultValue);
+
         for (const [key, values] of Object.entries(document.globals.menu)) {
 
-            if((parseInt(key) + 1) === defaultValue){
+            if((parseInt(key) + 1) === defaultValueInt){
                 return {
                     position: 'after',
                     menu: key
                 }
             }
 
-            if((parseInt(key) - 1) === defaultValue){
+            if((parseInt(key) - 1) === defaultValueInt){
                 return {
                     position: 'before',
                     menu: key
@@ -109,11 +101,11 @@ const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
                 value={defaultValue}
             />
             <div className="i-flex-center s-8 w-100">
-                <div className="acpt-select w-50">
+                <div className={`acpt-select w-50 ${size}`}>
                     <select
                         ref={positionRef}
-                        data-cy={`position-${id}`}
-                        className="form-control"
+                        data-testid={`position-${id}`}
+                        className={`form-control ${size}`}
                         onChangeCapture={onChangeCapture}
                         defaultValue={defaultPositionValues().position}
                     >
@@ -122,11 +114,11 @@ const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
                         <option value="before">{useTranslation("Before")}</option>
                     </select>
                 </div>
-                <div className="acpt-select w-50">
+                <div className={`acpt-select w-50 ${size}`}>
                     <select
                         ref={menuRef}
-                        data-cy={`menu-${id}`}
-                        className="form-control"
+                        data-testid={`menu-${id}`}
+                        className={`form-control ${size}`}
                         onChangeCapture={onChangeCapture}
                         defaultValue={defaultPositionValues().menu}
                     >
@@ -150,8 +142,12 @@ const MenuPosition = ({id, register, setValue, defaultValue, description}) => {
 };
 
 MenuPosition.propTypes = {
+    size: PropTypes.oneOf(sizes),
     id: PropTypes.string.isRequired,
-    defaultValue: PropTypes.number,
+    // A round trip through RHF's native hidden <input> (InputHidden below)
+    // returns a string even though it was seeded as a number -- comparisons
+    // in defaultPositionValues() above coerce with parseInt().
+    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     description: PropTypes.string,
     setValue: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,

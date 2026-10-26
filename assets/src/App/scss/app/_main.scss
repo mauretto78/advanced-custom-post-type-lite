@@ -1,12 +1,14 @@
+@use "variables";
+
 .acpt-main {
-  max-width: 1600px;
+  max-width: variables.$layout-max-width;;
   margin: 0 auto;
 
   .acpt-main-wrapper {
-    padding: $space-24;
+    padding: 0 variables.$space-24 variables.$space-24;
 
     @media screen and (max-width: 767px){
-      padding-left: $space-36;
+      padding-left: variables.$space-36;
     }
   }
 }

@@ -19,8 +19,12 @@ const initialState = {
  */
 export const saveTaxonomy = createAsyncThunk(
     "taxonomy/save",
-    async (data) => {
-        return await wpAjaxRequest("saveTaxonomyAction", data);
+    async (data, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("saveTaxonomyAction", data);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const saveTaxonomySlice = createSlice({
     name: 'taxonomy/save',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [saveTaxonomy.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [saveTaxonomy.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(saveTaxonomy.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(saveTaxonomy.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [saveTaxonomy.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(saveTaxonomy.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

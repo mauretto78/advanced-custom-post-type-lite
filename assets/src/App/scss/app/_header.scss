@@ -1,14 +1,16 @@
+@use "variables";
+
 .acpt-header-top {
-  padding: $space-12 $space-24;
-  border-bottom: $border-thickness solid $light-gray;
-  background: $white;
+  padding: variables.$space-12 variables.$space-24;
+  border-bottom: variables.$border-thickness solid variables.$light-gray;
+  background: variables.$white;
 
   .acpt-nav {
     position: absolute;
     right: 0;
-    background: $white;
-    border-radius: $border-radius;
-    box-shadow: $box-shadow;
+    background: variables.$white;
+    border-radius: variables.$border-radius;
+    box-shadow: variables.$box-shadow;
     width: 200px;
     top: 75px;
     opacity: 0;
@@ -16,9 +18,9 @@
     transition: opacity, top ease .3s;
     z-index: -1;
     display: flex;
-    padding: $space-24;
+    padding: variables.$space-24;
     flex-direction: column;
-    gap: $space-12;
+    gap: variables.$space-12;
     height: 0;
 
     &.visible {
@@ -40,15 +42,24 @@
 }
 
 .acpt-header-bottom {
-  padding: $space-12 $space-24;
-  background: $white;
-  box-shadow: $box-shadow;
+  padding: 0;
+  background: variables.$bg-color;
   position: sticky;
   position: -webkit-sticky;
-  top: 32px;
+  top: variables.$space-24 + variables.$space-8;
   z-index: 111;
+  margin: 0 auto;
+  max-width: variables.$layout-max-width;
+
+  @media screen and (max-width: 782px) and (min-width: 600px){
+    top: variables.$space-48 - variables.$space-2;
+  }
+
+  @media screen and (max-width: 600px){
+    top: 0;
+  }
 
   h1 {
-    padding: $space-12 0;
+    padding: variables.$space-12 0;
   }
 }

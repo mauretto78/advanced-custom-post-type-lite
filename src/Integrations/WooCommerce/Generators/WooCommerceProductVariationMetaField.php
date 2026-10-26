@@ -5,6 +5,7 @@ namespace ACPT_Lite\Integrations\WooCommerce\Generators;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Generators\Meta\Fields\AbstractField;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Utils\PHP\Serializer;
 
 class WooCommerceProductVariationMetaField
 {
@@ -13,15 +14,12 @@ class WooCommerceProductVariationMetaField
      */
     private MetaFieldModel $metaField;
 
-    /**
-     * @var int
-     */
-    private $loop;
+    private int $loop;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
-    private $variationData;
+    private array $variationData;
 
     /**
      * @var \WP_Post
@@ -29,13 +27,12 @@ class WooCommerceProductVariationMetaField
     private \WP_Post $variation;
 
     /**
-     * WooCommerceProductVariationMetaField constructor.
-     * @param MetaFieldModel $metaField
-     * @param $loop
-     * @param $variationData
-     * @param \WP_Post $variation
+     * @param MetaFieldModel       $metaField
+     * @param int                  $loop
+     * @param array<string, mixed> $variationData
+     * @param \WP_Post             $variation
      */
-    public function __construct(MetaFieldModel $metaField, $loop, $variationData, \WP_Post $variation)
+    public function __construct(MetaFieldModel $metaField, int $loop, array $variationData, \WP_Post $variation)
     {
         $this->metaField = $metaField;
         $this->loop = $loop;
@@ -51,16 +48,16 @@ class WooCommerceProductVariationMetaField
         $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'. $this->metaField->getType().'Field';
         $value = $this->variationData[$this->metaField->getDbName()][0] ?? null;
 
-        if(!empty($value) and is_serialized($value)){
-            $value = unserialize($value);
+        if (!empty($value) && is_serialized($value)) {
+            $value = Serializer::unserialize($value);
         }
 
-        if(class_exists($className)){
+        if (class_exists($className)) {
             /** @var AbstractField $instance */
-            $instance = new $className( $this->metaField, MetaTypes::CUSTOM_POST_TYPE, $this->variation->ID);
+            $instance = new $className($this->metaField, MetaTypes::CUSTOM_POST_TYPE, $this->variation->ID);
             $instance->setWooCommerceLoopIndex($this->loop);
 
-            if(!empty($value)){
+            if (!empty($value)) {
                 $instance->setValue($value);
             }
 

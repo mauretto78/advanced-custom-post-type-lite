@@ -1,0 +1,109 @@
+@use "variables";
+
+/* 1. Define the internal Swagger variables based on your app's state */
+[data-theme='light'] .swagger-ui-container {
+  --sw-bg: var(--acpt-surface-color);
+  --sw-text: var(--acpt-gray);
+  --sw-muted: var(--acpt-medium-gray);
+}
+
+[data-theme='dark'] .swagger-ui-container {
+  --sw-bg: var(--acpt-surface-color);
+  --sw-text: var(--acpt-black);
+  --sw-muted: var(--acpt-medium-gray);
+}
+
+[data-theme='midnight'] .swagger-ui-container {
+  --sw-bg: var(--acpt-surface-color);
+  --sw-text: var(--acpt-black);
+  --sw-muted: var(--acpt-medium-gray);
+}
+
+[data-theme='airy'] .swagger-ui-container {
+  --sw-bg: var(--acpt-surface-color);
+  --sw-text: var(--acpt-black);
+  --sw-muted: var(--acpt-medium-gray);
+}
+
+/* 2. Apply these to the .swagger-ui classes once */
+.swagger-ui-container .swagger-ui {
+  background-color: var(--sw-bg);
+  color: var(--sw-text);
+
+  .opblock-tag {
+    color: var(--sw-text);
+    small { color: var(--sw-muted); }
+  }
+
+  .opblock-section-header,
+  .scheme-container,
+  .dialog-ux .modal-ux {
+    background-color: var(--sw-bg);
+    color: var(--sw-text);
+  }
+
+  .btn {
+    background-color: var(--sw-bg);
+    color: var(--sw-text);
+  }
+
+  .parameter__name,
+  .parameter__type,
+  .parameter__extension,
+  .parameter__in,
+  .opblock-summary-description {
+    color: var(--sw-muted);
+  }
+
+  /* Target common inputs and text that often break in dark/midnight */
+  input,
+  select,
+  textarea,
+  label,
+  table thead tr td,
+  table thead tr th,
+  .opblock-summary-path,
+  .opblock-description-wrapper,
+  .opblock-external-docs-wrapper,
+  .opblock-title_normal,
+  .opblock .opblock-section-header h4,
+  .model
+  {
+    color: var(--sw-text) !important;
+
+    p {
+      color: var(--sw-text) !important;
+    }
+  }
+
+  /* Target common inputs and text that often break in dark/midnight */
+  input, select, textarea {
+    border: variables.$border-thickness solid variables.$light-gray;
+    border-radius: variables.$border-radius;
+    background-color: variables.$white;
+  }
+
+  .authorization__btn {
+    fill: variables.$black;
+  }
+
+  section.models {
+
+    &.is-open {
+      border: variables.$border-thickness solid variables.$light-gray;
+    }
+
+    .model-container {
+      background-color: var(--sw-bg);
+    }
+
+    .model-title__text {
+      color: variables.$black;
+    }
+
+    h4 {
+      color: variables.$black;
+      border-bottom: variables.$border-thickness solid variables.$light-gray;
+    }
+  }
+}

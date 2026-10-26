@@ -1,12 +1,14 @@
+@use "variables";
+
 .icon-picker-wrapper {
   max-height: 350px;
   overflow-y: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-  gap: $space-8;
-  padding: $space-24;
-  border: $border-thickness solid $light-gray;
-  border-radius: $border-radius;
+  gap: variables.$space-8;
+  padding: variables.$space-24;
+  border: variables.$border-thickness solid variables.$light-gray;
+  border-radius: variables.$border-radius;
 
   .icon {
     width: 100%;
@@ -14,22 +16,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: $border-radius;
-    border: $border-thickness solid $light-gray;
+    border-radius: variables.$border-radius;
+    border: variables.$border-thickness solid variables.$light-gray;
     cursor: pointer;
 
     svg {
-      color: $gray;
-      fill: $gray;
+      color: variables.$gray;
+      fill: variables.$gray;
     }
 
     &.selected,
     &:hover {
-      border: $border-thickness solid $primary-color;
+      border: variables.$border-thickness solid variables.$primary-color;
 
       svg {
-        color: $primary-color;
-        fill: $primary-color;
+        color: variables.$primary-color;
+        fill: variables.$primary-color;
       }
     }
   }

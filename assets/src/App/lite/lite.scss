@@ -1,0 +1,92 @@
+// ACPT Lite only styles
+
+.acpt-lite-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--acpt-primary-color-white, #fff);
+  background: var(--acpt-primary-color, #02c39a);
+}
+
+.acpt-lite-pro-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  line-height: 1.4;
+  // fixed, not a skin token: the gradient is light in every skin (dark skins turn --acpt-black light)
+  color: #111;
+  background: linear-gradient(90deg, #c9ff57 0%, #80e0cc 100%);
+}
+
+.acpt-lite-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--acpt-medium-gray, #777);
+}
+
+.acpt-lite-locked-badge {
+  cursor: pointer;
+  text-decoration: none;
+  opacity: .65;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.acpt-lite-locked-feature {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .acpt-btn {
+    align-self: flex-start;
+    text-decoration: none;
+  }
+}
+
+.acpt-lite-upgrade-button {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.acpt-lite-locked-setting {
+  .form-description a {
+    margin-left: 4px;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+}
+
+.acpt-lite-locked-tool {
+  > div:not(:last-child) {
+    opacity: .6;
+  }
+
+  .acpt-btn {
+    text-decoration: none;
+  }
+}
+
+.acpt-lite-locked-menu-item {
+  text-decoration: none;
+
+  // dropdown menu links are display: block, so a flex gap would not apply
+  .acpt-lite-pro-badge {
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+}

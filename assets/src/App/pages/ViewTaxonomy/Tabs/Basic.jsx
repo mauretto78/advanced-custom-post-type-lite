@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CardRow from "../../../components/Card/CardRow";
 import useTranslation from "../../../hooks/useTranslation";
 import Card from "../../../components/Card";
+import {taxonomyProps} from "../../../props/cptTaxonomyProps.js";
 
 const Basic = ({data}) => {
 
@@ -24,10 +25,12 @@ const Basic = ({data}) => {
             </Card>
         );
     }
+
+    return null;
 };
 
 Basic.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape(taxonomyProps)).isRequired,
 };
 
 export default Basic;

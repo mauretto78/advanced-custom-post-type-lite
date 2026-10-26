@@ -1,0 +1,101 @@
+@use "variables";
+
+// ── Shared pill base ──────────────────────────────────────────────────────────
+// Used by LogicPill and OperatorPill.
+// Import this partial in component SCSS files:
+//   @use 'path/to/_pill' as *;
+
+.acpt-pill {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  height:          variables.$space-24;
+  min-width:       variables.$space-36 - variables.$space-2;
+  padding:         0 variables.$space-8 + variables.$space-2;
+  border-radius:   variables.$space-18 + variables.$space-2;
+  font-size:       variables.$small-font-size;   // 0.813rem
+  font-weight:     500;
+  cursor:          pointer;
+  user-select:     none;
+  white-space:     nowrap;
+  letter-spacing:  0.04em;
+  transition:      background 0.15s, color 0.15s, border-color 0.15s;
+  border:          variables.$border-thickness solid transparent;
+
+  &.is-disabled {
+    opacity:        0.25;
+    pointer-events: none;
+  }
+
+  // ── Logic variants ──────────────────────────────────────────────────────────
+
+  &.acpt-pill-and {
+    background:   variables.$info-bg;
+    color:        variables.$info-color;
+    border-color: variables.$info-color;
+  }
+
+  &.acpt-pill-or {
+    background:   variables.$warning-bg;
+    color:        variables.$warning-color;
+    border-color: variables.$warning-color;
+  }
+
+  // ── Operator variants ───────────────────────────────────────────────────────
+  // Monospace font for symbols (=, !=, >, <, etc.)
+
+  &.acpt-pill-operator {
+    font-family: monospace;
+  }
+
+  &.acpt-pill-op-eq,
+  &.acpt-pill-op-gte,
+  &.acpt-pill-op-lte {
+    background:   variables.$success-bg;
+    color:        variables.$success-color;
+    border-color: variables.$success-color;
+  }
+
+  &.acpt-pill-op-neq {
+    background:   variables.$danger-bg;
+    color:        variables.$danger-color;
+    border-color: variables.$danger-color;
+  }
+
+  &.acpt-pill-op-gt,
+  &.acpt-pill-op-lt {
+    background:   variables.$warning-bg;
+    color:        variables.$warning-color;
+    border-color: variables.$warning-color;
+  }
+
+  &.acpt-pill-op-in,
+  &.acpt-pill-op-not-in {
+    background:   variables.$info-bg;
+    color:        variables.$info-color;
+    border-color: variables.$info-color;
+  }
+
+  &.acpt-pill-op-like,
+  &.acpt-pill-op-not-like {
+    background:   variables.$info-bg;
+    color:        variables.$info-color;
+    border-color: variables.$info-color;
+  }
+
+  &.acpt-pill-op-blank,
+  &.acpt-pill-op-not-blank,
+  &.acpt-pill-op-null,
+  &.acpt-pill-op-checked,
+  &.acpt-pill-op-not-checked {
+    background:   variables.$pale-gray;
+    color:        variables.$gray;
+    border-color: variables.$light-gray;
+  }
+
+  &.acpt-pill-op-regex {
+    background:   variables.$info-bg;
+    color:        variables.$info-color;
+    border-color: variables.$info-color;
+  }
+}

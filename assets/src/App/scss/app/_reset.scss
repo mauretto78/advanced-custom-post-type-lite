@@ -1,28 +1,40 @@
-h1 { font-size: $h1-font-size;  }
-h2 { font-size: $h2-font-size; }
-h3, h4 { font-size: $h3-font-size; }
+@use "variables";
+
+h1 { font-size: variables.$h1-font-size;  }
+h2 { font-size: variables.$h2-font-size; }
+h3, h4 { font-size: variables.$h3-font-size; }
 
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
   padding: 0;
+  color: variables.$black;
 }
 
 a {
   display: inline-block;
   text-decoration: none;
   outline: none;
-  color: $primary-color;
+  color: variables.$link-color;
   box-shadow: none;
 
   &:focus,
   &:hover {
     border: none;
     outline: none;
-    color: darken($primary-color, 8%);
+    color: var(--acpt-darken-link);
     box-shadow: none;
   }
 }
 
-code {
- background: transparent !important;
+// WCAG 2.4.7 Focus Visible — many interactive elements across the app set
+// outline: none and rely solely on a background/color shift shared with
+// :hover as their focus indicator, which is often too subtle to reliably
+// perceive when tabbing. This reinstates a consistent, clearly visible ring
+// for real keyboard focus specifically (:focus-visible, not plain :focus,
+// so it doesn't appear on mouse clicks) without having to touch every
+// individual component's own :focus styling. !important is required since
+// most of those existing rules are more specific than this global one.
+:focus-visible {
+  outline: 2px solid variables.$primary-color !important;
+  outline-offset: 2px !important;
 }

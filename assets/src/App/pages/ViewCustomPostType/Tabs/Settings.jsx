@@ -4,6 +4,7 @@ import CardRow from "../../../components/Card/CardRow";
 import useTranslation from "../../../hooks/useTranslation";
 import Boolean from "../../../components/Boolean";
 import Card from "../../../components/Card";
+import {customPostTypeProps} from "../../../props/cptTaxonomyProps.js";
 
 const Settings = ({data, isWPGraphQLActive = false}) => {
 
@@ -18,11 +19,11 @@ const Settings = ({data, isWPGraphQLActive = false}) => {
                         />
                         <CardRow
                             label={useTranslation("GraphQL single name")}
-                            value={<Boolean status={data[0].settings.graphql_single_name}/>}
+                            value={data[0].settings.graphql_single_name}
                         />
                         <CardRow
                             label={useTranslation("GraphQL plural name")}
-                            value={<Boolean status={data[0].settings.graphql_plural_name}/>}
+                            value={data[0].settings.graphql_plural_name}
                         />
                     </React.Fragment>
                 )}
@@ -63,6 +64,16 @@ const Settings = ({data, isWPGraphQLActive = false}) => {
                     value={data[0].settings.rest_base}
                 />
                 <CardRow
+                    label={useTranslation("Sorting")}
+                    value={
+                        <div className="i-flex-center s-4">
+                            <span>{data[0].settings.sorting && data[0].settings.sorting.orderBy ? useTranslation(data[0].settings.sorting.orderBy) : useTranslation("Date")}</span>
+                            <span>—</span>
+                            <span>{data[0].settings.sorting && data[0].settings.sorting.direction ? useTranslation(data[0].settings.sorting.direction) : useTranslation("Descending")}</span>
+                        </div>
+                    }
+                />
+                <CardRow
                     label={useTranslation("Menu position")}
                     value={data[0].settings.menu_position}
                 />
@@ -72,19 +83,31 @@ const Settings = ({data, isWPGraphQLActive = false}) => {
                 />
                 <CardRow
                     label={useTranslation("Has archive")}
-                    value={<Boolean status={data[0].settings.has_archive}/>}
+                    value={(typeof data[0].settings.has_archive === 'string') ? data[0].settings.has_archive : <Boolean status={data[0].settings.has_archive}/>}
                 />
                 <CardRow
                     label={useTranslation("Rewrite")}
                     value={<Boolean status={data[0].settings.rewrite}/>}
                 />
-                <CardRow
-                    label={useTranslation("Custom rewrite rules")}
-                    value={data[0].settings.custom_rewrite}
-                />
+                {data[0].settings.rewrite && (
+                    <React.Fragment>
+                        <CardRow
+                            label={useTranslation("Custom rewrite rules")}
+                            value={data[0].settings.custom_rewrite}
+                        />
+                        <CardRow
+                            label={useTranslation("With front")}
+                            value={<Boolean status={data[0].settings.with_front}/>}
+                        />
+                        <CardRow
+                            label={useTranslation("Feeds")}
+                            value={<Boolean status={data[0].settings.feeds !== false}/>}
+                        />
+                    </React.Fragment>
+                )}
                 <CardRow
                     label={useTranslation("Query var")}
-                    value={data[0].settings.query_var}
+                    value={typeof data[0].settings.query_var === "boolean" ? <Boolean status={data[0].settings.query_var} /> :  data[0].settings.query_var}
                 />
                 <CardRow
                     label={useTranslation("Custom query var")}
@@ -97,10 +120,12 @@ const Settings = ({data, isWPGraphQLActive = false}) => {
             </Card>
         );
     }
+
+    return null;
 };
 
 Settings.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape(customPostTypeProps)).isRequired,
     isWPGraphQLActive: PropTypes.bool,
 };
 

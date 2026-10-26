@@ -1,47 +1,58 @@
+@use "variables";
+
 .acpt-alert {
   display: block;
-  padding: 14px 24px;
-  border-radius: $border-radius;
-  color: $gray;
-  background: $pale-gray;
+  padding: variables.$space-btn;
+  border-radius: variables.$border-radius;
+  color: variables.$gray;
+  background: variables.$pale-gray;
   border: none;
   outline: none;
   transition: .3s;
-  font-size: $font-size;
+  font-size: variables.$font-size;
   width: -webkit-fill-available;
 
+  h3 { color: variables.$gray; }
+
   &.acpt-alert-disabled {
-    color: $gray;
-    background: $light-gray;
+    color: variables.$gray;
+    background: variables.$light-gray;
+    h3 { color: variables.$gray; }
   }
 
   &.acpt-alert-warning {
-    background: $warning-bg;
-    color: $warning-color;
+    background: variables.$warning-bg;
+    color: variables.$warning-color;
+    h3 { color: variables.$warning-color; }
   }
 
   &.acpt-alert-info {
-    background: $info-bg;
-    color: $info-color;
+    background: variables.$info-bg;
+    color: variables.$info-color;
+    h3 { color: variables.$info-color; }
   }
 
   &.acpt-alert-primary {
-    background: $primary-color;
-    color: $white;
+    background: variables.$primary-color;
+    color: variables.$primary-color-white;
+    h3 { color: variables.$primary-color-white; }
   }
 
   &.acpt-alert-secondary {
-    background: $secondary-color;
-    color: $primary-color;
+    background: variables.$secondary-color;
+    color: variables.$primary-color;
+    h3 { color: variables.$primary-color; }
   }
 
   &.acpt-alert-success {
-    background: $success-bg;
-    color: $success-color;
+    background: variables.$success-bg;
+    color: variables.$success-color;
+    h3 { color: variables.$success-color; }
   }
 
   &.acpt-alert-danger {
-    background: $danger-bg;
-    color: $danger-color;
+    background: variables.$danger-bg;
+    color: variables.$danger-color;
+    h3 { color: variables.$danger-color; }
   }
 }

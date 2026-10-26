@@ -5,6 +5,8 @@ import {useDispatch} from "react-redux";
 import {assocPostTypeToTaxonomy} from "../../redux/reducers/assocPostTypeToTaxonomySlice";
 import {toast} from "react-hot-toast";
 import useTranslation from "../../hooks/useTranslation";
+import {getErrorMessage} from "../../utils/errors";
+import {customPostTypeProps} from "../../props/cptTaxonomyProps.js";
 
 const AssocCustomPostTypeToTaxonomyElement = ({record, taxonomy, defaultChecked}) => {
 
@@ -22,10 +24,10 @@ const AssocCustomPostTypeToTaxonomyElement = ({record, taxonomy, defaultChecked}
                 }
 
                 if(payload.error){
-                    toast.error(error);
+                    toast.error(payload.error);
                 }
             })
-            .catch(err => console.error(err))
+            .catch(err => console.error(getErrorMessage(err)))
         ;
     };
 
@@ -45,9 +47,10 @@ const AssocCustomPostTypeToTaxonomyElement = ({record, taxonomy, defaultChecked}
             </td>
             <td>
                 <label
-                    data-cy={`assoc-${record.name}-to-${taxonomy}`}
+                    data-testid={`assoc-${record.name}-to-${taxonomy}`}
                     className="checkbox"
                     htmlFor={record.id}
+                    aria-label={`${useTranslation("Select")} ${record.name}`}
                 >
                     <input
                         id={record.id}
@@ -67,7 +70,7 @@ const AssocCustomPostTypeToTaxonomyElement = ({record, taxonomy, defaultChecked}
 
 AssocCustomPostTypeToTaxonomyElement.propTypes = {
     taxonomy: PropTypes.string.isRequired,
-    record: PropTypes.object.isRequired,
+    record: PropTypes.shape(customPostTypeProps).isRequired,
     defaultChecked: PropTypes.bool.isRequired,
 };
 

@@ -15,9 +15,9 @@ import {toast} from "react-hot-toast";
 import Loader from "../../components/Loader";
 import PageNotFound from "../404";
 import {setCookieMessage} from "../../utils/cookies";
+import {getErrorMessage} from "../../utils/errors";
 
 const SaveCustomPostType = ({}) => {
-
     // manage global state
     const dispatch = useDispatch();
     const {loading} = useSelector(state => state.saveCustomPostType);
@@ -28,7 +28,25 @@ const SaveCustomPostType = ({}) => {
     const {step} = useParams();
     const [edit, setEdit] = useState(false);
     const [fetchError, setFetchError] = useState(false);
-    const [stepActive, setStepActive] = useState(step ? parseInt(step) : 0);
+
+    const headings = [
+        {
+            "title": useTranslation("Basic"),
+            "description": useTranslation("Minimum configuration")
+        },
+        {
+            "title": useTranslation("Labels"),
+            "description": useTranslation("Additional labels")
+        },
+        {
+            "title": useTranslation("Settings"),
+            "description": useTranslation("Other settings")
+        }
+    ];
+
+    const clampStep = (value) => Math.min(Math.max(value, 0), headings.length - 1);
+
+    const [stepActive, setStepActive] = useState(step ? clampStep(parseInt(step)) : 0);
     const [formValues, setFormValues] = useState({});
     const [isWPGraphQLActive, setIsWPGraphQLActive] = useState(false);
     const [title, setTitle] = useState(postType && formValues[1] ? useTranslation("Edit") + " " + formValues[1].singular_label : useTranslation("Create new Custom Post Type"));
@@ -47,18 +65,6 @@ const SaveCustomPostType = ({}) => {
 
     }, [formValues]);
 
-    // is WPGraphQL active?
-    useEffect(()=>{
-        wpAjaxRequest("isWPGraphQLActiveAction", {})
-            .then(res => {
-                setIsWPGraphQLActive(res.status);
-            })
-            .catch(err => {
-                console.error(err.message);
-            })
-        ;
-    },[]);
-
     useEffect(() => {
         if(postType){
             setEdit(true);
@@ -66,7 +72,7 @@ const SaveCustomPostType = ({}) => {
                 postType:postType
             }))
                 .then(res => {
-                    if(res.payload.length !== 1){
+                    if(res.payload?.length !== 1){
                         setFetchError(true);
                     } else {
                         setFormValues({
@@ -115,44 +121,27 @@ const SaveCustomPostType = ({}) => {
         }
     ];
 
-    const headings = [
-        {
-            "label": useTranslation("Basic"),
-            "description": useTranslation("Minimum configuration")
-        },
-        {
-            "label": useTranslation("Labels"),
-            "description": useTranslation("Additional labels")
-        },
-        {
-            "label": useTranslation("Settings"),
-            "description": useTranslation("Other settings")
-        }
-    ];
-
     const handleSubmit = (data, index) => {
-
-        formValues[index] = data;
-        setFormValues(formValues);
+        const updatedValues = {...formValues, [index]: data};
+        setFormValues(updatedValues);
         scrollToTop();
 
-        const isFormComplete = Object.keys(formValues).length === 3;
+        const isFormComplete = Object.keys(updatedValues).length === 3;
 
         if(isFormComplete){
-            dispatch(saveCustomPostType(formValues))
+            dispatch(saveCustomPostType(updatedValues))
                 .then(res => {
                     const payload = res.payload;
 
                     if(payload.success){
                         setCookieMessage("Custom post type successfully saved.");
                         navigate("/");
-                        refreshPage();
                     } else {
                         toast.error(payload.error);
                     }
                 })
                 .catch(err => {
-                    toast.error(err);
+                    toast.error(getErrorMessage(err));
                 })
             ;
         }

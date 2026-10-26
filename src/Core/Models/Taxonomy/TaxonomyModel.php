@@ -3,23 +3,31 @@
 namespace ACPT_Lite\Core\Models\Taxonomy;
 
 use ACPT_Lite\Constants\ReservedTerms;
-use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
-use ACPT_Lite\Core\Repository\TaxonomyRepository;
 use ACPT_Lite\Utils\Wordpress\Translator;
 
 /**
  * TaxonomyModel
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/core
+ * @package    acpt-lite
+ * @subpackage acpt-lite/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 class TaxonomyModel extends AbstractModel implements \JsonSerializable
 {
+    /**
+     * Permissions are not available in ACPT Lite
+     *
+     * @return array<int, mixed>
+     */
+    public function getPermissions(): array
+    {
+        return [];
+    }
+
     /**
      * @var string
      */
@@ -36,9 +44,9 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     private string $plural;
 
     /**
-     * @var bool
+     * @var int
      */
-    private bool $native;
+    private int $native;
 
     /**
      * @var int
@@ -46,12 +54,12 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     private int $postCount;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private array $labels = [];
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private array $settings = [];
 
@@ -60,19 +68,19 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
      */
     private array $customPostTypes = [];
 
-	/**
-	 * TaxonomyModel constructor.
-	 *
-	 * @param string $id
-	 * @param string $slug
-	 * @param string $singular
-	 * @param string $plural
-	 * @param int $native
-	 * @param array $labels
-	 * @param array $settings
-	 *
-	 * @throws \Exception
-	 */
+    /**
+     * TaxonomyModel constructor.
+     *
+     * @param string $id
+     * @param string $slug
+     * @param string $singular
+     * @param string $plural
+     * @param int $native
+     * @param array<string, mixed> $labels
+     * @param array<string, mixed> $settings
+     *
+     * @throws \Exception
+     */
     public function __construct(
         string $id,
         string $slug,
@@ -90,25 +98,25 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
         $this->labels   = $labels;
         $this->settings = $settings;
         $this->customPostTypes = [];
-        $this->permissions = [];
         $this->postCount = 0;
     }
 
-	/**
-	 * @param $slug
-	 * @param $native
-	 *
-	 * @throws \Exception
-	 */
-    private function setSlug($slug, $native)
+    /**
+     * @param string $slug
+     * @param int $native
+     *
+     * @throws \Exception
+     *
+     * @return void
+     */
+    private function setSlug(string $slug, int $native): void
     {
-	   	// avoid reserved terms
-    	if(!$native and in_array($slug, ReservedTerms::list())){
-		    throw new \Exception('Slug must not collide with any reserved term. Please see the <a href="https://developer.wordpress.org/reference/functions/register_taxonomy/#reserved-terms" target="_blank">official docs</a> for more info');
-	    }
+        // avoid reserved terms
+        if (!$native && in_array($slug, ReservedTerms::list())) {
+            throw new \Exception('Slug must not collide with any reserved term. Please see the <a href="https://developer.wordpress.org/reference/functions/register_taxonomy/#reserved-terms" target="_blank">official docs</a> for more info');
+        }
 
-        if(strlen($slug) > 32){
-
+        if (strlen($slug) > 32) {
             throw new \Exception('Slug must not exceed 32 characters.');
         }
 
@@ -140,7 +148,7 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getLabels(): array
     {
@@ -148,17 +156,17 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @param $labels
+     * @param array<string, mixed> $labels
      */
-    public function setLabels($labels): void
+    public function setLabels(array $labels): void
     {
         $this->labels = $labels;
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
-    public function defaultLabels()
+    public function defaultLabels(): array
     {
         $plural = $this->getPlural();
         $singular = $this->getSingular();
@@ -190,7 +198,40 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * Mirrors the values the admin UI's creation wizard pre-fills for a brand-new taxonomy
+     * (assets/src/App/pages/SaveTaxonomy/Steps/SettingsStep.jsx), so a taxonomy created
+     * without an explicit `settings` payload behaves the same as one created through the UI.
+     *
+     * @return array<string, mixed>
+     */
+    public function defaultSettings(): array
+    {
+        return [
+            'public' => true,
+            'publicly_queryable' => true,
+            'hierarchical' => false,
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'show_in_nav_menus' => true,
+            'show_in_rest' => true,
+            'rest_base' => '',
+            'rest_controller_class' => '',
+            'show_tagcloud' => true,
+            'show_in_quick_edit' => true,
+            'show_admin_column' => false,
+            'show_meta_box' => true,
+            'capabilities' => ['manage_terms', 'edit_terms', 'delete_terms', 'assign_terms'],
+            'rewrite' => false,
+            'custom_rewrite' => '',
+            'query_var' => false,
+            'custom_query_var' => '',
+            'default_term' => '',
+            'sort' => false,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
      */
     public function getSettings(): array
     {
@@ -199,8 +240,10 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
 
     /**
      * @param int $postCount
+     *
+     * @return void
      */
-    public function setPostCount($postCount)
+    public function setPostCount(int $postCount): void
     {
         $this->postCount = $postCount;
     }
@@ -218,42 +261,54 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
      */
     public function isNative(): bool
     {
-        return $this->native;
+        return (bool)$this->native;
     }
 
-	/**
-	 * @return string
-	 */
-	public function isWooCommerceNative(): bool
-	{
-		return in_array($this->slug, ['product_tag', 'product_cat']);
-	}
+    /**
+     * @return bool
+     */
+    public function isWooCommerceNative(): bool
+    {
+        $wooCommerceNativeTags = [
+            'product_brand',
+            'product_cat',
+            'product_tag',
+            'product_shipping_class',
+            'product_type'
+        ];
+
+        return in_array($this->slug, $wooCommerceNativeTags);
+    }
 
     /**
      * @param CustomPostTypeModel $customPostTypeModel
+     *
+     * @return void
      */
-    public function addCustomPostType(CustomPostTypeModel $customPostTypeModel)
+    public function addCustomPostType(CustomPostTypeModel $customPostTypeModel): void
     {
-        if(!$this->existsInCollection($customPostTypeModel->getId(), $this->customPostTypes)){
+        if (!$this->existsInCollection($customPostTypeModel->getId(), $this->customPostTypes)) {
             $this->customPostTypes[] = $customPostTypeModel;
         }
     }
 
     /**
      * @param CustomPostTypeModel $customPostTypeModel
+     *
+     * @return void
      */
-    public function removeCustomPostType(CustomPostTypeModel $customPostTypeModel)
+    public function removeCustomPostType(CustomPostTypeModel $customPostTypeModel): void
     {
         $this->removeFromCollection($customPostTypeModel->getId(), $this->customPostTypes);
     }
 
-	/**
-	 * @return CustomPostTypeModel[]
-	 */
-	public function getCustomPostTypes(): array
-	{
-		return $this->customPostTypes;
-	}
+    /**
+     * @return CustomPostTypeModel[]
+     */
+    public function getCustomPostTypes(): array
+    {
+        return $this->customPostTypes;
+    }
 
     /**
      * @return TaxonomyModel
@@ -263,53 +318,17 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
     {
         $duplicate = clone $this;
         $duplicate->id = Uuid::v4();
-        $duplicate->permissions = [];
-        $duplicate->setSlug(Strings::getTheFirstAvailableName($duplicate->getSlug(), TaxonomyRepository::getSlugs()), false);
 
         return $duplicate;
     }
 
-	/**
-	 * @return array
-	 */
-    public function arrayRepresentation()
-    {
-	    $customPostTypesArray = [];
-
-	    /** @var CustomPostTypeModel $postTypeModel */
-	    foreach ($this->customPostTypes as $postTypeModel){
-		    $customPostTypesArray[] = [
-			    'id' => $postTypeModel->getId(),
-			    'name' => $postTypeModel->getName(),
-			    'singular' => $postTypeModel->getSingular(),
-			    'plural' => $postTypeModel->getPlural(),
-			    'icon' => $postTypeModel->getIcon(),
-			    'supports' => $postTypeModel->getSupports(),
-			    'labels' => $postTypeModel->getLabels(),
-			    'settings' => $postTypeModel->getSettings(),
-		    ];
-	    }
-
-	    return [
-		    'id' => $this->id,
-		    'slug' => $this->slug,
-		    'singular' => $this->singular,
-		    'plural' => $this->plural,
-		    'postCount' => (isset($this->postCount) and null !== $this->postCount) ? $this->postCount : 0,
-		    'isNative' => $this->isNative(),
-		    'labels' => $this->labels,
-		    'settings' => $this->settings,
-		    'customPostTypes' => $customPostTypesArray,
-	    ];
-    }
-
-	#[\ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $customPostTypesArray = [];
 
         /** @var CustomPostTypeModel $postTypeModel */
-        foreach ($this->customPostTypes as $postTypeModel){
+        foreach ($this->customPostTypes as $postTypeModel) {
             $customPostTypesArray[] = [
                 'id' => $postTypeModel->getId(),
                 'name' => $postTypeModel->getName(),
@@ -319,6 +338,7 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
                 'supports' => $postTypeModel->getSupports(),
                 'labels' => $postTypeModel->getLabels(),
                 'settings' => $postTypeModel->getSettings(),
+                'permissions' => $postTypeModel->getPermissions(),
             ];
         }
 
@@ -327,73 +347,94 @@ class TaxonomyModel extends AbstractModel implements \JsonSerializable
             'slug' => $this->slug,
             'singular' => $this->singular,
             'plural' => $this->plural,
-            'postCount' => (isset($this->postCount) and null !== $this->postCount) ? $this->postCount : 0,
+            'postCount' => $this->postCount,
             'isNative' => $this->isNative(),
             'labels' => $this->labels,
             'settings' => $this->settings,
             'customPostTypes' => $customPostTypesArray,
+            'permissions' => $this->getPermissions(),
         ];
     }
 
-	/**
-	 * @inheritDoc
-	 */
-	public static function validationRules(): array
-	{
-		return [
-			'id' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'slug' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'singular' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'plural' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'native' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-			'labels' => [
-				'required' => true,
-				'type' => 'array',
-			],
-			'settings' => [
-				'required' => true,
-				'type' => 'array',
-			],
-			'post_types' => [
-				'required' => false,
-				'type' => 'array',
-			]
-		];
-	}
+    /**
+     * @return array<string, mixed>
+     */
+    public static function validationRules(): array
+    {
+        return [
+            'id' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'slug' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'singular' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'plural' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'native' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'labels' => [
+                'required' => true,
+                'type' => 'array',
+            ],
+            'settings' => [
+                'required' => true,
+                'type' => 'array',
+            ],
+            'post_types' => [
+                'required' => false,
+                'type' => 'array',
+            ]
+        ];
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function capabilityType(): string
-	{
-		return $this->getSlug()."s";
-	}
+    /**
+     * @return string
+     */
+    public function capabilityType(): string
+    {
+        return $this->getSlug()."s";
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function capabilities(): array
-	{
-		return [
-			'edit',
-			'assign',
-			'manage',
-			'delete',
-		];
-	}
+    /**
+     * @return array<int, mixed>
+     */
+    public function capabilities(): array
+    {
+        return [
+            'edit',
+            'assign',
+            'manage',
+            'delete',
+        ];
+    }
+
+    /**
+     * Checks if the given taxonomy is a native WordPress taxonomy.
+     *
+     * @param string $taxonomy The name of the taxonomy to check.
+     *
+     * @return bool Returns true if the taxonomy is native, otherwise false.
+     */
+    public static function isTaxonomyNative(string $taxonomy): bool
+    {
+        $nativeTaxonomies = [
+            'category',
+            'post_tag',
+            'nav_menu',
+            'link_category',
+            'post_format',
+        ];
+
+        return in_array($taxonomy, $nativeTaxonomies);
+    }
 }

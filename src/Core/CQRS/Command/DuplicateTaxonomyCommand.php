@@ -9,28 +9,28 @@ class DuplicateTaxonomyCommand implements CommandInterface
     /**
      * @var string
      */
-    private $taxonomy;
+    private string $taxonomy;
 
     /**
      * DuplicateTaxonomyCommand constructor.
-     * @param $taxonomy
+     * @param string $taxonomy
      */
-    public function __construct($taxonomy)
+    public function __construct(string $taxonomy)
     {
         $this->taxonomy = $taxonomy;
     }
 
     /**
-     * @return mixed|void
+     * @return void
      * @throws \Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $taxonomy = TaxonomyRepository::get([
             'taxonomy' => $this->taxonomy
         ]);
 
-        if(empty($taxonomy)){
+        if (empty($taxonomy)) {
             throw new \Exception("Taxonomy not found");
         }
 
@@ -39,7 +39,7 @@ class DuplicateTaxonomyCommand implements CommandInterface
 
         TaxonomyRepository::save($newTaxonomyModel);
 
-        foreach ($newTaxonomyModel->getCustomPostTypes() as $customPostTypeModel){
+        foreach ($newTaxonomyModel->getCustomPostTypes() as $customPostTypeModel) {
             TaxonomyRepository::assocToPostType($customPostTypeModel->getId(), $newTaxonomyModel->getId());
         }
     }

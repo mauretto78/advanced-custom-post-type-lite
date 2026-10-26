@@ -19,8 +19,12 @@ const initialState = {
  */
 export const syncCustomPostTypes = createAsyncThunk(
     "custom-post-type/sync",
-    async () => {
-        return await wpAjaxRequest("syncPostsAction");
+    async (_, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("syncPostsAction");
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const syncCustomPostTypesSlice = createSlice({
     name: 'custom-post-type/sync',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [syncCustomPostTypes.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [syncCustomPostTypes.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(syncCustomPostTypes.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(syncCustomPostTypes.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [syncCustomPostTypes.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(syncCustomPostTypes.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

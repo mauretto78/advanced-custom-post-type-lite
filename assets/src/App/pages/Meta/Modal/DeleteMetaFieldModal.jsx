@@ -1,86 +1,58 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import useTranslation from "../../../hooks/useTranslation";
-import Modal from "../../../components/Modal";
-import Button from "../../../components/Button";
-import {styleVariants} from "../../../constants/styles";
+import DeleteModal from "../../../components/Modal/DeleteModal";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteField} from "../../../redux/reducers/metaStateSlice";
 import {useFieldArray, useFormContext} from "react-hook-form";
 import {getFormId} from "../../../utils/fields";
-import {Icon} from "@iconify/react";
 
-const DeleteMetaFieldModal = ({boxId, fieldId, fieldIndex, parentFieldId, parentBlockId, setActiveTab}) => {
+const DeleteMetaFieldModal = ({boxId, fieldId, fieldIndex, parentFieldId, parentBlockId, trigger, onAfterDelete}) => {
 
-    // manage global state
     const dispatch = useDispatch();
     const {group} = useSelector(state => state.metaState);
 
-    const formId = () => {
-        return getFormId(group.boxes, boxId, fieldId, false);
-    };
-
-    // mange local state
-    const [modalOpen, setModalOpen] = useState(false);
-
-    // manage form state
     const { control } = useFormContext();
     const { remove } = useFieldArray({
         control,
-        name: formId(),
+        name: getFormId(group.boxes, boxId, fieldId, false),
     });
 
-    const buttons = [
-        <Button style={styleVariants.SUCCESS} onClick={(e) => {
-            e.preventDefault();
-            dispatch(deleteField({boxId, parentFieldId, parentBlockId, fieldId}));
-            remove(fieldIndex);
-            setModalOpen(!modalOpen);
-
-            if(setActiveTab){
-                setActiveTab(0);
-            }
-        }}>
-            {useTranslation("Yes")}
-        </Button>,
-        <Button style={styleVariants.DANGER} onClick={(e) => {
-            e.preventDefault();
-            setModalOpen(!modalOpen);
-        }}>
-            {useTranslation("No")}
-        </Button>,
-    ];
+    // The `fieldIndex` prop is the field's position among a *filtered* sibling list
+    // (CanvasBox's root-level fields, or CanvasElementChildren's repeater children) --
+    // not necessarily its real position in the box's flat `fields` array (fields are
+    // stored flat post-flattenFields, with parentId/blockId tags, not nested). Since
+    // getFormId(..., false) always resolves to that one flat array regardless of
+    // nesting, remove() must be called with the field's real flat index, or it silently
+    // removes whichever unrelated field happens to sit at the filtered-sibling index.
+    const box = group.boxes?.find(b => b.id === boxId);
+    const flatIndex = box?.fields?.findIndex(f => f.id === fieldId);
+    const removeIndex = (typeof flatIndex === 'number' && flatIndex !== -1) ? flatIndex : fieldIndex;
 
     return (
-        <React.Fragment>
-            <Modal
-                title={useTranslation('Confirm deleting meta field')}
-                visible={modalOpen}
-                buttons={buttons}
-            >
-                {useTranslation("Are you sure?")}
-            </Modal>
-            <a
-                href="#"
-                onClick={e => {
-                    e.preventDefault();
-                    setModalOpen(!modalOpen);
-                }}
-            >
-                <Icon icon="bx-trash" width={18} color="#F94144" />
-            </a>
-        </React.Fragment>
-        
+        <DeleteModal
+            title={useTranslation('Confirm deleting meta field')}
+            trigger={trigger}
+            onConfirm={() => {
+                dispatch(deleteField({boxId, parentFieldId, parentBlockId, fieldId}));
+                remove(removeIndex);
+                if (onAfterDelete) onAfterDelete();
+            }}
+            onCancel={() => {}}
+        >
+            {useTranslation("Are you sure?")}
+        </DeleteModal>
     );
 };
 
 DeleteMetaFieldModal.propTypes = {
-    setActiveTab: PropTypes.func,
-    boxId: PropTypes.string.isRequired,
-    fieldId: PropTypes.string.isRequired,
-    fieldIndex: PropTypes.number.isRequired,
+    boxId:         PropTypes.string.isRequired,
+    fieldId:       PropTypes.string.isRequired,
+    fieldIndex:    PropTypes.number.isRequired,
     parentFieldId: PropTypes.string,
     parentBlockId: PropTypes.string,
+    trigger:       PropTypes.element,
+    onAfterDelete: PropTypes.func,
 };
 
 export default DeleteMetaFieldModal;

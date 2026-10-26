@@ -4,13 +4,13 @@ namespace ACPT_Lite\Constants;
 
 class Logic
 {
-	const BLANK = '';
-	const AND = 'AND';
-	const OR = 'OR';
+    public const BLANK = '';
+    public const AND = 'AND';
+    public const OR = 'OR';
 
-	const ALLOWED_VALUES = [
-		self::BLANK,
-		self::AND,
-		self::OR,
-	];
+    public const ALLOWED_VALUES = [
+        self::BLANK,
+        self::AND,
+        self::OR,
+    ];
 }

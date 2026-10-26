@@ -10,29 +10,29 @@ class DuplicateCustomPostTypeCommand implements CommandInterface
     /**
      * @var string
      */
-    private $postType;
+    private string $postType;
 
     /**
      * DeleteCustomPostTypeCommand constructor.
      *
-     * @param $postType
+     * @param string $postType
      */
-    public function __construct($postType)
+    public function __construct(string $postType)
     {
         $this->postType = $postType;
     }
 
     /**
-     * @return mixed|void
+     * @return void
      * @throws \Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $postType = CustomPostTypeRepository::get([
             'postType' => $this->postType
         ]);
 
-        if(empty($postType)){
+        if (empty($postType)) {
             throw new \Exception("Post type not found");
         }
 
@@ -41,7 +41,7 @@ class DuplicateCustomPostTypeCommand implements CommandInterface
 
         CustomPostTypeRepository::save($newPostTypeModel);
 
-        foreach ($newPostTypeModel->getTaxonomies() as $taxonomyModel){
+        foreach ($newPostTypeModel->getTaxonomies() as $taxonomyModel) {
             TaxonomyRepository::assocToPostType($newPostTypeModel->getId(), $taxonomyModel->getId());
         }
     }

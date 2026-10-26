@@ -6,25 +6,40 @@ use ACPT_Lite\Utils\Wordpress\WPAttachment;
 
 class Image
 {
-	/**
-	 * @param WPAttachment $attachment
-	 * @param $width
-	 * @param $height
-	 *
-	 * @return string|null
-	 */
-	public static function resize(WPAttachment $attachment, $width, $height)
-	{
-		try {
-			$image = wp_get_image_editor( $attachment->getPath() );
-			$image->resize( $width, $height, true );
-			$image->save();
+    /**
+     * @param WPAttachment $attachment
+     * @param int $width
+     * @param int $height
+     *
+     * @return string
+     */
+    public static function resize(WPAttachment $attachment, int $width, int $height): string
+    {
+        try {
+            $image = wp_get_image_editor($attachment->getPath());
 
-			$pathInfo = pathinfo($attachment->getSrc());
+            if ($image instanceof \WP_Error) {
+                return $attachment->getSrc();
+            }
 
-			return $pathInfo['dirname'] . DIRECTORY_SEPARATOR . $pathInfo['filename'] . '-'.$width.'x'.$height.'.' . $pathInfo['extension'];
-		} catch (\Exception $exception){
-			return null;
-		}
-	}
+            $image->resize($width, $height, true);
+            $image->save();
+
+            $pathInfo = pathinfo($attachment->getSrc());
+
+            if (!isset($pathInfo['extension'])) {
+                return $attachment->getSrc();
+            }
+
+            if (!isset($pathInfo['dirname'])) {
+                return $attachment->getSrc();
+            }
+
+            // $pathInfo['dirname'] comes from getSrc(), a URL -- always join with a literal
+            // forward slash, never a filesystem-path separator constant (backslash on Windows).
+            return $pathInfo['dirname'] . '/' . $pathInfo['filename'] . '-'.$width.'x'.$height.'.' . $pathInfo['extension'];
+        } catch (\Exception $exception) {
+            return $attachment->getSrc();
+        }
+    }
 }

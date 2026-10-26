@@ -1,11 +1,12 @@
-@import "app/variables";
-@import "app/scrollbar";
+@use "sass:meta";
+@use "app/variables" as *;
 
 .acpt-container {
   font-weight: 400;
   margin-left: -20px;
   color: $gray;
   font-size: $font-size;
+  background: $bg-color;
   position: relative;
   min-height: calc(100vh - 32px);
 
@@ -16,34 +17,53 @@
   }
 
   // utils
-  @import "app/reset";
-  @import "app/utils";
+  @include meta.load-css("app/reset");
+  @include meta.load-css("app/utils");
 
   // components
-  @import "app/alerts";
-  @import "app/badges";
-  @import "app/breadcrumbs";
-  @import "app/buttons";
-  @import "app/canvas";
-  @import "app/cards";
-  @import "app/code";
-  @import "app/copy";
-  @import "app/icons";
-  @import "app/icon-picker";
-  @import "app/fieldset";
-  @import "app/forms";
-  @import "app/footer";
-  @import "app/grid";
-  @import "app/header";
-  @import "app/lists";
-  @import "app/loader";
-  @import "app/main";
-  @import "app/modals";
-  @import "app/pagination";
-  @import "app/steps";
-  @import "app/scroll-to-top";
-  @import "app/tables";
-  @import "app/tabs";
-  @import "app/tooltip";
-  @import "app/tree";
+  @include meta.load-css("app/alerts");
+  @include meta.load-css("app/badges");
+  @include meta.load-css("app/breadcrumbs");
+  @include meta.load-css("app/buttons");
+  @include meta.load-css("app/canvas");
+  @include meta.load-css("app/cards");
+  @include meta.load-css("app/changelog");
+  @include meta.load-css("app/code");
+  @include meta.load-css("app/copy");
+  @include meta.load-css("app/dropdown");
+  @include meta.load-css("app/dumper");
+  @include meta.load-css("app/icons");
+  @include meta.load-css("app/icon-picker");
+  @include meta.load-css("app/fieldset");
+  @include meta.load-css("app/forms");
+  @include meta.load-css("app/footer");
+  @include meta.load-css("app/grid");
+  @include meta.load-css("app/header");
+  @include meta.load-css("app/lists");
+  @include meta.load-css("app/loader");
+  @include meta.load-css("app/main");
+  @include meta.load-css("app/media");
+  @include meta.load-css("app/modals");
+  @include meta.load-css("app/pagination");
+  @include meta.load-css("app/pill");
+  @include meta.load-css("app/steps");
+  @include meta.load-css("app/scroll-to-top");
+  @include meta.load-css("app/swagger");
+  @include meta.load-css("app/tables");
+  @include meta.load-css("app/tabs");
+  @include meta.load-css("app/tooltip");
+  @include meta.load-css("app/tree");
+}
+
+html.wp-toolbar {
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+
+html.wp-toolbar:has(body.acpt) {
+  scrollbar-color: #ddd #f8f8f8;
+}
+
+html.wp-toolbar:has(body.acpt-dark) {
+  scrollbar-color: #777 #4d5a62;
 }

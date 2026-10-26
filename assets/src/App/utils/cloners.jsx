@@ -59,15 +59,22 @@ export const cloneBox = (box) => {
     const objCopy = {...box};
     const newBoxId = uuidv4();
     let clonedFields = [];
+    let clonedVisibilityConditions = [];
 
     objCopy.id = newBoxId;
     objCopy.name = objCopy.name + "_copy";
+    objCopy.label = objCopy.label + " copy";
     objCopy.isSaved = false;
     objCopy.fields && objCopy.fields.map((field, index) => {
         clonedFields.push(cloneField(newBoxId, field));
     });
 
+    objCopy.visibilityConditions && objCopy.visibilityConditions.map((condition) => {
+        clonedVisibilityConditions.push(cloneVisibilityCondition(newBoxId, null, condition));
+    });
+
     objCopy.fields = clonedFields;
+    objCopy.visibilityConditions = clonedVisibilityConditions;
 
     return objCopy;
 };
@@ -83,6 +90,32 @@ export const cloneWCField = (field) => {
     objCopy.options && objCopy.options.map((option) => {
         clonedOptions.push(cloneWCOption(newFieldId, option));
     });
+
+    objCopy.options = clonedOptions;
+
+    return objCopy;
+};
+
+/**
+ * Clone a dynamic block control object
+ *
+ * @param control
+ * @return {*}
+ */
+export const cloneControl = (control) => {
+    const objCopy = {...control};
+    const newControlId = uuidv4();
+    let clonedOptions = [];
+
+    objCopy.id = newControlId;
+    objCopy.name = objCopy.name + "_copy";
+    objCopy.label = objCopy.label + " copy";
+
+    objCopy.options && objCopy.options.map((option) => {
+        clonedOptions.push({...option, id: uuidv4()});
+    });
+
+    objCopy.options = clonedOptions;
 
     return objCopy;
 };
@@ -207,7 +240,7 @@ export const cloneBlock = (boxId, fieldId, block) => {
     let clonedFields = [];
 
     objCopy.fields && objCopy.fields.map((f, fIndex) => {
-        clonedFields.push(cloneField(boxId, fieldId, null, newBlockId));
+        clonedFields.push(cloneField(boxId, f, null, newBlockId));
     });
 
     objCopy.fields = clonedFields;

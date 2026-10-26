@@ -6,27 +6,27 @@ use ACPT_Lite\Core\Repository\MetaRepository;
 
 class DeleteMetaGroupCommand implements CommandInterface
 {
-	/**
-	 * @var string
-	 */
-	private $id;
+    /**
+     * @var string
+     */
+    private string $id;
 
-	/**
-	 * DeleteMetaGroupCommand constructor.
-	 *
-	 * @param $id
-	 */
-	public function __construct($id)
-	{
-		$this->id = $id;
-	}
+    /**
+     * DeleteMetaGroupCommand constructor.
+     *
+     * @param string $id
+     */
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
 
-	/**
-	 * @return mixed|void
-	 * @throws \Exception
-	 */
-	public function execute()
-	{
-		MetaRepository::deleteMetaGroup($this->id);
-	}
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function execute(): void
+    {
+        MetaRepository::deleteMetaGroup($this->id);
+    }
 }

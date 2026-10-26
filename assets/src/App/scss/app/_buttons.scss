@@ -1,43 +1,165 @@
-.acpt-btn-switch {
+@use "variables";
+
+.btn-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
-  padding: $space-8;
-  border: $border-thickness solid $light-gray;
-  color: $medium-gray;
-  border-radius: $border-radius;
+  text-decoration: none;
+  outline: none;
+  color: variables.$link-color;
+  box-shadow: none;
+  display: inline-flex;
+
+  &:focus,
+  &:hover {
+    border: none;
+    outline: none;
+    color: var(--acpt-darken-link);
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  // Compound overrides so `color-*` utility classes win over the base color
+  // above — a plain class selector (.color-danger) has the same specificity
+  // as .btn-reset, so without these it silently loses to the link-color
+  // default. Never an issue on <a>, since there the competitor is the lower-
+  // specificity `a { color: ... }` element selector, not another class.
+  &.color-danger {
+    color: variables.$danger-color;
+    &:hover, &:focus { color: var(--acpt-darken-danger); }
+  }
+  &.color-warning {
+    color: variables.$warning-color;
+    &:hover, &:focus { color: var(--acpt-darken-warning); }
+  }
+  &.color-primary     { color: variables.$primary-color; }
+  &.color-gray        { color: variables.$gray; }
+  &.color-medium-gray { color: variables.$medium-gray; }
+  &.color-light-gray  { color: variables.$light-gray; }
+  &.color-pale-gray   { color: variables.$pale-gray; }
+  &.color-white       { color: variables.$white; }
+  &.color-black       { color: variables.$black; }
+}
+
+.acpt-btn-switch {
+  position: relative;
+  padding: variables.$space-8;
+  border: variables.$border-thickness solid variables.$light-gray;
+  color: variables.$medium-gray;
+  border-radius: variables.$border-radius;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-
-  &:hover {
-    border: $border-thickness solid $medium-gray;
-    color: $gray;
-  }
-
-  &.active {
-    font-weight: bold;
-    border: $border-thickness solid $primary-color;
-    color: $primary-color;
-  }
+  background: var(--acpt-white);
+  cursor: pointer;
+  transition: 0.3s;
 
   &.disabled {
     opacity: .5;
     cursor: not-allowed;
   }
+
+  &.active {
+    font-weight: bold;
+    border: variables.$border-thickness solid variables.$primary-color;
+    color: variables.$primary-color;
+  }
+
+  &:hover:not(.disabled) {
+    border: variables.$border-thickness solid variables.$medium-gray !important;
+    color: variables.$gray !important;
+  }
+
+  // Visually-hidden-but-focusable native input (radio/checkbox). The <label>
+  // stays the visible control; the input keeps native role, keyboard and state.
+  input[type="radio"],
+  input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  // Surface the global :focus-visible ring on the visible label when the
+  // hidden input receives keyboard focus (the input itself is opacity:0).
+  &:has(input:focus-visible) {
+    outline: 2px solid variables.$primary-color;
+    outline-offset: 2px;
+  }
+}
+
+.acpt-btn-switch-group {
+  display: inline-flex;
+
+  .acpt-btn-switch {
+    position: relative;
+
+    &:hover,
+    &:focus {
+      position: relative;
+      z-index: 1;
+    }
+
+    &.active {
+      z-index: 1;
+    }
+
+    & + .acpt-btn-switch {
+      margin-left: -(variables.$border-thickness);
+    }
+
+    & + .acpt-btn-switch:not(:last-child) {
+      border-radius: 0;
+    }
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
 }
 
 .acpt-btn {
-  display: inline-block;
-  padding: 14px 24px;
-  border-radius: $border-radius;
-  color: $gray;
-  background: $pale-gray;
-  border: none;
+  display: inline-flex;
+  padding: variables.$space-btn;
+  border-radius: variables.$border-radius;
+  color: variables.$gray;
+  background: variables.$pale-gray;
+  border: variables.$border-thickness solid transparent;
   outline: none;
   cursor: pointer;
-  transition: .3s;
-  font-size: $font-size;
+  transition: 0.3s;
+  font-size: variables.$font-size;
   max-height: 46px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  // Icons inherit the button's current color at all states
+  svg {
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  // Gap between icon and label
+  .i-flex-center {
+    gap: 6px;
+  }
 
   &:disabled {
     opacity: .5;
@@ -46,109 +168,236 @@
 
   &:hover,
   &:focus {
-    color: $gray;
-    background: darken($pale-gray, 8%);
+    color: variables.$gray;
+    background: var(--acpt-darken-pale-gray);
+    border: variables.$border-thickness solid transparent;
   }
 
   &.acpt-btn-sm {
-    padding: 12px 20px;
-    font-size: $small-font-size;
+    padding: variables.$space-12 variables.$space-18;
+    font-size: variables.$small-font-size;
   }
 
   &.acpt-btn-xs {
-    padding: 10px 16px;
-    font-size: $xs-font-size;
+    padding: variables.$space-8 variables.$space-14;
+    font-size: variables.$xs-font-size;
+  }
+
+  &.acpt-btn-mini {
+    padding: variables.$space-4 10px;
+    font-size: variables.$xs-font-size;
   }
 
   &.acpt-btn-disabled {
-    color: $gray;
-    background: $light-gray;
+    color: variables.$gray;
+    background: variables.$light-gray;
 
     &:hover,
     &:focus {
-      background: darken($light-gray, 8%);
+      background: var(--acpt-darken-light-gray);;
     }
   }
 
   &.acpt-btn-bordered {
-    color: $gray;
-    background: $white;
-    border: $border-thickness solid $light-gray;
+    color: variables.$gray;
+    background: variables.$white;
+    border: variables.$border-thickness solid variables.$light-gray;
 
     &:hover,
     &:focus {
-      color: $primary-color;
-      border: $border-thickness solid $primary-color;
+      color: variables.$primary-color;
+      border: variables.$border-thickness solid variables.$primary-color;
     }
   }
 
   &.acpt-btn-white {
-    color: $primary-color;
-    background: $white;
+    color: variables.$primary-color;
+    background: variables.$white;
 
     &:hover,
     &:focus {
-      background: $pale-gray;
+      background: variables.$pale-gray;
     }
   }
 
   &.acpt-btn-primary {
-    background: $primary-color;
-    color: $white;
+    background: variables.$primary-color;
+    color: variables.$on-primary;
 
     &:hover,
     &:focus {
-      background: darken($primary-color, 8%);
+      background: var(--acpt-darken-primary);
     }
   }
 
   &.acpt-btn-secondary {
-    background: $secondary-color;
-    color: $primary-color;
+    background: variables.$secondary-color;
+    color: variables.$link-color;
 
     &:hover,
     &:focus {
-      background: darken($secondary-color, 8%);
+      background: var(--acpt-darken-secondary);
     }
   }
 
   &.acpt-btn-success {
-    background: $success-bg;
-    color: $success-color;
+    background: variables.$success-bg;
+    color: variables.$success-color;
 
     &:hover,
     &:focus {
-      background: darken($success-bg, 8%);
+      background: var(--acpt-darken-success-bg);
     }
   }
 
   &.acpt-btn-danger {
-    background: $danger-bg;
-    color: $danger-color;
+    background: variables.$danger-bg;
+    color: variables.$danger-color;
 
     &:hover,
     &:focus {
-      background: darken($danger-bg, 8%);
+      background: var(--acpt-darken-danger-bg);
     }
   }
 
   &.acpt-btn-info {
-    background: $info-bg;
-    color: $info-color;
+    background: variables.$info-bg;
+    color: variables.$info-color;
 
     &:hover,
     &:focus {
-      background: darken($info-bg, 8%);
+      background: var(--acpt-darken-info-bg);
     }
   }
 
   &.acpt-btn-warning {
-    background: $warning-bg;
-    color: $warning-color;
+    background: variables.$warning-bg;
+    color: variables.$warning-color;
 
     &:hover,
     &:focus {
-      background: darken($warning-bg, 8%);
+      background: var(--acpt-darken-warning-bg);
+    }
+  }
+
+  // ── Outlined variants ──────────────────────────────────────────────────────
+
+  &.acpt-btn-outlined {
+    background: transparent;
+    color: variables.$gray;
+    border: variables.$border-thickness solid variables.$gray;
+
+    &:hover,
+    &:focus {
+      background: variables.$pale-gray;
+    }
+  }
+
+  &.acpt-btn-outlined-primary {
+    background: transparent;
+    color: variables.$primary-color;
+    border: variables.$border-thickness solid variables.$primary-color;
+
+    &:hover,
+    &:focus {
+      color: var(--acpt-darken-primary);
+      border-color: var(--acpt-darken-primary);
+      background: variables.$secondary-color;
+    }
+  }
+
+  &.acpt-btn-outlined-secondary {
+    background: transparent;
+    color: variables.$link-color;
+    border: variables.$border-thickness solid variables.$link-color;
+
+    &:hover,
+    &:focus {
+      background: var(--acpt-darken-secondary);
+    }
+  }
+
+  &.acpt-btn-outlined-danger {
+    background: transparent;
+
+  &.acpt-btn-success-filled {
+    background: variables.$success-color;
+    color: variables.$primary-color-white;
+
+    &:hover,
+    &:focus {
+      background: var(--acpt-darken-success);
+    }
+  }
+
+  &.acpt-btn-warning-filled {
+    background: variables.$warning-color;
+    color: variables.$primary-color-white;
+
+    &:hover,
+    &:focus {
+      background: var(--acpt-darken-warning);
+    }
+  }
+
+  &.acpt-btn-danger-filled {
+    background: variables.$danger-color;
+    color: variables.$primary-color-white;
+
+    &:hover,
+    &:focus {
+      background: var(--acpt-darken-danger);
+    }
+  }
+
+  &.acpt-btn-info-filled {
+    background: variables.$info-color;
+    color: variables.$primary-color-white;
+
+    &:hover,
+    &:focus {
+      background: var(--acpt-darken-info);
+    }
+  }
+    color: variables.$danger-color;
+    border: variables.$border-thickness solid variables.$danger-color;
+
+    &:hover,
+    &:focus {
+      background: variables.$danger-bg;
+    }
+  }
+
+  &.acpt-btn-outlined-success {
+    background: transparent;
+    color: variables.$success-color;
+    border: variables.$border-thickness solid variables.$success-color;
+
+    &:hover,
+    &:focus {
+      background: variables.$success-bg;
+    }
+  }
+
+  &.acpt-btn-outlined-info {
+    background: transparent;
+    color: variables.$info-color;
+    border: variables.$border-thickness solid variables.$info-color;
+
+    &:hover,
+    &:focus {
+      background: variables.$info-bg;
+    }
+  }
+
+  &.acpt-btn-outlined-warning {
+    background: transparent;
+    color: variables.$warning-color;
+    border: variables.$border-thickness solid variables.$warning-color;
+
+    &:hover,
+    &:focus {
+      background: variables.$warning-bg;
     }
   }
 }
@@ -164,18 +413,18 @@
     display: flex;
 
     svg {
-      color: $gray;
+      color: variables.$gray;
     }
 
     &:first-child {
       button {
-        border-radius: $border-radius 0 0 $border-radius;
+        border-radius: variables.$border-radius 0 0 variables.$border-radius;
       }
     }
 
     &:last-child {
       button {
-        border-radius: 0 $border-radius $border-radius 0;
+        border-radius: 0 variables.$border-radius variables.$border-radius 0;
       }
     }
 
@@ -186,22 +435,22 @@
       align-items: center;
       border-radius: 0;
       margin-right: -1px;
-      border: $border-thickness solid $light-gray;
-      padding: 10px 16px;
+      border: variables.$border-thickness solid variables.$light-gray;
+      padding: variables.$space-8 variables.$space-18;
       cursor: pointer;
-      color: $gray;
-      background: $white;
+      color: variables.$gray;
+      background: variables.$white;
     }
 
     &.active {
       button {
-        color: $white;
-        border: $primary-color;
-        background: $primary-color;
+        color: variables.$primary-color-white;
+        border: variables.$border-thickness solid variables.$primary-color;
+        background: variables.$primary-color;
       }
 
       svg {
-        color: $white;
+        color: variables.$white;
       }
     }
   }

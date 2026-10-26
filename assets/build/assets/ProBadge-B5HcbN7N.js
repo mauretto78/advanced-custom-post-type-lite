@@ -1,0 +1,1 @@
+import{m as a,P as r}from"./fields-8JM50JqS.js";import"./vendor-D1TjLYIp.js";const e=({className:s=""})=>a.jsx("span",{className:`acpt-lite-pro-badge ${s}`,"aria-label":"ACPT PRO",children:"PRO"});e.propTypes={className:r.string};export{e as P};

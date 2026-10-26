@@ -4,15 +4,12 @@ import useTranslation from "../../../hooks/useTranslation";
 import Button from "../../../components/Button";
 import {styleVariants} from "../../../constants/styles";
 import {wpAjaxRequest} from "../../../utils/ajax";
-import {refreshPage} from "../../../utils/misc";
+import {refreshPage, isRTLOrientation} from "../../../utils/misc";
 import {toast} from "react-hot-toast";
 import Alert from "../../../components/Alert";
 import {setCookieMessage} from "../../../utils/cookies";
 
 const SyncPostsModal = () => {
-
-    const documentGlobals = document.globals;
-    const globals = documentGlobals.globals;
 
     // manage local state
     const [modalOpen, setModalOpen] = useState(false);
@@ -69,6 +66,8 @@ const SyncPostsModal = () => {
     const buttons = [
         <Button
             style={styleVariants.PRIMARY}
+            size="sm"
+            icon="bx:refresh"
             disabled={selected.length === 0}
             onClick={() => {
                 handleSyncPostTypes();
@@ -77,7 +76,9 @@ const SyncPostsModal = () => {
             {useTranslation("Sync")}
         </Button>,
         <Button
-            style={styleVariants.SECONDARY}
+            style={styleVariants.OUTLINED_SECONDARY}
+            size="sm"
+            icon="bx:arrow-back"
             onClick={() => {
                 setModalOpen(!modalOpen);
             }}
@@ -96,7 +97,7 @@ const SyncPostsModal = () => {
                         <React.Fragment>
                             {postTypes && postTypes.length > 0 ?
                                 <div className="responsive">
-                                    <table className={`acpt-table spaceless ${globals.is_rtl ? 'rtl' : ''}`}>
+                                    <table className={`acpt-table spaceless ${isRTLOrientation()}`}>
                                         <tbody>
                                         {postTypes.map((postType) => (
                                             <tr>
@@ -127,7 +128,9 @@ const SyncPostsModal = () => {
             </Modal>
             <Button
                 type="button"
-                style={styleVariants.SECONDARY}
+                style={styleVariants.OUTLINED_PRIMARY}
+                size="sm"
+                icon="bx:refresh"
                 onClick={e => {
                     e.preventDefault();
                     setModalOpen(!modalOpen);

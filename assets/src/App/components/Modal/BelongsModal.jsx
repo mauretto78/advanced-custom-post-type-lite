@@ -6,11 +6,11 @@ import {styleVariants} from "../../constants/styles";
 import Alert from "../Alert";
 import BelongBadge from "../BelongBadge";
 import {metaTypes} from "../../constants/metaTypes";
+import {isArray} from "../../utils/objects.jsx";
+import {belongShape} from "../../constants/propShapes.jsx";
+import {isRTLOrientation} from "../../utils/misc";
 
 const BelongsModal = ({belongs}) => {
-
-    const documentGlobals = document.globals;
-    const globals = documentGlobals.globals;
 
     // manage local state
     const [modalOpen, setModalOpen] = useState(false);
@@ -22,64 +22,54 @@ const BelongsModal = ({belongs}) => {
      */
     const belongsTo = (belong) => {
 
-        if(!belong.belongsTo){
+        const b = belong.belongsTo ?? belong.rule ?? null;
+
+        if(!b){
             return '';
         }
 
         let string = '';
 
-        switch (belong.belongsTo) {
-            case metaTypes.CUSTOM_POST_TYPE:
-                string = "Custom post type";
-                break;
-
-            case metaTypes.TAXONOMY:
-                string = "Taxonomy";
-                break;
-
-            case metaTypes.OPTION_PAGE:
-                string = "Option page";
-                break;
-
-            case metaTypes.USER:
-                string = "All users";
-                break;
-
-            case metaTypes.COMMENT:
-                string = "All comments";
-                break;
-
-            case metaTypes.MEDIA:
-                string = "Attachment";
-                break;
-
-            case "PARENT_POST_ID":
-                string = "Post parent";
-                break;
-
-            case "POST_ID":
-                string = "Post";
-                break;
-
-            case "POST_TEMPLATE":
-                string = "Post template";
-                break;
-
-            case "POST_TAX":
-                string = "Post taxonomy";
-                break;
-
-            case "POST_CAT":
-                string = "Post category";
-                break;
-
-            case "TERM_ID":
-                string = "Term";
-                break;
-
-            case "USER_ID":
-                string = "User";
-                break;
+        switch (b) {
+        case metaTypes.CUSTOM_POST_TYPE:
+            string = "Custom post type";
+            break;
+        case metaTypes.TAXONOMY:
+            string = "Taxonomy";
+            break;
+        case metaTypes.USER:
+            string = "All users";
+            break;
+        case metaTypes.COMMENT:
+            string = "All comments";
+            break;
+        case metaTypes.MEDIA:
+            string = "Attachment";
+            break;
+        case "PARENT_POST_ID":
+            string = "Post parent";
+            break;
+        case "POST_ID":
+            string = "Post";
+            break;
+        case "POST_TEMPLATE":
+            string = "Post template";
+            break;
+        case "POST_FORMAT":
+            string = "Post format";
+            break;
+        case "POST_TAX":
+            string = "Post taxonomy";
+            break;
+        case "POST_CAT":
+            string = "Post category";
+            break;
+        case "TERM_ID":
+            string = "Term";
+            break;
+        case "USER_ID":
+            string = "User";
+            break;
         }
 
         return useTranslation(string);
@@ -96,27 +86,34 @@ const BelongsModal = ({belongs}) => {
             return '';
         }
 
-        let string = '';
+        const OPERATOR_CLASSES = {
+            '=':           'acpt-pill-op-eq',
+            '!=':          'acpt-pill-op-neq',
+            '>':           'acpt-pill-op-gt',
+            '<':           'acpt-pill-op-lt',
+            '>=':          'acpt-pill-op-gte',
+            '<=':          'acpt-pill-op-lte',
+            'IN':          'acpt-pill-op-in',
+            'NOT_IN':      'acpt-pill-op-not-in',
+            'LIKE':        'acpt-pill-op-like',
+            'NOT_LIKE':    'acpt-pill-op-not-like',
+            'BLANK':       'acpt-pill-op-blank',
+            'NOT_BLANK':   'acpt-pill-op-not-blank',
+            'NULL':        'acpt-pill-op-null',
+            'NOT_NULL':    'acpt-pill-op-null',
+            'CHECKED':     'acpt-pill-op-checked',
+            'NOT_CHECKED': 'acpt-pill-op-not-checked',
+            'MAX':         'acpt-pill-op-gt',
+            'MIN':         'acpt-pill-op-lt',
+            'REGEX':       'acpt-pill-op-like',
+        };
+        const variantClass  = OPERATOR_CLASSES[belong.operator]  ?? '';
 
-        switch (belong.operator) {
-            case "=":
-                string = "is equal to";
-                break;
-
-            case "!=":
-                string = "is not equal to";
-                break;
-
-            case "IN":
-                string = "is included in";
-                break;
-
-            case "NOT_IN":
-                string = "is not included in";
-                break;
-        }
-
-        return useTranslation(string);
+        return (
+            <span className={`acpt-pill acpt-pill-operator ${variantClass}`}>
+                {belong.operator}
+            </span>
+        );
     };
 
     /**
@@ -125,18 +122,22 @@ const BelongsModal = ({belongs}) => {
      * @return {*}
      */
     const find = (belong) => {
-        if(!belong.find || belong.find === ''){
+
+        const f = belong.find ?? belong.value ?? null;
+
+        if(!f || f === ''){
             return '';
         }
 
-        const finds = belong.find.split(",");
+        const finds = isArray(f) ? f : f.split(",");
 
         if(finds.length > 0){
             return (
                 <div className="i-flex-center flex-wrap s-4">
                     {finds.map((find) => (
                         <BelongBadge
-                            belongsTo={belong.belongsTo}
+                            key={find}
+                            belongsTo={belong.belongsTo ?? belong.rule}
                             find={find}
                         />
                     ))}
@@ -150,16 +151,16 @@ const BelongsModal = ({belongs}) => {
     return (
         <React.Fragment>
             <Modal title={useTranslation("Location")} visible={modalOpen} textAlign="left">
-                {belongs.length > 0 ? (
+                {belongs?.length > 0 ? (
                     <div className="responsive">
-                        <table className={`acpt-table spaceless ${globals.is_rtl ? 'rtl' : ''}`}>
+                        <table className={`acpt-table spaceless ${isRTLOrientation()}`}>
                             <tbody>
                             {belongs.map((belong, index) => {
 
                                 const isLast = (index === (belongs.length-1));
 
                                 return (
-                                    <tr>
+                                    <tr key={belong.id ?? index}>
                                         <td>
                                             {belongsTo(belong)}
                                         </td>
@@ -170,7 +171,11 @@ const BelongsModal = ({belongs}) => {
                                             {find(belong)}
                                         </td>
                                         <td>
-                                            {!isLast && belong.logic && useTranslation(belong.logic)}
+                                            {!isLast && belong.logic && (
+                                                <span className={`acpt-pill acpt-pill-${belong.logic.toLowerCase()}`}>
+                                                    {belong.logic}
+                                                </span>
+                                            )}
                                         </td>
                                     </tr>
                                 );
@@ -184,21 +189,22 @@ const BelongsModal = ({belongs}) => {
                     </Alert>
                 )}
             </Modal>
-            <a
-                href="#"
+            <button
+                type="button"
+                className="btn-reset"
                 onClick={e => {
                     e.preventDefault();
                     setModalOpen(!modalOpen);
                 }}
             >
                 {useTranslation("Show")}
-            </a>
+            </button>
         </React.Fragment>
     );
 };
 
 BelongsModal.propTypes = {
-    belongs: PropTypes.array.isRequired,
+    belongs: PropTypes.arrayOf(belongShape).isRequired,
 };
 
 export default BelongsModal;

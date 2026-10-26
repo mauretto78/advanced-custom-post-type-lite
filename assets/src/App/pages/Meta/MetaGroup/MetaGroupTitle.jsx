@@ -31,7 +31,15 @@ const MetaGroupTitle = ({groupId}) => {
     const {group} = useSelector(state => state.metaState);
 
     // manage local state
-    const [autoSlug, setAutoSlug] = useState(true);
+    // Starts ON for a brand-new/untouched group, but stays OFF for a name
+    // already customized away from what auto-slug would generate -- so
+    // reopening an existing group to tweak its label can't silently wipe an
+    // intentional custom slug.
+    const [autoSlug, setAutoSlug] = useState(() => {
+        const currentName = !isEmpty(group) ? group.name : '';
+        const currentLabel = !isEmpty(group) ? group.label : '';
+        return !currentName || currentName === slugify(transliterate(currentLabel ?? ''));
+    });
     const [formVisible, setFormVisible] = useState(false);
 
     /**
@@ -100,6 +108,7 @@ const MetaGroupTitle = ({groupId}) => {
                     <div>
                         <Input
                             id="label"
+                            size="xs"
                             register={register}
                             placeholder={useTranslation("Group label")}
                             defaultValue={!isEmpty(group) ? group.label : null}
@@ -125,11 +134,17 @@ const MetaGroupTitle = ({groupId}) => {
                     <div>
                         <Input
                             id="name"
+                            size="xs"
                             register={register}
                             placeholder={useTranslation("Group name")}
                             defaultValue={!isEmpty(group) ? group.name : "group_name"}
                             errors={errors}
                             isRequired={true}
+                            onChangeCapture={() => {
+                                // A direct edit to the slug is a deliberate customization --
+                                // stop auto-syncing it from the label for the rest of this session.
+                                setAutoSlug(false);
+                            }}
                             validate={{
                                 validate: alphanumericallyValid,
                                 required: useTranslation("This field is mandatory"),
@@ -145,9 +160,19 @@ const MetaGroupTitle = ({groupId}) => {
                             label={
                                 <span
                                     className={`acpt-btn-switch ${autoSlug === true ? 'active' : ''}`}
+                                    role="switch"
+                                    aria-label={useTranslation("Automatic slug")}
+                                    aria-checked={autoSlug}
+                                    tabIndex={0}
                                     onClick={e => {
                                         e.preventDefault();
                                         setAutoSlug(!autoSlug);
+                                    }}
+                                    onKeyDown={e => {
+                                        if(e.key === 'Enter' || e.key === ' '){
+                                            e.preventDefault();
+                                            setAutoSlug(!autoSlug);
+                                        }
                                     }}
                                 >
                                 <Icon icon="bx-link" width={18} />
@@ -170,7 +195,11 @@ const MetaGroupTitle = ({groupId}) => {
                     )}
                 </React.Fragment>
             )}
-            <Button style={styleVariants.SECONDARY} size="sm" onClick={(e) => {
+            <Button
+                style={styleVariants.OUTLINED_SECONDARY}
+                size="sm"
+                icon={formVisible ? 'bx:x' : 'bx:cog'}
+                onClick={(e) => {
                 e.preventDefault();
                 setFormVisible(!formVisible);
             }}>

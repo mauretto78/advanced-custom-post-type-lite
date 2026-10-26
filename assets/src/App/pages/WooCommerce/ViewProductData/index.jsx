@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "../../../components/Loader";
 import {metaTitle} from "../../../utils/misc";
+import {primaryColor} from "../../../utils/colors";
 import useTranslation from "../../../hooks/useTranslation";
 import {fetchWooCommerceProductData} from "../../../redux/reducers/fetchWooCommerceProductDataSlice";
 import ButtonLink from "../../../components/ButtonLink";
@@ -41,13 +42,19 @@ const ViewProductData = ({}) => {
 
     const actions = [
         <ButtonLink
-            style={styleVariants.SECONDARY}
+            key="edit"
+            style={styleVariants.OUTLINED_PRIMARY}
+            size="sm"
+            icon="bx:edit-alt"
             to={`/product-data/product/edit/${id}`}
         >
             {useTranslation("Edit")}
         </ButtonLink>,
         <ButtonLink
+            key="manage-fields"
             style={styleVariants.PRIMARY}
+            size="sm"
+            icon="bx:list-ul"
             to={`/product-data/product/fields/${id}`}
         >
                 {useTranslation("Manage fields")}
@@ -83,7 +90,7 @@ const ViewProductData = ({}) => {
                         <span
                             className={`wcicon-${typeof data.icon === 'object' ? data.icon.icon : woocommerceIconsMap[data.icon]}`}
                             style={{
-                                color: "#007cba",
+                                color: primaryColor(),
                                 fontSize: "18px"
                             }}
                         />

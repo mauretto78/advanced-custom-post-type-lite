@@ -19,8 +19,12 @@ const initialState = {
  */
 export const saveWooCommerceProductData = createAsyncThunk(
     "wc/product-data/save",
-    async (data) => {
-        return await wpAjaxRequest("saveWooCommerceProductDataAction", data);
+    async (data, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("saveWooCommerceProductDataAction", data);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const saveWooCommerceProductDataSlice = createSlice({
     name: 'wc/product-data/save',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [saveWooCommerceProductData.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [saveWooCommerceProductData.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(saveWooCommerceProductData.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(saveWooCommerceProductData.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [saveWooCommerceProductData.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(saveWooCommerceProductData.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

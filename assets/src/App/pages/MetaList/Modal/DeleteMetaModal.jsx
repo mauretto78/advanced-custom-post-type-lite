@@ -1,9 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
-import Modal from "../../../components/Modal";
 import useTranslation from "../../../hooks/useTranslation";
-import {styleVariants} from "../../../constants/styles";
-import Button from "../../../components/Button";
+import DeleteModal from "../../../components/Modal/DeleteModal";
 import {useDispatch} from "react-redux";
 import {deleteMeta} from "../../../redux/reducers/deleteMetaSlice";
 import {toast} from "react-hot-toast";
@@ -24,69 +22,35 @@ const DeleteMetaModal = ({page, id}) => {
     // manage global state
     const dispatch = useDispatch();
 
-    // manage local state
-    const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
-    const [modalVisible, setmodalVisible] = useState(false);
-    
     // manage redirect
     const navigate = useNavigate();
+
+    const perPage = (settings.length > 0 && filterByLabel(settings, 'key', 'records_per_page') !== '') ? filterByLabel(settings, 'key', 'records_per_page').value : 20;
 
     const handleDeleteModal = () => {
         dispatch(deleteMeta(id))
             .then(res => {
                 const payload = res.payload;
-
                 if(payload.success){
                     reset();
                     navigate('/meta');
-                    setmodalVisible(!modalVisible);
                     setCookieMessage("Meta group successfully deleted.");
                     refreshPage();
                 } else {
                     toast.error(payload.error);
                 }
             })
-            .catch(err => console.error(err))
-        ;
+            .catch(err => console.error(err));
     };
 
-    const buttons = [
-        <Button
-            style={styleVariants.DANGER}
-            onClick={() => {
-                handleDeleteModal();
-            }}
-        >
-            {useTranslation("Yes, delete it")}
-        </Button>,
-        <Button
-            style={styleVariants.SECONDARY}
-            onClick={() => {
-                setmodalVisible(!modalVisible);
-            }}
-        >
-            {useTranslation("Return back to list")}
-        </Button>,
-    ];
-
     return (
-        <React.Fragment>
-            <Modal title={useTranslation('Delete meta group')} buttons={buttons} visible={modalVisible}>
-                <div>
-                    {useTranslation("You are going to delete this meta group. Are you sure?")}
-                </div>
-            </Modal>
-            <a
-                className={`color-${styleVariants.DANGER}`}
-                href="#"
-                onClick={e => {
-                    e.preventDefault();
-                    setmodalVisible(!modalVisible);
-                }}
-            >
-                {useTranslation("Delete")}
-            </a>
-        </React.Fragment>
+        <DeleteModal
+            title={useTranslation('Delete meta group')}
+            onConfirm={handleDeleteModal}
+            onCancel={() => {}}
+        >
+            <div>{useTranslation("You are going to delete this meta group. Are you sure?")}</div>
+        </DeleteModal>
     );
 };
 
@@ -96,4 +60,3 @@ DeleteMetaModal.propTypes = {
 };
 
 export default DeleteMetaModal;
-

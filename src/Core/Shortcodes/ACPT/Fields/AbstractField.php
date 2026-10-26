@@ -3,25 +3,32 @@
 namespace ACPT_Lite\Core\Shortcodes\ACPT\Fields;
 
 use ACPT_Lite\Constants\ExtraFields;
-use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Core\Shortcodes\ACPT\DTO\ShortcodePayload;
 use ACPT_Lite\Utils\Data\Meta;
+use ACPT_Lite\Utils\PHP\Arrays;
+use ACPT_Lite\Utils\PHP\Url;
 use ACPT_Lite\Utils\Wordpress\Users;
+use ACPT_Lite\Utils\Wordpress\WPAttachment;
 
 abstract class AbstractField
 {
     /**
+     * @var mixed
+     */
+    protected $data;
+
+    /**
      * @var ShortcodePayload
      */
-    protected $payload;
+    protected ShortcodePayload $payload;
 
     /**
      * @var MetaFieldModel|null
      */
-    protected $metaBoxFieldModel;
+    protected ?MetaFieldModel $metaBoxFieldModel;
 
     /**
      * AbstractField constructor.
@@ -39,78 +46,136 @@ abstract class AbstractField
     }
 
     /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param mixed $data
+     */
+    public function setData($data): void
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return MetaFieldModel|null
+     */
+    public function getMetaBoxFieldModel(): ?MetaFieldModel
+    {
+        return $this->metaBoxFieldModel;
+    }
+
+    public function setMetaBoxFieldModel(MetaFieldModel $model): void
+    {
+        $this->metaBoxFieldModel = $model;
+    }
+
+    /**
+     * Returns true when the field is rendered in the context of a custom table record.
+     * In CCT mode the field name is just the column name and WordPress meta hidden
+     * inputs are not needed (CCT has its own schema and validation layer).
+     *
+     * @return bool
+     */
+    protected function isCCTMode(): bool
+    {
+        return false;
+    }
+
+    /**
      * @return string
      */
-    protected function getKey()
+    protected function getKey(): string
     {
-        if($this->payload->parent){
+        // WP Product attributes
+        if ($this->payload->isProductAttr === true) {
+            if ($this->payload->parent) {
+                return "wc_attribute_" . Strings::toDBFormat($this->payload->box) . '_' . Strings::toDBFormat($this->payload->parent) . "_" . $this->payload->productAttrId;
+            }
+
+            return (string)$this->payload->id;
+        }
+
+        if ($this->payload->parent) {
             return $this->formatKey(Strings::toDBFormat($this->payload->box).'_'.Strings::toDBFormat($this->payload->parent));
         }
 
         return $this->formatKey(Strings::toDBFormat($this->payload->box).'_'.Strings::toDBFormat($this->payload->field));
     }
 
-	/**
-	 * @param $key
-	 *
-	 * @return string
-	 */
-    protected function formatKey($key)
+    /**
+     * @param string $key
+     * @return string
+     */
+    protected function formatKey(string $key): string
     {
-	    if($this->payload->belongsTo === MetaTypes::OPTION_PAGE){
-		    return Strings::toDBFormat($this->payload->id).'_'.$key;
-	    }
-
-	    return $key;
+        return $key;
     }
 
     /**
      * @return bool
      */
-    protected function isAChildElement()
+    protected function isAChildElement(): bool
     {
-        return $this->payload->parent !== null and $this->payload->index !== null;
-    }
-
-	/**
-	 * @return bool
-	 */
-    protected function isABlockElement()
-    {
-	    return $this->isAChildElement() and $this->payload->blockName !== null and $this->payload->blockIndex !== null;
-    }
-
-	/**
-	 * @param $groupRawValue
-	 * @param $field
-	 *
-	 * @return mixed|null
-	 */
-    protected function getBlockElementValue($groupRawValue, $field)
-    {
-    	if(empty($groupRawValue)){
-    		return null;
-	    }
-
-	    if(isset($groupRawValue['blocks']) and
-	       isset($groupRawValue['blocks'][$this->payload->blockIndex]) and
-	       isset($groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName]) and
-	       isset($groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName][Strings::toDBFormat($field)]) and
-	       isset($groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName][Strings::toDBFormat($field)][$this->payload->index])
-	    ){
-		    return $groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName][Strings::toDBFormat($field)][$this->payload->index];
-	    }
-
-	    return null;
+        return $this->payload->parent !== null && $this->payload->index !== null;
     }
 
     /**
-     * @return array
+     * @return bool
      */
-    protected function getBeforeAndAfter()
+    protected function isABlockElement(): bool
+    {
+        return $this->isAChildElement() && $this->payload->blockName !== null && $this->payload->blockIndex !== null;
+    }
+
+    /**
+     * @param mixed $groupRawValue
+     * @param string $field
+     * @return mixed|null
+     */
+    protected function getBlockElementValue($groupRawValue, string $field)
+    {
+        if (empty($groupRawValue)) {
+            return null;
+        }
+
+        if (isset($groupRawValue['blocks']) &&
+           isset($groupRawValue['blocks'][$this->payload->blockIndex]) &&
+           isset($groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName]) &&
+           isset($groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName][Strings::toDBFormat($field)]) &&
+           isset($groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName][Strings::toDBFormat($field)][$this->payload->index])
+        ) {
+            return $groupRawValue['blocks'][$this->payload->blockIndex][$this->payload->blockName][Strings::toDBFormat($field)][$this->payload->index];
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array{after: string|null, before: string|null}
+     */
+    protected function getBeforeAndAfter(): array
     {
         $before = null;
         $after  = null;
+
+        if ($this->metaBoxFieldModel !== null) {
+            $advanced_options =  $this->metaBoxFieldModel->getAdvancedOptions();
+
+            foreach ($advanced_options as $advanced_option) {
+                if ($advanced_option->getKey() === 'after') {
+                    $after = $advanced_option->getValue();
+                }
+
+                if ($advanced_option->getKey() === 'before') {
+                    $before = $advanced_option->getValue();
+                }
+            }
+        }
 
         return [
             'after' => $after,
@@ -123,269 +188,306 @@ abstract class AbstractField
      */
     protected function isFieldVisible()
     {
+        if ($this->metaBoxFieldModel !== null && $this->payload->id !== null) {
+            if (true === false) {
+                return false;
+            }
+
+            return true;
+        }
+
         return true;
     }
 
     /**
-     * @param $value
-     *
+     * @param string $value
      * @return string
      */
-    protected function addBeforeAndAfter($value)
+    protected function addBeforeAndAfter(string $value): string
     {
+        // Display only the value in preview mode
+        if ($this->payload->preview) {
+            return $value;
+        }
+
         $beforeAndAfter = $this->getBeforeAndAfter();
 
         return $beforeAndAfter['before'].$value.$beforeAndAfter['after'];
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @param bool $single
-     *
-     * @return array|string|null
+     * @return array<string, mixed>|string|null
      */
-    protected function fetchMeta($key, $single = true)
+    protected function fetchMeta(string $key, bool $single = true)
     {
-	    return Meta::fetch($this->payload->id, $this->payload->belongsTo, $key, $single);
+        return Meta::fetch($this->payload->id, $this->payload->belongsTo, $key, $single);
     }
 
-	/**
-	 * @param $format
-	 * @param \DateTime $date
-	 *
-	 * @return string
-	 */
-	protected function formatDate($format, \DateTime $date)
-	{
-		return date_i18n($format, $date->getTimestamp());
-	}
+    /**
+     * @param array<int, string> $data
+     * @return string
+     */
+    protected function renderList(array $data = []): string
+    {
+        $render = $this->payload->render;
+        $separator = $this->payload->separator;
+        $classes = $this->payload->classes;
+        $list = $this->payload->list;
 
-	/**
-	 * @param array $data
-	 *
-	 * @return string
-	 */
-	protected function renderList(array $data = [])
-	{
-		$render = $this->payload->render;
-		$separator = $this->payload->separator;
-		$classes = $this->payload->classes;
-		$list = $this->payload->list;
+        if ($this->payload->preview) {
+            return implode(", ", $data);
+        }
 
-		if($this->payload->preview){
-			return implode(", ", $data);
-		}
+        $renderedList = [];
 
-		$renderedList = [];
+        foreach ($data as $item) {
+            $item = ($render === 'label' && $this->metaBoxFieldModel !== null) ? $this->metaBoxFieldModel->getOptionLabel($item) : $item;
+            $renderedList[] = $this->addBeforeAndAfter($item);
+        }
 
-		foreach ($data as $item){
-			$item = ($render === 'label') ? $this->metaBoxFieldModel->getOptionLabel($item) : $item;
-			$renderedList[] = $this->addBeforeAndAfter($item);
-		}
+        if ($list === 'ul') {
+            $return = '<ul>';
 
-		if($list === 'ul'){
-			$return = '<ul>';
+            foreach ($renderedList as $element) {
+                $return .= '<li class="'.$classes.'">'.esc_html($element).'</li>';
+            }
 
-			foreach ($renderedList as $element){
-				$return .= '<li class="'.$classes.'">'.esc_html($element).'</li>';
-			}
+            $return .= '</ul>';
 
-			$return .= '</ul>';
+            return $return;
+        }
 
-			return $return;
-		}
+        if ($list === 'ol') {
+            $return = '<ol>';
 
-		if($list === 'ol'){
-			$return = '<ol>';
+            foreach ($renderedList as $element) {
+                $return .= '<li class="'.$classes.'">'.esc_html($element).'</li>';
+            }
 
-			foreach ($renderedList as $element){
-				$return .= '<li class="'.$classes.'">'.esc_html($element).'</li>';
-			}
+            $return .= '</ol>';
 
-			$return .= '</ol>';
+            return $return;
+        }
 
-			return $return;
-		}
+        $separator = $separator ?? ',';
 
-		$separator = $separator ?? ',';
+        return implode($separator, $renderedList);
+    }
 
-		return implode($separator, $renderedList);
-	}
+    /**
+     * @param string|int $postId
+     * @return string|null
+     */
+    protected function renderPost($postId): ?string
+    {
+        if (!is_numeric($postId)) {
+            return null;
+        }
 
-	/**
-	 * @param $postId
-	 *
-	 * @return string
-	 */
-	protected function renderPost($postId)
-	{
-		if(!is_numeric($postId)){
-			return null;
-		}
+        $postId = (int)$postId;
 
-		return '<a href="'.get_the_permalink($postId).'" target="_blank">'.get_the_title($postId).'</a>';
-	}
+        return '<a href="'.get_the_permalink($postId).'" target="_blank">'.get_the_title($postId).'</a>';
+    }
 
-	/**
-	 * @param $termId
-	 *
-	 * @return string
-	 */
-	protected function renderTerm($termId)
-	{
-		if(!is_numeric($termId)){
-			return null;
-		}
+    /**
+     * @param string|int $termId
+     * @return string|null
+     */
+    protected function renderTerm($termId): ?string
+    {
+        if (!is_numeric($termId)) {
+            return null;
+        }
 
-		$termId = (int)$termId;
-		$term = get_term($termId);
+        $termId = (int)$termId;
+        $term = get_term($termId);
 
-		if($term instanceof \WP_Term){
+        if ($term instanceof \WP_Term) {
+            $link = get_term_link($termId);
 
-			$link = get_term_link($termId);
+            if (is_string($link)) {
+                return '<a href="'.$link.'" target="_blank">'.$term->name.'</a>';
+            }
+        }
 
-			if(is_string($link)){
-				return '<a href="'.$link.'" target="_blank">'.$term->name.'</a>';
-			}
+        return null;
+    }
 
-			return  $term->name;
-		}
+    /**
+     * @param string|int $userId
+     * @return string|null
+     */
+    protected function renderUser($userId): ?string
+    {
+        if (!is_numeric($userId)) {
+            return null;
+        }
 
-		return null;
-	}
+        if (!function_exists('get_user_by')) {
+            include_once(ABSPATH . 'wp-includes/pluggable.php');
+        }
 
-	/**
-	 * @param $userId
-	 *
-	 * @return string
-	 */
-	protected function renderUser($userId)
-	{
-		if(!is_numeric($userId)){
-			return null;
-		}
+        $userId = (int)$userId;
+        $user = get_user_by('id', $userId);
 
-		if( !function_exists('get_user_by') ) {
-			include_once( ABSPATH . 'wp-includes/pluggable.php' );
-		}
+        if ($user instanceof \WP_User) {
+            $link = get_edit_user_link($userId);
 
-		$userId = (int)$userId;
-		$user = get_user_by('id',$userId);
+            return '<a href="'.$link.'" target="_blank">'.Users::getUserLabel($user).'</a>';
+        }
 
-		if($user instanceof \WP_User){
+        return null;
+    }
 
-			$link = get_edit_user_link($userId);
+    /**
+     * @return mixed|null
+     */
+    protected function fetchRawData()
+    {
+        $value = [];
 
-			if(is_string($link)){
-				return '<a href="'.$link.'" target="_blank">'.Users::getUserLabel($user).'</a>';
-			}
+        if ($this->data !== null) {
+            if (is_array($this->data) && array_key_exists('value', $this->data)) {
+                $value = $this->data;
+            } else {
+                $value['value'] = $this->data;
+            }
+        }
 
-			return Users::getUserLabel($user);
-		}
+        if (empty($value)) {
+            if ($this->isABlockElement()) {
+                @$groupRawValue = $this->fetchMeta($this->getKey());
+                $field = Strings::toDBFormat($this->payload->field);
+                $data = $this->getBlockElementValue($groupRawValue, $field);
 
-		return null;
-	}
+                if ($data !== null && isset($data['value'])) {
+                    return $data;
+                }
 
-	/**
-	 * @param $optionPageId
-	 *
-	 * @return string|null
-	 */
-	protected function renderOptionPage($optionPageId)
-	{
-		try {
-			$page = OptionPageRepository::getById($optionPageId);
+                return null;
+            }
 
-			if($page !== null){
-				return $page->getMenuTitle();
-			}
+            if ($this->isAChildElement()) {
+                @$groupRawValue = $this->fetchMeta($this->getKey());
 
-			return null;
-		} catch (\Exception $exception){
-			return null;
-		}
-	}
+                if ($groupRawValue === null || $groupRawValue === '') {
+                    // check if is a repeater nested inside a repeater
+                    $key = $this->formatKey(Strings::toDBFormat($this->payload->box) . '_' . Strings::toDBFormat($this->metaBoxFieldModel->getRootParentField()->getName()));
+                    @$groupRawValue = $this->fetchMeta($key);
 
-	/**
-	 * @return mixed|null
-	 */
-	protected function fetchRawData()
-	{
-		if($this->isABlockElement()){
+                    if ($groupRawValue === null || $groupRawValue === '') {
+                        return null;
+                    }
 
-			@$groupRawValue = $this->fetchMeta($this->getKey());
-			$field = Strings::toDBFormat($this->payload->field);
-			$data = $this->getBlockElementValue($groupRawValue, $field);
+                    $parent = $this->payload->parent;
+                    $index = explode(".", $this->payload->index);
+                    $field = $this->payload->field;
 
-			if($data !== null and isset($data['value'])){
-				return $data;
-			}
+                    if (Arrays::count($index) !== 2) {
+                        return null;
+                    }
 
-			return null;
-		}
+                    if (
+                        isset($groupRawValue[$parent]) &&
+                        isset($groupRawValue[$parent][$index[0]]) &&
+                        isset($groupRawValue[$parent][$index[0]][$field]) &&
+                        isset($groupRawValue[$parent][$index[0]][$field][$index[1]])
+                    ) {
+                        $data = $groupRawValue[$parent][$index[0]][$field][$index[1]];
 
-		if($this->isAChildElement()){
+                        return $data;
+                    }
+                }
 
-			@$groupRawValue = $this->fetchMeta($this->getKey());
+                $field = Strings::toDBFormat($this->payload->field);
 
-			if($groupRawValue === null or $groupRawValue === ''){
+                if (isset($groupRawValue[$field]) && isset($groupRawValue[$field][$this->payload->index])) {
+                    $data = $groupRawValue[$field][$this->payload->index];
 
-				// check if is a repeater nested inside a repeater
-				$key = $this->formatKey(Strings::toDBFormat($this->payload->box).'_'.Strings::toDBFormat($this->metaBoxFieldModel->getRootParentField()->getName()));
-				@$groupRawValue = $this->fetchMeta($key);
+                    return $data;
+                }
 
-				if($groupRawValue === null or $groupRawValue === ''){
-					return null;
-				}
+                return null;
+            }
 
-				$parent = $this->payload->parent;
-				$index = explode(".", $this->payload->index);
-				$field = $this->payload->field;
+            $value['value'] = $this->fetchMeta($this->getKey());
+        }
 
-				if(count($index) !== 2){
-					return null;
-				}
+        foreach (ExtraFields::ALLOWED_VALUES as $extra) {
+            if (!isset($value[$extra]) && $this->fetchMeta($this->getKey() . '_' . $extra)) {
+                $value[$extra] = $this->fetchMeta($this->getKey() . '_' . $extra);
+            }
+        }
 
-				if(
-					isset($groupRawValue[$parent]) and
-					isset($groupRawValue[$parent][$index[0]]) and
-					isset($groupRawValue[$parent][$index[0]][$field]) and
-					isset($groupRawValue[$parent][$index[0]][$field][$index[1]])
-				){
-					$data = $groupRawValue[$parent][$index[0]][$field][$index[1]];
+        return $value;
+    }
 
-					return $data;
-				}
-			}
+    /**
+     * @param array<string, mixed> $rawData
+     * @return WPAttachment[]
+     */
+    protected function getAttachments(array $rawData)
+    {
+        $attachments = [];
 
-			$field = Strings::toDBFormat($this->payload->field);
+        if (!isset($rawData['value'])) {
+            return $attachments;
+        }
 
-			if(isset($groupRawValue[$field]) and isset($groupRawValue[$field][$this->payload->index])){
-				$data = $groupRawValue[$field][$this->payload->index];
+        if (empty($rawData['value'])) {
+            return $attachments;
+        }
 
-				return $data;
-			}
+        if (isset($rawData['attachment_id'])) {
+            $attachmentIds = explode(",", $rawData['attachment_id']);
+        }
 
-			return null;
-		}
+        if (!empty($attachmentIds)) {
+            foreach ($attachmentIds as $attachmentId) {
+                $attachment = WPAttachment::fromId($attachmentId);
 
-		$value = [
-			'value' => $this->fetchMeta($this->getKey())
-		];
+                if (!$attachment->isEmpty()) {
+                    $attachments[] = $attachment;
+                }
+            }
+        } else {
+            $urls = is_array($rawData['value']) ? $rawData['value'] : explode(",", (string)$rawData['value']);
 
-		foreach (ExtraFields::ALLOWED_VALUES as $extra){
-			if($this->fetchMeta($this->getKey().'_'.$extra)){
-				$value[$extra] = $this->fetchMeta($this->getKey().'_'.$extra);
-			}
-		}
+            foreach ($urls as $url) {
+                $attachment = WPAttachment::fromUrl($url);
 
-		return $value;
-	}
+                if (!$attachment->isEmpty()) {
+                    $attachments[] = WPAttachment::fromUrl($url);
+                }
+            }
+        }
+
+        return $attachments;
+    }
+
+    /**
+     * @param array<string, mixed> $rawData
+     * @return WPAttachment|null
+     */
+    protected function getAttachment(array $rawData): ?WPAttachment
+    {
+        if (isset($rawData['attachment_id']) && is_numeric($rawData['attachment_id'])) {
+            return WPAttachment::fromId((int)$rawData['attachment_id']);
+        }
+
+        if (isset($rawData['value']) && Url::isValid($rawData['value'])) {
+            return WPAttachment::fromUrl($rawData['value']);
+        }
+
+        return null;
+    }
 
     /**
      * Method for rendering the shortcode
      *
-     * @return mixed
+     * @return string|null
      */
-    abstract public function render();
+    abstract public function render(): ?string;
 }

@@ -14,9 +14,9 @@ import Settings from "./Tabs/Settings";
 import ButtonLink from "../../components/ButtonLink";
 import {styleVariants} from "../../constants/styles";
 import {flushCookieMessages} from "../../utils/cookies";
+import {useTabsKeyboardNav} from "../../hooks/useTabsKeyboardNav";
 
 const ViewCustomPostType = () => {
-
     // manage global state
     const {data, loading} = useSelector(state => state.fetchCustomPostTypes);
     const dispatch = useDispatch();
@@ -27,24 +27,20 @@ const ViewCustomPostType = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [fetchError, setFetchError] = useState(false);
 
+    const tabs = [
+        "Basic",
+        "Labels",
+        "Settings"
+    ];
+
+    const {getTabProps} = useTabsKeyboardNav(activeTab, setActiveTab, tabs.length);
+
     // manage redirect
     const navigate = useNavigate();
 
     if(postType === 'page' || postType === 'post'){
         navigate('/');
     }
-
-    // is WPGraphQL active?
-    useEffect(()=>{
-        wpAjaxRequest("isWPGraphQLActiveAction", {})
-            .then(res => {
-                setIsWPGraphQLActive(res.status);
-            })
-            .catch(err => {
-                console.error(err.message);
-            })
-        ;
-    },[]);
 
     // fetch post
     useEffect(() => {
@@ -64,6 +60,7 @@ const ViewCustomPostType = () => {
                 console.error(err);
             })
         ;
+
     }, [postType]);
 
     if(loading){
@@ -77,14 +74,8 @@ const ViewCustomPostType = () => {
     }
 
     const actions = [
-        <ButtonLink style={styleVariants.PRIMARY} to={`/edit/${postType}/${activeTab}`}>{useTranslation("Edit")}</ButtonLink>,
-        <ButtonLink style={styleVariants.SECONDARY} to={`/assoc-taxonomy-post/${postType}`}>{useTranslation("Taxonomies association")}</ButtonLink>,
-     ];
-
-    const tabs = [
-        "Basic",
-        "Labels",
-        "Settings"
+        <ButtonLink key="edit" style={styleVariants.PRIMARY} size="sm" icon="bx:edit-alt" to={`/edit/${postType}/${activeTab}`}>{useTranslation("Edit")}</ButtonLink>,
+        <ButtonLink key="taxonomies-association" style={styleVariants.OUTLINED_PRIMARY} size="sm" icon="bx:link" to={`/assoc-taxonomy-post/${postType}`}>{useTranslation("Taxonomies association")}</ButtonLink>,
     ];
 
     return (
@@ -102,18 +93,21 @@ const ViewCustomPostType = () => {
             ]}
         >
             <div>
-                <div className="i-flex-center mb-8 s-8">
-                    {tabs.map((tab, index) => (
-                        <button
-                            type="button"
-                            className={`acpt-btn acpt-btn-${(parseInt(index) === parseInt(activeTab)) ? "white text-bold color-black" : "default"}`}
-                            onClick={() => {
-                                setActiveTab(parseInt(index));
-                            }}
-                        >
-                            {tab}
-                        </button>
-                    ))}
+                <div className="acpt-tabs">
+                    <ul
+                        role="tablist"
+                        className={`acpt-tablist mb-12`}
+                    >
+                        {tabs.map((tab, index) => (
+                            <li
+                                key={index}
+                                className={`acpt-accordion-tab ${activeTab === index ? "active" : ""}`}
+                                {...getTabProps(index)}
+                            >
+                                {tab}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
                 {activeTab === 0 && (<Basic data={data}/>)}
                 {activeTab === 1 && (<Labels data={data} postType={postType}/>)}

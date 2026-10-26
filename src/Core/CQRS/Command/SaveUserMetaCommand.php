@@ -4,54 +4,66 @@ namespace ACPT_Lite\Core\CQRS\Command;
 
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
+use ACPT_Lite\Utils\PHP\Request;
 
 class SaveUserMetaCommand extends AbstractSaveMetaCommand implements CommandInterface
 {
-	/**
-	 * @var
-	 */
-	protected $userId;
+    /**
+     * @var int
+     */
+    protected int $userId;
 
-	/**
-	 * @var MetaGroupModel[]
-	 */
-	protected array $metaGroups;
+    /**
+     * @var MetaGroupModel[]
+     */
+    protected array $metaGroups;
 
-	/**
-	 * SaveUserMetaCommand constructor.
-	 *
-	 * @param $userId
-	 * @param array $metaGroups
-	 * @param array $data
-	 */
-	public function __construct($userId, array $metaGroups = [], array $data = [])
-	{
-		parent::__construct($data);
-		$this->userId     = $userId;
-		$this->metaGroups = $metaGroups;
-	}
+    /**
+     * SaveUserMetaCommand constructor.
+     *
+     * @param int $userId
+     * @param Request $request
+     * @param array<int, MetaGroupModel> $metaGroups
+     */
+    public function __construct(int $userId, Request $request, array $metaGroups = [])
+    {
+        parent::__construct($request);
+        $this->userId     = $userId;
+        $this->metaGroups = $metaGroups;
+    }
 
-	/**
-	 * @return bool|mixed|void
-	 * @throws \Exception
-	 */
-	public function execute()
-	{
-		$user_id = $this->userId;
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function execute(): void
+    {
+        $user_id = $this->userId;
 
-		if ( !current_user_can( 'edit_user', $user_id ) ){
-			return false;
-		}
+        if (!current_user_can('edit_user', $user_id)) {
+            return;
+        }
 
-		foreach ($this->metaGroups as $metaGroup){
-			foreach ($metaGroup->getBoxes() as $boxModel){
-				foreach ($boxModel->getFields() as $fieldModel){
-					if($this->hasField($fieldModel)){
-						$fieldModel->setBelongsToLabel(MetaTypes::USER);
-						$this->saveField($fieldModel, $this->userId, MetaTypes::USER);
-					}
-				}
-			}
-		}
-	}
+        $fieldEntries = [];
+
+        foreach ($this->metaGroups as $metaGroup) {
+
+            foreach ($metaGroup->getBoxes() as $boxModel) {
+                foreach ($boxModel->getFields() as $fieldModel) {
+                    if ($this->hasField($fieldModel)) {
+                        $fieldModel->setBelongsToLabel(MetaTypes::USER);
+                        $elementId = $this->userId;
+
+                        $fieldEntries[] = [
+                            'field'     => $fieldModel,
+                            'elementId' => $elementId,
+                            'belongsTo' => MetaTypes::USER,
+                        ];
+                    }
+                }
+            }
+        }
+
+        $this->validateAndSaveFields($fieldEntries);
+    }
 }

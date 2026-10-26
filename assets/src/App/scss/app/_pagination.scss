@@ -1,6 +1,8 @@
+@use "variables";
+
 .acpt-pagination {
   display: flex;
-  gap: $space-12;
+  gap: variables.$space-12;
   padding: 0;
   margin: 0;
 }

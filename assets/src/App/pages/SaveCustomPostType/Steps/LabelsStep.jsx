@@ -11,7 +11,7 @@ import CardRow from "../../../components/Card/CardRow";
 import Card from "../../../components/Card";
 import {useSelector} from "react-redux";
 import {postLabels} from "../../../constants/postLabels";
-import NavigationButtons from "../NavigationButtons";
+import NavigationButtons from "../../../components/NavigationButtons";
 
 const LabelsStep = ({title, crumbs, headings, stepActive, setStepActive, handleSubmit, formValues, setFormValues = null, edit}) => {
 
@@ -141,14 +141,17 @@ const LabelsStep = ({title, crumbs, headings, stepActive, setStepActive, handleS
     let actions = [];
 
     if(!edit){
-        actions.push(<Button testId="prev-step" type="button" onClick={() => setStepActive(0)} style={styleVariants.SECONDARY}>
+        actions.push(<Button key="prev-step" testId="prev-step" type="button" size="sm" icon="bx:chevron-left" onClick={() => setStepActive(0)} style={styleVariants.OUTLINED_PRIMARY}>
             {useTranslation("Previous Step")}
         </Button>);
     }
 
     actions.push(<Button
+        key="next-step"
         testId="next-step"
-        style={edit ? styleVariants.PRIMARY : styleVariants.SECONDARY}
+        style={edit ? styleVariants.PRIMARY : styleVariants.OUTLINED_PRIMARY}
+        size="sm"
+        icon={edit ? "bx:save" : "bx:chevron-right"}
     >
         {useTranslation(edit ? "Save" : "Next Step")}
     </Button>);
@@ -178,6 +181,7 @@ const LabelsStep = ({title, crumbs, headings, stepActive, setStepActive, handleS
                         )}
                         {postLabels.map((label)=>(
                             <CardRow
+                                key={label.id}
                                 label={label.label}
                                 value={
                                     <Input
@@ -202,7 +206,7 @@ const LabelsStep = ({title, crumbs, headings, stepActive, setStepActive, handleS
 
 LabelsStep.propTypes = {
     headings: PropTypes.arrayOf(PropTypes.shape({
-        label:  PropTypes.string.isRequired,
+        title:  PropTypes.string.isRequired,
         description:  PropTypes.string.isRequired,
     })).isRequired,
     title: PropTypes.string.isRequired,

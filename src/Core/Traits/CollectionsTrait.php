@@ -7,41 +7,41 @@ use ACPT_Lite\Utils\PHP\Arrays;
 
 trait CollectionsTrait
 {
-	/**
-	 * @param $id
-	 * @param $collection
-	 *
-	 * @return bool
-	 */
-	public function existsInCollection($id, $collection): bool
-	{
-		/** @var AbstractModel $item */
-		foreach ($collection as $item){
-			if ($item->getId() === $id) {
-				return true;
-			}
-		}
+    /**
+     * @param string $id
+     * @param array<int, mixed> $collection
+     *
+     * @return bool
+     */
+    public function existsInCollection(string $id, array $collection): bool
+    {
+        /** @var AbstractModel $item */
+        foreach ($collection as $item) {
+            if ($item->getId() === $id) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * @param $id
-	 * @param $collection
-	 *
-	 * @return mixed
-	 */
-	public function removeFromCollection($id, $collection)
-	{
-		if($this->existsInCollection($id, $collection)){
-			/** @var AbstractModel $item */
-			foreach ($collection as $index => $item){
-				if ($id === $item->getId()) {
-					unset($collection[$index]);
-				}
-			}
-		}
+    /**
+     * @param string $id
+     * @param array<int, mixed> $collection
+     *
+     * @return array<int, mixed>
+     */
+    public function removeFromCollection(string $id, array $collection): array
+    {
+        if ($this->existsInCollection($id, $collection)) {
+            /** @var AbstractModel $item */
+            foreach ($collection as $index => $item) {
+                if ($id === $item->getId()) {
+                    unset($collection[$index]);
+                }
+            }
+        }
 
-		return Arrays::reindex($collection);
-	}
+        return Arrays::reindex($collection);
+    }
 }

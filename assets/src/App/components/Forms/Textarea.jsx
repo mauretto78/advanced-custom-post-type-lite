@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {get} from 'react-hook-form';
+import {sizes} from "../../constants/forms.jsx";
 
 const Textarea = ({size= 'default', placeholder, id, defaultValue, description, readOnly, onChangeCapture, validate, register, errors, rows = 8, disabled = false, characterLimit = null}) => {
 
@@ -17,7 +18,8 @@ const Textarea = ({size= 'default', placeholder, id, defaultValue, description, 
             return '';
         }
 
-        const diff = characterLimit - currentValue.length;
+        const currentValueLength = currentValue?.length ?? 0;
+        const diff = characterLimit - currentValueLength;
 
         if(diff <= 3){
             return "color-danger";
@@ -34,13 +36,24 @@ const Textarea = ({size= 'default', placeholder, id, defaultValue, description, 
                 <textarea
                     rows={rows ? rows : 8}
                     id={id}
-                    data-cy={`textarea-${id}`}
+                    data-testid={`textarea-${id}`}
                     name={id}
                     disabled={disabled}
                     defaultValue={defaultValue}
                     placeholder={placeholder}
                     onChangeCapture={(e) => {
-                        setCurrentValue(e.target.value);
+                        // Update the character limit message when the value changes
+                        const allowed = () => {
+                            if(characterLimit){
+                                return e.target.value.length <= characterLimit;
+                            }
+
+                            return true;
+                        };
+
+                        if(allowed()){
+                            setCurrentValue(e.target.value);
+                        }
 
                         if(onChangeCapture){
                             onChangeCapture(e);
@@ -54,7 +67,9 @@ const Textarea = ({size= 'default', placeholder, id, defaultValue, description, 
                 />
                 {characterLimit && (
                     <div className="acpt-character-limit mt-4">
-                        <span className={getCharacterCounterClass()}>{currentValue.length}</span>
+                        <span className={getCharacterCounterClass()}>
+                            {currentValue?.length ?? 0}
+                        </span>
                         <span>/</span>
                         <span>{characterLimit}</span>
                     </div>
@@ -70,19 +85,16 @@ const Textarea = ({size= 'default', placeholder, id, defaultValue, description, 
 
 Textarea.propTypes = {
     id: PropTypes.string.isRequired,
-    size: PropTypes.oneOf([
-        'default',
-        'sm',
-    ]),
+    size: PropTypes.oneOf(sizes),
     innerRef: PropTypes.func,
     placeholder: PropTypes.string,
     defaultValue: PropTypes.string,
     description: PropTypes.string,
     readOnly: PropTypes.bool,
     onChangeCapture: PropTypes.func,
-    validate: PropTypes.func,
+    validate: PropTypes.object,
     register: PropTypes.func.isRequired,
-    errors: PropTypes.array.isRequired,
+    errors: PropTypes.object.isRequired,
     disabled: PropTypes.bool,
     rows: PropTypes.number,
     characterLimit: PropTypes.number,

@@ -81,6 +81,7 @@ export const reservedTerms = [
     'term',
     'terms',
     'theme',
+    'themes',
     'title',
     'type',
     'types',

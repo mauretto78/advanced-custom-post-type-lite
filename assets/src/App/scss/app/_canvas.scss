@@ -1,139 +1,484 @@
-.canvas {
+@use "variables";
 
-  &.canvas-hover {
-    opacity: .5;
+.canvas-wrapper {
+  display: flex;
+  z-index: 100000;
+  border: variables.$border-thickness solid variables.$light-gray;
+  border-radius: variables.$border-radius;
+
+  &.no-border {
+    border: none;
   }
 
-  .drag-placeholder {
-    background: $pale-gray;
-    width: 100%;
-    height: 120px;
-    border-radius: $border-radius;
-  }
-
-  .canvas-container {
+  .canvas-toolbar {
+    background: variables.$white;
+    padding: variables.$space-12 variables.$space-24;
+    border-bottom: variables.$border-thickness solid variables.$light-gray;
+    margin-bottom: 0;
+    font-size: variables.$xs-font-size;
+    justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
-    min-height: 1px;
+    align-items: center;
+    gap: variables.$space-12 variables.$space-24;
 
-    @media screen and (max-width: 960px){
-      flex-direction: column;
-      align-items: flex-start;
+    // The no-distraction / extra-option toggles are real <button>s (keyboard +
+    // role), styled by the same utility classes the old <div>s used. <button>
+    // doesn't inherit font/colour, so restore both here; the compound
+    // .color-primary override keeps the active state winning (same trick as
+    // .btn-reset's colour overrides in _buttons.scss).
+    button.element {
+      font: inherit;
+      line-height: inherit;
+      color: inherit;
+
+      &.color-primary {
+        color: variables.$primary-color;
+      }
+    }
+  }
+
+  &.no-distraction-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: variables.$white;
+  }
+
+  // No min/max-width here: the sidebar panel (CanvasLayout) owns the width,
+  // in pixels. A CSS minimum on the content made it wider than its panel.
+  .sidebar {
+    background: variables.$white;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .delete-element {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: variables.$space-24;
+      background: variables.$white;
+      border-top: variables.$border-thickness solid variables.$light-gray;
+      border-right: variables.$border-thickness solid variables.$light-gray;
     }
 
-    .canvas-element {
-      position: relative;
-      border-radius: $border-radius;
+    .canvas-settings {
+      background: variables.$pale-gray;
+      max-height: 1000px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: variables.$pale-gray variables.$light-gray;
+      scrollbar-gutter: stable;
+    }
+  }
 
-      * {
-        cursor: pointer;
+  .canvas-sidebar-content {
+    height: 100%;
+  }
+
+  // Sticky sidebar (#1401): while a long canvas scrolls, the sidebar stays in
+  // view below the page header and scrolls on its own. A sticky element only
+  // sticks inside its nearest scroll container, so the overflow the panel
+  // library sets on the group and on the sidebar panel's inner div is lifted
+  // (the canvas panel keeps its own overflow and still clips its content).
+  // --canvas-sticky-top is measured by CanvasLayout.
+  &:not(.no-distraction-mode) {
+    > [data-group] {
+      overflow: visible !important;
+    }
+
+    [data-panel] > div:has(> .canvas-sidebar-content) {
+      overflow: visible !important;
+    }
+
+    .canvas-sidebar-content {
+      position: sticky;
+      top: var(--canvas-sticky-top, 32px);
+      height: auto;
+      max-height: calc(100vh - var(--canvas-sticky-top, 32px));
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+  }
+
+  // What is left of a collapsed sidebar: a strip with the expand button.
+  .canvas-sidebar-strip {
+    background: variables.$white;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: variables.$space-12;
+
+    // On the left, the white separator (its border line is on the canvas
+    // side) reads as part of the strip: offset the button by its width so it
+    // sits in the middle of the column. On the right that line falls between
+    // the separator and the strip, so the strip alone is the column.
+    &.canvas-sidebar-strip--left {
+      padding-left: variables.$space-8;
+    }
+
+    .canvas-sidebar-strip__toggle {
+      width: variables.$space-36;
+      height: variables.$space-36;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: variables.$border-radius;
+      color: variables.$primary-color;
+
+      &:hover,
+      &:focus {
+        background: variables.$pale-gray;
+      }
+    }
+  }
+
+  .resizer {
+    background: variables.$white;
+    position: relative;
+    width: variables.$space-8;
+    height: 100%;
+    cursor: col-resize;
+    border-right: variables.$border-thickness solid variables.$light-gray;
+
+    &:after {
+      content: '';
+      position: absolute;
+      background: variables.$light-gray;
+      width: variables.$space-4;
+      height: variables.$space-36;
+      border-radius: variables.$border-radius;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .canvas-hover {
+    opacity: .5;
+    background: variables.$white;
+    border: 2px dashed variables.$light-gray;
+    border-radius: variables.$border-radius;
+  }
+
+  .canvas {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    container: canvas / inline-size;
+
+    // On a narrow canvas the toolbar buttons show only their icon. The label
+    // stays in the DOM (visually hidden) so it is still the accessible name.
+    // Icon-only buttons are squares the size of the sidebar-position switch.
+    @container canvas (max-width: 560px) {
+      .canvas-toolbar button.element {
+        width: variables.$space-36;
+        height: variables.$space-36;
+        padding: 0;
+        justify-content: center;
       }
 
-      .top-half,
-      .bottom-half,
-      .left-half,
-      .right-half {
+      .canvas-toolbar__label {
         position: absolute;
-        z-index: -1;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    }
+
+    .drag-placeholder {
+      background: variables.$pale-gray;
+      width: 100%;
+      height: variables.$space-60 * 2;
+      border-radius: variables.$border-radius;
+    }
+
+    .canvas-container {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 1px;
+      height: 100%;
+
+      .canvas-box {
+        min-width: 0;
       }
 
-      .left-half {
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 30px;
-        height: 100%;
+      @media screen and (max-width: 960px){
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .right-half {
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 30px;
-        height: 100%;
+      .z-index-top {
+        z-index: 100001 !important;
       }
 
-      .top-half {
-        top: 0;
-        left: 30px;
-        right: 30px;
-        height: 50%;
-      }
+      .canvas-element {
+        position: relative;
+        border-radius: variables.$border-radius;
+        min-width: 0;
+        width: 100%;
 
-      .bottom-half {
-        bottom: 0;
-        left: 30px;
-        right: 30px;
-        height: 50%;
-      }
+        * {
+          cursor: pointer;
+        }
 
-      .left-half-hover-placeholder,
-      .right-half-hover-placeholder {
-        background: $primary-color;
-        height: 100%;
-        width: 3px;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-      }
+        .top-half,
+        .bottom-half,
+        .left-half,
+        .right-half {
+          position: absolute;
+          z-index: -1;
+        }
 
-      .top-half-hover-placeholder,
-      .bottom-half-hover-placeholder {
-        background: $primary-color;
-        height: 3px;
-        position: absolute;
-        left: 0;
-        right: 0;
-      }
+        .left-half {
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 30px;
+          height: 100%;
+        }
 
-      .left-half-hover-placeholder {
-        left: 0;
-        border-radius: $border-radius 0 0 $border-radius;
-      }
+        .right-half {
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 30px;
+          height: 100%;
+        }
 
-      .right-half-hover-placeholder {
-        right: 0;
-        border-radius: 0 $border-radius $border-radius 0;
-      }
+        .top-half {
+          top: 0;
+          left: 30px;
+          right: 30px;
+          height: 50%;
+        }
 
-      .top-half-hover-placeholder {
-        top: 0;
-        border-radius: $border-radius $border-radius 0 0;
-      }
+        .bottom-half {
+          bottom: 0;
+          left: 30px;
+          right: 30px;
+          height: 50%;
+        }
 
-      .bottom-half-hover-placeholder {
-        bottom: 0;
-        border-radius: 0 0 $border-radius $border-radius;
-      }
+        .left-half-hover-placeholder,
+        .right-half-hover-placeholder {
+          background: variables.$primary-color;
+          height: 100%;
+          width: 3px;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+        }
 
-      .inside {
-        padding: $space-8;
-        border-radius: $border-radius;
+        .top-half-hover-placeholder,
+        .bottom-half-hover-placeholder {
+          background: variables.$primary-color;
+          height: 3px;
+          position: absolute;
+          left: 0;
+          right: 0;
+        }
+
+        .left-half-hover-placeholder {
+          left: 0;
+          border-radius: variables.$border-radius 0 0 variables.$border-radius;
+        }
+
+        .right-half-hover-placeholder {
+          right: 0;
+          border-radius: 0 variables.$border-radius variables.$border-radius 0;
+        }
+
+        .top-half-hover-placeholder {
+          top: 0;
+          border-radius: variables.$border-radius variables.$border-radius 0 0;
+        }
+
+        .bottom-half-hover-placeholder {
+          bottom: 0;
+          border-radius: 0 0 variables.$border-radius variables.$border-radius;
+        }
+
+        .inside {
+          padding: variables.$space-8;
+          border-radius: variables.$border-radius;
+
+          &.active {
+            outline: variables.$border-thickness solid variables.$primary-color;
+          }
+        }
 
         .actions {
           position: absolute;
           top: -31px;
-          padding: 6px 10px;
+          padding: variables.$space-8 variables.$space-12;
           left: 12px;
-          border-radius: $border-radius $border-radius 0 0;
-          background: $primary-color;
+          border-radius: variables.$border-radius variables.$border-radius 0 0;
+          background: variables.$primary-color;
           z-index: 100;
-          color: $white;
+          color: variables.$primary-color-white;
 
-          a {
-            color: $white;
+          &.with-errors {
+            background: variables.$danger-color;
+          }
+
+          &.tight {
+            top: -22px;
+            left: 24px;
+          }
+
+          // Every action in this bar is a <button class="btn-reset"> (never
+          // an <a>) -- .btn-reset's own base rule (_buttons.scss) hardcodes
+          // color: $link-color at the same specificity as this class
+          // selector, which otherwise wins by source order and renders every
+          // icon here in link-blue against this bar's own blue background
+          // (invisible). Target .btn-reset directly instead of `a` so this
+          // actually matches the real DOM; `a` kept for any literal anchor
+          // that might reuse this bar.
+          a,
+          .btn-reset {
+            color: variables.$primary-color-white;
 
             &:hover,
             &:focus {
-              color: rgba($white, .7);
+              color: rgba(variables.$primary-color-white, .7);
+
+              svg {
+                opacity: 0.7;
+                color: rgba(variables.$primary-color-white, .7) !important;
+              }
+            }
+
+            // Delete uses $danger-tint — a pale red tuned per-skin for better
+            // WCAG contrast on a saturated accent surface (4.9:1 vs primary
+            // in the light skin, beating plain $danger-bg's 4.4:1) while
+            // staying in the same danger/red hue family used everywhere else
+            // for destructive actions. No stronger/darker red anywhere —
+            // hover/focus fades the same way the sibling icons do (opacity
+            // only, no color shift).
+            &.delete-column-action {
+              color: variables.$danger-tint;
+
+              svg {
+                color: variables.$danger-tint !important;
+              }
+
+              &:hover,
+              &:focus {
+                color: variables.$danger-tint;
+
+                svg {
+                  opacity: 0.7;
+                  color: variables.$danger-tint !important;
+                }
+              }
             }
           }
         }
-
-        &.active {
-          outline: $border-thickness solid $primary-color;
-        }
       }
     }
+  }
+}
+
+// Ensure DragOverlay (portaled to <body>) stays above no-distraction-mode
+.acpt-dnd-overlay {
+  z-index: 100002 !important;
+}
+
+
+// Shared canvas card row (CanvasPreviewItem, used by every canvas builder).
+// The card is a size container, so the row adapts to its real pixel width:
+// a field's width setting is a % of its parent, and a 50% field inside a
+// repeater can be only ~200px wide (#1376). The name area shrinks (and
+// truncates) first; then the inline switches, then the type badge are hidden.
+// Nothing is lost: both are always available in the sidebar.
+.canvas-preview-item {
+  container-type: inline-size;
+
+  .canvas-preview-item__row {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .canvas-preview-item__main {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .canvas-preview-item__extra,
+  .canvas-preview-item__type {
+    flex: 0 0 auto;
+  }
+
+  @container (max-width: 460px) {
+    .canvas-preview-item__extra {
+      display: none;
+    }
+  }
+
+  @container (max-width: 200px) {
+    .canvas-preview-item__type {
+      display: none;
+    }
+  }
+}
+
+
+// Width-based truncation for the names/labels on the canvas: the text shrinks
+// with the room it really has (ellipsis + title tooltip) instead of the
+// character-count based max-w-120px cap, which cut names even on wide
+// screens. Every flex ancestor up to the card/header must allow shrinking
+// (min-width: 0), see .canvas-name-label and .canvas-header-row.
+.canvas-text-truncate {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  // The secondary text (slug or label) only gets the room left after the
+  // primary one (zero basis, grows up to its own width), so it is cut first
+  // and the primary only truncates once the secondary is gone.
+  &.canvas-text-truncate--secondary {
+    flex: 1 1 0;
+    max-width: max-content;
+  }
+}
+
+.canvas-name-label {
+  min-width: 0;
+  max-width: 100%;
+
+  > :not(.canvas-text-truncate) {
+    flex-shrink: 0;
+  }
+}
+
+// Box and block headers: the title side shrinks (and truncates), the actions
+// never do, so they always stay inside the card.
+.canvas-header-row {
+  min-width: 0;
+
+  > .canvas-header-row__title {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  > .canvas-header-row__actions {
+    flex: 0 0 auto;
   }
 }

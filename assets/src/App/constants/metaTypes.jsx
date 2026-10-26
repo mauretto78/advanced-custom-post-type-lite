@@ -3,7 +3,6 @@ export const metaTypes = {
     COMMENT: "comment",
     MEDIA: "media",
     META: "meta",
-    OPTION_PAGE: "optionPage",
     TAXONOMY: "taxonomy",
     USER: "user"
 };

@@ -12,7 +12,7 @@ import {sluggifyString} from "../../../utils/strings";
 import Input from "../../../components/Forms/Input";
 import CardRow from "../../../components/Card/CardRow";
 import {asyncIsTaxonomySlugValid, isTaxonomySlugValid} from "../../../utils/validation";
-import NavigationButtons from "../NavigationButtons";
+import NavigationButtons from "../../../components/NavigationButtons";
 
 const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleSubmit, formValues, edit = false, setFormValues = null}) => {
 
@@ -65,8 +65,12 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
 
     const actions = [
         <Button
+            key="next-step"
             testId="next-step"
-            style={edit ? styleVariants.PRIMARY : styleVariants.SECONDARY}
+            style={edit ? styleVariants.PRIMARY : styleVariants.OUTLINED_PRIMARY}
+            size="sm"
+            iconPosition="right"
+            icon={edit ? "bx:save" : "bx:chevron-right"}
         >
             {useTranslation(edit ? "Save" : "Next Step")}
         </Button>
@@ -156,7 +160,7 @@ const BasicStep = ({ title, crumbs, headings, stepActive, setStepActive, handleS
 
 BasicStep.propTypes = {
     headings: PropTypes.arrayOf(PropTypes.shape({
-        label:  PropTypes.string.isRequired,
+        title:  PropTypes.string.isRequired,
         description:  PropTypes.string.isRequired,
     })).isRequired,
     title: PropTypes.string.isRequired,

@@ -1,0 +1,7108 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mauretto 78\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "(default true)"
+msgstr "(по умолчанию true)"
+
+msgid "(e.g. Movie)"
+msgstr "(напр. Фильм)"
+
+msgid "(e.g. Movies)"
+msgstr "(напр. Фильмы)"
+
+msgid "--Select--"
+msgstr "--Выберите--"
+
+msgid "A brief description"
+msgstr "Краткое описание"
+
+msgid "Add page"
+msgstr "Добавить страницу"
+
+msgid "ACPT Tools"
+msgstr "Инструменты ACPT"
+
+msgid "ACPT email account"
+msgstr "Email-аккаунт ACPT"
+
+msgid "ALERT:"
+msgstr "ВНИМАНИЕ:"
+
+msgid "API dashboard"
+msgstr "Панель API"
+
+msgid "APIs"
+msgstr "API"
+
+msgid "APIs dashboard panel"
+msgstr "Панель управления API"
+
+msgid "APIs endpoints"
+msgstr "Конечные точки API"
+
+msgid "API key"
+msgstr "API-ключ"
+
+msgid "Action required"
+msgstr "Требуется действие"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid ""
+"Activate ACPT by your license key to get professional support and automatic "
+"updates from your WordPress dashboard."
+msgstr ""
+"Активируйте ACPT с помощью лицензионного ключа, чтобы получить "
+"профессиональную поддержку и автоматические обновления прямо из панели "
+"WordPress."
+
+msgid "Activate your license"
+msgstr "Активировать лицензию"
+
+msgid ""
+"Activate your license key here. Please note that you need also your ACPT "
+"user email"
+msgstr ""
+"Активируйте лицензионный ключ здесь. Обратите внимание, что вам также "
+"потребуется email вашего аккаунта ACPT"
+
+msgid "Activate your license now"
+msgstr "Активировать лицензию сейчас"
+
+msgid "Add"
+msgstr "Добавить"
+
+msgid "Add block"
+msgstr "Добавить блок"
+
+msgid "Add child page"
+msgstr "Добавить дочернюю страницу"
+
+msgid "Add element"
+msgstr "Добавить элемент"
+
+msgid "Add field"
+msgstr "Добавить поле"
+
+msgid "Add meta box"
+msgstr "Добавить мета-блок"
+
+msgid "Add new {{r}}"
+msgstr "Добавить новый {{r}}"
+
+msgid "Add option"
+msgstr "Добавить параметр"
+
+msgid "Add or remove {{r}}"
+msgstr "Добавить или удалить {{r}}"
+
+msgid "Add product data"
+msgstr "Добавить данные товара"
+
+msgid "Add support for various available post edit features. For more info"
+msgstr "Добавить поддержку различных функций редактирования записей. Подробнее"
+
+msgid "after copying"
+msgstr "после копирования"
+
+msgid "All {{r}}"
+msgstr "Все {{r}}"
+
+msgid ""
+"Allowed keys: 'name', name of default term.|'slug', Slug for default "
+"term.|'description', Description for default term"
+msgstr ""
+"Допустимые ключи: 'name' — название термина по умолчанию|'slug' — слаг "
+"термина по умолчанию|'description' — описание термина по умолчанию"
+
+msgid "Archive template"
+msgstr "Шаблон архива"
+
+msgid "Archives"
+msgstr "Архивы"
+
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+msgid "Array of capabilities for this taxonomy."
+msgstr "Массив возможностей для этой таксономии."
+
+msgid "Associate"
+msgstr "Связать"
+
+msgid "Associate custom post types here"
+msgstr "Связать произвольные типы записей здесь"
+
+msgid "Associate custom post types to"
+msgstr "Связать произвольные типы записей с"
+
+msgid "Associate taxonomies to"
+msgstr "Связать таксономии с"
+
+msgid "Associated icon"
+msgstr "Связанный значок"
+
+msgid "Associated meta boxes"
+msgstr "Связанные мета-блоки"
+
+msgid "Associated meta fields"
+msgstr "Связанные мета-поля"
+
+msgid "Associated post types"
+msgstr "Связанные типы записей"
+
+msgid "Associated taxonomies"
+msgstr "Связанные таксономии"
+
+msgid "Back to {{r}}"
+msgstr "Вернуться к {{r}}"
+
+msgid "Belongs to"
+msgstr "Принадлежит"
+
+msgid "Block list"
+msgstr "Список блоков"
+
+msgid "Block was successfully copied"
+msgstr "Блок успешно скопирован"
+
+msgid "CPT"
+msgstr "CPT"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the plural name."
+msgstr ""
+"Строка в формате CamelCase без знаков препинания и пробелов. Должна "
+"начинаться с буквы (не цифры). Важно, чтобы отличалась от формы "
+"множественного числа."
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the single name."
+msgstr ""
+"Строка в формате CamelCase без знаков препинания и пробелов. Должна "
+"начинаться с буквы (не цифры). Важно, чтобы отличалась от формы "
+"единственного числа."
+
+msgid "Capabilities"
+msgstr "Возможности"
+
+msgid "Capability"
+msgstr "Возможность"
+
+msgid "Capability Type"
+msgstr "Тип возможности"
+
+msgid "Capability type"
+msgstr "Тип возможности"
+
+msgid "Changelog"
+msgstr "Журнал изменений"
+
+msgid "Check `required` in the selected meta field"
+msgstr "Установите флажок «обязательное» в выбранном мета-поле"
+
+msgid "Check `show in archive` in the selected meta field"
+msgstr "Установите флажок «показывать в архиве» в выбранном мета-поле"
+
+msgid "Children list"
+msgstr "Список дочерних элементов"
+
+msgid "Choose box"
+msgstr "Выбрать блок"
+
+msgid "Choose element"
+msgstr "Выбрать элемент"
+
+msgid "Choose field"
+msgstr "Выбрать поле"
+
+msgid "Choose from most used {{r}}"
+msgstr "Выбрать из наиболее используемых {{r}}"
+
+msgid "Choose from the list"
+msgstr "Выбрать из списка"
+
+msgid "Choose how to display the related post(s) selector (default: select)"
+msgstr ""
+"Выбрать способ отображения селектора связанных записей (по умолчанию: "
+"выпадающий список)"
+
+msgid "Choose the field type"
+msgstr "Выбрать тип поля"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Condition"
+msgstr "Условие"
+
+msgid "Condition value"
+msgstr "Значение условия"
+
+msgid "Conditional rendering"
+msgstr "Условный рендеринг"
+
+msgid "Confirm deleting meta box"
+msgstr "Подтвердить удаление мета-блока"
+
+msgid "Confirm deleting meta field"
+msgstr "Подтвердить удаление мета-поля"
+
+msgid "Confirm deleting all"
+msgstr "Подтвердить удаление всего"
+
+msgid "Confirm deleting option"
+msgstr "Подтвердить удаление параметра"
+
+msgid ""
+"Copy the conditional logic settings of this meta field to other fields of "
+"this box"
+msgstr ""
+"Скопировать настройки условной логики этого мета-поля в другие поля этого "
+"блока"
+
+msgid "Copy the meta block"
+msgstr "Скопировать мета-блок"
+
+msgid "Copy the meta box"
+msgstr "Скопировать мета-блок"
+
+msgid "Copy the meta field"
+msgstr "Скопировать мета-поле"
+
+msgid "Copy the selected meta box"
+msgstr "Скопировать выбранный мета-блок"
+
+msgid "Copy the selected meta field"
+msgstr "Скопировать выбранное мета-поле"
+
+msgid "Copy this block to another meta field"
+msgstr "Скопировать этот блок в другое мета-поле"
+
+msgid "Copy this meta box"
+msgstr "Скопировать этот мета-блок"
+
+msgid "Copy this meta box to another"
+msgstr "Скопировать этот мета-блок в другой"
+
+msgid "Copy this meta field to another meta box"
+msgstr "Скопировать это мета-поле в другой мета-блок"
+
+msgid "Copyright"
+msgstr "Авторские права"
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Create a meta field in the selected meta box"
+msgstr "Создать мета-поле в выбранном мета-блоке"
+
+msgid "Create a meta option (if applicable) in the selected meta field"
+msgstr "Создать мета-параметр (если применимо) в выбранном мета-поле"
+
+msgid "Create a new block (only for Flexible field)"
+msgstr "Создать новый блок (только для гибкого поля)"
+
+msgid "Create a new condition in the selected meta field"
+msgstr "Создать новое условие в выбранном мета-поле"
+
+msgid "Create new Taxonomy"
+msgstr "Создать новую таксономию"
+
+msgid "Create new WooCommerce product data"
+msgstr "Создать новые данные товара WooCommerce"
+
+msgid "Create new meta box"
+msgstr "Создать новый мета-блок"
+
+msgid "Create new options after the selected meta option"
+msgstr "Создать новые параметры после выбранного мета-параметра"
+
+msgid "Create template"
+msgstr "Создать шаблон"
+
+msgid "Custom"
+msgstr "Пользовательский"
+
+msgid "Custom Post Type global settings"
+msgstr "Глобальные настройки типа записей"
+
+msgid "Custom post type data"
+msgstr "Данные типа записей"
+
+msgid "Custom post type meta successfully saved"
+msgstr "Мета-данные типа записи успешно сохранены"
+
+msgid "Custom post type slug to use instead of default."
+msgstr "Слаг типа записей вместо стандартного."
+
+msgid "Custom post type successfully deleted."
+msgstr "Тип записи успешно удалён."
+
+msgid "Custom post type successfully saved."
+msgstr "Тип записи успешно сохранён."
+
+msgid "Custom post type was associated to selected taxonomies"
+msgstr "Тип записей был связан с выбранными таксономиями"
+
+msgid "Custom post type"
+msgstr "Пользовательский тип записи"
+
+msgid "Custom post types"
+msgstr "Пользовательские типы записей"
+
+msgid "Custom query var"
+msgstr "Пользовательская переменная запроса"
+
+msgid "Custom query var slug to use instead of default."
+msgstr "Слаг переменной запроса вместо стандартного."
+
+msgid "Custom rewrite"
+msgstr "Пользовательская перезапись"
+
+msgid "Custom rewrite rules"
+msgstr "Правила перезаписи URL"
+
+msgid "Date format"
+msgstr "Формат даты"
+
+msgid "Default term to be used for the taxonomy."
+msgstr "Термин по умолчанию для таксономии."
+
+msgid "Default value"
+msgstr "Значение по умолчанию"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete ACPT definitions when deactivate the plug-in"
+msgstr "Удалить определения ACPT при деактивации плагина"
+
+msgid "Delete API key"
+msgstr "Удалить ключ API"
+
+msgid "Delete Taxonomy"
+msgstr "Удалить таксономию"
+
+msgid "Delete WooCommerce product data"
+msgstr "Удалить данные продукта WooCommerce"
+
+msgid "Delete all"
+msgstr "Удалить все"
+
+msgid "Delete all action"
+msgstr "Удалить все действия"
+
+msgid "Delete all images"
+msgstr "Удалить все изображения"
+
+msgid ""
+"Delete all saved ACPT definitions when you deactivate the plug-in. This "
+"means that if you select NO when you deactivate and then reactivate the plug-"
+"in you will find all the previously saved ACPT definitions (meta fields, "
+"options etc.)"
+msgstr ""
+"Удалить все сохранённые определения ACPT при деактивации плагина. Если "
+"выбрать НЕТ, при повторной активации плагина все ранее сохранённые "
+"определения ACPT (мета-поля, параметры и т.д.) будут доступны."
+
+msgid "Delete metadata when delete an ACPT field"
+msgstr "Удалять метаданные при удалении поля ACPT"
+
+msgid "Delete others pages"
+msgstr "Удалять чужие страницы"
+
+msgid "Delete others posts"
+msgstr "Удалять чужие записи"
+
+msgid "Delete pages"
+msgstr "Удалять страницы"
+
+msgid "Delete posts"
+msgstr "Удалять записи"
+
+msgid "Delete post metadata when deleting ACPT fields"
+msgstr "Удалять метаданные записи при удалении полей ACPT"
+
+msgid ""
+"Delete post metadata when deleting an ACPT field. This means that if you "
+"select YES, when you delete an ACPT meta field all the saved metadata will "
+"be deleted"
+msgstr ""
+"Удалять метаданные записи при удалении поля ACPT. Если выбрать ДА, при "
+"удалении поля все сохранённые метаданные будут удалены"
+
+msgid "Delete posts when delete an ACPT post definition"
+msgstr "Удалить записи при удалении определения типа записи ACPT"
+
+msgid ""
+"Delete posts when delete an ACPT post type definition. This means that if "
+"you select YES, when you delete an ACPT post type definition all the saved "
+"posts will be deleted"
+msgstr ""
+"Удалить записи при удалении определения типа записи ACPT. Это означает, что "
+"если вы выбрали ДА, при удалении определения типа записи ACPT все "
+"сохранённые записи будут удалены"
+
+msgid "Delete private pages"
+msgstr "Удалять личные страницы"
+
+msgid "Delete private posts"
+msgstr "Удалять личные записи"
+
+msgid "Delete published pages"
+msgstr "Удалять опубликованные страницы"
+
+msgid "Delete published posts"
+msgstr "Удалять опубликованные записи"
+
+msgid "Delete the meta box in this"
+msgstr "Удалить мета-блок в этом"
+
+msgid "Delete the meta field in this block after copying"
+msgstr "Удалить мета-поле в этом блоке после копирования"
+
+msgid "Delete the meta field in this field after copying"
+msgstr "Удалить мета-поле в этом поле после копирования"
+
+msgid "Delete the selected condition"
+msgstr "Удалить выбранное условие"
+
+msgid "Delete the selected meta box"
+msgstr "Удалить выбранный мета-блок"
+
+msgid "Delete the selected meta field"
+msgstr "Удалить выбранное мета-поле"
+
+msgid "Delete the selected meta option"
+msgstr "Удалить выбранный мета-параметр"
+
+msgid "Delete this meta box"
+msgstr "Удалить этот мета-блок"
+
+msgid "Delete this meta field"
+msgstr "Удалить это мета-поле"
+
+msgid "Different name MUST be different from single name"
+msgstr "Множественное имя ДОЛЖНО отличаться от единственного"
+
+msgid "Disabled"
+msgstr "Отключено"
+
+msgid "Displayed on the admin panel"
+msgstr "Отображается в панели администратора"
+
+msgid "Displayed on the sidebar of the admin panel"
+msgstr "Отображается в боковой панели администратора"
+
+msgid "Documentation"
+msgstr "Документация"
+
+msgid "Drag your component(s) here"
+msgstr "Перетащите компонент(ы) сюда"
+
+msgid "Drag your loop component(s) here"
+msgstr "Перетащите компонент(ы) цикла сюда"
+
+msgid "Duplicate the selected meta box"
+msgstr "Продублировать выбранный мета-блок"
+
+msgid "Duplicate the selected meta field"
+msgstr "Продублировать выбранное мета-поле"
+
+msgid "Duplicate this block"
+msgstr "Продублировать блок"
+
+msgid "Duplicate this meta box"
+msgstr "Продублировать мета-блок"
+
+msgid "Duplicate this meta field"
+msgstr "Продублировать мета-поле"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Edit Custom Post Type"
+msgstr "Редактировать тип записи"
+
+msgid "Edit Taxonomy"
+msgstr "Редактировать таксономию"
+
+msgid "Edit WooCommerce product data"
+msgstr "Редактировать данные продукта WooCommerce"
+
+msgid "Edit a Taxonomy"
+msgstr "Редактировать таксономию"
+
+msgid "Edit others pages"
+msgstr "Редактировать чужие страницы"
+
+msgid "Edit others posts"
+msgstr "Редактировать чужие записи"
+
+msgid "Edit pages"
+msgstr "Редактировать страницы"
+
+msgid "Edit posts"
+msgstr "Редактировать записи"
+
+msgid "Edit private pages"
+msgstr "Редактировать личные страницы"
+
+msgid "Edit private posts"
+msgstr "Редактировать личные записи"
+
+msgid "Edit published pages"
+msgstr "Редактировать опубликованные страницы"
+
+msgid "Edit published posts"
+msgstr "Редактировать опубликованные записи"
+
+msgid "Element"
+msgstr "Элемент"
+
+msgid "Elements per page"
+msgstr "Элементов на странице"
+
+msgid "Elements per row"
+msgstr "Элементов в строке"
+
+msgid "Elements to display"
+msgstr "Элементы для отображения"
+
+msgid "Enable ACPT visual builder"
+msgstr "Включить визуальный конструктор ACPT"
+
+msgid "Enable the ACPT visual builder to manage your templates."
+msgstr "Включите визуальный конструктор ACPT для управления шаблонами."
+
+msgid ""
+"Enable the ACPT visual builder. This option allows you to use the integrated "
+"visual builder to create and manage templates for single CPTs, archive "
+"pages, taxonomy terms and relations."
+msgstr ""
+"Включите визуальный конструктор ACPT. Эта опция позволяет использовать "
+"встроенный конструктор для создания и управления шаблонами для отдельных "
+"CPT, страниц архива, терминов таксономий и связей."
+
+msgid "Error during saving the template"
+msgstr "Ошибка при сохранении шаблона"
+
+msgid "Error during the activation of the license."
+msgstr "Ошибка при активации лицензии."
+
+msgid "Error fetching data"
+msgstr "Ошибка получения данных"
+
+msgid "Ex. movie"
+msgstr "Напр. фильм"
+
+msgid "Ex. movies"
+msgstr "Напр. фильмы"
+
+msgid "Expiration date"
+msgstr "Дата истечения"
+
+msgid "Export HTML/CSS code"
+msgstr "Экспортировать HTML/CSS код"
+
+msgid "Export code"
+msgstr "Экспортировать код"
+
+msgid "Export custom post types"
+msgstr "Экспортировать произвольные типы записей"
+
+msgid "Export data"
+msgstr "Экспортировать данные"
+
+msgid "Export settings"
+msgstr "Экспортировать настройки"
+
+msgid "Export selected elements"
+msgstr "Экспортировать выбранные элементы"
+
+msgid "Export settings and meta fields for selected elements:"
+msgstr "Экспортировать настройки и мета-поля для выбранных элементов:"
+
+msgid "Facebook group"
+msgstr "Группа Facebook"
+
+msgid "Featured image"
+msgstr "Миниатюра"
+
+msgid "Field columns"
+msgstr "Столбцы поля"
+
+msgid "Field columns ([1-6] only for repeater field)"
+msgstr "Столбцы поля ([1-6] только для поля повторителя)"
+
+msgid "Field label"
+msgstr "Метка поля"
+
+msgid "Field name"
+msgstr "Название поля"
+
+msgid "Field name cannot be blank"
+msgstr "Имя поля не может быть пустым"
+
+msgid "Field name max length is 255 characters"
+msgstr "Максимальная длина имени поля — 255 символов"
+
+msgid "Field required"
+msgstr "Обязательное поле"
+
+msgid "Field slug"
+msgstr "Слаг поля"
+
+msgid "Field slug (Ex. gallery or text_1)"
+msgstr "Слаг поля (напр. gallery или text_1)"
+
+msgid ""
+"Field slug. Only alphanumeric (latin) characters allowed, without spaces"
+msgstr ""
+"Слаг поля. Допустимы только буквенно-цифровые (латинские) символы без "
+"пробелов"
+
+msgid "Field width"
+msgstr "Ширина поля"
+
+msgid "Field width in % ([1-100] default value: 100)"
+msgstr "Ширина поля в % ([1-100], значение по умолчанию: 100)"
+
+msgid "Fields"
+msgstr "Поля"
+
+msgid "Fields count"
+msgstr "Количество полей"
+
+msgid "Filter by date"
+msgstr "Фильтровать по дате"
+
+msgid "Filter by {{r}}"
+msgstr "Фильтровать по {{r}}"
+
+msgid "Filter {{r}} list"
+msgstr "Список фильтрации {{r}}"
+
+msgid "Filter in admin"
+msgstr "Фильтровать в панели администратора"
+
+msgid "First, create a post for this post type"
+msgstr "Сначала создайте запись для этого типа"
+
+msgid "First, you need to add a block in ACPT settings."
+msgstr "Сначала нужно добавить блок в настройках ACPT."
+
+msgid "Format"
+msgstr "Формат"
+
+msgid ""
+"Discover, manage and test every REST endpoint exposed by ACPT via live "
+"Swagger UI."
+msgstr ""
+"Просматривайте, управляйте и тестируйте все REST-эндпоинты ACPT через "
+"интерактивный Swagger UI."
+
+msgid "Fullscreen mode"
+msgstr "Полноэкранный режим"
+
+msgid "General"
+msgstr "Общие"
+
+msgid "Generate"
+msgstr "Генерировать"
+
+msgid "Generated at"
+msgstr "Создано в"
+
+msgid "Generating code..."
+msgstr "Генерация кода..."
+
+msgid "Go to"
+msgstr "Перейти к"
+
+msgid "Google Maps API key"
+msgstr "API-ключ Google Maps"
+
+msgid "GraphQL plural name"
+msgstr "Имя GraphQL во множественном числе"
+
+msgid "GraphQL single name"
+msgstr "Имя GraphQL в единственном числе"
+
+msgid "Has archive"
+msgstr "Есть архив"
+
+msgid "Headline location"
+msgstr "Местоположение заголовка"
+
+msgid "Height"
+msgstr "Высота"
+
+msgid "Hide all modals, deselect the current element"
+msgstr "Скрыть все модальные окна, снять выделение с текущего элемента"
+
+msgid "Hide in external products"
+msgstr "Скрыть во внешних продуктах"
+
+msgid "Hide in virtual products"
+msgstr "Скрыть в виртуальных продуктах"
+
+msgid "Hide/show this meta box"
+msgstr "Скрыть/показать мета-блок"
+
+msgid "Hide/show this meta field"
+msgstr "Скрыть/показать мета-поле"
+
+msgid "Hide/show this block"
+msgstr "Скрыть/показать блок"
+
+msgid "Hide/show this page"
+msgstr "Скрыть/показать эту страницу"
+
+msgid "Hierarchical"
+msgstr "Иерархический"
+
+msgid "How to display the related post(s) selector?"
+msgstr "Как отображать выбор связанных записей?"
+
+msgid "Icon"
+msgstr "Значок"
+
+msgid "Import an ACPT backup here."
+msgstr "Импортируйте резервную копию ACPT здесь."
+
+msgid "Import custom post types"
+msgstr "Импортировать произвольные типы записей"
+
+msgid "Import data"
+msgstr "Импортировать данные"
+
+msgid "Import settings"
+msgstr "Импортировать настройки"
+
+msgid "Insert"
+msgstr "Вставить"
+
+msgid "Is Public"
+msgstr "Публично"
+
+msgid "Key"
+msgstr "Ключ"
+
+msgid "Label and value are linked"
+msgstr "Метка и значение связаны"
+
+msgid "Label and value are unlinked"
+msgstr "Метка и значение несвязаны"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Leading term:"
+msgstr "Ведущий термин:"
+
+msgid "Lifetime"
+msgstr "Срок действия"
+
+msgid "Link target"
+msgstr "Цель ссылки"
+
+msgid "List {{r}}"
+msgstr "Список {{r}}"
+
+msgid ""
+"Makes this post type available for selection in navigation menus. Default is "
+"value of $public."
+msgstr ""
+"Делает этот тип записей доступным для выбора в меню навигации. По умолчанию "
+"значение $public."
+
+msgid ""
+"Makes this post type available via the admin bar. Default is value of "
+"$show_in_menu."
+msgstr ""
+"Делает этот тип записей доступным через панель администратора. По умолчанию "
+"значение $show_in_menu."
+
+msgid ""
+"Makes this taxonomy available for selection in navigation menus. If not set, "
+"the default is inherited from $public (default true)."
+msgstr ""
+"Делает таксономию доступной для выбора в меню навигации. По умолчанию "
+"наследуется от $public (по умолчанию true)."
+
+msgid "Manage"
+msgstr "Управлять"
+
+msgid "Manage User Meta"
+msgstr "Управление мета-данными пользователя"
+
+msgid "Manage categories"
+msgstr "Управление категориями"
+
+msgid "Manage content"
+msgstr "Управление контентом"
+
+msgid "Manage fields"
+msgstr "Управлять полями"
+
+msgid "Manage links"
+msgstr "Управление ссылками"
+
+msgid "Manage options"
+msgstr "Управление параметрами"
+
+msgid "Manage pages"
+msgstr "Управлять страницами"
+
+msgid "Manage your license"
+msgstr "Управление лицензией"
+
+msgid "Manage your registered license key"
+msgstr "Управление зарегистрированным ключом лицензии"
+
+msgid "Max value (used only by numeric and textual fields)"
+msgstr "Максимальное значение (только для числовых и текстовых полей)"
+
+msgid "Maximum blocks allowed"
+msgstr "Максимальное допустимое количество блоков"
+
+msgid "Menu icon"
+msgstr "Значок меню"
+
+msgid "Menu position"
+msgstr "Позиция в меню"
+
+msgid "Menu slug"
+msgstr "Слаг меню"
+
+msgid "Menu title"
+msgstr "Заголовок меню"
+
+msgid "Meta box"
+msgstr "Мета-блок"
+
+msgid "Meta box was successfully copied"
+msgstr "Мета-блок успешно скопирован"
+
+msgid "Meta boxes"
+msgstr "Мета-блоки"
+
+msgid "Meta field"
+msgstr "Мета-поле"
+
+msgid "Meta field was successfully copied"
+msgstr "Мета-поле успешно скопировано"
+
+msgid "Meta fields"
+msgstr "Мета-поля"
+
+msgid "Meta option"
+msgstr "Мета-параметр"
+
+msgid "Min value (used only by numeric and textual fields)"
+msgstr "Минимальное значение (только для числовых и текстовых полей)"
+
+msgid "Minimum blocks allowed"
+msgstr "Минимальное допустимое количество блоков"
+
+msgid "Moderate comments"
+msgstr "Управление комментариями"
+
+msgid "Most used {{r}}"
+msgstr "Наиболее используемые {{r}}"
+
+msgid "My account"
+msgstr "Мой аккаунт"
+
+msgid "My license"
+msgstr "Моя лицензия"
+
+msgid "Name"
+msgstr "Название"
+
+msgid "Native"
+msgstr "Нативный"
+
+msgid "Navigate the input fields in the selected meta field"
+msgstr "Перемещение по полям ввода выбранного мета-поля"
+
+msgid "Navigate the input fields in the selected meta option"
+msgstr "Перемещение по полям ввода выбранного мета-параметра"
+
+msgid "Navigate the tabs of selected field (go to next tab)"
+msgstr "Навигация по вкладкам выбранного поля (перейти на следующую вкладку)"
+
+msgid "Navigate the tabs of selected field (go to previous tab)"
+msgstr "Навигация по вкладкам выбранного поля (перейти на предыдущую вкладку)"
+
+msgid "Navigate to next element (box, field, option or condition)"
+msgstr "Перейти к следующему элементу (блоку, полю, параметру или условию)"
+
+msgid "Navigate to previous element (box, field, option or condition)"
+msgstr "Перейти к предыдущему элементу (блоку, полю, параметру или условию)"
+
+msgid "Navigation"
+msgstr "Навигация"
+
+msgid "Navigation list {{r}}"
+msgstr "Список навигации {{r}}"
+
+msgid "New"
+msgstr "Новый"
+
+msgid "New {{r}}"
+msgstr "Новый {{r}}"
+
+msgid "Next Step"
+msgstr "Следующий шаг"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "No API keys found."
+msgstr "Ключи API не найдены."
+
+msgid ""
+"No blocks already created. Create the first one now by clicking the button "
+"\"Add block\"!"
+msgstr "Блоки ещё не созданы. Создайте первый, нажав кнопку «Добавить блок»!"
+
+msgid ""
+"No blocks saved, generate the first one clicking on \"Add block\" button"
+msgstr "Блоки не сохранены. Создайте первый, нажав кнопку «Добавить блок»"
+
+msgid ""
+"No children already created. Create the first one now by clicking the button "
+"\"Add child page\"!"
+msgstr ""
+"Дочерние страницы не созданы. Создайте первую, нажав кнопку «Добавить "
+"дочернюю страницу»!"
+
+msgid "No choice"
+msgstr "Нет выбора"
+
+msgid "No conditions are present."
+msgstr "Условия отсутствуют."
+
+msgid ""
+"No conditions are present, click on \"Add condition\" button to add the "
+"first one."
+msgstr ""
+"Условия отсутствуют. Нажмите кнопку «Добавить условие» для добавления "
+"первого."
+
+msgid ""
+"No content yet. Drag components in this canvas and start building something "
+"awesome!"
+msgstr ""
+"Контент ещё не добавлен. Перетащите компоненты на холст и начните создавать "
+"что-то отличное!"
+
+msgid "No custom post type found."
+msgstr "Тип записи не найден."
+
+msgid "No display"
+msgstr "Не отображать"
+
+msgid ""
+"No elements saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"Элементы не сохранены. Создайте первый, нажав кнопку «Добавить элемент»"
+
+msgid ""
+"No field box already created. Create the first one now by clicking the "
+"button \"Add field box\"!"
+msgstr ""
+"Блоки полей не созданы. Создайте первый, нажав кнопку «Добавить блок поля»!"
+
+msgid ""
+"No fields saved, generate the first one clicking on \"Add element\" button"
+msgstr "Поля не сохранены. Создайте первое, нажав кнопку «Добавить элемент»"
+
+msgid ""
+"No fields already created. Create the first one now by clicking the button "
+"\"Add field\"!"
+msgstr "Поля не созданы. Создайте первое, нажав кнопку «Добавить поле»!"
+
+msgid ""
+"No meta box already created. Create the first one now by clicking the button "
+"\"Add meta box\"!"
+msgstr ""
+"Мета-блоки не созданы. Создайте первый, нажав кнопку «Добавить мета-блок»!"
+
+msgid "No option pages found."
+msgstr "Страницы настроек не найдены."
+
+msgid ""
+"No options already created. Create the first one now by clicking the button "
+"\"Add option\"!"
+msgstr ""
+"Параметры ещё не созданы. Создайте первый, нажав кнопку «Добавить параметр»!"
+
+msgid "No product data found."
+msgstr "Данные продукта не найдены."
+
+msgid "No records message"
+msgstr "Сообщение об отсутствии записей"
+
+msgid "No taxonomies found."
+msgstr "Таксономии не найдены."
+
+msgid "No templates found."
+msgstr "Шаблоны не найдены."
+
+msgid "No {{r}}"
+msgstr "Нет {{r}}"
+
+msgid "No {{r}} found"
+msgstr "{{r}} не найдено"
+
+msgid "Not allowed"
+msgstr "Не разрешено"
+
+msgid "On the left"
+msgstr "Слева"
+
+msgid "On the right"
+msgstr "Справа"
+
+msgid "On the top"
+msgstr "Сверху"
+
+msgid "Opens in a new window or tab "
+msgstr "Открывается в новом окне или вкладке"
+
+msgid "Opens in the full body of the window"
+msgstr "Открывается в полном окне"
+
+msgid "Opens in the parent frame"
+msgstr "Открывается в родительском фрейме"
+
+msgid "Opens in the same frame as it was clicked"
+msgstr "Открывается в том же фрейме, где была нажата ссылка"
+
+msgid "Option list"
+msgstr "Список параметров"
+
+msgid "Option page meta successfully saved"
+msgstr "Мета-данные страницы настроек успешно сохранены"
+
+msgid "Single option page"
+msgstr "Одиночная страница настроек"
+
+msgid "Option page"
+msgstr "Страница параметров"
+
+msgid "Option pages"
+msgstr "Страницы параметров"
+
+msgid "Option pages meta"
+msgstr "Мета страниц настроек"
+
+msgid "Order by"
+msgstr "Сортировать по"
+
+msgid "Page description (will be displayed after the title)"
+msgstr "Описание страницы (будет отображаться после заголовка)"
+
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+msgid "Page title"
+msgstr "Заголовок страницы"
+
+msgid "Parent"
+msgstr "Родительский"
+
+msgid "Parent item"
+msgstr "Родительский элемент"
+
+msgid "Parent WP admin menu"
+msgstr ""
+
+msgid "Parent {{r}}"
+msgstr "Родительский {{r}}"
+
+msgid ""
+"Paste here your Google Maps API key. Needed to use the Address meta field."
+msgstr ""
+"Вставьте ключ API Google Maps. Необходим для использования мета-поля «Адрес»."
+
+msgid "Pattern value (used only by numeric and textual fields)"
+msgstr "Значение шаблона (только для числовых и текстовых полей)"
+
+msgid "Pattern value (used only by textual fields)"
+msgstr "Значение шаблона (только для текстовых полей)"
+
+msgid "Permalink text"
+msgstr "Текст постоянной ссылки"
+
+msgid "Plugin version"
+msgstr "Версия плагина"
+
+msgid "Plural"
+msgstr "Множественное число"
+
+msgid "Plural label"
+msgstr "Метка во множественном числе"
+
+msgid "Popular {{r}}"
+msgstr "Популярные {{r}}"
+
+msgid "Possible values: customPostType, taxonomy."
+msgstr "Возможные значения: customPostType, taxonomy."
+
+msgid "Post count"
+msgstr "Количество записей"
+
+msgid "Post name"
+msgstr "Имя записи"
+
+msgid "Preview"
+msgstr "Предварительный просмотр"
+
+msgid "Previous Step"
+msgstr "Предыдущий шаг"
+
+msgid "Product data"
+msgstr "Данные товара"
+
+msgid "Product data successfully saved"
+msgstr "Данные товара успешно сохранены"
+
+msgid "Publicly queryable"
+msgstr "Доступен для публичных запросов"
+
+msgid "Publish pages"
+msgstr "Публиковать страницы"
+
+msgid "Publish posts"
+msgstr "Публиковать записи"
+
+msgid "Published posts count"
+msgstr "Количество опубликованных записей"
+
+msgid "Published posts count associated with the taxonomy"
+msgstr "Количество опубликованных записей, связанных с таксономией"
+
+msgid "Query var"
+msgstr "Переменная запроса"
+
+msgid "Quick edit"
+msgstr "Быстрое редактирование"
+
+msgid "Quick navigation"
+msgstr "Быстрая навигация"
+
+msgid "REST API Controller class name. Default is 'WP_REST_Terms_Controller'."
+msgstr ""
+"Имя класса контроллера REST API. По умолчанию «WP_REST_Terms_Controller»."
+
+msgid "REST API base slug"
+msgstr "Базовый слаг REST API"
+
+msgid "REST Controller class"
+msgstr "Класс контроллера REST"
+
+msgid "Radio/checkbox"
+msgstr "Переключатель/флажок"
+
+msgid "Read "
+msgstr "Чтение"
+
+msgid "Read private pages"
+msgstr "Читать личные страницы"
+
+msgid "Read private posts"
+msgstr "Читать личные записи"
+
+msgid "Records per page"
+msgstr "Записей на странице"
+
+msgid "Records per page in ACPT dashboards"
+msgstr "Записей на страницу в дашбордах ACPT"
+
+msgid "Redo"
+msgstr "Повторить"
+
+msgid "Regenerate"
+msgstr "Перегенерировать"
+
+msgid "Register new Custom Post Type"
+msgstr "Зарегистрировать новый тип записи"
+
+msgid "Register the first one"
+msgstr "Зарегистрируйте первую"
+
+msgid "Registered Custom Post Types"
+msgstr "Зарегистрированные типы записей"
+
+msgid "Registered Taxonomies"
+msgstr "Зарегистрированные таксономии"
+
+msgid "Related template"
+msgstr "Связанный шаблон"
+
+msgid "Remove featured image"
+msgstr "Удалить миниатюру"
+
+msgid "Return back to list"
+msgstr "Вернуться к списку"
+
+msgid "Rewrite"
+msgstr "Перезапись"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save action"
+msgstr "Сохранить действие"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search box"
+msgstr "Поле поиска"
+
+msgid "Search {{r}}"
+msgstr "Поиск {{r}}"
+
+msgid "Secret"
+msgstr "Секрет"
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "Select field box from list"
+msgstr "Выбрать блок поля из списка"
+
+msgid "Select the inversed field on target"
+msgstr "Выбрать обратное поле на цели"
+
+msgid "Select field from list"
+msgstr "Выбрать поле из списка"
+
+msgid "Select field type from list"
+msgstr "Выбрать тип поля из списка"
+
+msgid "Select relation type from list"
+msgstr "Выбрать тип связи из списка"
+
+msgid "Select the element from the list:"
+msgstr "Выбрать элемент из списка:"
+
+msgid "Select the headline location (default: on the left)"
+msgstr "Выбрать расположение заголовка (по умолчанию: слева)"
+
+msgid "Select the template type:"
+msgstr "Выбрать тип шаблона:"
+
+msgid "Separate {{r}} with commas"
+msgstr "Разделяйте {{r}} запятыми"
+
+msgid "Set featured image"
+msgstr "Установить миниатюру"
+
+msgid "Set the language of the plug-in"
+msgstr "Задать язык плагина"
+
+msgid ""
+"Sets the query var key for this taxonomy. Default  key. If false, a taxonomy "
+"cannot be loaded at ?{query_var}={term_slug}. If a string, the query ?"
+"{query_var}={term_slug} will be valid."
+msgstr "Задаёт ключ переменной запроса для таксономии."
+
+msgid ""
+"Sets the query_var key for this post type. Defaults to  key. If false, a "
+"post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+"string, the query {post_slug} will be valid."
+msgstr "Задаёт ключ query_var для этого типа записи."
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Settings page"
+msgstr "Страница настроек"
+
+msgid "Show Tagcloud"
+msgstr "Показывать облако тегов"
+
+msgid "Show admin column"
+msgstr "Показывать столбец в панели администратора"
+
+msgid "Show in GraphQL"
+msgstr "Показывать в GraphQL"
+
+msgid "Show in REST API"
+msgstr "Показывать в REST API"
+
+msgid "Show in UI"
+msgstr "Показывать в интерфейсе"
+
+msgid "Show in Wordpress admin post lists page"
+msgstr "Показывать в списке записей WordPress"
+
+msgid "Show in admin bar"
+msgstr "Показать в панели администратора"
+
+msgid "Show in external products"
+msgstr "Показывать во внешних продуктах"
+
+msgid "Show in grouped products"
+msgstr "Показывать в сгруппированных продуктах"
+
+msgid "Show in menu"
+msgstr "Показать в меню"
+
+msgid "Show in nav menus"
+msgstr "Показать в навигационных меню"
+
+msgid "Show in quick edit"
+msgstr "Показать в быстром редактировании"
+
+msgid "Show in simple products"
+msgstr "Показывать в простых продуктах"
+
+msgid "Show in variable products"
+msgstr "Показывать в вариативных продуктах"
+
+msgid "Show on UI"
+msgstr "Показывать в интерфейсе"
+
+msgid "Show pagination"
+msgstr "Показывать пагинацию"
+
+msgid "Show the custom post type in WPGraphQL"
+msgstr "Показывать тип записи в WPGraphQL"
+
+msgid "Show the custom post type in WPGraphQL."
+msgstr "Показывать тип записи в WPGraphQL."
+
+msgid "Show the product data on the front store page."
+msgstr "Показывать данные продукта на странице магазина."
+
+msgid "Show this legend modal"
+msgstr "Показать это диалоговое окно легенды"
+
+msgid "Show/hide all fields"
+msgstr "Показать/скрыть все поля"
+
+msgid "Sing. label"
+msgstr "Метка (ед.ч.)"
+
+msgid "Single name MUST be different from plural name"
+msgstr "Единственное имя ДОЛЖНО отличаться от множественного"
+
+msgid "Single template"
+msgstr "Одиночный шаблон"
+
+msgid "Singular"
+msgstr "Единственное число"
+
+msgid "Singular label"
+msgstr "Метка в ед. числе"
+
+msgid "Slug"
+msgstr "Слаг"
+
+msgid "Sort"
+msgstr "Сортировка"
+
+msgid "Sort by"
+msgstr "Сортировать по"
+
+msgid "Step value (used only by numeric fields)"
+msgstr "Шаг (только для числовых полей)"
+
+msgid "Successfully post sync."
+msgstr "Записи успешно синхронизированы."
+
+msgid "Support"
+msgstr "Поддержка"
+
+msgid "Supports"
+msgstr "Поддерживает"
+
+msgid "Surrounding tag"
+msgstr "Обёртывающий тег"
+
+msgid "Sync with post types"
+msgstr "Синхронизировать с типами записей"
+
+msgid "Taxonomies"
+msgstr "Таксономии"
+
+msgid "Taxonomies association"
+msgstr "Ассоциация таксономий"
+
+msgid "Taxonomy"
+msgstr "Таксономия"
+
+msgid "Taxonomy data"
+msgstr "Данные таксономии"
+
+msgid "Taxonomy meta successfully saved"
+msgstr "Мета таксономии успешно сохранена"
+
+msgid "Taxonomy settings"
+msgstr "Настройки таксономии"
+
+msgid "Taxonomy slug to use instead of default."
+msgstr "Слаг таксономии вместо стандартного."
+
+msgid ""
+"Taxonomy slug. The post name/slug. Used for various queries for taxonomy "
+"content."
+msgstr ""
+"Слаг таксономии. Используется для различных запросов к контенту таксономии."
+
+msgid "Taxonomy successfully deleted"
+msgstr "Таксономия успешно удалена"
+
+msgid "Taxonomy was associated to selected Custom post types"
+msgstr "Таксономия была связана с выбранными типами записей"
+
+msgid "Template"
+msgstr "Шаблон"
+
+msgid "Template list"
+msgstr "Список шаблонов"
+
+msgid "Template saved successfully"
+msgstr "Шаблон успешно сохранён"
+
+msgid "Template was successfully deleted."
+msgstr "Шаблон успешно удалён."
+
+msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Текст после. Разрешён HTML (напр. &lt;small&gt;)"
+
+msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Текст перед. Разрешён HTML (напр. &lt;small&gt;)"
+
+msgid "The API key was successfully deleted"
+msgstr "Ключ API успешно удалён"
+
+msgid "The archive template for this custom post type"
+msgstr "Шаблон архива для этого типа записей"
+
+msgid "The browser will refresh after 5 seconds."
+msgstr "Браузер обновится через 5 секунд."
+
+msgid "The custom post type or taxonomy element."
+msgstr "Элемент пользовательского типа записи или таксономии."
+
+msgid "The default value for this field"
+msgstr "Значение по умолчанию для этого поля"
+
+msgid "The description of this field (showed only on admin panel)"
+msgstr "Описание поля (отображается только в панели администратора)"
+
+msgid "The field label, non latin characters are allowed"
+msgstr "Метка поля, допустимы нелатинские символы"
+
+msgid "The icon displayed on menu (only for parent pages)"
+msgstr "Иконка в меню (только для родительских страниц)"
+
+msgid ""
+"The inversed field is the target post type field which is related with this "
+"one in a bidirectional relation"
+msgstr ""
+"Обратное поле — это поле целевого типа записи, связанное с этим в "
+"двунаправленной связи"
+
+msgid ""
+"The limit on how many blocks are allowed ([1-100] only for flexible field)"
+msgstr "Ограничение на количество блоков ([1-100] только для гибкого поля)"
+
+msgid ""
+"The limit on how many blocks are required ([1-100] only for flexible field)"
+msgstr "Минимальное количество блоков ([1-100] только для гибкого поля)"
+
+msgid "The maximum value (used only by numeric and textual fields)"
+msgstr "Максимальное значение (только для числовых и текстовых полей)"
+
+msgid "The menu title (displayed only in the admin menu)"
+msgstr "Заголовок меню (отображается только в меню администратора)"
+
+msgid "The minimum value (used only by numeric and textual fields)"
+msgstr "Минимальное значение (только для числовых и текстовых полей)"
+
+msgid "The page slug (used to generate the page URL). Must be unique"
+msgstr "Слаг страницы (используется для генерации URL). Должен быть уникальным"
+
+msgid "The page title"
+msgstr "Заголовок страницы"
+
+msgid "The parent element slug"
+msgstr "Слаг родительского элемента"
+
+msgid ""
+"The position in the menu order the post type should appear. To work, "
+"$show_in_menu must be true. Default null (at the bottom)."
+msgstr ""
+"Позиция типа записи в порядке меню. Требует $show_in_menu = true. По "
+"умолчанию null (внизу)."
+
+msgid "The post name/slug. Used for various queries for taxonomy content."
+msgstr ""
+"Имя/слаг записи. Используется для различных запросов к контенту таксономии."
+
+msgid "The post name/slug. Used for various queries."
+msgstr "Имя/слаг записи. Используется для различных запросов."
+
+msgid "The product data name."
+msgstr "Имя данных продукта."
+
+msgid "The requested page was not found, was deleted or was moved!"
+msgstr "Запрашиваемая страница не найдена, удалена или перемещена!"
+
+msgid "The single template for taxonomy term"
+msgstr "Одиночный шаблон для термина таксономии"
+
+msgid "The single template for this custom post type"
+msgstr "Одиночный шаблон для этого типа записей"
+
+msgid ""
+"The string to use to build the read, edit, and delete capabilities. May be "
+"passed as an array to allow for alternative plurals when using this argument "
+"as a base to construct the capabilities, e.g. array('story', 'stories'). "
+"Default 'post'."
+msgstr ""
+"Строка для формирования возможностей чтения, редактирования и удаления. "
+"Может быть передан массив для альтернативных форм множественного числа, "
+"например array('story', 'stories'). По умолчанию — 'post'."
+
+msgid ""
+"The template type. Possible values: archive, single, related, metaField."
+msgstr "Тип шаблона. Возможные значения: archive, single, related, metaField."
+
+msgid ""
+"The template used to display this custom post type when it is releated to "
+"another one. If no template is set, it will be displayed just the title of "
+"the post."
+msgstr ""
+"Шаблон для отображения типа записи при связи с другим. Если шаблон не задан, "
+"отображается только заголовок записи."
+
+msgid "The visual builder can be used with a minimum resolution of 960 px wide"
+msgstr ""
+"Визуальный конструктор работает при минимальном разрешении 960 пикселей"
+
+msgid "The visual builder is disabled. Go to Settings page and enable it."
+msgstr ""
+"Визуальный конструктор отключён. Перейдите на страницу настроек и включите "
+"его."
+
+msgid "This field is mandatory"
+msgstr "Это поле обязательно"
+
+msgid ""
+"This is the only time that the secret access key can be viewed or copied. "
+"You cannot recover it later. However, you can delete and create or "
+"regenerate new API key at any time."
+msgstr ""
+"Это единственный раз, когда секретный ключ доступа можно просмотреть или "
+"скопировать. Восстановить его позже невозможно. Однако вы можете удалить и "
+"создать или перегенерировать новый ключ API в любое время."
+
+msgid "This number controls the position of this page in the admin menu"
+msgstr "Это число управляет позицией страницы в меню администратора"
+
+msgid "This text will appear after input"
+msgstr "Этот текст будет отображаться после поля ввода"
+
+msgid "This text will appear before input"
+msgstr "Этот текст будет отображаться перед полем ввода"
+
+msgid ""
+"Restore settings and meta fields from a previously exported .acpt file. "
+"Maximum file size is 2 MB."
+msgstr ""
+"Восстановите настройки и мета-поля из ранее экспортированного файла .acpt. "
+"Максимальный размер файла — 2 МБ."
+
+msgid "To change the base url of REST API route. Default is"
+msgstr "Изменить базовый URL маршрута REST API. По умолчанию:"
+
+msgid "Toggle guides"
+msgstr "Переключить направляющие"
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using  as "
+"slug. To prevent rewrite, set to false. To specify rewrite rules, an array "
+"can be passed with any of these keys:"
+msgstr ""
+"Управляет обработкой перезаписи URL для этой таксономии. По умолчанию true. "
+"Для отключения установите false. Для указания правил перезаписи передайте "
+"массив с нужными ключами:"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Type here your ACPT email account. Ex: mauro@acpt.io"
+msgstr "Введите адрес электронной почты ACPT. Напр.: mauro@acpt.io"
+
+msgid "Type here your license. Ex: 123e4567-e89b-12d3-a456-426614174000"
+msgstr ""
+"Введите ваш лицензионный ключ. Напр.: 123e4567-e89b-12d3-a456-426614174000"
+
+msgid "Uncheck `required` in the selected meta field"
+msgstr "Снять отметку «обязательное» в выбранном мета-поле"
+
+msgid "Uncheck `show in archive` in the selected meta field"
+msgstr "Снять отметку «показывать в архиве» в выбранном мета-поле"
+
+msgid "Undo"
+msgstr "Отменить"
+
+msgid "Unfiltered html"
+msgstr "Неотфильтрованный HTML"
+
+msgid "Update {{r}}"
+msgstr "Обновить {{r}}"
+
+msgid "Upgrade"
+msgstr "Обновить"
+
+msgid "Upload"
+msgstr "Загрузить"
+
+msgid "Upload file"
+msgstr "Загрузить файл"
+
+msgid "Upload files"
+msgstr "Загрузить файлы"
+
+msgid "Upload your file"
+msgstr "Загрузить файл"
+
+msgid "Use featured image"
+msgstr "Использовать миниатюру"
+
+msgid ""
+"Export your settings and meta field definitions into a compressed .acpt JSON "
+"archive for backup or migration."
+msgstr ""
+"Экспортируйте настройки и определения мета-полей в сжатый .acpt JSON-архив "
+"для резервного копирования или миграции."
+
+msgid "Used for the post type admin menu item"
+msgstr "Используется для пункта меню типа записи"
+
+msgid "Used for the taxonomy admin menu item"
+msgstr "Используется для пункта меню таксономии"
+
+msgid "Used when a singular label is needed"
+msgstr "Используется когда нужна метка в единственном числе"
+
+msgid "Single user"
+msgstr "Один пользователь"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "User meta"
+msgstr "Мета пользователя"
+
+msgid "User meta successfully saved"
+msgstr "Мета пользователя успешно сохранена"
+
+msgid "View"
+msgstr "Просмотр"
+
+msgid "View WooCommerce product data"
+msgstr "Просмотреть данные продукта WooCommerce"
+
+msgid "Visibility of product data"
+msgstr "Видимость данных продукта"
+
+msgid ""
+"WARNING: This action will delete all posts and metadata for this post type. "
+"The action is irreversible."
+msgstr ""
+"ВНИМАНИЕ: Это действие удалит все записи и метаданные для этого типа "
+"записей. Действие необратимо."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"block. The action is irreversible."
+msgstr ""
+"ВНИМАНИЕ: Это действие удалит все метаданные записей, связанные с этим "
+"блоком. Действие необратимо."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"box. The action is irreversible."
+msgstr ""
+"ВНИМАНИЕ: Это действие удалит все метаданные записей, связанные с этим мета-"
+"блоком. Действие необратимо."
+
+msgid "When BB Theme builder is active, the visual builder is disabled."
+msgstr "При активном BB Theme Builder визуальный конструктор отключается."
+
+msgid "When Oxygen Builder is active, the visual builder is disabled."
+msgstr "При активном Oxygen Builder визуальный конструктор отключается."
+
+msgid "Where do you want to copy this meta box?"
+msgstr "Куда вы хотите скопировать этот мета-блок?"
+
+msgid "Where do you want to copy this meta field?"
+msgstr "Куда вы хотите скопировать это мета-поле?"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, must be true. If "
+"true, the post type is shown in its own top level menu. If false, no menu is "
+"shown."
+msgstr ""
+"Где показывать тип записи в меню администратора. Если true, тип записи "
+"отображается в собственном меню верхнего уровня. Если false, меню не "
+"отображается."
+
+msgid ""
+"Whether a post type is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"Предназначен ли тип записей для публичного использования через интерфейс "
+"администратора или фронтенд."
+
+msgid ""
+"Whether a taxonomy is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"Предназначена ли таксономия для публичного использования через интерфейс "
+"администратора или фронтенд."
+
+msgid ""
+"Whether queries can be performed on the front end for the post type as part "
+"of parse_request()."
+msgstr ""
+"Могут ли выполняться запросы на фронтенде для этого типа записей в рамках "
+"parse_request()."
+
+msgid ""
+"Whether terms in this taxonomy should be sorted in the order they are "
+"provided to wp_set_object_terms(). Default null which equates to false."
+msgstr ""
+"Должны ли термины таксономии сортироваться в порядке, в котором они переданы "
+"в wp_set_object_terms(). По умолчанию null (false)."
+
+msgid "Whether the taxonomy is hierarchical. Default false."
+msgstr "Является ли таксономия иерархической. По умолчанию false."
+
+msgid ""
+"Whether the taxonomy is publicly queryable. If not set, the default is "
+"inherited from $public."
+msgstr ""
+"Доступна ли таксономия для публичных запросов. По умолчанию наследуется от "
+"$public."
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled."
+msgstr ""
+"Должны ли быть архивы типа записей. Если строка — слаг архива. Правила "
+"перезаписи генерируются, если $rewrite включён."
+
+msgid ""
+"Triggers the handling of rewrites for this post type. To prevent rewrite, "
+"set to false. Defaults to true, using $post_type as slug. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Управляет обработкой перезаписи URL для этого типа записи. Для отключения "
+"установите false. По умолчанию true, слаг — $post_type. Для указания правил "
+"перезаписи передайте массив с нужными ключами:"
+
+msgid ""
+"Whether to display a column for the taxonomy on its post type listing "
+"screens. Default false."
+msgstr ""
+"Отображать ли столбец таксономии на экранах списка записей. По умолчанию "
+"false."
+
+msgid ""
+"Whether to generate and allow a UI for managing terms in this taxonomy in "
+"the admin. If not set, the default is inherited from $public (default true)."
+msgstr ""
+"Генерировать ли интерфейс управления терминами таксономии. По умолчанию "
+"наследуется от $public (true)."
+
+msgid ""
+"Whether to generate and allow a UI for managing this post type in the admin. "
+"Default is value of $public."
+msgstr ""
+"Генерировать ли интерфейс управления этим типом записей. По умолчанию "
+"значение $public."
+
+msgid ""
+"Whether to include the post type in the REST API. Set this to true for the "
+"post type to be available in the block editor. SET TRUE TO ENABLE GUTEMBERG "
+"EDITOR."
+msgstr ""
+"Включать ли тип записей в REST API. Установите true для доступа к редактору "
+"блоков. УСТАНОВИТЕ TRUE ДЛЯ ВКЛЮЧЕНИЯ РЕДАКТОРА GUTENBERG."
+
+msgid ""
+"Whether to include the taxonomy in the REST API. Set this to true for the "
+"taxonomy to be available in the block editor. SET TRUE TO ENABLE "
+"VISUALIZATION ON GUTEMBERG EDITOR."
+msgstr ""
+"Включать ли таксономию в REST API. Установите true для доступа к редактору "
+"блоков. УСТАНОВИТЕ TRUE ДЛЯ ВКЛЮЧЕНИЯ ВИЗУАЛИЗАЦИИ В РЕДАКТОРЕ GUTENBERG."
+
+msgid ""
+"Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
+"the default is inherited from $show_ui (default true)."
+msgstr ""
+"Отображать ли таксономию в виджете облака тегов. По умолчанию наследуется от "
+"$show_ui (true)."
+
+msgid ""
+"Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+"shown as a submenu of the object type menu. If false, no menu is shown. "
+"$show_ui must be true. If not set, default is inherited from $show_ui "
+"(default true)."
+msgstr ""
+"Показывать ли таксономию в меню администратора. Требует $show_ui = true. По "
+"умолчанию наследуется от $show_ui (true)."
+
+msgid ""
+"Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
+"default is inherited from $show_ui (default true)."
+msgstr ""
+"Показывать ли таксономию в панели быстрого/массового редактирования. По "
+"умолчанию наследуется от $show_ui (true)."
+
+msgid "Which does this template belong to?"
+msgstr "К чему относится этот шаблон?"
+
+msgid "Width"
+msgstr "Ширина"
+
+msgid "WooCommerce product data"
+msgstr "Данные товара WooCommerce"
+
+msgid "WooCommerce product data fields successfully saved"
+msgstr "Поля данных продукта WooCommerce успешно сохранены"
+
+msgid "WooCommerce product data successfully deleted"
+msgstr "Данные продукта WooCommerce успешно удалены"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "Yes, delete it"
+msgstr "Да, удалить"
+
+msgid "You are going to delete WooCommerce this product data. Are you sure?"
+msgstr "Вы собираетесь удалить эти данные продукта WooCommerce. Вы уверены?"
+
+msgid "You are going to delete this API key. Are you sure?"
+msgstr "Вы собираетесь удалить этот ключ API. Вы уверены?"
+
+msgid "You are going to delete this custom post type. Are you sure?"
+msgstr "Вы собираетесь удалить этот тип записи. Вы уверены?"
+
+msgid ""
+"You are going to delete this meta block definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Вы собираетесь удалить определение мета-блока. Все определения полей внутри "
+"него будут удалены. Вы уверены?"
+
+msgid ""
+"You are going to delete this meta box definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"Вы собираетесь удалить определение мета-блока. Все определения полей внутри "
+"него будут удалены. Вы уверены?"
+
+msgid ""
+"You are going to delete this option page definition. Every associated meta "
+"fields and child page will be deleted. Are you sure?"
+msgstr ""
+"Вы собираетесь удалить определение страницы настроек. Все связанные мета-"
+"поля и дочерние страницы будут удалены. Вы уверены?"
+
+msgid "You are going to delete this taxonomy. Are you sure?"
+msgstr "Вы собираетесь удалить эту таксономию. Вы уверены?"
+
+msgid "Delete this block"
+msgstr "Удалить этот блок"
+
+msgid "Your API keys"
+msgstr "Ваши ключи API"
+
+msgid "Your favourite ACPT settings"
+msgstr "Ваши любимые настройки ACPT"
+
+msgid "Your new generated API key"
+msgstr "Ваш новый сгенерированный ключ API"
+
+msgid "Your theme already has a single template for"
+msgstr "Ваша тема уже имеет одиночный шаблон для"
+
+msgid "Your theme already has an archive template for"
+msgstr "Ваша тема уже имеет шаблон архива для"
+
+msgid "`has_archive` set to false"
+msgstr "`has_archive` установлен в false"
+
+msgid "child element"
+msgstr "дочерний элемент"
+
+msgid "current"
+msgstr "текущий"
+
+msgid "custom post type"
+msgstr "пользовательский тип записи"
+
+msgid "custom post types registered"
+msgstr "зарегистрированных типов записей"
+
+msgid "details"
+msgstr "подробности"
+
+msgid "format"
+msgstr "формат"
+
+msgid "global settings"
+msgstr "глобальные настройки"
+
+msgid "id"
+msgstr "id"
+
+msgid "is checked"
+msgstr "отмечено"
+
+msgid "is empty"
+msgstr "пусто"
+
+msgid "is equal to"
+msgstr "равно"
+
+msgid "is greater or equals than"
+msgstr "больше или равно"
+
+msgid "is greater than"
+msgstr "больше чем"
+
+msgid "is greater than or equal to"
+msgstr "больше или равно"
+
+msgid "is included in"
+msgstr "включено в"
+
+msgid "is less or equals than"
+msgstr "меньше или равно"
+
+msgid "is less than"
+msgstr "меньше чем"
+
+msgid "is less than or equal to"
+msgstr "меньше или равно"
+
+msgid "is like to"
+msgstr "похоже на"
+
+msgid "is not checked"
+msgstr "не отмечено"
+
+msgid "is not empty"
+msgstr "не пусто"
+
+msgid "is not equal to"
+msgstr "не равно"
+
+msgid "is not included in"
+msgstr "не включено в"
+
+msgid "is not like"
+msgstr "не похоже на"
+
+msgid "meta boxes"
+msgstr "мета-блоки"
+
+msgid "Meta boxes total count"
+msgstr "Общее количество мета-блоков"
+
+msgid "meta fields"
+msgstr "мета-поля"
+
+msgid "Meta fields total count"
+msgstr "Общее количество мета-полей"
+
+msgid "min length is"
+msgstr "минимальная длина:"
+
+msgid "old"
+msgstr "старый"
+
+msgid "product data fields"
+msgstr "поля данных продукта"
+
+msgid "record(s) found"
+msgstr "запись(и) найдена(ы)"
+
+msgid "see here"
+msgstr "смотрите здесь"
+
+msgid "slug"
+msgstr "слаг"
+
+msgid "taxonomies registered"
+msgstr "зарегистрированных таксономий"
+
+msgid "template"
+msgstr "шаблон"
+
+msgid "title"
+msgstr "заголовок"
+
+msgid "visibility"
+msgstr "видимость"
+
+msgid "Visibility"
+msgstr "Видимость"
+
+msgid "{{r}} published"
+msgstr "{{r}} опубликован"
+
+msgid "{{r}} published privately"
+msgstr "{{r}} опубликован приватно"
+
+msgid "{{r}} reverted to draft"
+msgstr "{{r}} возвращён в черновик"
+
+msgid "{{r}} scheduled"
+msgstr "{{r}} запланирован"
+
+msgid "{{r}} updated"
+msgstr "{{r}} обновлён"
+
+msgid "Address map"
+msgstr "Карта адресов"
+
+msgid "Color"
+msgstr "Цвет"
+
+msgid "Currency"
+msgstr "Валюта"
+
+msgid "Weight"
+msgstr "Вес"
+
+msgid "Length"
+msgstr "Длина"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Email address"
+msgstr "Адрес эл. почты"
+
+msgid "Number"
+msgstr "Число"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Phone Number"
+msgstr "Номер телефона"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "List"
+msgstr "Список"
+
+msgid "Select Multiple"
+msgstr "Множественный выбор"
+
+msgid "Toggle"
+msgstr "Переключить"
+
+msgid "Embed content"
+msgstr "Встроенный контент"
+
+msgid "Gallery"
+msgstr "Галерея"
+
+msgid "Image"
+msgstr "Изображение"
+
+msgid "Post relationship"
+msgstr "Связь записей"
+
+msgid "Relationship"
+msgstr "Связь"
+
+msgid "Time"
+msgstr "Время"
+
+msgid "Repeater"
+msgstr "Повторитель"
+
+msgid "Grouped field (Repeater)"
+msgstr "Сгруппированное поле (Повторитель)"
+
+msgid "User (select multiple)"
+msgstr "Пользователь (выбор нескольких)"
+
+msgid "Checkbox"
+msgstr "Флажок"
+
+msgid "Radio button"
+msgstr "Переключатель"
+
+msgid "Date Range"
+msgstr "Диапазон дат"
+
+msgid "Flexible content"
+msgstr "Гибкий контент"
+
+msgid "is enabled"
+msgstr "включено"
+
+msgid "found"
+msgstr "найдено"
+
+msgid "record(s)"
+msgstr "запись(и)"
+
+msgid "Copied"
+msgstr "Скопировано"
+
+msgid "Confirm deleting this template?"
+msgstr "Подтвердить удаление этого шаблона?"
+
+msgid "meta"
+msgstr "мета"
+
+msgid "Meta-key"
+msgstr "Мета-ключ"
+
+msgid "Shortcode"
+msgstr "Шорткод"
+
+msgid "Shortcodes"
+msgstr "Шорткоды"
+
+msgid "Delete custom post type"
+msgstr "Удалить тип записи"
+
+msgid "Delete taxonomy"
+msgstr "Удалить таксономию"
+
+msgid "License"
+msgstr "Лицензия"
+
+msgid "Tools"
+msgstr "Инструменты"
+
+msgid "Templates"
+msgstr "Шаблоны"
+
+msgid "Custom Post Types"
+msgstr "Произвольные типы записей"
+
+msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
+msgstr ""
+"[Допустимые расширения: *.acpt, *.json, *.yaml, *.xml макс. размер: 2 МБ]"
+
+msgid "Associated taxonomies with the post"
+msgstr "Таксономии, связанные с записью"
+
+msgid "Register new Post Type"
+msgstr "Зарегистрировать новый тип записи"
+
+msgid "Manage meta fields"
+msgstr "Управление мета-полями"
+
+msgid "Create new Custom Post Type"
+msgstr "Создать новый произвольный тип записи"
+
+msgid "Basic"
+msgstr "Основные"
+
+msgid "Labels"
+msgstr "Метки"
+
+msgid "Minimum configuration"
+msgstr "Минимальная конфигурация"
+
+msgid "Additional labels"
+msgstr "Дополнительные метки"
+
+msgid "Other settings"
+msgstr "Другие настройки"
+
+msgid "Menu Name"
+msgstr "Название меню"
+
+msgid "Label for the menu name. Default is the same as name."
+msgstr "Метка для имени меню. По умолчанию совпадает с именем."
+
+msgid "All items"
+msgstr "Все элементы"
+
+msgid ""
+"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All "
+"Pages’."
+msgstr ""
+
+msgid "Add New"
+msgstr "Добавить новый"
+
+msgid "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+msgstr ""
+
+msgid "Add New Item"
+msgstr "Добавить новый элемент"
+
+msgid ""
+"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New "
+"Page’."
+msgstr ""
+
+msgid "Edit Item"
+msgstr "Редактировать элемент"
+
+msgid ""
+"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+msgstr ""
+
+msgid "New Item"
+msgstr "Новый элемент"
+
+msgid "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+msgstr ""
+
+msgid "View Item"
+msgstr "Просмотреть элемент"
+
+msgid ""
+"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+msgstr ""
+
+msgid "View Items"
+msgstr "Просмотреть элементы"
+
+msgid ""
+"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+msgstr ""
+
+msgid "Search Item"
+msgstr "Поиск элемента"
+
+msgid ""
+"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+msgstr ""
+
+msgid "Not Found"
+msgstr "Не найдено"
+
+msgid ""
+"Label used when no items are found. Default is ‘No posts found’ / ‘No pages "
+"found’."
+msgstr ""
+
+msgid "Not Found in Trash"
+msgstr "В корзине не найдено"
+
+msgid ""
+"Label used when no items are in the Trash. Default is ‘No posts found in "
+"Trash’ / ‘No pages found in Trash’."
+msgstr ""
+
+msgid ""
+"Label used to prefix parents of hierarchical items. Not used on non-"
+"hierarchical post types. Default is ‘Parent Page:’."
+msgstr ""
+
+msgid "Featured Image"
+msgstr "Миниатюра записи"
+
+msgid ""
+"Label for the featured image meta box title. Default is ‘Featured image’."
+msgstr ""
+
+msgid "Set Featured Image"
+msgstr "Установить миниатюру"
+
+msgid "Label for setting the featured image. Default is ‘Set featured image’."
+msgstr ""
+
+msgid "Remove Featured Image"
+msgstr "Удалить миниатюру"
+
+msgid ""
+"Label for removing the featured image. Default is ‘Remove featured image’."
+msgstr ""
+
+msgid "Use Featured Image"
+msgstr "Использовать миниатюру"
+
+msgid ""
+"Label in the media frame for using a featured image. Default is ‘Use as "
+"featured image’."
+msgstr ""
+
+msgid ""
+"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page "
+"Archives’."
+msgstr ""
+
+msgid "Insert into item"
+msgstr "Вставить в элемент"
+
+msgid ""
+"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert "
+"into page’."
+msgstr ""
+
+msgid "Uploaded to this Item"
+msgstr "Загружено к этому элементу"
+
+msgid ""
+"Label for the media frame filter. Default is ‘Uploaded to this post’ / "
+"‘Uploaded to this page’."
+msgstr ""
+
+msgid "Filter Items List"
+msgstr "Список фильтрации элементов"
+
+msgid ""
+"Label for the table views hidden heading. Default is ‘Filter posts list’ / "
+"‘Filter pages list’."
+msgstr ""
+
+msgid "Items List Navigation"
+msgstr "Навигация по списку элементов"
+
+msgid ""
+"Label for the table pagination hidden heading. Default is ‘Posts list "
+"navigation’ / ‘Pages list navigation’."
+msgstr ""
+
+msgid "Items List"
+msgstr "Список элементов"
+
+msgid ""
+"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+msgstr ""
+
+msgid "Label for the date filter in list tables. Default is ‘Filter by date’."
+msgstr ""
+
+msgid "Item published"
+msgstr "Элемент опубликован"
+
+msgid ""
+"Label used when an item is published. Default is ‘Post published.’ / ‘Page "
+"published.’"
+msgstr ""
+
+msgid "Item published privately"
+msgstr "Элемент опубликован приватно"
+
+msgid ""
+"Label used when an item is published with private visibility. Default is "
+"‘Post published privately.’ / ‘Page published privately.’"
+msgstr ""
+
+msgid "Item reverted to draft"
+msgstr "Элемент возвращён в черновик"
+
+msgid ""
+"Label used when an item is switched to a draft. Default is ‘Post reverted to "
+"draft.’ / ‘Page reverted to draft.’"
+msgstr ""
+
+msgid "Item scheduled"
+msgstr "Элемент запланирован"
+
+msgid ""
+"Label used when an item is scheduled for publishing. Default is ‘Post "
+"scheduled.’ / ‘Page scheduled.’"
+msgstr ""
+
+msgid "Item updated"
+msgstr "Элемент обновлён"
+
+msgid ""
+"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page "
+"updated.’"
+msgstr ""
+
+msgid ""
+"General name for the taxonomy, usually plural. The same as and overridden by "
+"$tax->label. Default 'Tags/Categories'."
+msgstr ""
+"Общее название таксономии, обычно во множественном числе. Совпадает с $tax-"
+">label и переопределяется им. По умолчанию «Метки/Категории»."
+
+msgid "Singular name"
+msgstr "Название в ед. числе"
+
+msgid "Name for one object of this taxonomy. Default 'Tag/Category'"
+msgstr "Название одного объекта таксономии. По умолчанию «Метка/Категория»"
+
+msgid "Search items"
+msgstr "Поиск элементов"
+
+msgid "Search Tags/Search Categories"
+msgstr "Поиск тегов/поиск категорий"
+
+msgid "Popular items"
+msgstr "Популярные элементы"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Popular "
+"Tags'."
+msgstr ""
+"Эта метка используется только для неиерархических таксономий. По умолчанию "
+"«Популярные теги»."
+
+msgid "All Tags/All Categories"
+msgstr "Все теги/Все категории"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Parent "
+"Category'."
+msgstr ""
+"Эта метка используется только для иерархических таксономий. По умолчанию "
+"«Родительская категория»."
+
+msgid "Parent item colon"
+msgstr "Родительский элемент:"
+
+msgid "The same as parent_item, but with colon : in the end."
+msgstr "То же что и parent_item, но с двоеточием в конце."
+
+msgid "Edit Tag/Edit Category."
+msgstr "Редактировать тег/категорию."
+
+msgid "View Tag/View Category."
+msgstr "Просмотреть тег/просмотреть категорию."
+
+msgid "Update item"
+msgstr "Обновить элемент"
+
+msgid "Update Tag/Update Category."
+msgstr "Обновить тег/обновить категорию."
+
+msgid "Add New Tag/Add New Category."
+msgstr "Добавить новый тег/Добавить новую категорию."
+
+msgid "New item name"
+msgstr "Название нового элемента"
+
+msgid "New Tag Name/New Category Name."
+msgstr "Новое имя тега / новое имя категории."
+
+msgid "Separate items with commas"
+msgstr "Разделяйте элементы запятыми"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Separate "
+"tags with commas', used in the meta box."
+msgstr ""
+"Эта метка используется только для неиерархических таксономий. По умолчанию "
+"«Разделяйте теги запятыми», используется в мета-блоке."
+
+msgid "Add or remove items"
+msgstr "Добавить или удалить элементы"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Add or "
+"remove tags', used in the meta box when JavaScript is disabled."
+msgstr ""
+"Эта метка используется только для неиерархических таксономий. По умолчанию "
+"«Добавить или удалить теги», используется в мета-блоке при отключённом "
+"JavaScript."
+
+msgid "Choose from most used"
+msgstr "Выбрать из наиболее используемых"
+
+msgid ""
+"This label is only used on non-hierarchical taxonomies. Default 'Choose from "
+"the most used tags', used in the meta box."
+msgstr ""
+"Эта метка используется только для неиерархических таксономий. По умолчанию "
+"«Выбрать из наиболее используемых тегов», используется в мета-блоке."
+
+msgid ""
+"No tags found/No categories found', used in the meta box and taxonomy list "
+"table."
+msgstr ""
+"Теги/категории не найдены, используется в мета-блоке и списке таксономий."
+
+msgid "No terms"
+msgstr "Нет терминов"
+
+msgid "No tags/No categories', used in the posts and media list tables."
+msgstr "Нет тегов/нет категорий, используется в списках записей и медиафайлов."
+
+msgid "Filter by item"
+msgstr "Фильтровать по элементу"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Filter by "
+"category', used in the posts list table."
+msgstr ""
+"Эта метка используется только для иерархических таксономий. По умолчанию "
+"«Фильтр по категории», используется в таблице списка записей."
+
+msgid "Items list navigation"
+msgstr "Навигация по списку элементов"
+
+msgid "Label for the table pagination hidden heading."
+msgstr "Метка скрытого заголовка пагинации таблицы."
+
+msgid "Label for the table hidden heading."
+msgstr "Метка скрытого заголовка таблицы."
+
+msgid "Most used"
+msgstr "Наиболее используемые"
+
+msgid "Title for the Most Used tab. Default 'Most Used'."
+msgstr ""
+"Заголовок вкладки «Наиболее используемые». По умолчанию «Наиболее "
+"используемые»."
+
+msgid "Back to items"
+msgstr "Вернуться к элементам"
+
+msgid "Key length must be 39."
+msgstr "Длина ключа должна быть 39 символов."
+
+msgid "Not valid format."
+msgstr "Неверный формат."
+
+msgid "General settings"
+msgstr "Общие настройки"
+
+msgid "Content settings"
+msgstr "Настройки содержимого"
+
+msgid "Danger zone"
+msgstr "Опасная зона"
+
+msgid "manage template"
+msgstr "управление шаблоном"
+
+msgid "Manage template"
+msgstr "Управление шаблоном"
+
+msgid "Taxonomy global settings"
+msgstr "Глобальные настройки таксономии"
+
+msgid "eg. Text here"
+msgstr "напр. Текст здесь"
+
+msgid "Thumbnail"
+msgstr "Миниатюра"
+
+msgid "Medium"
+msgstr "Средний"
+
+msgid "Large"
+msgstr "Большой"
+
+msgid "Full size"
+msgstr "Полный размер"
+
+msgid "ASC"
+msgstr "По возрастанию"
+
+msgid "DESC"
+msgstr "По убыванию"
+
+msgid "eg. 100%"
+msgstr "напр. 100%"
+
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+msgid "Tablet"
+msgstr "Планшет"
+
+msgid "Mobile"
+msgstr "Мобильный"
+
+msgid "Keyboard interaction legend"
+msgstr "Легенда клавиатурного взаимодействия"
+
+msgid "Keyboard legend"
+msgstr "Легенда клавиатуры"
+
+msgid "BASIC"
+msgstr "ОСНОВНЫЕ"
+
+msgid "SPECIALIZED FIELDS"
+msgstr "СПЕЦИАЛИЗИРОВАННЫЕ ПОЛЯ"
+
+msgid "UNIT OF MEASURE"
+msgstr "ЕДИНИЦА ИЗМЕРЕНИЯ"
+
+msgid "MEDIA"
+msgstr "МЕДИА"
+
+msgid "RELATIONS"
+msgstr "СВЯЗИ"
+
+msgid "GROUPED"
+msgstr "СГРУППИРОВАНО"
+
+msgid "USER RELATIONS"
+msgstr "СВЯЗИ ПОЛЬЗОВАТЕЛЕЙ"
+
+msgid "One to One - Unidirectional"
+msgstr "Один к одному — однонаправленный"
+
+msgid "One to One - Bidirectional"
+msgstr "Один к одному — двунаправленный"
+
+msgid "One to Many - Unidirectional"
+msgstr "Один ко многим — однонаправленный"
+
+msgid "One to Many - Bidirectional"
+msgstr "Один ко многим — двунаправленный"
+
+msgid "Many to One - Unidirectional"
+msgstr "Многие к одному — однонаправленный"
+
+msgid "Many to One - Bidirectional"
+msgstr "Многие к одному — двунаправленный"
+
+msgid "Many to Many - Unidirectional"
+msgstr "Многие ко многим — однонаправленный"
+
+msgid "Many to Many - Bidirectional"
+msgstr "Многие ко многим — двунаправленный"
+
+msgid "Show this field if:"
+msgstr "Показывать это поле если:"
+
+msgid "Copy settings"
+msgstr "Скопировать настройки"
+
+msgid "Add condition"
+msgstr "Добавить условие"
+
+msgid "ADVANCED OPTIONS"
+msgstr "РАСШИРЕННЫЕ ПАРАМЕТРЫ"
+
+msgid "BASIC OPTIONS"
+msgstr "ОСНОВНЫЕ ПАРАМЕТРЫ"
+
+msgid "CONDITIONAL LOGIC"
+msgstr "УСЛОВНАЯ ЛОГИКА"
+
+msgid "Select option"
+msgstr "Выбрать параметр"
+
+msgid "operator"
+msgstr "оператор"
+
+msgid "This field"
+msgstr "Это поле"
+
+msgid "Value"
+msgstr "Значение"
+
+msgid "Label"
+msgstr "Метка"
+
+msgid "Post"
+msgstr "Запись"
+
+msgid "Post parent"
+msgstr "Родитель записи"
+
+msgid "Term"
+msgstr "Термин"
+
+msgid "Related taxonomies"
+msgstr "Связанные таксономии"
+
+msgid "Other fields"
+msgstr "Другие поля"
+
+msgid "Invalid visibility condition type"
+msgstr "Недействительный тип условия видимости"
+
+msgid "Invalid visibility condition operator"
+msgstr "Недействительный оператор условия видимости"
+
+msgid "Invalid visibility condition value"
+msgstr "Недействительное значение условия видимости"
+
+msgid "Invalid visibility condition logic"
+msgstr "Недействительная логика условия видимости"
+
+msgid "Box label, non latin chars allowed."
+msgstr "Метка блока, допускаются не латинские символы."
+
+msgid "Logic"
+msgstr "Логика"
+
+msgid "AND"
+msgstr "И"
+
+msgid "OR"
+msgstr "ИЛИ"
+
+msgid "Enter download text link"
+msgstr "Введите текст ссылки для скачивания"
+
+msgid "Select images"
+msgstr "Выбрать изображения"
+
+msgid "Remove element"
+msgstr "Удалить элемент"
+
+msgid "Min blocks required"
+msgstr "Минимальное количество блоков"
+
+msgid "Max blocks allowed"
+msgstr "Максимальное количество блоков"
+
+msgid "Browse icons"
+msgstr "Просмотр значков"
+
+msgid "Upload a SVG file"
+msgstr "Загрузить SVG-файл"
+
+msgid "Choose an icon"
+msgstr "Выберите значок"
+
+msgid "Type at least 3 characters to start searching."
+msgstr "Введите не менее 3 символов для начала поиска."
+
+msgid "Example: heart"
+msgstr "Пример: heart"
+
+msgid "There was an error during saving data. The error is:"
+msgstr "Произошла ошибка при сохранении данных. Ошибка:"
+
+msgid "There was an error during saving data. Minimum number of blocks is:"
+msgstr "Произошла ошибка при сохранении данных. Минимальное количество блоков:"
+
+msgid "There was an error during saving data. Maximum number of blocks is:"
+msgstr ""
+"Произошла ошибка при сохранении данных. Максимальное количество блоков:"
+
+msgid "Data saved correctly"
+msgstr "Данные успешно сохранены"
+
+msgid "No meta boxes aldready created."
+msgstr "Мета-блоки ещё не созданы."
+
+msgid "Create the first one"
+msgstr "Создать первый"
+
+msgid "There was an error fetching icons, retry later."
+msgstr "Произошла ошибка при получении иконок, повторите попытку позже."
+
+msgid "Sorry, no result match."
+msgstr "К сожалению, результаты не найдены."
+
+msgid ""
+"The media gallery is not available. You must admin_enqueue this function: "
+"wp_enqueue_media()"
+msgstr ""
+"Медиагалерея недоступна. Необходимо добавить функцию: wp_enqueue_media()"
+
+msgid "Download"
+msgstr "Скачать"
+
+msgid "Upload an Image"
+msgstr "Загрузить изображение"
+
+msgid "Upload a Video"
+msgstr "Загрузить видео"
+
+msgid "Upload a File"
+msgstr "Загрузить файл"
+
+msgid "Remove this block"
+msgstr "Удалить этот блок"
+
+msgid "Show elements"
+msgstr "Показать элементы"
+
+msgid "Hide elements"
+msgstr "Скрыть элементы"
+
+msgid "Show/hide elements in this block"
+msgstr "Показать/скрыть элементы в этом блоке"
+
+msgid "Filterable in Wordpress admin post lists page"
+msgstr "Возможность фильтрации на странице списка записей WordPress"
+
+msgid "Quick edit in Wordpress admin post lists page"
+msgstr "Быстрое редактирование в списке записей WordPress"
+
+msgid "Hide the blank value"
+msgstr "Скрыть пустое значение"
+
+msgid "Hide the label"
+msgstr "Скрыть метку"
+
+msgid "Enter the URL"
+msgstr "Введите URL"
+
+msgid "Enter text link"
+msgstr "Введите текст ссылки"
+
+msgid "Settings saved."
+msgstr "Настройки сохранены."
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "Option pages successfully saved"
+msgstr "Страницы настроек успешно сохранены"
+
+msgid "Children page list"
+msgstr "Список дочерних страниц"
+
+msgid "Register new Taxonomy"
+msgstr "Зарегистрировать новую таксономию"
+
+msgid "Deactivate"
+msgstr "Деактивировать"
+
+msgid "Choose icon"
+msgstr "Выбрать значок"
+
+msgid "Select icon type from the list"
+msgstr "Выбрать тип иконки из списка"
+
+msgid "Select a Dashicon"
+msgstr "Выбрать Dashicon"
+
+msgid "Select an icon from another set"
+msgstr "Выбрать иконку из другого набора"
+
+msgid "Upload an icon image"
+msgstr "Загрузить изображение иконки"
+
+msgid "ACPT meta import start"
+msgstr "Начало импорта мета ACPT"
+
+msgid "ACPT meta import end"
+msgstr "Конец импорта мета ACPT"
+
+msgid "Option page total count"
+msgstr "Общее количество страниц настроек"
+
+msgid "Show/hide all pages"
+msgstr "Показать/скрыть все страницы"
+
+msgid "List view"
+msgstr "Вид списка"
+
+msgid "Tabular view"
+msgstr "Табличный вид"
+
+msgid "Switch view"
+msgstr "Переключить вид"
+
+msgid "ACPT Date field"
+msgstr "Поле даты ACPT"
+
+msgid "ACPT Textual field"
+msgstr "Текстовое поле ACPT"
+
+msgid "ACPT Link field"
+msgstr "Поле ссылки ACPT"
+
+msgid "ACPT Image field"
+msgstr "Поле изображения ACPT"
+
+msgid "ACPT UOM field"
+msgstr "Поле единицы измерения ACPT"
+
+msgid "Select the date format"
+msgstr "Выбрать формат даты"
+
+msgid "Date range separator"
+msgstr "Разделитель диапазона дат"
+
+msgid "Select the date range separator"
+msgstr "Выбрать разделитель диапазона дат"
+
+msgid "Value format (Decimal points)"
+msgstr "Формат значения (знаков после запятой)"
+
+msgid "Value format (Decimal separator)"
+msgstr "Формат значения (разделитель десятичных знаков)"
+
+msgid "Value format (Thousands separator)"
+msgstr "Формат значения (разделитель тысяч)"
+
+msgid "Currency format"
+msgstr "Формат валюты"
+
+msgid "Currency position"
+msgstr "Позиция валюты"
+
+msgid "Custom Format"
+msgstr "Пользовательский формат"
+
+msgid "Render as"
+msgstr "Отобразить как"
+
+msgid "Date separator"
+msgstr "Разделитель дат"
+
+msgid "Classes (separated by space)"
+msgstr "Классы (через пробел)"
+
+msgid "Target link"
+msgstr "Целевая ссылка"
+
+msgid "Link"
+msgstr "Ссылка"
+
+msgid "Plain text"
+msgstr "Обычный текст"
+
+msgid "Size (px)"
+msgstr "Размер (px)"
+
+msgid "Set the icon size."
+msgstr "Задать размер иконки."
+
+msgid "Select the icon color."
+msgstr "Выбрать цвет иконки."
+
+msgid "Spacing (px)"
+msgstr "Отступ (px)"
+
+msgid "Select the icon spacing."
+msgstr "Выбрать отступ иконки."
+
+msgid "Is clickable?"
+msgstr "Является кликабельным?"
+
+msgid "Value and UOM"
+msgstr "Значение и единица измерения"
+
+msgid "Only value"
+msgstr "Только значение"
+
+msgid "Only UOM"
+msgstr "Только единица измерения"
+
+msgid "UOM format"
+msgstr "Формат единицы измерения"
+
+msgid "Select the UOM format."
+msgstr "Выбрать формат единицы измерения."
+
+msgid "Full UOM name"
+msgstr "Полное название единицы измерения"
+
+msgid "Abbreviation"
+msgstr "Аббревиатура"
+
+msgid "UOM position"
+msgstr "Позиция единицы измерения"
+
+msgid "Select the UOM position"
+msgstr "Выбрать позицию единицы измерения"
+
+msgid "After value"
+msgstr "После значения"
+
+msgid "Before value"
+msgstr "Перед значением"
+
+msgid "Decimal points"
+msgstr "Знаков после запятой"
+
+msgid "Set the decimal points."
+msgstr "Задать количество знаков после запятой."
+
+msgid "Decimal separator"
+msgstr "Десятичный разделитель"
+
+msgid "Set the decimal separator."
+msgstr "Задать разделитель десятичных знаков."
+
+msgid "Thousands separator"
+msgstr "Разделитель тысяч"
+
+msgid "Set the thousands separator."
+msgstr "Задать разделитель тысяч."
+
+msgid "ACPT Field"
+msgstr "Поле ACPT"
+
+msgid "ACPT Icon field"
+msgstr "Поле значка ACPT"
+
+msgid "List format"
+msgstr "Формат списка"
+
+msgid "Select the list format"
+msgstr "Выбрать формат списка"
+
+msgid "String separator"
+msgstr "Разделитель строк"
+
+msgid "Select the string separator"
+msgstr "Выбрать разделитель строки"
+
+msgid "ACPT Time field"
+msgstr "Поле времени ACPT"
+
+msgid "Time format"
+msgstr "Формат времени"
+
+msgid "Select the time format"
+msgstr "Выбрать формат времени"
+
+msgid "Controls"
+msgstr "Элементы управления"
+
+msgid "Allow video controls."
+msgstr "Разрешить элементы управления видео."
+
+msgid "Autoplay"
+msgstr "Автовоспроизведение"
+
+msgid "Autoplay player."
+msgstr "Автовоспроизведение плеера."
+
+msgid "Video width"
+msgstr "Ширина видео"
+
+msgid "Video width (% is allowed)."
+msgstr "Ширина видео (допустимы %)."
+
+msgid "Video height"
+msgstr "Высота видео"
+
+msgid "Video height (% is allowed)."
+msgstr "Высота видео (допустимы %)."
+
+msgid "You are going to delete this meta field definition. Are you sure?"
+msgstr "Вы собираетесь удалить определение мета-поля. Вы уверены?"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related to this "
+"field. The action is irreversible."
+msgstr ""
+"ВНИМАНИЕ: Это действие удалит все метаданные записей, связанные с этим "
+"полем. Действие необратимо."
+
+msgid "Show the shortcode"
+msgstr "Показать шорткод"
+
+msgid "Use this shortcode to display the meta field on your frontend."
+msgstr "Используйте этот шорткод для отображения мета-поля на фронтенде."
+
+msgid ""
+"Please note that \"N\" stands for a positive integer value, representing the "
+"nested field index (count starts from 0)."
+msgstr ""
+"Обратите внимание: «N» — положительное целое число, представляющее индекс "
+"вложенного поля (отсчёт начинается с 0)."
+
+msgid "What you want to display?"
+msgstr "Что вы хотите отобразить?"
+
+msgid "Rating"
+msgstr "Рейтинг"
+
+msgid "ACPT Rating field"
+msgstr "Поле рейтинга ACPT"
+
+# ######################################
+# version 2.0.0
+# ######################################
+msgid "Field groups"
+msgstr "Группы полей"
+
+msgid "Create new Meta group"
+msgstr "Создать новую мета-группу"
+
+msgid "Manage the associate meta field groups"
+msgstr "Управление связанными группами мета-полей"
+
+msgid "Meta group successfully deleted."
+msgstr "Группа мета успешно удалена."
+
+msgid "Meta group"
+msgstr "Мета-группа"
+
+msgid "Meta groups"
+msgstr "Мета-группы"
+
+msgid "Group name"
+msgstr "Название группы"
+
+msgid "Group label"
+msgstr "Метка группы"
+
+msgid "No meta group found."
+msgstr "Группа мета не найдена."
+
+msgid "Delete meta group"
+msgstr "Удалить мета-группу"
+
+msgid "You are going to delete this meta group. Are you sure?"
+msgstr "Вы собираетесь удалить эту группу мета. Вы уверены?"
+
+msgid "Forms"
+msgstr "Формы"
+
+msgid "Forms list"
+msgstr "Список форм"
+
+msgid "Copied to the clipboard!"
+msgstr "Скопировано в буфер обмена!"
+
+msgid "Confirm deactivating license"
+msgstr "Подтвердить деактивацию лицензии"
+
+msgid ""
+"License successfully deactivated. The browser will refresh after 5 seconds."
+msgstr "Лицензия успешно деактивирована. Браузер обновится через 5 секунд."
+
+msgid "max length is"
+msgstr "максимальная длина:"
+
+msgid "The element(s) this group is associated with"
+msgstr "Элемент(ы), с которыми связана эта группа"
+
+msgid "This group belongs to"
+msgstr "Эта группа принадлежит"
+
+msgid "VALIDATION RULES"
+msgstr "ПРАВИЛА ВАЛИДАЦИИ"
+
+msgid "Validation"
+msgstr "Проверка"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add rule\"!"
+msgstr ""
+"Правила ещё не созданы. Создайте первое, нажав кнопку «Добавить правило»!"
+
+msgid "maximum value"
+msgstr "максимальное значение"
+
+msgid "minimum value"
+msgstr "минимальное значение"
+
+msgid "regular expression"
+msgstr "регулярное выражение"
+
+msgid "Confirm deleting block"
+msgstr "Подтвердить удаление блока"
+
+msgid "Confirm deleting validation rule"
+msgstr "Подтвердить удаление правила проверки"
+
+msgid "Confirm deleting conditional rendering element"
+msgstr "Подтвердить удаление элемента условного рендеринга"
+
+msgid "Insert values separated by comma. Ex: 12, 54, foo"
+msgstr "Введите значения через запятую. Пример: 12, 54, foo"
+
+msgid "This is the meta-key of this field."
+msgstr "Это мета-ключ данного поля."
+
+msgid ""
+"Use it in functions like get_post_meta() to retrieve saved meta field data."
+msgstr ""
+"Используйте его в функциях, например get_post_meta(), для получения "
+"сохранённых данных мета-поля."
+
+msgid "Prepend the option page slug to retrieve option page meta fields."
+msgstr ""
+"Добавьте префикс слага страницы настроек для получения мета-полей страницы "
+"настроек."
+
+msgid "Copied to clipboard"
+msgstr "Скопировано в буфер обмена"
+
+msgid "Meta group settings successfully saved"
+msgstr "Настройки группы мета успешно сохранены"
+
+msgid "Delete this option page"
+msgstr "Удалить эту страницу параметров"
+
+msgid "Confirm deleting page"
+msgstr "Подтвердить удаление страницы"
+
+msgid "Performances"
+msgstr "Производительность"
+
+msgid "Flush the ACPT cache"
+msgstr "Очистить кэш ACPT"
+
+msgid "Flush cache"
+msgstr "Очистить кэш"
+
+msgid "Cache was successfully flushed"
+msgstr "Кэш успешно очищен"
+
+msgid "Could not flush the cache"
+msgstr ""
+
+msgid "Flushing…"
+msgstr ""
+
+msgid "Enable ACPT cache"
+msgstr "Включить кэш ACPT"
+
+msgid "Enable the ACPT cache to optimize the plugin performances."
+msgstr "Включите кэш ACPT для оптимизации производительности плагина."
+
+msgid ""
+"Enable the ACPT cache. The cache stores the MySQL results in simple textual "
+"files to avoid useless DB calls."
+msgstr ""
+"Включите кэш ACPT. Кэш хранит результаты MySQL в текстовых файлах, чтобы "
+"избежать лишних обращений к БД."
+
+msgid "select all"
+msgstr "выбрать все"
+
+msgid "deselect all"
+msgstr "снять выделение со всех"
+
+msgid "UOM default value"
+msgstr "Значение единицы измерения по умолчанию"
+
+msgid "Location"
+msgstr "Расположение"
+
+msgid "Open settings"
+msgstr "Открыть настройки"
+
+msgid "Close settings"
+msgstr "Закрыть настройки"
+
+msgid "Auto slug ON"
+msgstr "Авто-слаг ВКЛ"
+
+msgid "Auto slug OFF"
+msgstr "Авто-слаг ОТКЛ"
+
+msgid "Show"
+msgstr "Показать"
+
+msgid "File was successfully exported"
+msgstr "Файл успешно экспортирован"
+
+msgid "File was successfully imported"
+msgstr "Файл успешно импортирован"
+
+msgid "All users"
+msgstr "Все пользователи"
+
+msgid "Select items"
+msgstr "Выбрать элементы"
+
+msgid "Filter items"
+msgstr "Фильтровать элементы"
+
+msgid "Invalid data provided"
+msgstr "Предоставлены недействительные данные"
+
+msgid "Group name error(s). Please fix it."
+msgstr "Ошибка(и) имени группы. Пожалуйста, исправьте."
+
+msgid "Location rules error(s). Please fix it."
+msgstr "Ошибка(и) правил расположения. Пожалуйста, исправьте."
+
+msgid "Post type"
+msgstr "Тип записи"
+
+msgid "Post template"
+msgstr "Шаблон записи"
+
+msgid "Post format"
+msgstr ""
+
+msgid "Post category"
+msgstr "Категория записи"
+
+msgid "Post taxonomy"
+msgstr "Таксономия записи"
+
+msgid "Value is not blank"
+msgstr "Значение не пустое"
+
+msgid "Value is blank"
+msgstr "Значение пустое"
+
+msgid "Value is not equal to {{v}}"
+msgstr "Значение не равно {{v}}"
+
+msgid "Value is lower or equals than {{v}}"
+msgstr "Значение меньше или равно {{v}}"
+
+msgid "Value is lower than {{v}}"
+msgstr "Значение меньше {{v}}"
+
+msgid "Value is greatest or equals than {{v}}"
+msgstr "Значение больше или равно {{v}}"
+
+msgid "Value is greatest than {{v}}"
+msgstr "Значение больше {{v}}"
+
+msgid "The maximum length is {{v}}"
+msgstr "Максимальная длина: {{v}}"
+
+msgid "The minimum length is {{v}}"
+msgstr "Минимальная длина: {{v}}"
+
+msgid "Regex value is not matching {{v}}"
+msgstr "Значение регулярного выражения не совпадает с {{v}}"
+
+msgid "All pages"
+msgstr "Все страницы"
+
+msgid "Related entities and relationship"
+msgstr "Связанные сущности и тип связи"
+
+msgid "Target field"
+msgstr "Целевое поле"
+
+msgid "The relationship between the selected entities"
+msgstr "Связь между выбранными сущностями"
+
+msgid "The first entity involved in the relationship"
+msgstr "Первая сущность, участвующая в связи"
+
+msgid "The second entity involved in the relationship"
+msgstr "Вторая сущность, участвующая в связи"
+
+msgid "Selected items"
+msgstr "Выбранные элементы"
+
+msgid "From entity is not a custom post type"
+msgstr "Исходная сущность не является типом записи"
+
+msgid "From entity is not a taxonomy"
+msgstr "Исходная сущность не является таксономией"
+
+msgid "From entity is not valid"
+msgstr "Исходная сущность недействительна"
+
+msgid "From entity is not an user"
+msgstr "Исходная сущность не является пользователем"
+
+msgid "From entity is not an option page"
+msgstr "Исходная сущность не является страницей настроек"
+
+msgid "No relation set on this field."
+msgstr "Связь для этого поля не задана."
+
+msgid "You are going to delete this template. Are you sure?"
+msgstr "Вы собираетесь удалить этот шаблон. Вы уверены?"
+
+msgid "Template successfully deleted."
+msgstr "Шаблон успешно удалён."
+
+msgid "Manage product data fields"
+msgstr "Управление полями данных продукта"
+
+msgid ""
+"No pages already created. Create the first one now by clicking the button "
+"\"Add page\"!"
+msgstr ""
+"Страницы не созданы. Создайте первую, нажав кнопку «Добавить страницу»!"
+
+msgid "Delete the meta box after copying"
+msgstr "Удалить мета-блок после копирования"
+
+msgid "Create form"
+msgstr "Создать форму"
+
+msgid "Create a new form"
+msgstr "Создать новую форму"
+
+msgid "Edit form"
+msgstr "Редактировать форму"
+
+msgid "No forms found."
+msgstr "Формы не найдены."
+
+msgid "Form name"
+msgstr "Название формы"
+
+msgid "Form label"
+msgstr "Метка формы"
+
+msgid "Action"
+msgstr "Действие"
+
+msgid "Post management"
+msgstr "Управление записями"
+
+msgid "Custom action"
+msgstr "Пользовательское действие"
+
+msgid "Method"
+msgstr "Метод"
+
+msgid "PHP custom handling"
+msgstr "Пользовательская обработка PHP"
+
+msgid "Field mapping"
+msgstr "Сопоставление полей"
+
+msgid "List to populate from"
+msgstr "Список для заполнения"
+
+msgid "If blank, the current post_ID will be used"
+msgstr "Если пусто, будет использован текущий post_ID"
+
+msgid "If blank, the current queried term_ID will be used"
+msgstr "Если пусто, будет использован текущий запрашиваемый term_ID"
+
+msgid "If blank, the current logged user ID will be used"
+msgstr "Если пусто, будет использован ID текущего авторизованного пользователя"
+
+msgid "Form successfully saved"
+msgstr "Форма успешно сохранена"
+
+msgid "Delete form"
+msgstr "Удалить форму"
+
+msgid "You are going to delete this form. Are you sure?"
+msgstr "Вы собираетесь удалить эту форму. Вы уверены?"
+
+msgid "Form successfully deleted"
+msgstr "Форма успешно удалена"
+
+msgid "Form manager"
+msgstr "Менеджер форм"
+
+msgid "Form fields"
+msgstr "Поля формы"
+
+msgid "Drop elements here"
+msgstr "Перетащите элементы сюда"
+
+msgid "CSS classes"
+msgstr "CSS-классы"
+
+msgid "Placeholder"
+msgstr "Заполнитель"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Layout"
+msgstr "Макет"
+
+msgid "Alignment"
+msgstr "Выравнивание"
+
+msgid "Add rule"
+msgstr "Добавить правило"
+
+msgid "Step value"
+msgstr "Шаг значения"
+
+msgid "Rows value"
+msgstr "Количество строк"
+
+msgid "Cols value"
+msgstr "Значение столбцов"
+
+msgid "Type value"
+msgstr "Введите значение"
+
+msgid "Standard fields"
+msgstr "Стандартные поля"
+
+msgid "ACPT fields"
+msgstr "Поля ACPT"
+
+msgid "WordPress user fields"
+msgstr "Поля пользователей WordPress"
+
+msgid "WordPress post fields"
+msgstr "Поля записей WordPress"
+
+msgid "Reset fields"
+msgstr "Сбросить поля"
+
+msgid "Columns"
+msgstr "Столбцы"
+
+msgid "Ajax action"
+msgstr "Ajax-действие"
+
+msgid "Ajax success response handling"
+msgstr "Обработка успешного ответа Ajax"
+
+msgid "Allow empty value"
+msgstr "Разрешить пустое значение"
+
+msgid "Enable editor"
+msgstr "Включить редактор"
+
+msgid "Your Google reCAPTCHA site key"
+msgstr "Ваш ключ сайта Google reCAPTCHA"
+
+msgid "Your Google reCAPTCHA secret key"
+msgstr "Ваш секретный ключ Google reCAPTCHA"
+
+msgid "Your Google reCAPTCHA site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Ваш ключ сайта Google reCAPTCHA. Необходим для использования поля CAPTCHA."
+
+msgid "Your Google reCAPTCHA secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Ваш секретный ключ Google reCAPTCHA. Необходим для использования поля "
+"CAPTCHA."
+
+msgid "Maximum date"
+msgstr "Максимальная дата"
+
+msgid "Minimum date"
+msgstr "Минимальная дата"
+
+msgid "Icon set"
+msgstr "Набор значков"
+
+msgid "Enable forms"
+msgstr "Включить формы"
+
+msgid "Enable the form builder."
+msgstr "Включить конструктор форм."
+
+msgid "Create new post"
+msgstr "Создать новую запись"
+
+msgid "Create new user"
+msgstr "Создать нового пользователя"
+
+msgid "Create new term"
+msgstr "Создать новый термин"
+
+msgid "Name is already taken"
+msgstr "Имя уже занято"
+
+msgid "No Meta box duplicate names are allowed"
+msgstr ""
+
+msgid "No Meta field duplicate names are allowed"
+msgstr ""
+
+msgid "Copy"
+msgstr "Копировать"
+
+msgid "Duplicate"
+msgstr "Дублировать"
+
+msgid "Execute"
+msgstr "Выполнить"
+
+msgid "Copy selected meta boxes"
+msgstr "Скопировать выбранные мета-блоки"
+
+msgid "Copy selected meta fields"
+msgstr "Скопировать выбранные мета-поля"
+
+msgid "Delete after copying"
+msgstr "Удалить после копирования"
+
+msgid "Copy selected meta blocks"
+msgstr "Скопировать выбранные мета-блоки"
+
+msgid "Scroll to top"
+msgstr "Прокрутить вверх"
+
+msgid "Select this element"
+msgstr "Выбрать этот элемент"
+
+msgid "Deselect this element"
+msgstr "Снять выделение с элемента"
+
+msgid "Submit a bug"
+msgstr "Сообщить об ошибке"
+
+msgid "Multiple"
+msgstr "Несколько"
+
+msgid "Input file accepts"
+msgstr "Файл принимает"
+
+msgid "Maximum size"
+msgstr "Максимальный размер"
+
+msgid "Minimum size"
+msgstr "Минимальный размер"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "These CSS classes will be applied to back-end editor fields"
+msgstr ""
+"Эти CSS-классы будут применены к полям редактора в панели администратора"
+
+msgid "Add CSS classes to back-end editor fields (ex. class-active pulse)"
+msgstr "Добавить CSS-классы к полям редактора (например: class-active pulse)"
+
+msgid "Duplicate this option page"
+msgstr "Продублировать страницу настроек"
+
+msgid "Copy this option page"
+msgstr "Скопировать эту страницу параметров"
+
+msgid "Delete the meta option page after copying"
+msgstr "Удалить страницу мета-настроек после копирования"
+
+msgid "Page was successfully copied"
+msgstr "Страница успешно скопирована"
+
+msgid "Unknown error, please retry later"
+msgstr "Неизвестная ошибка, повторите попытку позже"
+
+msgid "Whether the post type is hierarchical (e.g. page). Default false."
+msgstr ""
+"Является ли тип записи иерархическим (например, страница). По умолчанию "
+"false."
+
+msgid "Default positions for Core Menu Items"
+msgstr "Позиции по умолчанию для элементов основного меню"
+
+msgid ""
+"The position in the menu order this page should appear. The higher the "
+"number, the lower its position in the menu."
+msgstr ""
+"Позиция страницы в порядке меню. Чем больше число, тем ниже позиция в меню."
+
+msgid "Default positions"
+msgstr "Позиции по умолчанию"
+
+msgid "Custom post type list"
+msgstr "Список типов записей"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, $show_ui must be "
+"true. If true, the post type is shown in its own top level menu. If false, "
+"no menu is shown."
+msgstr ""
+"Где показывать тип записи в меню администратора. Требует $show_ui = true. "
+"Если true, тип записи отображается в собственном меню верхнего уровня. Если "
+"false, меню не отображается."
+
+msgid "Custom show in menu rule"
+msgstr "Правило отображения в меню"
+
+msgid "Standard settings"
+msgstr "Стандартные настройки"
+
+msgid "Set custom settings"
+msgstr "Задать пользовательские настройки"
+
+msgid ""
+"Where to show the post type in the admin menu. Set a custom show in menu "
+"rule here. For more info"
+msgstr ""
+"Где показывать тип записи в меню администратора. Задайте здесь правило "
+"отображения в меню. Подробнее"
+
+msgid "To change the base url of REST API route. Default is $post_type."
+msgstr "Изменить базовый URL маршрута REST API. По умолчанию $post_type."
+
+msgid "Associated WooCommerce product data"
+msgstr "Связанные данные товаров WooCommerce"
+
+msgid "Label displayed after a term has been updated."
+msgstr "Метка, отображаемая после обновления термина."
+
+msgid "To change the base url of REST API route. Default is $taxonomy."
+msgstr "Изменить базовый URL маршрута REST API. По умолчанию $taxonomy."
+
+msgid ""
+"Sets the query var key for this taxonomy. Default $taxonomy key. If false, a "
+"taxonomy cannot be loaded at ?{query_var}={term_slug}. If a string, the "
+"query ?{query_var}={term_slug} will be valid."
+msgstr ""
+"Задаёт ключ переменной запроса для таксономии. По умолчанию ключ $taxonomy."
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using "
+"$taxonomy as slug. To prevent rewrite, set to false. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Управляет обработкой перезаписи URL для этой таксономии. По умолчанию true, "
+"слаг — $taxonomy. Для отключения установите false. Для указания правил "
+"перезаписи передайте массив с нужными ключами:"
+
+msgid "Add field box"
+msgstr "Добавить блок поля"
+
+msgid "From"
+msgstr "От"
+
+msgid "To"
+msgstr "До"
+
+msgid "Set the number of records per page in your ACPT dashboards."
+msgstr "Задать количество записей на страницу в дашбордах ACPT."
+
+msgid "Field type"
+msgstr "Тип поля"
+
+msgid "Display as"
+msgstr "Отображать как"
+
+msgid "Standard view"
+msgstr "Стандартный вид"
+
+msgid "Accordion"
+msgstr "Аккордеон"
+
+msgid "Horizontal tabs"
+msgstr "Горизонтальные вкладки"
+
+msgid "Vertical tabs"
+msgstr "Вертикальные вкладки"
+
+msgid "Product data name"
+msgstr "Имя данных продукта"
+
+msgid "Eye dropper"
+msgstr "Пипетка"
+
+msgid "Unordered list"
+msgstr "Маркированный список"
+
+msgid "Ordered list"
+msgstr "Нумерованный список"
+
+msgid "Font"
+msgstr "Шрифт"
+
+msgid "Set the font of the plug-in"
+msgstr "Задать шрифт плагина"
+
+msgid "After"
+msgstr "После"
+
+msgid "Before"
+msgstr "До"
+
+msgid "Country"
+msgstr "Страна"
+
+msgid "The application cannot be booted"
+msgstr "Приложение не может быть запущено"
+
+msgid "An unexpected error has occurred"
+msgstr "Произошла непредвиденная ошибка"
+
+msgid "Dataset"
+msgstr "Набор данных"
+
+msgid ""
+"Build reusable datasets for meta fields and forms. Import from CSV, JSON or "
+"YAML."
+msgstr ""
+"Создавайте многоразовые наборы данных для мета-полей и форм. Импортируйте из "
+"CSV, JSON или YAML."
+
+msgid "Dataset successfully saved"
+msgstr "Набор данных успешно сохранён"
+
+msgid "Dataset name"
+msgstr "Имя набора данных"
+
+msgid "Dataset label"
+msgstr "Метка набора данных"
+
+msgid "Edit dataset"
+msgstr "Редактировать набор данных"
+
+msgid "Create a new dataset"
+msgstr "Создать новый набор данных"
+
+msgid "Create dataset"
+msgstr "Создать набор данных"
+
+msgid "No dataset found."
+msgstr "Набор данных не найден."
+
+msgid "Items count"
+msgstr "Количество элементов"
+
+msgid "Dataset successfully deleted."
+msgstr "Набор данных успешно удалён."
+
+msgid "Delete dataset"
+msgstr "Удалить набор данных"
+
+msgid "Manage dataset"
+msgstr "Управление набором данных"
+
+msgid "Load dataset"
+msgstr "Загрузить набор данных"
+
+msgid "Dataset loaded correctly"
+msgstr "Набор данных загружен успешно"
+
+msgid "You are going to delete this dataset. Are you sure?"
+msgstr "Вы собираетесь удалить этот набор данных. Вы уверены?"
+
+msgid "Select/deselect all fields"
+msgstr "Выбрать/снять выделение со всех полей"
+
+msgid "Show/hide elements"
+msgstr "Показать/скрыть элементы"
+
+msgid "The limit on how many elements are required ([1-100])"
+msgstr "Минимальное количество элементов ([1-100])"
+
+msgid "Minimum elements allowed"
+msgstr "Минимальное допустимое количество элементов"
+
+msgid "The limit on how many elements are allowed ([1-100])"
+msgstr "Ограничение на количество элементов ([1-100])"
+
+msgid "Maximum elements allowed"
+msgstr "Максимальное допустимое количество элементов"
+
+msgid ""
+"Something went wrong. Try clicking the reload the application button to "
+"reload the application."
+msgstr "Что-то пошло не так. Нажмите кнопку перезагрузки приложения."
+
+msgid "The application has crashed"
+msgstr "Приложение аварийно завершило работу"
+
+msgid "Reload the application"
+msgstr "Перезагрузить приложение"
+
+msgid "Value is equals to {{v}}"
+msgstr "Значение равно {{v}}"
+
+msgid "Textual fields settings"
+msgstr "Настройки текстовых полей"
+
+msgid "File field settings"
+msgstr "Настройки поля файла"
+
+msgid "Radio field settings"
+msgstr "Настройки поля переключателя"
+
+msgid "Nestable fields layout settings"
+msgstr "Настройки компоновки вложенных полей"
+
+msgid "Unit of measure fields settings"
+msgstr "Настройки полей единицы измерения"
+
+msgid "URL field settings"
+msgstr "Настройки поля URL"
+
+msgid "WPML Settings"
+msgstr "Настройки WPML"
+
+msgid "The file wpml-config.xml was successfully generated."
+msgstr "Файл wpml-config.xml успешно сгенерирован."
+
+msgid "The file wpml-config.xml was not successfully generated."
+msgstr "Файл wpml-config.xml не был успешно сгенерирован."
+
+msgid "This is the generated wpml-config.xml file:"
+msgstr "Это сгенерированный файл wpml-config.xml:"
+
+msgid "Attachment"
+msgstr "Вложение"
+
+msgid "All formats"
+msgstr "Все форматы"
+
+msgid "Type the address or point a location on the map"
+msgstr "Введите адрес или укажите местоположение на карте"
+
+msgid "All comments"
+msgstr "Все комментарии"
+
+msgid "Nested fields"
+msgstr "Вложенные поля"
+
+msgid "Row"
+msgstr "Строка"
+
+msgid "Block"
+msgstr "Блок"
+
+msgid "Table"
+msgstr "Таблица"
+
+msgid "The look of the field for admins and editors."
+msgstr "Внешний вид поля для администраторов и редакторов."
+
+msgid "Field layout"
+msgstr "Компоновка поля"
+
+msgid ""
+"The leading field (which will be displayed when the repeater is collapsed)."
+msgstr "Ведущее поле (отображается при сворачивании повторителя)."
+
+msgid "Leading field"
+msgstr "Ведущее поле"
+
+msgid "Reset the map"
+msgstr "Сбросить карту"
+
+msgid "Successful outcome message"
+msgstr "Сообщение об успешном результате"
+
+msgid "Delete all blocks"
+msgstr "Удалить все блоки"
+
+msgid "Something went wrong, please retry."
+msgstr "Что-то пошло не так, попробуйте ещё раз."
+
+msgid "Connect external services"
+msgstr "Подключить внешние сервисы"
+
+msgid "Your Cloudflare Turnstile site key"
+msgstr "Ваш ключ сайта Cloudflare Turnstile"
+
+msgid ""
+"Your Cloudflare Turnstile site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Ваш ключ сайта Cloudflare Turnstile. Необходим для использования поля "
+"CAPTCHA."
+
+msgid "Your Cloudflare Turnstile secret key"
+msgstr "Ваш секретный ключ Cloudflare Turnstile"
+
+msgid ""
+"Your Cloudflare Turnstile secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Ваш секретный ключ Cloudflare Turnstile. Необходим для использования поля "
+"CAPTCHA."
+
+msgid "Health check"
+msgstr "Проверка работоспособности"
+
+msgid ""
+"Inspect the application state and automatically repair installation errors "
+"or schema issues."
+msgstr ""
+"Проверьте состояние приложения и автоматически исправьте ошибки установки "
+"или проблемы схемы."
+
+msgid "Run health check"
+msgstr "Запустить проверку работоспособности"
+
+msgid "Launch the repair"
+msgstr "Запустить исправление"
+
+msgid "DB status"
+msgstr "Статус БД"
+
+msgid "The repair was carried out successfully."
+msgstr "Ремонт выполнен успешно."
+
+msgid "Post object settings"
+msgstr "Настройки объекта записи"
+
+msgid "Term object settings"
+msgstr "Настройки объекта термина"
+
+msgid "Filter by post type"
+msgstr "Фильтр по типу записи"
+
+msgid "Filter by post status"
+msgstr "Фильтровать по статусу записи"
+
+msgid "Filter by taxonomy"
+msgstr "Фильтр по таксономии"
+
+msgid "Polylang Settings"
+msgstr "Настройки Polylang"
+
+msgid "Textarea settings"
+msgstr "Настройки текстовой области"
+
+msgid "The cols value (used only by textarea fields)"
+msgstr "Значение cols (только для полей textarea)"
+
+msgid "The rows value (used only by textarea fields)"
+msgstr "Значение rows (только для полей textarea)"
+
+msgid "Context"
+msgstr "Контекст"
+
+msgid "Priority"
+msgstr "Приоритет"
+
+msgid "User settings"
+msgstr "Настройки пользователя"
+
+msgid "Filter by role"
+msgstr "Фильтровать по роли"
+
+msgid "Relational field settings"
+msgstr "Настройки реляционного поля"
+
+msgid "Only name or title"
+msgstr "Только имя или заголовок"
+
+msgid "With image"
+msgstr "С изображением"
+
+msgid "Date field settings"
+msgstr "Настройки поля даты"
+
+msgid "Datetime field settings"
+msgstr "Настройки поля даты и времени"
+
+msgid "Time field settings"
+msgstr "Настройки поля времени"
+
+msgid "Select the field vertical alignment (default: center)"
+msgstr "Выбрать вертикальное выравнивание поля (по умолчанию: по центру)"
+
+msgid "Vertical alignment"
+msgstr "Вертикальное выравнивание"
+
+msgid "Center"
+msgstr "По центру"
+
+msgid "Top"
+msgstr "Сверху"
+
+msgid "Bottom"
+msgstr "Снизу"
+
+msgid "The maximum size is {{v}}"
+msgstr "Максимальный размер: {{v}}"
+
+msgid "The minimum size is {{v}}"
+msgstr "Минимальный размер: {{v}}"
+
+msgid "Set as post thumbnail"
+msgstr "Установить как миниатюру записи"
+
+msgid "Sync with post terms"
+msgstr "Синхронизировать с терминами записей"
+
+msgid "Image settings"
+msgstr "Настройки изображения"
+
+msgid "Permissions"
+msgstr "Разрешения"
+
+msgid "Manage permissions of"
+msgstr "Управление правами доступа"
+
+msgid "Add permission"
+msgstr "Добавить разрешение"
+
+msgid "No permissions found."
+msgstr "Права доступа не найдены."
+
+msgid "User role"
+msgstr "Роль пользователя"
+
+msgid "Confirm deleting permission"
+msgstr "Подтвердить удаление разрешения"
+
+msgid "Permissions successfully saved"
+msgstr "Разрешения успешно сохранены"
+
+msgid ""
+"No permissions are present, click on \"Add permission\" button to add the "
+"first one."
+msgstr ""
+"Разрешения отсутствуют. Нажмите кнопку «Добавить разрешение», чтобы добавить "
+"первое."
+
+msgid "Confirm deleting permission element"
+msgstr "Подтвердить удаление элемента разрешения"
+
+msgid "Assign"
+msgstr "Назначить"
+
+msgid "Child field"
+msgstr "Дочернее поле"
+
+msgid "Child block"
+msgstr "Дочерний блок"
+
+msgid "No fields found"
+msgstr "Поля не найдены"
+
+msgid "Reset to the default values"
+msgstr "Сбросить до значений по умолчанию"
+
+msgid "Override here the default settings:"
+msgstr "Переопределите здесь настройки по умолчанию:"
+
+msgid "Style"
+msgstr "Стиль"
+
+msgid "Settings successfully saved"
+msgstr "Настройки успешно сохранены"
+
+msgid "Save this table as template"
+msgstr "Сохранить эту таблицу как шаблон"
+
+msgid "Import template"
+msgstr "Импортировать шаблон"
+
+msgid "Choose the template"
+msgstr "Выбрать шаблон"
+
+msgid "Import"
+msgstr "Импорт"
+
+msgid "Border style"
+msgstr "Стиль границы"
+
+msgid "Border weight"
+msgstr "Толщина границы"
+
+msgid "Border color"
+msgstr "Цвет границы"
+
+msgid "Main background"
+msgstr "Основной фон"
+
+msgid "Alt background"
+msgstr "Альтернативный фон"
+
+msgid "Add header"
+msgstr "Добавить заголовок"
+
+msgid "Add footer"
+msgstr "Добавить подвал"
+
+msgid "Save as template"
+msgstr "Сохранить как шаблон"
+
+msgid "Create table"
+msgstr "Создать таблицу"
+
+msgid "Edit table settings"
+msgstr "Редактировать настройки таблицы"
+
+msgid "No table already created."
+msgstr "Таблицы ещё не созданы."
+
+msgid "JSON data is not valid."
+msgstr "Данные JSON недействительны."
+
+msgid "Delete row"
+msgstr "Удалить строку"
+
+msgid "Add row"
+msgstr "Добавить строку"
+
+msgid "Delete column"
+msgstr "Удалить столбец"
+
+msgid "Add column"
+msgstr "Добавить столбец"
+
+msgid "Border"
+msgstr "Граница"
+
+msgid "Text color"
+msgstr "Цвет текста"
+
+msgid "Background"
+msgstr "Фон"
+
+msgid "Rows"
+msgstr "Строки"
+
+msgid "Option pages successfully deleted."
+msgstr "Страницы настроек успешно удалены."
+
+msgid "Clear"
+msgstr "Очистить"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Preview element"
+msgstr "Предпросмотр элемента"
+
+msgid "No records found."
+msgstr "Записи не найдены."
+
+msgid "Show data"
+msgstr "Показать данные"
+
+msgid "Enable custom post types"
+msgstr "Включить пользовательские типы записей"
+
+msgid "Enable custom post types manager"
+msgstr "Включить менеджер типов записей"
+
+msgid "Enable Option Pages"
+msgstr "Включить страницы настроек"
+
+msgid "Enable the Option Pages manager."
+msgstr "Включить менеджер страниц настроек."
+
+msgid "Enable meta fields"
+msgstr "Включить мета-поля"
+
+msgid "Enable the meta fields manager."
+msgstr "Включить менеджер мета-полей."
+
+msgid "Clone field settings"
+msgstr "Клонировать настройки поля"
+
+msgid "Select fields to clone"
+msgstr "Выбрать поля для клонирования"
+
+msgid "Hide"
+msgstr "Скрыть"
+
+msgid "Restore"
+msgstr "Восстановить"
+
+msgid "Restore elements"
+msgstr "Восстановить элементы"
+
+msgid "hidden elements"
+msgstr "скрытые элементы"
+
+msgid "Front URL prefix"
+msgstr "Префикс URL фронтенда"
+
+msgid ""
+"Alters the post type permalink structure to add a prefix to singular posts "
+"URLs (ex. /movie/titanic). Default value is the post type name."
+msgstr ""
+"Изменяет структуру постоянных ссылок типа записи, добавляя префикс к URL "
+"отдельных записей (например: /movie/titanic). По умолчанию — название типа "
+"записи."
+
+msgid "Custom post type successfully duplicated."
+msgstr "Тип записи успешно продублирован."
+
+msgid "Option pages successfully duplicated."
+msgstr "Страницы настроек успешно продублированы."
+
+msgid "Taxonomy successfully duplicated."
+msgstr "Таксономия успешно продублирована."
+
+msgid "Dataset successfully duplicated."
+msgstr "Набор данных успешно продублирован."
+
+msgid "Form successfully duplicated."
+msgstr "Форма успешно продублирована."
+
+msgid "WooCommerce product data successfully duplicated"
+msgstr "Данные продукта WooCommerce успешно продублированы"
+
+msgid "Please wait"
+msgstr "Пожалуйста, подождите"
+
+msgid "Labels successfully regenerated"
+msgstr "Метки успешно перегенерированы"
+
+msgid "No image selected"
+msgstr "Изображение не выбрано"
+
+msgid "No video selected"
+msgstr "Видео не выбрано"
+
+msgid "No file selected"
+msgstr "Файл не выбран"
+
+msgid "Password field settings"
+msgstr "Настройки поля пароля"
+
+msgid "Algorithm"
+msgstr "Алгоритм"
+
+msgid ""
+"Should the permalink structure be prepended with the front base. (example: "
+"if your permalink structure is /blog/, then your links will be: false->/"
+"news/, true->/blog/news/). Defaults to true"
+msgstr "Добавлять ли фронтенд-базу к структуре постоянных ссылок."
+
+msgid "Resolution"
+msgstr "Разрешение"
+
+msgid "Color dark"
+msgstr "Тёмный цвет"
+
+msgid "Color light"
+msgstr "Светлый цвет"
+
+msgid "Post status"
+msgstr "Статус записи"
+
+msgid "The updated or new post status"
+msgstr "Обновлённый или новый статус записи"
+
+msgid "Add images to the gallery"
+msgstr "Добавить изображения в галерею"
+
+msgid "Enable custom blocks"
+msgstr "Включить пользовательские блоки"
+
+msgid "Enable the custom blocks manager."
+msgstr "Включить менеджер пользовательских блоков."
+
+msgid "Dynamic blocks list"
+msgstr "Список динамических блоков"
+
+msgid "Create new block"
+msgstr "Создать новый блок"
+
+msgid "General configuration"
+msgstr "Общая конфигурация"
+
+msgid "Add controls to the block"
+msgstr "Добавить элементы управления в блок"
+
+msgid "Add custom CSS to the block"
+msgstr "Добавить пользовательский CSS в блок"
+
+msgid "Add the callback to the block"
+msgstr "Добавить обратный вызов в блок"
+
+msgid "Custom SVG"
+msgstr "Пользовательский SVG"
+
+msgid "Confirm deleting control"
+msgstr "Подтвердить удаление элемента управления"
+
+msgid "Declare block support for certain features"
+msgstr "Объявить поддержку блока для определённых функций"
+
+msgid "Block callback"
+msgstr "Обратный вызов блока"
+
+msgid "This is the block's code that will be run. Make use of TWIG syntax."
+msgstr "Это код блока, который будет выполнен. Используйте синтаксис TWIG."
+
+msgid ""
+"No block controls already created. Create the first one now by clicking the "
+"button \"Add control\"!"
+msgstr ""
+"Элементы управления блоком ещё не созданы. Создайте первый, нажав кнопку "
+"«Добавить управление»!"
+
+msgid "Block controls"
+msgstr "Элементы управления блока"
+
+msgid "Add control"
+msgstr "Добавить элемент управления"
+
+msgid "Control slug"
+msgstr "Слаг элемента управления"
+
+msgid "Control slug (Ex. gallery or text_1)"
+msgstr "Слаг элемента управления (напр. gallery или text_1)"
+
+msgid "Choose the control type"
+msgstr "Выбрать тип элемента управления"
+
+msgid "The description of this control (showed only on admin panel)"
+msgstr ""
+"Описание элемента управления (отображается только в панели администратора)"
+
+msgid "Duplicate this control"
+msgstr "Продублировать управление"
+
+msgid "Delete this block control"
+msgstr "Удалить управление блоком"
+
+msgid "Hide/show this block control"
+msgstr "Скрыть/показать управление блоком"
+
+msgid "Icon type"
+msgstr "Тип иконки"
+
+msgid "The background color of the icon"
+msgstr "Цвет фона иконки"
+
+msgid "The foreground color of the icon"
+msgstr "Цвет переднего плана иконки"
+
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+msgid ""
+"An array of search terms to help user discover the block while searching."
+msgstr "Массив поисковых терминов для поиска блока."
+
+msgid "The block category"
+msgstr "Категория блока"
+
+msgid "Block category"
+msgstr "Категория блока"
+
+msgid "The block label"
+msgstr "Метка блока"
+
+msgid "Block label"
+msgstr "Метка блока"
+
+msgid "Block CSS"
+msgstr "CSS блока"
+
+msgid "Enter the CSS that will be used on the block here."
+msgstr "Введите CSS-код, который будет применён к блоку."
+
+msgid "Anchor"
+msgstr "Якорь"
+
+msgid "Anchors let you link directly to a specific block on a page."
+msgstr ""
+"Якоря позволяют ссылаться непосредственно на конкретный блок на странице."
+
+msgid "Align"
+msgstr "Выравнивание"
+
+msgid "This property adds block controls."
+msgstr "Это свойство добавляет управление блоком."
+
+msgid "Align wide"
+msgstr "Широкое выравнивание"
+
+msgid "This property allows to enable wide alignment for your theme."
+msgstr "Это свойство позволяет включить широкое выравнивание для вашей темы."
+
+msgid "Enable background image control."
+msgstr "Включить управление фоновым изображением."
+
+msgid "Enable/disable background image + size control."
+msgstr "Включить/отключить управление фоновым изображением и его размером."
+
+msgid "Enable/disable background and text color support."
+msgstr "Включить/отключить поддержку цвета фона и текста."
+
+msgid "Enable/disable button color support."
+msgstr "Включить/отключить поддержку цвета кнопки."
+
+msgid "Enable/disable contrast checker widget in the block editor UI."
+msgstr ""
+"Включить/отключить виджет проверки контраста в интерфейсе редактора блоков."
+
+msgid "Enable/disable gradient backgrounds support."
+msgstr "Включить/отключить поддержку градиентного фона."
+
+msgid "Enable/disable heading color support."
+msgstr "Включить/отключить поддержку цвета заголовка."
+
+msgid "Enable/disable link colors control."
+msgstr "Включить/отключить управление цветами ссылок."
+
+msgid "Enable/disable background and text, but not link."
+msgstr "Включить/отключить фон и текст, но не ссылку."
+
+msgid "Dimensions"
+msgstr "Размеры"
+
+msgid "Enable/disable aspect ratio control."
+msgstr "Включить/отключить управление соотношением сторон."
+
+msgid "Enable/disable min height control."
+msgstr "Включить/отключить управление минимальной высотой."
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Enable/disable duotone support."
+msgstr "Включить/отключить поддержку двухцветного фильтра."
+
+msgid "Enable/disable support for an HTML mode."
+msgstr "Включить/отключить поддержку режима HTML."
+
+msgid "Lock"
+msgstr "Заблокировать"
+
+msgid "Enable/disable the ability to toggle the lock state."
+msgstr "Включить/отключить возможность переключения состояния блокировки."
+
+msgid "Determine if a block can be used multiple times."
+msgstr "Определить, можно ли использовать блок несколько раз."
+
+msgid "Position"
+msgstr "Позиция"
+
+msgid "Enable/disable selecting sticky position."
+msgstr "Включить/отключить выбор липкой позиции."
+
+msgid "Renaming"
+msgstr "Переименование"
+
+msgid "Determine if a block can be renamed in the editor."
+msgstr "Определить, можно ли переименовывать блок в редакторе."
+
+msgid "Reusable"
+msgstr "Многоразовый"
+
+msgid "Enable/disable the ability of being converted into a reusable block."
+msgstr "Включить/отключить возможность преобразования в многоразовый блок."
+
+msgid "Shadow"
+msgstr "Тень"
+
+msgid "Enable/disable the shadow picker."
+msgstr "Включить/отключить выбор тени."
+
+msgid "Spacing"
+msgstr "Интервал"
+
+msgid "Enable/disable margin for arbitrary sides."
+msgstr "Включить/отключить отступы для произвольных сторон."
+
+msgid "Enable/disable padding for all sides."
+msgstr "Включить/отключить отступы для всех сторон."
+
+msgid "Enable/disable axial (column/row) block spacing controls."
+msgstr ""
+"Включить/отключить управление расстоянием между блоками (столбцы/строки)."
+
+msgid "Typography"
+msgstr "Типографика"
+
+msgid "Enable/disable support and UI control for font-size."
+msgstr ""
+"Включить/отключить поддержку и управление размером шрифта в интерфейсе."
+
+msgid "Declare support for specific text alignment options."
+msgstr "Объявить поддержку определённых параметров выравнивания текста."
+
+msgid "No block found."
+msgstr "Блок не найден."
+
+msgid "You are going to delete this block. Are you sure?"
+msgstr "Вы собираетесь удалить этот блок. Вы уверены?"
+
+msgid "Choose a standard category"
+msgstr "Выбрать стандартную категорию"
+
+msgid "Enter a custom category"
+msgstr "Введите пользовательскую категорию"
+
+msgid "Enable beta versions"
+msgstr "Включить бета-версии"
+
+msgid "Enable the download of beta versions."
+msgstr "Включить загрузку бета-версий."
+
+msgid "Audio field settings"
+msgstr "Настройки поля аудио"
+
+msgid "Use the custom audio player"
+msgstr "Использовать пользовательский аудиоплеер"
+
+msgid "Skin"
+msgstr "Тема оформления"
+
+msgid "Set the desired skin to be applied to the UI interface"
+msgstr "Выберите тему оформления для интерфейса"
+
+msgid "Add new post a link it"
+msgstr "Добавить новую запись и связать"
+
+msgid "Create a new post"
+msgstr "Создать новую запись"
+
+msgid "Gallery settings"
+msgstr "Настройки галереи"
+
+msgid "Video settings"
+msgstr "Настройки видео"
+
+msgid "Disable media upload"
+msgstr "Отключить загрузку медиафайлов"
+
+msgid "CSS variables"
+msgstr "CSS-переменные"
+
+msgid ""
+"Should the permastruct be prepended with WP_Rewrite::$front. Default true."
+msgstr ""
+"Добавлять ли WP_Rewrite::$front к структуре постоянных ссылок. По умолчанию "
+"true."
+
+msgid "Either hierarchical rewrite tag or not. Default false."
+msgstr "Иерархический тег перезаписи или нет. По умолчанию false."
+
+msgid "Rewrite hierarchical"
+msgstr "Иерархическая перезапись"
+
+msgid "Disable cover in custom the audio player"
+msgstr "Отключить обложку в аудиоплеере"
+
+msgid "Box settings"
+msgstr "Настройки блока"
+
+msgid "Delete unused MySQL tables"
+msgstr "Удалить неиспользуемые таблицы MySQL"
+
+msgid ""
+"If this option is enabled, all MySQL tables that are not in use — such as "
+"forms and dynamic blocks — will be deleted. Enable this option only if you "
+"are sure of what you are doing!"
+msgstr ""
+
+msgid "Apply to meta boxes"
+msgstr "Применить к мета-блокам"
+
+msgid "Don't apply to meta boxes"
+msgstr "Не применять к мета-блокам"
+
+msgid "Bulk edit"
+msgstr "Массовое редактирование"
+
+msgid "Cache driver"
+msgstr "Драйвер кэша"
+
+msgid "Set the desired cache driver to improve ACPT performances"
+msgstr "Выберите драйвер кэша для улучшения производительности ACPT"
+
+msgid "Cache folder settings"
+msgstr "Настройки папки кэша"
+
+msgid "Cache folder (absolute path)"
+msgstr ""
+
+msgid ""
+"Optional: specify an absolute server path for the cache directory (e.g. /var/"
+"cache/acpt). Leave empty to use the default plugin directory."
+msgstr ""
+
+msgid "Redis settings"
+msgstr "Настройки Redis"
+
+msgid "Memcached settings"
+msgstr "Настройки Memcached"
+
+msgid "INFO"
+msgstr "ИНФОРМАЦИЯ"
+
+msgid "SIZE"
+msgstr "РАЗМЕР"
+
+msgid "ITEMS"
+msgstr "ЭЛЕМЕНТЫ"
+
+msgid "Set the cache folder"
+msgstr "Задать папку кэша"
+
+msgid "Set the Redis host"
+msgstr "Задать хост Redis"
+
+msgid "Set the Redis port"
+msgstr "Задать порт Redis"
+
+msgid "Set the Redis database"
+msgstr "Задать базу данных Redis"
+
+msgid "Set the Memcached host"
+msgstr "Задать хост Memcached"
+
+msgid "Set the Memcached port"
+msgstr "Задать порт Memcached"
+
+msgid "Driver connection ok"
+msgstr "Соединение с драйвером установлено"
+
+msgid "Test driver connection"
+msgstr "Проверить подключение к драйверу"
+
+msgid "Enable cache for meta data"
+msgstr "Включить кэш для метаданных"
+
+msgid "Full"
+msgstr "Полный"
+
+msgid "Visual and Text"
+msgstr "Визуальный и текстовый"
+
+msgid "Visual Only"
+msgstr "Только визуальный"
+
+msgid "Text Only"
+msgstr "Только текст"
+
+msgid "Toolbar"
+msgstr "Панель инструментов"
+
+msgid "Tabs"
+msgstr "Вкладки"
+
+msgid "Set the first image as post thumbnail"
+msgstr "Установить первое изображение как миниатюру записи"
+
+msgid "Allow dangerous content"
+msgstr "Разрешить опасное содержимое"
+
+msgid "URL structure type"
+msgstr "Тип структуры URL"
+
+msgid "Absolute (ex. http://example.com)"
+msgstr "Абсолютный (например: http://example.com)"
+
+msgid "Relative (ex. /path/example/field)"
+msgstr "Относительный (напр. /путь/пример/поле)"
+
+msgid "Enable logs"
+msgstr "Включить журналы"
+
+msgid ""
+"Turn on full logging to keep a detailed record of everything. This helps to "
+"spot bugs more easily and understand what went wrong if something breaks."
+msgstr ""
+"Включите полное логирование для ведения подробного журнала. Это помогает "
+"легче находить ошибки и понимать, что пошло не так."
+
+msgid "Logs manager"
+msgstr "Менеджер журналов"
+
+msgid "No logs found"
+msgstr "Журналы не найдены"
+
+msgid "Severity"
+msgstr "Серьёзность"
+
+msgid "Message"
+msgstr "Сообщение"
+
+msgid "Filter by"
+msgstr "Фильтровать по"
+
+msgid "Jump to version"
+msgstr "Перейти к версии"
+
+msgid "Show only"
+msgstr "Показывать только"
+
+msgid "Select files"
+msgstr "Выбрать файлы"
+
+msgid "Max items allowed"
+msgstr "Максимальное количество элементов"
+
+msgid "Open a ticket"
+msgstr "Открыть тикет"
+
+msgid "Select post status"
+msgstr "Выбрать статус записи"
+
+msgid "Apply to Front-End"
+msgstr "Применить к фронтенду"
+
+msgid "Apply to Back-End"
+msgstr "Применить к бэкенду"
+
+msgid "Sync language with locale"
+msgstr "Синхронизировать язык с локалью"
+
+msgid ""
+"Automatically synchronize the application language with the selected locale "
+"settings, if applicable."
+msgstr ""
+"Автоматически синхронизировать язык приложения с выбранными настройками "
+"локали, если применимо."
+
+msgid "Table pagination"
+msgstr "Пагинация таблицы"
+
+msgid "Set the number of rows per page"
+msgstr "Задать количество строк на странице"
+
+msgid "Set the table as sortable"
+msgstr "Сделать таблицу сортируемой"
+
+msgid "Import CSV"
+msgstr "Импортировать CSV"
+
+msgid "Add tab"
+msgstr "Добавить вкладку"
+
+msgid ""
+"No tabs already created. Create the first one now by clicking the button "
+"\"Add tab\"!"
+msgstr ""
+"Вкладки ещё не созданы. Создайте первую, нажав кнопку «Добавить вкладку»!"
+
+msgid "No extra settings available"
+msgstr "Дополнительные настройки недоступны"
+
+msgid "No tabs available"
+msgstr "Вкладки недоступны"
+
+msgid "No steps available"
+msgstr "Шаги недоступны"
+
+msgid "Release elements here"
+msgstr "Отпустите элементы здесь"
+
+msgid "Date from"
+msgstr "Дата от"
+
+msgid "Date to"
+msgstr "Дата до"
+
+msgid "Single click to edit"
+msgstr "Один клик для редактирования"
+
+msgid "Double click to toggle this element"
+msgstr "Двойной клик для переключения элемента"
+
+msgid "Double click to close this element"
+msgstr "Двойной клик для закрытия элемента"
+
+msgid "Double click to open this element"
+msgstr "Двойной клик для открытия элемента"
+
+msgid ""
+"Enable the WordPress admin menu for faster, easier dashboard navigation."
+msgstr "Включить меню администратора WordPress для более удобной навигации."
+
+msgid "Enable Admin menu"
+msgstr "Включить меню администратора"
+
+msgid "Google Sheets API key"
+msgstr "API-ключ Google Sheets"
+
+msgid ""
+"Paste here your Google Sheets API key. Needed to import sheets into Table "
+"fields."
+msgstr "Вставьте ключ API Google Sheets. Необходим для импорта таблиц в поля."
+
+msgid "Form settings"
+msgstr "Настройки формы"
+
+msgid "Email delivery"
+msgstr "Доставка письма"
+
+msgid "Restrict the form submission rates"
+msgstr "Ограничить частоту отправки формы"
+
+msgid "Adjust the values of the form’s CSS variables"
+msgstr ""
+
+msgid "Trigger an email once the form is submitted"
+msgstr "Отправить письмо после отправки формы"
+
+msgid "Sync with taxonomies"
+msgstr "Синхронизировать с таксономиями"
+
+msgid "No taxonomy found."
+msgstr "Таксономия не найдена."
+
+msgid "Successfully taxonomy sync."
+msgstr "Таксономия успешно синхронизирована."
+
+msgid "Edit meta box"
+msgstr "Редактировать мета-блок"
+
+msgid "Available only if `show in archive` is enabled"
+msgstr "Доступно только если включён параметр «показывать в архиве»"
+
+msgid "Email preview"
+msgstr "Предпросмотр письма"
+
+msgid "Subject"
+msgstr "Тема"
+
+msgid "Rule"
+msgstr "Правило"
+
+msgid "Limit"
+msgstr "Ограничение"
+
+msgid "Submission limits"
+msgstr "Лимиты отправки"
+
+msgid "Email settings"
+msgstr "Настройки email"
+
+msgid "Post archive"
+msgstr "Архив записей"
+
+msgid "Taxonomy archive"
+msgstr "Архив таксономии"
+
+msgid "Copy after"
+msgstr "Скопировать после"
+
+msgid "Enable custom content type"
+msgstr "Включить пользовательский тип контента"
+
+msgid "Enable the custom content type manager."
+msgstr "Включить менеджер пользовательских типов контента."
+
+msgid "Create new table"
+msgstr "Создать новую таблицу"
+
+msgid "Registered tables"
+msgstr "Зарегистрированные таблицы"
+
+msgid "ID Strategy"
+msgstr "Стратегия идентификатора"
+
+msgid "The ID table strategy"
+msgstr "Стратегия ID таблицы"
+
+msgid "Table label"
+msgstr "Метка таблицы"
+
+msgid "The table label"
+msgstr "Метка таблицы"
+
+msgid "Table columns"
+msgstr "Столбцы таблицы"
+
+msgid "Table name"
+msgstr "Название таблицы"
+
+msgid "The table name. Must be unique"
+msgstr "Имя таблицы. Должно быть уникальным"
+
+msgid "Indexes"
+msgstr "Индексы"
+
+msgid "Indexes and foreign keys"
+msgstr "Индексы и внешние ключи"
+
+msgid "Charset and collation"
+msgstr "Набор символов и сравнение"
+
+msgid "The table charset and collation"
+msgstr "Кодировка и сопоставление таблицы"
+
+msgid "Delete this column"
+msgstr "Удалить этот столбец"
+
+msgid "Confirm deleting column"
+msgstr "Подтвердить удаление столбца"
+
+msgid ""
+"No columns already created. Create the first one now by clicking the button "
+"\"Add column\"!"
+msgstr ""
+"Столбцы ещё не созданы. Создайте первый, нажав кнопку «Добавить столбец»!"
+
+msgid "Column label"
+msgstr "Метка столбца"
+
+msgid "Column slug"
+msgstr "Слаг столбца"
+
+msgid "Column slug (Ex. gallery or text_1)"
+msgstr "Слаг столбца (напр. gallery или text_1)"
+
+msgid "Choose the column type"
+msgstr "Выбрать тип столбца"
+
+msgid "This key is already declared"
+msgstr "Этот ключ уже объявлен"
+
+msgid "UI field type mapping"
+msgstr "Сопоставление типов полей интерфейса"
+
+msgid ""
+"No indexes already created. Create the first one now by clicking the button "
+"\"Add index\"!"
+msgstr ""
+"Индексы ещё не созданы. Создайте первый, нажав кнопку «Добавить индекс»!"
+
+msgid "Add index"
+msgstr "Добавить индекс"
+
+msgid "Timestamps"
+msgstr "Временные метки"
+
+msgid "Add timestamps columns (`created_at` and `updated_at`) to the table."
+msgstr ""
+"Добавить столбцы временных меток (`created_at` и `updated_at`) в таблицу."
+
+msgid "Soft delete"
+msgstr "Мягкое удаление"
+
+msgid "Implement soft delete on this table."
+msgstr "Применить мягкое удаление для этой таблицы."
+
+msgid ""
+"No foreign keys already created. Create the first one now by clicking the "
+"button \"Add foreign key\"!"
+msgstr ""
+"Внешние ключи ещё не созданы. Создайте первый, нажав кнопку «Добавить "
+"внешний ключ»!"
+
+msgid "Reference table"
+msgstr "Таблица ссылок"
+
+msgid "Reference columns"
+msgstr "Столбцы ссылок"
+
+msgid "Referring columns"
+msgstr ""
+
+msgid "Referenced table"
+msgstr ""
+
+msgid "Referenced columns"
+msgstr ""
+
+msgid "Confirm deleting key"
+msgstr "Подтвердить удаление ключа"
+
+msgid "Is primary key"
+msgstr "Является первичным ключом"
+
+msgid ""
+"You cannot create an index or a foreign key until at least one column has "
+"been defined. Please create a column first."
+msgstr ""
+"Нельзя создать индекс или внешний ключ, пока не определён хотя бы один "
+"столбец. Сначала создайте столбец."
+
+msgid "Select time format"
+msgstr "Выбрать формат времени"
+
+msgid "Custom time format"
+msgstr "Пользовательский формат времени"
+
+msgid "Select date format"
+msgstr "Выбрать формат даты"
+
+msgid "Custom date format"
+msgstr "Пользовательский формат даты"
+
+msgid "The label of the Add element button"
+msgstr "Метка кнопки «Добавить элемент»"
+
+msgid "Add element button label"
+msgstr "Метка кнопки добавления элемента"
+
+msgid "The label of the Remove element button"
+msgstr "Метка кнопки «Удалить элемент»"
+
+msgid "Remove element button label"
+msgstr "Метка кнопки удаления элемента"
+
+msgid "Preview size"
+msgstr "Размер предпросмотра"
+
+msgid "Restrict image extensions"
+msgstr "Ограничить расширения изображений"
+
+msgid "Minimum width"
+msgstr "Минимальная ширина"
+
+msgid "Minimum height"
+msgstr "Минимальная высота"
+
+msgid "Maximum width"
+msgstr "Максимальная ширина"
+
+msgid "Maximum height"
+msgstr "Максимальная высота"
+
+msgid "Default sorting"
+msgstr "Сортировка по умолчанию"
+
+msgid ""
+"Sets the default sort order for posts in the admin list table. Defaults to "
+"WordPress standard (Date, Descending)."
+msgstr ""
+"Задаёт порядок сортировки по умолчанию в списке записей. По умолчанию: "
+"стандарт WordPress (Дата, По убыванию)."
+
+msgid "Restrict the field to only show posts created by the logged in user"
+msgstr ""
+
+msgid "Key parts"
+msgstr "Части ключа"
+
+msgid "Table successfully saved"
+msgstr "Таблица успешно сохранена"
+
+msgid "Schema status"
+msgstr "Статус схемы"
+
+msgid "Stats"
+msgstr "Статистика"
+
+msgid "Operation successfully executed"
+msgstr "Операция успешно выполнена"
+
+msgid ""
+"The following queries will be executed to synchronize the table schema. Are "
+"you sure?"
+msgstr ""
+"Следующие запросы будут выполнены для синхронизации схемы таблицы. Вы "
+"уверены?"
+
+msgid "The following queries will be executed to synchronize the table schema:"
+msgstr "Следующие запросы будут выполнены для синхронизации схемы таблицы:"
+
+msgid "No table selected"
+msgstr "Таблица не выбрана"
+
+msgid "Execute database operations"
+msgstr "Выполнить операции с базой данных"
+
+msgid "Length is required for this column type"
+msgstr "Для этого типа столбца требуется длина"
+
+msgid "Column name `id` is reserved"
+msgstr "Название столбца `id` зарезервировано"
+
+msgid "Virtual"
+msgstr "Виртуальный"
+
+msgid "Storage type"
+msgstr "Тип хранилища"
+
+msgid "Relational type"
+msgstr "Тип связи"
+
+msgid "Each record relates to exactly one record in the other table"
+msgstr "Каждая запись связана ровно с одной записью в другой таблице"
+
+msgid "One record relates to multiple records in the other table"
+msgstr "Одна запись связана с несколькими записями в другой таблице"
+
+msgid "Multiple records relate to one record in the other table"
+msgstr "Несколько записей связаны с одной записью в другой таблице"
+
+msgid "Multiple records relate to multiple records in the other table"
+msgstr "Несколько записей связаны с несколькими записями в другой таблице"
+
+msgid "Target table"
+msgstr "Целевая таблица"
+
+msgid "Direction"
+msgstr "Направление"
+
+msgid "Self-referential — useful for parent/child hierarchies"
+msgstr ""
+
+msgid "Meta keys manager"
+msgstr "Менеджер мета-ключей"
+
+msgid ""
+"Browse, search and manage every raw meta key stored by ACPT. Edit values "
+"directly or clean up stale entries across post types, taxonomies and users."
+msgstr ""
+"Просматривайте, ищите и управляйте всеми мета-ключами ACPT. Редактируйте "
+"значения напрямую или удаляйте устаревшие записи по типам записей, "
+"таксономиям и пользователям."
+
+msgid "Table stats"
+msgstr "Статистика таблицы"
+
+msgid "No stats available"
+msgstr "Статистика недоступна"
+
+msgid "Overview"
+msgstr "Обзор"
+
+msgid "Associated to"
+msgstr "Связано с"
+
+msgid "No meta keys found."
+msgstr "Мета-ключи не найдены."
+
+msgid "Clean orphan keys"
+msgstr "Очистить осиротевшие ключи"
+
+msgid "Add meta key"
+msgstr "Добавить мета-ключ"
+
+msgid "Delete meta key"
+msgstr "Удалить мета-ключ"
+
+msgid "You are going to delete this meta key. Are you sure?"
+msgstr "Вы собираетесь удалить этот мета-ключ. Вы уверены?"
+
+msgid "The record was successfully updated"
+msgstr "Запись успешно обновлена"
+
+msgid ""
+"Select the tables to include in this group. Tables define the schema and "
+"fields for storing custom content records."
+msgstr ""
+"Выберите таблицы для включения в эту группу. Таблицы определяют схему и поля "
+"для хранения пользовательских записей."
+
+msgid ""
+"Define location rules to control where this group's tables appear in the "
+"WordPress admin. Rules can target post types, taxonomies, users, or option "
+"pages."
+msgstr ""
+"Определите правила расположения для управления отображением таблиц этой "
+"группы в панели WordPress. Правила могут применяться к типам записей, "
+"таксономиям, пользователям или страницам настроек."
+
+msgid "--Select---"
+msgstr "--Выбрать--"
+
+msgid "A brief description (shown only in the admin panel)"
+msgstr "Краткое описание (отображается только в панели администратора)"
+
+msgid ""
+"ALERT: The visual builder can be used with a minimum resolution of 960 px "
+"wide"
+msgstr ""
+"ВНИМАНИЕ: Визуальный конструктор работает при минимальной ширине экрана 960 "
+"пикселей"
+
+msgid "Accept"
+msgstr "Принять"
+
+msgid "Actual settings"
+msgstr "Текущие настройки"
+
+msgid "Add a meta box to get started"
+msgstr "Добавьте мета-блок для начала работы"
+
+msgid "Add foreign key"
+msgstr "Добавить внешний ключ"
+
+msgid "Add key part"
+msgstr "Добавить часть ключа"
+
+msgid "Add new item"
+msgstr "Добавить новый элемент"
+
+msgid "Add new record"
+msgstr "Добавить новую запись"
+
+msgid "Add record"
+msgstr "Добавить запись"
+
+msgid "Add value"
+msgstr "Добавить значение"
+
+msgid "Advanced Mode"
+msgstr "Расширенный режим"
+
+msgid "Advanced options"
+msgstr "Расширенные параметры"
+
+msgid "Ajax"
+msgstr "Ajax"
+
+msgid "All Tables"
+msgstr "Все таблицы"
+
+msgid "Allow HTML"
+msgstr "Разрешить HTML"
+
+msgid "Anonymous users"
+msgstr "Анонимные пользователи"
+
+msgid "Assign this table to a group"
+msgstr "Назначить эту таблицу группе"
+
+msgid "Associated Tables"
+msgstr "Связанные таблицы"
+
+msgid "Attachments"
+msgstr "Вложения"
+
+msgid "Automatic"
+msgstr "Автоматически"
+
+msgid "BLOB"
+msgstr "BLOB"
+
+msgid "Basic options"
+msgstr "Основные параметры"
+
+msgid "Bcc"
+msgstr "Скрытая копия"
+
+msgid "Block name"
+msgstr "Название блока"
+
+msgid "Blocks"
+msgstr "Блоки"
+
+msgid "Body"
+msgstr "Тело письма"
+
+msgid "Browser"
+msgstr "Браузер"
+
+msgid "CURL"
+msgstr "CURL"
+
+msgid "CURRENT_TIMESTAMP"
+msgstr "CURRENT_TIMESTAMP"
+
+msgid "Cache"
+msgstr "Кэш"
+
+msgid "Cache stats"
+msgstr "Статистика кэша"
+
+msgid "Callback"
+msgstr "Обратный вызов"
+
+msgid "Category"
+msgstr "Категория"
+
+msgid "Cc"
+msgstr "Копия"
+
+msgid "Charset"
+msgstr "Набор символов"
+
+msgid "Child page"
+msgstr "Дочерняя страницу"
+
+msgid "Children"
+msgstr "Дочерние"
+
+msgid "Choose the icon"
+msgstr "Выбрать значок"
+
+msgid "Click on a page card to edit its settings"
+msgstr "Нажмите на карточку страницы для редактирования настроек"
+
+msgid "Click to edit"
+msgstr "Нажмите для редактирования"
+
+msgid "Collate"
+msgstr "Сравнение"
+
+msgid "Cols"
+msgstr "Столбцы"
+
+msgid "Column"
+msgstr "Столбец"
+
+msgid "Column Name"
+msgstr "Название столбца"
+
+msgid "Column length"
+msgstr "Длина столбца"
+
+msgid "Column length must be numeric"
+msgstr "Длина столбца должна быть числовой"
+
+msgid "Column options"
+msgstr "Параметры столбца"
+
+msgid "Column values"
+msgstr "Значения столбца"
+
+msgid "Comments"
+msgstr "Комментарии"
+
+msgid "Confirm deleting field"
+msgstr "Подтвердить удаление поля"
+
+msgid "Confirm deleting index"
+msgstr "Подтвердить удаление индекса"
+
+msgid "Confirm deleting wpml-config.xml file"
+msgstr "Подтвердить удаление файла wpml-config.xml"
+
+msgid "Control label"
+msgstr "Метка элемента управления"
+
+msgid "Control type"
+msgstr "Тип элемента управления"
+
+msgid "Copy this meta block"
+msgstr "Скопировать этот мета-блок"
+
+msgid "Copy this meta field"
+msgstr "Скопировать это мета-поле"
+
+msgid "Copy this meta option page"
+msgstr "Скопировать эту страницу мета-параметров"
+
+msgid "Create new Group"
+msgstr "Создать новую группу"
+
+msgid "Create new Table"
+msgstr "Создать новую таблицу"
+
+msgid "Create wpml-config.xml file"
+msgstr "Создать файл wpml-config.xml"
+
+msgid "Custom Tables"
+msgstr "Пользовательские таблицы"
+
+msgid "Custom settings"
+msgstr "Пользовательские настройки"
+
+msgid "DATE & TIME"
+msgstr "ДАТА И ВРЕМЯ"
+
+msgid "Dark"
+msgstr "Тёмная"
+
+msgid "Data"
+msgstr "Данные"
+
+msgid "Dataset is empty"
+msgstr "Набор данных пуст"
+
+msgid "Dataset list"
+msgstr "Список наборов данных"
+
+msgid "Dataset not found"
+msgstr "Набор данных не найден"
+
+msgid "Default percent"
+msgstr "Процент по умолчанию"
+
+msgid "Default term"
+msgstr "Термин по умолчанию"
+
+msgid "Delete Column"
+msgstr "Удалить столбец"
+
+msgid "Delete Table"
+msgstr "Удалить таблицу"
+
+msgid "Delete Table Group"
+msgstr "Удалить группу таблиц"
+
+msgid "Delete block"
+msgstr "Удалить блок"
+
+msgid "Delete box"
+msgstr "Удалить блок"
+
+msgid "Delete field"
+msgstr "Удалить поле"
+
+msgid "Delete option page"
+msgstr "Удалить страницу параметров"
+
+msgid "Delete others"
+msgstr "Удалять чужие"
+
+msgid "Delete page"
+msgstr "Удалить страницу"
+
+msgid "Delete private"
+msgstr "Удалять личные"
+
+msgid "Delete published"
+msgstr "Удалять опубликованные"
+
+msgid "Delete the meta block after copying"
+msgstr "Удалить мета-блок после копирования"
+
+msgid "Delete the meta field after copying"
+msgstr "Удалить мета-поле после копирования"
+
+msgid "Descending"
+msgstr "По убыванию"
+
+msgid "Deselect all"
+msgstr "Снять выделение"
+
+msgid "Details"
+msgstr "Подробности"
+
+msgid "Disable cover in the custom audio player"
+msgstr "Отключить обложку в аудиоплеере"
+
+msgid "Display"
+msgstr "Отображение"
+
+msgid "Display as translated"
+msgstr "Отображать как переведённый"
+
+msgid "Display mode"
+msgstr "Режим отображения"
+
+msgid "Display settings"
+msgstr "Настройки отображения"
+
+msgid "Drag a control type from the sidebar to get started"
+msgstr "Перетащите тип управления из боковой панели для начала работы"
+
+msgid "Drag a field type from the sidebar to get started"
+msgstr "Перетащите тип поля из боковой панели для начала работы"
+
+msgid "Drop children fields here"
+msgstr "Перетащите дочерние поля сюда"
+
+msgid "Drop children pages here"
+msgstr ""
+
+msgid "Duotone"
+msgstr "Двухцветный фильтр"
+
+msgid "Duplicate rules are not allowed."
+msgstr "Дублирующиеся правила не разрешены."
+
+msgid "ENUM"
+msgstr "ENUM"
+
+msgid "Edit item"
+msgstr "Редактировать элемент"
+
+msgid "Edit others"
+msgstr "Редактировать чужие"
+
+msgid "Edit private"
+msgstr "Редактировать личные"
+
+msgid "Edit published"
+msgstr "Редактировать опубликованные"
+
+msgid "Edit record"
+msgstr "Редактировать запись"
+
+msgid "Editor for"
+msgstr "Редактор для"
+
+msgid "Email body"
+msgstr "Тело письма"
+
+msgid "Enable dynamic blocks"
+msgstr "Включить динамические блоки"
+
+msgid "Enable select2"
+msgstr "Включить select2"
+
+msgid "Enable taxonomies"
+msgstr "Включить таксономии"
+
+msgid "Enable the custom post types manager."
+msgstr "Включить менеджер пользовательских типов записей."
+
+msgid "Enable the dynamic blocks manager."
+msgstr "Включить менеджер динамических блоков."
+
+msgid "Enable the taxonomies manager."
+msgstr "Включить менеджер таксономий."
+
+msgid "Enable/disable contrast checker widget in the block editor UI.."
+msgstr ""
+"Включить/отключить виджет проверки контраста в интерфейсе редактора блоков."
+
+msgid "Enter a valid JSON value."
+msgstr "Введите корректное значение JSON."
+
+msgid "Enter custom SVG"
+msgstr "Введите пользовательский SVG"
+
+msgid "Enter whatever items you want; separate them with COMMA or ENTER."
+msgstr "Введите любые элементы; разделяйте их запятой или нажатием Enter."
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Error during import occurred"
+msgstr "Произошла ошибка при импорте"
+
+msgid "Error message"
+msgstr "Сообщение об ошибке"
+
+msgid "Errors"
+msgstr "Ошибки"
+
+msgid "Extra"
+msgstr "Дополнительно"
+
+msgid "Field"
+msgstr "Поле"
+
+msgid "Field Mapping Preview"
+msgstr "Предпросмотр сопоставления полей"
+
+msgid "Field on target table that holds the back-reference"
+msgstr "Поле в целевой таблице для обратной ссылки"
+
+msgid "Field selector"
+msgstr "Выбор поля"
+
+msgid "Field slug (Ex. name_frk)"
+msgstr "Слаг поля (Напр. name_frk)"
+
+msgid "Field slug (Ex. name_idx)"
+msgstr "Слаг поля (Напр. name_idx)"
+
+msgid "Field slug (e.g. my_field)"
+msgstr "Слаг поля (напр. my_field)"
+
+msgid "Fields to clone"
+msgstr "Поля для клонирования"
+
+msgid "File was successfully deleted."
+msgstr "Файл успешно удалён."
+
+msgid "Font size"
+msgstr "Размер шрифта"
+
+msgid "Footer"
+msgstr "Подвал"
+
+msgid "Foreign keys"
+msgstr "Внешние ключи"
+
+msgid "Form submissions"
+msgstr "Отправки формы"
+
+msgid "Forms submissions"
+msgstr "Отправки форм"
+
+msgid "Go to next step"
+msgstr "Перейти к следующему шагу"
+
+msgid "Go to prev step"
+msgstr "Перейти к предыдущему шагу"
+
+msgid "Group"
+msgstr "Группа"
+
+msgid "Group successfully saved"
+msgstr "Группа успешно сохранена"
+
+msgid "HTML"
+msgstr "HTML"
+
+msgid "HTML settings"
+msgstr "Настройки HTML"
+
+msgid "Header"
+msgstr "Заголовок"
+
+msgid "Hide title"
+msgstr "Скрыть заголовок"
+
+msgid "Hide toggle visibility"
+msgstr "Скрыть переключатель видимости"
+
+msgid "Horizontal"
+msgstr "Горизонтальный"
+
+msgid "Human-readable label for this group"
+msgstr "Понятная пользователю метка для этой группы"
+
+msgid "ID settings"
+msgstr "Настройки ID"
+
+msgid "ID strategy"
+msgstr "Стратегия ID"
+
+msgid "INVERSE SOURCE"
+msgstr "ОБРАТНЫЙ ИСТОЧНИК"
+
+msgid "INVERSE TARGET"
+msgstr "ОБРАТНАЯ ЦЕЛЬ"
+
+msgid "INVISIBLE"
+msgstr "НЕВИДИМЫЙ"
+
+msgid ""
+"If enabled, the logged in user who submitted the form will also receive this "
+"email as a confirmation"
+msgstr ""
+"Если включено, авторизованный пользователь, отправивший форму, также получит "
+"это письмо как подтверждение"
+
+msgid "Index options"
+msgstr "Параметры индекса"
+
+msgid "Inverse field"
+msgstr "Обратное поле"
+
+msgid "Inverse field configuration"
+msgstr "Конфигурация обратного поля"
+
+msgid "Items list"
+msgstr "Список элементов"
+
+msgid "Label column"
+msgstr "Столбец метки"
+
+msgid "Label default value"
+msgstr "Значение метки по умолчанию"
+
+msgid "Label placeholder"
+msgstr "Подстановщик метки"
+
+msgid "Left"
+msgstr "Слева"
+
+msgid "Length must be at least 1"
+msgstr "Длина должна быть не менее 1"
+
+msgid "Level"
+msgstr "Уровень"
+
+msgid "Light"
+msgstr "Светлая"
+
+msgid "Link URL"
+msgstr "URL ссылки"
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "Location rules"
+msgstr "Правила расположения"
+
+msgid "Log context"
+msgstr "Контекст журнала"
+
+msgid "Logged user"
+msgstr "Авторизованный пользователь"
+
+msgid "Logged users"
+msgstr "Авторизованные пользователи"
+
+msgid "Manage cache items"
+msgstr "Управление элементами кэша"
+
+msgid "Manage option pages"
+msgstr "Управление страницами настроек"
+
+msgid "Manage permissions"
+msgstr "Управлять разрешениями"
+
+msgid "Max"
+msgstr "Макс"
+
+msgid "Max value"
+msgstr "Максимальное значение"
+
+msgid "Maximum value"
+msgstr "Максимальное значение"
+
+msgid "Meta block"
+msgstr "Мета-блок"
+
+msgid "Meta block was successfully copied"
+msgstr "Мета-блок успешно скопирован"
+
+msgid "Min"
+msgstr "Мин"
+
+msgid "Min value"
+msgstr "Минимальное значение"
+
+msgid "Minimum value"
+msgstr "Минимальное значение"
+
+msgid "Missing dependency installer, retry now"
+msgstr "Установщик зависимостей не найден, попробуйте снова"
+
+msgid "Multiple field"
+msgstr "Поле с множественным выбором"
+
+msgid "NOW()"
+msgstr "NOW()"
+
+msgid "NUMERIC"
+msgstr "NUMERIC"
+
+msgid "No blocks yet"
+msgstr "Нет блоков"
+
+msgid "No boxes registered"
+msgstr "Блоки не зарегистрированы"
+
+msgid "No columns found."
+msgstr "Столбцы не найдены."
+
+msgid "No columns selected"
+msgstr "Столбцы не выбраны"
+
+msgid "No controls created"
+msgstr "Управления не созданы"
+
+msgid "No custom post types found."
+msgstr "Типы записей не найдены."
+
+msgid "No distraction"
+msgstr "Без отвлечений"
+
+msgid "No editable columns found for this table."
+msgstr "Редактируемые столбцы для этой таблицы не найдены."
+
+msgid "No fields registered."
+msgstr "Поля не зарегистрированы."
+
+msgid "No foreign keys found."
+msgstr "Внешние ключи не найдены."
+
+msgid "No group"
+msgstr "Без группы"
+
+msgid "No index found."
+msgstr "Индексы не найдены."
+
+msgid "No items"
+msgstr "Элементов нет"
+
+msgid "No items imported"
+msgstr "Элементы не импортированы"
+
+msgid ""
+"No key parts are present, click on \"Add key part\" button to add the first "
+"one."
+msgstr ""
+"Части ключа отсутствуют. Нажмите кнопку «Добавить часть ключа», чтобы "
+"добавить первую."
+
+msgid "No location rules defined."
+msgstr "Правила расположения не определены."
+
+msgid ""
+"No option pages created yet. Click \"Add page\" to create the first one!"
+msgstr ""
+"Страницы параметров ещё не созданы. Нажмите «Добавить страницу», чтобы "
+"создать первую!"
+
+msgid "No options"
+msgstr "Нет параметров"
+
+msgid ""
+"No options are present, click on \"Add option\" button to add the first one."
+msgstr ""
+"Параметры отсутствуют. Нажмите кнопку «Добавить параметр», чтобы добавить "
+"первый."
+
+msgid "No page selected"
+msgstr "Страница не выбрана"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add condition\"!"
+msgstr ""
+"Правила ещё не созданы. Создайте первое, нажав кнопку «Добавить условие»!"
+
+msgid "No table groups found."
+msgstr "Группы таблиц не найдены."
+
+msgid "No tables associated to this group."
+msgstr "Таблицы, связанные с этой группой, не найдены."
+
+msgid "No tables found in this group."
+msgstr "Таблицы в этой группе не найдены."
+
+msgid "No tables found."
+msgstr "Таблицы не найдены."
+
+msgid ""
+"No values already created. Create the first one now by clicking the button "
+"\"Add value\"!"
+msgstr ""
+"Значения ещё не созданы. Создайте первое, нажав кнопку «Добавить значение»!"
+
+msgid "No wpml-config.xml found."
+msgstr "Файл wpml-config.xml не найден."
+
+msgid "Email"
+msgstr ""
+
+msgid "None"
+msgstr "Нет"
+
+msgid "Not found"
+msgstr "Не найдено"
+
+msgid "Nullable"
+msgstr "Допускает NULL"
+
+msgid "ON CHANGE"
+msgstr "ПРИ ИЗМЕНЕНИИ"
+
+msgid "On delete"
+msgstr "При удалении"
+
+msgid "On update"
+msgstr "При обновлении"
+
+msgid "Opens in a new window or tab"
+msgstr "Открывается в новом окне или вкладке"
+
+msgid "Operator"
+msgstr "Оператор"
+
+msgid "Options"
+msgstr "Параметры"
+
+msgid "Other columns"
+msgstr "Другие столбцы"
+
+msgid "PERMISSIONS"
+msgstr "ПРАВА ДОСТУПА"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Plural label. Used for the taxonomy admin menu item"
+msgstr ""
+"Метка во множественном числе. Используется для пункта меню администратора "
+"таксономии"
+
+msgid "Position sticky"
+msgstr "Прилипающее позиционирование"
+
+msgid "Post types"
+msgstr "Типы записей"
+
+msgid "Posts"
+msgstr "Записи"
+
+msgid "Prev Step"
+msgstr "Предыдущий шаг"
+
+msgid "REST controller class"
+msgstr "Класс контроллера REST"
+
+msgid "Read"
+msgstr "Чтение"
+
+msgid "Record created successfully."
+msgstr "Запись успешно создана."
+
+msgid "Record updated successfully."
+msgstr "Запись успешно обновлена."
+
+msgid "Redirect after form submission"
+msgstr "Перенаправление после отправки формы"
+
+msgid "Redirect timeout (seconds)"
+msgstr "Время перенаправления (секунды)"
+
+msgid "Registered Tables"
+msgstr "Зарегистрированные таблицы"
+
+msgid "Registered dynamic blocks"
+msgstr "Зарегистрированные динамические блоки"
+
+msgid "Reply to"
+msgstr "Ответить"
+
+msgid "Required"
+msgstr "Обязательное"
+
+msgid "Rest APIs"
+msgstr "REST API"
+
+msgid "Right"
+msgstr "Справа"
+
+msgid "Role"
+msgstr "Роль"
+
+msgid "SOURCE"
+msgstr "ИСТОЧНИК"
+
+msgid "STRING"
+msgstr "СТРОКА"
+
+msgid "Save record"
+msgstr "Сохранить запись"
+
+msgid "Search an element saved in cache by its content."
+msgstr "Поиск элемента, сохранённого в кэше, по его содержимому."
+
+msgid "Select a location first"
+msgstr "Сначала выберите расположение"
+
+msgid "Select a target table"
+msgstr "Выбрать целевую таблицу"
+
+msgid "Select all"
+msgstr "Выбрать все"
+
+msgid "Select capability"
+msgstr "Выбрать возможность"
+
+msgid "Select page"
+msgstr "Выбрать страницу"
+
+msgid "Select pages"
+msgstr "Выбрать страницы"
+
+msgid "Select tables..."
+msgstr "Выбрать таблицы..."
+
+msgid "Select taxonomies"
+msgstr "Выбрать таксономии"
+
+msgid "Select taxonomy"
+msgstr "Выбрать таксономию"
+
+msgid "Select the ID generation strategy"
+msgstr "Выбрать стратегию генерации ID"
+
+msgid "Select the column"
+msgstr "Выбрать столбец"
+
+msgid "Select the key"
+msgstr "Выбрать ключ"
+
+msgid "Select user"
+msgstr "Выбрать пользователя"
+
+msgid "Select users"
+msgstr "Выбрать пользователей"
+
+msgid "Selector"
+msgstr "Селектор"
+
+msgid "Self-referential"
+msgstr "Саморефрентный"
+
+msgid "Send confirmation email to logged in user"
+msgstr "Отправить подтверждение авторизованному пользователю"
+
+msgid "Shortcode preview"
+msgstr "Предпросмотр шорткода"
+
+msgid "Show errors"
+msgstr "Показать ошибки"
+
+msgid "Shown in dropdown"
+msgstr "Отображается в выпадающем списке"
+
+msgid "Singular label. Used when a singular label is needed"
+msgstr ""
+"Метка в единственном числе. Используется, когда нужна метка в единственном "
+"числе"
+
+msgid "Sorry, no posts matched your criteria."
+msgstr "К сожалению, записи не соответствуют вашим критериям."
+
+msgid "Sorting"
+msgstr "Сортировка"
+
+msgid "Specific user"
+msgstr "Конкретный пользователь"
+
+msgid "Step"
+msgstr "Шаг"
+
+msgid "Stored in FK column"
+msgstr "Хранится в столбце FK"
+
+msgid "Stored in inverse FK"
+msgstr "Хранится в обратном FK"
+
+msgid "Strategy"
+msgstr "Стратегия"
+
+msgid "Submissions"
+msgstr "Отправки"
+
+msgid "Sync"
+msgstr "Синхронизировать"
+
+msgid "TARGET"
+msgstr "ЦЕЛЬ"
+
+msgid "Table Groups"
+msgstr "Группы таблиц"
+
+msgid "Table foreign keys"
+msgstr "Внешние ключи таблицы"
+
+msgid "Table indexes"
+msgstr "Индексы таблицы"
+
+msgid "Table settings"
+msgstr "Настройки таблицы"
+
+msgid "Tables"
+msgstr "Таблицы"
+
+msgid "Tag element"
+msgstr "Элемент тега"
+
+msgid "Text settings"
+msgstr "Настройки текста"
+
+msgid "The block name/slug. Must be unique"
+msgstr "Имя/слаг блока. Должно быть уникальным"
+
+msgid "The default percent value"
+msgstr "Значение процента по умолчанию"
+
+msgid "This box"
+msgstr "Этот блок"
+
+msgid "Translate"
+msgstr "Перевести"
+
+msgid "UI"
+msgstr "Интерфейс"
+
+msgid "UI Type"
+msgstr "Тип интерфейса"
+
+msgid "UNSIGNED"
+msgstr "БЕЗ ЗНАКА"
+
+msgid "UNSIGNED ZEROFILL"
+msgstr "БЕЗ ЗНАКА С ЗАПОЛНЕНИЕМ НУЛЯМИ"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Unique"
+msgstr "Уникальный"
+
+msgid "Unique slug identifier (auto-filled from label)"
+msgstr "Уникальный идентификатор-слаг (заполняется автоматически из метки)"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Update the current post"
+msgstr "Обновить текущую запись"
+
+msgid "VISIBLE"
+msgstr "ВИДИМЫЙ"
+
+msgid "Validation rules"
+msgstr "Правила проверки"
+
+msgid "Value already exists."
+msgstr "Значение уже существует."
+
+msgid "Value column"
+msgstr "Столбец значений"
+
+msgid "Values"
+msgstr "Значения"
+
+msgid "Variable"
+msgstr "Переменная"
+
+msgid "Vertical"
+msgstr "Вертикальный"
+
+msgid "View item"
+msgstr "Просмотреть элемент"
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled. "
+"Default false."
+msgstr "Должны ли быть архивы типа записей. По умолчанию false."
+
+msgid "Wide"
+msgstr "Широкий"
+
+msgid "With front"
+msgstr "С фронтом"
+
+msgid "Yes, execute it"
+msgstr "Да, выполнить"
+
+msgid "You are going to delete this option page. Are you sure?"
+msgstr "Вы собираетесь удалить эту страницу настроек. Вы уверены?"
+
+msgid "You are going to delete this table group. Are you sure?"
+msgstr "Вы собираетесь удалить эту группу таблиц. Вы уверены?"
+
+msgid "You are going to delete this table. Are you sure?"
+msgstr "Вы собираетесь удалить эту таблицу. Вы уверены?"
+
+msgid "coming soon"
+msgstr "скоро"
+
+msgid "date"
+msgstr "дата"
+
+msgid "eg. 300px"
+msgstr "напр. 300px"
+
+msgid "group settings"
+msgstr "настройки группы"
+
+msgid "group_name"
+msgstr "имя_группы"
+
+msgid "height"
+msgstr "высота"
+
+msgid "label"
+msgstr "метка"
+
+msgid "max length is 20"
+msgstr "максимальная длина: 20"
+
+msgid "max length is 255"
+msgstr "максимальная длина: 255"
+
+msgid "order_by"
+msgstr "order_by"
+
+msgid "per_page"
+msgstr "per_page"
+
+msgid "render"
+msgstr "отрисовка"
+
+msgid "table"
+msgstr "таблица"
+
+msgid "table settings"
+msgstr "настройки таблицы"
+
+msgid "tables"
+msgstr "таблицы"
+
+msgid "target"
+msgstr "цель"
+
+msgid "this table"
+msgstr "эта таблица"
+
+msgid "value"
+msgstr "значение"
+
+msgid "width"
+msgstr "ширина"
+
+msgid "Product data fields"
+msgstr "Поля данных товара"
+
+msgid "Publish"
+msgstr "Опубликовать"
+
+msgid "Show schema create SQL query"
+msgstr "Показать SQL-запрос создания схемы"
+
+msgid "Show schema"
+msgstr "Показать схему"
+
+msgid "Table record"
+msgstr ""
+
+msgid "Form identity and submission feedback"
+msgstr ""
+
+msgid "Redirect after submission"
+msgstr ""
+
+msgid "Where users land once the form is sent"
+msgstr ""
+
+msgid "Auto slug"
+msgstr ""
+
+msgid "Custom AJAX handler for this form"
+msgstr ""
+
+msgid "External endpoint this form submits to"
+msgstr ""
+
+msgid "PHP function executed on submission"
+msgstr ""
+
+msgid "Email notification settings"
+msgstr ""
+
+msgid "What the form creates and which fields it maps"
+msgstr ""
+
+msgid "Which table record this form writes to"
+msgstr ""
+
+msgid "Colors"
+msgstr ""
+
+msgid "Font sizes"
+msgstr ""
+
+msgid "Radius and thickness settings"
+msgstr ""
+
+msgid "Color palette for light and dark modes"
+msgstr ""
+
+msgid "Gap and padding values"
+msgstr ""
+
+msgid "Font weights"
+msgstr ""
+
+msgid "Font size scale"
+msgstr ""
+
+msgid "Enable or disable email notifications for this form"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Who sends and receives this email"
+msgstr ""
+
+msgid "Subject & attachments"
+msgstr ""
+
+msgid "Email subject and file attachments"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "HTML structure, visual style and preview"
+msgstr ""
+
+msgid "Adjust the values of the form's CSS variables"
+msgstr ""
+
+msgid "Create a new record"
+msgstr ""
+
+msgid "Define who can submit this form and how many times"
+msgstr ""
+
+msgid "No columns available. Select a table first."
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Redirect to"
+msgstr ""
+
+msgid "Table to fill"
+msgstr ""
+
+msgid "Add image"
+msgstr "Добавить изображение"
+
+msgid "Advanced"
+msgstr "Дополнительно"
+
+msgid "Change image"
+msgstr "Изменить изображение"
+
+msgid "Child"
+msgstr "Дочерний"
+
+msgid "Click to edit label"
+msgstr "Нажмите, чтобы изменить метку"
+
+msgid "Click to rename"
+msgstr "Нажмите, чтобы переименовать"
+
+msgid "Core"
+msgstr "Основной"
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "Description (showed only on admin panel)"
+msgstr "Описание (отображается только в панели администратора)"
+
+msgid "Drop columns here"
+msgstr "Перетащите столбцы сюда"
+
+msgid "Drop fields here"
+msgstr "Перетащите поля сюда"
+
+msgid "Heading (optional)"
+msgstr "Заголовок (необязательно)"
+
+msgid "Hide the collapse/expand toggle."
+msgstr "Скрывает переключатель сворачивания/разворачивания."
+
+msgid "Hide the meta box title."
+msgstr "Скрывает заголовок метабокса."
+
+msgid "Hide toggle"
+msgstr "Скрыть переключатель"
+
+msgid "High"
+msgstr "Высокий"
+
+msgid "Link label"
+msgstr "Текст ссылки"
+
+msgid "Low"
+msgstr "Низкий"
+
+msgid "Message content"
+msgstr "Содержание сообщения"
+
+msgid "Message settings"
+msgstr "Настройки сообщения"
+
+msgid "Normal"
+msgstr "Обычный"
+
+msgid "Optional heading shown above the message"
+msgstr "Необязательный заголовок, отображаемый над сообщением"
+
+msgid "Order within the context."
+msgstr "Порядок в рамках контекста."
+
+msgid "Release"
+msgstr "Отпустить"
+
+msgid "Show label"
+msgstr "Показать метку"
+
+msgid "Side"
+msgstr "Боковой"
+
+msgid "Sidebar position"
+msgstr "Положение боковой панели"
+
+msgid "Sorted"
+msgstr "Отсортировано"
+
+msgid "Tab selected"
+msgstr "Выбранная вкладка"
+
+msgid "The instructional text shown to the user"
+msgstr "Пояснительный текст, отображаемый пользователю"
+
+msgid ""
+"Where the meta box appears in the post editor (applies when this table is "
+"attached to a CPT)."
+msgstr ""
+"Где отображается метабокс в редакторе записи (применяется, если эта таблица "
+"привязана к CPT)."
+
+msgid ""
+"You cannot create a foreign key until at least one column has been defined. "
+"Please create a column first."
+msgstr ""
+"Вы не можете создать внешний ключ, пока не определён хотя бы один столбец. "
+"Сначала создайте столбец."
+
+msgid "Enable Abilities API"
+msgstr ""
+
+msgid ""
+"Expose ACPT post types, taxonomies and fields as WordPress Abilities API "
+"abilities."
+msgstr ""
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Dynamic blocks"
+msgstr "Динамические блоки"
+
+msgid "Export"
+msgstr "Экспорт"
+
+msgid "If an item already exists"
+msgstr "Если элемент уже существует"
+
+msgid "Overwrite it — replace the existing version with the imported one"
+msgstr "Перезаписать — заменить существующую версию импортированной"
+
+msgid "Review import"
+msgstr "Проверить импорт"
+
+msgid "Settings were successfully imported"
+msgstr "Настройки успешно импортированы"
+
+msgid "Skip it — keep the existing version, import only new items"
+msgstr ""
+"Пропустить — оставить существующую версию, импортировать только новые "
+"элементы"
+
+msgid "Table groups"
+msgstr "Группы таблиц"
+
+msgid "Upload new file"
+msgstr "Загрузить новый файл"
+
+msgid "columns"
+msgstr "столбцы"
+
+msgid "exists"
+msgstr "существующий"
+
+msgid "fields"
+msgstr "поля"
+
+msgid ""
+"items already exist on this site. Choose how to handle them before importing."
+msgstr ""
+"На этом сайте уже существуют элементы. Выберите, как поступить с ними перед "
+"импортом."
+
+msgid "new"
+msgstr "новый"
+
+msgid "picked up"
+msgstr ""
+
+msgid "moved to a new position"
+msgstr ""
+
+msgid "is no longer over a drop target"
+msgstr ""
+
+msgid "dropped"
+msgstr ""
+
+msgid "Drop cancelled"
+msgstr ""
+
+msgid "released outside a valid drop target"
+msgstr ""
+
+msgid "Dragging cancelled"
+msgstr ""
+
+msgid "was returned to its original position"
+msgstr ""
+
+msgid "Item"
+msgstr ""
+
+msgid "New field"
+msgstr ""
+
+msgid "Control"
+msgstr ""
+
+msgid "New control"
+msgstr ""
+
+msgid "New column"
+msgstr ""
+
+msgid "Block field"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Actions for"
+msgstr ""
+
+msgid "WooCommerce"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Sidebar on the left"
+msgstr ""
+
+msgid "Sidebar on the right"
+msgstr ""
+
+msgid "Inline"
+msgstr ""
+
+msgid "Justify"
+msgstr ""
+
+msgid "Link label and value"
+msgstr ""
+
+msgid "Automatic slug"
+msgstr ""
+
+msgid "Snippet format"
+msgstr ""
+
+msgid "WordPress native snippet"
+msgstr ""
+
+msgid "ACPT function snippet"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
+msgid "Requires \"Expose via REST API\" on the table."
+msgstr ""
+
+msgid "Click to change the type"
+msgstr ""
+
+msgid "Showing {{start}}–{{end}} of {{total}} records"
+msgstr ""
+
+msgid "AUTO_INCREMENT"
+msgstr ""
+
+msgid "Allow in block bindings"
+msgstr ""
+
+msgid "Block slug"
+msgstr ""
+
+msgid "Clear all"
+msgstr ""
+
+msgid ""
+"Column was successfully copied. Sync the target table to apply the change."
+msgstr ""
+
+msgid "Copy to another table"
+msgstr ""
+
+msgid "Could not delete meta field value"
+msgstr ""
+
+msgid "Default image"
+msgstr ""
+
+msgid "Delete the column from this table after copying"
+msgstr ""
+
+msgid "Deselect"
+msgstr ""
+
+msgid "Drag to reorder"
+msgstr ""
+
+msgid "Edit label"
+msgstr ""
+
+msgid "Enable email notifications"
+msgstr ""
+
+msgid "Import data. Acceptable file formats: JSON, YAML, CSV, YAML"
+msgstr ""
+
+msgid "No other table is available to copy this column into."
+msgstr ""
+
+msgid ""
+"Only post types registered through ACPT are listed here. Don't see the post "
+"type you're looking for (e.g. one added by another plugin, like "
+"WooCommerce's Product)?"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record successfully deleted"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Select the level of changes to show"
+msgstr ""
+
+msgid "Sync it in first from the Custom Post Types list"
+msgstr ""
+
+msgid "The file size is too big"
+msgstr ""
+
+msgid "The timeout cannot be negative"
+msgstr ""
+
+msgid "Unable to load the table schema"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Value to copy"
+msgstr ""
+
+msgid "Show sidebar"
+msgstr ""
+
+msgid "Hide sidebar"
+msgstr ""
+
+msgid "Show meta box"
+msgstr ""
+
+msgid ""
+"Whether to show the taxonomy meta box on the post edit screen (classic "
+"editor). Turn it off when the terms are assigned through a custom field. "
+"Default true."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\", which stores JSON. "
+"MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Remove \"{{column}}\" from the index, or change the column to a type that "
+"can be indexed (for example INT or VARCHAR)."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\" ({{type}}). MySQL can "
+"index this type only on its first characters."
+msgstr ""
+
+msgid "Set a length on \"{{column}}\" in the index (for example 191)."
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" links the column \"{{column}}\" ({{type}}) to "
+"\"{{refColumn}}\" ({{refType}}) in the table \"{{refTable}}\". MySQL needs "
+"both columns to have the same type."
+msgstr ""
+
+msgid ""
+"An index uses a column that stores JSON. MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and remove the JSON column from the index, or change "
+"the column type."
+msgstr ""
+
+msgid ""
+"An index uses a text column without a length. MySQL can index this type only "
+"on its first characters."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and set a length on the text column (for example 191)."
+msgstr ""
+
+msgid ""
+"A foreign key links two columns MySQL cannot connect: they must have the "
+"same type, and the referenced column must be a primary key or have a unique "
+"index."
+msgstr ""
+
+msgid ""
+"Open the Foreign keys step and check that each column has the same type as "
+"the column it points to."
+msgstr ""
+
+msgid ""
+"Some rows already in the table point to records that do not exist in the "
+"referenced table, so the foreign key cannot be added."
+msgstr ""
+
+msgid "Fix or clear those values in the table records, then sync again."
+msgstr ""
+
+msgid ""
+"A unique index cannot be added because some rows already share the same "
+"value."
+msgstr ""
+
+msgid ""
+"Make the values unique in the table records, or make the index not unique."
+msgstr ""
+
+msgid "Some values already in the table do not fit the new column type."
+msgstr ""
+
+msgid ""
+"Change those values in the table records, or choose a column type that fits "
+"them."
+msgstr ""
+
+msgid "MySQL refused to change the table."
+msgstr ""
+
+msgid "Check the technical details below, or contact support with them."
+msgstr ""
+
+msgid "The table was not created."
+msgstr ""
+
+msgid ""
+"Part of the changes were already applied to the table and cannot be undone "
+"automatically (see the technical details)."
+msgstr ""
+
+msgid "No changes were applied to the table."
+msgstr ""
+
+msgid "Technical details"
+msgstr ""
+
+msgid "Statements that would run"
+msgstr ""
+
+msgid "Open the Indexes step"
+msgstr ""
+
+msgid "Open the Foreign keys step"
+msgstr ""
+
+msgid "This table can't be synced yet. Fix these problems, then try again:"
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Choose "
+"another column or delete this key part."
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+msgid "Not synced"
+msgstr ""
+
+msgid "Not created"
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" empties the column \"{{column}}\" (SET NULL) "
+"when the linked record changes, but the column does not allow empty values."
+msgstr ""
+
+msgid ""
+"Allow empty values on \"{{column}}\" in the Columns step (Advanced Mode), or "
+"choose another \"On delete\" / \"On update\" action."
+msgstr ""
+
+msgid ""
+"In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete the foreign key."
+msgstr ""
+
+msgid ""
+"The column \"{{column}}\" ({{type}}) can't be linked to "
+"\"{{refColumn}}\" ({{refType}}): MySQL needs both columns to have the same "
+"type. In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete this foreign key."
+msgstr ""
+
+msgid ""
+"\"SET NULL\" empties the column \"{{column}}\" when the linked record "
+"changes, but the column doesn't allow empty values. Allow empty values on "
+"\"{{column}}\" in the Columns step (Advanced Mode), or choose another action."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Edit the key "
+"parts to choose another column, or delete this index."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" ({{type}}) can be indexed only on its first characters. Edit "
+"the key parts and set a length (for example 191)."
+msgstr ""
+
+msgid "Datasets"
+msgstr ""
+
+msgid "Feeds"
+msgstr ""
+
+msgid ""
+"Whether the archive of this post type has an RSS feed (/{slug}/feed/). When "
+"off, the feed URLs redirect to the archive and the feed link is removed from "
+"the page head. Defaults to true"
+msgstr ""
+
+#~ msgid ""
+#~ "You cannot create a foreign key until at least one column index has been "
+#~ "defined. Please create an index first."
+#~ msgstr ""
+#~ "Нельзя создать внешний ключ, пока не определён хотя бы один индекс "
+#~ "столбца. Сначала создайте индекс."
+
+#~ msgid ""
+#~ "Label to signify all items in a submenu link. Default is All Posts / All "
+#~ "Pages."
+#~ msgstr ""
+#~ "Метка для всех элементов в ссылке подменю. По умолчанию «Все записи / "
+#~ "страницы»."
+
+#~ msgid "Default is Add New for both hierarchical and non-hierarchical types."
+#~ msgstr ""
+#~ "По умолчанию «Добавить новый» для иерархических и неиерархических типов."
+
+#~ msgid ""
+#~ "Label for adding a new singular item. Default is Add New Post / Add New "
+#~ "Page."
+#~ msgstr ""
+#~ "Метка для добавления нового элемента. По умолчанию «Добавить новую "
+#~ "запись / страницу»."
+
+#~ msgid "Label for editing a singular item. Default is Edit Post / Edit Page."
+#~ msgstr ""
+#~ "Метка для редактирования элемента. По умолчанию «Редактировать запись / "
+#~ "страницу»."
+
+#~ msgid "Label for the new item page title. Default is New Post / New Page."
+#~ msgstr ""
+#~ "Метка заголовка страницы нового элемента. По умолчанию «Новая запись / "
+#~ "страница»."
+
+#~ msgid "Label for viewing a singular item. Default is View Post / View Page."
+#~ msgstr ""
+#~ "Метка для просмотра элемента. По умолчанию «Просмотреть запись / "
+#~ "страницу»."
+
+#~ msgid ""
+#~ "Label for viewing post type archives. Default is View Posts / View Pages."
+#~ msgstr ""
+#~ "Метка для просмотра архивов. По умолчанию «Просмотреть записи / страницы»."
+
+#~ msgid ""
+#~ "Label for searching plural items. Default is Search Posts / Search Pages."
+#~ msgstr "Метка поиска элементов. По умолчанию «Поиск записей / страниц»."
+
+#~ msgid ""
+#~ "Label used when no items are found. Default is No posts found / No pages "
+#~ "found."
+#~ msgstr ""
+#~ "Метка при отсутствии элементов. По умолчанию «Записи не найдены / "
+#~ "страницы не найдены»."
+
+#~ msgid ""
+#~ "Label used when no items are in the Trash. Default is No posts found in "
+#~ "Trash / No pages found in Trash."
+#~ msgstr "Метка при пустой корзине."
+
+#~ msgid ""
+#~ "Label used to prefix parents of hierarchical items. Not used on non-"
+#~ "hierarchical post types. Default is Parent Page:."
+#~ msgstr ""
+#~ "Метка-префикс родителей иерархических элементов. Не используется для "
+#~ "неиерархических типов. По умолчанию «Родительская страница:»."
+
+#~ msgid ""
+#~ "Label for the featured image meta box title. Default is Featured image."
+#~ msgstr "Метка заголовка мета-блока миниатюры. По умолчанию «Миниатюра»."
+
+#~ msgid "Label for setting the featured image. Default is Set featured image."
+#~ msgstr "Метка для установки миниатюры. По умолчанию «Установить миниатюру»."
+
+#~ msgid ""
+#~ "Label for removing the featured image. Default is Remove featured image."
+#~ msgstr "Метка для удаления миниатюры. По умолчанию «Удалить миниатюру»."
+
+#~ msgid ""
+#~ "Label in the media frame for using a featured image. Default is Use as "
+#~ "featured image."
+#~ msgstr ""
+#~ "Метка в медиафрейме для использования миниатюры. По умолчанию "
+#~ "«Использовать как миниатюру»."
+
+#~ msgid ""
+#~ "Label for archives in nav menus. Default is Post Archives / Page Archives."
+#~ msgstr ""
+#~ "Метка для архивов в меню навигации. По умолчанию «Архив записей / "
+#~ "страниц»."
+
+#~ msgid ""
+#~ "Label for the media frame button. Default is Insert into post / Insert "
+#~ "into page."
+#~ msgstr ""
+#~ "Метка кнопки медиафрейма. По умолчанию «Вставить в запись / страницу»."
+
+#~ msgid ""
+#~ "Label for the media frame filter. Default is Uploaded to this post / "
+#~ "Uploaded to this page."
+#~ msgstr ""
+#~ "Метка фильтра медиафрейма. По умолчанию «Загружено в эту запись / "
+#~ "страницу»."
+
+#~ msgid ""
+#~ "Label for the table views hidden heading. Default is Filter posts list / "
+#~ "Filter pages list."
+#~ msgstr "По умолчанию «Фильтровать список записей / страниц»."
+
+#~ msgid ""
+#~ "Label for the table pagination hidden heading. Default is Posts list "
+#~ "navigation / Pages list navigation."
+#~ msgstr "По умолчанию «Навигация по списку записей / страниц»."
+
+#~ msgid ""
+#~ "Label for the table hidden heading. Default is Posts list / Pages list."
+#~ msgstr ""
+#~ "Метка скрытого заголовка таблицы. По умолчанию «Список записей / страниц»."
+
+#~ msgid "Label for the date filter in list tables. Default is Filter by date."
+#~ msgstr "Метка фильтра по дате. По умолчанию «Фильтр по дате»."
+
+#~ msgid ""
+#~ "Label used when an item is published. Default is Post published. / Page "
+#~ "published."
+#~ msgstr "Метка при публикации элемента."
+
+#~ msgid ""
+#~ "Label used when an item is published with private visibility. Default is "
+#~ "Post published privately. / Page published privately."
+#~ msgstr "Метка при публикации элемента с приватной видимостью."
+
+#~ msgid ""
+#~ "Label used when an item is switched to a draft. Default is Post reverted "
+#~ "to draft. / Page reverted to draft."
+#~ msgstr "Метка при переводе элемента в черновик."
+
+#~ msgid ""
+#~ "Label used when an item is scheduled for publishing. Default is Post "
+#~ "scheduled. / Page scheduled."
+#~ msgstr "Метка при планировании публикации элемента."
+
+#~ msgid ""
+#~ "Label used when an item is updated. Default is Post updated. / Page "
+#~ "updated."
+#~ msgstr "Метка при обновлении элемента."
+
+#~ msgid ""
+#~ "If this option is enabled, all MySQL tables that are not in use  such as "
+#~ "forms and dynamic blocks  will be deleted. Enable this option only if you "
+#~ "are sure of what you are doing!"
+#~ msgstr ""
+#~ "Если эта опция включена, все неиспользуемые таблицы MySQL (формы и "
+#~ "динамические блоки) будут удалены. Включайте эту опцию только если "
+#~ "уверены в своих действиях!"
+
+#~ msgid "Adjust the values of the forms CSS variables"
+#~ msgstr "Настроить значения CSS-переменных форм"
+
+#~ msgid "Self-referential  useful for parent/child hierarchies"
+#~ msgstr "Саморефрентный — полезен для иерархий родитель/дочерний"

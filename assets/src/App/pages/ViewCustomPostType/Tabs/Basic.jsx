@@ -5,6 +5,7 @@ import useTranslation from "../../../hooks/useTranslation";
 import ElementIcon from "../../../components/ElementIcon";
 import Badge from "../../../components/Badge";
 import Card from "../../../components/Card";
+import {customPostTypeProps} from "../../../props/cptTaxonomyProps.js";
 
 const Basic = ({data}) => {
 
@@ -32,7 +33,7 @@ const Basic = ({data}) => {
                     value={
                         <div className="i-flex-center s-8">
                             {data[0].supports.map((s)=>(
-                                <Badge>{s}</Badge>
+                                <Badge key={s}>{s}</Badge>
                             ))}
                         </div>
                     }
@@ -40,10 +41,12 @@ const Basic = ({data}) => {
             </Card>
         );
     }
+
+    return null;
 };
 
 Basic.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape(customPostTypeProps)).isRequired,
 };
 
 export default Basic;

@@ -1,16 +1,19 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import StepsHeaderElement from "./StepsHeaderElement";
+import {isRTLOrientation} from "../../utils/misc";
 
 const StepsHeader = ({stepActive, headings}) => {
 
-    const documentGlobals = document.globals;
-    const globals = documentGlobals.globals;
-
     return (
-        <div className={`acpt-steps ${globals.is_rtl === true ? `rtl` : ``}`}>
+        <div className={`acpt-steps ${isRTLOrientation()}`}>
             {headings.map((heading, index) => (
-                <StepsHeaderElement heading={heading} index={index} stepActive={stepActive} />
+                <StepsHeaderElement
+                    key={`step-header-${index}`}
+                    heading={heading}
+                    index={index}
+                    stepActive={stepActive}
+                />
             ))}
         </div>
     );
@@ -19,7 +22,7 @@ const StepsHeader = ({stepActive, headings}) => {
 StepsHeader.propTypes = {
     stepActive: PropTypes.number.isRequired,
     headings: PropTypes.arrayOf(PropTypes.shape({
-        label:  PropTypes.string.isRequired,
+        title:  PropTypes.string.isRequired,
         description:  PropTypes.string.isRequired,
     })).isRequired,
 };

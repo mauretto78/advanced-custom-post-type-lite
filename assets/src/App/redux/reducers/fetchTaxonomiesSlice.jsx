@@ -19,8 +19,12 @@ const initialState = {
  */
 export const fetchTaxonomies = createAsyncThunk(
     "taxonomies/fetch",
-    async (meta) => {
-        return await wpAjaxRequest("fetchTaxonomiesAction", meta ? meta : {});
+    async (meta, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("fetchTaxonomiesAction", meta ? meta : {});
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,22 +38,23 @@ export const fetchTaxonomiesSlice = createSlice({
     name: 'taxonomies/fetch',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [fetchTaxonomies.pending.type]: ( state ) => {
-            state.loading = true;
-            state.data = [];
-            state.error = null;
-        },
-        [fetchTaxonomies.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.data = action.payload;
-            state.error = null;
-        },
-        [fetchTaxonomies.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.data = [];
-            state.error = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchTaxonomies.pending, (state) => {
+                state.loading = true;
+                state.data = [];
+                state.error = null;
+            })
+            .addCase(fetchTaxonomies.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload;
+                state.error = null;
+            })
+            .addCase(fetchTaxonomies.rejected, (state, action) => {
+                state.loading = false;
+                state.data = [];
+                state.error = action.payload;
+            });
     }
 });
 

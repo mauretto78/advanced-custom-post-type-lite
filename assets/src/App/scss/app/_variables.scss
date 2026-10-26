@@ -1,49 +1,393 @@
-/*========== Colors ==========*/
-$header-color: #2c3338;
-$gjs-primary-color: #2c3338;
-$gjs-sec-color: #3E464B;
-$success-color: #02C39A;
-$success-bg: #e7fffa;
-$warning-color: #b7922c;
-$warning-bg: #FFEAAF;
-$danger-color: #F94144;
-$danger-bg: #FFDCDC;
-$info-color: #A972CA;
-$info-bg: #EFE7F3;
-$primary-color: #007CBA;
-$secondary-color: #EFF6FC;
-$white: #fff;
-$pale-gray: #f8f8f8;
-$light-gray: #ddd;
-$medium-gray: #aaa;
-$gray: #777;
-$black: #131313;
+/*
+ * Design Tokens — ACPT
+ *
+ * Structure:
+ *  1. Light theme (default)
+ *  2. Dark theme override
+ *  3. Midnight theme (deep blue-navy dark theme)
+ *  4. Airy theme (soft, light pastel theme)
+ *  5. Sass variable aliases (for use in component files)
+ *  6. Global constants (borders, typography, spacing, shadows)
+ */
 
-/*========== Borders ==========*/
-$border-radius: 4px;
-$border-thickness: 1px;
+/* ============================================================
+   1. LIGHT THEME (default)
+   ============================================================ */
 
-/*========== Font and typography ==========*/
-$h1-font-size: 1.35rem;
-$h2-font-size: 1.25rem;
-$h3-font-size: 1rem;
-$xl-font-size: 2.25rem;
-$font-size: .938rem;
-$small-font-size: .813rem;
-$xs-font-size: .75rem;
+.acpt-container {
 
-/*========== Spacing ==========*/
+  /* --- Brand --- */
+  --acpt-primary-color:           #3858e9;
+  --acpt-primary-color-white:     #fff;
+  /* Text on a FILLED primary button. Split from --acpt-primary-color because the
+     primary blue plays two roles that pull opposite ways on a dark surface: as
+     button background it needs dark text, as outline/link text it must stay light.
+     Light/airy: white on the dark-blue fill. Dark/midnight: near-black on the
+     light-blue fill (white would be ~2.7:1). */
+  --acpt-on-primary:              var(--acpt-primary-color-white);
+  --acpt-secondary-color:         #EFF6FC;
+  --acpt-link-color:              #3858e9;
 
-$space-36: 36px;
-$space-24: 24px;
-$space-18: 18px;
-$space-12: 12px;
-$space-8: 8px;
-$space-4: 4px;
-$space-2: 2px;
+  /* --- Semantic --- */
+  --acpt-success-color:           #018166;   /* darkened from #02C39A for 4.5:1 vs white (was 2.26:1) */
+  --acpt-success-bg:              #e7fffa;
+  --acpt-warning-color:           #7d641e;   /* darkened from #b7922c for 4.5:1 vs warning-bg (was 2.46:1) */
+  --acpt-warning-bg:              #FFEAAF;
+  --acpt-danger-color:            #cb060a;   /* darkened from #F94144 for 4.5:1 vs white (was 3.58:1) */
+  --acpt-danger-bg:               #FFDCDC;
+  --acpt-info-color:              #8e46b9;   /* darkened from #A972CA for 4.5:1 vs info-bg (was 2.93:1) */
+  --acpt-info-bg:                 #EFE7F3;
+  --acpt-accent-color:              #067590; /* darkened from #0891b2 for 4.5:1 vs accent-bg (was 3.31:1) */
+  --acpt-accent-bg:                 #e0f7fa;
 
-$font-weight: 400;
+  /* --- Layout --- */
+  --acpt-bg-color:                #f0f0f1;
+  --acpt-header-color:            #2c3338;
+  --acpt-surface-color:           #ffffff;
+  --acpt-surface-color-raised:    #f8f8f8;
 
-/*========== Shadows ==========*/
+  /* --- Neutrals --- */
+  --acpt-white:                   #ffffff;
+  --acpt-pale-gray:               #f8f8f8;
+  --acpt-light-gray:              #dddddd;
+  --acpt-medium-gray:             #747474;   /* darkened from #aaaaaa for 4.5:1 vs white text bg (was 2.32:1) */
+  --acpt-gray:                    #6a6a6a;   /* darkened from #777777 for 4.5:1 vs bg-color (#f0f0f1 was 3.93:1) */
+  --acpt-black:                   #131313;
 
-$box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  /* --- Icons (SVG data-uri — can't reference CSS vars inside, so the fill
+       is pre-baked per theme here; rest = light-gray, hover = gray, matching
+       the .acpt-select divider hover idiom below) --- */
+  --acpt-select-caret:            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23dddddd" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+  --acpt-select-caret-hover:      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%236a6a6a" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+
+  /* --- Darken variants (hardcoded — darken() is Sass compile-time only) --- */
+  --acpt-darken-link:             #1b3fd7;   /* darken(#3858e9, 8%) */
+  --acpt-darken-primary:          #1b3fd7;   /* darken(#3858e9, 8%) */
+  --acpt-darken-secondary:        #d8ecf8;   /* darken(#EFF6FC, 8%) */
+  --acpt-darken-danger:           #f80e12;   /* darken(#F94144, 8%) */
+  --acpt-darken-success:          #02ac87;   /* darken(#02C39A, 8%) */
+  --acpt-darken-info:             #9759bc;   /* darken(#A972CA, 8%) */
+  --acpt-darken-warning:          #a07f26;   /* darken(#b7922c, 8%) */
+  --acpt-darken-danger-bg:        #fecaca;   /* gentle 4% darken — stays pale, label remains visible */
+  --acpt-darken-success-bg:       #ceffef;   /* darken(#e7fffa, 8%) */
+  --acpt-darken-info-bg:          #dfcee9;   /* darken(#EFE7F3, 8%) */
+  --acpt-darken-warning-bg:       #ffd97a;   /* darken(#FFEAAF, 8%) */
+  --acpt-darken-pale-gray:        #e8e8e8;   /* darken(#f8f8f8, 8%) */
+  --acpt-darken-light-gray:       #c4c4c4;   /* darken(#ddd, 8%) */
+  --acpt-darken-gray:             #646464;   /* darken(#777, 8%) */
+  --acpt-danger-tint:             #FFEBEB;   /* lighten(danger-bg, 3%) — pale red tuned for use as an icon/text
+                                                 color on saturated accent surfaces (e.g. the primary-blue canvas
+                                                 toolbar); 4.9:1 vs primary-color, better than plain danger-bg (4.4:1) */
+
+  /* --- Shadow --- */
+  --acpt-box-shadow:              rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  /* --- GrapesJS (scoped — do not use outside gjs components) --- */
+  --acpt-gjs-primary-color:       #2c3338;
+  --acpt-gjs-sec-color:           #3E464B;
+}
+
+/* ============================================================
+   2. DARK THEME OVERRIDE
+   ============================================================ */
+
+.acpt-container.dark {
+
+  /* --- Brand --- */
+  --acpt-primary-color:           #7b9aff;
+  --acpt-on-primary:              #12161a;   /* near-black on the light-blue fill — 6.9:1; white would be 2.65:1 */
+  --acpt-secondary-color:         #242c44;   /* retuned from #1e2a4a — hue-aligned to primary (~225°), less saturated, harmonises with the neutral-gray dark surfaces */
+  --acpt-link-color:              #7b9aff;
+
+  /* --- Semantic (colors lightened, backgrounds darkened for dark surfaces) --- */
+  --acpt-success-color:           #00d9a8;
+  --acpt-success-bg:              #0d3329;
+  --acpt-warning-color:           #f0b429;
+  --acpt-warning-bg:              #332a0d;
+  --acpt-danger-color:            #ff6b6e;
+  --acpt-danger-bg:               #3d1112;
+  --acpt-info-color:              #c49de0;
+  --acpt-info-bg:                 #2a1f33;
+  --acpt-accent-color:              #22d3ee;
+  --acpt-accent-bg:                 #0c2831;
+
+  /* --- Layout --- */
+  --acpt-bg-color:                #1d2327;
+  --acpt-header-color:            #1d2327;
+  --acpt-surface-color:           #1d2327;
+  --acpt-surface-color-raised:    #3a4248;
+
+  /* --- Neutrals --- */
+  --acpt-white:                   #2c3338;
+  --acpt-pale-gray:               #242B2F;
+  --acpt-light-gray:              #4a5568;
+  --acpt-medium-gray:             #8d9eb2;   /* lightened slightly from #8a9bb0 for safety margin above 4.5:1 (was 4.52:1) */
+  --acpt-gray:                    #cbd5e0;
+  --acpt-black:                   #f0f0f0;
+
+  /* --- Icons --- */
+  --acpt-select-caret:            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%234a5568" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+  --acpt-select-caret-hover:      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23cbd5e0" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+
+  /* --- Darken variants --- */
+  --acpt-darken-link:             #5c79ff;   /* darken(#7b9aff, 8%) */
+  --acpt-darken-primary:          #5c79ff;   /* darken(#7b9aff, 8%) */
+  --acpt-darken-secondary:        #161b29;   /* darken(#242c44, 8%) */
+  --acpt-darken-danger:           #ff3a3d;
+  --acpt-darken-success:          #00c396;
+  --acpt-darken-info:             #b484d4;
+  --acpt-darken-warning:          #d9a020;
+  --acpt-darken-danger-bg:        #300d0e;
+  --acpt-darken-success-bg:       #0a2920;
+  --acpt-darken-info-bg:          #201828;
+  --acpt-darken-warning-bg:       #29220a;
+  --acpt-darken-pale-gray:        #3c474e;
+  --acpt-darken-light-gray:       #3d4a58;
+  --acpt-darken-gray:             #b0bec5;
+  --acpt-danger-tint:             #3d1112;   /* same as danger-bg — already 6.1:1 against this skin's
+                                                 lighter primary color, no adjustment needed */
+
+  /* --- Shadow --- */
+  --acpt-box-shadow:              rgba(0, 0, 0, 0.40) 0px 1px 4px;
+}
+
+/* ============================================================
+   3. MIDNIGHT THEME OVERRIDE
+   ============================================================ */
+
+.acpt-container.midnight {
+
+  /* --- Brand --- */
+  --acpt-primary-color:           #6d88ff;   /* ≈ #3858e9 lightened just enough for dark bg contrast */
+  --acpt-primary-color-white:     #ffffff;
+  --acpt-on-primary:              #12161a;   /* near-black on the light-blue fill — 5.7:1; white would be 3.17:1 */
+  --acpt-secondary-color:         #1c2740;   /* retuned from #1a2a3f — was cyan-shifted (~214°); now hue-aligned to primary (~222°) */
+  --acpt-link-color:              #6d88ff;
+
+  /* --- Semantic --- */
+  --acpt-success-color:           #00dfb0;
+  --acpt-success-bg:              #04243a;   /* navy-tinted dark teal */
+  --acpt-warning-color:           #f0b429;
+  --acpt-warning-bg:              #2b2204;
+  --acpt-danger-color:            #ff6b6e;
+  --acpt-danger-bg:               #2d0c0d;
+  --acpt-info-color:              #c49de0;
+  --acpt-info-bg:                 #1c1030;
+  --acpt-accent-color:              #22d3ee;
+  --acpt-accent-bg:                 #072433;
+
+  /* --- Layout --- */
+  --acpt-bg-color:                #070d17;   /* near-black navy */
+  --acpt-header-color:            #0b1624;
+  --acpt-surface-color:           #0d1b2e;   /* deep navy card surface */
+  --acpt-surface-color-raised:    #132540;   /* slightly raised navy */
+
+  /* --- Neutrals --- */
+  --acpt-white:                   #0d1b2e;
+  --acpt-pale-gray:               #102035;
+  --acpt-light-gray:              #1f3655;
+  --acpt-medium-gray:             #5f87b2;   /* lightened from #4a7099 for 4.5:1 vs surface bg (was 3.35:1) */
+  --acpt-gray:                    #8ab4cc;
+  --acpt-black:                   #e8f2f8;
+
+  /* --- Icons --- */
+  --acpt-select-caret:            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%231f3655" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+  --acpt-select-caret-hover:      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%238ab4cc" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+
+  /* --- Darken variants --- */
+  --acpt-darken-link:             #4a6dff;   /* darken(#6d88ff, 8%) */
+  --acpt-darken-primary:          #5c79ff;   /* primary-button hover/focus fill — kept light enough to carry --acpt-on-primary text at 4.8:1 (was #4a6dff → 4.23:1) */
+  --acpt-darken-secondary:        #101624;   /* darken(#1c2740, 8%) */
+  --acpt-darken-danger:           #ff3a3d;
+  --acpt-darken-success:          #00c99e;
+  --acpt-darken-info:             #b080d2;
+  --acpt-darken-warning:          #d49c1e;
+  --acpt-darken-danger-bg:        #22080a;
+  --acpt-darken-success-bg:       #021c2f;
+  --acpt-darken-info-bg:          #140a25;
+  --acpt-darken-warning-bg:       #211a03;
+  --acpt-darken-pale-gray:        #0c1828;
+  --acpt-darken-light-gray:       #172d49;
+  --acpt-darken-gray:             #7aa4bf;
+  --acpt-danger-tint:             #2d0c0d;   /* same as danger-bg — already 5.7:1 against this skin's
+                                                 primary color, no adjustment needed */
+
+  /* --- Shadow --- */
+  --acpt-box-shadow:              rgba(0, 0, 0, 0.55) 0px 1px 6px;
+
+  /* --- GrapesJS --- */
+  --acpt-gjs-primary-color:       #0d1b2e;
+  --acpt-gjs-sec-color:           #132540;
+}
+
+/* ============================================================
+   4. AIRY THEME OVERRIDE
+   ============================================================ */
+
+.acpt-container.airy {
+
+  /* --- Brand --- */
+  --acpt-primary-color:           #3858e9;   /* exact match — primary unchanged */
+  --acpt-primary-color-white:     #ffffff;
+  --acpt-secondary-color:         #d6ecf7;   /* pale sky blue */
+  --acpt-link-color:              #3858e9;
+
+  /* --- Semantic --- */
+  --acpt-success-color:           #137a5d;   /* darkened from #1aab82 for 4.5:1 vs white (was 2.92:1) */
+  --acpt-success-bg:              #d4f7ee;   /* mint pastel */
+  --acpt-warning-color:           #8c6415;   /* darkened from #b07d1a for 4.5:1 vs warning-bg (was 3.19:1) */
+  --acpt-warning-bg:              #fff0c2;   /* pale lemon */
+  --acpt-danger-color:            #ca292b;   /* darkened from #d94244 for 4.5:1 vs white (was 4.36:1) */
+  --acpt-danger-bg:               #ffe5e5;   /* blush pink */
+  --acpt-info-color:              #824ca7;   /* darkened from #8a52b0 for 4.5:1 vs info-bg (was 4.25:1) */
+  --acpt-info-bg:                 #ede0f8;   /* soft lavender */
+  --acpt-accent-color:              #0b7685; /* darkened from #0b7a8a for 4.5:1 vs accent-bg (was 4.32:1) */
+  --acpt-accent-bg:                 #d0f4f9;
+
+  /* --- Layout --- */
+  --acpt-bg-color:                #f5f0fb;   /* very pale lavender page wash */
+  --acpt-header-color:            #2c3338;
+  --acpt-surface-color:           #ffffff;
+  --acpt-surface-color-raised:    #faf7fd;   /* barely-there lilac */
+
+  /* --- Neutrals --- */
+  --acpt-white:                   #ffffff;
+  --acpt-pale-gray:               #f8f4fc;
+  --acpt-light-gray:              #e2d9ed;
+  --acpt-medium-gray:             #826d9b;   /* darkened from #b3a6c2 for 4.5:1 vs white text bg (was 2.30:1) */
+  --acpt-gray:                    #756884;   /* darkened from #7a6d8a for 4.5:1 vs bg-color (#f5f0fb was 4.28:1) */
+  --acpt-black:                   #1e1a26;
+
+  /* --- Icons --- */
+  --acpt-select-caret:            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23e2d9ed" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+  --acpt-select-caret-hover:      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23756884" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"/></svg>');
+
+  /* --- Darken variants --- */
+  --acpt-darken-link:             #1b3fd7;   /* darken(#3858e9, 8%) — same as light theme */
+  --acpt-darken-primary:          #1b3fd7;
+  --acpt-darken-secondary:        #bcddf2;   /* darken(#d6ecf7, 8%) */
+  --acpt-darken-danger:           #c03032;
+  --acpt-darken-success:          #15956f;
+  --acpt-darken-info:             #7840a0;
+  --acpt-darken-warning:          #9a6c15;
+  --acpt-darken-danger-bg:        #ffcece;   /* gentle darken of blush */
+  --acpt-darken-success-bg:       #b8f0e4;
+  --acpt-darken-info-bg:          #dccef4;
+  --acpt-darken-warning-bg:       #ffe6a0;
+  --acpt-darken-pale-gray:        #ede7f5;
+  --acpt-darken-light-gray:       #cfc4de;
+  --acpt-darken-gray:             #69607a;
+  --acpt-danger-tint:             #FFF4F4;   /* lighten(blush danger-bg, 3%) — same reasoning as light theme;
+                                                 5.2:1 vs primary-color */
+
+  /* --- Shadow --- */
+  --acpt-box-shadow:              rgba(100, 80, 140, 0.14) 0px 1px 4px;  /* soft violet-tinted shadow */
+
+  /* --- GrapesJS --- */
+  --acpt-gjs-primary-color:       #2c3338;
+  --acpt-gjs-sec-color:           #4a4060;
+}
+
+/* ============================================================
+   5. SASS VARIABLE ALIASES
+   ============================================================ */
+
+/* Brand */
+$primary-color:             var(--acpt-primary-color);
+$primary-color-white:       var(--acpt-primary-color-white);
+$on-primary:                var(--acpt-on-primary);
+$secondary-color:           var(--acpt-secondary-color);
+$link-color:                var(--acpt-link-color);
+
+/* Semantic */
+$success-color:             var(--acpt-success-color);
+$success-bg:                var(--acpt-success-bg);
+$warning-color:             var(--acpt-warning-color);
+$warning-bg:                var(--acpt-warning-bg);
+$danger-color:              var(--acpt-danger-color);
+$danger-bg:                 var(--acpt-danger-bg);
+$danger-tint:               var(--acpt-danger-tint);
+$info-color:                var(--acpt-info-color);
+$info-bg:                   var(--acpt-info-bg);
+$accent-color:                var(--acpt-accent-color);
+$accent-bg:                   var(--acpt-accent-bg);
+
+/* Layout */
+$bg-color:                  var(--acpt-bg-color);
+$header-color:              var(--acpt-header-color);
+$surface-color:             var(--acpt-surface-color);
+$surface-color-raised:      var(--acpt-surface-color-raised);
+
+/* Neutrals */
+$white:                     var(--acpt-white);
+$pale-gray:                 var(--acpt-pale-gray);
+$light-gray:                var(--acpt-light-gray);
+$medium-gray:               var(--acpt-medium-gray);
+$gray:                      var(--acpt-gray);
+$black:                     var(--acpt-black);
+
+/* Icons */
+$select-caret:              var(--acpt-select-caret);
+$select-caret-hover:        var(--acpt-select-caret-hover);
+
+/* Darken variants */
+$darken-link:               var(--acpt-darken-link);
+$darken-primary:            var(--acpt-darken-primary);
+$darken-secondary:          var(--acpt-darken-secondary);
+$darken-danger:             var(--acpt-darken-danger);
+$darken-success:            var(--acpt-darken-success);
+$darken-info:               var(--acpt-darken-info);
+$darken-warning:            var(--acpt-darken-warning);
+$darken-danger-bg:          var(--acpt-darken-danger-bg);
+$darken-success-bg:         var(--acpt-darken-success-bg);
+$darken-info-bg:            var(--acpt-darken-info-bg);
+$darken-warning-bg:         var(--acpt-darken-warning-bg);
+$darken-pale-gray:          var(--acpt-darken-pale-gray);
+$darken-light-gray:         var(--acpt-darken-light-gray);
+$darken-gray:               var(--acpt-darken-gray);
+
+/* Shadow */
+$box-shadow:                var(--acpt-box-shadow);
+
+/* GrapesJS */
+$gjs-primary-color:         var(--acpt-gjs-primary-color);
+$gjs-sec-color:             var(--acpt-gjs-sec-color);
+
+/* ============================================================
+   6. GLOBAL CONSTANTS
+   These never change between themes — no CSS variable needed.
+   ============================================================ */
+
+/* Layout width */
+$layout-max-width:          1600px;
+
+/* Borders */
+$border-radius:             4px;
+$border-thickness:          1px;
+
+/* Typography */
+$h1-font-size:              1.35rem;
+$h2-font-size:              1.25rem;
+$h3-font-size:              1rem;
+$xl-font-size:              2.25rem;
+$font-size:                 0.938rem;
+$small-font-size:           0.813rem;
+$xs-font-size:              0.75rem;
+$font-weight:               400;
+
+/* Spacing */
+$space-btn:                 14px 20px;
+$space-60:                  60px;
+$space-56:                  56px;
+$space-48:                  48px;
+$space-36:                  36px;
+$space-24:                  24px;
+$space-20:                  20px;
+$space-18:                  18px;
+$space-14:                  14px;
+$space-12:                  12px;
+$space-10:                  10px;
+$space-8:                   8px;
+$space-6:                   6px;
+$space-4:                   4px;
+$space-2:                   2px;

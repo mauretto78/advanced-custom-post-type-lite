@@ -4,64 +4,82 @@ namespace ACPT_Lite\Core\CQRS\Command;
 
 use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\CQRS\Query\FetchMetaGroupsQuery;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
-use ACPT_Lite\Core\Repository\MetaRepository;
+use ACPT_Lite\Utils\PHP\Request;
 
 class SaveTaxonomyMetaCommand extends AbstractSaveMetaCommand implements CommandInterface
 {
-	/**
-	 * @var
-	 */
-	protected $termId;
+    /**
+     * @var int
+     */
+    protected int $termId;
 
-	/**
-	 * SaveTaxonomyMetaCommand constructor.
-	 *
-	 * @param $termId
-	 * @param array $data
-	 */
-	public function __construct($termId, array $data = [])
-	{
-		parent::__construct($data);
-		$this->termId = $termId;
-	}
+    /**
+     * SaveTaxonomyMetaCommand constructor.
+     *
+     * @param int $termId
+     * @param Request $request
+     */
+    public function __construct(int $termId, Request $request)
+    {
+        parent::__construct($request);
+        $this->termId = $termId;
+    }
 
-	/**
-	 * @return mixed|void
-	 * @throws \Exception
-	 */
-	public function execute()
-	{
-		$termId = $this->termId;
-		$taxonomyObject = get_term($termId);
-		$taxonomy = $taxonomyObject->taxonomy;
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function execute(): void
+    {
+        $termId = $this->termId;
+        $taxonomyObject = get_term($termId);
 
-		$taxonomyMetaGroups = MetaRepository::get([
-			'belongsTo' => MetaTypes::TAXONOMY,
-			'find' => $taxonomy,
+        if ($taxonomyObject instanceof \WP_Error) {
+            throw new \Exception("Term not found: ". $taxonomyObject->get_error_message());
+        }
+
+        $taxonomy = $taxonomyObject->taxonomy;
+
+        $taxonomyMetaGroups = (new FetchMetaGroupsQuery([
+            'belongsTo' => MetaTypes::TAXONOMY,
+            'find' => $taxonomy,
             'clonedFields' => true,
-		]);
+            'cct' => true,
+        ]))->execute();
 
-		$termMetaGroups = MetaRepository::get([
-			'belongsTo' => BelongsTo::TERM_ID,
-			'find' => $termId,
+        $termMetaGroups = (new FetchMetaGroupsQuery([
+            'belongsTo' => BelongsTo::TERM_ID,
+            'find' => $termId,
             'clonedFields' => true,
-		]);
+            'cct' => true,
+        ]))->execute();
 
-		/** @var MetaGroupModel[] $metaGroups */
-		$metaGroups = array_merge($taxonomyMetaGroups, $termMetaGroups);
+        /** @var MetaGroupModel[] $metaGroups */
+        $metaGroups = array_merge($taxonomyMetaGroups, $termMetaGroups);
 
-		foreach ($metaGroups as $metaGroup){
-			foreach ($metaGroup->getBoxes() as $metaBoxModel) {
-				foreach ($metaBoxModel->getFields() as $fieldModel){
-					if($this->hasField($fieldModel)){
-						$fieldModel->setBelongsToLabel(MetaTypes::TAXONOMY);
-						$fieldModel->setFindLabel($taxonomy);
-						$this->saveField($fieldModel, $this->termId, MetaTypes::TAXONOMY);
-					}
-				}
-			}
-		}
-	}
+        $fieldEntries = [];
+
+        foreach ($metaGroups as $metaGroup) {
+
+            foreach ($metaGroup->getBoxes() as $metaBoxModel) {
+                foreach ($metaBoxModel->getFields() as $fieldModel) {
+                    if ($this->hasField($fieldModel)) {
+                        $fieldModel->setBelongsToLabel(MetaTypes::TAXONOMY);
+                        $fieldModel->setFindLabel($taxonomy);
+                        $elementId = $this->termId;
+
+                        $fieldEntries[] = [
+                            'field'     => $fieldModel,
+                            'elementId' => $elementId,
+                            'belongsTo' => MetaTypes::TAXONOMY,
+                        ];
+                    }
+                }
+            }
+        }
+
+        $this->validateAndSaveFields($fieldEntries);
+    }
 }
-

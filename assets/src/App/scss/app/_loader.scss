@@ -1,3 +1,5 @@
+@use "variables";
+
 .acpt-loading {
   position: absolute;
   top: 50%;
@@ -8,7 +10,7 @@
 .acpt-loading .acpt-loader {
   display: flex;
   align-items: center;
-  font-size: $h1-font-size;
+  font-size: variables.$h1-font-size;
 }
 
 .spinning-icon {

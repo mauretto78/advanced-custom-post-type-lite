@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {attributesProps} from "../../../props/attributes.js";
 
 const DateFormatControls = ({attributes, setAttributes}) => {
 
@@ -14,11 +16,11 @@ const DateFormatControls = ({attributes, setAttributes}) => {
         {value:"d-M-Y", label: "dd-mmm-yyyy (ex. 28-OCT-1990)"},
         {value:"d M y", label: "mmm yy (ex. 28 OCT 90)"},
         {value:"d M Y", label: "mmm yyyy (ex. 28 OCT 1990)"},
-        {value:"d/m/Y", label: "dd/mm/yy (ex. 28/10/90)"},
+        {value:"d/m/y", label: "dd/mm/yy (ex. 28/10/90)"},
         {value:"d/m/Y", label: "dd/mm/yyyy (ex. 28/10/1990)"},
         {value:"m/d/y", label: "mm/dd/yy (ex. 10/28/90)"},
         {value:"m/d/Y", label: "mm/dd/yyyy (ex. 10/28/1990)"},
-        {value:"d.m.Y", label: "dd.mm.yy (ex. 28.10.90)"},
+        {value:"d.m.y", label: "dd.mm.yy (ex. 28.10.90)"},
         {value:"d.m.Y", label: "dd.mm.yyyy (ex. 28.10.1990)"}
     ];
 
@@ -37,6 +39,11 @@ const DateFormatControls = ({attributes, setAttributes}) => {
             />
         </PanelRow>
     );
+};
+
+DateFormatControls.propTypes = {
+    attributes: PropTypes.shape(attributesProps).isRequired,
+    setAttributes: PropTypes.func.isRequired,
 };
 
 export default DateFormatControls;

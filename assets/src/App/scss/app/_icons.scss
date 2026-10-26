@@ -1,13 +1,15 @@
+@use "variables";
+
 .circle-icon {
-  padding: $space-2;
+  padding: variables.$space-2;
   border-radius: 100%;
-  border: $border-thickness solid $primary-color;
+  border: variables.$border-thickness solid variables.$primary-color;
 }
 
 .rounded-icon {
   margin: auto;
-  background: $pale-gray;
+  background: variables.$pale-gray;
   border-radius: 100%;
-  padding: $space-12;
-  color: $black;
+  padding: variables.$space-12;
+  color: variables.$black;
 }

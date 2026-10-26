@@ -12,7 +12,7 @@ import Toggle from "../../../components/Forms/Toggle";
 import CardRow from "../../../components/Card/CardRow";
 import Input from "../../../components/Forms/Input";
 import Checkbox from "../../../components/Forms/Checkbox";
-import NavigationButtons from "../NavigationButtons";
+import NavigationButtons from "../../../components/NavigationButtons";
 
 const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handleSubmit, formValues, loading = false, edit = false, setFormValues = null}) => {
 
@@ -41,8 +41,17 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
             show_tagcloud: data.length > 0 ? settings.show_tagcloud : null,
             show_in_quick_edit: data.length > 0 ? settings.show_in_quick_edit : null,
             show_admin_column: data.length > 0 ? settings.show_admin_column : null,
+            // missing on taxonomies saved before this setting existed: WP shows the box by default
+            show_meta_box: data.length > 0 && typeof settings.show_meta_box !== 'undefined' ? settings.show_meta_box : true,
             capabilities: data.length > 0 ? settings.capabilities : null,
-            rewrite: data.length > 0 ? settings.rewrite : null,
+            // A taxonomy whose stored settings JSON predates the `rewrite` key
+            // (created before this setting existed) has settings.rewrite ===
+            // undefined. WP's own register_taxonomy() default for `rewrite` is
+            // true — resolve undefined to true so the toggle renders checked and
+            // the `{rewrite && (...)}` block keeps custom_rewrite/with_front/
+            // rewrite_hierarchical visible; otherwise a save silently drops them.
+            // Taxonomy analog of the CPT fix in ticket #1251 (commit f21743192).
+            rewrite: data.length > 0 && typeof settings.rewrite !== 'undefined' ? settings.rewrite : true,
             custom_rewrite: data.length > 0 ? settings.custom_rewrite : null,
             query_var: data.length > 0 ? settings.query_var : null,
             custom_query_var: data.length > 0 ? settings.custom_query_var : null,
@@ -55,6 +64,15 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
 
         // edit mode
         if(edit && formValues && formValues[3]){
+
+            // formValues[3] is the raw fetched settings; a taxonomy created
+            // before the `rewrite` setting existed has formValues[3].rewrite ===
+            // undefined. Resolve it to true (WP's own default) so this
+            // setValue() does not override the correct default from useForm
+            // defaultValues / the Step-3 toggle — same reasoning as the
+            // defaultValues comment above. Ticket #1251 taxonomy analog.
+            const rewriteDefault = typeof formValues[3].rewrite !== 'undefined' ? formValues[3].rewrite : true;
+
             methods.setValue('public', formValues[3].public );
             methods.setValue('publicly_queryable', formValues[3].publicly_queryable );
             methods.setValue('hierarchical', formValues[3].hierarchical );
@@ -67,8 +85,9 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
             methods.setValue('show_tagcloud', formValues[3].show_tagcloud );
             methods.setValue('show_in_quick_edit', formValues[3].show_in_quick_edit );
             methods.setValue('show_admin_column', formValues[3].show_admin_column );
+            methods.setValue('show_meta_box', typeof formValues[3].show_meta_box !== 'undefined' ? formValues[3].show_meta_box : true );
             methods.setValue('capabilities', formValues[3].capabilities );
-            methods.setValue('rewrite', formValues[3].rewrite );
+            methods.setValue('rewrite', rewriteDefault );
             methods.setValue('custom_rewrite', formValues[3].custom_rewrite );
             methods.setValue('query_var', formValues[3].query_var );
             methods.setValue('custom_query_var', formValues[3].custom_query_var );
@@ -88,14 +107,17 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
     let actions = [];
 
     if(!edit){
-        actions.push(<Button testId="prev-step" type="button" onClick={() => setStepActive(1)} style={styleVariants.SECONDARY}>
+        actions.push(<Button key="prev-step" testId="prev-step" type="button" size="sm" icon="bx:chevron-left" onClick={() => setStepActive(1)} style={styleVariants.OUTLINED_PRIMARY}>
             {useTranslation("Previous Step")}
         </Button>);
     }
 
     actions.push(<Button
+        key="next-step"
         testId="next-step"
         style={styleVariants.PRIMARY}
+        size="sm"
+        icon="bx:save"
     >
         {useTranslation("Save")}
     </Button>);
@@ -275,8 +297,20 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
                                     id="show_admin_column"
                                     description={useTranslation("Whether to display a column for the taxonomy on its post type listing screens. Default false.")}
                                     defaultValue={data.length > 0 ? settings.show_admin_column : false}
-                                    register={methods.register} 
-                                    errors={methods.formState.errors} 
+                                    register={methods.register}
+                                    errors={methods.formState.errors}
+                                />
+                            }
+                        />
+                        <CardRow
+                            label={useTranslation("Show meta box")}
+                            value={
+                                <Toggle
+                                    id="show_meta_box"
+                                    description={useTranslation("Whether to show the taxonomy meta box on the post edit screen (classic editor). Turn it off when the terms are assigned through a custom field. Default true.")}
+                                    defaultValue={data.length > 0 && typeof settings.show_meta_box !== 'undefined' ? settings.show_meta_box : true}
+                                    register={methods.register}
+                                    errors={methods.formState.errors}
                                 />
                             }
                         />
@@ -322,31 +356,57 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
                                 <Toggle
                                     id="rewrite"
                                     description={useTranslation("Triggers the handling of rewrites for this taxonomy. Default true, using $taxonomy as slug. To prevent rewrite, set to false. To specify rewrite rules, an array can be passed with any of these keys:")}
-                                    defaultValue={data.length > 0 ? settings.rewrite : false}
+                                    defaultValue={data.length > 0 && typeof settings.rewrite !== 'undefined' ? settings.rewrite : true}
                                     register={methods.register} 
                                     errors={methods.formState.errors} 
                                 />
                             }
                         />
                         {rewrite && (
-                            <CardRow
-                                label={useTranslation("Custom rewrite rules")}
-                                value={
-                                    <Input
-                                        id="custom_rewrite"
-                                        placeholder={useTranslation("Custom rewrite rules")}
-                                        description={useTranslation("Taxonomy slug to use instead of default.")}
-                                        validate={{
-                                            maxLength: {
-                                                value: 255,
-                                                message: "max length is 255"
-                                            }
-                                        }}
-                                        register={methods.register} 
-                                        errors={methods.formState.errors} 
-                                    />
-                                }
-                            />
+                            <React.Fragment>
+                                <CardRow
+                                    label={useTranslation("Custom rewrite rules")}
+                                    value={
+                                        <Input
+                                            id="custom_rewrite"
+                                            placeholder={useTranslation("Custom rewrite rules")}
+                                            description={useTranslation("Taxonomy slug to use instead of default.")}
+                                            validate={{
+                                                maxLength: {
+                                                    value: 255,
+                                                    message: "max length is 255"
+                                                }
+                                            }}
+                                            register={methods.register}
+                                            errors={methods.formState.errors}
+                                        />
+                                    }
+                                />
+                                <CardRow
+                                    label={useTranslation("With front")}
+                                    value={
+                                        <Toggle
+                                            id="with_front"
+                                            description={useTranslation("Should the permastruct be prepended with WP_Rewrite::$front. Default true.")}
+                                            defaultValue={data.length > 0 && typeof settings.with_front !== "undefined" ? settings.with_front : true}
+                                            register={methods.register}
+                                            errors={methods.formState.errors}
+                                        />
+                                    }
+                                />
+                                <CardRow
+                                    label={useTranslation("Rewrite hierarchical")}
+                                    value={
+                                        <Toggle
+                                            id="rewrite_hierarchical"
+                                            description={useTranslation("Either hierarchical rewrite tag or not. Default false.")}
+                                            defaultValue={data.length > 0 && typeof settings.rewrite_hierarchical !== "undefined" ? settings.rewrite_hierarchical : false}
+                                            register={methods.register}
+                                            errors={methods.formState.errors}
+                                        />
+                                    }
+                                />
+                            </React.Fragment>
                         )}
                         <CardRow
                             label={useTranslation("Query var")}
@@ -419,7 +479,7 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
 
 SettingsStep.propTypes = {
     headings: PropTypes.arrayOf(PropTypes.shape({
-        label:  PropTypes.string.isRequired,
+        title:  PropTypes.string.isRequired,
         description:  PropTypes.string.isRequired,
     })).isRequired,
     title: PropTypes.string.isRequired,

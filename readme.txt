@@ -1,33 +1,38 @@
 === Custom post types for Wordpress – ACPT Lite ===
 Contributors: mauretto78
 Donate link: https://acpt.io
-Tags: custom post type, custom post types, taxonomy, taxonomies, meta box
-Requires at least: 5.1
-Tested up to: 6.6
+Tags: custom post type, custom post types, taxonomy, custom fields, meta box
+Requires at least: 6.5
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.11
+Stable tag: 2.1.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create and manage custom post types and taxonomies in seconds. Use the meta fields builder to create complex websites with just a few clicks.
+Create and manage custom post types, taxonomies and custom fields in seconds, from a clean, developer-friendly interface.
 
 == Description ==
 
-= Features  =
+= Features =
 
-ACPT Lite helps you to craft your website from inside WordPress. There is no need to create child themes or write PHP. No coding skills are required!
+ACPT Lite helps you craft your website from inside WordPress. No child themes, no PHP: no coding skills are required.
 
-Main features:
+* Register and manage custom post types in seconds.
+* Register taxonomies and associate them with your post types.
+* Field groups builder with a drag-and-drop canvas: Text, Textarea, Email, Select and Date fields, for posts, terms, users, comments and media.
+* Gutenberg block to display your fields.
+* WooCommerce integration: add product data tabs and fields in a few clicks.
+* `get_acpt_field()` / `save_acpt_meta_field_value()` PHP functions and shortcodes.
 
-* Register and manage new custom post types in seconds. Take the total control and become a Master of your CPTs.
-* Register, manage and associate custom new taxonimies in just 3 clicks.
-* Meta fields manager (choose between 5 field types)
-* Generate the ACPT custom shortcode with an interactive block in your WordPress Gutenberg editor.
-* Elementor custom widget: manage ACPT meta fields in the Elementor editor
-* WooCommerce custom integration: generate and manage product data in few clicks
-* REST API basic integration
+= ACPT PRO =
 
-If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!
+ACPT Lite is the free version of [ACPT](https://acpt.io). Upgrade to unlock:
+
+* 50+ field types: repeaters, flexible content, relations, media, galleries, maps, and more
+* Advanced field options, conditional rendering, validation rules and permissions
+* Option pages, forms, custom content tables and dynamic blocks
+* Integrations with Elementor, Bricks, Breakdance, Divi, WPML, Polylang, WPGraphQL, SEO plugins and more
+* Import/export, REST API and premium support
 
 = Credits =
 
@@ -35,13 +40,19 @@ If you need more power, consider to upgrade to [ACPT](https://acpt.io) :)!
 
 == Installation ==
 
-1. Make sure you are using WordPress 5.1 or later and that your server is running PHP 7.0 or later (same requirement as WordPress itself)
-2. Install and activate the plugin as usual from the 'Plugins' menu in WordPress.
-3. Go to the plugin settings page and set the language.
+1. Make sure you are using WordPress 6.5 or later and PHP 7.4 or later.
+2. Install and activate the plugin from the 'Plugins' menu in WordPress.
+3. Open the ACPT Lite menu and create your first custom post type.
 
 == Frequently Asked Questions ==
 
-Please refer to main [ACPT](https://acpt.io) website.
+= Can I upgrade to ACPT PRO later? =
+
+Yes. Install ACPT PRO: it deactivates ACPT Lite and imports your post types, taxonomies and field groups automatically.
+
+= Where is the documentation? =
+
+See [docs.acpt.io](https://docs.acpt.io).
 
 == Screenshots ==
 
@@ -51,7 +62,7 @@ Please refer to main [ACPT](https://acpt.io) website.
 4. Manage meta fields
 5. Meta boxes in the post editor
 6. Settings panel
-7. Elementor widget
+7. WooCommerce product data
 
 == Privacy Policy ==
 Advanced Custom Post Type Lite uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
@@ -63,6 +74,7 @@ Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without
 Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
 
 == Changelog ==
+
 
 = 1.0.0 (2021-11-23) =
 
@@ -197,3 +209,15 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 = 2.0.11 (2025-02-10) =
 
 * Assets loading fixed
+= 2.1.0 =
+
+Based on ACPT v2.1.7.
+
+* Brand-new drag-and-drop canvas for field groups
+* New Tools page, home of the Health check (inspect the installation and repair the database in one click)
+* Field names are made unique automatically, no more "Name is already taken" errors
+* Saved ACPT blocks always load correctly in the block editor
+* Dark mode and accessibility improvements across the admin
+* No more conflicts with plugins that bundle other versions of the same PHP libraries
+* Back-end and front-end improvements and fixes from ACPT v2.1.7
+* Requires WordPress 6.5+ and PHP 7.4+

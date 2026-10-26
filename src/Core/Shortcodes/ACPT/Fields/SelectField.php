@@ -4,36 +4,38 @@ namespace ACPT_Lite\Core\Shortcodes\ACPT\Fields;
 
 class SelectField extends AbstractField
 {
-    public function render()
+    /**
+     * @return string|null
+     */
+    public function render(): ?string
     {
-        if(!$this->isFieldVisible()){
+        if (!$this->isFieldVisible()) {
             return null;
         }
 
-	    $render = $this->payload->render;
-	    $rawData = $this->fetchRawData();
+        $render = $this->payload->render;
+        $rawData = $this->fetchRawData();
 
-	    if(!isset($rawData['value'])){
-		    return null;
-	    }
+        if (!isset($rawData['value'])) {
+            return null;
+        }
 
         $value = $rawData['value'];
 
         return $this->addBeforeAndAfter($this->renderItem($value, $render));
     }
 
-	/**
-	 * @param $value
-	 * @param null $render
-	 *
-	 * @return string|null
-	 */
-    private function renderItem($value, $render = null)
+    /**
+     * @param string $value
+     * @param string|null $render
+     * @return string|null
+     */
+    private function renderItem(string $value, ?string $render = null): ?string
     {
-    	if($render === 'label'){
-    		return $this->metaBoxFieldModel->getOptionLabel($value);
-	    }
+        if ($render === 'label' && $this->metaBoxFieldModel !== null) {
+            return $this->metaBoxFieldModel->getOptionLabel($value);
+        }
 
-    	return $value;
+        return $value;
     }
 }

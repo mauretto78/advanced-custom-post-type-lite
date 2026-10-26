@@ -19,8 +19,12 @@ const initialState = {
  */
 export const assocTaxonomyToPostType = createAsyncThunk(
     "taxonomy/assoc-to-post",
-    async (data) => {
-        return await wpAjaxRequest("assocTaxonomyToPostTypeAction", data);
+    async (data, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("assocTaxonomyToPostTypeAction", data);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const assocTaxonomyToPostTypeSlice = createSlice({
     name: 'taxonomy/assoc-to-post',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [assocTaxonomyToPostType.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [assocTaxonomyToPostType.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(assocTaxonomyToPostType.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(assocTaxonomyToPostType.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [assocTaxonomyToPostType.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(assocTaxonomyToPostType.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

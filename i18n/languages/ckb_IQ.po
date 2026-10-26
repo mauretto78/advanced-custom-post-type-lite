@@ -1,0 +1,6994 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ACPT 2.0.64\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-06-30 12:22:43+0000\n"
+"Last-Translator: Codex\n"
+"Language-Team: Kurdish (Sorani)\n"
+"Language: ckb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Codex\n"
+
+msgid "(default true)"
+msgstr "(بنەڕەت: true)"
+
+msgid "(e.g. Movie)"
+msgstr "(بۆ نموونە: فیلم)"
+
+msgid "(e.g. Movies)"
+msgstr "(بۆ نموونە: فیلمەکان)"
+
+msgid "--Select--"
+msgstr "--دیاری بکە--"
+
+msgid "A brief description"
+msgstr "وەسفێکی کورت"
+
+msgid "Add page"
+msgstr "زیادکردنی پەڕە"
+
+msgid "ACPT Tools"
+msgstr "ئامرازەکانی ACPT"
+
+msgid "ACPT email account"
+msgstr "هەژماری ئیمەیڵی ACPT"
+
+msgid "ALERT:"
+msgstr "ئاگاداری:"
+
+msgid "API dashboard"
+msgstr "داشبۆردی API"
+
+msgid "APIs"
+msgstr "APIەکان"
+
+msgid "APIs dashboard panel"
+msgstr "پانێڵی داشبۆردی APIەکان"
+
+msgid "APIs endpoints"
+msgstr "خاڵەکۆتاییەکانی APIەکان"
+
+msgid "API key"
+msgstr "کلیلی API"
+
+msgid "Action required"
+msgstr "کردار پێویستە"
+
+msgid "Actions"
+msgstr "کردارەکان"
+
+msgid ""
+"Activate ACPT by your license key to get professional support and automatic "
+"updates from your WordPress dashboard."
+msgstr ""
+"ACPT بە کلیلی مۆڵەتەکەت چالاک بکە بۆ وەرگرتنی پاڵپشتی پیشەیی و بەڕۆژکردنەوەی "
+"خۆکار لە داشبۆردی WordPress."
+
+msgid "Activate your license"
+msgstr "مۆڵەتەکەت چالاک بکە"
+
+msgid ""
+"Activate your license key here. Please note that you need also your ACPT "
+"user email"
+msgstr ""
+"کلیلی مۆڵەتەکەت لێرە چالاک بکە. تکایە سەرنج بدە کە ئیمەیڵی بەکارهێنەری "
+"ACPTیشت پێویستە"
+
+msgid "Activate your license now"
+msgstr "ئێستا مۆڵەتەکەت چالاک بکە"
+
+msgid "Add"
+msgstr "زیادکردن"
+
+msgid "Add block"
+msgstr "زیادکردنی بلۆک"
+
+msgid "Add child page"
+msgstr "زیادکردنی پەڕەی منداڵ"
+
+msgid "Add element"
+msgstr "زیادکردنی توخم"
+
+msgid "Add field"
+msgstr "زیادکردنی فیلد"
+
+msgid "Add meta box"
+msgstr "زیادکردنی بۆکسی مەتا"
+
+msgid "Add new {{r}}"
+msgstr "زیادکردنی {{r}}ی نوێ"
+
+msgid "Add option"
+msgstr "زیادکردنی هەڵبژاردە"
+
+msgid "Add or remove {{r}}"
+msgstr "زیادکردنی or remove {{r}}"
+
+msgid "Add product data"
+msgstr "زیادکردنی داتای بەرهەم"
+
+msgid "Add support for various available post edit features. For more info"
+msgstr ""
+"زیادکردنی پاڵپشتی for various available پۆست edit features. For more info"
+
+msgid "after copying"
+msgstr "دوای کۆپیکردن"
+
+msgid "All {{r}}"
+msgstr "هەموو {{r}}"
+
+msgid ""
+"Allowed keys: 'name', name of default term.|'slug', Slug for default "
+"term.|'description', Description for default term"
+msgstr ""
+"کلیلە ڕێگەپێدراوەکان: 'name'، ناوی زاراوەی بنەڕەت.|'slug'، سلەگی زاراوەی "
+"بنەڕەت.|'description'، وەسفی زاراوەی بنەڕەت"
+
+msgid "Archive template"
+msgstr "داڕێژەی ئەرشیف"
+
+msgid "Archives"
+msgstr "ئه‌رشیفه‌کان"
+
+msgid "Are you sure?"
+msgstr "دڵنیایت؟"
+
+msgid "Array of capabilities for this taxonomy."
+msgstr "ڕیزبەندی تواناکان بۆ ئەم تاکسۆنۆمییە."
+
+msgid "Associate"
+msgstr "پەیوەستکردن"
+
+msgid "Associate custom post types here"
+msgstr "جۆرە پۆستە تایبەتەکان لێرە پەیوەست بکە"
+
+msgid "Associate custom post types to"
+msgstr "جۆرە پۆستە تایبەتەکان پەیوەست بکە بە"
+
+msgid "Associate taxonomies to"
+msgstr "تاکسۆنۆمییەکان پەیوەست بکە بە"
+
+msgid "Associated icon"
+msgstr "ئایکۆنی پەیوەستکراو"
+
+msgid "Associated meta boxes"
+msgstr "بۆکسە مەتا پەیوەستکراوەکان"
+
+msgid "Associated meta fields"
+msgstr "فیلدە مەتا پەیوەستکراوەکان"
+
+msgid "Associated post types"
+msgstr "جۆرە پۆستە پەیوەستکراوەکان"
+
+msgid "Associated taxonomies"
+msgstr "تاکسۆنۆمییە پەیوەستکراوەکان"
+
+msgid "Back to {{r}}"
+msgstr "گەڕانەوە بۆ {{r}}"
+
+msgid "Belongs to"
+msgstr "سەر بە"
+
+msgid "Block list"
+msgstr "لیستی بلۆک"
+
+msgid "Block was successfully copied"
+msgstr "بلۆک بە سەرکەوتوویی کۆپی کرا"
+
+msgid "CPT"
+msgstr "CPT"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the plural name."
+msgstr ""
+"دەقێکی camelCase بێ نیشانە و بۆشایی. دەبێت بە پیت دەست پێ بکات، نەک ژمارە. "
+"گرنگە جیاواز بێت لە ناوی کۆ."
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the single name."
+msgstr ""
+"دەقێکی camelCase بێ نیشانە و بۆشایی. دەبێت بە پیت دەست پێ بکات، نەک ژمارە. "
+"گرنگە جیاواز بێت لە ناوی تاک."
+
+msgid "Capabilities"
+msgstr "دەسەڵاتەکان"
+
+msgid "Capability"
+msgstr "توانا"
+
+msgid "Capability Type"
+msgstr "جۆری توانا"
+
+msgid "Capability type"
+msgstr "جۆری توانا"
+
+msgid "Changelog"
+msgstr "گۆڕان"
+
+msgid "Check `required` in the selected meta field"
+msgstr "`required` لە فیلدی مەتای دیاریکراو چالاک بکە"
+
+msgid "Check `show in archive` in the selected meta field"
+msgstr "`show in archive` لە فیلدی مەتای دیاریکراو چالاک بکە"
+
+msgid "Children list"
+msgstr "لیستی Children"
+
+msgid "Choose box"
+msgstr "بۆکس هەڵبژێرە"
+
+msgid "Choose element"
+msgstr "هەڵبژاردنی توخم"
+
+msgid "Choose field"
+msgstr "هەڵبژاردنی فیلد"
+
+msgid "Choose from most used {{r}}"
+msgstr "هەڵبژاردنی from most used {{r}}"
+
+msgid "Choose from the list"
+msgstr "لە لیستەکە هەڵبژێرە"
+
+msgid "Choose how to display the related post(s) selector (default: select)"
+msgstr ""
+"هەڵبژاردنی how to display the related پۆست(s) selector (بنەڕەت: select)"
+
+msgid "Choose the field type"
+msgstr "هەڵبژاردنی فیلد type"
+
+msgid "Close"
+msgstr "داخستن"
+
+msgid "Condition"
+msgstr "Condition"
+
+msgid "Condition value"
+msgstr "نرخی Condition"
+
+msgid "Conditional rendering"
+msgstr "Conditional rendering"
+
+msgid "Confirm deleting meta box"
+msgstr "دڵنیابوونەوەی سڕینەوەی بۆکسی مەتا"
+
+msgid "Confirm deleting meta field"
+msgstr "دڵنیابوونەوەی سڕینەوەی فیلدی مەتا"
+
+msgid "Confirm deleting all"
+msgstr "دڵنیابوونەوەی سڕینەوەی هەموو"
+
+msgid "Confirm deleting option"
+msgstr "دڵنیابوونەوەی سڕینەوەی هەڵبژاردە"
+
+msgid ""
+"Copy the conditional logic settings of this meta field to other fields of "
+"this box"
+msgstr ""
+"ڕێکخستنەکانی لۆژیکی مەرجداری ئەم فیلدی مەتایە بۆ فیلدەکانی تری ئەم بۆکسە "
+"کۆپی بکە"
+
+msgid "Copy the meta block"
+msgstr "کۆپیکردنی بلۆکی مەتا"
+
+msgid "Copy the meta box"
+msgstr "کۆپیکردنی بۆکسی مەتا"
+
+msgid "Copy the meta field"
+msgstr "کۆپیکردنی فیلدی مەتا"
+
+msgid "Copy the selected meta box"
+msgstr "کۆپیکردنی بۆکسی مەتای دیاریکراو"
+
+msgid "Copy the selected meta field"
+msgstr "کۆپیکردنی فیلدی مەتای دیاریکراو"
+
+msgid "Copy this block to another meta field"
+msgstr "ئەم بلۆکە بۆ فیلدێکی مەتای تر کۆپی بکە"
+
+msgid "Copy this meta box"
+msgstr "ئەم بۆکسی مەتایە کۆپی بکە"
+
+msgid "Copy this meta box to another"
+msgstr "ئەم بۆکسی مەتایە بۆ دانەیەکی تر کۆپی بکە"
+
+msgid "Copy this meta field to another meta box"
+msgstr "ئەم فیلدی مەتایە بۆ بۆکسێکی مەتای تر کۆپی بکە"
+
+msgid "Copyright"
+msgstr "مافی لەبەرگرتنەوە"
+
+msgid "Create"
+msgstr "دروستکردن"
+
+msgid "Create a meta field in the selected meta box"
+msgstr "فیلدێکی مەتا لە بۆکسی مەتای دیاریکراو دروست بکە"
+
+msgid "Create a meta option (if applicable) in the selected meta field"
+msgstr ""
+"هەڵبژاردەیەکی مەتا (ئەگەر گونجاو بوو) لە فیلدی مەتای دیاریکراو دروست بکە"
+
+msgid "Create a new block (only for Flexible field)"
+msgstr "بلۆکێکی نوێ دروست بکە (تەنها بۆ فیلدی نەرم)"
+
+msgid "Create a new condition in the selected meta field"
+msgstr "مەرجێکی نوێ لە فیلدی مەتای دیاریکراو دروست بکە"
+
+msgid "Create new Taxonomy"
+msgstr "دروستکردنی تاکسۆنۆمیی نوێ"
+
+msgid "Create new WooCommerce product data"
+msgstr "دروستکردنی داتای بەرهەمی نوێی WooCommerce"
+
+msgid "Create new meta box"
+msgstr "دروستکردنی بۆکسی مەتای نوێ"
+
+msgid "Create new options after the selected meta option"
+msgstr "هەڵبژاردە نوێیەکان دوای هەڵبژاردەی مەتای دیاریکراو دروست بکە"
+
+msgid "Create template"
+msgstr "دروستکردنی داڕێژە"
+
+msgid "Custom"
+msgstr "تایبەت"
+
+msgid "Custom Post Type global settings"
+msgstr "ڕێکخستنەکانی جۆری پۆستی تایبەت global"
+
+msgid "Custom post type data"
+msgstr "جۆری پۆستی تایبەت داتا"
+
+msgid "Custom post type meta successfully saved"
+msgstr "جۆری پۆستی تایبەت meta بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Custom post type slug to use instead of default."
+msgstr "جۆری پۆستی تایبەت سلەگ بۆ use instead ی بنەڕەت."
+
+msgid "Custom post type successfully deleted."
+msgstr "جۆری پۆستی تایبەت بە سەرکەوتوویی سڕایەوە."
+
+msgid "Custom post type successfully saved."
+msgstr "جۆری پۆستی تایبەت بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Custom post type was associated to selected taxonomies"
+msgstr "جۆری پۆستی تایبەت was associated بۆ دیاریکراو تاکسۆنۆمییەکان"
+
+msgid "Custom post type"
+msgstr "جۆری Custom پۆست"
+
+msgid "Custom post types"
+msgstr "جۆرە پۆستە تایبەتەکان"
+
+msgid "Custom query var"
+msgstr "گۆڕاوەی پرسیاری تایبەت"
+
+msgid "Custom query var slug to use instead of default."
+msgstr "تایبەت پرسیار var سلەگ بۆ use instead ی بنەڕەت."
+
+msgid "Custom rewrite"
+msgstr "تایبەت نووسینەوە"
+
+msgid "Custom rewrite rules"
+msgstr "تایبەت نووسینەوە یاساکان"
+
+msgid "Date format"
+msgstr "فۆرماتی ڕێکەوت"
+
+msgid "Default term to be used for the taxonomy."
+msgstr "زاراوەی بنەڕەت کە بۆ تاکسۆنۆمی بەکار دەهێنرێت."
+
+msgid "Default value"
+msgstr "نرخی بنەڕەت"
+
+msgid "Delete"
+msgstr "سڕینه‌وه‌"
+
+msgid "Delete ACPT definitions when deactivate the plug-in"
+msgstr "پێناسەکانی ACPT بسڕەوە کاتێک پڵاگینەکە ناچالاک دەکرێت"
+
+msgid "Delete API key"
+msgstr "سڕینەوەی API key"
+
+msgid "Delete Taxonomy"
+msgstr "سڕینەوەی تاکسۆنۆمی"
+
+msgid "Delete WooCommerce product data"
+msgstr "سڕینەوەی داتای بەرهەمی WooCommerce"
+
+msgid "Delete all"
+msgstr "سڕینەوەی all"
+
+msgid "Delete all action"
+msgstr "سڕینەوەی all action"
+
+msgid "Delete all images"
+msgstr "سڕینەوەی all وێنەکان"
+
+msgid ""
+"Delete all saved ACPT definitions when you deactivate the plug-in. This "
+"means that if you select NO when you deactivate and then reactivate the plug-"
+"in you will find all the previously saved ACPT definitions (meta fields, "
+"options etc.)"
+msgstr ""
+"سڕینەوەی all saved ACPT پێناسەکان when you deactivate the پڵاگین. This means "
+"that if you select NO when you deactivate and then reactivate the پڵاگین you "
+"will find all the previously saved ACPT پێناسەکان (فیلدەکانی مەتا, "
+"هەڵبژاردەکان etc.)"
+
+msgid "Delete metadata when delete an ACPT field"
+msgstr "مەتاداتا بسڕەوە کاتێک فیلدێکی ACPT دەسڕدرێتەوە"
+
+msgid "Delete others pages"
+msgstr "سڕینەوەی others پەڕەکان"
+
+msgid "Delete others posts"
+msgstr "سڕینەوەی others پۆستەکان"
+
+msgid "Delete pages"
+msgstr "سڕینەوەی پەڕەکان"
+
+msgid "Delete posts"
+msgstr "سڕینەوەی پۆستەکان"
+
+msgid "Delete post metadata when deleting ACPT fields"
+msgstr "مەتاداتای پۆست بسڕەوە کاتێک فیلدەکانی ACPT دەسڕدرێنەوە"
+
+msgid ""
+"Delete post metadata when deleting an ACPT field. This means that if you "
+"select YES, when you delete an ACPT meta field all the saved metadata will "
+"be deleted"
+msgstr ""
+"سڕینەوەی پۆست مەتاداتا when deleting an ACPT فیلد. This means that if you "
+"select YES, when you delete an ACPT فیلدی مەتا all the saved مەتاداتا will "
+"be deleted"
+
+msgid "Delete posts when delete an ACPT post definition"
+msgstr "سڕینەوەی پۆستەکان when delete an ACPT پۆست پێناسە"
+
+msgid ""
+"Delete posts when delete an ACPT post type definition. This means that if "
+"you select YES, when you delete an ACPT post type definition all the saved "
+"posts will be deleted"
+msgstr ""
+"سڕینەوەی پۆستەکان when delete an ACPT جۆری پۆست پێناسە. This means that if "
+"you select YES, when you delete an ACPT جۆری پۆست پێناسە all the saved "
+"پۆستەکان will be deleted"
+
+msgid "Delete private pages"
+msgstr "سڕینەوەی تایبەت پەڕەکان"
+
+msgid "Delete private posts"
+msgstr "سڕینەوەی تایبەت پۆستەکان"
+
+msgid "Delete published pages"
+msgstr "سڕینەوەی بڵاوکراوە پەڕەکان"
+
+msgid "Delete published posts"
+msgstr "سڕینەوەی بڵاوکراوە پۆستەکان"
+
+msgid "Delete the meta box in this"
+msgstr "سڕینەوەی بۆکسی مەتا in this"
+
+msgid "Delete the meta field in this block after copying"
+msgstr "سڕینەوەی فیلدی مەتا in this بلۆک after copying"
+
+msgid "Delete the meta field in this field after copying"
+msgstr "سڕینەوەی فیلدی مەتا in this فیلد after copying"
+
+msgid "Delete the selected condition"
+msgstr "سڕینەوەی مەرجی دیاریکراو"
+
+msgid "Delete the selected meta box"
+msgstr "سڕینەوەی بۆکسی مەتای دیاریکراو"
+
+msgid "Delete the selected meta field"
+msgstr "سڕینەوەی فیلدی مەتای دیاریکراو"
+
+msgid "Delete the selected meta option"
+msgstr "سڕینەوەی هەڵبژاردەی مەتای دیاریکراو"
+
+msgid "Delete this meta box"
+msgstr "سڕینەوەی ئەم بۆکسی مەتا"
+
+msgid "Delete this meta field"
+msgstr "سڕینەوەی ئەم فیلدی مەتا"
+
+msgid "Different name MUST be different from single name"
+msgstr "ناوی Different ناو MUST be different from single"
+
+msgid "Disabled"
+msgstr "ناچالاککرا"
+
+msgid "Displayed on the admin panel"
+msgstr "لە پانێڵی بەڕێوەبەرایەتی پیشان دەدرێت"
+
+msgid "Displayed on the sidebar of the admin panel"
+msgstr "لە لاتەنیشتی پانێڵی بەڕێوەبەرایەتی پیشان دەدرێت"
+
+msgid "Documentation"
+msgstr "بەڵگەنامەکان"
+
+msgid "Drag your component(s) here"
+msgstr "کۆمبلەکەت لێرە ڕابکێشە"
+
+msgid "Drag your loop component(s) here"
+msgstr "کۆمبلەکانی loop لێرە ڕابکێشە"
+
+msgid "Duplicate the selected meta box"
+msgstr "دووبارەکردنەوەی بۆکسی مەتای دیاریکراو"
+
+msgid "Duplicate the selected meta field"
+msgstr "دووبارەکردنەوەی فیلدی مەتای دیاریکراو"
+
+msgid "Duplicate this block"
+msgstr "دووبارەکردنەوەی ئەم بلۆک"
+
+msgid "Duplicate this meta box"
+msgstr "دووبارەکردنەوەی ئەم بۆکسی مەتا"
+
+msgid "Duplicate this meta field"
+msgstr "دووبارەکردنەوەی ئەم فیلدی مەتا"
+
+msgid "Edit"
+msgstr "دەستکاری"
+
+msgid "Edit Custom Post Type"
+msgstr "دەستکاری جۆری پۆستی تایبەت"
+
+msgid "Edit Taxonomy"
+msgstr "دەستکاری تاکسۆنۆمی"
+
+msgid "Edit WooCommerce product data"
+msgstr "دەستکاری داتای بەرهەمی WooCommerce"
+
+msgid "Edit a Taxonomy"
+msgstr "دەستکاری تاکسۆنۆمی"
+
+msgid "Edit others pages"
+msgstr "دەستکاری others پەڕەکان"
+
+msgid "Edit others posts"
+msgstr "دەستکاری others پۆستەکان"
+
+msgid "Edit pages"
+msgstr "دەستکاری پەڕەکان"
+
+msgid "Edit posts"
+msgstr "دەستکاری پۆستەکان"
+
+msgid "Edit private pages"
+msgstr "دەستکاری تایبەت پەڕەکان"
+
+msgid "Edit private posts"
+msgstr "دەستکاری تایبەت پۆستەکان"
+
+msgid "Edit published pages"
+msgstr "دەستکاری بڵاوکراوە پەڕەکان"
+
+msgid "Edit published posts"
+msgstr "دەستکاری بڵاوکراوە پۆستەکان"
+
+msgid "Element"
+msgstr "توخم"
+
+msgid "Elements per page"
+msgstr "توخمەکان per پەڕە"
+
+msgid "Elements per row"
+msgstr "توخمەکان per ڕیز"
+
+msgid "Elements to display"
+msgstr "توخمەکان بۆ display"
+
+msgid "Enable ACPT visual builder"
+msgstr "چالاککردنی ACPT بیناسازی بینراو"
+
+msgid "Enable the ACPT visual builder to manage your templates."
+msgstr "چالاککردنی ACPT بیناسازی بینراو to manage your داڕێژەکان."
+
+msgid ""
+"Enable the ACPT visual builder. This option allows you to use the integrated "
+"visual builder to create and manage templates for single CPTs, archive "
+"pages, taxonomy terms and relations."
+msgstr ""
+"چالاککردنی ACPT بیناسازی بینراو. This هەڵبژاردە allows you to use the "
+"integrated بیناسازی بینراو to create and manage داڕێژەکان for single CPTs, "
+"ئەرشیف پەڕەکان, تاکسۆنۆمی زاراوەکان and relations."
+
+msgid "Error during saving the template"
+msgstr "Error لە کاتی saving  داڕێژە"
+
+msgid "Error during the activation of the license."
+msgstr "Error لە کاتی  activation ی  مۆڵەت."
+
+msgid "Error fetching data"
+msgstr "هەڵە لە وەرگرتنی داتا"
+
+msgid "Ex. movie"
+msgstr "نموونە: فیلم"
+
+msgid "Ex. movies"
+msgstr "نموونە: فیلمەکان"
+
+msgid "Expiration date"
+msgstr "Expiration ڕێکەوت"
+
+msgid "Export HTML/CSS code"
+msgstr "هەناردەکردنی HTML/CSS code"
+
+msgid "Export code"
+msgstr "هەناردەکردنی code"
+
+msgid "Export custom post types"
+msgstr "هەناردەکردنی جۆرە پۆستە تایبەتەکان"
+
+msgid "Export data"
+msgstr "هەناردەکردنی داتا"
+
+msgid "Export settings"
+msgstr ""
+
+msgid "Export selected elements"
+msgstr "هەناردەکردنی توخمەکانی دیاریکراو"
+
+msgid "Export settings and meta fields for selected elements:"
+msgstr "هەناردەکردنی ڕێکخستنەکان and فیلدەکانی مەتا for selected توخمەکان:"
+
+msgid "Facebook group"
+msgstr "Facebook group"
+
+msgid "Featured image"
+msgstr "وێنەی سەرەکی"
+
+msgid "Field columns"
+msgstr "فیلد ستوونەکان"
+
+msgid "Field columns ([1-6] only for repeater field)"
+msgstr "فیلد ستوونەکان ([1-6] تەنها بۆ repeater فیلد)"
+
+msgid "Field label"
+msgstr "ناوی پیشاندانی فیلد"
+
+msgid "Field name"
+msgstr "ناوی فیلد"
+
+msgid "Field name cannot be blank"
+msgstr "ناوی فیلد نابێت بەتاڵ بێت"
+
+msgid "Field name max length is 255 characters"
+msgstr "زۆرترین درێژی ناوی فیلد 255 پیتە"
+
+msgid "Field required"
+msgstr "فیلد پێویست"
+
+msgid "Field slug"
+msgstr "سلەگی فیلد"
+
+msgid "Field slug (Ex. gallery or text_1)"
+msgstr "فیلد سلەگ (Ex. gallery یان text_1)"
+
+msgid ""
+"Field slug. Only alphanumeric (latin) characters allowed, without spaces"
+msgstr "سلەگی فیلد. تەنها پیت و ژمارەی لاتینی ڕێگەپێدراوە، بێ بۆشایی"
+
+msgid "Field width"
+msgstr "فیلد پانی"
+
+msgid "Field width in % ([1-100] default value: 100)"
+msgstr "فیلد پانی لە % ([1-100] بنەڕەت نرخ: 100)"
+
+msgid "Fields"
+msgstr "فیلدەکان"
+
+msgid "Fields count"
+msgstr "ژمارەی فیلدەکان"
+
+msgid "Filter by date"
+msgstr "پاڵاوتنی by ڕێکەوت"
+
+msgid "Filter by {{r}}"
+msgstr "پاڵاوتن بەپێی {{r}}"
+
+msgid "Filter {{r}} list"
+msgstr "پاڵاوتنی لیستی {{r}}"
+
+msgid "Filter in admin"
+msgstr "پاڵاوتن لە بەڕێوەبەرایەتی"
+
+msgid "First, create a post for this post type"
+msgstr "جۆری First, create a پۆست for this پۆست"
+
+msgid "First, you need to add a block in ACPT settings."
+msgstr "سەرەتا پێویستە بلۆکێک لە ڕێکخستنەکانی ACPT زیاد بکەیت."
+
+msgid "Format"
+msgstr "شێواز"
+
+msgid ""
+"Discover, manage and test every REST endpoint exposed by ACPT via live "
+"Swagger UI."
+msgstr ""
+
+msgid "Fullscreen mode"
+msgstr "دۆخی پڕشاشە"
+
+msgid "General"
+msgstr "گشتی"
+
+msgid "Generate"
+msgstr "Generate"
+
+msgid "Generated at"
+msgstr "Generated at"
+
+msgid "Generating code..."
+msgstr "Generating code..."
+
+msgid "Go to"
+msgstr "بڕۆ بۆ"
+
+msgid "Google Maps API key"
+msgstr "Google Maps API کلیل"
+
+msgid "GraphQL plural name"
+msgstr "ناوی GraphQL plural"
+
+msgid "GraphQL single name"
+msgstr "ناوی GraphQL single"
+
+msgid "Has archive"
+msgstr "Has ئەرشیف"
+
+msgid "Headline location"
+msgstr "Headline location"
+
+msgid "Height"
+msgstr "به‌رزی"
+
+msgid "Hide all modals, deselect the current element"
+msgstr "هەموو مۆداڵەکان بشارەوە و توخمی ئێستا لە دیاریکردن دەر بهێنە"
+
+msgid "Hide in external products"
+msgstr "شاردنەوە لە بەرهەمە دەرەکییەکان"
+
+msgid "Hide in virtual products"
+msgstr "شاردنەوە لە بەرهەمە مەجازییەکان"
+
+msgid "Hide/show this meta box"
+msgstr "شاردنەوە/show ئەم بۆکسی مەتا"
+
+msgid "Hide/show this meta field"
+msgstr "شاردنەوە/show ئەم فیلدی مەتا"
+
+msgid "Hide/show this block"
+msgstr "شاردنەوە/show ئەم بلۆک"
+
+msgid "Hide/show this page"
+msgstr "شاردنەوە/show ئەم پەڕە"
+
+msgid "Hierarchical"
+msgstr "Hierarchical"
+
+msgid "How to display the related post(s) selector?"
+msgstr "هەڵبژێری پۆستە پەیوەندیدارەکان چۆن پیشان بدرێت؟"
+
+msgid "Icon"
+msgstr "وێنۆچکە"
+
+msgid "Import an ACPT backup here."
+msgstr "هاوردەکردنی an ACPT backup here."
+
+msgid "Import custom post types"
+msgstr "هاوردەکردنی جۆرە پۆستە تایبەتەکان"
+
+msgid "Import data"
+msgstr "هاوردەکردنی داتا"
+
+msgid "Import settings"
+msgstr ""
+
+msgid "Insert"
+msgstr "تێخستن"
+
+msgid "Is Public"
+msgstr "گشتییە"
+
+msgid "Key"
+msgstr "كلیل"
+
+msgid "Label and value are linked"
+msgstr "ناوی پیشاندان و نرخ پەیوەستن"
+
+msgid "Label and value are unlinked"
+msgstr "ناوی پیشاندان و نرخ پەیوەست نین"
+
+msgid "Language"
+msgstr "زمان"
+
+msgid "Leading term:"
+msgstr "Leading term:"
+
+msgid "Lifetime"
+msgstr "Lifetime"
+
+msgid "Link target"
+msgstr "Link target"
+
+msgid "List {{r}}"
+msgstr "لیستی {{r}}"
+
+msgid ""
+"Makes this post type available for selection in navigation menus. Default is "
+"value of $public."
+msgstr ""
+"Makes ئەم جۆری پۆست بەردەست بۆ هەڵبژاردن لە ڕێنیشاندەر menus. بنەڕەت ە نرخ ی "
+"$public."
+
+msgid ""
+"Makes this post type available via the admin bar. Default is value of "
+"$show_in_menu."
+msgstr ""
+"Makes ئەم جۆری پۆست بەردەست via  admin bar. بنەڕەت ە نرخ ی $show_in_menu."
+
+msgid ""
+"Makes this taxonomy available for selection in navigation menus. If not set, "
+"the default is inherited from $public (default true)."
+msgstr ""
+"Makes ئەم تاکسۆنۆمی بەردەست بۆ هەڵبژاردن لە ڕێنیشاندەر menus. ئەگەر نە set,  "
+"بنەڕەت ە inherited لە $public (بنەڕەت true)."
+
+msgid "Manage"
+msgstr "بەڕێوەبردن"
+
+msgid "Manage User Meta"
+msgstr "بەڕێوەبردنی بەکارهێنەر Meta"
+
+msgid "Manage categories"
+msgstr "بەڕێوەبردنی categories"
+
+msgid "Manage content"
+msgstr "بەڕێوەبردنی ناوەڕۆک"
+
+msgid "Manage fields"
+msgstr "بەڕێوەبردنی فیلدەکان"
+
+msgid "Manage links"
+msgstr "بەڕێوەبردنی links"
+
+msgid "Manage options"
+msgstr "بەڕێوەبردنی هەڵبژاردەکان"
+
+msgid "Manage pages"
+msgstr "بەڕێوەبردنی پەڕەکان"
+
+msgid "Manage your license"
+msgstr "بەڕێوەبردنی مۆڵەتەکەت"
+
+msgid "Manage your registered license key"
+msgstr "بەڕێوەبردنی registered مۆڵەت keyەکەت"
+
+msgid "Max value (used only by numeric and textual fields)"
+msgstr "Max نرخ (بەکارهێنراو تەنها لەلایەن numeric و textual فیلدەکان)"
+
+msgid "Maximum blocks allowed"
+msgstr "زۆرترین بلۆکی ڕێگەپێدراو"
+
+msgid "Menu icon"
+msgstr "مێنیو ئایکۆن"
+
+msgid "Menu position"
+msgstr "شوێنی مێنیو"
+
+msgid "Menu slug"
+msgstr "سلەگی مێنیو"
+
+msgid "Menu title"
+msgstr "مێنیو ناونیشان"
+
+msgid "Meta box"
+msgstr "بۆکسی مەتا"
+
+msgid "Meta box was successfully copied"
+msgstr "بۆکسی مەتا بە سەرکەوتوویی کۆپی کرا"
+
+msgid "Meta boxes"
+msgstr "بۆکسەکانی مەتا"
+
+msgid "Meta field"
+msgstr "فیلدی مەتا"
+
+msgid "Meta field was successfully copied"
+msgstr "فیلدی مەتا بە سەرکەوتوویی کۆپی کرا"
+
+msgid "Meta fields"
+msgstr "فیلدەکانی مەتا"
+
+msgid "Meta option"
+msgstr "Meta هەڵبژاردە"
+
+msgid "Min value (used only by numeric and textual fields)"
+msgstr "Min نرخ (بەکارهێنراو تەنها لەلایەن numeric و textual فیلدەکان)"
+
+msgid "Minimum blocks allowed"
+msgstr "کەمترین بلۆکی ڕێگەپێدراو"
+
+msgid "Moderate comments"
+msgstr "Moderate comments"
+
+msgid "Most used {{r}}"
+msgstr "زۆرترین {{r}}ی بەکارهاتوو"
+
+msgid "My account"
+msgstr "My account"
+
+msgid "My license"
+msgstr "My مۆڵەت"
+
+msgid "Name"
+msgstr "ناو"
+
+msgid "Native"
+msgstr "خۆماڵی"
+
+msgid "Navigate the input fields in the selected meta field"
+msgstr "Navigate  input فیلدەکان لە  دیاریکراو فیلدی مەتا"
+
+msgid "Navigate the input fields in the selected meta option"
+msgstr "Navigate  input فیلدەکان لە  دیاریکراو meta هەڵبژاردە"
+
+msgid "Navigate the tabs of selected field (go to next tab)"
+msgstr "Navigate  تابەکان ی دیاریکراو فیلد (go بۆ next تاب)"
+
+msgid "Navigate the tabs of selected field (go to previous tab)"
+msgstr "Navigate  تابەکان ی دیاریکراو فیلد (go بۆ previous تاب)"
+
+msgid "Navigate to next element (box, field, option or condition)"
+msgstr "Navigate بۆ next توخم (بۆکس, فیلد, هەڵبژاردە یان مەرج)"
+
+msgid "Navigate to previous element (box, field, option or condition)"
+msgstr "Navigate بۆ previous توخم (بۆکس, فیلد, هەڵبژاردە یان مەرج)"
+
+msgid "Navigation"
+msgstr "ڕێدۆزی"
+
+msgid "Navigation list {{r}}"
+msgstr "لیستی ڕێنیشاندەری {{r}}"
+
+msgid "New"
+msgstr "نوێ"
+
+msgid "New {{r}}"
+msgstr "{{r}}ی نوێ"
+
+msgid "Next Step"
+msgstr "Next Step"
+
+msgid "No"
+msgstr "نەخێر"
+
+msgid "No API keys found."
+msgstr "هیچ API keys نەدۆزرایەوە."
+
+msgid ""
+"No blocks already created. Create the first one now by clicking the button "
+"\"Add block\"!"
+msgstr ""
+"هێشتا هیچ بلۆکەکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add بلۆک\" دروست بکە!"
+
+msgid ""
+"No blocks saved, generate the first one clicking on \"Add block\" button"
+msgstr ""
+"هیچ بلۆکەکان پاشەکەوت نەکراوە، یەکەمین دانە بە کرتەکردن لە دوگمەی \"Add "
+"بلۆک\" دروست بکە"
+
+msgid ""
+"No children already created. Create the first one now by clicking the button "
+"\"Add child page\"!"
+msgstr ""
+"هێشتا هیچ منداڵەکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add منداڵ پەڕە\" دروست بکە!"
+
+msgid "No choice"
+msgstr "هیچ هەڵبژاردەیەک نییە"
+
+msgid "No conditions are present."
+msgstr "هیچ مەرجەکان ئامادە نییە."
+
+msgid ""
+"No conditions are present, click on \"Add condition\" button to add the "
+"first one."
+msgstr "No مەرجەکان ن ئامادە, کرتە لەسەر \"Add مەرج\" دوگمە بۆ add  first one."
+
+msgid ""
+"No content yet. Drag components in this canvas and start building something "
+"awesome!"
+msgstr ""
+"هێشتا هیچ ناوەڕۆکێک نییە. کۆمبلەکان بۆ ئەم کەنڤاسە ڕابکێشە و دەست بە "
+"دروستکردنی شتێکی ناوازە بکە!"
+
+msgid "No custom post type found."
+msgstr "هیچ جۆری پۆستی تایبەت نەدۆزرایەوە."
+
+msgid "No display"
+msgstr "No display"
+
+msgid ""
+"No elements saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"هیچ توخمەکان پاشەکەوت نەکراوە، یەکەمین دانە بە کرتەکردن لە دوگمەی \"Add "
+"توخم\" دروست بکە"
+
+msgid ""
+"No field box already created. Create the first one now by clicking the "
+"button \"Add field box\"!"
+msgstr ""
+"هێشتا هیچ بۆکسی فیلد دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add بۆکسی فیلد\" دروست بکە!"
+
+msgid ""
+"No fields saved, generate the first one clicking on \"Add element\" button"
+msgstr ""
+"هیچ فیلدەکان پاشەکەوت نەکراوە، یەکەمین دانە بە کرتەکردن لە دوگمەی \"Add "
+"توخم\" دروست بکە"
+
+msgid ""
+"No fields already created. Create the first one now by clicking the button "
+"\"Add field\"!"
+msgstr ""
+"هێشتا هیچ فیلدەکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add فیلد\" دروست بکە!"
+
+msgid ""
+"No meta box already created. Create the first one now by clicking the button "
+"\"Add meta box\"!"
+msgstr ""
+"هێشتا هیچ بۆکسی مەتا دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add بۆکسی مەتا\" دروست بکە!"
+
+msgid "No option pages found."
+msgstr "هیچ پەڕەکانی هەڵبژاردەکان نەدۆزرایەوە."
+
+msgid ""
+"No options already created. Create the first one now by clicking the button "
+"\"Add option\"!"
+msgstr ""
+"هێشتا هیچ هەڵبژاردەکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە "
+"دوگمەی \"Add هەڵبژاردە\" دروست بکە!"
+
+msgid "No product data found."
+msgstr "هیچ داتای بەرهەم نەدۆزرایەوە."
+
+msgid "No records message"
+msgstr "No records پەیام"
+
+msgid "No taxonomies found."
+msgstr "هیچ تاکسۆنۆمییەکان نەدۆزرایەوە."
+
+msgid "No templates found."
+msgstr "هیچ داڕێژەکان نەدۆزرایەوە."
+
+msgid "No {{r}}"
+msgstr "هیچ {{r}} نییە"
+
+msgid "No {{r}} found"
+msgstr "هیچ {{r}} نەدۆزرایەوە"
+
+msgid "Not allowed"
+msgstr "ڕێگەپێنەدراوە"
+
+msgid "On the left"
+msgstr "On  left"
+
+msgid "On the right"
+msgstr "On  right"
+
+msgid "On the top"
+msgstr "On  top"
+
+msgid "Opens in a new window or tab "
+msgstr "دەکرێتەوە لە a نوێ window یان تاب"
+
+msgid "Opens in the full body of the window"
+msgstr "دەکرێتەوە لە  full body ی  window"
+
+msgid "Opens in the parent frame"
+msgstr "دەکرێتەوە لە  parent چوارچێوە"
+
+msgid "Opens in the same frame as it was clicked"
+msgstr "دەکرێتەوە لە  هەمان چوارچێوە وەک it was کرتەکراو"
+
+msgid "Option list"
+msgstr "لیستی هەڵبژاردە"
+
+msgid "Option page meta successfully saved"
+msgstr "پەڕەی هەڵبژاردەکان meta بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Single option page"
+msgstr "Single پەڕەی هەڵبژاردەکان"
+
+msgid "Option page"
+msgstr "پەڕەی هەڵبژاردەکان"
+
+msgid "Option pages"
+msgstr "پەڕەکانی هەڵبژاردەکان"
+
+msgid "Option pages meta"
+msgstr "پەڕەکانی هەڵبژاردەکان meta"
+
+msgid "Order by"
+msgstr "ڕیزکردن بەپێی"
+
+msgid "Page description (will be displayed after the title)"
+msgstr "پەڕە وەسف (دەبێت بێت displayed دوای  ناونیشان)"
+
+msgid "Page not found"
+msgstr "پەڕە نەدۆزرایەوە"
+
+msgid "Page title"
+msgstr "سه‌ردێڕی پــــــــــــــــه‌ڕه‌"
+
+msgid "Parent"
+msgstr "باوان"
+
+msgid "Parent item"
+msgstr "بڕگەی باوان"
+
+msgid "Parent WP admin menu"
+msgstr ""
+
+msgid "Parent {{r}}"
+msgstr "{{r}}ی باوان"
+
+msgid ""
+"Paste here your Google Maps API key. Needed to use the Address meta field."
+msgstr ""
+"لکاندنی here your Google Maps API key. Needed to use the Address فیلدی مەتا."
+
+msgid "Pattern value (used only by numeric and textual fields)"
+msgstr "Pattern نرخ (بەکارهێنراو تەنها لەلایەن numeric و textual فیلدەکان)"
+
+msgid "Pattern value (used only by textual fields)"
+msgstr "Pattern نرخ (بەکارهێنراو تەنها لەلایەن textual فیلدەکان)"
+
+msgid "Permalink text"
+msgstr "دەقی بەستەری هەمیشەیی"
+
+msgid "Plugin version"
+msgstr "Plugin version"
+
+msgid "Plural"
+msgstr "Plural"
+
+msgid "Plural label"
+msgstr "ناوی پیشاندانی Plural"
+
+msgid "Popular {{r}}"
+msgstr "{{r}}ی باو"
+
+msgid "Possible values: customPostType, taxonomy."
+msgstr "Possible values: customPostType, تاکسۆنۆمی."
+
+msgid "Post count"
+msgstr "ژمارەی پۆست"
+
+msgid "Post name"
+msgstr "ناوی پۆست"
+
+msgid "Preview"
+msgstr "پێشبینین"
+
+msgid "Previous Step"
+msgstr "Previous Step"
+
+msgid "Product data"
+msgstr "داتای بەرهەم"
+
+msgid "Product data successfully saved"
+msgstr "داتای بەرهەم بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Publicly queryable"
+msgstr "بە گشتی دەتوانرێت بپرسێت"
+
+msgid "Publish pages"
+msgstr "Publish پەڕەکان"
+
+msgid "Publish posts"
+msgstr "Publish پۆستەکان"
+
+msgid "Published posts count"
+msgstr "ژمارەی پۆستە بڵاوکراوەکان"
+
+msgid "Published posts count associated with the taxonomy"
+msgstr "ژمارەی پۆستە بڵاوکراوە پەیوەستکراوەکان بە تاکسۆنۆمی"
+
+msgid "Query var"
+msgstr "Query var"
+
+msgid "Quick edit"
+msgstr "Quick edit"
+
+msgid "Quick navigation"
+msgstr "Quick ڕێنیشاندەر"
+
+msgid "REST API Controller class name. Default is 'WP_REST_Terms_Controller'."
+msgstr "REST API Controller class ناو. بنەڕەت ە 'WP_REST_Terms_Controller'."
+
+msgid "REST API base slug"
+msgstr "سلەگی REST API base"
+
+msgid "REST Controller class"
+msgstr "REST Controller class"
+
+msgid "Radio/checkbox"
+msgstr "Radio/checkbox"
+
+msgid "Read "
+msgstr "خوێندنەوە "
+
+msgid "Read private pages"
+msgstr "Read تایبەت پەڕەکان"
+
+msgid "Read private posts"
+msgstr "Read تایبەت پۆستەکان"
+
+msgid "Records per page"
+msgstr "Records per پەڕە"
+
+msgid "Records per page in ACPT dashboards"
+msgstr "Records per پەڕە لە ACPT dashboards"
+
+msgid "Redo"
+msgstr "كردنه‌وه"
+
+msgid "Regenerate"
+msgstr "دووبارە دروستکردنەوە"
+
+msgid "Register new Custom Post Type"
+msgstr "تۆمارکردنی جۆری پۆستی تایبەتی نوێ"
+
+msgid "Register the first one"
+msgstr "تۆمارکردنی first one"
+
+msgid "Registered Custom Post Types"
+msgstr "جۆرە پۆستە تایبەتە تۆمارکراوەکان"
+
+msgid "Registered Taxonomies"
+msgstr "تاکسۆنۆمییە تۆمارکراوەکان"
+
+msgid "Related template"
+msgstr "Related داڕێژە"
+
+msgid "Remove featured image"
+msgstr "لابردنی وێنەی سەرەکی"
+
+msgid "Return back to list"
+msgstr "لیستی Return back to"
+
+msgid "Rewrite"
+msgstr "Rewrite"
+
+msgid "Save"
+msgstr "پاشه‌كه‌وتكردن"
+
+msgid "Save action"
+msgstr "کرداری پاشەکەوتکردن"
+
+msgid "Search"
+msgstr "گەڕان"
+
+msgid "Search box"
+msgstr "بۆکسی گەڕان"
+
+msgid "Search {{r}}"
+msgstr "گەڕان لە {{r}}"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Select"
+msgstr "دیاریکردن"
+
+msgid "Select field box from list"
+msgstr "بۆکسی فیلد لە لیستەکە دیاری بکە"
+
+msgid "Select the inversed field on target"
+msgstr "دیاریکردنی inversed فیلد on target"
+
+msgid "Select field from list"
+msgstr "فیلد لە لیستەکە دیاری بکە"
+
+msgid "Select field type from list"
+msgstr "جۆری فیلد لە لیستەکە دیاری بکە"
+
+msgid "Select relation type from list"
+msgstr "جۆری پەیوەندی لە لیستەکە دیاری بکە"
+
+msgid "Select the element from the list:"
+msgstr "دیاریکردنی توخم from the لیست:"
+
+msgid "Select the headline location (default: on the left)"
+msgstr "دیاریکردنی headline location (بنەڕەت: on the left)"
+
+msgid "Select the template type:"
+msgstr "دیاریکردنی داڕێژە type:"
+
+msgid "Separate {{r}} with commas"
+msgstr "{{r}} بە کۆما جیا بکەرەوە"
+
+msgid "Set featured image"
+msgstr "دانانی وێنەی سەرەکی"
+
+msgid "Set the language of the plug-in"
+msgstr "دانانی language of the پڵاگین"
+
+msgid ""
+"Sets the query var key for this taxonomy. Default  key. If false, a taxonomy "
+"cannot be loaded at ?{query_var}={term_slug}. If a string, the query ?"
+"{query_var}={term_slug} will be valid."
+msgstr ""
+"Sets  پرسیار var کلیل بۆ ئەم تاکسۆنۆمی. بنەڕەت  کلیل. ئەگەر false, a "
+"تاکسۆنۆمی cannot بێت loaded at ?{پرسیار_var}={term_سلەگ}. ئەگەر a string,  "
+"پرسیار ?{پرسیار_var}={term_سلەگ} دەبێت بێت valid."
+
+msgid ""
+"Sets the query_var key for this post type. Defaults to  key. If false, a "
+"post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+"string, the query {post_slug} will be valid."
+msgstr ""
+"Sets  پرسیار_var کلیل بۆ ئەم جۆری پۆست. Defaults بۆ  کلیل. ئەگەر false, a "
+"جۆری پۆست cannot بێت loaded at ?{پرسیار_var}={پۆست_سلەگ}. ئەگەر specified "
+"وەک a string,  پرسیار {پۆست_سلەگ} دەبێت بێت valid."
+
+msgid "Settings"
+msgstr "ڕێکخستنەکان"
+
+msgid "Settings page"
+msgstr "ڕێکخستنەکان پەڕە"
+
+msgid "Show Tagcloud"
+msgstr "پیشاندانی Tagcloud"
+
+msgid "Show admin column"
+msgstr "پیشاندانی ستوونی بەڕێوەبەرایەتی"
+
+msgid "Show in GraphQL"
+msgstr "پیشاندان لە GraphQL"
+
+msgid "Show in REST API"
+msgstr "پیشاندان لە REST API"
+
+msgid "Show in UI"
+msgstr "پیشاندان لە UI"
+
+msgid "Show in Wordpress admin post lists page"
+msgstr "پیشاندان لە پەڕەی لیستی پۆستەکانی بەڕێوەبەرایەتی WordPress"
+
+msgid "Show in admin bar"
+msgstr "پیشاندان لە admin bar"
+
+msgid "Show in external products"
+msgstr "پیشاندان لە بەرهەمە دەرەکییەکان"
+
+msgid "Show in grouped products"
+msgstr "پیشاندان لە بەرهەمە گرووپکراوەکان"
+
+msgid "Show in menu"
+msgstr "پیشاندان لە مێنیو"
+
+msgid "Show in nav menus"
+msgstr "پیشاندان لە nav menus"
+
+msgid "Show in quick edit"
+msgstr "پیشاندان لە quick edit"
+
+msgid "Show in simple products"
+msgstr "پیشاندان لە بەرهەمە سادەکان"
+
+msgid "Show in variable products"
+msgstr "پیشاندان لە بەرهەمە گۆڕاوەکان"
+
+msgid "Show on UI"
+msgstr "پیشاندان لەسەر UI"
+
+msgid "Show pagination"
+msgstr "پیشاندان pagination"
+
+msgid "Show the custom post type in WPGraphQL"
+msgstr "پیشاندان  جۆری پۆستی تایبەت لە WPGraphQL"
+
+msgid "Show the custom post type in WPGraphQL."
+msgstr "پیشاندان  جۆری پۆستی تایبەت لە WPGraphQL."
+
+msgid "Show the product data on the front store page."
+msgstr "پیشاندان  داتای بەرهەم لەسەر  front store پەڕە."
+
+msgid "Show this legend modal"
+msgstr "پیشاندان ئەم legend modal"
+
+msgid "Show/hide all fields"
+msgstr "پیشاندان/hide هەموو فیلدەکان"
+
+msgid "Sing. label"
+msgstr "ناوی پیشاندانی Sing."
+
+msgid "Single name MUST be different from plural name"
+msgstr "ناوی Single ناو MUST be different from plural"
+
+msgid "Single template"
+msgstr "Single داڕێژە"
+
+msgid "Singular"
+msgstr "Singular"
+
+msgid "Singular label"
+msgstr "ناوی پیشاندانی Singular"
+
+msgid "Slug"
+msgstr "سلەگ"
+
+msgid "Sort"
+msgstr "Sort"
+
+msgid "Sort by"
+msgstr "Sort لەلایەن"
+
+msgid "Step value (used only by numeric fields)"
+msgstr "Step نرخ (بەکارهێنراو تەنها لەلایەن numeric فیلدەکان)"
+
+msgid "Successfully post sync."
+msgstr "هاوکاتکردنی پۆست بە سەرکەوتوویی ئەنجام درا."
+
+msgid "Support"
+msgstr "پاڵپشتی"
+
+msgid "Supports"
+msgstr "Supports"
+
+msgid "Surrounding tag"
+msgstr "Surrounding tag"
+
+msgid "Sync with post types"
+msgstr "هاوکاتکردن لەگەڵ جۆرە پۆستەکان"
+
+msgid "Taxonomies"
+msgstr "تاکسۆنۆمییەکان"
+
+msgid "Taxonomies association"
+msgstr "تاکسۆنۆمییەکان association"
+
+msgid "Taxonomy"
+msgstr "پۆلێنکردن"
+
+msgid "Taxonomy data"
+msgstr "تاکسۆنۆمی داتا"
+
+msgid "Taxonomy meta successfully saved"
+msgstr "تاکسۆنۆمی meta بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Taxonomy settings"
+msgstr "ڕێکخستنەکانی تاکسۆنۆمی"
+
+msgid "Taxonomy slug to use instead of default."
+msgstr "تاکسۆنۆمی سلەگ بۆ use instead ی بنەڕەت."
+
+msgid ""
+"Taxonomy slug. The post name/slug. Used for various queries for taxonomy "
+"content."
+msgstr ""
+"تاکسۆنۆمی سلەگ.  پۆست ناو/slug. Used بۆ various queries بۆ تاکسۆنۆمی content."
+
+msgid "Taxonomy successfully deleted"
+msgstr "تاکسۆنۆمی بە سەرکەوتوویی سڕایەوە."
+
+msgid "Taxonomy was associated to selected Custom post types"
+msgstr "تاکسۆنۆمی was associated بۆ دیاریکراو جۆرە پۆستە تایبەتەکان"
+
+msgid "Template"
+msgstr "داڕێژە"
+
+msgid "Template list"
+msgstr "لیستی داڕێژە"
+
+msgid "Template saved successfully"
+msgstr "داڕێژە بە سەرکەوتوویی پاشەکەوت کرا"
+
+msgid "Template was successfully deleted."
+msgstr "داڕێژە was بە سەرکەوتوویی سڕایەوە."
+
+msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Text دوای. HTML ە allowed (ex. &lt;small&gt;)"
+
+msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "Text پێش. HTML ە allowed (ex. &lt;small&gt;)"
+
+msgid "The API key was successfully deleted"
+msgstr "The API key was بە سەرکەوتوویی سڕایەوە."
+
+msgid "The archive template for this custom post type"
+msgstr "جۆری The ئەرشیف داڕێژە for this custom پۆست"
+
+msgid "The browser will refresh after 5 seconds."
+msgstr "وێبگەڕەکە دوای 5 چرکە تازە دەبێتەوە."
+
+msgid "The custom post type or taxonomy element."
+msgstr " جۆری پۆستی تایبەت یان تاکسۆنۆمی توخم."
+
+msgid "The default value for this field"
+msgstr " بنەڕەت نرخ بۆ ئەم فیلد"
+
+msgid "The description of this field (showed only on admin panel)"
+msgstr " وەسف ی ئەم فیلد (showed تەنها لەسەر admin panel)"
+
+msgid "The field label, non latin characters are allowed"
+msgstr " فیلد ناوی پیشاندان, non latin characters ن allowed"
+
+msgid "The icon displayed on menu (only for parent pages)"
+msgstr " ئایکۆن displayed لەسەر مێنیو (تەنها بۆ parent پەڕەکان)"
+
+msgid ""
+"The inversed field is the target post type field which is related with this "
+"one in a bidirectional relation"
+msgstr ""
+" inversed فیلد ە  target جۆری پۆست فیلد which ە related لەگەڵ ئەم one لە a "
+"bidirectional relation"
+
+msgid ""
+"The limit on how many blocks are allowed ([1-100] only for flexible field)"
+msgstr ""
+" limit لەسەر how many بلۆکەکان ن allowed ([1-100] تەنها بۆ flexible فیلد)"
+
+msgid ""
+"The limit on how many blocks are required ([1-100] only for flexible field)"
+msgstr ""
+" limit لەسەر how many بلۆکەکان ن پێویست ([1-100] تەنها بۆ flexible فیلد)"
+
+msgid "The maximum value (used only by numeric and textual fields)"
+msgstr " زۆرترین نرخ (بەکارهێنراو تەنها لەلایەن numeric و textual فیلدەکان)"
+
+msgid "The menu title (displayed only in the admin menu)"
+msgstr " مێنیو ناونیشان (displayed تەنها لە  admin مێنیو)"
+
+msgid "The minimum value (used only by numeric and textual fields)"
+msgstr " کەمترین نرخ (بەکارهێنراو تەنها لەلایەن numeric و textual فیلدەکان)"
+
+msgid "The page slug (used to generate the page URL). Must be unique"
+msgstr " پەڕە سلەگ (بەکارهێنراو بۆ generate  پەڕە URL). Must بێت unique"
+
+msgid "The page title"
+msgstr " پەڕە ناونیشان"
+
+msgid "The parent element slug"
+msgstr "سلەگی The باوان توخم"
+
+msgid ""
+"The position in the menu order the post type should appear. To work, "
+"$show_in_menu must be true. Default null (at the bottom)."
+msgstr ""
+" شوێن لە  مێنیو order  جۆری پۆست دەبێت appear. To کارکردن, $show_in_menu "
+"must بێت true. بنەڕەت null (at  bottom)."
+
+msgid "The post name/slug. Used for various queries for taxonomy content."
+msgstr " پۆست ناو/slug. Used بۆ various queries بۆ تاکسۆنۆمی content."
+
+msgid "The post name/slug. Used for various queries."
+msgstr " پۆست ناو/slug. Used بۆ various queries."
+
+msgid "The product data name."
+msgstr " داتای بەرهەم ناو."
+
+msgid "The requested page was not found, was deleted or was moved!"
+msgstr " requested پەڕە was نە دۆزرایەوە, was deleted یان was moved!"
+
+msgid "The single template for taxonomy term"
+msgstr " single داڕێژە بۆ تاکسۆنۆمی term"
+
+msgid "The single template for this custom post type"
+msgstr "جۆری The single داڕێژە for this custom پۆست"
+
+msgid ""
+"The string to use to build the read, edit, and delete capabilities. May be "
+"passed as an array to allow for alternative plurals when using this argument "
+"as a base to construct the capabilities, e.g. array('story', 'stories'). "
+"Default 'post'."
+msgstr ""
+" string بۆ use بۆ build  read, edit, و delete تواناکان. May بێت passed وەک "
+"an array بۆ allow بۆ alternative plurals کاتێک using ئەم argument وەک a base "
+"بۆ construct  تواناکان, e.g. array('story', 'stories'). بنەڕەت 'پۆست'."
+
+msgid ""
+"The template type. Possible values: archive, single, related, metaField."
+msgstr " داڕێژە type. Possible values: ئەرشیف, single, related, metaField."
+
+msgid ""
+"The template used to display this custom post type when it is releated to "
+"another one. If no template is set, it will be displayed just the title of "
+"the post."
+msgstr ""
+" داڕێژە بەکارهێنراو بۆ display ئەم جۆری پۆستی تایبەت کاتێک it ە releated بۆ "
+"another one. ئەگەر no داڕێژە ە set, it دەبێت بێت displayed just  ناونیشان ی  "
+"پۆست."
+
+msgid "The visual builder can be used with a minimum resolution of 960 px wide"
+msgstr ""
+" visual builder دەتوانێت بێت بەکارهێنراو لەگەڵ a کەمترین resolution ی 960 px "
+"wide"
+
+msgid "The visual builder is disabled. Go to Settings page and enable it."
+msgstr " visual builder ە ناچالاک. Go بۆ ڕێکخستنەکان پەڕە و enable it."
+
+msgid "This field is mandatory"
+msgstr "ئەم فیلدە پێویستە"
+
+msgid ""
+"This is the only time that the secret access key can be viewed or copied. "
+"You cannot recover it later. However, you can delete and create or "
+"regenerate new API key at any time."
+msgstr ""
+"ئەمە ە  تەنها کات that  secret access کلیل دەتوانێت بێت viewed یان copied. "
+"You cannot recover it later. However, you دەتوانێت delete و create یان "
+"regenerate نوێ API کلیل at any کات."
+
+msgid "This number controls the position of this page in the admin menu"
+msgstr "ئەمە number کۆنترۆڵەکان  شوێن ی ئەم پەڕە لە  admin مێنیو"
+
+msgid "This text will appear after input"
+msgstr "ئەمە text دەبێت appear دوای input"
+
+msgid "This text will appear before input"
+msgstr "ئەمە text دەبێت appear پێش input"
+
+msgid ""
+"Restore settings and meta fields from a previously exported .acpt file. "
+"Maximum file size is 2 MB."
+msgstr ""
+
+msgid "To change the base url of REST API route. Default is"
+msgstr "To change  base url ی REST API route. بنەڕەت ە"
+
+msgid "Toggle guides"
+msgstr "ڕێنماییەکان بگۆڕە"
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using  as "
+"slug. To prevent rewrite, set to false. To specify rewrite rules, an array "
+"can be passed with any of these keys:"
+msgstr ""
+"Triggers  handling ی rewrites بۆ ئەم تاکسۆنۆمی. بنەڕەت true, using  وەک "
+"سلەگ. To prevent نووسینەوە, set بۆ false. To specify نووسینەوە یاساکان, an "
+"array دەتوانێت بێت passed لەگەڵ any ی these keys:"
+
+msgid "Type"
+msgstr "جۆر"
+
+msgid "Type here your ACPT email account. Ex: mauro@acpt.io"
+msgstr "هەژماری ئیمەیڵی ACPTت لێرە بنووسە. نموونە: mauro@acpt.io"
+
+msgid "Type here your license. Ex: 123e4567-e89b-12d3-a456-426614174000"
+msgstr "مۆڵەتەکەت لێرە بنووسە. نموونە: 123e4567-e89b-12d3-a456-426614174000"
+
+msgid "Uncheck `required` in the selected meta field"
+msgstr "`required` لە فیلدی مەتای دیاریکراو ناچالاک بکە"
+
+msgid "Uncheck `show in archive` in the selected meta field"
+msgstr "`show in archive` لە فیلدی مەتای دیاریکراو ناچالاک بکە"
+
+msgid "Undo"
+msgstr "نه‌كردن"
+
+msgid "Unfiltered html"
+msgstr "HTMLی بێ پاڵاوتن"
+
+msgid "Update {{r}}"
+msgstr "{{r}} بەڕۆژ بکەرەوە"
+
+msgid "Upgrade"
+msgstr "Upgrade"
+
+msgid "Upload"
+msgstr "بارکردن"
+
+msgid "Upload file"
+msgstr "بارکردنی فایل"
+
+msgid "Upload files"
+msgstr "بارکردنی فایلەکان"
+
+msgid "Upload your file"
+msgstr "بارکردنی فایلەکەت"
+
+msgid "Use featured image"
+msgstr "بەکارهێنانی وێنەی سەرەکی"
+
+msgid ""
+"Export your settings and meta field definitions into a compressed .acpt JSON "
+"archive for backup or migration."
+msgstr ""
+
+msgid "Used for the post type admin menu item"
+msgstr "Used بۆ  جۆری پۆست admin مێنیو item"
+
+msgid "Used for the taxonomy admin menu item"
+msgstr "Used بۆ  تاکسۆنۆمی admin مێنیو item"
+
+msgid "Used when a singular label is needed"
+msgstr "کاتێک ناوی پیشاندانی تاک پێویستە بەکار دەهێنرێت"
+
+msgid "Single user"
+msgstr "Single بەکارهێنەر"
+
+msgid "User"
+msgstr "بەکارهێنەر"
+
+msgid "Users"
+msgstr "به‌كارهێنه‌ران"
+
+msgid "User meta"
+msgstr "بەکارهێنەر meta"
+
+msgid "User meta successfully saved"
+msgstr "بەکارهێنەر meta بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "View"
+msgstr "بینین"
+
+msgid "View WooCommerce product data"
+msgstr "بینینی داتای بەرهەمی WooCommerce"
+
+msgid "Visibility of product data"
+msgstr "Visibility ی داتای بەرهەم"
+
+msgid ""
+"WARNING: This action will delete all posts and metadata for this post type. "
+"The action is irreversible."
+msgstr ""
+"ئاگاداری: This action will delete all پۆستەکان and مەتاداتا for this جۆری "
+"پۆست. The action is irreversible."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"block. The action is irreversible."
+msgstr ""
+"ئاگاداری: This action will delete all the پۆست مەتاداتا related with this "
+"بلۆک. The action is irreversible."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"box. The action is irreversible."
+msgstr ""
+"ئاگاداری: This action will delete all the پۆست مەتاداتا related with this "
+"box. The action is irreversible."
+
+msgid "When BB Theme builder is active, the visual builder is disabled."
+msgstr "When BB Theme builder ە active,  visual builder ە ناچالاک."
+
+msgid "When Oxygen Builder is active, the visual builder is disabled."
+msgstr "When Oxygen Builder ە active,  visual builder ە ناچالاک."
+
+msgid "Where do you want to copy this meta box?"
+msgstr "Where do you want بۆ copy ئەم بۆکسی مەتا?"
+
+msgid "Where do you want to copy this meta field?"
+msgstr "Where do you want بۆ copy ئەم فیلدی مەتا?"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, must be true. If "
+"true, the post type is shown in its own top level menu. If false, no menu is "
+"shown."
+msgstr ""
+"Where بۆ show  جۆری پۆست لە  admin مێنیو. To کارکردن, must بێت true. ئەگەر "
+"true,  جۆری پۆست ە shown لە its own top level مێنیو. ئەگەر false, no مێنیو ە "
+"shown."
+
+msgid ""
+"Whether a post type is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"ئایا a جۆری پۆست ە intended بۆ use publicly either via  admin interface یان "
+"لەلایەن front-end بەکارهێنەران."
+
+msgid ""
+"Whether a taxonomy is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"ئەگەر پۆلێنکردن ێک بە مەبەستی بەکارهێنانی گشتی بێت یان لە ڕێگەی ڕووکاری "
+"بەڕێوەبەرەوە بێت یان لەلایەن بەکارهێنەرانی کۆتایی پێشەوە."
+
+msgid ""
+"Whether queries can be performed on the front end for the post type as part "
+"of parse_request()."
+msgstr ""
+"ئایا queries دەتوانێت بێت performed لەسەر  front end بۆ  جۆری پۆست وەک part "
+"ی parse_request()."
+
+msgid ""
+"Whether terms in this taxonomy should be sorted in the order they are "
+"provided to wp_set_object_terms(). Default null which equates to false."
+msgstr ""
+"ئایا terms لە ئەم تاکسۆنۆمی دەبێت بێت sorted لە  order they ن provided بۆ "
+"wp_set_object_terms(). بنەڕەت null which equates بۆ false."
+
+msgid "Whether the taxonomy is hierarchical. Default false."
+msgstr "ئایا  تاکسۆنۆمی ە hierarchical. بنەڕەت false."
+
+msgid ""
+"Whether the taxonomy is publicly queryable. If not set, the default is "
+"inherited from $public."
+msgstr ""
+"ئایا  تاکسۆنۆمی ە publicly queryable. ئەگەر نە set,  بنەڕەت ە inherited لە "
+"$public."
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled."
+msgstr ""
+"ئایا there دەبێت بێت جۆری پۆست ئەرشیفەکان, یان ئەگەر a string,  ئەرشیف سلەگ "
+"بۆ use. Will generate  proper نووسینەوە یاساکان ئەگەر $rewrite ە چالاک."
+
+msgid ""
+"Triggers the handling of rewrites for this post type. To prevent rewrite, "
+"set to false. Defaults to true, using $post_type as slug. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Triggers  handling ی rewrites بۆ ئەم جۆری پۆست. To prevent نووسینەوە, set بۆ "
+"false. Defaults بۆ true, using $post_type وەک سلەگ. To specify نووسینەوە "
+"یاساکان, an array دەتوانێت بێت passed لەگەڵ any ی these keys:"
+
+msgid ""
+"Whether to display a column for the taxonomy on its post type listing "
+"screens. Default false."
+msgstr ""
+"ئایا بۆ display a column بۆ  تاکسۆنۆمی لەسەر its جۆری پۆست listing screens. "
+"بنەڕەت false."
+
+msgid ""
+"Whether to generate and allow a UI for managing terms in this taxonomy in "
+"the admin. If not set, the default is inherited from $public (default true)."
+msgstr ""
+"ئایا بۆ generate و allow a UI بۆ managing terms لە ئەم تاکسۆنۆمی لە  admin. "
+"ئەگەر نە set,  بنەڕەت ە inherited لە $public (بنەڕەت true)."
+
+msgid ""
+"Whether to generate and allow a UI for managing this post type in the admin. "
+"Default is value of $public."
+msgstr ""
+"ئایا بۆ generate و allow a UI بۆ managing ئەم جۆری پۆست لە  admin. بنەڕەت ە "
+"نرخ ی $public."
+
+msgid ""
+"Whether to include the post type in the REST API. Set this to true for the "
+"post type to be available in the block editor. SET TRUE TO ENABLE GUTEMBERG "
+"EDITOR."
+msgstr ""
+"ئایا بۆ include  جۆری پۆست لە  REST API. Set ئەم بۆ true بۆ  جۆری پۆست بۆ "
+"بێت بەردەست لە  بلۆک editor. SET TRUE TO ENABLE GUTEMBERG EDITOR."
+
+msgid ""
+"Whether to include the taxonomy in the REST API. Set this to true for the "
+"taxonomy to be available in the block editor. SET TRUE TO ENABLE "
+"VISUALIZATION ON GUTEMBERG EDITOR."
+msgstr ""
+"ئایا بۆ include  تاکسۆنۆمی لە  REST API. Set ئەم بۆ true بۆ  تاکسۆنۆمی بۆ "
+"بێت بەردەست لە  بلۆک editor. SET TRUE TO ENABLE VISUALIZATION ON GUTEMBERG "
+"EDITOR."
+
+msgid ""
+"Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
+"the default is inherited from $show_ui (default true)."
+msgstr ""
+"ئایا بۆ لیست  تاکسۆنۆمی لە  Tag Cloud Widget کۆنترۆڵەکان. ئەگەر نە set,  "
+"بنەڕەت ە inherited لە $show_ui (بنەڕەت true)."
+
+msgid ""
+"Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+"shown as a submenu of the object type menu. If false, no menu is shown. "
+"$show_ui must be true. If not set, default is inherited from $show_ui "
+"(default true)."
+msgstr ""
+"ئایا بۆ show  تاکسۆنۆمی لە  admin مێنیو. ئەگەر true,  تاکسۆنۆمی ە shown وەک "
+"a submenu ی  object type مێنیو. ئەگەر false, no مێنیو ە shown. $show_ui must "
+"بێت true. ئەگەر نە set, بنەڕەت ە inherited لە $show_ui (بنەڕەت true)."
+
+msgid ""
+"Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
+"default is inherited from $show_ui (default true)."
+msgstr ""
+"ئایا بۆ show  تاکسۆنۆمی لە  quick/bulk edit panel. It نە set,  بنەڕەت ە "
+"inherited لە $show_ui (بنەڕەت true)."
+
+msgid "Which does this template belong to?"
+msgstr "Which does ئەم داڕێژە belong بۆ?"
+
+msgid "Width"
+msgstr "پانی"
+
+msgid "WooCommerce product data"
+msgstr "داتای بەرهەمی WooCommerce"
+
+msgid "WooCommerce product data fields successfully saved"
+msgstr "داتای بەرهەمی WooCommerce فیلدەکان بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "WooCommerce product data successfully deleted"
+msgstr "داتای بەرهەمی WooCommerce بە سەرکەوتوویی سڕایەوە."
+
+msgid "Yes"
+msgstr "بەڵێ"
+
+msgid "Yes, delete it"
+msgstr "بەڵێ، بیسڕەوە"
+
+msgid "You are going to delete WooCommerce this product data. Are you sure?"
+msgstr "خەریکە WooCommerce ئەم داتای بەرهەم دەسڕیتەوە. دڵنیایت؟"
+
+msgid "You are going to delete this API key. Are you sure?"
+msgstr "خەریکە ئەم API key دەسڕیتەوە. دڵنیایت؟"
+
+msgid "You are going to delete this custom post type. Are you sure?"
+msgstr "خەریکە ئەم جۆری پۆستی تایبەت دەسڕیتەوە. دڵنیایت؟"
+
+msgid ""
+"You are going to delete this meta block definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"خەریکە ئەم بلۆکی مەتا پێناسە. Every فیلد پێناسە inside of it will be deleted "
+"دەسڕیتەوە. دڵنیایت؟"
+
+msgid ""
+"You are going to delete this meta box definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"خەریکە ئەم بۆکسی مەتا پێناسە. Every فیلد پێناسە inside of it will be deleted "
+"دەسڕیتەوە. دڵنیایت؟"
+
+msgid ""
+"You are going to delete this option page definition. Every associated meta "
+"fields and child page will be deleted. Are you sure?"
+msgstr ""
+"خەریکە ئەم پەڕەی هەڵبژاردەکان پێناسە. Every associated فیلدەکانی مەتا and "
+"منداڵ پەڕە will be deleted دەسڕیتەوە. دڵنیایت؟"
+
+msgid "You are going to delete this taxonomy. Are you sure?"
+msgstr "خەریکە ئەم تاکسۆنۆمی دەسڕیتەوە. دڵنیایت؟"
+
+msgid "Delete this block"
+msgstr "سڕینەوەی ئەم بلۆک"
+
+msgid "Your API keys"
+msgstr "کلیلەکانی APIی تۆ"
+
+msgid "Your favourite ACPT settings"
+msgstr "ڕێکخستنە دڵخوازەکانی ACPTی تۆ"
+
+msgid "Your new generated API key"
+msgstr "کلیلی APIی نوێی دروستکراوی تۆ"
+
+msgid "Your theme already has a single template for"
+msgstr "هی تۆ theme already هەیە a single داڕێژە بۆ"
+
+msgid "Your theme already has an archive template for"
+msgstr "هی تۆ theme already هەیە an ئەرشیف داڕێژە بۆ"
+
+msgid "`has_archive` set to false"
+msgstr "`has_archive` set بۆ false"
+
+msgid "child element"
+msgstr "child توخم"
+
+msgid "current"
+msgstr "current"
+
+msgid "custom post type"
+msgstr "جۆری custom پۆست"
+
+msgid "custom post types registered"
+msgstr "جۆرە پۆستە تایبەتەکان registered"
+
+msgid "details"
+msgstr "details"
+
+msgid "format"
+msgstr "فۆرمات"
+
+msgid "global settings"
+msgstr "ڕێکخستنەکانی global"
+
+msgid "id"
+msgstr "id"
+
+msgid "is checked"
+msgstr "هەڵبژێردراوە"
+
+msgid "is empty"
+msgstr "بەتاڵە"
+
+msgid "is equal to"
+msgstr "یەکسانە بە"
+
+msgid "is greater or equals than"
+msgstr "ە greater یان equals than"
+
+msgid "is greater than"
+msgstr "گەورەترە لە"
+
+msgid "is greater than or equal to"
+msgstr "ە greater than یان equal بۆ"
+
+msgid "is included in"
+msgstr "ە included لە"
+
+msgid "is less or equals than"
+msgstr "ە less یان equals than"
+
+msgid "is less than"
+msgstr "کەمترە لە"
+
+msgid "is less than or equal to"
+msgstr "ە less than یان equal بۆ"
+
+msgid "is like to"
+msgstr "ە like بۆ"
+
+msgid "is not checked"
+msgstr "ە نە checked"
+
+msgid "is not empty"
+msgstr "بەتاڵ نییە"
+
+msgid "is not equal to"
+msgstr "یەکسان نییە بە"
+
+msgid "is not included in"
+msgstr "ە نە included لە"
+
+msgid "is not like"
+msgstr "ە نە like"
+
+msgid "meta boxes"
+msgstr "بۆکسەکانی مەتا"
+
+msgid "Meta boxes total count"
+msgstr "کۆی ژمارەی بۆکسەکانی مەتا"
+
+msgid "meta fields"
+msgstr "فیلدەکانی مەتا"
+
+msgid "Meta fields total count"
+msgstr "کۆی ژمارەی فیلدەکانی مەتا"
+
+msgid "min length is"
+msgstr "min length ە"
+
+msgid "old"
+msgstr "old"
+
+msgid "product data fields"
+msgstr "داتای بەرهەم فیلدەکان"
+
+msgid "record(s) found"
+msgstr "تۆمار دۆزرایەوە"
+
+msgid "see here"
+msgstr "لێرە ببینە"
+
+msgid "slug"
+msgstr "سلەگ"
+
+msgid "taxonomies registered"
+msgstr "تاکسۆنۆمییەکان registered"
+
+msgid "template"
+msgstr "داڕێژە"
+
+msgid "title"
+msgstr "ناونیشان"
+
+msgid "visibility"
+msgstr "دەرکەوتن"
+
+msgid "Visibility"
+msgstr "دەرکەوتن"
+
+msgid "{{r}} published"
+msgstr "{{r}} بڵاوکرایەوە"
+
+msgid "{{r}} published privately"
+msgstr "{{r}} بە تایبەتی بڵاوکرایەوە"
+
+msgid "{{r}} reverted to draft"
+msgstr "{{r}} گەڕێنرایەوە بۆ ڕەشنووس"
+
+msgid "{{r}} scheduled"
+msgstr "{{r}} خشتەبەند کرا"
+
+msgid "{{r}} updated"
+msgstr "{{r}} بەڕۆژ کرایەوە"
+
+msgid "Address map"
+msgstr "Address map"
+
+msgid "Color"
+msgstr "ڕەنگ"
+
+msgid "Currency"
+msgstr "Currency"
+
+msgid "Weight"
+msgstr "Weight"
+
+msgid "Length"
+msgstr "درێژی"
+
+msgid "Date"
+msgstr "ڕێکەوت"
+
+msgid "Email address"
+msgstr "ناونیشانی ئیمەیڵ"
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Phone"
+msgstr "تەلەفۆن"
+
+msgid "Phone Number"
+msgstr "ژمارەی تەلەفۆن"
+
+msgid "Text"
+msgstr "دەق"
+
+msgid "List"
+msgstr "لیست"
+
+msgid "Select Multiple"
+msgstr "دیاریکردنی Multiple"
+
+msgid "Toggle"
+msgstr "گۆڕین"
+
+msgid "Embed content"
+msgstr "ناوەڕۆکی تێخراو"
+
+msgid "Gallery"
+msgstr "پێشانگا"
+
+msgid "Image"
+msgstr "وێنە"
+
+msgid "Post relationship"
+msgstr "پۆست پەیوەندی"
+
+msgid "Relationship"
+msgstr "پەیوەندى"
+
+msgid "Time"
+msgstr "کات"
+
+msgid "Repeater"
+msgstr "Repeater"
+
+msgid "Grouped field (Repeater)"
+msgstr "Grouped فیلد (Repeater)"
+
+msgid "User (select multiple)"
+msgstr "بەکارهێنەر (select multiple)"
+
+msgid "Checkbox"
+msgstr "چێکبۆکس"
+
+msgid "Radio button"
+msgstr "دوگمەی ڕادیۆ"
+
+msgid "Date Range"
+msgstr "مەودای ڕێکەوت"
+
+msgid "Flexible content"
+msgstr "ناوەڕۆکی نەرم"
+
+msgid "is enabled"
+msgstr "ە چالاک"
+
+msgid "found"
+msgstr "دۆزرایەوە"
+
+msgid "record(s)"
+msgstr "record(s)"
+
+msgid "Copied"
+msgstr "کۆپی کرا"
+
+msgid "Confirm deleting this template?"
+msgstr "دڵنیابوونەوەی سڕینەوەی ئەم داڕێژە?"
+
+msgid "meta"
+msgstr "meta"
+
+msgid "Meta-key"
+msgstr "Meta-کلیل"
+
+msgid "Shortcode"
+msgstr "کۆدی کورت"
+
+msgid "Shortcodes"
+msgstr "Shortcodes"
+
+msgid "Delete custom post type"
+msgstr "سڕینەوەی جۆری پۆستی تایبەت"
+
+msgid "Delete taxonomy"
+msgstr "سڕینەوەی تاکسۆنۆمی"
+
+msgid "License"
+msgstr "مۆڵەت"
+
+msgid "Tools"
+msgstr "ئامرازەکان"
+
+msgid "Templates"
+msgstr "داڕێژەکان"
+
+msgid "Custom Post Types"
+msgstr "جۆرە پۆستە تایبەتەکان"
+
+msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
+msgstr "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max قەبارە: 2Mb]"
+
+msgid "Associated taxonomies with the post"
+msgstr "پەیوەستکراو تاکسۆنۆمییەکان لەگەڵ  پۆست"
+
+msgid "Register new Post Type"
+msgstr "تۆمارکردنی جۆری پۆستی نوێ"
+
+msgid "Manage meta fields"
+msgstr "بەڕێوەبردنی فیلدەکانی مەتا"
+
+msgid "Create new Custom Post Type"
+msgstr "دروستکردنی جۆری پۆستی تایبەتی نوێ"
+
+msgid "Basic"
+msgstr "بنەڕەتی"
+
+msgid "Labels"
+msgstr "ناوەکانی پیشاندان"
+
+msgid "Minimum configuration"
+msgstr "کەمترین configuration"
+
+msgid "Additional labels"
+msgstr "Additional ناوەکانی پیشاندان"
+
+msgid "Other settings"
+msgstr "ڕێکخستنەکانی Other"
+
+msgid "Menu Name"
+msgstr "ناوى پێڕست"
+
+msgid "Label for the menu name. Default is the same as name."
+msgstr "ناوی پیشاندان بۆ the مێنیو ناو. بنەڕەت is the same as ناو."
+
+msgid "All items"
+msgstr "هەموو بڕگەکان"
+
+msgid ""
+"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All "
+"Pages’."
+msgstr ""
+"ناوی پیشاندان بۆ signify هەموو items لە a submenu link. بنەڕەت ە ‘هەموو "
+"پۆستەکان’ / ‘هەموو پەڕەکان’."
+
+msgid "Add New"
+msgstr "زیادکردنی نوێ"
+
+msgid "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+msgstr ""
+"بنەڕەت بریتییە لە ‘Add New’ for both hierarchical and non-hierarchical types."
+
+msgid "Add New Item"
+msgstr "زیادکردنی بڕگەی نوێ"
+
+msgid ""
+"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New "
+"Page’."
+msgstr ""
+"ناوی پیشاندان بۆ زیادکردنی بڕگەیەکی تاکی نوێ. بنەڕەت ‘Add New Post’ / ‘Add "
+"New Page’ە."
+
+msgid "Edit Item"
+msgstr "دەستکاری بڕگە"
+
+msgid ""
+"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+msgstr ""
+"ناوی پیشاندان بۆ editing a singular بڕگە. بنەڕەت is ‘Edit پۆست’ / ‘Edit "
+"پەڕە’."
+
+msgid "New Item"
+msgstr "بڕگەی نوێ"
+
+msgid "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+msgstr ""
+"ناوی پیشاندان بۆ ناونیشانی پەڕەی بڕگەی نوێ. بنەڕەت ‘New Post’ / ‘New Page’ە."
+
+msgid "View Item"
+msgstr "بینینی بڕگە"
+
+msgid ""
+"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+msgstr ""
+"ناوی پیشاندان بۆ viewing a singular بڕگە. بنەڕەت is ‘View پۆست’ / ‘View "
+"پەڕە’."
+
+msgid "View Items"
+msgstr "بینینی بڕگەکان"
+
+msgid ""
+"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+msgstr ""
+"ناوی پیشاندان بۆ viewing جۆری پۆست ئەرشیفەکان. بنەڕەت is ‘View پۆستەکان’ / "
+"‘View پەڕەکان’."
+
+msgid "Search Item"
+msgstr "گەڕان بۆ بڕگە"
+
+msgid ""
+"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+msgstr ""
+"ناوی پیشاندان بۆ searching plural بڕگەکان. بنەڕەت is ‘Search پۆستەکان’ / "
+"‘Search پەڕەکان’."
+
+msgid "Not Found"
+msgstr "Not Found"
+
+msgid ""
+"Label used when no items are found. Default is ‘No posts found’ / ‘No pages "
+"found’."
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو کاتێک no items ن دۆزرایەوە. بنەڕەت ە ‘No پۆستەکان "
+"دۆزرایەوە’ / ‘No پەڕەکان دۆزرایەوە’."
+
+msgid "Not Found in Trash"
+msgstr "Not Found لە Trash"
+
+msgid ""
+"Label used when no items are in the Trash. Default is ‘No posts found in "
+"Trash’ / ‘No pages found in Trash’."
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو کاتێک no items ن لە  Trash. بنەڕەت ە ‘No پۆستەکان "
+"دۆزرایەوە لە Trash’ / ‘No پەڕەکان دۆزرایەوە لە Trash’."
+
+msgid ""
+"Label used to prefix parents of hierarchical items. Not used on non-"
+"hierarchical post types. Default is ‘Parent Page:’."
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو بۆ prefix parents ی hierarchical items. Not "
+"بەکارهێنراو لەسەر non-hierarchical جۆرە پۆستەکان. بنەڕەت ە ‘Parent پەڕە:’."
+
+msgid "Featured Image"
+msgstr "وێنەی تایبەت"
+
+msgid ""
+"Label for the featured image meta box title. Default is ‘Featured image’."
+msgstr ""
+"ناوی پیشاندان بۆ the وێنەی سەرەکی بۆکسی مەتا ناونیشان. بنەڕەت is ‘وێنەی "
+"سەرەکی’."
+
+msgid "Set Featured Image"
+msgstr "دانانی Featured وێنە"
+
+msgid "Label for setting the featured image. Default is ‘Set featured image’."
+msgstr ""
+"ناوی پیشاندان بۆ setting the وێنەی سەرەکی. بنەڕەت is ‘Set وێنەی سەرەکی’."
+
+msgid "Remove Featured Image"
+msgstr "لابردنی Featured وێنە"
+
+msgid ""
+"Label for removing the featured image. Default is ‘Remove featured image’."
+msgstr ""
+"ناوی پیشاندان بۆ removing the وێنەی سەرەکی. بنەڕەت is ‘Remove وێنەی سەرەکی’."
+
+msgid "Use Featured Image"
+msgstr "بەکارهێنانی Featured وێنە"
+
+msgid ""
+"Label in the media frame for using a featured image. Default is ‘Use as "
+"featured image’."
+msgstr ""
+"ناوی پیشاندان لە  media چوارچێوە بۆ using a featured وێنە. بنەڕەت ە ‘Use وەک "
+"featured وێنە’."
+
+msgid ""
+"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page "
+"Archives’."
+msgstr ""
+"ناوی پیشاندان بۆ ئەرشیفەکان in nav مێنیوەکان. بنەڕەت is ‘پۆست Archives’ / "
+"‘پەڕە Archives’."
+
+msgid "Insert into item"
+msgstr "Insert into item"
+
+msgid ""
+"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert "
+"into page’."
+msgstr ""
+"ناوی پیشاندان بۆ the media frame دوگمە. بنەڕەت is ‘Insert into پۆست’ / "
+"‘Insert into پەڕە’."
+
+msgid "Uploaded to this Item"
+msgstr "بارکراو بۆ ئەم بڕگەیە"
+
+msgid ""
+"Label for the media frame filter. Default is ‘Uploaded to this post’ / "
+"‘Uploaded to this page’."
+msgstr ""
+"ناوی پیشاندان بۆ the media frame filter. بنەڕەت is ‘Uploaded to this پۆست’ / "
+"‘Uploaded to this پەڕە’."
+
+msgid "Filter Items List"
+msgstr "پاڵاوتنی بڕگەکان لیست"
+
+msgid ""
+"Label for the table views hidden heading. Default is ‘Filter posts list’ / "
+"‘Filter pages list’."
+msgstr ""
+"ناوی پیشاندان بۆ the خشتە views hidden heading. بنەڕەت is ‘Filter پۆستەکان "
+"لیست’ / ‘Filter پەڕەکان لیست’."
+
+msgid "Items List Navigation"
+msgstr "Items لیست ڕێنیشاندەر"
+
+msgid ""
+"Label for the table pagination hidden heading. Default is ‘Posts list "
+"navigation’ / ‘Pages list navigation’."
+msgstr ""
+"ناوی پیشاندان بۆ the خشتە pagination hidden heading. بنەڕەت is ‘پۆستەکان "
+"لیست ڕێنیشاندەر’ / ‘پەڕەکان لیست ڕێنیشاندەر’."
+
+msgid "Items List"
+msgstr "Items لیست"
+
+msgid ""
+"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+msgstr ""
+"ناوی پیشاندان بۆ the خشتە hidden heading. بنەڕەت is ‘پۆستەکان لیست’ / "
+"‘پەڕەکان لیست’."
+
+msgid "Label for the date filter in list tables. Default is ‘Filter by date’."
+msgstr ""
+"ناوی پیشاندان بۆ the ڕێکەوت filter in لیست tables. بنەڕەت is ‘Filter by "
+"ڕێکەوت’."
+
+msgid "Item published"
+msgstr "بڕگە بڵاوکرایەوە"
+
+msgid ""
+"Label used when an item is published. Default is ‘Post published.’ / ‘Page "
+"published.’"
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو کاتێک an item ە بڵاوکراوە. بنەڕەت ە ‘پۆست "
+"بڵاوکراوە.’ / ‘پەڕە بڵاوکراوە.’"
+
+msgid "Item published privately"
+msgstr "بڕگە بە تایبەتی بڵاوکرایەوە"
+
+msgid ""
+"Label used when an item is published with private visibility. Default is "
+"‘Post published privately.’ / ‘Page published privately.’"
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو کاتێک an item ە بڵاوکراوە لەگەڵ تایبەت visibility. "
+"بنەڕەت ە ‘پۆست بڵاوکراوە privately.’ / ‘پەڕە بڵاوکراوە privately.’"
+
+msgid "Item reverted to draft"
+msgstr "بڕگە گەڕێنرایەوە بۆ ڕەشنووس"
+
+msgid ""
+"Label used when an item is switched to a draft. Default is ‘Post reverted to "
+"draft.’ / ‘Page reverted to draft.’"
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو کاتێک an item ە switched بۆ a draft. بنەڕەت ە "
+"‘پۆست reverted بۆ draft.’ / ‘پەڕە reverted بۆ draft.’"
+
+msgid "Item scheduled"
+msgstr "بڕگە خشتەبەند کرا"
+
+msgid ""
+"Label used when an item is scheduled for publishing. Default is ‘Post "
+"scheduled.’ / ‘Page scheduled.’"
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو کاتێک an item ە scheduled بۆ publishing. بنەڕەت ە "
+"‘پۆست scheduled.’ / ‘پەڕە scheduled.’"
+
+msgid "Item updated"
+msgstr "بڕگە بەڕۆژ کرایەوە"
+
+msgid ""
+"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page "
+"updated.’"
+msgstr ""
+"ناوی پیشاندان بەکارهێنراو کاتێک an item ە updated. بنەڕەت ە ‘پۆست "
+"updated.’ / ‘پەڕە updated.’"
+
+msgid ""
+"General name for the taxonomy, usually plural. The same as and overridden by "
+"$tax->label. Default 'Tags/Categories'."
+msgstr ""
+"General ناو بۆ  تاکسۆنۆمی, usually plural.  هەمان وەک و overridden لەلایەن "
+"$tax->ناوی پیشاندان. بنەڕەت 'Tags/Categories'."
+
+msgid "Singular name"
+msgstr "ناوی Singular"
+
+msgid "Name for one object of this taxonomy. Default 'Tag/Category'"
+msgstr "ناو بۆ one object ی ئەم تاکسۆنۆمی. بنەڕەت 'Tag/Category'"
+
+msgid "Search items"
+msgstr "Search items"
+
+msgid "Search Tags/Search Categories"
+msgstr "Search Tags/Search Categories"
+
+msgid "Popular items"
+msgstr "Popular items"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Popular "
+"Tags'."
+msgstr ""
+"ئەمە ناوی پیشاندان ە تەنها بەکارهێنراو بۆ non-hierarchical تاکسۆنۆمییەکان. "
+"بنەڕەت 'Popular Tags'."
+
+msgid "All Tags/All Categories"
+msgstr "هەموو Tags/All Categories"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Parent "
+"Category'."
+msgstr ""
+"ئەمە ناوی پیشاندان ە تەنها بەکارهێنراو بۆ hierarchical تاکسۆنۆمییەکان. "
+"بنەڕەت 'Parent Category'."
+
+msgid "Parent item colon"
+msgstr "Parent item colon"
+
+msgid "The same as parent_item, but with colon : in the end."
+msgstr "هەمان parent_item, but لەگەڵ colon : لە  end."
+
+msgid "Edit Tag/Edit Category."
+msgstr "دەستکاری Tag/Edit Category."
+
+msgid "View Tag/View Category."
+msgstr "بینینی Tag/View Category."
+
+msgid "Update item"
+msgstr "Update item"
+
+msgid "Update Tag/Update Category."
+msgstr "Update Tag/Update Category."
+
+msgid "Add New Tag/Add New Category."
+msgstr "زیادکردنی New Tag/Add New Category."
+
+msgid "New item name"
+msgstr "ناوی New بڕگە"
+
+msgid "New Tag Name/New Category Name."
+msgstr "نوێ Tag ناو/New Category ناو."
+
+msgid "Separate items with commas"
+msgstr "Separate items لەگەڵ commas"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Separate "
+"tags with commas', used in the meta box."
+msgstr ""
+"ئەمە ناوی پیشاندان ە تەنها بەکارهێنراو بۆ non-hierarchical تاکسۆنۆمییەکان. "
+"بنەڕەت 'Separate tags لەگەڵ commas', بەکارهێنراو لە  بۆکسی مەتا."
+
+msgid "Add or remove items"
+msgstr "زیادکردنی or remove بڕگەکان"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Add or "
+"remove tags', used in the meta box when JavaScript is disabled."
+msgstr ""
+"ئەمە ناوی پیشاندان ە تەنها بەکارهێنراو بۆ non-hierarchical تاکسۆنۆمییەکان. "
+"بنەڕەت 'Add یان remove tags', بەکارهێنراو لە  بۆکسی مەتا کاتێک JavaScript ە "
+"ناچالاک."
+
+msgid "Choose from most used"
+msgstr "هەڵبژاردنی from most used"
+
+msgid ""
+"This label is only used on non-hierarchical taxonomies. Default 'Choose from "
+"the most used tags', used in the meta box."
+msgstr ""
+"ئەمە ناوی پیشاندان ە تەنها بەکارهێنراو لەسەر non-hierarchical "
+"تاکسۆنۆمییەکان. بنەڕەت 'هەڵبژاردن لە  most بەکارهێنراو tags', بەکارهێنراو "
+"لە  بۆکسی مەتا."
+
+msgid ""
+"No tags found/No categories found', used in the meta box and taxonomy list "
+"table."
+msgstr ""
+"No tags دۆزرایەوە/No categories دۆزرایەوە', بەکارهێنراو لە  بۆکسی مەتا و "
+"تاکسۆنۆمی لیست خشتە."
+
+msgid "No terms"
+msgstr "No terms"
+
+msgid "No tags/No categories', used in the posts and media list tables."
+msgstr "No tags/No categories', بەکارهێنراو لە  پۆستەکان و media لیست tables."
+
+msgid "Filter by item"
+msgstr "پاڵاوتنی by بڕگە"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Filter by "
+"category', used in the posts list table."
+msgstr ""
+"ئەمە ناوی پیشاندان ە تەنها بەکارهێنراو بۆ hierarchical تاکسۆنۆمییەکان. "
+"بنەڕەت 'Filter لەلایەن category', بەکارهێنراو لە  پۆستەکان لیست خشتە."
+
+msgid "Items list navigation"
+msgstr "ڕێنیشاندەری بڕگەکان"
+
+msgid "Label for the table pagination hidden heading."
+msgstr "ناوی پیشاندان بۆ the خشتە pagination hidden heading."
+
+msgid "Label for the table hidden heading."
+msgstr "ناوی پیشاندان بۆ the خشتە hidden heading."
+
+msgid "Most used"
+msgstr "Most بەکارهێنراو"
+
+msgid "Title for the Most Used tab. Default 'Most Used'."
+msgstr "ناونیشان بۆ  Most Used تاب. بنەڕەت 'Most Used'."
+
+msgid "Back to items"
+msgstr "Back بۆ items"
+
+msgid "Key length must be 39."
+msgstr "Key length must بێت 39."
+
+msgid "Not valid format."
+msgstr "Not valid فۆرمات."
+
+msgid "General settings"
+msgstr "ڕێکخستنەکانی General"
+
+msgid "Content settings"
+msgstr "ڕێکخستنەکانی Content"
+
+msgid "Danger zone"
+msgstr "ناوچەی مەترسی"
+
+msgid "manage template"
+msgstr "manage داڕێژە"
+
+msgid "Manage template"
+msgstr "بەڕێوەبردنی داڕێژە"
+
+msgid "Taxonomy global settings"
+msgstr "ڕێکخستنەکانی تاکسۆنۆمی global"
+
+msgid "eg. Text here"
+msgstr "eg. Text here"
+
+msgid "Thumbnail"
+msgstr "چوارچێوە (بڵاوترینە)"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Large"
+msgstr "گەورە"
+
+msgid "Full size"
+msgstr "قەبارەی تەواو"
+
+msgid "ASC"
+msgstr "ASC"
+
+msgid "DESC"
+msgstr "DESC"
+
+msgid "eg. 100%"
+msgstr "eg. 100%"
+
+msgid "Desktop"
+msgstr "ڕوومێز"
+
+msgid "Tablet"
+msgstr "تابلێت"
+
+msgid "Mobile"
+msgstr "مۆبایل"
+
+msgid "Keyboard interaction legend"
+msgstr "Keyboard interaction legend"
+
+msgid "Keyboard legend"
+msgstr "ڕوونکردنەوەی تەختەکلیل"
+
+msgid "BASIC"
+msgstr "بنەڕەتی"
+
+msgid "SPECIALIZED FIELDS"
+msgstr "SPECIALIZED FIELDS"
+
+msgid "UNIT OF MEASURE"
+msgstr "UNIT OF MEASURE"
+
+msgid "MEDIA"
+msgstr "میدیا"
+
+msgid "RELATIONS"
+msgstr "پەیوەندییەکان"
+
+msgid "GROUPED"
+msgstr "گرووپکراو"
+
+msgid "USER RELATIONS"
+msgstr "USER RELATIONS"
+
+msgid "One to One - Unidirectional"
+msgstr "One بۆ One - Unidirectional"
+
+msgid "One to One - Bidirectional"
+msgstr "One بۆ One - Bidirectional"
+
+msgid "One to Many - Unidirectional"
+msgstr "One بۆ Many - Unidirectional"
+
+msgid "One to Many - Bidirectional"
+msgstr "One بۆ Many - Bidirectional"
+
+msgid "Many to One - Unidirectional"
+msgstr "Many بۆ One - Unidirectional"
+
+msgid "Many to One - Bidirectional"
+msgstr "Many بۆ One - Bidirectional"
+
+msgid "Many to Many - Unidirectional"
+msgstr "Many بۆ Many - Unidirectional"
+
+msgid "Many to Many - Bidirectional"
+msgstr "Many بۆ Many - Bidirectional"
+
+msgid "Show this field if:"
+msgstr "پیشاندان ئەم فیلد ئەگەر:"
+
+msgid "Copy settings"
+msgstr "کۆپیکردنی ڕێکخستنەکان"
+
+msgid "Add condition"
+msgstr "زیادکردنی مەرج"
+
+msgid "ADVANCED OPTIONS"
+msgstr "ADVANCED OPTIONS"
+
+msgid "BASIC OPTIONS"
+msgstr "BASIC OPTIONS"
+
+msgid "CONDITIONAL LOGIC"
+msgstr "CONDITIONAL LOGIC"
+
+msgid "Select option"
+msgstr "دیاریکردنی هەڵبژاردە"
+
+msgid "operator"
+msgstr "operator"
+
+msgid "This field"
+msgstr "ئەم فیلدە"
+
+msgid "Value"
+msgstr "بەها"
+
+msgid "Label"
+msgstr "ناوی پیشاندان"
+
+msgid "Post"
+msgstr "بابه‌ت"
+
+msgid "Post parent"
+msgstr "پۆست parent"
+
+msgid "Term"
+msgstr "Term"
+
+msgid "Related taxonomies"
+msgstr "Related تاکسۆنۆمییەکان"
+
+msgid "Other fields"
+msgstr "فیلدەکانی تر"
+
+msgid "Invalid visibility condition type"
+msgstr "جۆری Invalid visibility مەرج"
+
+msgid "Invalid visibility condition operator"
+msgstr "Invalid visibility مەرج operator"
+
+msgid "Invalid visibility condition value"
+msgstr "نرخی Invalid visibility مەرج"
+
+msgid "Invalid visibility condition logic"
+msgstr "Invalid visibility مەرج logic"
+
+msgid "Box label, non latin chars allowed."
+msgstr "Box ناوی پیشاندان, non latin chars allowed."
+
+msgid "Logic"
+msgstr "لۆژیک"
+
+msgid "AND"
+msgstr "و"
+
+msgid "OR"
+msgstr "یان"
+
+msgid "Enter download text link"
+msgstr "نووسینی download text link"
+
+msgid "Select images"
+msgstr "دیاریکردنی وێنەکان"
+
+msgid "Remove element"
+msgstr "لابردنی توخم"
+
+msgid "Min blocks required"
+msgstr "Min بلۆکەکان پێویست"
+
+msgid "Max blocks allowed"
+msgstr "Max بلۆکەکان allowed"
+
+msgid "Browse icons"
+msgstr "گەڕان بەدوای icons"
+
+msgid "Upload a SVG file"
+msgstr "بارکردنی a SVG فایل"
+
+msgid "Choose an icon"
+msgstr "هەڵبژاردنی an ئایکۆن"
+
+msgid "Type at least 3 characters to start searching."
+msgstr "لانیکەم 3 پیت بنووسە بۆ دەستپێکردنی گەڕان."
+
+msgid "Example: heart"
+msgstr "Example: heart"
+
+msgid "There was an error during saving data. The error is:"
+msgstr "There was an هەڵە لە کاتی saving داتا.  هەڵە ە:"
+
+msgid "There was an error during saving data. Minimum number of blocks is:"
+msgstr "There was an هەڵە لە کاتی saving داتا. کەمترین number ی بلۆکەکان ە:"
+
+msgid "There was an error during saving data. Maximum number of blocks is:"
+msgstr "There was an هەڵە لە کاتی saving داتا. زۆرترین number ی بلۆکەکان ە:"
+
+msgid "Data saved correctly"
+msgstr "داتا پاشەکەوتکراو correctly"
+
+msgid "No meta boxes aldready created."
+msgstr "No بۆکسەکانی مەتا aldready created."
+
+msgid "Create the first one"
+msgstr "دروستکردنی first one"
+
+msgid "There was an error fetching icons, retry later."
+msgstr "There was an هەڵە fetching icons, retry later."
+
+msgid "Sorry, no result match."
+msgstr "Sorry, no result match."
+
+msgid ""
+"The media gallery is not available. You must admin_enqueue this function: "
+"wp_enqueue_media()"
+msgstr ""
+" media gallery ە نە بەردەست. You must admin_enqueue ئەم function: "
+"wp_enqueue_media()"
+
+msgid "Download"
+msgstr "داگرتن"
+
+msgid "Upload an Image"
+msgstr "بارکردنی an وێنە"
+
+msgid "Upload a Video"
+msgstr "بارکردنی a Video"
+
+msgid "Upload a File"
+msgstr "بارکردنی a فایل"
+
+msgid "Remove this block"
+msgstr "لابردنی ئەم بلۆک"
+
+msgid "Show elements"
+msgstr "پیشاندان توخمەکان"
+
+msgid "Hide elements"
+msgstr "شاردنەوە توخمەکان"
+
+msgid "Show/hide elements in this block"
+msgstr "پیشاندان/hide توخمەکان لە ئەم بلۆک"
+
+msgid "Filterable in Wordpress admin post lists page"
+msgstr "Filterable لە Wordpress admin پۆست lists پەڕە"
+
+msgid "Quick edit in Wordpress admin post lists page"
+msgstr "Quick edit لە Wordpress admin پۆست lists پەڕە"
+
+msgid "Hide the blank value"
+msgstr "نرخی بەتاڵ بشارەوە"
+
+msgid "Hide the label"
+msgstr "ناوی پیشاندان بشارەوە"
+
+msgid "Enter the URL"
+msgstr "نووسینی URL"
+
+msgid "Enter text link"
+msgstr "نووسینی text link"
+
+msgid "Settings saved."
+msgstr "ڕێکخستنەکان پاشەکەوت کران."
+
+msgid "Exit"
+msgstr "دەرچوون"
+
+msgid "Option pages successfully saved"
+msgstr "پەڕەکانی هەڵبژاردەکان بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Children page list"
+msgstr "لیستی Children پەڕە"
+
+msgid "Register new Taxonomy"
+msgstr "تۆمارکردنی تاکسۆنۆمیی نوێ"
+
+msgid "Deactivate"
+msgstr "ناچالاککردن"
+
+msgid "Choose icon"
+msgstr "هەڵبژاردنی ئایکۆن"
+
+msgid "Select icon type from the list"
+msgstr "دیاریکردنی ئایکۆن type from the لیست"
+
+msgid "Select a Dashicon"
+msgstr "دیاریکردنی a Dashicon"
+
+msgid "Select an icon from another set"
+msgstr "دیاریکردنی an ئایکۆن from another set"
+
+msgid "Upload an icon image"
+msgstr "بارکردنی an ئایکۆن وێنە"
+
+msgid "ACPT meta import start"
+msgstr "ACPT meta import start"
+
+msgid "ACPT meta import end"
+msgstr "ACPT meta import end"
+
+msgid "Option page total count"
+msgstr "کۆی ژمارەی پەڕەی هەڵبژاردەکان"
+
+msgid "Show/hide all pages"
+msgstr "پیشاندان/hide هەموو پەڕەکان"
+
+msgid "List view"
+msgstr "پیشاندانی لیستیی"
+
+msgid "Tabular view"
+msgstr "Tabular view"
+
+msgid "Switch view"
+msgstr "Switch view"
+
+msgid "ACPT Date field"
+msgstr "ACPT ڕێکەوت فیلد"
+
+msgid "ACPT Textual field"
+msgstr "ACPT Textual فیلد"
+
+msgid "ACPT Link field"
+msgstr "ACPT Link فیلد"
+
+msgid "ACPT Image field"
+msgstr "ACPT وێنە فیلد"
+
+msgid "ACPT UOM field"
+msgstr "ACPT UOM فیلد"
+
+msgid "Select the date format"
+msgstr "دیاریکردنی ڕێکەوت فۆرمات"
+
+msgid "Date range separator"
+msgstr "جیاکەرەوەی ڕێکەوت range"
+
+msgid "Select the date range separator"
+msgstr "دیاریکردنی ڕێکەوت range separator"
+
+msgid "Value format (Decimal points)"
+msgstr "نرخ فۆرمات (Decimal points)"
+
+msgid "Value format (Decimal separator)"
+msgstr "نرخ فۆرمات (Decimal separator)"
+
+msgid "Value format (Thousands separator)"
+msgstr "نرخ فۆرمات (Thousands separator)"
+
+msgid "Currency format"
+msgstr "فۆرماتی Currency"
+
+msgid "Currency position"
+msgstr "شوێنی Currency"
+
+msgid "Custom Format"
+msgstr "تایبەت فۆرمات"
+
+msgid "Render as"
+msgstr "Render وەک"
+
+msgid "Date separator"
+msgstr "جیاکەرەوەی ڕێکەوت"
+
+msgid "Classes (separated by space)"
+msgstr "Classes (separated لەلایەن space)"
+
+msgid "Target link"
+msgstr "Target link"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Plain text"
+msgstr "Plain text"
+
+msgid "Size (px)"
+msgstr "قەبارە (px)"
+
+msgid "Set the icon size."
+msgstr "دانانی ئایکۆن قەبارە."
+
+msgid "Select the icon color."
+msgstr "دیاریکردنی ئایکۆن ڕەنگ."
+
+msgid "Spacing (px)"
+msgstr "Spacing (px)"
+
+msgid "Select the icon spacing."
+msgstr "دیاریکردنی ئایکۆن spacing."
+
+msgid "Is clickable?"
+msgstr "Is clickable?"
+
+msgid "Value and UOM"
+msgstr "نرخ و UOM"
+
+msgid "Only value"
+msgstr "نرخی Only"
+
+msgid "Only UOM"
+msgstr "Only UOM"
+
+msgid "UOM format"
+msgstr "فۆرماتی UOM"
+
+msgid "Select the UOM format."
+msgstr "دیاریکردنی UOM فۆرمات."
+
+msgid "Full UOM name"
+msgstr "ناوی Full UOM"
+
+msgid "Abbreviation"
+msgstr "Abbreviation"
+
+msgid "UOM position"
+msgstr "شوێنی UOM"
+
+msgid "Select the UOM position"
+msgstr "دیاریکردنی UOM شوێن"
+
+msgid "After value"
+msgstr "نرخی After"
+
+msgid "Before value"
+msgstr "نرخی Before"
+
+msgid "Decimal points"
+msgstr "Decimal points"
+
+msgid "Set the decimal points."
+msgstr "دانانی decimal points."
+
+msgid "Decimal separator"
+msgstr "جیاکەرەوەی Decimal"
+
+msgid "Set the decimal separator."
+msgstr "دانانی decimal separator."
+
+msgid "Thousands separator"
+msgstr "جیاکەرەوەی Thousands"
+
+msgid "Set the thousands separator."
+msgstr "دانانی thousands separator."
+
+msgid "ACPT Field"
+msgstr "ACPT فیلد"
+
+msgid "ACPT Icon field"
+msgstr "ACPT ئایکۆن فیلد"
+
+msgid "List format"
+msgstr "فۆرماتی لیست"
+
+msgid "Select the list format"
+msgstr "دیاریکردنی لیست فۆرمات"
+
+msgid "String separator"
+msgstr "جیاکەرەوەی String"
+
+msgid "Select the string separator"
+msgstr "دیاریکردنی string separator"
+
+msgid "ACPT Time field"
+msgstr "ACPT Time فیلد"
+
+msgid "Time format"
+msgstr "فۆرماتی Time"
+
+msgid "Select the time format"
+msgstr "دیاریکردنی کات فۆرمات"
+
+msgid "Controls"
+msgstr "Controls"
+
+msgid "Allow video controls."
+msgstr "ڕێگەدان بە ڤیدیۆ کۆنترۆڵەکان."
+
+msgid "Autoplay"
+msgstr "لێدانی خۆکار"
+
+msgid "Autoplay player."
+msgstr "Autoplay player."
+
+msgid "Video width"
+msgstr "Video پانی"
+
+msgid "Video width (% is allowed)."
+msgstr "Video پانی (% ە allowed)."
+
+msgid "Video height"
+msgstr "Video بەرزی"
+
+msgid "Video height (% is allowed)."
+msgstr "Video بەرزی (% ە allowed)."
+
+msgid "You are going to delete this meta field definition. Are you sure?"
+msgstr "خەریکە ئەم فیلدی مەتا پێناسە دەسڕیتەوە. دڵنیایت؟"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related to this "
+"field. The action is irreversible."
+msgstr ""
+"ئاگاداری: This action will delete all the پۆست مەتاداتا related to this "
+"فیلد. The action is irreversible."
+
+msgid "Show the shortcode"
+msgstr "پیشاندان  shortcode"
+
+msgid "Use this shortcode to display the meta field on your frontend."
+msgstr "بەکارهێنانی ئەم shortcode to display the فیلدی مەتا on your frontend."
+
+msgid ""
+"Please note that \"N\" stands for a positive integer value, representing the "
+"nested field index (count starts from 0)."
+msgstr ""
+"Please note that \"N\" stands بۆ a positive integer نرخ, representing  "
+"nested فیلد index (count starts لە 0)."
+
+msgid "What you want to display?"
+msgstr "What you want بۆ display?"
+
+msgid "Rating"
+msgstr "هه‌ڵسه‌نگاندن"
+
+msgid "ACPT Rating field"
+msgstr "ACPT Rating فیلد"
+
+msgid "Field groups"
+msgstr "گرووپەکانی فیلد"
+
+msgid "Create new Meta group"
+msgstr "دروستکردنی گرووپی مەتای نوێ"
+
+msgid "Manage the associate meta field groups"
+msgstr "بەڕێوەبردنی associate meta گرووپەکانی فیلد"
+
+msgid "Meta group successfully deleted."
+msgstr "Meta group بە سەرکەوتوویی سڕایەوە."
+
+msgid "Meta group"
+msgstr "گرووپی مەتا"
+
+msgid "Meta groups"
+msgstr "گرووپەکانی مەتا"
+
+msgid "Group name"
+msgstr "ناوی Group"
+
+msgid "Group label"
+msgstr "ناوی پیشاندانی Group"
+
+msgid "No meta group found."
+msgstr "هیچ گرووپی مەتا نەدۆزرایەوە."
+
+msgid "Delete meta group"
+msgstr "سڕینەوەی گرووپی مەتا"
+
+msgid "You are going to delete this meta group. Are you sure?"
+msgstr "خەریکە ئەم گرووپی مەتا دەسڕیتەوە. دڵنیایت؟"
+
+msgid "Forms"
+msgstr "فۆرمەکان"
+
+msgid "Forms list"
+msgstr "لیستی فۆرمەکان"
+
+msgid "Copied to the clipboard!"
+msgstr "کۆپی کرایە ناو کلیپبۆرد!"
+
+msgid "Confirm deactivating license"
+msgstr "دڵنیابوونەوەی deactivating مۆڵەت"
+
+msgid ""
+"License successfully deactivated. The browser will refresh after 5 seconds."
+msgstr ""
+"مۆڵەت بە سەرکەوتوویی deactivated.  browser دەبێت refresh دوای 5 seconds."
+
+msgid "max length is"
+msgstr "max length ە"
+
+msgid "The element(s) this group is associated with"
+msgstr " توخم(s) ئەم group ە associated لەگەڵ"
+
+msgid "This group belongs to"
+msgstr "ئەمە group belongs بۆ"
+
+msgid "VALIDATION RULES"
+msgstr "VALIDATION RULES"
+
+msgid "Validation"
+msgstr "Validation"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add rule\"!"
+msgstr ""
+"هێشتا هیچ یاساکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add یاسا\" دروست بکە!"
+
+msgid "maximum value"
+msgstr "نرخی زۆرترین"
+
+msgid "minimum value"
+msgstr "نرخی کەمترین"
+
+msgid "regular expression"
+msgstr "regular expression"
+
+msgid "Confirm deleting block"
+msgstr "دڵنیابوونەوەی سڕینەوەی بلۆک"
+
+msgid "Confirm deleting validation rule"
+msgstr "دڵنیابوونەوەی سڕینەوەی validation یاسا"
+
+msgid "Confirm deleting conditional rendering element"
+msgstr "دڵنیابوونەوەی سڕینەوەی conditional rendering توخم"
+
+msgid "Insert values separated by comma. Ex: 12, 54, foo"
+msgstr "Insert values separated لەلایەن comma. Ex: 12, 54, foo"
+
+msgid "This is the meta-key of this field."
+msgstr "ئەمە ە  meta-کلیل ی ئەم فیلد."
+
+msgid ""
+"Use it in functions like get_post_meta() to retrieve saved meta field data."
+msgstr ""
+"بەکارهێنانی it in functions like get_پۆست_meta() to retrieve saved فیلدی "
+"مەتا داتا."
+
+msgid "Prepend the option page slug to retrieve option page meta fields."
+msgstr ""
+"Prepend  پەڕەی هەڵبژاردەکان سلەگ بۆ retrieve پەڕەی هەڵبژاردەکان فیلدەکانی "
+"مەتا."
+
+msgid "Copied to clipboard"
+msgstr "کۆپی کرایە ناو کلیپبۆرد"
+
+msgid "Meta group settings successfully saved"
+msgstr "Meta group ڕێکخستنەکان بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Delete this option page"
+msgstr "سڕینەوەی ئەم پەڕەی هەڵبژاردەکان"
+
+msgid "Confirm deleting page"
+msgstr "دڵنیابوونەوەی سڕینەوەی پەڕە"
+
+msgid "Performances"
+msgstr "Performances"
+
+msgid "Flush the ACPT cache"
+msgstr "بەتاڵکردنی ACPT کاش"
+
+msgid "Flush cache"
+msgstr "بەتاڵکردنی کاش"
+
+msgid "Cache was successfully flushed"
+msgstr "کاش was بە سەرکەوتوویی flushed"
+
+msgid "Could not flush the cache"
+msgstr ""
+
+msgid "Flushing…"
+msgstr ""
+
+msgid "Enable ACPT cache"
+msgstr "چالاککردنی ACPT کاش"
+
+msgid "Enable the ACPT cache to optimize the plugin performances."
+msgstr "چالاککردنی ACPT کاش to optimize the پڵاگین performances."
+
+msgid ""
+"Enable the ACPT cache. The cache stores the MySQL results in simple textual "
+"files to avoid useless DB calls."
+msgstr ""
+"چالاککردنی ACPT کاش. The کاش stores the MySQL results in simple textual "
+"فایلەکان to avoid useless DB calls."
+
+msgid "select all"
+msgstr "select هەموو"
+
+msgid "deselect all"
+msgstr "deselect هەموو"
+
+msgid "UOM default value"
+msgstr "نرخی UOM بنەڕەت"
+
+msgid "Location"
+msgstr "Location"
+
+msgid "Open settings"
+msgstr "کردنەوەی ڕێکخستنەکان"
+
+msgid "Close settings"
+msgstr "ڕێکخستنەکانی Close"
+
+msgid "Auto slug ON"
+msgstr "سلەگی خۆکار ON"
+
+msgid "Auto slug OFF"
+msgstr "سلەگی خۆکار OFF"
+
+msgid "Show"
+msgstr "پیشاندان"
+
+msgid "File was successfully exported"
+msgstr "فایل was بە سەرکەوتوویی exported"
+
+msgid "File was successfully imported"
+msgstr "فایل was بە سەرکەوتوویی imported"
+
+msgid "All users"
+msgstr "هەموو بەکارهێنەران"
+
+msgid "Select items"
+msgstr "دیاریکردنی بڕگەکان"
+
+msgid "Filter items"
+msgstr "پاڵاوتنی بڕگەکان"
+
+msgid "Invalid data provided"
+msgstr "داتای نادروست پێشکەش کرا"
+
+msgid "Group name error(s). Please fix it."
+msgstr "Group ناو هەڵە(s). Please fix it."
+
+msgid "Location rules error(s). Please fix it."
+msgstr "Location یاساکان هەڵە(s). Please fix it."
+
+msgid "Post type"
+msgstr "جۆری پۆست"
+
+msgid "Post template"
+msgstr "پۆست داڕێژە"
+
+msgid "Post format"
+msgstr ""
+
+msgid "Post category"
+msgstr "پۆست category"
+
+msgid "Post taxonomy"
+msgstr "پۆست تاکسۆنۆمی"
+
+msgid "Value is not blank"
+msgstr "نرخ ە نە blank"
+
+msgid "Value is blank"
+msgstr "نرخ ە blank"
+
+msgid "Value is not equal to {{v}}"
+msgstr "نرخ ە نە equal بۆ {{v}}"
+
+msgid "Value is lower or equals than {{v}}"
+msgstr "نرخ ە lower یان equals than {{v}}"
+
+msgid "Value is lower than {{v}}"
+msgstr "نرخ ە lower than {{v}}"
+
+msgid "Value is greatest or equals than {{v}}"
+msgstr "نرخ ە greatest یان equals than {{v}}"
+
+msgid "Value is greatest than {{v}}"
+msgstr "نرخ ە greatest than {{v}}"
+
+msgid "The maximum length is {{v}}"
+msgstr " زۆرترین length ە {{v}}"
+
+msgid "The minimum length is {{v}}"
+msgstr " کەمترین length ە {{v}}"
+
+msgid "Regex value is not matching {{v}}"
+msgstr "Regex نرخ ە نە matching {{v}}"
+
+msgid "All pages"
+msgstr "هەموو پەڕەکان"
+
+msgid "Related entities and relationship"
+msgstr "Related entities و پەیوەندی"
+
+msgid "Target field"
+msgstr "Target فیلد"
+
+msgid "The relationship between the selected entities"
+msgstr " پەیوەندی between  دیاریکراو entities"
+
+msgid "The first entity involved in the relationship"
+msgstr " first entity involved لە  پەیوەندی"
+
+msgid "The second entity involved in the relationship"
+msgstr " second entity involved لە  پەیوەندی"
+
+msgid "Selected items"
+msgstr "Selected items"
+
+msgid "From entity is not a custom post type"
+msgstr "جۆری From entity is not a custom پۆست"
+
+msgid "From entity is not a taxonomy"
+msgstr "لە entity ە نە a تاکسۆنۆمی"
+
+msgid "From entity is not valid"
+msgstr "لە entity ە نە valid"
+
+msgid "From entity is not an user"
+msgstr "لە entity ە نە an بەکارهێنەر"
+
+msgid "From entity is not an option page"
+msgstr "لە entity ە نە an پەڕەی هەڵبژاردەکان"
+
+msgid "No relation set on this field."
+msgstr "هیچ پەیوەندییەک بۆ ئەم فیلدە دانەنراوە."
+
+msgid "You are going to delete this template. Are you sure?"
+msgstr "خەریکە ئەم داڕێژە دەسڕیتەوە. دڵنیایت؟"
+
+msgid "Template successfully deleted."
+msgstr "داڕێژە بە سەرکەوتوویی سڕایەوە."
+
+msgid "Manage product data fields"
+msgstr "بەڕێوەبردنی فیلدەکانی داتای بەرهەم"
+
+msgid ""
+"No pages already created. Create the first one now by clicking the button "
+"\"Add page\"!"
+msgstr ""
+"هێشتا هیچ پەڕەکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add پەڕە\" دروست بکە!"
+
+msgid "Delete the meta box after copying"
+msgstr "سڕینەوەی بۆکسی مەتا after copying"
+
+msgid "Create form"
+msgstr "دروستکردنی فۆرم"
+
+msgid "Create a new form"
+msgstr "دروستکردنی فۆرمێکی نوێ"
+
+msgid "Edit form"
+msgstr "دەستکاری فۆرم"
+
+msgid "No forms found."
+msgstr "هیچ فۆرمەکان نەدۆزرایەوە."
+
+msgid "Form name"
+msgstr "ناوی فۆرم"
+
+msgid "Form label"
+msgstr "ناوی پیشاندانی فۆرم"
+
+msgid "Action"
+msgstr "چالاكی"
+
+msgid "Post management"
+msgstr "پۆست management"
+
+msgid "Custom action"
+msgstr "تایبەت action"
+
+msgid "Method"
+msgstr "میتۆد"
+
+msgid "PHP custom handling"
+msgstr "مامەڵەکردنی تایبەتی PHP"
+
+msgid "Field mapping"
+msgstr "فیلد mapping"
+
+msgid "List to populate from"
+msgstr "لیست بۆ populate لە"
+
+msgid "If blank, the current post_ID will be used"
+msgstr "ئەگەر blank,  current پۆست_ID دەبێت بێت بەکارهێنراو"
+
+msgid "If blank, the current queried term_ID will be used"
+msgstr "ئەگەر blank,  current queried term_ID دەبێت بێت بەکارهێنراو"
+
+msgid "If blank, the current logged user ID will be used"
+msgstr "ئەگەر blank,  current logged بەکارهێنەر ID دەبێت بێت بەکارهێنراو"
+
+msgid "Form successfully saved"
+msgstr "فۆرم بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Delete form"
+msgstr "سڕینەوەی فۆرم"
+
+msgid "You are going to delete this form. Are you sure?"
+msgstr "خەریکە ئەم فۆرم دەسڕیتەوە. دڵنیایت؟"
+
+msgid "Form successfully deleted"
+msgstr "فۆرم بە سەرکەوتوویی سڕایەوە."
+
+msgid "Form manager"
+msgstr "فۆرم manager"
+
+msgid "Form fields"
+msgstr "فۆرم فیلدەکان"
+
+msgid "Drop elements here"
+msgstr "فڕێدانی توخمەکان here"
+
+msgid "CSS classes"
+msgstr "کلاسەکانی CSS"
+
+msgid "Placeholder"
+msgstr "شوێنگرەوە"
+
+msgid "Description"
+msgstr "وەسف"
+
+msgid "Layout"
+msgstr "گەڵاڵەبەندیی"
+
+msgid "Alignment"
+msgstr "ڕیزکردن"
+
+msgid "Add rule"
+msgstr "زیادکردنی یاسا"
+
+msgid "Step value"
+msgstr "نرخی Step"
+
+msgid "Rows value"
+msgstr "نرخی ڕیزەکان"
+
+msgid "Cols value"
+msgstr "نرخی Cols"
+
+msgid "Type value"
+msgstr "نرخی جۆر"
+
+msgid "Standard fields"
+msgstr "Standard فیلدەکان"
+
+msgid "ACPT fields"
+msgstr "ACPT فیلدەکان"
+
+msgid "WordPress user fields"
+msgstr "WordPress بەکارهێنەر فیلدەکان"
+
+msgid "WordPress post fields"
+msgstr "WordPress پۆست فیلدەکان"
+
+msgid "Reset fields"
+msgstr "گەڕاندنەوەی فیلدەکان"
+
+msgid "Columns"
+msgstr "ستوونه‌كان"
+
+msgid "Ajax action"
+msgstr "Ajax action"
+
+msgid "Ajax success response handling"
+msgstr "Ajax success response handling"
+
+msgid "Allow empty value"
+msgstr "ڕێگەدان بە empty نرخ"
+
+msgid "Enable editor"
+msgstr "چالاککردنی editor"
+
+msgid "Your Google reCAPTCHA site key"
+msgstr "هی تۆ Google reCAPTCHA site کلیل"
+
+msgid "Your Google reCAPTCHA secret key"
+msgstr "هی تۆ Google reCAPTCHA secret کلیل"
+
+msgid "Your Google reCAPTCHA site key. Needed to use the CAPTCHA form field."
+msgstr "هی تۆ Google reCAPTCHA site کلیل. Needed بۆ use  CAPTCHA فۆرم فیلد."
+
+msgid "Your Google reCAPTCHA secret key. Needed to use the CAPTCHA form field."
+msgstr "هی تۆ Google reCAPTCHA secret کلیل. Needed بۆ use  CAPTCHA فۆرم فیلد."
+
+msgid "Maximum date"
+msgstr "زۆرترین ڕێکەوت"
+
+msgid "Minimum date"
+msgstr "کەمترین ڕێکەوت"
+
+msgid "Icon set"
+msgstr "ئایکۆن set"
+
+msgid "Enable forms"
+msgstr "چالاککردنی فۆرمەکان"
+
+msgid "Enable the form builder."
+msgstr "چالاککردنی فۆرم بیناساز."
+
+msgid "Create new post"
+msgstr "دروستکردنی پۆستی نوێ"
+
+msgid "Create new user"
+msgstr "دروستکردنی بەکارهێنەری نوێ"
+
+msgid "Create new term"
+msgstr "دروستکردنی زاراوەی نوێ"
+
+msgid "Name is already taken"
+msgstr "ئەم ناوە پێشتر بەکارهاتووە"
+
+msgid "No Meta box duplicate names are allowed"
+msgstr ""
+
+msgid "No Meta field duplicate names are allowed"
+msgstr ""
+
+msgid "Copy"
+msgstr "ڕوونووس"
+
+msgid "Duplicate"
+msgstr "دووبارەکردنەوە"
+
+msgid "Execute"
+msgstr "جێبەجێکردن"
+
+msgid "Copy selected meta boxes"
+msgstr "کۆپیکردنی بۆکسەکانی مەتای دیاریکراو"
+
+msgid "Copy selected meta fields"
+msgstr "کۆپیکردنی فیلدەکانی مەتای دیاریکراو"
+
+msgid "Delete after copying"
+msgstr "سڕینەوەی after copying"
+
+msgid "Copy selected meta blocks"
+msgstr "کۆپیکردنی meta بلۆکەکانی دیاریکراو"
+
+msgid "Scroll to top"
+msgstr "پێچانەوەی to top"
+
+msgid "Select this element"
+msgstr "دیاریکردنی ئەم توخم"
+
+msgid "Deselect this element"
+msgstr "Deselect ئەم توخم"
+
+msgid "Submit a bug"
+msgstr "ناردنی a bug"
+
+msgid "Multiple"
+msgstr "Multiple"
+
+msgid "Input file accepts"
+msgstr "Input فایل accepts"
+
+msgid "Maximum size"
+msgstr "زۆرترین قەبارە"
+
+msgid "Minimum size"
+msgstr "کەمترین قەبارە"
+
+msgid "Remove"
+msgstr "لابردن"
+
+msgid "These CSS classes will be applied to back-end editor fields"
+msgstr "These CSS classes دەبێت بێت applied بۆ back-end editor فیلدەکان"
+
+msgid "Add CSS classes to back-end editor fields (ex. class-active pulse)"
+msgstr ""
+"زیادکردنی CSS classes to back-end editor فیلدەکان (ex. class-active pulse)"
+
+msgid "Duplicate this option page"
+msgstr "دووبارەکردنەوەی ئەم پەڕەی هەڵبژاردەکان"
+
+msgid "Copy this option page"
+msgstr "کۆپیکردنی ئەم پەڕەی هەڵبژاردەکان"
+
+msgid "Delete the meta option page after copying"
+msgstr "سڕینەوەی هەڵبژاردەی مەتا پەڕە after copying"
+
+msgid "Page was successfully copied"
+msgstr "پەڕە بە سەرکەوتوویی کۆپی کرا"
+
+msgid "Unknown error, please retry later"
+msgstr "هەڵەی نەناسراو، تکایە دواتر هەوڵ بدەرەوە"
+
+msgid "Whether the post type is hierarchical (e.g. page). Default false."
+msgstr "ئایا  جۆری پۆست ە hierarchical (e.g. پەڕە). بنەڕەت false."
+
+msgid "Default positions for Core Menu Items"
+msgstr "بنەڕەت positions بۆ Core مێنیو Items"
+
+msgid ""
+"The position in the menu order this page should appear. The higher the "
+"number, the lower its position in the menu."
+msgstr ""
+" شوێن لە  مێنیو order ئەم پەڕە دەبێت appear.  higher  number,  lower its "
+"شوێن لە  مێنیو."
+
+msgid "Default positions"
+msgstr "بنەڕەت positions"
+
+msgid "Custom post type list"
+msgstr "لیستی جۆری پۆستی تایبەت"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, $show_ui must be "
+"true. If true, the post type is shown in its own top level menu. If false, "
+"no menu is shown."
+msgstr ""
+"Where بۆ show  جۆری پۆست لە  admin مێنیو. To کارکردن, $show_ui must بێت "
+"true. ئەگەر true,  جۆری پۆست ە shown لە its own top level مێنیو. ئەگەر "
+"false, no مێنیو ە shown."
+
+msgid "Custom show in menu rule"
+msgstr "تایبەت show لە مێنیو یاسا"
+
+msgid "Standard settings"
+msgstr "ڕێکخستنەکانی Standard"
+
+msgid "Set custom settings"
+msgstr "دانانی custom ڕێکخستنەکان"
+
+msgid ""
+"Where to show the post type in the admin menu. Set a custom show in menu "
+"rule here. For more info"
+msgstr ""
+"Where بۆ show  جۆری پۆست لە  admin مێنیو. Set a custom show لە مێنیو یاسا "
+"here. For more info"
+
+msgid "To change the base url of REST API route. Default is $post_type."
+msgstr "To change  base url ی REST API route. بنەڕەت ە $post_type."
+
+msgid "Associated WooCommerce product data"
+msgstr "پەیوەستکراو داتای بەرهەمی WooCommerce"
+
+msgid "Label displayed after a term has been updated."
+msgstr "ناوی پیشاندان displayed دوای a term هەیە been updated."
+
+msgid "To change the base url of REST API route. Default is $taxonomy."
+msgstr "To change  base url ی REST API route. بنەڕەت ە $taxonomy."
+
+msgid ""
+"Sets the query var key for this taxonomy. Default $taxonomy key. If false, a "
+"taxonomy cannot be loaded at ?{query_var}={term_slug}. If a string, the "
+"query ?{query_var}={term_slug} will be valid."
+msgstr ""
+"Sets  پرسیار var کلیل بۆ ئەم تاکسۆنۆمی. بنەڕەت $taxonomy کلیل. ئەگەر false, "
+"a تاکسۆنۆمی cannot بێت loaded at ?{پرسیار_var}={term_سلەگ}. ئەگەر a string,  "
+"پرسیار ?{پرسیار_var}={term_سلەگ} دەبێت بێت valid."
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using "
+"$taxonomy as slug. To prevent rewrite, set to false. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"Triggers  handling ی rewrites بۆ ئەم تاکسۆنۆمی. بنەڕەت true, using $taxonomy "
+"وەک سلەگ. To prevent نووسینەوە, set بۆ false. To specify نووسینەوە یاساکان, "
+"an array دەتوانێت بێت passed لەگەڵ any ی these keys:"
+
+msgid "Add field box"
+msgstr "زیادکردنی بۆکسی فیلد"
+
+msgid "From"
+msgstr "لە"
+
+msgid "To"
+msgstr "To"
+
+msgid "Set the number of records per page in your ACPT dashboards."
+msgstr "دانانی number of records per پەڕە in your ACPT dashboards."
+
+msgid "Field type"
+msgstr "جۆری فیلد"
+
+msgid "Display as"
+msgstr "Display وەک"
+
+msgid "Standard view"
+msgstr "Standard view"
+
+msgid "Accordion"
+msgstr "ئەکۆردیۆن"
+
+msgid "Horizontal tabs"
+msgstr "Horizontal تابەکان"
+
+msgid "Vertical tabs"
+msgstr "Vertical تابەکان"
+
+msgid "Product data name"
+msgstr "ناوی داتای بەرهەم"
+
+msgid "Eye dropper"
+msgstr "Eye dropper"
+
+msgid "Unordered list"
+msgstr "لیستی Unordered"
+
+msgid "Ordered list"
+msgstr "لیستی Ordered"
+
+msgid "Font"
+msgstr "Font"
+
+msgid "Set the font of the plug-in"
+msgstr "دانانی font of the پڵاگین"
+
+msgid "After"
+msgstr "After"
+
+msgid "Before"
+msgstr "Before"
+
+msgid "Country"
+msgstr "وڵات"
+
+msgid "The application cannot be booted"
+msgstr "بەرنامەکە ناتوانرێت دەست پێ بکات"
+
+msgid "An unexpected error has occurred"
+msgstr "هەڵەیەکی چاوەڕواننەکراو ڕوویدا"
+
+msgid "Dataset"
+msgstr "کۆمەڵەداتا"
+
+msgid ""
+"Build reusable datasets for meta fields and forms. Import from CSV, JSON or "
+"YAML."
+msgstr ""
+
+msgid "Dataset successfully saved"
+msgstr "کۆمەڵەداتا بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Dataset name"
+msgstr "ناوی کۆمەڵەداتا"
+
+msgid "Dataset label"
+msgstr "ناوی پیشاندانی کۆمەڵەداتا"
+
+msgid "Edit dataset"
+msgstr "دەستکاری کۆمەڵەداتا"
+
+msgid "Create a new dataset"
+msgstr "دروستکردنی کۆمەڵەداتایەکی نوێ"
+
+msgid "Create dataset"
+msgstr "دروستکردنی کۆمەڵەداتا"
+
+msgid "No dataset found."
+msgstr "هیچ کۆمەڵەداتا نەدۆزرایەوە."
+
+msgid "Items count"
+msgstr "ژمارەی بڕگەکان"
+
+msgid "Dataset successfully deleted."
+msgstr "کۆمەڵەداتا بە سەرکەوتوویی سڕایەوە."
+
+msgid "Delete dataset"
+msgstr "سڕینەوەی کۆمەڵەداتا"
+
+msgid "Manage dataset"
+msgstr "بەڕێوەبردنی کۆمەڵەداتا"
+
+msgid "Load dataset"
+msgstr "بارکردنی کۆمەڵەداتا"
+
+msgid "Dataset loaded correctly"
+msgstr "کۆمەڵەداتا loaded correctly"
+
+msgid "You are going to delete this dataset. Are you sure?"
+msgstr "خەریکە ئەم کۆمەڵەداتا دەسڕیتەوە. دڵنیایت؟"
+
+msgid "Select/deselect all fields"
+msgstr "دیاریکردن/deselect هەموو فیلدەکان"
+
+msgid "Show/hide elements"
+msgstr "پیشاندان/hide توخمەکان"
+
+msgid "The limit on how many elements are required ([1-100])"
+msgstr " limit لەسەر how many توخمەکان ن پێویست ([1-100])"
+
+msgid "Minimum elements allowed"
+msgstr "کەمترین توخمەکان allowed"
+
+msgid "The limit on how many elements are allowed ([1-100])"
+msgstr " limit لەسەر how many توخمەکان ن allowed ([1-100])"
+
+msgid "Maximum elements allowed"
+msgstr "زۆرترین توخمەکان allowed"
+
+msgid ""
+"Something went wrong. Try clicking the reload the application button to "
+"reload the application."
+msgstr ""
+"Something went wrong. Try clicking  reload  بەرنامە دوگمە بۆ reload  بەرنامە."
+
+msgid "The application has crashed"
+msgstr " بەرنامە هەیە crashed"
+
+msgid "Reload the application"
+msgstr "Reload  بەرنامە"
+
+msgid "Value is equals to {{v}}"
+msgstr "نرخ ە equals بۆ {{v}}"
+
+msgid "Textual fields settings"
+msgstr "ڕێکخستنەکانی Textual فیلدەکان"
+
+msgid "File field settings"
+msgstr "ڕێکخستنەکانی فایل فیلد"
+
+msgid "Radio field settings"
+msgstr "ڕێکخستنەکانی Radio فیلد"
+
+msgid "Nestable fields layout settings"
+msgstr "ڕێکخستنەکانی Nestable فیلدەکان چینین"
+
+msgid "Unit of measure fields settings"
+msgstr "ڕێکخستنەکانی Unit of measure فیلدەکان"
+
+msgid "URL field settings"
+msgstr "ڕێکخستنەکانی URL فیلد"
+
+msgid "WPML Settings"
+msgstr "WPML ڕێکخستنەکان"
+
+msgid "The file wpml-config.xml was successfully generated."
+msgstr " فایل wpml-config.xml was بە سەرکەوتوویی generated."
+
+msgid "The file wpml-config.xml was not successfully generated."
+msgstr " فایل wpml-config.xml was نە بە سەرکەوتوویی generated."
+
+msgid "This is the generated wpml-config.xml file:"
+msgstr "ئەمە ە  generated wpml-config.xml فایل:"
+
+msgid "Attachment"
+msgstr "Attachment"
+
+msgid "All formats"
+msgstr "هەموو فۆرماتەکان"
+
+msgid "Type the address or point a location on the map"
+msgstr "ناونیشان بنووسە یان شوێنێک لەسەر نەخشە دیاری بکە"
+
+msgid "All comments"
+msgstr "هەموو لێدوانەکان"
+
+msgid "Nested fields"
+msgstr "Nested فیلدەکان"
+
+msgid "Row"
+msgstr "ئاسۆ"
+
+msgid "Block"
+msgstr "بڵۆک"
+
+msgid "Table"
+msgstr "خشتە"
+
+msgid "The look of the field for admins and editors."
+msgstr " look ی  فیلد بۆ admins و editors."
+
+msgid "Field layout"
+msgstr "فیلد چینین"
+
+msgid ""
+"The leading field (which will be displayed when the repeater is collapsed)."
+msgstr " leading فیلد (which دەبێت بێت displayed کاتێک  repeater ە collapsed)."
+
+msgid "Leading field"
+msgstr "Leading فیلد"
+
+msgid "Reset the map"
+msgstr "گەڕاندنەوەی map"
+
+msgid "Successful outcome message"
+msgstr "Successful outcome پەیام"
+
+msgid "Delete all blocks"
+msgstr "سڕینەوەی all بلۆکەکان"
+
+msgid "Something went wrong, please retry."
+msgstr "شتێک بە هەڵەدا چوو، تکایە دووبارە هەوڵ بدەرەوە."
+
+msgid "Connect external services"
+msgstr "Connect external services"
+
+msgid "Your Cloudflare Turnstile site key"
+msgstr "هی تۆ Cloudflare Turnstile site کلیل"
+
+msgid ""
+"Your Cloudflare Turnstile site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"هی تۆ Cloudflare Turnstile site کلیل. Needed بۆ use  CAPTCHA فۆرم فیلد."
+
+msgid "Your Cloudflare Turnstile secret key"
+msgstr "هی تۆ Cloudflare Turnstile secret کلیل"
+
+msgid ""
+"Your Cloudflare Turnstile secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"هی تۆ Cloudflare Turnstile secret کلیل. Needed بۆ use  CAPTCHA فۆرم فیلد."
+
+msgid "Health check"
+msgstr "Health check"
+
+msgid ""
+"Inspect the application state and automatically repair installation errors "
+"or schema issues."
+msgstr ""
+
+msgid "Run health check"
+msgstr "جێبەجێکردنی health check"
+
+msgid "Launch the repair"
+msgstr "دەستپێکردنی repair"
+
+msgid "DB status"
+msgstr "DB دۆخ"
+
+msgid "The repair was carried out successfully."
+msgstr " repair was carried out بە سەرکەوتوویی."
+
+msgid "Post object settings"
+msgstr "ڕێکخستنەکانی پۆست object"
+
+msgid "Term object settings"
+msgstr "ڕێکخستنەکانی Term object"
+
+msgid "Filter by post type"
+msgstr "پاڵاوتنی by جۆری پۆست"
+
+msgid "Filter by post status"
+msgstr "پاڵاوتنی by پۆست دۆخ"
+
+msgid "Filter by taxonomy"
+msgstr "پاڵاوتنی by تاکسۆنۆمی"
+
+msgid "Polylang Settings"
+msgstr "Polylang ڕێکخستنەکان"
+
+msgid "Textarea settings"
+msgstr "ڕێکخستنەکانی Textarea"
+
+msgid "The cols value (used only by textarea fields)"
+msgstr " cols نرخ (بەکارهێنراو تەنها لەلایەن textarea فیلدەکان)"
+
+msgid "The rows value (used only by textarea fields)"
+msgstr " rows نرخ (بەکارهێنراو تەنها لەلایەن textarea فیلدەکان)"
+
+msgid "Context"
+msgstr "Context"
+
+msgid "Priority"
+msgstr "پێشەنگی"
+
+msgid "User settings"
+msgstr "ڕێکخستنەکانی بەکارهێنەر"
+
+msgid "Filter by role"
+msgstr "پاڵاوتنی by ڕۆڵ"
+
+msgid "Relational field settings"
+msgstr "ڕێکخستنەکانی Relational فیلد"
+
+msgid "Only name or title"
+msgstr "Only ناو یان ناونیشان"
+
+msgid "With image"
+msgstr "With وێنە"
+
+msgid "Date field settings"
+msgstr "ڕێکخستنەکانی ڕێکەوت فیلد"
+
+msgid "Datetime field settings"
+msgstr "ڕێکخستنەکانی Datetime فیلد"
+
+msgid "Time field settings"
+msgstr "ڕێکخستنەکانی Time فیلد"
+
+msgid "Select the field vertical alignment (default: center)"
+msgstr "دیاریکردنی فیلد vertical هاوتاکردن (بنەڕەت: center)"
+
+msgid "Vertical alignment"
+msgstr "Vertical هاوتاکردن"
+
+msgid "Center"
+msgstr "ناوه‌ڕاست"
+
+msgid "Top"
+msgstr "لووتکه‌"
+
+msgid "Bottom"
+msgstr "بن"
+
+msgid "The maximum size is {{v}}"
+msgstr " زۆرترین قەبارە ە {{v}}"
+
+msgid "The minimum size is {{v}}"
+msgstr " کەمترین قەبارە ە {{v}}"
+
+msgid "Set as post thumbnail"
+msgstr "دانانی as پۆست thumbnail"
+
+msgid "Sync with post terms"
+msgstr "هاوکاتکردن لەگەڵ زاراوەکانی پۆست"
+
+msgid "Image settings"
+msgstr "ڕێکخستنەکانی وێنە"
+
+msgid "Permissions"
+msgstr "مۆڵەتەکان"
+
+msgid "Manage permissions of"
+msgstr "بەڕێوەبردنی مۆڵەتەکان of"
+
+msgid "Add permission"
+msgstr "زیادکردنی مۆڵەت"
+
+msgid "No permissions found."
+msgstr "هیچ مۆڵەتەکان نەدۆزرایەوە."
+
+msgid "User role"
+msgstr "بەکارهێنەر ڕۆڵ"
+
+msgid "Confirm deleting permission"
+msgstr "دڵنیابوونەوەی سڕینەوەی مۆڵەت"
+
+msgid "Permissions successfully saved"
+msgstr "مۆڵەتەکان بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid ""
+"No permissions are present, click on \"Add permission\" button to add the "
+"first one."
+msgstr ""
+"No مۆڵەتەکان ن ئامادە, کرتە لەسەر \"Add مۆڵەت\" دوگمە بۆ add  first one."
+
+msgid "Confirm deleting permission element"
+msgstr "دڵنیابوونەوەی سڕینەوەی مۆڵەت توخم"
+
+msgid "Assign"
+msgstr "Assign"
+
+msgid "Child field"
+msgstr "Child فیلد"
+
+msgid "Child block"
+msgstr "Child بلۆک"
+
+msgid "No fields found"
+msgstr "هیچ فیلدەکان نەدۆزرایەوە."
+
+msgid "Reset to the default values"
+msgstr "گەڕاندنەوەی to the بنەڕەت values"
+
+msgid "Override here the default settings:"
+msgstr "Override here  بنەڕەت ڕێکخستنەکان:"
+
+msgid "Style"
+msgstr "شێواز"
+
+msgid "Settings successfully saved"
+msgstr "ڕێکخستنەکان بە سەرکەوتوویی پاشەکەوت کرا."
+
+msgid "Save this table as template"
+msgstr "Save ئەم خشتە وەک داڕێژە"
+
+msgid "Import template"
+msgstr "هاوردەکردنی داڕێژە"
+
+msgid "Choose the template"
+msgstr "هەڵبژاردنی داڕێژە"
+
+msgid "Import"
+msgstr "هاوردن"
+
+msgid "Border style"
+msgstr "Border style"
+
+msgid "Border weight"
+msgstr "Border weight"
+
+msgid "Border color"
+msgstr "ڕەنگی چوارچێوە"
+
+msgid "Main background"
+msgstr "Main پاشبنەما"
+
+msgid "Alt background"
+msgstr "Alt پاشبنەما"
+
+msgid "Add header"
+msgstr "زیادکردنی header"
+
+msgid "Add footer"
+msgstr "زیادکردنی footer"
+
+msgid "Save as template"
+msgstr "Save وەک داڕێژە"
+
+msgid "Create table"
+msgstr "دروستکردنی خشتە"
+
+msgid "Edit table settings"
+msgstr "دەستکاری خشتە ڕێکخستنەکان"
+
+msgid "No table already created."
+msgstr "No خشتە already created."
+
+msgid "JSON data is not valid."
+msgstr "JSON داتا ە نە valid."
+
+msgid "Delete row"
+msgstr "سڕینەوەی ڕیز"
+
+msgid "Add row"
+msgstr "زیادکردنی ڕیز"
+
+msgid "Delete column"
+msgstr "سڕینەوەی column"
+
+msgid "Add column"
+msgstr "زیادکردنی column"
+
+msgid "Border"
+msgstr "سنوور"
+
+msgid "Text color"
+msgstr "ڕەنگی دەق"
+
+msgid "Background"
+msgstr "پاشبنەما"
+
+msgid "Rows"
+msgstr "ڕیزەکان"
+
+msgid "Option pages successfully deleted."
+msgstr "پەڕەکانی هەڵبژاردەکان بە سەرکەوتوویی سڕایەوە."
+
+msgid "Clear"
+msgstr "لابردن"
+
+msgid "Apply"
+msgstr "بەکاربردن"
+
+msgid "Preview element"
+msgstr "Preview توخم"
+
+msgid "No records found."
+msgstr "هیچ records نەدۆزرایەوە."
+
+msgid "Show data"
+msgstr "پیشاندان داتا"
+
+msgid "Enable custom post types"
+msgstr "چالاککردنی جۆرە پۆستە تایبەتەکان"
+
+msgid "Enable custom post types manager"
+msgstr "چالاککردنی جۆرە پۆستە تایبەتەکان manager"
+
+msgid "Enable Option Pages"
+msgstr "چالاککردنی هەڵبژاردە پەڕەکان"
+
+msgid "Enable the Option Pages manager."
+msgstr "چالاککردنی هەڵبژاردە پەڕەکان manager."
+
+msgid "Enable meta fields"
+msgstr "چالاککردنی فیلدەکانی مەتا"
+
+msgid "Enable the meta fields manager."
+msgstr "چالاککردنی فیلدەکانی مەتا manager."
+
+msgid "Clone field settings"
+msgstr "ڕێکخستنەکانی Clone فیلد"
+
+msgid "Select fields to clone"
+msgstr "دیاریکردنی فیلدەکان to clone"
+
+msgid "Hide"
+msgstr "شاردنه‌وه‌"
+
+msgid "Restore"
+msgstr "گه‌ڕاندنه‌وه‌"
+
+msgid "Restore elements"
+msgstr "گەڕاندنەوەی توخمەکان"
+
+msgid "hidden elements"
+msgstr "hidden توخمەکان"
+
+msgid "Front URL prefix"
+msgstr "Front URL prefix"
+
+msgid ""
+"Alters the post type permalink structure to add a prefix to singular posts "
+"URLs (ex. /movie/titanic). Default value is the post type name."
+msgstr ""
+"Alters  جۆری پۆست permalink structure بۆ add a prefix بۆ singular پۆستەکان "
+"URLs (ex. /movie/titanic). بنەڕەت نرخ ە  جۆری پۆست ناو."
+
+msgid "Custom post type successfully duplicated."
+msgstr "جۆری پۆستی تایبەت بە سەرکەوتوویی دووبارە کرایەوە."
+
+msgid "Option pages successfully duplicated."
+msgstr "پەڕەکانی هەڵبژاردەکان بە سەرکەوتوویی دووبارە کرایەوە."
+
+msgid "Taxonomy successfully duplicated."
+msgstr "تاکسۆنۆمی بە سەرکەوتوویی دووبارە کرایەوە."
+
+msgid "Dataset successfully duplicated."
+msgstr "کۆمەڵەداتا بە سەرکەوتوویی دووبارە کرایەوە."
+
+msgid "Form successfully duplicated."
+msgstr "فۆرم بە سەرکەوتوویی دووبارە کرایەوە."
+
+msgid "WooCommerce product data successfully duplicated"
+msgstr "داتای بەرهەمی WooCommerce بە سەرکەوتوویی دووبارە کرایەوە."
+
+msgid "Please wait"
+msgstr "تکایە چاوەڕێ بکە"
+
+msgid "Labels successfully regenerated"
+msgstr "ناوەکانی پیشاندان بە سەرکەوتوویی regenerated"
+
+msgid "No image selected"
+msgstr "هیچ وێنەیەک دیاری نەکراوە"
+
+msgid "No video selected"
+msgstr "هیچ ڤیدیۆیەک دیاری نەکراوە"
+
+msgid "No file selected"
+msgstr "هیچ فایلێک دیاری نەکراوە"
+
+msgid "Password field settings"
+msgstr "ڕێکخستنەکانی Password فیلد"
+
+msgid "Algorithm"
+msgstr "Algorithm"
+
+msgid ""
+"Should the permalink structure be prepended with the front base. (example: "
+"if your permalink structure is /blog/, then your links will be: false->/"
+"news/, true->/blog/news/). Defaults to true"
+msgstr ""
+"Should  permalink structure بێت prepended لەگەڵ  front base. (example: ئەگەر "
+"تۆ permalink structure ە /blog/, then تۆ links دەبێت بێت: false->/news/, "
+"true->/blog/news/). Defaults بۆ true"
+
+msgid "Resolution"
+msgstr "Resolution"
+
+msgid "Color dark"
+msgstr "ڕەنگ dark"
+
+msgid "Color light"
+msgstr "ڕەنگ light"
+
+msgid "Post status"
+msgstr "پۆست دۆخ"
+
+msgid "The updated or new post status"
+msgstr " updated یان نوێ پۆست دۆخ"
+
+msgid "Add images to the gallery"
+msgstr "زیادکردنی وێنەکان to the gallery"
+
+msgid "Enable custom blocks"
+msgstr "چالاککردنی custom بلۆکەکان"
+
+msgid "Enable the custom blocks manager."
+msgstr "چالاککردنی custom بلۆکەکان manager."
+
+msgid "Dynamic blocks list"
+msgstr "لیستی Dynamic بلۆکەکان"
+
+msgid "Create new block"
+msgstr "دروستکردنی بلۆکی نوێ"
+
+msgid "General configuration"
+msgstr "General configuration"
+
+msgid "Add controls to the block"
+msgstr "زیادکردنی کۆنترۆڵەکان to the بلۆک"
+
+msgid "Add custom CSS to the block"
+msgstr "زیادکردنی custom CSS to the بلۆک"
+
+msgid "Add the callback to the block"
+msgstr "زیادکردنی callback to the بلۆک"
+
+msgid "Custom SVG"
+msgstr "تایبەت SVG"
+
+msgid "Confirm deleting control"
+msgstr "دڵنیابوونەوەی سڕینەوەی کۆنترۆڵ"
+
+msgid "Declare block support for certain features"
+msgstr "ڕاگەیاندنی بلۆک support بۆ certain features"
+
+msgid "Block callback"
+msgstr "بلۆک callback"
+
+msgid "This is the block's code that will be run. Make use of TWIG syntax."
+msgstr "ئەمە ە  بلۆک's code that دەبێت بێت run. Make use ی TWIG syntax."
+
+msgid ""
+"No block controls already created. Create the first one now by clicking the "
+"button \"Add control\"!"
+msgstr ""
+"هێشتا هیچ بلۆک کۆنترۆڵەکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە "
+"دوگمەی \"Add کۆنترۆڵ\" دروست بکە!"
+
+msgid "Block controls"
+msgstr "بلۆک کۆنترۆڵەکان"
+
+msgid "Add control"
+msgstr "زیادکردنی کۆنترۆڵ"
+
+msgid "Control slug"
+msgstr "سلەگی Control"
+
+msgid "Control slug (Ex. gallery or text_1)"
+msgstr "Control سلەگ (Ex. gallery یان text_1)"
+
+msgid "Choose the control type"
+msgstr "هەڵبژاردنی کۆنترۆڵ type"
+
+msgid "The description of this control (showed only on admin panel)"
+msgstr " وەسف ی ئەم کۆنترۆڵ (showed تەنها لەسەر admin panel)"
+
+msgid "Duplicate this control"
+msgstr "دووبارەکردنەوەی ئەم کۆنترۆڵ"
+
+msgid "Delete this block control"
+msgstr "سڕینەوەی ئەم بلۆک کۆنترۆڵ"
+
+msgid "Hide/show this block control"
+msgstr "شاردنەوە/show ئەم بلۆک کۆنترۆڵ"
+
+msgid "Icon type"
+msgstr "جۆری ئایکۆن"
+
+msgid "The background color of the icon"
+msgstr " پاشبنەما ڕەنگ ی  ئایکۆن"
+
+msgid "The foreground color of the icon"
+msgstr " foreground ڕەنگ ی  ئایکۆن"
+
+msgid "Keywords"
+msgstr "کلیلەوشە"
+
+msgid ""
+"An array of search terms to help user discover the block while searching."
+msgstr ""
+"An array ی search terms بۆ help بەکارهێنەر discover  بلۆک while searching."
+
+msgid "The block category"
+msgstr " بلۆک category"
+
+msgid "Block category"
+msgstr "بلۆک category"
+
+msgid "The block label"
+msgstr "ناوی پیشاندانی The بلۆک"
+
+msgid "Block label"
+msgstr "ناوی پیشاندانی بلۆک"
+
+msgid "Block CSS"
+msgstr "بلۆک CSS"
+
+msgid "Enter the CSS that will be used on the block here."
+msgstr "نووسینی CSS that will be used on the بلۆک here."
+
+msgid "Anchor"
+msgstr "لەنگەر"
+
+msgid "Anchors let you link directly to a specific block on a page."
+msgstr "Anchors let you link directly بۆ a specific بلۆک لەسەر a پەڕە."
+
+msgid "Align"
+msgstr "لاگرتن"
+
+msgid "This property adds block controls."
+msgstr "ئەمە property adds بلۆک کۆنترۆڵەکان."
+
+msgid "Align wide"
+msgstr "Align wide"
+
+msgid "This property allows to enable wide alignment for your theme."
+msgstr "ئەمە property allows بۆ enable wide هاوتاکردن بۆ تۆ theme."
+
+msgid "Enable background image control."
+msgstr "چالاککردنی پاشبنەما وێنە کۆنترۆڵ."
+
+msgid "Enable/disable background image + size control."
+msgstr "Enable/disable پاشبنەما وێنە + قەبارە کۆنترۆڵ."
+
+msgid "Enable/disable background and text color support."
+msgstr "Enable/disable پاشبنەما و text ڕەنگ support."
+
+msgid "Enable/disable button color support."
+msgstr "Enable/disable دوگمە ڕەنگ support."
+
+msgid "Enable/disable contrast checker widget in the block editor UI."
+msgstr "Enable/disable contrast checker widget لە  بلۆک editor UI."
+
+msgid "Enable/disable gradient backgrounds support."
+msgstr "Enable/disable gradient backgrounds support."
+
+msgid "Enable/disable heading color support."
+msgstr "Enable/disable heading ڕەنگ support."
+
+msgid "Enable/disable link colors control."
+msgstr "Enable/disable link colors کۆنترۆڵ."
+
+msgid "Enable/disable background and text, but not link."
+msgstr "Enable/disable پاشبنەما و text, but نە link."
+
+msgid "Dimensions"
+msgstr "دوورییه‌کان"
+
+msgid "Enable/disable aspect ratio control."
+msgstr "Enable/disable aspect ratio کۆنترۆڵ."
+
+msgid "Enable/disable min height control."
+msgstr "Enable/disable min بەرزی کۆنترۆڵ."
+
+msgid "Filter"
+msgstr "پاڵاوتن"
+
+msgid "Enable/disable duotone support."
+msgstr "Enable/disable duotone support."
+
+msgid "Enable/disable support for an HTML mode."
+msgstr "Enable/disable support بۆ an HTML mode."
+
+msgid "Lock"
+msgstr "Lock"
+
+msgid "Enable/disable the ability to toggle the lock state."
+msgstr "Enable/disable  ability بۆ toggle  lock state."
+
+msgid "Determine if a block can be used multiple times."
+msgstr "دیاریکردنی ئەگەر a بلۆک دەتوانێت بێت بەکارهێنراو multiple times."
+
+msgid "Position"
+msgstr "شوێن"
+
+msgid "Enable/disable selecting sticky position."
+msgstr "Enable/disable selecting sticky شوێن."
+
+msgid "Renaming"
+msgstr "Renaming"
+
+msgid "Determine if a block can be renamed in the editor."
+msgstr "دیاریکردنی ئەگەر a بلۆک دەتوانێت بێت renamed لە  editor."
+
+msgid "Reusable"
+msgstr "Reusable"
+
+msgid "Enable/disable the ability of being converted into a reusable block."
+msgstr "Enable/disable  ability ی being converted into a reusable بلۆک."
+
+msgid "Shadow"
+msgstr "سێبەر"
+
+msgid "Enable/disable the shadow picker."
+msgstr "Enable/disable  shadow picker."
+
+msgid "Spacing"
+msgstr "Spacing"
+
+msgid "Enable/disable margin for arbitrary sides."
+msgstr "Enable/disable margin بۆ arbitrary sides."
+
+msgid "Enable/disable padding for all sides."
+msgstr "Enable/disable padding بۆ هەموو sides."
+
+msgid "Enable/disable axial (column/row) block spacing controls."
+msgstr "Enable/disable axial (column/row) بلۆک spacing کۆنترۆڵەکان."
+
+msgid "Typography"
+msgstr "Typography"
+
+msgid "Enable/disable support and UI control for font-size."
+msgstr "Enable/disable support و UI کۆنترۆڵ بۆ font-قەبارە."
+
+msgid "Declare support for specific text alignment options."
+msgstr "ڕاگەیاندنی support بۆ specific text هاوتاکردن هەڵبژاردەکان."
+
+msgid "No block found."
+msgstr "هیچ بلۆک نەدۆزرایەوە."
+
+msgid "You are going to delete this block. Are you sure?"
+msgstr "خەریکە ئەم بلۆک دەسڕیتەوە. دڵنیایت؟"
+
+msgid "Choose a standard category"
+msgstr "هەڵبژاردنی a standard هاوپۆل"
+
+msgid "Enter a custom category"
+msgstr "نووسینی a custom هاوپۆل"
+
+msgid "Enable beta versions"
+msgstr "چالاککردنی beta versions"
+
+msgid "Enable the download of beta versions."
+msgstr "چالاککردنی download of beta versions."
+
+msgid "Audio field settings"
+msgstr "ڕێکخستنەکانی Audio فیلد"
+
+msgid "Use the custom audio player"
+msgstr "بەکارهێنانی custom دەنگ player"
+
+msgid "Skin"
+msgstr "Skin"
+
+msgid "Set the desired skin to be applied to the UI interface"
+msgstr "دانانی desired skin to be applied to the UI interface"
+
+msgid "Add new post a link it"
+msgstr "پۆستێکی نوێ زیاد بکە و بەستەری پێ بدە"
+
+msgid "Create a new post"
+msgstr "دروستکردنی پۆستێکی نوێ"
+
+msgid "Gallery settings"
+msgstr "ڕێکخستنەکانی Gallery"
+
+msgid "Video settings"
+msgstr "ڕێکخستنەکانی Video"
+
+msgid "Disable media upload"
+msgstr "ناچالاککردنی media upload"
+
+msgid "CSS variables"
+msgstr "CSS variables"
+
+msgid ""
+"Should the permastruct be prepended with WP_Rewrite::$front. Default true."
+msgstr ""
+"Should  permastruct بێت prepended لەگەڵ WP_Rewrite::$front. بنەڕەت true."
+
+msgid "Either hierarchical rewrite tag or not. Default false."
+msgstr "یان hierarchical نووسینەوە tag یان نە. بنەڕەت false."
+
+msgid "Rewrite hierarchical"
+msgstr "Rewrite hierarchical"
+
+msgid "Disable cover in custom the audio player"
+msgstr "ناچالاککردنی cover in custom the دەنگ player"
+
+msgid "Box settings"
+msgstr "ڕێکخستنەکانی Box"
+
+msgid "Delete unused MySQL tables"
+msgstr "سڕینەوەی unused MySQL tables"
+
+msgid ""
+"If this option is enabled, all MySQL tables that are not in use — such as "
+"forms and dynamic blocks — will be deleted. Enable this option only if you "
+"are sure of what you are doing!"
+msgstr ""
+"ئەگەر ئەم هەڵبژاردە ە چالاک, هەموو MySQL tables that ن نە لە use — such وەک "
+"فۆرمەکان و dynamic بلۆکەکان — دەبێت بێت deleted. Enable ئەم هەڵبژاردە تەنها "
+"ئەگەر you ن sure ی what you ن doing!"
+
+msgid "Apply to meta boxes"
+msgstr "جێبەجێکردنی to بۆکسەکانی مەتا"
+
+msgid "Don't apply to meta boxes"
+msgstr "Don't apply بۆ بۆکسەکانی مەتا"
+
+msgid "Bulk edit"
+msgstr "دەستکاریکردنی بەکۆمەڵ"
+
+msgid "Cache driver"
+msgstr "کاش درایڤەر"
+
+msgid "Set the desired cache driver to improve ACPT performances"
+msgstr "دانانی desired کاش درایڤەر to improve ACPT performances"
+
+msgid "Cache folder settings"
+msgstr "ڕێکخستنەکانی کاش folder"
+
+msgid "Cache folder (absolute path)"
+msgstr "کاش folder (absolute path)"
+
+msgid ""
+"Optional: specify an absolute server path for the cache directory (e.g. /var/"
+"cache/acpt). Leave empty to use the default plugin directory."
+msgstr ""
+"Optional: specify an absolute server path بۆ  کاش directory (e.g. /var/cache/"
+"acpt). Leave empty بۆ use  بنەڕەت پڵاگین directory."
+
+msgid "Redis settings"
+msgstr "ڕێکخستنەکانی Redis"
+
+msgid "Memcached settings"
+msgstr "ڕێکخستنەکانی Memcached"
+
+msgid "INFO"
+msgstr "زانیاری"
+
+msgid "SIZE"
+msgstr "قەبارە"
+
+msgid "ITEMS"
+msgstr "بڕگەکان"
+
+msgid "Set the cache folder"
+msgstr "دانانی کاش folder"
+
+msgid "Set the Redis host"
+msgstr "دانانی Redis host"
+
+msgid "Set the Redis port"
+msgstr "دانانی Redis port"
+
+msgid "Set the Redis database"
+msgstr "دانانی Redis داتابەیس"
+
+msgid "Set the Memcached host"
+msgstr "دانانی Memcached host"
+
+msgid "Set the Memcached port"
+msgstr "دانانی Memcached port"
+
+msgid "Driver connection ok"
+msgstr "Driver connection ok"
+
+msgid "Test driver connection"
+msgstr "Test درایڤەر connection"
+
+msgid "Enable cache for meta data"
+msgstr "چالاککردنی کاش for meta داتا"
+
+msgid "Full"
+msgstr "تەواو"
+
+msgid "Visual and Text"
+msgstr "بینراو و دەق"
+
+msgid "Visual Only"
+msgstr "تەنها بینراو"
+
+msgid "Text Only"
+msgstr "تەنها دەق"
+
+msgid "Toolbar"
+msgstr "تووڵبار"
+
+msgid "Tabs"
+msgstr "تابەکان"
+
+msgid "Set the first image as post thumbnail"
+msgstr "دانانی first وێنە as پۆست thumbnail"
+
+msgid "Allow dangerous content"
+msgstr "ڕێگەدان بە dangerous ناوەڕۆک"
+
+msgid "URL structure type"
+msgstr "جۆری URL structure"
+
+msgid "Absolute (ex. http://example.com)"
+msgstr "Absolute (ex. http://example.com)"
+
+msgid "Relative (ex. /path/example/field)"
+msgstr "Relative (ex. /path/example/field)"
+
+msgid "Enable logs"
+msgstr "چالاککردنی لۆگەکان"
+
+msgid ""
+"Turn on full logging to keep a detailed record of everything. This helps to "
+"spot bugs more easily and understand what went wrong if something breaks."
+msgstr ""
+"Turn لەسەر full logging بۆ keep a detailed record ی everything. ئەمە helps "
+"بۆ spot bugs more easily و understand what went wrong ئەگەر something breaks."
+
+msgid "Logs manager"
+msgstr "Logs manager"
+
+msgid "No logs found"
+msgstr "هیچ لۆگەکان نەدۆزرایەوە."
+
+msgid "Severity"
+msgstr "Severity"
+
+msgid "Message"
+msgstr "پەیام"
+
+msgid "Filter by"
+msgstr "پاڵاوتنی by"
+
+msgid "Jump to version"
+msgstr "بازدان بۆ to version"
+
+msgid "Show only"
+msgstr "پیشاندان تەنها"
+
+msgid "Select files"
+msgstr "دیاریکردنی فایلەکان"
+
+msgid "Max items allowed"
+msgstr "Max items allowed"
+
+msgid "Open a ticket"
+msgstr "کردنەوەی a ticket"
+
+msgid "Select post status"
+msgstr "دیاریکردنی پۆست دۆخ"
+
+msgid "Apply to Front-End"
+msgstr "جێبەجێکردنی to Front-End"
+
+msgid "Apply to Back-End"
+msgstr "جێبەجێکردنی to Back-End"
+
+msgid "Sync language with locale"
+msgstr "هاوکاتکردنی زمان لەگەڵ لۆکاڵ"
+
+msgid ""
+"Automatically synchronize the application language with the selected locale "
+"settings, if applicable."
+msgstr ""
+"Automatically synchronize  بەرنامە language لەگەڵ  دیاریکراو locale "
+"ڕێکخستنەکان, ئەگەر applicable."
+
+msgid "Table pagination"
+msgstr "خشتە pagination"
+
+msgid "Set the number of rows per page"
+msgstr "دانانی number of rows per پەڕە"
+
+msgid "Set the table as sortable"
+msgstr "دانانی خشتە as sortable"
+
+msgid "Import CSV"
+msgstr "هاوردەکردنی CSV"
+
+msgid "Add tab"
+msgstr "زیادکردنی تاب"
+
+msgid ""
+"No tabs already created. Create the first one now by clicking the button "
+"\"Add tab\"!"
+msgstr ""
+"هێشتا هیچ تابەکان دروست نەکراوە. یەکەمین دانە ئێستا بە کرتەکردن لە دوگمەی "
+"\"Add تاب\" دروست بکە!"
+
+msgid "No extra settings available"
+msgstr "هیچ extra ڕێکخستنەکان بەردەست نییە"
+
+msgid "No tabs available"
+msgstr "هیچ تابەکان بەردەست نییە"
+
+msgid "No steps available"
+msgstr "هیچ steps بەردەست نییە"
+
+msgid "Release elements here"
+msgstr "بەردانی توخمەکان here"
+
+msgid "Date from"
+msgstr "ڕێکەوت لە"
+
+msgid "Date to"
+msgstr "ڕێکەوت بۆ"
+
+msgid "Single click to edit"
+msgstr "Single کرتە بۆ edit"
+
+msgid "Double click to toggle this element"
+msgstr "Double کرتە بۆ toggle ئەم توخم"
+
+msgid "Double click to close this element"
+msgstr "Double کرتە بۆ close ئەم توخم"
+
+msgid "Double click to open this element"
+msgstr "Double کرتە بۆ open ئەم توخم"
+
+msgid ""
+"Enable the WordPress admin menu for faster, easier dashboard navigation."
+msgstr ""
+"چالاککردنی WordPress admin مێنیو for faster, easier داشبۆرد ڕێنیشاندەر."
+
+msgid "Enable Admin menu"
+msgstr "چالاککردنی Admin مێنیو"
+
+msgid "Google Sheets API key"
+msgstr "Google Sheets API کلیل"
+
+msgid ""
+"Paste here your Google Sheets API key. Needed to import sheets into Table "
+"fields."
+msgstr ""
+"لکاندنی here your Google Sheets API key. Needed to import sheets into خشتە "
+"فیلدەکان."
+
+msgid "Form settings"
+msgstr "ڕێکخستنەکانی فۆرم"
+
+msgid "Email delivery"
+msgstr "گەیاندنی ئیمەیڵ"
+
+msgid "Restrict the form submission rates"
+msgstr "سنووردارکردنی فۆرم submission rates"
+
+msgid "Adjust the values of the form’s CSS variables"
+msgstr "ڕێکخستنی values of the فۆرم’s CSS variables"
+
+msgid "Trigger an email once the form is submitted"
+msgstr "ناردنی an ئیمەیڵ once the فۆرم is submitted"
+
+msgid "Sync with taxonomies"
+msgstr "هاوکاتکردن لەگەڵ تاکسۆنۆمییەکان"
+
+msgid "No taxonomy found."
+msgstr "هیچ تاکسۆنۆمی نەدۆزرایەوە."
+
+msgid "Successfully taxonomy sync."
+msgstr "Successfully تاکسۆنۆمی sync."
+
+msgid "Edit meta box"
+msgstr "دەستکاری بۆکسی مەتا"
+
+msgid "Available only if `show in archive` is enabled"
+msgstr "Available تەنها ئەگەر `show in archive` ە چالاک"
+
+msgid "Email preview"
+msgstr "پێشبینینی ئیمەیڵ"
+
+msgid "Subject"
+msgstr "بابەت"
+
+msgid "Rule"
+msgstr "Rule"
+
+msgid "Limit"
+msgstr "Limit"
+
+msgid "Submission limits"
+msgstr "Submission limits"
+
+msgid "Email settings"
+msgstr "ڕێکخستنەکانی ئیمەیڵ"
+
+msgid "Post archive"
+msgstr "پۆست ئەرشیف"
+
+msgid "Taxonomy archive"
+msgstr "تاکسۆنۆمی ئەرشیف"
+
+msgid "Copy after"
+msgstr "کۆپیکردنی after"
+
+msgid "Enable custom content type"
+msgstr ""
+
+msgid "Enable the custom content type manager."
+msgstr ""
+
+msgid "Create new table"
+msgstr ""
+
+msgid "Registered tables"
+msgstr ""
+
+msgid "ID Strategy"
+msgstr ""
+
+msgid "The ID table strategy"
+msgstr ""
+
+msgid "Table label"
+msgstr ""
+
+msgid "The table label"
+msgstr ""
+
+msgid "Table columns"
+msgstr ""
+
+msgid "Table name"
+msgstr ""
+
+msgid "The table name. Must be unique"
+msgstr ""
+
+msgid "Indexes"
+msgstr ""
+
+msgid "Indexes and foreign keys"
+msgstr ""
+
+msgid "Charset and collation"
+msgstr ""
+
+msgid "The table charset and collation"
+msgstr ""
+
+msgid "Delete this column"
+msgstr ""
+
+msgid "Confirm deleting column"
+msgstr ""
+
+msgid ""
+"No columns already created. Create the first one now by clicking the button "
+"\"Add column\"!"
+msgstr ""
+
+msgid "Column label"
+msgstr ""
+
+msgid "Column slug"
+msgstr ""
+
+msgid "Column slug (Ex. gallery or text_1)"
+msgstr ""
+
+msgid "Choose the column type"
+msgstr ""
+
+msgid "This key is already declared"
+msgstr ""
+
+msgid "UI field type mapping"
+msgstr ""
+
+msgid ""
+"No indexes already created. Create the first one now by clicking the button "
+"\"Add index\"!"
+msgstr ""
+
+msgid "Add index"
+msgstr ""
+
+msgid "Timestamps"
+msgstr ""
+
+msgid "Add timestamps columns (`created_at` and `updated_at`) to the table."
+msgstr ""
+
+msgid "Soft delete"
+msgstr ""
+
+msgid "Implement soft delete on this table."
+msgstr ""
+
+msgid ""
+"No foreign keys already created. Create the first one now by clicking the "
+"button \"Add foreign key\"!"
+msgstr ""
+
+msgid "Reference table"
+msgstr ""
+
+msgid "Reference columns"
+msgstr ""
+
+msgid "Referring columns"
+msgstr ""
+
+msgid "Referenced table"
+msgstr ""
+
+msgid "Referenced columns"
+msgstr ""
+
+msgid "Confirm deleting key"
+msgstr ""
+
+msgid "Is primary key"
+msgstr ""
+
+msgid ""
+"You cannot create an index or a foreign key until at least one column has "
+"been defined. Please create a column first."
+msgstr ""
+
+msgid "Select time format"
+msgstr "دیاریکردنی کات فۆرمات"
+
+msgid "Custom time format"
+msgstr "فۆرماتی Custom کات"
+
+msgid "Select date format"
+msgstr "دیاریکردنی ڕێکەوت فۆرمات"
+
+msgid "Custom date format"
+msgstr "فۆرماتی Custom ڕێکەوت"
+
+msgid "The label of the Add element button"
+msgstr " ناوی پیشاندان ی  Add توخم دوگمە"
+
+msgid "Add element button label"
+msgstr "زیادکردنی توخم دوگمە ناوی پیشاندان"
+
+msgid "The label of the Remove element button"
+msgstr " ناوی پیشاندان ی  Remove توخم دوگمە"
+
+msgid "Remove element button label"
+msgstr "لابردنی توخم دوگمە ناوی پیشاندان"
+
+msgid "Preview size"
+msgstr "Preview قەبارە"
+
+msgid "Restrict image extensions"
+msgstr "سنووردارکردنی وێنە extensions"
+
+msgid "Minimum width"
+msgstr "کەمترین پانی"
+
+msgid "Minimum height"
+msgstr "کەمترین بەرزی"
+
+msgid "Maximum width"
+msgstr "زۆرترین پانی"
+
+msgid "Maximum height"
+msgstr "زۆرترین بەرزی"
+
+msgid "Default sorting"
+msgstr "ڕیزکردنی بنەڕەت"
+
+msgid ""
+"Sets the default sort order for posts in the admin list table. Defaults to "
+"WordPress standard (Date, Descending)."
+msgstr ""
+"Sets  بنەڕەت sort order بۆ پۆستەکان لە  admin لیست خشتە. Defaults بۆ "
+"WordPress standard (ڕێکەوت, Descending)."
+
+msgid "Restrict the field to only show posts created by the logged in user"
+msgstr ""
+"سنووردارکردنی فیلد to only show پۆستەکان created by the logged in بەکارهێنەر"
+
+msgid "Key parts"
+msgstr ""
+
+msgid "Table successfully saved"
+msgstr ""
+
+msgid "Schema status"
+msgstr ""
+
+msgid "Stats"
+msgstr ""
+
+msgid "Operation successfully executed"
+msgstr ""
+
+msgid ""
+"The following queries will be executed to synchronize the table schema. Are "
+"you sure?"
+msgstr ""
+
+msgid "The following queries will be executed to synchronize the table schema:"
+msgstr ""
+
+msgid "No table selected"
+msgstr ""
+
+msgid "Execute database operations"
+msgstr ""
+
+msgid "Length is required for this column type"
+msgstr ""
+
+msgid "Column name `id` is reserved"
+msgstr ""
+
+msgid "Virtual"
+msgstr ""
+
+msgid "Storage type"
+msgstr ""
+
+msgid "Relational type"
+msgstr ""
+
+msgid "Each record relates to exactly one record in the other table"
+msgstr ""
+
+msgid "One record relates to multiple records in the other table"
+msgstr ""
+
+msgid "Multiple records relate to one record in the other table"
+msgstr ""
+
+msgid "Multiple records relate to multiple records in the other table"
+msgstr ""
+
+msgid "Target table"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Self-referential — useful for parent/child hierarchies"
+msgstr ""
+
+msgid "Meta keys manager"
+msgstr ""
+
+msgid ""
+"Browse, search and manage every raw meta key stored by ACPT. Edit values "
+"directly or clean up stale entries across post types, taxonomies and users."
+msgstr ""
+
+msgid "Table stats"
+msgstr ""
+
+msgid "No stats available"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Associated to"
+msgstr ""
+
+msgid "No meta keys found."
+msgstr ""
+
+msgid "Clean orphan keys"
+msgstr ""
+
+msgid "Add meta key"
+msgstr ""
+
+msgid "Delete meta key"
+msgstr ""
+
+msgid "You are going to delete this meta key. Are you sure?"
+msgstr ""
+
+msgid "The record was successfully updated"
+msgstr ""
+
+msgid ""
+"Select the tables to include in this group. Tables define the schema and "
+"fields for storing custom content records."
+msgstr ""
+
+msgid ""
+"Define location rules to control where this group's tables appear in the "
+"WordPress admin. Rules can target post types, taxonomies, users, or option "
+"pages."
+msgstr ""
+
+msgid "--Select---"
+msgstr ""
+
+msgid "A brief description (shown only in the admin panel)"
+msgstr ""
+
+msgid ""
+"ALERT: The visual builder can be used with a minimum resolution of 960 px "
+"wide"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Actual settings"
+msgstr ""
+
+msgid "Add a meta box to get started"
+msgstr ""
+
+msgid "Add foreign key"
+msgstr ""
+
+msgid "Add key part"
+msgstr ""
+
+msgid "Add new item"
+msgstr ""
+
+msgid "Add new record"
+msgstr ""
+
+msgid "Add record"
+msgstr ""
+
+msgid "Add value"
+msgstr ""
+
+msgid "Advanced Mode"
+msgstr ""
+
+msgid "Advanced options"
+msgstr ""
+
+msgid "Ajax"
+msgstr ""
+
+msgid "All Tables"
+msgstr ""
+
+msgid "Allow HTML"
+msgstr ""
+
+msgid "Anonymous users"
+msgstr ""
+
+msgid "Assign this table to a group"
+msgstr ""
+
+msgid "Associated Tables"
+msgstr ""
+
+msgid "Attachments"
+msgstr ""
+
+msgid "Automatic"
+msgstr ""
+
+msgid "BLOB"
+msgstr ""
+
+msgid "Basic options"
+msgstr ""
+
+msgid "Bcc"
+msgstr ""
+
+msgid "Block name"
+msgstr ""
+
+msgid "Blocks"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Browser"
+msgstr ""
+
+msgid "CURL"
+msgstr ""
+
+msgid "CURRENT_TIMESTAMP"
+msgstr ""
+
+msgid "Cache"
+msgstr ""
+
+msgid "Cache stats"
+msgstr ""
+
+msgid "Callback"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Cc"
+msgstr ""
+
+msgid "Charset"
+msgstr ""
+
+msgid "Child page"
+msgstr ""
+
+msgid "Children"
+msgstr ""
+
+msgid "Choose the icon"
+msgstr ""
+
+msgid "Click on a page card to edit its settings"
+msgstr ""
+
+msgid "Click to edit"
+msgstr ""
+
+msgid "Collate"
+msgstr ""
+
+msgid "Cols"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+msgid "Column Name"
+msgstr ""
+
+msgid "Column length"
+msgstr ""
+
+msgid "Column length must be numeric"
+msgstr ""
+
+msgid "Column options"
+msgstr ""
+
+msgid "Column values"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Confirm deleting field"
+msgstr ""
+
+msgid "Confirm deleting index"
+msgstr ""
+
+msgid "Confirm deleting wpml-config.xml file"
+msgstr ""
+
+msgid "Control label"
+msgstr ""
+
+msgid "Control type"
+msgstr ""
+
+msgid "Copy this meta block"
+msgstr ""
+
+msgid "Copy this meta field"
+msgstr ""
+
+msgid "Copy this meta option page"
+msgstr ""
+
+msgid "Create new Group"
+msgstr ""
+
+msgid "Create new Table"
+msgstr ""
+
+msgid "Create wpml-config.xml file"
+msgstr ""
+
+msgid "Custom Tables"
+msgstr ""
+
+msgid "Custom settings"
+msgstr ""
+
+msgid "DATE & TIME"
+msgstr ""
+
+msgid "Dark"
+msgstr ""
+
+msgid "Data"
+msgstr ""
+
+msgid "Dataset is empty"
+msgstr ""
+
+msgid "Dataset list"
+msgstr ""
+
+msgid "Dataset not found"
+msgstr ""
+
+msgid "Default percent"
+msgstr ""
+
+msgid "Default term"
+msgstr ""
+
+msgid "Delete Column"
+msgstr ""
+
+msgid "Delete Table"
+msgstr ""
+
+msgid "Delete Table Group"
+msgstr ""
+
+msgid "Delete block"
+msgstr ""
+
+msgid "Delete box"
+msgstr ""
+
+msgid "Delete field"
+msgstr ""
+
+msgid "Delete option page"
+msgstr ""
+
+msgid "Delete others"
+msgstr ""
+
+msgid "Delete page"
+msgstr ""
+
+msgid "Delete private"
+msgstr ""
+
+msgid "Delete published"
+msgstr ""
+
+msgid "Delete the meta block after copying"
+msgstr ""
+
+msgid "Delete the meta field after copying"
+msgstr ""
+
+msgid "Descending"
+msgstr ""
+
+msgid "Deselect all"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Disable cover in the custom audio player"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "Display as translated"
+msgstr ""
+
+msgid "Display mode"
+msgstr ""
+
+msgid "Display settings"
+msgstr ""
+
+msgid "Drag a control type from the sidebar to get started"
+msgstr ""
+
+msgid "Drag a field type from the sidebar to get started"
+msgstr ""
+
+msgid "Drop children fields here"
+msgstr ""
+
+msgid "Drop children pages here"
+msgstr ""
+
+msgid "Duotone"
+msgstr ""
+
+msgid "Duplicate rules are not allowed."
+msgstr ""
+
+msgid "ENUM"
+msgstr ""
+
+msgid "Edit item"
+msgstr ""
+
+msgid "Edit others"
+msgstr ""
+
+msgid "Edit private"
+msgstr ""
+
+msgid "Edit published"
+msgstr ""
+
+msgid "Edit record"
+msgstr ""
+
+msgid "Editor for"
+msgstr ""
+
+msgid "Email body"
+msgstr ""
+
+msgid "Enable dynamic blocks"
+msgstr ""
+
+msgid "Enable select2"
+msgstr ""
+
+msgid "Enable taxonomies"
+msgstr ""
+
+msgid "Enable the custom post types manager."
+msgstr ""
+
+msgid "Enable the dynamic blocks manager."
+msgstr ""
+
+msgid "Enable the taxonomies manager."
+msgstr ""
+
+msgid "Enable/disable contrast checker widget in the block editor UI.."
+msgstr ""
+
+msgid "Enter a valid JSON value."
+msgstr ""
+
+msgid "Enter custom SVG"
+msgstr ""
+
+msgid "Enter whatever items you want; separate them with COMMA or ENTER."
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Error during import occurred"
+msgstr ""
+
+msgid "Error message"
+msgstr ""
+
+msgid "Errors"
+msgstr ""
+
+msgid "Extra"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "Field Mapping Preview"
+msgstr ""
+
+msgid "Field on target table that holds the back-reference"
+msgstr ""
+
+msgid "Field selector"
+msgstr ""
+
+msgid "Field slug (Ex. name_frk)"
+msgstr ""
+
+msgid "Field slug (Ex. name_idx)"
+msgstr ""
+
+msgid "Field slug (e.g. my_field)"
+msgstr ""
+
+msgid "Fields to clone"
+msgstr ""
+
+msgid "File was successfully deleted."
+msgstr ""
+
+msgid "Font size"
+msgstr ""
+
+msgid "Footer"
+msgstr ""
+
+msgid "Foreign keys"
+msgstr ""
+
+msgid "Form submissions"
+msgstr ""
+
+msgid "Forms submissions"
+msgstr ""
+
+msgid "Go to next step"
+msgstr ""
+
+msgid "Go to prev step"
+msgstr ""
+
+msgid "Group"
+msgstr ""
+
+msgid "Group successfully saved"
+msgstr ""
+
+msgid "HTML"
+msgstr ""
+
+msgid "HTML settings"
+msgstr ""
+
+msgid "Header"
+msgstr ""
+
+msgid "Hide title"
+msgstr ""
+
+msgid "Hide toggle visibility"
+msgstr ""
+
+msgid "Horizontal"
+msgstr ""
+
+msgid "Human-readable label for this group"
+msgstr ""
+
+msgid "ID settings"
+msgstr ""
+
+msgid "ID strategy"
+msgstr ""
+
+msgid "INVERSE SOURCE"
+msgstr ""
+
+msgid "INVERSE TARGET"
+msgstr ""
+
+msgid "INVISIBLE"
+msgstr ""
+
+msgid ""
+"If enabled, the logged in user who submitted the form will also receive this "
+"email as a confirmation"
+msgstr ""
+
+msgid "Index options"
+msgstr ""
+
+msgid "Inverse field"
+msgstr ""
+
+msgid "Inverse field configuration"
+msgstr ""
+
+msgid "Items list"
+msgstr ""
+
+msgid "Label column"
+msgstr ""
+
+msgid "Label default value"
+msgstr ""
+
+msgid "Label placeholder"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Length must be at least 1"
+msgstr ""
+
+msgid "Level"
+msgstr ""
+
+msgid "Light"
+msgstr ""
+
+msgid "Link URL"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Location rules"
+msgstr ""
+
+msgid "Log context"
+msgstr ""
+
+msgid "Logged user"
+msgstr ""
+
+msgid "Logged users"
+msgstr ""
+
+msgid "Manage cache items"
+msgstr ""
+
+msgid "Manage option pages"
+msgstr ""
+
+msgid "Manage permissions"
+msgstr ""
+
+msgid "Max"
+msgstr ""
+
+msgid "Max value"
+msgstr ""
+
+msgid "Maximum value"
+msgstr ""
+
+msgid "Meta block"
+msgstr ""
+
+msgid "Meta block was successfully copied"
+msgstr ""
+
+msgid "Min"
+msgstr ""
+
+msgid "Min value"
+msgstr ""
+
+msgid "Minimum value"
+msgstr ""
+
+msgid "Missing dependency installer, retry now"
+msgstr ""
+
+msgid "Multiple field"
+msgstr ""
+
+msgid "NOW()"
+msgstr ""
+
+msgid "NUMERIC"
+msgstr ""
+
+msgid "No blocks yet"
+msgstr ""
+
+msgid "No boxes registered"
+msgstr ""
+
+msgid "No columns found."
+msgstr ""
+
+msgid "No columns selected"
+msgstr ""
+
+msgid "No controls created"
+msgstr ""
+
+msgid "No custom post types found."
+msgstr ""
+
+msgid "No distraction"
+msgstr ""
+
+msgid "No editable columns found for this table."
+msgstr ""
+
+msgid "No fields registered."
+msgstr ""
+
+msgid "No foreign keys found."
+msgstr ""
+
+msgid "No group"
+msgstr ""
+
+msgid "No index found."
+msgstr ""
+
+msgid "No items"
+msgstr ""
+
+msgid "No items imported"
+msgstr "هیچ بابەتێک هاوردە نەکراوە"
+
+msgid ""
+"No key parts are present, click on \"Add key part\" button to add the first "
+"one."
+msgstr ""
+
+msgid "No location rules defined."
+msgstr ""
+
+msgid ""
+"No option pages created yet. Click \"Add page\" to create the first one!"
+msgstr ""
+
+msgid "No options"
+msgstr ""
+
+msgid ""
+"No options are present, click on \"Add option\" button to add the first one."
+msgstr ""
+
+msgid "No page selected"
+msgstr ""
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add condition\"!"
+msgstr ""
+
+msgid "No table groups found."
+msgstr ""
+
+msgid "No tables associated to this group."
+msgstr ""
+
+msgid "No tables found in this group."
+msgstr ""
+
+msgid "No tables found."
+msgstr ""
+
+msgid ""
+"No values already created. Create the first one now by clicking the button "
+"\"Add value\"!"
+msgstr ""
+
+msgid "No wpml-config.xml found."
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Not found"
+msgstr ""
+
+msgid "Nullable"
+msgstr ""
+
+msgid "ON CHANGE"
+msgstr ""
+
+msgid "On delete"
+msgstr ""
+
+msgid "On update"
+msgstr ""
+
+msgid "Opens in a new window or tab"
+msgstr ""
+
+msgid "Operator"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Other columns"
+msgstr ""
+
+msgid "PERMISSIONS"
+msgstr ""
+
+msgid "PHP"
+msgstr ""
+
+msgid "Plural label. Used for the taxonomy admin menu item"
+msgstr ""
+
+msgid "Position sticky"
+msgstr ""
+
+msgid "Post types"
+msgstr ""
+
+msgid "Posts"
+msgstr ""
+
+msgid "Prev Step"
+msgstr ""
+
+msgid "REST controller class"
+msgstr ""
+
+msgid "Read"
+msgstr ""
+
+msgid "Record created successfully."
+msgstr ""
+
+msgid "Record updated successfully."
+msgstr ""
+
+msgid "Redirect after form submission"
+msgstr ""
+
+msgid "Redirect timeout (seconds)"
+msgstr ""
+
+msgid "Registered Tables"
+msgstr ""
+
+msgid "Registered dynamic blocks"
+msgstr ""
+
+msgid "Reply to"
+msgstr ""
+
+msgid "Required"
+msgstr ""
+
+msgid "Rest APIs"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Role"
+msgstr ""
+
+msgid "SOURCE"
+msgstr ""
+
+msgid "STRING"
+msgstr ""
+
+msgid "Save record"
+msgstr ""
+
+msgid "Search an element saved in cache by its content."
+msgstr ""
+
+msgid "Select a location first"
+msgstr ""
+
+msgid "Select a target table"
+msgstr ""
+
+msgid "Select all"
+msgstr ""
+
+msgid "Select capability"
+msgstr ""
+
+msgid "Select page"
+msgstr ""
+
+msgid "Select pages"
+msgstr ""
+
+msgid "Select tables..."
+msgstr ""
+
+msgid "Select taxonomies"
+msgstr ""
+
+msgid "Select taxonomy"
+msgstr ""
+
+msgid "Select the ID generation strategy"
+msgstr ""
+
+msgid "Select the column"
+msgstr ""
+
+msgid "Select the key"
+msgstr ""
+
+msgid "Select user"
+msgstr ""
+
+msgid "Select users"
+msgstr ""
+
+msgid "Selector"
+msgstr ""
+
+msgid "Self-referential"
+msgstr ""
+
+msgid "Send confirmation email to logged in user"
+msgstr ""
+
+msgid "Shortcode preview"
+msgstr ""
+
+msgid "Show errors"
+msgstr ""
+
+msgid "Shown in dropdown"
+msgstr ""
+
+msgid "Singular label. Used when a singular label is needed"
+msgstr ""
+
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+msgid "Sorting"
+msgstr ""
+
+msgid "Specific user"
+msgstr ""
+
+msgid "Step"
+msgstr ""
+
+msgid "Stored in FK column"
+msgstr ""
+
+msgid "Stored in inverse FK"
+msgstr ""
+
+msgid "Strategy"
+msgstr ""
+
+msgid "Submissions"
+msgstr ""
+
+msgid "Sync"
+msgstr ""
+
+msgid "TARGET"
+msgstr ""
+
+msgid "Table Groups"
+msgstr ""
+
+msgid "Table foreign keys"
+msgstr ""
+
+msgid "Table indexes"
+msgstr ""
+
+msgid "Table settings"
+msgstr ""
+
+msgid "Tables"
+msgstr ""
+
+msgid "Tag element"
+msgstr ""
+
+msgid "Text settings"
+msgstr ""
+
+msgid "The block name/slug. Must be unique"
+msgstr ""
+
+msgid "The default percent value"
+msgstr ""
+
+msgid "This box"
+msgstr ""
+
+msgid "Translate"
+msgstr ""
+
+msgid "UI"
+msgstr ""
+
+msgid "UI Type"
+msgstr ""
+
+msgid "UNSIGNED"
+msgstr ""
+
+msgid "UNSIGNED ZEROFILL"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Unique"
+msgstr ""
+
+msgid "Unique slug identifier (auto-filled from label)"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Update the current post"
+msgstr ""
+
+msgid "VISIBLE"
+msgstr ""
+
+msgid "Validation rules"
+msgstr ""
+
+msgid "Value already exists."
+msgstr ""
+
+msgid "Value column"
+msgstr ""
+
+msgid "Values"
+msgstr ""
+
+msgid "Variable"
+msgstr ""
+
+msgid "Vertical"
+msgstr ""
+
+msgid "View item"
+msgstr ""
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled. "
+"Default false."
+msgstr ""
+
+msgid "Wide"
+msgstr ""
+
+msgid "With front"
+msgstr ""
+
+msgid "Yes, execute it"
+msgstr ""
+
+msgid "You are going to delete this option page. Are you sure?"
+msgstr ""
+
+msgid "You are going to delete this table group. Are you sure?"
+msgstr ""
+
+msgid "You are going to delete this table. Are you sure?"
+msgstr ""
+
+msgid "coming soon"
+msgstr ""
+
+msgid "date"
+msgstr ""
+
+msgid "eg. 300px"
+msgstr ""
+
+msgid "group settings"
+msgstr ""
+
+msgid "group_name"
+msgstr ""
+
+msgid "height"
+msgstr ""
+
+msgid "label"
+msgstr ""
+
+msgid "max length is 20"
+msgstr ""
+
+msgid "max length is 255"
+msgstr ""
+
+msgid "order_by"
+msgstr ""
+
+msgid "per_page"
+msgstr ""
+
+msgid "render"
+msgstr ""
+
+msgid "table"
+msgstr ""
+
+msgid "table settings"
+msgstr ""
+
+msgid "tables"
+msgstr ""
+
+msgid "target"
+msgstr ""
+
+msgid "this table"
+msgstr ""
+
+msgid "value"
+msgstr ""
+
+msgid "width"
+msgstr ""
+
+msgid "Product data fields"
+msgstr ""
+
+msgid "Publish"
+msgstr ""
+
+msgid "Show schema create SQL query"
+msgstr ""
+
+msgid "Show schema"
+msgstr ""
+
+msgid "Table record"
+msgstr ""
+
+msgid "Form identity and submission feedback"
+msgstr ""
+
+msgid "Redirect after submission"
+msgstr ""
+
+msgid "Where users land once the form is sent"
+msgstr ""
+
+msgid "Auto slug"
+msgstr ""
+
+msgid "Custom AJAX handler for this form"
+msgstr ""
+
+msgid "External endpoint this form submits to"
+msgstr ""
+
+msgid "PHP function executed on submission"
+msgstr ""
+
+msgid "Email notification settings"
+msgstr ""
+
+msgid "What the form creates and which fields it maps"
+msgstr ""
+
+msgid "Which table record this form writes to"
+msgstr ""
+
+msgid "Colors"
+msgstr ""
+
+msgid "Font sizes"
+msgstr ""
+
+msgid "Radius and thickness settings"
+msgstr ""
+
+msgid "Color palette for light and dark modes"
+msgstr ""
+
+msgid "Gap and padding values"
+msgstr ""
+
+msgid "Font weights"
+msgstr ""
+
+msgid "Font size scale"
+msgstr ""
+
+msgid "Enable or disable email notifications for this form"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Who sends and receives this email"
+msgstr ""
+
+msgid "Subject & attachments"
+msgstr ""
+
+msgid "Email subject and file attachments"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "HTML structure, visual style and preview"
+msgstr ""
+
+msgid "Adjust the values of the form's CSS variables"
+msgstr ""
+
+msgid "Create a new record"
+msgstr ""
+
+msgid "Define who can submit this form and how many times"
+msgstr ""
+
+msgid "No columns available. Select a table first."
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Redirect to"
+msgstr ""
+
+msgid "Table to fill"
+msgstr ""
+
+msgid "Add image"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Change image"
+msgstr ""
+
+msgid "Child"
+msgstr ""
+
+msgid "Click to edit label"
+msgstr ""
+
+msgid "Click to rename"
+msgstr ""
+
+msgid "Core"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Description (showed only on admin panel)"
+msgstr ""
+
+msgid "Drop columns here"
+msgstr ""
+
+msgid "Drop fields here"
+msgstr ""
+
+msgid "Heading (optional)"
+msgstr ""
+
+msgid "Hide the collapse/expand toggle."
+msgstr ""
+
+msgid "Hide the meta box title."
+msgstr ""
+
+msgid "Hide toggle"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "Link label"
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
+msgid "Message content"
+msgstr ""
+
+msgid "Message settings"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Optional heading shown above the message"
+msgstr ""
+
+msgid "Order within the context."
+msgstr ""
+
+msgid "Release"
+msgstr ""
+
+msgid "Show label"
+msgstr ""
+
+msgid "Side"
+msgstr ""
+
+msgid "Sidebar position"
+msgstr ""
+
+msgid "Sorted"
+msgstr ""
+
+msgid "Tab selected"
+msgstr ""
+
+msgid "The instructional text shown to the user"
+msgstr ""
+
+msgid ""
+"Where the meta box appears in the post editor (applies when this table is "
+"attached to a CPT)."
+msgstr ""
+
+msgid ""
+"You cannot create a foreign key until at least one column has been defined. "
+"Please create a column first."
+msgstr ""
+
+msgid "Enable Abilities API"
+msgstr ""
+
+msgid ""
+"Expose ACPT post types, taxonomies and fields as WordPress Abilities API "
+"abilities."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Dynamic blocks"
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "If an item already exists"
+msgstr ""
+
+msgid "Overwrite it — replace the existing version with the imported one"
+msgstr ""
+
+msgid "Review import"
+msgstr ""
+
+msgid "Settings were successfully imported"
+msgstr ""
+
+msgid "Skip it — keep the existing version, import only new items"
+msgstr ""
+
+msgid "Table groups"
+msgstr ""
+
+msgid "Upload new file"
+msgstr ""
+
+msgid "columns"
+msgstr ""
+
+msgid "exists"
+msgstr ""
+
+msgid "fields"
+msgstr ""
+
+msgid ""
+"items already exist on this site. Choose how to handle them before importing."
+msgstr ""
+
+msgid "new"
+msgstr ""
+
+msgid "picked up"
+msgstr ""
+
+msgid "moved to a new position"
+msgstr ""
+
+msgid "is no longer over a drop target"
+msgstr ""
+
+msgid "dropped"
+msgstr ""
+
+msgid "Drop cancelled"
+msgstr ""
+
+msgid "released outside a valid drop target"
+msgstr ""
+
+msgid "Dragging cancelled"
+msgstr ""
+
+msgid "was returned to its original position"
+msgstr ""
+
+msgid "Item"
+msgstr ""
+
+msgid "New field"
+msgstr ""
+
+msgid "Control"
+msgstr ""
+
+msgid "New control"
+msgstr ""
+
+msgid "New column"
+msgstr ""
+
+msgid "Block field"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Actions for"
+msgstr ""
+
+msgid "WooCommerce"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Sidebar on the left"
+msgstr ""
+
+msgid "Sidebar on the right"
+msgstr ""
+
+msgid "Inline"
+msgstr ""
+
+msgid "Justify"
+msgstr ""
+
+msgid "Link label and value"
+msgstr ""
+
+msgid "Automatic slug"
+msgstr ""
+
+msgid "Snippet format"
+msgstr ""
+
+msgid "WordPress native snippet"
+msgstr ""
+
+msgid "ACPT function snippet"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
+msgid "Requires \"Expose via REST API\" on the table."
+msgstr ""
+
+msgid "Click to change the type"
+msgstr ""
+
+msgid "Showing {{start}}–{{end}} of {{total}} records"
+msgstr ""
+
+msgid "AUTO_INCREMENT"
+msgstr ""
+
+msgid "Allow in block bindings"
+msgstr ""
+
+msgid "Block slug"
+msgstr ""
+
+msgid "Clear all"
+msgstr ""
+
+msgid ""
+"Column was successfully copied. Sync the target table to apply the change."
+msgstr ""
+
+msgid "Copy to another table"
+msgstr ""
+
+msgid "Could not delete meta field value"
+msgstr ""
+
+msgid "Default image"
+msgstr ""
+
+msgid "Delete the column from this table after copying"
+msgstr ""
+
+msgid "Deselect"
+msgstr ""
+
+msgid "Drag to reorder"
+msgstr ""
+
+msgid "Edit label"
+msgstr ""
+
+msgid "Enable email notifications"
+msgstr ""
+
+msgid "Import data. Acceptable file formats: JSON, YAML, CSV, YAML"
+msgstr ""
+
+msgid "No other table is available to copy this column into."
+msgstr ""
+
+msgid ""
+"Only post types registered through ACPT are listed here. Don't see the post "
+"type you're looking for (e.g. one added by another plugin, like "
+"WooCommerce's Product)?"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record successfully deleted"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Select the level of changes to show"
+msgstr ""
+
+msgid "Sync it in first from the Custom Post Types list"
+msgstr ""
+
+msgid "The file size is too big"
+msgstr ""
+
+msgid "The timeout cannot be negative"
+msgstr ""
+
+msgid "Unable to load the table schema"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Value to copy"
+msgstr ""
+
+msgid "Show sidebar"
+msgstr ""
+
+msgid "Hide sidebar"
+msgstr ""
+
+msgid "Show meta box"
+msgstr ""
+
+msgid ""
+"Whether to show the taxonomy meta box on the post edit screen (classic "
+"editor). Turn it off when the terms are assigned through a custom field. "
+"Default true."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\", which stores JSON. "
+"MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Remove \"{{column}}\" from the index, or change the column to a type that "
+"can be indexed (for example INT or VARCHAR)."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\" ({{type}}). MySQL can "
+"index this type only on its first characters."
+msgstr ""
+
+msgid "Set a length on \"{{column}}\" in the index (for example 191)."
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" links the column \"{{column}}\" ({{type}}) to "
+"\"{{refColumn}}\" ({{refType}}) in the table \"{{refTable}}\". MySQL needs "
+"both columns to have the same type."
+msgstr ""
+
+msgid ""
+"An index uses a column that stores JSON. MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and remove the JSON column from the index, or change "
+"the column type."
+msgstr ""
+
+msgid ""
+"An index uses a text column without a length. MySQL can index this type only "
+"on its first characters."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and set a length on the text column (for example 191)."
+msgstr ""
+
+msgid ""
+"A foreign key links two columns MySQL cannot connect: they must have the "
+"same type, and the referenced column must be a primary key or have a unique "
+"index."
+msgstr ""
+
+msgid ""
+"Open the Foreign keys step and check that each column has the same type as "
+"the column it points to."
+msgstr ""
+
+msgid ""
+"Some rows already in the table point to records that do not exist in the "
+"referenced table, so the foreign key cannot be added."
+msgstr ""
+
+msgid "Fix or clear those values in the table records, then sync again."
+msgstr ""
+
+msgid ""
+"A unique index cannot be added because some rows already share the same "
+"value."
+msgstr ""
+
+msgid ""
+"Make the values unique in the table records, or make the index not unique."
+msgstr ""
+
+msgid "Some values already in the table do not fit the new column type."
+msgstr ""
+
+msgid ""
+"Change those values in the table records, or choose a column type that fits "
+"them."
+msgstr ""
+
+msgid "MySQL refused to change the table."
+msgstr ""
+
+msgid "Check the technical details below, or contact support with them."
+msgstr ""
+
+msgid "The table was not created."
+msgstr ""
+
+msgid ""
+"Part of the changes were already applied to the table and cannot be undone "
+"automatically (see the technical details)."
+msgstr ""
+
+msgid "No changes were applied to the table."
+msgstr ""
+
+msgid "Technical details"
+msgstr ""
+
+msgid "Statements that would run"
+msgstr ""
+
+msgid "Open the Indexes step"
+msgstr ""
+
+msgid "Open the Foreign keys step"
+msgstr ""
+
+msgid "This table can't be synced yet. Fix these problems, then try again:"
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Choose "
+"another column or delete this key part."
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+msgid "Not synced"
+msgstr ""
+
+msgid "Not created"
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" empties the column \"{{column}}\" (SET NULL) "
+"when the linked record changes, but the column does not allow empty values."
+msgstr ""
+
+msgid ""
+"Allow empty values on \"{{column}}\" in the Columns step (Advanced Mode), or "
+"choose another \"On delete\" / \"On update\" action."
+msgstr ""
+
+msgid ""
+"In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete the foreign key."
+msgstr ""
+
+msgid ""
+"The column \"{{column}}\" ({{type}}) can't be linked to "
+"\"{{refColumn}}\" ({{refType}}): MySQL needs both columns to have the same "
+"type. In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete this foreign key."
+msgstr ""
+
+msgid ""
+"\"SET NULL\" empties the column \"{{column}}\" when the linked record "
+"changes, but the column doesn't allow empty values. Allow empty values on "
+"\"{{column}}\" in the Columns step (Advanced Mode), or choose another action."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Edit the key "
+"parts to choose another column, or delete this index."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" ({{type}}) can be indexed only on its first characters. Edit "
+"the key parts and set a length (for example 191)."
+msgstr ""
+
+msgid "Datasets"
+msgstr ""
+
+msgid "Feeds"
+msgstr ""
+
+msgid ""
+"Whether the archive of this post type has an RSS feed (/{slug}/feed/). When "
+"off, the feed URLs redirect to the archive and the feed link is removed from "
+"the page head. Defaults to true"
+msgstr ""
+
+#~ msgid ""
+#~ "From this dashboard you can discover and manage every API endpoints "
+#~ "exposed by ACPT. Use the playground to learn how to use every endpoint."
+#~ msgstr ""
+#~ "لە ئەم داشبۆرد you دەتوانێت discover و manage every API endpoints exposed "
+#~ "لەلایەن ACPT. Use  playground بۆ learn how بۆ use every endpoint."
+
+#~ msgid ""
+#~ "This tool allows you to import settings and meta fields from previously "
+#~ "exported .acpt files (max size allowed is 2Mb)."
+#~ msgstr ""
+#~ "ئەمە tool allows you بۆ import ڕێکخستنەکان و فیلدەکانی مەتا لە previously "
+#~ "exported .acpt فایلەکان (max قەبارە allowed ە 2Mb)."
+
+#~ msgid ""
+#~ "Use this tool to quick export the general settings and meta fields for "
+#~ "every element in a compressed JSON format called .acpt."
+#~ msgstr ""
+#~ "بەکارهێنانی ئەم tool to quick export the general ڕێکخستنەکان and "
+#~ "فیلدەکانی مەتا for every توخم in a compressed JSON فۆرمات called .acpt."
+
+#~ msgid ""
+#~ "Build reusable dataset for meta fields and forms values. Import your "
+#~ "dataset from CSV, JSON or YAML with a few clicks."
+#~ msgstr ""
+#~ "Build reusable کۆمەڵەداتا بۆ فیلدەکانی مەتا و فۆرمەکان values. Import تۆ "
+#~ "کۆمەڵەداتا لە CSV, JSON یان YAML لەگەڵ a few clicks."
+
+#~ msgid ""
+#~ "Check the health check of the application, and repair any installation "
+#~ "error."
+#~ msgstr "Check  health check ی  بەرنامە, و repair any installation هەڵە."

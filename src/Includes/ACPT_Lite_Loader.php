@@ -5,67 +5,48 @@ namespace ACPT_Lite\Includes;
 class ACPT_Lite_Loader
 {
     /**
-     * The array of actions registered with WordPress.
-     *
-     * @since    1.0.0
-     * @access   protected
-     * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
+     * @var array<int, array<string, mixed>>
      */
-    private $actions = [];
+    private array $actions = [];
 
     /**
-     * The array of filters registered with WordPress.
-     *
-     * @since    1.0.0
-     * @access   protected
-     * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
+     * @var array<int, array<string, mixed>>
      */
-    private $filters = [];
+    private array $filters = [];
 
     /**
-     * Add a new action to the collection to be registered with WordPress.
-     *
-     * @since    1.0.0
-     * @param    string               $hook             The name of the WordPress action that is being registered.
-     * @param    object               $component        A reference to the instance of the object on which the action is defined.
-     * @param    string               $callback         The name of the function definition on the $component.
-     * @param    int                  $priority         Optional. The priority at which the function should be fired. Default is 10.
-     * @param    int                  $accepted_args    Optional. The number of arguments that should be passed to the $callback. Default is 1.
+     * @param string $hook
+     * @param object $component
+     * @param string $callback
+     * @param int    $priority
+     * @param int    $accepted_args
      */
-    public function addAction( $hook, $component, $callback, $priority = 10, $accepted_args = 1 )
+    public function addAction(string $hook, object $component, string $callback, int $priority = 10, int $accepted_args = 1): void
     {
-        $this->actions[] = $this->createHook( $hook, $component, $callback, $priority, $accepted_args );
+        $this->actions[] = $this->createHook($hook, $component, $callback, $priority, $accepted_args);
     }
 
     /**
-     * Add a new filter to the collection to be registered with WordPress.
-     *
-     * @since    1.0.0
-     * @param    string               $hook             The name of the WordPress filter that is being registered.
-     * @param    object               $component        A reference to the instance of the object on which the filter is defined.
-     * @param    string               $callback         The name of the function definition on the $component.
-     * @param    int                  $priority         Optional. The priority at which the function should be fired. Default is 10.
-     * @param    int                  $accepted_args    Optional. The number of arguments that should be passed to the $callback. Default is 1
+     * @param string $hook
+     * @param object $component
+     * @param string $callback
+     * @param int    $priority
+     * @param int    $accepted_args
      */
-    public function addFilter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 )
+    public function addFilter(string $hook, object $component, string $callback, int $priority = 10, int $accepted_args = 1): void
     {
-        $this->filters[] = $this->createHook( $hook, $component, $callback, $priority, $accepted_args );
+        $this->filters[] = $this->createHook($hook, $component, $callback, $priority, $accepted_args);
     }
 
     /**
-     * A utility function that is used to register the actions and hooks into a single
-     * collection.
-     *
-     * @since    1.0.0
-     * @access   private
-     * @param    string               $hook             The name of the WordPress filter that is being registered.
-     * @param    object               $component        A reference to the instance of the object on which the filter is defined.
-     * @param    string               $callback         The name of the function definition on the $component.
-     * @param    int                  $priority         The priority at which the function should be fired.
-     * @param    int                  $accepted_args    The number of arguments that should be passed to the $callback.
-     * @return   array                                  The collection of actions and filters registered with WordPress.
+     * @param string $hook
+     * @param object $component
+     * @param string $callback
+     * @param int    $priority
+     * @param int    $accepted_args
+     * @return array<string, mixed>
      */
-    private function createHook( $hook, $component, $callback, $priority, $accepted_args )
+    private function createHook(string $hook, object $component, string $callback, int $priority, int $accepted_args): array
     {
         return [
                 'hook'          => $hook,
@@ -76,33 +57,30 @@ class ACPT_Lite_Loader
         ];
     }
 
-    /**
-     * Register the filters and actions with WordPress.
-     *
-     * @since    1.0.0
-     */
-    public function run()
+    public function run(): void
     {
-        foreach ( $this->filters as $hook ) {
+        foreach ($this->filters as $hook) {
             $this->callAddAction($hook);
         }
 
-        foreach ( $this->actions as $hook ) {
+        foreach ($this->actions as $hook) {
             $this->callAddAction($hook);
         }
     }
 
     /**
-     * Call add_action Wordpress function
-     *
-     * @param $hook
+     * @param array<string, mixed> $hook
      */
-    private function callAddAction($hook)
+    private function callAddAction(array $hook): void
     {
-        if(is_callable($hook['callback'])){
-            add_action( $hook['hook'], $hook['callback'], $hook['priority'], $hook['accepted_args'] );
+        if (is_callable($hook['callback'])) {
+            add_action($hook['hook'], $hook['callback'], $hook['priority'], $hook['accepted_args']);
         } else {
-            add_action( $hook['hook'], [$hook['component'], $hook['callback']], $hook['priority'], $hook['accepted_args'] );
+            $callback = [$hook['component'], $hook['callback']];
+
+            if (is_callable($callback)) {
+                add_action($hook['hook'], $callback, $hook['priority'], $hook['accepted_args']);
+            }
         }
     }
 }

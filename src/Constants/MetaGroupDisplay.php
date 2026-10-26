@@ -4,8 +4,8 @@ namespace ACPT_Lite\Constants;
 
 class MetaGroupDisplay
 {
-	const STANDARD = 'standard';
-	const ACCORDION = 'accordion';
-	const VERTICAL_TABS = 'verticalTabs';
-	const HORIZONTAL_TABS = 'horizontalTabs';
+    public const STANDARD = 'standard';
+    public const ACCORDION = 'accordion';
+    public const VERTICAL_TABS = 'verticalTabs';
+    public const HORIZONTAL_TABS = 'horizontalTabs';
 }

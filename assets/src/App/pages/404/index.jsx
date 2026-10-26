@@ -25,6 +25,7 @@ const PageNotFound = () => {
                 {useTranslation('The requested page was not found, was deleted or was moved!')}
             </Alert>
             <Link
+                data-testid="return-to-list"
                 className="mt-12"
                 to="/"
             >

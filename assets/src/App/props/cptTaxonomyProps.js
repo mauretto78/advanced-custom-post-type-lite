@@ -1,0 +1,76 @@
+import PropTypes from "prop-types";
+
+export const customPostTypeSettingsProps = {
+    show_in_graphql: PropTypes.bool,
+    graphql_single_name: PropTypes.string,
+    graphql_plural_name: PropTypes.string,
+    hierarchical: PropTypes.bool,
+    public: PropTypes.bool,
+    publicly_queryable: PropTypes.bool,
+    show_ui: PropTypes.bool,
+    show_in_menu: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    show_in_nav_menus: PropTypes.bool,
+    show_in_admin_bar: PropTypes.bool,
+    show_in_rest: PropTypes.bool,
+    rest_base: PropTypes.string,
+    sorting: PropTypes.shape({
+        orderBy: PropTypes.string,
+        direction: PropTypes.string,
+    }),
+    menu_position: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    capability_type: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+    has_archive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    rewrite: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    custom_rewrite: PropTypes.string,
+    with_front: PropTypes.bool,
+    query_var: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    custom_query_var: PropTypes.string,
+    front_url_prefix: PropTypes.string,
+};
+
+export const customPostTypeProps = {
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string.isRequired,
+    singular: PropTypes.string,
+    plural: PropTypes.string,
+    icon: PropTypes.string,
+    isNative: PropTypes.bool,
+    isWooCommerce: PropTypes.bool,
+    taxonomies: PropTypes.array,
+    woocommerceProductData: PropTypes.array,
+    supports: PropTypes.arrayOf(PropTypes.string),
+    labels: PropTypes.object,
+    settings: PropTypes.shape(customPostTypeSettingsProps),
+};
+
+export const taxonomySettingsProps = {
+    public: PropTypes.bool,
+    publicly_queryable: PropTypes.bool,
+    hierarchical: PropTypes.bool,
+    show_in_menu: PropTypes.bool,
+    show_in_nav_menus: PropTypes.bool,
+    show_in_rest: PropTypes.bool,
+    rest_base: PropTypes.string,
+    rest_controller_class: PropTypes.string,
+    show_tagcloud: PropTypes.bool,
+    show_in_quick_edit: PropTypes.bool,
+    show_admin_column: PropTypes.bool,
+    capabilities: PropTypes.arrayOf(PropTypes.string),
+    rewrite: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    custom_rewrite: PropTypes.string,
+    with_front: PropTypes.bool,
+    rewrite_hierarchical: PropTypes.bool,
+    query_var: PropTypes.bool,
+    custom_query_var: PropTypes.bool,
+};
+
+export const taxonomyProps = {
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    slug: PropTypes.string.isRequired,
+    singular: PropTypes.string,
+    plural: PropTypes.string,
+    isNative: PropTypes.bool,
+    customPostTypes: PropTypes.array,
+    labels: PropTypes.object,
+    settings: PropTypes.shape(taxonomySettingsProps),
+};

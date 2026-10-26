@@ -18,6 +18,7 @@ import InputHidden from "../../../components/Forms/InputHidden";
 import {v4 as uuidv4} from "uuid";
 import {toast} from "react-hot-toast";
 import {saveWooCommerceProductData} from "../../../redux/reducers/saveWooCommerceProductDataSlice";
+import {getErrorMessage} from "../../../utils/errors";
 import {fetchWooCommerceProductData} from "../../../redux/reducers/fetchWooCommerceProductDataSlice";
 import Loader from "../../../components/Loader";
 
@@ -93,15 +94,18 @@ const SaveProductData = ({}) => {
                 }
             })
             .catch(err => {
-                toast.error(err);
+                toast.error(getErrorMessage(err));
             })
         ;
     };
 
     const actions = [
         <Button
+            key="save-form"
             type="submit"
             style={styleVariants.PRIMARY}
+            size="sm"
+            icon="bx:save"
         >
             {useTranslation("Save")}
         </Button>

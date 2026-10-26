@@ -8,6 +8,7 @@ import {toast} from "react-hot-toast";
 import {refreshPage} from "../../../utils/misc";
 import Card from "../../../components/Card";
 import {setCookieMessage} from "../../../utils/cookies";
+import {customPostTypeProps} from "../../../props/cptTaxonomyProps.js";
 
 const Labels = ({postType, data}) => {
 
@@ -20,7 +21,7 @@ const Labels = ({postType, data}) => {
                 }
 
                 if(res.error){
-                    toast.error(error);
+                    toast.error(res.error);
                 }
             })
             .catch(err => {
@@ -34,22 +35,23 @@ const Labels = ({postType, data}) => {
             <Card>
                 <div className="acpt-card-row">
                     <span className="label">
-                        <a
+                        <button
+                            type="button"
+                            className="btn-reset"
                             style={{fontWeight: "normal"}}
-                            href="#"
                             onClick={e => {
                                 e.preventDefault();
                                 handleRegenerate();
                             }}
                         >
                             {useTranslation("Regenerate")}
-                        </a>
+                        </button>
                     </span>
                     <span className="value" />
                 </div>
                 {postLabels.map((label) => (
                     <CardRow
-                        index={label.id}
+                        key={label.id}
                         label={useTranslation(label.label)}
                         value={data[0].labels[label.id]}
                     />
@@ -57,11 +59,13 @@ const Labels = ({postType, data}) => {
             </Card>
         );
     }
+
+    return null;
 };
 
 Labels.propTypes = {
     postType: PropTypes.string.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape(customPostTypeProps)).isRequired,
 };
 
 export default Labels;

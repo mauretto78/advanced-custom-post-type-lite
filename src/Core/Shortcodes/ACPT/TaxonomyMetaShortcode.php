@@ -6,38 +6,39 @@ use ACPT_Lite\Constants\MetaTypes;
 
 class TaxonomyMetaShortcode extends AbstractACPTShortcode
 {
-	/**
-	 * @param $atts
-	 *
-	 * @return mixed|string|null
-	 * @throws \Exception
-	 */
-    public function render($atts)
+    /**
+     * @param array<string, mixed> $atts
+     * @param string|null $content
+     * @param string $tag
+     * @return string
+     * @throws \Exception
+     */
+    public function render(array $atts, ?string $content = null, string $tag = ''): string
     {
-        if(!isset($atts['box']) or !isset($atts['field'])){
+        if (!isset($atts['box']) || !isset($atts['field'])) {
             return '';
         }
 
         $tid = isset($atts['tid']) ? $atts['tid'] : null;
 
-        if($tid === null){
+        if ($tid === null) {
             $queriedObject = get_queried_object();
 
-            if(!$queriedObject instanceof \WP_Term){
-                return null;
+            if (!$queriedObject instanceof \WP_Term) {
+                return '';
             }
 
             $tid = $queriedObject->term_id;
         }
 
-	    if($tid === null){
-	    	return null;
-	    }
-
         $taxonomyObject = get_term($tid);
+
+        if (!$taxonomyObject instanceof \WP_Term) {
+            return '';
+        }
+
         $taxonomy = $taxonomyObject->taxonomy;
 
-	    return $this->renderShortcode($tid, MetaTypes::TAXONOMY, $taxonomy, $atts);
+        return $this->renderShortcode($tid, MetaTypes::TAXONOMY, $taxonomy, $atts) ?? '';
     }
 }
-

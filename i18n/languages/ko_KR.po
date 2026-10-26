@@ -1,0 +1,6980 @@
+# Advanced Custom Post Type - Korean (Korea)
+# Copyright (C) Advanced Custom Post Type
+# This file is distributed under the same license as the plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Advanced Custom Post Type\n"
+"PO-Revision-Date: 2026-06-07 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Korean <ko@li.org>\n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "(default true)"
+msgstr "(기본값: 참)"
+
+msgid "(e.g. Movie)"
+msgstr "(예: 영화)"
+
+msgid "(e.g. Movies)"
+msgstr "(예: 영화들)"
+
+msgid "--Select--"
+msgstr "--선택--"
+
+msgid "A brief description"
+msgstr "간단한 설명"
+
+msgid "Add page"
+msgstr "페이지 추가"
+
+msgid "ACPT Tools"
+msgstr "ACPT 도구"
+
+msgid "ACPT email account"
+msgstr "ACPT 이메일 계정"
+
+msgid "ALERT:"
+msgstr "알림:"
+
+msgid "API dashboard"
+msgstr "API 대시보드"
+
+msgid "APIs"
+msgstr "API"
+
+msgid "APIs dashboard panel"
+msgstr "API 대시보드 패널"
+
+msgid "APIs endpoints"
+msgstr "API 엔드포인트"
+
+msgid "API key"
+msgstr "API 키"
+
+msgid "Action required"
+msgstr "조치 필요"
+
+msgid "Actions"
+msgstr "작업"
+
+msgid ""
+"Activate ACPT by your license key to get professional support and automatic "
+"updates from your WordPress dashboard."
+msgstr ""
+"전문적인 기술 지원과 자동 업데이트를 받으려면 워드프레스 대시보드에서 라이선"
+"스 키를 입력하여 ACPT를 활성화하세요."
+
+msgid "Activate your license"
+msgstr "라이선스 활성화"
+
+msgid ""
+"Activate your license key here. Please note that you need also your ACPT "
+"user email"
+msgstr "여기에서 라이선스 키를 활성화하세요. ACPT 사용자 이메일도 필요합니다."
+
+msgid "Activate your license now"
+msgstr "지금 라이선스 활성화"
+
+msgid "Add"
+msgstr "추가"
+
+msgid "Add block"
+msgstr "블록 추가"
+
+msgid "Add child page"
+msgstr "하위 페이지 추가"
+
+msgid "Add element"
+msgstr "요소 추가"
+
+msgid "Add field"
+msgstr "필드 추가"
+
+msgid "Add meta box"
+msgstr "메타 박스 추가"
+
+msgid "Add new {{r}}"
+msgstr "새 {{r}} 추가"
+
+msgid "Add option"
+msgstr "옵션 추가"
+
+msgid "Add or remove {{r}}"
+msgstr "{{r}} 추가 또는 제거"
+
+msgid "Add product data"
+msgstr "상품 데이터 추가"
+
+msgid "Add support for various available post edit features. For more info"
+msgstr "사용 가능한 다양한 글 편집 기능을 지원합니다. 자세한 정보는"
+
+msgid "after copying"
+msgstr "복사 후"
+
+msgid "All {{r}}"
+msgstr "모든 {{r}}"
+
+msgid ""
+"Allowed keys: 'name', name of default term.|'slug', Slug for default "
+"term.|'description', Description for default term"
+msgstr ""
+"허용된 키: 'name', 기본 용어 이름.|'slug', 기본 용어 슬러그.|'description', "
+"기본 용어 설명"
+
+msgid "Archive template"
+msgstr "아카이브 템플릿"
+
+msgid "Archives"
+msgstr "아카이브"
+
+msgid "Are you sure?"
+msgstr "정말입니까?"
+
+msgid "Array of capabilities for this taxonomy."
+msgstr "이 택소노미(Taxonomy)에 대한 권한(Capabilities) 배열입니다."
+
+msgid "Associate"
+msgstr "연결"
+
+msgid "Associate custom post types here"
+msgstr "여기에서 커스텀 포스트 타입을 연결하세요"
+
+msgid "Associate custom post types to"
+msgstr "커스텀 포스트 타입을 다음에 연결"
+
+msgid "Associate taxonomies to"
+msgstr "택소노미를 다음에 연결"
+
+msgid "Associated icon"
+msgstr "연결된 아이콘"
+
+msgid "Associated meta boxes"
+msgstr "연결된 메타 박스"
+
+msgid "Associated meta fields"
+msgstr "연결된 메타 필드"
+
+msgid "Associated post types"
+msgstr "연결된 포스트 타입"
+
+msgid "Associated taxonomies"
+msgstr "연결된 택소노미"
+
+msgid "Back to {{r}}"
+msgstr "{{r}}(으)로 돌아가기"
+
+msgid "Belongs to"
+msgstr "다음에 속함"
+
+msgid "Block list"
+msgstr "블록 목록"
+
+msgid "Block was successfully copied"
+msgstr "블록이 성공적으로 복사되었습니다."
+
+msgid "CPT"
+msgstr "CPT"
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the plural name."
+msgstr ""
+"구두점이나 공백이 없는 카멜 케이스(Camel case) 문자열이어야 합니다. 숫자가 아"
+"닌 문자로 시작해야 하며, 복수형 이름과 달라야 합니다."
+
+msgid ""
+"Camel case string with no punctuation or spaces. Needs to start with a "
+"letter (not a number). Important to be different than the single name."
+msgstr ""
+"구두점이나 공백이 없는 카멜 케이스(Camel case) 문자열이어야 합니다. 숫자가 아"
+"닌 문자로 시작해야 하며, 단수형 이름과 달라야 합니다."
+
+msgid "Capabilities"
+msgstr "권한"
+
+msgid "Capability"
+msgstr "권한"
+
+msgid "Capability Type"
+msgstr "권한 유형"
+
+msgid "Capability type"
+msgstr "권한 유형"
+
+msgid "Changelog"
+msgstr "변경 이력"
+
+msgid "Check `required` in the selected meta field"
+msgstr "선택한 메타 필드에서 `필수(required)`를 확인하세요"
+
+msgid "Check `show in archive` in the selected meta field"
+msgstr "선택한 메타 필드에서 `아카이브에 표시(show in archive)`를 확인하세요"
+
+msgid "Children list"
+msgstr "하위 목록"
+
+msgid "Choose box"
+msgstr "박스 선택"
+
+msgid "Choose element"
+msgstr "요소 선택"
+
+msgid "Choose field"
+msgstr "필드 선택"
+
+msgid "Choose from most used {{r}}"
+msgstr "가장 많이 사용된 {{r}} 중에서 선택"
+
+msgid "Choose from the list"
+msgstr "목록에서 선택"
+
+msgid "Choose how to display the related post(s) selector (default: select)"
+msgstr "관련 글 선택기 표시 방법을 선택하세요 (기본값: select)"
+
+msgid "Choose the field type"
+msgstr "필드 유형 선택"
+
+msgid "Close"
+msgstr "닫기"
+
+msgid "Condition"
+msgstr "조건"
+
+msgid "Condition value"
+msgstr "조건 값"
+
+msgid "Conditional rendering"
+msgstr "조건부 렌더링"
+
+msgid "Confirm deleting meta box"
+msgstr "메타 박스 삭제 확인"
+
+msgid "Confirm deleting meta field"
+msgstr "메타 필드 삭제 확인"
+
+msgid "Confirm deleting all"
+msgstr "전체 삭제 확인"
+
+msgid "Confirm deleting option"
+msgstr "옵션 삭제 확인"
+
+msgid ""
+"Copy the conditional logic settings of this meta field to other fields of "
+"this box"
+msgstr "이 메타 필드의 조건부 로직 설정을 이 박스의 다른 필드에 복사"
+
+msgid "Copy the meta block"
+msgstr "메타 블록 복사"
+
+msgid "Copy the meta box"
+msgstr "메타 박스 복사"
+
+msgid "Copy the meta field"
+msgstr "메타 필드 복사"
+
+msgid "Copy the selected meta box"
+msgstr "선택한 메타 박스 복사"
+
+msgid "Copy the selected meta field"
+msgstr "선택한 메타 필드 복사"
+
+msgid "Copy this block to another meta field"
+msgstr "이 블록을 다른 메타 필드로 복사"
+
+msgid "Copy this meta box"
+msgstr "이 메타 박스 복사"
+
+msgid "Copy this meta box to another"
+msgstr "이 메타 박스를 다른 곳으로 복사"
+
+msgid "Copy this meta field to another meta box"
+msgstr "이 메타 필드를 다른 메타 박스로 복사"
+
+msgid "Copyright"
+msgstr "저작권"
+
+msgid "Create"
+msgstr "생성"
+
+msgid "Create a meta field in the selected meta box"
+msgstr "선택한 메타 박스에 메타 필드 생성"
+
+msgid "Create a meta option (if applicable) in the selected meta field"
+msgstr "선택한 메타 필드에 메타 옵션(해당하는 경우) 생성"
+
+msgid "Create a new block (only for Flexible field)"
+msgstr "새 블록 생성 (플렉서블 필드 전용)"
+
+msgid "Create a new condition in the selected meta field"
+msgstr "선택한 메타 필드에 새 조건 생성"
+
+msgid "Create new Taxonomy"
+msgstr "새 택소노미 생성"
+
+msgid "Create new WooCommerce product data"
+msgstr "새 우커머스 상품 데이터 생성"
+
+msgid "Create new meta box"
+msgstr "새 메타 박스 생성"
+
+msgid "Create new options after the selected meta option"
+msgstr "선택한 메타 옵션 뒤에 새 옵션 생성"
+
+msgid "Create template"
+msgstr "템플릿 생성"
+
+msgid "Custom"
+msgstr "커스텀"
+
+msgid "Custom Post Type global settings"
+msgstr "커스텀 포스트 타입 전역 설정"
+
+msgid "Custom post type data"
+msgstr "커스텀 포스트 타입 데이터"
+
+msgid "Custom post type meta successfully saved"
+msgstr "커스텀 포스트 타입 메타가 성공적으로 저장되었습니다."
+
+msgid "Custom post type slug to use instead of default."
+msgstr "기본값 대신 사용할 커스텀 포스트 타입 슬러그."
+
+msgid "Custom post type successfully deleted."
+msgstr "커스텀 포스트 타입이 성공적으로 삭제되었습니다."
+
+msgid "Custom post type successfully saved."
+msgstr "커스텀 포스트 타입이 성공적으로 저장되었습니다."
+
+msgid "Custom post type was associated to selected taxonomies"
+msgstr "커스텀 포스트 타입이 선택한 택소노미에 연결되었습니다."
+
+msgid "Custom post type"
+msgstr "커스텀 포스트 타입"
+
+msgid "Custom post types"
+msgstr "커스텀 포스트 타입"
+
+msgid "Custom query var"
+msgstr "커스텀 쿼리 변수"
+
+msgid "Custom query var slug to use instead of default."
+msgstr "기본값 대신 사용할 커스텀 쿼리 변수 슬러그."
+
+msgid "Custom rewrite"
+msgstr "커스텀 리라이트"
+
+msgid "Custom rewrite rules"
+msgstr "커스텀 리라이트 규칙"
+
+msgid "Date format"
+msgstr "날짜 형식"
+
+msgid "Default term to be used for the taxonomy."
+msgstr "택소노미에 사용할 기본 용어."
+
+msgid "Default value"
+msgstr "기본값"
+
+msgid "Delete"
+msgstr "삭제"
+
+msgid "Delete ACPT definitions when deactivate the plug-in"
+msgstr "플러그인 비활성화 시 ACPT 정의 삭제"
+
+msgid "Delete API key"
+msgstr "API 키 삭제"
+
+msgid "Delete Taxonomy"
+msgstr "택소노미 삭제"
+
+msgid "Delete WooCommerce product data"
+msgstr "우커머스 상품 데이터 삭제"
+
+msgid "Delete all"
+msgstr "전체 삭제"
+
+msgid "Delete all action"
+msgstr "전체 삭제 작업"
+
+msgid "Delete all images"
+msgstr "모든 이미지 삭제"
+
+msgid ""
+"Delete all saved ACPT definitions when you deactivate the plug-in. This "
+"means that if you select NO when you deactivate and then reactivate the plug-"
+"in you will find all the previously saved ACPT definitions (meta fields, "
+"options etc.)"
+msgstr ""
+"플러그인을 비활성화할 때 저장된 모든 ACPT 정의를 삭제합니다. 만약 '아니오"
+"(NO)'를 선택하면, 플러그인을 비활성화했다가 다시 활성화했을 때 이전에 저장된 "
+"모든 ACPT 정의(메타 필드, 옵션 등)를 다시 확인할 수 있습니다."
+
+msgid "Delete metadata when delete an ACPT field"
+msgstr "ACPT 필드 삭제 시 메타데이터 삭제"
+
+msgid "Delete others pages"
+msgstr "다른 페이지 삭제"
+
+msgid "Delete others posts"
+msgstr "다른 글 삭제"
+
+msgid "Delete pages"
+msgstr "페이지 삭제"
+
+msgid "Delete posts"
+msgstr "글 삭제"
+
+msgid "Delete post metadata when deleting ACPT fields"
+msgstr "ACPT 필드 삭제 시 글 메타데이터 삭제"
+
+msgid ""
+"Delete post metadata when deleting an ACPT field. This means that if you "
+"select YES, when you delete an ACPT meta field all the saved metadata will "
+"be deleted"
+msgstr ""
+"ACPT 필드를 삭제할 때 글 메타데이터를 함께 삭제합니다. '예(YES)'를 선택하면, "
+"ACPT 메타 필드를 삭제할 때 해당 필드에 저장된 모든 메타데이터가 삭제됩니다."
+
+msgid "Delete posts when delete an ACPT post definition"
+msgstr "ACPT 글 정의 삭제 시 글 삭제"
+
+msgid ""
+"Delete posts when delete an ACPT post type definition. This means that if "
+"you select YES, when you delete an ACPT post type definition all the saved "
+"posts will be deleted"
+msgstr ""
+"ACPT 게시물 유형 정의를 삭제할 때 게시물도 삭제합니다. 예를 선택하면 ACPT 정"
+"의 삭제 시 저장된 모든 게시물이 삭제됩니다"
+
+msgid "Delete private pages"
+msgstr "비공개 페이지 삭제"
+
+msgid "Delete private posts"
+msgstr "비공개 글 삭제"
+
+msgid "Delete published pages"
+msgstr "공개된 페이지 삭제"
+
+msgid "Delete published posts"
+msgstr "공개된 글 삭제"
+
+msgid "Delete the meta box in this"
+msgstr "다음의 메타 박스 삭제"
+
+msgid "Delete the meta field in this block after copying"
+msgstr "복사 후 이 블록의 메타 필드 삭제"
+
+msgid "Delete the meta field in this field after copying"
+msgstr "복사 후 이 필드의 메타 필드 삭제"
+
+msgid "Delete the selected condition"
+msgstr "선택한 조건 삭제"
+
+msgid "Delete the selected meta box"
+msgstr "선택한 메타 박스 삭제"
+
+msgid "Delete the selected meta field"
+msgstr "선택한 메타 필드 삭제"
+
+msgid "Delete the selected meta option"
+msgstr "선택한 메타 옵션 삭제"
+
+msgid "Delete this meta box"
+msgstr "이 메타 박스 삭제"
+
+msgid "Delete this meta field"
+msgstr "이 메타 필드 삭제"
+
+msgid "Different name MUST be different from single name"
+msgstr "다른 이름은 반드시 단수형 이름과 달라야 합니다."
+
+msgid "Disabled"
+msgstr "비활성화됨"
+
+msgid "Displayed on the admin panel"
+msgstr "관리자 패널에 표시됨"
+
+msgid "Displayed on the sidebar of the admin panel"
+msgstr "관리자 패널 사이드바에 표시됨"
+
+msgid "Documentation"
+msgstr "문서"
+
+msgid "Drag your component(s) here"
+msgstr "여기에 구성 요소(컴포넌트)를 드래그하세요"
+
+msgid "Drag your loop component(s) here"
+msgstr "여기에 루프 구성 요소(컴포넌트)를 드래그하세요"
+
+msgid "Duplicate the selected meta box"
+msgstr "선택한 메타 박스 복제"
+
+msgid "Duplicate the selected meta field"
+msgstr "선택한 메타 필드 복제"
+
+msgid "Duplicate this block"
+msgstr "이 블록 복제"
+
+msgid "Duplicate this meta box"
+msgstr "이 메타 박스 복제"
+
+msgid "Duplicate this meta field"
+msgstr "이 메타 필드 복제"
+
+msgid "Edit"
+msgstr "편집"
+
+msgid "Edit Custom Post Type"
+msgstr "커스텀 포스트 타입 편집"
+
+msgid "Edit Taxonomy"
+msgstr "택소노미 편집"
+
+msgid "Edit WooCommerce product data"
+msgstr "우커머스 상품 데이터 편집"
+
+msgid "Edit a Taxonomy"
+msgstr "택소노미 편집"
+
+msgid "Edit others pages"
+msgstr "다른 페이지 편집"
+
+msgid "Edit others posts"
+msgstr "다른 글 편집"
+
+msgid "Edit pages"
+msgstr "페이지 편집"
+
+msgid "Edit posts"
+msgstr "글 편집"
+
+msgid "Edit private pages"
+msgstr "비공개 페이지 편집"
+
+msgid "Edit private posts"
+msgstr "비공개 포스트 편집"
+
+msgid "Edit published pages"
+msgstr "발행된 페이지 편집"
+
+msgid "Edit published posts"
+msgstr "발행된 포스트 편집"
+
+msgid "Element"
+msgstr "요소"
+
+msgid "Elements per page"
+msgstr "페이지당 요소 수"
+
+msgid "Elements per row"
+msgstr "행당 요소 수"
+
+msgid "Elements to display"
+msgstr "표시할 요소"
+
+msgid "Enable ACPT visual builder"
+msgstr "ACPT 비주얼 빌더 활성화"
+
+msgid "Enable the ACPT visual builder to manage your templates."
+msgstr "템플릿 관리를 위해 ACPT 비주얼 빌더를 활성화합니다."
+
+msgid ""
+"Enable the ACPT visual builder. This option allows you to use the integrated "
+"visual builder to create and manage templates for single CPTs, archive "
+"pages, taxonomy terms and relations."
+msgstr ""
+"ACPT 비주얼 빌더를 활성화합니다. 이 옵션을 사용하면 통합 비주얼 빌더를 통해 "
+"단일 CPT, 아카이브 페이지, 분류(Taxonomy) 용어 및 관계에 대한 템플릿을 생성하"
+"고 관리할 수 있습니다."
+
+msgid "Error during saving the template"
+msgstr "템플릿 저장 중 오류 발생"
+
+msgid "Error during the activation of the license."
+msgstr "라이선스 활성화 중 오류가 발생했습니다."
+
+msgid "Error fetching data"
+msgstr "데이터를 가져오는 중 오류 발생"
+
+msgid "Ex. movie"
+msgstr "예: 영화"
+
+msgid "Ex. movies"
+msgstr "예: 영화 목록"
+
+msgid "Expiration date"
+msgstr "만료일"
+
+msgid "Export HTML/CSS code"
+msgstr "HTML/CSS 코드 내보내기"
+
+msgid "Export code"
+msgstr "코드 내보내기"
+
+msgid "Export custom post types"
+msgstr "사용자 정의 포스트 타입 내보내기"
+
+msgid "Export data"
+msgstr "데이터 내보내기"
+
+msgid "Export settings"
+msgstr "설정 내보내기"
+
+msgid "Export selected elements"
+msgstr "선택한 요소 내보내기"
+
+msgid "Export settings and meta fields for selected elements:"
+msgstr "선택한 요소의 설정 및 메타 필드 내보내기:"
+
+msgid "Facebook group"
+msgstr "페이스북 그룹"
+
+msgid "Featured image"
+msgstr "특성 이미지"
+
+msgid "Field columns"
+msgstr "필드 열"
+
+msgid "Field columns ([1-6] only for repeater field)"
+msgstr "필드 열 (반복 필드의 경우 1-6 사이)"
+
+msgid "Field label"
+msgstr "필드 라벨"
+
+msgid "Field name"
+msgstr "필드 이름"
+
+msgid "Field name cannot be blank"
+msgstr "필드 이름은 비워둘 수 없습니다"
+
+msgid "Field name max length is 255 characters"
+msgstr "필드 이름의 최대 길이는 255자입니다"
+
+msgid "Field required"
+msgstr "필수 필드"
+
+msgid "Field slug"
+msgstr "필드 슬러그"
+
+msgid "Field slug (Ex. gallery or text_1)"
+msgstr "필드 슬러그 (예: gallery 또는 text_1)"
+
+msgid ""
+"Field slug. Only alphanumeric (latin) characters allowed, without spaces"
+msgstr "필드 슬러그입니다. 공백 없이 영문자와 숫자만 허용됩니다"
+
+msgid "Field width"
+msgstr "필드 너비"
+
+msgid "Field width in % ([1-100] default value: 100)"
+msgstr "필드 너비 % (1-100, 기본값: 100)"
+
+msgid "Fields"
+msgstr "필드"
+
+msgid "Fields count"
+msgstr "필드 수"
+
+msgid "Filter by date"
+msgstr "날짜별 필터링"
+
+msgid "Filter by {{r}}"
+msgstr "{{r}}(으)로 필터링"
+
+msgid "Filter {{r}} list"
+msgstr "{{r}} 목록 필터링"
+
+msgid "Filter in admin"
+msgstr "관리자 화면에서 필터링"
+
+msgid "First, create a post for this post type"
+msgstr "먼저 이 포스트 타입에 대한 포스트를 생성하세요"
+
+msgid "First, you need to add a block in ACPT settings."
+msgstr "먼저 ACPT 설정에서 블록을 추가해야 합니다."
+
+msgid "Format"
+msgstr "형식"
+
+msgid ""
+"Discover, manage and test every REST endpoint exposed by ACPT via live "
+"Swagger UI."
+msgstr ""
+
+msgid "Fullscreen mode"
+msgstr "전체화면 모드"
+
+msgid "General"
+msgstr "일반"
+
+msgid "Generate"
+msgstr "생성"
+
+msgid "Generated at"
+msgstr "생성일:"
+
+msgid "Generating code..."
+msgstr "코드 생성 중..."
+
+msgid "Go to"
+msgstr "이동"
+
+msgid "Google Maps API key"
+msgstr "구글 지도 API 키"
+
+msgid "GraphQL plural name"
+msgstr "GraphQL 복수 이름"
+
+msgid "GraphQL single name"
+msgstr "GraphQL 단수 이름"
+
+msgid "Has archive"
+msgstr "아카이브 보유"
+
+msgid "Headline location"
+msgstr "헤드라인 위치"
+
+msgid "Height"
+msgstr "높이"
+
+msgid "Hide all modals, deselect the current element"
+msgstr "모든 모달 숨기기, 현재 요소 선택 해제"
+
+msgid "Hide in external products"
+msgstr "외부 상품에서 숨기기"
+
+msgid "Hide in virtual products"
+msgstr "가상 상품에서 숨기기"
+
+msgid "Hide/show this meta box"
+msgstr "이 메타 박스 숨기기/표시"
+
+msgid "Hide/show this meta field"
+msgstr "이 메타 필드 숨기기/표시"
+
+msgid "Hide/show this block"
+msgstr "이 블록 숨기기/표시"
+
+msgid "Hide/show this page"
+msgstr "이 페이지 숨기기/표시"
+
+msgid "Hierarchical"
+msgstr "계층 구조"
+
+msgid "How to display the related post(s) selector?"
+msgstr "연관 포스트 선택기를 어떻게 표시하시겠습니까?"
+
+msgid "Icon"
+msgstr "아이콘"
+
+msgid "Import an ACPT backup here."
+msgstr "여기에서 ACPT 백업 파일을 가져오세요."
+
+msgid "Import custom post types"
+msgstr "사용자 정의 포스트 타입 가져오기"
+
+msgid "Import data"
+msgstr "데이터 가져오기"
+
+msgid "Import settings"
+msgstr "설정 가져오기"
+
+msgid "Insert"
+msgstr "삽입"
+
+msgid "Is Public"
+msgstr "공개 여부"
+
+msgid "Key"
+msgstr "키"
+
+msgid "Label and value are linked"
+msgstr "라벨과 값이 연결됨"
+
+msgid "Label and value are unlinked"
+msgstr "라벨과 값이 분리됨"
+
+msgid "Language"
+msgstr "언어"
+
+msgid "Leading term:"
+msgstr "주요 용어:"
+
+msgid "Lifetime"
+msgstr "평생 소장"
+
+msgid "Link target"
+msgstr "링크 타겟"
+
+msgid "List {{r}}"
+msgstr "{{r}} 목록"
+
+msgid ""
+"Makes this post type available for selection in navigation menus. Default is "
+"value of $public."
+msgstr ""
+"이 포스트 타입을 탐색 메뉴에서 선택할 수 있도록 설정합니다. 기본값은 $public"
+"의 값을 따릅니다."
+
+msgid ""
+"Makes this post type available via the admin bar. Default is value of "
+"$show_in_menu."
+msgstr ""
+"이 포스트 타입을 관리자 바(Admin Bar)를 통해 사용할 수 있게 합니다. 기본값은 "
+"$show_in_menu의 값을 따릅니다."
+
+msgid ""
+"Makes this taxonomy available for selection in navigation menus. If not set, "
+"the default is inherited from $public (default true)."
+msgstr ""
+"이 분류를 탐색 메뉴에서 선택할 수 있도록 설정합니다. 설정하지 않으면 기본적으"
+"로 $public에서 상속됩니다(기본값: true)."
+
+msgid "Manage"
+msgstr "관리"
+
+msgid "Manage User Meta"
+msgstr "사용자 메타 관리"
+
+msgid "Manage categories"
+msgstr "카테고리 관리"
+
+msgid "Manage content"
+msgstr "콘텐츠 관리"
+
+msgid "Manage fields"
+msgstr "필드 관리"
+
+msgid "Manage links"
+msgstr "링크 관리"
+
+msgid "Manage options"
+msgstr "옵션 관리"
+
+msgid "Manage pages"
+msgstr "페이지 관리"
+
+msgid "Manage your license"
+msgstr "라이선스 관리"
+
+msgid "Manage your registered license key"
+msgstr "등록된 라이선스 키 관리"
+
+msgid "Max value (used only by numeric and textual fields)"
+msgstr "최댓값 (숫자 및 텍스트 필드에만 사용됨)"
+
+msgid "Maximum blocks allowed"
+msgstr "최대 허용 블록 수"
+
+msgid "Menu icon"
+msgstr "메뉴 아이콘"
+
+msgid "Menu position"
+msgstr "메뉴 위치"
+
+msgid "Menu slug"
+msgstr "메뉴 슬러그"
+
+msgid "Menu title"
+msgstr "메뉴 제목"
+
+msgid "Meta box"
+msgstr "메타 박스"
+
+msgid "Meta box was successfully copied"
+msgstr "메타 박스가 복사되었습니다"
+
+msgid "Meta boxes"
+msgstr "메타 박스 목록"
+
+msgid "Meta field"
+msgstr "메타 필드"
+
+msgid "Meta field was successfully copied"
+msgstr "메타 필드가 복사되었습니다"
+
+msgid "Meta fields"
+msgstr "메타 필드 목록"
+
+msgid "Meta option"
+msgstr "메타 옵션"
+
+msgid "Min value (used only by numeric and textual fields)"
+msgstr "최솟값 (숫자 및 텍스트 필드에만 사용됨)"
+
+msgid "Minimum blocks allowed"
+msgstr "최소 허용 블록 수"
+
+msgid "Moderate comments"
+msgstr "댓글 검토"
+
+msgid "Most used {{r}}"
+msgstr "가장 많이 사용된 {{r}}"
+
+msgid "My account"
+msgstr "내 계정"
+
+msgid "My license"
+msgstr "내 라이선스"
+
+msgid "Name"
+msgstr "이름"
+
+msgid "Native"
+msgstr "네이티브"
+
+msgid "Navigate the input fields in the selected meta field"
+msgstr "선택한 메타 필드의 입력 필드 탐색"
+
+msgid "Navigate the input fields in the selected meta option"
+msgstr "선택한 메타 옵션의 입력 필드 탐색"
+
+msgid "Navigate the tabs of selected field (go to next tab)"
+msgstr "선택한 필드의 탭 탐색 (다음 탭으로 이동)"
+
+msgid "Navigate the tabs of selected field (go to previous tab)"
+msgstr "선택한 필드의 탭 탐색 (이전 탭으로 이동)"
+
+msgid "Navigate to next element (box, field, option or condition)"
+msgstr "다음 요소로 이동 (박스, 필드, 옵션 또는 조건)"
+
+msgid "Navigate to previous element (box, field, option or condition)"
+msgstr "이전 요소로 이동 (박스, 필드, 옵션 또는 조건)"
+
+msgid "Navigation"
+msgstr "탐색"
+
+msgid "Navigation list {{r}}"
+msgstr "{{r}} 탐색 목록"
+
+msgid "New"
+msgstr "새로 만들기"
+
+msgid "New {{r}}"
+msgstr "새 {{r}}"
+
+msgid "Next Step"
+msgstr "다음 단계"
+
+msgid "No"
+msgstr "아니요"
+
+msgid "No API keys found."
+msgstr "API 키를 찾을 수 없습니다."
+
+msgid ""
+"No blocks already created. Create the first one now by clicking the button "
+"\"Add block\"!"
+msgstr ""
+"아직 생성된 블록이 없습니다. \"블록 추가\" 버튼을 클릭하여 첫 번째를 만드세"
+"요!"
+
+msgid ""
+"No blocks saved, generate the first one clicking on \"Add block\" button"
+msgstr "저장된 블록이 없습니다. \"블록 추가\" 버튼을 클릭하여 생성하세요."
+
+msgid ""
+"No children already created. Create the first one now by clicking the button "
+"\"Add child page\"!"
+msgstr ""
+"생성된 하위 페이지가 없습니다. \"하위 페이지 추가\" 버튼을 클릭하여 첫 번째 "
+"페이지를 만드세요!"
+
+msgid "No choice"
+msgstr "선택 사항 없음"
+
+msgid "No conditions are present."
+msgstr "조건이 존재하지 않습니다."
+
+msgid ""
+"No conditions are present, click on \"Add condition\" button to add the "
+"first one."
+msgstr ""
+"조건이 없습니다. \"조건 추가\" 버튼을 클릭하여 첫 번째 조건을 추가하세요."
+
+msgid ""
+"No content yet. Drag components in this canvas and start building something "
+"awesome!"
+msgstr ""
+"아직 콘텐츠가 없습니다. 이 캔버스에 구성 요소를 끌어다 놓아 멋진 결과물을 만"
+"들어 보세요!"
+
+msgid "No custom post type found."
+msgstr "사용자 정의 포스트 타입을 찾을 수 없습니다."
+
+msgid "No display"
+msgstr "표시 안 함"
+
+msgid ""
+"No elements saved, generate the first one clicking on \"Add element\" button"
+msgstr "\"요소 추가\" 버튼을 클릭하여 첫 번째 요소를 생성하세요"
+
+msgid ""
+"No field box already created. Create the first one now by clicking the "
+"button \"Add field box\"!"
+msgstr ""
+"생성된 필드 박스가 없습니다. \"필드 박스 추가\" 버튼을 클릭하여 만드세요!"
+
+msgid ""
+"No fields saved, generate the first one clicking on \"Add element\" button"
+msgstr "저장된 필드가 없습니다. \"요소 추가\" 버튼을 클릭하여 생성하세요."
+
+msgid ""
+"No fields already created. Create the first one now by clicking the button "
+"\"Add field\"!"
+msgstr ""
+"생성된 필드가 없습니다. \"필드 추가\" 버튼을 클릭하여 첫 번째 필드를 만드세"
+"요!"
+
+msgid ""
+"No meta box already created. Create the first one now by clicking the button "
+"\"Add meta box\"!"
+msgstr ""
+"생성된 메타 박스가 없습니다. \"메타 박스 추가\" 버튼을 클릭하여 만드세요!"
+
+msgid "No option pages found."
+msgstr "옵션 페이지를 찾을 수 없습니다."
+
+msgid ""
+"No options already created. Create the first one now by clicking the button "
+"\"Add option\"!"
+msgstr "아직 옵션이 없습니다. \"옵션 추가\"를 클릭하여 첫 번째를 만드세요!"
+
+msgid "No product data found."
+msgstr "상품 데이터를 찾을 수 없습니다."
+
+msgid "No records message"
+msgstr "기록 없음 메시지"
+
+msgid "No taxonomies found."
+msgstr "분류(Taxonomies)를 찾을 수 없습니다."
+
+msgid "No templates found."
+msgstr "템플릿을 찾을 수 없습니다."
+
+msgid "No {{r}}"
+msgstr "{{r}} 없음"
+
+msgid "No {{r}} found"
+msgstr "{{r}}을(를) 찾을 수 없습니다"
+
+msgid "Not allowed"
+msgstr "허용되지 않음"
+
+msgid "On the left"
+msgstr "왼쪽에"
+
+msgid "On the right"
+msgstr "오른쪽에"
+
+msgid "On the top"
+msgstr "상단에"
+
+msgid "Opens in a new window or tab "
+msgstr "새 창 또는 탭에서 열기"
+
+msgid "Opens in the full body of the window"
+msgstr "전체 창에서 열기"
+
+msgid "Opens in the parent frame"
+msgstr "부모 프레임에서 열기"
+
+msgid "Opens in the same frame as it was clicked"
+msgstr "클릭한 동일 프레임에서 열기"
+
+msgid "Option list"
+msgstr "옵션 목록"
+
+msgid "Option page meta successfully saved"
+msgstr "옵션 페이지 메타가 성공적으로 저장되었습니다"
+
+msgid "Single option page"
+msgstr "단일 옵션 페이지"
+
+msgid "Option page"
+msgstr "옵션 페이지"
+
+msgid "Option pages"
+msgstr "옵션 페이지 목록"
+
+msgid "Option pages meta"
+msgstr "옵션 페이지 메타"
+
+msgid "Order by"
+msgstr "정렬 기준"
+
+msgid "Page description (will be displayed after the title)"
+msgstr "페이지 설명 (제목 뒤에 표시됩니다)"
+
+msgid "Page not found"
+msgstr "페이지를 찾을 수 없습니다"
+
+msgid "Page title"
+msgstr "페이지 제목"
+
+msgid "Parent"
+msgstr "상위"
+
+msgid "Parent item"
+msgstr "상위 항목"
+
+msgid "Parent WP admin menu"
+msgstr ""
+
+msgid "Parent {{r}}"
+msgstr "상위 {{r}}"
+
+msgid ""
+"Paste here your Google Maps API key. Needed to use the Address meta field."
+msgstr ""
+"여기에 Google Maps API 키를 붙여넣으세요. 주소 메타 필드를 사용하는 데 필요합"
+"니다."
+
+msgid "Pattern value (used only by numeric and textual fields)"
+msgstr "패턴 값 (숫자 및 텍스트 필드에서만 사용됨)"
+
+msgid "Pattern value (used only by textual fields)"
+msgstr "패턴 값 (텍스트 필드에서만 사용됨)"
+
+msgid "Permalink text"
+msgstr "고유주소(Permalink) 텍스트"
+
+msgid "Plugin version"
+msgstr "플러그인 버전"
+
+msgid "Plural"
+msgstr "복수형"
+
+msgid "Plural label"
+msgstr "복수형 레이블"
+
+msgid "Popular {{r}}"
+msgstr "인기 {{r}}"
+
+msgid "Possible values: customPostType, taxonomy."
+msgstr "가능한 값: customPostType(사용자 정의 포스트 타입), taxonomy(분류)."
+
+msgid "Post count"
+msgstr "글 수"
+
+msgid "Post name"
+msgstr "글 이름"
+
+msgid "Preview"
+msgstr "미리보기"
+
+msgid "Previous Step"
+msgstr "이전 단계"
+
+msgid "Product data"
+msgstr "상품 데이터"
+
+msgid "Product data successfully saved"
+msgstr "상품 데이터가 성공적으로 저장되었습니다"
+
+msgid "Publicly queryable"
+msgstr "공개 쿼리 가능 여부"
+
+msgid "Publish pages"
+msgstr "페이지 발행"
+
+msgid "Publish posts"
+msgstr "글 발행"
+
+msgid "Published posts count"
+msgstr "발행된 글 수"
+
+msgid "Published posts count associated with the taxonomy"
+msgstr "이 분류(taxonomy)와 관련된 발행된 글 수"
+
+msgid "Query var"
+msgstr "쿼리 변수(Query var)"
+
+msgid "Quick edit"
+msgstr "빠른 편집"
+
+msgid "Quick navigation"
+msgstr "빠른 탐색"
+
+msgid "REST API Controller class name. Default is 'WP_REST_Terms_Controller'."
+msgstr ""
+"REST API 컨트롤러 클래스 이름. 기본값은 'WP_REST_Terms_Controller'입니다."
+
+msgid "REST API base slug"
+msgstr "REST API 기본 슬러그"
+
+msgid "REST Controller class"
+msgstr "REST 컨트롤러 클래스"
+
+msgid "Radio/checkbox"
+msgstr "라디오/체크박스"
+
+msgid "Read "
+msgstr "읽기"
+
+msgid "Read private pages"
+msgstr "비공개 페이지 읽기"
+
+msgid "Read private posts"
+msgstr "비공개 글 읽기"
+
+msgid "Records per page"
+msgstr "페이지당 레코드 수"
+
+msgid "Records per page in ACPT dashboards"
+msgstr "ACPT 대시보드의 페이지당 레코드 수"
+
+msgid "Redo"
+msgstr "다시 실행"
+
+msgid "Regenerate"
+msgstr "재생성"
+
+msgid "Register new Custom Post Type"
+msgstr "새 사용자 정의 포스트 타입 등록"
+
+msgid "Register the first one"
+msgstr "첫 번째 항목 등록"
+
+msgid "Registered Custom Post Types"
+msgstr "등록된 사용자 정의 포스트 타입"
+
+msgid "Registered Taxonomies"
+msgstr "등록된 분류(Taxonomies)"
+
+msgid "Related template"
+msgstr "관련 템플릿"
+
+msgid "Remove featured image"
+msgstr "특성 이미지 제거"
+
+msgid "Return back to list"
+msgstr "목록으로 돌아가기"
+
+msgid "Rewrite"
+msgstr "리라이트(Rewrite)"
+
+msgid "Save"
+msgstr "저장"
+
+msgid "Save action"
+msgstr "저장 동작"
+
+msgid "Search"
+msgstr "검색"
+
+msgid "Search box"
+msgstr "검색창"
+
+msgid "Search {{r}}"
+msgstr "{{r}} 검색"
+
+msgid "Secret"
+msgstr "비밀키(Secret)"
+
+msgid "Select"
+msgstr "선택"
+
+msgid "Select field box from list"
+msgstr "목록에서 필드 박스 선택"
+
+msgid "Select the inversed field on target"
+msgstr "대상의 역방향(inversed) 필드 선택"
+
+msgid "Select field from list"
+msgstr "목록에서 필드 선택"
+
+msgid "Select field type from list"
+msgstr "목록에서 필드 유형 선택"
+
+msgid "Select relation type from list"
+msgstr "목록에서 관계 유형 선택"
+
+msgid "Select the element from the list:"
+msgstr "목록에서 요소를 선택하세요:"
+
+msgid "Select the headline location (default: on the left)"
+msgstr "헤드라인 위치 선택 (기본값: 왼쪽)"
+
+msgid "Select the template type:"
+msgstr "템플릿 유형 선택:"
+
+msgid "Separate {{r}} with commas"
+msgstr "{{r}}를 쉼표로 구분"
+
+msgid "Set featured image"
+msgstr "특성 이미지 설정"
+
+msgid "Set the language of the plug-in"
+msgstr "플러그인 언어 설정"
+
+msgid ""
+"Sets the query var key for this taxonomy. Default  key. If false, a taxonomy "
+"cannot be loaded at ?{query_var}={term_slug}. If a string, the query ?"
+"{query_var}={term_slug} will be valid."
+msgstr ""
+
+msgid ""
+"Sets the query_var key for this post type. Defaults to  key. If false, a "
+"post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+"string, the query {post_slug} will be valid."
+msgstr ""
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "Settings page"
+msgstr "설정 페이지"
+
+msgid "Show Tagcloud"
+msgstr "태그 클라우드 표시"
+
+msgid "Show admin column"
+msgstr "관리자 열 표시"
+
+msgid "Show in GraphQL"
+msgstr "GraphQL에 표시"
+
+msgid "Show in REST API"
+msgstr "REST API에 표시"
+
+msgid "Show in UI"
+msgstr "UI에 표시"
+
+msgid "Show in Wordpress admin post lists page"
+msgstr "워드프레스 관리자 글 목록 페이지에 표시"
+
+msgid "Show in admin bar"
+msgstr "관리자 막대에 표시"
+
+msgid "Show in external products"
+msgstr "외부 상품에 표시"
+
+msgid "Show in grouped products"
+msgstr "그룹 상품에 표시"
+
+msgid "Show in menu"
+msgstr "메뉴에 표시"
+
+msgid "Show in nav menus"
+msgstr "탐색 메뉴에 표시"
+
+msgid "Show in quick edit"
+msgstr "빠른 편집에 표시"
+
+msgid "Show in simple products"
+msgstr "단순 상품에 표시"
+
+msgid "Show in variable products"
+msgstr "옵션 상품에 표시"
+
+msgid "Show on UI"
+msgstr "UI에 표시"
+
+msgid "Show pagination"
+msgstr "페이지네이션 표시"
+
+msgid "Show the custom post type in WPGraphQL"
+msgstr "WPGraphQL에 사용자 정의 포스트 타입 표시"
+
+msgid "Show the custom post type in WPGraphQL."
+msgstr "WPGraphQL에 사용자 정의 포스트 타입을 표시합니다."
+
+msgid "Show the product data on the front store page."
+msgstr "상점 전면 페이지에 상품 데이터를 표시합니다."
+
+msgid "Show this legend modal"
+msgstr "이 범례 모달 표시"
+
+msgid "Show/hide all fields"
+msgstr "모든 필드 표시/숨기기"
+
+msgid "Sing. label"
+msgstr "단수형 레이블"
+
+msgid "Single name MUST be different from plural name"
+msgstr "단수형 이름은 반드시 복수형 이름과 달라야 합니다"
+
+msgid "Single template"
+msgstr "싱글 템플릿"
+
+msgid "Singular"
+msgstr "단수형"
+
+msgid "Singular label"
+msgstr "단수형 레이블"
+
+msgid "Slug"
+msgstr "슬러그"
+
+msgid "Sort"
+msgstr "정렬"
+
+msgid "Sort by"
+msgstr "정렬 기준"
+
+msgid "Step value (used only by numeric fields)"
+msgstr "단계(Step) 값 (숫자 필드에서만 사용됨)"
+
+msgid "Successfully post sync."
+msgstr "포스트 동기화 성공."
+
+msgid "Support"
+msgstr "지원"
+
+msgid "Supports"
+msgstr "지원 기능"
+
+msgid "Surrounding tag"
+msgstr "서라운딩 태그"
+
+msgid "Sync with post types"
+msgstr "포스트 타입과 동기화"
+
+msgid "Taxonomies"
+msgstr "분류(Taxonomies)"
+
+msgid "Taxonomies association"
+msgstr "분류 연결"
+
+msgid "Taxonomy"
+msgstr "분류"
+
+msgid "Taxonomy data"
+msgstr "분류 데이터"
+
+msgid "Taxonomy meta successfully saved"
+msgstr "분류 메타 정보가 성공적으로 저장되었습니다"
+
+msgid "Taxonomy settings"
+msgstr "분류 설정"
+
+msgid "Taxonomy slug to use instead of default."
+msgstr "기본값 대신 사용할 분류 슬러그."
+
+msgid ""
+"Taxonomy slug. The post name/slug. Used for various queries for taxonomy "
+"content."
+msgstr ""
+"분류 슬러그. 포스트 이름/슬러그입니다. 분류 콘텐츠에 대한 다양한 쿼리에 사용"
+"됩니다."
+
+msgid "Taxonomy successfully deleted"
+msgstr "분류가 성공적으로 삭제되었습니다"
+
+msgid "Taxonomy was associated to selected Custom post types"
+msgstr "분류가 선택된 사용자 정의 포스트 타입에 연결되었습니다"
+
+msgid "Template"
+msgstr "템플릿"
+
+msgid "Template list"
+msgstr "템플릿 목록"
+
+msgid "Template saved successfully"
+msgstr "템플릿이 성공적으로 저장되었습니다"
+
+msgid "Template was successfully deleted."
+msgstr "템플릿이 성공적으로 삭제되었습니다."
+
+msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "뒤쪽 텍스트. HTML 허용 (예: &lt;small&gt;)"
+
+msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
+msgstr "앞쪽 텍스트. HTML 허용 (예: &lt;small&gt;)"
+
+msgid "The API key was successfully deleted"
+msgstr "API 키가 성공적으로 삭제되었습니다"
+
+msgid "The archive template for this custom post type"
+msgstr "이 사용자 정의 포스트 타입의 아카이브 템플릿"
+
+msgid "The browser will refresh after 5 seconds."
+msgstr "5초 후 브라우저가 새로고침됩니다."
+
+msgid "The custom post type or taxonomy element."
+msgstr "사용자 정의 포스트 타입 또는 분류 요소."
+
+msgid "The default value for this field"
+msgstr "이 필드의 기본값"
+
+msgid "The description of this field (showed only on admin panel)"
+msgstr "이 필드의 설명 (관리자 패널에만 표시됨)"
+
+msgid "The field label, non latin characters are allowed"
+msgstr "필드 레이블, 한글 등 비라틴 문자 사용 가능"
+
+msgid "The icon displayed on menu (only for parent pages)"
+msgstr "메뉴에 표시되는 아이콘 (상위 페이지 전용)"
+
+msgid ""
+"The inversed field is the target post type field which is related with this "
+"one in a bidirectional relation"
+msgstr ""
+"역방향(Inversed) 필드는 이 필드와 양방향 관계로 연결된 대상 포스트 타입의 필"
+"드입니다."
+
+msgid ""
+"The limit on how many blocks are allowed ([1-100] only for flexible field)"
+msgstr "허용되는 최대 블록 제한 ([1-100], 유연한 필드 전용)"
+
+msgid ""
+"The limit on how many blocks are required ([1-100] only for flexible field)"
+msgstr "필수 블록 수 제한 ([1-100], 유연한 필드 전용)"
+
+msgid "The maximum value (used only by numeric and textual fields)"
+msgstr "최댓값 (숫자 및 텍스트 필드에서만 사용됨)"
+
+msgid "The menu title (displayed only in the admin menu)"
+msgstr "메뉴 제목 (관리자 메뉴에만 표시됨)"
+
+msgid "The minimum value (used only by numeric and textual fields)"
+msgstr "최솟값 (숫자 및 텍스트 필드에서만 사용됨)"
+
+msgid "The page slug (used to generate the page URL). Must be unique"
+msgstr "페이지 슬러그 (페이지 URL 생성에 사용). 고유해야 함"
+
+msgid "The page title"
+msgstr "페이지 제목"
+
+msgid "The parent element slug"
+msgstr "상위 요소 슬러그"
+
+msgid ""
+"The position in the menu order the post type should appear. To work, "
+"$show_in_menu must be true. Default null (at the bottom)."
+msgstr ""
+"포스트 타입이 나타날 메뉴 순서 위치입니다. 작동하려면 $show_in_menu가 true여"
+"야 합니다. 기본값은 null(맨 아래)입니다."
+
+msgid "The post name/slug. Used for various queries for taxonomy content."
+msgstr "포스트 이름/슬러그. 분류 콘텐츠에 대한 다양한 쿼리에 사용됩니다."
+
+msgid "The post name/slug. Used for various queries."
+msgstr "포스트 이름/슬러그. 다양한 쿼리에 사용됩니다."
+
+msgid "The product data name."
+msgstr "상품 데이터 이름."
+
+msgid "The requested page was not found, was deleted or was moved!"
+msgstr "요청한 페이지를 찾을 수 없거나, 삭제되었거나, 이동되었습니다!"
+
+msgid "The single template for taxonomy term"
+msgstr "분류 용어(Term)의 싱글 템플릿"
+
+msgid "The single template for this custom post type"
+msgstr "이 사용자 정의 포스트 타입의 싱글 템플릿"
+
+msgid ""
+"The string to use to build the read, edit, and delete capabilities. May be "
+"passed as an array to allow for alternative plurals when using this argument "
+"as a base to construct the capabilities, e.g. array('story', 'stories'). "
+"Default 'post'."
+msgstr ""
+"읽기, 편집, 삭제 권한(capabilities)을 구성하는 데 사용할 문자열입니다. 권한 "
+"구성을 위한 기반 인자로 사용할 때 대체 복수형을 허용하도록 배열로 전달할 수 "
+"있습니다. 예: array('story', 'stories'). 기본값은 'post'입니다."
+
+msgid ""
+"The template type. Possible values: archive, single, related, metaField."
+msgstr ""
+"템플릿 유형. 가능한 값: archive(아카이브), single(싱글), related(관련), "
+"metaField(메타 필드)."
+
+msgid ""
+"The template used to display this custom post type when it is releated to "
+"another one. If no template is set, it will be displayed just the title of "
+"the post."
+msgstr ""
+"이 사용자 정의 포스트 타입이 다른 타입과 연관될 때 표시하는 데 사용되는 템플"
+"릿입니다. 설정된 템플릿이 없으면 포스트 제목만 표시됩니다."
+
+msgid "The visual builder can be used with a minimum resolution of 960 px wide"
+msgstr "비주얼 빌더는 가로 해상도 최소 960px 이상에서 사용할 수 있습니다"
+
+msgid "The visual builder is disabled. Go to Settings page and enable it."
+msgstr "비주얼 빌더가 비활성화되어 있습니다. 설정 페이지에서 활성화하세요."
+
+msgid "This field is mandatory"
+msgstr "이 필드는 필수입니다"
+
+msgid ""
+"This is the only time that the secret access key can be viewed or copied. "
+"You cannot recover it later. However, you can delete and create or "
+"regenerate new API key at any time."
+msgstr ""
+"비밀 액세스 키를 확인하거나 복사할 수 있는 유일한 기회입니다. 나중에는 복구"
+"할 수 없습니다. 하지만 언제든지 기존 API 키를 삭제하고 새로 생성하거나 재생성"
+"할 수 있습니다."
+
+msgid "This number controls the position of this page in the admin menu"
+msgstr "이 숫자는 관리자 메뉴에서 이 페이지의 위치를 제어합니다"
+
+msgid "This text will appear after input"
+msgstr "이 텍스트는 입력란 뒤에 나타납니다"
+
+msgid "This text will appear before input"
+msgstr "이 텍스트는 입력란 앞에 나타납니다"
+
+msgid ""
+"Restore settings and meta fields from a previously exported .acpt file. "
+"Maximum file size is 2 MB."
+msgstr ""
+
+msgid "To change the base url of REST API route. Default is"
+msgstr "REST API 경로의 기본 URL을 변경하려면. 기본값은"
+
+msgid "Toggle guides"
+msgstr "가이드 토글"
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using  as "
+"slug. To prevent rewrite, set to false. To specify rewrite rules, an array "
+"can be passed with any of these keys:"
+msgstr ""
+"이 분류의 리라이트(rewrite) 처리를 활성화합니다. 기본값은 true이며, 해당 값"
+"을 슬러그로 사용합니다. 리라이트를 방지하려면 false로 설정하세요. 리라이트 규"
+"칙을 지정하려면 특정 키가 포함된 배열을 전달할 수 있습니다."
+
+msgid "Type"
+msgstr "유형"
+
+msgid "Type here your ACPT email account. Ex: mauro@acpt.io"
+msgstr "여기에 ACPT 이메일 계정을 입력하세요. 예: mauro@acpt.io"
+
+msgid "Type here your license. Ex: 123e4567-e89b-12d3-a456-426614174000"
+msgstr "여기에 라이선스를 입력하세요. 예: 123e4567-e89b-12d3-a456-426614174000"
+
+msgid "Uncheck `required` in the selected meta field"
+msgstr "선택한 메타 필드에서 `필수(required)` 체크 해제"
+
+msgid "Uncheck `show in archive` in the selected meta field"
+msgstr "선택한 메타 필드에서 `아카이브에 표시(show in archive)` 체크 해제"
+
+msgid "Undo"
+msgstr "실행 취소"
+
+msgid "Unfiltered html"
+msgstr "필터링되지 않은 HTML"
+
+msgid "Update {{r}}"
+msgstr "{{r}} 업데이트"
+
+msgid "Upgrade"
+msgstr "업그레이드"
+
+msgid "Upload"
+msgstr "업로드"
+
+msgid "Upload file"
+msgstr "파일 업로드"
+
+msgid "Upload files"
+msgstr "파일들 업로드"
+
+msgid "Upload your file"
+msgstr "파일을 업로드하세요"
+
+msgid "Use featured image"
+msgstr "특성 이미지 사용"
+
+msgid ""
+"Export your settings and meta field definitions into a compressed .acpt JSON "
+"archive for backup or migration."
+msgstr ""
+
+msgid "Used for the post type admin menu item"
+msgstr "글 유형 관리자 메뉴 항목에 사용됨"
+
+msgid "Used for the taxonomy admin menu item"
+msgstr "분류 체계 관리자 메뉴 항목에 사용됨"
+
+msgid "Used when a singular label is needed"
+msgstr "단수형 라벨이 필요할 때 사용됨"
+
+msgid "Single user"
+msgstr "단일 사용자"
+
+msgid "User"
+msgstr "사용자"
+
+msgid "Users"
+msgstr "사용자들"
+
+msgid "User meta"
+msgstr "사용자 메타"
+
+msgid "User meta successfully saved"
+msgstr "사용자 메타가 성공적으로 저장되었습니다"
+
+msgid "View"
+msgstr "보기"
+
+msgid "View WooCommerce product data"
+msgstr "우커머스 상품 데이터 보기"
+
+msgid "Visibility of product data"
+msgstr "상품 데이터 공개 여부"
+
+msgid ""
+"WARNING: This action will delete all posts and metadata for this post type. "
+"The action is irreversible."
+msgstr ""
+"경고: 이 작업은 해당 글 유형의 모든 글과 메타데이터를 삭제합니다. 이 작업은 "
+"되돌릴 수 없습니다."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"block. The action is irreversible."
+msgstr ""
+"경고: 이 작업은 이 블록과 관련된 모든 글 메타데이터를 삭제합니다. 이 작업은 "
+"되돌릴 수 없습니다."
+
+msgid ""
+"WARNING: This action will delete all the post metadata related with this "
+"box. The action is irreversible."
+msgstr ""
+"경고: 이 작업은 이 박스와 관련된 모든 글 메타데이터를 삭제합니다. 이 작업은 "
+"되돌릴 수 없습니다."
+
+msgid "When BB Theme builder is active, the visual builder is disabled."
+msgstr "BB 테마 빌더가 활성화되어 있으면 비주얼 빌더가 비활성화됩니다."
+
+msgid "When Oxygen Builder is active, the visual builder is disabled."
+msgstr "Oxygen 빌더가 활성화되어 있으면 비주얼 빌더가 비활성화됩니다."
+
+msgid "Where do you want to copy this meta box?"
+msgstr "이 메타 박스를 어디로 복사하시겠습니까?"
+
+msgid "Where do you want to copy this meta field?"
+msgstr "이 메타 필드를 어디로 복사하시겠습니까?"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, must be true. If "
+"true, the post type is shown in its own top level menu. If false, no menu is "
+"shown."
+msgstr ""
+"관리자 메뉴에서 글 유형을 표시할 위치입니다. 작동하려면 true로 설정해야 합니"
+"다. true일 경우 글 유형이 별도의 최상위 메뉴로 표시됩니다. false일 경우 메뉴"
+"가 표시되지 않습니다."
+
+msgid ""
+"Whether a post type is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"관리자 인터페이스 또는 프런트엔드 사용자가 글 유형을 공개적으로 사용할 수 있"
+"게 할지 여부입니다."
+
+msgid ""
+"Whether a taxonomy is intended for use publicly either via the admin "
+"interface or by front-end users."
+msgstr ""
+"관리자 인터페이스 또는 프런트엔드 사용자가 분류 체계를 공개적으로 사용할 수 "
+"있게 할지 여부입니다."
+
+msgid ""
+"Whether queries can be performed on the front end for the post type as part "
+"of parse_request()."
+msgstr ""
+"parse_request()의 일부로 프런트엔드에서 글 유형에 대한 쿼리를 수행할 수 있는"
+"지 여부입니다."
+
+msgid ""
+"Whether terms in this taxonomy should be sorted in the order they are "
+"provided to wp_set_object_terms(). Default null which equates to false."
+msgstr ""
+"이 분류 체계의 항목들을 wp_set_object_terms()에 제공된 순서대로 정렬할지 여부"
+"입니다. 기본값은 null(false와 동일)입니다."
+
+msgid "Whether the taxonomy is hierarchical. Default false."
+msgstr ""
+"분류 체계가 계층 구조(부모/자식)를 가지는지 여부입니다. 기본값은 false입니다."
+
+msgid ""
+"Whether the taxonomy is publicly queryable. If not set, the default is "
+"inherited from $public."
+msgstr ""
+"분류 체계를 공개적으로 쿼리할 수 있는지 여부입니다. 설정하지 않으면 $public"
+"의 값을 상속받습니다."
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled."
+msgstr ""
+"글 유형 아카이브 페이지를 유지할지 여부, 또는 사용할 아카이브 슬러그 문자열입"
+"니다. $rewrite가 활성화된 경우 적절한 리라이트 규칙을 생성합니다."
+
+msgid ""
+"Triggers the handling of rewrites for this post type. To prevent rewrite, "
+"set to false. Defaults to true, using $post_type as slug. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"이 글 유형에 대한 고유주소(rewrite) 처리를 활성화합니다. 방지하려면 false로 "
+"설정하세요. 기본값은 true이며 글 유형명을 슬러그로 사용합니다. 특정 리라이트 "
+"규칙을 지정하려면 배열을 전달할 수 있습니다."
+
+msgid ""
+"Whether to display a column for the taxonomy on its post type listing "
+"screens. Default false."
+msgstr ""
+"글 유형 목록 화면에서 이 분류 체계에 대한 열을 표시할지 여부입니다. 기본값은 "
+"false입니다."
+
+msgid ""
+"Whether to generate and allow a UI for managing terms in this taxonomy in "
+"the admin. If not set, the default is inherited from $public (default true)."
+msgstr ""
+"관리자 페이지에서 이 분류 체계의 항목들을 관리하기 위한 UI를 생성하고 허용할"
+"지 여부입니다. 설정하지 않으면 $public의 기본값(true)을 상속받습니다."
+
+msgid ""
+"Whether to generate and allow a UI for managing this post type in the admin. "
+"Default is value of $public."
+msgstr ""
+"관리자 페이지에서 이 글 유형을 관리하기 위한 UI를 생성하고 허용할지 여부입니"
+"다. 기본값은 $public의 값입니다."
+
+msgid ""
+"Whether to include the post type in the REST API. Set this to true for the "
+"post type to be available in the block editor. SET TRUE TO ENABLE GUTEMBERG "
+"EDITOR."
+msgstr ""
+"글 유형을 REST API에 포함할지 여부입니다. 블록 에디터에서 글 유형을 사용하려"
+"면 true로 설정하세요. 구텐베르크 에디터를 활성화하려면 TRUE로 설정하십시오."
+
+msgid ""
+"Whether to include the taxonomy in the REST API. Set this to true for the "
+"taxonomy to be available in the block editor. SET TRUE TO ENABLE "
+"VISUALIZATION ON GUTEMBERG EDITOR."
+msgstr ""
+"분류 체계를 REST API에 포함할지 여부입니다. 블록 에디터에서 분류 체계를 사용"
+"하려면 true로 설정하세요. 구텐베르크 에디터에서 시각화하려면 TRUE로 설정하십"
+"시오."
+
+msgid ""
+"Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
+"the default is inherited from $show_ui (default true)."
+msgstr ""
+"태그 클라우드 위젯 컨트롤에 분류 체계를 나열할지 여부입니다. 설정하지 않으면 "
+"$show_ui의 기본값(true)을 상속받습니다."
+
+msgid ""
+"Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+"shown as a submenu of the object type menu. If false, no menu is shown. "
+"$show_ui must be true. If not set, default is inherited from $show_ui "
+"(default true)."
+msgstr ""
+"관리자 메뉴에 분류 체계를 표시할지 여부입니다. true일 경우 해당 객체 유형 메"
+"뉴의 하위 메뉴로 표시됩니다. false일 경우 메뉴가 표시되지 않습니다. $show_ui"
+"가 true여야 합니다. 설정하지 않으면 $show_ui의 기본값(true)을 상속받습니다."
+
+msgid ""
+"Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
+"default is inherited from $show_ui (default true)."
+msgstr ""
+"빠른 편집/대량 편집 패널에 분류 체계를 표시할지 여부입니다. 설정하지 않으면 "
+"$show_ui의 기본값(true)을 상속받습니다."
+
+msgid "Which does this template belong to?"
+msgstr "이 템플릿은 어디에 속합니까?"
+
+msgid "Width"
+msgstr "너비"
+
+msgid "WooCommerce product data"
+msgstr "우커머스 상품 데이터"
+
+msgid "WooCommerce product data fields successfully saved"
+msgstr "우커머스 상품 데이터 필드가 성공적으로 저장되었습니다"
+
+msgid "WooCommerce product data successfully deleted"
+msgstr "우커머스 상품 데이터가 성공적으로 삭제되었습니다"
+
+msgid "Yes"
+msgstr "예"
+
+msgid "Yes, delete it"
+msgstr "네, 삭제합니다"
+
+msgid "You are going to delete WooCommerce this product data. Are you sure?"
+msgstr "이 우커머스 상품 데이터를 삭제하려고 합니다. 정말입니까?"
+
+msgid "You are going to delete this API key. Are you sure?"
+msgstr "이 API 키를 삭제하려고 합니다. 정말입니까?"
+
+msgid "You are going to delete this custom post type. Are you sure?"
+msgstr "이 사용자 정의 글 유형을 삭제하려고 합니다. 정말입니까?"
+
+msgid ""
+"You are going to delete this meta block definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"이 메타 블록 정의를 삭제하려고 합니다. 내부의 모든 필드 정의가 삭제됩니다. 정"
+"말입니까?"
+
+msgid ""
+"You are going to delete this meta box definition. Every field definition "
+"inside of it will be deleted. Are you sure?"
+msgstr ""
+"이 메타 박스 정의를 삭제하려고 합니다. 내부의 모든 필드 정의가 삭제됩니다. 정"
+"말입니까?"
+
+msgid ""
+"You are going to delete this option page definition. Every associated meta "
+"fields and child page will be deleted. Are you sure?"
+msgstr ""
+"이 옵션 페이지 정의를 삭제하려고 합니다. 관련된 모든 메타 필드와 하위 페이지"
+"가 삭제됩니다. 정말입니까?"
+
+msgid "You are going to delete this taxonomy. Are you sure?"
+msgstr "이 분류 체계를 삭제하려고 합니다. 정말입니까?"
+
+msgid "Delete this block"
+msgstr "이 블록 삭제"
+
+msgid "Your API keys"
+msgstr "사용자 API 키"
+
+msgid "Your favourite ACPT settings"
+msgstr "즐겨찾는 ACPT 설정"
+
+msgid "Your new generated API key"
+msgstr "새로 생성된 API 키"
+
+msgid "Your theme already has a single template for"
+msgstr "테마에 이미 다음 항목에 대한 단일 글(single) 템플릿이 있습니다:"
+
+msgid "Your theme already has an archive template for"
+msgstr "테마에 이미 다음 항목에 대한 아카이브(archive) 템플릿이 있습니다:"
+
+msgid "`has_archive` set to false"
+msgstr "`has_archive`가 false로 설정됨"
+
+msgid "child element"
+msgstr "자식 요소"
+
+msgid "current"
+msgstr "현재"
+
+msgid "custom post type"
+msgstr "사용자 정의 글 유형"
+
+msgid "custom post types registered"
+msgstr "등록된 사용자 정의 글 유형"
+
+msgid "details"
+msgstr "세부 정보"
+
+msgid "format"
+msgstr "형식"
+
+msgid "global settings"
+msgstr "전역 설정"
+
+msgid "id"
+msgstr "ID"
+
+msgid "is checked"
+msgstr "체크됨"
+
+msgid "is empty"
+msgstr "비어 있음"
+
+msgid "is equal to"
+msgstr "다음과 같음"
+
+msgid "is greater or equals than"
+msgstr "다음보다 크거나 같음"
+
+msgid "is greater than"
+msgstr "다음보다 큼"
+
+msgid "is greater than or equal to"
+msgstr "다음보다 크거나 같음"
+
+msgid "is included in"
+msgstr "다음에 포함됨"
+
+msgid "is less or equals than"
+msgstr "다음보다 작거나 같음"
+
+msgid "is less than"
+msgstr "다음보다 작음"
+
+msgid "is less than or equal to"
+msgstr "다음보다 작거나 같음"
+
+msgid "is like to"
+msgstr "다음과 유사함 (like)"
+
+msgid "is not checked"
+msgstr "체크되지 않음"
+
+msgid "is not empty"
+msgstr "비어 있지 않음"
+
+msgid "is not equal to"
+msgstr "다음과 같지 않음"
+
+msgid "is not included in"
+msgstr "다음에 포함되지 않음"
+
+msgid "is not like"
+msgstr "다음과 유사하지 않음"
+
+msgid "meta boxes"
+msgstr "메타 박스"
+
+msgid "Meta boxes total count"
+msgstr "메타 박스 총 개수"
+
+msgid "meta fields"
+msgstr "메타 필드"
+
+msgid "Meta fields total count"
+msgstr "메타 필드 총 개수"
+
+msgid "min length is"
+msgstr "최소 길이는"
+
+msgid "old"
+msgstr "이전"
+
+msgid "product data fields"
+msgstr "상품 데이터 필드"
+
+msgid "record(s) found"
+msgstr "개의 레코드 발견"
+
+msgid "see here"
+msgstr "여기 확인"
+
+msgid "slug"
+msgstr "슬러그"
+
+msgid "taxonomies registered"
+msgstr "등록된 분류 체계"
+
+msgid "template"
+msgstr "템플릿"
+
+msgid "title"
+msgstr "제목"
+
+msgid "visibility"
+msgstr "공개 여부"
+
+msgid "Visibility"
+msgstr "공개 상태"
+
+msgid "{{r}} published"
+msgstr "{{r}}개 발행됨"
+
+msgid "{{r}} published privately"
+msgstr "{{r}}개 비공개 발행됨"
+
+msgid "{{r}} reverted to draft"
+msgstr "{{r}}개 임시글로 전환됨"
+
+msgid "{{r}} scheduled"
+msgstr "{{r}}개 예약됨"
+
+msgid "{{r}} updated"
+msgstr "{{r}}개 업데이트됨"
+
+msgid "Address map"
+msgstr "주소 지도"
+
+msgid "Color"
+msgstr "색상"
+
+msgid "Currency"
+msgstr "통화"
+
+msgid "Weight"
+msgstr "무게"
+
+msgid "Length"
+msgstr "길이"
+
+msgid "Date"
+msgstr "날짜"
+
+msgid "Email address"
+msgstr "이메일 주소"
+
+msgid "Number"
+msgstr "숫자"
+
+msgid "Phone"
+msgstr "전화"
+
+msgid "Phone Number"
+msgstr "전화번호"
+
+msgid "Text"
+msgstr "텍스트"
+
+msgid "List"
+msgstr "리스트"
+
+msgid "Select Multiple"
+msgstr "다중 선택"
+
+msgid "Toggle"
+msgstr "토글"
+
+msgid "Embed content"
+msgstr "콘텐츠 임베드"
+
+msgid "Gallery"
+msgstr "갤러리"
+
+msgid "Image"
+msgstr "이미지"
+
+msgid "Post relationship"
+msgstr "글 관계"
+
+msgid "Relationship"
+msgstr "관계"
+
+msgid "Time"
+msgstr "시간"
+
+msgid "Repeater"
+msgstr "리피터"
+
+msgid "Grouped field (Repeater)"
+msgstr "그룹 필드 (리피터)"
+
+msgid "User (select multiple)"
+msgstr "사용자 (다중 선택)"
+
+msgid "Checkbox"
+msgstr "체크박스"
+
+msgid "Radio button"
+msgstr "라디오 버튼"
+
+msgid "Date Range"
+msgstr "날짜 범위"
+
+msgid "Flexible content"
+msgstr "플렉서블 콘텐츠"
+
+msgid "is enabled"
+msgstr "활성화됨"
+
+msgid "found"
+msgstr "찾음"
+
+msgid "record(s)"
+msgstr "레코드"
+
+msgid "Copied"
+msgstr "복사됨"
+
+msgid "Confirm deleting this template?"
+msgstr "이 템플릿을 삭제하시겠습니까?"
+
+msgid "meta"
+msgstr "메타"
+
+msgid "Meta-key"
+msgstr "메타 키"
+
+msgid "Shortcode"
+msgstr "숏코드"
+
+msgid "Shortcodes"
+msgstr "숏코드들"
+
+msgid "Delete custom post type"
+msgstr "사용자 정의 글 유형 삭제"
+
+msgid "Delete taxonomy"
+msgstr "분류 체계 삭제"
+
+msgid "License"
+msgstr "라이선스"
+
+msgid "Tools"
+msgstr "도구"
+
+msgid "Templates"
+msgstr "템플릿"
+
+msgid "Custom Post Types"
+msgstr "사용자 정의 글 유형"
+
+msgid "[Allowed extension: *.acpt, *.json, *.yaml, *.xml max size: 2Mb]"
+msgstr "[허용된 확장자: *.acpt, *.json, *.yaml, *.xml 최대 크기: 2Mb]"
+
+msgid "Associated taxonomies with the post"
+msgstr "글과 연결된 분류 체계"
+
+msgid "Register new Post Type"
+msgstr "새 글 유형 등록"
+
+msgid "Manage meta fields"
+msgstr "메타 필드 관리"
+
+msgid "Create new Custom Post Type"
+msgstr "새 사용자 정의 글 유형 생성"
+
+msgid "Basic"
+msgstr ""
+
+msgid "Labels"
+msgstr "라벨"
+
+msgid "Minimum configuration"
+msgstr "최소 구성"
+
+msgid "Additional labels"
+msgstr "추가 라벨"
+
+msgid "Other settings"
+msgstr "기타 설정"
+
+msgid "Menu Name"
+msgstr "메뉴 이름"
+
+msgid "Label for the menu name. Default is the same as name."
+msgstr "메뉴 이름의 라벨입니다. 기본값은 이름(name)과 동일합니다."
+
+msgid "All items"
+msgstr "모든 항목"
+
+msgid ""
+"Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All "
+"Pages’."
+msgstr ""
+"하위 메뉴 링크에서 모든 항목을 나타내는 라벨입니다. 기본값은 '모든 글' / '모"
+"든 페이지'입니다."
+
+msgid "Add New"
+msgstr "새로 추가"
+
+msgid "Default is ‘Add New’ for both hierarchical and non-hierarchical types."
+msgstr "계층형과 비계층형 유형 모두 기본값은 '새로 추가'입니다."
+
+msgid "Add New Item"
+msgstr "새 항목 추가"
+
+msgid ""
+"Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New "
+"Page’."
+msgstr ""
+"새 단일 항목을 추가하기 위한 라벨입니다. 기본값은 '새 글 추가' / '새 페이지 "
+"추가'입니다."
+
+msgid "Edit Item"
+msgstr "항목 편집"
+
+msgid ""
+"Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’."
+msgstr ""
+"단일 항목 편집을 위한 라벨입니다. 기본값은 '글 편집' / '페이지 편집'입니다."
+
+msgid "New Item"
+msgstr "새 항목"
+
+msgid "Label for the new item page title. Default is ‘New Post’ / ‘New Page’."
+msgstr ""
+"새 항목 페이지 제목을 위한 라벨입니다. 기본값은 '새 글' / '새 페이지'입니다."
+
+msgid "View Item"
+msgstr "항목 보기"
+
+msgid ""
+"Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’."
+msgstr ""
+"단일 항목 보기를 위한 라벨입니다. 기본값은 '글 보기' / '페이지 보기'입니다."
+
+msgid "View Items"
+msgstr "항목 보기"
+
+msgid ""
+"Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’."
+msgstr ""
+"글 유형 아카이브 보기를 위한 라벨입니다. 기본값은 '글 보기' / '페이지 보기'입"
+"니다."
+
+msgid "Search Item"
+msgstr "항목 검색"
+
+msgid ""
+"Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’."
+msgstr ""
+"여러 항목 검색을 위한 라벨입니다. 기본값은 '글 검색' / '페이지 검색'입니다."
+
+msgid "Not Found"
+msgstr "찾을 수 없음"
+
+msgid ""
+"Label used when no items are found. Default is ‘No posts found’ / ‘No pages "
+"found’."
+msgstr ""
+"항목을 찾을 수 없을 때 사용되는 라벨입니다. 기본값은 '글을 찾을 수 없습니"
+"다' / '페이지를 찾을 수 없습니다'입니다."
+
+msgid "Not Found in Trash"
+msgstr "휴지통에서 찾을 수 없음"
+
+msgid ""
+"Label used when no items are in the Trash. Default is ‘No posts found in "
+"Trash’ / ‘No pages found in Trash’."
+msgstr ""
+"휴지통에 항목이 없을 때 사용되는 라벨입니다. 기본값은 '휴지통에 글이 없습니"
+"다' / '휴지통에 페이지가 없습니다'입니다."
+
+msgid ""
+"Label used to prefix parents of hierarchical items. Not used on non-"
+"hierarchical post types. Default is ‘Parent Page:’."
+msgstr ""
+"계층적 항목의 상위 항목 앞에 붙는 라벨입니다. 비계층적 글 유형에는 사용되지 "
+"않습니다. 기본값은 '상위 페이지:'입니다."
+
+msgid "Featured Image"
+msgstr "특성 이미지"
+
+msgid ""
+"Label for the featured image meta box title. Default is ‘Featured image’."
+msgstr ""
+"특성 이미지 메타 박스 제목을 위한 라벨입니다. 기본값은 '특성 이미지'입니다."
+
+msgid "Set Featured Image"
+msgstr "특성 이미지 설정"
+
+msgid "Label for setting the featured image. Default is ‘Set featured image’."
+msgstr "특성 이미지 설정을 위한 라벨입니다. 기본값은 '특성 이미지 설정'입니다."
+
+msgid "Remove Featured Image"
+msgstr "특성 이미지 제거"
+
+msgid ""
+"Label for removing the featured image. Default is ‘Remove featured image’."
+msgstr "특성 이미지 제거를 위한 라벨입니다. 기본값은 '특성 이미지 제거'입니다."
+
+msgid "Use Featured Image"
+msgstr "특성 이미지 사용"
+
+msgid ""
+"Label in the media frame for using a featured image. Default is ‘Use as "
+"featured image’."
+msgstr ""
+"미디어 프레임에서 특성 이미지를 사용하기 위한 라벨입니다. 기본값은 '특성 이미"
+"지로 사용'입니다."
+
+msgid ""
+"Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page "
+"Archives’."
+msgstr ""
+"네비게이션 메뉴의 아카이브를 위한 라벨입니다. 기본값은 '글 아카이브' / '페이"
+"지 아카이브'입니다."
+
+msgid "Insert into item"
+msgstr "항목에 삽입"
+
+msgid ""
+"Label for the media frame button. Default is ‘Insert into post’ / ‘Insert "
+"into page’."
+msgstr ""
+"미디어 프레임 버튼을 위한 라벨입니다. 기본값은 '글에 삽입' / '페이지에 삽"
+"입'입니다."
+
+msgid "Uploaded to this Item"
+msgstr "이 항목에 업로드됨"
+
+msgid ""
+"Label for the media frame filter. Default is ‘Uploaded to this post’ / "
+"‘Uploaded to this page’."
+msgstr ""
+"미디어 프레임 필터를 위한 라벨입니다. 기본값은 '이 글에 업로드됨' / '이 페이"
+"지에 업로드됨'입니다."
+
+msgid "Filter Items List"
+msgstr "항목 목록 필터링"
+
+msgid ""
+"Label for the table views hidden heading. Default is ‘Filter posts list’ / "
+"‘Filter pages list’."
+msgstr ""
+"테이블 뷰의 숨겨진 제목을 위한 라벨입니다. 기본값은 '글 목록 필터' / '페이지 "
+"목록 필터'입니다."
+
+msgid "Items List Navigation"
+msgstr "항목 목록 네비게이션"
+
+msgid ""
+"Label for the table pagination hidden heading. Default is ‘Posts list "
+"navigation’ / ‘Pages list navigation’."
+msgstr ""
+"테이블 페이지네이션의 숨겨진 제목을 위한 라벨입니다. 기본값은 '글 목록 네비게"
+"이션' / '페이지 목록 네비게이션'입니다."
+
+msgid "Items List"
+msgstr "항목 목록"
+
+msgid ""
+"Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’."
+msgstr ""
+"테이블의 숨겨진 제목을 위한 라벨입니다. 기본값은 '글 목록' / '페이지 목록'입"
+"니다."
+
+msgid "Label for the date filter in list tables. Default is ‘Filter by date’."
+msgstr ""
+"목록 테이블의 날짜 필터를 위한 라벨입니다. 기본값은 '날짜별 필터'입니다."
+
+msgid "Item published"
+msgstr "항목 발행됨"
+
+msgid ""
+"Label used when an item is published. Default is ‘Post published.’ / ‘Page "
+"published.’"
+msgstr ""
+"항목이 발행되었을 때 사용되는 라벨입니다. 기본값은 '글이 발행되었습니다.' / "
+"'페이지가 발행되었습니다.'입니다."
+
+msgid "Item published privately"
+msgstr "항목이 비공개로 발행됨"
+
+msgid ""
+"Label used when an item is published with private visibility. Default is "
+"‘Post published privately.’ / ‘Page published privately.’"
+msgstr ""
+"항목이 비공개로 발행되었을 때 사용되는 라벨입니다. 기본값은 '글이 비공개로 발"
+"행되었습니다.' / '페이지가 비공개로 발행되었습니다.'입니다."
+
+msgid "Item reverted to draft"
+msgstr "항목이 임시글로 되돌아감"
+
+msgid ""
+"Label used when an item is switched to a draft. Default is ‘Post reverted to "
+"draft.’ / ‘Page reverted to draft.’"
+msgstr ""
+"항목이 임시글로 전환되었을 때 사용되는 라벨입니다. 기본값은 '글이 임시글로 되"
+"돌아갔습니다.' / '페이지가 임시글로 되돌아갔습니다.'입니다."
+
+msgid "Item scheduled"
+msgstr "항목 예약됨"
+
+msgid ""
+"Label used when an item is scheduled for publishing. Default is ‘Post "
+"scheduled.’ / ‘Page scheduled.’"
+msgstr ""
+"항목 발행이 예약되었을 때 사용되는 라벨입니다. 기본값은 '글이 예약되었습니"
+"다.' / '페이지가 예약되었습니다.'입니다."
+
+msgid "Item updated"
+msgstr "항목 업데이트됨"
+
+msgid ""
+"Label used when an item is updated. Default is ‘Post updated.’ / ‘Page "
+"updated.’"
+msgstr ""
+"항목이 업데이트되었을 때 사용되는 라벨입니다. 기본값은 '글이 업데이트되었습니"
+"다.' / '페이지가 업데이트되었습니다.'입니다."
+
+msgid ""
+"General name for the taxonomy, usually plural. The same as and overridden by "
+"$tax->label. Default 'Tags/Categories'."
+msgstr ""
+"분류 체계의 일반적인 이름으로, 보통 복수형입니다. $tax->label과 동일하며 이"
+"에 의해 재정의됩니다. 기본값은 '태그/카테고리'입니다."
+
+msgid "Singular name"
+msgstr "단수 이름"
+
+msgid "Name for one object of this taxonomy. Default 'Tag/Category'"
+msgstr "이 분류 체계의 단일 객체 이름입니다. 기본값은 '태그/카테고리'입니다."
+
+msgid "Search items"
+msgstr "항목 검색"
+
+msgid "Search Tags/Search Categories"
+msgstr "태그 검색/카테고리 검색"
+
+msgid "Popular items"
+msgstr "인기 항목"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Popular "
+"Tags'."
+msgstr ""
+"이 라벨은 비계층적 분류 체계에만 사용됩니다. 기본값은 '인기 태그'입니다."
+
+msgid "All Tags/All Categories"
+msgstr "모든 태그/모든 카테고리"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Parent "
+"Category'."
+msgstr ""
+"이 라벨은 계층적 분류 체계에만 사용됩니다. 기본값은 '상위 카테고리'입니다."
+
+msgid "Parent item colon"
+msgstr "상위 항목 콜론"
+
+msgid "The same as parent_item, but with colon : in the end."
+msgstr "parent_item과 동일하지만 끝에 콜론(:)이 붙습니다."
+
+msgid "Edit Tag/Edit Category."
+msgstr "태그 편집/카테고리 편집."
+
+msgid "View Tag/View Category."
+msgstr "태그 보기/카테고리 보기."
+
+msgid "Update item"
+msgstr "항목 업데이트"
+
+msgid "Update Tag/Update Category."
+msgstr "태그 업데이트/카테고리 업데이트."
+
+msgid "Add New Tag/Add New Category."
+msgstr "새 태그 추가/새 카테고리 추가."
+
+msgid "New item name"
+msgstr "새 항목 이름"
+
+msgid "New Tag Name/New Category Name."
+msgstr "새 태그 이름/새 카테고리 이름."
+
+msgid "Separate items with commas"
+msgstr "항목을 쉼표로 구분"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Separate "
+"tags with commas', used in the meta box."
+msgstr ""
+"이 라벨은 비계층적 분류 체계에만 사용됩니다. 기본값은 메타 박스에서 사용되는 "
+"'태그를 쉼표로 구분'입니다."
+
+msgid "Add or remove items"
+msgstr "항목 추가 또는 제거"
+
+msgid ""
+"This label is only used for non-hierarchical taxonomies. Default 'Add or "
+"remove tags', used in the meta box when JavaScript is disabled."
+msgstr ""
+"이 라벨은 비계층적 분류 체계에만 사용됩니다. 기본값은 자바스크립트가 비활성화"
+"된 경우 메타 박스에서 사용되는 '태그 추가 또는 제거'입니다."
+
+msgid "Choose from most used"
+msgstr "가장 많이 사용된 항목에서 선택"
+
+msgid ""
+"This label is only used on non-hierarchical taxonomies. Default 'Choose from "
+"the most used tags', used in the meta box."
+msgstr ""
+"이 라벨은 비계층적 분류 체계에서만 사용됩니다. 기본값은 메타 박스에서 사용되"
+"는 '가장 많이 사용된 태그에서 선택'입니다."
+
+msgid ""
+"No tags found/No categories found', used in the meta box and taxonomy list "
+"table."
+msgstr ""
+"태그를 찾을 수 없음/카테고리를 찾을 수 없음', 메타 박스 및 분류 목록 테이블에"
+"서 사용됩니다."
+
+msgid "No terms"
+msgstr "용어 없음"
+
+msgid "No tags/No categories', used in the posts and media list tables."
+msgstr "태그 없음/카테고리 없음', 글 및 미디어 목록 테이블에서 사용됩니다."
+
+msgid "Filter by item"
+msgstr "항목별 필터링"
+
+msgid ""
+"This label is only used for hierarchical taxonomies. Default 'Filter by "
+"category', used in the posts list table."
+msgstr ""
+"이 라벨은 계층적 분류 체계에만 사용됩니다. 기본값은 글 목록 테이블에서 사용되"
+"는 '카테고리별 필터'입니다."
+
+msgid "Items list navigation"
+msgstr "항목 목록 네비게이션"
+
+msgid "Label for the table pagination hidden heading."
+msgstr "테이블 페이지네이션의 숨겨진 제목을 위한 라벨입니다."
+
+msgid "Label for the table hidden heading."
+msgstr "테이블의 숨겨진 제목을 위한 라벨입니다."
+
+msgid "Most used"
+msgstr "가장 많이 사용됨"
+
+msgid "Title for the Most Used tab. Default 'Most Used'."
+msgstr "가장 많이 사용됨 탭의 제목입니다. 기본값은 '가장 많이 사용됨'입니다."
+
+msgid "Back to items"
+msgstr "항목으로 돌아가기"
+
+msgid "Key length must be 39."
+msgstr "키 길이는 39자여야 합니다."
+
+msgid "Not valid format."
+msgstr "유효하지 않은 형식입니다."
+
+msgid "General settings"
+msgstr "일반 설정"
+
+msgid "Content settings"
+msgstr "콘텐츠 설정"
+
+msgid "Danger zone"
+msgstr "위험 구역"
+
+msgid "manage template"
+msgstr "템플릿 관리"
+
+msgid "Manage template"
+msgstr "템플릿 관리"
+
+msgid "Taxonomy global settings"
+msgstr "분류 체계 전역 설정"
+
+msgid "eg. Text here"
+msgstr "예: 여기에 텍스트 입력"
+
+msgid "Thumbnail"
+msgstr "썸네일"
+
+msgid "Medium"
+msgstr "중간"
+
+msgid "Large"
+msgstr "크게"
+
+msgid "Full size"
+msgstr "전체 크기"
+
+msgid "ASC"
+msgstr "오름차순"
+
+msgid "DESC"
+msgstr "내림차순"
+
+msgid "eg. 100%"
+msgstr "예: 100%"
+
+msgid "Desktop"
+msgstr "데스크탑"
+
+msgid "Tablet"
+msgstr "태블릿"
+
+msgid "Mobile"
+msgstr "모바일"
+
+msgid "Keyboard interaction legend"
+msgstr "키보드 상호작용 범례"
+
+msgid "Keyboard legend"
+msgstr "키보드 범례"
+
+msgid "BASIC"
+msgstr ""
+
+msgid "SPECIALIZED FIELDS"
+msgstr "특수 필드"
+
+msgid "UNIT OF MEASURE"
+msgstr "측정 단위"
+
+msgid "MEDIA"
+msgstr "미디어"
+
+msgid "RELATIONS"
+msgstr "관계"
+
+msgid "GROUPED"
+msgstr "그룹화됨"
+
+msgid "USER RELATIONS"
+msgstr "사용자 관계"
+
+msgid "One to One - Unidirectional"
+msgstr "일대일 - 단방향"
+
+msgid "One to One - Bidirectional"
+msgstr "일대일 - 양방향"
+
+msgid "One to Many - Unidirectional"
+msgstr "일대다 - 단방향"
+
+msgid "One to Many - Bidirectional"
+msgstr "일대다 - 양방향"
+
+msgid "Many to One - Unidirectional"
+msgstr "다대일 - 단방향"
+
+msgid "Many to One - Bidirectional"
+msgstr "다대일 - 양방향"
+
+msgid "Many to Many - Unidirectional"
+msgstr "다대다 - 단방향"
+
+msgid "Many to Many - Bidirectional"
+msgstr "다대다 - 양방향"
+
+msgid "Show this field if:"
+msgstr "다음 조건일 때 이 필드 표시:"
+
+msgid "Copy settings"
+msgstr "설정 복사"
+
+msgid "Add condition"
+msgstr "조건 추가"
+
+msgid "ADVANCED OPTIONS"
+msgstr "고급 옵션"
+
+msgid "BASIC OPTIONS"
+msgstr "기본 옵션"
+
+msgid "CONDITIONAL LOGIC"
+msgstr "조건부 로직"
+
+msgid "Select option"
+msgstr "옵션 선택"
+
+msgid "operator"
+msgstr "연산자"
+
+msgid "This field"
+msgstr "이 필드"
+
+msgid "Value"
+msgstr "값"
+
+msgid "Label"
+msgstr "라벨"
+
+msgid "Post"
+msgstr "글"
+
+msgid "Post parent"
+msgstr "상위 글"
+
+msgid "Term"
+msgstr "용어"
+
+msgid "Related taxonomies"
+msgstr "관련 분류 체계"
+
+msgid "Other fields"
+msgstr "기타 필드"
+
+msgid "Invalid visibility condition type"
+msgstr "유효하지 않은 가시성 조건 유형"
+
+msgid "Invalid visibility condition operator"
+msgstr "유효하지 않은 가시성 조건 연산자"
+
+msgid "Invalid visibility condition value"
+msgstr "유효하지 않은 가시성 조건 값"
+
+msgid "Invalid visibility condition logic"
+msgstr "유효하지 않은 가시성 조건 로직"
+
+msgid "Box label, non latin chars allowed."
+msgstr "박스 라벨, 라틴 문자 이외의 문자도 허용됩니다."
+
+msgid "Logic"
+msgstr "로직"
+
+msgid "AND"
+msgstr "그리고 (AND)"
+
+msgid "OR"
+msgstr "또는 (OR)"
+
+msgid "Enter download text link"
+msgstr "다운로드 텍스트 링크 입력"
+
+msgid "Select images"
+msgstr "이미지 선택"
+
+msgid "Remove element"
+msgstr "요소 제거"
+
+msgid "Min blocks required"
+msgstr "최소 필요한 블록 수"
+
+msgid "Max blocks allowed"
+msgstr "최대 허용된 블록 수"
+
+msgid "Browse icons"
+msgstr "아이콘 찾아보기"
+
+msgid "Upload a SVG file"
+msgstr "SVG 파일 업로드"
+
+msgid "Choose an icon"
+msgstr "아이콘 선택"
+
+msgid "Type at least 3 characters to start searching."
+msgstr "검색을 시작하려면 최소 3자 이상 입력하세요."
+
+msgid "Example: heart"
+msgstr "예: heart"
+
+msgid "There was an error during saving data. The error is:"
+msgstr "데이터 저장 중 오류가 발생했습니다. 오류 내용:"
+
+msgid "There was an error during saving data. Minimum number of blocks is:"
+msgstr "데이터 저장 중 오류가 발생했습니다. 최소 블록 수는 다음과 같습니다:"
+
+msgid "There was an error during saving data. Maximum number of blocks is:"
+msgstr "데이터 저장 중 오류가 발생했습니다. 최대 블록 수는 다음과 같습니다:"
+
+msgid "Data saved correctly"
+msgstr "데이터가 올바르게 저장되었습니다"
+
+msgid "No meta boxes aldready created."
+msgstr "이미 생성된 메타 박스가 없습니다."
+
+msgid "Create the first one"
+msgstr "첫 번째 메타 박스 생성"
+
+msgid "There was an error fetching icons, retry later."
+msgstr "아이콘을 불러오는 중 오류가 발생했습니다. 나중에 다시 시도해 주세요."
+
+msgid "Sorry, no result match."
+msgstr "죄송합니다, 일치하는 결과가 없습니다."
+
+msgid ""
+"The media gallery is not available. You must admin_enqueue this function: "
+"wp_enqueue_media()"
+msgstr ""
+"미디어 갤러리를 사용할 수 없습니다. 다음 함수를 admin_enqueue 해야 합니다: "
+"wp_enqueue_media()"
+
+msgid "Download"
+msgstr "다운로드"
+
+msgid "Upload an Image"
+msgstr "이미지 업로드"
+
+msgid "Upload a Video"
+msgstr "비디오 업로드"
+
+msgid "Upload a File"
+msgstr "파일 업로드"
+
+msgid "Remove this block"
+msgstr "이 블록 제거"
+
+msgid "Show elements"
+msgstr "요소 표시"
+
+msgid "Hide elements"
+msgstr "요소 숨기기"
+
+msgid "Show/hide elements in this block"
+msgstr "이 블록의 요소 표시/숨기기"
+
+msgid "Filterable in Wordpress admin post lists page"
+msgstr "워드프레스 관리자 글 목록 페이지에서 필터링 가능"
+
+msgid "Quick edit in Wordpress admin post lists page"
+msgstr "워드프레스 관리자 포스트 목록 페이지에서 빠른 편집"
+
+msgid "Hide the blank value"
+msgstr "빈 값 숨기기"
+
+msgid "Hide the label"
+msgstr "레이블 숨기기"
+
+msgid "Enter the URL"
+msgstr "URL 입력"
+
+msgid "Enter text link"
+msgstr "링크 텍스트 입력"
+
+msgid "Settings saved."
+msgstr "설정이 저장되었습니다."
+
+msgid "Exit"
+msgstr "나가기"
+
+msgid "Option pages successfully saved"
+msgstr "옵션 페이지가 성공적으로 저장되었습니다"
+
+msgid "Children page list"
+msgstr "하위 페이지 목록"
+
+msgid "Register new Taxonomy"
+msgstr "새 분류(Taxonomy) 등록"
+
+msgid "Deactivate"
+msgstr "비활성화"
+
+msgid "Choose icon"
+msgstr "아이콘 선택"
+
+msgid "Select icon type from the list"
+msgstr "목록에서 아이콘 유형 선택"
+
+msgid "Select a Dashicon"
+msgstr "대시콘(Dashicon) 선택"
+
+msgid "Select an icon from another set"
+msgstr "다른 세트에서 아이콘 선택"
+
+msgid "Upload an icon image"
+msgstr "아이콘 이미지 업로드"
+
+msgid "ACPT meta import start"
+msgstr "ACPT 메타 가져오기 시작"
+
+msgid "ACPT meta import end"
+msgstr "ACPT 메타 가져오기 종료"
+
+msgid "Option page total count"
+msgstr "옵션 페이지 총 개수"
+
+msgid "Show/hide all pages"
+msgstr "모든 페이지 표시/숨기기"
+
+msgid "List view"
+msgstr "리스트 보기"
+
+msgid "Tabular view"
+msgstr "표 형식 보기"
+
+msgid "Switch view"
+msgstr "보기 전환"
+
+msgid "ACPT Date field"
+msgstr "ACPT 날짜 필드"
+
+msgid "ACPT Textual field"
+msgstr "ACPT 텍스트 필드"
+
+msgid "ACPT Link field"
+msgstr "ACPT 링크 필드"
+
+msgid "ACPT Image field"
+msgstr "ACPT 이미지 필드"
+
+msgid "ACPT UOM field"
+msgstr "ACPT 단위(UOM) 필드"
+
+msgid "Select the date format"
+msgstr "날짜 형식 선택"
+
+msgid "Date range separator"
+msgstr "날짜 범위 구분자"
+
+msgid "Select the date range separator"
+msgstr "날짜 범위 구분자 선택"
+
+msgid "Value format (Decimal points)"
+msgstr "값 형식 (소수점)"
+
+msgid "Value format (Decimal separator)"
+msgstr "값 형식 (소수점 구분자)"
+
+msgid "Value format (Thousands separator)"
+msgstr "값 형식 (천 단위 구분자)"
+
+msgid "Currency format"
+msgstr "통화 형식"
+
+msgid "Currency position"
+msgstr "통화 위치"
+
+msgid "Custom Format"
+msgstr "사용자 정의 형식"
+
+msgid "Render as"
+msgstr "출력 방식"
+
+msgid "Date separator"
+msgstr "날짜 구분자"
+
+msgid "Classes (separated by space)"
+msgstr "클래스 (공백으로 구분)"
+
+msgid "Target link"
+msgstr "대상 링크"
+
+msgid "Link"
+msgstr "링크"
+
+msgid "Plain text"
+msgstr "일반 텍스트"
+
+msgid "Size (px)"
+msgstr "크기 (px)"
+
+msgid "Set the icon size."
+msgstr "아이콘 크기를 설정합니다."
+
+msgid "Select the icon color."
+msgstr "아이콘 색상을 선택합니다."
+
+msgid "Spacing (px)"
+msgstr "간격 (px)"
+
+msgid "Select the icon spacing."
+msgstr "아이콘 간격을 선택합니다."
+
+msgid "Is clickable?"
+msgstr "클릭 가능여부"
+
+msgid "Value and UOM"
+msgstr "값 및 단위(UOM)"
+
+msgid "Only value"
+msgstr "값만 표시"
+
+msgid "Only UOM"
+msgstr "단위(UOM)만 표시"
+
+msgid "UOM format"
+msgstr "단위(UOM) 형식"
+
+msgid "Select the UOM format."
+msgstr "단위(UOM) 형식을 선택하십시오."
+
+msgid "Full UOM name"
+msgstr "단위 전체 이름"
+
+msgid "Abbreviation"
+msgstr "약어"
+
+msgid "UOM position"
+msgstr "단위(UOM) 위치"
+
+msgid "Select the UOM position"
+msgstr "단위(UOM) 위치 선택"
+
+msgid "After value"
+msgstr "값 뒤에"
+
+msgid "Before value"
+msgstr "값 앞에"
+
+msgid "Decimal points"
+msgstr "소수점 자릿수"
+
+msgid "Set the decimal points."
+msgstr "소수점 자릿수를 설정합니다."
+
+msgid "Decimal separator"
+msgstr "소수점 구분자"
+
+msgid "Set the decimal separator."
+msgstr "소수점 구분자를 설정합니다."
+
+msgid "Thousands separator"
+msgstr "천 단위 구분자"
+
+msgid "Set the thousands separator."
+msgstr "천 단위 구분자를 설정합니다."
+
+msgid "ACPT Field"
+msgstr "ACPT 필드"
+
+msgid "ACPT Icon field"
+msgstr "ACPT 아이콘 필드"
+
+msgid "List format"
+msgstr "목록 형식"
+
+msgid "Select the list format"
+msgstr "목록 형식을 선택하십시오"
+
+msgid "String separator"
+msgstr "문자열 구분자"
+
+msgid "Select the string separator"
+msgstr "문자열 구분자를 선택하십시오"
+
+msgid "ACPT Time field"
+msgstr "ACPT 시간 필드"
+
+msgid "Time format"
+msgstr "시간 형식"
+
+msgid "Select the time format"
+msgstr "시간 형식을 선택하십시오"
+
+msgid "Controls"
+msgstr "컨트롤"
+
+msgid "Allow video controls."
+msgstr "비디오 컨트롤을 허용합니다."
+
+msgid "Autoplay"
+msgstr "자동 재생"
+
+msgid "Autoplay player."
+msgstr "플레이어 자동 재생."
+
+msgid "Video width"
+msgstr "비디오 너비"
+
+msgid "Video width (% is allowed)."
+msgstr "비디오 너비 (% 단위 사용 가능)."
+
+msgid "Video height"
+msgstr "비디오 높이"
+
+msgid "Video height (% is allowed)."
+msgstr "비디오 높이 (% 단위 사용 가능)."
+
+msgid "You are going to delete this meta field definition. Are you sure?"
+msgstr "이 메타 필드 정의를 삭제하려고 합니다. 계속하시겠습니까?"
+
+msgid ""
+"WARNING: This action will delete all the post metadata related to this "
+"field. The action is irreversible."
+msgstr ""
+"경고: 이 작업은 이 필드와 관련된 모든 포스트 메타데이터를 삭제합니다. 이 작업"
+"은 되돌릴 수 없습니다."
+
+msgid "Show the shortcode"
+msgstr "쇼트코드 표시"
+
+msgid "Use this shortcode to display the meta field on your frontend."
+msgstr "프런트엔드에 메타 필드를 표시하려면 이 쇼트코드를 사용하십시오."
+
+msgid ""
+"Please note that \"N\" stands for a positive integer value, representing the "
+"nested field index (count starts from 0)."
+msgstr ""
+"\"N\"은 양의 정수 값을 의미하며, 중첩된 필드 인덱스를 나타냅니다 (카운트는 0"
+"부터 시작합니다)."
+
+msgid "What you want to display?"
+msgstr "무엇을 표시하시겠습니까?"
+
+msgid "Rating"
+msgstr "별점(Rating)"
+
+msgid "ACPT Rating field"
+msgstr "ACPT 별점 필드"
+
+# ######################################
+# version 2.0.0
+# ######################################
+msgid "Field groups"
+msgstr "필드 그룹"
+
+msgid "Create new Meta group"
+msgstr "새 메타 그룹 생성"
+
+msgid "Manage the associate meta field groups"
+msgstr "연결된 메타 필드 그룹 관리"
+
+msgid "Meta group successfully deleted."
+msgstr "메타 그룹이 성공적으로 삭제되었습니다."
+
+msgid "Meta group"
+msgstr "메타 그룹"
+
+msgid "Meta groups"
+msgstr "메타 그룹 목록"
+
+msgid "Group name"
+msgstr "그룹 이름"
+
+msgid "Group label"
+msgstr "그룹 레이블"
+
+msgid "No meta group found."
+msgstr "메타 그룹을 찾을 수 없습니다."
+
+msgid "Delete meta group"
+msgstr "메타 그룹 삭제"
+
+msgid "You are going to delete this meta group. Are you sure?"
+msgstr "이 메타 그룹을 삭제하려고 합니다. 계속하시겠습니까?"
+
+msgid "Forms"
+msgstr "양식(Forms)"
+
+msgid "Forms list"
+msgstr "양식 목록"
+
+msgid "Copied to the clipboard!"
+msgstr "클립보드에 복사되었습니다!"
+
+msgid "Confirm deactivating license"
+msgstr "라이선스 비활성화 확인"
+
+msgid ""
+"License successfully deactivated. The browser will refresh after 5 seconds."
+msgstr ""
+"라이선스가 성공적으로 비활성화되었습니다. 5초 후에 브라우저가 새로고침됩니다."
+
+msgid "max length is"
+msgstr "최대 길이는"
+
+msgid "The element(s) this group is associated with"
+msgstr "이 그룹이 연결된 요소"
+
+msgid "This group belongs to"
+msgstr "이 그룹의 소속"
+
+msgid "VALIDATION RULES"
+msgstr "유효성 검사 규칙"
+
+msgid "Validation"
+msgstr "유효성 검사"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add rule\"!"
+msgstr "아직 규칙이 없습니다. \"규칙 추가\"를 클릭하여 첫 번째를 만드세요!"
+
+msgid "maximum value"
+msgstr "최대값"
+
+msgid "minimum value"
+msgstr "최소값"
+
+msgid "regular expression"
+msgstr "정규 표현식"
+
+msgid "Confirm deleting block"
+msgstr "블록 삭제 확인"
+
+msgid "Confirm deleting validation rule"
+msgstr "유효성 검사 규칙 삭제 확인"
+
+msgid "Confirm deleting conditional rendering element"
+msgstr "조건부 렌더링 요소 삭제 확인"
+
+msgid "Insert values separated by comma. Ex: 12, 54, foo"
+msgstr "쉼표로 구분하여 값을 입력하십시오. 예: 12, 54, foo"
+
+msgid "This is the meta-key of this field."
+msgstr "이 필드의 메타 키(meta-key)입니다."
+
+msgid ""
+"Use it in functions like get_post_meta() to retrieve saved meta field data."
+msgstr ""
+"저장된 메타 필드 데이터를 가져오려면 get_post_meta()와 같은 함수에서 이것을 "
+"사용하십시오."
+
+msgid "Prepend the option page slug to retrieve option page meta fields."
+msgstr ""
+"옵션 페이지 메타 필드를 가져오려면 옵션 페이지 슬러그를 앞에 추가하십시오."
+
+msgid "Copied to clipboard"
+msgstr "클립보드에 복사됨"
+
+msgid "Meta group settings successfully saved"
+msgstr "메타 그룹 설정이 성공적으로 저장되었습니다"
+
+msgid "Delete this option page"
+msgstr "이 옵션 페이지 삭제"
+
+msgid "Confirm deleting page"
+msgstr "페이지 삭제 확인"
+
+msgid "Performances"
+msgstr "성능"
+
+msgid "Flush the ACPT cache"
+msgstr "ACPT 캐시 비우기"
+
+msgid "Flush cache"
+msgstr "캐시 비우기"
+
+msgid "Cache was successfully flushed"
+msgstr "캐시가 성공적으로 비워졌습니다"
+
+msgid "Could not flush the cache"
+msgstr ""
+
+msgid "Flushing…"
+msgstr ""
+
+msgid "Enable ACPT cache"
+msgstr "ACPT 캐시 활성화"
+
+msgid "Enable the ACPT cache to optimize the plugin performances."
+msgstr "플러그인 성능을 최적화하려면 ACPT 캐시를 활성화하십시오."
+
+msgid ""
+"Enable the ACPT cache. The cache stores the MySQL results in simple textual "
+"files to avoid useless DB calls."
+msgstr ""
+"ACPT 캐시를 활성화합니다. 캐시는 MySQL 결과를 단순 텍스트 파일에 저장하여 불"
+"필요한 DB 호출을 방지합니다."
+
+msgid "select all"
+msgstr "모두 선택"
+
+msgid "deselect all"
+msgstr "모두 선택 해제"
+
+msgid "UOM default value"
+msgstr "단위(UOM) 기본값"
+
+msgid "Location"
+msgstr "위치"
+
+msgid "Open settings"
+msgstr "설정 열기"
+
+msgid "Close settings"
+msgstr "설정 닫기"
+
+msgid "Auto slug ON"
+msgstr "자동 슬러그 켜짐"
+
+msgid "Auto slug OFF"
+msgstr "자동 슬러그 꺼짐"
+
+msgid "Show"
+msgstr "표시"
+
+msgid "File was successfully exported"
+msgstr "파일이 성공적으로 내보내졌습니다"
+
+msgid "File was successfully imported"
+msgstr "파일이 성공적으로 가져오기되었습니다"
+
+msgid "All users"
+msgstr "모든 사용자"
+
+msgid "Select items"
+msgstr "항목 선택"
+
+msgid "Filter items"
+msgstr "항목 필터링"
+
+msgid "Invalid data provided"
+msgstr "유효하지 않은 데이터가 제공되었습니다"
+
+msgid "Group name error(s). Please fix it."
+msgstr "그룹 이름 오류가 발생했습니다. 수정해 주세요."
+
+msgid "Location rules error(s). Please fix it."
+msgstr "위치 규칙 오류가 발생했습니다. 수정해 주세요."
+
+msgid "Post type"
+msgstr "포스트 타입"
+
+msgid "Post template"
+msgstr "포스트 템플릿"
+
+msgid "Post format"
+msgstr ""
+
+msgid "Post category"
+msgstr "포스트 카테고리"
+
+msgid "Post taxonomy"
+msgstr "포스트 분류(Taxonomy)"
+
+msgid "Value is not blank"
+msgstr "값이 비어 있지 않음"
+
+msgid "Value is blank"
+msgstr "값이 비어 있음"
+
+msgid "Value is not equal to {{v}}"
+msgstr "값이 {{v}}와(과) 같지 않음"
+
+msgid "Value is lower or equals than {{v}}"
+msgstr "값이 {{v}}보다 작거나 같음"
+
+msgid "Value is lower than {{v}}"
+msgstr "값이 {{v}}보다 작음"
+
+msgid "Value is greatest or equals than {{v}}"
+msgstr "값이 {{v}}보다 크거나 같음"
+
+msgid "Value is greatest than {{v}}"
+msgstr "값이 {{v}}보다 큼"
+
+msgid "The maximum length is {{v}}"
+msgstr "최대 길이는 {{v}}입니다"
+
+msgid "The minimum length is {{v}}"
+msgstr "최소 길이는 {{v}}입니다"
+
+msgid "Regex value is not matching {{v}}"
+msgstr "정규표현식 값이 {{v}}와(과) 일치하지 않음"
+
+msgid "All pages"
+msgstr "모든 페이지"
+
+msgid "Related entities and relationship"
+msgstr "관련 엔티티 및 관계"
+
+msgid "Target field"
+msgstr "대상 필드"
+
+msgid "The relationship between the selected entities"
+msgstr "선택된 엔티티 간의 관계"
+
+msgid "The first entity involved in the relationship"
+msgstr "관계에 포함된 첫 번째 엔티티"
+
+msgid "The second entity involved in the relationship"
+msgstr "관계에 포함된 두 번째 엔티티"
+
+msgid "Selected items"
+msgstr "선택된 항목"
+
+msgid "From entity is not a custom post type"
+msgstr "시작 엔티티가 사용자 정의 글 유형이 아닙니다"
+
+msgid "From entity is not a taxonomy"
+msgstr "시작 엔티티가 분류 체계(Taxonomy)가 아닙니다"
+
+msgid "From entity is not valid"
+msgstr "시작 엔티티가 유효하지 않습니다"
+
+msgid "From entity is not an user"
+msgstr "시작 엔티티가 사용자가 아닙니다"
+
+msgid "From entity is not an option page"
+msgstr "시작 엔티티가 옵션 페이지가 아닙니다"
+
+msgid "No relation set on this field."
+msgstr "이 필드에 설정된 관계가 없습니다."
+
+msgid "You are going to delete this template. Are you sure?"
+msgstr "이 템플릿을 삭제하려고 합니다. 정말로 진행하시겠습니까?"
+
+msgid "Template successfully deleted."
+msgstr "템플릿이 성공적으로 삭제되었습니다."
+
+msgid "Manage product data fields"
+msgstr "상품 데이터 필드 관리"
+
+msgid ""
+"No pages already created. Create the first one now by clicking the button "
+"\"Add page\"!"
+msgstr ""
+"생성된 페이지가 없습니다. \"페이지 추가\" 버튼을 클릭하여 첫 번째 페이지를 만"
+"들어 보세요!"
+
+msgid "Delete the meta box after copying"
+msgstr "복사 후 메타 박스 삭제"
+
+msgid "Create form"
+msgstr "폼 생성"
+
+msgid "Create a new form"
+msgstr "새 폼 생성"
+
+msgid "Edit form"
+msgstr "폼 편집"
+
+msgid "No forms found."
+msgstr "폼을 찾을 수 없습니다."
+
+msgid "Form name"
+msgstr "폼 이름"
+
+msgid "Form label"
+msgstr "폼 레이블"
+
+msgid "Action"
+msgstr "액션"
+
+msgid "Post management"
+msgstr "글 관리"
+
+msgid "Custom action"
+msgstr "사용자 정의 액션"
+
+msgid "Method"
+msgstr "메소드"
+
+msgid "PHP custom handling"
+msgstr "PHP 사용자 정의 처리"
+
+msgid "Field mapping"
+msgstr "필드 매핑"
+
+msgid "List to populate from"
+msgstr "데이터를 가져올 리스트"
+
+msgid "If blank, the current post_ID will be used"
+msgstr "비어 있는 경우 현재 post_ID가 사용됩니다"
+
+msgid "If blank, the current queried term_ID will be used"
+msgstr "비어 있는 경우 현재 쿼리된 term_ID가 사용됩니다"
+
+msgid "If blank, the current logged user ID will be used"
+msgstr "비어 있는 경우 현재 로그인한 사용자 ID가 사용됩니다"
+
+msgid "Form successfully saved"
+msgstr "폼이 성공적으로 저장되었습니다"
+
+msgid "Delete form"
+msgstr "폼 삭제"
+
+msgid "You are going to delete this form. Are you sure?"
+msgstr "이 폼을 삭제하려고 합니다. 정말로 진행하시겠습니까?"
+
+msgid "Form successfully deleted"
+msgstr "폼이 성공적으로 삭제되었습니다"
+
+msgid "Form manager"
+msgstr "폼 관리자"
+
+msgid "Form fields"
+msgstr "폼 필드"
+
+msgid "Drop elements here"
+msgstr "여기에 요소를 끌어다 놓으세요"
+
+msgid "CSS classes"
+msgstr "CSS 클래스"
+
+msgid "Placeholder"
+msgstr "플레이스홀더"
+
+msgid "Description"
+msgstr "설명"
+
+msgid "Layout"
+msgstr "레이아웃"
+
+msgid "Alignment"
+msgstr "정렬"
+
+msgid "Add rule"
+msgstr "규칙 추가"
+
+msgid "Step value"
+msgstr "단계 값"
+
+msgid "Rows value"
+msgstr "행(Rows) 값"
+
+msgid "Cols value"
+msgstr "열(Cols) 값"
+
+msgid "Type value"
+msgstr "유형 값"
+
+msgid "Standard fields"
+msgstr "표준 필드"
+
+msgid "ACPT fields"
+msgstr "ACPT 필드"
+
+msgid "WordPress user fields"
+msgstr "워드프레스 사용자 필드"
+
+msgid "WordPress post fields"
+msgstr "워드프레스 글 필드"
+
+msgid "Reset fields"
+msgstr "필드 초기화"
+
+msgid "Columns"
+msgstr "열(Columns)"
+
+msgid "Ajax action"
+msgstr "Ajax 액션"
+
+msgid "Ajax success response handling"
+msgstr "Ajax 성공 응답 처리"
+
+msgid "Allow empty value"
+msgstr "빈 값 허용"
+
+msgid "Enable editor"
+msgstr "에디터 활성화"
+
+msgid "Your Google reCAPTCHA site key"
+msgstr "구글 reCAPTCHA 사이트 키"
+
+msgid "Your Google reCAPTCHA secret key"
+msgstr "구글 reCAPTCHA 비밀 키"
+
+msgid "Your Google reCAPTCHA site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"구글 reCAPTCHA 사이트 키입니다. CAPTCHA 폼 필드를 사용하는 데 필요합니다."
+
+msgid "Your Google reCAPTCHA secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"구글 reCAPTCHA 비밀 키입니다. CAPTCHA 폼 필드를 사용하는 데 필요합니다."
+
+msgid "Maximum date"
+msgstr "최대 날짜"
+
+msgid "Minimum date"
+msgstr "최소 날짜"
+
+msgid "Icon set"
+msgstr "아이콘 세트"
+
+msgid "Enable forms"
+msgstr "폼 활성화"
+
+msgid "Enable the form builder."
+msgstr "폼 빌더를 활성화합니다."
+
+msgid "Create new post"
+msgstr "새 글 생성"
+
+msgid "Create new user"
+msgstr "새 사용자 생성"
+
+msgid "Create new term"
+msgstr "새 용어(Term) 생성"
+
+msgid "Name is already taken"
+msgstr "이미 사용 중인 이름입니다"
+
+msgid "No Meta box duplicate names are allowed"
+msgstr ""
+
+msgid "No Meta field duplicate names are allowed"
+msgstr ""
+
+msgid "Copy"
+msgstr "복사"
+
+msgid "Duplicate"
+msgstr "복제"
+
+msgid "Execute"
+msgstr "실행"
+
+msgid "Copy selected meta boxes"
+msgstr "선택한 메타 박스 복사"
+
+msgid "Copy selected meta fields"
+msgstr "선택한 메타 필드 복사"
+
+msgid "Delete after copying"
+msgstr "복사 후 삭제"
+
+msgid "Copy selected meta blocks"
+msgstr "선택한 메타 블록 복사"
+
+msgid "Scroll to top"
+msgstr "맨 위로 스크롤"
+
+msgid "Select this element"
+msgstr "이 요소 선택"
+
+msgid "Deselect this element"
+msgstr "이 요소 선택 해제"
+
+msgid "Submit a bug"
+msgstr "버그 제보"
+
+msgid "Multiple"
+msgstr "다중 선택"
+
+msgid "Input file accepts"
+msgstr "허용되는 파일 형식"
+
+msgid "Maximum size"
+msgstr "최대 크기"
+
+msgid "Minimum size"
+msgstr "최소 크기"
+
+msgid "Remove"
+msgstr "제거"
+
+msgid "These CSS classes will be applied to back-end editor fields"
+msgstr "이 CSS 클래스들은 백엔드 에디터 필드에 적용됩니다"
+
+msgid "Add CSS classes to back-end editor fields (ex. class-active pulse)"
+msgstr "백엔드 에디터 필드에 CSS 클래스 추가 (예: class-active pulse)"
+
+msgid "Duplicate this option page"
+msgstr "이 옵션 페이지 복제"
+
+msgid "Copy this option page"
+msgstr "이 옵션 페이지 복사"
+
+msgid "Delete the meta option page after copying"
+msgstr "복사 후 메타 옵션 페이지 삭제"
+
+msgid "Page was successfully copied"
+msgstr "페이지가 성공적으로 복사되었습니다"
+
+msgid "Unknown error, please retry later"
+msgstr "알 수 없는 오류가 발생했습니다. 나중에 다시 시도해 주세요"
+
+msgid "Whether the post type is hierarchical (e.g. page). Default false."
+msgstr "글 유형이 계층 구조(예: 페이지)인지 여부입니다. 기본값은 false입니다."
+
+msgid "Default positions for Core Menu Items"
+msgstr "코어 메뉴 항목의 기본 위치"
+
+msgid ""
+"The position in the menu order this page should appear. The higher the "
+"number, the lower its position in the menu."
+msgstr ""
+"이 페이지가 나타날 메뉴 순서상의 위치입니다. 숫자가 높을수록 메뉴의 하단에 배"
+"치됩니다."
+
+msgid "Default positions"
+msgstr "기본 위치"
+
+msgid "Custom post type list"
+msgstr "사용자 정의 글 유형 리스트"
+
+msgid ""
+"Where to show the post type in the admin menu. To work, $show_ui must be "
+"true. If true, the post type is shown in its own top level menu. If false, "
+"no menu is shown."
+msgstr ""
+"관리자 메뉴에서 글 유형을 표시할 위치입니다. 작동하려면 $show_ui가 true여야 "
+"합니다. true인 경우 글 유형은 자체 최상위 메뉴에 표시됩니다. false인 경우 메"
+"뉴가 표시되지 않습니다."
+
+msgid "Custom show in menu rule"
+msgstr "메뉴 표시 사용자 정의 규칙"
+
+msgid "Standard settings"
+msgstr "표준 설정"
+
+msgid "Set custom settings"
+msgstr "사용자 정의 설정 적용"
+
+msgid ""
+"Where to show the post type in the admin menu. Set a custom show in menu "
+"rule here. For more info"
+msgstr ""
+"관리자 메뉴에서 글 유형을 표시할 위치입니다. 여기서 메뉴 표시 사용자 정의 규"
+"칙을 설정하세요. 자세한 정보는"
+
+msgid "To change the base url of REST API route. Default is $post_type."
+msgstr "REST API 경로의 기본 URL을 변경합니다. 기본값은 $post_type입니다."
+
+msgid "Associated WooCommerce product data"
+msgstr "연결된 우커머스 상품 데이터"
+
+msgid "Label displayed after a term has been updated."
+msgstr "용어(Term)가 업데이트된 후 표시되는 레이블입니다."
+
+msgid "To change the base url of REST API route. Default is $taxonomy."
+msgstr "REST API 경로의 기본 URL을 변경합니다. 기본값은 $taxonomy입니다."
+
+msgid ""
+"Sets the query var key for this taxonomy. Default $taxonomy key. If false, a "
+"taxonomy cannot be loaded at ?{query_var}={term_slug}. If a string, the "
+"query ?{query_var}={term_slug} will be valid."
+msgstr ""
+"이 분류 체계의 query_var 키를 설정합니다. 기본값은 $taxonomy 키입니다. false"
+"인 경우 ?{query_var}={term_slug}로 분류 체계를 불러올 수 없습니다. 문자열인 "
+"경우 해당 쿼리가 유효해집니다."
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using "
+"$taxonomy as slug. To prevent rewrite, set to false. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+"이 분류 체계에 대한 리라이트(rewrites) 처리를 트리거합니다. 기본값은 true이"
+"며 $taxonomy를 슬러그로 사용합니다. 리라이트를 방지하려면 false로 설정하세"
+"요. 리라이트 규칙을 지정하려면 다음 키를 포함한 배열을 전달할 수 있습니다:"
+
+msgid "Add field box"
+msgstr "필드 박스 추가"
+
+msgid "From"
+msgstr "시작"
+
+msgid "To"
+msgstr "대상"
+
+msgid "Set the number of records per page in your ACPT dashboards."
+msgstr "ACPT 대시보드의 페이지당 레코드 수를 설정합니다."
+
+msgid "Field type"
+msgstr "필드 유형"
+
+msgid "Display as"
+msgstr "표시 방식"
+
+msgid "Standard view"
+msgstr "표준 보기"
+
+msgid "Accordion"
+msgstr "아코디언"
+
+msgid "Horizontal tabs"
+msgstr "가로 탭"
+
+msgid "Vertical tabs"
+msgstr "세로 탭"
+
+msgid "Product data name"
+msgstr "상품 데이터 이름"
+
+msgid "Eye dropper"
+msgstr "스포이드"
+
+msgid "Unordered list"
+msgstr "순서 없는 리스트"
+
+msgid "Ordered list"
+msgstr "순서 있는 리스트"
+
+msgid "Font"
+msgstr "글꼴"
+
+msgid "Set the font of the plug-in"
+msgstr "플러그인의 글꼴을 설정합니다"
+
+msgid "After"
+msgstr "이후"
+
+msgid "Before"
+msgstr "이전"
+
+msgid "Country"
+msgstr "국가"
+
+msgid "The application cannot be booted"
+msgstr "애플리케이션을 부팅할 수 없습니다"
+
+msgid "An unexpected error has occurred"
+msgstr "예기치 않은 오류가 발생했습니다"
+
+msgid "Dataset"
+msgstr "데이터셋"
+
+msgid ""
+"Build reusable datasets for meta fields and forms. Import from CSV, JSON or "
+"YAML."
+msgstr ""
+
+msgid "Dataset successfully saved"
+msgstr "데이터셋이 성공적으로 저장되었습니다"
+
+msgid "Dataset name"
+msgstr "데이터셋 이름"
+
+msgid "Dataset label"
+msgstr "데이터셋 레이블"
+
+msgid "Edit dataset"
+msgstr "데이터셋 편집"
+
+msgid "Create a new dataset"
+msgstr "새 데이터셋 생성"
+
+msgid "Create dataset"
+msgstr "데이터셋 생성"
+
+msgid "No dataset found."
+msgstr "데이터셋을 찾을 수 없습니다."
+
+msgid "Items count"
+msgstr "항목 수"
+
+msgid "Dataset successfully deleted."
+msgstr "데이터셋이 성공적으로 삭제되었습니다."
+
+msgid "Delete dataset"
+msgstr "데이터셋 삭제"
+
+msgid "Manage dataset"
+msgstr "데이터셋 관리"
+
+msgid "Load dataset"
+msgstr "데이터셋 불러오기"
+
+msgid "Dataset loaded correctly"
+msgstr "데이터셋을 올바르게 불러왔습니다"
+
+msgid "You are going to delete this dataset. Are you sure?"
+msgstr "이 데이터셋을 삭제하려고 합니다. 정말로 진행하시겠습니까?"
+
+msgid "Select/deselect all fields"
+msgstr "모든 필드 선택/해제"
+
+msgid "Show/hide elements"
+msgstr "요소 표시/숨기기"
+
+msgid "The limit on how many elements are required ([1-100])"
+msgstr "필요한 요소 수 제한 ([1-100])"
+
+msgid "Minimum elements allowed"
+msgstr "허용되는 최소 요소 수"
+
+msgid "The limit on how many elements are allowed ([1-100])"
+msgstr "허용되는 요소 수 제한 ([1-100])"
+
+msgid "Maximum elements allowed"
+msgstr "허용되는 최대 요소 수"
+
+msgid ""
+"Something went wrong. Try clicking the reload the application button to "
+"reload the application."
+msgstr ""
+"문제가 발생했습니다. 애플리케이션 다시 로드 버튼을 클릭하여 다시 시도해 보세"
+"요."
+
+msgid "The application has crashed"
+msgstr "애플리케이션 작동이 중단되었습니다"
+
+msgid "Reload the application"
+msgstr "애플리케이션 다시 로드"
+
+msgid "Value is equals to {{v}}"
+msgstr "값이 {{v}}와(과) 일치함"
+
+msgid "Textual fields settings"
+msgstr "텍스트 필드 설정"
+
+msgid "File field settings"
+msgstr "파일 필드 설정"
+
+msgid "Radio field settings"
+msgstr "라디오 필드 설정"
+
+msgid "Nestable fields layout settings"
+msgstr "중첩 가능(Nestable) 필드 레이아웃 설정"
+
+msgid "Unit of measure fields settings"
+msgstr "측정 단위 필드 설정"
+
+msgid "URL field settings"
+msgstr "URL 필드 설정"
+
+msgid "WPML Settings"
+msgstr "WPML 설정"
+
+msgid "The file wpml-config.xml was successfully generated."
+msgstr "wpml-config.xml 파일이 성공적으로 생성되었습니다."
+
+msgid "The file wpml-config.xml was not successfully generated."
+msgstr "wpml-config.xml 파일이 생성되지 않았습니다."
+
+msgid "This is the generated wpml-config.xml file:"
+msgstr "생성된 wpml-config.xml 파일입니다:"
+
+msgid "Attachment"
+msgstr "첨부 파일"
+
+msgid "All formats"
+msgstr "모든 형식"
+
+msgid "Type the address or point a location on the map"
+msgstr "주소를 입력하거나 지도상에 위치를 표시하세요"
+
+msgid "All comments"
+msgstr "모든 댓글"
+
+msgid "Nested fields"
+msgstr "중첩 필드"
+
+msgid "Row"
+msgstr "행(Row)"
+
+msgid "Block"
+msgstr "블록"
+
+msgid "Table"
+msgstr "테이블"
+
+msgid "The look of the field for admins and editors."
+msgstr "관리자와 편집자에게 표시되는 필드 레이아웃입니다."
+
+msgid "Field layout"
+msgstr "필드 레이아웃"
+
+msgid ""
+"The leading field (which will be displayed when the repeater is collapsed)."
+msgstr "대표 필드 (리피터가 축소되었을 때 표시되는 필드)."
+
+msgid "Leading field"
+msgstr "대표 필드"
+
+msgid "Reset the map"
+msgstr "지도 초기화"
+
+msgid "Successful outcome message"
+msgstr "성공 결과 메시지"
+
+msgid "Delete all blocks"
+msgstr "모든 블록 삭제"
+
+msgid "Something went wrong, please retry."
+msgstr "문제가 발생했습니다. 다시 시도해 주세요."
+
+msgid "Connect external services"
+msgstr "외부 서비스 연결"
+
+msgid "Your Cloudflare Turnstile site key"
+msgstr "Cloudflare Turnstile 사이트 키"
+
+msgid ""
+"Your Cloudflare Turnstile site key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Cloudflare Turnstile 사이트 키입니다. 캡차(CAPTCHA) 양식 필드를 사용하는 데 "
+"필요합니다."
+
+msgid "Your Cloudflare Turnstile secret key"
+msgstr "Cloudflare Turnstile 비밀 키"
+
+msgid ""
+"Your Cloudflare Turnstile secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+"Cloudflare Turnstile 비밀 키입니다. 캡차(CAPTCHA) 양식 필드를 사용하는 데 필"
+"요합니다."
+
+msgid "Health check"
+msgstr "상태 점검"
+
+msgid ""
+"Inspect the application state and automatically repair installation errors "
+"or schema issues."
+msgstr ""
+
+msgid "Run health check"
+msgstr "상태 점검 실행"
+
+msgid "Launch the repair"
+msgstr "복구 시작"
+
+msgid "DB status"
+msgstr "데이터베이스 상태"
+
+msgid "The repair was carried out successfully."
+msgstr "복구가 성공적으로 완료되었습니다."
+
+msgid "Post object settings"
+msgstr "글(Post) 객체 설정"
+
+msgid "Term object settings"
+msgstr "용어(Term) 객체 설정"
+
+msgid "Filter by post type"
+msgstr "글 유형별 필터링"
+
+msgid "Filter by post status"
+msgstr "글 상태별 필터링"
+
+msgid "Filter by taxonomy"
+msgstr "분류 체계(Taxonomy)별 필터링"
+
+msgid "Polylang Settings"
+msgstr "Polylang 설정"
+
+msgid "Textarea settings"
+msgstr "텍스트 영역(Textarea) 설정"
+
+msgid "The cols value (used only by textarea fields)"
+msgstr "열(cols) 값 (텍스트 영역 필드에서만 사용)"
+
+msgid "The rows value (used only by textarea fields)"
+msgstr "행(rows) 값 (텍스트 영역 필드에서만 사용)"
+
+msgid "Context"
+msgstr "컨텍스트"
+
+msgid "Priority"
+msgstr "우선순위"
+
+msgid "User settings"
+msgstr "사용자 설정"
+
+msgid "Filter by role"
+msgstr "역할별 필터링"
+
+msgid "Relational field settings"
+msgstr "관계형 필드 설정"
+
+msgid "Only name or title"
+msgstr "이름 또는 제목만"
+
+msgid "With image"
+msgstr "이미지 포함"
+
+msgid "Date field settings"
+msgstr "날짜 필드 설정"
+
+msgid "Datetime field settings"
+msgstr "날짜 시간 필드 설정"
+
+msgid "Time field settings"
+msgstr "시간 필드 설정"
+
+msgid "Select the field vertical alignment (default: center)"
+msgstr "필드의 세로 정렬을 선택하세요 (기본값: 중앙)"
+
+msgid "Vertical alignment"
+msgstr "세로 정렬"
+
+msgid "Center"
+msgstr "중앙"
+
+msgid "Top"
+msgstr "상단"
+
+msgid "Bottom"
+msgstr "하단"
+
+msgid "The maximum size is {{v}}"
+msgstr "최대 크기는 {{v}}입니다."
+
+msgid "The minimum size is {{v}}"
+msgstr "최소 크기는 {{v}}입니다."
+
+msgid "Set as post thumbnail"
+msgstr "특성 이미지로 설정"
+
+msgid "Sync with post terms"
+msgstr "글 용어와 동기화"
+
+msgid "Image settings"
+msgstr "이미지 설정"
+
+msgid "Permissions"
+msgstr "권한"
+
+msgid "Manage permissions of"
+msgstr "다음 권한 관리:"
+
+msgid "Add permission"
+msgstr "권한 추가"
+
+msgid "No permissions found."
+msgstr "권한을 찾을 수 없습니다."
+
+msgid "User role"
+msgstr "사용자 역할"
+
+msgid "Confirm deleting permission"
+msgstr "권한 삭제 확인"
+
+msgid "Permissions successfully saved"
+msgstr "권한이 성공적으로 저장되었습니다."
+
+msgid ""
+"No permissions are present, click on \"Add permission\" button to add the "
+"first one."
+msgstr "권한이 없습니다. \"권한 추가\"를 클릭하세요."
+
+msgid "Confirm deleting permission element"
+msgstr "권한 요소 삭제 확인"
+
+msgid "Assign"
+msgstr "할당"
+
+msgid "Child field"
+msgstr "하위 필드"
+
+msgid "Child block"
+msgstr "하위 블록"
+
+msgid "No fields found"
+msgstr "필드를 찾을 수 없습니다"
+
+msgid "Reset to the default values"
+msgstr "기본값으로 재설정"
+
+msgid "Override here the default settings:"
+msgstr "여기에서 기본 설정을 재정의합니다:"
+
+msgid "Style"
+msgstr "스타일"
+
+msgid "Settings successfully saved"
+msgstr "설정이 성공적으로 저장되었습니다."
+
+msgid "Save this table as template"
+msgstr "이 테이블을 템플릿으로 저장"
+
+msgid "Import template"
+msgstr "템플릿 가져오기"
+
+msgid "Choose the template"
+msgstr "템플릿 선택"
+
+msgid "Import"
+msgstr "가져오기"
+
+msgid "Border style"
+msgstr "테두리 스타일"
+
+msgid "Border weight"
+msgstr "테두리 두께"
+
+msgid "Border color"
+msgstr "테두리 색상"
+
+msgid "Main background"
+msgstr "기본 배경"
+
+msgid "Alt background"
+msgstr "보조 배경"
+
+msgid "Add header"
+msgstr "헤더 추가"
+
+msgid "Add footer"
+msgstr "푸터 추가"
+
+msgid "Save as template"
+msgstr "템플릿으로 저장"
+
+msgid "Create table"
+msgstr "테이블 생성"
+
+msgid "Edit table settings"
+msgstr "테이블 설정 편집"
+
+msgid "No table already created."
+msgstr "생성된 테이블이 없습니다."
+
+msgid "JSON data is not valid."
+msgstr "JSON 데이터가 유효하지 않습니다."
+
+msgid "Delete row"
+msgstr "행 삭제"
+
+msgid "Add row"
+msgstr "행 추가"
+
+msgid "Delete column"
+msgstr "열 삭제"
+
+msgid "Add column"
+msgstr "열 추가"
+
+msgid "Border"
+msgstr "테두리"
+
+msgid "Text color"
+msgstr "텍스트 색상"
+
+msgid "Background"
+msgstr "배경"
+
+msgid "Rows"
+msgstr "행"
+
+msgid "Option pages successfully deleted."
+msgstr "옵션 페이지가 성공적으로 삭제되었습니다."
+
+msgid "Clear"
+msgstr "지우기"
+
+msgid "Apply"
+msgstr "적용"
+
+msgid "Preview element"
+msgstr "요소 미리보기"
+
+msgid "No records found."
+msgstr "기록을 찾을 수 없습니다."
+
+msgid "Show data"
+msgstr "데이터 표시"
+
+msgid "Enable custom post types"
+msgstr "사용자 정의 글 유형(CPT) 활성화"
+
+msgid "Enable custom post types manager"
+msgstr "사용자 정의 글 유형 관리자 활성화"
+
+msgid "Enable Option Pages"
+msgstr "옵션 페이지 활성화"
+
+msgid "Enable the Option Pages manager."
+msgstr "옵션 페이지 관리자를 활성화합니다."
+
+msgid "Enable meta fields"
+msgstr "메타 필드 활성화"
+
+msgid "Enable the meta fields manager."
+msgstr "메타 필드 관리자를 활성화합니다."
+
+msgid "Clone field settings"
+msgstr "필드 설정 복제"
+
+msgid "Select fields to clone"
+msgstr "복제할 필드 선택"
+
+msgid "Hide"
+msgstr "숨기기"
+
+msgid "Restore"
+msgstr "복구"
+
+msgid "Restore elements"
+msgstr "요소 복구"
+
+msgid "hidden elements"
+msgstr "숨겨진 요소"
+
+msgid "Front URL prefix"
+msgstr "전면 URL 접두사"
+
+msgid ""
+"Alters the post type permalink structure to add a prefix to singular posts "
+"URLs (ex. /movie/titanic). Default value is the post type name."
+msgstr ""
+"단일 글 URL에 접두사를 추가하도록 글 유형 고유주소 구조를 변경합니다. (예: /"
+"movie/titanic). 기본값은 글 유형 이름입니다."
+
+msgid "Custom post type successfully duplicated."
+msgstr "사용자 정의 글 유형이 성공적으로 복제되었습니다."
+
+msgid "Option pages successfully duplicated."
+msgstr "옵션 페이지가 성공적으로 복제되었습니다."
+
+msgid "Taxonomy successfully duplicated."
+msgstr "분류 체계가 성공적으로 복제되었습니다."
+
+msgid "Dataset successfully duplicated."
+msgstr "데이터 세트가 성공적으로 복제되었습니다."
+
+msgid "Form successfully duplicated."
+msgstr "양식이 성공적으로 복제되었습니다."
+
+msgid "WooCommerce product data successfully duplicated"
+msgstr "우커머스 상품 데이터가 성공적으로 복제되었습니다."
+
+msgid "Please wait"
+msgstr "잠시만 기다려 주세요"
+
+msgid "Labels successfully regenerated"
+msgstr "레이블이 성공적으로 재생성되었습니다"
+
+msgid "No image selected"
+msgstr "선택된 이미지 없음"
+
+msgid "No video selected"
+msgstr "선택된 비디오 없음"
+
+msgid "No file selected"
+msgstr "선택된 파일 없음"
+
+msgid "Password field settings"
+msgstr "비밀번호 필드 설정"
+
+msgid "Algorithm"
+msgstr "알고리즘"
+
+msgid ""
+"Should the permalink structure be prepended with the front base. (example: "
+"if your permalink structure is /blog/, then your links will be: false->/"
+"news/, true->/blog/news/). Defaults to true"
+msgstr ""
+"고유주소 구조 앞에 전면 베이스를 추가할지 여부. (예: 고유주소 구조가 /blog/"
+"인 경우, false면 /news/, true면 /blog/news/). 기본값은 true입니다."
+
+msgid "Resolution"
+msgstr "해상도"
+
+msgid "Color dark"
+msgstr "어두운 색상"
+
+msgid "Color light"
+msgstr "밝은 색상"
+
+msgid "Post status"
+msgstr "글 상태"
+
+msgid "The updated or new post status"
+msgstr "업데이트되었거나 새로운 글 상태"
+
+msgid "Add images to the gallery"
+msgstr "갤러리에 이미지 추가"
+
+msgid "Enable custom blocks"
+msgstr "사용자 정의 블록 활성화"
+
+msgid "Enable the custom blocks manager."
+msgstr "사용자 정의 블록 관리자를 활성화합니다."
+
+msgid "Dynamic blocks list"
+msgstr "동적 블록 목록"
+
+msgid "Create new block"
+msgstr "새 블록 생성"
+
+msgid "General configuration"
+msgstr "일반 구성"
+
+msgid "Add controls to the block"
+msgstr "블록에 컨트롤 추가"
+
+msgid "Add custom CSS to the block"
+msgstr "블록에 사용자 정의 CSS 추가"
+
+msgid "Add the callback to the block"
+msgstr "블록에 콜백 추가"
+
+msgid "Custom SVG"
+msgstr "사용자 정의 SVG"
+
+msgid "Confirm deleting control"
+msgstr "컨트롤 삭제 확인"
+
+msgid "Declare block support for certain features"
+msgstr "특정 기능에 대한 블록 지원 선언"
+
+msgid "Block callback"
+msgstr "블록 콜백"
+
+msgid "This is the block's code that will be run. Make use of TWIG syntax."
+msgstr "실행될 블록 코드입니다. TWIG 문법을 사용하세요."
+
+msgid ""
+"No block controls already created. Create the first one now by clicking the "
+"button \"Add control\"!"
+msgstr ""
+"생성된 블록 컨트롤이 없습니다. \"컨트롤 추가\" 버튼을 클릭하여 첫 번째 컨트롤"
+"을 생성해 보세요!"
+
+msgid "Block controls"
+msgstr "블록 컨트롤"
+
+msgid "Add control"
+msgstr "컨트롤 추가"
+
+msgid "Control slug"
+msgstr "컨트롤 슬러그"
+
+msgid "Control slug (Ex. gallery or text_1)"
+msgstr "컨트롤 슬러그 (예: gallery 또는 text_1)"
+
+msgid "Choose the control type"
+msgstr "컨트롤 유형 선택"
+
+msgid "The description of this control (showed only on admin panel)"
+msgstr "이 컨트롤에 대한 설명 (관리자 패널에만 표시됨)"
+
+msgid "Duplicate this control"
+msgstr "이 컨트롤 복제"
+
+msgid "Delete this block control"
+msgstr "이 블록 컨트롤 삭제"
+
+msgid "Hide/show this block control"
+msgstr "이 블록 컨트롤 숨기기/표시"
+
+msgid "Icon type"
+msgstr "아이콘 유형"
+
+msgid "The background color of the icon"
+msgstr "아이콘 배경색"
+
+msgid "The foreground color of the icon"
+msgstr "아이콘 전경색"
+
+msgid "Keywords"
+msgstr "키워드"
+
+msgid ""
+"An array of search terms to help user discover the block while searching."
+msgstr "사용자가 검색을 통해 블록을 찾을 수 있도록 돕는 검색어 배열입니다."
+
+msgid "The block category"
+msgstr "블록 카테고리"
+
+msgid "Block category"
+msgstr "블록 카테고리"
+
+msgid "The block label"
+msgstr "블록 레이블"
+
+msgid "Block label"
+msgstr "블록 레이블"
+
+msgid "Block CSS"
+msgstr "블록 CSS"
+
+msgid "Enter the CSS that will be used on the block here."
+msgstr "여기에 블록에 사용될 CSS를 입력하세요."
+
+msgid "Anchor"
+msgstr "앵커"
+
+msgid "Anchors let you link directly to a specific block on a page."
+msgstr "앵커를 사용하면 페이지 내의 특정 블록으로 직접 링크할 수 있습니다."
+
+msgid "Align"
+msgstr "정렬"
+
+msgid "This property adds block controls."
+msgstr "이 속성은 블록 컨트롤을 추가합니다."
+
+msgid "Align wide"
+msgstr "와이드 정렬"
+
+msgid "This property allows to enable wide alignment for your theme."
+msgstr "이 속성은 테마에 대해 와이드 정렬을 활성화할 수 있게 합니다."
+
+msgid "Enable background image control."
+msgstr "배경 이미지 컨트롤 활성화"
+
+msgid "Enable/disable background image + size control."
+msgstr "배경 이미지 및 크기 컨트롤 활성화/비활성화."
+
+msgid "Enable/disable background and text color support."
+msgstr "배경 및 텍스트 색상 지원 활성화/비활성화."
+
+msgid "Enable/disable button color support."
+msgstr "버튼 색상 지원 활성화/비활성화."
+
+msgid "Enable/disable contrast checker widget in the block editor UI."
+msgstr "블록 에디터 UI에서 대비 체크 위젯 활성화/비활성화."
+
+msgid "Enable/disable gradient backgrounds support."
+msgstr "그라데이션 배경 지원 활성화/비활성화."
+
+msgid "Enable/disable heading color support."
+msgstr "제목 색상 지원 활성화/비활성화."
+
+msgid "Enable/disable link colors control."
+msgstr "링크 색상 컨트롤 활성화/비활성화."
+
+msgid "Enable/disable background and text, but not link."
+msgstr "배경 및 텍스트는 활성화하되 링크는 제외합니다."
+
+msgid "Dimensions"
+msgstr "치수"
+
+msgid "Enable/disable aspect ratio control."
+msgstr "종횡비 컨트롤 활성화/비활성화."
+
+msgid "Enable/disable min height control."
+msgstr "최소 높이 컨트롤 활성화/비활성화."
+
+msgid "Filter"
+msgstr "필터"
+
+msgid "Enable/disable duotone support."
+msgstr "듀오톤(Duotone) 지원 활성화/비활성화."
+
+msgid "Enable/disable support for an HTML mode."
+msgstr "HTML 모드 지원 활성화/비활성화."
+
+msgid "Lock"
+msgstr "잠금"
+
+msgid "Enable/disable the ability to toggle the lock state."
+msgstr "잠금 상태 전환 기능 활성화/비활성화."
+
+msgid "Determine if a block can be used multiple times."
+msgstr "블록을 여러 번 사용할 수 있는지 여부를 결정합니다."
+
+msgid "Position"
+msgstr "위치"
+
+msgid "Enable/disable selecting sticky position."
+msgstr "스티키(Sticky) 위치 선택 활성화/비활성화."
+
+msgid "Renaming"
+msgstr "이름 변경"
+
+msgid "Determine if a block can be renamed in the editor."
+msgstr "에디터에서 블록 이름을 변경할 수 있는지 여부를 결정합니다."
+
+msgid "Reusable"
+msgstr "재사용 가능"
+
+msgid "Enable/disable the ability of being converted into a reusable block."
+msgstr "재사용 가능한 블록으로 변환하는 기능 활성화/비활성화."
+
+msgid "Shadow"
+msgstr "그림자"
+
+msgid "Enable/disable the shadow picker."
+msgstr "그림자 선택기 활성화/비활성화."
+
+msgid "Spacing"
+msgstr "간격"
+
+msgid "Enable/disable margin for arbitrary sides."
+msgstr "임의의 측면에 대한 마진(Margin) 활성화/비활성화."
+
+msgid "Enable/disable padding for all sides."
+msgstr "모든 측면에 대한 패딩(Padding) 활성화/비활성화."
+
+msgid "Enable/disable axial (column/row) block spacing controls."
+msgstr "축(열/행) 블록 간격 컨트롤 활성화/비활성화."
+
+msgid "Typography"
+msgstr "타이포그래피"
+
+msgid "Enable/disable support and UI control for font-size."
+msgstr "글꼴 크기에 대한 지원 및 UI 컨트롤 활성화/비활성화."
+
+msgid "Declare support for specific text alignment options."
+msgstr "특정 텍스트 정렬 옵션에 대한 지원을 선언합니다."
+
+msgid "No block found."
+msgstr "블록을 찾을 수 없습니다."
+
+msgid "You are going to delete this block. Are you sure?"
+msgstr "이 블록을 삭제하려고 합니다. 정말입니까?"
+
+msgid "Choose a standard category"
+msgstr "표준 카테고리 선택"
+
+msgid "Enter a custom category"
+msgstr "사용자 정의 카테고리 입력"
+
+msgid "Enable beta versions"
+msgstr "베타 버전 활성화"
+
+msgid "Enable the download of beta versions."
+msgstr "베타 버전 다운로드 활성화."
+
+msgid "Audio field settings"
+msgstr "오디오 필드 설정"
+
+msgid "Use the custom audio player"
+msgstr "사용자 정의 오디오 플레이어 사용"
+
+msgid "Skin"
+msgstr "스킨"
+
+msgid "Set the desired skin to be applied to the UI interface"
+msgstr "UI 인터페이스에 적용할 스킨을 설정하세요"
+
+msgid "Add new post a link it"
+msgstr "새 글을 추가하고 링크하기"
+
+msgid "Create a new post"
+msgstr "새 글 작성"
+
+msgid "Gallery settings"
+msgstr "갤러리 설정"
+
+msgid "Video settings"
+msgstr "비디오 설정"
+
+msgid "Disable media upload"
+msgstr "미디어 업로드 비활성화"
+
+msgid "CSS variables"
+msgstr "CSS 변수"
+
+msgid ""
+"Should the permastruct be prepended with WP_Rewrite::$front. Default true."
+msgstr ""
+"고유주소 구조 앞에 WP_Rewrite::$front를 붙일지 여부입니다. 기본값은 true입니"
+"다."
+
+msgid "Either hierarchical rewrite tag or not. Default false."
+msgstr "계층적 리라이트(Rewrite) 태그 여부입니다. 기본값은 false입니다."
+
+msgid "Rewrite hierarchical"
+msgstr "계층적 리라이트"
+
+msgid "Disable cover in custom the audio player"
+msgstr "사용자 정의 오디오 플레이어에서 커버 비활성화"
+
+msgid "Box settings"
+msgstr "박스 설정"
+
+msgid "Delete unused MySQL tables"
+msgstr "사용하지 않는 MySQL 테이블 삭제"
+
+msgid ""
+"If this option is enabled, all MySQL tables that are not in use — such as "
+"forms and dynamic blocks — will be deleted. Enable this option only if you "
+"are sure of what you are doing!"
+msgstr ""
+"이 옵션을 활성화하면 폼이나 동적 블록과 같이 사용되지 않는 모든 MySQL 테이블"
+"이 삭제됩니다. 내용을 정확히 이해하고 있는 경우에만 활성화하십시오!"
+
+msgid "Apply to meta boxes"
+msgstr "메타 박스에 적용"
+
+msgid "Don't apply to meta boxes"
+msgstr "메타 박스에 적용하지 않음"
+
+msgid "Bulk edit"
+msgstr "일괄 편집"
+
+msgid "Cache driver"
+msgstr "캐시 드라이버"
+
+msgid "Set the desired cache driver to improve ACPT performances"
+msgstr "ACPT 성능 향상을 위해 원하는 캐시 드라이버를 설정하세요"
+
+msgid "Cache folder settings"
+msgstr "캐시 폴더 설정"
+
+msgid "Cache folder (absolute path)"
+msgstr ""
+
+msgid ""
+"Optional: specify an absolute server path for the cache directory (e.g. /var/"
+"cache/acpt). Leave empty to use the default plugin directory."
+msgstr ""
+
+msgid "Redis settings"
+msgstr "Redis 설정"
+
+msgid "Memcached settings"
+msgstr "Memcached 설정"
+
+msgid "INFO"
+msgstr "정보"
+
+msgid "SIZE"
+msgstr "크기"
+
+msgid "ITEMS"
+msgstr "항목"
+
+msgid "Set the cache folder"
+msgstr "캐시 폴더 설정"
+
+msgid "Set the Redis host"
+msgstr "Redis 호스트 설정"
+
+msgid "Set the Redis port"
+msgstr "Redis 포트 설정"
+
+msgid "Set the Redis database"
+msgstr "Redis 데이터베이스 설정"
+
+msgid "Set the Memcached host"
+msgstr "Memcached 호스트 설정"
+
+msgid "Set the Memcached port"
+msgstr "Memcached 포트 설정"
+
+msgid "Driver connection ok"
+msgstr "드라이버 연결 정상"
+
+msgid "Test driver connection"
+msgstr "드라이버 연결 테스트"
+
+msgid "Enable cache for meta data"
+msgstr "메타 데이터 캐시 활성화"
+
+msgid "Full"
+msgstr "전체"
+
+msgid "Visual and Text"
+msgstr "비주얼 및 텍스트"
+
+msgid "Visual Only"
+msgstr "비주얼 전용"
+
+msgid "Text Only"
+msgstr "텍스트 전용"
+
+msgid "Toolbar"
+msgstr "툴바"
+
+msgid "Tabs"
+msgstr "탭"
+
+msgid "Set the first image as post thumbnail"
+msgstr "첫 번째 이미지를 특성 이미지(포스트 썸네일)로 설정"
+
+msgid "Allow dangerous content"
+msgstr "위험한 콘텐츠 허용"
+
+msgid "URL structure type"
+msgstr "URL 구조 유형"
+
+msgid "Absolute (ex. http://example.com)"
+msgstr "절대 경로 (예: http://example.com)"
+
+msgid "Relative (ex. /path/example/field)"
+msgstr "상대 경로 (예: /path/example/field)"
+
+msgid "Enable logs"
+msgstr "로그 활성화"
+
+msgid ""
+"Turn on full logging to keep a detailed record of everything. This helps to "
+"spot bugs more easily and understand what went wrong if something breaks."
+msgstr ""
+"상세한 기록을 유지하기 위해 전체 로깅을 켭니다. 이는 버그를 더 쉽게 찾아내고 "
+"문제가 발생했을 때 원인을 파악하는 데 도움이 됩니다."
+
+msgid "Logs manager"
+msgstr "로그 관리자"
+
+msgid "No logs found"
+msgstr "로그가 없습니다"
+
+msgid "Severity"
+msgstr "심각도"
+
+msgid "Message"
+msgstr "메시지"
+
+msgid "Filter by"
+msgstr "필터링 기준"
+
+msgid "Jump to version"
+msgstr "버전으로 건너뛰기"
+
+msgid "Show only"
+msgstr "항목만 보기"
+
+msgid "Select files"
+msgstr "파일 선택"
+
+msgid "Max items allowed"
+msgstr "허용된 최대 항목 수"
+
+msgid "Open a ticket"
+msgstr "티켓 문의하기"
+
+msgid "Select post status"
+msgstr "포스트 상태 선택"
+
+msgid "Apply to Front-End"
+msgstr "프론트엔드에 적용"
+
+msgid "Apply to Back-End"
+msgstr "백엔드에 적용"
+
+msgid "Sync language with locale"
+msgstr "언어를 로케일에 동기화"
+
+msgid ""
+"Automatically synchronize the application language with the selected locale "
+"settings, if applicable."
+msgstr ""
+"해당하는 경우 애플리케이션 언어를 선택한 로케일 설정과 자동으로 동기화합니다."
+
+msgid "Table pagination"
+msgstr "테이블 페이지네이션"
+
+msgid "Set the number of rows per page"
+msgstr "페이지당 행 수 설정"
+
+msgid "Set the table as sortable"
+msgstr "테이블을 정렬 가능하게 설정"
+
+msgid "Import CSV"
+msgstr "CSV 가져오기"
+
+msgid "Add tab"
+msgstr "탭 추가"
+
+msgid ""
+"No tabs already created. Create the first one now by clicking the button "
+"\"Add tab\"!"
+msgstr "아직 탭이 없습니다. \"탭 추가\"를 클릭하여 첫 번째를 만드세요!"
+
+msgid "No extra settings available"
+msgstr "추가 설정 없음"
+
+msgid "No tabs available"
+msgstr "사용 가능한 탭 없음"
+
+msgid "No steps available"
+msgstr "사용 가능한 단계 없음"
+
+msgid "Release elements here"
+msgstr "여기에 요소를 놓으세요"
+
+msgid "Date from"
+msgstr "시작 날짜"
+
+msgid "Date to"
+msgstr "종료 날짜"
+
+msgid "Single click to edit"
+msgstr "한 번 클릭하여 편집"
+
+msgid "Double click to toggle this element"
+msgstr "두 번 클릭하여 이 요소를 전환"
+
+msgid "Double click to close this element"
+msgstr "두 번 클릭하여 이 요소를 닫기"
+
+msgid "Double click to open this element"
+msgstr "두 번 클릭하여 이 요소를 열기"
+
+msgid ""
+"Enable the WordPress admin menu for faster, easier dashboard navigation."
+msgstr ""
+"빠르고 쉬운 대시보드 탐색을 위해 워드프레스 알림판 메뉴를 활성화합니다."
+
+msgid "Enable Admin menu"
+msgstr "관리자 메뉴 활성화"
+
+msgid "Google Sheets API key"
+msgstr "Google Sheets API 키"
+
+msgid ""
+"Paste here your Google Sheets API key. Needed to import sheets into Table "
+"fields."
+msgstr ""
+"여기에 Google Sheets API 키를 붙여넣으세요. 테이블 필드로 시트를 가져오는 데 "
+"필요합니다."
+
+msgid "Form settings"
+msgstr "폼 설정"
+
+msgid "Email delivery"
+msgstr "이메일 전송"
+
+msgid "Restrict the form submission rates"
+msgstr "폼 제출 빈도 제한"
+
+msgid "Adjust the values of the form’s CSS variables"
+msgstr "폼의 CSS 변수 값 조정"
+
+msgid "Trigger an email once the form is submitted"
+msgstr "폼이 제출되면 이메일 트리거"
+
+msgid "Sync with taxonomies"
+msgstr "분류 체계(Taxonomy)와 동기화"
+
+msgid "No taxonomy found."
+msgstr "분류 체계를 찾을 수 없습니다."
+
+msgid "Successfully taxonomy sync."
+msgstr "분류 체계 동기화에 성공했습니다."
+
+msgid "Edit meta box"
+msgstr "메타 박스 편집"
+
+msgid "Available only if `show in archive` is enabled"
+msgstr "'아카이브에 표시'가 활성화된 경우에만 사용 가능"
+
+msgid "Email preview"
+msgstr "이메일 미리보기"
+
+msgid "Subject"
+msgstr "제목"
+
+msgid "Rule"
+msgstr "규칙"
+
+msgid "Limit"
+msgstr "제한"
+
+msgid "Submission limits"
+msgstr "제출 제한"
+
+msgid "Email settings"
+msgstr "이메일 설정"
+
+msgid "Post archive"
+msgstr "포스트 아카이브"
+
+msgid "Taxonomy archive"
+msgstr "분류 체계 아카이브"
+
+msgid "Copy after"
+msgstr ""
+
+msgid "Enable custom content type"
+msgstr ""
+
+msgid "Enable the custom content type manager."
+msgstr ""
+
+msgid "Create new table"
+msgstr ""
+
+msgid "Registered tables"
+msgstr ""
+
+msgid "ID Strategy"
+msgstr ""
+
+msgid "The ID table strategy"
+msgstr ""
+
+msgid "Table label"
+msgstr ""
+
+msgid "The table label"
+msgstr ""
+
+msgid "Table columns"
+msgstr ""
+
+msgid "Table name"
+msgstr ""
+
+msgid "The table name. Must be unique"
+msgstr ""
+
+msgid "Indexes"
+msgstr ""
+
+msgid "Indexes and foreign keys"
+msgstr ""
+
+msgid "Charset and collation"
+msgstr ""
+
+msgid "The table charset and collation"
+msgstr ""
+
+msgid "Delete this column"
+msgstr ""
+
+msgid "Confirm deleting column"
+msgstr ""
+
+msgid ""
+"No columns already created. Create the first one now by clicking the button "
+"\"Add column\"!"
+msgstr ""
+
+msgid "Column label"
+msgstr ""
+
+msgid "Column slug"
+msgstr ""
+
+msgid "Column slug (Ex. gallery or text_1)"
+msgstr ""
+
+msgid "Choose the column type"
+msgstr ""
+
+msgid "This key is already declared"
+msgstr ""
+
+msgid "UI field type mapping"
+msgstr ""
+
+msgid ""
+"No indexes already created. Create the first one now by clicking the button "
+"\"Add index\"!"
+msgstr "아직 인덱스가 없습니다. \"인덱스 추가\"를 클릭하여 첫 번째를 만드세요!"
+
+msgid "Add index"
+msgstr ""
+
+msgid "Timestamps"
+msgstr ""
+
+msgid "Add timestamps columns (`created_at` and `updated_at`) to the table."
+msgstr ""
+
+msgid "Soft delete"
+msgstr ""
+
+msgid "Implement soft delete on this table."
+msgstr ""
+
+msgid ""
+"No foreign keys already created. Create the first one now by clicking the "
+"button \"Add foreign key\"!"
+msgstr ""
+"아직 외래 키가 없습니다. \"외래 키 추가\"를 클릭하여 첫 번째를 만드세요!"
+
+msgid "Reference table"
+msgstr ""
+
+msgid "Reference columns"
+msgstr ""
+
+msgid "Referring columns"
+msgstr ""
+
+msgid "Referenced table"
+msgstr ""
+
+msgid "Referenced columns"
+msgstr ""
+
+msgid "Confirm deleting key"
+msgstr ""
+
+msgid "Is primary key"
+msgstr ""
+
+msgid ""
+"You cannot create an index or a foreign key until at least one column has "
+"been defined. Please create a column first."
+msgstr ""
+
+msgid "Select time format"
+msgstr ""
+
+msgid "Custom time format"
+msgstr ""
+
+msgid "Select date format"
+msgstr ""
+
+msgid "Custom date format"
+msgstr ""
+
+msgid "The label of the Add element button"
+msgstr ""
+
+msgid "Add element button label"
+msgstr ""
+
+msgid "The label of the Remove element button"
+msgstr ""
+
+msgid "Remove element button label"
+msgstr ""
+
+msgid "Preview size"
+msgstr ""
+
+msgid "Restrict image extensions"
+msgstr ""
+
+msgid "Minimum width"
+msgstr ""
+
+msgid "Minimum height"
+msgstr ""
+
+msgid "Maximum width"
+msgstr ""
+
+msgid "Maximum height"
+msgstr ""
+
+msgid "Default sorting"
+msgstr ""
+
+msgid ""
+"Sets the default sort order for posts in the admin list table. Defaults to "
+"WordPress standard (Date, Descending)."
+msgstr ""
+
+msgid "Restrict the field to only show posts created by the logged in user"
+msgstr ""
+
+msgid "Key parts"
+msgstr ""
+
+msgid "Table successfully saved"
+msgstr ""
+
+msgid "Schema status"
+msgstr ""
+
+msgid "Stats"
+msgstr ""
+
+msgid "Operation successfully executed"
+msgstr ""
+
+msgid ""
+"The following queries will be executed to synchronize the table schema. Are "
+"you sure?"
+msgstr ""
+
+msgid "The following queries will be executed to synchronize the table schema:"
+msgstr ""
+
+msgid "No table selected"
+msgstr ""
+
+msgid "Execute database operations"
+msgstr ""
+
+msgid "Length is required for this column type"
+msgstr ""
+
+msgid "Column name `id` is reserved"
+msgstr ""
+
+msgid "Virtual"
+msgstr ""
+
+msgid "Storage type"
+msgstr ""
+
+msgid "Relational type"
+msgstr ""
+
+msgid "Each record relates to exactly one record in the other table"
+msgstr ""
+
+msgid "One record relates to multiple records in the other table"
+msgstr ""
+
+msgid "Multiple records relate to one record in the other table"
+msgstr ""
+
+msgid "Multiple records relate to multiple records in the other table"
+msgstr ""
+
+msgid "Target table"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Self-referential — useful for parent/child hierarchies"
+msgstr ""
+
+msgid "Meta keys manager"
+msgstr ""
+
+msgid ""
+"Browse, search and manage every raw meta key stored by ACPT. Edit values "
+"directly or clean up stale entries across post types, taxonomies and users."
+msgstr ""
+
+msgid "Table stats"
+msgstr ""
+
+msgid "No stats available"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Associated to"
+msgstr ""
+
+msgid "No meta keys found."
+msgstr ""
+
+msgid "Clean orphan keys"
+msgstr ""
+
+msgid "Add meta key"
+msgstr ""
+
+msgid "Delete meta key"
+msgstr ""
+
+msgid "You are going to delete this meta key. Are you sure?"
+msgstr ""
+
+msgid "The record was successfully updated"
+msgstr ""
+
+msgid ""
+"Select the tables to include in this group. Tables define the schema and "
+"fields for storing custom content records."
+msgstr ""
+
+msgid ""
+"Define location rules to control where this group's tables appear in the "
+"WordPress admin. Rules can target post types, taxonomies, users, or option "
+"pages."
+msgstr ""
+
+msgid "--Select---"
+msgstr "--선택---"
+
+msgid "A brief description (shown only in the admin panel)"
+msgstr "간단한 설명 (관리 패널에만 표시됨)"
+
+msgid ""
+"ALERT: The visual builder can be used with a minimum resolution of 960 px "
+"wide"
+msgstr "경고: 비주얼 빌더는 최소 960px 너비의 해상도에서 사용할 수 있습니다"
+
+msgid "Accept"
+msgstr "수락"
+
+msgid "Actual settings"
+msgstr "현재 설정"
+
+msgid "Add a meta box to get started"
+msgstr "시작하려면 메타 박스를 추가하세요"
+
+msgid "Add foreign key"
+msgstr "외래 키 추가"
+
+msgid "Add key part"
+msgstr "키 부분 추가"
+
+msgid "Add new item"
+msgstr "새 항목 추가"
+
+msgid "Add new record"
+msgstr "새 레코드 추가"
+
+msgid "Add record"
+msgstr "레코드 추가"
+
+msgid "Add value"
+msgstr "값 추가"
+
+msgid "Advanced Mode"
+msgstr "고급 모드"
+
+msgid "Advanced options"
+msgstr "고급 옵션"
+
+msgid "Ajax"
+msgstr "Ajax"
+
+msgid "All Tables"
+msgstr "모든 테이블"
+
+msgid "Allow HTML"
+msgstr "HTML 허용"
+
+msgid "Anonymous users"
+msgstr "익명 사용자"
+
+msgid "Assign this table to a group"
+msgstr "이 테이블을 그룹에 할당"
+
+msgid "Associated Tables"
+msgstr "연결된 테이블"
+
+msgid "Attachments"
+msgstr "첨부 파일"
+
+msgid "Automatic"
+msgstr "자동"
+
+msgid "BLOB"
+msgstr "BLOB"
+
+msgid "Basic options"
+msgstr "기본 옵션"
+
+msgid "Bcc"
+msgstr "숨은 참조"
+
+msgid "Block name"
+msgstr "블록 이름"
+
+msgid "Blocks"
+msgstr "블록"
+
+msgid "Body"
+msgstr "본문"
+
+msgid "Browser"
+msgstr "브라우저"
+
+msgid "CURL"
+msgstr "CURL"
+
+msgid "CURRENT_TIMESTAMP"
+msgstr "CURRENT_TIMESTAMP"
+
+msgid "Cache"
+msgstr "캐시"
+
+msgid "Cache stats"
+msgstr "캐시 통계"
+
+msgid "Callback"
+msgstr "콜백"
+
+msgid "Category"
+msgstr "카테고리"
+
+msgid "Cc"
+msgstr "참조"
+
+msgid "Charset"
+msgstr "문자 집합"
+
+msgid "Child page"
+msgstr "하위 페이지"
+
+msgid "Children"
+msgstr "하위 요소"
+
+msgid "Choose the icon"
+msgstr "아이콘 선택"
+
+msgid "Click on a page card to edit its settings"
+msgstr "페이지 카드를 클릭하여 설정을 편집하세요"
+
+msgid "Click to edit"
+msgstr "클릭하여 편집"
+
+msgid "Collate"
+msgstr "정렬"
+
+msgid "Cols"
+msgstr "열"
+
+msgid "Column"
+msgstr "열"
+
+msgid "Column Name"
+msgstr "열 이름"
+
+msgid "Column length"
+msgstr "열 길이"
+
+msgid "Column length must be numeric"
+msgstr "열 길이는 숫자여야 합니다"
+
+msgid "Column options"
+msgstr "열 옵션"
+
+msgid "Column values"
+msgstr "열 값"
+
+msgid "Comments"
+msgstr "댓글"
+
+msgid "Confirm deleting field"
+msgstr "필드 삭제 확인"
+
+msgid "Confirm deleting index"
+msgstr "인덱스 삭제 확인"
+
+msgid "Confirm deleting wpml-config.xml file"
+msgstr "wpml-config.xml 파일 삭제 확인"
+
+msgid "Control label"
+msgstr "컨트롤 레이블"
+
+msgid "Control type"
+msgstr "컨트롤 유형"
+
+msgid "Copy this meta block"
+msgstr "이 메타 블록 복사"
+
+msgid "Copy this meta field"
+msgstr "이 메타 필드 복사"
+
+msgid "Copy this meta option page"
+msgstr "이 메타 옵션 페이지 복사"
+
+msgid "Create new Group"
+msgstr "새 그룹 만들기"
+
+msgid "Create new Table"
+msgstr "새 테이블 만들기"
+
+msgid "Create wpml-config.xml file"
+msgstr "wpml-config.xml 파일 생성"
+
+msgid "Custom Tables"
+msgstr "사용자 정의 테이블"
+
+msgid "Custom settings"
+msgstr "사용자 정의 설정"
+
+msgid "DATE & TIME"
+msgstr "날짜 및 시간"
+
+msgid "Dark"
+msgstr "어두운"
+
+msgid "Data"
+msgstr "데이터"
+
+msgid "Dataset is empty"
+msgstr "데이터셋이 비어 있습니다"
+
+msgid "Dataset list"
+msgstr "데이터셋 목록"
+
+msgid "Dataset not found"
+msgstr "데이터셋을 찾을 수 없습니다"
+
+msgid "Default percent"
+msgstr "기본 퍼센트"
+
+msgid "Default term"
+msgstr "기본 용어"
+
+msgid "Delete Column"
+msgstr "열 삭제"
+
+msgid "Delete Table"
+msgstr "테이블 삭제"
+
+msgid "Delete Table Group"
+msgstr "테이블 그룹 삭제"
+
+msgid "Delete block"
+msgstr "블록 삭제"
+
+msgid "Delete box"
+msgstr "박스 삭제"
+
+msgid "Delete field"
+msgstr "필드 삭제"
+
+msgid "Delete option page"
+msgstr "옵션 페이지 삭제"
+
+msgid "Delete others"
+msgstr "다른 항목 삭제"
+
+msgid "Delete page"
+msgstr "페이지 삭제"
+
+msgid "Delete private"
+msgstr "비공개 삭제"
+
+msgid "Delete published"
+msgstr "게시된 항목 삭제"
+
+msgid "Delete the meta block after copying"
+msgstr "복사 후 메타 블록 삭제"
+
+msgid "Delete the meta field after copying"
+msgstr "복사 후 메타 필드 삭제"
+
+msgid "Descending"
+msgstr "내림차순"
+
+msgid "Deselect all"
+msgstr "모두 선택 해제"
+
+msgid "Details"
+msgstr "세부 정보"
+
+msgid "Disable cover in the custom audio player"
+msgstr "사용자 정의 오디오 플레이어에서 커버 비활성화"
+
+msgid "Display"
+msgstr "표시"
+
+msgid "Display as translated"
+msgstr "번역됨으로 표시"
+
+msgid "Display mode"
+msgstr "표시 모드"
+
+msgid "Display settings"
+msgstr "표시 설정"
+
+msgid "Drag a control type from the sidebar to get started"
+msgstr "사이드바에서 컨트롤 유형을 드래그하여 시작하세요"
+
+msgid "Drag a field type from the sidebar to get started"
+msgstr "사이드바에서 필드 유형을 드래그하여 시작하세요"
+
+msgid "Drop children fields here"
+msgstr "여기에 하위 필드를 드롭하세요"
+
+msgid "Drop children pages here"
+msgstr ""
+
+msgid "Duotone"
+msgstr "듀오톤"
+
+msgid "Duplicate rules are not allowed."
+msgstr "중복 규칙은 허용되지 않습니다."
+
+msgid "ENUM"
+msgstr "ENUM"
+
+msgid "Edit item"
+msgstr "항목 편집"
+
+msgid "Edit others"
+msgstr "다른 항목 편집"
+
+msgid "Edit private"
+msgstr "비공개 편집"
+
+msgid "Edit published"
+msgstr "게시된 항목 편집"
+
+msgid "Edit record"
+msgstr "레코드 편집"
+
+msgid "Editor for"
+msgstr "편집기:"
+
+msgid "Email body"
+msgstr "이메일 본문"
+
+msgid "Enable dynamic blocks"
+msgstr "동적 블록 활성화"
+
+msgid "Enable select2"
+msgstr "select2 활성화"
+
+msgid "Enable taxonomies"
+msgstr "분류 활성화"
+
+msgid "Enable the custom post types manager."
+msgstr "사용자 정의 게시물 유형 관리자 활성화."
+
+msgid "Enable the dynamic blocks manager."
+msgstr "동적 블록 관리자 활성화."
+
+msgid "Enable the taxonomies manager."
+msgstr "분류 관리자 활성화."
+
+msgid "Enable/disable contrast checker widget in the block editor UI.."
+msgstr "블록 편집기에서 명암 검사 위젯 활성화/비활성화.."
+
+msgid "Enter a valid JSON value."
+msgstr "유효한 JSON 값을 입력하세요."
+
+msgid "Enter custom SVG"
+msgstr "사용자 정의 SVG 입력"
+
+msgid "Enter whatever items you want; separate them with COMMA or ENTER."
+msgstr "원하는 항목을 입력하세요. 쉼표 또는 Enter로 구분하세요."
+
+msgid "Error"
+msgstr "오류"
+
+msgid "Error during import occurred"
+msgstr "가져오기 중 오류 발생"
+
+msgid "Error message"
+msgstr "오류 메시지"
+
+msgid "Errors"
+msgstr "오류"
+
+msgid "Extra"
+msgstr "추가"
+
+msgid "Field"
+msgstr "필드"
+
+msgid "Field Mapping Preview"
+msgstr "필드 매핑 미리보기"
+
+msgid "Field on target table that holds the back-reference"
+msgstr "역참조를 보유하는 대상 테이블의 필드"
+
+msgid "Field selector"
+msgstr "필드 선택기"
+
+msgid "Field slug (Ex. name_frk)"
+msgstr "필드 슬러그 (예: name_frk)"
+
+msgid "Field slug (Ex. name_idx)"
+msgstr "필드 슬러그 (예: name_idx)"
+
+msgid "Field slug (e.g. my_field)"
+msgstr "필드 슬러그 (예: my_field)"
+
+msgid "Fields to clone"
+msgstr "복제할 필드"
+
+msgid "File was successfully deleted."
+msgstr "파일이 성공적으로 삭제되었습니다."
+
+msgid "Font size"
+msgstr "글꼴 크기"
+
+msgid "Footer"
+msgstr "바닥글"
+
+msgid "Foreign keys"
+msgstr "외래 키"
+
+msgid "Form submissions"
+msgstr "양식 제출"
+
+msgid "Forms submissions"
+msgstr "양식 제출"
+
+msgid "Go to next step"
+msgstr "다음 단계로"
+
+msgid "Go to prev step"
+msgstr "이전 단계로"
+
+msgid "Group"
+msgstr "그룹"
+
+msgid "Group successfully saved"
+msgstr "그룹이 성공적으로 저장되었습니다"
+
+msgid "HTML"
+msgstr "HTML"
+
+msgid "HTML settings"
+msgstr "HTML 설정"
+
+msgid "Header"
+msgstr "머리글"
+
+msgid "Hide title"
+msgstr "제목 숨기기"
+
+msgid "Hide toggle visibility"
+msgstr "가시성 토글 숨기기"
+
+msgid "Horizontal"
+msgstr "수평"
+
+msgid "Human-readable label for this group"
+msgstr "이 그룹의 읽기 쉬운 레이블"
+
+msgid "ID settings"
+msgstr "ID 설정"
+
+msgid "ID strategy"
+msgstr "ID 전략"
+
+msgid "INVERSE SOURCE"
+msgstr "INVERSE SOURCE"
+
+msgid "INVERSE TARGET"
+msgstr "INVERSE TARGET"
+
+msgid "INVISIBLE"
+msgstr "INVISIBLE"
+
+msgid ""
+"If enabled, the logged in user who submitted the form will also receive this "
+"email as a confirmation"
+msgstr "활성화된 경우, 양식을 제출한 로그인 사용자도 확인 이메일을 받습니다"
+
+msgid "Index options"
+msgstr "인덱스 옵션"
+
+msgid "Inverse field"
+msgstr "역 필드"
+
+msgid "Inverse field configuration"
+msgstr "역 필드 구성"
+
+msgid "Items list"
+msgstr "항목 목록"
+
+msgid "Label column"
+msgstr "레이블 열"
+
+msgid "Label default value"
+msgstr "레이블 기본값"
+
+msgid "Label placeholder"
+msgstr "레이블 자리표시자"
+
+msgid "Left"
+msgstr "왼쪽"
+
+msgid "Length must be at least 1"
+msgstr "길이는 최소 1이어야 합니다"
+
+msgid "Level"
+msgstr "레벨"
+
+msgid "Light"
+msgstr "밝은"
+
+msgid "Link URL"
+msgstr "링크 URL"
+
+msgid "Loading..."
+msgstr "로딩 중..."
+
+msgid "Location rules"
+msgstr "위치 규칙"
+
+msgid "Log context"
+msgstr "로그 컨텍스트"
+
+msgid "Logged user"
+msgstr "로그인한 사용자"
+
+msgid "Logged users"
+msgstr "로그인한 사용자들"
+
+msgid "Manage cache items"
+msgstr "캐시 항목 관리"
+
+msgid "Manage option pages"
+msgstr "옵션 페이지 관리"
+
+msgid "Manage permissions"
+msgstr "권한 관리"
+
+msgid "Max"
+msgstr "최대"
+
+msgid "Max value"
+msgstr "최대값"
+
+msgid "Maximum value"
+msgstr "최대값"
+
+msgid "Meta block"
+msgstr "메타 블록"
+
+msgid "Meta block was successfully copied"
+msgstr "메타 블록이 성공적으로 복사되었습니다"
+
+msgid "Min"
+msgstr "최소"
+
+msgid "Min value"
+msgstr "최소값"
+
+msgid "Minimum value"
+msgstr "최소값"
+
+msgid "Missing dependency installer, retry now"
+msgstr "종속성 설치 프로그램 누락, 지금 다시 시도"
+
+msgid "Multiple field"
+msgstr "다중 필드"
+
+msgid "NOW()"
+msgstr "NOW()"
+
+msgid "NUMERIC"
+msgstr "NUMERIC"
+
+msgid "No blocks yet"
+msgstr "블록이 없습니다"
+
+msgid "No boxes registered"
+msgstr "등록된 박스 없음"
+
+msgid "No columns found."
+msgstr "열을 찾을 수 없습니다."
+
+msgid "No columns selected"
+msgstr "선택된 열 없음"
+
+msgid "No controls created"
+msgstr "생성된 컨트롤 없음"
+
+msgid "No custom post types found."
+msgstr "사용자 정의 게시물 유형을 찾을 수 없습니다."
+
+msgid "No distraction"
+msgstr "방해 없음"
+
+msgid "No editable columns found for this table."
+msgstr "이 테이블의 편집 가능한 열을 찾을 수 없습니다."
+
+msgid "No fields registered."
+msgstr "등록된 필드 없음."
+
+msgid "No foreign keys found."
+msgstr "외래 키를 찾을 수 없습니다."
+
+msgid "No group"
+msgstr "그룹 없음"
+
+msgid "No index found."
+msgstr "인덱스를 찾을 수 없습니다."
+
+msgid "No items"
+msgstr "항목 없음"
+
+msgid "No items imported"
+msgstr "가져온 항목이 없습니다"
+
+msgid ""
+"No key parts are present, click on \"Add key part\" button to add the first "
+"one."
+msgstr "키 부분이 없습니다. \"키 부분 추가\"를 클릭하여 첫 번째를 추가하세요."
+
+msgid "No location rules defined."
+msgstr "정의된 위치 규칙 없음."
+
+msgid ""
+"No option pages created yet. Click \"Add page\" to create the first one!"
+msgstr "아직 옵션 페이지가 없습니다. \"페이지 추가\"를 클릭하세요!"
+
+msgid "No options"
+msgstr "옵션 없음"
+
+msgid ""
+"No options are present, click on \"Add option\" button to add the first one."
+msgstr "옵션이 없습니다. \"옵션 추가\"를 클릭하세요."
+
+msgid "No page selected"
+msgstr "선택된 페이지 없음"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add condition\"!"
+msgstr "아직 규칙이 없습니다. \"조건 추가\"를 클릭하여 첫 번째를 만드세요!"
+
+msgid "No table groups found."
+msgstr "테이블 그룹을 찾을 수 없습니다."
+
+msgid "No tables associated to this group."
+msgstr "이 그룹과 연결된 테이블 없음."
+
+msgid "No tables found in this group."
+msgstr "이 그룹에서 테이블을 찾을 수 없습니다."
+
+msgid "No tables found."
+msgstr "테이블을 찾을 수 없습니다."
+
+msgid ""
+"No values already created. Create the first one now by clicking the button "
+"\"Add value\"!"
+msgstr "아직 값이 없습니다. \"값 추가\"를 클릭하여 첫 번째를 만드세요!"
+
+msgid "No wpml-config.xml found."
+msgstr "wpml-config.xml을 찾을 수 없습니다."
+
+msgid "Email"
+msgstr ""
+
+msgid "None"
+msgstr "없음"
+
+msgid "Not found"
+msgstr "찾을 수 없음"
+
+msgid "Nullable"
+msgstr "Nullable"
+
+msgid "ON CHANGE"
+msgstr "ON CHANGE"
+
+msgid "On delete"
+msgstr "삭제 시"
+
+msgid "On update"
+msgstr "업데이트 시"
+
+msgid "Opens in a new window or tab"
+msgstr "새 창 또는 탭에서 열기"
+
+msgid "Operator"
+msgstr "연산자"
+
+msgid "Options"
+msgstr "옵션"
+
+msgid "Other columns"
+msgstr "다른 열"
+
+msgid "PERMISSIONS"
+msgstr "PERMISSIONS"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Plural label. Used for the taxonomy admin menu item"
+msgstr "복수 레이블. 분류 관리 메뉴 항목에 사용됨"
+
+msgid "Position sticky"
+msgstr "고정 위치"
+
+msgid "Post types"
+msgstr "게시물 유형"
+
+msgid "Posts"
+msgstr "게시물"
+
+msgid "Prev Step"
+msgstr "이전 단계"
+
+msgid "REST controller class"
+msgstr "REST 컨트롤러 클래스"
+
+msgid "Read"
+msgstr "읽기"
+
+msgid "Record created successfully."
+msgstr "레코드가 성공적으로 생성되었습니다."
+
+msgid "Record updated successfully."
+msgstr "레코드가 성공적으로 업데이트되었습니다."
+
+msgid "Redirect after form submission"
+msgstr "양식 제출 후 리디렉션"
+
+msgid "Redirect timeout (seconds)"
+msgstr "리디렉션 시간 초과 (초)"
+
+msgid "Registered Tables"
+msgstr "등록된 테이블"
+
+msgid "Registered dynamic blocks"
+msgstr "등록된 동적 블록"
+
+msgid "Reply to"
+msgstr "회신 대상"
+
+msgid "Required"
+msgstr "필수"
+
+msgid "Rest APIs"
+msgstr "REST API"
+
+msgid "Right"
+msgstr "오른쪽"
+
+msgid "Role"
+msgstr "역할"
+
+msgid "SOURCE"
+msgstr "SOURCE"
+
+msgid "STRING"
+msgstr "STRING"
+
+msgid "Save record"
+msgstr "레코드 저장"
+
+msgid "Search an element saved in cache by its content."
+msgstr "내용으로 캐시에 저장된 요소 검색."
+
+msgid "Select a location first"
+msgstr "먼저 위치를 선택하세요"
+
+msgid "Select a target table"
+msgstr "대상 테이블 선택"
+
+msgid "Select all"
+msgstr "모두 선택"
+
+msgid "Select capability"
+msgstr "권한 선택"
+
+msgid "Select page"
+msgstr "페이지 선택"
+
+msgid "Select pages"
+msgstr "페이지 선택"
+
+msgid "Select tables..."
+msgstr "테이블 선택..."
+
+msgid "Select taxonomies"
+msgstr "분류 선택"
+
+msgid "Select taxonomy"
+msgstr "분류 선택"
+
+msgid "Select the ID generation strategy"
+msgstr "ID 생성 전략 선택"
+
+msgid "Select the column"
+msgstr "열 선택"
+
+msgid "Select the key"
+msgstr "키 선택"
+
+msgid "Select user"
+msgstr "사용자 선택"
+
+msgid "Select users"
+msgstr "사용자 선택"
+
+msgid "Selector"
+msgstr "선택기"
+
+msgid "Self-referential"
+msgstr "자기 참조"
+
+msgid "Send confirmation email to logged in user"
+msgstr "로그인한 사용자에게 확인 이메일 보내기"
+
+msgid "Shortcode preview"
+msgstr "숏코드 미리보기"
+
+msgid "Show errors"
+msgstr "오류 표시"
+
+msgid "Shown in dropdown"
+msgstr "드롭다운에 표시됨"
+
+msgid "Singular label. Used when a singular label is needed"
+msgstr "단수 레이블. 단수 레이블이 필요할 때 사용됨"
+
+msgid "Sorry, no posts matched your criteria."
+msgstr "죄송합니다. 기준에 맞는 게시물이 없습니다."
+
+msgid "Sorting"
+msgstr "정렬"
+
+msgid "Specific user"
+msgstr "특정 사용자"
+
+msgid "Step"
+msgstr "단계"
+
+msgid "Stored in FK column"
+msgstr "FK 열에 저장됨"
+
+msgid "Stored in inverse FK"
+msgstr "역 FK에 저장됨"
+
+msgid "Strategy"
+msgstr "전략"
+
+msgid "Submissions"
+msgstr "제출"
+
+msgid "Sync"
+msgstr "동기화"
+
+msgid "TARGET"
+msgstr "TARGET"
+
+msgid "Table Groups"
+msgstr "테이블 그룹"
+
+msgid "Table foreign keys"
+msgstr "테이블 외래 키"
+
+msgid "Table indexes"
+msgstr "테이블 인덱스"
+
+msgid "Table settings"
+msgstr "테이블 설정"
+
+msgid "Tables"
+msgstr "테이블"
+
+msgid "Tag element"
+msgstr "태그 요소"
+
+msgid "Text settings"
+msgstr "텍스트 설정"
+
+msgid "The block name/slug. Must be unique"
+msgstr "블록 이름/슬러그. 고유해야 합니다"
+
+msgid "The default percent value"
+msgstr "기본 퍼센트 값"
+
+msgid "This box"
+msgstr "이 박스"
+
+msgid "Translate"
+msgstr "번역"
+
+msgid "UI"
+msgstr "UI"
+
+msgid "UI Type"
+msgstr "UI 유형"
+
+msgid "UNSIGNED"
+msgstr "UNSIGNED"
+
+msgid "UNSIGNED ZEROFILL"
+msgstr "UNSIGNED ZEROFILL"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Unique"
+msgstr "고유"
+
+msgid "Unique slug identifier (auto-filled from label)"
+msgstr "고유 슬러그 식별자 (레이블에서 자동 입력됨)"
+
+msgid "Update"
+msgstr "업데이트"
+
+msgid "Update the current post"
+msgstr "현재 게시물 업데이트"
+
+msgid "VISIBLE"
+msgstr "VISIBLE"
+
+msgid "Validation rules"
+msgstr "유효성 검사 규칙"
+
+msgid "Value already exists."
+msgstr "값이 이미 존재합니다."
+
+msgid "Value column"
+msgstr "값 열"
+
+msgid "Values"
+msgstr "값"
+
+msgid "Variable"
+msgstr "변수"
+
+msgid "Vertical"
+msgstr "수직"
+
+msgid "View item"
+msgstr "항목 보기"
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled. "
+"Default false."
+msgstr ""
+"게시물 유형 아카이브 여부 또는 아카이브 슬러그 문자열. $rewrite가 활성화된 경"
+"우 적절한 재작성 규칙을 생성합니다. 기본값: false."
+
+msgid "Wide"
+msgstr "넓은"
+
+msgid "With front"
+msgstr "앞부분 포함"
+
+msgid "Yes, execute it"
+msgstr "예, 실행합니다"
+
+msgid "You are going to delete this option page. Are you sure?"
+msgstr "이 옵션 페이지를 삭제하려고 합니다. 확실합니까?"
+
+msgid "You are going to delete this table group. Are you sure?"
+msgstr "이 테이블 그룹을 삭제하려고 합니다. 확실합니까?"
+
+msgid "You are going to delete this table. Are you sure?"
+msgstr "이 테이블을 삭제하려고 합니다. 확실합니까?"
+
+msgid "coming soon"
+msgstr "출시 예정"
+
+msgid "date"
+msgstr "날짜"
+
+msgid "eg. 300px"
+msgstr "예: 300px"
+
+msgid "group settings"
+msgstr "그룹 설정"
+
+msgid "group_name"
+msgstr "group_name"
+
+msgid "height"
+msgstr "높이"
+
+msgid "label"
+msgstr "레이블"
+
+msgid "max length is 20"
+msgstr "최대 길이 20"
+
+msgid "max length is 255"
+msgstr "최대 길이 255"
+
+msgid "order_by"
+msgstr "order_by"
+
+msgid "per_page"
+msgstr "per_page"
+
+msgid "render"
+msgstr "render"
+
+msgid "table"
+msgstr "테이블"
+
+msgid "table settings"
+msgstr "테이블 설정"
+
+msgid "tables"
+msgstr "테이블"
+
+msgid "target"
+msgstr "대상"
+
+msgid "this table"
+msgstr "이 테이블"
+
+msgid "value"
+msgstr "값"
+
+msgid "width"
+msgstr "너비"
+
+msgid "Product data fields"
+msgstr "제품 데이터 필드"
+
+msgid "Publish"
+msgstr "게시"
+
+msgid "Show schema create SQL query"
+msgstr "스키마 생성 SQL 쿼리 표시"
+
+msgid "Show schema"
+msgstr "스키마 표시"
+
+msgid "Table record"
+msgstr ""
+
+msgid "Form identity and submission feedback"
+msgstr ""
+
+msgid "Redirect after submission"
+msgstr ""
+
+msgid "Where users land once the form is sent"
+msgstr ""
+
+msgid "Auto slug"
+msgstr ""
+
+msgid "Custom AJAX handler for this form"
+msgstr ""
+
+msgid "External endpoint this form submits to"
+msgstr ""
+
+msgid "PHP function executed on submission"
+msgstr ""
+
+msgid "Email notification settings"
+msgstr ""
+
+msgid "What the form creates and which fields it maps"
+msgstr ""
+
+msgid "Which table record this form writes to"
+msgstr ""
+
+msgid "Colors"
+msgstr ""
+
+msgid "Font sizes"
+msgstr ""
+
+msgid "Radius and thickness settings"
+msgstr ""
+
+msgid "Color palette for light and dark modes"
+msgstr ""
+
+msgid "Gap and padding values"
+msgstr ""
+
+msgid "Font weights"
+msgstr ""
+
+msgid "Font size scale"
+msgstr ""
+
+msgid "Enable or disable email notifications for this form"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Who sends and receives this email"
+msgstr ""
+
+msgid "Subject & attachments"
+msgstr ""
+
+msgid "Email subject and file attachments"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "HTML structure, visual style and preview"
+msgstr ""
+
+msgid "Adjust the values of the form's CSS variables"
+msgstr ""
+
+msgid "Create a new record"
+msgstr ""
+
+msgid "Define who can submit this form and how many times"
+msgstr ""
+
+msgid "No columns available. Select a table first."
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Redirect to"
+msgstr ""
+
+msgid "Table to fill"
+msgstr ""
+
+msgid "Add image"
+msgstr "이미지 추가"
+
+msgid "Advanced"
+msgstr "고급"
+
+msgid "Change image"
+msgstr "이미지 변경"
+
+msgid "Child"
+msgstr "하위"
+
+msgid "Click to edit label"
+msgstr "클릭하여 레이블 편집"
+
+msgid "Click to rename"
+msgstr "클릭하여 이름 바꾸기"
+
+msgid "Core"
+msgstr "코어"
+
+msgid "Default"
+msgstr "기본값"
+
+msgid "Description (showed only on admin panel)"
+msgstr "설명 (관리자 패널에만 표시됨)"
+
+msgid "Drop columns here"
+msgstr "여기에 열을 놓으세요"
+
+msgid "Drop fields here"
+msgstr "여기에 필드를 놓으세요"
+
+msgid "Heading (optional)"
+msgstr "제목 (선택 사항)"
+
+msgid "Hide the collapse/expand toggle."
+msgstr "접기/펼치기 토글을 숨깁니다."
+
+msgid "Hide the meta box title."
+msgstr "메타 박스 제목을 숨깁니다."
+
+msgid "Hide toggle"
+msgstr "토글 숨기기"
+
+msgid "High"
+msgstr "높음"
+
+msgid "Link label"
+msgstr "링크 레이블"
+
+msgid "Low"
+msgstr "낮음"
+
+msgid "Message content"
+msgstr "메시지 내용"
+
+msgid "Message settings"
+msgstr "메시지 설정"
+
+msgid "Normal"
+msgstr "보통"
+
+msgid "Optional heading shown above the message"
+msgstr "메시지 위에 표시되는 선택적 제목"
+
+msgid "Order within the context."
+msgstr "컨텍스트 내의 순서."
+
+msgid "Release"
+msgstr "놓기"
+
+msgid "Show label"
+msgstr "레이블 표시"
+
+msgid "Side"
+msgstr "사이드"
+
+msgid "Sidebar position"
+msgstr "사이드바 위치"
+
+msgid "Sorted"
+msgstr "정렬됨"
+
+msgid "Tab selected"
+msgstr "선택된 탭"
+
+msgid "The instructional text shown to the user"
+msgstr "사용자에게 표시되는 안내 텍스트"
+
+msgid ""
+"Where the meta box appears in the post editor (applies when this table is "
+"attached to a CPT)."
+msgstr ""
+"게시물 편집기에서 메타 박스가 표시되는 위치 (이 테이블이 CPT에 연결된 경우 적"
+"용됨)."
+
+msgid ""
+"You cannot create a foreign key until at least one column has been defined. "
+"Please create a column first."
+msgstr ""
+"최소 하나의 열이 정의될 때까지 외래 키를 생성할 수 없습니다. 먼저 열을 생성하"
+"세요."
+
+msgid "Enable Abilities API"
+msgstr ""
+
+msgid ""
+"Expose ACPT post types, taxonomies and fields as WordPress Abilities API "
+"abilities."
+msgstr ""
+
+msgid "Cancel"
+msgstr "취소"
+
+msgid "Dynamic blocks"
+msgstr "동적 블록"
+
+msgid "Export"
+msgstr "내보내기"
+
+msgid "If an item already exists"
+msgstr "항목이 이미 존재하는 경우"
+
+msgid "Overwrite it — replace the existing version with the imported one"
+msgstr "덮어쓰기 — 기존 버전을 가져온 버전으로 교체"
+
+msgid "Review import"
+msgstr "가져오기 검토"
+
+msgid "Settings were successfully imported"
+msgstr "설정을 성공적으로 가져왔습니다"
+
+msgid "Skip it — keep the existing version, import only new items"
+msgstr "건너뛰기 — 기존 버전을 유지하고 새 항목만 가져오기"
+
+msgid "Table groups"
+msgstr "테이블 그룹"
+
+msgid "Upload new file"
+msgstr "새 파일 업로드"
+
+msgid "columns"
+msgstr "열"
+
+msgid "exists"
+msgstr "기존"
+
+msgid "fields"
+msgstr "필드"
+
+msgid ""
+"items already exist on this site. Choose how to handle them before importing."
+msgstr ""
+"이 사이트에 이미 존재하는 항목이 있습니다. 가져오기 전에 처리 방법을 선택하세"
+"요."
+
+msgid "new"
+msgstr "신규"
+
+msgid "picked up"
+msgstr ""
+
+msgid "moved to a new position"
+msgstr ""
+
+msgid "is no longer over a drop target"
+msgstr ""
+
+msgid "dropped"
+msgstr ""
+
+msgid "Drop cancelled"
+msgstr ""
+
+msgid "released outside a valid drop target"
+msgstr ""
+
+msgid "Dragging cancelled"
+msgstr ""
+
+msgid "was returned to its original position"
+msgstr ""
+
+msgid "Item"
+msgstr ""
+
+msgid "New field"
+msgstr ""
+
+msgid "Control"
+msgstr ""
+
+msgid "New control"
+msgstr ""
+
+msgid "New column"
+msgstr ""
+
+msgid "Block field"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Actions for"
+msgstr ""
+
+msgid "WooCommerce"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Sidebar on the left"
+msgstr ""
+
+msgid "Sidebar on the right"
+msgstr ""
+
+msgid "Inline"
+msgstr ""
+
+msgid "Justify"
+msgstr ""
+
+msgid "Link label and value"
+msgstr ""
+
+msgid "Automatic slug"
+msgstr ""
+
+msgid "Snippet format"
+msgstr ""
+
+msgid "WordPress native snippet"
+msgstr ""
+
+msgid "ACPT function snippet"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
+msgid "Requires \"Expose via REST API\" on the table."
+msgstr ""
+
+msgid "Click to change the type"
+msgstr ""
+
+msgid "Showing {{start}}–{{end}} of {{total}} records"
+msgstr ""
+
+msgid "AUTO_INCREMENT"
+msgstr ""
+
+msgid "Allow in block bindings"
+msgstr ""
+
+msgid "Block slug"
+msgstr ""
+
+msgid "Clear all"
+msgstr ""
+
+msgid ""
+"Column was successfully copied. Sync the target table to apply the change."
+msgstr ""
+
+msgid "Copy to another table"
+msgstr ""
+
+msgid "Could not delete meta field value"
+msgstr ""
+
+msgid "Default image"
+msgstr ""
+
+msgid "Delete the column from this table after copying"
+msgstr ""
+
+msgid "Deselect"
+msgstr ""
+
+msgid "Drag to reorder"
+msgstr ""
+
+msgid "Edit label"
+msgstr ""
+
+msgid "Enable email notifications"
+msgstr ""
+
+msgid "Import data. Acceptable file formats: JSON, YAML, CSV, YAML"
+msgstr ""
+
+msgid "No other table is available to copy this column into."
+msgstr ""
+
+msgid ""
+"Only post types registered through ACPT are listed here. Don't see the post "
+"type you're looking for (e.g. one added by another plugin, like "
+"WooCommerce's Product)?"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record successfully deleted"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Select the level of changes to show"
+msgstr ""
+
+msgid "Sync it in first from the Custom Post Types list"
+msgstr ""
+
+msgid "The file size is too big"
+msgstr ""
+
+msgid "The timeout cannot be negative"
+msgstr ""
+
+msgid "Unable to load the table schema"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Value to copy"
+msgstr ""
+
+msgid "Show sidebar"
+msgstr ""
+
+msgid "Hide sidebar"
+msgstr ""
+
+msgid "Show meta box"
+msgstr ""
+
+msgid ""
+"Whether to show the taxonomy meta box on the post edit screen (classic "
+"editor). Turn it off when the terms are assigned through a custom field. "
+"Default true."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\", which stores JSON. "
+"MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Remove \"{{column}}\" from the index, or change the column to a type that "
+"can be indexed (for example INT or VARCHAR)."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\" ({{type}}). MySQL can "
+"index this type only on its first characters."
+msgstr ""
+
+msgid "Set a length on \"{{column}}\" in the index (for example 191)."
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" links the column \"{{column}}\" ({{type}}) to "
+"\"{{refColumn}}\" ({{refType}}) in the table \"{{refTable}}\". MySQL needs "
+"both columns to have the same type."
+msgstr ""
+
+msgid ""
+"An index uses a column that stores JSON. MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and remove the JSON column from the index, or change "
+"the column type."
+msgstr ""
+
+msgid ""
+"An index uses a text column without a length. MySQL can index this type only "
+"on its first characters."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and set a length on the text column (for example 191)."
+msgstr ""
+
+msgid ""
+"A foreign key links two columns MySQL cannot connect: they must have the "
+"same type, and the referenced column must be a primary key or have a unique "
+"index."
+msgstr ""
+
+msgid ""
+"Open the Foreign keys step and check that each column has the same type as "
+"the column it points to."
+msgstr ""
+
+msgid ""
+"Some rows already in the table point to records that do not exist in the "
+"referenced table, so the foreign key cannot be added."
+msgstr ""
+
+msgid "Fix or clear those values in the table records, then sync again."
+msgstr ""
+
+msgid ""
+"A unique index cannot be added because some rows already share the same "
+"value."
+msgstr ""
+
+msgid ""
+"Make the values unique in the table records, or make the index not unique."
+msgstr ""
+
+msgid "Some values already in the table do not fit the new column type."
+msgstr ""
+
+msgid ""
+"Change those values in the table records, or choose a column type that fits "
+"them."
+msgstr ""
+
+msgid "MySQL refused to change the table."
+msgstr ""
+
+msgid "Check the technical details below, or contact support with them."
+msgstr ""
+
+msgid "The table was not created."
+msgstr ""
+
+msgid ""
+"Part of the changes were already applied to the table and cannot be undone "
+"automatically (see the technical details)."
+msgstr ""
+
+msgid "No changes were applied to the table."
+msgstr ""
+
+msgid "Technical details"
+msgstr ""
+
+msgid "Statements that would run"
+msgstr ""
+
+msgid "Open the Indexes step"
+msgstr ""
+
+msgid "Open the Foreign keys step"
+msgstr ""
+
+msgid "This table can't be synced yet. Fix these problems, then try again:"
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Choose "
+"another column or delete this key part."
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+msgid "Not synced"
+msgstr ""
+
+msgid "Not created"
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" empties the column \"{{column}}\" (SET NULL) "
+"when the linked record changes, but the column does not allow empty values."
+msgstr ""
+
+msgid ""
+"Allow empty values on \"{{column}}\" in the Columns step (Advanced Mode), or "
+"choose another \"On delete\" / \"On update\" action."
+msgstr ""
+
+msgid ""
+"In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete the foreign key."
+msgstr ""
+
+msgid ""
+"The column \"{{column}}\" ({{type}}) can't be linked to "
+"\"{{refColumn}}\" ({{refType}}): MySQL needs both columns to have the same "
+"type. In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete this foreign key."
+msgstr ""
+
+msgid ""
+"\"SET NULL\" empties the column \"{{column}}\" when the linked record "
+"changes, but the column doesn't allow empty values. Allow empty values on "
+"\"{{column}}\" in the Columns step (Advanced Mode), or choose another action."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Edit the key "
+"parts to choose another column, or delete this index."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" ({{type}}) can be indexed only on its first characters. Edit "
+"the key parts and set a length (for example 191)."
+msgstr ""
+
+msgid "Datasets"
+msgstr ""
+
+msgid "Feeds"
+msgstr ""
+
+msgid ""
+"Whether the archive of this post type has an RSS feed (/{slug}/feed/). When "
+"off, the feed URLs redirect to the archive and the feed link is removed from "
+"the page head. Defaults to true"
+msgstr ""
+
+#~ msgid ""
+#~ "From this dashboard you can discover and manage every API endpoints "
+#~ "exposed by ACPT. Use the playground to learn how to use every endpoint."
+#~ msgstr ""
+#~ "이 대시보드에서 ACPT가 노출하는 모든 API 엔드포인트를 확인하고 관리할 수 "
+#~ "있습니다. 플레이그라운드를 사용하여 각 엔드포인트의 사용법을 익히십시오."
+
+#~ msgid ""
+#~ "Sets the query var key for this taxonomy. Default key. If false, a "
+#~ "taxonomy cannot be loaded at ?{query_var}={term_slug}. If a string, the "
+#~ "query ?{query_var}={term_slug} will be valid."
+#~ msgstr ""
+#~ "이 분류의 쿼리 변수(query var) 키를 설정합니다. 기본값은 키값입니다. false"
+#~ "인 경우 ?{query_var}={term_slug}로 분류를 불러올 수 없습니다. 문자열로 지"
+#~ "정하면 ?{query_var}={term_slug} 쿼리가 유효해집니다."
+
+#~ msgid ""
+#~ "Sets the query_var key for this post type. Defaults to key. If false, a "
+#~ "post type cannot be loaded at ?{query_var}={post_slug}. If specified as a "
+#~ "string, the query {post_slug} will be valid."
+#~ msgstr ""
+#~ "이 포스트 타입의 query_var 키를 설정합니다. 기본값은 키값입니다. false인 "
+#~ "경우 ?{query_var}={post_slug}로 포스트 타입을 불러올 수 없습니다. 문자열"
+#~ "로 지정하면 {post_slug} 쿼리가 유효해집니다."
+
+#~ msgid ""
+#~ "This tool allows you to import settings and meta fields from previously "
+#~ "exported .acpt files (max size allowed is 2Mb)."
+#~ msgstr ""
+#~ "이 도구를 사용하면 이전에 내보낸 .acpt 파일에서 설정 및 메타 필드를 가져"
+#~ "올 수 있습니다 (최대 허용 크기 2MB)."
+
+#~ msgid ""
+#~ "Use this tool to quick export the general settings and meta fields for "
+#~ "every element in a compressed JSON format called .acpt."
+#~ msgstr ""
+#~ "이 도구를 사용하여 모든 요소의 일반 설정 및 메타 필드를 .acpt라는 압축된 "
+#~ "JSON 형식으로 빠르게 내보낼 수 있습니다."
+
+#~ msgid ""
+#~ "Build reusable dataset for meta fields and forms values. Import your "
+#~ "dataset from CSV, JSON or YAML with a few clicks."
+#~ msgstr ""
+#~ "메타 필드 및 폼 값을 위한 재사용 가능한 데이터셋을 구축하세요. 클릭 몇 번"
+#~ "으로 CSV, JSON 또는 YAML에서 데이터셋을 가져올 수 있습니다."
+
+#~ msgid ""
+#~ "Check the health check of the application, and repair any installation "
+#~ "error."
+#~ msgstr "애플리케이션의 상태를 확인하고 설치 오류를 복구합니다."

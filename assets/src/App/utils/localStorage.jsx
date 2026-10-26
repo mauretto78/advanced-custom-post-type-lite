@@ -7,6 +7,10 @@ import {arrayUnique} from "./objects";
  * @return {any}
  */
 export const hiddenElements = (belongsTo) => {
+    if(typeof belongsTo !== 'string' || !belongsTo){
+        return [];
+    }
+
     const key = localStorageVars.HIDDEN_ELEMENTS + "_" + belongsTo;
 
     return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : [];
@@ -19,6 +23,10 @@ export const hiddenElements = (belongsTo) => {
  * @return {*}
  */
 export const restoreHiddenElement = (id, belongsTo) => {
+    if(id === null || id === undefined || id === '' || typeof belongsTo !== 'string' || !belongsTo){
+        return;
+    }
+
     const elements = hiddenElements(belongsTo);
     const key = localStorageVars.HIDDEN_ELEMENTS + "_" + belongsTo;
 
@@ -38,21 +46,55 @@ export const restoreHiddenElement = (id, belongsTo) => {
  *
  * @param id
  * @param belongsTo
- * @return {*}
+ * @returns {*}
  */
 export const isElementHidden = (id, belongsTo) => {
+    if(id === null || id === undefined || id === '' || typeof belongsTo !== 'string' || !belongsTo){
+        return false;
+    }
+
     const elements = hiddenElements(belongsTo);
 
     return elements.includes(id);
 };
 
 /**
+ * Hides an element by adding its identifier to a list of hidden elements
+ * associated with a specific group and persisting the updated list in local storage.
  *
- * @param data
+ * @param {string} id - The unique identifier of the element to hide.
+ * @param {string} belongsTo - The group or context to which the element belongs.
+ */
+export const hideElement = (id, belongsTo) => {
+    if(id === null || id === undefined || id === '' || typeof belongsTo !== 'string' || !belongsTo){
+        return;
+    }
+
+    const elements = hiddenElements(belongsTo);
+    const key = localStorageVars.HIDDEN_ELEMENTS + "_" + belongsTo;
+    elements.push(id);
+    localStorage.setItem(key, JSON.stringify(elements));
+}
+
+/**
+ * Hides specified elements by storing them in local storage.
+ *
+ * This function processes the input `data` object to determine which elements should be hidden.
+ * It checks if the `belongsTo` and `elements` properties are provided in the `data`.
+ * The function merges the elements that need to be hidden with previously saved elements,
+ * and stores the updated list in local storage under a unique key derived from the `belongsTo` property.
+ *
+ * @param {Object} data - The input data containing information about elements to be hidden.
+ * @param {string} data.belongsTo - A unique identifier used to associate the hidden elements with a specific owner or category.
+ * @param {Object} data.elements - A set of key-value pairs where keys represent element identifiers and values indicate whether the element should be hidden (`true`) or not (`false`).
  */
 export const hideElements = (data) => {
 
-    if(!data.belongsTo){
+    if(!data){
+        return;
+    }
+
+    if(typeof data.belongsTo !== 'string' || !data.belongsTo){
         return;
     }
 
@@ -82,30 +124,19 @@ export const hideElements = (data) => {
 };
 
 /**
+ * Checks whether a specific element, identified by its ID, is marked as closed or hidden in the application's saved visibility state.
  *
- * @return {string}
- */
-export const savedView = (id) => {
-
-    const savedSwitchView = localStorage.getItem(localStorageVars.META_VIEW) ? JSON.parse(localStorage.getItem(localStorageVars.META_VIEW)).filter((i) => i.id === id) : [];
-
-    if(savedSwitchView && savedSwitchView.length === 1 && savedSwitchView[0].view === 'tabular'){
-        return 'tabular';
-    }
-
-    if(savedSwitchView && savedSwitchView.length === 1 && savedSwitchView[0].view === 'accordion'){
-        return 'accordion';
-    }
-
-    return 'list';
-};
-
-/**
+ * This function retrieves a visibility state array from the browser's `localStorage` and determines if the given element ID exists within that array.
+ * It returns `false` if the provided `elementId` is `null`, `undefined`, or an empty string, or if the visibility state array does not contain the specified ID.
  *
- * @param elementId
- * @return {boolean}
+ * @param {string|null|undefined} elementId - The unique identifier of the element to check.
+ * @returns {boolean} - Returns `true` if the element ID exists in the saved visibility state, indicating it is closed; otherwise, returns `false`.
  */
 export const savedIsClosed = (elementId) => {
+    if(elementId === null || elementId === undefined || elementId === ''){
+        return false;
+    }
+
     const visibilityState = localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY) ? JSON.parse(localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY)) : [];
     const indexOf = visibilityState.indexOf(elementId);
 
@@ -117,6 +148,9 @@ export const savedIsClosed = (elementId) => {
  * @param elementId
  */
 export const saveIsClosed = (elementId) => {
+    if(elementId === null || elementId === undefined || elementId === ''){
+        return;
+    }
 
     const visibilityState = localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY) ? JSON.parse(localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY)) : [];
     const indexOf = visibilityState.indexOf(elementId);
@@ -131,46 +165,25 @@ export const saveIsClosed = (elementId) => {
     localStorage.setItem(localStorageVars.META_ELEMENTS_VISIBILITY, JSON.stringify(visibilityState));
 };
 
-export const saveCloseAll = (elementIds) => {
-    elementIds.map((elementId) => {
-        const visibilityState = localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY) ? JSON.parse(localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY)) : [];
-        const indexOf = visibilityState.indexOf(elementId);
-        const savedIsClosed = indexOf !== -1;
-
-        if(!savedIsClosed){
-            visibilityState.push(elementId);
-        }
-
-        localStorage.setItem(localStorageVars.META_ELEMENTS_VISIBILITY, JSON.stringify(visibilityState));
-    });
-};
-
-export const saveShowAll = (elementIds) => {
-    elementIds.map((elementId) => {
-        const visibilityState = localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY) ? JSON.parse(localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY)) : [];
-        const indexOf = visibilityState.indexOf(elementId);
-        const savedIsClosed = indexOf !== -1;
-
-        if(savedIsClosed){
-            visibilityState.splice(indexOf, 1);
-        }
-
-        localStorage.setItem(localStorageVars.META_ELEMENTS_VISIBILITY, JSON.stringify(visibilityState));
-    });
-};
-
-export const toggleNavigation = (id, checked) => {
-    const value = checked ? "1" : "0";
-    localStorage.setItem(localStorageVars.TOGGLE_NAVIGATION+"_"+id, value);
-};
-
 /**
+ * Removes the specified element ID from the list of meta element visibility states stored in local storage.
+ * This function ensures that the given element ID is no longer marked as visible.
  *
- * @param id
- * @return {boolean}
+ * @param {string} elementId - The ID of the element to be removed from the visibility state.
+ *                              If the parameter is null, undefined, or an empty string, the function will return without performing any action.
  */
-export const isNavigationEnabled = (id) => {
-    const isEnabled = localStorage.getItem(localStorageVars.TOGGLE_NAVIGATION+"_"+id) ? localStorage.getItem(localStorageVars.TOGGLE_NAVIGATION+"_"+id) : "0";
+export const releaseSaveIsClosed = (elementId) => {
 
-    return isEnabled === "1";
+    if(elementId === null || elementId === undefined || elementId === ''){
+        return;
+    }
+
+    const visibilityState = localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY) ? JSON.parse(localStorage.getItem(localStorageVars.META_ELEMENTS_VISIBILITY)) : [];
+    const indexOf = visibilityState.indexOf(elementId);
+
+    if(indexOf !== -1){
+        visibilityState.splice(indexOf, 1);
+    }
+
+    localStorage.setItem(localStorageVars.META_ELEMENTS_VISIBILITY, JSON.stringify(visibilityState));
 };
