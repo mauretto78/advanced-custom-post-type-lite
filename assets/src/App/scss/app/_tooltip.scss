@@ -1,7 +1,10 @@
+@use "variables";
+
 .acpt-tooltip {
+  font-weight: normal !important;
   position: relative;
   align-items: center;
-  gap: $space-4;
+  gap: variables.$space-4;
 
   .acpt-tooltip-help,
   .acpt-tooltip-label {
@@ -12,23 +15,26 @@
     }
   }
 
-  .react-tooltip {
-    z-index: 9999;
-  }
+  // react-tooltip's stacking/clipping is handled on the component itself
+  // (SharedTooltip: positionStrategy="fixed" + inline zIndex), because it also
+  // has to cover call sites like Forms/IconRadioGroup where the tip is not a
+  // descendant of .acpt-tooltip.
 
   .acpt-tooltip-tip {
     position: absolute;
     top: 60px;
-    border-radius: $border-radius;
-    background: $white;
-    box-shadow: $box-shadow;
-    padding: $space-12;
+    border-radius: variables.$border-radius;
+    background: var(--acpt-surface-color-raised);
+    color: var(--acpt-black);
+    border: variables.$border-thickness solid var(--acpt-light-gray);
+    box-shadow: variables.$box-shadow;
+    padding: variables.$space-12;
     width: 240px;
     z-index: -1;
     overflow : hidden;
     white-space: pre-wrap;
     opacity: 0;
-    transition: all ease .3s;
+    transition: all ease 0.3s;
 
     &.visible {
       opacity: 1;

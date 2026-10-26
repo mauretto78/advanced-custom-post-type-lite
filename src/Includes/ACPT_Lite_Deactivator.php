@@ -11,29 +11,27 @@ use ACPT_Lite\Utils\Settings\Settings;
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/includes
+ * @package    acpt-lite
+ * @subpackage acpt-lite/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 class ACPT_Lite_Deactivator
 {
     /**
-     * Deactivate plugin
-     *
-     * destroy schema only if `delete_tables_when_deactivate` settings is set to 1 (default value)
-     *
      * @throws \Exception
      * @since    1.0.0
      */
-    public static function deactivate()
+    public static function deactivate(): void
     {
-	    // Delete all saved ACPT definitions when you deactivate the plug-in
-	    $destroySchema = Settings::get(SettingsModel::DELETE_TABLES_WHEN_DEACTIVATE_KEY, 0);
+        wp_clear_scheduled_hook('acpt_send_insights');
 
-	    if($destroySchema == 1){
-		    ACPT_Lite_DB::destroySchema();
-		    delete_option('acpt_lite_version');
-		    delete_option('acpt_lite_current_version');
-	    }
+        // Delete all saved ACPT definitions when you deactivate the plug-in
+        $destroySchema = Settings::get(SettingsModel::DELETE_TABLES_WHEN_DEACTIVATE_KEY, 0);
+
+        if ($destroySchema == 1) {
+            ACPT_Lite_DB::destroySchema();
+            delete_option('acpt_lite_version');
+            delete_option('acpt_lite_current_version');
+        }
     }
 }

@@ -9,46 +9,45 @@ use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 class MetaGroupBelongsRepository extends AbstractRepository
 {
-	/**
-	 * @param array $args
-	 *
-	 * @return BelongModel[]
-	 * @throws \Exception
-	 */
-	public static function get(array $args = [])
-	{
-		$mandatoryKeys = [
-			'groupId'  => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'belongs'  => [
-				'required' => false,
-				'type' => 'string',
-				'enum' => [
-					BelongsTo::POST_ID,
-					BelongsTo::POST_CAT,
-					BelongsTo::POST_TAX,
-					BelongsTo::POST_TEMPLATE,
-					BelongsTo::USER_ID,
-					BelongsTo::TERM_ID,
-					MetaTypes::CUSTOM_POST_TYPE,
-					MetaTypes::TAXONOMY,
-					MetaTypes::OPTION_PAGE,
-					MetaTypes::USER,
-				],
-			],
-		];
+    /**
+     * @param array<string, mixed> $args
+     *
+     * @return BelongModel[]
+     * @throws \Exception
+     */
+    public static function get(array $args = [])
+    {
+        $mandatoryKeys = [
+            'groupId'  => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'belongs'  => [
+                'required' => false,
+                'type' => 'string',
+                'enum' => [
+                    BelongsTo::POST_ID,
+                    BelongsTo::POST_CAT,
+                    BelongsTo::POST_TAX,
+                    BelongsTo::POST_TEMPLATE,
+                    BelongsTo::USER_ID,
+                    BelongsTo::TERM_ID,
+                    MetaTypes::CUSTOM_POST_TYPE,
+                    MetaTypes::TAXONOMY,
+                    MetaTypes::USER,
+                ],
+            ],
+        ];
 
-		self::validateArgs($mandatoryKeys, $args);
+        self::validateArgs($mandatoryKeys, $args);
 
-		$return = [];
-		$sqlArgs = [];
+        $return = [];
+        $sqlArgs = [];
 
-		$groupId = (isset($args['groupId'])) ? $args['groupId'] : null;
-		$belongs = (isset($args['belongs'])) ? $args['belongs'] : null;
+        $groupId = (isset($args['groupId'])) ? $args['groupId'] : null;
+        $belongs = (isset($args['belongs'])) ? $args['belongs'] : null;
 
-		$sql = "
+        $sql = "
 	        SELECT 
 	        	g.id,
 	        	g.belongs, 
@@ -63,32 +62,32 @@ class MetaGroupBelongsRepository extends AbstractRepository
 			WHERE  1 = 1
 	    ";
 
-		if($belongs !== null){
-			$sql .= ' AND g.belongs = %s';
-			$sqlArgs[] = $belongs;
-		}
+        if ($belongs !== null) {
+            $sql .= ' AND g.belongs = %s';
+            $sqlArgs[] = $belongs;
+        }
 
-		if($groupId !== null){
-			$sql .= ' AND b.group_id = %s';
-			$sqlArgs[] = $groupId;
-		}
+        if ($groupId !== null) {
+            $sql .= ' AND b.group_id = %s';
+            $sqlArgs[] = $groupId;
+        }
 
-		$sql .= ';';
-		$belongs = ACPT_Lite_DB::getResults($sql, $sqlArgs);
+        $sql .= ';';
+        $belongs = ACPT_Lite_DB::getResults($sql, $sqlArgs);
 
-		foreach ($belongs as $belong){
-			$belongModel = BelongModel::hydrateFromArray([
-				'id' => $belong->id,
-				'belongsTo' => $belong->belongs,
-				'operator' => $belong->operator,
-				'find' => $belong->find,
-				'logic' => $belong->logic,
-				'sort' => $belong->sort,
-			]);
+        foreach ($belongs as $belong) {
+            $belongModel = BelongModel::hydrateFromArray([
+                'id' => $belong->id,
+                'belongsTo' => $belong->belongs,
+                'operator' => $belong->operator,
+                'find' => $belong->find,
+                'logic' => $belong->logic,
+                'sort' => $belong->sort,
+            ]);
 
-			$return[] = $belongModel;
-		}
+            $return[] = $belongModel;
+        }
 
-		return $return;
-	}
+        return $return;
+    }
 }

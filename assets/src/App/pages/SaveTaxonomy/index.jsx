@@ -14,6 +14,7 @@ import SettingsStep from "./Steps/SettingsStep";
 import {saveTaxonomy} from "../../redux/reducers/saveTaxonomySlice";
 import {toast} from "react-hot-toast";
 import {setCookieMessage} from "../../utils/cookies";
+import {getErrorMessage} from "../../utils/errors";
 
 const SaveTaxonomy = ({}) => {
 
@@ -27,7 +28,25 @@ const SaveTaxonomy = ({}) => {
     const {step} = useParams();
     const [edit, isEdit] = useState(false);
     const [fetchError, setFetchError] = useState(false);
-    const [stepActive, setStepActive] = useState(step ? parseInt(step) : 0);
+
+    const headings = [
+        {
+            "title": useTranslation("Basic"),
+            "description": useTranslation("Minimum configuration")
+        },
+        {
+            "title": useTranslation("Labels"),
+            "description": useTranslation("Additional labels")
+        },
+        {
+            "title": useTranslation("Settings"),
+            "description": useTranslation("Other settings")
+        }
+    ];
+
+    const clampStep = (value) => Math.min(Math.max(value, 0), headings.length - 1);
+
+    const [stepActive, setStepActive] = useState(step ? clampStep(parseInt(step)) : 0);
     const [formValues, setFormValues] = useState({});
     const [title, setTitle] = useState(taxonomy && formValues[1] ? useTranslation("Edit") + " " + formValues[1].singular_label : useTranslation("Create new Taxonomy"));
 
@@ -93,44 +112,28 @@ const SaveTaxonomy = ({}) => {
         }
     ];
 
-    const headings = [
-        {
-            "label": useTranslation("Basic"),
-            "description": useTranslation("Minimum configuration")
-        },
-        {
-            "label": useTranslation("Labels"),
-            "description": useTranslation("Additional labels")
-        },
-        {
-            "label": useTranslation("Settings"),
-            "description": useTranslation("Other settings")
-        }
-    ];
-
     const handleSubmit = (data, index) => {
 
-        formValues[index] = data;
-        setFormValues(formValues);
+        const updatedValues = {...formValues, [index]: data};
+        setFormValues(updatedValues);
         scrollToTop();
 
-        const isFormComplete = Object.keys(formValues).length === 3;
+        const isFormComplete = Object.keys(updatedValues).length === 3;
 
         if(isFormComplete){
-            dispatch(saveTaxonomy(formValues))
+            dispatch(saveTaxonomy(updatedValues))
                 .then(res => {
                     const payload = res.payload;
 
                     if(payload.success){
                         setCookieMessage("Taxonomy successfully saved.");
                         navigate('/taxonomies');
-                        refreshPage();
                     } else {
                         toast.error(payload.error);
                     }
                 })
                 .catch(err => {
-                    toast.error(err);
+                    toast.error(getErrorMessage(err));
                 })
             ;
         }

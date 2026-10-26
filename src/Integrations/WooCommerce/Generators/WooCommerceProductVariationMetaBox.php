@@ -17,12 +17,12 @@ class WooCommerceProductVariationMetaBox extends AbstractGenerator
     /**
      * @var int
      */
-    private $loop;
+    private int $loop;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
-    private $variationData;
+    private array $variationData;
 
     /**
      * @var \WP_Post
@@ -30,13 +30,12 @@ class WooCommerceProductVariationMetaBox extends AbstractGenerator
     private \WP_Post $variation;
 
     /**
-     * WooCommerceProductVariationMetaBox constructor.
-     * @param MetaBoxModel $metaBoxModel
-     * @param $loop
-     * @param $variationData
-     * @param \WP_Post $variation
+     * @param MetaBoxModel         $metaBoxModel
+     * @param int                  $loop
+     * @param array<string, mixed> $variationData
+     * @param \WP_Post             $variation
      */
-    public function __construct(MetaBoxModel $metaBoxModel, $loop, $variationData, \WP_Post $variation)
+    public function __construct(MetaBoxModel $metaBoxModel, int $loop, array $variationData, \WP_Post $variation)
     {
         $this->metaBoxModel = $metaBoxModel;
         $this->loop = $loop;
@@ -45,12 +44,12 @@ class WooCommerceProductVariationMetaBox extends AbstractGenerator
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \Exception
      */
-    public function render()
+    public function render(): ?string
     {
-        if(empty($this->metaBoxModel->getFields())){
+        if (empty($this->metaBoxModel->getFields())) {
             return null;
         }
 
@@ -61,10 +60,10 @@ class WooCommerceProductVariationMetaBox extends AbstractGenerator
         $box = "<div class='acpt-admin-meta-wc-variation-box' id='".$idBox."'>";
         $box .= "<div class='acpt-admin-meta-wc-variation-box-header'>".$boxLabel."</div>";
 
-        foreach ($rows as $row){
+        foreach ($rows as $row) {
             $box .= "<div class='acpt-admin-meta-row ".($row['isVisible'] == 0 ? ' hidden' : '')."'>";
 
-            foreach ($row['fields'] as $field){
+            foreach ($row['fields'] as $field) {
                 $box .= $field;
             }
 
@@ -77,29 +76,26 @@ class WooCommerceProductVariationMetaBox extends AbstractGenerator
     }
 
     /**
-     * @param $fields
-     * @param $postId
-     *
-     * @return array
+     * @param array<int, \ACPT_Lite\Core\Models\Meta\MetaFieldModel> $fields
+     * @return array<int, mixed>
      * @throws \Exception
      */
-    private function fieldRows($fields)
+    private function fieldRows(array $fields): array
     {
         $rows = Fields::extractFieldRows($fields);
         $fieldRows = [];
         $visibleFieldsTotalCount = 0;
 
         // build the field rows array
-        foreach ($rows as $index => $row){
-
+        foreach ($rows as $index => $row) {
             $visibleFieldsRowCount = 0;
 
-            foreach ($row as $field){
+            foreach ($row as $field) {
                 $fieldGenerator = new WooCommerceProductVariationMetaField($field, $this->loop, $this->variationData, $this->variation);
                 $f = $fieldGenerator->generate();
 
-                if($f){
-                    if($f->isVisible()){
+                if ($f) {
+                    if ($f->isVisible()) {
                         $visibleFieldsTotalCount++;
                         $visibleFieldsRowCount++;
                     }
@@ -110,7 +106,7 @@ class WooCommerceProductVariationMetaBox extends AbstractGenerator
             }
         }
 
-        if($visibleFieldsTotalCount > 0){
+        if ($visibleFieldsTotalCount > 0) {
             return $fieldRows;
         }
 

@@ -7,7 +7,7 @@ use ACPT_Lite\Core\Repository\CustomPostTypeRepository;
 class RegeneratePostLabelsCommand implements CommandInterface
 {
     /**
-     * @var
+     * @var string
      */
     private string $postType;
 
@@ -21,16 +21,16 @@ class RegeneratePostLabelsCommand implements CommandInterface
     }
 
     /**
-     * @return array|mixed
+     * @return void
      * @throws \Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $customPostTypeModel = CustomPostTypeRepository::get([
             'postType' => $this->postType,
         ]);
 
-        if(empty($customPostTypeModel)){
+        if (empty($customPostTypeModel)) {
             throw new \Exception("Post type not found");
         }
 

@@ -1,0 +1,23 @@
+@use "variables";
+
+.acpt-dumper {
+  position: relative;
+
+  .copy-to-clipboard {
+    position: absolute;
+    top: variables.$space-24;
+    right: variables.$space-24;
+    z-index: 1111111;
+    cursor: pointer;
+    padding: variables.$space-8 variables.$space-8 variables.$space-4;
+    border: none;
+    border-radius: variables.$border-radius;
+    background: variables.$secondary-color;
+    color: variables.$link-color;
+
+    &:hover,
+    &:focus {
+      background: var(--acpt-darken-secondary);
+    }
+  }
+}

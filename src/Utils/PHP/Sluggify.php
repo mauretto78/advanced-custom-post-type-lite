@@ -12,28 +12,30 @@ class Sluggify
      *
      * @return string
      */
-    public static function slug($string, $maxLength = 0)
+    public static function slug(string $string, int $maxLength = 0): string
     {
-	    $result = '';
+        $result = '';
 
-	    if(!is_string($string)){
-		    return $result;
-	    }
+        $result = strtolower($string);
+        $result = ltrim($result);
+        $result = rtrim($result);
+        $result = str_replace(' ', '-', $result);
+        $result = preg_replace('/[^a-z0-9_\-]/', '', $result);
 
-        if ( is_scalar( $string ) ) {
-	        $result = strtolower( $string );
-	        $result = ltrim($result);
-	        $result = rtrim($result);
-	        $result = str_replace(' ','-', $result);
-	        $result = preg_replace( '/[^a-z0-9_\-]/', '', $result );
+        if ($maxLength > 0) {
+            $result = substr($result, 0, $maxLength);
         }
 
-        if($maxLength > 0){
-	        $result = substr($result, 0, $maxLength);
+        if (empty($result)) {
+            return 'n-a';
         }
 
-        if(class_exists(\Transliterator::class)){
-	        $result = \Transliterator::create('Any-Latin; Latin-ASCII')->transliterate($result);
+        if (class_exists(\Transliterator::class)) {
+            $result = \Transliterator::create('Any-Latin; Latin-ASCII')->transliterate($result);
+        }
+
+        if ($result === false) {
+            return 'n-a';
         }
 
         return $result;

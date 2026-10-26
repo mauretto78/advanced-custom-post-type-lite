@@ -11,47 +11,47 @@ use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
  * WooCommerceProductDataFieldModel
  *
  * @since      1.0.1
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/core
+ * @package    acpt-lite
+ * @subpackage acpt-lite/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSerializable
 {
-    const CHECKBOX_TYPE = 'Checkbox';
-    const COLOR_TYPE = 'Color';
-    const DATE_TYPE = 'Date';
-    const DATE_TIME_TYPE = 'DateTime';
-    const EMAIL_TYPE = 'Email';
-    const NUMBER_TYPE = 'Number';
-    const PHONE_TYPE = 'Phone';
-    const POST_OBJECT_TYPE = 'PostObject';
-    const POST_OBJECT_MULTI_TYPE = 'PostObjectMulti';
-    const RADIO_TYPE = 'Radio';
-    const SELECT_TYPE = 'Select';
-    const SELECT_MULTI_TYPE = 'SelectMulti';
-    const TERM_OBJECT_TYPE = 'TermObject';
-    const TERM_OBJECT_MULTI_TYPE = 'TermObjectMulti';
-    const TEXT_TYPE = 'Text';
-    const TEXTAREA_TYPE = 'Textarea';
-    const TIME_TYPE = 'Time';
-    const URL_TYPE = 'Url';
-    const USER_TYPE = 'User';
-    const USER_MULTI_TYPE = 'UserMulti';
+    public const CHECKBOX_TYPE = 'Checkbox';
+    public const COLOR_TYPE = 'Color';
+    public const DATE_TYPE = 'Date';
+    public const DATE_TIME_TYPE = 'DateTime';
+    public const EMAIL_TYPE = 'Email';
+    public const NUMBER_TYPE = 'Number';
+    public const PHONE_TYPE = 'Phone';
+    public const POST_OBJECT_TYPE = 'PostObject';
+    public const POST_OBJECT_MULTI_TYPE = 'PostObjectMulti';
+    public const RADIO_TYPE = 'Radio';
+    public const SELECT_TYPE = 'Select';
+    public const SELECT_MULTI_TYPE = 'SelectMulti';
+    public const TERM_OBJECT_TYPE = 'TermObject';
+    public const TERM_OBJECT_MULTI_TYPE = 'TermObjectMulti';
+    public const TEXT_TYPE = 'Text';
+    public const TEXTAREA_TYPE = 'Textarea';
+    public const TIME_TYPE = 'Time';
+    public const URL_TYPE = 'Url';
+    public const USER_TYPE = 'User';
+    public const USER_MULTI_TYPE = 'UserMulti';
 
     /**
      * @var WooCommerceProductDataModel
      */
-    private $productData;
+    private WooCommerceProductDataModel $productData;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @return string
      */
-    public function getSluggedName()
+    public function getSluggedName(): string
     {
         return strtolower(str_replace(" ", "_", $this->name));
     }
@@ -60,54 +60,54 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
      * @see https://woocommerce.github.io/code-reference/files/woocommerce-includes-admin-wc-meta-box-functions.html
      * @var string
      */
-    private $type;
+    private string $type;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $defaultValue;
+    private ?string $defaultValue = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $description;
+    private ?string $description = null;
 
     /**
      * @var bool
      */
-    private $required;
+    private bool $required;
 
     /**
      * @var int
      */
-    private $sort;
+    private int $sort;
 
     /**
      * @var WooCommerceProductDataFieldOptionModel[]
      */
-    private $options;
+    private array $options = [];
 
     /**
      * WooCommerceProductDataFieldModel constructor.
      *
-     * @param                             $id
+     * @param string                      $id
      * @param WooCommerceProductDataModel $productDataModel
-     * @param                             $name
-     * @param                             $type
-     * @param                             $required
-     * @param                             $sort
-     * @param null                        $defaultValue
-     * @param null                        $description
+     * @param string                      $name
+     * @param string                      $type
+     * @param bool                        $required
+     * @param int                         $sort
+     * @param string|null                 $defaultValue
+     * @param string|null                 $description
      */
     public function __construct(
-            $id,
-            WooCommerceProductDataModel $productDataModel,
-            $name,
-            $type,
-            $required,
-            $sort,
-            $defaultValue = null,
-            $description = null
+        string $id,
+        WooCommerceProductDataModel $productDataModel,
+        string $name,
+        string $type,
+        bool $required,
+        int $sort,
+        ?string $defaultValue = null,
+        ?string $description = null
     ) {
         parent::__construct($id);
         $this->productData = $productDataModel;
@@ -123,22 +123,25 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
     /**
      * @return WooCommerceProductDataModel
      */
-    public function getProductData() {
+    public function getProductData()
+    {
         return $this->productData;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param $name
+     * @param string $name
+     *
+     * @return void
      */
-    public function changeName($name)
+    public function changeName(string $name): void
     {
         $this->name = $name;
     }
@@ -146,52 +149,61 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
     /**
      * @return string
      */
-    public function getType() {
+    public function getType(): string
+    {
         return $this->type;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDefaultValue() {
+    public function getDefaultValue(): ?string
+    {
         return $this->defaultValue;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription() {
+    public function getDescription(): ?string
+    {
         return $this->description;
     }
 
     /**
      * @return bool
      */
-    public function isRequired() {
+    public function isRequired(): bool
+    {
         return $this->required;
     }
 
     /**
      * @return int
      */
-    public function getSort() {
+    public function getSort(): int
+    {
         return $this->sort;
     }
 
     /**
      * @param WooCommerceProductDataFieldOptionModel $option
+     *
+     * @return void
      */
-    public function addOption(WooCommerceProductDataFieldOptionModel $option)
+    public function addOption(WooCommerceProductDataFieldOptionModel $option): void
     {
-        if(!$this->existsInCollection($option->getId(), $this->options)){
+        if (!$this->existsInCollection($option->getId(), $this->options)) {
             $this->options[] = $option;
         }
     }
 
     /**
      * @param WooCommerceProductDataFieldOptionModel $option
+     *
+     * @return void
      */
-    public function removeOption(WooCommerceProductDataFieldOptionModel $option)
+    public function removeOption(WooCommerceProductDataFieldOptionModel $option): void
     {
         $this->removeFromCollection($option->getId(), $this->options);
     }
@@ -199,7 +211,7 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
     /**
      * @return WooCommerceProductDataFieldOptionModel[]
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -207,7 +219,7 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
     /**
      * @return string
      */
-    public function getDBName()
+    public function getDBName(): string
     {
         return '_' . Strings::toDBFormat($this->getProductData()->getName()) . '_' . Strings::toDBFormat($this->name);
     }
@@ -215,7 +227,7 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
     /**
      * @return string
      */
-    public function getUiName()
+    public function getUiName(): string
     {
         return Strings::toHumanReadableFormat($this->getProductData()->getName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
     }
@@ -224,7 +236,7 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
      * @param WooCommerceProductDataModel $productDataModel
      * @return WooCommerceProductDataFieldModel
      */
-    public function duplicateFrom(WooCommerceProductDataModel $productDataModel)
+    public function duplicateFrom(WooCommerceProductDataModel $productDataModel): WooCommerceProductDataFieldModel
     {
         $duplicate = clone $this;
         $duplicate->id = Uuid::v4();
@@ -234,14 +246,14 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
         $options = $duplicate->getOptions();
         $duplicate->options = [];
 
-        foreach ($options as $optionModel){
+        foreach ($options as $optionModel) {
             $duplicate->options[] = $optionModel->duplicateFrom($duplicate);
         }
 
         return $duplicate;
     }
 
-	#[\ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [
@@ -259,33 +271,36 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
         ];
     }
 
-	public static function validationRules(): array
-	{
-		return [
-			'id' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'productDataModelId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'productDataModel' => [
-				'required' => false,
-				'type' => 'object',
-				'instanceOf' => WooCommerceProductDataModel::class
-			],
-			'name' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'new_name' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'type' => [
-				'required' => true,
-				'type' => 'string',
+    /**
+     * @return array<string, mixed>
+     */
+    public static function validationRules(): array
+    {
+        return [
+            'id' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'productDataModelId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'productDataModel' => [
+                'required' => false,
+                'type' => 'object',
+                'instanceOf' => WooCommerceProductDataModel::class
+            ],
+            'name' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'new_name' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'type' => [
+                'required' => true,
+                'type' => 'string',
                 'enum' => [
                     WooCommerceProductDataFieldModel::CHECKBOX_TYPE,
                     WooCommerceProductDataFieldModel::COLOR_TYPE,
@@ -308,23 +323,23 @@ class WooCommerceProductDataFieldModel extends AbstractModel implements \JsonSer
                     WooCommerceProductDataFieldModel::USER_TYPE,
                     WooCommerceProductDataFieldModel::USER_MULTI_TYPE,
                 ],
-			],
-			'required' => [
-				'required' => true,
-				'type' => 'boolean',
-			],
-			'sort' => [
-				'required' => false,
-				'type' => 'string|integer',
-			],
-			'defaultValue' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'description' => [
-				'required' => false,
-				'type' => 'string',
-			],
-		];
-	}
+            ],
+            'required' => [
+                'required' => true,
+                'type' => 'boolean',
+            ],
+            'sort' => [
+                'required' => false,
+                'type' => 'string|integer',
+            ],
+            'defaultValue' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'description' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+        ];
+    }
 }

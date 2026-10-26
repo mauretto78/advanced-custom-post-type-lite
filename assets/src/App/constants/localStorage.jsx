@@ -3,4 +3,5 @@ export const localStorageVars = {
     META_ELEMENTS_VISIBILITY: 'meta_elements_visibility',
     HIDDEN_ELEMENTS: 'hidden_elements',
     TOGGLE_NAVIGATION: 'toggle_navigation',
+    TOGGLE_BULK_EDIT: 'toggle_bulk_edit',
 };

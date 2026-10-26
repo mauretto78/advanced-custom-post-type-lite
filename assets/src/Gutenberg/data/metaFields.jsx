@@ -12,12 +12,13 @@ export const fetchMeta = async () => {
 
     for (const [belongsTo, records] of Object.entries(results)) {
 
-        for (const [find, value] of Object.entries(records)) {
-            if (value.length > 0){
+        for (const [find, data] of Object.entries(records)) {
+            if (data.records && data.records.length > 0){
                 meta.push({
                     belongsTo: belongsTo,
                     find: find,
-                    records: value
+                    findLabel: data.label || find,
+                    records: data.records
                 });
             }
         }

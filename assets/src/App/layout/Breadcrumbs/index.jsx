@@ -1,34 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumb from "./Breadcrumb";
+import {isRTLOrientation} from "../../utils/misc";
+import {Link} from "react-router-dom";
+import {Icon} from "@iconify/react";
 
 const Breadcrumbs = ({crumbs}) => {
 
-    const settings = document.globals;
+    if(crumbs.length === 0){
+        return null;
+    }
 
     return (
-        <div className={`acpt-breadcrumbs ${settings.globals.is_rtl === true ? `rtl` : ``}`}>
+        <div id="acpt-breadcrumbs" className={`acpt-breadcrumbs ${isRTLOrientation()}`}>
             {crumbs.length > 0 && (
-                <ul className="i-flex-center s-8">
-                    {crumbs.map((crumb, index) => (
-                        <Breadcrumb
-                            label={crumb.label}
-                            link={crumb.link}
-                            isLast={(index+1) === crumbs.length}
-                            key={index}
-                        />
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
-};
+                    <nav aria-label="Breadcrumb" className="breadcrumb">
+                        {/* role="list" is intentional, not redundant: `i-flex-center` sets
+                            display:flex, which makes Safari/VoiceOver drop the <ol>'s
+                            implicit list semantics — re-asserting the role restores them. */}
+                        {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
+                        <ol className="m-0 i-flex-center s-8" role="list">
+                            <li>
+                                <Link
+                                    to="/"
+                                    aria-label="Home"
+                                >
+                                    <Icon icon="bx:home" width={18} />
+                                </Link>
+                            </li>
+                            {crumbs.map((crumb, index) => (
+                                <Breadcrumb
+                                    label={crumb.label}
+                                    link={crumb.link}
+                                    isFirst={index === 0}
+                                    isLast={(index + 1) === crumbs.length}
+                                    key={index}
+                                />
+                            ))}
+                        </ol>
+                    </nav>
+                    )}
+                </div>
+                );
+            };
 
 Breadcrumbs.propTypes = {
-  crumbs: PropTypes.arrayOf(PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      link: PropTypes.string,
-      isLast: PropTypes.bool,
+    crumbs: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        link: PropTypes.string,
+        isFirst: PropTypes.bool,
+        isLast: PropTypes.bool,
   })).isRequired
 };
 

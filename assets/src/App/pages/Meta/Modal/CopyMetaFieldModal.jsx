@@ -8,11 +8,12 @@ import {wpAjaxRequest} from "../../../utils/ajax";
 import {toast} from "react-hot-toast";
 import {styleVariants} from "../../../constants/styles";
 import Button from "../../../components/Button";
-import {fieldTypes} from "../../../constants/fields";
 import {useDispatch} from "react-redux";
 import {fetchMeta} from "../../../redux/reducers/fetchMetaSlice";
 import {hydrateState} from "../../../redux/reducers/metaStateSlice";
 import {useFormContext} from "react-hook-form";
+import {metaFieldProps} from "../../../props/metaProps.js";
+import {hydrateFormBoxes} from "../../../utils/flattenFields.jsx";
 
 const CopyMetaFieldModal = ({field}) => {
 
@@ -30,19 +31,23 @@ const CopyMetaFieldModal = ({field}) => {
     const [group, setGroup] = useState(null);
     const [boxes, setBoxes] = useState([]);
     const [fields, setFields] = useState([]);
+    const [nestedFields, setNestedFields] = useState([]);
     const [blocks, setBlocks] = useState([]);
     const [targetEntityType, setTargetEntityType] = useState(null);
     const [targetEntityId, setTargetEntityId] = useState(null);
     const [deleteField, setDeleteField] = useState(false);
+    const [position, setPosition] = useState(null);
 
     // reset state on open modal
     useEffect(() => {
         setGroup(null);
         setBoxes([]);
         setFields([]);
+        setNestedFields([]);
         setBlocks([]);
         setTargetEntityType(null);
         setTargetEntityId(null);
+        setPosition(null);
         setDeleteField(false);
     }, [modalOpen]);
 
@@ -50,9 +55,11 @@ const CopyMetaFieldModal = ({field}) => {
         setGroup(groupId);
         setBoxes([]);
         setFields([]);
+        setNestedFields([]);
         setBlocks([]);
         setTargetEntityType(null);
         setTargetEntityId(null);
+        setPosition(null);
         setDeleteField(false);
 
         wpAjaxRequest('fetchMetaAction', {
@@ -67,18 +74,20 @@ const CopyMetaFieldModal = ({field}) => {
 
     const handleBoxChange = (boxId) => {
 
-        setFields([]);
+        setNestedFields([]);
         setBlocks([]);
         setTargetEntityType("box");
         setTargetEntityId(boxId);
 
         const filteredFields = boxes.filter(b => b.id === boxId)[0].fields;
 
+        setFields(filteredFields);
+
         if(filteredFields && filteredFields.length > 0){
-            const nestableFields = filteredFields.filter(f => (f.type === fieldTypes.REPEATER || f.type === fieldTypes.FLEXIBLE));
+            const nestableFields = filteredFields.filter(f => (false));
 
             if(nestableFields && nestableFields.length > 0){
-                setFields(nestableFields);
+                setNestedFields(nestableFields);
             }
         }
     };
@@ -87,7 +96,7 @@ const CopyMetaFieldModal = ({field}) => {
         setTargetEntityType("field");
         setTargetEntityId(fieldId);
 
-        const filteredBlocks = fields.filter(f => f.id === fieldId)[0].blocks;
+        const filteredBlocks = nestedFields.filter(f => f.id === fieldId)[0].blocks;
 
         if(filteredBlocks && filteredBlocks.length > 0){
             setBlocks(filteredBlocks);
@@ -105,10 +114,13 @@ const CopyMetaFieldModal = ({field}) => {
             fieldId: field.id,
             targetEntityType: targetEntityType,
             targetEntityId: targetEntityId,
-            delete: deleteField
+            delete: deleteField,
+            position: position
         })
             .then(res => {
                 if(res.success){
+                    // The modal closes in place, so a cookie message would only
+                    // surface on the next navigation -- toast immediately instead.
                     toast.success(`${useTranslation("Meta field was successfully copied")}.`);
                     setModalOpen(!modalOpen);
 
@@ -131,7 +143,9 @@ const CopyMetaFieldModal = ({field}) => {
                                     setValue(`belongs.${index}.find`, belong.find);
                                     setValue(`belongs.${index}.logic`, belong.logic);
                                 });
-                                res.payload.boxes && res.payload.boxes.map((box, index) => {
+                                // flatten (see ticket #1231) so a submit right after this
+                                // reload doesn't clobber Repeater/Flexible children with []
+                                res.payload.boxes && hydrateFormBoxes(res.payload.boxes).forEach((box, index) => {
                                     setValue(`boxes.${index}`, box);
                                 });
                             })
@@ -156,6 +170,7 @@ const CopyMetaFieldModal = ({field}) => {
             <Modal
                 title={useTranslation('Copy this meta field')}
                 visible={modalOpen}
+                setVisible={setModalOpen}
                 buttons={[]}
             >
                 <div className="flex-column s-24">
@@ -173,7 +188,7 @@ const CopyMetaFieldModal = ({field}) => {
                                 onChangeCapture={e => handleGroupChange(e.target.value) }
                             >
                                 {globals.find.meta.map((g) => (
-                                    <option value={g.value}>
+                                    <option key={g.value} value={g.value}>
                                         {g.label}
                                     </option>
                                 ))}
@@ -196,7 +211,7 @@ const CopyMetaFieldModal = ({field}) => {
                                 >
                                     <option value={null}>{useTranslation("Select")}</option>
                                     {boxes.map((b) => (
-                                        <option value={b.id}>
+                                        <option key={b.id} value={b.id}>
                                             {b.name}
                                         </option>
                                     ))}
@@ -204,7 +219,7 @@ const CopyMetaFieldModal = ({field}) => {
                             </div>
                         </div>
                     )}
-                    {fields && fields.length > 0 && (
+                    {nestedFields && nestedFields.length > 0 && (
                         <div>
                             <label
                                 className="form-label i-flex-center s-4"
@@ -219,8 +234,8 @@ const CopyMetaFieldModal = ({field}) => {
                                     onChangeCapture={e => handleFieldChange(e.target.value) }
                                 >
                                     <option value={null}>{useTranslation("Select")}</option>
-                                    {fields.map((f) => (
-                                        <option value={f.id}>
+                                    {nestedFields.map((f) => (
+                                        <option key={f.id} value={f.id}>
                                             {f.name}
                                         </option>
                                     ))}
@@ -232,7 +247,7 @@ const CopyMetaFieldModal = ({field}) => {
                         <div>
                             <label
                                 className="form-label i-flex-center s-4"
-                                htmlFor="field"
+                                htmlFor="block"
                             >
                                 {useTranslation("Meta block")}
                             </label>
@@ -244,7 +259,7 @@ const CopyMetaFieldModal = ({field}) => {
                                 >
                                     <option value={null}>{useTranslation("Select")}</option>
                                     {blocks.map((b) => (
-                                        <option value={b.id}>
+                                        <option key={b.id} value={b.id}>
                                             {b.name}
                                         </option>
                                     ))}
@@ -253,38 +268,68 @@ const CopyMetaFieldModal = ({field}) => {
                         </div>
                     )}
                     {targetEntityType && targetEntityId && (
-                        <div>
-                            <div className="w-100 i-flex-center s-4 mb-8">
-                                <input type="checkbox" defaultValue={deleteField} onClick={() => setDeleteField(!deleteField)} id="deleteField" />
-                                <label htmlFor="deleteField">
-                                    {useTranslation("Delete the meta field after copying")}
+                        <React.Fragment>
+                            <div>
+                                <label
+                                    className="form-label i-flex-center s-4"
+                                    htmlFor="position"
+                                >
+                                    {useTranslation("Copy after")}
                                 </label>
+                                <div className="acpt-select">
+                                    <select
+                                        id="position"
+                                        className="form-control default"
+                                        onChangeCapture={e => setPosition(e.target.value) }
+                                    >
+                                        <option value={null}>{useTranslation("Select")}</option>
+                                        {fields.map((field, index) => (
+                                            <option key={field.id ?? index} value={index}>
+                                                {field.label ?? field.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
-                            <Button
-                                onClick={() => handleSubmit() }
-                                style={styleVariants.PRIMARY}
-                            >
-                                {useTranslation("Copy")}
-                            </Button>
-                        </div>
+                            <div>
+                                <div className="w-100 i-flex-center s-4 mb-8">
+                                    <input type="checkbox" defaultValue={deleteField} onClick={() => setDeleteField(!deleteField)} id="deleteField" />
+                                    <label htmlFor="deleteField">
+                                        {useTranslation("Delete the meta field after copying")}
+                                    </label>
+                                </div>
+                                <Button
+                                    onClick={() => handleSubmit() }
+                                    style={styleVariants.PRIMARY}
+                                >
+                                    {useTranslation("Copy")}
+                                </Button>
+                            </div>
+                        </React.Fragment>
                     )}
                 </div>
             </Modal>
-            <a
-                href="#"
+            <button
+                type="button"
+                className="btn-reset"
+                aria-label={useTranslation("Copy")}
                 onClick={(e) => {
                     e.preventDefault();
+                    // Without this the click bubbles to the canvas-root onClick
+                    // (Canvas/index.jsx), which unsets the active element and
+                    // unmounts this modal before `modalOpen` can render it.
+                    e.stopPropagation();
                     setModalOpen(!modalOpen);
                 }}
             >
-                <Icon icon="bx:copy" width={18} />
-            </a>
+                <Icon icon="bx:copy" width={14} />
+            </button>
         </React.Fragment>
     );
 };
 
 CopyMetaFieldModal.propTypes = {
-    field: PropTypes.object.isRequired,
+    field: PropTypes.shape(metaFieldProps).isRequired,
 };
 
 export default CopyMetaFieldModal;

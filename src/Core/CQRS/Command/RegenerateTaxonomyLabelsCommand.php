@@ -7,7 +7,7 @@ use ACPT_Lite\Core\Repository\TaxonomyRepository;
 class RegenerateTaxonomyLabelsCommand implements CommandInterface
 {
     /**
-     * @var
+     * @var string
      */
     private string $taxonomy;
 
@@ -21,16 +21,16 @@ class RegenerateTaxonomyLabelsCommand implements CommandInterface
     }
 
     /**
-     * @return array|mixed
+     * @return void
      * @throws \Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $taxonomyModel = TaxonomyRepository::get([
             'taxonomy' => $this->taxonomy,
         ]);
 
-        if(empty($taxonomyModel)){
+        if (empty($taxonomyModel)) {
             throw new \Exception("Taxonomy not found");
         }
 

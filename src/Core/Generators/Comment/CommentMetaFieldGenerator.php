@@ -9,69 +9,71 @@ use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 
 class CommentMetaFieldGenerator extends AbstractGenerator
 {
-	/**
-	 * @var MetaFieldModel
-	 */
-	private MetaFieldModel $fieldModel;
+    /**
+     * @var MetaFieldModel
+     */
+    private MetaFieldModel $fieldModel;
 
-	/**
-	 * AttachmentMetaFieldGenerator constructor.
-	 *
-	 * @param MetaFieldModel $fieldModel
-	 */
-	public function __construct(MetaFieldModel $fieldModel)
-	{
-		$this->fieldModel = $fieldModel;
-	}
+    /**
+     * @var mixed
+     */
+    private $commentId;
 
-	/**
-	 * @return string
-	 */
-	public function render()
-	{
-		$field = $this->getCommentMetaField();
+    /**
+     * AttachmentMetaFieldGenerator constructor.
+     *
+     * @param MetaFieldModel $fieldModel
+     * @param int|null       $commentId
+     */
+    public function __construct(MetaFieldModel $fieldModel, ?int $commentId = null)
+    {
+        $this->fieldModel = $fieldModel;
+        $this->commentId = $commentId;
+    }
 
-		if($field){
-			$render = $field->render();
+    /**
+     * @param string $for
+     *
+     * @return string|null
+     */
+    public function render($for = "frontEnd")
+    {
+        $field = $this->getCommentMetaField();
 
-			return preg_replace('/width: \d+\%\;|width: \d+\%/', '', $render);
-		}
+        if ($field) {
+            $render = $field->render();
 
-		return null;
-	}
+            if ($for === "backEnd") {
+                return $render;
+            }
 
-	/**
-	 * @param null $commentId
-	 *
-	 * @return AbstractField|null
-	 */
-	public function getCommentMetaField($commentId = null)
-	{
-		$notAllowed = [
-			MetaFieldModel::EMBED_TYPE,
-			MetaFieldModel::REPEATER_TYPE,
-			MetaFieldModel::FLEXIBLE_CONTENT_TYPE,
-			MetaFieldModel::LIST_TYPE,
-			MetaFieldModel::POST_TYPE,
-			MetaFieldModel::IMAGE_TYPE,
-			MetaFieldModel::GALLERY_TYPE,
-			MetaFieldModel::VIDEO_TYPE,
-		];
+            return preg_replace('/width: \d+\%\;|width: \d+\%/', '', $render);
+        }
 
-		if(in_array($this->fieldModel->getType(), $notAllowed)){
-			return null;
-		}
+        return null;
+    }
 
-		$className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
-		$commentId = $commentId ? $commentId : 0;
+    /**
+     * @return AbstractField|null
+     */
+    public function getCommentMetaField()
+    {
+        $notAllowed = [];
 
-		if(class_exists($className)){
-			/** @var AbstractField $instance */
-			$instance = new $className($this->fieldModel, MetaTypes::COMMENT, $commentId);
+        if (in_array($this->fieldModel->getType(), $notAllowed)) {
+            return null;
+        }
 
-			return $instance;
-		}
+        $className = 'ACPT_Lite\\Core\\Generators\\Meta\\Fields\\'.$this->fieldModel->getType().'Field';
+        $commentId = $this->commentId ? $this->commentId : 0;
 
-		return null;
-	}
+        if (class_exists($className)) {
+            /** @var AbstractField $instance */
+            $instance = new $className($this->fieldModel, MetaTypes::COMMENT, $commentId);
+
+            return $instance;
+        }
+
+        return null;
+    }
 }

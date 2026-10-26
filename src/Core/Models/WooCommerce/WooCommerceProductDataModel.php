@@ -11,8 +11,8 @@ use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
  * WooCommerceProductDataModel
  *
  * @since      1.0.1
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/core
+ * @package    acpt-lite
+ * @subpackage acpt-lite/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializable
@@ -20,48 +20,53 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var array
+     * json_decode() (without `true`) on the DB-stored icon column -- see
+     * WooCommerceProductDataRepository::get() -- yields a \stdClass for any
+     * JSON object payload, so this is genuinely reachable at runtime despite
+     * every write path passing an array.
+     *
+     * @var string|array<string, mixed>|\stdClass
      */
     private $icon;
 
     /**
-     * @var array
+     * @var array<int, mixed>
      */
-    private $visibility;
+    private array $visibility = [];
 
     /**
      * @var bool
      */
-    private $showInUI;
+    private bool $showInUI;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $content;
+    private ?string $content = null;
 
     /**
      * @var WooCommerceProductDataFieldModel[]
      */
-    private $fields = [];
+    private array $fields = [];
 
     /**
-     * WooCommerceProductData constructor.
+     * WooCommerceProductDataModel constructor.
      *
-     * @param $id
-     * @param $name
-     * @param $icon
-     * @param $visibility
-     * @param $showInUI
+     * @param string $id
+     * @param string $name
+     * @param string|array<string, mixed>|\stdClass $icon
+     * @param array<int, mixed> $visibility
+     * @param bool $showInUI
      */
     public function __construct(
-        $id,
-        $name,
+        string $id,
+        string $name,
         $icon,
-        $visibility,
-        $showInUI
+        array $visibility = [],
+        bool $showInUI = true
     ) {
         parent::__construct($id);
         $this->name   = $name;
@@ -74,88 +79,112 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param $name
+     * @param string $name
+     *
+     * @return void
      */
-    public function changeName($name)
+    public function changeName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function getSluggedName()
+    /**
+     * @return string
+     */
+    public function getSluggedName(): string
     {
         return strtolower(str_replace(" ", "_", $this->name));
     }
 
     /**
-     * @return array
+     * @return string|array<string, mixed>
      */
-    public function getIcon() {
+    public function getIcon()
+    {
+        if(is_object($this->icon)){
+            return (array)$this->icon;
+        }
+
         return $this->icon;
     }
 
     /**
-     * @return array
+     * @return array<int, mixed>
      */
-    public function getVisibility() {
+    public function getVisibility(): array
+    {
         return $this->visibility;
     }
 
     /**
      * @return bool
      */
-    public function isShowInUI() {
+    public function isShowInUI(): bool
+    {
         return $this->showInUI;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getContent() {
+    public function getContent(): ?string
+    {
         return $this->content;
     }
 
     /**
      * @param string $content
+     *
+     * @return void
      */
-    public function setContent( $content ) {
+    public function setContent(string $content): void
+    {
         $this->content = $content;
     }
 
-    public function setFields(array $fields)
+    /**
+     * @param WooCommerceProductDataFieldModel[] $fields
+     * @return void
+     */
+    public function setFields(array $fields): void
     {
-        foreach ($fields as $field){
+        foreach ($fields as $field) {
             $this->addField($field);
         }
     }
 
     /**
      * @param WooCommerceProductDataFieldModel $field
+     *
+     * @return void
      */
-    public function addField(WooCommerceProductDataFieldModel $field)
+    public function addField(WooCommerceProductDataFieldModel $field): void
     {
-        if(!$this->existsInCollection($field->getId(), $this->fields)){
+        if (!$this->existsInCollection($field->getId(), $this->fields)) {
             $this->fields[] = $field;
         }
     }
 
     /**
      * @param WooCommerceProductDataFieldModel $field
+     *
+     * @return void
      */
-    public function removeField(WooCommerceProductDataFieldModel $field)
+    public function removeField(WooCommerceProductDataFieldModel $field): void
     {
         $this->removeFromCollection($field->getId(), $this->fields);
     }
 
     /**
-     * @return array|WooCommerceProductDataFieldModel[]
+     * @return array<WooCommerceProductDataFieldModel>
      */
-    public function getFields()
+    public function getFields(): array
     {
         return $this->fields;
     }
@@ -172,14 +201,14 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
         $fields = $duplicate->getFields();
         $duplicate->fields = [];
 
-        foreach ($fields as $fieldModel){
+        foreach ($fields as $fieldModel) {
             $duplicate->fields[] = $fieldModel->duplicateFrom($duplicate);
         }
 
         return $duplicate;
     }
 
-	#[\ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [
@@ -194,40 +223,40 @@ class WooCommerceProductDataModel extends AbstractModel implements \JsonSerializ
         ];
     }
 
-	/**
-	 * @inheritDoc
-	 */
-	public static function validationRules(): array
-	{
-		return [
-			'id' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'name' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'new_name' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'icon' => [
-				'required' => true,
-				'type' => 'string|array|object',
-			],
-			'visibility' => [
-				'required' => true,
-				'type' => 'string|array',
-			],
-			'showInUI' => [
-				'required' => true,
-				'type' => 'boolean',
-			],
-			'fields' => [
-				'required' => false,
-				'type' => 'array',
-			],
-		];
-	}
+    /**
+     * @return array<string, mixed>
+     */
+    public static function validationRules(): array
+    {
+        return [
+            'id' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'name' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'new_name' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'icon' => [
+                'required' => true,
+                'type' => 'string|array|object',
+            ],
+            'visibility' => [
+                'required' => true,
+                'type' => 'string|array',
+            ],
+            'showInUI' => [
+                'required' => true,
+                'type' => 'boolean',
+            ],
+            'fields' => [
+                'required' => false,
+                'type' => 'array',
+            ],
+        ];
+    }
 }

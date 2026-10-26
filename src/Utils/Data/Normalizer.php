@@ -9,27 +9,29 @@ namespace ACPT_Lite\Utils\Data;
 class Normalizer
 {
     /**
-     * @param $array
-     *
+     * @param array<mixed> $array
      * @return \stdClass
      */
-    public static function arrayToObject($array)
+    public static function arrayToObject(array $array): \stdClass
     {
         $json = json_encode($array);
+
+        if ($json === false) {
+            return new \stdClass();
+        }
 
         return json_decode($json);
     }
 
     /**
-     * @param $object
-     *
-     * @return array
+     * @param mixed $object
+     * @return mixed
      */
     public static function objectToArray($object)
     {
-        if(is_object($object) || is_array($object)) {
+        if (is_object($object) || is_array($object)) {
             $ret = (array) $object;
-            foreach($ret as &$item) {
+            foreach ($ret as &$item) {
                 $item = self::objectToArray($item);
             }
 

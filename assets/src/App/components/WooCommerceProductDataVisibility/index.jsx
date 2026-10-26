@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useTranslation from "../../hooks/useTranslation";
 
-const WooCommerceProductDataVisibility = ({visibility}) => {
+const WooCommerceProductDataVisibility = ({visibility = []}) => {
 
     let vis = [];
 
@@ -16,7 +16,7 @@ const WooCommerceProductDataVisibility = ({visibility}) => {
     return (
         <div className="max-w-400 flex-wrap i-flex-center s-8">
             {vis.map((vis)=>(
-                <span className="acpt-badge">
+                <span key={vis} className="acpt-badge">
                     <span className="label">
                         {useTranslation(vis)}
                     </span>
@@ -27,7 +27,9 @@ const WooCommerceProductDataVisibility = ({visibility}) => {
 };
 
 WooCommerceProductDataVisibility.propTypes = {
-    visibility: PropTypes.array.isRequired
+    visibility: PropTypes.arrayOf(
+        PropTypes.oneOf(['show_if_simple', 'show_if_variable', 'show_if_grouped', 'show_if_external', 'hide_if_virtual', 'hide_if_external'])
+    ).isRequired
 };
 
 export default WooCommerceProductDataVisibility;

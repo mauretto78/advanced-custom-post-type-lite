@@ -1,5 +1,5 @@
-import React, {lazy, memo, Suspense, useEffect, useState} from 'react';
-import {createHashRouter, RouterProvider} from 'react-router-dom';
+import { lazy, memo, Suspense, useEffect, useState } from 'react';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Loader from "./components/Loader";
 import {useDispatch} from "react-redux";
 import {fetchGlobalSettings} from "./redux/reducers/fetchGlobalSettingsSlice";
@@ -7,9 +7,9 @@ import WebFont from 'webfontloader';
 import BootError from "./components/Errors/BootError";
 import {fetchSettingValue} from "./utils/objects";
 
-// Pages
 const AssocCustomPostTypeToTaxonomyPage = lazy(() => import("./pages/AssocCustomPostTypeToTaxonomy"));
 const AssocTaxonomyToCustomPostTypePage = lazy(() => import("./pages/AssocTaxonomyToCustomPostType"));
+const HealthCheckPage = lazy(() => import("./pages/HealthCheck"));
 const MetaListPage = lazy(() => import("./pages/MetaList"));
 const MetaPage = lazy(() => import("./pages/Meta"));
 const PageCustomPostTypeListPage = lazy(() => import("./pages/CustomPostTypeList"));
@@ -19,14 +19,13 @@ const SaveCustomPostTypePage = lazy(() => import("./pages/SaveCustomPostType"));
 const SaveProductDataPage = lazy(() => import("./pages/WooCommerce/SaveProductData"));
 const SaveTaxonomyPage = lazy(() => import("./pages/SaveTaxonomy"));
 const SettingsPage = lazy(() => import("./pages/Settings"));
+const ToolsPage = lazy(() => import("./pages/Tools"));
 const TaxonomyListPage = lazy(() => import("./pages/TaxonomyList"));
 const ViewCustomPostTypePage = lazy(() => import("./pages/ViewCustomPostType"));
 const ViewTaxonomyPage = lazy(() => import("./pages/ViewTaxonomy"));
 const ViewProductDataPage = lazy(() => import("./pages/WooCommerce/ViewProductData"));
-const HealthCheckPage = lazy(() => import("./pages/HealthCheck"));
 
 const App = memo(() => {
-
     // redux global state
     const dispatch = useDispatch();
 
@@ -35,16 +34,19 @@ const App = memo(() => {
     const [ready, isReady] = useState(false);
     const [routes, setRoutes] = useState([]);
     const [font, setFont] = useState('Inter');
+    const [skin, setSkin] = useState('light');
     const fontFamily = font !== "Default" ? font : '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue"';
 
     useEffect(() => {
         dispatch(fetchGlobalSettings())
             .then(res => {
-
                 if(res.error){
                     setError(res.error.name);
                 } else {
                     document.globals = {...document.globals, ...res.payload};
+
+                    // skin
+                    setSkin(res.payload.globals.skin);
 
                     // load Google fonts
                     setFont(res.payload.globals.font);
@@ -62,29 +64,27 @@ const App = memo(() => {
                     const enableTax = fetchSettingValue("enable_tax", settings, 1);
                     const enableMeta = fetchSettingValue("enable_meta", settings, 1);
 
-                    let r = [
-                        {
-                            path:'/assoc-post-taxonomy/:taxonomy',
-                            name: "Associate Post to Taxonomy",
-                            element: <Suspense fallback={<Loader/>}><AssocCustomPostTypeToTaxonomyPage /></Suspense>
-                        },
-                        {
-                            path:'/assoc-taxonomy-post/:postType',
-                            name: "Associate Taxonomy to Post",
-                            element: <Suspense fallback={<Loader/>}><AssocTaxonomyToCustomPostTypePage /></Suspense>
-                        },
-                        {
-                            path:"/settings",
-                            name: "Settings page",
-                            element: <Suspense fallback={<Loader/>}><SettingsPage /></Suspense>
-                        },
-                        {
-                            path:"/health-check",
-                            name: "HealthCheck page",
-                            element: <Suspense fallback={<Loader/>}><HealthCheckPage /></Suspense>
-                        },
-
-                    ];
+                    let r = [{
+                        path:'/assoc-post-taxonomy/:taxonomy/:page?',
+                        name: "Associate Post to Taxonomy",
+                        element: <Suspense fallback={<Loader/>}><AssocCustomPostTypeToTaxonomyPage /></Suspense>
+                    }, {
+                        path:'/assoc-taxonomy-post/:postType/:page?',
+                        name: "Associate Taxonomy to Post",
+                        element: <Suspense fallback={<Loader/>}><AssocTaxonomyToCustomPostTypePage /></Suspense>
+                    }, {
+                        path:"/settings",
+                        name: "Settings page",
+                        element: <Suspense fallback={<Loader/>}><SettingsPage /></Suspense>
+                    }, {
+                        path:"/tools",
+                        name: "Tools page",
+                        element: <Suspense fallback={<Loader/>}><ToolsPage /></Suspense>
+                    }, {
+                        path:'/tools/health-check',
+                        name: "Health check page",
+                        element: <Suspense fallback={<Loader/>}><HealthCheckPage /></Suspense>
+                    }];
 
                     // post types related pages
                     if(enableCtp === 1){
@@ -92,47 +92,39 @@ const App = memo(() => {
                                 path:"/view/:postType",
                                 name: "View Custom Post Type page",
                                 element: <Suspense fallback={<Loader/>}><ViewCustomPostTypePage /></Suspense>
-                            },
-                            {
-                                path:'/:page?',
-                                name: "Custom post types list page",
-                                element: <Suspense fallback={<Loader/>}><PageCustomPostTypeListPage /></Suspense>
-                            },
-                            {
-                                path:'/product-data/product',
-                                name: "woocommerce_product_data",
-                                element: <Suspense fallback={<Loader/>}><ProductDataListPage /></Suspense>
-                            },
-                            {
-                                path:'/product-data/product/add',
-                                name: "Add WooCommerce product data",
-                                element: <Suspense fallback={<Loader/>}><SaveProductDataPage /></Suspense>
-                            },
-                            {
-                                path:'/product-data/product/edit/:id',
-                                name: "Edit WooCommerce product data",
-                                element: <Suspense fallback={<Loader/>}><SaveProductDataPage /></Suspense>
-                            },
-                            {
-                                path:'/product-data/product/fields/:id',
-                                name: "WooCommerce product data field list",
-                                element: <Suspense fallback={<Loader/>}><ProductDataFieldsPage /></Suspense>
-                            },
-                            {
-                                path:'/product-data/product/view/:id',
-                                name: "View WooCommerce product data",
-                                element: <Suspense fallback={<Loader/>}><ViewProductDataPage /></Suspense>
-                            },
-                            {
-                                path:"/register",
-                                name: "Save Custom Post Type page",
-                                element: <Suspense fallback={<Loader/>}><SaveCustomPostTypePage /></Suspense>
-                            },
-                            {
-                                path:"/edit/:postType/:step?",
-                                name: "Edit Custom Post Type page",
-                                element: <Suspense fallback={<Loader/>}><SaveCustomPostTypePage /></Suspense>
-                            });
+                            }, {
+                            path:'/:page?',
+                            name: "CPT dashboard page",
+                            element: <Suspense fallback={<Loader/>}><PageCustomPostTypeListPage /></Suspense>
+                        }, {
+                            path:'/product-data/product/:page?',
+                            name: "woocommerce_product_data",
+                            element: <Suspense fallback={<Loader/>}><ProductDataListPage /></Suspense>
+                        }, {
+                            path:'/product-data/product/add',
+                            name: "Add WooCommerce product data",
+                            element: <Suspense fallback={<Loader/>}><SaveProductDataPage /></Suspense>
+                        }, {
+                            path:'/product-data/product/edit/:id',
+                            name: "Edit WooCommerce product data",
+                            element: <Suspense fallback={<Loader/>}><SaveProductDataPage /></Suspense>
+                        }, {
+                            path:'/product-data/product/fields/:id',
+                            name: "WooCommerce product data field list",
+                            element: <Suspense fallback={<Loader/>}><ProductDataFieldsPage /></Suspense>
+                        }, {
+                            path:'/product-data/product/view/:id',
+                            name: "View WooCommerce product data",
+                            element: <Suspense fallback={<Loader/>}><ViewProductDataPage /></Suspense>
+                        }, {
+                            path:"/register",
+                            name: "Save Custom Post Type page",
+                            element: <Suspense fallback={<Loader/>}><SaveCustomPostTypePage /></Suspense>
+                        }, {
+                            path:"/edit/:postType/:step?",
+                            name: "Edit Custom Post Type page",
+                            element: <Suspense fallback={<Loader/>}><SaveCustomPostTypePage /></Suspense>
+                        });
                     }
 
                     // taxonomies related pages
@@ -144,7 +136,7 @@ const App = memo(() => {
                             },
                             {
                                 path:'/taxonomies/:page?',
-                                name: "Taxonomy list page",
+                                name: "CPT dashboard page",
                                 element: <Suspense fallback={<Loader/>}><TaxonomyListPage /></Suspense>
                             },
                             {
@@ -161,7 +153,8 @@ const App = memo(() => {
 
                     // meta related pages
                     if(enableMeta === 1){
-                        r.push({
+                        r.push(
+                            {
                                 path:'/register_meta',
                                 name: "Register new meta",
                                 element: <Suspense fallback={<Loader/>}><MetaPage /></Suspense>
@@ -173,9 +166,10 @@ const App = memo(() => {
                             },
                             {
                                 path:'/meta/:page?',
-                                name: "Meta groups list page",
+                                name: "Meta fields page",
                                 element: <Suspense fallback={<Loader/>}><MetaListPage /></Suspense>
-                            });
+                            }
+                        );
                     }
 
                     if(enableCtp === 0){

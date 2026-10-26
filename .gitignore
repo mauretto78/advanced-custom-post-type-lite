@@ -1,10 +1,8 @@
 .svn
 .idea
-stats.json
+.DS_Store
 /cache/
 /vendor/
 node_modules/
-/bundle
 /tags/
 /trunk/
-.phpunit.result.cache

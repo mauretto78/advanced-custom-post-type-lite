@@ -1,17 +1,42 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {get} from 'react-hook-form';
 import {isArray} from '../../utils/objects';
 import useTranslation from "../../hooks/useTranslation";
 import {likeThat} from "../../utils/strings";
+import {sizes} from "../../constants/forms.jsx";
+import {selectValuesPropType} from "../../constants/propShapes.jsx";
 
-const SelectMulti = ({placeholder, id, disabled = false, defaultValue, description, values, validate, register, errors, setValue, clearErrors, maxItems}) => {
+const SelectMulti = ({size= 'default', placeholder, id, disabled = false, defaultValue, description, values, validate, register, errors, setValue, clearErrors, maxItems}) => {
 
     const error = get(errors, id);
 
     const [currentValues, setCurrentValues] = useState((defaultValue && isArray(defaultValue)) ? defaultValue : []);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const triggerRef = useRef();
+
+    // Escape-to-close, focus restored to the trigger — same pattern as
+    // Modal/DropdownMenu. Scoped to only listen while open.
+    useEffect(() => {
+        if(!dropdownOpen){
+            return;
+        }
+
+        const handleKeyDown = (e) => {
+            if(e.key === 'Escape'){
+                e.stopPropagation();
+                setDropdownOpen(false);
+                triggerRef.current?.focus();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [dropdownOpen]);
 
     /**
      *
@@ -42,11 +67,11 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
                                     return v.value === value;
                                 });
 
-                                if(filterValue.length === 1){
+                                if(filterValue?.length === 1){
                                     if(filterValue[0].options){
                                         const filterOptValue = filterValue[0].options.filter(o => o.value.toString() === value.toString());
 
-                                        if(filterOptValue.length === 1){
+                                        if(filterOptValue?.length === 1){
                                             return filterOptValue[0].label;
                                         }
                                     }
@@ -58,34 +83,35 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
                             };
 
                             return (
-                                <span className="item">
-                                <span className="label">
-                                    {renderLabel()}
-                                </span>
-                                <a
-                                    href="#"
-                                    className="close-item"
-                                    onClick={e => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
+                                <span key={value} className="item">
+                                    <span className={`label font-size-${size}`}>
+                                        {renderLabel()}
+                                    </span>
+                                    <button
+                                        type="button"
+                                        className="btn-reset close-item"
+                                        aria-label={useTranslation("Remove item")}
+                                        onClick={e => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
 
-                                        if(!disabled){
-                                            setCurrentValues((val) => {
-                                                const newArray = val.filter(v => v !== value);
-                                                setValue(id, newArray);
-                                                setDropdownOpen(false);
+                                            if(!disabled){
+                                                setCurrentValues((val) => {
+                                                    const newArray = val.filter(v => v !== value);
+                                                    setValue(id, newArray);
+                                                    setDropdownOpen(false);
 
-                                                if(error){
-                                                    clearErrors(id);
-                                                }
+                                                    if(error){
+                                                        clearErrors(id);
+                                                    }
 
-                                                return newArray;
-                                            });
-                                        }
-                                    }}
-                                >
-                                    &times;
-                                </a>
+                                                    return newArray;
+                                                });
+                                            }
+                                        }}
+                                    >
+                                        &times;
+                                </button>
                             </span>
                             );
                         })}
@@ -105,9 +131,11 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
      */
     const renderClearAll = () =>  {
         return (
-            <a
-                href="#"
-                className="close"
+            <button
+                type="button"
+                className="btn-reset close"
+                data-testid={`select-multi-clear-all-${id}`}
+                aria-label={useTranslation("Clear all")}
                 onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -124,8 +152,31 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
                 }}
             >
                 &times;
-            </a>
+            </button>
         );
+    };
+
+    const flattenValues = (items) => {
+        return items.reduce((acc, item) => {
+            if(item.options){
+                return acc.concat(flattenValues(item.options));
+            }
+
+            return acc.concat(item.value);
+        }, []);
+    };
+
+    const handleSelectAll = () => {
+        setCurrentValues(() => {
+
+            const allValues = flattenValues(values);
+
+            setValue(id, allValues);
+            clearErrors(id);
+            setDropdownOpen(false);
+
+            return allValues;
+        });
     };
 
     /**
@@ -134,16 +185,34 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
      */
     const renderDropdown = () => {
 
-        if(maxItems && currentValues.length >= maxItems){
+        if(maxItems && currentValues?.length >= maxItems){
             return null;
         }
 
+        const elements = renderListElements(values);
+
+        if(elements?.length === 0){
+            return (
+                <div
+                    data-testid={`select-multi-no-items-${id}`}
+                    className="select-items"
+                >
+                    <div className="p-24">
+                        {useTranslation("No items")}
+                    </div>
+                </div>
+            );
+        }
+
         return (
-            <div className="select-items">
+            <div
+                data-testid={`select-multi-items-${id}`}
+                className="select-items"
+            >
                 <div className="search-box">
                     <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${size}`}
                         placeholder={useTranslation("Filter items")}
                         defaultValue={searchTerm}
                         onChange={e => {
@@ -152,11 +221,25 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
                     />
                 </div>
                 <ul
-                    tabIndex={0}
-                    className="select-items-list"
+                    role="listbox"
+                    className={`select-items-list font-size-${size}`}
                 >
-                    {renderListElements(values)}
+                    {elements}
                 </ul>
+                {!maxItems && (
+                    <div className={`select-all font-size-${size}`}>
+                        <button
+                            type="button"
+                            className="btn-reset"
+                            onClick={e => {
+                                e.preventDefault();
+                                handleSelectAll();
+                            }}
+                        >
+                            {useTranslation("Select all")}
+                        </button>
+                    </div>
+                )}
             </div>
         );
     };
@@ -188,7 +271,7 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
 
                 if(element.options){
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={element.label ?? index}>
                             <li className="optgroup">
                                 {element.label}
                             </li>
@@ -197,23 +280,43 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
                     );
                 }
 
+                const selectItem = () => {
+                    setCurrentValues((val) => {
+                        const newArray = [...val, element.value];
+                        setValue(id, newArray);
+                        setDropdownOpen(!dropdownOpen);
+
+                        if(error){
+                            clearErrors(id);
+                        }
+
+                        return newArray;
+                    });
+                };
+
                 return (
                     <li
                         key={index}
-                        tabIndex={index+1}
+                        role="option"
+                        aria-selected={false}
+                        tabIndex={0}
                         className="select-item"
-                        onClick={() => {
-                            setCurrentValues((val) => {
-                                const newArray = [...val, element.value];
-                                setValue(id, newArray);
-                                setDropdownOpen(!dropdownOpen);
-
-                                if(error){
-                                    clearErrors(id);
-                                }
-
-                                return newArray;
-                            });
+                        onClick={e => {
+                            // CardRow wraps this in a native <label> for a11y; without
+                            // preventDefault the browser also fires a synthetic click on
+                            // the first labelable descendant (e.g. the search input),
+                            // corrupting this selection. See SelectMulti's other button
+                            // handlers (clear-all, select-all, chip-remove) for the same
+                            // pattern.
+                            e.preventDefault();
+                            e.stopPropagation();
+                            selectItem();
+                        }}
+                        onKeyDown={(e) => {
+                            if(e.key === 'Enter' || e.key === ' '){
+                                e.preventDefault();
+                                selectItem();
+                            }
                         }}
                     >
                         {element.label}
@@ -224,24 +327,45 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
 
     return (
         <React.Fragment>
-            <div className="acpt-select-multi">
+            <div
+                className="acpt-select-multi"
+                data-testid={`select-multi-${id}`}
+            >
                 <input
                     id={id}
                     name={id}
                     type="hidden"
                     defaultValue={currentValues}
+                    data-testid={`select-multi-${id}-input`}
                     {...register(id, validate)}
                 />
                 <div
-                    className={`placeholder ${error ? 'has-errors': ''} ${disabled ? 'disabled' : ''}`}
-                    onClick={() => {
+                    ref={triggerRef}
+                    className={`placeholder ${size} ${error ? 'has-errors': ''} ${disabled ? 'disabled' : ''}`}
+                    role="button"
+                    tabIndex={disabled ? -1 : 0}
+                    aria-haspopup="listbox"
+                    aria-expanded={dropdownOpen}
+                    onClick={e => {
+                        // See the item onClick below: CardRow's native <label> wrapper
+                        // forwards an extra synthetic click to the first labelable
+                        // descendant (e.g. the "Clear all" button) unless prevented.
+                        e.preventDefault();
+                        e.stopPropagation();
+
                         if(!disabled){
                             setDropdownOpen(!dropdownOpen);
                         }
                     }}
+                    onKeyDown={(e) => {
+                        if((e.key === 'Enter' || e.key === ' ') && !disabled){
+                            e.preventDefault();
+                            setDropdownOpen(!dropdownOpen);
+                        }
+                    }}
                 >
-                    <div className="items">{renderItems()}</div>
-                    {!dropdownOpen && currentValues.length > 0 && renderClearAll()}
+                    <div data-testid={`select-multi-${id}-items`} className="items">{renderItems()}</div>
+                    {!dropdownOpen && currentValues?.length > 0 && renderClearAll()}
                     <div className="divider"/>
                     <div className="caret"/>
                 </div>
@@ -257,16 +381,20 @@ const SelectMulti = ({placeholder, id, disabled = false, defaultValue, descripti
 
 SelectMulti.propTypes = {
     id: PropTypes.string.isRequired,
+    size: PropTypes.oneOf(sizes),
     placeholder: PropTypes.string,
-    defaultValue: PropTypes.array,
+    // a caller may still hold a legacy single-string value (e.g. a
+    // ConditionalRenderingElement value before it's normalized to an
+    // array) -- isArray() above already falls back to [] for that case.
+    defaultValue: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
     description: PropTypes.string,
     disabled: PropTypes.bool,
-    values: PropTypes.array.isRequired,
-    validate: PropTypes.func,
+    values: selectValuesPropType.isRequired,
+    validate: PropTypes.object,
     register: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
-    errors: PropTypes.array.isRequired,
+    errors: PropTypes.object.isRequired,
     maxItems: PropTypes.number
 };
 

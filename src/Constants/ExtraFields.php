@@ -4,35 +4,39 @@ namespace ACPT_Lite\Constants;
 
 class ExtraFields
 {
-	const ATTACHMENT_ID = 'attachment_id';
-	const CITY = 'city';
-    const COUNTRY = 'country';
-    const CURRENCY = 'currency';
-    const DIAL = 'dial';
-    const FORGED_BY = 'forged_by';
-    const ID = 'id';
-    const LABEL = 'label';
-	const LAT = 'lat';
-	const LENGTH = 'length';
-	const LNG = 'lng';
-	const TYPE = 'type';
-	const WEIGHT = 'weight';
+    public const ATTACHMENT_ID = 'attachment_id';
+    public const CITY = 'city';
+    public const COUNTRY = 'country';
+    public const CURRENCY = 'currency';
+    public const DIAL = 'dial';
+    public const FORMAT = 'format';
+    public const FORGED_BY = 'forged_by';
+    public const ID = 'id';
+    public const LABEL = 'label';
+    public const LAT = 'lat';
+    public const LENGTH = 'length';
+    public const LNG = 'lng';
+    public const BARCODE_VALUE = 'barcode_value';
+    public const QR_CODE_VALUE = 'qr_code_value';
+    public const TYPE = 'type';
+    public const WEIGHT = 'weight';
 
-	const ALLOWED_VALUES = [
-		self::ATTACHMENT_ID,
+    public const ALLOWED_VALUES = [
+        self::ATTACHMENT_ID,
+        self::BARCODE_VALUE,
         self::CITY,
-		self::COUNTRY,
-		self::CURRENCY,
-		self::DIAL,
+        self::COUNTRY,
+        self::CURRENCY,
+        self::DIAL,
+        self::FORMAT,
         self::FORGED_BY,
-		self::ID,
-		self::LAT,
-		self::LABEL,
-		self::LENGTH,
-		self::LNG,
-		self::TYPE,
-		self::WEIGHT,
-	];
+        self::ID,
+        self::LAT,
+        self::LABEL,
+        self::LENGTH,
+        self::LNG,
+        self::QR_CODE_VALUE,
+        self::TYPE,
+        self::WEIGHT,
+    ];
 }
-
-

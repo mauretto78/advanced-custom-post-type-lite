@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from "../../components/Button";
 import {Icon} from "@iconify/react";
 import {styleVariants} from "../../constants/styles";
@@ -18,12 +18,15 @@ const ScrollToTop = () =>{
         }
     };
 
-    window.addEventListener('scroll', toggleVisible);
+    useEffect(() => {
+        window.addEventListener('scroll', toggleVisible);
+        return () => window.removeEventListener('scroll', toggleVisible);
+    }, []);
 
     return (
         <div
             className={`scroll-to-top ${visible ? 'visible' : 'none'}`}
-            data-cy="scroll-to-top"
+            data-testid="scroll-to-top"
         >
             <Button
                 type="button"

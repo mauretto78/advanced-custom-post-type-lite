@@ -1,13 +1,15 @@
+@use "variables";
+
 .acpt-badge {
   display: inline-block;
-  padding: 6px 10px !important;
-  border-radius: $border-radius;
-  color: $gray !important;
-  background: $pale-gray;
+  padding: variables.$space-4 variables.$space-8 !important;
+  border-radius: variables.$border-radius;
+  color: variables.$gray !important;
+  background: variables.$pale-gray;
   border: none;
   outline: none;
   transition: .3s;
-  font-size: $small-font-size;
+  font-size: variables.$small-font-size;
 
   &.disabled {
     opacity: .5;
@@ -23,13 +25,13 @@
   }
 
   &.with-border {
-    border: $border-thickness solid $gray;
+    border: variables.$border-thickness solid variables.$gray;
   }
 
   .badge-link {
-    background: $white;
-    width: 18px;
-    height: 18px;
+    background: variables.$white;
+    width: variables.$space-18;
+    height: variables.$space-18;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,85 +40,134 @@
   }
 
   &.acpt-badge-disabled {
-    color: $gray !important;
-    background: $light-gray;
+    color: variables.$gray !important;
+    background: variables.$light-gray;
   }
 
   &.acpt-badge-warning {
-    background: $warning-bg;
-    color: $warning-color !important;
+    background: variables.$warning-bg;
+    color: variables.$warning-color !important;
 
     .badge-link {
-      color: $warning-color !important;
+      color: variables.$warning-color !important;
     }
 
     &.with-border {
-      border: $border-thickness solid $warning-color;
+      border: variables.$border-thickness solid variables.$warning-color;
     }
   }
 
   &.acpt-badge-info {
-    background: $info-bg;
-    color: $info-color !important;
+    background: variables.$info-bg;
+    color: variables.$info-color !important;
 
     .badge-link {
-      color: $info-color !important;
+      color: variables.$info-color !important;
     }
 
     &.with-border {
-      border: $border-thickness solid $info-color;
+      border: variables.$border-thickness solid variables.$info-color;
+    }
+  }
+
+  &.acpt-badge-accent {
+    background: variables.$accent-bg;
+    color: variables.$accent-color !important;
+
+    .badge-link {
+      color: variables.$accent-color !important;
+    }
+
+    &.with-border {
+      border: variables.$border-thickness solid variables.$accent-color;
     }
   }
 
   &.acpt-badge-primary {
-    background: $primary-color;
-    color: $white !important;
+    background: variables.$primary-color;
+    color: variables.$primary-color-white !important;
 
     .badge-link {
-      color: $primary-color !important;
+      color: variables.$primary-color !important;
     }
 
     &.with-border {
-      border: $border-thickness solid $primary-color;
+      border: variables.$border-thickness solid variables.$primary-color;
     }
   }
 
   &.acpt-badge-secondary {
-    background: $secondary-color;
-    color: $primary-color !important;
+    background: variables.$secondary-color;
+    color: variables.$link-color !important;
 
     .badge-link {
-      color: $primary-color !important;
+      color: variables.$link-color !important;
     }
 
     &.with-border {
-      border: $border-thickness solid $primary-color;
+      border: variables.$border-thickness solid variables.$link-color;
     }
   }
 
   &.acpt-badge-success {
-    background: $success-bg;
-    color: $success-color !important;
+    background: variables.$success-bg;
+    color: variables.$success-color !important;
 
     .badge-link {
-      color: $success-color !important;
+      color: variables.$success-color !important;
     }
 
     &.with-border {
-      border: $border-thickness solid $success-color;
+      border: variables.$border-thickness solid variables.$success-color;
     }
   }
 
   &.acpt-badge-danger {
-    background: $danger-bg;
-    color: $danger-color !important;
+    background: variables.$danger-bg;
+    color: variables.$danger-color !important;
 
     .badge-link {
-      color: $danger-color !important;
+      color: variables.$danger-color !important;
     }
 
     &.with-border {
-      border: $border-thickness solid $danger-color;
+      border: variables.$border-thickness solid variables.$danger-color;
+    }
+  }
+
+  &.acpt-badge-outlined {
+    background: transparent;
+    color: variables.$gray !important;
+    border: variables.$border-thickness solid variables.$gray;
+
+    &.acpt-badge-outlined-primary {
+      color: variables.$primary-color !important;
+      border-color: variables.$primary-color;
+    }
+
+    &.acpt-badge-outlined-secondary {
+      color: variables.$link-color !important;
+      border-color: variables.$link-color;
+    }
+
+    &.acpt-badge-outlined-success {
+      color: variables.$success-color !important;
+      border-color: variables.$success-color;
+    }
+
+    &.acpt-badge-outlined-danger {
+      color: variables.$danger-color !important;
+      border-color: variables.$danger-color;
+    }
+
+    &.acpt-badge-outlined-warning {
+      color: variables.$warning-color !important;
+      border-color: variables.$warning-color;
+    }
+
+    &.acpt-badge-outlined-info {
+      color: variables.$info-color !important;
+      border-color: variables.$info-color;
     }
   }
 }

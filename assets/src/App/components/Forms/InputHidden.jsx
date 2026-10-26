@@ -21,7 +21,7 @@ InputHidden.propTypes = {
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
-    ]).isRequired,
+    ]),
     register: PropTypes.func.isRequired
 };
 

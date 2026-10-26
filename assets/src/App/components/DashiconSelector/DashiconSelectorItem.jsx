@@ -8,8 +8,17 @@ const DashiconSelectorItem = ({icon, isSelected, callback}) => {
         <div
             title={icon}
             className={`icon ${isSelected ? 'selected' : ''}`}
+            role="button"
+            tabIndex={0}
+            aria-pressed={!!isSelected}
             onClick={()=>{
                 callback(icon);
+            }}
+            onKeyDown={(e) => {
+                if(e.key === 'Enter' || e.key === ' '){
+                    e.preventDefault();
+                    callback(icon);
+                }
             }}
         >
             <Icon icon={icon} width="24px"/>

@@ -4,32 +4,34 @@ namespace ACPT_Lite\Core\Shortcodes\ACPT\Fields;
 
 class EmailField extends AbstractField
 {
-    public function render()
+    /**
+     * @return string|null
+     */
+    public function render(): ?string
     {
-        if(!$this->isFieldVisible()){
+        if (!$this->isFieldVisible()) {
             return null;
         }
 
-	    $rawData = $this->fetchRawData();
+        $rawData = $this->fetchRawData();
 
-	    if(!isset($rawData['value'])){
-		    return null;
-	    }
+        if (!isset($rawData['value'])) {
+            return null;
+        }
 
         return $this->renderEmail($rawData['value']);
     }
 
-	/**
-	 * @param $email
-	 *
-	 * @return string
-	 */
-	private function renderEmail($email)
-	{
-		if($this->payload->render === 'text'){
-			return $email;
-		}
+    /**
+     * @param string $email
+     * @return string
+     */
+    private function renderEmail(string $email): string
+    {
+        if ($this->payload->render === 'text') {
+            return $email;
+        }
 
-		return '<a href="mailto:' . sanitize_email($email) . '">' . $this->addBeforeAndAfter($email) . '</a>';
-	}
+        return $this->addBeforeAndAfter('<a href="mailto:' . sanitize_email($email) . '">' . $email . '</a>');
+    }
 }

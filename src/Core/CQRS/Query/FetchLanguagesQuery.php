@@ -7,36 +7,34 @@ use Translation_Entry;
 
 class FetchLanguagesQuery implements QueryInterface
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function execute()
-	{
-		$entries = [
-			'languages' => [],
-			'translations' => [],
-		];
+    /**
+     * @inheritDoc
+     */
+    public function execute()
+    {
+        $entries = [
+            'languages' => [],
+            'translations' => [],
+        ];
 
-		$languageDir = ACPT_LITE_PLUGIN_DIR_PATH.'/i18n/languages';
-		foreach (new \DirectoryIterator($languageDir) as $file){
-			if($file->getExtension() === 'po'){
-				$languageCode = str_replace('.po','', $file->getFilename());
-				$entries['languages'][] = [
-					'value' => $languageCode,
-					'label' => Language::getLabel($languageCode),
-				];
-			}
-		}
+        $languages = Language::supported();
 
-		usort($entries['languages'], function ($a, $b) {
-			return strcmp($a['label'], $b['label']);
-		});
+        foreach ($languages as $languageCode) {
+            $entries['languages'][] = [
+                'value' => $languageCode,
+                'label' => Language::getLabel($languageCode),
+            ];
+        }
 
-		/** @var Translation_Entry $entry */
-		foreach($GLOBALS['l10n'][ACPT_LITE_PLUGIN_NAME]->entries as $entry){
-			$entries['translations'][$entry->key()] = $entry->translations[0];
-		}
+        usort($entries['languages'], function ($a, $b) {
+            return strcmp($a['label'], $b['label']);
+        });
 
-		return $entries;
-	}
+        /** @var Translation_Entry $entry */
+        foreach ($GLOBALS['l10n'][ACPT_LITE_PLUGIN_NAME]->entries as $entry) {
+            $entries['translations'][$entry->key()] = $entry->translations[0];
+        }
+
+        return $entries;
+    }
 }

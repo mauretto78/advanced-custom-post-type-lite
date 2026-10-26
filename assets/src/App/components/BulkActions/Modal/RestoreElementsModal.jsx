@@ -4,12 +4,11 @@ import Modal from "../../../components/Modal";
 import useTranslation from "../../../hooks/useTranslation";
 import {hiddenElements, restoreHiddenElement} from "../../../utils/localStorage";
 import {metaTypes} from "../../../constants/metaTypes";
+import {isRTLOrientation} from "../../../utils/misc";
 
 const RestoreElementsModal = ({belongsTo}) => {
-
     const documentGlobals = document.globals;
     const globals = documentGlobals.globals;
-    const isRtl = globals.is_rtl;
     const globalFind = globals.find;
 
     const hiddenElms = hiddenElements(belongsTo);
@@ -27,35 +26,22 @@ const RestoreElementsModal = ({belongsTo}) => {
      * @return {*}
      */
     const getElement = (elm) => {
-
         if(!globalFind[belongsTo]){
             return;
         }
 
         switch (belongsTo) {
-            case "dataset":
-            case "form":
-            case "woo_product_data":
-            case metaTypes.META:
-                const find = globalFind[belongsTo].filter(el => el.value === elm);
+        case "woo_product_data":
+        case metaTypes.META:
+            const find = globalFind[belongsTo].filter(el => el.value === elm);
 
-                if(find.length !== 1){
-                    return;
-                }
+            if(find.length !== 1){
+                return;
+            }
 
-                return find[0].label;
-
-            case metaTypes.OPTION_PAGE:
-                const page = globalFind[belongsTo].filter(el => el.id === elm);
-
-                if(page.length !== 1){
-                    return;
-                }
-
-                return page[0].label;
-
-            default:
-                return elm;
+            return find[0].label;
+        default:
+            return elm;
         }
     };
 
@@ -70,7 +56,7 @@ const RestoreElementsModal = ({belongsTo}) => {
                 visible={modalOpen}
                 buttons={[]}
             >
-                <table className={`acpt-table with-border ${isRtl ? 'rtl' : ''}`}>
+                <table className={`acpt-table with-border ${isRTLOrientation()}`}>
                     <thead>
                         <tr>
                             <th>
@@ -83,13 +69,14 @@ const RestoreElementsModal = ({belongsTo}) => {
                     </thead>
                     <tbody>
                         {hiddenElms.map((elm) => (
-                            <tr>
+                            <tr key={elm}>
                                 <td>
                                     {getElement(elm)}
                                 </td>
                                 <td>
-                                    <a
-                                        href="#"
+                                    <button
+                                        type="button"
+                                        className="btn-reset"
                                         onClick={e => {
                                             e.preventDefault();
                                             restoreHiddenElement(elm, belongsTo);
@@ -100,7 +87,7 @@ const RestoreElementsModal = ({belongsTo}) => {
                                         }}
                                     >
                                         {useTranslation("Restore")}
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -111,15 +98,16 @@ const RestoreElementsModal = ({belongsTo}) => {
                 <span>
                     {hiddenElms.length} {useTranslation("hidden elements")}
                 </span>
-                <a
-                    href="#"
+                <button
+                    type="button"
+                    className="btn-reset"
                     onClick={e => {
                         e.preventDefault();
                         setModalOpen(!modalOpen);
                     }}
                 >
                     {useTranslation("Restore elements")}
-                </a>
+                </button>
             </div>
         </React.Fragment>
     );

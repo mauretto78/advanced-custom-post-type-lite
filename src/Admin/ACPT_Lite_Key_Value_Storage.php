@@ -7,17 +7,17 @@ use ACPT_Lite\Utils\PHP\KeyEcrypt;
 class ACPT_Lite_Key_Value_Storage
 {
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public static function delete($key)
+    public static function delete(string $key): bool
     {
         $key = KeyEcrypt::ecrypt($key);
 
         $deleteOption = delete_option($key);
-	    $deleteCache = (wp_cache_get($key)) ? wp_cache_delete($key) : true;
+        $deleteCache = (wp_cache_get($key)) ? wp_cache_delete($key) : true;
 
-        if($deleteOption and $deleteCache){
+        if ($deleteOption && $deleteCache) {
             return true;
         }
 
@@ -25,14 +25,14 @@ class ACPT_Lite_Key_Value_Storage
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return mixed
      */
-    public static function get($key)
+    public static function get(string $key)
     {
         $key = KeyEcrypt::ecrypt($key);
 
-        if(wp_cache_get($key)){
+        if (wp_cache_get($key)) {
             return wp_cache_get($key);
         }
 
@@ -40,23 +40,21 @@ class ACPT_Lite_Key_Value_Storage
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed  $value
      * @return bool
      */
-    public static function set($key, $value)
+    public static function set(string $key, $value): bool
     {
         $key = KeyEcrypt::ecrypt($key);
 
-        if(get_option($key)){
-            $saveOption = update_option($key, $value);
+        if (get_option($key)) {
+            $saveOption = update_option($key, $value, true);
         } else {
-            $deprecated = '';
-            $autoload = 'no';
-            $saveOption = add_option($key, $value, $deprecated, $autoload);
+            $saveOption = add_option($key, $value, '', true);
         }
 
-        if($saveOption and wp_cache_set($key, $value)){
+        if ($saveOption && wp_cache_set($key, $value)) {
             return true;
         }
 

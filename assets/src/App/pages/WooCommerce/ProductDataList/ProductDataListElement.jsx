@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
+import {productRecordProps} from "../../../props/wooCommerceProps.js";
 import useTranslation from "../../../hooks/useTranslation";
 import {Link} from "react-router-dom";
 import '../../../scss/woocommerce.scss';
@@ -13,6 +14,10 @@ import {setCookieMessage} from "../../../utils/cookies";
 import {scrollToTop} from "../../../utils/scroll";
 import {refreshPage} from "../../../utils/misc";
 import {toast} from "react-hot-toast";
+import {Icon} from "@iconify/react";
+import {primaryColor} from "../../../utils/colors";
+import DropdownMenu from "../../../components/DropdownMenu";
+import {styleVariants} from "../../../constants/styles";
 
 const ProductDataListElement = memo(({record, page, perPage}) => {
 
@@ -89,28 +94,36 @@ const ProductDataListElement = memo(({record, page, perPage}) => {
                     }
                 </td>
                 <td>
-                    <div className="i-flex-center s-8">
-                        <Link to={`/product-data/product/view/${record.id}`}>
-                            {useTranslation("View")}
-                        </Link>
-                        <Link to={`/product-data/product/edit/${record.id}`}>
-                            {useTranslation("Edit")}
-                        </Link>
-                        <a
-                            href="#"
-                            onClick={e => {
-                                e.preventDefault();
-                                handleDuplicate();
-                            }}
-                        >
+                    <DropdownMenu
+                      name="product-data-menu"
+                      label={`${useTranslation("Actions for")} ${record.name}`}
+                      buttonClass={styleVariants.OUTLINED_SECONDARY}
+                      anchor={
+                          <Icon icon="bx:dots-vertical-rounded" color={primaryColor()} width={24} />
+                      }
+                      links={[
+                          <Link to={`/product-data/product/view/${record.id}`}>
+                              {useTranslation("View")}
+                          </Link>,
+                          <Link to={`/product-data/product/edit/${record.id}`}>
+                              {useTranslation("Edit")}
+                          </Link>,
+                          <button
+                              type="button"
+                              className="btn-reset"
+                              onClick={e => {
+                              e.preventDefault();
+                              handleDuplicate();
+                          }}>
                             {useTranslation("Duplicate")}
-                        </a>
-                        <DeleteWooCommerceProductDataModal
-                            id={record.id}
-                            page={page}
-                            perPage={perPage}
-                        />
-                    </div>
+                          </button>,
+                          <DeleteWooCommerceProductDataModal
+                              id={record.id}
+                              page={page}
+                              perPage={perPage}
+                          />
+                      ]}
+                    />
                 </td>
             </tr>
         </React.Fragment>
@@ -120,7 +133,7 @@ const ProductDataListElement = memo(({record, page, perPage}) => {
 ProductDataListElement.propTypes = {
     page: PropTypes.number,
     perPage: PropTypes.number,
-    record: PropTypes.object.isRequired
+    record: PropTypes.shape(productRecordProps).isRequired
 };
 
 export default ProductDataListElement;

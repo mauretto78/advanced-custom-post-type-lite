@@ -9,23 +9,32 @@ use ACPT_Lite\Core\Models\Taxonomy\TaxonomyModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\PHP\Arrays;
 
 class CustomPostTypeRepository extends AbstractRepository
 {
     /**
      * @return int
      */
-    public static function count()
+    /**
+     * @param array<string, mixed> $args
+     * @return int
+     */
+    public static function count(array $args = []): int
     {
-        $baseQuery = "
-            SELECT 
-                count(id) as count
-            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."`
-            ";
+        $baseQuery = "SELECT count(id) as count FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` WHERE 1 = 1";
+        $queryArgs = [];
 
-        $results = ACPT_Lite_DB::getResults($baseQuery);
+        if (isset($args['search'])) {
+            $baseQuery .= " AND (singular LIKE %s OR plural LIKE %s OR post_name LIKE %s)";
+            $queryArgs[] = "%" . $args['search'] . "%";
+            $queryArgs[] = "%" . $args['search'] . "%";
+            $queryArgs[] = "%" . $args['search'] . "%";
+        }
 
-        if(empty($results)){
+        $results = ACPT_Lite_DB::getResults($baseQuery, $queryArgs);
+
+        if (empty($results)) {
             return 0;
         }
 
@@ -38,18 +47,17 @@ class CustomPostTypeRepository extends AbstractRepository
      * @param string $postType
      * @param bool $deletePosts
      *
-     * @return string|null
+     * @return bool
      * @throws \Exception
      * @since    1.0.0
      */
-    public static function delete($postType, $deletePosts = false)
+    public static function delete(string $postType, bool $deletePosts = false): bool
     {
-        if($postType === 'post' or $postType === 'page'){
+        if ($postType === 'post' || $postType === 'page') {
             throw new \Exception('You cannot delete page or post CPT.');
         }
 
-        if(self::exists($postType)) {
-
+        if (self::exists($postType)) {
             $postModel = self::get([
                     'postType' => $postType
             ])[0];
@@ -63,23 +71,24 @@ class CustomPostTypeRepository extends AbstractRepository
                         WHERE id = %s
                     ";
 
-	            MetaRepository::deleteBelongs( MetaTypes::CUSTOM_POST_TYPE, $postType);
+                MetaRepository::deleteBelongs(MetaTypes::CUSTOM_POST_TYPE, $postType);
 
                 TaxonomyRepository::deleteAssociations($postModel->getId());
 
-                if($postModel->isWooCommerce()){
+                if ($postModel->isWooCommerce()) {
                     WooCommerceProductDataRepository::clear();
                 }
-
                 ACPT_Lite_DB::executeQueryOrThrowException($sql, [$postModel->getId()]);
                 ACPT_Lite_DB::commitTransaction();
-	            ACPT_Lite_DB::invalidateCacheTag(self::class);
-            } catch (\Exception $exception){
+                ACPT_Lite_DB::invalidateCacheTag(self::class);
+            } catch (\Exception $exception) {
+                do_action("acpt/error", $exception);
+
                 ACPT_Lite_DB::rollbackTransaction();
                 throw new \Exception($exception->getMessage());
             }
 
-            if($deletePosts){
+            if ($deletePosts) {
                 self::deletePostType($postType);
             }
 
@@ -93,11 +102,11 @@ class CustomPostTypeRepository extends AbstractRepository
      * Check if a post type exists
      *
      * @since    1.0.0
-     * @param $postType
+     * @param string $postType
      *
      * @return bool
      */
-    public static function exists($postType)
+    public static function exists(string $postType): bool
     {
         $baseQuery = "
             SELECT 
@@ -108,22 +117,24 @@ class CustomPostTypeRepository extends AbstractRepository
 
         $posts = ACPT_Lite_DB::getResults($baseQuery, [$postType]);
 
-        return count($posts) === 1;
+        return Arrays::count($posts) === 1;
     }
-    
+
     /**
      * Get the registered custom post types
      *
-     * @param array $meta
+     * @param array<string, mixed> $meta
      *
      * @return CustomPostTypeModel[]
      * @throws \Exception
      * @since    1.0.0
      */
-    public static function get(array $meta = [])
+    public static function get(array $meta = []): array
     {
         $results = [];
         $args = [];
+
+        $cachedId = "post_type_get";
 
         $baseQuery = "
             SELECT 
@@ -144,53 +155,86 @@ class CustomPostTypeRepository extends AbstractRepository
 
         $args[] = 'publish';
 
-        if(isset($meta['id'])){
+        if (isset($meta['id'])) {
             $baseQuery .= " AND cp.id = %s";
             $args[] = $meta['id'];
+            $cachedId .= "_".$meta['id'];
         }
 
-        if(isset($meta['postType'])){
+        $postTypeFilter = $meta['postType'] ?? $meta['name'] ?? null;
+        if ($postTypeFilter !== null) {
             $baseQuery .= " AND cp.post_name = %s ";
-            $args[] = $meta['postType'];
+            $args[] = $postTypeFilter;
+            $cachedId .= "_".$postTypeFilter;
         }
 
-	    if(isset($meta['exclude'])){
-		    $baseQuery .= " AND cp.post_name != %s ";
-		    $args[] = $meta['exclude'];
-	    }
+        if (isset($meta['exclude'])) {
+            $baseQuery .= " AND cp.post_name != %s ";
+            $args[] = $meta['exclude'];
+            $cachedId .= "_".$meta['exclude'];
+        }
+
+        if (isset($meta['search'])) {
+            $baseQuery .= " AND (cp.singular LIKE %s OR cp.plural LIKE %s OR cp.post_name LIKE %s)";
+            $args[] = "%".$meta['search']."%";
+            $args[] = "%".$meta['search']."%";
+            $args[] = "%".$meta['search']."%";
+            $cachedId .= "_".$meta['search'];
+        }
 
         $baseQuery .= " GROUP BY cp.id";
-        $baseQuery .= " ORDER BY cp.native DESC, cp.post_name ASC";
 
-        if(isset($meta['page']) and isset($meta['perPage'])){
-            $baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
+        if (isset($meta['sort']) && isset($meta['order'])) {
+            $baseQuery .= " ORDER BY ".$meta['sort']." ".$meta['order'];
+            $cachedId .= "_".$meta['sort']."_".$meta['order'];
+        } else {
+            $baseQuery .= " ORDER BY cp.native DESC, cp.post_name ASC";
+        }
+
+        if (isset($meta['page']) && isset($meta['perPage'])) {
+            $baseQuery .= " LIMIT ".(int)$meta['perPage']." OFFSET " . ((int)$meta['perPage'] * ((int)$meta['page'] - 1));
+            $cachedId .= "_".$meta['perPage'];
+            $cachedId .= "_".$meta['page'];
+        }
+
+        $fromCache = self::fromCache($cachedId);
+
+        if ($fromCache !== null) {
+            return $fromCache;
         }
 
         $baseQuery .= ';';
         $posts = ACPT_Lite_DB::getResults($baseQuery, $args);
 
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             try {
-	            $postModel = CustomPostTypeModel::hydrateFromArray([
-		            'id' => $post->id,
-		            'name' => $post->name,
-		            'singular' => $post->singular,
-		            'plural' => $post->plural,
-		            'icon' => $post->icon,
-		            'native' => $post->native == '0' ? false : true,
-		            'supports' => json_decode($post->supports),
-		            'labels' => json_decode($post->labels, true),
-		            'settings' => json_decode($post->settings, true),
-	            ]);
+                $postModel = CustomPostTypeModel::hydrateFromArray([
+                    'id' => $post->id,
+                    'name' => $post->name,
+                    'singular' => $post->singular,
+                    'plural' => $post->plural,
+                    'icon' => $post->icon,
+                    'native' => $post->native == '0' ? false : true,
+                    'supports' => json_decode($post->supports),
+                    'labels' => json_decode($post->labels, true),
+                    // WP core defaults rest_base to boolean false when unset rather than '' or
+                    // null — collapse that to null so it matches the declared string|null output
+                    // schema instead of failing ability_invalid_output for such a post type.
+                    'settings' => Arrays::falseToNull(json_decode($post->settings, true) ?: [], ['rest_base']),
+                ]);
 
-	            // Add more data
-	            $postModel = self::addTaxonomiesToPostTypeModel($postModel);
-	            $postModel = self::addWooCommerceDataToPostTypeModel($postModel);
-	            $postModel->setPostCount($post->post_count);
+                // Add more data
+                $postModel = self::addTaxonomiesToPostTypeModel($postModel);
+                $postModel = self::addWooCommerceDataToPostTypeModel($postModel);
+                $postModel->setPostCount($post->post_count);
 
-	            $results[] = $postModel;
-            } catch (\Exception $exception){}
+                $results[] = $postModel;
+            } catch (\Exception $exception) {
+                do_action("acpt/error", $exception);
+            }
         }
+
+        self::saveInCache($cachedId, $results);
 
         return $results;
     }
@@ -201,7 +245,7 @@ class CustomPostTypeRepository extends AbstractRepository
      * @return CustomPostTypeModel
      * @throws \Exception
      */
-    private static function addTaxonomiesToPostTypeModel(CustomPostTypeModel $postModel)
+    private static function addTaxonomiesToPostTypeModel(CustomPostTypeModel $postModel): CustomPostTypeModel
     {
         $taxonomies = ACPT_Lite_DB::getResults("
                     SELECT
@@ -219,18 +263,20 @@ class CustomPostTypeRepository extends AbstractRepository
 
         foreach ($taxonomies as $taxonomy) {
             try {
-	            $taxonomyModel = TaxonomyModel::hydrateFromArray([
-		            'id' => $taxonomy->id,
-		            'slug' => $taxonomy->slug,
-		            'singular' => $taxonomy->singular,
-		            'plural' => $taxonomy->plural,
-		            'native' => (isset($taxonomy->native) and $taxonomy->native == '1') ? true : false,
-		            'labels' => json_decode($taxonomy->labels, true),
-		            'settings' => json_decode($taxonomy->settings, true),
-	            ]);
+                $taxonomyModel = TaxonomyModel::hydrateFromArray([
+                    'id' => $taxonomy->id,
+                    'slug' => $taxonomy->slug,
+                    'singular' => $taxonomy->singular,
+                    'plural' => $taxonomy->plural,
+                    'native' => (isset($taxonomy->native) && $taxonomy->native == '1') ? true : false,
+                    'labels' => json_decode($taxonomy->labels, true),
+                    'settings' => Arrays::falseToNull(json_decode($taxonomy->settings, true) ?: [], ['rest_base', 'rest_controller_class']),
+                ]);
 
-	            $postModel->addTaxonomy($taxonomyModel);
-            } catch (\Exception $exception){}
+                $postModel->addTaxonomy($taxonomyModel);
+            } catch (\Exception $exception) {
+                do_action("acpt/error", $exception);
+            }
         }
 
         return $postModel;
@@ -242,9 +288,9 @@ class CustomPostTypeRepository extends AbstractRepository
      * @return CustomPostTypeModel
      * @throws \Exception
      */
-    private static function addWooCommerceDataToPostTypeModel( CustomPostTypeModel $postModel)
+    private static function addWooCommerceDataToPostTypeModel(CustomPostTypeModel $postModel): CustomPostTypeModel
     {
-        if($postModel->isWooCommerce()){
+        if ($postModel->isWooCommerce()) {
             $productData = ACPT_Lite_DB::getResults("
                         SELECT 
                             id,
@@ -255,12 +301,12 @@ class CustomPostTypeRepository extends AbstractRepository
                         FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
                     ;", []);
 
-            foreach ($productData as $productDatum){
+            foreach ($productData as $productDatum) {
                 $wooCommerceProductDataModel = WooCommerceProductDataModel::hydrateFromArray([
                         'id' => $productDatum->id,
                         'name' => $productDatum->product_data_name,
                         'icon' => json_decode($productDatum->icon, true),
-                        'visibility' => $productDatum->visibility,
+                        'visibility' => json_decode($productDatum->visibility),
                         'showInUI' => $productDatum->show_in_ui == '0' ? false : true,
                 ]);
 
@@ -276,7 +322,7 @@ class CustomPostTypeRepository extends AbstractRepository
                             WHERE product_data_id = %s ORDER BY sort DESC
                         ;", [$productDatum->id]);
 
-                foreach ($productDataFields as $productDataField){
+                foreach ($productDataFields as $productDataField) {
                     $wooCommerceProductDataFieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
                             'id' => $productDataField->id,
                             'productDataModel' => $wooCommerceProductDataModel,
@@ -303,7 +349,7 @@ class CustomPostTypeRepository extends AbstractRepository
     /**
      * @return string[]
      */
-    public static function getNames()
+    public static function getNames(): array
     {
         $names = [];
         $query = "
@@ -315,7 +361,7 @@ class CustomPostTypeRepository extends AbstractRepository
 
         $postTypes = ACPT_Lite_DB::getResults($query, []);
 
-        foreach ($postTypes as $postType){
+        foreach ($postTypes as $postType) {
             $names[] = $postType->name;
         }
 
@@ -326,11 +372,11 @@ class CustomPostTypeRepository extends AbstractRepository
      * Get the id of a post type by registered name
      *
      * @since    1.0.0
-     * @param $postType
+     * @param string $postType
      *
      * @return string|null
      */
-    public static function getId($postType)
+    public static function getId(string $postType): ?string
     {
         $baseQuery = "
             SELECT 
@@ -343,21 +389,21 @@ class CustomPostTypeRepository extends AbstractRepository
                 $postType
         ]);
 
-        if(count($posts) === 1){
+        if (Arrays::count($posts) === 1) {
             return $posts[0]->id;
         }
 
         return null;
     }
-    
+
     /**
      * Save custom post type data
      *
      * @param CustomPostTypeModel $model
-     *
+     * @return void
      * @throws \Exception
      */
-    public static function save(CustomPostTypeModel $model)
+    public static function save(CustomPostTypeModel $model): void
     {
         $sql = "
             INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_CUSTOM_POST_TYPE)."` 
@@ -410,17 +456,17 @@ class CustomPostTypeRepository extends AbstractRepository
                 json_encode($model->getLabels()),
                 json_encode($model->getSettings())
         ]);
-	    ACPT_Lite_DB::invalidateCacheTag(self::class);
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
      * Delete all posts by post type
      *
-     * @param $postType
-     *
+     * @param string $postType
+     * @return void
      * @throws \Exception
      */
-    private static function deletePostType($postType)
+    private static function deletePostType(string $postType): void
     {
         global $wpdb;
 
@@ -433,131 +479,126 @@ class CustomPostTypeRepository extends AbstractRepository
             WHERE a.post_type = %s";
 
         ACPT_Lite_DB::executeQueryOrThrowException($query, [$postType]);
-	    ACPT_Lite_DB::invalidateCacheTag(self::class);
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
-	/**
-	 * @param $postType
-	 *
-	 * @throws \Exception
-	 */
-	public static function createCustomPostType($postType)
-	{
-		if(self::isAValidCustomPostType($postType)){
-			$postTypeObject = get_post_type_object($postType);
-			$postTypeSupports = get_all_post_type_supports($postType);
+    /**
+     * @param string $postType
+     * @return void
+     * @throws \Exception
+     */
+    public static function createCustomPostType(string $postType): void
+    {
+        if (self::isAValidCustomPostType($postType)) {
+            $postTypeObject = get_post_type_object($postType);
+            $postTypeSupports = get_all_post_type_supports($postType);
 
-			if(
-				$postTypeObject->show_ui === true and
-				$postTypeObject->show_in_nav_menus === true and
-				is_string($postTypeObject->menu_icon)
-			){
+            if (
+                $postTypeObject->show_ui === true &&
+                $postTypeObject->show_in_nav_menus === true
+            ) {
+                $settings = [
+                    'public' => $postTypeObject->public,
+                    'publicly_queryable' => $postTypeObject->publicly_queryable,
+                    'show_ui' => $postTypeObject->show_ui,
+                    'show_in_menu' => $postTypeObject->show_in_menu,
+                    'show_in_nav_menus' => $postTypeObject->show_in_nav_menus,
+                    'show_in_admin_bar' => $postTypeObject->show_in_admin_bar,
+                    'show_in_rest' => $postTypeObject->show_in_rest,
+                    'rest_base' => $postTypeObject->rest_base,
+                    'menu_position' => isset($postTypeObject->menu_position) ? (int)$postTypeObject->menu_position : null,
+                    'capability_type' => $postTypeObject->capability_type,
+                    'has_archive' => $postTypeObject->has_archive,
+                    'rewrite' => $postTypeObject->rewrite,
+                    'custom_rewrite' => $postTypeObject->rewrite['slug'] ?? $postTypeObject->custom_rewrite ?? null,
+                    'with_front' => $postTypeObject->rewrite['with_front'] ?? $postTypeObject->with_front ?? null,
+                    'feeds' => $postTypeObject->rewrite['feeds'] ?? null,
+                    'hierarchical' => $postTypeObject->hierarchical ?? false,
+                    'rewrite_hierarchical' => $postTypeObject->rewrite_hierarchical ?? $postTypeObject->hierarchical ?? null,
+                    'query_var' => isset($postTypeObject->query_var) ? !empty($postTypeObject->query_var) : null,
+                    'custom_query_var' => $postTypeObject->custom_query_var ?? $postTypeObject->query_var ?? null ,
+                ];
 
-				$settings = [
-					'public' => $postTypeObject->public,
-					'publicly_queryable' => $postTypeObject->publicly_queryable,
-					'show_ui' => $postTypeObject->show_ui,
-					'show_in_menu' => $postTypeObject->show_in_menu,
-					'show_in_nav_menus' => $postTypeObject->show_in_nav_menus,
-					'show_in_admin_bar' => $postTypeObject->show_in_admin_bar,
-					'show_in_rest' => $postTypeObject->show_in_rest,
-					'rest_base' => $postTypeObject->rest_base,
-					'menu_position' => isset($postTypeObject->menu_position) ? (int)$postTypeObject->menu_position : null,
-					'capability_type' => $postTypeObject->capability_type,
-					'has_archive' => $postTypeObject->has_archive,
-					'rewrite' => $postTypeObject->rewrite,
-					'custom_rewrite' => isset($postTypeObject->custom_rewrite) ? $postTypeObject->custom_rewrite : null,
-					'query_var' => isset($postTypeObject->query_var) ? $postTypeObject->query_var : null,
-					'custom_query_var' => isset($postTypeObject->custom_query_var) ? $postTypeObject->custom_query_var : null ,
-				];
+                $postModel = CustomPostTypeModel::hydrateFromArray([
+                    'id' => Uuid::v4(),
+                    'name' => $postTypeObject->name,
+                    'singular' => $postTypeObject->labels->singular_name ?? $postTypeObject->label,
+                    'plural' => $postTypeObject->label,
+                    'icon' => (isset($postTypeObject->menu_icon) ? $postTypeObject->menu_icon : 'dashicons-admin-post'),
+                    'native' => false,
+                    'supports' => array_keys($postTypeSupports),
+                    'labels' => json_decode(json_encode($postTypeObject->labels) ?: 'null', true),
+                    'settings' => $settings,
+                ]);
 
-				// WPGraphQL
-				if(is_plugin_active( 'wp-graphql/wp-graphql.php' )){
-					$settings['show_in_graphql'] = isset($postTypeObject->show_in_graphql) ? $postTypeObject->show_in_graphql : false;
-					$settings['graphql_single_name'] = isset($postTypeObject->show_in_graphql) ? $postTypeObject->graphql_single_name : null;
-					$settings['graphql_plural_name'] = isset($postTypeObject->graphql_plural_name) ? $postTypeObject->graphql_plural_name : null;
-				}
+                self::save($postModel);
+                self::registerRelatedTaxonomies($postType);
 
-				$postModel = CustomPostTypeModel::hydrateFromArray([
-					'id' => Uuid::v4(),
-					'name' => $postTypeObject->name,
-					'singular' => $postTypeObject->label,
-					'plural' => $postTypeObject->label,
-					'icon' => (isset($postTypeObject->menu_icon) ? $postTypeObject->menu_icon : 'dashicons-admin-site-alt3'),
-					'native' => false,
-					'supports' => array_keys($postTypeSupports),
-					'labels' => json_decode(json_encode($postTypeObject->labels), true),
-					'settings' => $settings,
-				]);
+                ACPT_Lite_DB::invalidateCacheTag(self::class);
+            }
+        }
+    }
 
-				self::save($postModel);
-				self::registerRelatedTaxonomies($postType);
+    /**
+     * @param string $postType
+     * @return void
+     */
+    private static function registerRelatedTaxonomies($postType)
+    {
+        $args = [
+            'public' => true,
+            '_builtin' => false,
+        ];
+        $output = 'objects';
+        $operator = 'and';
+        $taxonomies = get_taxonomies($args, $output, $operator);
 
-				ACPT_Lite_DB::invalidateCacheTag(self::class);
-			}
-		}
-	}
+        if (!empty($taxonomies)) {
+            foreach ($taxonomies as $taxonomy) {
+                if (
+                    !empty($taxonomy->object_type)
+                    && $taxonomy->object_type[0] === $postType
+                ) {
+                    TaxonomyRepository::createCustomTaxonomy($taxonomy->name);
+                }
+            }
+        }
+    }
 
-	/**
-	 * @param $postType
-	 */
-	private static function registerRelatedTaxonomies($postType)
-	{
-		$args = [
-			'public' => true,
-			'_builtin' => false,
-		];
-		$output = 'objects';
-		$operator = 'and';
-		$taxonomies = get_taxonomies($args, $output, $operator);
+    /**
+     * @param string $postType
+     *
+     * @return bool
+     */
+    private static function isAValidCustomPostType($postType)
+    {
+        $notAllowed = [
+            "post",
+            "page",
+            "attachment",
+            "revision",
+            "nav_menu_item",
+            "custom_css",
+            "customize_changeset",
+            "oembed_cache",
+            "user_request",
+            "wp_block",
+            "wp_template",
+        ];
 
-		if(!empty($taxonomies)){
-			foreach ($taxonomies as $taxonomy){
-				if(
-					is_array($taxonomy->object_type) and
-					!empty($taxonomy->object_type)
-					and $taxonomy->object_type[0] === $postType
-				){
-					TaxonomyRepository::createCustomTaxonomy($taxonomy->name);
-				}
-			}
-		}
-	}
+        // exclude WooCommerce CPT
+        if (class_exists('woocommerce')) {
+            $notAllowed[] = 'shop_order';
+            $notAllowed[] = 'scheduled-action';
+            $notAllowed[] = 'shop_coupon';
+            $notAllowed[] = 'product_variation';
+            $notAllowed[] = 'shop_order_refund';
+        }
 
-	/**
-	 * @param $postType
-	 *
-	 * @return bool
-	 */
-	private static function isAValidCustomPostType($postType)
-	{
-		$notAllowed = [
-			"post",
-			"page",
-			"attachment",
-			"revision",
-			"nav_menu_item",
-			"custom_css",
-			"customize_changeset",
-			"oembed_cache",
-			"user_request",
-			"wp_block",
-			"wp_template",
-		];
+        if (in_array($postType, $notAllowed)) {
+            return false;
+        }
 
-		// exclude WooCommerce CPT
-		if ( class_exists( 'woocommerce' ) ) {
-			$notAllowed[] = 'shop_order';
-			$notAllowed[] = 'scheduled-action';
-			$notAllowed[] = 'shop_coupon';
-			$notAllowed[] = 'product_variation';
-			$notAllowed[] = 'shop_order_refund';
-		}
-
-		if(in_array($postType, $notAllowed)){
-			return false;
-		}
-
-		return true;
-	}
+        return true;
+    }
 }

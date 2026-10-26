@@ -4,7 +4,6 @@ namespace ACPT_Lite\Integrations\WooCommerce\Generators;
 
 use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\MetaTypes;
-use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Utils\Wordpress\WPUtils;
 
@@ -13,38 +12,34 @@ class WooCommerceProductVariationMetaGroups
     /**
      * Add product data
      */
-    public function generate()
+    public function generate(): void
     {
-        try {
-            $groups = MetaRepository::get([
-                'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
-                'find' => 'product_variation',
-                'clonedFields' => true,
-            ]);
-        } catch (\Exception $exception){
-            $groups = [];
-        }
-
-        $this->renderGroups($groups);
-        $this->saveData($groups);
+        $this->renderGroups();
+        $this->saveData();
     }
 
     /**
-     * @param MetaGroupModel[] $groups
+     * Render fields on WC product variation data
      */
-    private function renderGroups($groups)
+    private function renderGroups(): void
     {
-        add_action( 'woocommerce_product_after_variable_attributes', function ($loop, $variationData, \WP_Post $variation) use($groups) {
-
+        add_action('woocommerce_product_after_variable_attributes', function ($loop, $variationData, \WP_Post $variation) {
             $singleProductGroups = MetaRepository::get([
                 'belongsTo' => BelongsTo::POST_ID,
                 'find' => $variation->ID,
                 'clonedFields' => true,
             ]);
 
+            $groups = MetaRepository::get([
+                'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
+                'find' => 'product_variation',
+                'postId' => $variation->ID,
+                'clonedFields' => true,
+            ]);
+
             $groups = array_merge($groups, $singleProductGroups);
 
-            foreach ($groups as $group){
+            foreach ($groups as $group) {
                 $generator = new WooCommerceProductVariationMetaGroup($group, $loop, $variationData, $variation);
                 echo $generator->render();
             }
@@ -52,21 +47,27 @@ class WooCommerceProductVariationMetaGroups
     }
 
     /**
-     * @param MetaGroupModel[] $groups
+     * Save WC product variation data
      */
-    private function saveData($groups)
+    private function saveData(): void
     {
-        add_action( 'woocommerce_save_product_variation', function ($variationId, $loop) use($groups) {
-
+        add_action('woocommerce_save_product_variation', function ($variationId, $loop) {
             $singleProductGroups = MetaRepository::get([
                 'belongsTo' => BelongsTo::POST_ID,
                 'find' => $variationId,
                 'clonedFields' => true,
             ]);
 
+            $groups = MetaRepository::get([
+                'belongsTo' => MetaTypes::CUSTOM_POST_TYPE,
+                'find' => 'product_variation',
+                'postId' => $variationId,
+                'clonedFields' => true,
+            ]);
+
             $groups = array_merge($groups, $singleProductGroups);
 
-            WPUtils::handleSavePost($variationId, $groups, $loop);
-        }, 10, 2 );
+            WPUtils::handleSavePost((int)$variationId, 'product_variation', $groups, $loop);
+        }, 10, 2);
     }
 }

@@ -7,82 +7,74 @@ use ACPT_Lite\Core\Repository\MetaRepository;
 
 class FetchMetaFieldsFromBelongsQuery implements QueryInterface
 {
-	/**
-	 * @var string
-	 */
-	private $belongsTo;
+    /**
+     * @var string
+     */
+    private string $belongsTo;
 
-	/**
-	 * @var string
-	 */
-	private $find;
 
-	/**
-	 * FetchMetaFieldsFromBelongsQuery constructor.
-	 *
-	 * @param $belongsTo
-	 * @param $find
-	 */
-	public function __construct($belongsTo, $find) {
-		$this->belongsTo = $belongsTo;
-		$this->find = $find;
-	}
 
-	/**
-	 * @return array|mixed
-	 * @throws \Exception
-	 */
-	public function execute()
-	{
-		$data = [
-			[
-				"name" => "--Select--",
-				"id" => null,
-			]
-		];
+    /**
+     * @param string $belongsTo
+     */
+    public function __construct(string $belongsTo)
+    {
+        $this->belongsTo = $belongsTo;
+    }
 
-		switch ($this->belongsTo){
-			case MetaTypes::CUSTOM_POST_TYPE:
-				$data[] = ['name' => 'ID', 'id' => 'ID'];
-				$data[] = ['name' => 'date', 'id' => 'date'];
-				$data[] = ['name' => 'title', 'id' => 'title'];
+    /**
+     * @return array<int, mixed>
+     * @throws \Exception
+     */
+    public function execute(): array
+    {
+        $data = [
+            [
+                "name" => "--Select--",
+                "id" => null,
+            ]
+        ];
 
-				// fetch cpt meta fields
-				$metaFields = MetaRepository::getMetaFields([
-					'belongsTo' => $this->belongsTo,
-					'find' => $this->find,
-					'lazy' => true,
-				]);
+        switch ($this->belongsTo) {
+            case MetaTypes::CUSTOM_POST_TYPE:
+                $data[] = ['name' => 'ID', 'id' => 'ID'];
+                $data[] = ['name' => 'date', 'id' => 'date'];
+                $data[] = ['name' => 'title', 'id' => 'title'];
 
-				foreach ($metaFields as $metaField){
-					$data[]  = [
-						'id' => $metaField->getId(),
-						'name' => '['.$metaField->getMetaBox()->getPostType().']' . $metaField->getUiName(),
-					];
-				}
+                // fetch cpt meta fields
+                $metaFields = MetaRepository::getMetaFields([
+                    'lazy' => true,
+                ]);
 
-				break;
+                foreach ($metaFields as $metaField) {
+                    $data[]  = [
+                        'id' => $metaField->getId(),
+                        'name' => '['.$metaField->getBox()->getGroup()->getUIName().']' . $metaField->getUiName(),
+                    ];
+                }
 
-			case MetaTypes::TAXONOMY:
-				$data[] = ['name' => 'ID', 'id' => 'ID'];
-				$data[] = ['name' => 'name', 'id' => 'name'];
-				$data[] = ['name' => 'slug', 'id' => 'slug'];
+                break;
 
-				// fetch tax meta fields
-				$metaFields = MetaRepository::getMetaFields([
-					'lazy' => true,
-				]);
+            case MetaTypes::TAXONOMY:
+                $data[] = ['name' => 'ID', 'id' => 'ID'];
+                $data[] = ['name' => 'name', 'id' => 'name'];
+                $data[] = ['name' => 'slug', 'id' => 'slug'];
 
-				foreach ($metaFields as $metaField){
-					$data[]  = [
-						'id' => $metaField->getId(),
-						'name' => '['.$metaField->getMetaBox()->getTaxonomy().']' . $metaField->getUiName(),
-					];
-				}
+                // fetch tax meta fields
+                $metaFields = MetaRepository::getMetaFields([
+                    'lazy' => true,
+                ]);
 
-				break;
-		}
-		
-		return $data;
-	}
+                foreach ($metaFields as $metaField) {
+                    $data[]  = [
+                        'id' => $metaField->getId(),
+                        'name' => '['.$metaField->getBox()->getGroup()->getUIName().']' . $metaField->getUiName(),
+                    ];
+                }
+
+                break;
+        }
+
+        return $data;
+    }
 }

@@ -350,15 +350,11 @@ msgstr "Meta vlastného typu príspevku úspešne uložená"
 msgid "Custom post type slug to use instead of default."
 msgstr "Vlastný typ príspevku slug použiť namiesto predvoleného."
 
-msgid ""
-"Custom post type successfully deleted."
-msgstr ""
-"Vlastný typ príspevku úspešne odstránený."
+msgid "Custom post type successfully deleted."
+msgstr "Vlastný typ príspevku úspešne odstránený."
 
-msgid ""
-"Custom post type successfully saved."
-msgstr ""
-"Vlastný typ príspevku úspešne uložený.."
+msgid "Custom post type successfully saved."
+msgstr "Vlastný typ príspevku úspešne uložený.."
 
 msgid "Custom post type was associated to selected taxonomies"
 msgstr "Vlastný typ príspevku bol priradený k vybraným taxonómiám"
@@ -437,6 +433,9 @@ msgstr "Odstránenie ostatných príspevkov"
 msgid "Delete pages"
 msgstr "Odstránenie stránok"
 
+msgid "Delete posts"
+msgstr ""
+
 msgid "Delete post metadata when deleting ACPT fields"
 msgstr "Odstránenie metaúdajov príspevku pri odstraňovaní polí ACPT"
 
@@ -469,6 +468,9 @@ msgstr "Odstránenie súkromných príspevkov"
 
 msgid "Delete published pages"
 msgstr "Odstránenie publikovaných stránok"
+
+msgid "Delete published posts"
+msgstr ""
 
 msgid "Delete the meta box in this"
 msgstr "Odstráňte meta políčko v tomto"
@@ -557,6 +559,9 @@ msgstr "Upravovať príspevky ostatných"
 msgid "Edit pages"
 msgstr "Úprava stránok"
 
+msgid "Edit posts"
+msgstr ""
+
 msgid "Edit private pages"
 msgstr "Úprava súkromných stránok"
 
@@ -565,6 +570,9 @@ msgstr "Úprava súkromných príspevkov"
 
 msgid "Edit published pages"
 msgstr "Úprava uverejnených stránok"
+
+msgid "Edit published posts"
+msgstr ""
 
 msgid "Element"
 msgstr "Element"
@@ -623,6 +631,9 @@ msgstr "Export vlastných typov príspevkov"
 msgid "Export data"
 msgstr "Export údajov"
 
+msgid "Export settings"
+msgstr "Export nastavení"
+
 msgid "Export selected elements"
 msgstr "Export vybraných prvkov"
 
@@ -643,6 +654,9 @@ msgstr "Stĺpce poľa ([1-6] len pre pole opakovača)"
 
 msgid "Field label"
 msgstr "Názov textového poľa"
+
+msgid "Field name"
+msgstr ""
 
 msgid "Field name cannot be blank"
 msgstr "Názov poľa nemôže byť prázdny"
@@ -698,12 +712,9 @@ msgid "Format"
 msgstr "Formát"
 
 msgid ""
-"From this dashboard you can discover and manage every API endpoints exposed "
-"by ACPT. Use the playground to learn how to use every endpoint."
+"Discover, manage and test every REST endpoint exposed by ACPT via live "
+"Swagger UI."
 msgstr ""
-"Na tomto ovládacom paneli môžete zistiť a spravovať všetky koncové body API "
-"vystavené systémom ACPT. Pomocou ihriska sa naučíte používať každý koncový "
-"bod."
 
 msgid "Fullscreen mode"
 msgstr "Režim celej obrazovky"
@@ -779,6 +790,9 @@ msgstr "Import vlastných typov príspevkov"
 
 msgid "Import data"
 msgstr "Import údajov"
+
+msgid "Import settings"
+msgstr "Import nastavení"
 
 msgid "Insert"
 msgstr "Vložiť"
@@ -1130,6 +1144,9 @@ msgstr "Nadradený"
 msgid "Parent item"
 msgstr "Rodič značky"
 
+msgid "Parent WP admin menu"
+msgstr ""
+
 msgid "Parent {{r}}"
 msgstr "Rodič {{r}}"
 
@@ -1186,6 +1203,9 @@ msgstr "Verejne prístupné vyhľadávanie"
 msgid "Publish pages"
 msgstr "Publikovanie stránok"
 
+msgid "Publish posts"
+msgstr ""
+
 msgid "Published posts count"
 msgstr "Počet uverejnených príspevkov"
 
@@ -1214,6 +1234,9 @@ msgstr "Trieda REST Controller"
 
 msgid "Radio/checkbox"
 msgstr "Rádio/zaškrtávacie políčko"
+
+msgid "Read "
+msgstr ""
 
 msgid "Read private pages"
 msgstr "Čítanie súkromných stránok"
@@ -1630,11 +1653,9 @@ msgid "This text will appear before input"
 msgstr "Tento text sa zobrazí pred vstupom"
 
 msgid ""
-"This tool allows you to import settings and meta fields from previously "
-"exported .acpt files (max size allowed is 2Mb)."
+"Restore settings and meta fields from a previously exported .acpt file. "
+"Maximum file size is 2 MB."
 msgstr ""
-"Tento nástroj umožňuje importovať nastavenia a meta polia z predtým "
-"exportovaných súborov .acpt (maximálna povolená veľkosť je 2 MB)."
 
 msgid "To change the base url of REST API route. Default is"
 msgstr "Zmena základnej url trasy REST API. Predvolená hodnota je"
@@ -1686,6 +1707,9 @@ msgstr "Nahrať"
 msgid "Upload file"
 msgstr "Nahrať súbor"
 
+msgid "Upload files"
+msgstr ""
+
 msgid "Upload your file"
 msgstr "Nahrajte svoj súbor"
 
@@ -1693,11 +1717,9 @@ msgid "Use featured image"
 msgstr "Použiť titulnú fotku"
 
 msgid ""
-"Use this tool to quick export the general settings and meta fields for every "
-"element in a compressed JSON format called .acpt."
+"Export your settings and meta field definitions into a compressed .acpt JSON "
+"archive for backup or migration."
 msgstr ""
-"Pomocou tohto nástroja môžete rýchlo exportovať všeobecné nastavenia a meta "
-"polia pre každý prvok do komprimovaného formátu JSON s názvom .acpt."
 
 msgid "Used for the post type admin menu item"
 msgstr "Používa sa pre položku ponuky správcu typu príspevku"
@@ -2650,8 +2672,8 @@ msgstr "Najpoužívanejšie"
 
 msgid "Title for the Most Used tab. Default 'Most Used'."
 msgstr ""
-"Názov najpoužívanejšej karty. Predvolené nastavenie \"Most Used\" "
-"(Najpoužívanejšie)."
+"Názov najpoužívanejšej karty. Predvolené nastavenie \"Most "
+"Used\" (Najpoužívanejšie)."
 
 msgid "Back to items"
 msgstr "Späť na položky"
@@ -2800,6 +2822,9 @@ msgstr "Štítok"
 msgid "Post"
 msgstr "Príspevok"
 
+msgid "Post parent"
+msgstr ""
+
 msgid "Term"
 msgstr "Podmienka"
 
@@ -2851,8 +2876,11 @@ msgstr "Maximálne povolené bloky"
 msgid "Browse icons"
 msgstr "Ikony prehliadača"
 
-msgid "Search an icon"
-msgstr "Vyhľadávanie ikony"
+msgid "Upload a SVG file"
+msgstr ""
+
+msgid "Choose an icon"
+msgstr ""
 
 msgid "Type at least 3 characters to start searching."
 msgstr "Ak chcete začať vyhľadávanie, zadajte aspoň 3 znaky."
@@ -2905,6 +2933,12 @@ msgstr "Odoslanie súboru"
 
 msgid "Remove this block"
 msgstr "Odstránenie tohto bloku"
+
+msgid "Show elements"
+msgstr ""
+
+msgid "Hide elements"
+msgstr ""
 
 msgid "Show/hide elements in this block"
 msgstr "Zobrazenie/skrytie prvkov v tomto bloku"
@@ -3298,6 +3332,9 @@ msgstr ""
 "Použite ho vo funkciách, ako je get_post_meta(), na načítanie uložených "
 "údajov meta polí."
 
+msgid "Prepend the option page slug to retrieve option page meta fields."
+msgstr ""
+
 msgid "Copied to clipboard"
 msgstr "Skopírované do schránky"
 
@@ -3321,6 +3358,12 @@ msgstr "Vyprázdnenie vyrovnávacej pamäte"
 
 msgid "Cache was successfully flushed"
 msgstr "Vyrovnávacia pamäť bola úspešne prepláchnutá"
+
+msgid "Could not flush the cache"
+msgstr ""
+
+msgid "Flushing…"
+msgstr ""
 
 msgid "Enable ACPT cache"
 msgstr "Povolenie vyrovnávacej pamäte ACPT"
@@ -3396,6 +3439,9 @@ msgstr ""
 
 msgid "Post template"
 msgstr "Šablóna príspevku"
+
+msgid "Post format"
+msgstr ""
 
 msgid "Post category"
 msgstr "Kategória príspevkov"
@@ -3663,6 +3709,12 @@ msgstr "Vytvorenie nového termínu"
 msgid "Name is already taken"
 msgstr "Názov je už obsadený"
 
+msgid "No Meta box duplicate names are allowed"
+msgstr ""
+
+msgid "No Meta field duplicate names are allowed"
+msgstr ""
+
 msgid "Copy"
 msgstr "Kopírovať"
 
@@ -3759,6 +3811,20 @@ msgstr ""
 "Kde zobraziť typ príspevku v menu administrátora. Aby to fungovalo, $show_ui "
 "musí byť true. Ak je true, typ príspevku sa zobrazí vo vlastnom menu "
 "najvyššej úrovne. Ak je false, nezobrazí sa žiadne menu."
+
+msgid "Custom show in menu rule"
+msgstr ""
+
+msgid "Standard settings"
+msgstr ""
+
+msgid "Set custom settings"
+msgstr ""
+
+msgid ""
+"Where to show the post type in the admin menu. Set a custom show in menu "
+"rule here. For more info"
+msgstr ""
 
 msgid "To change the base url of REST API route. Default is $post_type."
 msgstr "Zmena základnej url trasy REST API. Predvolená hodnota je $post_type."
@@ -3858,12 +3924,9 @@ msgid "Dataset"
 msgstr "Súbor údajov"
 
 msgid ""
-"Build reusable dataset for meta fields and forms values. Import your dataset "
-"from CSV, JSON or YAML with a few clicks."
+"Build reusable datasets for meta fields and forms. Import from CSV, JSON or "
+"YAML."
 msgstr ""
-"Vytvorenie opakovane použiteľného súboru údajov pre meta polia a hodnoty "
-"formulárov. Importujte súbor údajov z CSV, JSON alebo YAML niekoľkými "
-"kliknutiami."
 
 msgid "Dataset successfully saved"
 msgstr "Súbor údajov bol úspešne uložený"
@@ -3913,16 +3976,14 @@ msgstr "Vybrať/zrušiť výber všetkých polí"
 msgid "Show/hide elements"
 msgstr "Zobrazenie/skrytie prvkov"
 
-msgid ""
-"The limit on how many elements are required ([1-100] only for repeater field)"
-msgstr "Obmedzenie počtu požadovaných prvkov ([1-100] len pre pole opakovača)"
+msgid "The limit on how many elements are required ([1-100])"
+msgstr ""
 
 msgid "Minimum elements allowed"
 msgstr "Minimálne povolené prvky"
 
-msgid ""
-"The limit on how many elements are allowed ([1-100] only for repeater field)"
-msgstr "Obmedzenie počtu povolených prvkov ([1-100] len pre pole opakovača)"
+msgid "The limit on how many elements are allowed ([1-100])"
+msgstr ""
 
 msgid "Maximum elements allowed"
 msgstr "Maximálne povolené prvky"
@@ -3978,3 +4039,2998 @@ msgstr "Príloha"
 
 msgid "All formats"
 msgstr "Všetky formáty"
+
+msgid "Type the address or point a location on the map"
+msgstr ""
+
+msgid "All comments"
+msgstr ""
+
+msgid "Nested fields"
+msgstr ""
+
+msgid "Row"
+msgstr ""
+
+msgid "Block"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "The look of the field for admins and editors."
+msgstr ""
+
+msgid "Field layout"
+msgstr ""
+
+msgid ""
+"The leading field (which will be displayed when the repeater is collapsed)."
+msgstr ""
+
+msgid "Leading field"
+msgstr ""
+
+msgid "Reset the map"
+msgstr ""
+
+msgid "Successful outcome message"
+msgstr ""
+
+msgid "Delete all blocks"
+msgstr ""
+
+msgid "Something went wrong, please retry."
+msgstr ""
+
+msgid "Connect external services"
+msgstr ""
+
+msgid "Your Cloudflare Turnstile site key"
+msgstr ""
+
+msgid ""
+"Your Cloudflare Turnstile site key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Your Cloudflare Turnstile secret key"
+msgstr ""
+
+msgid ""
+"Your Cloudflare Turnstile secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Health check"
+msgstr ""
+
+msgid ""
+"Inspect the application state and automatically repair installation errors "
+"or schema issues."
+msgstr ""
+
+msgid "Run health check"
+msgstr ""
+
+msgid "Launch the repair"
+msgstr ""
+
+msgid "DB status"
+msgstr ""
+
+msgid "The repair was carried out successfully."
+msgstr ""
+
+msgid "Post object settings"
+msgstr ""
+
+msgid "Term object settings"
+msgstr ""
+
+msgid "Filter by post type"
+msgstr ""
+
+msgid "Filter by post status"
+msgstr ""
+
+msgid "Filter by taxonomy"
+msgstr ""
+
+msgid "Polylang Settings"
+msgstr ""
+
+msgid "Textarea settings"
+msgstr ""
+
+msgid "The cols value (used only by textarea fields)"
+msgstr ""
+
+msgid "The rows value (used only by textarea fields)"
+msgstr ""
+
+msgid "Context"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "User settings"
+msgstr ""
+
+msgid "Filter by role"
+msgstr ""
+
+msgid "Relational field settings"
+msgstr ""
+
+msgid "Only name or title"
+msgstr ""
+
+msgid "With image"
+msgstr ""
+
+msgid "Date field settings"
+msgstr ""
+
+msgid "Datetime field settings"
+msgstr ""
+
+msgid "Time field settings"
+msgstr ""
+
+msgid "Select the field vertical alignment (default: center)"
+msgstr ""
+
+msgid "Vertical alignment"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Bottom"
+msgstr ""
+
+msgid "The maximum size is {{v}}"
+msgstr ""
+
+msgid "The minimum size is {{v}}"
+msgstr ""
+
+msgid "Set as post thumbnail"
+msgstr ""
+
+msgid "Sync with post terms"
+msgstr ""
+
+msgid "Image settings"
+msgstr ""
+
+msgid "Permissions"
+msgstr ""
+
+msgid "Manage permissions of"
+msgstr ""
+
+msgid "Add permission"
+msgstr ""
+
+msgid "No permissions found."
+msgstr ""
+
+msgid "User role"
+msgstr ""
+
+msgid "Confirm deleting permission"
+msgstr ""
+
+msgid "Permissions successfully saved"
+msgstr ""
+
+msgid ""
+"No permissions are present, click on \"Add permission\" button to add the "
+"first one."
+msgstr "Nie sú prítomné žiadne oprávnenia, kliknite na \"Pridať oprávnenie\"."
+
+msgid "Confirm deleting permission element"
+msgstr ""
+
+msgid "Assign"
+msgstr ""
+
+msgid "Child field"
+msgstr ""
+
+msgid "Child block"
+msgstr ""
+
+msgid "No fields found"
+msgstr ""
+
+msgid "Reset to the default values"
+msgstr ""
+
+msgid "Override here the default settings:"
+msgstr ""
+
+msgid "Style"
+msgstr ""
+
+msgid "Settings successfully saved"
+msgstr ""
+
+msgid "Save this table as template"
+msgstr ""
+
+msgid "Import template"
+msgstr ""
+
+msgid "Choose the template"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Border style"
+msgstr ""
+
+msgid "Border weight"
+msgstr ""
+
+msgid "Border color"
+msgstr ""
+
+msgid "Main background"
+msgstr ""
+
+msgid "Alt background"
+msgstr ""
+
+msgid "Add header"
+msgstr ""
+
+msgid "Add footer"
+msgstr ""
+
+msgid "Save as template"
+msgstr ""
+
+msgid "Create table"
+msgstr ""
+
+msgid "Edit table settings"
+msgstr ""
+
+msgid "No table already created."
+msgstr ""
+
+msgid "JSON data is not valid."
+msgstr ""
+
+msgid "Delete row"
+msgstr ""
+
+msgid "Add row"
+msgstr ""
+
+msgid "Delete column"
+msgstr ""
+
+msgid "Add column"
+msgstr ""
+
+msgid "Border"
+msgstr ""
+
+msgid "Text color"
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Option pages successfully deleted."
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Preview element"
+msgstr ""
+
+msgid "No records found."
+msgstr ""
+
+msgid "Show data"
+msgstr ""
+
+msgid "Enable custom post types"
+msgstr ""
+
+msgid "Enable custom post types manager"
+msgstr ""
+
+msgid "Enable Option Pages"
+msgstr ""
+
+msgid "Enable the Option Pages manager."
+msgstr ""
+
+msgid "Enable meta fields"
+msgstr ""
+
+msgid "Enable the meta fields manager."
+msgstr ""
+
+msgid "Clone field settings"
+msgstr ""
+
+msgid "Select fields to clone"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Restore elements"
+msgstr ""
+
+msgid "hidden elements"
+msgstr ""
+
+msgid "Front URL prefix"
+msgstr ""
+
+msgid ""
+"Alters the post type permalink structure to add a prefix to singular posts "
+"URLs (ex. /movie/titanic). Default value is the post type name."
+msgstr ""
+
+msgid "Custom post type successfully duplicated."
+msgstr ""
+
+msgid "Option pages successfully duplicated."
+msgstr ""
+
+msgid "Taxonomy successfully duplicated."
+msgstr ""
+
+msgid "Dataset successfully duplicated."
+msgstr ""
+
+msgid "Form successfully duplicated."
+msgstr ""
+
+msgid "WooCommerce product data successfully duplicated"
+msgstr ""
+
+msgid "Please wait"
+msgstr ""
+
+msgid "Labels successfully regenerated"
+msgstr ""
+
+msgid "No image selected"
+msgstr ""
+
+msgid "No video selected"
+msgstr ""
+
+msgid "No file selected"
+msgstr ""
+
+msgid "Password field settings"
+msgstr ""
+
+msgid "Algorithm"
+msgstr ""
+
+msgid ""
+"Should the permalink structure be prepended with the front base. (example: "
+"if your permalink structure is /blog/, then your links will be: false->/"
+"news/, true->/blog/news/). Defaults to true"
+msgstr ""
+
+msgid "Resolution"
+msgstr ""
+
+msgid "Color dark"
+msgstr ""
+
+msgid "Color light"
+msgstr ""
+
+msgid "Post status"
+msgstr ""
+
+msgid "The updated or new post status"
+msgstr ""
+
+msgid "Add images to the gallery"
+msgstr ""
+
+msgid "Enable custom blocks"
+msgstr ""
+
+msgid "Enable the custom blocks manager."
+msgstr ""
+
+msgid "Dynamic blocks list"
+msgstr ""
+
+msgid "Create new block"
+msgstr ""
+
+msgid "General configuration"
+msgstr ""
+
+msgid "Add controls to the block"
+msgstr ""
+
+msgid "Add custom CSS to the block"
+msgstr ""
+
+msgid "Add the callback to the block"
+msgstr ""
+
+msgid "Custom SVG"
+msgstr ""
+
+msgid "Confirm deleting control"
+msgstr ""
+
+msgid "Declare block support for certain features"
+msgstr ""
+
+msgid "Block callback"
+msgstr ""
+
+msgid "This is the block's code that will be run. Make use of TWIG syntax."
+msgstr ""
+
+msgid ""
+"No block controls already created. Create the first one now by clicking the "
+"button \"Add control\"!"
+msgstr ""
+
+msgid "Block controls"
+msgstr ""
+
+msgid "Add control"
+msgstr ""
+
+msgid "Control slug"
+msgstr ""
+
+msgid "Control slug (Ex. gallery or text_1)"
+msgstr ""
+
+msgid "Choose the control type"
+msgstr ""
+
+msgid "The description of this control (showed only on admin panel)"
+msgstr ""
+
+msgid "Duplicate this control"
+msgstr ""
+
+msgid "Delete this block control"
+msgstr ""
+
+msgid "Hide/show this block control"
+msgstr ""
+
+msgid "Icon type"
+msgstr ""
+
+msgid "The background color of the icon"
+msgstr ""
+
+msgid "The foreground color of the icon"
+msgstr ""
+
+msgid "Keywords"
+msgstr ""
+
+msgid ""
+"An array of search terms to help user discover the block while searching."
+msgstr ""
+
+msgid "The block category"
+msgstr ""
+
+msgid "Block category"
+msgstr ""
+
+msgid "The block label"
+msgstr ""
+
+msgid "Block label"
+msgstr ""
+
+msgid "Block CSS"
+msgstr ""
+
+msgid "Enter the CSS that will be used on the block here."
+msgstr ""
+
+msgid "Anchor"
+msgstr ""
+
+msgid "Anchors let you link directly to a specific block on a page."
+msgstr ""
+
+msgid "Align"
+msgstr ""
+
+msgid "This property adds block controls."
+msgstr ""
+
+msgid "Align wide"
+msgstr ""
+
+msgid "This property allows to enable wide alignment for your theme."
+msgstr ""
+
+msgid "Enable background image control."
+msgstr ""
+
+msgid "Enable/disable background image + size control."
+msgstr ""
+
+msgid "Enable/disable background and text color support."
+msgstr ""
+
+msgid "Enable/disable button color support."
+msgstr ""
+
+msgid "Enable/disable contrast checker widget in the block editor UI."
+msgstr ""
+
+msgid "Enable/disable gradient backgrounds support."
+msgstr ""
+
+msgid "Enable/disable heading color support."
+msgstr ""
+
+msgid "Enable/disable link colors control."
+msgstr ""
+
+msgid "Enable/disable background and text, but not link."
+msgstr ""
+
+msgid "Dimensions"
+msgstr ""
+
+msgid "Enable/disable aspect ratio control."
+msgstr ""
+
+msgid "Enable/disable min height control."
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Enable/disable duotone support."
+msgstr ""
+
+msgid "Enable/disable support for an HTML mode."
+msgstr ""
+
+msgid "Lock"
+msgstr ""
+
+msgid "Enable/disable the ability to toggle the lock state."
+msgstr ""
+
+msgid "Determine if a block can be used multiple times."
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Enable/disable selecting sticky position."
+msgstr ""
+
+msgid "Renaming"
+msgstr ""
+
+msgid "Determine if a block can be renamed in the editor."
+msgstr ""
+
+msgid "Reusable"
+msgstr ""
+
+msgid "Enable/disable the ability of being converted into a reusable block."
+msgstr ""
+
+msgid "Shadow"
+msgstr ""
+
+msgid "Enable/disable the shadow picker."
+msgstr ""
+
+msgid "Spacing"
+msgstr ""
+
+msgid "Enable/disable margin for arbitrary sides."
+msgstr ""
+
+msgid "Enable/disable padding for all sides."
+msgstr ""
+
+msgid "Enable/disable axial (column/row) block spacing controls."
+msgstr ""
+
+msgid "Typography"
+msgstr ""
+
+msgid "Enable/disable support and UI control for font-size."
+msgstr ""
+
+msgid "Declare support for specific text alignment options."
+msgstr ""
+
+msgid "No block found."
+msgstr ""
+
+msgid "You are going to delete this block. Are you sure?"
+msgstr ""
+
+msgid "Choose a standard category"
+msgstr ""
+
+msgid "Enter a custom category"
+msgstr ""
+
+msgid "Enable beta versions"
+msgstr "Povoliť beta verzie"
+
+msgid "Enable the download of beta versions."
+msgstr "Povoliť sťahovanie beta verzií."
+
+msgid "Audio field settings"
+msgstr ""
+
+msgid "Use the custom audio player"
+msgstr ""
+
+msgid "Skin"
+msgstr ""
+
+msgid "Set the desired skin to be applied to the UI interface"
+msgstr ""
+
+msgid "Add new post a link it"
+msgstr ""
+
+msgid "Create a new post"
+msgstr ""
+
+msgid "Gallery settings"
+msgstr ""
+
+msgid "Video settings"
+msgstr ""
+
+msgid "Disable media upload"
+msgstr ""
+
+msgid "CSS variables"
+msgstr ""
+
+msgid ""
+"Should the permastruct be prepended with WP_Rewrite::$front. Default true."
+msgstr ""
+
+msgid "Either hierarchical rewrite tag or not. Default false."
+msgstr ""
+
+msgid "Rewrite hierarchical"
+msgstr ""
+
+msgid "Disable cover in custom the audio player"
+msgstr ""
+
+msgid "Box settings"
+msgstr ""
+
+msgid "Delete unused MySQL tables"
+msgstr ""
+
+msgid ""
+"If this option is enabled, all MySQL tables that are not in use — such as "
+"forms and dynamic blocks — will be deleted. Enable this option only if you "
+"are sure of what you are doing!"
+msgstr ""
+
+msgid "Apply to meta boxes"
+msgstr ""
+
+msgid "Don't apply to meta boxes"
+msgstr ""
+
+msgid "Bulk edit"
+msgstr ""
+
+msgid "Cache driver"
+msgstr ""
+
+msgid "Set the desired cache driver to improve ACPT performances"
+msgstr ""
+
+msgid "Cache folder settings"
+msgstr ""
+
+msgid "Cache folder (absolute path)"
+msgstr ""
+
+msgid ""
+"Optional: specify an absolute server path for the cache directory (e.g. /var/"
+"cache/acpt). Leave empty to use the default plugin directory."
+msgstr ""
+
+msgid "Redis settings"
+msgstr ""
+
+msgid "Memcached settings"
+msgstr ""
+
+msgid "INFO"
+msgstr ""
+
+msgid "SIZE"
+msgstr ""
+
+msgid "ITEMS"
+msgstr ""
+
+msgid "Set the cache folder"
+msgstr ""
+
+msgid "Set the Redis host"
+msgstr ""
+
+msgid "Set the Redis port"
+msgstr ""
+
+msgid "Set the Redis database"
+msgstr ""
+
+msgid "Set the Memcached host"
+msgstr ""
+
+msgid "Set the Memcached port"
+msgstr ""
+
+msgid "Driver connection ok"
+msgstr ""
+
+msgid "Test driver connection"
+msgstr ""
+
+msgid "Enable cache for meta data"
+msgstr ""
+
+msgid "Full"
+msgstr ""
+
+msgid "Visual and Text"
+msgstr ""
+
+msgid "Visual Only"
+msgstr ""
+
+msgid "Text Only"
+msgstr ""
+
+msgid "Toolbar"
+msgstr ""
+
+msgid "Tabs"
+msgstr ""
+
+msgid "Set the first image as post thumbnail"
+msgstr ""
+
+msgid "Allow dangerous content"
+msgstr ""
+
+msgid "URL structure type"
+msgstr ""
+
+msgid "Absolute (ex. http://example.com)"
+msgstr ""
+
+msgid "Relative (ex. /path/example/field)"
+msgstr ""
+
+msgid "Enable logs"
+msgstr ""
+
+msgid ""
+"Turn on full logging to keep a detailed record of everything. This helps to "
+"spot bugs more easily and understand what went wrong if something breaks."
+msgstr ""
+
+msgid "Logs manager"
+msgstr ""
+
+msgid "No logs found"
+msgstr ""
+
+msgid "Severity"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Filter by"
+msgstr ""
+
+msgid "Jump to version"
+msgstr ""
+
+msgid "Show only"
+msgstr ""
+
+msgid "Select files"
+msgstr ""
+
+msgid "Max items allowed"
+msgstr ""
+
+msgid "Open a ticket"
+msgstr ""
+
+msgid "Select post status"
+msgstr ""
+
+msgid "Apply to Front-End"
+msgstr ""
+
+msgid "Apply to Back-End"
+msgstr ""
+
+msgid "Sync language with locale"
+msgstr ""
+
+msgid ""
+"Automatically synchronize the application language with the selected locale "
+"settings, if applicable."
+msgstr ""
+
+msgid "Table pagination"
+msgstr ""
+
+msgid "Set the number of rows per page"
+msgstr ""
+
+msgid "Set the table as sortable"
+msgstr ""
+
+msgid "Import CSV"
+msgstr ""
+
+msgid "Add tab"
+msgstr ""
+
+msgid ""
+"No tabs already created. Create the first one now by clicking the button "
+"\"Add tab\"!"
+msgstr ""
+"Zatiaľ nie sú vytvorené žiadne karty. Vytvorte prvú kliknutím na \"Pridať "
+"kartu\"!"
+
+msgid "No extra settings available"
+msgstr ""
+
+msgid "No tabs available"
+msgstr ""
+
+msgid "No steps available"
+msgstr ""
+
+msgid "Release elements here"
+msgstr ""
+
+msgid "Date from"
+msgstr ""
+
+msgid "Date to"
+msgstr ""
+
+msgid "Single click to edit"
+msgstr ""
+
+msgid "Double click to toggle this element"
+msgstr ""
+
+msgid "Double click to close this element"
+msgstr ""
+
+msgid "Double click to open this element"
+msgstr ""
+
+msgid ""
+"Enable the WordPress admin menu for faster, easier dashboard navigation."
+msgstr ""
+
+msgid "Enable Admin menu"
+msgstr ""
+
+msgid "Google Sheets API key"
+msgstr ""
+
+msgid ""
+"Paste here your Google Sheets API key. Needed to import sheets into Table "
+"fields."
+msgstr ""
+
+msgid "Form settings"
+msgstr ""
+
+msgid "Email delivery"
+msgstr ""
+
+msgid "Restrict the form submission rates"
+msgstr ""
+
+msgid "Adjust the values of the form’s CSS variables"
+msgstr ""
+
+msgid "Trigger an email once the form is submitted"
+msgstr ""
+
+msgid "Sync with taxonomies"
+msgstr ""
+
+msgid "No taxonomy found."
+msgstr ""
+
+msgid "Successfully taxonomy sync."
+msgstr ""
+
+msgid "Edit meta box"
+msgstr ""
+
+msgid "Available only if `show in archive` is enabled"
+msgstr ""
+
+msgid "Email preview"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Rule"
+msgstr ""
+
+msgid "Limit"
+msgstr ""
+
+msgid "Submission limits"
+msgstr ""
+
+msgid "Email settings"
+msgstr ""
+
+msgid "Post archive"
+msgstr ""
+
+msgid "Taxonomy archive"
+msgstr ""
+
+msgid "Copy after"
+msgstr ""
+
+msgid "Enable custom content type"
+msgstr ""
+
+msgid "Enable the custom content type manager."
+msgstr ""
+
+msgid "Create new table"
+msgstr ""
+
+msgid "Registered tables"
+msgstr ""
+
+msgid "ID Strategy"
+msgstr ""
+
+msgid "The ID table strategy"
+msgstr ""
+
+msgid "Table label"
+msgstr ""
+
+msgid "The table label"
+msgstr ""
+
+msgid "Table columns"
+msgstr ""
+
+msgid "Table name"
+msgstr ""
+
+msgid "The table name. Must be unique"
+msgstr ""
+
+msgid "Indexes"
+msgstr ""
+
+msgid "Indexes and foreign keys"
+msgstr ""
+
+msgid "Charset and collation"
+msgstr ""
+
+msgid "The table charset and collation"
+msgstr ""
+
+msgid "Delete this column"
+msgstr ""
+
+msgid "Confirm deleting column"
+msgstr ""
+
+msgid ""
+"No columns already created. Create the first one now by clicking the button "
+"\"Add column\"!"
+msgstr ""
+
+msgid "Column label"
+msgstr ""
+
+msgid "Column slug"
+msgstr ""
+
+msgid "Column slug (Ex. gallery or text_1)"
+msgstr ""
+
+msgid "Choose the column type"
+msgstr ""
+
+msgid "This key is already declared"
+msgstr ""
+
+msgid "UI field type mapping"
+msgstr ""
+
+msgid ""
+"No indexes already created. Create the first one now by clicking the button "
+"\"Add index\"!"
+msgstr ""
+"Zatiaľ nie sú vytvorené žiadne indexy. Vytvorte prvý kliknutím na \"Pridať "
+"index\"!"
+
+msgid "Add index"
+msgstr ""
+
+msgid "Timestamps"
+msgstr ""
+
+msgid "Add timestamps columns (`created_at` and `updated_at`) to the table."
+msgstr ""
+
+msgid "Soft delete"
+msgstr ""
+
+msgid "Implement soft delete on this table."
+msgstr ""
+
+msgid ""
+"No foreign keys already created. Create the first one now by clicking the "
+"button \"Add foreign key\"!"
+msgstr ""
+"Zatiaľ nie sú vytvorené žiadne cudzie kľúče. Vytvorte prvý kliknutím na "
+"\"Pridať cudzí kľúč\"!"
+
+msgid "Reference table"
+msgstr ""
+
+msgid "Reference columns"
+msgstr ""
+
+msgid "Referring columns"
+msgstr ""
+
+msgid "Referenced table"
+msgstr ""
+
+msgid "Referenced columns"
+msgstr ""
+
+msgid "Confirm deleting key"
+msgstr ""
+
+msgid "Is primary key"
+msgstr ""
+
+msgid ""
+"You cannot create an index or a foreign key until at least one column has "
+"been defined. Please create a column first."
+msgstr ""
+
+msgid "Select time format"
+msgstr ""
+
+msgid "Custom time format"
+msgstr ""
+
+msgid "Select date format"
+msgstr ""
+
+msgid "Custom date format"
+msgstr ""
+
+msgid "The label of the Add element button"
+msgstr ""
+
+msgid "Add element button label"
+msgstr ""
+
+msgid "The label of the Remove element button"
+msgstr ""
+
+msgid "Remove element button label"
+msgstr ""
+
+msgid "Preview size"
+msgstr ""
+
+msgid "Restrict image extensions"
+msgstr ""
+
+msgid "Minimum width"
+msgstr ""
+
+msgid "Minimum height"
+msgstr ""
+
+msgid "Maximum width"
+msgstr ""
+
+msgid "Maximum height"
+msgstr ""
+
+msgid "Default sorting"
+msgstr ""
+
+msgid ""
+"Sets the default sort order for posts in the admin list table. Defaults to "
+"WordPress standard (Date, Descending)."
+msgstr ""
+
+msgid "Restrict the field to only show posts created by the logged in user"
+msgstr ""
+
+msgid "Key parts"
+msgstr ""
+
+msgid "Table successfully saved"
+msgstr ""
+
+msgid "Schema status"
+msgstr ""
+
+msgid "Stats"
+msgstr ""
+
+msgid "Operation successfully executed"
+msgstr ""
+
+msgid ""
+"The following queries will be executed to synchronize the table schema. Are "
+"you sure?"
+msgstr ""
+
+msgid "The following queries will be executed to synchronize the table schema:"
+msgstr ""
+
+msgid "No table selected"
+msgstr ""
+
+msgid "Execute database operations"
+msgstr ""
+
+msgid "Length is required for this column type"
+msgstr ""
+
+msgid "Column name `id` is reserved"
+msgstr ""
+
+msgid "Virtual"
+msgstr ""
+
+msgid "Storage type"
+msgstr ""
+
+msgid "Relational type"
+msgstr ""
+
+msgid "Each record relates to exactly one record in the other table"
+msgstr ""
+
+msgid "One record relates to multiple records in the other table"
+msgstr ""
+
+msgid "Multiple records relate to one record in the other table"
+msgstr ""
+
+msgid "Multiple records relate to multiple records in the other table"
+msgstr ""
+
+msgid "Target table"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Self-referential — useful for parent/child hierarchies"
+msgstr ""
+
+msgid "Meta keys manager"
+msgstr ""
+
+msgid ""
+"Browse, search and manage every raw meta key stored by ACPT. Edit values "
+"directly or clean up stale entries across post types, taxonomies and users."
+msgstr ""
+
+msgid "Table stats"
+msgstr ""
+
+msgid "No stats available"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Associated to"
+msgstr ""
+
+msgid "No meta keys found."
+msgstr ""
+
+msgid "Clean orphan keys"
+msgstr ""
+
+msgid "Add meta key"
+msgstr ""
+
+msgid "Delete meta key"
+msgstr ""
+
+msgid "You are going to delete this meta key. Are you sure?"
+msgstr ""
+
+msgid "The record was successfully updated"
+msgstr ""
+
+msgid ""
+"Select the tables to include in this group. Tables define the schema and "
+"fields for storing custom content records."
+msgstr ""
+
+msgid ""
+"Define location rules to control where this group's tables appear in the "
+"WordPress admin. Rules can target post types, taxonomies, users, or option "
+"pages."
+msgstr ""
+
+msgid "--Select---"
+msgstr "--Vybrať---"
+
+msgid "A brief description (shown only in the admin panel)"
+msgstr "Krátky popis (zobrazený len v administračnom paneli)"
+
+msgid ""
+"ALERT: The visual builder can be used with a minimum resolution of 960 px "
+"wide"
+msgstr "UPOZORNENIE: Vizuálny builder možno použiť pri minimálnej šírke 960 px"
+
+msgid "Accept"
+msgstr "Prijať"
+
+msgid "Actual settings"
+msgstr "Aktuálne nastavenia"
+
+msgid "Add a meta box to get started"
+msgstr "Pridajte meta box na začiatok"
+
+msgid "Add foreign key"
+msgstr "Pridať cudzí kľúč"
+
+msgid "Add key part"
+msgstr "Pridať časť kľúča"
+
+msgid "Add new item"
+msgstr "Pridať nový prvok"
+
+msgid "Add new record"
+msgstr "Pridať nový záznam"
+
+msgid "Add record"
+msgstr "Pridať záznam"
+
+msgid "Add value"
+msgstr "Pridať hodnotu"
+
+msgid "Advanced Mode"
+msgstr "Pokročilý režim"
+
+msgid "Advanced options"
+msgstr "Pokročilé možnosti"
+
+msgid "Ajax"
+msgstr "Ajax"
+
+msgid "All Tables"
+msgstr "Všetky tabuľky"
+
+msgid "Allow HTML"
+msgstr "Povoliť HTML"
+
+msgid "Anonymous users"
+msgstr "Anonymní používatelia"
+
+msgid "Assign this table to a group"
+msgstr "Priradiť túto tabuľku do skupiny"
+
+msgid "Associated Tables"
+msgstr "Priradené tabuľky"
+
+msgid "Attachments"
+msgstr "Prílohy"
+
+msgid "Automatic"
+msgstr "Automaticky"
+
+msgid "BLOB"
+msgstr "BLOB"
+
+msgid "Basic options"
+msgstr "Základné možnosti"
+
+msgid "Bcc"
+msgstr "Bcc"
+
+msgid "Block name"
+msgstr "Názov bloku"
+
+msgid "Blocks"
+msgstr "Bloky"
+
+msgid "Body"
+msgstr "Telo"
+
+msgid "Browser"
+msgstr "Prehliadač"
+
+msgid "CURL"
+msgstr "CURL"
+
+msgid "CURRENT_TIMESTAMP"
+msgstr "CURRENT_TIMESTAMP"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Cache stats"
+msgstr "Štatistiky cache"
+
+msgid "Callback"
+msgstr "Callback"
+
+msgid "Category"
+msgstr "Kategória"
+
+msgid "Cc"
+msgstr "Cc"
+
+msgid "Charset"
+msgstr "Znaková sada"
+
+msgid "Child page"
+msgstr "Podstránka"
+
+msgid "Children"
+msgstr "Podelementy"
+
+msgid "Choose the icon"
+msgstr "Zvoľte ikonu"
+
+msgid "Click on a page card to edit its settings"
+msgstr "Kliknite na kartu stránky a upravte jej nastavenia"
+
+msgid "Click to edit"
+msgstr "Kliknite pre úpravu"
+
+msgid "Collate"
+msgstr "Zoradenie"
+
+msgid "Cols"
+msgstr "Stĺpce"
+
+msgid "Column"
+msgstr "Stĺpec"
+
+msgid "Column Name"
+msgstr "Názov stĺpca"
+
+msgid "Column length"
+msgstr "Dĺžka stĺpca"
+
+msgid "Column length must be numeric"
+msgstr "Dĺžka stĺpca musí byť číselná"
+
+msgid "Column options"
+msgstr "Možnosti stĺpca"
+
+msgid "Column values"
+msgstr "Hodnoty stĺpca"
+
+msgid "Comments"
+msgstr "Komentáre"
+
+msgid "Confirm deleting field"
+msgstr "Potvrdiť vymazanie poľa"
+
+msgid "Confirm deleting index"
+msgstr "Potvrdiť vymazanie indexu"
+
+msgid "Confirm deleting wpml-config.xml file"
+msgstr "Potvrdiť vymazanie súboru wpml-config.xml"
+
+msgid "Control label"
+msgstr "Popis ovládacieho prvku"
+
+msgid "Control type"
+msgstr "Typ ovládacieho prvku"
+
+msgid "Copy this meta block"
+msgstr "Skopírovať tento meta blok"
+
+msgid "Copy this meta field"
+msgstr "Skopírovať toto meta pole"
+
+msgid "Copy this meta option page"
+msgstr "Skopírovať túto stránku meta možností"
+
+msgid "Create new Group"
+msgstr "Vytvoriť novú skupinu"
+
+msgid "Create new Table"
+msgstr "Vytvoriť novú tabuľku"
+
+msgid "Create wpml-config.xml file"
+msgstr "Vytvoriť súbor wpml-config.xml"
+
+msgid "Custom Tables"
+msgstr "Vlastné tabuľky"
+
+msgid "Custom settings"
+msgstr "Vlastné nastavenia"
+
+msgid "DATE & TIME"
+msgstr "DÁTUM A ČAS"
+
+msgid "Dark"
+msgstr "Tmavý"
+
+msgid "Data"
+msgstr "Dáta"
+
+msgid "Dataset is empty"
+msgstr "Súbor dát je prázdny"
+
+msgid "Dataset list"
+msgstr "Zoznam súborov dát"
+
+msgid "Dataset not found"
+msgstr "Súbor dát nenájdený"
+
+msgid "Default percent"
+msgstr "Predvolené percento"
+
+msgid "Default term"
+msgstr "Predvolený výraz"
+
+msgid "Delete Column"
+msgstr "Vymazať stĺpec"
+
+msgid "Delete Table"
+msgstr "Vymazať tabuľku"
+
+msgid "Delete Table Group"
+msgstr "Vymazať skupinu tabuliek"
+
+msgid "Delete block"
+msgstr "Vymazať blok"
+
+msgid "Delete box"
+msgstr "Vymazať box"
+
+msgid "Delete field"
+msgstr "Vymazať pole"
+
+msgid "Delete option page"
+msgstr "Vymazať stránku možností"
+
+msgid "Delete others"
+msgstr "Vymazať ostatné"
+
+msgid "Delete page"
+msgstr "Vymazať stránku"
+
+msgid "Delete private"
+msgstr "Vymazať súkromné"
+
+msgid "Delete published"
+msgstr "Vymazať publikované"
+
+msgid "Delete the meta block after copying"
+msgstr "Vymazať meta blok po kopírovaní"
+
+msgid "Delete the meta field after copying"
+msgstr "Vymazať meta pole po kopírovaní"
+
+msgid "Descending"
+msgstr "Zostupne"
+
+msgid "Deselect all"
+msgstr "Zrušiť výber všetkého"
+
+msgid "Details"
+msgstr "Detaily"
+
+msgid "Disable cover in the custom audio player"
+msgstr "Zakázať obal v vlastnom audio prehrávaèi"
+
+msgid "Display"
+msgstr "Zobraziť"
+
+msgid "Display as translated"
+msgstr "Zobraziť ako preložené"
+
+msgid "Display mode"
+msgstr "Režim zobrazenia"
+
+msgid "Display settings"
+msgstr "Nastavenia zobrazenia"
+
+msgid "Drag a control type from the sidebar to get started"
+msgstr "Pretiahnite typ ovládacieho prvku z postranného panela"
+
+msgid "Drag a field type from the sidebar to get started"
+msgstr "Pretiahnite typ poľa z postranného panela"
+
+msgid "Drop children fields here"
+msgstr "Sem vložte podradené polia"
+
+msgid "Drop children pages here"
+msgstr ""
+
+msgid "Duotone"
+msgstr "Duotón"
+
+msgid "Duplicate rules are not allowed."
+msgstr "Duplicitné pravidlá nie sú povolené."
+
+msgid "ENUM"
+msgstr "ENUM"
+
+msgid "Edit item"
+msgstr "Upraviť prvok"
+
+msgid "Edit others"
+msgstr "Upraviť ostatné"
+
+msgid "Edit private"
+msgstr "Upraviť súkromné"
+
+msgid "Edit published"
+msgstr "Upraviť publikované"
+
+msgid "Edit record"
+msgstr "Upraviť záznam"
+
+msgid "Editor for"
+msgstr "Editor pre"
+
+msgid "Email body"
+msgstr "Telo e-mailu"
+
+msgid "Enable dynamic blocks"
+msgstr "Povoliť dynamické bloky"
+
+msgid "Enable select2"
+msgstr "Povoliť select2"
+
+msgid "Enable taxonomies"
+msgstr "Povoliť taxonómie"
+
+msgid "Enable the custom post types manager."
+msgstr "Povoliť správcu vlastných typov príspevkov."
+
+msgid "Enable the dynamic blocks manager."
+msgstr "Povoliť správcu dynamických blokov."
+
+msgid "Enable the taxonomies manager."
+msgstr "Povoliť správcu taxonómií."
+
+msgid "Enable/disable contrast checker widget in the block editor UI.."
+msgstr "Povoliť/zakázať widget kontroly kontrastu v editore blokov.."
+
+msgid "Enter a valid JSON value."
+msgstr "Zadajte platnú hodnotu JSON."
+
+msgid "Enter custom SVG"
+msgstr "Zadajte vlastné SVG"
+
+msgid "Enter whatever items you want; separate them with COMMA or ENTER."
+msgstr "Zadajte ľubovoľné prvky; oddeľte ich ČIARKOU alebo ENTEROM."
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Error during import occurred"
+msgstr "Počas importu sa vyskytla chyba"
+
+msgid "Error message"
+msgstr "Chybové hlásenie"
+
+msgid "Errors"
+msgstr "Chyby"
+
+msgid "Extra"
+msgstr "Extra"
+
+msgid "Field"
+msgstr "Pole"
+
+msgid "Field Mapping Preview"
+msgstr "Ukážka mapovania polí"
+
+msgid "Field on target table that holds the back-reference"
+msgstr "Pole v cieľovej tabuľke obsahujúce spätnú referenciu"
+
+msgid "Field selector"
+msgstr "Výber poľa"
+
+msgid "Field slug (Ex. name_frk)"
+msgstr "Slug poľa (napr. name_frk)"
+
+msgid "Field slug (Ex. name_idx)"
+msgstr "Slug poľa (napr. name_idx)"
+
+msgid "Field slug (e.g. my_field)"
+msgstr "Slug poľa (napr. my_field)"
+
+msgid "Fields to clone"
+msgstr "Polia na klonovanie"
+
+msgid "File was successfully deleted."
+msgstr "Súbor bol úspešne vymazaný."
+
+msgid "Font size"
+msgstr "Veľkosť písma"
+
+msgid "Footer"
+msgstr "Päta"
+
+msgid "Foreign keys"
+msgstr "Cudzie kľúče"
+
+msgid "Form submissions"
+msgstr "Odoslania formulárov"
+
+msgid "Forms submissions"
+msgstr "Odoslania formulárov"
+
+msgid "Go to next step"
+msgstr "Prejsť na ďalší krok"
+
+msgid "Go to prev step"
+msgstr "Prejsť na predchádzajúci krok"
+
+msgid "Group"
+msgstr "Skupina"
+
+msgid "Group successfully saved"
+msgstr "Skupina úspešne uložená"
+
+msgid "HTML"
+msgstr "HTML"
+
+msgid "HTML settings"
+msgstr "Nastavenia HTML"
+
+msgid "Header"
+msgstr "Hlavička"
+
+msgid "Hide title"
+msgstr "Skryť názov"
+
+msgid "Hide toggle visibility"
+msgstr "Skryť prepínač viditeľnosti"
+
+msgid "Horizontal"
+msgstr "Horizontálne"
+
+msgid "Human-readable label for this group"
+msgstr "Čitateľný popis pre túto skupinu"
+
+msgid "ID settings"
+msgstr "Nastavenia ID"
+
+msgid "ID strategy"
+msgstr "Stratégia ID"
+
+msgid "INVERSE SOURCE"
+msgstr "INVERSE SOURCE"
+
+msgid "INVERSE TARGET"
+msgstr "INVERSE TARGET"
+
+msgid "INVISIBLE"
+msgstr "INVISIBLE"
+
+msgid ""
+"If enabled, the logged in user who submitted the form will also receive this "
+"email as a confirmation"
+msgstr ""
+"Ak je povolené, prihlásený používateľ, ktorý odoslal formulár, dostane tento "
+"e-mail ako potvrdenie"
+
+msgid "Index options"
+msgstr "Možnosti indexu"
+
+msgid "Inverse field"
+msgstr "Inverzné pole"
+
+msgid "Inverse field configuration"
+msgstr "Konfigurácia inverzného poľa"
+
+msgid "Items list"
+msgstr "Zoznam prvkov"
+
+msgid "Label column"
+msgstr "Stĺpec popisku"
+
+msgid "Label default value"
+msgstr "Predvolená hodnota popisku"
+
+msgid "Label placeholder"
+msgstr "Zástupný text popisku"
+
+msgid "Left"
+msgstr "Vľavo"
+
+msgid "Length must be at least 1"
+msgstr "Dĺžka musí byť aspoň 1"
+
+msgid "Level"
+msgstr "Úroveň"
+
+msgid "Light"
+msgstr "Svetlý"
+
+msgid "Link URL"
+msgstr "URL odkazu"
+
+msgid "Loading..."
+msgstr "Načítava sa..."
+
+msgid "Location rules"
+msgstr "Pravidlá umiestnenia"
+
+msgid "Log context"
+msgstr "Kontext logu"
+
+msgid "Logged user"
+msgstr "Prihlásený používateľ"
+
+msgid "Logged users"
+msgstr "Prihlásení používatelia"
+
+msgid "Manage cache items"
+msgstr "Spravovať položky cache"
+
+msgid "Manage option pages"
+msgstr "Spravovať stránky možností"
+
+msgid "Manage permissions"
+msgstr "Spravovať oprávnenia"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Max value"
+msgstr "Maximálna hodnota"
+
+msgid "Maximum value"
+msgstr "Maximálna hodnota"
+
+msgid "Meta block"
+msgstr "Meta blok"
+
+msgid "Meta block was successfully copied"
+msgstr "Meta blok bol úspešne skopírovaný"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Min value"
+msgstr "Minimálna hodnota"
+
+msgid "Minimum value"
+msgstr "Minimálna hodnota"
+
+msgid "Missing dependency installer, retry now"
+msgstr "Chýbajúci inštalátor závislosti, skúste znova"
+
+msgid "Multiple field"
+msgstr "Viacnásobné pole"
+
+msgid "NOW()"
+msgstr "NOW()"
+
+msgid "NUMERIC"
+msgstr "NUMERIC"
+
+msgid "No blocks yet"
+msgstr "Zatiaľ žiadne bloky"
+
+msgid "No boxes registered"
+msgstr "Žiadne zaregistrované boxy"
+
+msgid "No columns found."
+msgstr "Nenašli sa žiadne stĺpce."
+
+msgid "No columns selected"
+msgstr "Neboli vybrané žiadne stĺpce"
+
+msgid "No controls created"
+msgstr "Neboli vytvorené žiadne ovládacie prvky"
+
+msgid "No custom post types found."
+msgstr "Nenašli sa žiadne vlastné typy príspevkov."
+
+msgid "No distraction"
+msgstr "Bez rozptýlenia"
+
+msgid "No editable columns found for this table."
+msgstr "Nenašli sa žiadne upraviteľné stĺpce pre túto tabuľku."
+
+msgid "No fields registered."
+msgstr "Žiadne zaregistrované polia."
+
+msgid "No foreign keys found."
+msgstr "Nenašli sa žiadne cudzie kľúče."
+
+msgid "No group"
+msgstr "Žiadna skupina"
+
+msgid "No index found."
+msgstr "Nenašiel sa žiadny index."
+
+msgid "No items"
+msgstr "Žiadne prvky"
+
+msgid "No items imported"
+msgstr "Neboli importované žiadne prvky"
+
+msgid ""
+"No key parts are present, click on \"Add key part\" button to add the first "
+"one."
+msgstr "Nie sú prítomné žiadne časti kľúča, kliknite na \"Pridať časť kľúča\"."
+
+msgid "No location rules defined."
+msgstr "Nie sú definované žiadne pravidlá umiestnenia."
+
+msgid ""
+"No option pages created yet. Click \"Add page\" to create the first one!"
+msgstr ""
+"Zatiaľ nie sú vytvorené žiadne stránky možností. Kliknite na \"Pridať "
+"stránku\"!"
+
+msgid "No options"
+msgstr "Žiadne možnosti"
+
+msgid ""
+"No options are present, click on \"Add option\" button to add the first one."
+msgstr "Nie sú prítomné žiadne možnosti, kliknite na \"Pridať možnosť\"."
+
+msgid "No page selected"
+msgstr "Nebola vybraná žiadna stránka"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add condition\"!"
+msgstr ""
+"Zatiaľ nie sú vytvorené žiadne pravidlá. Vytvorte prvé kliknutím na \"Pridať "
+"podmienku\"!"
+
+msgid "No table groups found."
+msgstr "Nenašli sa žiadne skupiny tabuliek."
+
+msgid "No tables associated to this group."
+msgstr "K tejto skupine nie sú priradené žiadne tabuľky."
+
+msgid "No tables found in this group."
+msgstr "V tejto skupine sa nenašli žiadne tabuľky."
+
+msgid "No tables found."
+msgstr "Nenašli sa žiadne tabuľky."
+
+msgid ""
+"No values already created. Create the first one now by clicking the button "
+"\"Add value\"!"
+msgstr ""
+"Zatiaľ nie sú vytvorené žiadne hodnoty. Vytvorte prvú kliknutím na \"Pridať "
+"hodnotu\"!"
+
+msgid "No wpml-config.xml found."
+msgstr "Nenašiel sa súbor wpml-config.xml."
+
+msgid "Email"
+msgstr ""
+
+msgid "None"
+msgstr "Žiadny"
+
+msgid "Not found"
+msgstr "Nenájdené"
+
+msgid "Nullable"
+msgstr "Nullable"
+
+msgid "ON CHANGE"
+msgstr "ON CHANGE"
+
+msgid "On delete"
+msgstr "Pri vymazaní"
+
+msgid "On update"
+msgstr "Pri aktualizácii"
+
+msgid "Opens in a new window or tab"
+msgstr "Otvára sa v novom okne alebo karte"
+
+msgid "Operator"
+msgstr "Operátor"
+
+msgid "Options"
+msgstr "Možnosti"
+
+msgid "Other columns"
+msgstr "Ostatné stĺpce"
+
+msgid "PERMISSIONS"
+msgstr "PERMISSIONS"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Plural label. Used for the taxonomy admin menu item"
+msgstr "Množné označenie. Používa sa pre položku admin menu taxonómie"
+
+msgid "Position sticky"
+msgstr "Fixná pozícia"
+
+msgid "Post types"
+msgstr "Typy príspevkov"
+
+msgid "Posts"
+msgstr "Príspevky"
+
+msgid "Prev Step"
+msgstr "Predchádzajúci krok"
+
+msgid "REST controller class"
+msgstr "Trieda REST kontroléra"
+
+msgid "Read"
+msgstr "Čítať"
+
+msgid "Record created successfully."
+msgstr "Záznam bol úspešne vytvorený."
+
+msgid "Record updated successfully."
+msgstr "Záznam bol úspešne aktualizovaný."
+
+msgid "Redirect after form submission"
+msgstr "Presmerovanie po odoslaní formulára"
+
+msgid "Redirect timeout (seconds)"
+msgstr "Časový limit presmerovania (sekundy)"
+
+msgid "Registered Tables"
+msgstr "Zaregistrované tabuľky"
+
+msgid "Registered dynamic blocks"
+msgstr "Zaregistrované dynamické bloky"
+
+msgid "Reply to"
+msgstr "Odpovedať na"
+
+msgid "Required"
+msgstr "Povinný"
+
+msgid "Rest APIs"
+msgstr "REST API"
+
+msgid "Right"
+msgstr "Vpravo"
+
+msgid "Role"
+msgstr "Rola"
+
+msgid "SOURCE"
+msgstr "SOURCE"
+
+msgid "STRING"
+msgstr "STRING"
+
+msgid "Save record"
+msgstr "Uložiť záznam"
+
+msgid "Search an element saved in cache by its content."
+msgstr "Vyhľadajte prvok uložený v cache podľa obsahu."
+
+msgid "Select a location first"
+msgstr "Najprv vyberte umiestnenie"
+
+msgid "Select a target table"
+msgstr "Vyberte cieľovú tabuľku"
+
+msgid "Select all"
+msgstr "Vybrať všetko"
+
+msgid "Select capability"
+msgstr "Vybrať oprávnenie"
+
+msgid "Select page"
+msgstr "Vybrať stránku"
+
+msgid "Select pages"
+msgstr "Vybrať stránky"
+
+msgid "Select tables..."
+msgstr "Vybrať tabuľky..."
+
+msgid "Select taxonomies"
+msgstr "Vybrať taxonómie"
+
+msgid "Select taxonomy"
+msgstr "Vybrať taxonómiu"
+
+msgid "Select the ID generation strategy"
+msgstr "Vybrať stratégiu generovania ID"
+
+msgid "Select the column"
+msgstr "Vybrať stĺpec"
+
+msgid "Select the key"
+msgstr "Vybrať kľúč"
+
+msgid "Select user"
+msgstr "Vybrať používateľa"
+
+msgid "Select users"
+msgstr "Vybrať používateľov"
+
+msgid "Selector"
+msgstr "Selektor"
+
+msgid "Self-referential"
+msgstr "Samoreferenčný"
+
+msgid "Send confirmation email to logged in user"
+msgstr "Odoslať potvrdzovací e-mail prihlásenému používateľovi"
+
+msgid "Shortcode preview"
+msgstr "Ukážka shortcode"
+
+msgid "Show errors"
+msgstr "Zobraziť chyby"
+
+msgid "Shown in dropdown"
+msgstr "Zobrazené v rozbaľovacom zozname"
+
+msgid "Singular label. Used when a singular label is needed"
+msgstr "Jednotné označenie. Používa sa keď je potrebné jednotné označenie"
+
+msgid "Sorry, no posts matched your criteria."
+msgstr "Prepáčte, žiadne príspevky nezodpovedajú vašim kritériám."
+
+msgid "Sorting"
+msgstr "Zoradenie"
+
+msgid "Specific user"
+msgstr "Konkrétny používateľ"
+
+msgid "Step"
+msgstr "Krok"
+
+msgid "Stored in FK column"
+msgstr "Uložené v stĺpci FK"
+
+msgid "Stored in inverse FK"
+msgstr "Uložené v inverznom FK"
+
+msgid "Strategy"
+msgstr "Stratégia"
+
+msgid "Submissions"
+msgstr "Odoslania"
+
+msgid "Sync"
+msgstr "Synchronizovať"
+
+msgid "TARGET"
+msgstr "TARGET"
+
+msgid "Table Groups"
+msgstr "Skupiny tabuliek"
+
+msgid "Table foreign keys"
+msgstr "Cudzie kľúče tabuľky"
+
+msgid "Table indexes"
+msgstr "Indexy tabuľky"
+
+msgid "Table settings"
+msgstr "Nastavenia tabuľky"
+
+msgid "Tables"
+msgstr "Tabuľky"
+
+msgid "Tag element"
+msgstr "Prvok tagu"
+
+msgid "Text settings"
+msgstr "Nastavenia textu"
+
+msgid "The block name/slug. Must be unique"
+msgstr "Názov/slug bloku. Musí byť jedinečný"
+
+msgid "The default percent value"
+msgstr "Predvolená percentuálna hodnota"
+
+msgid "This box"
+msgstr "Tento box"
+
+msgid "Translate"
+msgstr "Preložiť"
+
+msgid "UI"
+msgstr "UI"
+
+msgid "UI Type"
+msgstr "Typ UI"
+
+msgid "UNSIGNED"
+msgstr "UNSIGNED"
+
+msgid "UNSIGNED ZEROFILL"
+msgstr "UNSIGNED ZEROFILL"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Unique"
+msgstr "Jedinečný"
+
+msgid "Unique slug identifier (auto-filled from label)"
+msgstr "Jedinečný slug identifikátor (automaticky vyplnený z popisku)"
+
+msgid "Update"
+msgstr "Aktualizovať"
+
+msgid "Update the current post"
+msgstr "Aktualizovať aktuálny príspevok"
+
+msgid "VISIBLE"
+msgstr "VISIBLE"
+
+msgid "Validation rules"
+msgstr "Pravidlá validácie"
+
+msgid "Value already exists."
+msgstr "Hodnota už existuje."
+
+msgid "Value column"
+msgstr "Stĺpec hodnôt"
+
+msgid "Values"
+msgstr "Hodnoty"
+
+msgid "Variable"
+msgstr "Premenná"
+
+msgid "Vertical"
+msgstr "Vertikálne"
+
+msgid "View item"
+msgstr "Zobraziť prvok"
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled. "
+"Default false."
+msgstr ""
+"Či by mali existovať archívy typu príspevku, alebo reťazec ako slug archívu. "
+"Vygeneruje správne pravidlá prepisovania ak je $rewrite povolené. "
+"Predvolene: false."
+
+msgid "Wide"
+msgstr "Široký"
+
+msgid "With front"
+msgstr "S frontom"
+
+msgid "Yes, execute it"
+msgstr "Áno, vykonať"
+
+msgid "You are going to delete this option page. Are you sure?"
+msgstr "Chystáte sa vymazať túto stránku možností. Ste si istý?"
+
+msgid "You are going to delete this table group. Are you sure?"
+msgstr "Chystáte sa vymazať túto skupinu tabuliek. Ste si istý?"
+
+msgid "You are going to delete this table. Are you sure?"
+msgstr "Chystáte sa vymazať túto tabuľku. Ste si istý?"
+
+msgid "coming soon"
+msgstr "čoskoro"
+
+msgid "date"
+msgstr "dátum"
+
+msgid "eg. 300px"
+msgstr "napr. 300px"
+
+msgid "group settings"
+msgstr "nastavenia skupiny"
+
+msgid "group_name"
+msgstr "group_name"
+
+msgid "height"
+msgstr "výška"
+
+msgid "label"
+msgstr "popisok"
+
+msgid "max length is 20"
+msgstr "maximálna dĺžka je 20"
+
+msgid "max length is 255"
+msgstr "maximálna dĺžka je 255"
+
+msgid "order_by"
+msgstr "order_by"
+
+msgid "per_page"
+msgstr "per_page"
+
+msgid "render"
+msgstr "render"
+
+msgid "table"
+msgstr "tabuľka"
+
+msgid "table settings"
+msgstr "nastavenia tabuľky"
+
+msgid "tables"
+msgstr "tabuľky"
+
+msgid "target"
+msgstr "cieľ"
+
+msgid "this table"
+msgstr "táto tabuľka"
+
+msgid "value"
+msgstr "hodnota"
+
+msgid "width"
+msgstr "šírka"
+
+msgid "Product data fields"
+msgstr "Polia dát produktu"
+
+msgid "Publish"
+msgstr "Publikovať"
+
+msgid "Show schema create SQL query"
+msgstr "Zobraziť SQL dotaz na vytvorenie schémy"
+
+msgid "Show schema"
+msgstr "Zobraziť schému"
+
+msgid "Table record"
+msgstr ""
+
+msgid "Form identity and submission feedback"
+msgstr ""
+
+msgid "Redirect after submission"
+msgstr ""
+
+msgid "Where users land once the form is sent"
+msgstr ""
+
+msgid "Auto slug"
+msgstr ""
+
+msgid "Custom AJAX handler for this form"
+msgstr ""
+
+msgid "External endpoint this form submits to"
+msgstr ""
+
+msgid "PHP function executed on submission"
+msgstr ""
+
+msgid "Email notification settings"
+msgstr ""
+
+msgid "What the form creates and which fields it maps"
+msgstr ""
+
+msgid "Which table record this form writes to"
+msgstr ""
+
+msgid "Colors"
+msgstr ""
+
+msgid "Font sizes"
+msgstr ""
+
+msgid "Radius and thickness settings"
+msgstr ""
+
+msgid "Color palette for light and dark modes"
+msgstr ""
+
+msgid "Gap and padding values"
+msgstr ""
+
+msgid "Font weights"
+msgstr ""
+
+msgid "Font size scale"
+msgstr ""
+
+msgid "Enable or disable email notifications for this form"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Who sends and receives this email"
+msgstr ""
+
+msgid "Subject & attachments"
+msgstr ""
+
+msgid "Email subject and file attachments"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "HTML structure, visual style and preview"
+msgstr ""
+
+msgid "Adjust the values of the form's CSS variables"
+msgstr ""
+
+msgid "Create a new record"
+msgstr ""
+
+msgid "Define who can submit this form and how many times"
+msgstr ""
+
+msgid "No columns available. Select a table first."
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Redirect to"
+msgstr ""
+
+msgid "Table to fill"
+msgstr ""
+
+msgid "Add image"
+msgstr "Pridať obrázok"
+
+msgid "Advanced"
+msgstr "Pokročilé"
+
+msgid "Change image"
+msgstr "Zmeniť obrázok"
+
+msgid "Child"
+msgstr "Podradený"
+
+msgid "Click to edit label"
+msgstr "Kliknutím upravíte popisok"
+
+msgid "Click to rename"
+msgstr "Kliknutím premenujete"
+
+msgid "Core"
+msgstr "Jadro"
+
+msgid "Default"
+msgstr "Predvolené"
+
+msgid "Description (showed only on admin panel)"
+msgstr "Popis (zobrazuje sa len na paneli administrátora)"
+
+msgid "Drop columns here"
+msgstr "Sem presuňte stĺpce"
+
+msgid "Drop fields here"
+msgstr "Sem presuňte polia"
+
+msgid "Heading (optional)"
+msgstr "Nadpis (voliteľné)"
+
+msgid "Hide the collapse/expand toggle."
+msgstr "Skryje prepínač zbalenia/rozbalenia."
+
+msgid "Hide the meta box title."
+msgstr "Skryje názov metaboxu."
+
+msgid "Hide toggle"
+msgstr "Skryť prepínač"
+
+msgid "High"
+msgstr "Vysoká"
+
+msgid "Link label"
+msgstr "Popisok odkazu"
+
+msgid "Low"
+msgstr "Nízka"
+
+msgid "Message content"
+msgstr "Obsah správy"
+
+msgid "Message settings"
+msgstr "Nastavenia správy"
+
+msgid "Normal"
+msgstr "Normálna"
+
+msgid "Optional heading shown above the message"
+msgstr "Voliteľný nadpis zobrazený nad správou"
+
+msgid "Order within the context."
+msgstr "Poradie v rámci kontextu."
+
+msgid "Release"
+msgstr "Uvoľniť"
+
+msgid "Show label"
+msgstr "Zobraziť popisok"
+
+msgid "Side"
+msgstr "Bočný"
+
+msgid "Sidebar position"
+msgstr "Pozícia bočného panela"
+
+msgid "Sorted"
+msgstr "Zoradené"
+
+msgid "Tab selected"
+msgstr "Vybraná karta"
+
+msgid "The instructional text shown to the user"
+msgstr "Inštrukčný text zobrazený používateľovi"
+
+msgid ""
+"Where the meta box appears in the post editor (applies when this table is "
+"attached to a CPT)."
+msgstr ""
+"Kde sa metabox zobrazí v editore príspevkov (platí, ak je táto tabuľka "
+"priradená k CPT)."
+
+msgid ""
+"You cannot create a foreign key until at least one column has been defined. "
+"Please create a column first."
+msgstr ""
+"Cudzí kľúč nemôžete vytvoriť, kým nie je definovaný aspoň jeden stĺpec. "
+"Najprv vytvorte stĺpec."
+
+msgid "Enable Abilities API"
+msgstr ""
+
+msgid ""
+"Expose ACPT post types, taxonomies and fields as WordPress Abilities API "
+"abilities."
+msgstr ""
+
+msgid "Cancel"
+msgstr "Zrušiť"
+
+msgid "Dynamic blocks"
+msgstr "Dynamické bloky"
+
+msgid "Export"
+msgstr "Exportovať"
+
+msgid "If an item already exists"
+msgstr "Ak položka už existuje"
+
+msgid "Overwrite it — replace the existing version with the imported one"
+msgstr "Prepísať – nahradiť existujúcu verziu importovanou"
+
+msgid "Review import"
+msgstr "Skontrolovať import"
+
+msgid "Settings were successfully imported"
+msgstr "Nastavenia boli úspešne importované"
+
+msgid "Skip it — keep the existing version, import only new items"
+msgstr "Preskočiť – zachovať existujúcu verziu, importovať iba nové položky"
+
+msgid "Table groups"
+msgstr "Skupiny tabuliek"
+
+msgid "Upload new file"
+msgstr "Nahrať nový súbor"
+
+msgid "columns"
+msgstr "stĺpce"
+
+msgid "exists"
+msgstr "existujúci"
+
+msgid "fields"
+msgstr "polia"
+
+msgid ""
+"items already exist on this site. Choose how to handle them before importing."
+msgstr ""
+"Na tejto stránke už existujú položky. Vyberte, ako s nimi naložiť pred "
+"importom."
+
+msgid "new"
+msgstr "nový"
+
+msgid "picked up"
+msgstr ""
+
+msgid "moved to a new position"
+msgstr ""
+
+msgid "is no longer over a drop target"
+msgstr ""
+
+msgid "dropped"
+msgstr ""
+
+msgid "Drop cancelled"
+msgstr ""
+
+msgid "released outside a valid drop target"
+msgstr ""
+
+msgid "Dragging cancelled"
+msgstr ""
+
+msgid "was returned to its original position"
+msgstr ""
+
+msgid "Item"
+msgstr ""
+
+msgid "New field"
+msgstr ""
+
+msgid "Control"
+msgstr ""
+
+msgid "New control"
+msgstr ""
+
+msgid "New column"
+msgstr ""
+
+msgid "Block field"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Actions for"
+msgstr ""
+
+msgid "WooCommerce"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Sidebar on the left"
+msgstr ""
+
+msgid "Sidebar on the right"
+msgstr ""
+
+msgid "Inline"
+msgstr ""
+
+msgid "Justify"
+msgstr ""
+
+msgid "Link label and value"
+msgstr ""
+
+msgid "Automatic slug"
+msgstr ""
+
+msgid "Snippet format"
+msgstr ""
+
+msgid "WordPress native snippet"
+msgstr ""
+
+msgid "ACPT function snippet"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
+msgid "Requires \"Expose via REST API\" on the table."
+msgstr ""
+
+msgid "Click to change the type"
+msgstr ""
+
+msgid "Showing {{start}}–{{end}} of {{total}} records"
+msgstr ""
+
+msgid "AUTO_INCREMENT"
+msgstr ""
+
+msgid "Allow in block bindings"
+msgstr ""
+
+msgid "Block slug"
+msgstr ""
+
+msgid "Clear all"
+msgstr ""
+
+msgid ""
+"Column was successfully copied. Sync the target table to apply the change."
+msgstr ""
+
+msgid "Copy to another table"
+msgstr ""
+
+msgid "Could not delete meta field value"
+msgstr ""
+
+msgid "Default image"
+msgstr ""
+
+msgid "Delete the column from this table after copying"
+msgstr ""
+
+msgid "Deselect"
+msgstr ""
+
+msgid "Drag to reorder"
+msgstr ""
+
+msgid "Edit label"
+msgstr ""
+
+msgid "Enable email notifications"
+msgstr ""
+
+msgid "Import data. Acceptable file formats: JSON, YAML, CSV, YAML"
+msgstr ""
+
+msgid "No other table is available to copy this column into."
+msgstr ""
+
+msgid ""
+"Only post types registered through ACPT are listed here. Don't see the post "
+"type you're looking for (e.g. one added by another plugin, like "
+"WooCommerce's Product)?"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record successfully deleted"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Select the level of changes to show"
+msgstr ""
+
+msgid "Sync it in first from the Custom Post Types list"
+msgstr ""
+
+msgid "The file size is too big"
+msgstr ""
+
+msgid "The timeout cannot be negative"
+msgstr ""
+
+msgid "Unable to load the table schema"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Value to copy"
+msgstr ""
+
+msgid "Show sidebar"
+msgstr ""
+
+msgid "Hide sidebar"
+msgstr ""
+
+msgid "Show meta box"
+msgstr ""
+
+msgid ""
+"Whether to show the taxonomy meta box on the post edit screen (classic "
+"editor). Turn it off when the terms are assigned through a custom field. "
+"Default true."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\", which stores JSON. "
+"MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Remove \"{{column}}\" from the index, or change the column to a type that "
+"can be indexed (for example INT or VARCHAR)."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\" ({{type}}). MySQL can "
+"index this type only on its first characters."
+msgstr ""
+
+msgid "Set a length on \"{{column}}\" in the index (for example 191)."
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" links the column \"{{column}}\" ({{type}}) to "
+"\"{{refColumn}}\" ({{refType}}) in the table \"{{refTable}}\". MySQL needs "
+"both columns to have the same type."
+msgstr ""
+
+msgid ""
+"An index uses a column that stores JSON. MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and remove the JSON column from the index, or change "
+"the column type."
+msgstr ""
+
+msgid ""
+"An index uses a text column without a length. MySQL can index this type only "
+"on its first characters."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and set a length on the text column (for example 191)."
+msgstr ""
+
+msgid ""
+"A foreign key links two columns MySQL cannot connect: they must have the "
+"same type, and the referenced column must be a primary key or have a unique "
+"index."
+msgstr ""
+
+msgid ""
+"Open the Foreign keys step and check that each column has the same type as "
+"the column it points to."
+msgstr ""
+
+msgid ""
+"Some rows already in the table point to records that do not exist in the "
+"referenced table, so the foreign key cannot be added."
+msgstr ""
+
+msgid "Fix or clear those values in the table records, then sync again."
+msgstr ""
+
+msgid ""
+"A unique index cannot be added because some rows already share the same "
+"value."
+msgstr ""
+
+msgid ""
+"Make the values unique in the table records, or make the index not unique."
+msgstr ""
+
+msgid "Some values already in the table do not fit the new column type."
+msgstr ""
+
+msgid ""
+"Change those values in the table records, or choose a column type that fits "
+"them."
+msgstr ""
+
+msgid "MySQL refused to change the table."
+msgstr ""
+
+msgid "Check the technical details below, or contact support with them."
+msgstr ""
+
+msgid "The table was not created."
+msgstr ""
+
+msgid ""
+"Part of the changes were already applied to the table and cannot be undone "
+"automatically (see the technical details)."
+msgstr ""
+
+msgid "No changes were applied to the table."
+msgstr ""
+
+msgid "Technical details"
+msgstr ""
+
+msgid "Statements that would run"
+msgstr ""
+
+msgid "Open the Indexes step"
+msgstr ""
+
+msgid "Open the Foreign keys step"
+msgstr ""
+
+msgid "This table can't be synced yet. Fix these problems, then try again:"
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Choose "
+"another column or delete this key part."
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+msgid "Not synced"
+msgstr ""
+
+msgid "Not created"
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" empties the column \"{{column}}\" (SET NULL) "
+"when the linked record changes, but the column does not allow empty values."
+msgstr ""
+
+msgid ""
+"Allow empty values on \"{{column}}\" in the Columns step (Advanced Mode), or "
+"choose another \"On delete\" / \"On update\" action."
+msgstr ""
+
+msgid ""
+"In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete the foreign key."
+msgstr ""
+
+msgid ""
+"The column \"{{column}}\" ({{type}}) can't be linked to "
+"\"{{refColumn}}\" ({{refType}}): MySQL needs both columns to have the same "
+"type. In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete this foreign key."
+msgstr ""
+
+msgid ""
+"\"SET NULL\" empties the column \"{{column}}\" when the linked record "
+"changes, but the column doesn't allow empty values. Allow empty values on "
+"\"{{column}}\" in the Columns step (Advanced Mode), or choose another action."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Edit the key "
+"parts to choose another column, or delete this index."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" ({{type}}) can be indexed only on its first characters. Edit "
+"the key parts and set a length (for example 191)."
+msgstr ""
+
+msgid "Datasets"
+msgstr ""
+
+msgid "Feeds"
+msgstr ""
+
+msgid ""
+"Whether the archive of this post type has an RSS feed (/{slug}/feed/). When "
+"off, the feed URLs redirect to the archive and the feed link is removed from "
+"the page head. Defaults to true"
+msgstr ""
+
+#~ msgid ""
+#~ "From this dashboard you can discover and manage every API endpoints "
+#~ "exposed by ACPT. Use the playground to learn how to use every endpoint."
+#~ msgstr ""
+#~ "Na tomto ovládacom paneli môžete zistiť a spravovať všetky koncové body "
+#~ "API vystavené systémom ACPT. Pomocou ihriska sa naučíte používať každý "
+#~ "koncový bod."
+
+#~ msgid ""
+#~ "This tool allows you to import settings and meta fields from previously "
+#~ "exported .acpt files (max size allowed is 2Mb)."
+#~ msgstr ""
+#~ "Tento nástroj umožňuje importovať nastavenia a meta polia z predtým "
+#~ "exportovaných súborov .acpt (maximálna povolená veľkosť je 2 MB)."
+
+#~ msgid ""
+#~ "Use this tool to quick export the general settings and meta fields for "
+#~ "every element in a compressed JSON format called .acpt."
+#~ msgstr ""
+#~ "Pomocou tohto nástroja môžete rýchlo exportovať všeobecné nastavenia a "
+#~ "meta polia pre každý prvok do komprimovaného formátu JSON s názvom .acpt."
+
+#~ msgid "Search an icon"
+#~ msgstr "Vyhľadávanie ikony"
+
+#~ msgid ""
+#~ "Build reusable dataset for meta fields and forms values. Import your "
+#~ "dataset from CSV, JSON or YAML with a few clicks."
+#~ msgstr ""
+#~ "Vytvorenie opakovane použiteľného súboru údajov pre meta polia a hodnoty "
+#~ "formulárov. Importujte súbor údajov z CSV, JSON alebo YAML niekoľkými "
+#~ "kliknutiami."
+
+#~ msgid ""
+#~ "The limit on how many elements are required ([1-100] only for repeater "
+#~ "field)"
+#~ msgstr ""
+#~ "Obmedzenie počtu požadovaných prvkov ([1-100] len pre pole opakovača)"
+
+#~ msgid ""
+#~ "The limit on how many elements are allowed ([1-100] only for repeater "
+#~ "field)"
+#~ msgstr "Obmedzenie počtu povolených prvkov ([1-100] len pre pole opakovača)"

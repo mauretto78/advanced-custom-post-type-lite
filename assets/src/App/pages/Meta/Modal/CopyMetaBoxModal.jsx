@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from "../../../components/Modal";
 import useTranslation from "../../../hooks/useTranslation";
 import {Icon} from "@iconify/react";
+import {primaryColor} from "../../../utils/colors.jsx";
 import Button from "../../../components/Button";
 import {styleVariants} from "../../../constants/styles";
 import {wpAjaxRequest} from "../../../utils/ajax";
@@ -12,13 +13,15 @@ import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 import {fetchMeta} from "../../../redux/reducers/fetchMetaSlice";
 import {hydrateState} from "../../../redux/reducers/metaStateSlice";
+import {setCookieMessage} from "../../../utils/cookies.jsx";
+import {metaBoxProps} from "../../../props/metaProps.js";
 
 const CopyMetaBoxModal = ({box}) => {
 
     const documentGlobals = document.globals;
     const globals = documentGlobals.globals;
 
-    const { setValue } = useFormContext();
+    const { setValue, getValues } = useFormContext();
 
     // manage global state
     const dispatch = useDispatch();
@@ -27,7 +30,9 @@ const CopyMetaBoxModal = ({box}) => {
     const {id} = useParams();
     const [modalOpen, setModalOpen] = useState(false);
     const [group, setGroup] = useState(null);
+    const [boxes, setBoxes] = useState([]);
     const [deleteBox, setDeleteBox] = useState(false);
+    const [position, setPosition] = useState(null);
 
     // reset state on open modal
     useEffect(() => {
@@ -35,15 +40,33 @@ const CopyMetaBoxModal = ({box}) => {
         setDeleteBox(false);
     }, [modalOpen]);
 
+    const handleGroupChange = (groupId) => {
+        setGroup(groupId);
+
+        if(groupId === box.groupId){
+            setBoxes(getValues()?.boxes);
+        } else {
+            wpAjaxRequest('fetchMetaAction', {
+                id: groupId
+            })
+                .then(res => {
+                    setBoxes(res.boxes);
+                })
+                .catch(err => console.error(err))
+            ;
+        }
+    };
+
     const handleSubmit = () => {
         wpAjaxRequest('copyMetaBoxAction', {
-                boxId: box.id,
-                targetGroupId: group,
-                delete: deleteBox
-            })
+            boxId: box.id,
+            targetGroupId: group,
+            delete: deleteBox,
+            position: position
+        })
             .then(res => {
                 if(res.success){
-                    toast.success(`${useTranslation("Meta box was successfully copied")}.`);
+                    setCookieMessage(`${useTranslation("Meta box was successfully copied")}.`);
                     setModalOpen(!modalOpen);
 
                     if(id === box.groupId){
@@ -102,7 +125,9 @@ const CopyMetaBoxModal = ({box}) => {
                             <select
                                 id="group"
                                 className="form-control default"
-                                onChangeCapture={e => setGroup(e.target.value) }
+                                onChangeCapture={e => {
+                                    handleGroupChange(e.target.value);
+                                }}
                             >
                                 {globals.find.meta.map((g) => (
                                     <option value={g.value}>
@@ -113,39 +138,68 @@ const CopyMetaBoxModal = ({box}) => {
                         </div>
                     </div>
                     {group && group !== 'Select' && (
-                        <div>
-                            <div className="w-100 i-flex-center s-4 mb-8">
-                                <input type="checkbox" defaultValue={deleteBox} onClick={() => setDeleteBox(!deleteBox)} id="deleteBox" />
-                                <label htmlFor="deleteBox">
-                                    {useTranslation("Delete the meta box after copying")}
+                        <React.Fragment>
+                            <div>
+                                <label
+                                    className="form-label i-flex-center s-4"
+                                    htmlFor="position"
+                                >
+                                    {useTranslation("Copy after")}
                                 </label>
+                                <div className="acpt-select">
+                                    <select
+                                        id="position"
+                                        className="form-control default"
+                                        onChangeCapture={e => setPosition(e.target.value) }
+                                    >
+                                        <option value={null}>{useTranslation("Select")}</option>
+                                        {boxes.map((box, index) => (
+                                            <option value={index}>
+                                                {box.label ?? box.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
-                            <Button
-                                onClick={() => handleSubmit() }
-                                style={styleVariants.PRIMARY}
-                            >
-                                {useTranslation("Copy")}
-                            </Button>
-                        </div>
+                            <div>
+                                <div className="w-100 i-flex-center s-4 mb-8">
+                                    <input type="checkbox" defaultValue={deleteBox} onClick={() => setDeleteBox(!deleteBox)} id="deleteBox" />
+                                    <label htmlFor="deleteBox">
+                                        {useTranslation("Delete the meta box after copying")}
+                                    </label>
+                                </div>
+                                <Button
+                                    onClick={() => handleSubmit() }
+                                    style={styleVariants.PRIMARY}
+                                >
+                                    {useTranslation("Copy")}
+                                </Button>
+                            </div>
+                        </React.Fragment>
                     )}
                 </div>
             </Modal>
-            <a
-                href=""
+            <button
+                type="button"
+                className="btn-reset"
+                aria-label={useTranslation("Copy")}
                 onClick={e => {
                     e.preventDefault();
+                    // Without this the click bubbles to the canvas-root onClick
+                    // (Canvas/index.jsx), which unsets the active element and
+                    // unmounts this modal before `modalOpen` can render it.
+                    e.stopPropagation();
                     setModalOpen(!modalOpen);
                 }}
             >
-                <Icon icon="bx:copy" width={18} />
-            </a>
+                <Icon icon="bx:copy" width={18} color={primaryColor()} />
+            </button>
         </React.Fragment>
     );
 };
 
 CopyMetaBoxModal.propTypes = {
-    box: PropTypes.object.isRequired,
+    box: PropTypes.shape(metaBoxProps).isRequired,
 };
 
 export default CopyMetaBoxModal;
-

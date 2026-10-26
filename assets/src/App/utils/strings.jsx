@@ -5,7 +5,8 @@
  * @return {string}
  */
 export const capitalizeTxt = (txt) => {
-    return txt.charAt(0).toUpperCase() + txt.slice(1); //or if you want lowercase the rest txt.slice(1).toLowerCase();
+    if (typeof txt !== 'string' || !txt.length) return txt ?? '';
+    return txt.charAt(0).toUpperCase() + txt.slice(1);
 };
 
 /**
@@ -47,6 +48,27 @@ export const addSlashes = (string) => {
     replace(/'/g, '\\\'').
     replace(/"/g, '\\"');
 };
+
+/**
+ * Determines whether a given string represents a numeric value.
+ *
+ * This function checks if the input string can be successfully
+ * parsed as a numeric value. It returns false for boolean inputs
+ * and only evaluates the numeric nature of non-boolean strings.
+ *
+ * @param {string} str - The input value to be checked for numeric nature.
+ * @returns {boolean} - Returns true if the string represents a numeric value, otherwise false.
+ */
+export const isStringNumeric = (str) => {
+    // Reject booleans
+    if (typeof str === 'boolean') return false;
+
+    // Convert to string and replace comma with dot
+    const normalized = String(str).trim().replace(',', '.');
+
+    // Check if it's a valid number
+    return normalized !== '' && !isNaN(normalized) && !isNaN(parseFloat(normalized));
+}
 
 /**
  *
@@ -95,6 +117,7 @@ export const substring = (string, limit = 60) => {
  * @return {boolean}
  */
 export const isValidJSON = (str) => {
+    if (str === null || str === undefined || typeof str !== 'string') return false;
     try {
         JSON.parse(str);
         return true;
@@ -122,13 +145,15 @@ export const isValidUuid = (uuid) => {
 export const isNumeric = (str) => {
 
     if(typeof str === 'number'){
-        return true;
+        return !isNaN(str);
     }
 
     if(typeof str === 'string'){
-        const parsedInt = parseInt(str);
+        if(str.trim() === ''){
+            return false;
+        }
 
-        return isNumeric(parsedInt);
+        return !isNaN(Number(str));
     }
 
     return false;
@@ -140,6 +165,8 @@ export const isNumeric = (str) => {
  * @returns {*}
  */
 export const htmlspecialcharsDecode = (str) => {
+
+    if (typeof str !== 'string') return str ?? '';
 
     let string = str.replace(/&#(\d+);/g, function(match, dec) {
         return String.fromCharCode(dec);
@@ -179,7 +206,7 @@ export const randomAlphabeticString = (length = 10) => {
  * @return {boolean}
  */
 export const pregMatchAll = (regex, str) => {
-    return new RegExp(regex,'g').matchAll(str)
+    return str.matchAll(new RegExp(regex, 'g'));
 };
 
 /**
@@ -188,6 +215,7 @@ export const pregMatchAll = (regex, str) => {
  * @return {*}
  */
 export const capitalizeFirstLetter = (string) => {
+    if (typeof string !== 'string' || !string.length) return string ?? '';
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
@@ -206,4 +234,128 @@ export const isValidHttpUrl = (string) => {
     }
 
     return url.protocol === "http:" || url.protocol === "https:";
+};
+
+/**
+ * Validates that a string is well-formed SVG markup — not just a string
+ * that happens to contain the substring "<svg". Parses it as XML and
+ * checks both that parsing succeeded (no <parsererror>) and that the
+ * document's root element is actually an <svg> tag.
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export const isValidSvg = (value) => {
+    if(typeof value !== 'string' || !value.trim()){
+        return false;
+    }
+
+    try {
+        const doc = new DOMParser().parseFromString(value, 'image/svg+xml');
+
+        if(doc.getElementsByTagName('parsererror').length > 0){
+            return false;
+        }
+
+        return doc.documentElement.tagName.toLowerCase() === 'svg';
+    } catch (e) {
+        return false;
+    }
+};
+
+/**
+ * Transform a string HELLO WORLD to Hello World
+ * @param str
+ * @return {string}
+ */
+export const titleCase = (str) => {
+    if (typeof str !== 'string' || !str.length) return str ?? '';
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
+};
+
+/**
+ * Sanitizes a given canvas ID by removing specific substrings.
+ * This function modifies the canvas ID by stripping out predefined
+ * substrings that are not required, resulting in a cleaner identifier.
+ *
+ * @param {string} id - The canvas ID to sanitize.
+ * @returns {string} - The sanitized canvas ID with specific substrings removed.
+ */
+export const sanitizeCanvasId = (id) => {
+    return id
+        .replace("canvas-block-", "")
+        .replace("-top", "")
+        .replace("-left", "")
+        .replace("-bottom", "")
+        .replace("-right", "")
+    ;
+};
+
+/**
+ * Compares two version strings to determine if the first version is greater than or equal to the second.
+ *
+ * This function splits the version strings into their numerical components using a period ('.') as the delimiter
+ * and compares each corresponding segment of the versions from left to right. If one version is shorter,
+ * missing segments are treated as zero.
+ *
+ * @param {string|number} version - The version string or number to compare (e.g., "1.2.0" or 1.2).
+ * @param {string|number} target - The target version string or number to compare against (e.g., "1.3.0").
+ * @returns {boolean} Returns `true` if the `version` is greater than or equal to the `target`; otherwise, returns `false`.
+ */
+export const isVersionGreaterOrEqual = (version, target) => {
+    const vParts = String(version).split('.').map(Number);
+    const tParts = String(target).split('.').map(Number);
+
+    for (let i = 0; i < Math.max(vParts.length, tParts.length); i++) {
+        const v = vParts[i] || 0;
+        const t = tParts[i] || 0;
+
+        if (v > t) return true;
+        if (v < t) return false;
+    }
+
+    return true;
+};
+
+export const removeNewLines = (str) => {
+
+    if(typeof str !== 'string'){
+        return str;
+    }
+
+    return str.replace(/\r?\n/g, "");
+}
+
+export const stripHtml = (label) => {
+
+    if(typeof label !== 'string'){
+        return '';
+    }
+
+    return label.replace(/(<([^>]+)>)/gi, "").trim();
+};
+
+/**
+ * Calculates the length of a given string, accounting for multi-byte characters.
+ *
+ * This function determines the length of the provided string by converting it
+ * to an array of characters using `Array.from()` to ensure that multi-byte
+ * characters (e.g., emoji, accented characters) are correctly counted as a
+ * single entity. If the input is not a string, the function returns 0.
+ *
+ * @param {string} str - The input string whose length is to be determined.
+ * @returns {number} The length of the string, considering multi-byte characters,
+ * or 0 if the input is not a string.
+ */
+export const mbStrLength = (str) => {
+
+    if(typeof str !== 'string'){
+        return 0;
+    }
+
+    return Array.from(str).length;
 }

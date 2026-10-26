@@ -7,35 +7,36 @@ use ACPT_Lite\Constants\MetaTypes;
 class PostMetaShortcode extends AbstractACPTShortcode
 {
     /**
-     * @param array $atts
-     *
+     * @param array<string, mixed> $atts
+     * @param string|null $content
+     * @param string $tag
      * @return string
      * @throws \Exception
      */
-    public function render($atts)
+    public function render(array $atts, ?string $content = null, string $tag = ''): string
     {
         global $post;
 
-        if(!isset($atts['box']) or !isset($atts['field'])){
+        if (!isset($atts['box']) || !isset($atts['field'])) {
             return '';
         }
 
-        if(!isset($atts['pid']) and $post === null){
+        if (!isset($atts['pid']) && $post === null) {
             return '';
         }
 
         $pid = isset($atts['pid']) ? $atts['pid'] : $post->ID;
 
-        if($post === null){
+        if ($post === null) {
             $post = get_post((int)$pid);
         }
 
-        if($post === null){
+        if ($post === null) {
             return '';
         }
 
-	    $postType = $post->post_type;
+        $postType = $post->post_type;
 
-	    return $this->renderShortcode($pid, MetaTypes::CUSTOM_POST_TYPE, $postType, $atts);
+        return $this->renderShortcode($pid, MetaTypes::CUSTOM_POST_TYPE, $postType, $atts) ?? '';
     }
 }

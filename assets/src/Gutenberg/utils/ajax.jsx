@@ -13,6 +13,10 @@ export const wpAjaxRequest = async (action, data) => {
     formData.append('action', action);
     formData.append('data', JSON.stringify(data));
 
+    if (document.globals && document.globals.nonce) {
+        formData.append('_ajax_nonce', document.globals.nonce);
+    }
+
     const baseAjaxUrl = (typeof ajaxurl === 'string') ? ajaxurl : '/wp-admin/admin-ajax.php';
 
     let response = await fetch(baseAjaxUrl, {

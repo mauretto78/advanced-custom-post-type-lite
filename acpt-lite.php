@@ -1,143 +1,119 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              #
+ * @link              ####
  * @since             1.0.0
- * @package           advanced-custom-post-type-lite
+ * @package           acpt-lite
  *
  * @wordpress-plugin
  * Plugin Name:       ACPT Lite
  * Plugin URI:        https://wordpress.org/plugins/acpt-lite
- * Description:       Create and manage custom post types, with advanced custom fields and taxonomies management
- * Version:           2.0.11
+ * Description:       Create and manage custom post types, taxonomies and custom fields from a clean, developer-friendly interface. The free version of ACPT.
+ * Version:           2.1.0
  * Author:            Mauro Cassani
  * Author URI:        https://github.com/mauretto78
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       custom-post-type
- * Domain Path:       /advanced-custom-post-type-lite
+ * Text Domain:       acpt-lite
+ * Domain Path:       /acpt-lite
+ * Requires PHP:      7.4
+ * Requires at least: 6.5
  */
 
-use ACPT_Lite\Core\Repository\SettingsRepository;
-use ACPT_Lite\Includes\ACPT_Lite_Activator;
-use ACPT_Lite\Includes\ACPT_Lite_DB;
-use ACPT_Lite\Includes\ACPT_Lite_Deactivator;
 use ACPT_Lite\Includes\ACPT_Lite_Plugin;
+use ACPT_Lite\Utils\PHP\Request;
 
-// If this file is called directly, abort.
+/**
+ * If this file is called directly, abort.
+ */
 if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
 /**
- * Composer init
+ * PHP 7.4 polyfills (str_contains, str_starts_with, str_ends_with, array_is_list)
  */
-require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
-require_once(plugin_dir_path(__FILE__) . '/functions/bootstrap.php');
-require_once(plugin_dir_path(__FILE__) . '/functions/meta_get.php');
-require_once(plugin_dir_path(__FILE__) . '/functions/meta_set.php');
-
-// Fix PHP headers
-ob_start();
+require_once(plugin_dir_path(__FILE__) . '/functions/polyfills.php');
 
 /**
- * Avoid Call to undefined function is_plugin_active() error
+ * Bootstrap the application
  */
+// the PHP dependencies, prefixed with ACPT_Lite\Vendor\ (bin/vendor-prefix/prefix.php) so other plugins cannot replace them
+require_once(plugin_dir_path(__FILE__) . '/vendor-prefixed/autoload.php');
+
+// the plugin classes (PSR-4): the release zip ships no vendor/ folder
+spl_autoload_register(function ($class) {
+    $prefix = 'ACPT_Lite\\';
+
+    if (strpos($class, $prefix) === 0) {
+        $file = __DIR__ . '/src/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
+
+        if (is_file($file)) {
+            require $file;
+        }
+    }
+});
+
+// a development checkout (dev tools); ACPT Lite (the AppSero client)
+if (is_file(plugin_dir_path(__FILE__) . '/vendor/autoload.php')) {
+    require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
+}
+
+require_once(plugin_dir_path(__FILE__) . '/src/Includes/ACPT_Script_Module_Polyfill.php');
+require_once(plugin_dir_path(__FILE__) . '/init/bootstrap.php');
+
+/**
+ * Fix PHP headers
+ */
+ob_start();
+
 if( !function_exists('is_plugin_active') ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 
 /**
- * plugin settings
+ * General Settings
  */
-define( 'ACPT_LITE_PLUGIN_NAME', 'acpt-lite' );
-define( 'ACPT_LITE_PLUGIN_VERSION', '2.0.11' );
-define( 'ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
-define( 'ACPT_LITE_DEV_MODE', devACPTLiteMode() );
+define('ACPT_LITE_PLUGIN_NAME', 'acpt-lite');
+define('ACPT_LITE_PLUGIN_VERSION', '2.1.0');
+define('ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ));
+define('ACPT_LITE_DEV_MODE', devACPTLiteMode());
+
+$request = Request::fromGlobals();
 
 /**
- * Inject DB Cache
+ * Activation/deactivation hooks
  */
-try {
-	$isCacheEnabled = SettingsRepository::getSingle('enable_cache');
-
-	if($isCacheEnabled === null or $isCacheEnabled->getValue() == 1){
-		ACPT_Lite_DB::injectCache(cacheACPTLiteInstance());
-	}
-} catch (\Exception $exception){
-	// do nothing
-}
-
-class ACPT_Lite
-{
-    /**
-     * The code that runs during plugin activation.
-     */
-    public function activate()
-    {
-        ACPT_Lite_Activator::activate();
-    }
-
-    /**
-     * The code that runs during plugin deactivation.
-     */
-    public function deactivate()
-    {
-        ACPT_Lite_Deactivator::deactivate();
-    }
-}
-
-register_activation_hook( __FILE__, [new ACPT_Lite(), 'activate'] );
-register_deactivation_hook( __FILE__, [new ACPT_Lite(), 'deactivate'] );
+register_activation_hook( __FILE__, [new ACPT_Lite_Plugin($request), 'activationHook'] );
+register_deactivation_hook( __FILE__, [new ACPT_Lite_Plugin($request), 'deactivationHook'] );
 
 checkForACPTLitePluginUpgrades();
 
 /**
- * APPSERO
- * Initialize the plugin tracker
+ * Begins execution of the plugin.
  *
- * @return void
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
  */
-function appsero_init_tracker_acpt_lite() {
+try {
+    $plugin = new ACPT_Lite_Plugin($request);
+    $plugin->run();
 
-    if ( ! class_exists( 'Appsero\Client' ) ) {
-        require_once __DIR__ . '/vendor/appsero/client/src/Client.php';
+    // Usage insights (AppSero)
+    if (class_exists('Appsero\\Client')) {
+        $client = new \Appsero\Client('858a08d4-bccd-4710-a3bc-e768cfe80675', 'Advanced Custom Post Type Lite', __FILE__);
+        $client->insights()->init();
     }
 
-    $client = new Appsero\Client( '858a08d4-bccd-4710-a3bc-e768cfe80675', 'Advanced Custom Post Type Lite', __FILE__ );
-
-    // Active insights
-    $client->insights()->init();
-
-}
-
-appsero_init_tracker_acpt_lite();
-
-try {
-	/**
-	 * Begins execution of the plugin.
-	 *
-	 * Since everything within the plugin is registered via hooks,
-	 * then kicking off the plugin from this point in the file does
-	 * not affect the page life cycle.
-	 *
-	 * @since    1.0.0
-	 */
-	$plugin = new ACPT_Lite_Plugin();
-    $plugin->run();
 } catch (\Exception $exception){
-
+    //
     function wpb_admin_notice_error() {
-        echo '<div class="notice notice-error is-dismissible">
-            <p>Something went wrong.</p>
-      </div>';
+        echo '
+			<div class="notice notice-error is-dismissible">
+	            <p>Something went wrong.</p>
+			</div>
+		';
     }
 
     add_action( 'admin_notices', 'wpb_admin_notice_error' );

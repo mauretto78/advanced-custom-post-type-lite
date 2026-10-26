@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useParams} from "react-router-dom";
 import {filterByLabel} from "../../../utils/objects";
 import Loader from "../../../components/Loader";
-import {metaTitle, refreshPage} from "../../../utils/misc";
+import {metaTitle, refreshPage, isRTLOrientation} from "../../../utils/misc";
 import {fetchWooCommerceProductData} from "../../../redux/reducers/fetchWooCommerceProductDataSlice";
 import Alert from "../../../components/Alert";
 import Pagination from "../../../components/Pagination";
@@ -62,8 +62,11 @@ const ProductDataList = ({}) => {
 
     const actions = [
         <ButtonLink
+            key="add-product-data"
             to="/product-data/product/add"
             style={styleVariants.PRIMARY}
+            size="sm"
+            icon="bx:plus"
         >
             {useTranslation("Add product data")}
         </ButtonLink>
@@ -163,13 +166,13 @@ const ProductDataList = ({}) => {
                     <BulkActions belongsTo="woo_product_data" />
                     {data.records && data.records.length > 0 ? (
                         <div className="responsive with-shadow b-rounded">
-                            <table className={`acpt-table ${globals.is_rtl ? 'rtl' : ''}`}>
+                            <table className={`acpt-table ${isRTLOrientation()}`}>
                                 <thead>
                                     <tr>
                                         <th style={{
                                             width: "24px"
                                         }}>
-                                            <label className="checkbox" htmlFor="all">
+                                            <label className="checkbox" htmlFor="all" aria-label="Select all">
                                                 <input
                                                     ref={ref}
                                                     type="checkbox"
@@ -220,7 +223,7 @@ const ProductDataList = ({}) => {
                                             <td colSpan={6}>
                                                 <Pagination
                                                     currentPage={page ? parseInt(page) : 1}
-                                                    totalPages={totalPages}
+                                                    totalRows={data.count}
                                                     baseLink="/product-data/product"
                                                 />
                                             </td>

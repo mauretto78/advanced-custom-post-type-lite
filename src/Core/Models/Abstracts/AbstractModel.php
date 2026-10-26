@@ -12,13 +12,13 @@ use ReflectionClass;
  * AbstractModel
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/core
+ * @package    acpt-lite
+ * @subpackage acpt-lite/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 abstract class AbstractModel
 {
-	use CollectionsTrait;
+    use CollectionsTrait;
 
     /**
      * @var string
@@ -33,12 +33,12 @@ abstract class AbstractModel
         return $this->id;
     }
 
-	/**
-	 * AbstractModel constructor.
-	 *
-	 * @param $id
-	 */
-    public function __construct($id)
+    /**
+     * AbstractModel constructor.
+     *
+     * @param string $id
+     */
+    public function __construct(string $id)
     {
         $this->id = $id;
     }
@@ -46,31 +46,45 @@ abstract class AbstractModel
     /**
      * Hydrate an entity from an array of params
      *
-     * @param array $data
+     * @param array<string, mixed> $data
      *
      * @return static
      * @throws \Exception
      */
-    public static function hydrateFromArray( array $data )
+    public static function hydrateFromArray(array $data): AbstractModel
     {
+        /** @var \ReflectionClass<static> $reflection */
         $reflection = new \ReflectionClass(static::class);
         $validator = new ArgumentsArrayValidator();
+        $rules = static::validationRules();
 
-	    if(!$validator->validate(static::validationRules(), $data)){
-		    throw new \InvalidArgumentException($validator->errorMessage());
-	    }
+        // An empty XML leaf element (e.g. <description></description>) is
+        // indistinguishable from an empty *array* once round-tripped through
+        // XMLFormatter::xmlToArray() - both become []. For a key whose
+        // schema only allows 'string' (not 'array'), an empty array is
+        // unambiguously meant to be an empty string, so coerce it back
+        // before validating/hydrating instead of failing import.
+        foreach ($rules as $key => $rule) {
+            if (($data[$key] ?? null) === [] && trim((string)($rule['type'] ?? '')) === 'string') {
+                $data[$key] = '';
+            }
+        }
+
+        if (!$validator->validate($rules, $data)) {
+            throw new \InvalidArgumentException($validator->errorMessage());
+        }
 
         return self::HydrateReflectionClassFromData($reflection, $data);
     }
 
     /**
-     * @param \ReflectionClass $reflection
-     * @param array            $data
+     * @param \ReflectionClass<object>     $reflection
+     * @param array<string, mixed> $data
      *
      * @return mixed
      * @throws \ReflectionException
      */
-    private static function HydrateReflectionClassFromData( \ReflectionClass $reflection, array $data)
+    private static function HydrateReflectionClassFromData(\ReflectionClass $reflection, array $data)
     {
         $constructorParams = $reflection->getConstructor()->getParameters();
 
@@ -78,16 +92,15 @@ abstract class AbstractModel
         $values = [];
         $keys = [];
 
-        foreach ($constructorParams as $constructorParam){
-
-            if($constructorParam->getName() === 'id' and isset($data[$constructorParam->getName()])){
+        foreach ($constructorParams as $constructorParam) {
+            if ($constructorParam->getName() === 'id' && isset($data[$constructorParam->getName()])) {
                 $id = $data[$constructorParam->getName()];
             }
 
-            if($constructorParam->getName() !== 'id'){
+            if ($constructorParam->getName() !== 'id') {
                 $keys[] = $constructorParam->getName();
 
-                if(isset($data[$constructorParam->getName()])){
+                if (isset($data[$constructorParam->getName()])) {
                     $value = $data[$constructorParam->getName()];
                 } elseif ($constructorParam->allowsNull()) {
                     $value = null;
@@ -95,9 +108,16 @@ abstract class AbstractModel
                     throw new \DomainException(static::class . ': wrong or missing parameter [' . $constructorParam->getName(). ']');
                 }
 
-                $class = ($constructorParam->getType() and !$constructorParam->getType()->isBuiltin()) ? new ReflectionClass($constructorParam->getType()->getName()) : null;
+                $type = $constructorParam->getType();
+                $class = null;
 
-                if ($class and is_array($value)){
+                if ($type instanceof \ReflectionNamedType && !$type->isBuiltin()) {
+                    /** @var class-string $typeName */
+                    $typeName = $type->getName();
+                    $class = new ReflectionClass($typeName);
+                }
+
+                if ($class && is_array($value)) {
                     $values[] = self::HydrateReflectionClassFromData($class, $value);
                 } else {
                     $values[] = $value;
@@ -108,68 +128,70 @@ abstract class AbstractModel
         unset($data['id']);
 
         $diff = array_diff(array_keys($data), $keys);
-        if(!empty($diff)){
+        if (!empty($diff)) {
             //@TODO in prod log the error and return null??
-            throw new \DomainException('Wrong or missing parameters');
+            throw new \DomainException('Wrong or missing parameters' . print_r($diff, true));
         }
 
         $className = $reflection->getName();
 
-        if(!$id){
+        if (!$id) {
             $id = Uuid::v4();
         }
 
         return new $className($id, ...$values);
     }
 
-	/**
-	 * @param AbstractModel $model
-	 *
-	 * @return bool
-	 */
+    /**
+     * @param AbstractModel $model
+     *
+     * @return bool
+     */
     public function isEqualsTo(AbstractModel $model): bool
     {
-    	return $this->getId() === $model->getId();
+        return $this->getId() === $model->getId();
     }
 
-	/**
-	 * @return array
-	 */
-    protected function getConstants()
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getConstants(): array
     {
-	    try {
-		    $oClass = new \ReflectionClass(static::class);
+        try {
+            $oClass = new \ReflectionClass(static::class);
 
-		    return $oClass->getConstants();
-	    } catch (\Exception $exception){
-		    return [];
-	    }
+            return $oClass->getConstants();
+        } catch (\Exception $exception) {
+            do_action("acpt/error", $exception);
+
+            return [];
+        }
     }
 
-	/**
-	 * @return mixed
-	 * @throws \ReflectionException
-	 */
-    public function toStdObject()
+    /**
+     * @return \stdClass
+     * @throws \ReflectionException
+     */
+    public function toStdObject(): \stdClass
     {
-    	$stdObject = json_decode(json_encode($this));
+        $stdObject = json_decode(json_encode($this) ?: 'null');
 
-		return Objects::cast(\stdClass::class, $stdObject);
+        return Objects::cast(\stdClass::class, $stdObject);
     }
 
-	/**
-	 * @return array
-	 * @throws \ReflectionException
-	 */
-    public function toArray()
+    /**
+     * @return array<mixed>
+     * @throws \ReflectionException
+     */
+    public function toArray(): array
     {
-    	$stdClass = $this->toStdObject();
+        $stdClass = $this->toStdObject();
 
-    	return Objects::stdObjToArray($stdClass);
+        return Objects::stdObjToArray($stdClass);
     }
 
-	/**
-	 * @return array
-	 */
-    public abstract static function validationRules(): array;
+    /**
+     * @return array<string, mixed>
+     */
+    abstract public static function validationRules(): array;
 }

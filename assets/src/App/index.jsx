@@ -7,6 +7,7 @@ import store from "./redux/store";
 import {ErrorBoundary} from "react-error-boundary";
 // styles
 import "./scss/app.scss";
+import "./lite/lite.scss";
 import ErrorBoundaryFallback from "./components/Errors/ErrorBoundaryFallback";
 import {refreshPage} from "./utils/misc";
 

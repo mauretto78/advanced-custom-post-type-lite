@@ -11,10 +11,29 @@ import {toast} from "react-hot-toast";
 import Alert from "../../components/Alert";
 
 const HealthCheck = () => {
-
     // manage local state
     const [healthCheck, setHealthCheck] = useState(null);
     const [errors, setErrors] = useState([]);
+    const [fetchingError, setFetchingError] = useState(null);
+
+    /**
+     * Validates the structure of a health check response object.
+     *
+     * This function ensures that the provided response object contains
+     * the required keys: `version`, `db`, `curl`, and `cache`, and that
+     * the value for each key is of type string.
+     *
+     * @param {Object} res - The response object to validate.
+     * @returns {boolean} Returns `true` if the provided object matches the required structure; otherwise, returns `false`.
+     */
+    const validateHealthCheckResponse = (res) => {
+        if(typeof res !== 'object' || res === null){ return false; }
+        if(typeof res.version !== 'string'){ return false; }
+        if(typeof res.db !== 'string'){ return false; }
+        if(typeof res.cache !== 'string'){ return false; }
+
+        return true;
+    }
 
     /**
      * Run Repair tool
@@ -39,12 +58,17 @@ const HealthCheck = () => {
      * Run Health Check
      */
     const runHealthCheck = () => {
-
         setHealthCheck(null);
         setErrors([]);
+        setFetchingError(null);
 
         wpAjaxRequest("healthCheckAction", {})
             .then(res => {
+                if(!validateHealthCheckResponse(res)){
+                    setFetchingError("Fetching error occurred.");
+                    return;
+                }
+
                 setHealthCheck(res);
 
                 if(res.db !== 'ok'){ setErrors(err => [...err, "db"]) };
@@ -53,19 +77,24 @@ const HealthCheck = () => {
             })
             .catch(err => {
                 console.error(err);
+                setFetchingError(useTranslation("Something went wrong, please retry."));
                 toast.error(useTranslation("Something went wrong, please retry."));
             })
     };
 
     useEffect(() => {
         metaTitle(useTranslation("Health check"));
-        changeCurrentAdminMenuLink('#/health-check');
+        changeCurrentAdminMenuLink('#/tools');
         runHealthCheck();
     }, []);
 
     let actions = [
         <Button
-            style={styleVariants.SECONDARY}
+            testId="run-health-check"
+            key="run-health-check"
+            style={styleVariants.OUTLINED_PRIMARY}
+            size="sm"
+            icon="bx:check-circle"
             onClick={(e) => {
                 e.preventDefault();
                 runHealthCheck();
@@ -75,12 +104,19 @@ const HealthCheck = () => {
         </Button>
     ];
 
-    if(errors.length > 0){
+    if(errors?.length > 0){
         actions.push(
-            <Button style={styleVariants.PRIMARY} onClick={(e) => {
-                e.preventDefault();
-                runRepair();
-            }}>
+            <Button
+                key="repair"
+                testId="repair"
+                style={styleVariants.PRIMARY}
+                size="sm"
+                icon="bx:wrench"
+                onClick={(e) => {
+                    e.preventDefault();
+                    runRepair();
+                }}
+            >
                 {useTranslation("Launch the repair")}
             </Button>
         );
@@ -108,27 +144,35 @@ const HealthCheck = () => {
                 }
             ]}
         >
-            {healthCheck ? (
-                <React.Fragment>
-                    <Card title={useTranslation("Health check")}>
-                        <CardRow
-                            label={useTranslation("Plugin version")}
-                            value={renderHealthElement(healthCheck.version)}
-                        />
-                        <CardRow
-                            label={useTranslation("DB status")}
-                            value={renderHealthElement(healthCheck.db)}
-                        />
-                        <CardRow
-                            label={useTranslation("Cache")}
-                            value={renderHealthElement(healthCheck.cache)}
-                        />
-                    </Card>
-                </React.Fragment>
-            ) : (
+            {fetchingError ? (
                 <Alert style={styleVariants.WARNING}>
-                    Health check running...
+                    {fetchingError}
                 </Alert>
+            ) : (
+                <React.Fragment>
+                    {healthCheck ? (
+                        <React.Fragment>
+                            <Card title={useTranslation("Health check")}>
+                                <CardRow
+                                    label={useTranslation("Plugin version")}
+                                    value={renderHealthElement(healthCheck.version)}
+                                />
+                                <CardRow
+                                    label={useTranslation("DB status")}
+                                    value={renderHealthElement(healthCheck.db)}
+                                />
+                                <CardRow
+                                    label={useTranslation("Cache")}
+                                    value={renderHealthElement(healthCheck.cache)}
+                                />
+                            </Card>
+                        </React.Fragment>
+                    ) : (
+                        <Alert style={styleVariants.WARNING}>
+                            Health check running...
+                        </Alert>
+                    )}
+                </React.Fragment>
             )}
         </Layout>
     );

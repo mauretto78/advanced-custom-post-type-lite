@@ -1,75 +1,89 @@
+@use "variables";
+
 .acpt-horizontal-tabs {
   display: flex;
 
-  > .tablist {
+  > .acpt-tablist {
     width: 25%;
     display: flex;
     flex-direction: column;
-    gap: $space-8;
+    gap: variables.$space-8;
     margin: 0;
     padding: 0;
 
     > .tab {
-      padding: $space-24;
-      background: $pale-gray;
-      border-radius: $border-radius 0 0 $border-radius;
-      color: $gray;
+      padding: variables.$space-24;
+      background: variables.$pale-gray;
+      border-radius: variables.$border-radius 0 0 variables.$border-radius;
+      color: variables.$gray;
       cursor: pointer;
 
       &.active {
         font-weight: bold;
-        background: $white;
-        color: $black;
-        border-radius: 0 $border-radius $border-radius $border-radius;
+        background: variables.$white;
+        color: variables.$black;
+        border-radius: 0 variables.$border-radius variables.$border-radius variables.$border-radius;
       }
     }
   }
 
-  > .tab-panel {
+  > .acpt-tab-panel {
     width: 75%;
-    background: $white;
-    border-radius: 0 $border-radius $border-radius $border-radius;
-    box-shadow: 3px 2px 4px rgba(0,0,0,.16);
-    padding: $space-24;
+    background: variables.$white;
+    border-radius: 0 variables.$border-radius variables.$border-radius variables.$border-radius;
+    box-shadow: variables.$box-shadow;
+    padding: variables.$space-24;
   }
 }
 
 .acpt-tabs {
 
-  .tablist {
+  .acpt-tablist {
     display: flex;
-    gap: $space-8;
+    flex-wrap: wrap;
+    gap: variables.$space-8;
     padding: 0;
+    margin: 0;
 
     li {
-      background: $white;
-      padding: $space-12;
-      border: $border-thickness solid $light-gray;
-      color: $medium-gray;
-      border-radius: $border-radius;
+      background: variables.$white;
+      padding: variables.$space-12;
+      border: variables.$border-thickness solid variables.$light-gray;
+      color: variables.$medium-gray;
+      border-radius: variables.$border-radius;
       cursor: pointer;
       margin: 0;
 
-      &:hover {
-        border: $border-thickness solid $medium-gray;
-        color: $gray;
+      &:hover,
+      &:focus {
+        border: variables.$border-thickness solid variables.$medium-gray;
+        color: variables.$gray;
       }
 
       &.active {
         font-weight: bold;
-        color: $primary-color;
-        border: $border-thickness solid $primary-color;
+        color: variables.$primary-color;
+        border: variables.$border-thickness solid variables.$primary-color;
       }
 
       &.danger.active {
         font-weight: bold;
-        color: $danger-color;
-        border: $border-thickness solid $danger-color;
+        color: variables.$danger-color;
+        border: variables.$border-thickness solid variables.$danger-color;
+      }
+    }
+
+    &.invalid {
+      li {
+        pointer-events: none;
+        cursor: not-allowed;
+        border: variables.$border-thickness solid variables.$danger-color;
+        color: variables.$danger-color;
       }
     }
   }
 
-  .tab-panel {
+  .acpt-tab-panel {
 
   }
 }

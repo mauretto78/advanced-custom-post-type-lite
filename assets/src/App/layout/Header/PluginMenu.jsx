@@ -1,54 +1,51 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import useTranslation from "../../hooks/useTranslation";
 import {Icon} from "@iconify/react";
-import {useOutsideClick} from "../../hooks/useOutsideClick";
+import {grayColor} from "../../utils/colors";
+import DropdownMenu from "../../components/DropdownMenu";
+import {upgradeUrl} from "../../lite/upgrade.jsx";
 
+/**
+ * ACPT Lite plugin menu (replaces the ACPT one: no account, license or tickets).
+ */
 const PluginMenu = () => {
 
-    // global settings
-    const settings = document.globals;
-
-    // local settings
-    const [isVisible, setIsVisible] = useState(false);
-    const node = useRef();
-
-    useOutsideClick([node], () => {
-        setIsVisible(false);
-    });
-
     return (
-        <div className="relative">
+        <div className="i-flex-center s-8">
             <a
-                data-cy="button-plugin-menu"
-                href="#"
-                onClick={e => {
-                    e.preventDefault();
-                    setIsVisible(!isVisible);
-                }}
+                className="acpt-btn acpt-btn-primary acpt-btn-sm acpt-lite-upgrade-button"
+                href={upgradeUrl("plugin-menu")}
+                target="_blank"
+                rel="noopener noreferrer"
             >
-                <Icon icon="bx:menu-alt-right" color="#777" width={24} />
+                {useTranslation("Upgrade to PRO")}
             </a>
-            <nav
-                data-cy="plugin-menu"
-                ref={node}
-                className={`acpt-nav ${isVisible ? 'visible': ''} ${settings.globals.is_rtl ? 'rtl' : ''}`}
-            >
-                <a href="https://docs.acpt.io" target="_blank">
-                    {useTranslation("Documentation")}
-                </a>
-                <a href="https://wordpress.org/plugins/acpt-lite/#developers" target="_blank">
-                    {useTranslation("Changelog")}
-                </a>
-                <a href="https://wordpress.org/plugins/acpt-lite/#reviews" target="_blank">
-                    {useTranslation("Rate this plugin")}
-                </a>
-                <a className="facebook" href="https://www.facebook.com/groups/880817719861018" target="_blank">
-                    {useTranslation("Facebook group")}
-                </a>
-                <a className="color-danger" href="https://acpt.io/checkout/" target="_blank">
-                    {useTranslation("Upgrade to PRO")}
-                </a>
-            </nav>
+            <DropdownMenu
+                align="right"
+                name="plugin-menu"
+                label={useTranslation("Plugin menu")}
+                anchor={<Icon className="hover-opacity-70" icon="bx:menu-alt-right" color={grayColor()} width={24} />}
+                links={[
+                    <a href="https://docs.acpt.io" target="_blank" rel="noopener noreferrer">
+                        {useTranslation("Documentation")}
+                    </a>,
+                    <a href="https://wordpress.org/plugins/acpt-lite/#developers" target="_blank" rel="noopener noreferrer">
+                        {useTranslation("Changelog")}
+                    </a>,
+                    <a href="https://wordpress.org/support/plugin/acpt-lite/reviews/#new-post" target="_blank" rel="noopener noreferrer">
+                        {useTranslation("Rate ACPT Lite")}
+                    </a>,
+                    <a href="https://wordpress.org/support/plugin/acpt-lite/" target="_blank" rel="noopener noreferrer">
+                        {useTranslation("Support forum")}
+                    </a>,
+                    <a className="facebook" href="https://www.facebook.com/groups/880817719861018" target="_blank" rel="noopener noreferrer">
+                        {useTranslation("Facebook group")}
+                    </a>,
+                    <a className="color-danger" href={upgradeUrl("plugin-menu", "dropdown")} target="_blank" rel="noopener noreferrer">
+                        {useTranslation("Upgrade to PRO")}
+                    </a>
+                ]}
+            />
         </div>
     );
 };

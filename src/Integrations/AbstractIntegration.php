@@ -2,46 +2,86 @@
 
 namespace ACPT_Lite\Integrations;
 
+use ACPT_Lite\Utils\PHP\Request;
+
 abstract class AbstractIntegration
 {
     /**
+     * Integration name
+     *
+     * @return string
+     */
+    abstract protected function name(): string;
+
+    /**
      * Check if the corresponding plugin/theme is active
+     *
+     * @param Request|null $request
      *
      * @return bool
      */
-    protected abstract function isActive();
+    abstract protected function isActive(?Request $request = null): bool;
 
     /**
      * Run the integration
      *
      * @return mixed
      */
-    protected abstract function runIntegration();
+    abstract protected function runIntegration();
 
     /**
+     * Run the code
      *
+     * @param Request|null $request
+     *
+     * @return void
      */
-    public function run()
+    public function run(?Request $request = null): void
     {
-        if($this->isActive()){
+        //
+        // External filter to override $this->isActive() check.
+        //
+        // Example: acpt_is_elementor_pro_active
+        //
+        $isActiveFromFilter = apply_filters('acpt_is_'.$this->name().'_active', false);
+
+        if ($isActiveFromFilter === true) {
+            $isActive = true;
+        } else {
+            $isActive = $this->isActive($request);
+        }
+
+        if ($isActive) {
             $this->runIntegration();
         }
     }
 
-	/**
-	 * @param \WP_Theme $theme
-	 * @param $minimumVersion
-	 *
-	 * @return bool|int
-	 */
-    protected function checkThemeVersion(\WP_Theme $theme, $minimumVersion)
+    /**
+     * @param \WP_Theme $theme
+     *
+     * @return false|string
+     */
+    protected function getThemeVersion(\WP_Theme $theme)
     {
-	    $version = $theme->parent_theme ? $theme->parent()->get('Version') : $theme->get('Version');
+        $parentTheme = $theme->parent();
 
-	    if(!$version){
-		    return false;
-	    }
+        return ($parentTheme instanceof \WP_Theme) ? $parentTheme->get('Version') : $theme->get('Version');
+    }
 
-	    return version_compare( $version, $minimumVersion, '>=' );
+    /**
+     * @param \WP_Theme $theme
+     * @param string $minimumVersion
+     *
+     * @return bool|int
+     */
+    protected function checkThemeVersion(\WP_Theme $theme, string $minimumVersion)
+    {
+        $version = $this->getThemeVersion($theme);
+
+        if (!$version) {
+            return false;
+        }
+
+        return version_compare($version, $minimumVersion, '>=');
     }
 }

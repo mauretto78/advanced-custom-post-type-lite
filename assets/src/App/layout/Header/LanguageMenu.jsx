@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {saveSettings} from "../../redux/reducers/saveSettingsSlice";
 import {toast} from "react-hot-toast";
 import {refreshPage} from "../../utils/misc";
+import {primaryColor} from "../../utils/colors";
 import {dontShowCookieMessage, flushCookieMessages, setCookieMessage} from "../../utils/cookies";
 import {useLocation} from "react-router-dom";
 
@@ -18,8 +19,9 @@ const LanguageMenu = () => {
 
     // redux local state
     const availableLanguages = settings.globals.available_languages;
-    const defaultValue = availableLanguages.filter((l)=>{
-        return l.value === settings.globals.language
+    const syncLanguage = settings.globals.sync_language;
+    const defaultLanguageValue = availableLanguages.filter((l)=>{
+        return l?.value === settings.globals.language
     });
 
     const handleLanguageChange = (language) => {
@@ -42,21 +44,25 @@ const LanguageMenu = () => {
 
     }, [loading]);
 
+    const isDisabled = syncLanguage || loading === true;
+
     return (
         <div className="i-flex-center s-4">
-            <Icon color="#007CBA" icon="mdi:language" width={24} />
-            <div className="acpt-select">
+            <Icon color={primaryColor()} icon="mdi:language" width={24} />
+            <div className={`acpt-select sm ${isDisabled ? 'disabled' : ''}`}>
                 <select
+                    name="acpt-language"
                     id="acpt-language"
-                    tabIndex={1}
-                    disabled={loading === true}
+                    tabIndex="0"
+                    aria-label="Language"
+                    disabled={isDisabled}
                     onChangeCapture={e => handleLanguageChange(e.target.value)}
-                    defaultValue={defaultValue.length === 1 ? defaultValue[0].value : null}
-                    className={`form-control`}
+                    defaultValue={defaultLanguageValue.length === 1 ? defaultLanguageValue[0].value : "en_US"}
+                    className={`sm form-control`}
                 >
                     {availableLanguages.map((lang) => {
                         return (
-                            <option value={lang.value}>
+                            <option key={lang.value} value={lang.value}>
                                 {lang.label}
                             </option>
                         );

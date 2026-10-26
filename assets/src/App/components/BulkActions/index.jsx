@@ -7,8 +7,9 @@ import {useAutoAnimate} from "@formkit/auto-animate/react";
 import {hiddenElements} from "../../utils/localStorage";
 import PropTypes from "prop-types";
 import RestoreElementsModal from "./Modal/RestoreElementsModal";
+import {BULK_ACTIONS_MAP} from "../../constants/bulkActions.jsx";
 
-const BulkActions = ({belongsTo}) => {
+const BulkActions = ({belongsTo, actions = ["delete", "duplicate", "hide"]}) => {
 
     const hiddenElms = hiddenElements(belongsTo);
 
@@ -66,7 +67,7 @@ const BulkActions = ({belongsTo}) => {
             {showBulkActions() && (
                 <div
                     className="flex-between s-8 mb-24"
-                    data-cy="bulk-actions"
+                    data-testid="bulk-actions"
                 >
                     <span>
                         {count()} {useTranslation("Selected items")}
@@ -74,14 +75,14 @@ const BulkActions = ({belongsTo}) => {
                     <div className="i-flex-center s-8">
                         <select
                             name="action"
-                            data-cy="cpt-bulk-actions"
+                            data-testid="cpt-bulk-actions"
                             className="form-control sm"
                             {...register("action")}
                         >
                             <option value="">{useTranslation("Select")}</option>
-                            <option value="delete">{useTranslation("Delete")}</option>
-                            <option value="duplicate">{useTranslation("Duplicate")}</option>
-                            <option value="hide">{useTranslation("Hide")}</option>
+                            {actions.map((action) => (
+                                <option key={action} value={action}>{useTranslation(BULK_ACTIONS_MAP[action])}</option>
+                            ))}
                         </select>
                         <Button
                             testId="cpt-bulk-actions"
@@ -98,6 +99,7 @@ const BulkActions = ({belongsTo}) => {
 };
 
 BulkActions.propTypes = {
+    actions: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(BULK_ACTIONS_MAP))),
     belongsTo: PropTypes.string.isRequired,
 };
 

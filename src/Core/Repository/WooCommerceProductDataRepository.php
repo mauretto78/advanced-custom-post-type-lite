@@ -2,15 +2,16 @@
 
 namespace ACPT_Lite\Core\Repository;
 
-use ACPT_Lite\Core\Models\Meta\MetaFieldOptionModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataFieldOptionModel;
 use ACPT_Lite\Core\Models\WooCommerce\WooCommerceProductDataModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\PHP\Arrays;
 
 class WooCommerceProductDataRepository extends AbstractRepository
 {
     /**
+     * @return void
      * @throws \Exception
      */
     public static function clear()
@@ -18,28 +19,24 @@ class WooCommerceProductDataRepository extends AbstractRepository
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`");
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."`");
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."`");
-	    ACPT_Lite_DB::invalidateCacheTag(self::class);
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return bool
      * @throws \Exception
      */
     public static function delete($id)
     {
-        if(self::exists($id)){
-
+        if (self::exists($id)) {
             $productDataModel = self::get([
                     'id' => $id
             ]);
 
-            /** @var WooCommerceProductDataFieldModel $field */
-            foreach ($productDataModel[0]->getFields() as $field){
-
-                /** @var WooCommerceProductDataFieldOptionModel $option */
-                foreach ($field->getOptions() as $option){
+            foreach ($productDataModel[0]->getFields() as $field) {
+                foreach ($field->getOptions() as $option) {
                     ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` WHERE id = %s;", [$option->getId()]);
                 }
 
@@ -47,67 +44,61 @@ class WooCommerceProductDataRepository extends AbstractRepository
             }
 
             ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."` WHERE id = %s;", [$id]);
-	        ACPT_Lite_DB::invalidateCacheTag(self::class);
+            ACPT_Lite_DB::invalidateCacheTag(self::class);
 
             return true;
         }
 
         return false;
     }
-    
+
     /**
-     * @param $id
-     * @param $fieldId
+     * @param string $id
+     * @param string $fieldId
      *
      * @return bool
      * @throws \Exception
      */
     public static function deleteField($id, $fieldId)
     {
-        /** @var WooCommerceProductDataFieldModel $productDataFieldModel */
         $productDataFieldModel = self::getField($id, $fieldId);
 
-        if(null === $productDataFieldModel){
+        if ($productDataFieldModel === null) {
             return false;
         }
 
-        /** @var WooCommerceProductDataFieldOptionModel $option */
-        foreach ($productDataFieldModel->getOptions() as $option){
+        foreach ($productDataFieldModel->getOptions() as $option) {
             ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` WHERE id = %s;", [$option->getId()]);
         }
 
         ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` WHERE id = %s;", [$productDataFieldModel->getId()]);
-	    ACPT_Lite_DB::invalidateCacheTag(self::class);
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
 
         return true;
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return bool
      * @throws \Exception
      */
     public static function deleteFields($id)
     {
-        if(self::exists($id)){
-
+        if (self::exists($id)) {
             $productDataModel = self::get([
                     'id' => $id
             ]);
 
-            /** @var WooCommerceProductDataFieldModel $field */
-            foreach ($productDataModel[0]->getFields() as $field){
-
-                /** @var WooCommerceProductDataFieldOptionModel $option */
-                foreach ($field->getOptions() as $option){
+            foreach ($productDataModel[0]->getFields() as $field) {
+                foreach ($field->getOptions() as $option) {
                     ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` WHERE id = %s;", [$option->getId()]);
                 }
 
                 ACPT_Lite_DB::executeQueryOrThrowException("DELETE FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` WHERE id = %s;", [$field->getId()]);
             }
 
-	        ACPT_Lite_DB::invalidateCacheTag(self::class);
+            ACPT_Lite_DB::invalidateCacheTag(self::class);
 
             return true;
         }
@@ -115,27 +106,27 @@ class WooCommerceProductDataRepository extends AbstractRepository
         return false;
     }
 
-	/**
-	 * @return int
-	 */
+    /**
+     * @return int
+     */
     public static function count()
     {
-	    $baseQuery = "
+        $baseQuery = "
             SELECT 
                 count(id) as count
             FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA)."`
             ";
 
-	    $results = ACPT_Lite_DB::getResults($baseQuery);
+        $results = ACPT_Lite_DB::getResults($baseQuery);
 
-	    return (int)$results[0]->count;
+        return (int)$results[0]->count;
     }
-    
+
     /**
      * Check if a WC product data exists
      *
      * @since    1.0.1
-     * @param $id
+     * @param string $id
      *
      * @return bool
      */
@@ -150,11 +141,11 @@ class WooCommerceProductDataRepository extends AbstractRepository
 
         $posts = ACPT_Lite_DB::getResults($baseQuery, [$id]);
 
-        return count($posts) === 1;
+        return Arrays::count($posts) === 1;
     }
-    
+
     /**
-     * @param array $meta
+     * @param array<string, mixed> $meta
      *
      * @return WooCommerceProductDataModel[]
      * @throws \Exception
@@ -176,33 +167,32 @@ class WooCommerceProductDataRepository extends AbstractRepository
             WHERE 1=1
             ";
 
-        if(isset($meta['id'])){
+        if (isset($meta['id'])) {
             $baseQuery .= " AND pd.id = %s";
             $args[] = $meta['id'];
         }
 
-        if(isset($meta['name'])){
-            $baseQuery .= " AND pd.name = %s";
+        if (isset($meta['name'])) {
+            $baseQuery .= " AND pd.product_data_name = %s";
             $args[] = $meta['name'];
         }
 
         $baseQuery .= " GROUP BY pd.id";
 
-        if(isset($meta['sortedBy'])){
+        if (isset($meta['sortedBy'])) {
             $baseQuery .= " ORDER BY pd.".$meta['sortedBy']." ASC";
         } else {
             $baseQuery .= " ORDER BY pd.product_data_name ASC";
         }
 
-        if(isset($meta['page']) and isset($meta['perPage'])){
-            $baseQuery .= " LIMIT ".$meta['perPage']." OFFSET " . ($meta['perPage'] * ($meta['page'] - 1));
+        if (isset($meta['page']) && isset($meta['perPage'])) {
+            $baseQuery .= " LIMIT ".(int)$meta['perPage']." OFFSET " . ((int)$meta['perPage'] * ((int)$meta['page'] - 1));
         }
 
         $baseQuery .= ';';
         $productData = ACPT_Lite_DB::getResults($baseQuery, $args);
 
-        foreach ($productData as $productDatum){
-
+        foreach ($productData as $productDatum) {
             $productDataModel = WooCommerceProductDataModel::hydrateFromArray([
                     'id' => $productDatum->id,
                     'name' => $productDatum->name,
@@ -226,8 +216,7 @@ class WooCommerceProductDataRepository extends AbstractRepository
                 ORDER BY sort
             ;", [$productDatum->id]);
 
-            foreach ($fields as $fieldIndex => $field){
-
+            foreach ($fields as $fieldIndex => $field) {
                 $productDataFieldModel = WooCommerceProductDataFieldModel::hydrateFromArray([
                         'id' => $field->id,
                         'productDataModel' => $productDataModel,
@@ -252,7 +241,7 @@ class WooCommerceProductDataRepository extends AbstractRepository
                     ORDER BY sort
                 ;", [$field->id]);
 
-                foreach ($options as $option){
+                foreach ($options as $option) {
                     $optionModel = WooCommerceProductDataFieldOptionModel::hydrateFromArray([
                             'id' => $option->id,
                             'productDataField' => $productDataFieldModel,
@@ -288,7 +277,7 @@ class WooCommerceProductDataRepository extends AbstractRepository
 
         $productData = ACPT_Lite_DB::getResults($query, []);
 
-        foreach ($productData as $productDatum){
+        foreach ($productData as $productDatum) {
             $names[] = $productDatum->name;
         }
 
@@ -310,22 +299,22 @@ class WooCommerceProductDataRepository extends AbstractRepository
 
         $productData = ACPT_Lite_DB::getResults($query, []);
 
-        foreach ($productData as $productDatum){
+        foreach ($productData as $productDatum) {
             $names[] = $productDatum->name;
         }
 
         return $names;
     }
 
-	/**
-	 * @return MetaFieldOptionModel[]
-	 */
+    /**
+     * @return WooCommerceProductDataFieldOptionModel[]
+     */
     public static function getAllOptions()
     {
-    	$results = [];
+        $results = [];
 
-	    try {
-		    $options = ACPT_Lite_DB::getResults("
+        try {
+            $options = ACPT_Lite_DB::getResults("
             SELECT
                 id,
                 product_data_id as productDataId,
@@ -337,51 +326,52 @@ class WooCommerceProductDataRepository extends AbstractRepository
             ORDER BY sort
         ;", []);
 
-		    foreach ($options as $option){
-			    $productDataFieldModel = self::getField($option->productDataId, $option->fieldId);
-			    $optionModel = WooCommerceProductDataFieldOptionModel::hydrateFromArray([
-				    'id' => $option->id,
-				    'productDataField' => $productDataFieldModel,
-				    'label' => $option->label,
-				    'value' => $option->value,
-				    'sort' => $option->sort,
-			    ]);
+            foreach ($options as $option) {
+                $productDataFieldModel = self::getField($option->productDataId, $option->fieldId);
+                $optionModel = WooCommerceProductDataFieldOptionModel::hydrateFromArray([
+                    'id' => $option->id,
+                    'productDataField' => $productDataFieldModel,
+                    'label' => $option->label,
+                    'value' => $option->value,
+                    'sort' => $option->sort,
+                ]);
 
-			    $results[] = $optionModel;
-		    }
-	    } catch (\Exception $exception){}
+                $results[] = $optionModel;
+            }
+        } catch (\Exception $exception) {
+        }
 
-    	return $results;
+        return $results;
     }
 
     /**
-     * @param $id
-     * @param $fieldId
+     * @param string $id
+     * @param string $fieldId
      *
-     * @return array
+     * @return WooCommerceProductDataFieldModel|null
      * @throws \Exception
      */
-    public static function getField($id, $fieldId)
+    public static function getField($id, $fieldId): ?WooCommerceProductDataFieldModel
     {
         $fields = self::getFields($id);
 
-        if(empty($fields)){
-            return [];
+        if (empty($fields)) {
+            return null;
         }
 
         $filteredFields = array_filter($fields, function ($field) use ($fieldId) {
             return $fieldId === $field->getId();
         });
 
-        if(empty($filteredFields)){
-            return [];
+        if (empty($filteredFields)) {
+            return null;
         }
 
         return $filteredFields[0];
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return WooCommerceProductDataFieldModel[]
      * @throws \Exception
@@ -392,7 +382,7 @@ class WooCommerceProductDataRepository extends AbstractRepository
                 'id' => $id
         ]);
 
-        if(!isset($productData[0])){
+        if (!isset($productData[0])) {
             return [];
         }
 
@@ -400,20 +390,20 @@ class WooCommerceProductDataRepository extends AbstractRepository
     }
 
     /**
-     * @param $productDataName
-     * @param $field
+     * @param string $productDataName
+     * @param string $field
      *
-     * @return WooCommerceProductDataFieldModel|mixed|null
+     * @return WooCommerceProductDataFieldModel|null
      * @throws \Exception
      */
-    public static function getSingleField( $productDataName, $field)
+    public static function getSingleField($productDataName, $field)
     {
         $productData = self::get();
 
-        foreach ($productData as $item){
-            if($item->getName() === $productDataName){
-                foreach ($item->getFields() as $fieldModel){
-                    if($fieldModel->getName() === $field){
+        foreach ($productData as $item) {
+            if ($item->getName() === $productDataName) {
+                foreach ($item->getFields() as $fieldModel) {
+                    if ($fieldModel->getName() === $field) {
                         return $fieldModel;
                     }
                 }
@@ -422,10 +412,10 @@ class WooCommerceProductDataRepository extends AbstractRepository
 
         return null;
     }
-    
+
     /**
      * @param WooCommerceProductDataModel $productDataModel
-     *
+     * @return void
      * @throws \Exception
      */
     public static function save(WooCommerceProductDataModel $productDataModel)
@@ -467,22 +457,21 @@ class WooCommerceProductDataRepository extends AbstractRepository
                 $productDataModel->getContent(),
         ]);
 
-        if( !empty($productDataModel->getFields()) ){
+        if (!empty($productDataModel->getFields())) {
             WooCommerceProductDataRepository::saveFields($productDataModel->getFields());
         }
 
-	    ACPT_Lite_DB::invalidateCacheTag(self::class);
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
      * @param WooCommerceProductDataFieldModel[] $fields
-     *
+     * @return void
      * @throws \Exception
      */
     public static function saveFields(array $fields)
     {
-        foreach ($fields as $fieldModel){
-
+        foreach ($fields as $fieldModel) {
             $isRequired = $fieldModel->isRequired() ? '1' : '0';
 
             $sql = "
@@ -533,7 +522,7 @@ class WooCommerceProductDataRepository extends AbstractRepository
                     $fieldModel->getSort(),
             ]);
 
-            foreach ($fieldModel->getOptions() as $optionModel){
+            foreach ($fieldModel->getOptions() as $optionModel) {
                 $sql = "
                     INSERT INTO `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` 
                     (`id`,
@@ -573,46 +562,61 @@ class WooCommerceProductDataRepository extends AbstractRepository
             }
         }
 
-	    ACPT_Lite_DB::invalidateCacheTag(self::class);
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
-     * @param $ids
+     * @param array<mixed> $ids
+     * @return void
      * @throws \Exception
      */
     public static function removeFieldsOrphans($ids)
     {
-    	if(empty($ids)){
-		    self::deleteAllFields();
-	    } else {
-		    $optionsIds = [];
-		    $fieldIds = [];
-		    $productDataIds = [];
+        if (empty($ids)) {
+            self::deleteAllFields();
+        } else {
+            $optionsIds = [];
+            $fieldIds = [];
+            $productDataIds = [];
 
-		    foreach ($ids as $id){
-			    $fieldIds[] = $id['field'];
-			    $productDataIds[] = $id['product_data_id'];
+            foreach ($ids as $id) {
+                $fieldIds[] = $id['field'];
+                $productDataIds[] = $id['product_data_id'];
 
-			    foreach ($id['options'] as $optionId){
-				    $optionsIds[] = $optionId;
-			    }
-		    }
+                foreach ($id['options'] as $optionId) {
+                    $optionsIds[] = $optionId;
+                }
+            }
 
-		    ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f WHERE f.product_data_id IN ('".implode("','",$productDataIds)."') AND f.id NOT IN ('"
-		                                          .implode("','",$fieldIds)."');");
-		    ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o WHERE o.product_data_id IN ('".implode("','",$productDataIds)."') AND o.id NOT IN ('"
-		                                          .implode("','",$optionsIds)."');");
-	    }
+            $productDataIdsForFields = $productDataIds;
+            $fieldIdsForQuery = $fieldIds;
+            $productDataPlaceholders = implode(',', array_fill(0, count($productDataIdsForFields), '%s'));
+            $fieldPlaceholders = implode(',', array_fill(0, count($fieldIdsForQuery), '%s'));
 
-	    ACPT_Lite_DB::invalidateCacheTag(self::class);
+            ACPT_Lite_DB::executeQueryOrThrowException(
+                "DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f WHERE f.product_data_id IN ($productDataPlaceholders) AND f.id NOT IN ($fieldPlaceholders);",
+                array_merge($productDataIdsForFields, $fieldIdsForQuery)
+            );
+
+            $optionsIdsForQuery = (!empty($optionsIds)) ? $optionsIds : [''];
+            $optionsPlaceholders = implode(',', array_fill(0, count($optionsIdsForQuery), '%s'));
+
+            ACPT_Lite_DB::executeQueryOrThrowException(
+                "DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o WHERE o.product_data_id IN ($productDataPlaceholders) AND o.id NOT IN ($optionsPlaceholders);",
+                array_merge($productDataIdsForFields, $optionsIdsForQuery)
+            );
+        }
+
+        ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
-	/**
-	 * @throws \Exception
-	 */
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public static function deleteAllFields()
     {
-	    ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f;");
-	    ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o;");
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE f FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_FIELD)."` f;");
+        ACPT_Lite_DB::executeQueryOrThrowException("DELETE o FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_WOOCOMMERCE_PRODUCT_DATA_OPTION)."` o;");
     }
 }

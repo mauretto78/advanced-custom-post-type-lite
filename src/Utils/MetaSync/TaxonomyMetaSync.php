@@ -6,91 +6,215 @@ use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
+use ACPT_Lite\Utils\PHP\Serializer;
 
 class TaxonomyMetaSync extends AbstractMetaSync
 {
-	/**
-	 * @param MetaBoxModel $metaBoxModel
-	 * @param null $find
-	 *
-	 * @return mixed|void
-	 * @throws \Exception
-	 */
-	public static function syncBox(MetaBoxModel $metaBoxModel, $find = null)
-	{
-		if($oldBox = self::getMetaBoxData($metaBoxModel)){
-			$boxNames = self::changedBoxNames($oldBox->meta_box_name, $metaBoxModel->getName());
-			self::updateBoxPostMeta($boxNames['newKey'], $boxNames['oldKey'], $find);
-		}
-	}
+    /**
+     * @param MetaBoxModel $metaBoxModel
+     * @param string|null $find
+     *
+     * @return void
+     * @throws \Exception
+     */
+    public static function syncBox(MetaBoxModel $metaBoxModel, ?string $find = null): void
+    {
+        if ($oldBox = self::getMetaBoxData($metaBoxModel)) {
+            $boxNames = self::changedBoxNames($oldBox->meta_box_name, $metaBoxModel->getName());
+            self::updateBoxPostMeta($boxNames['newKey'], $boxNames['oldKey'], $find);
+        }
+    }
 
-	/**
-	 * @param $newKey
-	 * @param $oldKey
-	 * @param $taxonomy
-	 *
-	 * @throws \Exception
-	 */
-	private static function updateBoxPostMeta($newKey, $oldKey, $taxonomy)
-	{
-		global $wpdb;
+    /**
+     * @param string      $newKey
+     * @param string      $oldKey
+     * @param string|null $taxonomy
+     *
+     * @return void
+     * @throws \Exception
+     */
+    private static function updateBoxPostMeta($newKey, $oldKey, $taxonomy)
+    {
+        global $wpdb;
 
-		if($newKey !== $oldKey){
-			$sql = "UPDATE `{$wpdb->prefix}termmeta` tm 
+        if ($newKey !== $oldKey) {
+            $sql = "UPDATE `{$wpdb->prefix}termmeta` tm 
                     JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
                     JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                     SET tm.meta_key=REPLACE(tm.meta_key, %s, %s) 
                     WHERE tm.meta_key LIKE %s AND tax.taxonomy=%s";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey.'%', $taxonomy]);
-		}
-	}
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey, $newKey, $oldKey.'%', $taxonomy]);
+        }
+    }
 
-	/**
-	 * @param MetaFieldModel $fieldModel
-	 * @param null $find
-	 *
-	 * @throws \Exception
-	 */
-	public static function syncField(MetaFieldModel $fieldModel, $find = null)
-	{
-	    self::updatePostMetaWhenFieldNameChanges($fieldModel, $find);
-	}
+    /**
+     * @param MetaFieldModel $fieldModel
+     * @param string|null $find
+     *
+     * @throws \Exception
+     */
+    public static function syncField(MetaFieldModel $fieldModel, ?string $find = null)
+    {
+        if ($fieldModel->getParentId() !== null) {
+            self::updateNestedPostMetaWhenFieldNameChanges($fieldModel, $find);
+        } elseif ($fieldModel->getBlockId() !== null) {
+        } else {
+            self::updatePostMetaWhenFieldNameChanges($fieldModel, $find);
+        }
+    }
 
-	/**
-	 * @param MetaFieldModel $fieldModel
-	 * @param $taxonomy
-	 *
-	 * @throws \Exception
-	 */
-	private  static function updatePostMetaWhenFieldNameChanges(MetaFieldModel $fieldModel, $taxonomy)
-	{
-		if($oldField = self::getMetaFieldData($fieldModel)){
+    /**
+     * @param MetaFieldModel $fieldModel
+     * @param string|null    $taxonomy
+     *
+     * @return void
+     * @throws \Exception
+     */
+    private static function updateNestedPostMetaWhenFieldNameChanges(MetaFieldModel $fieldModel, $taxonomy)
+    {
+        if ($oldField = self::getMetaFieldData($fieldModel)) {
+            if ($parentField = self::getParentMetaFieldData($fieldModel)) {
+                global $wpdb;
 
-			// old key
-			$boxName = $oldField->meta_box_name;
-			$fieldName = $oldField->field_name;
-			$oldKey = Strings::toDBFormat($boxName).'_'.Strings::toDBFormat($fieldName);
+                // old parent key
+                $parentBoxName = $parentField->meta_box_name;
+                $parentFieldName = $parentField->field_name;
+                $parentKey = Strings::toDBFormat($parentBoxName).'_'.Strings::toDBFormat($parentFieldName);
 
-			// new key
-			$newKey = $fieldModel->getDbName();
+                // old key
+                $fieldName = $oldField->field_name;
+                $oldKey = Strings::toDBFormat($fieldName);
 
-			self::updateFieldPostMeta($newKey, $oldKey, $taxonomy);
-		}
-	}
+                // new key
+                $newKey = Strings::toDBFormat($fieldModel->getName());
 
-	/**
-	 * @param $newKey
-	 * @param $oldKey
-	 * @param $taxonomy
-	 *
-	 * @throws \Exception
-	 */
-	private static function updateFieldPostMeta($newKey, $oldKey, $taxonomy)
-	{
-		global $wpdb;
+                $query = "
+                    SELECT * FROM `{$wpdb->prefix}termmeta` tm 
+                    JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
+                    JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
+                    WHERE tm.meta_key=%s AND tax.taxonomy=%s
+                ";
+                $results = ACPT_Lite_DB::getResults($query, [$parentKey, $taxonomy]);
 
-		if($newKey !== $oldKey){
-			$sql = "
+                foreach ($results as $result) {
+                    $oldMetaValue = Serializer::unserialize($result->meta_value);
+
+                    // key update
+                    if ($newKey !== $oldKey) {
+                        $oldMetaValue[$newKey] = $oldMetaValue[$oldKey];
+                        unset($oldMetaValue[$oldKey]);
+
+                        $metaValue = serialize($oldMetaValue);
+
+                        $sql = "
+                            UPDATE `{$wpdb->prefix}termmeta` tm 
+                            JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
+                    		JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
+                            SET tm.meta_value=%s 
+                            WHERE tm.meta_key=%s AND tax.taxonomy=%s
+                        ";
+                        ACPT_Lite_DB::executeQueryOrThrowException($sql, [$metaValue, $parentKey, $taxonomy]);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @param string      $parentKey
+     * @param string      $oldKey
+     * @param string      $newKey
+     * @param string|null $taxonomy
+     *
+     * @return void
+     * @throws \Exception
+     */
+    private static function updateNestedPostMetaData($parentKey, $oldKey, $newKey, $taxonomy)
+    {
+        global $wpdb;
+
+        $query = "
+                    SELECT * FROM `{$wpdb->prefix}termmeta` tm 
+                    JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
+                    JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
+                    WHERE tm.meta_key=%s AND tax.taxonomy=%s
+                ";
+        $results = ACPT_Lite_DB::getResults($query, [$parentKey, $taxonomy]);
+
+        foreach ($results as $result) {
+            $oldMetaValue = Serializer::unserialize($result->meta_value);
+
+            // key update
+            if ($newKey !== $oldKey) {
+
+                // blocks
+                if (isset($oldMetaValue['blocks']) && is_array($oldMetaValue['blocks'])) {
+                    foreach ($oldMetaValue['blocks'] as $blockIndex => $block) {
+                        foreach ($block as $blockName => $blockValues) {
+                            foreach ($blockValues as $fieldName => $fieldValues) {
+                                if ($fieldName === $oldKey) {
+                                    $oldMetaValue['blocks'][$blockIndex][$blockName][$newKey] = $oldMetaValue['blocks'][$blockIndex][$blockName][$oldKey];
+                                    unset($oldMetaValue['blocks'][$blockIndex][$blockName][$oldKey]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    $oldMetaValue[$newKey] = $oldMetaValue[$oldKey];
+                    unset($oldMetaValue[$oldKey]);
+                }
+
+                $metaValue = serialize($oldMetaValue);
+
+                $sql = "
+                            UPDATE `{$wpdb->prefix}termmeta` tm 
+                            JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
+                            JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
+                            SET tm.meta_value=%s 
+                            WHERE tm.meta_key=%s AND tax.taxonomy=%s
+                        ";
+                ACPT_Lite_DB::executeQueryOrThrowException($sql, [$metaValue, $parentKey, $taxonomy]);
+            }
+        }
+    }
+
+    /**
+     * @param MetaFieldModel $fieldModel
+     * @param string|null    $taxonomy
+     *
+     * @return void
+     * @throws \Exception
+     */
+    private static function updatePostMetaWhenFieldNameChanges(MetaFieldModel $fieldModel, $taxonomy)
+    {
+        if ($oldField = self::getMetaFieldData($fieldModel)) {
+
+            // old key
+            $boxName = $oldField->meta_box_name;
+            $fieldName = $oldField->field_name;
+            $oldKey = Strings::toDBFormat($boxName).'_'.Strings::toDBFormat($fieldName);
+
+            // new key
+            $newKey = $fieldModel->getDbName();
+
+            self::updateFieldPostMeta($newKey, $oldKey, $taxonomy);
+        }
+    }
+
+    /**
+     * @param string      $newKey
+     * @param string      $oldKey
+     * @param string|null $taxonomy
+     *
+     * @return void
+     * @throws \Exception
+     */
+    private static function updateFieldPostMeta($newKey, $oldKey, $taxonomy)
+    {
+        global $wpdb;
+
+        if ($newKey !== $oldKey) {
+            $sql = "
                 UPDATE `{$wpdb->prefix}termmeta` tm 
                 JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
                 JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
@@ -98,16 +222,16 @@ class TaxonomyMetaSync extends AbstractMetaSync
                 WHERE tm.meta_key=%s AND tax.taxonomy=%s
             ";
 
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$newKey, $oldKey, $taxonomy]);
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$newKey, $oldKey, $taxonomy]);
 
-			$sql = "
+            $sql = "
                 UPDATE `{$wpdb->prefix}termmeta` tm 
                 JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
                 JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                 SET meta_key=REPLACE(tm.meta_key, %s, %s) 
                 WHERE tm.meta_key LIKE %s AND tax.taxonomy=%s
             ";
-			ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%', $taxonomy]);
-		}
-	}
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%', $taxonomy]);
+        }
+    }
 }

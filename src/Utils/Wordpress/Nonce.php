@@ -4,37 +4,43 @@ namespace ACPT_Lite\Utils\Wordpress;
 
 class Nonce
 {
-	const ACPT_NONCE = 'acpt_nonce';
+    public const ACPT_NONCE = 'acpt_nonce';
 
-	/**
-	 * @param $nonce
-	 *
-	 * @return string
-	 */
-	public static function field($nonce = null)
-	{
-		if($nonce === null){
-			$nonce = self::ACPT_NONCE;
-		}
+    /**
+     * @param string|null $nonce
+     * @return string
+     */
+    public static function field(?string $nonce = null): string
+    {
+        if ($nonce === null) {
+            $nonce = self::ACPT_NONCE;
+        }
 
-		return wp_nonce_field(self::generate(), $nonce, true, false);
-	}
+        return wp_nonce_field(self::generate(), $nonce, true, false);
+    }
 
-	/**
-	 * @param $nonce
-	 *
-	 * @return bool|int
-	 */
-	public static function verify($nonce)
-	{
-		return wp_verify_nonce($nonce, self::generate());
-	}
+    /**
+     * @param string $nonce
+     * @return bool|int
+     */
+    public static function verify(string $nonce)
+    {
+        return wp_verify_nonce($nonce, self::generate());
+    }
 
-	/**
-	 * @return string
-	 */
-	public static function generate()
-	{
-		return plugin_basename(__FILE__) . '/src/Utils/Wordpress/Nonce.php';
-	}
+    /**
+     * @return string
+     */
+    public static function generate()
+    {
+        return plugin_basename(__FILE__) . '/src/Utils/Wordpress/Nonce.php';
+    }
+
+    /**
+     * @return string
+     */
+    public static function create()
+    {
+        return wp_create_nonce(self::generate());
+    }
 }

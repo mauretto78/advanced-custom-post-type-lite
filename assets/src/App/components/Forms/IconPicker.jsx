@@ -7,8 +7,9 @@ import DashiconSelector from "../DashiconSelector";
 import Modal from "../../components/Modal";
 import ElementIcon from "../ElementIcon";
 import {get} from 'react-hook-form';
+import {sizes} from "../../constants/forms.jsx";
 
-const IconPicker = ({callback, id, validate, register, description, defaultValue, errors}) => {
+const IconPicker = ({callback, id, size = 'default', validate, register, description, defaultValue, errors, upload = true, svg = false}) => {
 
     const error = get(errors, id);
     const [icon, setIcon] = useState(defaultValue);
@@ -46,23 +47,24 @@ const IconPicker = ({callback, id, validate, register, description, defaultValue
                     testId={id}
                 >
                     <div className="text-left">
-                        <label className="form-label" htmlFor="icon-picker">
+                        <label className={`form-label ${size}`} htmlFor="icon-picker">
                             {useTranslation("Select icon type from the list")}
                         </label>
                         <select
-                            data-cy="select-icon"
+                            data-testid="select-icon"
                             onChange={(e)=>{
                                 e.preventDefault();
                                 e.stopPropagation();
                                 setIconPicker(e.currentTarget.value);
                             }}
                             defaultValue={iconPicker}
-                            className="form-control"
+                            className={`form-control ${size}`}
                             id="icon-picker"
                         >
                             <option value="">{useTranslation("--Select--")}</option>
                             <option value="dashicon">{useTranslation("Select a Dashicon")}</option>
-                            <option value="image">{useTranslation("Upload an icon image")}</option>
+                            {svg && (<option value="svg">{useTranslation("Enter custom SVG")}</option>)}
+                            {upload && (<option value="image">{useTranslation("Upload an icon image")}</option>)}
                         </select>
                     </div>
                     {iconPicker && (
@@ -84,7 +86,7 @@ const IconPicker = ({callback, id, validate, register, description, defaultValue
                     id={id}
                     name={id}
                     type="text"
-                    data-cy="input-icon"
+                    data-testid="input-icon"
                     value={icon ? icon : ''}
                     className={`hidden`}
                     {...register(id, validate)}
@@ -97,43 +99,60 @@ const IconPicker = ({callback, id, validate, register, description, defaultValue
                             openTheModal("dashicon");
                         }}
                         style={styleVariants.SECONDARY}
-                        size="sm"
+                        size={size === "default" ? "sm" : size}
                         testId={`${id}_dashicon`}
                     >
                         {useTranslation("Choose icon")}
                     </Button>
-                    <Button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            openTheModal("image");
-                        }}
-                        style={styleVariants.BORDERED}
-                        size="sm"
-                        testId={`${id}_image`}
-                    >
-                        {useTranslation("Upload an icon image")}
-                    </Button>
+                    {svg && (
+                        <Button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                openTheModal("svg");
+                            }}
+                            style={styleVariants.BORDERED}
+                            size={size === "default" ? "sm" : size}
+                            testId={`${id}_image`}
+                        >
+                            {useTranslation("Custom SVG")}
+                        </Button>
+                    )}
+                    {upload && (
+                        <Button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                openTheModal("image");
+                            }}
+                            style={styleVariants.BORDERED}
+                            size={size === "default" ? "sm" : size}
+                            testId={`${id}_image`}
+                        >
+                            {useTranslation("Upload an icon image")}
+                        </Button>
+                    )}
                 </div>
             </div>
             {description && (
                 <div className="form-description">{description}</div>
             )}
-            {error && <div data-cy="input-error-icon" className="invalid-feedback">{error.message}</div>}
+            {error && <div data-testid="input-error-icon" className="invalid-feedback">{error.message}</div>}
         </React.Fragment>
     );
 };
 
 IconPicker.propTypes = {
+    size: PropTypes.oneOf(sizes),
     id: PropTypes.string.isRequired,
     defaultValue: PropTypes.string,
     description: PropTypes.string,
     callback: PropTypes.func,
-    validate: PropTypes.func,
+    validate: PropTypes.object,
     register: PropTypes.func.isRequired,
-    errors: PropTypes.array.isRequired,
-
-
+    errors: PropTypes.object.isRequired,
+    svg: PropTypes.bool,
+    upload: PropTypes.bool,
 };
 
 export default IconPicker;

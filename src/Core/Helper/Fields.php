@@ -3,32 +3,31 @@
 namespace ACPT_Lite\Core\Helper;
 
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
+use ACPT_Lite\Utils\PHP\Arrays;
 
 class Fields
 {
     /**
-     * @param MetaFieldModel[] $fields
-     *
-     * @return array
+      * @template T of MetaFieldModel
+     * @param array<int, T> $fields
+     * @return array<int, array<int, T>>
      */
-    public static function extractFieldRows($fields)
+    public static function extractFieldRows(array $fields = [])
     {
         $rows = [];
         $sum = 0;
         $sumRows = [];
 
-        /** @var MetaFieldModel $field */
-        foreach($fields as $index => $field){
-
-            $width = 100;
+        foreach ($fields as $index => $field) {
+            $width = self::fieldWidth($field);
             $sum = $sum + $width;
             $sumRows[] = $field;
 
-            if($sum == 100){
+            if ($sum == 100) {
                 $rows[] = $sumRows;
                 $sum = 0;
                 $sumRows = [];
-            } elseif($sum > 100){
+            } elseif ($sum > 100) {
                 array_pop($sumRows);
                 $rows[] = $sumRows;
                 $rows[] = [$field];
@@ -36,7 +35,7 @@ class Fields
                 $sumRows = [];
             }
 
-            if($sum > 0 and $index === (count($fields)-1)){
+            if ($sum > 0 && $index === (Arrays::count($fields)-1)) {
                 $rows[] = $sumRows;
                 $sum = 0;
                 $sumRows = [];
@@ -44,5 +43,15 @@ class Fields
         }
 
         return $rows;
+    }
+
+    /**
+      * @param MetaFieldModel $field
+     *
+     * @return int
+     */
+    private static function fieldWidth($field): int
+    {
+        return $field->getAdvancedOption('width') ? (int)$field->getAdvancedOption('width') : 100;
     }
 }

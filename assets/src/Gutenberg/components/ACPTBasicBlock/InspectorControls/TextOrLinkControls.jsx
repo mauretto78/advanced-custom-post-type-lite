@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {attributesProps} from "../../../props/attributes.js";
 
 const TextOrLinkControls = ({ attributes, setAttributes }) => {
 
@@ -14,8 +16,8 @@ const TextOrLinkControls = ({ attributes, setAttributes }) => {
                 label={__("Display as", "acpt")}
                 value={attributes.display}
                 options={[
-                    {label: __("text", "acpt"), value: __("text", "acpt")},
-                    {label: __("link", "acpt"), value: __("link", "acpt")},
+                    {label: __("text", "acpt"), value: "text"},
+                    {label: __("link", "acpt"), value: "link"},
                 ]}
                 onChange={ ( display ) => {
                     setAttributes({
@@ -26,6 +28,11 @@ const TextOrLinkControls = ({ attributes, setAttributes }) => {
             />
         </PanelRow>
     );
+};
+
+TextOrLinkControls.propTypes = {
+    attributes: PropTypes.shape(attributesProps).isRequired,
+    setAttributes: PropTypes.func.isRequired,
 };
 
 export default TextOrLinkControls;

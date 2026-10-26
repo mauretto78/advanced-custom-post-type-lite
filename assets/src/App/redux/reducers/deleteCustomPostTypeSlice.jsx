@@ -19,8 +19,12 @@ const initialState = {
  */
 export const deleteCustomPostType = createAsyncThunk(
     "custom-post-type/delete",
-    async (postType, mode) => {
-        return await wpAjaxRequest("deleteCustomPostTypeAction", postType ? {postType:postType, mode:mode} : {});
+    async ({postType, mode} = {}, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("deleteCustomPostTypeAction", postType ? {postType:postType, mode:mode} : {});
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const deleteCustomPostTypeSlice = createSlice({
     name: 'custom-post-type/delete',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [deleteCustomPostType.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [deleteCustomPostType.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(deleteCustomPostType.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(deleteCustomPostType.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [deleteCustomPostType.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(deleteCustomPostType.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

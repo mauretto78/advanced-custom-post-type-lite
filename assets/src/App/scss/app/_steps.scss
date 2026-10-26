@@ -1,8 +1,10 @@
+@use "variables";
+
 .acpt-steps {
-  padding: $space-24;
-  border-bottom: $border-thickness solid $light-gray;
+  padding: variables.$space-24;
+  border-bottom: variables.$border-thickness solid variables.$light-gray;
   display: grid;
-  gap: $space-24;
+  gap: variables.$space-24;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   text-align: center;
   position: relative;
@@ -15,7 +17,7 @@
       height: 3px;
       content: '';
       position: absolute;
-      background-color: $pale-gray;
+      background-color: variables.$pale-gray;
       top: 25px;
       left: -50%;
       z-index: 1;
@@ -23,7 +25,7 @@
 
     &.done:after,
     &.active:after {
-      background-color: $primary-color;
+      background-color: variables.$primary-color;
     }
 
     &:first-child:after {
@@ -38,38 +40,42 @@
       width: 50px;
       height: 50px;
       line-height: 50px;
-      font-size: $h3-font-size;
-      color: $white;
-      background: $primary-color;
+      font-size: variables.$h3-font-size;
+      color: variables.$primary-color-white;
+      background: variables.$primary-color;
       margin-bottom: 10px;
     }
 
     &.undone .number {
-      color: $gray;
-      background: $pale-gray;
+      color: variables.$gray;
+      background: variables.$pale-gray;
     }
 
     &.done .number {
-      color: $white;
-      background: $primary-color;
+      color: variables.$primary-color-white;
+      background: variables.$primary-color;
     }
 
     .title {
-      color: $black;
-      font-size: $h3-font-size;
+      color: variables.$gray;
+      font-size: variables.$h3-font-size;
       margin: 0 0 10px;
     }
 
     .description {
-      color: $gray;
+      color: variables.$gray;
       display: inline-block;
     }
 
-    &.active {
-      font-weight: bold;
+    &.undone {
+      .title, .description {
+        color: variables.$medium-gray;
+      }
+    }
 
-      .description {
-        color: $black;
+    &.active {
+      .title, .description {
+        color: variables.$black;
       }
     }
   }

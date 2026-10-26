@@ -34,22 +34,23 @@ export const fetchGlobalSettingsSlice = createSlice({
     name: 'settings/fetch',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [fetchGlobalSettings.pending.type]: ( state ) => {
-            state.loading = true;
-            state.settings = {};
-            state.error = null;
-        },
-        [fetchGlobalSettings.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.settings = action.payload;
-            state.error = null;
-        },
-        [fetchGlobalSettings.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.settings = {};
-            state.error = action.error.name;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchGlobalSettings.pending, (state) => {
+                state.loading = true;
+                state.settings = {};
+                state.error = null;
+            })
+            .addCase(fetchGlobalSettings.fulfilled, (state, action) => {
+                state.loading = false;
+                state.settings = action.payload;
+                state.error = null;
+            })
+            .addCase(fetchGlobalSettings.rejected, (state, action) => {
+                state.loading = false;
+                state.settings = {};
+                state.error = action.error.name;
+            });
     }
 });
 

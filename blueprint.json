@@ -1,21 +1,18 @@
 {
-  "landingPage": "/wp-admin/plugins.php",
+  "landingPage": "/wp-admin/admin.php?page=acpt-lite",
   "preferredVersions": {
-    "php": "8.0",
+    "php": "8.1",
     "wp": "latest"
   },
-  "phpExtensionBundles": [
-    "kitchen-sink"
-  ],
   "features": {
     "networking": true
   },
   "steps": [
     {
       "step": "installPlugin",
-      "pluginZipFile": {
-        "resource": "url",
-        "url": "https://downloads.wordpress.org/plugin/acpt-lite.2.0.2.zip"
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "acpt-lite"
       },
       "options": {
         "activate": true

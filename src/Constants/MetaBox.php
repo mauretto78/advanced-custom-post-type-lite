@@ -7,14 +7,14 @@ namespace ACPT_Lite\Constants;
  */
 class MetaBox
 {
-	// context (default is 'advanced')
-	const CONTEXT_NORMAL = 'normal';
-	const CONTEXT_SIDE = 'side';
-	const CONTEXT_ADVANCED = 'advanced';
+    // context (default is 'advanced')
+    public const CONTEXT_NORMAL = 'normal';
+    public const CONTEXT_SIDE = 'side';
+    public const CONTEXT_ADVANCED = 'advanced';
 
-	// priority (default is 'default')
-	const PRIORITY_HIGH = 'high';
-	const PRIORITY_CORE = 'core';
-	const PRIORITY_DEFAULT = 'default';
-	const PRIORITY_LOW = 'low';
+    // priority (default is 'default')
+    public const PRIORITY_HIGH = 'high';
+    public const PRIORITY_CORE = 'core';
+    public const PRIORITY_DEFAULT = 'default';
+    public const PRIORITY_LOW = 'low';
 }

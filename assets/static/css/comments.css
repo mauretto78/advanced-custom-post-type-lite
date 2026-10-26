@@ -1,0 +1,224 @@
+.acpt-comment-fields-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.acpt-admin-meta-wrapper {
+    padding: 10px;
+}
+
+.acpt-admin-meta-wrapper .acpt-admin-meta-label {
+    margin-bottom: 5px;
+}
+
+.acpt-comment-fields-wrapper .acpt-form-control,
+.acpt-comment-fields-wrapper .acpt-admin-meta-field-input {
+    width: 100%;
+    padding: 12px;
+}
+
+.acpt-w-0{width: 0%}
+.acpt-w-1{width: 1%}
+.acpt-w-2{width: 2%}
+.acpt-w-3{width: 3%}
+.acpt-w-4{width: 4%}
+.acpt-w-5{width: 5%}
+.acpt-w-6{width: 6%}
+.acpt-w-7{width: 7%}
+.acpt-w-8{width: 8%}
+.acpt-w-9{width: 9%}
+.acpt-w-10{width: 10%}
+.acpt-w-11{width: 11%}
+.acpt-w-12{width: 12%}
+.acpt-w-13{width: 13%}
+.acpt-w-14{width: 14%}
+.acpt-w-15{width: 15%}
+.acpt-w-16{width: 16%}
+.acpt-w-17{width: 17%}
+.acpt-w-18{width: 18%}
+.acpt-w-19{width: 19%}
+.acpt-w-20{width: 20%}
+.acpt-w-21{width: 21%}
+.acpt-w-22{width: 22%}
+.acpt-w-23{width: 23%}
+.acpt-w-24{width: 24%}
+.acpt-w-25{width: 25%}
+.acpt-w-26{width: 26%}
+.acpt-w-27{width: 27%}
+.acpt-w-28{width: 28%}
+.acpt-w-29{width: 29%}
+.acpt-w-30{width: 30%}
+.acpt-w-31{width: 31%}
+.acpt-w-32{width: 32%}
+.acpt-w-33{width: 33%}
+.acpt-w-34{width: 34%}
+.acpt-w-35{width: 35%}
+.acpt-w-36{width: 36%}
+.acpt-w-37{width: 37%}
+.acpt-w-38{width: 38%}
+.acpt-w-39{width: 39%}
+.acpt-w-40{width: 40%}
+.acpt-w-41{width: 41%}
+.acpt-w-42{width: 42%}
+.acpt-w-43{width: 43%}
+.acpt-w-44{width: 44%}
+.acpt-w-45{width: 45%}
+.acpt-w-46{width: 46%}
+.acpt-w-47{width: 47%}
+.acpt-w-48{width: 48%}
+.acpt-w-49{width: 49%}
+.acpt-w-50{width: 50%}
+.acpt-w-51{width: 51%}
+.acpt-w-52{width: 52%}
+.acpt-w-53{width: 53%}
+.acpt-w-54{width: 54%}
+.acpt-w-55{width: 55%}
+.acpt-w-56{width: 56%}
+.acpt-w-57{width: 57%}
+.acpt-w-58{width: 58%}
+.acpt-w-59{width: 59%}
+.acpt-w-60{width: 60%}
+.acpt-w-61{width: 61%}
+.acpt-w-62{width: 62%}
+.acpt-w-63{width: 63%}
+.acpt-w-64{width: 64%}
+.acpt-w-65{width: 65%}
+.acpt-w-66{width: 66%}
+.acpt-w-67{width: 67%}
+.acpt-w-68{width: 68%}
+.acpt-w-69{width: 69%}
+.acpt-w-70{width: 70%}
+.acpt-w-71{width: 71%}
+.acpt-w-72{width: 72%}
+.acpt-w-73{width: 73%}
+.acpt-w-74{width: 74%}
+.acpt-w-75{width: 75%}
+.acpt-w-76{width: 76%}
+.acpt-w-77{width: 77%}
+.acpt-w-78{width: 78%}
+.acpt-w-79{width: 79%}
+.acpt-w-80{width: 80%}
+.acpt-w-81{width: 81%}
+.acpt-w-82{width: 82%}
+.acpt-w-83{width: 83%}
+.acpt-w-84{width: 84%}
+.acpt-w-85{width: 85%}
+.acpt-w-86{width: 86%}
+.acpt-w-87{width: 87%}
+.acpt-w-88{width: 88%}
+.acpt-w-89{width: 89%}
+.acpt-w-90{width: 90%}
+.acpt-w-91{width: 91%}
+.acpt-w-92{width: 92%}
+.acpt-w-93{width: 93%}
+.acpt-w-94{width: 94%}
+.acpt-w-95{width: 95%}
+.acpt-w-96{width: 96%}
+.acpt-w-97{width: 97%}
+.acpt-w-98{width: 98%}
+.acpt-w-99{width: 99%}
+.acpt-w-100{width: 100%}
+
+@media (max-width: 959px){
+    .acpt-w-0{width: 100%}
+    .acpt-w-1{width: 100%}
+    .acpt-w-2{width: 100%}
+    .acpt-w-3{width: 100%}
+    .acpt-w-4{width: 100%}
+    .acpt-w-5{width: 100%}
+    .acpt-w-6{width: 100%}
+    .acpt-w-7{width: 100%}
+    .acpt-w-8{width: 100%}
+    .acpt-w-9{width: 100%}
+    .acpt-w-10{width: 100%}
+    .acpt-w-11{width: 100%}
+    .acpt-w-12{width: 100%}
+    .acpt-w-13{width: 100%}
+    .acpt-w-14{width: 100%}
+    .acpt-w-15{width: 100%}
+    .acpt-w-16{width: 100%}
+    .acpt-w-17{width: 100%}
+    .acpt-w-18{width: 100%}
+    .acpt-w-19{width: 100%}
+    .acpt-w-20{width: 100%}
+    .acpt-w-21{width: 100%}
+    .acpt-w-22{width: 100%}
+    .acpt-w-23{width: 100%}
+    .acpt-w-24{width: 100%}
+    .acpt-w-25{width: 100%}
+    .acpt-w-26{width: 100%}
+    .acpt-w-27{width: 100%}
+    .acpt-w-28{width: 100%}
+    .acpt-w-29{width: 100%}
+    .acpt-w-30{width: 100%}
+    .acpt-w-31{width: 100%}
+    .acpt-w-32{width: 100%}
+    .acpt-w-33{width: 100%}
+    .acpt-w-34{width: 100%}
+    .acpt-w-35{width: 100%}
+    .acpt-w-36{width: 100%}
+    .acpt-w-37{width: 100%}
+    .acpt-w-38{width: 100%}
+    .acpt-w-39{width: 100%}
+    .acpt-w-40{width: 100%}
+    .acpt-w-41{width: 100%}
+    .acpt-w-42{width: 100%}
+    .acpt-w-43{width: 100%}
+    .acpt-w-44{width: 100%}
+    .acpt-w-45{width: 100%}
+    .acpt-w-46{width: 100%}
+    .acpt-w-47{width: 100%}
+    .acpt-w-48{width: 100%}
+    .acpt-w-49{width: 100%}
+    .acpt-w-50{width: 100%}
+    .acpt-w-51{width: 100%}
+    .acpt-w-52{width: 100%}
+    .acpt-w-53{width: 100%}
+    .acpt-w-54{width: 100%}
+    .acpt-w-55{width: 100%}
+    .acpt-w-56{width: 100%}
+    .acpt-w-57{width: 100%}
+    .acpt-w-58{width: 100%}
+    .acpt-w-59{width: 100%}
+    .acpt-w-60{width: 100%}
+    .acpt-w-61{width: 100%}
+    .acpt-w-62{width: 100%}
+    .acpt-w-63{width: 100%}
+    .acpt-w-64{width: 100%}
+    .acpt-w-65{width: 100%}
+    .acpt-w-66{width: 100%}
+    .acpt-w-67{width: 100%}
+    .acpt-w-68{width: 100%}
+    .acpt-w-69{width: 100%}
+    .acpt-w-70{width: 100%}
+    .acpt-w-71{width: 100%}
+    .acpt-w-72{width: 100%}
+    .acpt-w-73{width: 100%}
+    .acpt-w-74{width: 100%}
+    .acpt-w-75{width: 100%}
+    .acpt-w-76{width: 100%}
+    .acpt-w-77{width: 100%}
+    .acpt-w-78{width: 100%}
+    .acpt-w-79{width: 100%}
+    .acpt-w-80{width: 100%}
+    .acpt-w-81{width: 100%}
+    .acpt-w-82{width: 100%}
+    .acpt-w-83{width: 100%}
+    .acpt-w-84{width: 100%}
+    .acpt-w-85{width: 100%}
+    .acpt-w-86{width: 100%}
+    .acpt-w-87{width: 100%}
+    .acpt-w-88{width: 100%}
+    .acpt-w-89{width: 100%}
+    .acpt-w-90{width: 100%}
+    .acpt-w-91{width: 100%}
+    .acpt-w-92{width: 100%}
+    .acpt-w-93{width: 100%}
+    .acpt-w-94{width: 100%}
+    .acpt-w-95{width: 100%}
+    .acpt-w-96{width: 100%}
+    .acpt-w-97{width: 100%}
+    .acpt-w-98{width: 100%}
+    .acpt-w-99{width: 100%}
+}

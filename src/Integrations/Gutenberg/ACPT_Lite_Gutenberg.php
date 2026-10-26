@@ -2,154 +2,161 @@
 
 namespace ACPT_Lite\Integrations\Gutenberg;
 
-use ACPT_Lite\Core\Models\Settings\SettingsModel;
+use ACPT_Lite\Core\Helper\Features;
+use ACPT_Lite\Includes\ACPT_Lite_Plugin;
 use ACPT_Lite\Integrations\AbstractIntegration;
-use ACPT_Lite\Integrations\Gutenberg\Blocks\ACPTBasicBlock;
-use ACPT_Lite\Utils\Settings\Settings;
+use ACPT_Lite\Integrations\Gutenberg\Generators\ACPTBlocks\Generators\BasicBlockGenerator;
+use ACPT_Lite\Utils\PHP\Request;
+use ACPT_Lite\Utils\PHP\Url;
 
 class ACPT_Lite_Gutenberg extends AbstractIntegration
 {
-	/**
-	 * @inheritDoc
-	 */
-	protected function isActive()
-	{
-		return Settings::get(SettingsModel::ENABLE_META, 1) == 1;
-	}
+    /**
+     * @return string
+     */
+    protected function name(): string
+    {
+        return "gutenberg";
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	protected function runIntegration()
-	{
-		add_action( 'init', [new ACPT_Lite_Gutenberg(), 'registerBlocks'] );
-	}
+    /**
+     * Determines whether the block editor (Gutenberg) should be considered active
+     * based on the current page or request context.
+     *
+     * @param Request|null $request Optional request override; defaults to the plugin's current request.
+     *
+     * @return bool Returns true if the block editor is active for the current context, false otherwise.
+     */
+    protected function isActive(?Request $request = null): bool
+    {
+        if ($request === null) {
+            $request = ACPT_Lite_Plugin::getRequest();
+        }
 
-	/**
-	 * Register Gutenberg blocks
-	 */
-	public function registerBlocks()
-	{
-		if ( ! function_exists( 'register_block_type' ) ) {
-			// Block editor is not available.
-			return;
-		}
+        $pagenow = Url::pagenow($request);
 
-		// basic-block
-		register_block_type( 'advanced-custom-post-type/basic-block', [
-			'api_version' => 3,
-			'editor_script' => 'block_js',
-			'editor_style' => 'block_css',
-			'render_callback' => [new ACPTBasicBlock(), 'render'],
-			'attributes'      => [
-				'postId'      => [
-					'default' => 99999999999999999,
-					'type'    => 'integer'
-				],
-				'field'            => [
-					'default' => null,
-					'type'    => 'string'
-				],
-				'gradient' => [
-					'default' => null,
-					'type'    => 'string'
-				],
-				'backgroundColor' => [
-					'default' => null,
-					'type'    => 'string'
-				],
-				'textColor' => [
-					'default' => null,
-					'type'    => 'string'
-				],
-				'style' => [
-					'default' => [],
-					'type'    => 'object'
-				],
-				'align' => [
-					'default' => 'left',
-					'type'    => 'string'
-				],
-				'display' => [
-					'default' => null,
-					'type'    => 'string'
-				],
-				"color" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"target" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"fontSize" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"width" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"height" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"uomFormatDecimalPoints" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"uomFormatDecimalSeparator" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"uomFormatThousandsSeparator" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"uomFormat" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"uomPosition" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"dateFormat" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"timeFormat" => [
-					"type" => 'string',
-					"default" => null
-				],
-				"zoom" => [
-					"type" => 'integer',
-					"default" => 14
-				],
-				"gap" => [
-					"type" => 'integer',
-					"default" => 20
-				],
-				"elements" => [
-					"type" => 'integer',
-					"default" => 3
-				],
-				"border" => [
-					"type" => 'object',
-					"default" => []
-				],
-				"borderRadius" => [
-					"type" => 'object',
-					"default" => []
-				],
-				"padding" => [
-					"type" => 'object',
-					"default" => []
-				],
-			]
-		]);
-	}
+        switch ($pagenow) {
+            case 'post-new.php':
+                return $this->canUseBlockEditorForType($request->get('post_type') ?: 'post');
+
+            case 'post.php':
+                if ($request->get('action') !== 'edit') {
+                    return false;
+                }
+
+                // The block editor's meta box save request. Core's own answer for it is
+                // "not the block editor", but use_block_editor_for_post() first calls the
+                // pluggable check_admin_referer() (#1385).
+                if (!empty($request->get('meta-box-loader'))) {
+                    return false;
+                }
+                $postId = (int) $request->get('post');
+                if ($postId <= 0 || !function_exists('use_block_editor_for_post')) {
+                    return false;
+                }
+                return (bool) use_block_editor_for_post($postId);
+
+            case 'edit.php':
+                // List table — not the editor itself.
+                return false;
+
+            case 'admin-ajax.php':     // Autosave, legacy metabox, heartbeat — block scripts still expected
+            case 'site-editor.php':    // Full-Site Editing
+            case 'widgets.php':        // Block-based widgets
+            case 'customize.php':      // Block-based customizer parts
+                return true;
+
+            default:
+                if ($request->isRestRequest()) {
+                    return true;
+                }
+
+                // Outside wp-admin (front end, cron, CLI) blocks are *rendered*, so
+                // their render_callback must be registered - otherwise WP prints the
+                // saved static wrapper and every ACPT block comes out empty (#1348).
+                return !$this->isAdminPath($request);
+        }
+    }
+
+    /**
+     * Decides on plugins_loaded, not while plugins are being included:
+     * isActive() calls use_block_editor_for_post(), whose callbacks (core's and
+     * other plugins') may need pluggable functions and filters that are not
+     * loaded yet at that point (#1385). runIntegration() only hooks into init,
+     * which runs after plugins_loaded.
+     *
+     * @param Request|null $request
+     *
+     * @return void
+     */
+    public function run(?Request $request = null): void
+    {
+        if (did_action('plugins_loaded')) {
+            parent::run($request);
+
+            return;
+        }
+
+        add_action('plugins_loaded', function () use ($request) {
+            parent::run($request);
+        });
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    private function isAdminPath(Request $request): bool
+    {
+        $phpSelf = (string) $request->server('PHP_SELF', '');
+
+        return strpos($phpSelf, '/wp-admin/') !== false;
+    }
+
+    /**
+     * @param string $postType
+     *
+     * @return bool
+     */
+    private function canUseBlockEditorForType(string $postType): bool
+    {
+        if (!function_exists('use_block_editor_for_post_type')) {
+            return false;
+        }
+
+        return (bool) use_block_editor_for_post_type($postType);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function runIntegration(): void
+    {
+        if (!function_exists('register_block_type')) {
+            // Block editor is not available.
+            return;
+        }
+
+        if (Features::hasMeta()) {
+            add_action('init', [new ACPT_Lite_Gutenberg(), 'registerACPTBlocks']);
+        }
+    }
+
+    /**
+     * Register Gutenberg blocks
+     *
+     * @return void
+     */
+    public function registerACPTBlocks(): void
+    {
+        $generators = [
+            BasicBlockGenerator::class,
+        ];
+
+        foreach ($generators as $generator) {
+            $g = new $generator();
+            $g->generate();
+        }
+    }
 }
-
-
-

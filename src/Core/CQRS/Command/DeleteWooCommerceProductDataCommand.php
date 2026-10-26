@@ -6,27 +6,27 @@ use ACPT_Lite\Core\Repository\WooCommerceProductDataRepository;
 
 class DeleteWooCommerceProductDataCommand implements CommandInterface
 {
-	/**
-	 * @var string
-	 */
-	private $id;
+    /**
+     * @var string
+     */
+    private string $id;
 
-	/**
-	 * DeleteTemplateCommand constructor.
-	 *
-	 * @param $id
-	 */
-	public function __construct($id)
-	{
-		$this->id = $id;
-	}
+    /**
+     * DeleteTemplateCommand constructor.
+     *
+     * @param string $id
+     */
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
 
-	/**
-	 * @return mixed|void
-	 * @throws \Exception
-	 */
-	public function execute()
-	{
-		WooCommerceProductDataRepository::delete($this->id);
-	}
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function execute(): void
+    {
+        WooCommerceProductDataRepository::delete($this->id);
+    }
 }

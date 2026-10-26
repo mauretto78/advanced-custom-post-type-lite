@@ -15,7 +15,9 @@ import {validWPGraphQLName} from "../../../utils/validation";
 import MenuPosition from "../../../components/Forms/MenuPosition";
 import {isEmpty} from "../../../utils/objects";
 import {useParams} from "react-router-dom";
-import NavigationButtons from "../NavigationButtons";
+import NavigationButtons from "../../../components/NavigationButtons";
+import SortingElements from "../../../components/Forms/SortingElements.jsx";
+import {slugify, transliterate} from "transliteration";
 
 const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handleSubmit, formValues, isWPGraphQLActive = false, loading = false, edit = false, setFormValues = null}) => {
 
@@ -30,6 +32,8 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
 
     // manage local state
     const [customShowInMenu, setCustomShowInMenu] = useState("toggle");
+    const [hasArchive, setHasArchive] = useState(data.length > 0 ? settings.has_archive : true);
+
     const {postType} = useParams();
 
     const postTypeName = () => {
@@ -61,10 +65,12 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
             show_in_rest: data.length > 0 ? settings.show_in_rest : null,
             rest_base: data.length > 0 ? settings.rest_base : null,
             menu_position: data.length > 0 ? settings.menu_position : null,
+            sorting: data.length > 0 ? settings.sorting : null,
             capability_type: data.length > 0 ? settings.capability_type : 'post',
-            has_archive: data.length > 0 ? settings.has_archive : null,
-            rewrite: data.length > 0 ? settings.rewrite : null,
+            has_archive: data.length > 0 && typeof settings.has_archive === 'string' ? settings.has_archive : postTypeName(),
+            rewrite: data.length > 0 && typeof settings.rewrite !== 'undefined' ? settings.rewrite : true,
             with_front: data.length > 0 ? settings.with_front : null,
+            feeds: data.length > 0 && typeof settings.feeds !== 'undefined' && settings.feeds !== null ? settings.feeds : true,
             custom_rewrite: data.length > 0 ? settings.custom_rewrite : null,
             query_var: data.length > 0 ? settings.query_var : null,
             custom_query_var: data.length > 0 ? settings.custom_query_var : null,
@@ -88,6 +94,34 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
 
         // edit mode
         if(edit && formValues && formValues[3]){
+
+            // A CPT whose stored settings JSON predates the `rewrite` key (created
+            // before this setting existed) has formValues[3].rewrite === undefined.
+            // WP's own default for `rewrite` is true, and the Step-3 toggle's
+            // defaultValue already reflects that - so resolve undefined to true here
+            // too, otherwise this setVal() would override the correct default with
+            // undefined: the toggle renders unchecked, the `{rewrite && (...)}` block
+            // hides has_archive/custom_rewrite/with_front, and saving then silently
+            // drops those settings. Matches the existing `with_front` guard below.
+            const rewriteDefault = typeof formValues[3].rewrite !== "undefined" ? formValues[3].rewrite : true;
+
+            const defaultHasArchive = () => {
+
+                if(!rewriteDefault){
+                    return null;
+                }
+
+                if(typeof formValues[3].has_archive === 'string'){
+                    return formValues[3].has_archive;
+                }
+
+                if(formValues[3].has_archive === true){
+                    return postTypeName();
+                }
+
+                return null;
+            };
+
             methods.setValue('hierarchical', formValues[3].hierarchical);
             methods.setValue('public', formValues[3].public);
             methods.setValue('publicly_queryable', formValues[3].publicly_queryable);
@@ -98,13 +132,15 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
             methods.setValue('show_in_rest', formValues[3].show_in_rest);
             methods.setValue('rest_base', formValues[3].rest_base);
             methods.setValue('menu_position', formValues[3].menu_position);
+            methods.setValue('sorting', formValues[3].sorting);
             methods.setValue('capability_type', formValues[3].capability_type);
-            methods.setValue('has_archive', formValues[3].has_archive);
-            methods.setValue('rewrite', formValues[3].rewrite);
+            methods.setValue('has_archive', defaultHasArchive());
+            methods.setValue('rewrite', rewriteDefault);
             methods.setValue('custom_rewrite', formValues[3].custom_rewrite);
             methods.setValue('query_var', formValues[3].query_var);
             methods.setValue('custom_query_var', formValues[3].custom_query_var);
             methods.setValue('with_front', typeof formValues[3].with_front !== "undefined" ? formValues[3].with_front : true);
+            methods.setValue('feeds', typeof formValues[3].feeds !== "undefined" && formValues[3].feeds !== null ? formValues[3].feeds : true);
             methods.setValue('front_url_prefix', formValues[3].front_url_prefix);
         }
 
@@ -123,17 +159,41 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
         return data.length > 0 ? settings.menu_position : null
     };
 
+    /**
+     *
+     * @return {null}
+     */
+    const defaultSorting = () => {
+
+        if(edit && formValues && formValues[3]){
+            return formValues[3].sorting;
+        }
+
+        return data.length > 0 ? settings.sorting : null
+    };
+
 
     const showInGraphql = methods.watch('show_in_graphql');
     const graphqlSingleName = methods.watch('graphql_single_name');
     const graphqlPluralName = methods.watch('graphql_plural_name');
 
+    // GraphQL names must match /^[_A-Za-z][_0-9A-Za-z]*$/ - no hyphens, can't start with a digit
+    const toGraphQLName = (label) => {
+        let name = slugify(transliterate(label.toLowerCase()), {separator: '_'});
+
+        if (/^[0-9]/.test(name)) {
+            name = '_' + name;
+        }
+
+        return name;
+    };
+
     const graphQLSingleNameToLowerCase = (label) => {
-        methods.setValue('graphql_single_name', label.toLowerCase());
+        methods.setValue('graphql_single_name', toGraphQLName(label));
     };
 
     const graphQLPluralNameToLowerCase = (label) => {
-        methods.setValue('graphql_plural_name', label.toLowerCase());
+        methods.setValue('graphql_plural_name', toGraphQLName(label));
     };
 
     const handleGraphQLSingleNameChange = (single_name) => {
@@ -158,14 +218,18 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
     let actions = [];
 
     if(!edit){
-        actions.push(<Button testId="prev-step" type="button" onClick={() => setStepActive(1)} style={styleVariants.SECONDARY}>
+        actions.push(<Button key="prev-step" testId="prev-step" type="button" size="sm" icon="bx:chevron-left" onClick={() => setStepActive(1)} style={styleVariants.OUTLINED_PRIMARY}>
             {useTranslation("Previous Step")}
         </Button>);
     }
 
     actions.push(<Button
+        key="next-step"
         testId="next-step"
         style={styleVariants.PRIMARY}
+        size="sm"
+        icon="bx:save"
+        disabled={loading === true}
     >
         {useTranslation("Save")}
     </Button>);
@@ -325,9 +389,9 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
                                             errors={methods.formState.errors}
                                         />
                                     )}
-                                    <a
-                                        className="mt-12"
-                                        href="#"
+                                    <button
+                                        type="button"
+                                        className="btn-reset mt-12"
                                         onClick={e => {
                                             e.preventDefault();
                                             const newStatus = (customShowInMenu === "toggle") ? "custom" : "toggle";
@@ -335,7 +399,7 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
                                         }}
                                     >
                                         {useTranslation((customShowInMenu === "custom") ? "Standard settings" : "Set custom settings")}
-                                    </a>
+                                    </button>
                                 </React.Fragment>
                             }
                         />
@@ -394,6 +458,18 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
                             }
                         />
                         <CardRow
+                            label={useTranslation("Default sorting")}
+                            value={
+                                <SortingElements
+                                    id="sorting"
+                                    defaultValue={defaultSorting()}
+                                    description={useTranslation("Sets the default sort order for posts in the admin list table. Defaults to WordPress standard (Date, Descending).")}
+                                    register={methods.register}
+                                    setValue={methods.setValue}
+                                />
+                            }
+                        />
+                        <CardRow
                             label={useTranslation("Menu position")}
                             value={
                                 <MenuPosition
@@ -423,62 +499,111 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
                                 />
                             }
                         />
-                        <CardRow
-                            label={useTranslation("Has archive")}
-                            value={
-                                <Toggle
-                                    id="has_archive"
-                                    description={useTranslation("Whether there should be post type archives, or if a string, the archive slug to use. Will generate the proper rewrite rules if $rewrite is enabled.")}
-                                    defaultValue={data.length > 0 ? settings.has_archive : true}
-                                    register={methods.register}
-                                    errors={methods.formState.errors}
-                                />
-                            }
-                        />
+                        {rewrite && (
+                            <CardRow
+                                label={useTranslation("Has archive")}
+                                value={
+                                    <div className="flex-column s-12">
+                                        <div className="toggle-group">
+                                            <label
+                                                className="toggle"
+                                                aria-label={useTranslation("Has archive")}
+                                            >
+                                                <input
+                                                    id="has_archive_toggle"
+                                                    type="checkbox"
+                                                    defaultChecked={hasArchive}
+                                                    onChangeCapture={(e) => {
+                                                        const isChecked = e.target.checked;
+                                                        setHasArchive(isChecked);
+
+                                                        if(isChecked){
+                                                            methods.setValue("has_archive", postTypeName());
+                                                        } else {
+                                                            methods.unregister("has_archive");
+                                                        }
+                                                    }}
+                                                />
+                                                <span className="slider round"/>
+                                            </label>
+                                        </div>
+                                        {hasArchive && (
+                                            <Input
+                                                id="has_archive"
+                                                defaultValue={(data.length > 0 && typeof settings.has_archive === 'string') ? settings.has_archive : postTypeName()}
+                                                description={useTranslation("Whether there should be post type archives, or if a string, the archive slug to use. Will generate the proper rewrite rules if $rewrite is enabled. Default false.")}
+                                                validate={{
+                                                    maxLength: {
+                                                        value: 255,
+                                                        message: "max length is 255"
+                                                    }
+                                                }}
+                                                register={methods.register}
+                                                errors={methods.formState.errors}
+                                            />
+                                        )}
+                                    </div>
+                                }
+                            />
+                        )}
                         <CardRow
                             label={useTranslation("Rewrite")}
                             value={
                                 <Toggle
                                     id="rewrite"
                                     description={useTranslation("Triggers the handling of rewrites for this post type. To prevent rewrite, set to false. Defaults to true, using $post_type as slug. To specify rewrite rules, an array can be passed with any of these keys:")}
-                                    defaultValue={data.length > 0 ? settings.rewrite : true}
+                                    defaultValue={data.length > 0 && typeof settings.rewrite !== 'undefined' ? settings.rewrite : true}
                                     register={methods.register}
                                     errors={methods.formState.errors}
                                 />
                             }
                         />
                         {rewrite && (
-                            <CardRow
-                                label={useTranslation("Custom rewrite rules")}
-                                value={
-                                    <Input
-                                        id="custom_rewrite"
-                                        placeholder={useTranslation("Custom rewrite rules")}
-                                        description={useTranslation("Custom post type slug to use instead of default.")}
-                                        validate={{
-                                            maxLength: {
-                                                value: 255,
-                                                message: useTranslation("max length is 255")
-                                            }
-                                        }}
-                                        register={methods.register}
-                                        errors={methods.formState.errors}
-                                    />
-                                }
-                            />
-                        )}
-                        <CardRow
-                            label={useTranslation("With front")}
-                            value={
-                                <Toggle
-                                    id="with_front"
-                                    description={useTranslation("Should the permalink structure be prepended with the front base. (example: if your permalink structure is /blog/, then your links will be: false->/news/, true->/blog/news/). Defaults to true")}
-                                    defaultValue={data.length > 0 && typeof settings.with_front !== "undefined" ? settings.with_front : true}
-                                    register={methods.register}
-                                    errors={methods.formState.errors}
+                            <React.Fragment>
+                                <CardRow
+                                    label={useTranslation("Custom rewrite rules")}
+                                    value={
+                                        <Input
+                                            id="custom_rewrite"
+                                            placeholder={useTranslation("Custom rewrite rules")}
+                                            description={useTranslation("Custom post type slug to use instead of default.")}
+                                            validate={{
+                                                maxLength: {
+                                                    value: 255,
+                                                    message: useTranslation("max length is 255")
+                                                }
+                                            }}
+                                            register={methods.register}
+                                            errors={methods.formState.errors}
+                                        />
+                                    }
                                 />
-                            }
-                        />
+                                <CardRow
+                                    label={useTranslation("With front")}
+                                    value={
+                                        <Toggle
+                                            id="with_front"
+                                            description={useTranslation("Should the permalink structure be prepended with the front base. (example: if your permalink structure is /blog/, then your links will be: false->/news/, true->/blog/news/). Defaults to true")}
+                                            defaultValue={data.length > 0 && typeof settings.with_front !== "undefined" ? settings.with_front : true}
+                                            register={methods.register}
+                                            errors={methods.formState.errors}
+                                        />
+                                    }
+                                />
+                                <CardRow
+                                    label={useTranslation("Feeds")}
+                                    value={
+                                        <Toggle
+                                            id="feeds"
+                                            description={useTranslation("Whether the archive of this post type has an RSS feed (/{slug}/feed/). When off, the feed URLs redirect to the archive and the feed link is removed from the page head. Defaults to true")}
+                                            defaultValue={data.length > 0 && typeof settings.feeds !== "undefined" && settings.feeds !== null ? settings.feeds : true}
+                                            register={methods.register}
+                                            errors={methods.formState.errors}
+                                        />
+                                    }
+                                />
+                            </React.Fragment>
+                        )}
                         <CardRow
                             label={useTranslation("Query var")}
                             value={
@@ -539,7 +664,7 @@ const SettingsStep = ({title, crumbs, headings, stepActive, setStepActive, handl
 
 SettingsStep.propTypes = {
     headings: PropTypes.arrayOf(PropTypes.shape({
-        label:  PropTypes.string.isRequired,
+        title:  PropTypes.string.isRequired,
         description:  PropTypes.string.isRequired,
     })).isRequired,
     title: PropTypes.string.isRequired,

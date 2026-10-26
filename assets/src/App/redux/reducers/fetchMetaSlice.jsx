@@ -19,8 +19,12 @@ const initialState = {
  */
 export const fetchMeta = createAsyncThunk(
     "meta/fetch",
-    async (meta) => {
-        return await wpAjaxRequest("fetchMetaAction", meta ? meta : {});
+    async (meta, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("fetchMetaAction", meta ? meta : {});
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,22 +38,23 @@ export const fetchMetaSlice = createSlice({
     name: 'meta/fetch',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [fetchMeta.pending.type]: ( state ) => {
-            state.loading = true;
-            state.data = [];
-            state.error = null;
-        },
-        [fetchMeta.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.data = action.payload;
-            state.error = null;
-        },
-        [fetchMeta.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.data = [];
-            state.error = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchMeta.pending, (state) => {
+                state.loading = true;
+                state.data = [];
+                state.error = null;
+            })
+            .addCase(fetchMeta.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload;
+                state.error = null;
+            })
+            .addCase(fetchMeta.rejected, (state, action) => {
+                state.loading = false;
+                state.data = [];
+                state.error = action.payload;
+            });
     }
 });
 

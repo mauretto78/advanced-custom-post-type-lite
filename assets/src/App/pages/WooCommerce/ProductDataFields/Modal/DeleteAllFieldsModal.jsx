@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import useTranslation from "../../../../hooks/useTranslation";
-import Modal from "../../../../components/Modal";
+import DeleteModal from "../../../../components/Modal/DeleteModal";
 import Button from "../../../../components/Button";
 import {styleVariants} from "../../../../constants/styles";
 import {useDispatch} from "react-redux";
@@ -15,48 +15,30 @@ const DeleteAllFieldsModal = () => {
     // manage form state
     const { setValue } = useFormContext();
 
-    // manage local state
-    const [modalOpen, setModalOpen] = useState(false);
-    
-    const buttons = [
-        <Button style={styleVariants.SUCCESS} onClick={(e) => {
-            e.preventDefault();
-            dispatch(deleteAllFields());
-            dispatch(deselectAllElements());
-            setValue("fields", []);
-            setModalOpen(!modalOpen);
-        }}>
-            {useTranslation("Yes")}
-        </Button>,
-        <Button style={styleVariants.DANGER} onClick={(e) => {
-            e.preventDefault();
-            setModalOpen(!modalOpen);
-        }}>
-            {useTranslation("No")}
-        </Button>,
-    ];
-
     return (
-        <React.Fragment>
-            <Modal
-                title={useTranslation('Confirm deleting all')}
-                visible={modalOpen}
-                buttons={buttons}
-            >
-                {useTranslation("Are you sure?")}
-            </Modal>
-            <Button
-                style={styleVariants.DANGER}
-                onClick={(e) => {
-                    e.preventDefault();
-                    setModalOpen(!modalOpen);
-                }}
-            >
-                {useTranslation("Delete all")}
-            </Button>
-        </React.Fragment>
+        <DeleteModal
+            testId="delete-all-product-data-fields"
+            title={useTranslation('Confirm deleting all')}
+            onConfirm={() => {
+                dispatch(deleteAllFields());
+                dispatch(deselectAllElements());
+                setValue("fields", []);
+            }}
+            onCancel={() => {}}
+            trigger={
+                <Button
+                    testId="delete-all-product-data-fields-trigger"
+                    style={styleVariants.OUTLINED_DANGER}
+                    size="sm"
+                    icon="bx:trash"
+                >
+                    {useTranslation("Delete all")}
+                </Button>
+            }
+        >
+            {useTranslation("Are you sure?")}
+        </DeleteModal>
     );
 };
-
 
 export default DeleteAllFieldsModal;

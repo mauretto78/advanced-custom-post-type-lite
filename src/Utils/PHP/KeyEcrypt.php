@@ -10,7 +10,7 @@ class KeyEcrypt
     private const ALGO = 'ripemd128';
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return string
      */

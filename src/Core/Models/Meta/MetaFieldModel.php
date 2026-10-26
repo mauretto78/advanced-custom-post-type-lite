@@ -2,786 +2,1423 @@
 
 namespace ACPT_Lite\Core\Models\Meta;
 
-use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
 use ACPT_Lite\Core\Models\Belong\BelongModel;
 use ACPT_Lite\Core\Repository\MetaRepository;
+use ACPT_Lite\Utils\PHP\Arrays;
 use ACPT_Lite\Utils\Wordpress\Translator;
 
 class MetaFieldModel extends AbstractModel implements \JsonSerializable
 {
-    const DATE_TYPE = 'Date';
-    const EMAIL_TYPE = 'Email';
-    const SELECT_TYPE = 'Select';
-    const TEXTAREA_TYPE = 'Textarea';
-    const TEXT_TYPE = 'Text';
-
-	/**
-	 * @var MetaBoxModel
-	 */
-	private MetaBoxModel $box;
-
-	/**
-	 * @var string
-	 */
-	private string $name;
-
-	/**
-	 * @var string
-	 */
-	private ?string $label = null;
-
-	/**
-	 * @var string
-	 */
-	private string $type;
-
-	/**
-	 * @var string
-	 */
-	private ?string $defaultValue = null;
-
-	/**
-	 * @var string
-	 */
-	private ?string $description  = null;
-
-	/**
-	 * @var bool
-	 */
-	private bool $showInArchive = false;
-
-	/**
-	 * @var bool
-	 */
-	private bool $isRequired = false;
-
-	/**
-	 * @var bool
-	 */
-	private bool $quickEdit = false;
-
-	/**
-	 * @var bool
-	 */
-	private bool $filterableInAdmin = false;
-
-	/**
-	 * @var string|null
-	 */
-	private ?string $belongsToLabel = null;
-
-	/**
-	 * @var string|null
-	 */
-	private ?string $findLabel = null;
-
-	/**
-	 * @var int
-	 */
-	private int $sort;
-
-	/**
-	 * @var MetaFieldOptionModel[]
-	 */
-	private array $options = [];
+    /**
+     * Permissions are not available in ACPT Lite
+     *
+     * @return array<int, mixed>
+     */
+    public function getPermissions(): array
+    {
+        return [];
+    }
+    public const DATE_TYPE = 'Date';
+    public const EMAIL_TYPE = 'Email';
+    public const SELECT_TYPE = 'Select';
+    public const TEXTAREA_TYPE = 'Textarea';
+    public const TEXT_TYPE = 'Text';
 
     /**
-	 * MetaFieldModel constructor.
-	 *
-	 * @param string $id
-	 * @param MetaBoxModel $box
-	 * @param string $name
-	 * @param string $type
-	 * @param bool $showInArchive
-	 * @param bool $isRequired
-	 * @param int $sort
-	 * @param string|null $defaultValue
-	 * @param string|null $description
-	 * @param string|null $label
-	 *
-	 * @throws \ReflectionException
-	 */
-	public function __construct(
-		string $id,
-		MetaBoxModel $box,
-		string $name,
-		string $type,
-		bool $showInArchive,
-		bool $isRequired,
-		int $sort,
-		$defaultValue = null,
-		?string $description = null,
-		?string $label = null
-	) {
-		parent::__construct($id);
-		$this->box = $box;
-		$this->name    = $name;
-		$this->setType($type);
-		$this->showInArchive        = $showInArchive;
-		$this->isRequired           = $isRequired;
-		$this->sort                 = $sort;
-		$this->defaultValue         = (is_array($defaultValue)) ? json_encode($defaultValue) : $defaultValue;
-		$this->description          = $description;
-		$this->label                = $label;
-		$this->options              = [];
-	}
+     * Field types that resolve to a scalar (or scalar-array) WP Block
+     * Bindings value — string/boolean/integer/number/array, per
+     * resolveBindingType()'s BINDING_TYPE_MAP, assets/src/Gutenberg/utils/
+     * resolveBindingType.jsx — as opposed to structural/nested types
+     * (Repeater, FlexibleContent, Clone, Table, Gallery, multi-relation
+     * fields, etc.) that can never be represented as a single bound
+     * attribute value. Modeled on ACF's own supported-field-types list for
+     * block bindings, plus ID/Editor/DateRange/SelectMulti/Checkbox/List
+     * (ACPT-specific/extra -- the last three are only included because their
+     * raw stored value is already a flat array of plain strings, per
+     * FetchMetaFieldValueQuery.php's CHECKBOX_TYPE/SELECT_MULTI_TYPE/
+     * LIST_TYPE case, unlike other `array`-typed fields such as Gallery or
+     * Post Object Multi, whose array items are complex objects and are
+     * deliberately NOT included here).
+     * Drives:
+     * 1) whether the "Allow in block bindings" advanced option is even
+     *    shown for a given field (see jsonSerialize()'s `bindable` key), and
+     * 2) documents, on the PHP side, exactly which types
+     * ACPT_Block_Bindings::getValueCallback() must special-case value
+     * extraction for (URL/IMAGE/FILE/DATE_RANGE -- every other listed type
+     * is already a plain scalar/scalar-array with no extraction needed).
+     * Kept in parity with the JS BINDING_TYPE_MAP by resolveBindingType.
+     * test.js's own completeness meta-test plus this class's own PHPUnit
+     * coverage -- update both together if either side changes.
+     *
+     * @var array<int, string>
+     */
+    public const BINDABLE_FIELD_TYPES = [
+        self::TEXT_TYPE,
+        self::TEXTAREA_TYPE,
+        self::EMAIL_TYPE,
+        self::SELECT_TYPE,
+        self::DATE_TYPE,
+    ];
 
-	/**
-	 * @param MetaBoxModel $box
-	 */
-	public function changeBox(MetaBoxModel $box)
-	{
-		$this->box = $box;
-	}
+    /**
+     * @var MetaBoxModel
+     */
+    private MetaBoxModel $box;
 
-	/**
-	 * @return MetaBoxModel
-	 */
-	public function getBox(): MetaBoxModel
-	{
-		return $this->box;
-	}
+    /**
+     * @var string
+     */
+    private string $name;
 
-	/**
-	 * @param $name
-	 */
-	public function changeName($name)
-	{
-		if(!Strings::alphanumericallyValid($name)){
-			throw new \DomainException($name . ' is not valid name');
-		}
+    /**
+     * @var string|null
+     */
+    private ?string $label = null;
 
-		$this->name = $name;
-	}
+    /**
+     * @var string
+     */
+    private string $type;
 
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
+    /**
+     * @var mixed|null
+     */
+    private $defaultValue = null;
 
-	/**
-	 * @return string
-	 */
-	public function getLabelOrName(): string
-	{
-		if($this->getLabel()){
-			return $this->getLabel();
-		}
+    /**
+     * @var string|null
+     */
+    private ?string $description  = null;
 
-		return $this->getName();
-	}
+    /**
+     * @var bool
+     */
+    private bool $showInArchive = false;
 
-	/**
-	 * @return string
-	 */
-	/**
-	 * @return string
-	 */
-	public function getNormalizedName()
-	{
-		return Strings::toDBFormat($this->name);
-	}
+    /**
+     * @var bool
+     */
+    private bool $isRequired = false;
 
-	/**
-	 * @param $type
-	 *
-	 * @throws \ReflectionException
-	 */
-	private function setType($type)
-	{
-		if(!in_array($type, $this->getValidTypes())){
-			throw new \DomainException($type . ' is not a valid field type for this meta box field');
-		}
+    /**
+     * @var bool
+     */
+    private bool $quickEdit = false;
 
-		$this->type = $type;
-	}
+    /**
+     * @var bool
+     */
+    private bool $filterableInAdmin = false;
 
-	/**
-	 * @return array
-	 */
-	public function getValidTypes(): array
-	{
-		return $this->getConstants();
-	}
+    /**
+     * @var string|null
+     */
+    private ?string $belongsToLabel = null;
 
-	/**
-	 * @param $type
-	 *
-	 * @throws \ReflectionException
-	 */
-	public function changeType($type)
-	{
-		$this->setType($type);
-	}
+    /**
+     * @var string|null
+     */
+    private ?string $findLabel = null;
 
-	/**
-	 * @return string
-	 */
-	public function getType()
-	{
-		return $this->type;
-	}
+    /**
+     * @var int
+     */
+    private int $sort;
 
-	/**
-	 * @return int
-	 */
-	public function getSort(): int
-	{
-		return $this->sort;
-	}
+    /**
+      * @var array<int, mixed>
+     */
+    private array $advancedOptions = [];
 
-	/**
-	 * @return string|null
-	 */
-	public function getDefaultValue(): ?string
-	{
-		return $this->defaultValue;
-	}
+    /**
+     * @var MetaFieldOptionModel[]
+     */
+    private array $options = [];
 
-	/**
-	 * @return string|null
-	 */
-	public function getDescription(): ?string
-	{
-		return $this->description;
-	}
+    /**
+      * @var array<int, mixed>
+     */
+    private array $relations = [];
 
-	/**
-	 * @return string|null
-	 */
-	public function getLabel(): ?string
-	{
-		return $this->label;
-	}
+    /**
+      * @var array<int, mixed>
+     */
+    private array $visibilityConditions = [];
 
-	/**
-	 * @return bool
-	 */
-	public function isShowInArchive(): bool
-	{
-		return $this->showInArchive;
-	}
+    /**
+      * @var array<int, mixed>
+     */
+    private array $validationRules = [];
 
-	/**
-	 * @return bool
-	 */
-	public function isRequired(): bool
-	{
-		return $this->isRequired;
-	}
+    /**
+     * @var MetaFieldModel[]
+     */
+    private array $children = [];
 
-	/**
-	 * @return bool
-	 */
-	public function isForQuickEdit(): bool
-	{
-		return $this->quickEdit;
-	}
+    /**
+      * @var array<int, mixed>
+     */
+    private array $blocks = [];
 
-	/**
-	 * @param bool $quickEdit
-	 */
-	public function setQuickEdit($quickEdit)
-	{
-		$this->quickEdit = $quickEdit;
-	}
+    /**
+     * @var string|null
+     */
+    private ?string $parentId = null;
 
-	/**
-	 * @return bool
-	 */
-	public function isFilterableInAdmin(): bool
-	{
-		return $this->filterableInAdmin;
-	}
+    /**
+     * @var string|null
+     */
+    private ?string $blockId = null;
 
-	/**
-	 * @param bool $filterableInAdmin
-	 */
-	public function setFilterableInAdmin($filterableInAdmin )
-	{
-		$this->filterableInAdmin = $filterableInAdmin;
-	}
+    /**
+     * @var MetaFieldModel|null
+     */
+    private ?MetaFieldModel $forgedBy = null;
 
-	/**
-	 * @param MetaFieldOptionModel $option
-	 */
-	public function addOption(MetaFieldOptionModel $option)
-	{
-		if(!$this->existsInCollection($option->getId(), $this->options)){
-			$this->options[] = $option;
-		}
-	}
+    /**
+     * @var bool|null
+     */
+    private ?bool $isAWooCommerceProductAttribute = false;
 
-	/**
-	 * @param MetaFieldOptionModel $option
-	 */
-	public function removeOption(MetaFieldOptionModel $option)
-	{
-		$this->options = $this->removeFromCollection($option->getId(), $this->options);
-	}
+    /**
+     * MetaFieldModel constructor.
+     *
+     * @param string $id
+     * @param MetaBoxModel $box
+     * @param string $name
+     * @param string $type
+     * @param bool $showInArchive
+     * @param bool $isRequired
+     * @param int $sort
+     * @param mixed|null $defaultValue
+     * @param string|null $description
+     * @param string|null $label
+     */
+    public function __construct(
+        string $id,
+        MetaBoxModel $box,
+        string $name,
+        string $type,
+        bool $showInArchive,
+        bool $isRequired,
+        int $sort,
+        $defaultValue = null,
+        ?string $description = null,
+        ?string $label = null
+    ) {
+        parent::__construct($id);
+        $this->box = $box;
+        $this->name    = $name;
+        $this->setType($type);
+        $this->showInArchive        = $showInArchive;
+        $this->isRequired           = $isRequired;
+        $this->sort                 = $sort;
+        $this->defaultValue         = $defaultValue;
+        $this->description          = $description;
+        $this->label                = $label;
+        $this->advancedOptions      = [];
+        $this->options              = [];
+        $this->relations            = [];
+        $this->visibilityConditions = [];
+        $this->validationRules      = [];
+        $this->children             = [];
+        $this->blocks               = [];
+    }
 
-	/**
-	 * Clear all options
-	 */
-	public function clearOptions()
-	{
-		$this->options = [];
-	}
+    /**
+     * @param MetaBoxModel $box
+     */
+    public function changeBox(MetaBoxModel $box): void
+    {
+        $this->box = $box;
+    }
 
-	/**
-	 * @return MetaFieldOptionModel[]
-	 */
-	public function getOptions()
-	{
-		return $this->options;
-	}
+    /**
+     * @return MetaBoxModel
+     */
+    public function getBox(): MetaBoxModel
+    {
+        return $this->box;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getOptionValues()
-	{
-		$values = [];
+    /**
+     * @param string $name
+     */
+    public function changeName(string $name): void
+    {
+        if (!Strings::alphanumericallyValid($name)) {
+            throw new \DomainException($name . ' is not valid name');
+        }
 
-		foreach ($this->getOptions() as $option){
-			$values[] = $option->getValue();
-		}
+        $this->name = $name;
+    }
 
-		return $values;
-	}
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
-	/**
-	 * @param $value
-	 *
-	 * @return string|null
-	 */
-	public function getOptionLabel($value)
-	{
-		if(empty($this->getOptions())){
-			return null;
-		}
+    /**
+     * @return string
+     */
+    public function getLabelOrName(): string
+    {
+        if ($this->getLabel()) {
+            return $this->getLabel();
+        }
 
-		foreach ($this->getOptions() as $option){
-			if($option->getValue() === $value){
-				return Translator::translateString($option->getLabel());
-			}
-		}
+        return $this->getName();
+    }
 
-		return null;
-	}
+    /**
+     * @return string
+     */
+    /**
+     * @return string
+     */
+    public function getNormalizedName()
+    {
+        return Strings::toDBFormat($this->name);
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isATextualField(): bool
-	{
-		$textualTypes = [
-			self::SELECT_TYPE,
-			self::EMAIL_TYPE,
-			self::TEXT_TYPE,
-			self::TEXTAREA_TYPE,
-		];
+    /**
+     * @param string $type
+     *
+     * @throws \DomainException
+     *
+     * @return void
+     */
+    private function setType(string $type): void
+    {
+        if (!in_array($type, $this->getValidTypes())) {
+            throw new \DomainException($type . ' is not a valid field type for this meta box field');
+        }
 
-		return in_array($this->type, $textualTypes);
-	}
+        $this->type = $type;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function canBeQuickEdited(): bool
-	{
-		$textualTypes = [
+    /**
+     * @return array<string, string>
+     */
+    public function getValidTypes(): array
+    {
+        return $this->getConstants();
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return void
+     */
+    public function changeType(string $type): void
+    {
+        $this->setType($type);
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * This function converts the meta field type to
+     * the corresponding form field type
+     *
+     * @return string
+     */
+    public function resolveFieldTypeForForms(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $sort
+     *
+     * @return void
+     */
+    public function changeSort(int $sort): void
+    {
+        $this->sort = $sort;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSort(): int
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefaultValueAsString(): ?string
+    {
+        if ($this->defaultValue === null) {
+            return null;
+        }
+
+        if (is_array($this->defaultValue)) {
+            // json_encode() returns false on failure (e.g. INF, NAN, invalid UTF-8).
+            // Return null instead of letting PHP silently coerce false → "" and
+            // persisting an empty string to the DB.
+            $encoded = json_encode($this->defaultValue);
+            return $encoded !== false ? $encoded : null;
+        }
+
+        if (is_bool($this->defaultValue)) {
+            // '1'/'0', not 'true'/'false' -- ToggleField::getToggleValue()
+            // (src/Core/Generators/Meta/Fields/ToggleField.php) checks
+            // in_array($defaultValue, [0, 1]), which 'true'/'false' never
+            // match (PHP 8 non-numeric-string comparison rules), silently
+            // rendering the field's default as always unchecked.
+            return $this->defaultValue ? '1' : '0';
+        }
+
+        // Explicit cast guards against any non-string scalar (int, float) that
+        // bypassed type validation and reached this point.
+        return (string) $this->defaultValue;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShowInArchive(): bool
+    {
+        return $this->showInArchive;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRequired(): bool
+    {
+        return $this->isRequired;
+    }
+
+    /**
+     * @return string
+     */
+    public function isRequiredAsSting(): string
+    {
+        return $this->isRequired ? '1' : '0' ;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForQuickEdit(): bool
+    {
+        return $this->quickEdit;
+    }
+
+    /**
+     * @param bool $quickEdit
+     */
+    public function setQuickEdit(bool $quickEdit): void
+    {
+        $this->quickEdit = $quickEdit;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFilterableInAdmin(): bool
+    {
+        return $this->filterableInAdmin;
+    }
+
+    /**
+     * @param bool $filterableInAdmin
+     */
+    public function setFilterableInAdmin(bool $filterableInAdmin): void
+    {
+        $this->filterableInAdmin = $filterableInAdmin;
+    }
+
+    /**
+     * Not available in ACPT Lite
+     *
+     * @return array<int, mixed>
+     */
+    public function getValidationRules()
+    {
+        return [];
+    }
+
+    /**
+     * @return array<int, mixed>
+     */
+    public function getAdvancedOptions(): array
+    {
+        return [];
+    }
+
+    /**
+     * Not available in ACPT Lite
+     *
+     * @return null
+     */
+    public function getAdvancedOption(string $key)
+    {
+        return null;
+    }
+
+    /**
+     * @param MetaFieldOptionModel $option
+     */
+    public function addOption(MetaFieldOptionModel $option): void
+    {
+        if (!$this->existsInCollection($option->getId(), $this->options)) {
+            $this->options[] = $option;
+        }
+    }
+
+    /**
+     * @param MetaFieldOptionModel $option
+     */
+    public function removeOption(MetaFieldOptionModel $option): void
+    {
+        $this->options = $this->removeFromCollection($option->getId(), $this->options);
+    }
+
+    /**
+     * Clear all options
+     */
+    public function clearOptions(): void
+    {
+        $this->options = [];
+    }
+
+    /**
+     * @return MetaFieldOptionModel[]
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getOptionsAsArray(): array
+    {
+        $options = [];
+
+        foreach ($this->getOptions() as $option) {
+            $options[$option->getValue()] = $option->getLabel();
+        }
+
+        return $options;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public function getOptionValues(): array
+    {
+        $values = [];
+
+        foreach ($this->getOptions() as $option) {
+            $values[] = $option->getValue();
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string|null
+     */
+    public function getOptionLabel(string $value): ?string
+    {
+        if (empty($this->getOptions())) {
+            return null;
+        }
+
+        foreach ($this->getOptions() as $option) {
+            if ($option->getValue() === $value) {
+                return Translator::translateString($option->getLabel());
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Not available in ACPT Lite
+     *
+     * @return array<int, mixed>
+     */
+    public function getRelations()
+    {
+        return [];
+    }
+
+    /**
+     * Not available in ACPT Lite
+     *
+     * @return bool
+     */
+    public function hasManyRelation(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasChildren(): bool
+    {
+        return !empty($this->children);
+    }
+
+    /**
+     * Whether this field's type is capable of being used in a Gutenberg
+     * block binding at all -- see the BINDABLE_FIELD_TYPES docblock. Does
+     * NOT account for the "Allow in block bindings" advanced-option opt-out
+     * (a field can be of a bindable type but still individually disallowed);
+     * that check lives in ACPT_Block_Bindings.
+     *
+     * @return bool
+     */
+    public function isBindable(): bool
+    {
+        return in_array($this->type, self::BINDABLE_FIELD_TYPES, true);
+    }
+
+    /**
+     * @param MetaFieldModel $field
+     */
+    public function addChild(MetaFieldModel $field): void
+    {
+        if (!$this->existsInCollection($field->getId(), $this->children)) {
+            $this->children[] = $field;
+        }
+    }
+
+    /**
+     * @param MetaFieldModel $field
+     */
+    public function removeChild(MetaFieldModel $field): void
+    {
+        $this->children = $this->removeFromCollection($field->getId(), $this->children);
+    }
+
+    /**
+     * Clear all children
+     */
+    public function clearChildren(): void
+    {
+        $this->children = [];
+    }
+
+    /**
+     * @return MetaFieldModel[]
+     */
+    public function getChildren(): array
+    {
+        return $this->children;
+    }
+
+    /**
+     * @param int $index
+     * @param MetaFieldModel $fieldModel
+     *
+     * @return void
+     */
+    public function setChild(int $index, MetaFieldModel $fieldModel): void
+    {
+        $this->children[$index] = $fieldModel;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return MetaFieldModel|null
+     */
+    public function getChild(string $name): ?MetaFieldModel
+    {
+        foreach ($this->getChildren() as $child) {
+            if ($name === $child->getName()) {
+                return $child;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string|null $parentId
+     */
+    public function setParentId(?string $parentId): void
+    {
+        $this->parentId = $parentId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getParentId(): ?string
+    {
+        return $this->parentId;
+    }
+
+    /**
+     * @return MetaFieldModel|null
+     */
+    public function getRootParentField(): ?MetaFieldModel
+    {
+        return null;
+    }
+
+    /**
+     * @return MetaFieldModel|null
+     */
+    public function getParentField(): ?MetaFieldModel
+    {
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasParent(): bool
+    {
+        return $this->getParentId() !== null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasParentBlock(): bool
+    {
+        return $this->getBlockId() !== null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBlockId(): ?string
+    {
+        return $this->blockId;
+    }
+
+    /**
+     * @param ?string $blockId
+     */
+    public function setBlockId(?string $blockId): void
+    {
+        $this->blockId = $blockId;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return null
+     */
+    public function getBlock(string $name)
+    {
+        return null;
+    }
+
+    /**
+     * Not available in ACPT Lite
+     *
+     * @return array<int, mixed>
+     */
+    public function getBlocks(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNestedInABlock(): bool
+    {
+        return $this->getBlockId() !== null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getParentBlock()
+    {
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasBlocks(): bool
+    {
+        return !empty($this->blocks);
+    }
+
+    /**
+     * Not available in ACPT Lite
+     *
+     * @return array<int, mixed>
+     */
+    public function getVisibilityConditions(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasVisibilityConditions(): bool
+    {
+        return Arrays::count($this->visibilityConditions) > 0;
+    }
+
+    /**
+     * Get the parent clone field
+     *
+     * @return MetaFieldModel|null
+     */
+    public function getForgedBy(): ?MetaFieldModel
+    {
+        return $this->forgedBy ?? null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isATextualField(): bool
+    {
+        $textualTypes = [
+            self::SELECT_TYPE,
+            self::EMAIL_TYPE,
+            self::TEXT_TYPE,
+            self::TEXTAREA_TYPE,
+        ];
+
+        return in_array($this->type, $textualTypes);
+    }
+
+    /**
+     * @return bool
+     */
+    public function canBeQuickEdited(): bool
+    {
+        $textualTypes = [
             self::DATE_TYPE,
-			self::SELECT_TYPE,
-			self::EMAIL_TYPE,
-			self::TEXT_TYPE,
-			self::TEXTAREA_TYPE,
-		];
+            self::SELECT_TYPE,
+            self::EMAIL_TYPE,
+            self::TEXT_TYPE,
+            self::TEXTAREA_TYPE,
+        ];
 
-		return in_array($this->type, $textualTypes);
-	}
+        return in_array($this->type, $textualTypes);
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isFilterable(): bool
-	{
-		$filterableTypes = [
-			self::DATE_TYPE,
-			self::EMAIL_TYPE,
-			self::SELECT_TYPE,
-			self::TEXT_TYPE,
-			self::TEXTAREA_TYPE,
-		];
+    /**
+     * @return bool
+     */
+    public function isFilterable(): bool
+    {
+        $filterableTypes = [
+            self::DATE_TYPE,
+            self::EMAIL_TYPE,
+            self::SELECT_TYPE,
+            self::TEXT_TYPE,
+            self::TEXTAREA_TYPE,
+        ];
 
-		return in_array($this->type, $filterableTypes);
-	}
+        return in_array($this->type, $filterableTypes);
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getDbName()
-	{
-		$dbName = '';
+    /**
+     * @return string
+     */
+    public function getDbName()
+    {
+        $dbName = '';
 
-		if($this->getBelongsToLabel() === MetaTypes::OPTION_PAGE and $this->getFindLabel() !== null){
-			$dbName .= Strings::toDBFormat($this->getFindLabel()). '_';
-		}
+        $dbName .= Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
 
-		$dbName .= Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
+        return $dbName;
+    }
 
-		return $dbName;
-	}
+    /**
+     * @return string
+     */
+    public function getUiName()
+    {
+        $uiName = Strings::toHumanReadableFormat($this->getBox()->getUiName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
 
-	/**
-	 * @return string
-	 */
-	public function getUiName()
-	{
-        return Strings::toHumanReadableFormat($this->getBox()->getUiName()) . ' - ' . Strings::toHumanReadableFormat($this->name);
-	}
+        if ($this->getParentId()) {
+            $uiName .= ' [children]';
+        }
 
-	/**
-	 * @return MetaFieldModel
-	 */
-	public function duplicate(): MetaFieldModel
-	{
-		return $this->duplicateFrom($this->getBox());
-	}
+        return $uiName;
+    }
 
-	/**
-	 * @param MetaBoxModel $duplicateFrom
-	 *
-	 * @return MetaFieldModel
-	 */
-	public function duplicateFrom(MetaBoxModel $duplicateFrom): MetaFieldModel
-	{
-		$duplicate = clone $this;
-		$duplicate->id = Uuid::v4();
-		$duplicate->box = $duplicateFrom;
+    /**
+     * @return MetaFieldModel
+     */
+    public function duplicate(): MetaFieldModel
+    {
+        return $this->duplicateFrom($this->getBox());
+    }
+
+    /**
+     * @param MetaBoxModel $duplicateFrom
+     *
+     * @return MetaFieldModel
+     */
+    public function duplicateFrom(MetaBoxModel $duplicateFrom): MetaFieldModel
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->box = $duplicateFrom;
         $duplicate->changeName(Strings::getTheFirstAvailableName($duplicate->getName(), MetaRepository::getFieldNames()));
 
-		$duplicatedOptions = $duplicate->getOptions();
-		$duplicate->options = [];
+        $duplicatedOptions = $duplicate->getOptions();
+        $duplicatedChildren = $duplicate->getChildren();
 
+        $duplicate->options = [];
+        $duplicate->advancedOptions = [];
+        $duplicate->relations = [];
+        $duplicate->children = [];
+        $duplicate->visibilityConditions = [];
+        $duplicate->blocks = [];
+        $duplicate->validationRules = [];
 
-		foreach ($duplicatedOptions as $option){
-			$optionFieldModel = $option->duplicateFrom($duplicate);
-			$duplicate->addOption($optionFieldModel);
-		}
+        foreach ($duplicatedOptions as $option) {
+            $optionFieldModel = $option->duplicateFrom($duplicate);
+            $duplicate->addOption($optionFieldModel);
+        }
 
-		return $duplicate;
-	}
+        foreach ($duplicatedChildren as $child) {
+            $childModel = $child->duplicateFromParent($duplicate);
+            $duplicate->addChild($childModel);
+        }
 
-	/**
-	 * @param MetaFieldModel $duplicateFrom
-	 *
-	 * @return MetaFieldModel
-	 */
-	public function duplicateFromParent(MetaFieldModel $duplicateFrom): MetaFieldModel
-	{
-		$duplicate = clone $this;
-		$duplicate->id = Uuid::v4();
+        return $duplicate;
+    }
 
-		return $duplicate;
-	}
+    /**
+     * @param MetaFieldModel $duplicateFrom
+     *
+     * @return MetaFieldModel
+     */
+    public function duplicateFromParent(MetaFieldModel $duplicateFrom): MetaFieldModel
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->parentId = $duplicateFrom->getId();
 
-	#[\ReturnTypeWillChange]
-	public function jsonSerialize()
-	{
-		return [
-			'id' => $this->id,
-			'boxId' => $this->getBox()->getId(),
-			'groupId' => $this->getBox()->getGroup()->getId(),
-			'boxName' => $this->getBox()->getName(),
-			'db_name' => $this->getDbName(),
-			'ui_name' => $this->getUiName(),
-			'name' => $this->name,
-			'label' => $this->label,
-			'type' => $this->type,
-			'group' => $this->getGroup(),
-			'belongsToLabel' => $this->getBelongsToLabel(),
-			'findLabel' => $this->getFindLabel(),
-			'defaultValue' => $this->defaultValue,
-			'description' => $this->description,
-			'isRequired' => (bool)$this->isRequired,
-			'showInArchive' => (bool)$this->showInArchive,
-			'quickEdit' => (bool)$this->quickEdit,
-			'filterableInAdmin' => (bool)$this->filterableInAdmin,
-			'sort' => (int)$this->sort,
-			'options' => $this->options,
-			'isATextualField' => $this->isATextualField(),
-			'canHaveAfterAndBefore' => $this->canHaveAfterAndBefore(),
-			'isFilterable' => $this->isFilterable(),
-		];
-	}
+        return $duplicate;
+    }
 
-	/**
-	 * @param MetaBoxModel $box
-	 * @param $fieldIndex
-	 * @param $data
-	 * @param $arrayOfFieldNames
-	 * @param $arrayOfBlockNames
-	 *
-	 * @return MetaFieldModel
-	 * @throws \Exception
-	 */
-	public static function fullHydrateFromArray(MetaBoxModel $box, $fieldIndex, $data, &$arrayOfFieldNames, &$arrayOfBlockNames)
-	{
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'boxId' => $this->getBox()->getId(),
+            'groupId' => $this->getBox()->getGroup()->getId(),
+            'boxName' => $this->getBox()->getName(),
+            'db_name' => $this->getDbName(),
+            'ui_name' => $this->getUiName(),
+            'name' => $this->name,
+            'label' => $this->label,
+            'type' => $this->type,
+            'bindable' => $this->isBindable(),
+            'group' => $this->getGroup(),
+            'belongsToLabel' => $this->getBelongsToLabel(),
+            'findLabel' => $this->getFindLabel(),
+            'defaultValue' => $this->defaultValue,
+            'description' => $this->description,
+            'isRequired' => (bool)$this->isRequired,
+            'showInArchive' => (bool)$this->showInArchive,
+            'quickEdit' => (bool)$this->quickEdit,
+            'filterableInAdmin' => (bool)$this->filterableInAdmin,
+            'sort' => (int)$this->sort,
+            'advancedOptions' => $this->getAdvancedOptions(),
+            'options' => $this->options,
+            'relations' => $this->relations,
+            'blocks' => $this->blocks,
+            'blockId' => $this->getBlockId(),
+            'blockName' => ($this->getParentBlock() !== null ? $this->getParentBlock()->getName() : null),
+            'validationRules' => $this->validationRules,
+            'visibilityConditions' => $this->getVisibilityConditions(),
+            'hasManyRelation' => false,
+            'hasChildren' => false,
+            'children' => $this->getChildren(),
+            'parentId' => $this->getParentId(),
+            'parentName' => ($this->getParentField() !== null ? $this->getParentField()->getName() : null),
+            'isATextualField' => $this->isATextualField(),
+            'canHaveAfterAndBefore' => $this->canHaveAfterAndBefore(),
+            'isFilterable' => $this->isFilterable(),
+            'permissions' => [],
+            'forgedBy' => $this->getForgedBy(),
+        ];
+    }
+
+    /**
+     * @param MetaBoxModel $box
+     * @param int $fieldIndex
+     * @param array<string, mixed> $data
+     * @param array<int, string> $arrayOfFieldNames
+     * @param array<int, string> $arrayOfBlockNames
+     * @param array<string, array{name: string, box_id: string}> $persistedFields stored fields by id
+     *
+     * @return MetaFieldModel
+     * @throws \Exception
+     */
+    public static function fullHydrateFromArray(MetaBoxModel $box, int $fieldIndex, array $data, array &$arrayOfFieldNames, array &$arrayOfBlockNames, array $persistedFields = [])
+    {
         $defaultValue = $data['defaultValue'] ?? $data['default_value'] ?? null;
 
-		$fieldModel = self::hydrateFromArray([
-			'id' => (isset($data["id"]) ? $data["id"] : Uuid::v4()),
-			'box' => $box,
-		    'name' => $data['name'],
-		    'label' => $data['label'] ?? null,
-		    'type' => $data['type'],
-			'sort' => ($fieldIndex+1),
-			'showInArchive' => $data['showInArchive'] ?? $data['show_in_archive'] ?? false,
-			'isRequired' => $data['isRequired'] ?? $data['is_required'] ?? false,
-		    'defaultValue' => $defaultValue,
-		    'description' => $data['description'] ?? null,
-		]);
+        // Clone fields special handling
+        $clonedFields = $data['clonedFields'] ?? $data['cloned_fields'] ?? [];
 
-		$fieldModel->changeName(Strings::getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
-		$arrayOfFieldNames[] = $fieldModel->getName();
+        $fieldModel = self::hydrateFromArray([
+            'id' => (isset($data["id"]) ? $data["id"] : Uuid::v4()),
+            'box' => $box,
+            'name' => $data['name'],
+            'label' => $data['label'] ?? null,
+            'type' => $data['type'],
+            'sort' => ($fieldIndex+1),
+            'showInArchive' => $data['showInArchive'] ?? $data['show_in_archive'] ?? false,
+            'isRequired' => $data['isRequired'] ?? $data['is_required'] ?? false,
+            'defaultValue' => $defaultValue,
+            'description' => $data['description'] ?? null,
+        ]);
 
-		if(isset($data['quickEdit'])){
-			$fieldModel->setQuickEdit($data['quickEdit']);
-		}
+        // An existing field saved with its stored name in its stored box keeps that name,
+        // even if it collides: renaming it would orphan every value saved under the old
+        // meta key (#1421/#1422). Only new or renamed fields get a unique suffix.
+        $persisted = $persistedFields[$fieldModel->getId()] ?? null;
+        $isUnchanged = $persisted !== null && $persisted['name'] === $fieldModel->getName() && $persisted['box_id'] === $box->getId();
 
-		if(isset($data['quick_edit'])){
-			$fieldModel->setQuickEdit($data['quick_edit']);
-		}
+        if (!$isUnchanged) {
+            $fieldModel->changeName(Strings::getTheFirstAvailableName($fieldModel->getName(), $arrayOfFieldNames));
+        }
 
-		if(isset($data['filterableInAdmin'])){
-			$fieldModel->setFilterableInAdmin($data['filterableInAdmin']);
-		}
+        $arrayOfFieldNames[] = $fieldModel->getName();
 
-		if(isset($data['filterable_in_admin'])){
-			$fieldModel->setFilterableInAdmin($data['filterable_in_admin']);
-		}
+        if (isset($data['blockId']) && !empty($data['blockId'])) {
+            $fieldModel->setBlockId($data['blockId']);
+        }
 
-		if(isset($data['options']) and is_array($data['options'])){
-			foreach ($data['options'] as $indexOption => $option){
+        if (isset($data['block_id']) && !empty($data['block_id'])) {
+            $fieldModel->setBlockId($data['block_id']);
+        }
 
-				$optionModel = MetaFieldOptionModel::hydrateFromArray([
-					'id' => (isset($option["id"]) ? $option["id"] : Uuid::v4()),
-					'metaField' => $fieldModel,
-					'label' => @$option['label'],
-					'value' => @$option['value'],
-					'isDefault' => @$option['isDefault'],
-					'sort' => ($indexOption+1),
-				]);
+        if (isset($data['parentId']) && !empty($data['parentId']) && (!isset($data['blockId']) || empty($data['blockId']))) {
+            $fieldModel->setParentId($data['parentId']);
+        }
 
-				$fieldModel->addOption($optionModel);
-			}
-		}
+        if (isset($data['parent_id']) && !empty($data['parent_id']) && (!isset($data['block_id']) || empty($data['block_id']))) {
+            $fieldModel->setParentId($data['parent_id']);
+        }
 
-		return $fieldModel;
-	}
+        if (isset($data['quickEdit'])) {
+            $fieldModel->setQuickEdit($data['quickEdit']);
+        }
 
-	/**
-	 * @return string|null
-	 */
-	public function getBelongsToLabel(): ?string {
-		return $this->belongsToLabel;
-	}
+        if (isset($data['quick_edit'])) {
+            $fieldModel->setQuickEdit($data['quick_edit']);
+        }
 
-	/**
-	 * @param string|null $belongsToLabel
-	 */
-	public function setBelongsToLabel( ?string $belongsToLabel ): void
-	{
-		$this->belongsToLabel = $belongsToLabel;
-	}
+        if (isset($data['filterableInAdmin'])) {
+            $fieldModel->setFilterableInAdmin($data['filterableInAdmin']);
+        }
 
-	/**
-	 * @return string|null
-	 */
-	public function getFindLabel(): ?string {
-		return $this->findLabel;
-	}
+        if (isset($data['filterable_in_admin'])) {
+            $fieldModel->setFilterableInAdmin($data['filterable_in_admin']);
+        }
 
-	/**
-	 * @param string|null $findLabel
-	 */
-	public function setFindLabel( ?string $findLabel ): void
-	{
-		$this->findLabel = $findLabel;
-	}
+        if (isset($data['options']) && is_array($data['options'])) {
+            foreach ($data['options'] as $indexOption => $option) {
+                // Skip junk rows (no value, no label) instead of aborting the whole
+                // group save with "`value` key is mandatory" (#1349). An option with a
+                // label but no value falls back to its label, like the linked editor does.
+                if (!is_array($option)) {
+                    continue;
+                }
 
-	/**
-	 * @return bool
-	 */
-	public function canBeDisplayedWithShortcode(): bool
-	{
-		return !$this->isRelational() and !$this->isNestable();
-	}
+                $label = $option['label'] ?? null;
+                $value = $option['value'] ?? $label;
 
-	/**
-	 * @return bool
-	 */
-	public function canFieldHaveValidationAndLogicRules(): bool
-	{
-		$allowed = [
-			self::TEXT_TYPE,
-			self::TEXTAREA_TYPE,
-			self::SELECT_TYPE,
-			self::DATE_TYPE,
-			self::EMAIL_TYPE,
-		];
+                if ($value === null || ($value === '' && empty($label))) {
+                    continue;
+                }
 
-		return in_array($this->getType(), $allowed);
-	}
+                try {
+                    $optionModel = MetaFieldOptionModel::hydrateFromArray([
+                        'id' => (isset($option["id"]) ? $option["id"] : Uuid::v4()),
+                        'metaField' => $fieldModel,
+                        'label' => $label ?? $value,
+                        'value' => $value,
+                        'isDefault' => (bool)($option['isDefault'] ?? false),
+                        'sort' => ($indexOption+1),
+                    ]);
 
-	/**
-	 * @return bool
-	 */
-	public function isTextual(): bool
-	{
-		$allowed = [
-			self::DATE_TYPE,
-			self::EMAIL_TYPE,
-			self::TEXT_TYPE,
-			self::TEXTAREA_TYPE,
-			self::SELECT_TYPE,
-		];
+                    $fieldModel->addOption($optionModel);
+                } catch (\Exception $exception) {
+                    do_action("acpt/error", $exception);
+                }
+            }
+        }
 
-		return in_array($this->getType(), $allowed);
-	}
+        if (isset($data['children']) && is_array($data['children'])) {
+            foreach ($data['children'] as $childIndex => $child) {
+                $child['parentId'] = $fieldModel->getId();
+                $childModel = self::fullHydrateFromArray($box, $childIndex, $child, $arrayOfFieldNames, $arrayOfBlockNames, $persistedFields);
+                $fieldModel->addChild($childModel);
+            }
+        } elseif (isset($data['id'])) {
+            // 'children' entirely absent (not just an empty array — that still means "clear
+            // them") on an existing field: a caller resending a field payload that simply
+            // doesn't mention children (e.g. a GET->PUT round trip, or a partial update via
+            // save_acpt_meta_field()) must not silently wipe an existing repeater's children.
+            // Re-attach the currently-stored children (same ids, so nothing orphans) instead.
+            try {
+                $existingField = MetaRepository::getMetaFieldById($data['id']);
 
-	/**
-	 * @return bool
-	 */
-	public function canHaveAfterAndBefore(): bool
-	{
-		$allowed = [
-			self::DATE_TYPE,
-			self::EMAIL_TYPE,
-			self::SELECT_TYPE,
-			self::TEXTAREA_TYPE,
-			self::TEXT_TYPE,
-		];
+                if ($existingField !== null) {
+                    foreach ($existingField->getChildren() as $existingChild) {
+                        $fieldModel->addChild($existingChild);
+                    }
+                }
+            } catch (\Exception $exception) {
+                do_action("acpt/error", $exception);
+            }
+        }
 
-		return in_array($this->getType(), $allowed);
-	}
+        return $fieldModel;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getGroup(): ?string
-	{
-		return 'basic';
-	}
+    /**
+     * Converts a condition type into an array.
+     *
+     * @param mixed $conditionType The condition type to be converted.
+     * @return array<string, mixed> Returns the condition type as an array.
+     */
+    private static function convertConditionTypeToArray($conditionType): array
+    {
+        if (empty($conditionType)) {
+            return [];
+        }
 
-	/**
-	 * @param string $format
-	 *
-	 * @return array
-	 */
-	public function arrayRepresentation(string $format = 'full'): array
-	{
-		$optionsArray = [];
+        if (is_array($conditionType)) {
+            return $conditionType;
+        }
 
-		foreach ($this->getOptions() as $optionModel){
-			$optionsArray[] = [
-				'id' => $optionModel->getId(),
-				'label' => $optionModel->getLabel(),
-				'value' => $optionModel->getValue(),
-				'sort' => (int)$optionModel->getSort(),
-			];
-		}
+        return json_decode(html_entity_decode($conditionType), true);
+    }
 
-		return [
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'label' => $this->getLabel(),
-			'type' => $this->getType(),
-			'group' => $this->getGroup(),
-			'belongsToLabel' => $this->getBelongsToLabel(),
-			'findLabel' => $this->getFindLabel(),
-			'defaultValue' => $this->getDefaultValue(),
-			'description' => $this->getDescription(),
-			'showInArchive' => (bool)$this->isShowInArchive(),
-			'isRequired' => (bool)$this->isRequired(),
-			'sort' => (int)$this->getSort(),
-			'options' => $optionsArray,
-		];
-	}
+    /**
+     * @return string|null
+     */
+    public function getBelongsToLabel(): ?string
+    {
+        return $this->belongsToLabel;
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public static function validationRules(): array
-	{
-		return [
-			'id' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'box' => [
-				'required' => false,
-				'type' => 'object',
-				'instanceOf' => MetaBoxModel::class
-			],
-			'boxId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'groupId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'boxName' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'db_name' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'ui_name' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'UIName' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'fieldsCount' => [
-				'required' => false,
-				'type' => 'string|integer',
-			],
-			'name' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'new_name' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'label' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'type' => [
-				'required' => true,
-				'type' => 'string',
-				'enum' => [
-					MetaFieldModel::DATE_TYPE,
-					MetaFieldModel::EMAIL_TYPE,
-					MetaFieldModel::SELECT_TYPE,
-					MetaFieldModel::TEXT_TYPE,
-					MetaFieldModel::TEXTAREA_TYPE,
-				],
-			],
+    /**
+     * @param string|null $belongsToLabel
+     */
+    public function setBelongsToLabel(?string $belongsToLabel): void
+    {
+        $this->belongsToLabel = $belongsToLabel;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFindLabel(): ?string
+    {
+        return $this->findLabel;
+    }
+
+    /**
+     * @param string|null $findLabel
+     */
+    public function setFindLabel(?string $findLabel): void
+    {
+        $this->findLabel = $findLabel;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAWooCommerceProductAttribute(): bool
+    {
+        return $this->isAWooCommerceProductAttribute ?? false;
+    }
+
+    /**
+     * @param bool|null $isAWooCommerceProductAttribute
+     */
+    public function setIsAWooCommerceProductAttribute(?bool $isAWooCommerceProductAttribute): void
+    {
+        $this->isAWooCommerceProductAttribute = $isAWooCommerceProductAttribute;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canBeDisplayedWithShortcode(): bool
+    {
+        return !$this->isRelational() && !$this->isNestable();
+    }
+
+    /**
+     * @return bool
+     */
+    public function canFieldHaveValidationAndLogicRules(): bool
+    {
+        $allowed = [
+            self::TEXT_TYPE,
+            self::TEXTAREA_TYPE,
+            self::SELECT_TYPE,
+            self::DATE_TYPE,
+            self::EMAIL_TYPE,
+        ];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNumeric(): bool
+    {
+        $allowed = [];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTextual(): bool
+    {
+        $allowed = [
+            self::DATE_TYPE,
+            self::EMAIL_TYPE,
+            self::TEXT_TYPE,
+            self::TEXTAREA_TYPE,
+            self::SELECT_TYPE,
+        ];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isClone(): bool
+    {
+        $allowed = [];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMedia(): bool
+    {
+        $allowed = [];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRelational(): bool
+    {
+        $allowed = [];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function canHaveAfterAndBefore(): bool
+    {
+        $allowed = [
+            self::DATE_TYPE,
+            self::EMAIL_TYPE,
+            self::SELECT_TYPE,
+            self::TEXTAREA_TYPE,
+            self::TEXT_TYPE,
+        ];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForFormBuilder()
+    {
+        $allowed = [
+            self::DATE_TYPE,
+            self::EMAIL_TYPE,
+            self::SELECT_TYPE,
+            self::TEXTAREA_TYPE,
+            self::TEXT_TYPE,
+        ];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFlexible(): bool
+    {
+        $allowed = [];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNestable(): bool
+    {
+        $allowed = [];
+
+        return in_array($this->getType(), $allowed);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGroup(): ?string
+    {
+        if ($this->isClone()) {
+            return 'clone';
+        }
+
+        if ($this->isRelational()) {
+            return 'relational';
+        }
+
+        if ($this->isMedia()) {
+            return 'media';
+        }
+
+        if ($this->isNestable()) {
+            return 'repeatable';
+        }
+
+        return 'basic';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function validationRules(): array
+    {
+        return [
+            'id' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'box' => [
+                'required' => false,
+                'type' => 'object',
+                'instanceOf' => MetaBoxModel::class
+            ],
+            'boxId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'groupId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'boxName' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'db_name' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'ui_name' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'UIName' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'fieldsCount' => [
+                'required' => false,
+                'type' => 'string|integer',
+            ],
+            'name' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'new_name' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'label' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'type' => [
+                'required' => true,
+                'type' => 'string',
+                'enum' => [
+                    MetaFieldModel::DATE_TYPE,
+                    MetaFieldModel::EMAIL_TYPE,
+                    MetaFieldModel::SELECT_TYPE,
+                    MetaFieldModel::TEXT_TYPE,
+                    MetaFieldModel::TEXTAREA_TYPE,
+                ],
+            ],
             'blockId' => [
                 'required' => false,
                 'type' => 'string',
@@ -799,6 +1436,10 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
                 'type' => 'string',
             ],
             'showInArchive' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+            'isAWooCommerceProductAttribute' => [
                 'required' => false,
                 'type' => 'boolean',
             ],
@@ -849,6 +1490,10 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
             'isFilterable' => [
                 'required' => false,
                 'type' => 'boolean|integer',
+            ],
+            'bindable' => [
+                'required' => false,
+                'type' => 'boolean',
             ],
             'advancedOptions' => [
                 'required' => false,
@@ -906,36 +1551,17 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
                 'required' => false,
                 'type' => 'array',
             ],
-
-		];
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function capabilityType(): string
-	{
-		return Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function capabilities(): array
-	{
-		return [
-			'edit',
-			'read',
-		];
-	}
+        ];
+    }
 
     /**
      * @param BelongModel $belong
      */
-    public function setBelongsAndFindLabels(BelongModel $belong)
+    public function setBelongsAndFindLabels(BelongModel $belong): void
     {
         $belongsTo = $belong->getBelongsTo();
         $this->setBelongsToLabel($belongsTo);
         $this->setFindLabel($belong->getFindAsSting());
     }
+
 }

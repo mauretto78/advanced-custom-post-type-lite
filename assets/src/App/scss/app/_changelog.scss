@@ -1,0 +1,111 @@
+@use "variables";
+
+.changelog {
+
+  h2 {
+    margin-bottom: variables.$space-24;
+    display: flex;
+    gap: variables.$space-8;
+    align-items: center;
+    align-content: center;
+
+    &:not(:first-child) {
+      margin-top: variables.$space-24;
+    }
+
+    &:before {
+      content: "✅";
+    }
+
+    .version {}
+
+    .date {
+      color: variables.$gray;
+      background: variables.$white;
+      font-size: variables.$small-font-size;
+      padding: 6px 10px !important;
+      border-radius: variables.$border-radius;
+    }
+  }
+
+  h3 {
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    padding: 6px 10px !important;
+    border-radius: variables.$border-radius;
+    margin-right: variables.$space-8;
+    margin-bottom: variables.$space-12;
+    font-size: variables.$small-font-size;
+
+    &.hidden {
+      display: none;
+    }
+
+    &.added {
+      background: variables.$success-bg;
+      color: variables.$success-color !important;
+    }
+
+    &.security {
+      background: variables.$warning-bg;
+      color: variables.$warning-color !important;
+    }
+
+    &.changed {
+      background: variables.$info-bg;
+      color: variables.$info-color !important;
+    }
+
+    &.fixed {
+      color: variables.$danger-color;
+      background: variables.$danger-bg;
+    }
+
+    &.removed {
+      background: variables.$warning-bg;
+      color: variables.$warning-color !important;
+    }
+  }
+
+  h4 {
+    margin-bottom: variables.$space-12;
+  }
+
+  ul {
+    border: variables.$border-thickness solid variables.$light-gray;
+    border-bottom: none;
+    overflow: hidden;
+    border-radius: variables.$border-radius;
+    background: variables.$white;
+    margin-top: 0;
+    line-height: 1.4;
+
+    li {
+      padding: variables.$space-12;
+      margin: 0;
+      border-bottom: variables.$border-thickness solid variables.$light-gray;
+
+      p {
+        font-size: variables.$font-size;
+        margin: 0;
+        padding: 0;
+      }
+
+      ul {
+        margin-top: variables.$space-12;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        gap: variables.$space-4;
+        padding-left: variables.$space-24;
+        list-style: disc;
+
+        li {
+          border: none;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

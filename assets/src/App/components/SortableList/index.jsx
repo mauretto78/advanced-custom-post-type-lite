@@ -1,14 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    closestCenter,
-    DndContext,
-    KeyboardSensor,
-    MouseSensor,
-    PointerSensor,
-    useSensor,
-    useSensors
-} from "@dnd-kit/core";
+import {closestCenter, DndContext} from "@dnd-kit/core";
 import {
     horizontalListSortingStrategy,
     SortableContext,
@@ -16,16 +8,12 @@ import {
     verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import {restrictToVerticalAxis} from "@dnd-kit/modifiers";
+import useDndSensors from "../../hooks/useDndSensors.jsx";
+import {dndAnnouncementsShape} from "../../constants/propShapes.jsx";
 
-const SortableList = ({items, onDragEnd, mode = 'vertical', children}) => {
+const SortableList = ({items, onDragEnd, mode = 'vertical', announcements, children}) => {
 
-    const sensors = useSensors(
-        useSensor(PointerSensor),
-        useSensor(MouseSensor),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates
-        })
-    );
+    const sensors = useDndSensors({withPointerSensor: true, coordinateGetter: sortableKeyboardCoordinates});
 
     return (
         <DndContext
@@ -33,6 +21,7 @@ const SortableList = ({items, onDragEnd, mode = 'vertical', children}) => {
             collisionDetection={closestCenter}
             modifiers={mode === 'vertical' ? [restrictToVerticalAxis] : []}
             onDragEnd={onDragEnd}
+            accessibility={{announcements, container: document.body}}
         >
             <SortableContext
                 items={items}
@@ -51,6 +40,7 @@ SortableList.propTypes = {
         'horizontal',
     ]),
     onDragEnd: PropTypes.func.isRequired,
+    announcements: dndAnnouncementsShape,
 };
 
 export default SortableList;

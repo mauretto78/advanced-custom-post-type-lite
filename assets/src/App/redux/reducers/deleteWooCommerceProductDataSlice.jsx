@@ -19,8 +19,12 @@ const initialState = {
  */
 export const deleteWooCommerceProductData = createAsyncThunk(
     "wp/product-data/delete",
-    async (id) => {
-        return await wpAjaxRequest("deleteWooCommerceProductDataAction", {id:id});
+    async (id, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("deleteWooCommerceProductDataAction", {id:id});
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const deleteWooCommerceProductDataSlice = createSlice({
     name: 'wp/product-data//delete',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [deleteWooCommerceProductData.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [deleteWooCommerceProductData.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(deleteWooCommerceProductData.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(deleteWooCommerceProductData.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [deleteWooCommerceProductData.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(deleteWooCommerceProductData.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

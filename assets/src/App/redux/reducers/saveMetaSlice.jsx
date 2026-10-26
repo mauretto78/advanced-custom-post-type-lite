@@ -19,8 +19,12 @@ const initialState = {
  */
 export const saveMeta = createAsyncThunk(
     "meta/save",
-    async (data) => {
-        return await wpAjaxRequest("saveMetaAction", data);
+    async (data, {rejectWithValue}) => {
+        try {
+            return await wpAjaxRequest("saveMetaAction", data);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 
@@ -34,24 +38,25 @@ export const saveMetaSlice = createSlice({
     name: 'meta/save',
     initialState: initialState,
     reducers: {},
-    extraReducers: {
-        [saveMeta.pending.type]: ( state ) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-        },
-        [saveMeta.fulfilled.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = true;
-            state.error = null;
+    extraReducers: (builder) => {
+        builder
+            .addCase(saveMeta.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(saveMeta.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
 
-            return state;
-        },
-        [saveMeta.rejected.type]: ( state, action ) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-        },
+                return state;
+            })
+            .addCase(saveMeta.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            });
     }
 });
 

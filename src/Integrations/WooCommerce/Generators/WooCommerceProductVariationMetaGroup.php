@@ -12,15 +12,12 @@ class WooCommerceProductVariationMetaGroup extends AbstractGenerator
      */
     private MetaGroupModel $groupModel;
 
-    /**
-     * @var int
-     */
-    private $loop;
+    private int $loop;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
-    private $variationData;
+    private array $variationData;
 
     /**
      * @var \WP_Post
@@ -28,13 +25,12 @@ class WooCommerceProductVariationMetaGroup extends AbstractGenerator
     private \WP_Post $variation;
 
     /**
-     * WooCommerceProductVariationMetaGroup constructor.
-     * @param MetaGroupModel $groupModel
-     * @param $loop
-     * @param $variationData
-     * @param \WP_Post $variation
+     * @param MetaGroupModel       $groupModel
+     * @param int                  $loop
+     * @param array<string, mixed> $variationData
+     * @param \WP_Post             $variation
      */
-    public function __construct(MetaGroupModel $groupModel, $loop, $variationData, \WP_Post $variation)
+    public function __construct(MetaGroupModel $groupModel, int $loop, array $variationData, \WP_Post $variation)
     {
         $this->groupModel = $groupModel;
         $this->loop = $loop;
@@ -43,12 +39,12 @@ class WooCommerceProductVariationMetaGroup extends AbstractGenerator
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \Exception
      */
     public function render()
     {
-        if(empty($this->groupModel->getBoxes())){
+        if (empty($this->groupModel->getBoxes())) {
             return null;
         }
 
@@ -56,14 +52,14 @@ class WooCommerceProductVariationMetaGroup extends AbstractGenerator
     }
 
     /**
-     * Standard view
+     * @return string
      * @throws \Exception
      */
-    private function standardView()
+    private function standardView(): string
     {
         $render = "<div class='acpt-admin-meta-wc-variation-group'>";
 
-        foreach ($this->groupModel->getBoxes() as $metaBoxModel){
+        foreach ($this->groupModel->getBoxes() as $metaBoxModel) {
             $generator = new WooCommerceProductVariationMetaBox($metaBoxModel, $this->loop, $this->variationData, $this->variation);
             $render .= $generator->render();
         }

@@ -1,21 +1,13 @@
-
 export const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-export const scrollToBottom = () => {
-    window.scrollTo({ top: (document.body.scrollHeight + 120), behavior: 'smooth' })
-};
-
-export const scrollToTargetId = (id) => {
-    const element = document.getElementById(id);
-
-    if (element) {
-        element.scrollIntoView({behavior: 'smooth'}, true);
-    }
-};
-
 export const scrollToId = (id, yOffset = -230) => {
+
+    // check if id is string
+    if(typeof id !== 'string'){
+        return;
+    }
 
     const element = document.getElementById(id);
 
@@ -24,13 +16,3 @@ export const scrollToId = (id, yOffset = -230) => {
         window.scrollTo({top: y, behavior: 'smooth'});
     }
 };
-
-function isVisible(domElement) {
-    return new Promise(resolve => {
-        const o = new IntersectionObserver(([entry]) => {
-            resolve(entry.intersectionRatio === 1);
-            o.disconnect();
-        });
-        o.observe(domElement);
-    });
-}

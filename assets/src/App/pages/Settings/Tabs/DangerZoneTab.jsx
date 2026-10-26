@@ -6,12 +6,24 @@ import CardRow from "../../../components/Card/CardRow";
 import {useFormContext} from "react-hook-form";
 import Toggle from "../../../components/Forms/Toggle";
 
-const DangerZoneTab = ({delete_tables_when_deactivate, delete_posts, delete_metadata}) => {
+const DangerZoneTab = ({delete_unused_tables, delete_tables_when_deactivate, delete_posts, delete_metadata}) => {
 
     const { register, formState: {errors} } = useFormContext();
 
     return (
         <Card>
+            <CardRow
+              label={useTranslation("Delete unused MySQL tables")}
+              value={
+                <Toggle
+                  id="delete_unused_tables"
+                  description={useTranslation("If this option is enabled, all MySQL tables that are not in use — such as forms and dynamic blocks — will be deleted. Enable this option only if you are sure of what you are doing!")}
+                  register={register}
+                  errors={errors}
+                  defaultValue={delete_unused_tables}
+                />
+              }
+            />
             <CardRow
                 label={useTranslation("Delete ACPT definitions when deactivate the plug-in")}
                 value={
@@ -29,7 +41,7 @@ const DangerZoneTab = ({delete_tables_when_deactivate, delete_posts, delete_meta
                 value={
                     <Toggle
                         id="delete_posts"
-                        description={useTranslation("   Delete posts when delete an ACPT post type definition. This means that if you select YES, when you delete an ACPT post type definition all the saved posts will be deleted")}
+                        description={useTranslation("Delete posts when delete an ACPT post type definition. This means that if you select YES, when you delete an ACPT post type definition all the saved posts will be deleted")}
                         register={register}
                         errors={errors}
                         defaultValue={delete_posts}
@@ -53,6 +65,7 @@ const DangerZoneTab = ({delete_tables_when_deactivate, delete_posts, delete_meta
 };
 
 DangerZoneTab.propTypes = {
+    delete_unused_tables: PropTypes.bool,
     delete_tables_when_deactivate: PropTypes.bool,
     delete_posts: PropTypes.bool,
     delete_metadata: PropTypes.bool

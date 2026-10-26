@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {get} from 'react-hook-form';
+import {sizes} from "../../constants/forms.jsx";
+import DangerousContent from "../DangerousContent";
 
-const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defaultValue, description, step, min, max, readOnly, onClick, onChangeCapture, validate, register, errors, autoFocus = false, disabled = false}) => {
+const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defaultValue, description, step, min, max, readOnly, onClick, onChangeCapture, validate, register, errors, disabled = false}) => {
 
     const error = get(errors, id);
 
@@ -11,13 +13,12 @@ const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defau
             <input
                 ref={innerRef}
                 id={id}
-                data-cy={`input-${id}`}
+                data-testid={`input-${id}`}
                 name={id}
                 type={type}
-                autoFocus={autoFocus}
                 disabled={disabled}
-                min={min ? min : null}
-                max={max ? max : null}
+                min={min ?? null}
+                max={max ?? null}
                 step={step ? step : "any"}
                 defaultValue={defaultValue}
                 placeholder={placeholder}
@@ -28,9 +29,9 @@ const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defau
                 className={`form-control ${size} ${error ? 'has-errors': ''}`}
                 {...register(id, validate)}
             />
-            {error && <div data-cy={`input-error-${id}`} className="invalid-feedback"><span dangerouslySetInnerHTML={{__html: error.message}}/></div>}
+            {error && <div data-testid={`input-error-${id}`} className="invalid-feedback"><DangerousContent element="span" content={error.message}/></div>}
             {description && (
-                <div className="form-description" dangerouslySetInnerHTML={{__html: description}} />
+                <DangerousContent className="form-description" content={description} />
             )}
         </React.Fragment>
     );
@@ -38,23 +39,25 @@ const Input = ({innerRef, type = 'text', size= 'default', placeholder, id, defau
 
 Input.propTypes = {
     id: PropTypes.string.isRequired,
-    size: PropTypes.oneOf([
-        'default',
-        'sm',
-    ]),
+    size: PropTypes.oneOf(sizes),
     innerRef: PropTypes.func,
     placeholder: PropTypes.string,
-    defaultValue: PropTypes.string,
+    defaultValue: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
     description: PropTypes.string,
     readOnly: PropTypes.bool,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    step: PropTypes.number,
+    // Spread straight onto the native <input min/max/step> attribute below --
+    // AdvancedTab's renderAdvancedField() callers commonly pass these as
+    // quoted numeric strings (e.g. `min: "0"`), which HTML accepts fine.
+    min: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    max: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     onChangeCapture: PropTypes.func,
-    validate: PropTypes.func,
+    validate: PropTypes.object,
     register: PropTypes.func.isRequired,
-    errors: PropTypes.array.isRequired,
-    autoFocus: PropTypes.bool,
+    errors: PropTypes.object.isRequired,
     disabled: PropTypes.bool,
     type: PropTypes.oneOf([
         'text',

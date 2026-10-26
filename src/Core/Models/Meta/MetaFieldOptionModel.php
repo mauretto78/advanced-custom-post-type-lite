@@ -9,8 +9,8 @@ use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
  * MetaBoxFieldOptionModel
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/core
+ * @package    acpt-lite
+ * @subpackage acpt-lite/core
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 class MetaFieldOptionModel extends AbstractModel implements \JsonSerializable
@@ -35,28 +35,28 @@ class MetaFieldOptionModel extends AbstractModel implements \JsonSerializable
      */
     private int $sort;
 
-	/**
-	 * @var bool
-	 */
+    /**
+     * @var bool
+     */
     private bool $isDefault = false;
 
-	/**
-	 * MetaBoxFieldModel constructor.
-	 *
-	 * @param string $id
-	 * @param MetaFieldModel $metaField
-	 * @param string $label
-	 * @param string $value
-	 * @param int $sort
-	 * @param bool $isDefault
-	 */
+    /**
+     * MetaBoxFieldModel constructor.
+     *
+     * @param string $id
+     * @param MetaFieldModel $metaField
+     * @param string $label
+     * @param string $value
+     * @param int $sort
+     * @param bool $isDefault
+     */
     public function __construct(
         string $id,
         MetaFieldModel $metaField,
-	    string $label,
-	    string $value,
+        string $label,
+        string $value,
         int $sort,
-		bool $isDefault = false
+        bool $isDefault = false
     ) {
         parent::__construct($id);
         $this->metaField = $metaField;
@@ -98,15 +98,15 @@ class MetaFieldOptionModel extends AbstractModel implements \JsonSerializable
         return $this->sort;
     }
 
-	/**
-	 * @return bool
-	 */
-	public function isDefault(): bool
-	{
-		return $this->isDefault;
-	}
+    /**
+     * @return bool
+     */
+    public function isDefault(): bool
+    {
+        return $this->isDefault;
+    }
 
-	#[\ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [
@@ -120,59 +120,60 @@ class MetaFieldOptionModel extends AbstractModel implements \JsonSerializable
         ];
     }
 
-	/**
-	 * @param MetaFieldModel $duplicateFrom
-	 *
-	 * @return MetaFieldOptionModel
-	 */
-	public function duplicateFrom( MetaFieldModel $duplicateFrom ): MetaFieldOptionModel
-	{
-		$duplicate = clone $this;
-		$duplicate->id = Uuid::v4();
-		$duplicate->metaField = $duplicateFrom;
+    /**
+     * @param MetaFieldModel $duplicateFrom
+     *
+     * @return MetaFieldOptionModel
+     */
+    public function duplicateFrom(MetaFieldModel $duplicateFrom): MetaFieldOptionModel
+    {
+        $duplicate = clone $this;
+        $duplicate->id = Uuid::v4();
+        $duplicate->metaField = $duplicateFrom;
 
-		return $duplicate;
-	}
+        return $duplicate;
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public static function validationRules(): array
-	{
-		return [
-			'id' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'boxId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'fieldId' => [
-				'required' => false,
-				'type' => 'string',
-			],
-			'metaField' => [
-				'required' => false,
-				'type' => 'object',
-				'instanceOf' => MetaFieldModel::class
-			],
-			'label' => [
-				'required' => true,
-				'type' => 'string',
-			],
-			'value' => [
-				'required' => true,
-				'type' => 'string|integer',
-			],
-			'sort' => [
-				'required' => false,
-				'type' => 'string|integer',
-			],
-			'isDefault' => [
-				'required' => false,
-				'type' => 'boolean',
-			],
-		];
-	}
+    /**
+     * @inheritDoc
+     * @return array<string, array<string, mixed>>
+     */
+    public static function validationRules(): array
+    {
+        return [
+            'id' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'boxId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'fieldId' => [
+                'required' => false,
+                'type' => 'string',
+            ],
+            'metaField' => [
+                'required' => false,
+                'type' => 'object',
+                'instanceOf' => MetaFieldModel::class
+            ],
+            'label' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'value' => [
+                'required' => true,
+                'type' => 'string|integer',
+            ],
+            'sort' => [
+                'required' => false,
+                'type' => 'string|integer',
+            ],
+            'isDefault' => [
+                'required' => false,
+                'type' => 'boolean',
+            ],
+        ];
+    }
 }

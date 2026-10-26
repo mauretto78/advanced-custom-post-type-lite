@@ -1,0 +1,62 @@
+@use "variables";
+
+.acpt-dropdown-wrapper {
+  position: relative;
+
+  .acpt-dropdown {
+    position: absolute;
+    list-style: none;
+    background: variables.$white;
+    border-radius: variables.$border-radius;
+    box-shadow: variables.$box-shadow;
+    width: 200px;
+    top: 75px;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity ease .3s, top ease .3s;
+    z-index: -1;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+    height: 0;
+
+    &.visible {
+      opacity: 1;
+      top: 36px;
+      z-index: 1111;
+      height: auto;
+    }
+
+    li {
+      padding: variables.$space-12;
+      border-bottom: variables.$border-thickness solid variables.$light-gray;
+
+      &:last-child {
+        border: none;
+      }
+
+      a {
+        display: block;
+      }
+    }
+  }
+
+  &.align-right {
+    .acpt-dropdown {
+      right: 0;
+      left: auto;
+    }
+  }
+
+  &.align-left {
+    .acpt-dropdown {
+      left: 0;
+      right: auto;
+    }
+  }
+
+  &.is-rtl {
+    left: 0;
+    right: auto;
+  }
+}

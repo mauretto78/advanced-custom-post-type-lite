@@ -10,8 +10,8 @@ const Steps = ({steps, activeStep = 0}) => {
             return 0;
         }
 
-        if(activeStep > steps.length){
-            return steps.length;
+        if(activeStep > steps.length - 1){
+            return steps.length - 1;
         }
 
         return activeStep;

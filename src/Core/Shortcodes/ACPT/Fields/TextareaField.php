@@ -6,28 +6,36 @@ use ACPT_Lite\Utils\Wordpress\WPUtils;
 
 class TextareaField extends AbstractField
 {
-    public function render()
+    /**
+     * @return string|null
+     */
+    public function render(): ?string
     {
-        if(!$this->isFieldVisible()){
+        if (!$this->isFieldVisible()) {
             return null;
         }
 
-	    $rawData = $this->fetchRawData();
+        $rawData = $this->fetchRawData();
 
-	    if(!isset($rawData['value'])){
-		    return null;
-	    }
+        if (!isset($rawData['value'])) {
+            return null;
+        }
 
-	    return $this->addBeforeAndAfter($this->renderTextarea($rawData['value']));
+        $allowHtml = $this->metaBoxFieldModel->getAdvancedOption("allow_html");
+
+        if ($allowHtml == 1) {
+            $rawData['value'] = html_entity_decode($rawData['value']);
+        }
+
+        return $this->addBeforeAndAfter($this->renderTextarea($rawData['value']));
     }
 
-	/**
-	 * @param $data
-	 *
-	 * @return string
-	 */
-    private function renderTextarea($data)
+    /**
+     * @param string $data
+     * @return string
+     */
+    private function renderTextarea(string $data): string
     {
-    	return WPUtils::renderShortCode($data, true);
+        return WPUtils::renderShortCode($data, true);
     }
 }

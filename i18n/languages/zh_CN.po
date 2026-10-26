@@ -248,6 +248,12 @@ msgstr "条件值"
 msgid "Conditional rendering"
 msgstr "条件渲染"
 
+msgid "Confirm deleting meta box"
+msgstr ""
+
+msgid "Confirm deleting meta field"
+msgstr ""
+
 msgid "Confirm deleting all"
 msgstr "确认全部删除"
 
@@ -276,6 +282,9 @@ msgstr "复制选定的元字段"
 
 msgid "Copy this block to another meta field"
 msgstr "将此块复制到另一个元字段"
+
+msgid "Copy this meta box"
+msgstr ""
 
 msgid "Copy this meta box to another"
 msgstr "将此元框复制到另一个元框"
@@ -331,16 +340,17 @@ msgstr "自定义帖子类型元已成功保存"
 msgid "Custom post type slug to use instead of default."
 msgstr "要使用的自定义帖子类型 slug 代替默认值。"
 
-msgid ""
-"Custom post type successfully deleted."
+msgid "Custom post type successfully deleted."
 msgstr "自定义帖子类型已成功删除。"
 
-msgid ""
-"Custom post type successfully saved."
+msgid "Custom post type successfully saved."
 msgstr "自定义帖子类型已成功保存。"
 
 msgid "Custom post type was associated to selected taxonomies"
 msgstr "自定义帖子类型与选定的分类相关联"
+
+msgid "Custom post type"
+msgstr ""
 
 msgid "Custom post types"
 msgstr "自定义帖子类型"
@@ -411,6 +421,9 @@ msgstr "删除其他帖子"
 msgid "Delete pages"
 msgstr "删除页面"
 
+msgid "Delete posts"
+msgstr ""
+
 msgid "Delete post metadata when deleting ACPT fields"
 msgstr "删除 ACPT 字段时删除帖子元数据"
 
@@ -441,6 +454,9 @@ msgstr "删除私人帖子"
 
 msgid "Delete published pages"
 msgstr "删除已发布的页面"
+
+msgid "Delete published posts"
+msgstr ""
 
 msgid "Delete the meta box in this"
 msgstr "删除其中的元框"
@@ -529,6 +545,9 @@ msgstr "编辑他人的文章"
 msgid "Edit pages"
 msgstr "编辑页面"
 
+msgid "Edit posts"
+msgstr ""
+
 msgid "Edit private pages"
 msgstr "编辑私人页面"
 
@@ -537,6 +556,9 @@ msgstr "编辑私密文章"
 
 msgid "Edit published pages"
 msgstr "编辑已发布的页面"
+
+msgid "Edit published posts"
+msgstr ""
 
 msgid "Element"
 msgstr "元素"
@@ -594,6 +616,9 @@ msgstr "导出自定义帖子类型"
 msgid "Export data"
 msgstr "导出数据"
 
+msgid "Export settings"
+msgstr "导出设置"
+
 msgid "Export selected elements"
 msgstr "导出所选元素"
 
@@ -606,11 +631,17 @@ msgstr "Facebook群组"
 msgid "Featured image"
 msgstr "特色图片"
 
+msgid "Field columns"
+msgstr ""
+
 msgid "Field columns ([1-6] only for repeater field)"
 msgstr "字段列（[1-6] 仅适用于中继器字段）"
 
 msgid "Field label"
 msgstr "字段标签"
+
+msgid "Field name"
+msgstr ""
 
 msgid "Field name cannot be blank"
 msgstr "字段名称不能为空"
@@ -621,12 +652,18 @@ msgstr "字段名称最大长度为 255 个字符"
 msgid "Field required"
 msgstr "必填字段"
 
+msgid "Field slug"
+msgstr ""
+
 msgid "Field slug (Ex. gallery or text_1)"
 msgstr "字段段塞（例如画廊或text_1）"
 
 msgid ""
 "Field slug. Only alphanumeric (latin) characters allowed, without spaces"
 msgstr "田间蛞蝓。只允许使用字母数字（拉丁）字符，不带空格"
+
+msgid "Field width"
+msgstr ""
 
 msgid "Field width in % ([1-100] default value: 100)"
 msgstr "字段宽度（以 % 为单位）（[1-100] 默认值：100）"
@@ -659,11 +696,9 @@ msgid "Format"
 msgstr "格式"
 
 msgid ""
-"From this dashboard you can discover and manage every API endpoints exposed "
-"by ACPT. Use the playground to learn how to use every endpoint."
+"Discover, manage and test every REST endpoint exposed by ACPT via live "
+"Swagger UI."
 msgstr ""
-"在此仪表板中，您可以发现和管理 APPT 公开的每个 API 端点。 使用 Playground 了"
-"解如何使用每个端点。"
 
 msgid "Fullscreen mode"
 msgstr "全屏模式"
@@ -716,6 +751,12 @@ msgstr "隐藏/显示此元框"
 msgid "Hide/show this meta field"
 msgstr "隐藏/显示此元字段"
 
+msgid "Hide/show this block"
+msgstr ""
+
+msgid "Hide/show this page"
+msgstr ""
+
 msgid "Hierarchical"
 msgstr "分层"
 
@@ -733,6 +774,9 @@ msgstr "导入自定义帖子类型"
 
 msgid "Import data"
 msgstr "导入数据"
+
+msgid "Import settings"
+msgstr "导入设置"
 
 msgid "Insert"
 msgstr "插入"
@@ -764,13 +808,20 @@ msgstr "链接目标"
 msgid "List {{r}}"
 msgstr "列表{{r}}"
 
-msgid "Makes this post type available via the admin bar. Default is value of"
-msgstr "通过管理栏提供此帖子类型。默认值为"
+msgid ""
+"Makes this post type available for selection in navigation menus. Default is "
+"value of $public."
+msgstr ""
+
+msgid ""
+"Makes this post type available via the admin bar. Default is value of "
+"$show_in_menu."
+msgstr ""
 
 msgid ""
 "Makes this taxonomy available for selection in navigation menus. If not set, "
-"the default is inherited from"
-msgstr "使此分类可在导航菜单中进行选择。如果未设置，则默认值继承自"
+"the default is inherited from $public (default true)."
+msgstr ""
 
 msgid "Manage"
 msgstr "管理"
@@ -921,6 +972,9 @@ msgstr "尚未创建任何子项。现在通过单击“添加子页面”按钮
 msgid "No choice"
 msgstr "选项"
 
+msgid "No conditions are present."
+msgstr ""
+
 msgid ""
 "No conditions are present, click on \"Add condition\" button to add the "
 "first one."
@@ -1016,6 +1070,12 @@ msgstr "选项列表"
 msgid "Option page meta successfully saved"
 msgstr "选项页面元已成功保存"
 
+msgid "Single option page"
+msgstr ""
+
+msgid "Option page"
+msgstr ""
+
 msgid "Option pages"
 msgstr "选项页"
 
@@ -1039,6 +1099,9 @@ msgstr "父级"
 
 msgid "Parent item"
 msgstr "父项目"
+
+msgid "Parent WP admin menu"
+msgstr ""
 
 msgid "Parent {{r}}"
 msgstr "父{{r}}"
@@ -1095,6 +1158,9 @@ msgstr "可公开查询"
 msgid "Publish pages"
 msgstr "发布页面"
 
+msgid "Publish posts"
+msgstr ""
+
 msgid "Published posts count"
 msgstr "按文章数发布"
 
@@ -1121,6 +1187,9 @@ msgstr "REST 控制器类"
 
 msgid "Radio/checkbox"
 msgstr "单选/复选框"
+
+msgid "Read "
+msgstr ""
 
 msgid "Read private pages"
 msgstr "阅读加密页面"
@@ -1187,6 +1256,9 @@ msgstr "选择 "
 
 msgid "Select field box from list"
 msgstr "从列表中选择字段框"
+
+msgid "Select the inversed field on target"
+msgstr ""
 
 msgid "Select field from list"
 msgstr "从列表中选择字段"
@@ -1386,8 +1458,8 @@ msgstr "模板已成功保存"
 msgid "Template was successfully deleted."
 msgstr "模板已成功删除。"
 
-msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
-msgstr "之后的文字。允许 HTML（例如 &lt;/small&gt;）"
+msgid "Text after. HTML is allowed (ex. &lt;small&gt;)"
+msgstr ""
 
 msgid "Text before. HTML is allowed (ex. &lt;small&gt;)"
 msgstr "前面的文字。允许使用 HTML（例如&lt;小&gt;）"
@@ -1448,11 +1520,9 @@ msgid "The parent element slug"
 msgstr "父元素 slug"
 
 msgid ""
-"The position in the menu order the post type should appear. To work,  must "
-"be true. Default null (at the bottom)."
+"The position in the menu order the post type should appear. To work, "
+"$show_in_menu must be true. Default null (at the bottom)."
 msgstr ""
-"应显示帖子类型应显示的菜单顺序中的位置。要工作，必须是真的。默认值为 null（在"
-"底部）。"
 
 msgid "The post name/slug. Used for various queries for taxonomy content."
 msgstr "帖子名称/slug。用于对分类内容的各种查询。"
@@ -1521,10 +1591,9 @@ msgid "This text will appear before input"
 msgstr "此文本将出现在输入之前"
 
 msgid ""
-"This tool allows you to import settings and meta fields from previously "
-"exported .acpt files (max size allowed is 2Mb)."
+"Restore settings and meta fields from a previously exported .acpt file. "
+"Maximum file size is 2 MB."
 msgstr ""
-"此工具允许您从以前导出的 .acpt 文件导入设置和元字段（允许的最大大小为 2Mb）。"
 
 msgid "To change the base url of REST API route. Default is"
 msgstr "更改 REST API 路由的基 URL。默认值为"
@@ -1573,6 +1642,9 @@ msgstr "上传"
 msgid "Upload file"
 msgstr "上传文件"
 
+msgid "Upload files"
+msgstr ""
+
 msgid "Upload your file"
 msgstr "上传文件"
 
@@ -1580,10 +1652,9 @@ msgid "Use featured image"
 msgstr "使用特色图片"
 
 msgid ""
-"Use this tool to quick export the general settings and meta fields for every "
-"element in a compressed JSON format called .acpt."
+"Export your settings and meta field definitions into a compressed .acpt JSON "
+"archive for backup or migration."
 msgstr ""
-"使用此工具以名为 .acpt 的压缩 JSON 格式快速导出每个元素的常规设置和元字段。"
 
 msgid "Used for the post type admin menu item"
 msgstr "用于帖子类型管理菜单项"
@@ -1594,8 +1665,14 @@ msgstr "用于分类管理菜单项"
 msgid "Used when a singular label is needed"
 msgstr "当需要单个标签时使用"
 
+msgid "Single user"
+msgstr ""
+
 msgid "User"
 msgstr "用户"
+
+msgid "Users"
+msgstr ""
 
 msgid "User meta"
 msgstr "用户meta"
@@ -1640,12 +1717,10 @@ msgid "Where do you want to copy this meta field?"
 msgstr "您想在哪里复制此元字段？"
 
 msgid ""
-"Where to show the post type in the admin menu. To work,  must be true. If "
+"Where to show the post type in the admin menu. To work, must be true. If "
 "true, the post type is shown in its own top level menu. If false, no menu is "
 "shown."
 msgstr ""
-"在管理菜单中显示帖子类型的位置。要工作，必须是真的。如果为 true，则帖子类型将"
-"显示在其自己的顶级菜单中。如果为 false，则不显示任何菜单。"
 
 msgid ""
 "Whether a post type is intended for use publicly either via the admin "
@@ -1674,15 +1749,19 @@ msgstr "分类是否为分层分类。默认值为 false。"
 
 msgid ""
 "Whether the taxonomy is publicly queryable. If not set, the default is "
-"inherited from"
-msgstr "分类是否可公开查询。如果未设置，则默认值继承自"
+"inherited from $public."
+msgstr ""
 
 msgid ""
 "Whether there should be post type archives, or if a string, the archive slug "
-"to use. Will generate the proper rewrite rules if"
+"to use. Will generate the proper rewrite rules if $rewrite is enabled."
 msgstr ""
-"是否应该有帖子类型的存档，或者如果是字符串，则使用存档 slug。如果出现以下情"
-"况，将生成正确的重写规则"
+
+msgid ""
+"Triggers the handling of rewrites for this post type. To prevent rewrite, "
+"set to false. Defaults to true, using $post_type as slug. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
 
 msgid ""
 "Whether to display a column for the taxonomy on its post type listing "
@@ -1691,14 +1770,13 @@ msgstr "是否在其帖子类型列表屏幕上显示分类的列。默认值为
 
 msgid ""
 "Whether to generate and allow a UI for managing terms in this taxonomy in "
-"the admin. If not set, the default is inherited from"
+"the admin. If not set, the default is inherited from $public (default true)."
 msgstr ""
-"是否在后台中生成并允许用于管理此分类中的术语的 UI。如果未设置，则默认值继承自"
 
 msgid ""
 "Whether to generate and allow a UI for managing this post type in the admin. "
-"Default is value of"
-msgstr "是否生成并允许在后台中管理此帖子类型的 UI。默认值为"
+"Default is value of $public."
+msgstr ""
 
 msgid ""
 "Whether to include the post type in the REST API. Set this to true for the "
@@ -1718,22 +1796,20 @@ msgstr ""
 
 msgid ""
 "Whether to list the taxonomy in the Tag Cloud Widget controls. If not set, "
-"the default is inherited from"
-msgstr "是否在“标记云”小组件控件中列出分类。如果未设置，则默认值继承自"
+"the default is inherited from $show_ui (default true)."
+msgstr ""
 
 msgid ""
 "Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
-"shown as a submenu of the object type menu. If false, no menu is shown.  "
-"must be true. If not set, default is inherited from  (default true)."
+"shown as a submenu of the object type menu. If false, no menu is shown. "
+"$show_ui must be true. If not set, default is inherited from $show_ui "
+"(default true)."
 msgstr ""
-"是否在管理菜单中显示分类。如果为 true，则分类将显示为对象类型菜单的子菜单。如"
-"果为 false，则不显示任何菜单。 必须为 true。如果未设置，则继承自 （default "
-"true）。"
 
 msgid ""
 "Whether to show the taxonomy in the quick/bulk edit panel. It not set, the "
-"default is inherited from"
-msgstr "是否在快速/批量编辑面板中显示分类。它未设置，默认值继承自"
+"default is inherited from $show_ui (default true)."
+msgstr ""
 
 msgid "Which does this template belong to?"
 msgstr "这个模板属于哪个？"
@@ -1782,6 +1858,9 @@ msgstr "您将删除此选项页面定义。每个关联的元字段和子页面
 
 msgid "You are going to delete this taxonomy. Are you sure?"
 msgstr "您将删除此分类。是否确定？"
+
+msgid "Delete this block"
+msgstr ""
 
 msgid "Your API keys"
 msgstr "您的 API 密钥"
@@ -1917,6 +1996,9 @@ msgstr "标题"
 msgid "visibility"
 msgstr "能见度"
 
+msgid "Visibility"
+msgstr ""
+
 msgid "{{r}} published"
 msgstr "{{r}}已出版"
 
@@ -1956,6 +2038,9 @@ msgstr "邮箱地址"
 msgid "Number"
 msgstr "数量"
 
+msgid "Phone"
+msgstr ""
+
 msgid "Phone Number"
 msgstr "电话号码"
 
@@ -1983,8 +2068,14 @@ msgstr "图像"
 msgid "Post relationship"
 msgstr "文章关系"
 
+msgid "Relationship"
+msgstr ""
+
 msgid "Time"
 msgstr "时间"
+
+msgid "Repeater"
+msgstr ""
 
 msgid "Grouped field (Repeater)"
 msgstr "分组字段（中继器）"
@@ -2021,6 +2112,15 @@ msgstr "确认删除此模板？"
 
 msgid "meta"
 msgstr "元数据"
+
+msgid "Meta-key"
+msgstr ""
+
+msgid "Shortcode"
+msgstr ""
+
+msgid "Shortcodes"
+msgstr ""
 
 msgid "Delete custom post type"
 msgstr "删除自定义帖子类型"
@@ -2417,6 +2517,9 @@ msgstr "危险区域"
 msgid "manage template"
 msgstr "管理模板"
 
+msgid "Manage template"
+msgstr ""
+
 msgid "Taxonomy global settings"
 msgstr "分类全局设置"
 
@@ -2540,6 +2643,9 @@ msgstr "标签"
 msgid "Post"
 msgstr "文章"
 
+msgid "Post parent"
+msgstr ""
+
 msgid "Term"
 msgstr "术语"
 
@@ -2591,8 +2697,11 @@ msgstr "允许的最大块数"
 msgid "Browse icons"
 msgstr "浏览器图标"
 
-msgid "Search an icon"
-msgstr "搜索图标"
+msgid "Upload a SVG file"
+msgstr ""
+
+msgid "Choose an icon"
+msgstr ""
 
 msgid "Type at least 3 characters to start searching."
 msgstr "键入至少 3 个字符以开始搜索。"
@@ -2643,6 +2752,12 @@ msgstr "上传文件"
 
 msgid "Remove this block"
 msgstr "删除此块"
+
+msgid "Show elements"
+msgstr ""
+
+msgid "Hide elements"
+msgstr ""
 
 msgid "Show/hide elements in this block"
 msgstr "显示/隐藏此块中的元素"
@@ -2927,6 +3042,118 @@ msgstr "评分"
 msgid "ACPT Rating field"
 msgstr "ACPT 评级字段"
 
+msgid "Field groups"
+msgstr ""
+
+msgid "Create new Meta group"
+msgstr ""
+
+msgid "Manage the associate meta field groups"
+msgstr ""
+
+msgid "Meta group successfully deleted."
+msgstr ""
+
+msgid "Meta group"
+msgstr ""
+
+msgid "Meta groups"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
+
+msgid "Group label"
+msgstr ""
+
+msgid "No meta group found."
+msgstr ""
+
+msgid "Delete meta group"
+msgstr ""
+
+msgid "You are going to delete this meta group. Are you sure?"
+msgstr ""
+
+msgid "Forms"
+msgstr ""
+
+msgid "Forms list"
+msgstr ""
+
+msgid "Copied to the clipboard!"
+msgstr ""
+
+msgid "Confirm deactivating license"
+msgstr ""
+
+msgid ""
+"License successfully deactivated. The browser will refresh after 5 seconds."
+msgstr ""
+
+msgid "max length is"
+msgstr ""
+
+msgid "The element(s) this group is associated with"
+msgstr ""
+
+msgid "This group belongs to"
+msgstr ""
+
+msgid "VALIDATION RULES"
+msgstr ""
+
+msgid "Validation"
+msgstr ""
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add rule\"!"
+msgstr "尚未创建规则。点击\"添加规则\"创建第一个！"
+
+msgid "maximum value"
+msgstr ""
+
+msgid "minimum value"
+msgstr ""
+
+msgid "regular expression"
+msgstr ""
+
+msgid "Confirm deleting block"
+msgstr ""
+
+msgid "Confirm deleting validation rule"
+msgstr ""
+
+msgid "Confirm deleting conditional rendering element"
+msgstr ""
+
+msgid "Insert values separated by comma. Ex: 12, 54, foo"
+msgstr ""
+
+msgid "This is the meta-key of this field."
+msgstr ""
+
+msgid ""
+"Use it in functions like get_post_meta() to retrieve saved meta field data."
+msgstr ""
+
+msgid "Prepend the option page slug to retrieve option page meta fields."
+msgstr ""
+
+msgid "Copied to clipboard"
+msgstr ""
+
+msgid "Meta group settings successfully saved"
+msgstr ""
+
+msgid "Delete this option page"
+msgstr ""
+
+msgid "Confirm deleting page"
+msgstr ""
+
 msgid "Performances"
 msgstr "性能"
 
@@ -2938,6 +3165,12 @@ msgstr "刷新缓存"
 
 msgid "Cache was successfully flushed"
 msgstr "缓存已成功刷新"
+
+msgid "Could not flush the cache"
+msgstr ""
+
+msgid "Flushing…"
+msgstr ""
 
 msgid "Enable ACPT cache"
 msgstr "启用 ACPT 缓存"
@@ -2960,3 +3193,3655 @@ msgstr "取消选定"
 
 msgid "UOM default value"
 msgstr "UOM 默认值"
+
+msgid "Location"
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "Close settings"
+msgstr ""
+
+msgid "Auto slug ON"
+msgstr ""
+
+msgid "Auto slug OFF"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "File was successfully exported"
+msgstr ""
+
+msgid "File was successfully imported"
+msgstr ""
+
+msgid "All users"
+msgstr ""
+
+msgid "Select items"
+msgstr ""
+
+msgid "Filter items"
+msgstr ""
+
+msgid "Invalid data provided"
+msgstr ""
+
+msgid "Group name error(s). Please fix it."
+msgstr ""
+
+msgid "Location rules error(s). Please fix it."
+msgstr ""
+
+msgid "Post type"
+msgstr ""
+
+msgid "Post template"
+msgstr ""
+
+msgid "Post format"
+msgstr ""
+
+msgid "Post category"
+msgstr ""
+
+msgid "Post taxonomy"
+msgstr ""
+
+msgid "Value is not blank"
+msgstr ""
+
+msgid "Value is blank"
+msgstr ""
+
+msgid "Value is not equal to {{v}}"
+msgstr ""
+
+msgid "Value is lower or equals than {{v}}"
+msgstr ""
+
+msgid "Value is lower than {{v}}"
+msgstr ""
+
+msgid "Value is greatest or equals than {{v}}"
+msgstr ""
+
+msgid "Value is greatest than {{v}}"
+msgstr ""
+
+msgid "The maximum length is {{v}}"
+msgstr ""
+
+msgid "The minimum length is {{v}}"
+msgstr ""
+
+msgid "Regex value is not matching {{v}}"
+msgstr ""
+
+msgid "All pages"
+msgstr ""
+
+msgid "Related entities and relationship"
+msgstr ""
+
+msgid "Target field"
+msgstr ""
+
+msgid "The relationship between the selected entities"
+msgstr ""
+
+msgid "The first entity involved in the relationship"
+msgstr ""
+
+msgid "The second entity involved in the relationship"
+msgstr ""
+
+msgid "Selected items"
+msgstr ""
+
+msgid "From entity is not a custom post type"
+msgstr ""
+
+msgid "From entity is not a taxonomy"
+msgstr ""
+
+msgid "From entity is not valid"
+msgstr ""
+
+msgid "From entity is not an user"
+msgstr ""
+
+msgid "From entity is not an option page"
+msgstr ""
+
+msgid "No relation set on this field."
+msgstr ""
+
+msgid "You are going to delete this template. Are you sure?"
+msgstr ""
+
+msgid "Template successfully deleted."
+msgstr ""
+
+msgid "Manage product data fields"
+msgstr ""
+
+msgid ""
+"No pages already created. Create the first one now by clicking the button "
+"\"Add page\"!"
+msgstr ""
+
+msgid "Delete the meta box after copying"
+msgstr ""
+
+msgid "Create form"
+msgstr ""
+
+msgid "Create a new form"
+msgstr ""
+
+msgid "Edit form"
+msgstr ""
+
+msgid "No forms found."
+msgstr ""
+
+msgid "Form name"
+msgstr ""
+
+msgid "Form label"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Post management"
+msgstr ""
+
+msgid "Custom action"
+msgstr ""
+
+msgid "Method"
+msgstr ""
+
+msgid "PHP custom handling"
+msgstr ""
+
+msgid "Field mapping"
+msgstr ""
+
+msgid "List to populate from"
+msgstr ""
+
+msgid "If blank, the current post_ID will be used"
+msgstr ""
+
+msgid "If blank, the current queried term_ID will be used"
+msgstr ""
+
+msgid "If blank, the current logged user ID will be used"
+msgstr ""
+
+msgid "Form successfully saved"
+msgstr ""
+
+msgid "Delete form"
+msgstr ""
+
+msgid "You are going to delete this form. Are you sure?"
+msgstr ""
+
+msgid "Form successfully deleted"
+msgstr ""
+
+msgid "Form manager"
+msgstr ""
+
+msgid "Form fields"
+msgstr ""
+
+msgid "Drop elements here"
+msgstr ""
+
+msgid "CSS classes"
+msgstr ""
+
+msgid "Placeholder"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Layout"
+msgstr ""
+
+msgid "Alignment"
+msgstr ""
+
+msgid "Add rule"
+msgstr ""
+
+msgid "Step value"
+msgstr ""
+
+msgid "Rows value"
+msgstr ""
+
+msgid "Cols value"
+msgstr ""
+
+msgid "Type value"
+msgstr ""
+
+msgid "Standard fields"
+msgstr ""
+
+msgid "ACPT fields"
+msgstr ""
+
+msgid "WordPress user fields"
+msgstr ""
+
+msgid "WordPress post fields"
+msgstr ""
+
+msgid "Reset fields"
+msgstr ""
+
+msgid "Columns"
+msgstr ""
+
+msgid "Ajax action"
+msgstr ""
+
+msgid "Ajax success response handling"
+msgstr ""
+
+msgid "Allow empty value"
+msgstr ""
+
+msgid "Enable editor"
+msgstr ""
+
+msgid "Your Google reCAPTCHA site key"
+msgstr ""
+
+msgid "Your Google reCAPTCHA secret key"
+msgstr ""
+
+msgid "Your Google reCAPTCHA site key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Your Google reCAPTCHA secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Maximum date"
+msgstr ""
+
+msgid "Minimum date"
+msgstr ""
+
+msgid "Icon set"
+msgstr ""
+
+msgid "Enable forms"
+msgstr ""
+
+msgid "Enable the form builder."
+msgstr ""
+
+msgid "Create new post"
+msgstr ""
+
+msgid "Create new user"
+msgstr ""
+
+msgid "Create new term"
+msgstr ""
+
+msgid "Name is already taken"
+msgstr ""
+
+msgid "No Meta box duplicate names are allowed"
+msgstr ""
+
+msgid "No Meta field duplicate names are allowed"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Duplicate"
+msgstr ""
+
+msgid "Execute"
+msgstr ""
+
+msgid "Copy selected meta boxes"
+msgstr ""
+
+msgid "Copy selected meta fields"
+msgstr ""
+
+msgid "Delete after copying"
+msgstr ""
+
+msgid "Copy selected meta blocks"
+msgstr ""
+
+msgid "Scroll to top"
+msgstr ""
+
+msgid "Select this element"
+msgstr ""
+
+msgid "Deselect this element"
+msgstr ""
+
+msgid "Submit a bug"
+msgstr ""
+
+msgid "Multiple"
+msgstr ""
+
+msgid "Input file accepts"
+msgstr ""
+
+msgid "Maximum size"
+msgstr ""
+
+msgid "Minimum size"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "These CSS classes will be applied to back-end editor fields"
+msgstr ""
+
+msgid "Add CSS classes to back-end editor fields (ex. class-active pulse)"
+msgstr ""
+
+msgid "Duplicate this option page"
+msgstr ""
+
+msgid "Copy this option page"
+msgstr ""
+
+msgid "Delete the meta option page after copying"
+msgstr ""
+
+msgid "Page was successfully copied"
+msgstr ""
+
+msgid "Unknown error, please retry later"
+msgstr ""
+
+msgid "Whether the post type is hierarchical (e.g. page). Default false."
+msgstr ""
+
+msgid "Default positions for Core Menu Items"
+msgstr ""
+
+msgid ""
+"The position in the menu order this page should appear. The higher the "
+"number, the lower its position in the menu."
+msgstr ""
+
+msgid "Default positions"
+msgstr ""
+
+msgid "Custom post type list"
+msgstr ""
+
+msgid ""
+"Where to show the post type in the admin menu. To work, $show_ui must be "
+"true. If true, the post type is shown in its own top level menu. If false, "
+"no menu is shown."
+msgstr ""
+
+msgid "Custom show in menu rule"
+msgstr ""
+
+msgid "Standard settings"
+msgstr ""
+
+msgid "Set custom settings"
+msgstr ""
+
+msgid ""
+"Where to show the post type in the admin menu. Set a custom show in menu "
+"rule here. For more info"
+msgstr ""
+
+msgid "To change the base url of REST API route. Default is $post_type."
+msgstr ""
+
+msgid "Associated WooCommerce product data"
+msgstr ""
+
+msgid "Label displayed after a term has been updated."
+msgstr ""
+
+msgid "To change the base url of REST API route. Default is $taxonomy."
+msgstr ""
+
+msgid ""
+"Sets the query var key for this taxonomy. Default $taxonomy key. If false, a "
+"taxonomy cannot be loaded at ?{query_var}={term_slug}. If a string, the "
+"query ?{query_var}={term_slug} will be valid."
+msgstr ""
+
+msgid ""
+"Triggers the handling of rewrites for this taxonomy. Default true, using "
+"$taxonomy as slug. To prevent rewrite, set to false. To specify rewrite "
+"rules, an array can be passed with any of these keys:"
+msgstr ""
+
+msgid "Add field box"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Set the number of records per page in your ACPT dashboards."
+msgstr ""
+
+msgid "Field type"
+msgstr ""
+
+msgid "Display as"
+msgstr ""
+
+msgid "Standard view"
+msgstr ""
+
+msgid "Accordion"
+msgstr ""
+
+msgid "Horizontal tabs"
+msgstr ""
+
+msgid "Vertical tabs"
+msgstr ""
+
+msgid "Product data name"
+msgstr ""
+
+msgid "Eye dropper"
+msgstr ""
+
+msgid "Unordered list"
+msgstr ""
+
+msgid "Ordered list"
+msgstr ""
+
+msgid "Font"
+msgstr ""
+
+msgid "Set the font of the plug-in"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Before"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "The application cannot be booted"
+msgstr ""
+
+msgid "An unexpected error has occurred"
+msgstr ""
+
+msgid "Dataset"
+msgstr ""
+
+msgid ""
+"Build reusable datasets for meta fields and forms. Import from CSV, JSON or "
+"YAML."
+msgstr ""
+
+msgid "Dataset successfully saved"
+msgstr ""
+
+msgid "Dataset name"
+msgstr ""
+
+msgid "Dataset label"
+msgstr ""
+
+msgid "Edit dataset"
+msgstr ""
+
+msgid "Create a new dataset"
+msgstr ""
+
+msgid "Create dataset"
+msgstr ""
+
+msgid "No dataset found."
+msgstr ""
+
+msgid "Items count"
+msgstr ""
+
+msgid "Dataset successfully deleted."
+msgstr ""
+
+msgid "Delete dataset"
+msgstr ""
+
+msgid "Manage dataset"
+msgstr ""
+
+msgid "Load dataset"
+msgstr ""
+
+msgid "Dataset loaded correctly"
+msgstr ""
+
+msgid "You are going to delete this dataset. Are you sure?"
+msgstr ""
+
+msgid "Select/deselect all fields"
+msgstr ""
+
+msgid "Show/hide elements"
+msgstr ""
+
+msgid "The limit on how many elements are required ([1-100])"
+msgstr ""
+
+msgid "Minimum elements allowed"
+msgstr ""
+
+msgid "The limit on how many elements are allowed ([1-100])"
+msgstr ""
+
+msgid "Maximum elements allowed"
+msgstr ""
+
+msgid ""
+"Something went wrong. Try clicking the reload the application button to "
+"reload the application."
+msgstr ""
+
+msgid "The application has crashed"
+msgstr ""
+
+msgid "Reload the application"
+msgstr ""
+
+msgid "Value is equals to {{v}}"
+msgstr ""
+
+msgid "Textual fields settings"
+msgstr ""
+
+msgid "File field settings"
+msgstr ""
+
+msgid "Radio field settings"
+msgstr ""
+
+msgid "Nestable fields layout settings"
+msgstr ""
+
+msgid "Unit of measure fields settings"
+msgstr ""
+
+msgid "URL field settings"
+msgstr ""
+
+msgid "WPML Settings"
+msgstr ""
+
+msgid "The file wpml-config.xml was successfully generated."
+msgstr ""
+
+msgid "The file wpml-config.xml was not successfully generated."
+msgstr ""
+
+msgid "This is the generated wpml-config.xml file:"
+msgstr ""
+
+msgid "Attachment"
+msgstr ""
+
+msgid "All formats"
+msgstr ""
+
+msgid "Type the address or point a location on the map"
+msgstr ""
+
+msgid "All comments"
+msgstr ""
+
+msgid "Nested fields"
+msgstr ""
+
+msgid "Row"
+msgstr ""
+
+msgid "Block"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "The look of the field for admins and editors."
+msgstr ""
+
+msgid "Field layout"
+msgstr ""
+
+msgid ""
+"The leading field (which will be displayed when the repeater is collapsed)."
+msgstr ""
+
+msgid "Leading field"
+msgstr ""
+
+msgid "Reset the map"
+msgstr ""
+
+msgid "Successful outcome message"
+msgstr ""
+
+msgid "Delete all blocks"
+msgstr ""
+
+msgid "Something went wrong, please retry."
+msgstr ""
+
+msgid "Connect external services"
+msgstr ""
+
+msgid "Your Cloudflare Turnstile site key"
+msgstr ""
+
+msgid ""
+"Your Cloudflare Turnstile site key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Your Cloudflare Turnstile secret key"
+msgstr ""
+
+msgid ""
+"Your Cloudflare Turnstile secret key. Needed to use the CAPTCHA form field."
+msgstr ""
+
+msgid "Health check"
+msgstr ""
+
+msgid ""
+"Inspect the application state and automatically repair installation errors "
+"or schema issues."
+msgstr ""
+
+msgid "Run health check"
+msgstr ""
+
+msgid "Launch the repair"
+msgstr ""
+
+msgid "DB status"
+msgstr ""
+
+msgid "The repair was carried out successfully."
+msgstr ""
+
+msgid "Post object settings"
+msgstr ""
+
+msgid "Term object settings"
+msgstr ""
+
+msgid "Filter by post type"
+msgstr ""
+
+msgid "Filter by post status"
+msgstr ""
+
+msgid "Filter by taxonomy"
+msgstr ""
+
+msgid "Polylang Settings"
+msgstr ""
+
+msgid "Textarea settings"
+msgstr ""
+
+msgid "The cols value (used only by textarea fields)"
+msgstr ""
+
+msgid "The rows value (used only by textarea fields)"
+msgstr ""
+
+msgid "Context"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "User settings"
+msgstr ""
+
+msgid "Filter by role"
+msgstr ""
+
+msgid "Relational field settings"
+msgstr ""
+
+msgid "Only name or title"
+msgstr ""
+
+msgid "With image"
+msgstr ""
+
+msgid "Date field settings"
+msgstr ""
+
+msgid "Datetime field settings"
+msgstr ""
+
+msgid "Time field settings"
+msgstr ""
+
+msgid "Select the field vertical alignment (default: center)"
+msgstr ""
+
+msgid "Vertical alignment"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Bottom"
+msgstr ""
+
+msgid "The maximum size is {{v}}"
+msgstr ""
+
+msgid "The minimum size is {{v}}"
+msgstr ""
+
+msgid "Set as post thumbnail"
+msgstr ""
+
+msgid "Sync with post terms"
+msgstr ""
+
+msgid "Image settings"
+msgstr ""
+
+msgid "Permissions"
+msgstr ""
+
+msgid "Manage permissions of"
+msgstr ""
+
+msgid "Add permission"
+msgstr ""
+
+msgid "No permissions found."
+msgstr ""
+
+msgid "User role"
+msgstr ""
+
+msgid "Confirm deleting permission"
+msgstr ""
+
+msgid "Permissions successfully saved"
+msgstr ""
+
+msgid ""
+"No permissions are present, click on \"Add permission\" button to add the "
+"first one."
+msgstr "没有权限，点击\"添加权限\"添加第一个。"
+
+msgid "Confirm deleting permission element"
+msgstr ""
+
+msgid "Assign"
+msgstr ""
+
+msgid "Child field"
+msgstr ""
+
+msgid "Child block"
+msgstr ""
+
+msgid "No fields found"
+msgstr ""
+
+msgid "Reset to the default values"
+msgstr ""
+
+msgid "Override here the default settings:"
+msgstr ""
+
+msgid "Style"
+msgstr ""
+
+msgid "Settings successfully saved"
+msgstr ""
+
+msgid "Save this table as template"
+msgstr ""
+
+msgid "Import template"
+msgstr ""
+
+msgid "Choose the template"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Border style"
+msgstr ""
+
+msgid "Border weight"
+msgstr ""
+
+msgid "Border color"
+msgstr ""
+
+msgid "Main background"
+msgstr ""
+
+msgid "Alt background"
+msgstr ""
+
+msgid "Add header"
+msgstr ""
+
+msgid "Add footer"
+msgstr ""
+
+msgid "Save as template"
+msgstr ""
+
+msgid "Create table"
+msgstr ""
+
+msgid "Edit table settings"
+msgstr ""
+
+msgid "No table already created."
+msgstr ""
+
+msgid "JSON data is not valid."
+msgstr ""
+
+msgid "Delete row"
+msgstr ""
+
+msgid "Add row"
+msgstr ""
+
+msgid "Delete column"
+msgstr ""
+
+msgid "Add column"
+msgstr ""
+
+msgid "Border"
+msgstr ""
+
+msgid "Text color"
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Option pages successfully deleted."
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Preview element"
+msgstr ""
+
+msgid "No records found."
+msgstr ""
+
+msgid "Show data"
+msgstr ""
+
+msgid "Enable custom post types"
+msgstr ""
+
+msgid "Enable custom post types manager"
+msgstr ""
+
+msgid "Enable Option Pages"
+msgstr ""
+
+msgid "Enable the Option Pages manager."
+msgstr ""
+
+msgid "Enable meta fields"
+msgstr ""
+
+msgid "Enable the meta fields manager."
+msgstr ""
+
+msgid "Clone field settings"
+msgstr ""
+
+msgid "Select fields to clone"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Restore elements"
+msgstr ""
+
+msgid "hidden elements"
+msgstr ""
+
+msgid "Front URL prefix"
+msgstr ""
+
+msgid ""
+"Alters the post type permalink structure to add a prefix to singular posts "
+"URLs (ex. /movie/titanic). Default value is the post type name."
+msgstr ""
+
+msgid "Custom post type successfully duplicated."
+msgstr ""
+
+msgid "Option pages successfully duplicated."
+msgstr ""
+
+msgid "Taxonomy successfully duplicated."
+msgstr ""
+
+msgid "Dataset successfully duplicated."
+msgstr ""
+
+msgid "Form successfully duplicated."
+msgstr ""
+
+msgid "WooCommerce product data successfully duplicated"
+msgstr ""
+
+msgid "Please wait"
+msgstr ""
+
+msgid "Labels successfully regenerated"
+msgstr ""
+
+msgid "No image selected"
+msgstr ""
+
+msgid "No video selected"
+msgstr ""
+
+msgid "No file selected"
+msgstr ""
+
+msgid "Password field settings"
+msgstr ""
+
+msgid "Algorithm"
+msgstr ""
+
+msgid ""
+"Should the permalink structure be prepended with the front base. (example: "
+"if your permalink structure is /blog/, then your links will be: false->/"
+"news/, true->/blog/news/). Defaults to true"
+msgstr ""
+
+msgid "Resolution"
+msgstr ""
+
+msgid "Color dark"
+msgstr ""
+
+msgid "Color light"
+msgstr ""
+
+msgid "Post status"
+msgstr ""
+
+msgid "The updated or new post status"
+msgstr ""
+
+msgid "Add images to the gallery"
+msgstr ""
+
+msgid "Enable custom blocks"
+msgstr ""
+
+msgid "Enable the custom blocks manager."
+msgstr ""
+
+msgid "Dynamic blocks list"
+msgstr ""
+
+msgid "Create new block"
+msgstr ""
+
+msgid "General configuration"
+msgstr ""
+
+msgid "Add controls to the block"
+msgstr ""
+
+msgid "Add custom CSS to the block"
+msgstr ""
+
+msgid "Add the callback to the block"
+msgstr ""
+
+msgid "Custom SVG"
+msgstr ""
+
+msgid "Confirm deleting control"
+msgstr ""
+
+msgid "Declare block support for certain features"
+msgstr ""
+
+msgid "Block callback"
+msgstr ""
+
+msgid "This is the block's code that will be run. Make use of TWIG syntax."
+msgstr ""
+
+msgid ""
+"No block controls already created. Create the first one now by clicking the "
+"button \"Add control\"!"
+msgstr ""
+
+msgid "Block controls"
+msgstr ""
+
+msgid "Add control"
+msgstr ""
+
+msgid "Control slug"
+msgstr ""
+
+msgid "Control slug (Ex. gallery or text_1)"
+msgstr ""
+
+msgid "Choose the control type"
+msgstr ""
+
+msgid "The description of this control (showed only on admin panel)"
+msgstr ""
+
+msgid "Duplicate this control"
+msgstr ""
+
+msgid "Delete this block control"
+msgstr ""
+
+msgid "Hide/show this block control"
+msgstr ""
+
+msgid "Icon type"
+msgstr ""
+
+msgid "The background color of the icon"
+msgstr ""
+
+msgid "The foreground color of the icon"
+msgstr ""
+
+msgid "Keywords"
+msgstr ""
+
+msgid ""
+"An array of search terms to help user discover the block while searching."
+msgstr ""
+
+msgid "The block category"
+msgstr ""
+
+msgid "Block category"
+msgstr ""
+
+msgid "The block label"
+msgstr ""
+
+msgid "Block label"
+msgstr ""
+
+msgid "Block CSS"
+msgstr ""
+
+msgid "Enter the CSS that will be used on the block here."
+msgstr ""
+
+msgid "Anchor"
+msgstr ""
+
+msgid "Anchors let you link directly to a specific block on a page."
+msgstr ""
+
+msgid "Align"
+msgstr ""
+
+msgid "This property adds block controls."
+msgstr ""
+
+msgid "Align wide"
+msgstr ""
+
+msgid "This property allows to enable wide alignment for your theme."
+msgstr ""
+
+msgid "Enable background image control."
+msgstr ""
+
+msgid "Enable/disable background image + size control."
+msgstr ""
+
+msgid "Enable/disable background and text color support."
+msgstr ""
+
+msgid "Enable/disable button color support."
+msgstr ""
+
+msgid "Enable/disable contrast checker widget in the block editor UI."
+msgstr ""
+
+msgid "Enable/disable gradient backgrounds support."
+msgstr ""
+
+msgid "Enable/disable heading color support."
+msgstr ""
+
+msgid "Enable/disable link colors control."
+msgstr ""
+
+msgid "Enable/disable background and text, but not link."
+msgstr ""
+
+msgid "Dimensions"
+msgstr ""
+
+msgid "Enable/disable aspect ratio control."
+msgstr ""
+
+msgid "Enable/disable min height control."
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Enable/disable duotone support."
+msgstr ""
+
+msgid "Enable/disable support for an HTML mode."
+msgstr ""
+
+msgid "Lock"
+msgstr ""
+
+msgid "Enable/disable the ability to toggle the lock state."
+msgstr ""
+
+msgid "Determine if a block can be used multiple times."
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Enable/disable selecting sticky position."
+msgstr ""
+
+msgid "Renaming"
+msgstr ""
+
+msgid "Determine if a block can be renamed in the editor."
+msgstr ""
+
+msgid "Reusable"
+msgstr ""
+
+msgid "Enable/disable the ability of being converted into a reusable block."
+msgstr ""
+
+msgid "Shadow"
+msgstr ""
+
+msgid "Enable/disable the shadow picker."
+msgstr ""
+
+msgid "Spacing"
+msgstr ""
+
+msgid "Enable/disable margin for arbitrary sides."
+msgstr ""
+
+msgid "Enable/disable padding for all sides."
+msgstr ""
+
+msgid "Enable/disable axial (column/row) block spacing controls."
+msgstr ""
+
+msgid "Typography"
+msgstr ""
+
+msgid "Enable/disable support and UI control for font-size."
+msgstr ""
+
+msgid "Declare support for specific text alignment options."
+msgstr ""
+
+msgid "No block found."
+msgstr ""
+
+msgid "You are going to delete this block. Are you sure?"
+msgstr ""
+
+msgid "Choose a standard category"
+msgstr ""
+
+msgid "Enter a custom category"
+msgstr ""
+
+msgid "Enable beta versions"
+msgstr "启用测试版"
+
+msgid "Enable the download of beta versions."
+msgstr "启用测试版下载。"
+
+msgid "Audio field settings"
+msgstr ""
+
+msgid "Use the custom audio player"
+msgstr ""
+
+msgid "Skin"
+msgstr ""
+
+msgid "Set the desired skin to be applied to the UI interface"
+msgstr ""
+
+msgid "Add new post a link it"
+msgstr ""
+
+msgid "Create a new post"
+msgstr ""
+
+msgid "Gallery settings"
+msgstr ""
+
+msgid "Video settings"
+msgstr ""
+
+msgid "Disable media upload"
+msgstr ""
+
+msgid "CSS variables"
+msgstr ""
+
+msgid ""
+"Should the permastruct be prepended with WP_Rewrite::$front. Default true."
+msgstr ""
+
+msgid "Either hierarchical rewrite tag or not. Default false."
+msgstr ""
+
+msgid "Rewrite hierarchical"
+msgstr ""
+
+msgid "Disable cover in custom the audio player"
+msgstr ""
+
+msgid "Box settings"
+msgstr ""
+
+msgid "Delete unused MySQL tables"
+msgstr ""
+
+msgid ""
+"If this option is enabled, all MySQL tables that are not in use — such as "
+"forms and dynamic blocks — will be deleted. Enable this option only if you "
+"are sure of what you are doing!"
+msgstr ""
+
+msgid "Apply to meta boxes"
+msgstr ""
+
+msgid "Don't apply to meta boxes"
+msgstr ""
+
+msgid "Bulk edit"
+msgstr ""
+
+msgid "Cache driver"
+msgstr ""
+
+msgid "Set the desired cache driver to improve ACPT performances"
+msgstr ""
+
+msgid "Cache folder settings"
+msgstr ""
+
+msgid "Cache folder (absolute path)"
+msgstr ""
+
+msgid ""
+"Optional: specify an absolute server path for the cache directory (e.g. /var/"
+"cache/acpt). Leave empty to use the default plugin directory."
+msgstr ""
+
+msgid "Redis settings"
+msgstr ""
+
+msgid "Memcached settings"
+msgstr ""
+
+msgid "INFO"
+msgstr ""
+
+msgid "SIZE"
+msgstr ""
+
+msgid "ITEMS"
+msgstr ""
+
+msgid "Set the cache folder"
+msgstr ""
+
+msgid "Set the Redis host"
+msgstr ""
+
+msgid "Set the Redis port"
+msgstr ""
+
+msgid "Set the Redis database"
+msgstr ""
+
+msgid "Set the Memcached host"
+msgstr ""
+
+msgid "Set the Memcached port"
+msgstr ""
+
+msgid "Driver connection ok"
+msgstr ""
+
+msgid "Test driver connection"
+msgstr ""
+
+msgid "Enable cache for meta data"
+msgstr ""
+
+msgid "Full"
+msgstr ""
+
+msgid "Visual and Text"
+msgstr ""
+
+msgid "Visual Only"
+msgstr ""
+
+msgid "Text Only"
+msgstr ""
+
+msgid "Toolbar"
+msgstr ""
+
+msgid "Tabs"
+msgstr ""
+
+msgid "Set the first image as post thumbnail"
+msgstr ""
+
+msgid "Allow dangerous content"
+msgstr ""
+
+msgid "URL structure type"
+msgstr ""
+
+msgid "Absolute (ex. http://example.com)"
+msgstr ""
+
+msgid "Relative (ex. /path/example/field)"
+msgstr ""
+
+msgid "Enable logs"
+msgstr ""
+
+msgid ""
+"Turn on full logging to keep a detailed record of everything. This helps to "
+"spot bugs more easily and understand what went wrong if something breaks."
+msgstr ""
+
+msgid "Logs manager"
+msgstr ""
+
+msgid "No logs found"
+msgstr ""
+
+msgid "Severity"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Filter by"
+msgstr ""
+
+msgid "Jump to version"
+msgstr ""
+
+msgid "Show only"
+msgstr ""
+
+msgid "Select files"
+msgstr ""
+
+msgid "Max items allowed"
+msgstr ""
+
+msgid "Open a ticket"
+msgstr ""
+
+msgid "Select post status"
+msgstr ""
+
+msgid "Apply to Front-End"
+msgstr ""
+
+msgid "Apply to Back-End"
+msgstr ""
+
+msgid "Sync language with locale"
+msgstr ""
+
+msgid ""
+"Automatically synchronize the application language with the selected locale "
+"settings, if applicable."
+msgstr ""
+
+msgid "Table pagination"
+msgstr ""
+
+msgid "Set the number of rows per page"
+msgstr ""
+
+msgid "Set the table as sortable"
+msgstr ""
+
+msgid "Import CSV"
+msgstr ""
+
+msgid "Add tab"
+msgstr ""
+
+msgid ""
+"No tabs already created. Create the first one now by clicking the button "
+"\"Add tab\"!"
+msgstr "尚未创建标签页。点击\"添加标签页\"创建第一个！"
+
+msgid "No extra settings available"
+msgstr ""
+
+msgid "No tabs available"
+msgstr ""
+
+msgid "No steps available"
+msgstr ""
+
+msgid "Release elements here"
+msgstr ""
+
+msgid "Date from"
+msgstr ""
+
+msgid "Date to"
+msgstr ""
+
+msgid "Single click to edit"
+msgstr ""
+
+msgid "Double click to toggle this element"
+msgstr ""
+
+msgid "Double click to close this element"
+msgstr ""
+
+msgid "Double click to open this element"
+msgstr ""
+
+msgid ""
+"Enable the WordPress admin menu for faster, easier dashboard navigation."
+msgstr ""
+
+msgid "Enable Admin menu"
+msgstr ""
+
+msgid "Google Sheets API key"
+msgstr ""
+
+msgid ""
+"Paste here your Google Sheets API key. Needed to import sheets into Table "
+"fields."
+msgstr ""
+
+msgid "Form settings"
+msgstr ""
+
+msgid "Email delivery"
+msgstr ""
+
+msgid "Restrict the form submission rates"
+msgstr ""
+
+msgid "Adjust the values of the form’s CSS variables"
+msgstr ""
+
+msgid "Trigger an email once the form is submitted"
+msgstr ""
+
+msgid "Sync with taxonomies"
+msgstr ""
+
+msgid "No taxonomy found."
+msgstr ""
+
+msgid "Successfully taxonomy sync."
+msgstr ""
+
+msgid "Edit meta box"
+msgstr ""
+
+msgid "Available only if `show in archive` is enabled"
+msgstr ""
+
+msgid "Email preview"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Rule"
+msgstr ""
+
+msgid "Limit"
+msgstr ""
+
+msgid "Submission limits"
+msgstr ""
+
+msgid "Email settings"
+msgstr ""
+
+msgid "Post archive"
+msgstr ""
+
+msgid "Taxonomy archive"
+msgstr ""
+
+msgid "Copy after"
+msgstr ""
+
+msgid "Enable custom content type"
+msgstr ""
+
+msgid "Enable the custom content type manager."
+msgstr ""
+
+msgid "Create new table"
+msgstr ""
+
+msgid "Registered tables"
+msgstr ""
+
+msgid "ID Strategy"
+msgstr ""
+
+msgid "The ID table strategy"
+msgstr ""
+
+msgid "Table label"
+msgstr ""
+
+msgid "The table label"
+msgstr ""
+
+msgid "Table columns"
+msgstr ""
+
+msgid "Table name"
+msgstr ""
+
+msgid "The table name. Must be unique"
+msgstr ""
+
+msgid "Indexes"
+msgstr ""
+
+msgid "Indexes and foreign keys"
+msgstr ""
+
+msgid "Charset and collation"
+msgstr ""
+
+msgid "The table charset and collation"
+msgstr ""
+
+msgid "Delete this column"
+msgstr ""
+
+msgid "Confirm deleting column"
+msgstr ""
+
+msgid ""
+"No columns already created. Create the first one now by clicking the button "
+"\"Add column\"!"
+msgstr ""
+
+msgid "Column label"
+msgstr ""
+
+msgid "Column slug"
+msgstr ""
+
+msgid "Column slug (Ex. gallery or text_1)"
+msgstr ""
+
+msgid "Choose the column type"
+msgstr ""
+
+msgid "This key is already declared"
+msgstr ""
+
+msgid "UI field type mapping"
+msgstr ""
+
+msgid ""
+"No indexes already created. Create the first one now by clicking the button "
+"\"Add index\"!"
+msgstr "尚未创建索引。点击\"添加索引\"创建第一个！"
+
+msgid "Add index"
+msgstr ""
+
+msgid "Timestamps"
+msgstr ""
+
+msgid "Add timestamps columns (`created_at` and `updated_at`) to the table."
+msgstr ""
+
+msgid "Soft delete"
+msgstr ""
+
+msgid "Implement soft delete on this table."
+msgstr ""
+
+msgid ""
+"No foreign keys already created. Create the first one now by clicking the "
+"button \"Add foreign key\"!"
+msgstr "尚未创建外键。点击\"添加外键\"创建第一个！"
+
+msgid "Reference table"
+msgstr ""
+
+msgid "Reference columns"
+msgstr ""
+
+msgid "Referring columns"
+msgstr ""
+
+msgid "Referenced table"
+msgstr ""
+
+msgid "Referenced columns"
+msgstr ""
+
+msgid "Confirm deleting key"
+msgstr ""
+
+msgid "Is primary key"
+msgstr ""
+
+msgid ""
+"You cannot create an index or a foreign key until at least one column has "
+"been defined. Please create a column first."
+msgstr ""
+
+msgid "Select time format"
+msgstr ""
+
+msgid "Custom time format"
+msgstr ""
+
+msgid "Select date format"
+msgstr ""
+
+msgid "Custom date format"
+msgstr ""
+
+msgid "The label of the Add element button"
+msgstr ""
+
+msgid "Add element button label"
+msgstr ""
+
+msgid "The label of the Remove element button"
+msgstr ""
+
+msgid "Remove element button label"
+msgstr ""
+
+msgid "Preview size"
+msgstr ""
+
+msgid "Restrict image extensions"
+msgstr ""
+
+msgid "Minimum width"
+msgstr ""
+
+msgid "Minimum height"
+msgstr ""
+
+msgid "Maximum width"
+msgstr ""
+
+msgid "Maximum height"
+msgstr ""
+
+msgid "Default sorting"
+msgstr ""
+
+msgid ""
+"Sets the default sort order for posts in the admin list table. Defaults to "
+"WordPress standard (Date, Descending)."
+msgstr ""
+
+msgid "Restrict the field to only show posts created by the logged in user"
+msgstr ""
+
+msgid "Key parts"
+msgstr ""
+
+msgid "Table successfully saved"
+msgstr ""
+
+msgid "Schema status"
+msgstr ""
+
+msgid "Stats"
+msgstr ""
+
+msgid "Operation successfully executed"
+msgstr ""
+
+msgid ""
+"The following queries will be executed to synchronize the table schema. Are "
+"you sure?"
+msgstr ""
+
+msgid "The following queries will be executed to synchronize the table schema:"
+msgstr ""
+
+msgid "No table selected"
+msgstr ""
+
+msgid "Execute database operations"
+msgstr ""
+
+msgid "Length is required for this column type"
+msgstr ""
+
+msgid "Column name `id` is reserved"
+msgstr ""
+
+msgid "Virtual"
+msgstr ""
+
+msgid "Storage type"
+msgstr ""
+
+msgid "Relational type"
+msgstr ""
+
+msgid "Each record relates to exactly one record in the other table"
+msgstr ""
+
+msgid "One record relates to multiple records in the other table"
+msgstr ""
+
+msgid "Multiple records relate to one record in the other table"
+msgstr ""
+
+msgid "Multiple records relate to multiple records in the other table"
+msgstr ""
+
+msgid "Target table"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Self-referential — useful for parent/child hierarchies"
+msgstr ""
+
+msgid "Meta keys manager"
+msgstr ""
+
+msgid ""
+"Browse, search and manage every raw meta key stored by ACPT. Edit values "
+"directly or clean up stale entries across post types, taxonomies and users."
+msgstr ""
+
+msgid "Table stats"
+msgstr ""
+
+msgid "No stats available"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Associated to"
+msgstr ""
+
+msgid "No meta keys found."
+msgstr ""
+
+msgid "Clean orphan keys"
+msgstr ""
+
+msgid "Add meta key"
+msgstr ""
+
+msgid "Delete meta key"
+msgstr ""
+
+msgid "You are going to delete this meta key. Are you sure?"
+msgstr ""
+
+msgid "The record was successfully updated"
+msgstr ""
+
+msgid ""
+"Select the tables to include in this group. Tables define the schema and "
+"fields for storing custom content records."
+msgstr ""
+
+msgid ""
+"Define location rules to control where this group's tables appear in the "
+"WordPress admin. Rules can target post types, taxonomies, users, or option "
+"pages."
+msgstr ""
+
+msgid "--Select---"
+msgstr "--请选择---"
+
+msgid "A brief description (shown only in the admin panel)"
+msgstr "简短描述（仅在管理面板中显示）"
+
+msgid ""
+"ALERT: The visual builder can be used with a minimum resolution of 960 px "
+"wide"
+msgstr "提示：可视化构建器要求最低屏幕宽度为 960 像素"
+
+msgid "Accept"
+msgstr "接受"
+
+msgid "Actual settings"
+msgstr "当前设置"
+
+msgid "Add a meta box to get started"
+msgstr "添加一个元框以开始"
+
+msgid "Add foreign key"
+msgstr "添加外键"
+
+msgid "Add key part"
+msgstr "添加键部分"
+
+msgid "Add new item"
+msgstr "添加新项目"
+
+msgid "Add new record"
+msgstr "添加新记录"
+
+msgid "Add record"
+msgstr "添加记录"
+
+msgid "Add value"
+msgstr "添加值"
+
+msgid "Advanced Mode"
+msgstr "高级模式"
+
+msgid "Advanced options"
+msgstr "高级选项"
+
+msgid "Ajax"
+msgstr "Ajax"
+
+msgid "All Tables"
+msgstr "所有表"
+
+msgid "Allow HTML"
+msgstr "允许 HTML"
+
+msgid "Anonymous users"
+msgstr "匿名用户"
+
+msgid "Assign this table to a group"
+msgstr "将此表分配给组"
+
+msgid "Associated Tables"
+msgstr "关联表"
+
+msgid "Attachments"
+msgstr "附件"
+
+msgid "Automatic"
+msgstr "自动"
+
+msgid "BLOB"
+msgstr "BLOB"
+
+msgid "Basic options"
+msgstr "基本选项"
+
+msgid "Bcc"
+msgstr "密送"
+
+msgid "Block name"
+msgstr "块名称"
+
+msgid "Blocks"
+msgstr "块"
+
+msgid "Body"
+msgstr "正文"
+
+msgid "Browser"
+msgstr "浏览器"
+
+msgid "CURL"
+msgstr "CURL"
+
+msgid "CURRENT_TIMESTAMP"
+msgstr "CURRENT_TIMESTAMP"
+
+msgid "Cache"
+msgstr "缓存"
+
+msgid "Cache stats"
+msgstr "缓存统计"
+
+msgid "Callback"
+msgstr "回调"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Cc"
+msgstr "抄送"
+
+msgid "Charset"
+msgstr "字符集"
+
+msgid "Child page"
+msgstr "子页面"
+
+msgid "Children"
+msgstr "子元素"
+
+msgid "Choose the icon"
+msgstr "选择图标"
+
+msgid "Click on a page card to edit its settings"
+msgstr "点击页面卡片以编辑其设置"
+
+msgid "Click to edit"
+msgstr "点击编辑"
+
+msgid "Collate"
+msgstr "排序规则"
+
+msgid "Cols"
+msgstr "列"
+
+msgid "Column"
+msgstr "列"
+
+msgid "Column Name"
+msgstr "列名"
+
+msgid "Column length"
+msgstr "列长度"
+
+msgid "Column length must be numeric"
+msgstr "列长度必须为数字"
+
+msgid "Column options"
+msgstr "列选项"
+
+msgid "Column values"
+msgstr "列值"
+
+msgid "Comments"
+msgstr "评论"
+
+msgid "Confirm deleting field"
+msgstr "确认删除字段"
+
+msgid "Confirm deleting index"
+msgstr "确认删除索引"
+
+msgid "Confirm deleting wpml-config.xml file"
+msgstr "确认删除 wpml-config.xml 文件"
+
+msgid "Control label"
+msgstr "控件标签"
+
+msgid "Control type"
+msgstr "控件类型"
+
+msgid "Copy this meta block"
+msgstr "复制此元块"
+
+msgid "Copy this meta field"
+msgstr "复制此元字段"
+
+msgid "Copy this meta option page"
+msgstr "复制此元选项页面"
+
+msgid "Create new Group"
+msgstr "创建新组"
+
+msgid "Create new Table"
+msgstr "创建新表"
+
+msgid "Create wpml-config.xml file"
+msgstr "创建 wpml-config.xml 文件"
+
+msgid "Custom Tables"
+msgstr "自定义表"
+
+msgid "Custom settings"
+msgstr "自定义设置"
+
+msgid "DATE & TIME"
+msgstr "日期和时间"
+
+msgid "Dark"
+msgstr "深色"
+
+msgid "Data"
+msgstr "数据"
+
+msgid "Dataset is empty"
+msgstr "数据集为空"
+
+msgid "Dataset list"
+msgstr "数据集列表"
+
+msgid "Dataset not found"
+msgstr "未找到数据集"
+
+msgid "Default percent"
+msgstr "默认百分比"
+
+msgid "Default term"
+msgstr "默认术语"
+
+msgid "Delete Column"
+msgstr "删除列"
+
+msgid "Delete Table"
+msgstr "删除表"
+
+msgid "Delete Table Group"
+msgstr "删除表组"
+
+msgid "Delete block"
+msgstr "删除块"
+
+msgid "Delete box"
+msgstr "删除框"
+
+msgid "Delete field"
+msgstr "删除字段"
+
+msgid "Delete option page"
+msgstr "删除选项页面"
+
+msgid "Delete others"
+msgstr "删除其他"
+
+msgid "Delete page"
+msgstr "删除页面"
+
+msgid "Delete private"
+msgstr "删除私有"
+
+msgid "Delete published"
+msgstr "删除已发布"
+
+msgid "Delete the meta block after copying"
+msgstr "复制后删除元块"
+
+msgid "Delete the meta field after copying"
+msgstr "复制后删除元字段"
+
+msgid "Descending"
+msgstr "降序"
+
+msgid "Deselect all"
+msgstr "取消全选"
+
+msgid "Details"
+msgstr "详情"
+
+msgid "Disable cover in the custom audio player"
+msgstr "在自定义音频播放器中禁用封面"
+
+msgid "Display"
+msgstr "显示"
+
+msgid "Display as translated"
+msgstr "显示为已翻译"
+
+msgid "Display mode"
+msgstr "显示模式"
+
+msgid "Display settings"
+msgstr "显示设置"
+
+msgid "Drag a control type from the sidebar to get started"
+msgstr "从侧边栏拖动控件类型以开始"
+
+msgid "Drag a field type from the sidebar to get started"
+msgstr "从侧边栏拖动字段类型以开始"
+
+msgid "Drop children fields here"
+msgstr "在此放置子字段"
+
+msgid "Drop children pages here"
+msgstr ""
+
+msgid "Duotone"
+msgstr "双色调"
+
+msgid "Duplicate rules are not allowed."
+msgstr "不允许重复规则。"
+
+msgid "ENUM"
+msgstr "ENUM"
+
+msgid "Edit item"
+msgstr "编辑项目"
+
+msgid "Edit others"
+msgstr "编辑其他"
+
+msgid "Edit private"
+msgstr "编辑私有"
+
+msgid "Edit published"
+msgstr "编辑已发布"
+
+msgid "Edit record"
+msgstr "编辑记录"
+
+msgid "Editor for"
+msgstr "编辑器："
+
+msgid "Email body"
+msgstr "邮件正文"
+
+msgid "Enable dynamic blocks"
+msgstr "启用动态块"
+
+msgid "Enable select2"
+msgstr "启用 select2"
+
+msgid "Enable taxonomies"
+msgstr "启用分类"
+
+msgid "Enable the custom post types manager."
+msgstr "启用自定义文章类型管理器。"
+
+msgid "Enable the dynamic blocks manager."
+msgstr "启用动态块管理器。"
+
+msgid "Enable the taxonomies manager."
+msgstr "启用分类管理器。"
+
+msgid "Enable/disable contrast checker widget in the block editor UI.."
+msgstr "在块编辑器中启用/禁用对比度检查小部件。。"
+
+msgid "Enter a valid JSON value."
+msgstr "请输入有效的 JSON 值。"
+
+msgid "Enter custom SVG"
+msgstr "输入自定义 SVG"
+
+msgid "Enter whatever items you want; separate them with COMMA or ENTER."
+msgstr "输入所需项目；用逗号或回车分隔。"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Error during import occurred"
+msgstr "导入时发生错误"
+
+msgid "Error message"
+msgstr "错误消息"
+
+msgid "Errors"
+msgstr "错误"
+
+msgid "Extra"
+msgstr "额外"
+
+msgid "Field"
+msgstr "字段"
+
+msgid "Field Mapping Preview"
+msgstr "字段映射预览"
+
+msgid "Field on target table that holds the back-reference"
+msgstr "目标表中保存反向引用的字段"
+
+msgid "Field selector"
+msgstr "字段选择器"
+
+msgid "Field slug (Ex. name_frk)"
+msgstr "字段别名（例：name_frk）"
+
+msgid "Field slug (Ex. name_idx)"
+msgstr "字段别名（例：name_idx）"
+
+msgid "Field slug (e.g. my_field)"
+msgstr "字段别名（如：my_field）"
+
+msgid "Fields to clone"
+msgstr "要克隆的字段"
+
+msgid "File was successfully deleted."
+msgstr "文件已成功删除。"
+
+msgid "Font size"
+msgstr "字体大小"
+
+msgid "Footer"
+msgstr "页脚"
+
+msgid "Foreign keys"
+msgstr "外键"
+
+msgid "Form submissions"
+msgstr "表单提交"
+
+msgid "Forms submissions"
+msgstr "表单提交"
+
+msgid "Go to next step"
+msgstr "转到下一步"
+
+msgid "Go to prev step"
+msgstr "转到上一步"
+
+msgid "Group"
+msgstr "组"
+
+msgid "Group successfully saved"
+msgstr "组已成功保存"
+
+msgid "HTML"
+msgstr "HTML"
+
+msgid "HTML settings"
+msgstr "HTML 设置"
+
+msgid "Header"
+msgstr "页眉"
+
+msgid "Hide title"
+msgstr "隐藏标题"
+
+msgid "Hide toggle visibility"
+msgstr "隐藏可见性切换"
+
+msgid "Horizontal"
+msgstr "水平"
+
+msgid "Human-readable label for this group"
+msgstr "此组的可读标签"
+
+msgid "ID settings"
+msgstr "ID 设置"
+
+msgid "ID strategy"
+msgstr "ID 策略"
+
+msgid "INVERSE SOURCE"
+msgstr "INVERSE SOURCE"
+
+msgid "INVERSE TARGET"
+msgstr "INVERSE TARGET"
+
+msgid "INVISIBLE"
+msgstr "INVISIBLE"
+
+msgid ""
+"If enabled, the logged in user who submitted the form will also receive this "
+"email as a confirmation"
+msgstr "如果启用，提交表单的已登录用户也将收到此确认电子邮件"
+
+msgid "Index options"
+msgstr "索引选项"
+
+msgid "Inverse field"
+msgstr "反向字段"
+
+msgid "Inverse field configuration"
+msgstr "反向字段配置"
+
+msgid "Items list"
+msgstr "项目列表"
+
+msgid "Label column"
+msgstr "标签列"
+
+msgid "Label default value"
+msgstr "标签默认值"
+
+msgid "Label placeholder"
+msgstr "标签占位符"
+
+msgid "Left"
+msgstr "左"
+
+msgid "Length must be at least 1"
+msgstr "长度必须至少为 1"
+
+msgid "Level"
+msgstr "级别"
+
+msgid "Light"
+msgstr "浅色"
+
+msgid "Link URL"
+msgstr "链接 URL"
+
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "Location rules"
+msgstr "位置规则"
+
+msgid "Log context"
+msgstr "日志上下文"
+
+msgid "Logged user"
+msgstr "已登录用户"
+
+msgid "Logged users"
+msgstr "已登录用户"
+
+msgid "Manage cache items"
+msgstr "管理缓存项目"
+
+msgid "Manage option pages"
+msgstr "管理选项页面"
+
+msgid "Manage permissions"
+msgstr "管理权限"
+
+msgid "Max"
+msgstr "最大"
+
+msgid "Max value"
+msgstr "最大值"
+
+msgid "Maximum value"
+msgstr "最大值"
+
+msgid "Meta block"
+msgstr "元块"
+
+msgid "Meta block was successfully copied"
+msgstr "元块已成功复制"
+
+msgid "Min"
+msgstr "最小"
+
+msgid "Min value"
+msgstr "最小值"
+
+msgid "Minimum value"
+msgstr "最小值"
+
+msgid "Missing dependency installer, retry now"
+msgstr "缺少依赖安装程序，立即重试"
+
+msgid "Multiple field"
+msgstr "多值字段"
+
+msgid "NOW()"
+msgstr "NOW()"
+
+msgid "NUMERIC"
+msgstr "NUMERIC"
+
+msgid "No blocks yet"
+msgstr "暂无块"
+
+msgid "No boxes registered"
+msgstr "无已注册框"
+
+msgid "No columns found."
+msgstr "未找到列。"
+
+msgid "No columns selected"
+msgstr "未选择列"
+
+msgid "No controls created"
+msgstr "未创建控件"
+
+msgid "No custom post types found."
+msgstr "未找到自定义文章类型。"
+
+msgid "No distraction"
+msgstr "专注模式"
+
+msgid "No editable columns found for this table."
+msgstr "此表中未找到可编辑列。"
+
+msgid "No fields registered."
+msgstr "无已注册字段。"
+
+msgid "No foreign keys found."
+msgstr "未找到外键。"
+
+msgid "No group"
+msgstr "无组"
+
+msgid "No index found."
+msgstr "未找到索引。"
+
+msgid "No items"
+msgstr "无项目"
+
+msgid "No items imported"
+msgstr "未导入任何项目"
+
+msgid ""
+"No key parts are present, click on \"Add key part\" button to add the first "
+"one."
+msgstr "没有键部分，点击\"添加键部分\"添加第一个。"
+
+msgid "No location rules defined."
+msgstr "未定义位置规则。"
+
+msgid ""
+"No option pages created yet. Click \"Add page\" to create the first one!"
+msgstr "尚未创建选项页面。点击\"添加页面\"创建第一个！"
+
+msgid "No options"
+msgstr "无选项"
+
+msgid ""
+"No options are present, click on \"Add option\" button to add the first one."
+msgstr "没有选项，点击\"添加选项\"添加第一个。"
+
+msgid "No page selected"
+msgstr "未选择页面"
+
+msgid ""
+"No rules already created. Create the first one now by clicking the button "
+"\"Add condition\"!"
+msgstr "尚未创建规则。点击\"添加条件\"创建第一个！"
+
+msgid "No table groups found."
+msgstr "未找到表组。"
+
+msgid "No tables associated to this group."
+msgstr "此组无关联表。"
+
+msgid "No tables found in this group."
+msgstr "此组中未找到表。"
+
+msgid "No tables found."
+msgstr "未找到表。"
+
+msgid ""
+"No values already created. Create the first one now by clicking the button "
+"\"Add value\"!"
+msgstr "尚未创建值。点击\"添加值\"创建第一个！"
+
+msgid "No wpml-config.xml found."
+msgstr "未找到 wpml-config.xml。"
+
+msgid "Email"
+msgstr ""
+
+msgid "None"
+msgstr "无"
+
+msgid "Not found"
+msgstr "未找到"
+
+msgid "Nullable"
+msgstr "可为空"
+
+msgid "ON CHANGE"
+msgstr "ON CHANGE"
+
+msgid "On delete"
+msgstr "删除时"
+
+msgid "On update"
+msgstr "更新时"
+
+msgid "Opens in a new window or tab"
+msgstr "在新窗口或标签页中打开"
+
+msgid "Operator"
+msgstr "运算符"
+
+msgid "Options"
+msgstr "选项"
+
+msgid "Other columns"
+msgstr "其他列"
+
+msgid "PERMISSIONS"
+msgstr "PERMISSIONS"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Plural label. Used for the taxonomy admin menu item"
+msgstr "复数标签。用于分类管理菜单项"
+
+msgid "Position sticky"
+msgstr "固定位置"
+
+msgid "Post types"
+msgstr "文章类型"
+
+msgid "Posts"
+msgstr "文章"
+
+msgid "Prev Step"
+msgstr "上一步"
+
+msgid "REST controller class"
+msgstr "REST 控制器类"
+
+msgid "Read"
+msgstr "读取"
+
+msgid "Record created successfully."
+msgstr "记录创建成功。"
+
+msgid "Record updated successfully."
+msgstr "记录更新成功。"
+
+msgid "Redirect after form submission"
+msgstr "表单提交后重定向"
+
+msgid "Redirect timeout (seconds)"
+msgstr "重定向超时（秒）"
+
+msgid "Registered Tables"
+msgstr "已注册表"
+
+msgid "Registered dynamic blocks"
+msgstr "已注册动态块"
+
+msgid "Reply to"
+msgstr "回复至"
+
+msgid "Required"
+msgstr "必填"
+
+msgid "Rest APIs"
+msgstr "REST API"
+
+msgid "Right"
+msgstr "右"
+
+msgid "Role"
+msgstr "角色"
+
+msgid "SOURCE"
+msgstr "SOURCE"
+
+msgid "STRING"
+msgstr "STRING"
+
+msgid "Save record"
+msgstr "保存记录"
+
+msgid "Search an element saved in cache by its content."
+msgstr "按内容搜索缓存中保存的元素。"
+
+msgid "Select a location first"
+msgstr "请先选择位置"
+
+msgid "Select a target table"
+msgstr "选择目标表"
+
+msgid "Select all"
+msgstr "全选"
+
+msgid "Select capability"
+msgstr "选择权限"
+
+msgid "Select page"
+msgstr "选择页面"
+
+msgid "Select pages"
+msgstr "选择页面"
+
+msgid "Select tables..."
+msgstr "选择表..."
+
+msgid "Select taxonomies"
+msgstr "选择分类"
+
+msgid "Select taxonomy"
+msgstr "选择分类"
+
+msgid "Select the ID generation strategy"
+msgstr "选择 ID 生成策略"
+
+msgid "Select the column"
+msgstr "选择列"
+
+msgid "Select the key"
+msgstr "选择键"
+
+msgid "Select user"
+msgstr "选择用户"
+
+msgid "Select users"
+msgstr "选择用户"
+
+msgid "Selector"
+msgstr "选择器"
+
+msgid "Self-referential"
+msgstr "自引用"
+
+msgid "Send confirmation email to logged in user"
+msgstr "向已登录用户发送确认邮件"
+
+msgid "Shortcode preview"
+msgstr "短代码预览"
+
+msgid "Show errors"
+msgstr "显示错误"
+
+msgid "Shown in dropdown"
+msgstr "显示在下拉列表中"
+
+msgid "Singular label. Used when a singular label is needed"
+msgstr "单数标签。在需要单数标签时使用"
+
+msgid "Sorry, no posts matched your criteria."
+msgstr "抱歉，没有文章符合您的条件。"
+
+msgid "Sorting"
+msgstr "排序"
+
+msgid "Specific user"
+msgstr "指定用户"
+
+msgid "Step"
+msgstr "步骤"
+
+msgid "Stored in FK column"
+msgstr "存储在 FK 列中"
+
+msgid "Stored in inverse FK"
+msgstr "存储在反向 FK 中"
+
+msgid "Strategy"
+msgstr "策略"
+
+msgid "Submissions"
+msgstr "提交"
+
+msgid "Sync"
+msgstr "同步"
+
+msgid "TARGET"
+msgstr "TARGET"
+
+msgid "Table Groups"
+msgstr "表组"
+
+msgid "Table foreign keys"
+msgstr "表外键"
+
+msgid "Table indexes"
+msgstr "表索引"
+
+msgid "Table settings"
+msgstr "表设置"
+
+msgid "Tables"
+msgstr "表"
+
+msgid "Tag element"
+msgstr "标签元素"
+
+msgid "Text settings"
+msgstr "文本设置"
+
+msgid "The block name/slug. Must be unique"
+msgstr "块名称/别名。必须唯一"
+
+msgid "The default percent value"
+msgstr "默认百分比值"
+
+msgid "This box"
+msgstr "此框"
+
+msgid "Translate"
+msgstr "翻译"
+
+msgid "UI"
+msgstr "UI"
+
+msgid "UI Type"
+msgstr "UI 类型"
+
+msgid "UNSIGNED"
+msgstr "UNSIGNED"
+
+msgid "UNSIGNED ZEROFILL"
+msgstr "UNSIGNED ZEROFILL"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Unique"
+msgstr "唯一"
+
+msgid "Unique slug identifier (auto-filled from label)"
+msgstr "唯一别名标识符（从标签自动填充）"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Update the current post"
+msgstr "更新当前文章"
+
+msgid "VISIBLE"
+msgstr "VISIBLE"
+
+msgid "Validation rules"
+msgstr "验证规则"
+
+msgid "Value already exists."
+msgstr "值已存在。"
+
+msgid "Value column"
+msgstr "值列"
+
+msgid "Values"
+msgstr "值"
+
+msgid "Variable"
+msgstr "变量"
+
+msgid "Vertical"
+msgstr "垂直"
+
+msgid "View item"
+msgstr "查看项目"
+
+msgid ""
+"Whether there should be post type archives, or if a string, the archive slug "
+"to use. Will generate the proper rewrite rules if $rewrite is enabled. "
+"Default false."
+msgstr ""
+"是否应有文章类型存档，或指定存档别名字符串。如果 $rewrite 已启用则生成重写规"
+"则。默认：false。"
+
+msgid "Wide"
+msgstr "宽"
+
+msgid "With front"
+msgstr "带前缀"
+
+msgid "Yes, execute it"
+msgstr "是，执行"
+
+msgid "You are going to delete this option page. Are you sure?"
+msgstr "您即将删除此选项页面。确定吗？"
+
+msgid "You are going to delete this table group. Are you sure?"
+msgstr "您即将删除此表组。确定吗？"
+
+msgid "You are going to delete this table. Are you sure?"
+msgstr "您即将删除此表。确定吗？"
+
+msgid "coming soon"
+msgstr "即将推出"
+
+msgid "date"
+msgstr "日期"
+
+msgid "eg. 300px"
+msgstr "例：300px"
+
+msgid "group settings"
+msgstr "组设置"
+
+msgid "group_name"
+msgstr "group_name"
+
+msgid "height"
+msgstr "高度"
+
+msgid "label"
+msgstr "标签"
+
+msgid "max length is 20"
+msgstr "最大长度为 20"
+
+msgid "max length is 255"
+msgstr "最大长度为 255"
+
+msgid "order_by"
+msgstr "order_by"
+
+msgid "per_page"
+msgstr "per_page"
+
+msgid "render"
+msgstr "render"
+
+msgid "table"
+msgstr "表"
+
+msgid "table settings"
+msgstr "表设置"
+
+msgid "tables"
+msgstr "表"
+
+msgid "target"
+msgstr "目标"
+
+msgid "this table"
+msgstr "此表"
+
+msgid "value"
+msgstr "值"
+
+msgid "width"
+msgstr "宽度"
+
+msgid "Product data fields"
+msgstr "产品数据字段"
+
+msgid "Publish"
+msgstr "发布"
+
+msgid "Show schema create SQL query"
+msgstr "显示模式创建SQL查询"
+
+msgid "Show schema"
+msgstr "显示模式"
+
+msgid "Table record"
+msgstr ""
+
+msgid "Form identity and submission feedback"
+msgstr ""
+
+msgid "Redirect after submission"
+msgstr ""
+
+msgid "Where users land once the form is sent"
+msgstr ""
+
+msgid "Auto slug"
+msgstr ""
+
+msgid "Custom AJAX handler for this form"
+msgstr ""
+
+msgid "External endpoint this form submits to"
+msgstr ""
+
+msgid "PHP function executed on submission"
+msgstr ""
+
+msgid "Email notification settings"
+msgstr ""
+
+msgid "What the form creates and which fields it maps"
+msgstr ""
+
+msgid "Which table record this form writes to"
+msgstr ""
+
+msgid "Colors"
+msgstr ""
+
+msgid "Font sizes"
+msgstr ""
+
+msgid "Radius and thickness settings"
+msgstr ""
+
+msgid "Color palette for light and dark modes"
+msgstr ""
+
+msgid "Gap and padding values"
+msgstr ""
+
+msgid "Font weights"
+msgstr ""
+
+msgid "Font size scale"
+msgstr ""
+
+msgid "Enable or disable email notifications for this form"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Who sends and receives this email"
+msgstr ""
+
+msgid "Subject & attachments"
+msgstr ""
+
+msgid "Email subject and file attachments"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "HTML structure, visual style and preview"
+msgstr ""
+
+msgid "Adjust the values of the form's CSS variables"
+msgstr ""
+
+msgid "Create a new record"
+msgstr ""
+
+msgid "Define who can submit this form and how many times"
+msgstr ""
+
+msgid "No columns available. Select a table first."
+msgstr ""
+
+msgid "Record"
+msgstr ""
+
+msgid "Redirect to"
+msgstr ""
+
+msgid "Table to fill"
+msgstr ""
+
+msgid "Add image"
+msgstr "添加图片"
+
+msgid "Advanced"
+msgstr "高级"
+
+msgid "Change image"
+msgstr "更改图片"
+
+msgid "Child"
+msgstr "子级"
+
+msgid "Click to edit label"
+msgstr "点击编辑标签"
+
+msgid "Click to rename"
+msgstr "点击重命名"
+
+msgid "Core"
+msgstr "核心"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "Description (showed only on admin panel)"
+msgstr "描述（仅在管理面板中显示）"
+
+msgid "Drop columns here"
+msgstr "将列拖放到此处"
+
+msgid "Drop fields here"
+msgstr "将字段拖放到此处"
+
+msgid "Heading (optional)"
+msgstr "标题（可选）"
+
+msgid "Hide the collapse/expand toggle."
+msgstr "隐藏折叠/展开切换开关。"
+
+msgid "Hide the meta box title."
+msgstr "隐藏元数据框标题。"
+
+msgid "Hide toggle"
+msgstr "隐藏切换开关"
+
+msgid "High"
+msgstr "高"
+
+msgid "Link label"
+msgstr "链接标签"
+
+msgid "Low"
+msgstr "低"
+
+msgid "Message content"
+msgstr "消息内容"
+
+msgid "Message settings"
+msgstr "消息设置"
+
+msgid "Normal"
+msgstr "普通"
+
+msgid "Optional heading shown above the message"
+msgstr "显示在消息上方的可选标题"
+
+msgid "Order within the context."
+msgstr "上下文内的顺序。"
+
+msgid "Release"
+msgstr "释放"
+
+msgid "Show label"
+msgstr "显示标签"
+
+msgid "Side"
+msgstr "侧边"
+
+msgid "Sidebar position"
+msgstr "侧边栏位置"
+
+msgid "Sorted"
+msgstr "已排序"
+
+msgid "Tab selected"
+msgstr "已选中标签页"
+
+msgid "The instructional text shown to the user"
+msgstr "显示给用户的说明文字"
+
+msgid ""
+"Where the meta box appears in the post editor (applies when this table is "
+"attached to a CPT)."
+msgstr "元数据框在文章编辑器中出现的位置（当此表关联到 CPT 时适用）。"
+
+msgid ""
+"You cannot create a foreign key until at least one column has been defined. "
+"Please create a column first."
+msgstr "在定义至少一列之前，您无法创建外键。请先创建一列。"
+
+msgid "Enable Abilities API"
+msgstr ""
+
+msgid ""
+"Expose ACPT post types, taxonomies and fields as WordPress Abilities API "
+"abilities."
+msgstr ""
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Dynamic blocks"
+msgstr "动态区块"
+
+msgid "Export"
+msgstr "导出"
+
+msgid "If an item already exists"
+msgstr "如果项目已存在"
+
+msgid "Overwrite it — replace the existing version with the imported one"
+msgstr "覆盖 — 用导入的版本替换现有版本"
+
+msgid "Review import"
+msgstr "查看导入"
+
+msgid "Settings were successfully imported"
+msgstr "设置已成功导入"
+
+msgid "Skip it — keep the existing version, import only new items"
+msgstr "跳过 — 保留现有版本,仅导入新项目"
+
+msgid "Table groups"
+msgstr "表组"
+
+msgid "Upload new file"
+msgstr "上传新文件"
+
+msgid "columns"
+msgstr "列"
+
+msgid "exists"
+msgstr "已存在"
+
+msgid "fields"
+msgstr "字段"
+
+msgid ""
+"items already exist on this site. Choose how to handle them before importing."
+msgstr "此站点上已存在相关项目。请选择导入前如何处理它们。"
+
+msgid "new"
+msgstr "新"
+
+msgid "picked up"
+msgstr ""
+
+msgid "moved to a new position"
+msgstr ""
+
+msgid "is no longer over a drop target"
+msgstr ""
+
+msgid "dropped"
+msgstr ""
+
+msgid "Drop cancelled"
+msgstr ""
+
+msgid "released outside a valid drop target"
+msgstr ""
+
+msgid "Dragging cancelled"
+msgstr ""
+
+msgid "was returned to its original position"
+msgstr ""
+
+msgid "Item"
+msgstr ""
+
+msgid "New field"
+msgstr ""
+
+msgid "Control"
+msgstr ""
+
+msgid "New control"
+msgstr ""
+
+msgid "New column"
+msgstr ""
+
+msgid "Block field"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Actions for"
+msgstr ""
+
+msgid "WooCommerce"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Sidebar on the left"
+msgstr ""
+
+msgid "Sidebar on the right"
+msgstr ""
+
+msgid "Inline"
+msgstr ""
+
+msgid "Justify"
+msgstr ""
+
+msgid "Link label and value"
+msgstr ""
+
+msgid "Automatic slug"
+msgstr ""
+
+msgid "Snippet format"
+msgstr ""
+
+msgid "WordPress native snippet"
+msgstr ""
+
+msgid "ACPT function snippet"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Media"
+msgstr ""
+
+msgid "Requires \"Expose via REST API\" on the table."
+msgstr ""
+
+msgid "Click to change the type"
+msgstr ""
+
+msgid "Showing {{start}}–{{end}} of {{total}} records"
+msgstr ""
+
+msgid "AUTO_INCREMENT"
+msgstr ""
+
+msgid "Allow in block bindings"
+msgstr ""
+
+msgid "Block slug"
+msgstr ""
+
+msgid "Clear all"
+msgstr ""
+
+msgid ""
+"Column was successfully copied. Sync the target table to apply the change."
+msgstr ""
+
+msgid "Copy to another table"
+msgstr ""
+
+msgid "Could not delete meta field value"
+msgstr ""
+
+msgid "Default image"
+msgstr ""
+
+msgid "Delete the column from this table after copying"
+msgstr ""
+
+msgid "Deselect"
+msgstr ""
+
+msgid "Drag to reorder"
+msgstr ""
+
+msgid "Edit label"
+msgstr ""
+
+msgid "Enable email notifications"
+msgstr ""
+
+msgid "Import data. Acceptable file formats: JSON, YAML, CSV, YAML"
+msgstr ""
+
+msgid "No other table is available to copy this column into."
+msgstr ""
+
+msgid ""
+"Only post types registered through ACPT are listed here. Don't see the post "
+"type you're looking for (e.g. one added by another plugin, like "
+"WooCommerce's Product)?"
+msgstr ""
+
+msgid "Plugin menu"
+msgstr ""
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record successfully deleted"
+msgstr ""
+
+msgid "Remove item"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Select the level of changes to show"
+msgstr ""
+
+msgid "Sync it in first from the Custom Post Types list"
+msgstr ""
+
+msgid "The file size is too big"
+msgstr ""
+
+msgid "The timeout cannot be negative"
+msgstr ""
+
+msgid "Unable to load the table schema"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Value to copy"
+msgstr ""
+
+msgid "Show sidebar"
+msgstr ""
+
+msgid "Hide sidebar"
+msgstr ""
+
+msgid "Show meta box"
+msgstr ""
+
+msgid ""
+"Whether to show the taxonomy meta box on the post edit screen (classic "
+"editor). Turn it off when the terms are assigned through a custom field. "
+"Default true."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\", which stores JSON. "
+"MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Remove \"{{column}}\" from the index, or change the column to a type that "
+"can be indexed (for example INT or VARCHAR)."
+msgstr ""
+
+msgid ""
+"The index \"{{index}}\" uses the column \"{{column}}\" ({{type}}). MySQL can "
+"index this type only on its first characters."
+msgstr ""
+
+msgid "Set a length on \"{{column}}\" in the index (for example 191)."
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" links the column \"{{column}}\" ({{type}}) to "
+"\"{{refColumn}}\" ({{refType}}) in the table \"{{refTable}}\". MySQL needs "
+"both columns to have the same type."
+msgstr ""
+
+msgid ""
+"An index uses a column that stores JSON. MySQL cannot index a JSON column."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and remove the JSON column from the index, or change "
+"the column type."
+msgstr ""
+
+msgid ""
+"An index uses a text column without a length. MySQL can index this type only "
+"on its first characters."
+msgstr ""
+
+msgid ""
+"Open the Indexes step and set a length on the text column (for example 191)."
+msgstr ""
+
+msgid ""
+"A foreign key links two columns MySQL cannot connect: they must have the "
+"same type, and the referenced column must be a primary key or have a unique "
+"index."
+msgstr ""
+
+msgid ""
+"Open the Foreign keys step and check that each column has the same type as "
+"the column it points to."
+msgstr ""
+
+msgid ""
+"Some rows already in the table point to records that do not exist in the "
+"referenced table, so the foreign key cannot be added."
+msgstr ""
+
+msgid "Fix or clear those values in the table records, then sync again."
+msgstr ""
+
+msgid ""
+"A unique index cannot be added because some rows already share the same "
+"value."
+msgstr ""
+
+msgid ""
+"Make the values unique in the table records, or make the index not unique."
+msgstr ""
+
+msgid "Some values already in the table do not fit the new column type."
+msgstr ""
+
+msgid ""
+"Change those values in the table records, or choose a column type that fits "
+"them."
+msgstr ""
+
+msgid "MySQL refused to change the table."
+msgstr ""
+
+msgid "Check the technical details below, or contact support with them."
+msgstr ""
+
+msgid "The table was not created."
+msgstr ""
+
+msgid ""
+"Part of the changes were already applied to the table and cannot be undone "
+"automatically (see the technical details)."
+msgstr ""
+
+msgid "No changes were applied to the table."
+msgstr ""
+
+msgid "Technical details"
+msgstr ""
+
+msgid "Statements that would run"
+msgstr ""
+
+msgid "Open the Indexes step"
+msgstr ""
+
+msgid "Open the Foreign keys step"
+msgstr ""
+
+msgid "This table can't be synced yet. Fix these problems, then try again:"
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Choose "
+"another column or delete this key part."
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+msgid "Not synced"
+msgstr ""
+
+msgid "Not created"
+msgstr ""
+
+msgid ""
+"The foreign key \"{{key}}\" empties the column \"{{column}}\" (SET NULL) "
+"when the linked record changes, but the column does not allow empty values."
+msgstr ""
+
+msgid ""
+"Allow empty values on \"{{column}}\" in the Columns step (Advanced Mode), or "
+"choose another \"On delete\" / \"On update\" action."
+msgstr ""
+
+msgid ""
+"In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete the foreign key."
+msgstr ""
+
+msgid ""
+"The column \"{{column}}\" ({{type}}) can't be linked to "
+"\"{{refColumn}}\" ({{refType}}): MySQL needs both columns to have the same "
+"type. In the Columns step, turn on Advanced Mode and change the type of "
+"\"{{column}}\" to {{refType}}, or delete this foreign key."
+msgstr ""
+
+msgid ""
+"\"SET NULL\" empties the column \"{{column}}\" when the linked record "
+"changes, but the column doesn't allow empty values. Allow empty values on "
+"\"{{column}}\" in the Columns step (Advanced Mode), or choose another action."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" stores JSON, and MySQL can't index JSON columns. Edit the key "
+"parts to choose another column, or delete this index."
+msgstr ""
+
+msgid ""
+"\"{{column}}\" ({{type}}) can be indexed only on its first characters. Edit "
+"the key parts and set a length (for example 191)."
+msgstr ""
+
+msgid "Datasets"
+msgstr ""
+
+msgid "Feeds"
+msgstr ""
+
+msgid ""
+"Whether the archive of this post type has an RSS feed (/{slug}/feed/). When "
+"off, the feed URLs redirect to the archive and the feed link is removed from "
+"the page head. Defaults to true"
+msgstr ""
+
+#~ msgid ""
+#~ "From this dashboard you can discover and manage every API endpoints "
+#~ "exposed by ACPT. Use the playground to learn how to use every endpoint."
+#~ msgstr ""
+#~ "在此仪表板中，您可以发现和管理 APPT 公开的每个 API 端点。 使用 Playground "
+#~ "了解如何使用每个端点。"
+
+#~ msgid ""
+#~ "Makes this post type available via the admin bar. Default is value of"
+#~ msgstr "通过管理栏提供此帖子类型。默认值为"
+
+#~ msgid ""
+#~ "Makes this taxonomy available for selection in navigation menus. If not "
+#~ "set, the default is inherited from"
+#~ msgstr "使此分类可在导航菜单中进行选择。如果未设置，则默认值继承自"
+
+#~ msgid "Text after. HTML is allowed (ex. &lt;/small&gt;)"
+#~ msgstr "之后的文字。允许 HTML（例如 &lt;/small&gt;）"
+
+#~ msgid ""
+#~ "The position in the menu order the post type should appear. To work,  "
+#~ "must be true. Default null (at the bottom)."
+#~ msgstr ""
+#~ "应显示帖子类型应显示的菜单顺序中的位置。要工作，必须是真的。默认值为 null"
+#~ "（在底部）。"
+
+#~ msgid ""
+#~ "This tool allows you to import settings and meta fields from previously "
+#~ "exported .acpt files (max size allowed is 2Mb)."
+#~ msgstr ""
+#~ "此工具允许您从以前导出的 .acpt 文件导入设置和元字段（允许的最大大小为 "
+#~ "2Mb）。"
+
+#~ msgid ""
+#~ "Use this tool to quick export the general settings and meta fields for "
+#~ "every element in a compressed JSON format called .acpt."
+#~ msgstr ""
+#~ "使用此工具以名为 .acpt 的压缩 JSON 格式快速导出每个元素的常规设置和元字"
+#~ "段。"
+
+#~ msgid ""
+#~ "Where to show the post type in the admin menu. To work,  must be true. If "
+#~ "true, the post type is shown in its own top level menu. If false, no menu "
+#~ "is shown."
+#~ msgstr ""
+#~ "在管理菜单中显示帖子类型的位置。要工作，必须是真的。如果为 true，则帖子类"
+#~ "型将显示在其自己的顶级菜单中。如果为 false，则不显示任何菜单。"
+
+#~ msgid ""
+#~ "Whether the taxonomy is publicly queryable. If not set, the default is "
+#~ "inherited from"
+#~ msgstr "分类是否可公开查询。如果未设置，则默认值继承自"
+
+#~ msgid ""
+#~ "Whether there should be post type archives, or if a string, the archive "
+#~ "slug to use. Will generate the proper rewrite rules if"
+#~ msgstr ""
+#~ "是否应该有帖子类型的存档，或者如果是字符串，则使用存档 slug。如果出现以下"
+#~ "情况，将生成正确的重写规则"
+
+#~ msgid ""
+#~ "Whether to generate and allow a UI for managing terms in this taxonomy in "
+#~ "the admin. If not set, the default is inherited from"
+#~ msgstr ""
+#~ "是否在后台中生成并允许用于管理此分类中的术语的 UI。如果未设置，则默认值继"
+#~ "承自"
+
+#~ msgid ""
+#~ "Whether to generate and allow a UI for managing this post type in the "
+#~ "admin. Default is value of"
+#~ msgstr "是否生成并允许在后台中管理此帖子类型的 UI。默认值为"
+
+#~ msgid ""
+#~ "Whether to list the taxonomy in the Tag Cloud Widget controls. If not "
+#~ "set, the default is inherited from"
+#~ msgstr "是否在“标记云”小组件控件中列出分类。如果未设置，则默认值继承自"
+
+#~ msgid ""
+#~ "Whether to show the taxonomy in the admin menu. If true, the taxonomy is "
+#~ "shown as a submenu of the object type menu. If false, no menu is shown.  "
+#~ "must be true. If not set, default is inherited from  (default true)."
+#~ msgstr ""
+#~ "是否在管理菜单中显示分类。如果为 true，则分类将显示为对象类型菜单的子菜"
+#~ "单。如果为 false，则不显示任何菜单。 必须为 true。如果未设置，则继承自 "
+#~ "（default true）。"
+
+#~ msgid ""
+#~ "Whether to show the taxonomy in the quick/bulk edit panel. It not set, "
+#~ "the default is inherited from"
+#~ msgstr "是否在快速/批量编辑面板中显示分类。它未设置，默认值继承自"
+
+#~ msgid "Search an icon"
+#~ msgstr "搜索图标"

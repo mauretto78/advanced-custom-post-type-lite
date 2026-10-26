@@ -9,6 +9,7 @@ import {savedIsClosed} from "../../utils/localStorage";
  */
 const initialState = {
     fields: [],
+    activeElement: null,
     selectedElements: [],
     closedElements: []
 };
@@ -33,6 +34,7 @@ export const productDataFieldsStateSlice = createSlice({
         addOption: (state, action) => {
             if(action.payload){
                 const {fieldIndex, option} = action.payload;
+                if(!state.fields[fieldIndex]) return;
 
                 if(!state.fields[fieldIndex].options){
                     state.fields[fieldIndex].options = [];
@@ -43,17 +45,24 @@ export const productDataFieldsStateSlice = createSlice({
         },
         deleteAllFields: (state) => {
             state.fields = [];
+            state.activeElement = null;
+            state.selectedElements = [];
         },
         deleteField: (state, action) => {
             if(action.payload){
                 const {field} = action.payload;
 
                 state.fields = state.fields.filter(p => p.id !== field.id);
+
+                if(state.activeElement?.id === field.id){
+                    state.activeElement = null;
+                }
             }
         },
         deleteOption: (state, action) => {
             if(action.payload){
                 const {fieldIndex, optionIndex} = action.payload;
+                if(!state.fields[fieldIndex] || !state.fields[fieldIndex].options) return;
 
                 state.fields[fieldIndex].options.splice(optionIndex, 1);
             }
@@ -64,13 +73,18 @@ export const productDataFieldsStateSlice = createSlice({
         hideAll: (state, action) => {
             const ids = getElementIds(state.fields);
             ids.map((id) => {
-                state.closedElements.push(id);
+                if(!state.closedElements.includes(id)){
+                    state.closedElements.push(id);
+                }
             });
         },
         hideElement: (state, action) => {
             if(action.payload){
                 const {id} = action.payload;
-                state.closedElements.push(id);
+
+                if(!state.closedElements.includes(id)){
+                    state.closedElements.push(id);
+                }
             }
         },
         hydrateState: (state, action) => {
@@ -79,7 +93,7 @@ export const productDataFieldsStateSlice = createSlice({
 
                 const ids = getElementIds(state.fields);
                 ids.map((id) => {
-                    if(savedIsClosed(id)){
+                    if(savedIsClosed(id) && !state.closedElements.includes(id)){
                         state.closedElements.push(id);
                     }
                 });
@@ -90,7 +104,9 @@ export const productDataFieldsStateSlice = createSlice({
                 const {element, selected} = action.payload;
 
                 if(selected === true){
-                    state.selectedElements.push(element);
+                    if(!state.selectedElements.some(e => e.id === element.id)){
+                        state.selectedElements.push(element);
+                    }
                 } else {
                     state.selectedElements = state.selectedElements.filter(e => e.id !== element.id);
                 }
@@ -98,7 +114,35 @@ export const productDataFieldsStateSlice = createSlice({
         },
         setFields: (state, action) => {
             if(action.payload){
-                state.fields = action.payload;
+                // Support both {fields: [...]} wrapper (canvas UI) and direct array (legacy)
+                const fields = Array.isArray(action.payload)
+                    ? action.payload
+                    : action.payload.fields;
+                state.fields = fields;
+            }
+        },
+        setActiveElement: (state, action) => {
+            state.activeElement = action.payload?.field ?? null;
+        },
+        unsetActiveElement: (state) => {
+            state.activeElement = null;
+        },
+        setOptions: (state, action) => {
+            if(action.payload){
+                const {fieldIndex, sortedOptions} = action.payload;
+                if(!state.fields[fieldIndex]) return;
+
+                state.fields[fieldIndex].options = sortedOptions;
+            }
+        },
+        updateField: (state, action) => {
+            if(action.payload){
+                const {field} = action.payload;
+                const fieldIndex = state.fields.findIndex((f) => f.id === field.id);
+
+                if(fieldIndex !== -1){
+                    state.fields[fieldIndex] = field;
+                }
             }
         },
         showAll: (state, payload) => {
@@ -124,9 +168,13 @@ export const {
     hideElement,
     hydrateState,
     selectElement,
+    setActiveElement,
     setFields,
+    setOptions,
     showElement,
     showAll,
+    unsetActiveElement,
+    updateField,
 } = productDataFieldsStateSlice.actions;
 
 export default productDataFieldsStateSlice.reducer

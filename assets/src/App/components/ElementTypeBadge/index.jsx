@@ -9,9 +9,16 @@ const ElementTypeBadge = ({element}) => {
     let variant;
     let label;
 
-    if(element.id === 'user_meta') {
+    if(!element){
+        return null;
+    }
+
+    if(element.id && element.id === 'user_meta') {
         variant = styleVariants.DANGER;
         label = useTranslation("User");
+    } else if(element.parentSlug){
+        variant = styleVariants.WARNING;
+        label = useTranslation("Child");
     } else if(element.children){
         variant = (element.children.length > 0 || element.parentId === null) ? styleVariants.SECONDARY : styleVariants.WARNING;
         label = useTranslation((element.children.length > 0 || element.parentId === null) ? "Parent" : "Child");
@@ -20,10 +27,18 @@ const ElementTypeBadge = ({element}) => {
         label = useTranslation("Native");
     } else if(element.isWooCommerce){
         variant = styleVariants.INFO;
-        label = "WooCommerce";
+        label = useTranslation("WooCommerce");
     } else {
-        variant = styleVariants.WARNING;
-        label = useTranslation('Custom');
+        variant = styleVariants.PRIMARY;
+        label = useTranslation("Custom");
+    }
+
+    if(!variant){
+        return null;
+    }
+
+    if(!label){
+        return null;
     }
 
     return (
@@ -34,7 +49,15 @@ const ElementTypeBadge = ({element}) => {
 };
 
 ElementTypeBadge.propTypes = {
-    element: PropTypes.object.isRequired
+    element: PropTypes.shape(
+        {
+            id: PropTypes.string,
+            children: PropTypes.arrayOf(PropTypes.object),
+            parentId: PropTypes.string,
+            isNative: PropTypes.bool,
+            isWooCommerce: PropTypes.bool,
+        }
+    ).isRequired
 };
 
 export default ElementTypeBadge;

@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Includes;
 
+use ACPT_Lite\Core\Models\Settings\SettingsModel;
 use ACPT_Lite\Utils\Settings\Settings;
 
 /**
@@ -13,8 +14,8 @@ use ACPT_Lite\Utils\Settings\Settings;
  * @link       https://acpt.io
  * @since      1.0.0
  *
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/includes
+ * @package    acpt-lite
+ * @subpackage acpt-lite/includes
  */
 
 /**
@@ -24,35 +25,55 @@ use ACPT_Lite\Utils\Settings\Settings;
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    advanced-custom-post-type
- * @subpackage advanced-custom-post-type/includes
+ * @package    acpt-lite
+ * @subpackage acpt-lite/includes
  * @author     Mauro Cassani <maurocassani1978@gmail.com>
  */
 class ACPT_Lite_Internalization
 {
-	/**
-	 * @return string
-	 */
-    private function getLocale()
+    public const FALLBACK_LANGUAGE = 'en_US';
+
+    /**
+     * @return string
+     */
+    private function getLocale(): string
     {
-    	try {
-		    return Settings::get('language', 'en_US');
-	    } catch (\Exception $exception){
-		    return 'en_US';
-	    }
+        try {
+            $syncLanguage = Settings::get(SettingsModel::LANGUAGE_SYNC, true);
+
+            if ($syncLanguage) {
+                return get_locale();
+            }
+
+            return Settings::get(SettingsModel::LANGUAGE, self::FALLBACK_LANGUAGE);
+        } catch (\Exception $exception) {
+            return self::FALLBACK_LANGUAGE;
+        }
     }
 
-	/**
-	 * Run localisation
-	 */
-    public function run()
+    public function run(): void
     {
-	    // Needed to load menu pages translations
-	    load_textdomain( ACPT_LITE_PLUGIN_NAME, ACPT_LITE_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
+        $defaultLanguage = self::FALLBACK_LANGUAGE;
+        $moFile = file_exists($this->moFilePath($this->getLocale())) ? $this->moFilePath($this->getLocale()) : $this->moFilePath($defaultLanguage);
 
-	    add_action( 'plugins_loaded', function (){
-		    unload_textdomain( ACPT_LITE_PLUGIN_NAME, false);
-		    load_textdomain( ACPT_LITE_PLUGIN_NAME, ACPT_LITE_PLUGIN_DIR_PATH . '/i18n/languages/'.$this->getLocale().'.mo');
-	    } );
+        // Needed to load menu pages translations. Deferred to plugins_loaded
+        // (rather than called synchronously here) so it doesn't force
+        // wp_get_current_user()/pluggable.php to resolve ahead of WordPress's
+        // own boot sequence: loading pluggable.php early stops later plugins
+        // from overriding wp_mail() and friends (#1377).
+        add_action('plugins_loaded', function () use ($moFile) {
+            load_textdomain(ACPT_LITE_PLUGIN_NAME, $moFile);
+        });
+    }
+
+    /**
+     * Constructs the file path to the .mo file for a given language.
+     *
+     * @param string $lang The language code used to determine the .mo file path.
+     * @return string The full path to the .mo file for the specified language.
+     */
+    private function moFilePath(string $lang): string
+    {
+        return ACPT_LITE_PLUGIN_DIR_PATH . '/i18n/languages/'.$lang.'.mo';
     }
 }
