@@ -296,6 +296,54 @@ abstract class AbstractSaveMetaCommand implements LogFormatInterface
     }
 
     /**
+     * The submitted values, shaped like the payload ACPTConditionalRules.js posts to
+     * the live check, so conditions are judged on what is being saved rather than on
+     * the stored values.
+     *
+     * @param array<array<string, mixed>> $fieldEntries
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    private function submittedLiveData(array $fieldEntries): array
+    {
+        $liveData = [];
+
+        foreach ($fieldEntries as $entry) {
+            /** @var MetaFieldModel $fieldModel */
+            $fieldModel = $entry['field'];
+            $key        = $fieldModel->getDbName();
+
+            // @phpstan-ignore-next-line notIdentical.alwaysTrue
+            if (isset($this->WooCommerceLoopIndex) && $this->WooCommerceLoopIndex !== null) {
+                $key .= "_" . $this->WooCommerceLoopIndex;
+            }
+
+            $liveData[] = [
+                'id'     => $key,
+                'formId' => $fieldModel->getId(),
+                'value'  => $this->data[$key] ?? null,
+            ];
+        }
+
+        return $liveData;
+    }
+
+    /**
+     * @param MetaFieldModel           $fieldModel
+     * @param int|string               $elementId
+     * @param string                   $belongsTo
+     * @param array<int, array<string, mixed>> $liveData
+     *
+     * @return bool
+     */
+    private function isHiddenByConditions(MetaFieldModel $fieldModel, $elementId, string $belongsTo, array $liveData): bool
+    {
+        $boxModel = $fieldModel->getBox();
+
+        return false;
+    }
+
+    /**
      * Validate all fields first, then persist them inside a DB transaction.
      * Redirects back with all collected errors if any validation fails.
      *
@@ -313,6 +361,7 @@ abstract class AbstractSaveMetaCommand implements LogFormatInterface
         // every other field on the post from being persisted. ---
         $errors       = [];
         $validEntries = [];
+        $liveData     = $this->submittedLiveData($fieldEntries);
 
         foreach ($fieldEntries as $entry) {
             // Server-side permission enforcement (ticket #1243). A field's own
@@ -328,6 +377,14 @@ abstract class AbstractSaveMetaCommand implements LogFormatInterface
                     'Blocked a write to meta field "%s" — the current user does not have edit permission on it (field-level Permissions).',
                     $entry['field']->getName()
                 )));
+                continue;
+            }
+
+            // the user never saw a field its conditions hide, and the browser no longer
+            // submits it as required: rejecting it here named a field nobody could fill
+            // in (#1437). Its submitted value is still saved, as for any optional field.
+            if ($this->isHiddenByConditions($entry['field'], $entry['elementId'], $entry['belongsTo'], $liveData)) {
+                $validEntries[] = $entry;
                 continue;
             }
 

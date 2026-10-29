@@ -58,6 +58,19 @@ class Strings
     }
 
     /**
+     * Character length as the browser counts it: an accented letter is one character,
+     * not two UTF-8 bytes, and a textarea's CRLF line break counts once (#1439).
+     *
+     * @param string $string
+     *
+     * @return int
+     */
+    public static function length(string $string): int
+    {
+        return mb_strlen(str_replace("\r\n", "\n", $string), 'UTF-8');
+    }
+
+    /**
      * @param string|null $string
      * @return string|null
      */

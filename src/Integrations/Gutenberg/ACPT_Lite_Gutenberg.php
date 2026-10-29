@@ -79,11 +79,15 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
     }
 
     /**
-     * Decides on plugins_loaded, not while plugins are being included:
-     * isActive() calls use_block_editor_for_post(), whose callbacks (core's and
-     * other plugins') may need pluggable functions and filters that are not
-     * loaded yet at that point (#1385). runIntegration() only hooks into init,
-     * which runs after plugins_loaded.
+     * Decides on init, priority 20, not while plugins are being included:
+     * - isActive() calls use_block_editor_for_post(), whose callbacks (core's and
+     *   other plugins') may need pluggable functions and filters that are not
+     *   loaded yet at that point (#1385);
+     * - post types are registered on init (priority 10), and
+     *   use_block_editor_for_post_type() is false for one that does not exist yet:
+     *   deciding on plugins_loaded skipped the server-side registration on the
+     *   editor of every such post type, GeneratePress Elements and ACPT's own
+     *   CPTs included (#1441).
      *
      * @param Request|null $request
      *
@@ -91,15 +95,15 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
      */
     public function run(?Request $request = null): void
     {
-        if (did_action('plugins_loaded')) {
+        if (did_action('init') && !doing_action('init')) {
             parent::run($request);
 
             return;
         }
 
-        add_action('plugins_loaded', function () use ($request) {
+        add_action('init', function () use ($request) {
             parent::run($request);
-        });
+        }, 20);
     }
 
     /**
@@ -139,8 +143,27 @@ class ACPT_Lite_Gutenberg extends AbstractIntegration
         }
 
         if (Features::hasMeta()) {
-            add_action('init', [new ACPT_Lite_Gutenberg(), 'registerACPTBlocks']);
+            $this->onInit([new ACPT_Lite_Gutenberg(), 'registerACPTBlocks']);
         }
+    }
+
+    /**
+     * run() decides during init, after the default priority has fired: a
+     * callback hooked on init from there would never run.
+     *
+     * @param callable $callback
+     *
+     * @return void
+     */
+    private function onInit(callable $callback): void
+    {
+        if (doing_action('init')) {
+            $callback();
+
+            return;
+        }
+
+        add_action('init', $callback);
     }
 
     /**

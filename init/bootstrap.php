@@ -123,21 +123,25 @@ function checkForACPTLitePluginUpgrades(): void
 	}
 }
 
-/**
- * Checks whether tests are currently being executed in the environment.
- *
- * Not spoofable from a production HTTP request: PHPUNIT_ACPT_TEST_SUITE is only
- * ever defined by tests/_inc/bootstrap.php (loaded solely by the WP PHPUnit test
- * scaffold), and php_sapi_name() can't be influenced by request data — a normal
- * web request never satisfies both conditions.
- *
- * @return bool Returns true if tests are running, false otherwise.
- */
-function testsAreRunning(): bool
-{
-    return (
-        defined('PHPUNIT_ACPT_TEST_SUITE') &&
-        PHPUNIT_ACPT_TEST_SUITE &&
-        php_sapi_name() === 'cli'
-    );
+// ACPT Lite 2.1.0 declares the same function (the Lite build renames only the ACPT* functions):
+// without the guard, activating ACPT while Lite is active is a fatal error
+if (!function_exists('testsAreRunning')) {
+    /**
+     * Checks whether tests are currently being executed in the environment.
+     *
+     * Not spoofable from a production HTTP request: PHPUNIT_ACPT_TEST_SUITE is only
+     * ever defined by tests/_inc/bootstrap.php (loaded solely by the WP PHPUnit test
+     * scaffold), and php_sapi_name() can't be influenced by request data — a normal
+     * web request never satisfies both conditions.
+     *
+     * @return bool Returns true if tests are running, false otherwise.
+     */
+    function testsAreRunning(): bool
+    {
+        return (
+            defined('PHPUNIT_ACPT_TEST_SUITE') &&
+            PHPUNIT_ACPT_TEST_SUITE &&
+            php_sapi_name() === 'cli'
+        );
+    }
 }
