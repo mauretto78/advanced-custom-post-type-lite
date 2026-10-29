@@ -4,7 +4,7 @@
     'name' => 'mauretto78/advanced-custom-post-type-lite',
     'pretty_version' => 'dev-master',
     'version' => 'dev-master',
-    'reference' => 'c1ca2e56144a7588631cdbbc085463f36605446a',
+    'reference' => 'f80e333841e4e6690425d0251d860d16a73800f2',
     'type' => 'wordpress-plugin',
     'install_path' => __DIR__ . '/../',
     'aliases' => 

@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, custom fields, meta box
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -221,3 +221,11 @@ Based on ACPT v2.1.7.
 * No more conflicts with plugins that bundle other versions of the same PHP libraries
 * Back-end and front-end improvements and fixes from ACPT v2.1.7
 * Requires WordPress 6.5+ and PHP 7.4+
+
+= 2.1.1 =
+
+Based on ACPT v2.1.9.
+
+* Upgrading to ACPT PRO works again: activating ACPT PRO 2.1.9 or newer while ACPT Lite is active imports your post types, taxonomies and field groups, then deactivates Lite
+* The ACPT block is now available in the block editor of post types registered by other plugins and themes (e.g. GeneratePress Elements)
+* Back-end improvements and fixes from ACPT v2.1.8 and v2.1.9

@@ -190,7 +190,7 @@ if (!function_exists('assoc_acpt_taxonomy_to_acpt_post')) {
     }
 }
 
-if (!function_exists('remove_assoc_acpt_taxonomy_to_acpt_post')) {
+if (!function_exists('remove_assoc_acpt_taxonomy_from_acpt_post')) {
 
     /**
      * Remove association between a custom taxonomy to a custom post type.
