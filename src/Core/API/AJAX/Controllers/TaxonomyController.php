@@ -112,6 +112,8 @@ class TaxonomyController extends AbstractController
             $search = isset($data['search']) ? $data['search'] : null;
             $sort = isset($data['sort']) ? $data['sort'] : null;
             $order = isset($data['order']) ? $data['order'] : null;
+            // the admin list lists broken taxonomies too, so it matches count() (M13)
+            $includeBroken = !empty($data['includeBroken']);
         }
 
         if ($taxonomy) {
@@ -120,17 +122,19 @@ class TaxonomyController extends AbstractController
             ]));
         }
 
+        $listArgs = [
+            'page' => isset($page) ? $page : 1,
+            'perPage' => isset($perPage) ? $perPage : 20,
+            'search' => isset($search) ? $search : null,
+            'sort' => isset($sort) ? $sort : null,
+            'order' => isset($order) ? $order : null,
+        ];
+
         wp_send_json([
             'count' => TaxonomyRepository::count([
                 'search' => isset($search) ? $search : null,
             ]),
-            'records' => TaxonomyRepository::get([
-                'page' => isset($page) ? $page : 1,
-                'perPage' => isset($perPage) ? $perPage : 20,
-                'search' => isset($search) ? $search : null,
-                'sort' => isset($sort) ? $sort : null,
-                'order' => isset($order) ? $order : null,
-            ]),
+            'records' => !empty($includeBroken) ? TaxonomyRepository::getForAdminList($listArgs) : TaxonomyRepository::get($listArgs),
         ]);
     }
 

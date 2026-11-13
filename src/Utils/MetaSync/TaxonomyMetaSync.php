@@ -94,7 +94,7 @@ class TaxonomyMetaSync extends AbstractMetaSync
                     JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                     WHERE tm.meta_key=%s AND tax.taxonomy=%s
                 ";
-                $results = ACPT_Lite_DB::getResults($query, [$parentKey, $taxonomy]);
+                $results = ACPT_Lite_DB::getResults($query, [$parentKey, $taxonomy], 7200, null, true);
 
                 foreach ($results as $result) {
                     $oldMetaValue = Serializer::unserialize($result->meta_value);
@@ -139,7 +139,7 @@ class TaxonomyMetaSync extends AbstractMetaSync
                     JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
                     WHERE tm.meta_key=%s AND tax.taxonomy=%s
                 ";
-        $results = ACPT_Lite_DB::getResults($query, [$parentKey, $taxonomy]);
+        $results = ACPT_Lite_DB::getResults($query, [$parentKey, $taxonomy], 7200, null, true);
 
         foreach ($results as $result) {
             $oldMetaValue = Serializer::unserialize($result->meta_value);
@@ -214,24 +214,16 @@ class TaxonomyMetaSync extends AbstractMetaSync
         global $wpdb;
 
         if ($newKey !== $oldKey) {
+            $rename = self::renameFieldKeys('tm.meta_key', $oldKey, $newKey);
             $sql = "
-                UPDATE `{$wpdb->prefix}termmeta` tm 
+                UPDATE `{$wpdb->prefix}termmeta` tm
                 JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
                 JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
-                SET tm.meta_key=%s 
-                WHERE tm.meta_key=%s AND tax.taxonomy=%s
+                SET {$rename['set']}
+                WHERE {$rename['where']} AND tax.taxonomy=%s
             ";
 
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$newKey, $oldKey, $taxonomy]);
-
-            $sql = "
-                UPDATE `{$wpdb->prefix}termmeta` tm 
-                JOIN `{$wpdb->prefix}terms` t ON t.term_id=tm.term_id
-                JOIN `{$wpdb->prefix}term_taxonomy` tax ON tax.term_id=t.term_id
-                SET meta_key=REPLACE(tm.meta_key, %s, %s) 
-                WHERE tm.meta_key LIKE %s AND tax.taxonomy=%s
-            ";
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%', $taxonomy]);
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, array_merge($rename['args'], [$taxonomy]));
         }
     }
 }

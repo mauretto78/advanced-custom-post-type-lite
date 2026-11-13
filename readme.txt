@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, custom fields, meta box
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,3 +229,14 @@ Based on ACPT v2.1.9.
 * Upgrading to ACPT PRO works again: activating ACPT PRO 2.1.9 or newer while ACPT Lite is active imports your post types, taxonomies and field groups, then deactivates Lite
 * The ACPT block is now available in the block editor of post types registered by other plugins and themes (e.g. GeneratePress Elements)
 * Back-end improvements and fixes from ACPT v2.1.8 and v2.1.9
+
+= 2.1.2 =
+
+Based on ACPT v2.1.10.
+
+* Renaming a field or a box no longer loses its saved values
+* A field group with a negative location rule (e.g. "Post type != Page") no longer shows up on user profiles, term screens or comments
+* The field group editor no longer reports unsaved changes right after saving, and the field settings panel always shows the current description
+* ACPT Lite's database tables are always InnoDB: existing ones are converted on update, and the Health check repairs any that aren't
+* New public PHP functions let other plugins create field groups and save field values in bulk
+* Back-end improvements, security and fixes from ACPT v2.1.10

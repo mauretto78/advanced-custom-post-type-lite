@@ -139,17 +139,28 @@ class GlobalsController extends AbstractController
         try {
             $dbHealthCheck = ACPT_Lite_DB_Tools::healthCheck();
             $dbCheck = (empty($dbHealthCheck)) ? 'ok' : 'Missing tables or columns';
+
+            foreach ($dbHealthCheck as $issue) {
+                if (is_array($issue) && isset($issue['engine'])) {
+                    $dbCheck = 'Missing tables or columns, or tables not using the InnoDB engine';
+                    break;
+                }
+            }
         } catch (\Exception $exception) {
             do_action("acpt/error", $exception);
             $dbHealthCheck = $exception->getMessage();
             $dbCheck = $exception->getMessage();
         }
 
+        // Custom Content Tables not on InnoDB: reported, never repaired (#1455 L4)
+        $cctEngines = [];
+
         wp_send_json([
             'db' => $dbCheck,
             'db_health_check' => $dbHealthCheck,
             'version' => $versionCheck,
             'cache' => $cacheCheck,
+            'cct_engines' => (object)$cctEngines,
         ]);
     }
 

@@ -216,15 +216,22 @@ export function debounce(func, timeout = 300){
  * Converts a string of comma-separated values into an array of numbers.
  *
  * @param {JQuery} el - An object that contains a `val` method returning a string of comma-separated values.
- * @return {number[]} An array of numbers obtained by splitting the input string. If the input is falsy, returns an empty array.
+ * @return {number[]} The positive attachment ids in the input. Empty for a missing element or an empty value.
  */
 export function stringsToArray(el) {
 
-    if(!el){
+    // an empty jQuery object is truthy, and its val() is undefined
+    if(!el || el.length === 0){
         return [];
     }
 
-    return el.val().split(",").map(Number);
+    // "".split(",") is [""], which Number() turns into a phantom attachment 0 (#1455)
+    return String(el.val() || "")
+        .split(",")
+        .map((id) => id.trim())
+        .filter(Boolean)
+        .map(Number)
+        .filter((id) => Number.isInteger(id) && id > 0);
 }
 
 /**

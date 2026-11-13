@@ -4,6 +4,7 @@ import "./scss/block.scss";
 import ACPTBasicBlock from "./components/ACPTBasicBlock";
 import {fetchMeta} from "./data/metaFields";
 import {fetchGlobals} from "./data/globals";
+import {watchMetaBoxSaveErrors} from "./utils/metaBoxSaveErrors";
 import {logoIcon} from "./icons/logoIcon";
 import {fieldTypes} from "../App/constants/fields";
 
@@ -17,6 +18,9 @@ if ( isLodash() ) {
 }
 
 fetchGlobals();
+
+// show the meta box save errors right away, not on the next page load (#1455, M10)
+watchMetaBoxSaveErrors();
 
 /**
  * The "--Select--" entry heading every block's field picker

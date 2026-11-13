@@ -120,6 +120,11 @@ trait VisibilityTrait
             $taxonomy = ACPT_Lite_WooCommerce::getWooCommerceProductAttributeName((int)$id);
         }
 
+        // M15: a rule only matches where its subject exists. Without a post, a term or an
+        // option page to compare, a negative rule ("Post type != page") would be true on
+        // every screen: users, terms, option pages, comments.
+        $hasPostContext = !empty($postType);
+
         foreach ($logicBlocks as $logicBlock) {
             $matches = 0;
 
@@ -140,14 +145,14 @@ trait VisibilityTrait
 
                     case MetaTypes::CUSTOM_POST_TYPE:
 
-                        if ($this->reviewCondition($postType, $operator, $find)) {
+                        if ($hasPostContext && $this->reviewCondition($postType, $operator, $find)) {
                             $matches++;
                         }
 
                         break;
                     case BelongsTo::POST_ID:
 
-                        if ($this->reviewCondition($postId, $operator, $find)) {
+                        if ($hasPostContext && $this->reviewCondition($postId, $operator, $find)) {
                             $matches++;
                         }
 
@@ -156,7 +161,7 @@ trait VisibilityTrait
 
                         $postParent = get_post_parent($postId);
 
-                        if ($postParent !== null) {
+                        if ($hasPostContext && $postParent !== null) {
                             if ($this->reviewCondition($postParent->ID, $operator, $find)) {
                                 $matches++;
                             }
@@ -168,7 +173,7 @@ trait VisibilityTrait
 
                         $post = get_post($postId);
 
-                        if ($post instanceof \WP_Post) {
+                        if ($hasPostContext && $post instanceof \WP_Post) {
                             $terms = Terms::getForPostId($post->ID);
 
                             if (!empty($terms)) {
@@ -203,7 +208,7 @@ trait VisibilityTrait
 
                         $file = Meta::fetch($postId, MetaTypes::CUSTOM_POST_TYPE, '_wp_page_template', true);
 
-                        if ($this->reviewCondition($file, $operator, $find)) {
+                        if ($hasPostContext && $this->reviewCondition($file, $operator, $find)) {
                             $matches++;
                         }
 
@@ -215,21 +220,21 @@ trait VisibilityTrait
                         $format = get_post_format((int)$postId);
                         $format = ($format !== false) ? $format : 'standard';
 
-                        if ($this->reviewCondition($format, $operator, $find)) {
+                        if ($hasPostContext && $this->reviewCondition($format, $operator, $find)) {
                             $matches++;
                         }
 
                         break;
                     case MetaTypes::TAXONOMY:
 
-                        if ($this->reviewCondition($taxonomy, $operator, $find)) {
+                        if (!empty($taxonomy) && $this->reviewCondition($taxonomy, $operator, $find)) {
                             $matches++;
                         }
 
                         break;
                     case BelongsTo::TERM_ID:
 
-                        if ($this->reviewCondition($termId, $operator, $find)) {
+                        if (!empty($termId) && $this->reviewCondition($termId, $operator, $find)) {
                             $matches++;
                         }
 

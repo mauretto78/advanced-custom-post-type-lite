@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Core\Models\Meta;
 
+use ACPT_Lite\Constants\ExtraFields;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\Abstracts\AbstractModel;
@@ -872,9 +873,27 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
     {
         $dbName = '';
 
-        $dbName .= Strings::toDBFormat($this->getBox()->getName()).'_'.Strings::toDBFormat($this->name);
+        $dbName .= Strings::toDBFormat($this->getBox()->getName()).'_'.$this->getInnerClonesKeySegment().Strings::toDBFormat($this->name);
 
         return $dbName;
+    }
+
+    /**
+     * For a field cloned through a Clone inside a Clone: the inner Clones' names, outermost first,
+     * each followed by "_" (e.g. "clone_b_"), so its key cannot collide with a direct clone of
+     * the same field in the same box (#1455 M21). Empty for every other field.
+     *
+     * @return string
+     */
+    public function getInnerClonesKeySegment(): string
+    {
+        $segment = '';
+
+        for ($forgedBy = $this->forgedBy; $forgedBy !== null && $forgedBy->forgedBy !== null; $forgedBy = $forgedBy->forgedBy) {
+            $segment = Strings::toDBFormat($forgedBy->name).'_'.$segment;
+        }
+
+        return $segment;
     }
 
     /**
@@ -1564,4 +1583,30 @@ class MetaFieldModel extends AbstractModel implements \JsonSerializable
         $this->setFindLabel($belong->getFindAsSting());
     }
 
+    /**
+     * Retrieves an array of storage keys based on the database name and type of the meta field.
+     *
+     * @return list<string> The meta keys the field stores its value under: the main key first, then its sidecar keys.
+     */
+    public function getStorageKeys(): array
+    {
+        $dbName = $this->getDbName();
+        $keys = [
+            $dbName,
+            $dbName . '_' . ExtraFields::TYPE,
+            $dbName . '_' . ExtraFields::ID
+        ];
+
+        if ($this->getForgedBy()) {
+            $keys[] = $dbName . '_' . ExtraFields::FORGED_BY;
+        }
+
+        switch ($this->getType()) {
+            case MetaFieldModel::DATE_TYPE:
+                $keys[] = $dbName . '_' . ExtraFields::FORMAT;
+                break;
+        }
+
+        return array_values(array_unique($keys));
+    }
 }

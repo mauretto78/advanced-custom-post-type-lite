@@ -3,6 +3,7 @@
 namespace ACPT_Lite\Core\Repository;
 
 use ACPT_Lite\Constants\BelongsTo;
+use ACPT_Lite\Constants\ExtraFields;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Belong\BelongModel;
@@ -52,7 +53,7 @@ class MetaRepository extends AbstractRepository
      * @return bool
      * @throws \Exception
      */
-    public static function deleteAll(array $args)
+    public static function deleteAll(array $args): bool
     {
         self::validateArgs(self::mandatoryKeys([]), $args);
 
@@ -80,7 +81,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function deleteBelongs($belongsTo, $find)
+    public static function deleteBelongs(string $belongsTo, string $find): void
     {
         $sql = "
 			SELECT b.id FROM 
@@ -118,7 +119,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function deleteMetaGroup(string $id)
+    public static function deleteMetaGroup(string $id): void
     {
         ACPT_Lite_DB::startTransaction();
 
@@ -193,7 +194,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function deleteMetaBox(string $boxId)
+    public static function deleteMetaBox(string $boxId): void
     {
         $sql = "
             DELETE
@@ -234,7 +235,7 @@ class MetaRepository extends AbstractRepository
      * @return bool
      * @throws \Exception
      */
-    public static function deleteMetaBoxById(array $args)
+    public static function deleteMetaBoxById(array $args): bool
     {
         // @TODO questo metodo è inutile????
 
@@ -264,7 +265,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function deleteMetaField(string $fieldId)
+    public static function deleteMetaField(string $fieldId): void
     {
         ACPT_Lite_DB::startTransaction();
 
@@ -300,7 +301,7 @@ class MetaRepository extends AbstractRepository
      * @return bool
      * @throws \Exception
      */
-    public static function existsMetaBox(array $args)
+    public static function existsMetaBox(array $args): bool
     {
         $mandatoryKeys = [
             'boxName' => [
@@ -339,7 +340,7 @@ class MetaRepository extends AbstractRepository
      * @return bool
      * @throws \Exception
      */
-    public static function existsMetaField(array $args)
+    public static function existsMetaField(array $args): bool
     {
         $mandatoryKeys = [
             'fieldName' => [
@@ -384,15 +385,10 @@ class MetaRepository extends AbstractRepository
     }
 
     /**
-     * @param $excludeId
-     *
-     * @return array
-     */
-    /**
      * @param string $excludeId
      * @return array<mixed>
      */
-    public static function metaFieldsFlatArray($excludeId)
+    public static function metaFieldsFlatArray(string $excludeId): array
     {
         $guery = "
 	        SELECT 
@@ -640,11 +636,10 @@ class MetaRepository extends AbstractRepository
 
         $groupQuery .= ' GROUP BY g.id';
 
-        if ($sort !== null && $order !== null) {
-            $groupQuery .= " ORDER BY ".$sort." ".$order;
-        } else {
-            $groupQuery .= ' ORDER BY g.group_name ASC';
-        }
+        $groupQuery .= self::orderByClause($sort, $order, [
+            'name' => 'g.group_name',
+            'label' => 'g.label',
+        ], 'g.group_name ASC');
 
         $groups = ACPT_Lite_DB::getResults($groupQuery, $groupQueryArgs);
         $groupModels = [];
@@ -789,6 +784,7 @@ class MetaRepository extends AbstractRepository
 
                         // add cloned fields
                         if ($clonedFields) {
+                            self::addClonedFieldsToBox($boxModel, $fieldModel);
                         }
                     }
 
@@ -807,7 +803,7 @@ class MetaRepository extends AbstractRepository
     /**
      * @return string[]
      */
-    public static function getGroupNames()
+    public static function getGroupNames(): array
     {
         $names = [];
         $query = "
@@ -829,7 +825,7 @@ class MetaRepository extends AbstractRepository
     /**
      * @return string[]
      */
-    public static function getBoxNames()
+    public static function getBoxNames(): array
     {
         $names = [];
         $query = "
@@ -851,7 +847,7 @@ class MetaRepository extends AbstractRepository
     /**
      * @return string[]
      */
-    public static function getFieldNames()
+    public static function getFieldNames(): array
     {
         $names = [];
         $query = "
@@ -874,7 +870,7 @@ class MetaRepository extends AbstractRepository
     /**
      * @return array<int, array{id: string, box_name: string, field_name: string}>
      */
-    public static function getFieldDBNames()
+    public static function getFieldDBNames(): array
     {
         $records = [];
         $query = "
@@ -1481,6 +1477,19 @@ class MetaRepository extends AbstractRepository
     }
 
     /**
+     * Adds the forged copies of the fields a Clone field clones to the Clone's box, so the save
+     * loop sees them. A cloned Clone adds its own cloned fields too, at any depth (#1455 M21);
+     * getClonedFields() skips a Clone already in the chain, so this stops.
+     *
+     * @param MetaBoxModel $boxModel
+     * @param MetaFieldModel $fieldModel
+     */
+    private static function addClonedFieldsToBox(MetaBoxModel $boxModel, MetaFieldModel $fieldModel): void
+    {
+        return;
+    }
+
+    /**
      * @param string $id
      * @param bool $lazy
      *
@@ -1688,7 +1697,9 @@ class MetaRepository extends AbstractRepository
         $sql .= " WHERE 1 = 1";
 
         if ($types) {
-            $sql .= " AND f.field_type IN ('".implode("','", $types)."')";
+            $types = array_values((array)$types);
+            $sql .= " AND f.field_type IN (".implode(', ', array_fill(0, count($types), '%s')).")";
+            $queryArgs = array_merge($queryArgs, $types);
         }
 
         if ($blockId) {
@@ -1696,7 +1707,10 @@ class MetaRepository extends AbstractRepository
             $queryArgs[] = $blockId;
         }
 
-        $sql .= ' GROUP BY f.id ORDER BY f.'.$sortBy.' ASC;';
+        $sql .= ' GROUP BY f.id' . self::orderByClause($sortBy, 'ASC', [
+            'field_name' => 'f.field_name',
+            'sort' => 'f.sort',
+        ], 'f.field_name ASC') . ';';
 
         $results = [];
         $fields = ACPT_Lite_DB::getResults($sql, $queryArgs);
@@ -1744,7 +1758,7 @@ class MetaRepository extends AbstractRepository
     /**
      * @return MetaFieldOptionModel[]
      */
-    public static function getAllOptions()
+    public static function getAllOptions(): array
     {
         $results = [];
         $options = ACPT_Lite_DB::getResults("
@@ -1784,7 +1798,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function saveMetaGroup(MetaGroupModel $group)
+    public static function saveMetaGroup(MetaGroupModel $group): void
     {
         ACPT_Lite_DB::startTransaction();
 
@@ -1908,7 +1922,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function saveMetaBox(MetaBoxModel $metaBoxModel)
+    public static function saveMetaBox(MetaBoxModel $metaBoxModel): void
     {
         ACPT_Lite_DB::startTransaction();
 
@@ -1972,7 +1986,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function saveMetaBoxField(MetaFieldModel $fieldModel)
+    public static function saveMetaBoxField(MetaFieldModel $fieldModel): void
     {
         $metaBoxModel = $fieldModel->getBox();
 
@@ -2045,7 +2059,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    private static function saveMetaField(MetaFieldModel $fieldModel)
+    private static function saveMetaField(MetaFieldModel $fieldModel): void
     {
         if (empty($fieldModel->getName())) {
             return;
@@ -2167,7 +2181,7 @@ class MetaRepository extends AbstractRepository
      * @return void
      * @throws \Exception
      */
-    public static function removeMetaOrphans(array $args)
+    public static function removeMetaOrphans(array $args): void
     {
         $mandatoryKeys = [
             'groupId'  => [
@@ -2188,7 +2202,17 @@ class MetaRepository extends AbstractRepository
         // Delete metadata
         $deleteMetadata = Settings::get(SettingsModel::DELETE_POSTMETA_KEY, 0);
 
+        // The meta keys of the removed fields must be read now: the queries below delete
+        // the field, box and belong rows they are built from.
+        $orphanMetaKeys = [];
+        $optionPageSlugs = [];
+
+        if ($deleteMetadata == 1) {
+            $orphanMetaKeys = self::orphanFieldMetaKeys($groupId, $ids['fields'] ?? []);
+        }
+
         // Delete ACPT definitions
+        $params = [$groupId];
         $belongQuery = "
             SELECT 
                 b.id
@@ -2198,11 +2222,11 @@ class MetaRepository extends AbstractRepository
         ";
 
         if (isset($ids['belongs']) && !empty($ids['belongs'])) {
-            $belongQuery .= " AND bb.belong_id NOT IN ('".implode("','", $ids['belongs'])."')";
+            $belongQuery .= self::notInClause('bb.belong_id', $ids['belongs'], $params);
         }
 
         $belongQuery .= "GROUP BY b.id;";
-        $belongs = ACPT_Lite_DB::getResults($belongQuery, [$groupId]);
+        $belongs = ACPT_Lite_DB::getResults($belongQuery, $params);
 
         foreach ($belongs as $belong) {
             // @TODO delete belong from cache
@@ -2216,6 +2240,7 @@ class MetaRepository extends AbstractRepository
             ACPT_Lite_DB::executeQueryOrThrowException($sql, [$belong->id]);
         }
 
+        $params = [$groupId];
         $deleteBelongsQuery = "
 	        DELETE b
 	        FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP_BELONG)."` b
@@ -2223,15 +2248,14 @@ class MetaRepository extends AbstractRepository
 	    ";
 
         if (isset($ids['belongs']) && !empty($ids['belongs'])) {
-            $deleteBelongsQuery .= " AND b.belong_id NOT IN ('".implode("','", $ids['belongs'])."')";
+            $deleteBelongsQuery .= self::notInClause('b.belong_id', $ids['belongs'], $params);
         }
 
         $deleteBelongsQuery .= ";";
 
-        ACPT_Lite_DB::executeQueryOrThrowException($deleteBelongsQuery, [
-            $groupId,
-        ]);
+        ACPT_Lite_DB::executeQueryOrThrowException($deleteBelongsQuery, $params);
 
+        $params = [$groupId];
         $deleteFieldsQuery = "
 			DELETE f 
 			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f 
@@ -2240,16 +2264,15 @@ class MetaRepository extends AbstractRepository
 		";
 
         if (isset($ids['fields']) && !empty($ids['fields'])) {
-            $deleteFieldsQuery .= " AND f.id NOT IN ('".implode("','", $ids['fields'])."')";
+            $deleteFieldsQuery .= self::notInClause('f.id', $ids['fields'], $params);
         }
 
         $deleteFieldsQuery .= ";";
 
-        ACPT_Lite_DB::executeQueryOrThrowException($deleteFieldsQuery, [
-            $groupId,
-        ]);
+        ACPT_Lite_DB::executeQueryOrThrowException($deleteFieldsQuery, $params);
 
         // Delete options
+        $params = [$groupId];
         $deleteOptionsQuery = "
 	    	DELETE o
 			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION)."` o
@@ -2258,15 +2281,14 @@ class MetaRepository extends AbstractRepository
 	    ";
 
         if (isset($ids['options']) && !empty($ids['options'])) {
-            $deleteOptionsQuery .= " AND o.id NOT IN ('".implode("','", $ids['options'])."')";
+            $deleteOptionsQuery .= self::notInClause('o.id', $ids['options'], $params);
         }
 
         $deleteOptionsQuery .= ";";
 
-        ACPT_Lite_DB::executeQueryOrThrowException($deleteOptionsQuery, [
-            $groupId,
-        ]);
+        ACPT_Lite_DB::executeQueryOrThrowException($deleteOptionsQuery, $params);
 
+        $params = [$groupId];
         $deleteBoxesQuery = "
 	        DELETE b
 			FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b
@@ -2274,173 +2296,195 @@ class MetaRepository extends AbstractRepository
 	    ";
 
         if (isset($ids['boxes']) && !empty($ids['boxes'])) {
-            $deleteBoxesQuery .= " AND id NOT IN ('".implode("','", $ids['boxes'])."')";
+            $deleteBoxesQuery .= self::notInClause('id', $ids['boxes'], $params);
         }
 
         $deleteBoxesQuery .= ";";
 
-        ACPT_Lite_DB::executeQueryOrThrowException($deleteBoxesQuery, [
-            $groupId,
-        ]);
+        ACPT_Lite_DB::executeQueryOrThrowException($deleteBoxesQuery, $params);
 
         // Delete metadata
-        if ($deleteMetadata == 1) {
-            $queryForIdsToDelete = "
-		            SELECT f.id
-		             	FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
-						LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
-						WHERE b.group_id = %s
-						AND f.id NOT IN ('".implode("','", $ids['fields'])."')
-						AND f.parent_id IS NULL
-					;
-		        ";
-
-            $fieldsToBeDeleted = ACPT_Lite_DB::getResults($queryForIdsToDelete, [
-                $groupId,
-            ]);
-
-            $fieldIds = [];
-            foreach ($fieldsToBeDeleted as $fieldToBeDeleted) {
-                $fieldIds[] = $fieldToBeDeleted->id;
-            }
-
-            if (!empty($fieldIds)) {
-                self::deletePostMetaData($fieldIds);
-                self::deleteTaxonomyMetaData($fieldIds);
-                self::deleteUserMetaData($fieldIds);
-            }
+        if (!empty($orphanMetaKeys)) {
+            self::deleteFieldValues($orphanMetaKeys, $optionPageSlugs);
         }
 
         ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
-     * Delete all post meta data for a given fieldIds list
+     * " AND <column> NOT IN (%s, %s...)" for the ids to keep, with the ids appended to $params.
+     * The ids come from the saved payload: never concatenate them into the SQL.
      *
-     * @param array<string> $fieldIds
+     * @param string $column
+     * @param array<int, mixed> $ids
+     * @param array<int, mixed> $params
+     * @return string
+     */
+    private static function notInClause(string $column, array $ids, array &$params): string
+    {
+        $ids = array_values(array_map('strval', array_filter($ids, 'is_scalar')));
+
+        if (empty($ids)) {
+            return '';
+        }
+
+        $params = array_merge($params, $ids);
+
+        return " AND ".$column." NOT IN (".implode(",", array_fill(0, count($ids), "%s")).")";
+    }
+
+    /**
+     * Meta keys ("<box>_<field>") of the top-level fields of a group that are not in $keptFieldIds.
+     * Repeater/Flexible children and block fields are stored inside their parent's value, so they
+     * have no key of their own.
+     *
+     * @param string $groupId
+     * @param array<int, string> $keptFieldIds
+     * @return array<int, string>
+     * @throws \Exception
+     */
+    private static function orphanFieldMetaKeys(string $groupId, array $keptFieldIds): array
+    {
+        $sql = "
+            SELECT f.id, f.field_type, b.meta_box_name, f.field_name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            WHERE b.group_id = %s
+            AND f.parent_id IS NULL
+            AND f.block_id IS NULL
+        ";
+        $params = [$groupId];
+        $keptFieldIds = array_values(array_filter($keptFieldIds, 'is_string'));
+
+        if (!empty($keptFieldIds)) {
+            $sql .= " AND f.id NOT IN (".implode(",", array_fill(0, count($keptFieldIds), "%s")).")";
+            $params = array_merge($params, $keptFieldIds);
+        }
+
+        $keys = [];
+
+        foreach (ACPT_Lite_DB::getResults($sql, $params, 0, null, true) as $row) {
+            /** @var \stdClass $row */
+            if (!empty($row->meta_box_name) && !empty($row->field_name)) {
+                $keys[] = Strings::toDBFormat($row->meta_box_name).'_'.Strings::toDBFormat($row->field_name);
+            }
+
+        }
+
+        return array_values(array_unique($keys));
+    }
+
+    /**
+     * Delete the saved values of removed fields (the value and every ExtraFields key: "_id",
+     * "_type", "_lat", "_currency"...) on posts, terms, users, comments and option pages.
+     * CCT records are not concerned: a CCT field is a table column, dropped with the table schema. A key still used by a field that survives (two groups can
+     * have a box with the same name) is kept.
+     *
+     * @param array<int, string> $metaKeys
+     * @param array<int, string> $optionPageSlugs
      * @return void
      * @throws \Exception
      */
-    private static function deletePostMetaData($fieldIds)
+    private static function deleteFieldValues(array $metaKeys, array $optionPageSlugs): void
     {
         global $wpdb;
 
-        foreach ($fieldIds as $fieldId) {
-            $baseQuery = "
-                    SELECT 
-                        b.meta_box_name,
-                        f.field_name,
-                        f.field_type
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
-                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
-                    WHERE f.id = %s AND parent_id IS NULL
-                ";
+        $metaKeys = array_values(array_diff($metaKeys, self::usedFieldMetaKeys()));
 
-            $field = ACPT_Lite_DB::getResults($baseQuery, [$fieldId])[0];
+        if (empty($metaKeys)) {
+            return;
+        }
 
-            if ($field->meta_box_name !== null && $field->field_name !== null) {
-                $metaFieldName = Strings::toDBFormat($field->meta_box_name).'_'.Strings::toDBFormat($field->field_name);
+        $withSuffixes = function (array $baseKeys): array {
+            $keys = [];
 
-                $sql = "DELETE FROM `{$wpdb->prefix}postmeta` WHERE meta_key=%s";
+            foreach ($baseKeys as $baseKey) {
+                $keys[] = $baseKey;
 
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName
-                ]);
-
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName.'_type'
-                ]);
+                foreach (ExtraFields::ALLOWED_VALUES as $extra) {
+                    $keys[] = $baseKey.'_'.$extra;
+                }
             }
+
+            return $keys;
+        };
+
+        $deleteIn = function (string $table, string $column, array $keys): void {
+            foreach (array_chunk($keys, 500) as $chunk) {
+                $sql = "DELETE FROM `".$table."` WHERE `".$column."` IN (".implode(",", array_fill(0, count($chunk), "%s")).")";
+                ACPT_Lite_DB::executeQueryOrThrowException($sql, $chunk);
+            }
+        };
+
+        $keys = $withSuffixes($metaKeys);
+
+        $deleteIn($wpdb->postmeta, 'meta_key', $keys);
+        $deleteIn($wpdb->termmeta, 'meta_key', $keys);
+        $deleteIn($wpdb->usermeta, 'meta_key', $keys);
+        $deleteIn($wpdb->commentmeta, 'meta_key', $keys);
+
+        if (!empty($optionPageSlugs)) {
+            $optionKeys = [];
+
+            foreach ($optionPageSlugs as $slug) {
+                foreach ($metaKeys as $metaKey) {
+                    $optionKeys[] = $slug.'_'.$metaKey;
+                }
+            }
+
+            $deleteIn($wpdb->options, 'option_name', $withSuffixes($optionKeys));
+            wp_cache_delete('alloptions', 'options');
+            wp_cache_delete('notoptions', 'options');
+
+            foreach ($withSuffixes($optionKeys) as $optionKey) {
+                wp_cache_delete($optionKey, 'options');
+            }
+        }
+
+        // the rows were deleted with SQL: drop the cached meta so WordPress does not serve them
+        if (function_exists('wp_cache_supports') && wp_cache_supports('flush_group')) {
+            foreach (['post_meta', 'term_meta', 'user_meta', 'comment_meta'] as $group) {
+                wp_cache_flush_group($group);
+            }
+        } else {
+            wp_cache_flush();
         }
 
         ACPT_Lite_DB::invalidateCacheTag(self::class);
     }
 
     /**
-     * @param array<string> $fieldIds
-     * @return void
+     * Meta keys ("<box>_<field>") of every top-level field still defined.
+     *
+     * @return array<int, string>
      * @throws \Exception
      */
-    private static function deleteTaxonomyMetaData($fieldIds)
+    private static function usedFieldMetaKeys(): array
     {
-        global $wpdb;
+        $sql = "
+            SELECT b.meta_box_name, f.field_name
+            FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
+            JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b ON b.id = f.meta_box_id
+            WHERE f.parent_id IS NULL AND f.block_id IS NULL
+        ";
 
-        foreach ($fieldIds as $fieldId) {
-            $baseQuery = "
-                    SELECT 
-                        b.meta_box_name,
-                        f.field_name,
-                        f.field_type
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
-                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
-                    WHERE f.id = %s AND parent_id IS NULL
-                ";
+        $keys = [];
 
-            $field = ACPT_Lite_DB::getResults($baseQuery, [$fieldId])[0];
-
-            if ($field->meta_box_name !== null && $field->field_name !== null) {
-                $metaFieldName = Strings::toDBFormat($field->meta_box_name).'_'.Strings::toDBFormat($field->field_name);
-
-                $sql = "DELETE FROM `{$wpdb->prefix}termmeta` WHERE meta_key=%s";
-
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName
-                ]);
-
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName.'_type'
-                ]);
+        foreach (ACPT_Lite_DB::getResults($sql, [], 0, null, true) as $row) {
+            /** @var \stdClass $row */
+            if (!empty($row->meta_box_name) && !empty($row->field_name)) {
+                $keys[] = Strings::toDBFormat($row->meta_box_name).'_'.Strings::toDBFormat($row->field_name);
             }
         }
 
-        ACPT_Lite_DB::invalidateCacheTag(self::class);
-    }
-
-    /**
-     * @param array<string> $fieldIds
-     * @return void
-     * @throws \Exception
-     */
-    private static function deleteUserMetaData($fieldIds)
-    {
-        global $wpdb;
-
-        foreach ($fieldIds as $fieldId) {
-            $baseQuery = "
-                    SELECT 
-                        b.meta_box_name,
-                        f.field_name,
-                        f.field_type
-                    FROM `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f
-                    JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
-                    WHERE f.id = %s AND parent_id IS NULL
-                ";
-
-            $field = ACPT_Lite_DB::getResults($baseQuery, [$fieldId])[0];
-
-            if ($field->meta_box_name !== null && $field->field_name !== null) {
-                $metaFieldName = Strings::toDBFormat($field->meta_box_name).'_'.Strings::toDBFormat($field->field_name);
-
-                $sql = "DELETE FROM `{$wpdb->prefix}usermeta` WHERE meta_key=%s";
-
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName
-                ]);
-
-                ACPT_Lite_DB::executeQueryOrThrowException($sql, [
-                    $metaFieldName.'_type'
-                ]);
-            }
-        }
-
-        ACPT_Lite_DB::invalidateCacheTag(self::class);
+        return $keys;
     }
 
     /**
      * @return void
      * @throws \Exception
      */
-    public static function removeOrphanBoxesAndFields()
+    public static function removeOrphanBoxesAndFields(): void
     {
         $select = "SELECT f.id, b.id from `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD)."` f 
             LEFT JOIN  `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX)."` b on b.id = f.meta_box_id
@@ -2582,7 +2626,7 @@ class MetaRepository extends AbstractRepository
      * @param array<string, mixed> $keys
      * @return array<string, mixed>
      */
-    private static function mandatoryKeys(array $keys = [])
+    private static function mandatoryKeys(array $keys = []): array
     {
         $mandatoryKeys = [
             'belongsTo' => [

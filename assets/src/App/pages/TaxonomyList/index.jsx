@@ -17,6 +17,8 @@ import {flushCookieMessages} from "../../utils/cookies";
 import SyncTaxonomiesModal from "./Modal/SyncTaxonomiesModal.jsx";
 import Table from "../../components/Table/index.jsx";
 import {getPageSize} from "../../utils/pagination.jsx";
+import BrokenListRow from "../../components/Table/BrokenListRow.jsx";
+import DeleteTaxonomyModal from "./Modal/DeleteTaxonomyModal";
 
 const TaxonomyList = () => {
 
@@ -46,6 +48,8 @@ const TaxonomyList = () => {
             sort: sort ?? null,
             order: order ?? null,
             search: search ?? null,
+            // list broken records too, so the rows match the total (M13)
+            includeBroken: true,
         })).then(res => {
             flushCookieMessages();
         });
@@ -83,7 +87,7 @@ const TaxonomyList = () => {
         >
             <Table
                 rowKey="slug"
-                isSelectable={r => !r.isNative}
+                isSelectable={r => !r.isNative && !r.broken}
                 belongsTo={metaTypes.TAXONOMY}
                 columns={[
                     {
@@ -123,6 +127,17 @@ const TaxonomyList = () => {
                     </Alert>
                 }
                 renderRow={(record, {handleSelect}) => {
+                    if (record.broken) {
+                        return (
+                            <BrokenListRow
+                                key={record.id}
+                                record={record}
+                                columnsCount={5}
+                                deleteAction={<DeleteTaxonomyModal taxonomy={record.name} page={page ? parseInt(page) : 1} perPage={perPage} />}
+                            />
+                        );
+                    }
+
                     if(!isElementHidden(record.slug, metaTypes.TAXONOMY)){
                         return (
                             <TaxonomyListElement

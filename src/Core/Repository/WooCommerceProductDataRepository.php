@@ -179,11 +179,10 @@ class WooCommerceProductDataRepository extends AbstractRepository
 
         $baseQuery .= " GROUP BY pd.id";
 
-        if (isset($meta['sortedBy'])) {
-            $baseQuery .= " ORDER BY pd.".$meta['sortedBy']." ASC";
-        } else {
-            $baseQuery .= " ORDER BY pd.product_data_name ASC";
-        }
+        $baseQuery .= self::orderByClause($meta['sortedBy'] ?? null, 'ASC', [
+            'product_data_name' => 'pd.product_data_name',
+            'name' => 'pd.product_data_name',
+        ], 'pd.product_data_name ASC');
 
         if (isset($meta['page']) && isset($meta['perPage'])) {
             $baseQuery .= " LIMIT ".(int)$meta['perPage']." OFFSET " . ((int)$meta['perPage'] * ((int)$meta['page'] - 1));

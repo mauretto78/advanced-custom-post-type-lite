@@ -119,10 +119,30 @@ const Meta = () => {
     const isHydrated = useRef(false);
     const prevBoxesJson = useRef(null);
 
-    useEffect(() => {
-        if (!group.boxes) return;
+    // Set right before every hydrateState() that carries the server's data (load, a new
+    // group, after a save). The boxes it brings are the new saved baseline, not an edit:
+    // the save's own re-sync used to flip hasUnsavedChanges back on right after
+    // "successfully saved", so the title kept its "*" and leaving asked to confirm.
+    const syncingFromServer = useRef(false);
 
-        const json = JSON.stringify(group.boxes);
+    const hydrateFromServer = (data) => {
+        syncingFromServer.current = true;
+        dispatch(hydrateState(data));
+    };
+
+    useEffect(() => {
+        const json = group.boxes ? JSON.stringify(group.boxes) : null;
+
+        // before the no-boxes return: a new group is hydrated without boxes, and a
+        // flag left set would swallow the user's first real edit
+        if (syncingFromServer.current) {
+            syncingFromServer.current = false;
+            isHydrated.current = true;
+            prevBoxesJson.current = json;
+            return;
+        }
+
+        if (!group.boxes) return;
 
         // Skip the very first hydration (data loading sets boxes initially)
         if (!isHydrated.current) {
@@ -182,6 +202,9 @@ const Meta = () => {
         metaTitle(useTranslation("Manage meta fields"));
         changeCurrentAdminMenuLink('#/meta');
 
+        // another group opened in-app: the previous one's unsaved flag doesn't apply to it
+        setHasUnsavedChanges(false);
+
         if (id) {
             dispatch(fetchMeta({id}))
                 .then(res => {
@@ -199,7 +222,7 @@ const Meta = () => {
                     }
 
                     methods.reset();
-                    dispatch(hydrateState(res.payload));
+                    hydrateFromServer(res.payload);
                     methods.setValue('id', id);
                     methods.setValue('name', res.payload.name);
                     methods.setValue('label', res.payload.label);
@@ -245,7 +268,7 @@ const Meta = () => {
                 state.belongs = [{id: newUuid, belongsTo, operator: "=", find}];
             }
 
-            dispatch(hydrateState(state));
+            hydrateFromServer(state);
         }
 
         flushCookieMessages();
@@ -581,7 +604,7 @@ const Meta = () => {
                     methods.reset({}, {keepValues: true, keepIsSubmitted: true});
                     setHasUnsavedChanges(false);
                     toast.success(useTranslation("Meta group settings successfully saved"));
-                    dispatch(hydrateState(submitData));
+                    hydrateFromServer(submitData);
                     updateDocumentGlobalsVar(submitData);
                     scrollToTop();
                 } else {

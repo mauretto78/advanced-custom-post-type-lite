@@ -253,6 +253,24 @@ class MetaBoxModel extends AbstractModel implements \JsonSerializable
     }
 
     /**
+     * Adds a field forged by a Clone field. A box can hold several copies of one field (cloned
+     * directly and through a nested Clone): they share the id, so they are told apart by their
+     * meta key instead (#1455 M21).
+     *
+     * @param MetaFieldModel $field
+     */
+    public function addForgedField(MetaFieldModel $field): void
+    {
+        foreach ($this->fields as $existingField) {
+            if ($existingField->getId() === $field->getId() && $existingField->getDbName() === $field->getDbName()) {
+                return;
+            }
+        }
+
+        $this->fields[] = $field;
+    }
+
+    /**
      * @param MetaFieldModel $field
      */
     public function removeField(MetaFieldModel $field): void

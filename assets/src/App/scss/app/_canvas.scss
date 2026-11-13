@@ -72,7 +72,6 @@
       max-height: 1000px;
       overflow-y: auto;
       scrollbar-width: thin;
-      scrollbar-color: variables.$pale-gray variables.$light-gray;
       scrollbar-gutter: stable;
     }
   }
@@ -210,6 +209,14 @@
       flex-wrap: wrap;
       min-height: 1px;
       height: 100%;
+
+      // A vertical canvas never wraps into a second column, and column-wrap
+      // makes Chrome size each item from its min-content height: a page card
+      // whose children zone is empty ("Drop children pages here") got ~60px of
+      // extra space below it.
+      &.flex-column {
+        flex-wrap: nowrap;
+      }
 
       .canvas-box {
         min-width: 0;

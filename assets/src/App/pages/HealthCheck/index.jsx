@@ -9,6 +9,7 @@ import {changeCurrentAdminMenuLink, metaTitle} from "../../utils/misc";
 import {wpAjaxRequest} from "../../utils/ajax";
 import {toast} from "react-hot-toast";
 import Alert from "../../components/Alert";
+import {Link} from "react-router-dom";
 
 const HealthCheck = () => {
     // manage local state
@@ -121,6 +122,12 @@ const HealthCheck = () => {
             </Button>
         );
     }
+
+    // Custom Content Tables not on InnoDB: reported only, the repair never converts them (#1455 L4)
+    const cctEngines = (healthCheck && healthCheck.cct_engines && typeof healthCheck.cct_engines === 'object') ? healthCheck.cct_engines : {};
+    const cctEngineNames = Object.keys(cctEngines);
+    const tCctEngines = useTranslation("These tables don't use InnoDB, so their records don't roll back and foreign keys can't be added:");
+    const tCctEnginesFix = useTranslation("Switch them to InnoDB from the Custom Content Tables list.");
 
     const renderHealthElement = (element) => {
         return (

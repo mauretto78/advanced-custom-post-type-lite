@@ -20,7 +20,7 @@ abstract class ACPT_Lite_DB_Tools
      * @return bool
      * @throws \Exception
      */
-    public static function runHealthCheck()
+    public static function runHealthCheck(): bool
     {
         if (!Transient::has(self::HEALTH_CHECK_TRANSIENT_KEY)) {
             $healthCheckIssues = ACPT_Lite_DB_Tools::healthCheck();
@@ -47,9 +47,13 @@ abstract class ACPT_Lite_DB_Tools
     public static function healthCheck(): array
     {
         $issues = [];
+        $schema = ACPT_Lite_Schema::get();
+
+        // ACPT's tables must be InnoDB, whatever the server default is (#1455 M17)
+        $engines = ACPT_Lite_DB::supportsInnoDB() ? ACPT_Lite_DB::tableEngines(array_keys($schema)) : [];
 
         // check schema
-        foreach (ACPT_Lite_Schema::get() as $tableName => $specs) {
+        foreach ($schema as $tableName => $specs) {
             if (self::tableShouldBeIncludedInHealthCheck($tableName)) {
                 $create = $specs['create'];
                 $columns = $specs['columns'];
@@ -59,6 +63,10 @@ abstract class ACPT_Lite_DB_Tools
                             'create' => $create,
                     ];
                 } else {
+                    if (isset($engines[$tableName]) && strcasecmp($engines[$tableName], 'InnoDB') !== 0) {
+                        $issues[$tableName]['engine'] = $engines[$tableName];
+                    }
+
                     foreach ($columns as $column => $desc) {
                         if (false === ACPT_Lite_DB::checkIfColumnExistsInTable($tableName, $column)) {
                             $desc['reason'] = "add_column";
@@ -144,25 +152,57 @@ abstract class ACPT_Lite_DB_Tools
             return true;
         }
 
-        try {
-            foreach ($issues as $table => $issue) {
-                if (isset($issue['create'])) {
-                    self::repairTable($table, $issue['create']);
-                } elseif (isset($issue['columns'])) {
-                    self::repairColumns($table, $issue['columns']);
-                }
+        // One table that can't be repaired must not stop the others from being repaired
+        $repaired = true;
+
+        foreach ($issues as $table => $issue) {
+            if (!is_array($issue)) {
+                continue;
             }
 
+            try {
+                if (isset($issue['create'])) {
+                    self::repairTable($table, $issue['create']);
+                } else {
+                    if (isset($issue['engine'])) {
+                        self::repairEngine($table);
+                    }
+
+                    if (isset($issue['columns'])) {
+                        self::repairColumns($table, $issue['columns']);
+                    }
+                }
+            } catch (\Exception $exception) {
+                do_action("acpt/error", $exception);
+                $repaired = false;
+            }
+        }
+
+        try {
             if (isset($issues['sync']) && $issues['sync'] === true) {
                 ACPT_Lite_DB::sync();
                 unset($issues['sync']);
             }
-
-            return true;
         } catch (\Exception $exception) {
             do_action("acpt/error", $exception);
+            $repaired = false;
+        }
 
-            return false;
+        return $repaired;
+    }
+
+    /**
+     * Move a table to InnoDB.
+     *
+     * @param string $table
+     * @throws \Exception
+     */
+    private static function repairEngine(string $table): void
+    {
+        global $wpdb;
+
+        if ($wpdb->query("ALTER TABLE `" . esc_sql($table) . "` ENGINE=InnoDB") === false) {
+            throw new \Exception("Moving table " . $table . " to InnoDB failed: " . $wpdb->last_error);
         }
     }
 
@@ -176,7 +216,7 @@ abstract class ACPT_Lite_DB_Tools
         global $wpdb;
 
         if (!$wpdb->query($create)) {
-            throw new \Exception("Repairing table ".$table." failed");
+            throw new \Exception("Repairing table ".$table." failed: ".$wpdb->last_error);
         }
     }
 

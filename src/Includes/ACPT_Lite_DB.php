@@ -68,6 +68,11 @@ class ACPT_Lite_DB
      */
     private static ?ExtendedCacheItemPoolInterface $cache = null;
 
+    /**
+     * @var bool|null
+     */
+    private static ?bool $supportsInnoDB = null;
+
     private function __construct()
     {
     }
@@ -128,6 +133,80 @@ class ACPT_Lite_DB
         }
 
         return $charset_collate;
+    }
+
+    /**
+     * Table options for every ACPT table: the storage engine and the charset.
+     *
+     * ACPT's tables need InnoDB whatever the server default is (#1455 M17). On a
+     * server whose default engine is MyISAM, a table created without ENGINE=InnoDB
+     * gets MyISAM: transactions don't roll back, and an index is limited to 1,000
+     * bytes, so wp_acpt_table_record_location can't be created at all.
+     *
+     * @return string
+     */
+    public static function tableOptions(): string
+    {
+        $charsetCollation = (string)self::getCharsetCollation();
+
+        if (!self::supportsInnoDB()) {
+            return $charsetCollation;
+        }
+
+        return trim("ENGINE=InnoDB " . $charsetCollation);
+    }
+
+    /**
+     * True when the server can create InnoDB tables.
+     *
+     * @return bool
+     */
+    public static function supportsInnoDB(): bool
+    {
+        if (self::$supportsInnoDB === null) {
+            global $wpdb;
+
+            $support = $wpdb->get_var("SELECT SUPPORT FROM information_schema.ENGINES WHERE ENGINE = 'InnoDB'");
+            self::$supportsInnoDB = in_array(strtoupper((string)$support), ['YES', 'DEFAULT'], true);
+        }
+
+        return self::$supportsInnoDB;
+    }
+
+    /**
+     * The storage engine of each existing table in the list.
+     *
+     * @param string[] $tables Table names (prefixed or not)
+     * @return array<string, string> Prefixed table name => engine (e.g. "MyISAM")
+     */
+    public static function tableEngines(array $tables): array
+    {
+        if (empty($tables)) {
+            return [];
+        }
+
+        global $wpdb;
+
+        $tables = array_values(array_map(function ($table) {
+            return self::prefixedTableName((string)$table);
+        }, $tables));
+
+        $placeholders = implode(', ', array_fill(0, count($tables), '%s'));
+        $rows = $wpdb->get_results($wpdb->prepare(
+            "SELECT TABLE_NAME AS table_name, ENGINE AS engine FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME IN ({$placeholders})",
+            $tables
+        ));
+
+        $engines = [];
+
+        foreach ((array)$rows as $row) {
+            /** @var \stdClass $row */
+            if (!empty($row->engine)) {
+                $engines[(string)$row->table_name] = (string)$row->engine;
+            }
+        }
+
+        return $engines;
     }
 
     /**
@@ -599,11 +678,11 @@ class ACPT_Lite_DB
      * @return bool
      * @throws \Exception
      */
-    public static function flushCache(bool $throwOnError = false)
+    public static function flushCache(bool $throwOnError = false): bool
     {
         if (self::$cache) {
             try {
-                return self::$cache->clear();
+                return (bool) self::$cache->clear();
             } catch (\Exception $e) {
                 if ($throwOnError) {
                     throw $e;
