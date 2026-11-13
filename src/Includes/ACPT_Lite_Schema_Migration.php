@@ -5,6 +5,8 @@ namespace ACPT_Lite\Includes;
 abstract class ACPT_Lite_Schema_Migration
 {
     /**
+     * Table options for a CREATE TABLE: ENGINE=InnoDB plus the charset (see ACPT_Lite_DB::tableOptions()).
+     *
      * @var string
      */
     protected string $charsetCollation;
@@ -14,7 +16,7 @@ abstract class ACPT_Lite_Schema_Migration
      */
     public function __construct()
     {
-        $this->charsetCollation = ACPT_Lite_DB::getCharsetCollation();
+        $this->charsetCollation = ACPT_Lite_DB::tableOptions();
     }
 
     /**

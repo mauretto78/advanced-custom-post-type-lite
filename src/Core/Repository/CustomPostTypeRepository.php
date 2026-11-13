@@ -185,11 +185,14 @@ class CustomPostTypeRepository extends AbstractRepository
         $baseQuery .= " GROUP BY cp.id";
 
         if (isset($meta['sort']) && isset($meta['order'])) {
-            $baseQuery .= " ORDER BY ".$meta['sort']." ".$meta['order'];
             $cachedId .= "_".$meta['sort']."_".$meta['order'];
-        } else {
-            $baseQuery .= " ORDER BY cp.native DESC, cp.post_name ASC";
         }
+
+        $baseQuery .= self::orderByClause($meta['sort'] ?? null, $meta['order'] ?? null, [
+            'name' => 'cp.post_name',
+            'singular' => 'cp.singular',
+            'plural' => 'cp.plural',
+        ], 'cp.native DESC, cp.post_name ASC');
 
         if (isset($meta['page']) && isset($meta['perPage'])) {
             $baseQuery .= " LIMIT ".(int)$meta['perPage']." OFFSET " . ((int)$meta['perPage'] * ((int)$meta['page'] - 1));

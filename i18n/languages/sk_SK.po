@@ -6991,6 +6991,61 @@ msgid ""
 "the page head. Defaults to true"
 msgstr ""
 
+msgid "The record was not saved: fix the errors below."
+msgstr ""
+
+msgid "Can't be loaded"
+msgstr ""
+
+msgid "Its definition is invalid. Delete it, or check the error log."
+msgstr ""
+
+msgid ""
+"This engine has no foreign keys and no transactions, and an index can't be "
+"longer than 1,000 bytes, so a unique or indexed text column stops the table "
+"from being created. Use InnoDB unless you have a specific reason."
+msgstr ""
+
+msgid "Switch to InnoDB"
+msgstr ""
+
+msgid ""
+"This table uses an engine with no transactions and no foreign keys, and an "
+"index can't be longer than 1,000 bytes. Moving it to InnoDB keeps every "
+"record. A big table is locked while it's rebuilt. Are you sure?"
+msgstr ""
+
+msgid ""
+"This table doesn't use InnoDB: records don't roll back and foreign keys "
+"can't be added."
+msgstr ""
+
+msgid ""
+"These tables don't use InnoDB, so their records don't roll back and foreign "
+"keys can't be added:"
+msgstr ""
+
+msgid "Switch them to InnoDB from the Custom Content Tables list."
+msgstr ""
+
+msgid "Custom Content Tables"
+msgstr ""
+
+msgid "This MySQL server has no InnoDB engine."
+msgstr ""
+
+msgid "Max value {{v}}"
+msgstr ""
+
+msgid "Min value {{v}}"
+msgstr ""
+
+msgid "Max length {{v}}"
+msgstr ""
+
+msgid "Min length {{v}}"
+msgstr ""
+
 #~ msgid ""
 #~ "From this dashboard you can discover and manage every API endpoints "
 #~ "exposed by ACPT. Use the playground to learn how to use every endpoint."

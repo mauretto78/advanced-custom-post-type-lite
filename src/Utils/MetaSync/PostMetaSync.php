@@ -108,7 +108,7 @@ class PostMetaSync extends AbstractMetaSync
                     JOIN `{$wpdb->prefix}posts` p ON p.ID=pm.post_id
                     WHERE pm.meta_key=%s AND p.post_type=%s
                 ";
-        $results = ACPT_Lite_DB::getResults($query, [$parentKey, $postType]);
+        $results = ACPT_Lite_DB::getResults($query, [$parentKey, $postType], 7200, null, true);
 
         foreach ($results as $result) {
             $oldMetaValue = Serializer::unserialize($result->meta_value);
@@ -182,22 +182,15 @@ class PostMetaSync extends AbstractMetaSync
         global $wpdb;
 
         if ($newKey !== $oldKey) {
+            $rename = self::renameFieldKeys('pm.meta_key', $oldKey, $newKey);
             $sql = "
-                UPDATE `{$wpdb->prefix}postmeta` pm 
+                UPDATE `{$wpdb->prefix}postmeta` pm
                 JOIN `{$wpdb->prefix}posts` p ON p.ID=pm.post_id
-                SET pm.meta_key=%s 
-                WHERE pm.meta_key=%s AND p.post_type=%s
+                SET {$rename['set']}
+                WHERE {$rename['where']} AND p.post_type=%s
             ";
 
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$newKey, $oldKey, $postType]);
-
-            $sql = "
-                UPDATE `{$wpdb->prefix}postmeta` pm 
-                JOIN `{$wpdb->prefix}posts` p ON p.ID=pm.post_id
-                SET meta_key=REPLACE(pm.meta_key, %s, %s) 
-                WHERE pm.meta_key LIKE %s AND p.post_type=%s
-            ";
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%', $postType]);
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, array_merge($rename['args'], [$postType]));
         }
     }
 }

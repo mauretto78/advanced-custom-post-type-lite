@@ -5,8 +5,8 @@ namespace ACPT_Lite\Core\Generators\CustomPostType;
 use ACPT_Lite\Constants\BelongsTo;
 use ACPT_Lite\Constants\Logic;
 use ACPT_Lite\Constants\MetaTypes;
+use ACPT_Lite\Core\CQRS\Query\FetchMetaGroupsQuery;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
-use ACPT_Lite\Core\Repository\MetaRepository;
 use ACPT_Lite\Utils\Wordpress\WPUtils;
 
 class CustomPostTypeMetaGroupsGenerator
@@ -20,6 +20,14 @@ class CustomPostTypeMetaGroupsGenerator
      * @var string|null
      */
     private ?string $postType = null;
+
+    /**
+     * generate() runs once per post type: the attachment filters must be added only once,
+     * or every attachment save runs once per group and post type.
+     *
+     * @var bool
+     */
+    private static bool $attachmentHooksRegistered = false;
 
     /**
      * CustomPostTypeMetaGroupsGenerator constructor.
@@ -79,9 +87,9 @@ class CustomPostTypeMetaGroupsGenerator
                     $generator->render();
                 }
             }
-
-            $this->renderForAttachments();
         }
+
+        $this->renderForAttachments();
 
         return $groups;
     }
@@ -94,25 +102,31 @@ class CustomPostTypeMetaGroupsGenerator
      */
     private function renderForAttachments(): void
     {
+        if (self::$attachmentHooksRegistered) {
+            return;
+        }
+
+        self::$attachmentHooksRegistered = true;
+
         add_filter("attachment_fields_to_edit", function ($formFields, $post) {
             $postId = $post->ID;
-            $meta_groups = MetaRepository::get([]);
 
-            foreach ($meta_groups as $meta_group) {
-                if ($meta_group->isVisible([
-                    'post_id' => $postId
-                ])) {
-                    foreach ($meta_group->getBoxes() as $meta_box_model) {
-                        foreach ($meta_box_model->getFields() as $fieldModel) {
-                            $fieldGenerator = CustomPostTypeMetaBoxFieldGenerator::generate($fieldModel, $postId);
+            foreach (self::attachmentMetaGroups((int)$postId) as $meta_group) {
+                $recordIdInput = self::cctRecordIdInput($meta_group, (int)$postId);
 
-                            $formFields[$fieldModel->getDbName()] = array(
-                                "label" => $fieldModel->getLabelOrName(),
-                                "input" => "html",
-                                "value" => get_post_meta($postId, $fieldModel->getDbName(), true),
-                                "html" => $fieldGenerator->render()
-                            );
-                        }
+                foreach ($meta_group->getBoxes() as $meta_box_model) {
+                    foreach ($meta_box_model->getFields() as $fieldModel) {
+                        $fieldGenerator = CustomPostTypeMetaBoxFieldGenerator::generate($fieldModel, $postId);
+
+                        $formFields[$fieldModel->getDbName()] = array(
+                            "label" => $fieldModel->getLabelOrName(),
+                            "input" => "html",
+                            "value" => get_post_meta($postId, $fieldModel->getDbName(), true),
+                            "html" => $recordIdInput . $fieldGenerator->render()
+                        );
+
+                        // print the record id once per group
+                        $recordIdInput = '';
                     }
                 }
             }
@@ -124,17 +138,40 @@ class CustomPostTypeMetaGroupsGenerator
             $postId = $post['post_ID'] ?? $post['ID'];
 
             if (!empty($postId)) {
-                $metaGroups = MetaRepository::get([]);
-                $metaGroups = array_filter($metaGroups, function (MetaGroupModel $metaGroup) use ($postId) {
-                    return $metaGroup->isVisible([
-                            'post_id' => $postId
-                    ]);
-                });
-
-                WPUtils::handleSavePost((int)$postId, 'attachment', $metaGroups);
+                WPUtils::handleSavePost((int)$postId, 'attachment', self::attachmentMetaGroups((int)$postId));
             }
 
             return $post;
         }, 10, 2);
+    }
+
+    /**
+     * Field groups and table groups (CCT) visible on an attachment.
+     *
+     * @param int $postId
+     * @return MetaGroupModel[]
+     */
+    private static function attachmentMetaGroups(int $postId): array
+    {
+        $metaGroups = (new FetchMetaGroupsQuery(['cct' => true]))->execute();
+
+        return array_values(array_filter($metaGroups, function (MetaGroupModel $metaGroup) use ($postId) {
+            return $metaGroup->isVisible([
+                'post_id' => $postId
+            ]);
+        }));
+    }
+
+    /**
+     * The id of the CCT record linked to the attachment, as on the post edit screen
+     * (CustomPostTypeMetaBoxGenerator).
+     *
+     * @param MetaGroupModel $metaGroup
+     * @param int $postId
+     * @return string
+     */
+    private static function cctRecordIdInput(MetaGroupModel $metaGroup, int $postId): string
+    {
+        return '';
     }
 }

@@ -11,7 +11,11 @@ class Files
      */
     public static function getMimeType(): array
     {
-        $mimeTypes = get_allowed_mime_types();
+        // Table groups validate their Media location rules while ACPT boots, before WordPress
+        // has loaded pluggable.php. get_allowed_mime_types() calls current_user_can(), which
+        // needs wp_get_current_user() from pluggable.php: calling it then is a fatal error on
+        // every request (#1455). Until then, use the full list that the allowed one is built from.
+        $mimeTypes = function_exists('wp_get_current_user') ? get_allowed_mime_types() : wp_get_mime_types();
         $mimeTypes[] = "All formats";
 
         usort($mimeTypes, function ($a, $b) {

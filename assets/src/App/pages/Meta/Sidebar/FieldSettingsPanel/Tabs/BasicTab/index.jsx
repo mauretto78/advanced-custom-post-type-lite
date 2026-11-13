@@ -39,6 +39,11 @@ const BasicTab = ({formId, boxIndex, fieldIndex, boxId, field}) => {
         name: formId("type")
     });
 
+    const watchedDescription = useWatch({
+        control,
+        name: formId("description")
+    });
+
     // calculate nesting levels
     const nestingLevel = fieldNestingLevel(group.boxes, boxId, field.id);
 
@@ -194,7 +199,7 @@ const BasicTab = ({formId, boxIndex, fieldIndex, boxId, field}) => {
                         ariaLabel={useTranslation("The description of this field (showed only on admin panel)")}
                         register={register}
                         setValue={setValue}
-                        defaultValue={field.description}
+                        defaultValue={watchedDescription !== undefined ? watchedDescription : field.description}
                         placeholder={useTranslation("A brief description")}
                     />
                 </div>

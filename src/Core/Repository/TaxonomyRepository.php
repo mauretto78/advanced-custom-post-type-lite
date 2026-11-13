@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Core\Repository;
 
+use ACPT_Lite\Core\ValueObjects\BrokenEntityObject;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Core\Models\CustomPostType\CustomPostTypeModel;
@@ -146,11 +147,29 @@ class TaxonomyRepository extends AbstractRepository
      */
     public static function get(array $meta = [], bool $lazy = false): array
     {
-        $results = [];
-        $join = '';
-        $args = [];
+        [$baseQuery, $args, $cachedId] = self::buildSelectQuery($meta);
 
+        $taxonomies = ACPT_Lite_DB::getResults($baseQuery, $args);
+
+        // a taxonomy that fails to load is logged and left out; the admin list
+        // uses getForAdminList() to keep it (M13)
+        /** @var TaxonomyModel[] $results */
+        $results = self::hydrateRows($taxonomies, $meta, false);
+
+        self::saveInCache($cachedId, $results);
+
+        return $results;
+    }
+
+    /**
+     * @param array<string, mixed> $meta
+     * @return array{0: string, 1: array<int, mixed>, 2: string} [query, params, repository cache id]
+     */
+    private static function buildSelectQuery(array $meta): array
+    {
+        $args = [];
         $cachedId = "taxonomy_get";
+        $join = '';
 
         if (isset($meta['customPostType'])) {
             $join .= " LEFT JOIN `".ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_TAXONOMY_PIVOT)."` tp ON tp.taxonomy_id = t.id";
@@ -207,50 +226,70 @@ class TaxonomyRepository extends AbstractRepository
         $baseQuery .= " GROUP BY t.id";
 
         if (isset($meta['order']) && isset($meta['sort'])) {
-            $baseQuery .= " ORDER BY ".$meta['sort']." ".$meta['order'];
             $cachedId .= "_".$meta['sort']."_".$meta['order'];
-        } else {
-            $baseQuery .= " ORDER BY t.slug ASC";
         }
+
+        $baseQuery .= self::orderByClause($meta['sort'] ?? null, $meta['order'] ?? null, [
+            'slug' => 't.slug',
+            'singular' => 't.singular',
+            'plural' => 't.plural',
+        ], 't.slug ASC');
 
         if (isset($meta['page']) && isset($meta['perPage'])) {
             $baseQuery .= " LIMIT ".(int)$meta['perPage']." OFFSET " . ((int)$meta['perPage'] * ((int)$meta['page'] - 1));
         }
 
-        $baseQuery .= '';
-        $taxonomies = ACPT_Lite_DB::getResults($baseQuery, $args);
+        return [$baseQuery, $args, $cachedId];
+    }
 
-        foreach ($taxonomies as $taxonomy) {
-            try {
-                $taxonomyModel = TaxonomyModel::hydrateFromArray([
-                    'id' => $taxonomy->id,
-                    'slug' => $taxonomy->slug,
-                    'singular' => $taxonomy->singular,
-                    'plural' => $taxonomy->plural,
-                    'native' => $taxonomy->native == '1' ? true : false,
-                    'labels' => json_decode($taxonomy->labels, true),
-                    // WP core defaults rest_base/rest_controller_class to boolean false when
-                    // unset (e.g. link_category, post_format) rather than '' or null — collapse
-                    // that to null so it matches the declared string|null output schema instead
-                    // of failing ability_invalid_output on every list/get call that includes one.
-                    'settings' => Arrays::falseToNull(json_decode($taxonomy->settings, true) ?: [], ['rest_base', 'rest_controller_class']),
-                ]);
+    /**
+     * @param array<string, mixed> $args
+     * @return array{0: string, 1: array<int, mixed>}
+     */
+    protected static function listQuery(array $args): array
+    {
+        [$query, $params] = self::buildSelectQuery($args);
 
-                $sql = "
-                SELECT 
-                    SUM(count) as count
-                FROM `".ACPT_Lite_DB::prefix()."term_taxonomy` 
-                WHERE `taxonomy` = %s 
-            ";
+        return [$query, $params];
+    }
 
-                $res = ACPT_Lite_DB::getResults($sql, [
-                    $taxonomy->slug
-                ]);
+    /**
+     * @param \stdClass $row
+     * @param array<string, mixed> $args
+     * @return TaxonomyModel
+     * @throws \Exception
+     */
+    protected static function hydrateRow(\stdClass $row, array $args): TaxonomyModel
+    {
+        $taxonomyModel = TaxonomyModel::hydrateFromArray([
+            'id' => $row->id,
+            'slug' => $row->slug,
+            'singular' => $row->singular,
+            'plural' => $row->plural,
+            'native' => $row->native == '1' ? true : false,
+            'labels' => json_decode($row->labels, true),
+            // WP core defaults rest_base/rest_controller_class to boolean false when
+            // unset (e.g. link_category, post_format) rather than '' or null — collapse
+            // that to null so it matches the declared string|null output schema instead
+            // of failing ability_invalid_output on every list/get call that includes one.
+            'settings' => Arrays::falseToNull(json_decode($row->settings, true) ?: [], ['rest_base', 'rest_controller_class']),
+        ]);
 
-                $count = (Arrays::count($res) > 0 && isset($res[0]->count)) ? $res[0]->count : 0;
-                $taxonomyModel->setPostCount($count);
+        $sql = "
+        SELECT 
+            SUM(count) as count
+        FROM `".ACPT_Lite_DB::prefix()."term_taxonomy` 
+        WHERE `taxonomy` = %s 
+    ";
 
-                $customPostTypes = ACPT_Lite_DB::getResults("
+        $res = ACPT_Lite_DB::getResults($sql, [
+            $row->slug
+        ]);
+
+        $count = (Arrays::count($res) > 0 && isset($res[0]->count)) ? $res[0]->count : 0;
+        $taxonomyModel->setPostCount($count);
+
+        $customPostTypes = ACPT_Lite_DB::getResults("
 	                SELECT
 	                    c.id,
 	                    c.post_name,
@@ -266,31 +305,33 @@ class TaxonomyRepository extends AbstractRepository
 	                WHERE p.taxonomy_id = %s
 	            ;", [$taxonomyModel->getId()]);
 
-                foreach ($customPostTypes as $post) {
-                    $postModel = CustomPostTypeModel::hydrateFromArray([
-                        'id' => $post->id,
-                        'name' => $post->post_name,
-                        'singular' => $post->singular,
-                        'plural' => $post->plural,
-                        'icon' => $post->icon,
-                        'native' => $post->native == '0' ? false : true,
-                        'supports' => json_decode($post->supports),
-                        'labels' => json_decode($post->labels, true),
-                        'settings' => Arrays::falseToNull(json_decode($post->settings, true) ?: [], ['rest_base']),
-                    ]);
+        foreach ($customPostTypes as $post) {
+            $postModel = CustomPostTypeModel::hydrateFromArray([
+                'id' => $post->id,
+                'name' => $post->post_name,
+                'singular' => $post->singular,
+                'plural' => $post->plural,
+                'icon' => $post->icon,
+                'native' => $post->native == '0' ? false : true,
+                'supports' => json_decode($post->supports),
+                'labels' => json_decode($post->labels, true),
+                'settings' => Arrays::falseToNull(json_decode($post->settings, true) ?: [], ['rest_base']),
+            ]);
 
-                    $taxonomyModel->addCustomPostType($postModel);
-                }
-
-                $results[] = $taxonomyModel;
-            } catch (\Exception $exception) {
-                do_action("acpt/error", $exception);
-            }
+            $taxonomyModel->addCustomPostType($postModel);
         }
 
-        self::saveInCache($cachedId, $results);
+        return $taxonomyModel;
+    }
 
-        return $results;
+    /**
+     * @param \stdClass $row
+     * @param \Throwable $exception
+     * @return BrokenEntityObject
+     */
+    protected static function brokenRow(\stdClass $row, \Throwable $exception): BrokenEntityObject
+    {
+        return BrokenEntityObject::fromRow($row, $exception, 'slug', 'singular');
     }
 
     /**

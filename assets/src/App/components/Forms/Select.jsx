@@ -73,17 +73,20 @@ const Select = ({size= 'default', placeholder, id, defaultValue, description, va
         );
     };
 
-    // Force re-rendering when injecting the defaultValue
+    // Remount the <select> once both the defaultValue and the options are there: React applies
+    // defaultValue only on mount, and options that arrive later (fetched in an effect) left it
+    // showing the placeholder. Without distinct keys React reuses the same <div> and <select>
+    // and only swaps the class, so nothing remounts (#1455).
     if(defaultValue && values.length > 0){
         return (
-            <div className="acpt-select-wrapper-with-values" data-current-value={defaultValue}>
+            <div key="with-values" className="acpt-select-wrapper-with-values" data-current-value={defaultValue}>
                 {renderSelectElement(defaultValue)}
             </div>
         );
     }
 
     return (
-        <div className="acpt-select-wrapper-without-values">
+        <div key="without-values" className="acpt-select-wrapper-without-values">
             {renderSelectElement()}
         </div>
     );

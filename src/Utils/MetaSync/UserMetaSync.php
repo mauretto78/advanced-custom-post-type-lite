@@ -89,7 +89,7 @@ class UserMetaSync extends AbstractMetaSync
                     SELECT * FROM `{$wpdb->prefix}usermeta` um 
                     WHERE um.meta_key=%s 
                 ";
-                $results = ACPT_Lite_DB::getResults($query, [$parentKey]);
+                $results = ACPT_Lite_DB::getResults($query, [$parentKey], 7200, null, true);
 
                 foreach ($results as $result) {
                     $oldMetaValue = Serializer::unserialize($result->meta_value);
@@ -129,7 +129,7 @@ class UserMetaSync extends AbstractMetaSync
                     SELECT * FROM `{$wpdb->prefix}usermeta` um 
                     WHERE um.meta_key=%s 
                 ";
-        $results = ACPT_Lite_DB::getResults($query, [$parentKey]);
+        $results = ACPT_Lite_DB::getResults($query, [$parentKey], 7200, null, true);
 
         foreach ($results as $result) {
             $oldMetaValue = Serializer::unserialize($result->meta_value);
@@ -200,20 +200,14 @@ class UserMetaSync extends AbstractMetaSync
         global $wpdb;
 
         if ($newKey !== $oldKey) {
+            $rename = self::renameFieldKeys('um.meta_key', $oldKey, $newKey);
             $sql = "
-                UPDATE `{$wpdb->prefix}usermeta` um 
-                SET um.meta_key=%s 
-                WHERE um.meta_key=%s
+                UPDATE `{$wpdb->prefix}usermeta` um
+                SET {$rename['set']}
+                WHERE {$rename['where']}
             ";
 
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$newKey, $oldKey]);
-
-            $sql = "
-                UPDATE `{$wpdb->prefix}usermeta` um 
-                SET meta_key=REPLACE(um.meta_key, %s, %s) 
-                WHERE um.meta_key LIKE %s
-            ";
-            ACPT_Lite_DB::executeQueryOrThrowException($sql, [$oldKey.'_', $newKey.'_', $oldKey.'_%']);
+            ACPT_Lite_DB::executeQueryOrThrowException($sql, $rename['args']);
         }
     }
 }

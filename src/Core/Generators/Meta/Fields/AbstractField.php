@@ -345,7 +345,7 @@ abstract class AbstractField
             return esc_html($idName);
         }
 
-        $idName .= Strings::toDBFormat($this->metaField->getBox()->getName()) . '_' . $this->metaField->getNormalizedName();
+        $idName .= Strings::toDBFormat($this->metaField->getBox()->getName()) . '_' . $this->metaField->getInnerClonesKeySegment() . $this->metaField->getNormalizedName();
 
         if ($this->WooCommerceLoopIndex !== null) {
             $idName .= "_".$this->WooCommerceLoopIndex;
@@ -660,20 +660,24 @@ abstract class AbstractField
     }
 
     /**
+     * Returns '' (never null) when the field renders nothing: most field classes
+     * declare render(): string, so a null here is a TypeError that takes down the whole
+     * edit screen (#1455: the forged copy of every cloned field hits the first branch).
+     *
      * @param string|null $field
      *
-     * @return string|null
+     * @return string
      */
-    protected function renderField(?string $field): ?string
+    protected function renderField(?string $field): string
     {
-        // cloned fields
+        // cloned fields: the forged copy in the Clone field's box is rendered by the Clone field itself
         if ($this->isCloned() && $this->cloneFieldId !== $this->metaField->getForgedBy()->getId()) {
-            return null;
+            return '';
         }
 
         // no show
         if ($this->isNoShow()) {
-            return null;
+            return '';
         }
 
         $css = $this->getAdvancedOption('css') ?? '';

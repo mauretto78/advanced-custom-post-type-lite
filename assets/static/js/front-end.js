@@ -269,8 +269,8 @@ window.addEventListener('load', function () {
                         case "goToNextStep":
                             let nextStep = activeStep+1;
 
-                            if(nextStep > stepContentElements.lenght){
-                                nextStep = stepContentElements.lenght;
+                            if(nextStep > stepContentElements.length){
+                                nextStep = stepContentElements.length;
                             }
 
                             setTimeout(function() {
@@ -1136,7 +1136,7 @@ window.addEventListener('load', function () {
 
                         const addMinLengthError = () => {
 
-                            const error = `Min length ${min}`;
+                            const error = ((window.acptFormValidatorI18n && window.acptFormValidatorI18n.minLength) || 'Min length {{v}}').replace('{{v}}', String(min));
 
                             input.setCustomValidity(error);
                             input.reportValidity();

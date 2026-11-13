@@ -774,22 +774,26 @@ a.color-info {
   overflow-y: scroll;
   scrollbar-gutter: stable;
 
-  // Firefox — no border-radius support, just color and width
+  // No scrollbar-color of its own: it inherits the page's (html.wp-toolbar in app.scss),
+  // so an inner sidebar scrollbar looks like the canvas sidebar's and the window's in
+  // every skin. Its own pale-gray-on-light-gray pair drew the thumb darker than the
+  // track in the dark skin.
   scrollbar-width: thin;
-  scrollbar-color: variables.$pale-gray variables.$light-gray;
 
-  // Chrome / Safari / Edge — full control including border-radius
+  // Safari ignores scrollbar-color; Chrome and Firefox ignore these once scrollbar-color
+  // is set, which the inherited value is. Thumb light-gray on a pale-gray track, like
+  // the page's own scrollbar.
   &::-webkit-scrollbar {
     width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background: variables.$light-gray;
+    background: variables.$pale-gray;
     border-radius: 999px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: variables.$pale-gray;
+    background-color: variables.$light-gray;
     border-radius: 999px;
   }
 }

@@ -32,13 +32,13 @@ class Objects
         $sourceProperties = $sourceReflection->getProperties();
 
         foreach ($sourceProperties as $sourceProperty) {
-            $sourceProperty->setAccessible(true);
+            self::setAccessible($sourceProperty);
             $name = $sourceProperty->getName();
             $value = $sourceProperty->getValue($sourceObject);
 
             if ($destinationReflection->hasProperty($name)) {
                 $propDest = $destinationReflection->getProperty($name);
-                $propDest->setAccessible(true);
+                self::setAccessible($propDest);
                 $propDest->setValue($destination, $value);
             } elseif (is_object($value) && ($depth <= $maxDepth)) {
                 $depth++;
@@ -61,6 +61,22 @@ class Objects
         }
 
         return $destination;
+    }
+
+    /**
+     * Makes a private/protected property readable on PHP < 8.1. Since 8.1 every
+     * property is accessible through reflection, and setAccessible() is deprecated
+     * in 8.5 (#1462).
+     *
+     * @param \ReflectionProperty $property
+     *
+     * @return void
+     */
+    private static function setAccessible(\ReflectionProperty $property): void
+    {
+        if (PHP_VERSION_ID < 80100) {
+            $property->setAccessible(true);
+        }
     }
 
     /**

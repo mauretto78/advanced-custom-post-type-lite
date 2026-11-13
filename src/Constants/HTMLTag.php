@@ -522,7 +522,7 @@ class HTMLTag
             'data-max' => [],
             'data-field-type' => [],
             'data-default-values' => [],
-            'data-layout="' => [],
+            'data-layout' => [],
             'data-to-type' => [],
             'data-to-value' => [],
             'data-post-type' => [],

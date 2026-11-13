@@ -760,6 +760,12 @@ class Strings
      */
     public static function startsWith(string $str, string $substr): bool
     {
+        // PHP 8 `str_starts_with` check first
+        if(function_exists('str_starts_with')){
+            return str_starts_with($str, $substr);
+        }
+
+        // polyfill for PHP 7.4 and lower
         return substr($str, 0, strlen($substr)) === $substr;
     }
 
@@ -771,6 +777,10 @@ class Strings
      */
     public static function endsWith(string $str, string $substr): bool
     {
+        if(function_exists('str_ends_with')){
+            return str_ends_with($str, $substr);
+        }
+
         return strrpos($str, $substr) === strlen($str) - strlen($substr);
     }
 

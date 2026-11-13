@@ -6981,6 +6981,52 @@ msgstr ""
 "off, the feed URLs redirect to the archive and the feed link is removed from "
 "the page head. Defaults to true"
 
+msgid "The record was not saved: fix the errors below."
+msgstr "The record was not saved: fix the errors below."
+
+msgid "Can't be loaded"
+msgstr "Can't be loaded"
+
+msgid "Its definition is invalid. Delete it, or check the error log."
+msgstr "Its definition is invalid. Delete it, or check the error log."
+
+msgid ""
+"This engine has no foreign keys and no transactions, and an index can't be "
+"longer than 1,000 bytes, so a unique or indexed text column stops the table "
+"from being created. Use InnoDB unless you have a specific reason."
+msgstr ""
+"This engine has no foreign keys and no transactions, and an index can't be "
+"longer than 1,000 bytes, so a unique or indexed text column stops the table "
+"from being created. Use InnoDB unless you have a specific reason."
+
+msgid "Switch to InnoDB"
+msgstr "Switch to InnoDB"
+
+msgid ""
+"This table uses an engine with no transactions and no foreign keys, and an "
+"index can't be longer than 1,000 bytes. Moving it to InnoDB keeps every "
+"record. A big table is locked while it's rebuilt. Are you sure?"
+msgstr "This table uses an engine with no transactions and no foreign keys, and an index can't be longer than 1,000 bytes. Moving it to InnoDB keeps every record. A big table is locked while it's rebuilt. Are you sure?"
+
+msgid ""
+"This table doesn't use InnoDB: records don't roll back and foreign keys "
+"can't be added."
+msgstr "This table doesn't use InnoDB: records don't roll back and foreign keys can't be added."
+
+msgid ""
+"These tables don't use InnoDB, so their records don't roll back and foreign "
+"keys can't be added:"
+msgstr "These tables don't use InnoDB, so their records don't roll back and foreign keys can't be added:"
+
+msgid "Switch them to InnoDB from the Custom Content Tables list."
+msgstr "Switch them to InnoDB from the Custom Content Tables list."
+
+msgid "Custom Content Tables"
+msgstr "Custom Content Tables"
+
+msgid "This MySQL server has no InnoDB engine."
+msgstr "This MySQL server has no InnoDB engine."
+
 #~ msgid "Custom post type successfully deleted"
 #~ msgstr "Custom post type successfully deleted."
 
@@ -7014,3 +7060,15 @@ msgstr ""
 
 #~ msgid "Search an icon"
 #~ msgstr "Search an icon"
+
+msgid "Max value {{v}}"
+msgstr "Max value {{v}}"
+
+msgid "Min value {{v}}"
+msgstr "Min value {{v}}"
+
+msgid "Max length {{v}}"
+msgstr "Max length {{v}}"
+
+msgid "Min length {{v}}"
+msgstr "Min length {{v}}"
