@@ -51,6 +51,25 @@ class SaveMetaFieldValueCommand extends AbstractMetaFieldValueCommand implements
     }
 
     /**
+     * Loose comparison of the stored value with the new one, as before, except that a
+     * numeric 0 is never "the same" as a value that isn't stored at all: `null == 0` is true
+     * in PHP, so an int 0 or float 0.0 saved as the first value was skipped and the field
+     * stayed empty (the string "0" was saved fine).
+     *
+     * @param mixed $savedValue
+     * @param mixed $newValue
+     * @return bool
+     */
+    private static function sameValue($savedValue, $newValue): bool
+    {
+        if (($savedValue === null || $savedValue === false) && (is_int($newValue) || is_float($newValue))) {
+            return false;
+        }
+
+        return $savedValue == $newValue;
+    }
+
+    /**
      * @throws \Exception
      *
      * @return bool
@@ -64,7 +83,7 @@ class SaveMetaFieldValueCommand extends AbstractMetaFieldValueCommand implements
         $value = self::objectsToIds($this->args['value'] ?? null);
 
         // check is value is changed, if not, do nothing and return true
-        if ($savedFieldValue == $value) {
+        if (self::sameValue($savedFieldValue, $value)) {
             return true;
         }
 
@@ -88,7 +107,7 @@ class SaveMetaFieldValueCommand extends AbstractMetaFieldValueCommand implements
 
                 if (in_array($value, $this->fieldModel->getOptionValues())) {
                     $savedFieldValue = $this->get($this->fieldModel->getDbName());
-                    if ($savedFieldValue != $value) {
+                    if (!self::sameValue($savedFieldValue, $value)) {
                         if (!$this->set($this->fieldModel->getDbName(), Sanitizer::sanitizeRawData($metaFieldModelType, $value))) {
                             return false;
                         }
@@ -102,7 +121,7 @@ class SaveMetaFieldValueCommand extends AbstractMetaFieldValueCommand implements
                 // Default behaviour
             default:
                 $savedFieldValue = $this->get($this->fieldModel->getDbName());
-                if ($savedFieldValue != $value) {
+                if (!self::sameValue($savedFieldValue, $value)) {
                     if (!$this->set($this->fieldModel->getDbName(), Sanitizer::sanitizeRawData($metaFieldModelType, $value))) {
                         return false;
                     }

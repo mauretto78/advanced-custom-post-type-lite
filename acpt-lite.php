@@ -9,7 +9,7 @@
  * Plugin Name:       ACPT Lite
  * Plugin URI:        https://wordpress.org/plugins/acpt-lite
  * Description:       Create and manage custom post types, taxonomies and custom fields from a clean, developer-friendly interface. The free version of ACPT.
- * Version:           2.1.2
+ * Version:           2.1.3
  * Author:            Mauro Cassani
  * Author URI:        https://github.com/mauretto78
  * License:           GPL-2.0+
@@ -75,7 +75,7 @@ if( !function_exists('is_plugin_active') ) {
  * General Settings
  */
 define('ACPT_LITE_PLUGIN_NAME', 'acpt-lite');
-define('ACPT_LITE_PLUGIN_VERSION', '2.1.2');
+define('ACPT_LITE_PLUGIN_VERSION', '2.1.3');
 define('ACPT_LITE_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ));
 define('ACPT_LITE_DEV_MODE', devACPTLiteMode());
 // public API level (docs/public-api.md): the same constant in ACPT Lite, read by other plugins

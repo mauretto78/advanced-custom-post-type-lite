@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, custom fields, meta box
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -240,3 +240,11 @@ Based on ACPT v2.1.10.
 * ACPT Lite's database tables are always InnoDB: existing ones are converted on update, and the Health check repairs any that aren't
 * New public PHP functions let other plugins create field groups and save field values in bulk
 * Back-end improvements, security and fixes from ACPT v2.1.10
+
+= 2.1.3 =
+
+Based on ACPT v2.1.11.
+
+* The public PHP function that saves field groups (`save_acpt_meta_group_definition()`) now also saves each field's required flag, description and default value
+* Two new functions, `acpt_supported_field_types()` and `acpt_supported_field_settings()`, tell other plugins which field types and field settings ACPT Lite can save
+* Back-end improvements and fixes from ACPT v2.1.11

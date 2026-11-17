@@ -3,6 +3,7 @@
 namespace ACPT_Lite\Core\PublicApi;
 
 use ACPT_Lite\Constants\ExtraFields;
+use ACPT_Lite\Constants\Logic;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Constants\Operator;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
@@ -31,6 +32,38 @@ class PublicApiV1Helper
             MetaFieldModel::TEXT_TYPE,
             MetaFieldModel::TEXTAREA_TYPE,
         ];
+    }
+
+    /**
+     * Every optional field setting key the level 1 contract knows, in the order the
+     * definition is checked (docs/public-api.md, "Field settings").
+     */
+    public const FIELD_SETTINGS = ['required', 'description', 'default', 'advanced_options', 'validation_rules', 'conditions'];
+
+    /** Longest `description`, in bytes: it is stored in a TEXT column. */
+    public const DESCRIPTION_MAX_BYTES = 65535;
+
+    /** Longest `default` (its string, or its items joined with `,`), advanced option and rule value, in characters: varchar(255) columns. */
+    public const VALUE_MAX_CHARS = 255;
+
+    /** The `advanced_options` keys the public API takes. */
+    public const ADVANCED_OPTION_KEYS = ['before', 'after', 'min', 'max', 'step', 'rows'];
+
+    /** The validation rule conditions the public API takes. */
+    public const RULE_CONDITIONS = ['BLANK', 'NOT_BLANK', '=', '!=', '>', '>=', '<', '<=', 'MAX', 'MIN', 'REGEX', 'MAX_SIZE', 'MIN_SIZE'];
+
+    /** The condition operators that ignore `value` (it is stored empty). */
+    public const VALUELESS_OPERATORS = [Operator::BLANK, Operator::NOT_BLANK, Operator::CHECKED, Operator::NOT_CHECKED];
+
+    /**
+     * The optional field setting keys this edition saves (acpt_supported_field_settings()).
+     *
+     * @internal
+     * @return string[]
+     */
+    public static function supportedFieldSettings(): array
+    {
+        return ['required', 'description', 'default'];
     }
 
     /**
@@ -108,6 +141,8 @@ class PublicApiV1Helper
         }
 
         $fieldNames = [];
+        // every field name sent, so a condition may name a field of a later box
+        $allNames = self::sentFieldNames($definition['boxes']);
 
         foreach (array_values($definition['boxes']) as $i => $box) {
             if (!is_array($box)) {
@@ -148,32 +183,339 @@ class PublicApiV1Helper
                     return $invalid("$path.type");
                 }
 
-                if (!in_array($field['type'], self::choiceTypes(), true)) {
-                    continue;
-                }
-
-                if (!isset($field['choices']) || !is_array($field['choices']) || empty($field['choices'])) {
-                    return $invalid("$path.choices");
-                }
-
-                $values = [];
-
-                foreach (array_values($field['choices']) as $k => $choice) {
-                    // stored in varchar(255) columns
-                    if (!is_array($choice) || !isset($choice['value']) || !is_string($choice['value']) || mb_strlen($choice['value'], 'UTF-8') > 255 || in_array($choice['value'], $values, true)) {
-                        return $invalid("$path.choices[$k].value");
+                if (in_array($field['type'], self::choiceTypes(), true)) {
+                    if (!isset($field['choices']) || !is_array($field['choices']) || empty($field['choices'])) {
+                        return $invalid("$path.choices");
                     }
 
-                    $values[] = $choice['value'];
+                    $values = [];
 
-                    if (!isset($choice['label']) || !is_string($choice['label']) || mb_strlen($choice['label'], 'UTF-8') > 255) {
-                        return $invalid("$path.choices[$k].label");
+                    foreach (array_values($field['choices']) as $k => $choice) {
+                        // stored in varchar(255) columns
+                        if (!is_array($choice) || !isset($choice['value']) || !is_string($choice['value']) || mb_strlen($choice['value'], 'UTF-8') > 255 || in_array($choice['value'], $values, true)) {
+                            return $invalid("$path.choices[$k].value");
+                        }
+
+                        $values[] = $choice['value'];
+
+                        if (!isset($choice['label']) || !is_string($choice['label']) || mb_strlen($choice['label'], 'UTF-8') > 255) {
+                            return $invalid("$path.choices[$k].label");
+                        }
                     }
+                }
+
+                $settingKey = self::invalidFieldSetting($field, $allNames);
+
+                if ($settingKey !== null) {
+                    return $invalid("$path.$settingKey");
                 }
             }
         }
 
         return null;
+    }
+
+    /**
+     * The path, below the field, of the first optional setting that breaks its rule
+     * (for example `default` or `validation_rules[1].condition`), or null. A key this
+     * edition doesn't save is refused when its value isn't empty (null, false, '' and
+     * [] are empty), so a caller never loses a setting without knowing. Called once
+     * the field's type and choices are checked.
+     *
+     * @internal
+     * @param array<string, mixed> $field
+     * @param string[]             $allNames every field name of the definition (conditions name one of them)
+     * @return string|null
+     */
+    public static function invalidFieldSetting(array $field, array $allNames = []): ?string
+    {
+        $supported = self::supportedFieldSettings();
+        $type = (string) $field['type'];
+        $choices = in_array($type, self::choiceTypes(), true) ? array_column($field['choices'], 'value') : [];
+
+        foreach (self::FIELD_SETTINGS as $key) {
+            if (!array_key_exists($key, $field) || $field[$key] === null) {
+                continue;
+            }
+
+            $value = $field[$key];
+
+            if (!in_array($key, $supported, true)) {
+                if ($value === false || $value === '' || $value === []) {
+                    continue;
+                }
+
+                return $key;
+            }
+
+            switch ($key) {
+                case 'required':
+                    if (!is_bool($value)) {
+                        return $key;
+                    }
+                    break;
+
+                case 'description':
+                    if (!is_string($value) || strlen($value) > self::DESCRIPTION_MAX_BYTES) {
+                        return $key;
+                    }
+                    break;
+
+                case 'default':
+                    if (!self::isValidDefault($type, $choices, $value)) {
+                        return $key;
+                    }
+                    break;
+
+                case 'advanced_options':
+                    $option = self::invalidAdvancedOption($type, $value);
+
+                    if ($option !== null) {
+                        return $option;
+                    }
+                    break;
+
+                case 'validation_rules':
+                    $rule = self::invalidValidationRule($value);
+
+                    if ($rule !== null) {
+                        return $rule;
+                    }
+                    break;
+
+                case 'conditions':
+                    $condition = self::invalidCondition($value, (string)$field['name'], $allNames);
+
+                    if ($condition !== null) {
+                        return $condition;
+                    }
+                    break;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * A `default` passes the field type's value check (the value table, list types
+     * within the choices), and its string, or its items joined with `,`, is at most
+     * 255 characters, with no item holding a comma.
+     *
+     * @internal
+     * @param string   $type
+     * @param string[] $choices
+     * @param mixed    $value
+     * @return bool
+     */
+    public static function isValidDefault(string $type, array $choices, $value): bool
+    {
+        if (self::validateValue(['type' => $type, 'choices' => $choices, 'supported' => true], $value) !== null) {
+            return false;
+        }
+
+        if (is_array($value)) {
+            foreach ($value as $item) {
+                if (strpos($item, ',') !== false) {
+                    return false;
+                }
+            }
+
+            return mb_strlen(implode(',', $value), 'UTF-8') <= self::VALUE_MAX_CHARS;
+        }
+
+        return mb_strlen(self::defaultValueAsString($value), 'UTF-8') <= self::VALUE_MAX_CHARS;
+    }
+
+    /**
+     * A default as `field_default_value` stores it (MetaFieldModel::getDefaultValueAsString()):
+     * a list as JSON, a bool as '1'/'0', anything else as its string.
+     *
+     * @internal
+     * @param mixed $value
+     * @return string
+     */
+    public static function defaultValueAsString($value): string
+    {
+        if ($value === null) {
+            return '';
+        }
+
+        if (is_array($value)) {
+            return (string) json_encode(array_values($value));
+        }
+
+        if (is_bool($value)) {
+            return $value ? '1' : '0';
+        }
+
+        return (string) $value;
+    }
+
+    /**
+     * The path of the first broken `advanced_options` rule, or null: a map of known keys
+     * to strings of at most 255 characters; `min`, `max` and `step` numeric and only on
+     * a Number, `min` not above `max`; `rows` a positive integer and only on a Textarea.
+     *
+     * @internal
+     * @param string $type
+     * @param mixed  $value
+     * @return string|null
+     */
+    public static function invalidAdvancedOption(string $type, $value): ?string
+    {
+        $key = 'advanced_options';
+
+        if (!is_array($value) || ($value !== [] && array_values($value) === $value)) {
+            return $key;
+        }
+
+        foreach ($value as $option => $text) {
+            if (!is_string($option) || !in_array($option, self::ADVANCED_OPTION_KEYS, true) || !is_string($text) || mb_strlen($text, 'UTF-8') > self::VALUE_MAX_CHARS) {
+                return "$key.$option";
+            }
+
+            if (in_array($option, ['min', 'max', 'step'], true)) {
+                return "$key.$option";
+            }
+
+            if ($option === 'rows' && ($type !== MetaFieldModel::TEXTAREA_TYPE || !ctype_digit($text) || (int)$text < 1)) {
+                return "$key.$option";
+            }
+        }
+
+        if (isset($value['min'], $value['max']) && (float)$value['min'] > (float)$value['max']) {
+            return "$key.min";
+        }
+
+        return null;
+    }
+
+    /**
+     * The path of the first broken `validation_rules` rule, or null: a list of
+     * `{condition, value, message?}`, `condition` one of RULE_CONDITIONS, `value` a
+     * string of at most 255 characters, `message` a string of at most 255 characters
+     * (the editor's cap) when present.
+     *
+     * @internal
+     * @param mixed $value
+     * @return string|null
+     */
+    public static function invalidValidationRule($value): ?string
+    {
+        $key = 'validation_rules';
+
+        if (!is_array($value) || array_values($value) !== $value) {
+            return $key;
+        }
+
+        foreach ($value as $i => $rule) {
+            if (!is_array($rule) || !isset($rule['condition']) || !is_string($rule['condition']) || !in_array($rule['condition'], self::RULE_CONDITIONS, true)) {
+                return "{$key}[$i].condition";
+            }
+
+            if (!isset($rule['value']) || !is_string($rule['value']) || mb_strlen($rule['value'], 'UTF-8') > self::VALUE_MAX_CHARS) {
+                return "{$key}[$i].value";
+            }
+
+            if (isset($rule['message']) && (!is_string($rule['message']) || mb_strlen($rule['message'], 'UTF-8') > self::VALUE_MAX_CHARS)) {
+                return "{$key}[$i].message";
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * The names of every field in the sent boxes (whatever their other keys hold).
+     *
+     * @internal
+     * @param array<mixed> $boxes
+     * @return string[]
+     */
+    public static function sentFieldNames(array $boxes): array
+    {
+        $names = [];
+
+        foreach ($boxes as $box) {
+            foreach ((is_array($box) && is_array($box['fields'] ?? null)) ? $box['fields'] : [] as $field) {
+                if (is_array($field) && is_string($field['name'] ?? null)) {
+                    $names[] = $field['name'];
+                }
+            }
+        }
+
+        return $names;
+    }
+
+    /**
+     * The path of the first broken `conditions` entry, or null: a list of
+     * `{field, operator, value, logic, back_end?, front_end?}`, `field` the name of
+     * another field of the same definition (any box), `operator` one of ACPT's
+     * operators, `value` a string of at most 255 characters (it may be left out for
+     * BLANK, NOT_BLANK, CHECKED and NOT_CHECKED, which ignore it), `logic` AND or OR,
+     * `back_end` and `front_end` bools when present.
+     *
+     * @internal
+     * @param mixed    $value
+     * @param string   $selfName the field carrying the conditions
+     * @param string[] $allNames
+     * @return string|null
+     */
+    public static function invalidCondition($value, string $selfName, array $allNames): ?string
+    {
+        $key = 'conditions';
+
+        if (!is_array($value) || array_values($value) !== $value) {
+            return $key;
+        }
+
+        foreach ($value as $i => $condition) {
+            if (!is_array($condition) || !isset($condition['field']) || !is_string($condition['field']) || $condition['field'] === $selfName || !in_array($condition['field'], $allNames, true)) {
+                return "{$key}[$i].field";
+            }
+
+            if (!isset($condition['operator']) || !is_string($condition['operator']) || !in_array($condition['operator'], Operator::ALLOWED_VALUES, true)) {
+                return "{$key}[$i].operator";
+            }
+
+            $valueless = in_array($condition['operator'], self::VALUELESS_OPERATORS, true);
+
+            if ((!$valueless || isset($condition['value'])) && (!isset($condition['value']) || !is_string($condition['value']) || mb_strlen($condition['value'], 'UTF-8') > self::VALUE_MAX_CHARS)) {
+                return "{$key}[$i].value";
+            }
+
+            if (!isset($condition['logic']) || !in_array($condition['logic'], [Logic::AND, Logic::OR], true)) {
+                return "{$key}[$i].logic";
+            }
+
+            foreach (['back_end', 'front_end'] as $flag) {
+                if (array_key_exists($flag, $condition) && !is_bool($condition[$flag])) {
+                    return "{$key}[$i].$flag";
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * The message to store for a valid `validation_rules` rule: the sent message as
+     * sent, or, when it is missing, null or only whitespace, ACPT's default message for
+     * the rule's condition, translated in the site language now (`{{v}}` kept).
+     *
+     * @internal
+     * @param array{condition: string, value: string, message?: string|null} $rule
+     * @return string
+     */
+    public static function ruleMessage(array $rule): string
+    {
+        $message = $rule['message'] ?? null;
+
+        if (is_string($message) && trim($message) !== '') {
+            return $message;
+        }
+
+        return '';
     }
 
     /**

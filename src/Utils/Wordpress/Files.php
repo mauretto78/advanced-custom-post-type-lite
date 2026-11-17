@@ -93,7 +93,6 @@ class Files
 
         $pathInfo    = pathinfo($path);
         $filename    = ($originalFileName !== null) ? $originalFileName : $pathInfo['basename'];
-        $wpUploadDir = wp_upload_dir();
         $fileType    = wp_check_filetype($filename, null);
         $fileContent = file_get_contents($path);
 
@@ -110,7 +109,7 @@ class Files
         $filePath = $upload['file'];
 
         $postInfo = [
-            'guid'           => $wpUploadDir['url'] . '/' . $filename,
+            'guid'           => $upload['url'],
             'post_mime_type' => $fileType['type'],
             'post_title'     => $filename,
             'post_content'   => '',

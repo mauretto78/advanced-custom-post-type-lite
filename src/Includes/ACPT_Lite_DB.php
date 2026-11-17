@@ -590,6 +590,13 @@ class ACPT_Lite_DB
 
                     $tag = $cacheTag ? md5($cacheTag) : md5(CallingClass::get());
                     $data = $wpdb->get_results($preparedQuery);
+
+                    // a failed query (null, or [] with an error) is never cached:
+                    // it would be served for $cacheTtl after the cause is fixed
+                    if (!is_array($data) || $wpdb->last_error !== '') {
+                        return $data;
+                    }
+
                     $cachedElement->addTag($tag)->set($data)->expiresAfter($cacheTtl);
                     self::$cache->save($cachedElement);
                 }
@@ -609,6 +616,44 @@ class ACPT_Lite_DB
         }
 
         return $wpdb->get_results($preparedQuery);
+    }
+
+    /**
+     * getResults(), but a query that couldn't be prepared or that MySQL rejected throws
+     * instead of returning null (or an empty array that looks like "no rows").
+     *
+     * @param string            $sql
+     * @param array<int, mixed> $args
+     * @param int               $cacheTtl
+     * @param string|null       $cacheTag
+     * @return array<int, mixed>
+     * @throws \Exception with the MySQL error as its message
+     */
+    public static function getResultsOrThrowException(string $sql, array $args = [], int $cacheTtl = 7200, ?string $cacheTag = null): array
+    {
+        global $wpdb;
+
+        // a cache hit runs no query: don't let it report the previous query's error
+        $wpdb->last_error = '';
+
+        $results = self::getResults($sql, $args, $cacheTtl, $cacheTag);
+        $error = self::lastError();
+
+        if (!is_array($results) || $error !== '') {
+            throw new \Exception($error !== '' ? $error : 'The query could not be prepared');
+        }
+
+        return $results;
+    }
+
+    /**
+     * @return string the error of the last query run through $wpdb, '' if it succeeded
+     */
+    private static function lastError(): string
+    {
+        global $wpdb;
+
+        return (string)$wpdb->last_error;
     }
 
     public static function invalidateCacheKey(string $key): void

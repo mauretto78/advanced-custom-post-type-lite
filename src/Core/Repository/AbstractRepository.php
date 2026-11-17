@@ -205,4 +205,26 @@ abstract class AbstractRepository
     {
         return BrokenEntityObject::fromRow($row, $exception);
     }
+
+    /**
+     * " AND <column> NOT IN (%s, %s...)" for the ids to keep, with the ids appended to $params.
+     * The ids come from the saved payload: never concatenate them into the SQL.
+     *
+     * @param string $column
+     * @param array<int, mixed> $ids
+     * @param array<int, mixed> $params
+     * @return string
+     */
+    protected static function notInClause(string $column, array $ids, array &$params): string
+    {
+        $ids = array_values(array_map('strval', array_filter($ids, 'is_scalar')));
+
+        if (empty($ids)) {
+            return '';
+        }
+
+        $params = array_merge($params, $ids);
+
+        return " AND ".$column." NOT IN (".implode(",", array_fill(0, count($ids), "%s")).")";
+    }
 }
