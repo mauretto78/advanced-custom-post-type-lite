@@ -3,7 +3,6 @@
 namespace ACPT_Lite\Core\Helper;
 
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
-use ACPT_Lite\Utils\PHP\Arrays;
 
 class Fields
 {
@@ -18,28 +17,30 @@ class Fields
         $sum = 0;
         $sumRows = [];
 
-        foreach ($fields as $index => $field) {
+        foreach ($fields as $field) {
             $width = self::fieldWidth($field);
-            $sum = $sum + $width;
+
+            // A field that doesn't fit starts the next row. It used to be put alone
+            // in a row of its own, so with 33% fields (3 x 33 = 99) every row after
+            // the first was off by one (#1467)
+            if (!empty($sumRows) && $sum + $width > 100) {
+                $rows[] = $sumRows;
+                $sum = 0;
+                $sumRows = [];
+            }
+
+            $sum += $width;
             $sumRows[] = $field;
 
-            if ($sum == 100) {
+            if ($sum >= 100) {
                 $rows[] = $sumRows;
-                $sum = 0;
-                $sumRows = [];
-            } elseif ($sum > 100) {
-                array_pop($sumRows);
-                $rows[] = $sumRows;
-                $rows[] = [$field];
                 $sum = 0;
                 $sumRows = [];
             }
+        }
 
-            if ($sum > 0 && $index === (Arrays::count($fields)-1)) {
-                $rows[] = $sumRows;
-                $sum = 0;
-                $sumRows = [];
-            }
+        if (!empty($sumRows)) {
+            $rows[] = $sumRows;
         }
 
         return $rows;

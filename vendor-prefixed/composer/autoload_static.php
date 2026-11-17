@@ -4,7 +4,7 @@
 
 namespace ACPT_Lite\Vendor\Composer\Autoload;
 
-class ComposerStaticInitba9e891da1d5544e83ff2bb531d15b6d
+class ComposerStaticInit021d484d545b5eba0d8acf4973c5457d
 {
     public static $prefixLengthsPsr4 = array (
         'A' =>
@@ -184,9 +184,9 @@ class ComposerStaticInitba9e891da1d5544e83ff2bb531d15b6d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitba9e891da1d5544e83ff2bb531d15b6d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitba9e891da1d5544e83ff2bb531d15b6d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitba9e891da1d5544e83ff2bb531d15b6d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit021d484d545b5eba0d8acf4973c5457d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit021d484d545b5eba0d8acf4973c5457d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit021d484d545b5eba0d8acf4973c5457d::$classMap;
 
         }, null, ClassLoader::class);
     }

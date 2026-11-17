@@ -315,6 +315,27 @@ abstract class AbstractField
     }
 
     /**
+     * The parent name already starts with the option page prefix, so a nested field's
+     * name starts with it twice: remove the leading copy only. Replacing every doubled
+     * prefix also collapsed a field name starting with the page slug ("equipe_personnes"
+     * on the page "equipe"), so the rows were posted under another name than their
+     * Repeater and every save emptied it (#1468).
+     *
+     * @param string $idName
+     * @param string $opPrefix
+     *
+     * @return string
+     */
+    private static function removeDoubleOptionPagePrefix(string $idName, string $opPrefix): string
+    {
+        if ($opPrefix !== '' && strpos($idName, $opPrefix.$opPrefix) === 0) {
+            return substr($idName, strlen($opPrefix));
+        }
+
+        return $idName;
+    }
+
+    /**
      * @return string
      */
     protected function getIdName(): string
@@ -337,10 +358,7 @@ abstract class AbstractField
 
             $idName .= '['.$this->metaField->getNormalizedName().']['.$this->index.']';
 
-            // remove double prefix
-            if ($opPrefix !== '') {
-                $idName = str_replace($opPrefix.$opPrefix, $opPrefix, $idName);
-            }
+            $idName = self::removeDoubleOptionPagePrefix($idName, $opPrefix);
 
             return esc_html($idName);
         }
@@ -792,15 +810,29 @@ abstract class AbstractField
 
         // edit
         if ($this->isForEdit()) {
-            $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'">';
-            $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_type">';
-            $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_id">';
-            if ($this->metaField->getForgedBy() !== null) {
-                $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_forged_by">';
-                $return .= '<input type="hidden" name="'.esc_html($this->getIdName()).'_forged_by" value="'. esc_html($this->metaField->getForgedBy()->getId()) .'">';
+            // WordPress meta hidden inputs are not needed in CCT mode:
+            // the table has a built-in schema and its own validation layer.
+            if (true) {
+                $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'">';
+                $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_type">';
+                $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_id">';
+
+                if ($this->metaField->getForgedBy() !== null) {
+                    $return .= '<input type="hidden" name="meta_fields[]" value="'. esc_html($this->getIdName()) .'_forged_by">';
+                    $return .= '<input type="hidden" name="'.esc_html($this->getIdName()).'_forged_by" value="'. esc_html($this->metaField->getForgedBy()->getId()) .'">';
+                }
+
+                $return .= '<input type="hidden" name="'.esc_html($this->getIdName()).'_id" value="'. esc_html($this->metaField->getId()) .'">';
+                $return .= '<input type="hidden" name="' . Strings::esc_attr($this->getIdName()) . '_required" value="' . Strings::esc_attr($this->metaField->isRequiredAsSting())  . '">';
+            } elseif ($this->postsNothingWhenEmpty()) {
+                // CCT record form: unticked boxes, an empty <select multiple> or a List without
+                // rows post nothing, and the record update keeps a column missing from the request,
+                // so the column could never be emptied. This empty value, posted first, means
+                // "emptied": the field's own inputs, rendered after it, replace it whenever they
+                // post something (PHP keeps the last value of a name, and `col[]` rows replace it).
+                $return .= '<input type="hidden" name="' . Strings::esc_attr($this->getIdName()) . '" value="">';
             }
-            $return .= '<input type="hidden" name="'.esc_html($this->getIdName()).'_id" value="'. esc_html($this->metaField->getId()) .'">';
-            $return .= '<input type="hidden" name="' . Strings::esc_attr($this->getIdName()) . '_required" value="' . Strings::esc_attr($this->metaField->isRequiredAsSting())  . '">';
+
             $return .= Sanitizer::escapeField($field);
             $return .= $this->renderErrors();
             $return .= '</div>';
@@ -809,6 +841,14 @@ abstract class AbstractField
         }
 
         return null;
+    }
+
+    /**
+     * A CCT column whose controls post nothing when left empty (see renderFieldValue()).
+     */
+    private function postsNothingWhenEmpty(): bool
+    {
+        return false;
     }
 
     /**

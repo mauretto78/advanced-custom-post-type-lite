@@ -78,6 +78,8 @@ if (!function_exists('save_acpt_meta_group_definition')) {
             }
 
             $resultBoxes = [];
+            $fieldIds = [];
+            $pendingConditions = [];
 
             foreach ($definition['boxes'] as $boxIndex => $box) {
                 $boxId = Uuid::v4();
@@ -94,8 +96,16 @@ if (!function_exists('save_acpt_meta_group_definition')) {
 
                     ACPT_Lite_DB::executeQueryOrThrowException(
                         "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` (`id`, `meta_box_id`, `field_name`, `field_label`, `field_type`, `sort`, `showInArchive`, `required`, `quick_edit`, `filter_in_admin`, `field_description`, `field_default_value`) VALUES (%s, %s, %s, %s, %s, %d, %d, %d, %d, %d, %s, %s)",
-                        [$fieldId, $boxId, $field['name'], trim($field['label']), $field['type'], $fieldIndex, 0, 0, 0, 0, '', '']
+                        [$fieldId, $boxId, $field['name'], trim($field['label']), $field['type'], $fieldIndex, 0, (($field['required'] ?? false) === true) ? 1 : 0, 0, 0, (string)($field['description'] ?? ''), PublicApiV1Helper::defaultValueAsString($field['default'] ?? null)]
                     );
+
+                    // Empty on an edition that doesn't save them: validation refused any other value
+                    foreach (($field['advanced_options'] ?? null) ?: [] as $optionKey => $optionValue) {
+                    }
+
+                    foreach (($field['validation_rules'] ?? null) ?: [] as $ruleIndex => $rule) {
+                        $ruleId = Uuid::v4();
+                    }
 
                     if (in_array($field['type'], PublicApiV1Helper::choiceTypes(), true)) {
                         foreach ($field['choices'] as $choiceIndex => $choice) {
@@ -107,12 +117,25 @@ if (!function_exists('save_acpt_meta_group_definition')) {
                     }
 
                     $resultFields[$field['name']] = $fieldId;
+                    $fieldIds[$field['name']] = $fieldId;
+
+                    // Saved once every field has its id: a condition may name a field of a later box
+                    if (!empty($field['conditions'])) {
+                        $pendingConditions[] = [$boxId, $fieldId, $field['conditions']];
+                    }
                 }
 
                 $resultBoxes[$box['name']] = [
                     'box_id' => $boxId,
                     'fields' => $resultFields,
                 ];
+            }
+
+            // Empty on an edition that doesn't save them: validation refused any other value
+            foreach ($pendingConditions as [$boxId, $fieldId, $conditions]) {
+                foreach (array_values($conditions) as $sort => $condition) {
+                    $valueless = in_array($condition['operator'], PublicApiV1Helper::VALUELESS_OPERATORS, true);
+                }
             }
 
             return [
@@ -124,6 +147,31 @@ if (!function_exists('save_acpt_meta_group_definition')) {
 
             return new WP_Error('acpt_db_error', 'The meta group could not be saved.');
         }
+    }
+}
+
+if (!function_exists('acpt_supported_field_types')) {
+    /**
+     * Read only. The field types this edition accepts in save_acpt_meta_group_definition().
+     *
+     * @return list<string>
+     */
+    function acpt_supported_field_types(): array
+    {
+        return array_values(PublicApiV1Helper::fieldTypes());
+    }
+}
+
+if (!function_exists('acpt_supported_field_settings')) {
+    /**
+     * Read only. The optional field setting keys this edition accepts in
+     * save_acpt_meta_group_definition() (docs/public-api.md, "Field settings").
+     *
+     * @return list<string>
+     */
+    function acpt_supported_field_settings(): array
+    {
+        return array_values(PublicApiV1Helper::supportedFieldSettings());
     }
 }
 
