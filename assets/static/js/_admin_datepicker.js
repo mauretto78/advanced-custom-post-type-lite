@@ -57,6 +57,9 @@ export const initDateRangePicker = (pickerFormat, idSelector = null, wrapper = n
 
         const daterangepickerElements = $$(selector) ;
 
+        // labels in the WordPress locale (DatePicker::locale()); moment.js stays English
+        const pickerLocale = (window.acptDatePickerLocale && typeof window.acptDatePickerLocale === 'object') ? window.acptDatePickerLocale : {};
+
         daterangepickerElements.each(function(index){
 
             const daterangepickerElement = $(this);
@@ -86,6 +89,7 @@ export const initDateRangePicker = (pickerFormat, idSelector = null, wrapper = n
                         singleDatePicker: false,
                         autoUpdateInput: false,
                         locale: {
+                            ...pickerLocale,
                             format: format
                         }
                     };
@@ -112,6 +116,7 @@ export const initDateRangePicker = (pickerFormat, idSelector = null, wrapper = n
                         singleDatePicker: true,
                         autoUpdateInput: false,
                         locale: {
+                            ...pickerLocale,
                             format: format
                         }
                     };
@@ -129,6 +134,7 @@ export const initDateRangePicker = (pickerFormat, idSelector = null, wrapper = n
                         singleDatePicker: true,
                         autoUpdateInput: false,
                         locale: {
+                            ...pickerLocale,
                             format: format
                         }
                     };
@@ -140,6 +146,7 @@ export const initDateRangePicker = (pickerFormat, idSelector = null, wrapper = n
                     singleDatePicker: true,
                     autoUpdateInput: false,
                     locale: {
+                        ...pickerLocale,
                         format: format
                     }
                 };

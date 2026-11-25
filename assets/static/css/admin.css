@@ -764,6 +764,16 @@
     align-content: center;
 }
 
+/* the empty square of a single Image/Video field opens the Media Library (#1364) */
+.acpt-admin-meta-field .file-upload-wrapper:has(> .btn-wrapper > .upload-image-btn, > .btn-wrapper > .upload-video-btn) .image-preview .placeholder {
+    cursor: pointer;
+}
+
+.acpt-admin-meta-field .file-upload-wrapper:has(> .btn-wrapper > .upload-image-btn, > .btn-wrapper > .upload-video-btn) .image-preview .placeholder:hover {
+    border-color: var(--acpt-color-primary);
+    color: var(--acpt-color-primary);
+}
+
 .acpt-admin-meta-field .image-preview .image video,
 .acpt-admin-meta-field .image-preview .image img {
     max-width: 150px;
@@ -1067,6 +1077,37 @@
 
 .acpt-admin-meta-field .acpt-sortable li.sortable-li a.sortable-li_toggle_visibility.reverse svg {
     transform: rotate(180deg);
+}
+
+/* an expanded row can be tall: keep its Delete and toggle buttons at the top, next to where the row starts (#1469) */
+.acpt-admin-meta-field .acpt-sortable li.sortable-li:not(.hidden) > .remove-grouped-element,
+.acpt-admin-meta-field .acpt-sortable li.sortable-li:not(.hidden) > .sortable-li_toggle_visibility {
+    align-self: flex-start;
+    margin-top: var(--acpt-spacing);
+}
+
+/* Collapse all / Expand all (#1469) */
+.acpt-admin-meta-field .acpt-toggle-all-rows {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--acpt-half-spacing);
+    margin-bottom: var(--acpt-half-spacing);
+    font-size: 12px;
+}
+
+/* nothing to collapse in a list with no rows (they appear once a row is added) */
+.acpt-admin-meta-field .acpt-toggle-all-rows:not(:has(+ .acpt-sortable > li.sortable-li)) {
+    display: none;
+}
+
+.acpt-admin-meta-field .acpt-toggle-all-rows a {
+    text-decoration: none;
+}
+
+.acpt-admin-meta-field .acpt-toggle-all-rows a:hover,
+.acpt-admin-meta-field .acpt-toggle-all-rows a:focus {
+    text-decoration: underline;
 }
 
 .acpt-admin-meta-field .acpt-sortable .sortable-li.sortable-li-active {
@@ -3214,4 +3255,8 @@ select.acpt-select2 {
 
 .acpt-switch input:checked + .slider:before {
     transform: translateX(20px);
+}
+/* URL field internal link picker (#1442): the field has no "new tab" setting, hide core's checkbox */
+#wp-link-wrap.acpt-link-picker-open .link-target {
+    display: none;
 }

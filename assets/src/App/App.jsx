@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {fetchGlobalSettings} from "./redux/reducers/fetchGlobalSettingsSlice";
 import WebFont from 'webfontloader';
 import BootError from "./components/Errors/BootError";
+import RouterRoot from "./components/RouterRoot/index.jsx";
 import {fetchSettingValue} from "./utils/objects";
 
 const AssocCustomPostTypeToTaxonomyPage = lazy(() => import("./pages/AssocCustomPostTypeToTaxonomy"));
@@ -205,6 +206,7 @@ const App = memo(() => {
     const router = createHashRouter([
             {
                 path: "/",
+                element: <RouterRoot/>,
                 children: routes
             }
         ]

@@ -173,31 +173,34 @@ const CanvasBoxHeader = ({box, boxIndex, listeners, attributes, isActive, hasErr
                     tip={useTranslation("Delete box")}
                     icon={false}
                 />
-                <Tooltip
-                    label={
-                        <button
-                            type="button"
-                            className="btn-reset cursor-pointer"
-                            aria-label={useTranslation(isExpanded ? "Collapse" : "Expand")}
-                            onClick={() => setIsExpanded(!isExpanded)}
-                            onKeyDown={e => {
-                                if(e.key === 'Enter' || e.key === ' '){
-                                    e.preventDefault();
-                                    setIsExpanded(!isExpanded);
-                                }
-                            }}
-                        >
-                            <Icon
-                                icon={isExpanded ? "bx:chevron-up" : "bx:chevron-down"}
-                                width={14}
-                                color={primaryColor()}
-                            />
-                        </button>
+                {/* kept apart from Delete so a click meant to collapse can't land on it (#1469) */}
+                <span className="canvas-header-row__toggle">
+                    <Tooltip
+                        label={
+                            <button
+                                type="button"
+                                className="btn-reset cursor-pointer"
+                                aria-label={useTranslation(isExpanded ? "Collapse" : "Expand")}
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                onKeyDown={e => {
+                                    if(e.key === 'Enter' || e.key === ' '){
+                                        e.preventDefault();
+                                        setIsExpanded(!isExpanded);
+                                    }
+                                }}
+                            >
+                                <Icon
+                                    icon={isExpanded ? "bx:chevron-up" : "bx:chevron-down"}
+                                    width={18}
+                                    color={primaryColor()}
+                                />
+                            </button>
 
-                    }
-                    tip={useTranslation(isExpanded ? "Collapse" : "Expand")}
-                    icon={false}
-                />
+                        }
+                        tip={useTranslation(isExpanded ? "Collapse" : "Expand")}
+                        icon={false}
+                    />
+                </span>
             </div>
         </div>
     );

@@ -431,6 +431,9 @@ window.addEventListener('load', function () {
 
         const dateFields = document.getElementsByClassName(selector);
 
+        // labels in the WordPress locale (DatePicker::locale()); moment.js stays English
+        const pickerLocale = (window.acptDatePickerLocale && typeof window.acptDatePickerLocale === 'object') ? window.acptDatePickerLocale : {};
+
         if(dateFields.length > 0){
             for (let i = 0; i < dateFields.length; i++) {
                 const dateElement = dateFields.item(i);
@@ -465,6 +468,7 @@ window.addEventListener('load', function () {
                             showDropdowns: true,
                             singleDatePicker: false,
                             locale: {
+                                ...pickerLocale,
                                 format: format
                             }
                         };
@@ -488,6 +492,7 @@ window.addEventListener('load', function () {
                             timePicker: true,
                             singleDatePicker: true,
                             locale: {
+                                ...pickerLocale,
                                 format: format
                             }
                         };
@@ -502,6 +507,7 @@ window.addEventListener('load', function () {
                             timePicker: true,
                             singleDatePicker: true,
                             locale: {
+                                ...pickerLocale,
                                 format: format
                             }
                         };
@@ -512,6 +518,7 @@ window.addEventListener('load', function () {
                         showDropdowns: true,
                         singleDatePicker: true,
                         locale: {
+                            ...pickerLocale,
                             format: format
                         }
                     };

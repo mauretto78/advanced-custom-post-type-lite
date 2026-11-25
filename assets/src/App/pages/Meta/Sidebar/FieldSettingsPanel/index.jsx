@@ -98,16 +98,17 @@ const FieldSettingsPanel = () => {
 
     return (
         <div className="h-100 b-right-1 flex-column">
-            <div className="flex-between b-bottom-1 p-24">
-                <div className="flex-column s-8">
-                    <h3 className="i-flex-center s-8">
+            {/* #1364: the title row wraps (label, slug, switches) so a long name never pushes the close (X) out of view */}
+            <div className="flex-between canvas-header-row s-8 b-bottom-1 p-24">
+                <div className="flex-column s-8 canvas-header-row__title">
+                    <h3 className="i-flex-center flex-wrap s-8">
                         <span className={maxWidthClassName(watchedLabel || field.label)}>{watchedLabel || field.label}</span>
                         <span className={`${maxWidthClassName(watchedName || field.name)} color-medium-gray font-size-sm`}>{watchedName || field.name}</span>
                         <MetaFieldSwitches boxId={boxId} field={field} />
                     </h3>
                 </div>
                 <Icon
-                    className="cursor-pointer"
+                    className="cursor-pointer canvas-header-row__actions"
                     role="button"
                     tabIndex={0}
                     aria-hidden={false}

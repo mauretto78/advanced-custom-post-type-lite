@@ -6983,6 +6983,43 @@ msgstr ""
 msgid "Min length {{v}}"
 msgstr ""
 
+msgid "Collapse"
+msgstr ""
+
+msgid "Expand"
+msgstr ""
+
+msgid "Collapse all"
+msgstr ""
+
+msgid "Expand all"
+msgstr ""
+
+msgid "Collapse rows by default"
+msgstr ""
+
+msgid ""
+"Saved rows start collapsed on the edit screen. New rows always open expanded."
+msgstr ""
+
+msgid "Unsaved changes"
+msgstr ""
+
+msgid "Stay on this page"
+msgstr ""
+
+msgid "Leave without saving"
+msgstr ""
+
+msgid "You have unsaved changes. If you leave this page, they will be lost."
+msgstr ""
+
+msgid "Enable internal link picker"
+msgstr ""
+
+msgid "Pick a link"
+msgstr ""
+
 #~ msgid ""
 #~ "From this dashboard you can discover and manage every API endpoints "
 #~ "exposed by ACPT. Use the playground to learn how to use every endpoint."

@@ -192,36 +192,94 @@ class DateNormalizer
      * Converts a PHP date format string to the equivalent moment.js token string
      * for use with daterangepicker's `locale.format` option.
      *
-     * Only the tokens present in the supported format lists are mapped.
+     * Covers the PHP tokens a WordPress date/time format commonly uses. Backslash-escaped
+     * characters (e.g. "j \d\e F \d\e Y" on Spanish sites) and letters that are not PHP
+     * tokens become moment literals ("[d]"), never tokens (#1473).
      */
     public static function toMomentFormat(string $phpFormat): string
     {
-        // Order matters — longer tokens before shorter ones to avoid partial replacement
-        $map = [
+        return self::convertPhpFormatToMoment($phpFormat, [
             'Y' => 'YYYY',
             'y' => 'YY',
             'F' => 'MMMM',  // July
             'M' => 'MMM',   // Jul
+            'n' => 'M',     // 7
             'm' => 'MM',
             'd' => 'DD',
             'j' => 'D',
+            'D' => 'ddd',   // Mon
+            'l' => 'dddd',  // Monday
+            'N' => 'E',
+            'w' => 'd',
             'H' => 'HH',
+            'G' => 'H',
+            'h' => 'hh',
+            'g' => 'h',
             'i' => 'mm',
             's' => 'ss',
-            'g' => 'h',
             'a' => 'a',
             'A' => 'A',
-        ];
+        ]);
+    }
 
+    /**
+     * Converts a PHP date format to moment.js with the given token map.
+     *
+     * - "\x" (PHP escape) becomes the moment literal "[x]";
+     * - "S" (English ordinal suffix) right after a day token becomes moment's "Do";
+     * - any other letter missing from the map is emitted as a literal, because moment
+     *   would read it as a token (e.g. "e" is moment's day of week);
+     * - everything else (spaces, punctuation) is copied as is.
+     *
+     * @param string                $phpFormat
+     * @param array<string, string> $map PHP token => moment token
+     *
+     * @return string
+     */
+    public static function convertPhpFormatToMoment(string $phpFormat, array $map): string
+    {
         $result = '';
         $len    = strlen($phpFormat);
 
         for ($i = 0; $i < $len; $i++) {
             $char = $phpFormat[$i];
-            $result .= $map[$char] ?? $char;
+
+            if ($char === '\\') {
+                $i++;
+
+                if ($i < $len) {
+                    $result .= self::momentLiteral($phpFormat[$i]);
+                }
+
+                continue;
+            }
+
+            if (($char === 'j' || $char === 'd') && ($phpFormat[$i + 1] ?? '') === 'S') {
+                $result .= 'Do';
+                $i++;
+                continue;
+            }
+
+            if (isset($map[$char])) {
+                $result .= $map[$char];
+                continue;
+            }
+
+            $result .= ctype_alpha($char) ? self::momentLiteral($char) : $char;
         }
 
         return $result;
+    }
+
+    /**
+     * @param string $char
+     *
+     * @return string
+     */
+    private static function momentLiteral(string $char): string
+    {
+        // moment has no way to escape a bracket inside a literal: leave it as is
+        return ($char === '[' || $char === ']') ? $char : '[' . $char . ']';
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────

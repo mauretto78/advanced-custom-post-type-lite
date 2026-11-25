@@ -1,0 +1,1 @@
+import{m as n,P as e}from"./fields-CBZwUTYK.js";import{R as i}from"./vendor-DSa9X2FV.js";const p=({id:r,value:s,register:t})=>n.jsx(i.Fragment,{children:n.jsx("input",{id:r,name:r,type:"hidden",value:s||"",...t(r)})});p.propTypes={id:e.string.isRequired,value:e.oneOfType([e.string,e.number]),register:e.func.isRequired};export{p as I};

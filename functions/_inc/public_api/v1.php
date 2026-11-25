@@ -7,7 +7,7 @@
  * Rules every function here keeps:
  * - no transaction, no DDL, nothing that commits implicitly: the caller owns the transaction;
  * - never throws, never returns a bare false: an unexpected failure is WP_Error acpt_db_error;
- * - no hooks and no cache writes in the two write functions (flush_acpt_caches() does
+ * - no hooks and no cache writes in the three write functions (flush_acpt_caches() does
  *   the side effects after the caller's commit);
  * - reads go straight to the database, never through ACPT's cache, so rows the caller
  *   wrote earlier in the same transaction are visible;
@@ -81,49 +81,10 @@ if (!function_exists('save_acpt_meta_group_definition')) {
             $fieldIds = [];
             $pendingConditions = [];
 
-            foreach ($definition['boxes'] as $boxIndex => $box) {
-                $boxId = Uuid::v4();
-
-                ACPT_Lite_DB::executeQueryOrThrowException(
-                    "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` (`id`, `group_id`, `meta_box_name`, `meta_box_label`, `settings`, `sort`) VALUES (%s, %s, %s, %s, %s, %d)",
-                    [$boxId, $groupId, $box['name'], trim($box['label']), '[]', $boxIndex]
-                );
-
-                $resultFields = [];
-
-                foreach ($box['fields'] as $fieldIndex => $field) {
-                    $fieldId = Uuid::v4();
-
-                    ACPT_Lite_DB::executeQueryOrThrowException(
-                        "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` (`id`, `meta_box_id`, `field_name`, `field_label`, `field_type`, `sort`, `showInArchive`, `required`, `quick_edit`, `filter_in_admin`, `field_description`, `field_default_value`) VALUES (%s, %s, %s, %s, %s, %d, %d, %d, %d, %d, %s, %s)",
-                        [$fieldId, $boxId, $field['name'], trim($field['label']), $field['type'], $fieldIndex, 0, (($field['required'] ?? false) === true) ? 1 : 0, 0, 0, (string)($field['description'] ?? ''), PublicApiV1Helper::defaultValueAsString($field['default'] ?? null)]
-                    );
-
-                    // Empty on an edition that doesn't save them: validation refused any other value
-                    foreach (($field['advanced_options'] ?? null) ?: [] as $optionKey => $optionValue) {
-                    }
-
-                    foreach (($field['validation_rules'] ?? null) ?: [] as $ruleIndex => $rule) {
-                        $ruleId = Uuid::v4();
-                    }
-
-                    if (in_array($field['type'], PublicApiV1Helper::choiceTypes(), true)) {
-                        foreach ($field['choices'] as $choiceIndex => $choice) {
-                            ACPT_Lite_DB::executeQueryOrThrowException(
-                                "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "` (`id`, `meta_box_id`, `meta_field_id`, `option_label`, `option_value`, `sort`, `is_default`) VALUES (%s, %s, %s, %s, %s, %d, %d)",
-                                [Uuid::v4(), $boxId, $fieldId, $choice['label'], $choice['value'], $choiceIndex, 0]
-                            );
-                        }
-                    }
-
-                    $resultFields[$field['name']] = $fieldId;
-                    $fieldIds[$field['name']] = $fieldId;
-
-                    // Saved once every field has its id: a condition may name a field of a later box
-                    if (!empty($field['conditions'])) {
-                        $pendingConditions[] = [$boxId, $fieldId, $field['conditions']];
-                    }
-                }
+            foreach (array_values($definition['boxes']) as $boxIndex => $box) {
+                $boxId = PublicApiV1Helper::insertBox($groupId, $box, $boxIndex);
+                $resultFields = PublicApiV1Helper::insertFields($boxId, $box['fields'], 0, $pendingConditions);
+                $fieldIds = array_merge($fieldIds, $resultFields);
 
                 $resultBoxes[$box['name']] = [
                     'box_id' => $boxId,
@@ -131,12 +92,8 @@ if (!function_exists('save_acpt_meta_group_definition')) {
                 ];
             }
 
-            // Empty on an edition that doesn't save them: validation refused any other value
-            foreach ($pendingConditions as [$boxId, $fieldId, $conditions]) {
-                foreach (array_values($conditions) as $sort => $condition) {
-                    $valueless = in_array($condition['operator'], PublicApiV1Helper::VALUELESS_OPERATORS, true);
-                }
-            }
+            // Saved once every field has its id: a condition may name a field of a later box
+            PublicApiV1Helper::insertConditions($pendingConditions, $fieldIds);
 
             return [
                 'group_id' => $groupId,
@@ -146,6 +103,137 @@ if (!function_exists('save_acpt_meta_group_definition')) {
             do_action("acpt/error", $exception);
 
             return new WP_Error('acpt_db_error', 'The meta group could not be saved.');
+        }
+    }
+}
+
+if (!function_exists('get_acpt_meta_group_structure')) {
+    /**
+     * Read only. One meta group's boxes and top level fields, in ACPT's order, without values.
+     *
+     * @param string $groupId
+     * @return array{id: string, name: string, boxes: list<array{id: string, name: string, fields: list<array{id: string, name: string, type: string, label: string}>}>}|WP_Error
+     *         WP_Error codes: acpt_group_not_found, acpt_db_error.
+     */
+    function get_acpt_meta_group_structure(string $groupId)
+    {
+        try {
+            $structure = PublicApiV1Helper::readGroupStructure($groupId);
+
+            if ($structure === null) {
+                return new WP_Error('acpt_group_not_found', 'No meta group has this id.');
+            }
+
+            $boxes = [];
+
+            foreach ($structure['boxes'] as $box) {
+                $fields = [];
+
+                foreach ($box['fields'] as $field) {
+                    $fields[] = ['id' => $field['id'], 'name' => $field['name'], 'type' => $field['type'], 'label' => $field['label']];
+                }
+
+                $boxes[] = ['id' => $box['id'], 'name' => $box['name'], 'fields' => $fields];
+            }
+
+            return ['id' => $structure['id'], 'name' => $structure['name'], 'boxes' => $boxes];
+        } catch (\Throwable $exception) {
+            do_action("acpt/error", $exception);
+
+            return new WP_Error('acpt_db_error', 'The meta group could not be read.');
+        }
+    }
+}
+
+if (!function_exists('add_acpt_meta_fields')) {
+    /**
+     * Adds fields to an existing meta group. A box whose name the group already has receives
+     * the fields after its own; a new box name creates the box after the group's boxes.
+     * The whole input is checked before anything is written, and existing boxes and fields
+     * are never changed.
+     *
+     * @param string $groupId
+     * @param array<int, array<string, mixed>> $boxes the shape of a definition's boxes
+     * @return array{boxes: array<string, array{id: string, fields: array<string, string>}>}|WP_Error
+     *         the boxes and fields sent, box name => id and field name => id.
+     *         WP_Error codes: acpt_group_not_found, acpt_invalid_definition (data: {path: string}),
+     *         acpt_field_name_taken (data: {name: string}), acpt_db_error. After any WP_Error the caller rolls back.
+     */
+    function add_acpt_meta_fields(string $groupId, array $boxes)
+    {
+        try {
+            $structure = PublicApiV1Helper::readGroupStructure($groupId);
+
+            if ($structure === null) {
+                return new WP_Error('acpt_group_not_found', 'No meta group has this id.');
+            }
+
+            $existingBoxes = [];
+            $existingFieldIds = [];
+            $nextBoxSort = 0;
+
+            foreach ($structure['boxes'] as $box) {
+                $nextFieldSort = 0;
+
+                foreach ($box['fields'] as $field) {
+                    $existingFieldIds[$field['name']] = $field['id'];
+                    $nextFieldSort = max($nextFieldSort, $field['sort'] + 1);
+                }
+
+                $existingBoxes[$box['name']] = ['id' => $box['id'], 'next_sort' => $nextFieldSort];
+                $nextBoxSort = max($nextBoxSort, $box['sort'] + 1);
+            }
+
+            $error = PublicApiV1Helper::validateBoxes($boxes, array_keys($existingFieldIds));
+
+            if ($error instanceof WP_Error) {
+                return $error;
+            }
+
+            $boxNames = [];
+
+            foreach (array_values($boxes) as $i => $box) {
+                if (in_array($box['name'], $boxNames, true)) {
+                    return new WP_Error('acpt_invalid_definition', "Invalid definition at boxes[$i].name.", ['path' => "boxes[$i].name"]);
+                }
+
+                $boxNames[] = $box['name'];
+            }
+
+            // unique across the whole group, existing fields included: meta keys are built from names
+            foreach (PublicApiV1Helper::sentFieldNames($boxes) as $name) {
+                if (isset($existingFieldIds[$name])) {
+                    return new WP_Error('acpt_field_name_taken', 'A field of this group already has this name.', ['name' => $name]);
+                }
+            }
+
+            $result = [];
+            $fieldIds = $existingFieldIds;
+            $pendingConditions = [];
+
+            foreach (array_values($boxes) as $box) {
+                if (isset($existingBoxes[$box['name']])) {
+                    $boxId = $existingBoxes[$box['name']]['id'];
+                    $firstSort = $existingBoxes[$box['name']]['next_sort'];
+                } else {
+                    $boxId = PublicApiV1Helper::insertBox($groupId, $box, $nextBoxSort++);
+                    $firstSort = 0;
+                }
+
+                $added = PublicApiV1Helper::insertFields($boxId, $box['fields'], $firstSort, $pendingConditions);
+                $fieldIds = array_merge($fieldIds, $added);
+
+                $result[$box['name']] = ['id' => $boxId, 'fields' => $added];
+            }
+
+            // a condition may name a field sent in a later box, or one the group already had
+            PublicApiV1Helper::insertConditions($pendingConditions, $fieldIds);
+
+            return ['boxes' => $result];
+        } catch (\Throwable $exception) {
+            do_action("acpt/error", $exception);
+
+            return new WP_Error('acpt_db_error', 'The fields could not be added.');
         }
     }
 }

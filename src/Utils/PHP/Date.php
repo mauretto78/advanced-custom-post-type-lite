@@ -116,13 +116,15 @@ class Date
      */
     public static function convertTimeFormatForJS($format)
     {
-        // Use strtr for atomic replacement — prevents G→H being re-processed by the H→HH rule.
-        return strtr($format, [
+        // Token by token, so G→H is not re-processed by the H→HH rule; escaped characters stay literals (#1473).
+        return DateNormalizer::convertPhpFormatToMoment((string)$format, [
             'G' => 'H',   // 24h without leading zero → Moment H
             'H' => 'HH',  // 24h with leading zero   → Moment HH
             'g' => 'hh',  // 12h                     → Moment hh
             'i' => 'mm',
             's' => 'ss',
+            'a' => 'a',   // am/pm
+            'A' => 'A',   // AM/PM
         ]);
     }
 
@@ -133,9 +135,9 @@ class Date
      */
     public static function convertDateFormatForJS($format): string
     {
-        // Use strtr for atomic replacement — prevents cascading substitutions.
+        // Token by token, so substitutions don't cascade; escaped characters stay literals (#1473).
         // PHP 'T' (timezone abbreviation) has no Moment equivalent and is intentionally omitted.
-        return strtr($format, [
+        return DateNormalizer::convertPhpFormatToMoment((string)$format, [
             'd' => 'DD',
             'j' => 'DD',
             'M' => 'MMM',

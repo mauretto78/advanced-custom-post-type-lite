@@ -2,6 +2,7 @@
 
 namespace ACPT_Lite\Core\Generators\Meta\Fields;
 
+use ACPT_Lite\Utils\Wordpress\DatePicker;
 use ACPT_Lite\Constants\MetaTypes;
 use ACPT_Lite\Constants\Permissions;
 use ACPT_Lite\Core\Helper\Strings;
@@ -10,6 +11,7 @@ use ACPT_Lite\Core\Models\Meta\MetaFieldOptionModel;
 use ACPT_Lite\Utils\Data\Meta;
 use ACPT_Lite\Utils\Data\Sanitizer;
 use ACPT_Lite\Utils\PHP\Session;
+use ACPT_Lite\Utils\Wordpress\LinkPicker;
 use ACPT_Lite\Utils\Wordpress\Translator;
 use ACPT_Lite\Utils\Wordpress\WPAttachment;
 
@@ -698,6 +700,11 @@ abstract class AbstractField
             return '';
         }
 
+        // the link dialog of the URL field's internal link picker, also for rows added later (#1442)
+        if (!LinkPicker::isEnqueued() && LinkPicker::isUsedBy($this->metaField)) {
+            LinkPicker::enqueue();
+        }
+
         $css = $this->getAdvancedOption('css') ?? '';
         $headlineAlignment = $this->getAdvancedOption('headline') ?? 'top';
         $verticalAlignment = $this->getAdvancedOption('vertical_alignment') ?? 'center';
@@ -975,9 +982,7 @@ abstract class AbstractField
         if (
             isset($checks[ MetaFieldModel::DATE_TYPE ])
         ) {
-            wp_enqueue_script('momentjs', plugins_url('acpt-lite/assets/vendor/moment/moment.min.js'), [], '2.18.1', true);
-            wp_enqueue_script('daterangepicker-js', plugins_url('acpt-lite/assets/vendor/daterangepicker/js/daterangepicker.min.js'), [], '3.1.0', true);
-            wp_enqueue_style('daterangepicker-css', plugins_url('acpt-lite/assets/vendor/daterangepicker/css/daterangepicker.min.css'), [], '3.1.0', 'all');
+            DatePicker::enqueueAssets();
         }
     }
 
@@ -1050,6 +1055,37 @@ abstract class AbstractField
         $savedValue = $this->getData(Strings::esc_attr($this->getIdName()).'_' . $attribute);
 
         return ($savedValue !== null && $savedValue !== '' && $savedValue !== false) ? $savedValue : $defaultValue;
+    }
+
+    /**
+     * Whether the saved rows (Repeater) or blocks (Flexible) of this field start
+     * collapsed on the edit screen ("Collapse rows by default" setting, #1469).
+     * Rows added with the Add button always open expanded.
+     *
+     * @return bool
+     */
+    protected function hasCollapsedRowsByDefault(): bool
+    {
+        return (string)$this->getAdvancedOption('collapsed_rows') === '1';
+    }
+
+    /**
+     * "Collapse all / Expand all" links for the rows of a Repeater or the blocks
+     * of a Flexible field (#1469). Handled in _admin_repeater.js.
+     *
+     * @param string $listId the id of the sortable list (acpt-sortable-...)
+     *
+     * @return string
+     */
+    protected function toggleAllRowsLinks(string $listId): string
+    {
+        $links  = '<div class="acpt-toggle-all-rows">';
+        $links .= '<a href="#" role="button" class="acpt-toggle-all-rows-btn" data-action="collapse" data-target-id="'.Strings::esc_attr($listId).'">'.Translator::translate("Collapse all").'</a>';
+        $links .= '<span aria-hidden="true">/</span>';
+        $links .= '<a href="#" role="button" class="acpt-toggle-all-rows-btn" data-action="expand" data-target-id="'.Strings::esc_attr($listId).'">'.Translator::translate("Expand all").'</a>';
+        $links .= '</div>';
+
+        return $links;
     }
 
     /**
