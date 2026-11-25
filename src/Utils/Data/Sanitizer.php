@@ -384,79 +384,59 @@ class Sanitizer
         return wp_kses($html, $allowed);
     }
 
+    /**
+     * Presentation attributes an icon needs to keep its colors and outline: the
+     * Icon field's Fill/Stroke pickers write fill/stroke on the root <svg> or on
+     * its shapes, and outline icon sets draw with stroke + stroke-width. Without
+     * them a colored icon was saved grey, and an outline one with no stroke at all
+     * (#1476). wp_kses() compares lowercase names.
+     *
+     * @return array<string, bool>
+     */
+    private static function svgPresentationAttributes(): array
+    {
+        return array_fill_keys([
+            'id',
+            'class',
+            'style',
+            'transform',
+            'opacity',
+            'color',
+            'fill',
+            'fill-opacity',
+            'fill-rule',
+            'clip-rule',
+            'stroke',
+            'stroke-width',
+            'stroke-linecap',
+            'stroke-linejoin',
+            'stroke-miterlimit',
+            'stroke-dasharray',
+            'stroke-dashoffset',
+            'stroke-opacity',
+            'vector-effect',
+        ], true);
+    }
+
     /** @return array<string, array<string, bool>> */
     private static function svgWhitelist(): array
     {
+        $presentation = self::svgPresentationAttributes();
+        $shape = static function (array $attributes) use ($presentation): array {
+            return array_merge($presentation, array_fill_keys($attributes, true));
+        };
+
         return [
-            'svg' => [
-                'aria-hidden'     => true,
-                'aria-labelledby' => true,
-                'class'           => true,
-                'id'              => true,
-                'role'            => true,
-                'style'           => true,
-                'xmlns'           => true,
-                'width'           => true,
-                'height'          => true,
-                'version'         => true,
-                'viewBox'         => true,
-                'viewbox'         => true,
-                'xmlns:svg'       => true,
-            ],
-            'g' => [
-                'fill'      => true,
-                'id'        => true,
-                'style'     => true,
-                'transform' => true,
-            ],
-            'line' => [
-                'id'    => true,
-                'x1'    => true,
-                'y1'    => true,
-                'x2'    => true,
-                'y2'    => true,
-                'style' => true,
-            ],
-            'polyline' => [
-                'id'     => true,
-                'points' => true,
-                'style'  => true,
-            ],
-            'path' => [
-                'd'     => true,
-                'id'    => true,
-                'fill'  => true,
-                'name'  => true,
-                'style' => true,
-            ],
-            'circle' => [
-                'cx'    => true,
-                'cy'    => true,
-                'id'    => true,
-                'r'     => true,
-                'style' => true,
-            ],
-            'rect' => [
-                'id'     => true,
-                'x'      => true,
-                'y'      => true,
-                'width'  => true,
-                'height' => true,
-                'rx'     => true,
-                'ry'     => true,
-                'style'  => true,
-                'fill'   => true,
-            ],
-            'text' => [
-                'id'           => true,
-                'x'            => true,
-                'y'            => true,
-                'style'        => true,
-                'text-anchor'  => true,
-                'font-size'    => true,
-                'font-family'  => true,
-                'fill'         => true,
-            ],
+            'svg'      => $shape(['aria-hidden', 'aria-labelledby', 'role', 'xmlns', 'width', 'height', 'version', 'viewbox', 'preserveaspectratio', 'xmlns:svg', 'focusable']),
+            'g'        => $presentation,
+            'line'     => $shape(['x1', 'y1', 'x2', 'y2']),
+            'polyline' => $shape(['points']),
+            'polygon'  => $shape(['points']),
+            'path'     => $shape(['d', 'name']),
+            'circle'   => $shape(['cx', 'cy', 'r']),
+            'ellipse'  => $shape(['cx', 'cy', 'rx', 'ry']),
+            'rect'     => $shape(['x', 'y', 'width', 'height', 'rx', 'ry']),
+            'text'     => $shape(['x', 'y', 'text-anchor', 'font-size', 'font-family']),
         ];
     }
 

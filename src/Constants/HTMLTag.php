@@ -111,7 +111,9 @@ class HTMLTag
             'data-block-id' => [],
             'data-row-id' => [],
             'data-col-id' => [],
+            'data-action' => [], // Collapse all / Expand all (#1469)
             'aria-label' => [],
+            'role' => [],
         ],
         'abbr' => self::GLOBAL_ATTRS,
         'acronym' => [],
@@ -173,6 +175,8 @@ class HTMLTag
             'data-leading-field' => [],
             'data-hide-label' => [],
             'data-label-name' => [],
+            'data-url-type' => [],
+            'data-home-url' => [],
             'readonly' => [],
             'style' => [],
             'multiple' => [],

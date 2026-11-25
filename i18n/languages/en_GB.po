@@ -7006,17 +7006,24 @@ msgid ""
 "This table uses an engine with no transactions and no foreign keys, and an "
 "index can't be longer than 1,000 bytes. Moving it to InnoDB keeps every "
 "record. A big table is locked while it's rebuilt. Are you sure?"
-msgstr "This table uses an engine with no transactions and no foreign keys, and an index can't be longer than 1,000 bytes. Moving it to InnoDB keeps every record. A big table is locked while it's rebuilt. Are you sure?"
+msgstr ""
+"This table uses an engine with no transactions and no foreign keys, and an "
+"index can't be longer than 1,000 bytes. Moving it to InnoDB keeps every "
+"record. A big table is locked while it's rebuilt. Are you sure?"
 
 msgid ""
 "This table doesn't use InnoDB: records don't roll back and foreign keys "
 "can't be added."
-msgstr "This table doesn't use InnoDB: records don't roll back and foreign keys can't be added."
+msgstr ""
+"This table doesn't use InnoDB: records don't roll back and foreign keys "
+"can't be added."
 
 msgid ""
 "These tables don't use InnoDB, so their records don't roll back and foreign "
 "keys can't be added:"
-msgstr "These tables don't use InnoDB, so their records don't roll back and foreign keys can't be added:"
+msgstr ""
+"These tables don't use InnoDB, so their records don't roll back and foreign "
+"keys can't be added:"
 
 msgid "Switch them to InnoDB from the Custom Content Tables list."
 msgstr "Switch them to InnoDB from the Custom Content Tables list."
@@ -7026,6 +7033,56 @@ msgstr "Custom Content Tables"
 
 msgid "This MySQL server has no InnoDB engine."
 msgstr "This MySQL server has no InnoDB engine."
+
+msgid "Max value {{v}}"
+msgstr "Max value {{v}}"
+
+msgid "Min value {{v}}"
+msgstr "Min value {{v}}"
+
+msgid "Max length {{v}}"
+msgstr "Max length {{v}}"
+
+msgid "Min length {{v}}"
+msgstr "Min length {{v}}"
+
+msgid "Collapse"
+msgstr "Collapse"
+
+msgid "Expand"
+msgstr "Expand"
+
+msgid "Collapse all"
+msgstr "Collapse all"
+
+msgid "Expand all"
+msgstr "Expand all"
+
+msgid "Collapse rows by default"
+msgstr "Collapse rows by default"
+
+msgid ""
+"Saved rows start collapsed on the edit screen. New rows always open expanded."
+msgstr ""
+"Saved rows start collapsed on the edit screen. New rows always open expanded."
+
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
+msgid "Stay on this page"
+msgstr "Stay on this page"
+
+msgid "Leave without saving"
+msgstr "Leave without saving"
+
+msgid "You have unsaved changes. If you leave this page, they will be lost."
+msgstr "You have unsaved changes. If you leave this page, they will be lost."
+
+msgid "Enable internal link picker"
+msgstr "Enable internal link picker"
+
+msgid "Pick a link"
+msgstr "Pick a link"
 
 #~ msgid "Custom post type successfully deleted"
 #~ msgstr "Custom post type successfully deleted."
@@ -7060,15 +7117,3 @@ msgstr "This MySQL server has no InnoDB engine."
 
 #~ msgid "Search an icon"
 #~ msgstr "Search an icon"
-
-msgid "Max value {{v}}"
-msgstr "Max value {{v}}"
-
-msgid "Min value {{v}}"
-msgstr "Min value {{v}}"
-
-msgid "Max length {{v}}"
-msgstr "Max length {{v}}"
-
-msgid "Min length {{v}}"
-msgstr "Min length {{v}}"

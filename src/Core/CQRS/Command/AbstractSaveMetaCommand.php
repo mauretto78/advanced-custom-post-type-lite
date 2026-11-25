@@ -17,6 +17,13 @@ use ACPT_Lite\Utils\Wordpress\Files;
 abstract class AbstractSaveMetaCommand implements LogFormatInterface
 {
     /**
+     * Field types whose admin picker posts a display-format value.
+     */
+    private const DATE_FIELD_TYPES = [
+        MetaFieldModel::DATE_TYPE,
+    ];
+
+    /**
      * @var Request
      */
     protected Request $request;
@@ -458,6 +465,118 @@ abstract class AbstractSaveMetaCommand implements LogFormatInterface
         do_action('acpt/save_meta/before_exit', $messages);
 
         exit();
+    }
+
+    /**
+     * Date/time fields inside a Repeater or Flexible content row post their display
+     * value too ("05/12/2026"): store it in the canonical format, as a standalone
+     * field does (#1473). Each sub-field posts {type, original_name, value} at any
+     * depth (nested repeaters, blocks), and its own date_format is read from the
+     * matching child model.
+     *
+     * @param MetaFieldModel       $fieldModel the Repeater/Flexible field
+     * @param array<mixed, mixed>  $value
+     *
+     * @return array<mixed, mixed>
+     */
+    private function normalizeNestedDisplayDates(MetaFieldModel $fieldModel, array $value): array
+    {
+        $fieldsByName = [];
+        $this->collectNestedFields($fieldModel, $fieldsByName);
+
+        if (empty($fieldsByName)) {
+            return $value;
+        }
+
+        return $this->walkNestedDates($value, $fieldsByName);
+    }
+
+    /**
+     * @param MetaFieldModel                $fieldModel
+     * @param array<string, MetaFieldModel> $fieldsByName
+     *
+     * @return void
+     */
+    private function collectNestedFields(MetaFieldModel $fieldModel, array &$fieldsByName): void
+    {
+        $nested = $fieldModel->getChildren();
+
+        foreach ($fieldModel->getBlocks() as $block) {
+            foreach ($block->getFields() as $blockField) {
+                $nested[] = $blockField;
+            }
+        }
+
+        foreach ($nested as $nestedField) {
+            if (in_array($nestedField->getType(), self::DATE_FIELD_TYPES, true) && !isset($fieldsByName[$nestedField->getName()])) {
+                $fieldsByName[$nestedField->getName()] = $nestedField;
+            }
+
+            $this->collectNestedFields($nestedField, $fieldsByName);
+        }
+    }
+
+    /**
+     * @param array<mixed, mixed>           $node
+     * @param array<string, MetaFieldModel> $fieldsByName
+     *
+     * @return array<mixed, mixed>
+     */
+    private function walkNestedDates(array $node, array $fieldsByName): array
+    {
+        if (
+            isset($node['type'], $node['original_name'], $node['value']) &&
+            is_string($node['type']) &&
+            is_string($node['original_name']) &&
+            is_string($node['value']) &&
+            $node['value'] !== '' &&
+            in_array($node['type'], self::DATE_FIELD_TYPES, true)
+        ) {
+            $nestedField = $fieldsByName[$node['original_name']] ?? null;
+
+            if ($nestedField !== null && $nestedField->getType() === $node['type']) {
+                $node['value'] = $this->toCanonicalDate($nestedField, $node['type'], $node['value']);
+            }
+
+            return $node;
+        }
+
+        foreach ($node as $key => $child) {
+            if (is_array($child)) {
+                $node[$key] = $this->walkNestedDates($child, $fieldsByName);
+            }
+        }
+
+        return $node;
+    }
+
+    /**
+     * A value already in the canonical format is kept, anything else goes through
+     * normalizeDisplayDate().
+     *
+     * @param MetaFieldModel $fieldModel
+     * @param string         $fieldType
+     * @param string         $value
+     *
+     * @return string
+     */
+    private function toCanonicalDate(MetaFieldModel $fieldModel, string $fieldType, string $value): string
+    {
+        switch ($fieldType) {
+            default:
+                $canonicalFormat = 'Y-m-d';
+                break;
+        }
+
+        if ($canonicalFormat !== null) {
+            $dateTime = \DateTime::createFromFormat('!' . $canonicalFormat, $value);
+
+            if ($dateTime instanceof \DateTime && $dateTime->format($canonicalFormat) === $value) {
+                return $value;
+            }
+        }
+
+        return $this->normalizeDisplayDate($fieldModel, $fieldType, $value);
     }
 
     /**

@@ -28,6 +28,7 @@ import {scrollToTop} from "../../utils/scroll";
 import {saveMeta} from "../../redux/reducers/saveMetaSlice";
 import toast from "react-hot-toast";
 import {useConfirmTabClose} from "../../hooks/useConfirmTabClose";
+import UnsavedChangesModal from "../../components/Modal/UnsavedChangesModal.jsx";
 import {useOutsideClick} from "../../hooks/useOutsideClick";
 import MetaGroupTitle from "./MetaGroup/MetaGroupTitle";
 import {flushCookieMessages} from "../../utils/cookies.jsx";
@@ -703,6 +704,7 @@ const Meta = () => {
                     </Layout>
                 </form>
             </FormProvider>
+            <UnsavedChangesModal when={hasUnsavedChanges && !isSubmitting} />
         </React.Fragment>
     );
 };

@@ -102,6 +102,51 @@ class NestedValues
     }
 
     /**
+     * The inner rows of a nested repeater, as a list of rows keyed by child name.
+     * get_acpt_field() returns them wrapped once more ([[row, row]]), so a value read
+     * with it can be saved back as is (#1371): a list of row lists is flattened into the
+     * outer row's own rows. A single row ({child: value}) is a list of one.
+     *
+     * @param mixed $raw
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    private static function nestedRepeaterRows($raw): array
+    {
+        if (!is_array($raw) || empty($raw)) {
+            return [];
+        }
+
+        $isList = static function (array $array): bool {
+            return array_keys($array) === range(0, count($array) - 1);
+        };
+
+        if (!$isList($raw)) {
+            return [$raw];
+        }
+
+        $rows = [];
+
+        foreach ($raw as $item) {
+            if (!is_array($item) || empty($item)) {
+                continue;
+            }
+
+            if ($isList($item)) {
+                foreach ($item as $row) {
+                    if (is_array($row) && !empty($row)) {
+                        $rows[] = $row;
+                    }
+                }
+            } else {
+                $rows[] = $item;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
      * @param string $type
      * @param mixed  $raw
      * @param string $original_name

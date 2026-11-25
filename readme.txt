@@ -5,7 +5,7 @@ Tags: custom post type, custom post types, taxonomy, custom fields, meta box
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -248,3 +248,14 @@ Based on ACPT v2.1.11.
 * The public PHP function that saves field groups (`save_acpt_meta_group_definition()`) now also saves each field's required flag, description and default value
 * Two new functions, `acpt_supported_field_types()` and `acpt_supported_field_settings()`, tell other plugins which field types and field settings ACPT Lite can save
 * Back-end improvements and fixes from ACPT v2.1.11
+
+= 2.1.4 =
+
+Based on ACPT v2.1.12.
+
+* The date picker shows month and weekday names, the first day of the week and its buttons in your site's language
+* Date fields work with date formats containing escaped text, such as "5 de diciembre de 2026"
+* The field group editor asks before you leave with unsaved changes, and the collapse arrow of a box sits apart from Delete
+* Narrow fields and long field names fit in the field group editor
+* Two new public PHP functions, `get_acpt_meta_group_structure()` and `add_acpt_meta_fields()`, let other plugins read a field group's structure and add fields to it
+* Back-end improvements and fixes from ACPT v2.1.12

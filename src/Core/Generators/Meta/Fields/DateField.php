@@ -2,11 +2,11 @@
 
 namespace ACPT_Lite\Core\Generators\Meta\Fields;
 
+use ACPT_Lite\Utils\Wordpress\DatePicker;
 use ACPT_Lite\Core\Generators\Meta\AfterAndBeforeFieldGenerator;
 use ACPT_Lite\Core\Helper\Strings;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Utils\PHP\DateNormalizer;
-use ACPT_Lite\Utils\Wordpress\Translator;
 
 /**
  * Renders a single date picker input.
@@ -63,7 +63,7 @@ class DateField extends AbstractField
         $date .= '>';
 
         $field .= (new AfterAndBeforeFieldGenerator())->generate($this->metaField, $date);
-        $field .= '<a href="#" data-target-id="' . Strings::esc_attr($this->getIdName()) . '" class="acpt-datepicker-clear">' . Translator::translate("Clear") . '</a>';
+        $field .= '<a href="#" data-target-id="' . Strings::esc_attr($this->getIdName()) . '" class="acpt-datepicker-clear">' . DatePicker::clearLabel() . '</a>';
 
         return $this->renderField($field);
     }
@@ -104,8 +104,6 @@ class DateField extends AbstractField
 
     private function enqueueAssets(): void
     {
-        wp_enqueue_script('momentjs', plugins_url('acpt-lite/assets/vendor/moment/moment.min.js'), [], '2.18.1', true);
-        wp_enqueue_script('daterangepicker-js', plugins_url('acpt-lite/assets/vendor/daterangepicker/js/daterangepicker.min.js'), [], '3.1.0', true);
-        wp_enqueue_style('daterangepicker-css', plugins_url('acpt-lite/assets/vendor/daterangepicker/css/daterangepicker.min.css'), [], '3.1.0', 'all');
+        DatePicker::enqueueAssets();
     }
 }

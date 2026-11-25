@@ -9,11 +9,12 @@ use ACPT_Lite\Constants\Operator;
 use ACPT_Lite\Core\Models\Meta\MetaBoxModel;
 use ACPT_Lite\Core\Models\Meta\MetaFieldModel;
 use ACPT_Lite\Core\Models\Meta\MetaGroupModel;
+use ACPT_Lite\Core\Helper\Uuid;
 use ACPT_Lite\Includes\ACPT_Lite_DB;
 
 /**
  * Internals of the public API, level 1 (functions/_inc/public_api/v1.php).
- * Not part of the contract: callers use the five functions only.
+ * Not part of the contract: callers use the level 1 functions only.
  *
  * @internal
  */
@@ -136,15 +137,35 @@ class PublicApiV1Helper
             }
         }
 
-        if (!isset($definition['boxes']) || !is_array($definition['boxes']) || empty($definition['boxes'])) {
+        return self::validateBoxes($definition['boxes'] ?? null);
+    }
+
+    /**
+     * The first broken rule in a list of boxes, in document order, as acpt_invalid_definition
+     * with data.path (boxes[i]...). Field names must be unique across the boxes sent; a
+     * condition may name any field sent or any name in $existingFieldNames (the fields a
+     * group already holds, for add_acpt_meta_fields()).
+     *
+     * @internal
+     * @param mixed $boxes
+     * @param string[] $existingFieldNames
+     * @return \WP_Error|null
+     */
+    public static function validateBoxes($boxes, array $existingFieldNames = []): ?\WP_Error
+    {
+        $invalid = static function (string $path): \WP_Error {
+            return new \WP_Error('acpt_invalid_definition', 'Invalid definition at ' . $path . '.', ['path' => $path]);
+        };
+
+        if (!is_array($boxes) || empty($boxes)) {
             return $invalid('boxes');
         }
 
         $fieldNames = [];
         // every field name sent, so a condition may name a field of a later box
-        $allNames = self::sentFieldNames($definition['boxes']);
+        $allNames = array_merge(self::sentFieldNames($boxes), $existingFieldNames);
 
-        foreach (array_values($definition['boxes']) as $i => $box) {
+        foreach (array_values($boxes) as $i => $box) {
             if (!is_array($box)) {
                 return $invalid("boxes[$i]");
             }
@@ -423,6 +444,184 @@ class PublicApiV1Helper
         }
 
         return null;
+    }
+
+    /**
+     * Reads one group straight from the database (never through ACPT's cache, so rows the
+     * caller wrote earlier in its transaction are visible): its boxes in sort order, each
+     * with its top level fields in sort order. Child fields of a repeater or flexible
+     * block are not listed. Null when no group has this id.
+     *
+     * @internal
+     * @param string $groupId
+     * @return array{id: string, name: string, boxes: list<array{id: string, name: string, sort: int, fields: list<array{id: string, name: string, type: string, label: string, sort: int}>}>}|null
+     */
+    public static function readGroupStructure(string $groupId): ?array
+    {
+        $groups = self::selectRows(
+            "SELECT `id`, `group_name` FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_GROUP) . "` WHERE `id` = %s",
+            [$groupId]
+        );
+
+        if (empty($groups)) {
+            return null;
+        }
+
+        $boxRows = self::selectRows(
+            "SELECT `id`, `meta_box_name`, `sort` FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` WHERE `group_id` = %s ORDER BY `sort` ASC, `id` ASC",
+            [$groupId]
+        );
+
+        $fieldsByBox = [];
+
+        foreach ($boxRows as $row) {
+            $fieldsByBox[(string) $row['id']] = [];
+        }
+
+        if (!empty($fieldsByBox)) {
+            $placeholders = implode(', ', array_fill(0, count($fieldsByBox), '%s'));
+            $fieldRows = self::selectRows(
+                "SELECT `id`, `meta_box_id`, `field_name`, `field_label`, `field_type`, `sort` FROM `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` WHERE `meta_box_id` IN ({$placeholders}) AND (`parent_id` IS NULL OR `parent_id` = '') AND (`block_id` IS NULL OR `block_id` = '') ORDER BY `sort` ASC, `id` ASC",
+                array_map('strval', array_keys($fieldsByBox))
+            );
+
+            foreach ($fieldRows as $row) {
+                $fieldsByBox[(string) $row['meta_box_id']][] = [
+                    'id' => (string) $row['id'],
+                    'name' => (string) $row['field_name'],
+                    'type' => (string) $row['field_type'],
+                    'label' => (string) $row['field_label'],
+                    'sort' => (int) $row['sort'],
+                ];
+            }
+        }
+
+        $boxes = [];
+
+        foreach ($boxRows as $row) {
+            $boxes[] = [
+                'id' => (string) $row['id'],
+                'name' => (string) $row['meta_box_name'],
+                'sort' => (int) $row['sort'],
+                'fields' => $fieldsByBox[(string) $row['id']],
+            ];
+        }
+
+        return ['id' => (string) $groups[0]['id'], 'name' => (string) $groups[0]['group_name'], 'boxes' => $boxes];
+    }
+
+    /**
+     * Runs one SELECT straight against the database.
+     *
+     * @param string $query
+     * @param array<int, string> $args
+     * @return list<array<string, mixed>>
+     * @throws \RuntimeException on a database error
+     */
+    private static function selectRows(string $query, array $args): array
+    {
+        global $wpdb;
+
+        $rows = $wpdb->get_results($wpdb->prepare($query, $args), ARRAY_A);
+
+        if (!is_array($rows) || $wpdb->last_error !== '') {
+            throw new \RuntimeException('The meta group could not be read.');
+        }
+
+        return array_values($rows);
+    }
+
+    /**
+     * Inserts one box of a validated definition into a group.
+     *
+     * @internal
+     * @param string $groupId
+     * @param array<string, mixed> $box
+     * @param int $sort
+     * @return string the new box id
+     * @throws \Exception
+     */
+    public static function insertBox(string $groupId, array $box, int $sort): string
+    {
+        $boxId = Uuid::v4();
+
+        ACPT_Lite_DB::executeQueryOrThrowException(
+            "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_BOX) . "` (`id`, `group_id`, `meta_box_name`, `meta_box_label`, `settings`, `sort`) VALUES (%s, %s, %s, %s, %s, %d)",
+            [$boxId, $groupId, $box['name'], trim($box['label']), '[]', $sort]
+        );
+
+        return $boxId;
+    }
+
+    /**
+     * Inserts the validated fields of one box, with their settings and choices, sorted from
+     * $firstSort on. Conditions are not saved here: each one goes into $pendingConditions,
+     * for insertConditions() once every field has its id.
+     *
+     * @internal
+     * @param string $boxId
+     * @param array<int, array<string, mixed>> $fields
+     * @param int $firstSort
+     * @param array<int, array{0: string, 1: string, 2: array<mixed>}> $pendingConditions
+     * @return array<string, string> field name => new field id
+     * @throws \Exception
+     */
+    public static function insertFields(string $boxId, array $fields, int $firstSort, array &$pendingConditions): array
+    {
+        $fieldIds = [];
+
+        foreach (array_values($fields) as $fieldIndex => $field) {
+            $fieldId = Uuid::v4();
+
+            ACPT_Lite_DB::executeQueryOrThrowException(
+                "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_FIELD) . "` (`id`, `meta_box_id`, `field_name`, `field_label`, `field_type`, `sort`, `showInArchive`, `required`, `quick_edit`, `filter_in_admin`, `field_description`, `field_default_value`) VALUES (%s, %s, %s, %s, %s, %d, %d, %d, %d, %d, %s, %s)",
+                [$fieldId, $boxId, $field['name'], trim($field['label']), $field['type'], $firstSort + $fieldIndex, 0, (($field['required'] ?? false) === true) ? 1 : 0, 0, 0, (string)($field['description'] ?? ''), self::defaultValueAsString($field['default'] ?? null)]
+            );
+
+            // Empty on an edition that doesn't save them: validation refused any other value
+            foreach (($field['advanced_options'] ?? null) ?: [] as $optionKey => $optionValue) {
+            }
+
+            foreach (($field['validation_rules'] ?? null) ?: [] as $ruleIndex => $rule) {
+                $ruleId = Uuid::v4();
+            }
+
+            if (in_array($field['type'], self::choiceTypes(), true)) {
+                foreach ($field['choices'] as $choiceIndex => $choice) {
+                    ACPT_Lite_DB::executeQueryOrThrowException(
+                        "INSERT INTO `" . ACPT_Lite_DB::prefixedTableName(ACPT_Lite_DB::TABLE_META_OPTION) . "` (`id`, `meta_box_id`, `meta_field_id`, `option_label`, `option_value`, `sort`, `is_default`) VALUES (%s, %s, %s, %s, %s, %d, %d)",
+                        [Uuid::v4(), $boxId, $fieldId, $choice['label'], $choice['value'], $choiceIndex, 0]
+                    );
+                }
+            }
+
+            $fieldIds[$field['name']] = $fieldId;
+
+            if (is_array($field['conditions'] ?? null) && !empty($field['conditions'])) {
+                $pendingConditions[] = [$boxId, $fieldId, $field['conditions']];
+            }
+        }
+
+        return $fieldIds;
+    }
+
+    /**
+     * Saves the conditions insertFields() set aside. Each condition names its field by
+     * name, resolved through $fieldIds (every field of the group the condition may name).
+     *
+     * @internal
+     * @param array<int, array{0: string, 1: string, 2: array<mixed>}> $pendingConditions
+     * @param array<string, string> $fieldIds field name => field id
+     * @throws \Exception
+     */
+    public static function insertConditions(array $pendingConditions, array $fieldIds): void
+    {
+        // Empty on an edition that doesn't save them: validation refused any other value
+        foreach ($pendingConditions as [$boxId, $fieldId, $conditions]) {
+            foreach (array_values($conditions) as $sort => $condition) {
+                $valueless = in_array($condition['operator'], self::VALUELESS_OPERATORS, true);
+            }
+        }
     }
 
     /**
